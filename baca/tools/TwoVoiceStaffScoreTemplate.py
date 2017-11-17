@@ -21,43 +21,58 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        % measure 1
+            <BLANKLINE>
+                        %%% Global Skips [measure 1] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 2
+            <BLANKLINE>
+                        %%% Global Skips [measure 2] %%%
                         \time 3/8
                         s1 * 3/8
-                        % measure 3
+            <BLANKLINE>
+                        %%% Global Skips [measure 3] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 4
+            <BLANKLINE>
+                        %%% Global Skips [measure 4] %%%
                         \time 3/8
                         s1 * 3/8
+            <BLANKLINE>
                     }
                 >>
                 \context MusicContext = "Music Context" <<
                     \context MusicStaff = "Music Staff" <<
                         \context MusicVoiceOne = "Music Voice 1" {
-                            % measure 1
+            <BLANKLINE>
+                            %%% Music Voice 1 [measure 1] %%%
                             R1 * 1/2
-                            % measure 2
+            <BLANKLINE>
+                            %%% Music Voice 1 [measure 2] %%%
                             R1 * 3/8
-                            % measure 3
+            <BLANKLINE>
+                            %%% Music Voice 1 [measure 3] %%%
                             R1 * 1/2
-                            % measure 4
+            <BLANKLINE>
+                            %%% Music Voice 1 [measure 4] %%%
                             R1 * 3/8
                             \bar "|"
+            <BLANKLINE>
                         }
                         \context MusicVoiceTwo = "Music Voice 2" {
-                            % measure 1
+            <BLANKLINE>
+                            %%% Music Voice 2 [measure 1] %%%
                             R1 * 1/2
-                            % measure 2
+            <BLANKLINE>
+                            %%% Music Voice 2 [measure 2] %%%
                             R1 * 3/8
-                            % measure 3
+            <BLANKLINE>
+                            %%% Music Voice 2 [measure 3] %%%
                             R1 * 1/2
-                            % measure 4
+            <BLANKLINE>
+                            %%% Music Voice 2 [measure 4] %%%
                             R1 * 3/8
                             \bar "|"
+            <BLANKLINE>
                         }
                     >>
                 >>

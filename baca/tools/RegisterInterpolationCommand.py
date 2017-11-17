@@ -134,88 +134,126 @@ class RegisterInterpolationCommand(Command):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        % measure 1
+            <BLANKLINE>
+                        %%% Global Skips [measure 1] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 2
+            <BLANKLINE>
+                        %%% Global Skips [measure 2] %%%
                         \time 3/8
                         s1 * 3/8
-                        % measure 3
+            <BLANKLINE>
+                        %%% Global Skips [measure 3] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 4
+            <BLANKLINE>
+                        %%% Global Skips [measure 4] %%%
                         \time 3/8
                         s1 * 3/8
-                        % measure 5
+            <BLANKLINE>
+                        %%% Global Skips [measure 5] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 6
+            <BLANKLINE>
+                        %%% Global Skips [measure 6] %%%
                         \time 3/8
                         s1 * 3/8
-                        % measure 7
+            <BLANKLINE>
+                        %%% Global Skips [measure 7] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 8
+            <BLANKLINE>
+                        %%% Global Skips [measure 8] %%%
                         \time 3/8
                         s1 * 3/8
+            <BLANKLINE>
                     }
                 >>
                 \context MusicContext = "Music Context" <<
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
-                                % measure 1
+            <BLANKLINE>
+                                %%% Music Voice [measure 1] %%%
                                 \clef "treble"
                                 fs''8 [
+            <BLANKLINE>
                                 e''8
+            <BLANKLINE>
                                 ef''8
+            <BLANKLINE>
                                 f''8 ]
                             }
                             {
-                                % measure 2
+            <BLANKLINE>
+                                %%% Music Voice [measure 2] %%%
                                 a''8 [
+            <BLANKLINE>
                                 bf''8
+            <BLANKLINE>
                                 c''8 ]
                             }
                             {
-                                % measure 3
+            <BLANKLINE>
+                                %%% Music Voice [measure 3] %%%
                                 b''8 [
+            <BLANKLINE>
                                 af''8
+            <BLANKLINE>
                                 g''8
+            <BLANKLINE>
                                 cs''8 ]
                             }
                             {
-                                % measure 4
+            <BLANKLINE>
+                                %%% Music Voice [measure 4] %%%
                                 d''8 [
+            <BLANKLINE>
                                 fs''8
+            <BLANKLINE>
                                 e''8 ]
                             }
                             {
-                                % measure 5
+            <BLANKLINE>
+                                %%% Music Voice [measure 5] %%%
                                 ef''8 [
+            <BLANKLINE>
                                 f''8
+            <BLANKLINE>
                                 a''8
+            <BLANKLINE>
                                 bf''8 ]
                             }
                             {
-                                % measure 6
+            <BLANKLINE>
+                                %%% Music Voice [measure 6] %%%
                                 c''8 [
+            <BLANKLINE>
                                 b''8
+            <BLANKLINE>
                                 af''8 ]
                             }
                             {
-                                % measure 7
+            <BLANKLINE>
+                                %%% Music Voice [measure 7] %%%
                                 g''8 [
+            <BLANKLINE>
                                 cs''8
+            <BLANKLINE>
                                 d''8
+            <BLANKLINE>
                                 fs''8 ]
                             }
                             {
-                                % measure 8
+            <BLANKLINE>
+                                %%% Music Voice [measure 8] %%%
                                 e''8 [
+            <BLANKLINE>
                                 ef''8
+            <BLANKLINE>
                                 f''8 ]
                                 \bar "|"
+            <BLANKLINE>
                             }
                         }
                     }
@@ -249,88 +287,126 @@ class RegisterInterpolationCommand(Command):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        % measure 1
+            <BLANKLINE>
+                        %%% Global Skips [measure 1] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 2
+            <BLANKLINE>
+                        %%% Global Skips [measure 2] %%%
                         \time 3/8
                         s1 * 3/8
-                        % measure 3
+            <BLANKLINE>
+                        %%% Global Skips [measure 3] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 4
+            <BLANKLINE>
+                        %%% Global Skips [measure 4] %%%
                         \time 3/8
                         s1 * 3/8
-                        % measure 5
+            <BLANKLINE>
+                        %%% Global Skips [measure 5] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 6
+            <BLANKLINE>
+                        %%% Global Skips [measure 6] %%%
                         \time 3/8
                         s1 * 3/8
-                        % measure 7
+            <BLANKLINE>
+                        %%% Global Skips [measure 7] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 8
+            <BLANKLINE>
+                        %%% Global Skips [measure 8] %%%
                         \time 3/8
                         s1 * 3/8
+            <BLANKLINE>
                     }
                 >>
                 \context MusicContext = "Music Context" <<
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
-                                % measure 1
+            <BLANKLINE>
+                                %%% Music Voice [measure 1] %%%
                                 \clef "treble"
                                 fs''8 [
+            <BLANKLINE>
                                 e''8
+            <BLANKLINE>
                                 ef''8
+            <BLANKLINE>
                                 f''8 ]
                             }
                             {
-                                % measure 2
+            <BLANKLINE>
+                                %%% Music Voice [measure 2] %%%
                                 a''8 [
+            <BLANKLINE>
                                 bf'8
+            <BLANKLINE>
                                 c''8 ]
                             }
                             {
-                                % measure 3
+            <BLANKLINE>
+                                %%% Music Voice [measure 3] %%%
                                 b'8 [
+            <BLANKLINE>
                                 af'8
+            <BLANKLINE>
                                 g''8
+            <BLANKLINE>
                                 cs''8 ]
                             }
                             {
-                                % measure 4
+            <BLANKLINE>
+                                %%% Music Voice [measure 4] %%%
                                 d''8 [
+            <BLANKLINE>
                                 fs'8
+            <BLANKLINE>
                                 e''8 ]
                             }
                             {
-                                % measure 5
+            <BLANKLINE>
+                                %%% Music Voice [measure 5] %%%
                                 ef''8 [
+            <BLANKLINE>
                                 f'8
+            <BLANKLINE>
                                 a'8
+            <BLANKLINE>
                                 bf'8 ]
                             }
                             {
-                                % measure 6
+            <BLANKLINE>
+                                %%% Music Voice [measure 6] %%%
                                 c''8 [
+            <BLANKLINE>
                                 b'8
+            <BLANKLINE>
                                 af'8 ]
                             }
                             {
-                                % measure 7
+            <BLANKLINE>
+                                %%% Music Voice [measure 7] %%%
                                 g'8 [
+            <BLANKLINE>
                                 cs''8
+            <BLANKLINE>
                                 d'8
+            <BLANKLINE>
                                 fs'8 ]
                             }
                             {
-                                % measure 8
+            <BLANKLINE>
+                                %%% Music Voice [measure 8] %%%
                                 e'8 [
+            <BLANKLINE>
                                 ef'8
+            <BLANKLINE>
                                 f'8 ]
                                 \bar "|"
+            <BLANKLINE>
                             }
                         }
                     }
@@ -364,88 +440,126 @@ class RegisterInterpolationCommand(Command):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        % measure 1
+            <BLANKLINE>
+                        %%% Global Skips [measure 1] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 2
+            <BLANKLINE>
+                        %%% Global Skips [measure 2] %%%
                         \time 3/8
                         s1 * 3/8
-                        % measure 3
+            <BLANKLINE>
+                        %%% Global Skips [measure 3] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 4
+            <BLANKLINE>
+                        %%% Global Skips [measure 4] %%%
                         \time 3/8
                         s1 * 3/8
-                        % measure 5
+            <BLANKLINE>
+                        %%% Global Skips [measure 5] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 6
+            <BLANKLINE>
+                        %%% Global Skips [measure 6] %%%
                         \time 3/8
                         s1 * 3/8
-                        % measure 7
+            <BLANKLINE>
+                        %%% Global Skips [measure 7] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 8
+            <BLANKLINE>
+                        %%% Global Skips [measure 8] %%%
                         \time 3/8
                         s1 * 3/8
+            <BLANKLINE>
                     }
                 >>
                 \context MusicContext = "Music Context" <<
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
-                                % measure 1
+            <BLANKLINE>
+                                %%% Music Voice [measure 1] %%%
                                 \clef "treble"
                                 fs'8 [
+            <BLANKLINE>
                                 e'8
+            <BLANKLINE>
                                 ef'8
+            <BLANKLINE>
                                 f'8 ]
                             }
                             {
-                                % measure 2
+            <BLANKLINE>
+                                %%% Music Voice [measure 2] %%%
                                 a'8 [
+            <BLANKLINE>
                                 bf'8
+            <BLANKLINE>
                                 c''8 ]
                             }
                             {
-                                % measure 3
+            <BLANKLINE>
+                                %%% Music Voice [measure 3] %%%
                                 b'8 [
+            <BLANKLINE>
                                 af'8
+            <BLANKLINE>
                                 g'8
+            <BLANKLINE>
                                 cs''8 ]
                             }
                             {
-                                % measure 4
+            <BLANKLINE>
+                                %%% Music Voice [measure 4] %%%
                                 d''8 [
+            <BLANKLINE>
                                 fs'8
+            <BLANKLINE>
                                 e''8 ]
                             }
                             {
-                                % measure 5
+            <BLANKLINE>
+                                %%% Music Voice [measure 5] %%%
                                 ef''8 [
+            <BLANKLINE>
                                 f''8
+            <BLANKLINE>
                                 a'8
+            <BLANKLINE>
                                 bf'8 ]
                             }
                             {
-                                % measure 6
+            <BLANKLINE>
+                                %%% Music Voice [measure 6] %%%
                                 c''8 [
+            <BLANKLINE>
                                 b'8
+            <BLANKLINE>
                                 af'8 ]
                             }
                             {
-                                % measure 7
+            <BLANKLINE>
+                                %%% Music Voice [measure 7] %%%
                                 g''8 [
+            <BLANKLINE>
                                 cs''8
+            <BLANKLINE>
                                 d''8
+            <BLANKLINE>
                                 fs''8 ]
                             }
                             {
-                                % measure 8
+            <BLANKLINE>
+                                %%% Music Voice [measure 8] %%%
                                 e''8 [
+            <BLANKLINE>
                                 ef''8
+            <BLANKLINE>
                                 f''8 ]
                                 \bar "|"
+            <BLANKLINE>
                             }
                         }
                     }
@@ -479,88 +593,126 @@ class RegisterInterpolationCommand(Command):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        % measure 1
+            <BLANKLINE>
+                        %%% Global Skips [measure 1] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 2
+            <BLANKLINE>
+                        %%% Global Skips [measure 2] %%%
                         \time 3/8
                         s1 * 3/8
-                        % measure 3
+            <BLANKLINE>
+                        %%% Global Skips [measure 3] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 4
+            <BLANKLINE>
+                        %%% Global Skips [measure 4] %%%
                         \time 3/8
                         s1 * 3/8
-                        % measure 5
+            <BLANKLINE>
+                        %%% Global Skips [measure 5] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 6
+            <BLANKLINE>
+                        %%% Global Skips [measure 6] %%%
                         \time 3/8
                         s1 * 3/8
-                        % measure 7
+            <BLANKLINE>
+                        %%% Global Skips [measure 7] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 8
+            <BLANKLINE>
+                        %%% Global Skips [measure 8] %%%
                         \time 3/8
                         s1 * 3/8
+            <BLANKLINE>
                     }
                 >>
                 \context MusicContext = "Music Context" <<
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
-                                % measure 1
+            <BLANKLINE>
+                                %%% Music Voice [measure 1] %%%
                                 \clef "treble"
                                 fs''8 [
+            <BLANKLINE>
                                 e''8
+            <BLANKLINE>
                                 ef''8
+            <BLANKLINE>
                                 f''8 ]
                             }
                             {
-                                % measure 2
+            <BLANKLINE>
+                                %%% Music Voice [measure 2] %%%
                                 a'8 [
+            <BLANKLINE>
                                 bf'8
+            <BLANKLINE>
                                 c''8 ]
                             }
                             {
-                                % measure 3
+            <BLANKLINE>
+                                %%% Music Voice [measure 3] %%%
                                 b'8 [
+            <BLANKLINE>
                                 af'8
+            <BLANKLINE>
                                 g'8
+            <BLANKLINE>
                                 cs''8 ]
                             }
                             {
-                                % measure 4
+            <BLANKLINE>
+                                %%% Music Voice [measure 4] %%%
                                 d'8 [
+            <BLANKLINE>
                                 fs'8
+            <BLANKLINE>
                                 e'8 ]
                             }
                             {
-                                % measure 5
+            <BLANKLINE>
+                                %%% Music Voice [measure 5] %%%
                                 ef'8 [
+            <BLANKLINE>
                                 f'8
+            <BLANKLINE>
                                 a'8
+            <BLANKLINE>
                                 bf8 ]
                             }
                             {
-                                % measure 6
+            <BLANKLINE>
+                                %%% Music Voice [measure 6] %%%
                                 c'8 [
+            <BLANKLINE>
                                 b8
+            <BLANKLINE>
                                 af8 ]
                             }
                             {
-                                % measure 7
+            <BLANKLINE>
+                                %%% Music Voice [measure 7] %%%
                                 g8 [
+            <BLANKLINE>
                                 cs'8
+            <BLANKLINE>
                                 d'8
+            <BLANKLINE>
                                 fs8 ]
                             }
                             {
-                                % measure 8
+            <BLANKLINE>
+                                %%% Music Voice [measure 8] %%%
                                 e8 [
+            <BLANKLINE>
                                 ef8
+            <BLANKLINE>
                                 f8 ]
                                 \bar "|"
+            <BLANKLINE>
                             }
                         }
                     }
@@ -594,88 +746,126 @@ class RegisterInterpolationCommand(Command):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        % measure 1
+            <BLANKLINE>
+                        %%% Global Skips [measure 1] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 2
+            <BLANKLINE>
+                        %%% Global Skips [measure 2] %%%
                         \time 3/8
                         s1 * 3/8
-                        % measure 3
+            <BLANKLINE>
+                        %%% Global Skips [measure 3] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 4
+            <BLANKLINE>
+                        %%% Global Skips [measure 4] %%%
                         \time 3/8
                         s1 * 3/8
-                        % measure 5
+            <BLANKLINE>
+                        %%% Global Skips [measure 5] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 6
+            <BLANKLINE>
+                        %%% Global Skips [measure 6] %%%
                         \time 3/8
                         s1 * 3/8
-                        % measure 7
+            <BLANKLINE>
+                        %%% Global Skips [measure 7] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 8
+            <BLANKLINE>
+                        %%% Global Skips [measure 8] %%%
                         \time 3/8
                         s1 * 3/8
+            <BLANKLINE>
                     }
                 >>
                 \context MusicContext = "Music Context" <<
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
-                                % measure 1
+            <BLANKLINE>
+                                %%% Music Voice [measure 1] %%%
                                 \clef "treble"
                                 fs8 [
+            <BLANKLINE>
                                 e8
+            <BLANKLINE>
                                 ef8
+            <BLANKLINE>
                                 f8 ]
                             }
                             {
-                                % measure 2
+            <BLANKLINE>
+                                %%% Music Voice [measure 2] %%%
                                 a8 [
+            <BLANKLINE>
                                 bf8
+            <BLANKLINE>
                                 c'8 ]
                             }
                             {
-                                % measure 3
+            <BLANKLINE>
+                                %%% Music Voice [measure 3] %%%
                                 b8 [
+            <BLANKLINE>
                                 af8
+            <BLANKLINE>
                                 g'8
+            <BLANKLINE>
                                 cs'8 ]
                             }
                             {
-                                % measure 4
+            <BLANKLINE>
+                                %%% Music Voice [measure 4] %%%
                                 d'8 [
+            <BLANKLINE>
                                 fs'8
+            <BLANKLINE>
                                 e'8 ]
                             }
                             {
-                                % measure 5
+            <BLANKLINE>
+                                %%% Music Voice [measure 5] %%%
                                 ef'8 [
+            <BLANKLINE>
                                 f'8
+            <BLANKLINE>
                                 a'8
+            <BLANKLINE>
                                 bf'8 ]
                             }
                             {
-                                % measure 6
+            <BLANKLINE>
+                                %%% Music Voice [measure 6] %%%
                                 c''8 [
+            <BLANKLINE>
                                 b'8
+            <BLANKLINE>
                                 af'8 ]
                             }
                             {
-                                % measure 7
+            <BLANKLINE>
+                                %%% Music Voice [measure 7] %%%
                                 g'8 [
+            <BLANKLINE>
                                 cs''8
+            <BLANKLINE>
                                 d''8
+            <BLANKLINE>
                                 fs''8 ]
                             }
                             {
-                                % measure 8
+            <BLANKLINE>
+                                %%% Music Voice [measure 8] %%%
                                 e''8 [
+            <BLANKLINE>
                                 ef''8
+            <BLANKLINE>
                                 f''8 ]
                                 \bar "|"
+            <BLANKLINE>
                             }
                         }
                     }

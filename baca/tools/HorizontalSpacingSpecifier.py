@@ -33,51 +33,72 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        % measure 1
+            <BLANKLINE>
+                        %%% Global Skips [measure 1] %%%
                         \time 8/16
                         s1 * 1/2
-                        % measure 2
+            <BLANKLINE>
+                        %%% Global Skips [measure 2] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 3
+            <BLANKLINE>
+                        %%% Global Skips [measure 3] %%%
                         \time 2/4
                         s1 * 1/2
-                        % measure 4
+            <BLANKLINE>
+                        %%% Global Skips [measure 4] %%%
                         \time 1/2
                         s1 * 1/2
+            <BLANKLINE>
                     }
                 >>
                 \context MusicContext = "Music Context" <<
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
-                                % measure 1
+            <BLANKLINE>
+                                %%% Music Voice [measure 1] %%%
                                 \clef "treble"
                                 e'16 [
+            <BLANKLINE>
                                 f'16
+            <BLANKLINE>
                                 e'16
+            <BLANKLINE>
                                 f'16
+            <BLANKLINE>
                                 e'16
+            <BLANKLINE>
                                 f'16
+            <BLANKLINE>
                                 e'16
+            <BLANKLINE>
                                 f'16 ]
                             }
                             {
-                                % measure 2
+            <BLANKLINE>
+                                %%% Music Voice [measure 2] %%%
                                 e'8 [
+            <BLANKLINE>
                                 f'8
+            <BLANKLINE>
                                 e'8
+            <BLANKLINE>
                                 f'8 ]
                             }
                             {
-                                % measure 3
+            <BLANKLINE>
+                                %%% Music Voice [measure 3] %%%
                                 e'4
+            <BLANKLINE>
                                 f'4
                             }
                             {
-                                % measure 4
+            <BLANKLINE>
+                                %%% Music Voice [measure 4] %%%
                                 e'2
                                 \bar "|"
+            <BLANKLINE>
                             }
                         }
                     }
@@ -111,59 +132,80 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        % measure 1
+            <BLANKLINE>
+                        %%% Global Skips [measure 1] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                         \time 8/16
                         \newSpacingSection
                         s1 * 1/2
-                        % measure 2
+            <BLANKLINE>
+                        %%% Global Skips [measure 2] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
                         \time 4/8
                         \newSpacingSection
                         s1 * 1/2
-                        % measure 3
+            <BLANKLINE>
+                        %%% Global Skips [measure 3] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)
                         \time 2/4
                         \newSpacingSection
                         s1 * 1/2
-                        % measure 4
+            <BLANKLINE>
+                        %%% Global Skips [measure 4] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 2)
                         \time 1/2
                         \newSpacingSection
                         s1 * 1/2
+            <BLANKLINE>
                     }
                 >>
                 \context MusicContext = "Music Context" <<
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
-                                % measure 1
+            <BLANKLINE>
+                                %%% Music Voice [measure 1] %%%
                                 \clef "treble"
                                 e'16 [
+            <BLANKLINE>
                                 f'16
+            <BLANKLINE>
                                 e'16
+            <BLANKLINE>
                                 f'16
+            <BLANKLINE>
                                 e'16
+            <BLANKLINE>
                                 f'16
+            <BLANKLINE>
                                 e'16
+            <BLANKLINE>
                                 f'16 ]
                             }
                             {
-                                % measure 2
+            <BLANKLINE>
+                                %%% Music Voice [measure 2] %%%
                                 e'8 [
+            <BLANKLINE>
                                 f'8
+            <BLANKLINE>
                                 e'8
+            <BLANKLINE>
                                 f'8 ]
                             }
                             {
-                                % measure 3
+            <BLANKLINE>
+                                %%% Music Voice [measure 3] %%%
                                 e'4
+            <BLANKLINE>
                                 f'4
                             }
                             {
-                                % measure 4
+            <BLANKLINE>
+                                %%% Music Voice [measure 4] %%%
                                 e'2
                                 \bar "|"
+            <BLANKLINE>
                             }
                         }
                     }
@@ -199,59 +241,80 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        % measure 1
+            <BLANKLINE>
+                        %%% Global Skips [measure 1] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                         \time 8/16
                         \newSpacingSection
                         s1 * 1/2
-                        % measure 2
+            <BLANKLINE>
+                        %%% Global Skips [measure 2] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
                         \time 4/8
                         \newSpacingSection
                         s1 * 1/2
-                        % measure 3
+            <BLANKLINE>
+                        %%% Global Skips [measure 3] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)
                         \time 2/4
                         \newSpacingSection
                         s1 * 1/2
-                        % measure 4
+            <BLANKLINE>
+                        %%% Global Skips [measure 4] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 2)
                         \time 1/2
                         \newSpacingSection
                         s1 * 1/2
+            <BLANKLINE>
                     }
                 >>
                 \context MusicContext = "Music Context" <<
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
-                                % measure 1
+            <BLANKLINE>
+                                %%% Music Voice [measure 1] %%%
                                 \clef "treble"
                                 e'16 [
+            <BLANKLINE>
                                 f'16
+            <BLANKLINE>
                                 e'16
+            <BLANKLINE>
                                 f'16
+            <BLANKLINE>
                                 e'16
+            <BLANKLINE>
                                 f'16
+            <BLANKLINE>
                                 e'16
+            <BLANKLINE>
                                 f'16 ]
                             }
                             {
-                                % measure 2
+            <BLANKLINE>
+                                %%% Music Voice [measure 2] %%%
                                 e'8 [
+            <BLANKLINE>
                                 f'8
+            <BLANKLINE>
                                 e'8
+            <BLANKLINE>
                                 f'8 ]
                             }
                             {
-                                % measure 3
+            <BLANKLINE>
+                                %%% Music Voice [measure 3] %%%
                                 e'4
+            <BLANKLINE>
                                 f'4
                             }
                             {
-                                % measure 4
+            <BLANKLINE>
+                                %%% Music Voice [measure 4] %%%
                                 e'2
                                 \bar "|"
+            <BLANKLINE>
                             }
                         }
                     }
@@ -288,59 +351,80 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        % measure 1
+            <BLANKLINE>
+                        %%% Global Skips [measure 1] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)
                         \time 8/16
                         \newSpacingSection
                         s1 * 1/2
-                        % measure 2
+            <BLANKLINE>
+                        %%% Global Skips [measure 2] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                         \time 4/8
                         \newSpacingSection
                         s1 * 1/2
-                        % measure 3
+            <BLANKLINE>
+                        %%% Global Skips [measure 3] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
                         \time 2/4
                         \newSpacingSection
                         s1 * 1/2
-                        % measure 4
+            <BLANKLINE>
+                        %%% Global Skips [measure 4] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)
                         \time 1/2
                         \newSpacingSection
                         s1 * 1/2
+            <BLANKLINE>
                     }
                 >>
                 \context MusicContext = "Music Context" <<
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
-                                % measure 1
+            <BLANKLINE>
+                                %%% Music Voice [measure 1] %%%
                                 \clef "treble"
                                 e'16 [
+            <BLANKLINE>
                                 f'16
+            <BLANKLINE>
                                 e'16
+            <BLANKLINE>
                                 f'16
+            <BLANKLINE>
                                 e'16
+            <BLANKLINE>
                                 f'16
+            <BLANKLINE>
                                 e'16
+            <BLANKLINE>
                                 f'16 ]
                             }
                             {
-                                % measure 2
+            <BLANKLINE>
+                                %%% Music Voice [measure 2] %%%
                                 e'8 [
+            <BLANKLINE>
                                 f'8
+            <BLANKLINE>
                                 e'8
+            <BLANKLINE>
                                 f'8 ]
                             }
                             {
-                                % measure 3
+            <BLANKLINE>
+                                %%% Music Voice [measure 3] %%%
                                 e'4
+            <BLANKLINE>
                                 f'4
                             }
                             {
-                                % measure 4
+            <BLANKLINE>
+                                %%% Music Voice [measure 4] %%%
                                 e'2
                                 \bar "|"
+            <BLANKLINE>
                             }
                         }
                     }
@@ -378,59 +462,80 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        % measure 1
+            <BLANKLINE>
+                        %%% Global Skips [measure 1] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)
                         \time 8/16
                         \newSpacingSection
                         s1 * 1/2
-                        % measure 2
+            <BLANKLINE>
+                        %%% Global Skips [measure 2] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                         \time 4/8
                         \newSpacingSection
                         s1 * 1/2
-                        % measure 3
+            <BLANKLINE>
+                        %%% Global Skips [measure 3] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                         \time 2/4
                         \newSpacingSection
                         s1 * 1/2
-                        % measure 4
+            <BLANKLINE>
+                        %%% Global Skips [measure 4] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                         \time 1/2
                         \newSpacingSection
                         s1 * 1/2
+            <BLANKLINE>
                     }
                 >>
                 \context MusicContext = "Music Context" <<
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
-                                % measure 1
+            <BLANKLINE>
+                                %%% Music Voice [measure 1] %%%
                                 \clef "treble"
                                 e'16 [
+            <BLANKLINE>
                                 f'16
+            <BLANKLINE>
                                 e'16
+            <BLANKLINE>
                                 f'16
+            <BLANKLINE>
                                 e'16
+            <BLANKLINE>
                                 f'16
+            <BLANKLINE>
                                 e'16
+            <BLANKLINE>
                                 f'16 ]
                             }
                             {
-                                % measure 2
+            <BLANKLINE>
+                                %%% Music Voice [measure 2] %%%
                                 e'8 [
+            <BLANKLINE>
                                 f'8
+            <BLANKLINE>
                                 e'8
+            <BLANKLINE>
                                 f'8 ]
                             }
                             {
-                                % measure 3
+            <BLANKLINE>
+                                %%% Music Voice [measure 3] %%%
                                 e'4
+            <BLANKLINE>
                                 f'4
                             }
                             {
-                                % measure 4
+            <BLANKLINE>
+                                %%% Music Voice [measure 4] %%%
                                 e'2
                                 \bar "|"
+            <BLANKLINE>
                             }
                         }
                     }
@@ -478,16 +583,19 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        % measure 1
+            <BLANKLINE>
+                        %%% Global Skips [measure 1] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                         \time 4/8
                         \newSpacingSection
                         s1 * 1/2
-                        % measure 2
+            <BLANKLINE>
+                        %%% Global Skips [measure 2] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                         \time 3/8
                         \newSpacingSection
                         s1 * 3/8
+            <BLANKLINE>
                     }
                 >>
                 \context MusicContext = "Music Context" <<
@@ -524,14 +632,20 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                         }
                                 }
                             \times 1/1 {
-                                % measure 1
+            <BLANKLINE>
+                                %%% Music Voice [measure 1] %%%
                                 \once \override Beam.grow-direction = #right
                                 \clef "treble"
                                 e'16 * 63/32 [
+            <BLANKLINE>
                                 f'16 * 115/64
+            <BLANKLINE>
                                 e'16 * 91/64
+            <BLANKLINE>
                                 f'16 * 35/32
+            <BLANKLINE>
                                 e'16 * 29/32
+            <BLANKLINE>
                                 f'16 * 13/16 ]
                             }
                             \revert TupletNumber.text
@@ -566,14 +680,20 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                         }
                                 }
                             \times 1/1 {
-                                % measure 2
+            <BLANKLINE>
+                                %%% Music Voice [measure 2] %%%
                                 \once \override Beam.grow-direction = #right
                                 e'16 * 117/64 [
+            <BLANKLINE>
                                 f'16 * 99/64
+            <BLANKLINE>
                                 e'16 * 69/64
+            <BLANKLINE>
                                 f'16 * 13/16
+            <BLANKLINE>
                                 e'16 * 47/64 ]
                                 \bar "|"
+            <BLANKLINE>
                             }
                             \revert TupletNumber.text
                         }

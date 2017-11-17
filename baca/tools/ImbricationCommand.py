@@ -835,16 +835,19 @@ class ImbricationCommand(Command):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 7/16
                             \newSpacingSection
                             s1 * 7/16
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/4
                             \newSpacingSection
                             s1 * 1/4
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -854,19 +857,26 @@ class ImbricationCommand(Command):
                                     \override TupletBracket.stencil = ##f
                                     \override TupletNumber.stencil = ##f
                                     {
-                                        % measure 1
+                <BLANKLINE>
+                                        %%% Music Voice 1 [measure 1] %%%
                                         s16 [
+                <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
                                         d'16 -\staccato
+                <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
                                         bf'16 -\staccato
+                <BLANKLINE>
                                         s16
                                     }
                                     {
+                <BLANKLINE>
                                         s16
+                <BLANKLINE>
                                         s16
+                <BLANKLINE>
                                         s16
                                     }
                                     \revert TupletBracket.stencil
@@ -876,16 +886,21 @@ class ImbricationCommand(Command):
                                     \override TupletBracket.stencil = ##f
                                     \override TupletNumber.stencil = ##f
                                     {
-                                        % measure 2
+                <BLANKLINE>
+                                        %%% Music Voice 1 [measure 2] %%%
                                         s16
+                <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
                                         cs''16 -\staccato
+                <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
                                         a'16 -\staccato
+                <BLANKLINE>
                                         s16 ]
                                         \bar "|"
+                <BLANKLINE>
                                     }
                                     \revert TupletBracket.stencil
                                     \revert TupletNumber.stencil
@@ -896,27 +911,34 @@ class ImbricationCommand(Command):
                             } {
                                 {
                                     {
-                                        % measure 1
+                <BLANKLINE>
+                                        %%% Music Voice 2 [measure 1] %%%
                                         \set stemLeftBeamCount = #0
                                         \set stemRightBeamCount = #2
                                         c'16 [
+                <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
                                         d'16
+                <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
                                         bf'16
+                <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #1
                                         fs''16
                                     }
                                     {
+                <BLANKLINE>
                                         \set stemLeftBeamCount = #1
                                         \set stemRightBeamCount = #2
                                         e''16
+                <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
                                         ef''16
+                <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #0
                                         b''16 ]
@@ -924,20 +946,25 @@ class ImbricationCommand(Command):
                                 }
                                 {
                                     {
-                                        % measure 2
+                <BLANKLINE>
+                                        %%% Music Voice 2 [measure 2] %%%
                                         \set stemLeftBeamCount = #0
                                         \set stemRightBeamCount = #2
                                         g''16 [
+                <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
                                         cs''16
+                <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
                                         a'16
+                <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #0
                                         af'16 ]
                                         \bar "|"
+                <BLANKLINE>
                                     }
                                 }
                             }

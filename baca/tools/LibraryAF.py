@@ -630,61 +630,81 @@ class LibraryAF(abjad.AbjadObject):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)
                             \time 4/8
                             \newSpacingSection
                             s1 * 1/2
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)
                             \time 3/8
                             \newSpacingSection
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)
                             \time 4/8
                             \newSpacingSection
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)
                             \time 3/8
                             \newSpacingSection
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
-                                    % measure 1
+                <BLANKLINE>
+                                    %%% Music Voice [measure 1] %%%
                                     \clef "treble"
                                     e'8 [
+                <BLANKLINE>
                                     d''8
+                <BLANKLINE>
                                     f'8
+                <BLANKLINE>
                                     e''8 ]
                                 }
                                 {
-                                    % measure 2
+                <BLANKLINE>
+                                    %%% Music Voice [measure 2] %%%
                                     \override Staff.BarLine.bar-extent = #'(-4 . 4)
                                     g'8 [
+                <BLANKLINE>
                                     f''8
+                <BLANKLINE>
                                     e'8 ]
                                     \revert Staff.BarLine.bar-extent
                                 }
                                 {
-                                    % measure 3
+                <BLANKLINE>
+                                    %%% Music Voice [measure 3] %%%
                                     d''8 [
+                <BLANKLINE>
                                     f'8
+                <BLANKLINE>
                                     e''8
+                <BLANKLINE>
                                     g'8 ]
                                 }
                                 {
-                                    % measure 4
+                <BLANKLINE>
+                                    %%% Music Voice [measure 4] %%%
                                     f''8 [
+                <BLANKLINE>
                                     e'8
+                <BLANKLINE>
                                     d''8 ]
                                     \bar "|"
                                     \once \override Staff.BarLine.bar-extent = #'(-4 . 4)
+                <BLANKLINE>
                                 }
                             }
                         }
@@ -1828,8 +1848,8 @@ class LibraryAF(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \clef "alto"
                                 \override TupletBracket.staff-padding = #7
+                                \clef "alto"
                                 r8
                                 c'16 [
                                 d'16 ]
@@ -2041,9 +2061,9 @@ class LibraryAF(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
                                 \once \override Dots.color = #red
                                 \once \override Rest.color = #red
-                                \override TupletBracket.staff-padding = #5
                                 r8
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue
@@ -2416,9 +2436,11 @@ class LibraryAF(abjad.AbjadObject):
                     \tag violin.viola.cello
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 5/8
                             s1 * 5/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -2428,18 +2450,24 @@ class LibraryAF(abjad.AbjadObject):
                                 \context ViolinMusicVoice = "Violin Music Voice" {
                                     {
                                         {
-                                            % measure 1
+                <BLANKLINE>
+                                            %%% Violin Music Voice [measure 1] %%%
+                                            \override Stem.direction = #up
                                             \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                             \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                             \clef "treble"
-                                            \override Stem.direction = #up
                                             a'8
+                <BLANKLINE>
                                             b'8
+                <BLANKLINE>
                                             c''8
+                <BLANKLINE>
                                             d''8
+                <BLANKLINE>
                                             e''8
                                             \bar "|"
                                             \revert Stem.direction
+                <BLANKLINE>
                                         }
                                     }
                                 }
@@ -2449,23 +2477,29 @@ class LibraryAF(abjad.AbjadObject):
                                 \context ViolaMusicVoice = "Viola Music Voice" {
                                     {
                                         {
-                                            % measure 1
+                <BLANKLINE>
+                                            %%% Viola Music Voice [measure 1] %%%
+                                            \override Stem.direction = #up
                                             \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                             \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
                                             \clef "alto"
                                             \crossStaff
-                                            \override Stem.direction = #up
                                             c'8
+                <BLANKLINE>
                                             \crossStaff
                                             d'8
+                <BLANKLINE>
                                             \crossStaff
                                             e'8
+                <BLANKLINE>
                                             \crossStaff
                                             f'8
+                <BLANKLINE>
                                             \crossStaff
                                             g'8
                                             \bar "|"
                                             \revert Stem.direction
+                <BLANKLINE>
                                         }
                                     }
                                 }
@@ -2473,12 +2507,14 @@ class LibraryAF(abjad.AbjadObject):
                             \tag cello
                             \context CelloMusicStaff = "Cello Music Staff" {
                                 \context CelloMusicVoice = "Cello Music Voice" {
-                                    % measure 1
+                <BLANKLINE>
+                                    %%% Cello Music Voice [measure 1] %%%
                                     \set CelloMusicStaff.instrumentName = \markup { Cello }
                                     \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
                                     \clef "bass"
                                     R1 * 5/8
                                     \bar "|"
+                <BLANKLINE>
                                 }
                             }
                         >>
@@ -2533,9 +2569,11 @@ class LibraryAF(abjad.AbjadObject):
                     \tag violin.viola.cello
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 5/8
                             s1 * 5/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -2545,18 +2583,24 @@ class LibraryAF(abjad.AbjadObject):
                                 \context ViolinMusicVoice = "Violin Music Voice" {
                                     {
                                         {
-                                            % measure 1
+                <BLANKLINE>
+                                            %%% Violin Music Voice [measure 1] %%%
+                                            \override Stem.direction = #up
                                             \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                             \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                             \clef "treble"
-                                            \override Stem.direction = #up
                                             a'8
+                <BLANKLINE>
                                             b'8
+                <BLANKLINE>
                                             c''8
+                <BLANKLINE>
                                             d''8
+                <BLANKLINE>
                                             e''8
                                             \bar "|"
                                             \revert Stem.direction
+                <BLANKLINE>
                                         }
                                     }
                                 }
@@ -2566,20 +2610,26 @@ class LibraryAF(abjad.AbjadObject):
                                 \context ViolaMusicVoice = "Viola Music Voice" {
                                     {
                                         {
-                                            % measure 1
+                <BLANKLINE>
+                                            %%% Viola Music Voice [measure 1] %%%
+                                            \override Stem.direction = #up
                                             \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                             \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
                                             \clef "alto"
-                                            \override Stem.direction = #up
                                             c'8
+                <BLANKLINE>
                                             d'8
+                <BLANKLINE>
                                             e'8
+                <BLANKLINE>
                                             \crossStaff
                                             f'8
+                <BLANKLINE>
                                             \crossStaff
                                             g'8
                                             \bar "|"
                                             \revert Stem.direction
+                <BLANKLINE>
                                         }
                                     }
                                 }
@@ -2587,12 +2637,14 @@ class LibraryAF(abjad.AbjadObject):
                             \tag cello
                             \context CelloMusicStaff = "Cello Music Staff" {
                                 \context CelloMusicVoice = "Cello Music Voice" {
-                                    % measure 1
+                <BLANKLINE>
+                                    %%% Cello Music Voice [measure 1] %%%
                                     \set CelloMusicStaff.instrumentName = \markup { Cello }
                                     \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
                                     \clef "bass"
                                     R1 * 5/8
                                     \bar "|"
+                <BLANKLINE>
                                 }
                             }
                         >>
@@ -3697,8 +3749,8 @@ class LibraryAF(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \dynamicDown
                                 \override TupletBracket.staff-padding = #5
+                                \dynamicDown
                                 r8
                                 c'16 \p [
                                 d'16 ]
@@ -3819,8 +3871,8 @@ class LibraryAF(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \dynamicUp
                                 \override TupletBracket.staff-padding = #5
+                                \dynamicUp
                                 r8
                                 c'16 \p [
                                 d'16 ]

@@ -605,8 +605,8 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
                                 \override TupletBracket.staff-padding = #5
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)
                                 r8
                                 c'16 [
                                 d'16 ]
@@ -655,8 +655,8 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)
                                 \override TupletBracket.staff-padding = #5
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)
                                 r8
                                 c'16 [
                                 d'16 ]
@@ -705,8 +705,8 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                                 \override TupletBracket.staff-padding = #5
+                                \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                                 r8
                                 c'16 [
                                 d'16 ]
@@ -4587,9 +4587,9 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \set Staff.pedalSustainStyle = #'bracket
                                 \override Staff.SustainPedalLineSpanner.staff-padding = #4
                                 \override TupletBracket.staff-padding = #5
+                                \set Staff.pedalSustainStyle = #'bracket
                                 r8 \sustainOn
                                 c'16 [
                                 d'16 ]
@@ -4881,9 +4881,9 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \set Staff.pedalSustainStyle = #'bracket
                                 \override Staff.SustainPedalLineSpanner.staff-padding = #4
                                 \override TupletBracket.staff-padding = #5
+                                \set Staff.pedalSustainStyle = #'bracket
                                 r8 \sustainOn
                                 c'16 [
                                 d'16 ]
@@ -4943,9 +4943,9 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \set Staff.pedalSustainStyle = #'bracket
                                 \override Staff.SustainPedalLineSpanner.staff-padding = #4
                                 \override TupletBracket.staff-padding = #5
+                                \set Staff.pedalSustainStyle = #'bracket
                                 r8 \sustainOn
                                 c'16 [
                                 d'16 ]
@@ -5005,9 +5005,9 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \set Staff.pedalSustainStyle = #'bracket
                                 \override Staff.SustainPedalLineSpanner.staff-padding = #4
                                 \override TupletBracket.staff-padding = #5
+                                \set Staff.pedalSustainStyle = #'bracket
                                 r8 \sustainOn
                                 c'16 [
                                 d'16 ]
@@ -5081,9 +5081,9 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \set Staff.pedalSustainStyle = #'bracket
                                 \override Staff.SustainPedalLineSpanner.staff-padding = #4
                                 \override TupletBracket.staff-padding = #5
+                                \set Staff.pedalSustainStyle = #'bracket
                                 r8 \sustainOn
                                 c'16 [
                                 d'16 ]
@@ -5143,8 +5143,8 @@ class LibraryNS(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \set Staff.pedalSustainStyle = #'bracket
                                 \override TupletBracket.staff-padding = #5
+                                \set Staff.pedalSustainStyle = #'bracket
                                 r8 \sustainOn
                                 c'16 [
                                 d'16 ]
@@ -5154,8 +5154,8 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \set Staff.pedalSustainStyle = #'bracket
                                 \override Staff.SustainPedalLineSpanner.staff-padding = #4
+                                \set Staff.pedalSustainStyle = #'bracket
                                 fs''16 [ \sustainOn
                                 e''16 ]
                                 ef''4 ~

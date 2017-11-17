@@ -1048,6 +1048,7 @@ class LibraryTZ(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
+                                \override TextSpanner.staff-padding = #6
                                 \once \override TextSpanner.arrow-width = 0.25
                                 \once \override TextSpanner.bound-details.left-broken.text = ##f
                                 \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center
@@ -1068,7 +1069,6 @@ class LibraryTZ(abjad.AbjadObject):
                                 \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center
                                 \once \override TextSpanner.dash-fraction = 0.25
                                 \once \override TextSpanner.dash-period = 1.5
-                                \override TextSpanner.staff-padding = #6
                                 fs''16 [ \startTextSpan
                                 e''16 ]
                                 ef''4 ~
@@ -1634,45 +1634,65 @@ class LibraryTZ(abjad.AbjadObject):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
-                                % measure 1
-                                \clef "treble"
+                <BLANKLINE>
+                                %%% Music Voice [measure 1] %%%
                                 \override Score.BarLine.transparent = ##t
+                                \clef "treble"
                                 e'8 [
+                <BLANKLINE>
                                 d''8
+                <BLANKLINE>
                                 f'8 ]
+                <BLANKLINE>
                                 r8
-                                % measure 2
+                <BLANKLINE>
+                                %%% Music Voice [measure 2] %%%
                                 e''8 [
+                <BLANKLINE>
                                 g'8
+                <BLANKLINE>
                                 f''8 ]
-                                % measure 3
+                <BLANKLINE>
+                                %%% Music Voice [measure 3] %%%
                                 r8
+                <BLANKLINE>
                                 e'8 [
+                <BLANKLINE>
                                 d''8
+                <BLANKLINE>
                                 f'8 ]
-                                % measure 4
+                <BLANKLINE>
+                                %%% Music Voice [measure 4] %%%
                                 r8
+                <BLANKLINE>
                                 e''8 [
+                <BLANKLINE>
                                 g'8 ]
                                 \bar "|"
                                 \revert Score.BarLine.transparent
+                <BLANKLINE>
                             }
                         }
                     >>
@@ -1710,45 +1730,65 @@ class LibraryTZ(abjad.AbjadObject):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
-                                % measure 1
+                <BLANKLINE>
+                                %%% Music Voice [measure 1] %%%
                                 \clef "treble"
                                 e'8 [
+                <BLANKLINE>
                                 d''8
+                <BLANKLINE>
                                 f'8 ]
+                <BLANKLINE>
                                 r8
-                                % measure 2
+                <BLANKLINE>
+                                %%% Music Voice [measure 2] %%%
                                 \override Score.BarLine.transparent = ##t
                                 e''8 [
+                <BLANKLINE>
                                 g'8
+                <BLANKLINE>
                                 f''8 ]
                                 \revert Score.BarLine.transparent
-                                % measure 3
+                <BLANKLINE>
+                                %%% Music Voice [measure 3] %%%
                                 r8
+                <BLANKLINE>
                                 e'8 [
+                <BLANKLINE>
                                 d''8
+                <BLANKLINE>
                                 f'8 ]
-                                % measure 4
+                <BLANKLINE>
+                                %%% Music Voice [measure 4] %%%
                                 r8
+                <BLANKLINE>
                                 e''8 [
+                <BLANKLINE>
                                 g'8 ]
                                 \bar "|"
+                <BLANKLINE>
                             }
                         }
                     >>
@@ -3416,46 +3456,66 @@ class LibraryTZ(abjad.AbjadObject):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                             \repeat volta 2
                             {
-                                % measure 2
+                <BLANKLINE>
+                                %%% Global Skips [measure 2] %%%
                                 \time 3/8
                                 s1 * 3/8
-                                % measure 3
+                <BLANKLINE>
+                                %%% Global Skips [measure 3] %%%
                                 \time 4/8
                                 s1 * 1/2
                             }
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
-                                % measure 1
+                <BLANKLINE>
+                                %%% Music Voice [measure 1] %%%
                                 \clef "treble"
                                 e'8 [
+                <BLANKLINE>
                                 d''8
+                <BLANKLINE>
                                 f'8 ]
+                <BLANKLINE>
                                 r8
-                                % measure 2
+                <BLANKLINE>
+                                %%% Music Voice [measure 2] %%%
                                 e''8 [
+                <BLANKLINE>
                                 g'8
+                <BLANKLINE>
                                 f''8 ]
-                                % measure 3
+                <BLANKLINE>
+                                %%% Music Voice [measure 3] %%%
                                 r8
+                <BLANKLINE>
                                 e'8 [
+                <BLANKLINE>
                                 d''8
+                <BLANKLINE>
                                 f'8 ]
-                                % measure 4
+                <BLANKLINE>
+                                %%% Music Voice [measure 4] %%%
                                 r8
+                <BLANKLINE>
                                 e''8 [
+                <BLANKLINE>
                                 g'8 ]
                                 \bar "|"
+                <BLANKLINE>
                             }
                         }
                     >>
@@ -3499,7 +3559,8 @@ class LibraryTZ(abjad.AbjadObject):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                                 - \markup {
@@ -3511,7 +3572,8 @@ class LibraryTZ(abjad.AbjadObject):
                                     }
                             \repeat volta 2
                             {
-                                % measure 2
+                <BLANKLINE>
+                                %%% Global Skips [measure 2] %%%
                                 \time 3/8
                                 s1 * 3/8
                                     - \markup {
@@ -3521,11 +3583,13 @@ class LibraryTZ(abjad.AbjadObject):
                                                 #blue
                                                 [2]
                                         }
-                                % measure 3
+                <BLANKLINE>
+                                %%% Global Skips [measure 3] %%%
                                 \time 4/8
                                 s1 * 1/2
                             }
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                                 - \markup {
@@ -3535,31 +3599,47 @@ class LibraryTZ(abjad.AbjadObject):
                                             #blue
                                             [3]
                                     }
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
-                                % measure 1
+                <BLANKLINE>
+                                %%% Music Voice [measure 1] %%%
                                 \clef "treble"
                                 e'8 [
+                <BLANKLINE>
                                 d''8
+                <BLANKLINE>
                                 f'8 ]
+                <BLANKLINE>
                                 r8
-                                % measure 2
+                <BLANKLINE>
+                                %%% Music Voice [measure 2] %%%
                                 e''8 [
+                <BLANKLINE>
                                 g'8
+                <BLANKLINE>
                                 f''8 ]
-                                % measure 3
+                <BLANKLINE>
+                                %%% Music Voice [measure 3] %%%
                                 r8
+                <BLANKLINE>
                                 e'8 [
+                <BLANKLINE>
                                 d''8
+                <BLANKLINE>
                                 f'8 ]
-                                % measure 4
+                <BLANKLINE>
+                                %%% Music Voice [measure 4] %%%
                                 r8
+                <BLANKLINE>
                                 e''8 [
+                <BLANKLINE>
                                 g'8 ]
                                 \bar "|"
+                <BLANKLINE>
                             }
                         }
                     >>

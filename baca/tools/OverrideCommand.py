@@ -86,49 +86,69 @@ class OverrideCommand(Command):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        % measure 1
+            <BLANKLINE>
+                        %%% Global Skips [measure 1] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 2
+            <BLANKLINE>
+                        %%% Global Skips [measure 2] %%%
                         \time 3/8
                         s1 * 3/8
-                        % measure 3
+            <BLANKLINE>
+                        %%% Global Skips [measure 3] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 4
+            <BLANKLINE>
+                        %%% Global Skips [measure 4] %%%
                         \time 3/8
                         s1 * 3/8
+            <BLANKLINE>
                     }
                 >>
                 \context MusicContext = "Music Context" <<
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
-                            % measure 1
-                            \clef "treble"
+            <BLANKLINE>
+                            %%% Music Voice [measure 1] %%%
                             \override Beam.positions = #'(6 . 6)
                             \override Stem.direction = #up
+                            \clef "treble"
                             e'8 [
+            <BLANKLINE>
                             d''8
+            <BLANKLINE>
                             f'8 ]
+            <BLANKLINE>
                             \override Rest.direction = #up
                             r8
-                            % measure 2
+            <BLANKLINE>
+                            %%% Music Voice [measure 2] %%%
                             e''8 [
+            <BLANKLINE>
                             g'8
+            <BLANKLINE>
                             f''8 ]
-                            % measure 3
+            <BLANKLINE>
+                            %%% Music Voice [measure 3] %%%
                             r8
+            <BLANKLINE>
                             e'8 [
+            <BLANKLINE>
                             d''8
+            <BLANKLINE>
                             f'8 ]
-                            % measure 4
+            <BLANKLINE>
+                            %%% Music Voice [measure 4] %%%
                             r8
                             \revert Rest.direction
+            <BLANKLINE>
                             e''8 [
+            <BLANKLINE>
                             g'8 ]
                             \bar "|"
                             \revert Beam.positions
                             \revert Stem.direction
+            <BLANKLINE>
                         }
                     }
                 >>
@@ -204,7 +224,7 @@ class OverrideCommand(Command):
             once=once,
             )
         string = string[1:]
-        format_slot = None
+        format_slot = 'before'
         if self.after is True:
             format_slot = 'after'
         override = abjad.LilyPondCommand(string, format_slot=format_slot)

@@ -373,24 +373,30 @@ class ClusterCommand(Command):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        % measure 1
+            <BLANKLINE>
+                        %%% Global Skips [measure 1] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 2
+            <BLANKLINE>
+                        %%% Global Skips [measure 2] %%%
                         \time 3/8
                         s1 * 3/8
-                        % measure 3
+            <BLANKLINE>
+                        %%% Global Skips [measure 3] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 4
+            <BLANKLINE>
+                        %%% Global Skips [measure 4] %%%
                         \time 3/8
                         s1 * 3/8
+            <BLANKLINE>
                     }
                 >>
                 \context MusicContext = "Music Context" <<
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
-                            % measure 1
+            <BLANKLINE>
+                            %%% Music Voice [measure 1] %%%
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -408,7 +414,8 @@ class ClusterCommand(Command):
                                                 \flat
                                             }
                                     }
-                            % measure 2
+            <BLANKLINE>
+                            %%% Music Voice [measure 2] %%%
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -425,7 +432,8 @@ class ClusterCommand(Command):
                                                 \flat
                                             }
                                     }
-                            % measure 3
+            <BLANKLINE>
+                            %%% Music Voice [measure 3] %%%
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -442,7 +450,8 @@ class ClusterCommand(Command):
                                                 \flat
                                             }
                                     }
-                            % measure 4
+            <BLANKLINE>
+                            %%% Music Voice [measure 4] %%%
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -460,6 +469,7 @@ class ClusterCommand(Command):
                                             }
                                     }
                             \bar "|"
+            <BLANKLINE>
                         }
                     }
                 >>
@@ -579,24 +589,30 @@ class ClusterCommand(Command):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
-                                % measure 1
+                <BLANKLINE>
+                                %%% Music Voice [measure 1] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -610,7 +626,8 @@ class ClusterCommand(Command):
                                         \center-align
                                             \natural
                                         }
-                                % measure 2
+                <BLANKLINE>
+                                %%% Music Voice [measure 2] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -623,7 +640,8 @@ class ClusterCommand(Command):
                                         \center-align
                                             \natural
                                         }
-                                % measure 3
+                <BLANKLINE>
+                                %%% Music Voice [measure 3] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -636,7 +654,8 @@ class ClusterCommand(Command):
                                         \center-align
                                             \natural
                                         }
-                                % measure 4
+                <BLANKLINE>
+                                %%% Music Voice [measure 4] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -650,6 +669,7 @@ class ClusterCommand(Command):
                                             \natural
                                         }
                                 \bar "|"
+                <BLANKLINE>
                             }
                         }
                     >>
@@ -703,24 +723,30 @@ class ClusterCommand(Command):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
-                                % measure 1
+                <BLANKLINE>
+                                %%% Music Voice [measure 1] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -738,7 +764,8 @@ class ClusterCommand(Command):
                                                     \flat
                                                 }
                                         }
-                                % measure 2
+                <BLANKLINE>
+                                %%% Music Voice [measure 2] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -755,7 +782,8 @@ class ClusterCommand(Command):
                                                     \flat
                                                 }
                                         }
-                                % measure 3
+                <BLANKLINE>
+                                %%% Music Voice [measure 3] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -772,7 +800,8 @@ class ClusterCommand(Command):
                                                     \flat
                                                 }
                                         }
-                                % measure 4
+                <BLANKLINE>
+                                %%% Music Voice [measure 4] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -790,6 +819,7 @@ class ClusterCommand(Command):
                                                 }
                                         }
                                 \bar "|"
+                <BLANKLINE>
                             }
                         }
                     >>
@@ -819,24 +849,30 @@ class ClusterCommand(Command):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
-                                % measure 1
+                <BLANKLINE>
+                                %%% Music Voice [measure 1] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -854,7 +890,8 @@ class ClusterCommand(Command):
                                                     \flat
                                                 }
                                         }
-                                % measure 2
+                <BLANKLINE>
+                                %%% Music Voice [measure 2] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -871,7 +908,8 @@ class ClusterCommand(Command):
                                                     \flat
                                                 }
                                         }
-                                % measure 3
+                <BLANKLINE>
+                                %%% Music Voice [measure 3] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -888,7 +926,8 @@ class ClusterCommand(Command):
                                                     \flat
                                                 }
                                         }
-                                % measure 4
+                <BLANKLINE>
+                                %%% Music Voice [measure 4] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -906,6 +945,7 @@ class ClusterCommand(Command):
                                                 }
                                         }
                                 \bar "|"
+                <BLANKLINE>
                             }
                         }
                     >>
@@ -945,24 +985,30 @@ class ClusterCommand(Command):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
-                                % measure 1
+                <BLANKLINE>
+                                %%% Music Voice [measure 1] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -980,7 +1026,8 @@ class ClusterCommand(Command):
                                                     \flat
                                                 }
                                         }
-                                % measure 2
+                <BLANKLINE>
+                                %%% Music Voice [measure 2] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -997,7 +1044,8 @@ class ClusterCommand(Command):
                                                     \flat
                                                 }
                                         }
-                                % measure 3
+                <BLANKLINE>
+                                %%% Music Voice [measure 3] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1014,7 +1062,8 @@ class ClusterCommand(Command):
                                                     \flat
                                                 }
                                         }
-                                % measure 4
+                <BLANKLINE>
+                                %%% Music Voice [measure 4] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1032,6 +1081,7 @@ class ClusterCommand(Command):
                                                 }
                                         }
                                 \bar "|"
+                <BLANKLINE>
                             }
                         }
                     >>
@@ -1061,24 +1111,30 @@ class ClusterCommand(Command):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
-                                % measure 1
+                <BLANKLINE>
+                                %%% Music Voice [measure 1] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1096,7 +1152,8 @@ class ClusterCommand(Command):
                                                     \flat
                                                 }
                                         }
-                                % measure 2
+                <BLANKLINE>
+                                %%% Music Voice [measure 2] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1113,7 +1170,8 @@ class ClusterCommand(Command):
                                                     \flat
                                                 }
                                         }
-                                % measure 3
+                <BLANKLINE>
+                                %%% Music Voice [measure 3] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1130,7 +1188,8 @@ class ClusterCommand(Command):
                                                     \flat
                                                 }
                                         }
-                                % measure 4
+                <BLANKLINE>
+                                %%% Music Voice [measure 4] %%%
                                 \once \override Accidental.stencil = ##f
                                 \once \override AccidentalCautionary.stencil = ##f
                                 \once \override Arpeggio.X-offset = #-2
@@ -1148,6 +1207,7 @@ class ClusterCommand(Command):
                                                 }
                                         }
                                 \bar "|"
+                <BLANKLINE>
                             }
                         }
                     >>
@@ -1178,33 +1238,43 @@ class ClusterCommand(Command):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
-                                % measure 1
+                <BLANKLINE>
+                                %%% Music Voice [measure 1] %%%
                                 \clef "treble"
                                 e'2
-                                % measure 2
+                <BLANKLINE>
+                                %%% Music Voice [measure 2] %%%
                                 e'4.
-                                % measure 3
+                <BLANKLINE>
+                                %%% Music Voice [measure 3] %%%
                                 e'2
-                                % measure 4
+                <BLANKLINE>
+                                %%% Music Voice [measure 4] %%%
                                 e'4.
                                 \bar "|"
+                <BLANKLINE>
                             }
                         }
                     >>

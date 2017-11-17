@@ -28,33 +28,43 @@ class SegmentMaker(abjad.SegmentMaker):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        % measure 1
+            <BLANKLINE>
+                        %%% Global Skips [measure 1] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 2
+            <BLANKLINE>
+                        %%% Global Skips [measure 2] %%%
                         \time 3/8
                         s1 * 3/8
-                        % measure 3
+            <BLANKLINE>
+                        %%% Global Skips [measure 3] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 4
+            <BLANKLINE>
+                        %%% Global Skips [measure 4] %%%
                         \time 3/8
                         s1 * 3/8
+            <BLANKLINE>
                     }
                 >>
                 \context MusicContext = "Music Context" <<
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
-                            % measure 1
+            <BLANKLINE>
+                            %%% Music Voice [measure 1] %%%
                             \clef "treble"
                             R1 * 1/2
-                            % measure 2
+            <BLANKLINE>
+                            %%% Music Voice [measure 2] %%%
                             R1 * 3/8
-                            % measure 3
+            <BLANKLINE>
+                            %%% Music Voice [measure 3] %%%
                             R1 * 1/2
-                            % measure 4
+            <BLANKLINE>
+                            %%% Music Voice [measure 4] %%%
                             R1 * 3/8
                             \bar "|"
+            <BLANKLINE>
                         }
                     }
                 >>
@@ -81,25 +91,31 @@ class SegmentMaker(abjad.SegmentMaker):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        % measure 1
+            <BLANKLINE>
+                        %%% Global Skips [measure 1] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 2
+            <BLANKLINE>
+                        %%% Global Skips [measure 2] %%%
                         \time 3/8
                         s1 * 3/8
-                        % measure 3
+            <BLANKLINE>
+                        %%% Global Skips [measure 3] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 4
+            <BLANKLINE>
+                        %%% Global Skips [measure 4] %%%
                         \time 3/8
                         s1 * 3/8
+            <BLANKLINE>
                     }
                 >>
                 \context MusicContext = "Music Context" <<
                     \context Staff = "Music Staff" {
                         \context Voice = "Music Voice" {
                             {
-                                % measure 1
+            <BLANKLINE>
+                                %%% Music Voice [measure 1] %%%
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override Flag.color = #blue
@@ -107,18 +123,21 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \once \override Stem.color = #blue
                                 \clef "treble"
                                 c'8 [
+            <BLANKLINE>
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override Flag.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
                                 c'8
+            <BLANKLINE>
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override Flag.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
                                 c'8
+            <BLANKLINE>
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override Flag.color = #blue
@@ -127,19 +146,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8 ]
                             }
                             {
-                                % measure 2
+            <BLANKLINE>
+                                %%% Music Voice [measure 2] %%%
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override Flag.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
                                 c'8 [
+            <BLANKLINE>
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override Flag.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
                                 c'8
+            <BLANKLINE>
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override Flag.color = #blue
@@ -148,25 +170,29 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8 ]
                             }
                             {
-                                % measure 3
+            <BLANKLINE>
+                                %%% Music Voice [measure 3] %%%
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override Flag.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
                                 c'8 [
+            <BLANKLINE>
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override Flag.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
                                 c'8
+            <BLANKLINE>
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override Flag.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
                                 c'8
+            <BLANKLINE>
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override Flag.color = #blue
@@ -175,19 +201,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                 c'8 ]
                             }
                             {
-                                % measure 4
+            <BLANKLINE>
+                                %%% Music Voice [measure 4] %%%
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override Flag.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
                                 c'8 [
+            <BLANKLINE>
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override Flag.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
                                 c'8
+            <BLANKLINE>
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override Flag.color = #blue
@@ -195,6 +224,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \once \override Stem.color = #blue
                                 c'8 ]
                                 \bar "|"
+            <BLANKLINE>
                             }
                         }
                     }
@@ -453,25 +483,31 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
-                                    % measure 1
+                <BLANKLINE>
+                                    %%% Music Voice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -483,6 +519,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \small
                                                 0
                                             }
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -493,6 +530,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \small
                                                 1
                                             }
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -503,6 +541,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \small
                                                 2
                                             }
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -515,7 +554,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                             }
                                 }
                                 {
-                                    % measure 2
+                <BLANKLINE>
+                                    %%% Music Voice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -526,6 +566,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \small
                                                 4
                                             }
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -536,6 +577,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \small
                                                 5
                                             }
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -548,7 +590,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                             }
                                 }
                                 {
-                                    % measure 3
+                <BLANKLINE>
+                                    %%% Music Voice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -559,6 +602,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \small
                                                 7
                                             }
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -569,6 +613,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \small
                                                 8
                                             }
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -579,6 +624,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \small
                                                 9
                                             }
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -591,7 +637,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                             }
                                 }
                                 {
-                                    % measure 4
+                <BLANKLINE>
+                                    %%% Music Voice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -602,6 +649,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \small
                                                 11
                                             }
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -612,6 +660,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \small
                                                 12
                                             }
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -623,6 +672,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 13
                                             }
                                     \bar "|"
+                <BLANKLINE>
                                 }
                             }
                         }
@@ -1024,13 +1074,18 @@ class SegmentMaker(abjad.SegmentMaker):
             offset = abjad.inspect(skip).get_timespan().start_offset
             offset_to_measure_number[offset] = measure_number
             measure_number += 1
-        for leaf in baca.select(self._score).leaves():
-            offset = abjad.inspect(leaf).get_timespan().start_offset
-            measure_number = offset_to_measure_number.get(offset, None)
-            if measure_number is None:
-                continue
-            comment = abjad.LilyPondComment(f'measure {measure_number}')
-            abjad.attach(comment, leaf)
+        contexts = []
+        contexts.extend(self._score['Global Context'])
+        contexts.extend(abjad.iterate(self._score).components(abjad.Voice))
+        for context in contexts:
+            for leaf in abjad.iterate(context).leaves():
+                offset = abjad.inspect(leaf).get_timespan().start_offset
+                measure_number = offset_to_measure_number.get(offset, None)
+                if measure_number is None:
+                    continue
+                string = f'%%% {context.name} [measure {measure_number}] %%%'
+                literal = abjad.LilyPondLiteral(string, 'absolute_before')
+                abjad.attach(literal, leaf)
 
     def _detach_figure_names(self):
         if self.allow_figure_names:
@@ -1695,6 +1750,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 wrappers.append(wrapper)
         return wrappers
 
+    def _whitespace_leaves(self):
+        for leaf in abjad.iterate(self._score).leaves():
+            abjad.attach(abjad.LilyPondLiteral('', 'absolute_before'), leaf)
+            if abjad.inspect(leaf).get_leaf(1) is None:
+                abjad.attach(abjad.LilyPondLiteral('', 'absolute_after'), leaf)
+
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -1768,26 +1829,31 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
                             \newSpacingSection
                             s1 * 1/16
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 7/16
                             \newSpacingSection
                             s1 * 7/16
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
                             \newSpacingSection
                             s1 * 1/16
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/8
                             \newSpacingSection
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -1795,39 +1861,55 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "Music Voice" {
                                 {
                                     {
-                                        % measure 1
+                <BLANKLINE>
+                                        %%% Music Voice [measure 1] %%%
                                         \clef "treble"
                                         e'16
                                     }
                                 }
                                 {
                                     {
-                                        % measure 2
+                <BLANKLINE>
+                                        %%% Music Voice [measure 2] %%%
                                         fs'16 [
+                <BLANKLINE>
                                         d'16
+                <BLANKLINE>
                                         ef'16
+                <BLANKLINE>
                                         f'16
+                <BLANKLINE>
                                         a'16
+                <BLANKLINE>
                                         af'16
+                <BLANKLINE>
                                         c'16 ]
                                     }
                                 }
                                 {
                                     {
-                                        % measure 3
+                <BLANKLINE>
+                                        %%% Music Voice [measure 3] %%%
                                         b'16
                                     }
                                 }
                                 {
                                     {
-                                        % measure 4
+                <BLANKLINE>
+                                        %%% Music Voice [measure 4] %%%
                                         bf'16 [
+                <BLANKLINE>
                                         g'16
+                <BLANKLINE>
                                         a'16
+                <BLANKLINE>
                                         af'16
+                <BLANKLINE>
                                         c'16
+                <BLANKLINE>
                                         f'16 ]
                                         \bar "|"
+                <BLANKLINE>
                                     }
                                 }
                             }
@@ -1891,26 +1973,31 @@ class SegmentMaker(abjad.SegmentMaker):
                 } <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
                             \newSpacingSection
                             s1 * 1/16
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 7/16
                             \newSpacingSection
                             s1 * 7/16
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
                             \newSpacingSection
                             s1 * 1/16
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/8
                             \newSpacingSection
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -1918,7 +2005,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "Music Voice" {
                                 {
                                     {
-                                        % measure 1
+                <BLANKLINE>
+                                        %%% Music Voice [measure 1] %%%
                                         \clef "treble"
                                         e'16
                                             ^ \markup {
@@ -1942,7 +2030,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                                     {
-                                        % measure 2
+                <BLANKLINE>
+                                        %%% Music Voice [measure 2] %%%
                                         fs'16 [
                                             ^ \markup {
                                                 \fontsize
@@ -1961,17 +2050,24 @@ class SegmentMaker(abjad.SegmentMaker):
                                                             ]
                                                         }
                                                 }
+                <BLANKLINE>
                                         d'16
+                <BLANKLINE>
                                         ef'16
+                <BLANKLINE>
                                         f'16
+                <BLANKLINE>
                                         a'16
+                <BLANKLINE>
                                         af'16
+                <BLANKLINE>
                                         c'16 ]
                                     }
                                 }
                                 {
                                     {
-                                        % measure 3
+                <BLANKLINE>
+                                        %%% Music Voice [measure 3] %%%
                                         b'16
                                             ^ \markup {
                                                 \fontsize
@@ -1994,7 +2090,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                                     {
-                                        % measure 4
+                <BLANKLINE>
+                                        %%% Music Voice [measure 4] %%%
                                         bf'16 [
                                             ^ \markup {
                                                 \fontsize
@@ -2013,12 +2110,18 @@ class SegmentMaker(abjad.SegmentMaker):
                                                             ]
                                                         }
                                                 }
+                <BLANKLINE>
                                         g'16
+                <BLANKLINE>
                                         a'16
+                <BLANKLINE>
                                         af'16
+                <BLANKLINE>
                                         c'16
+                <BLANKLINE>
                                         f'16 ]
                                         \bar "|"
+                <BLANKLINE>
                                     }
                                 }
                             }
@@ -2082,11 +2185,13 @@ class SegmentMaker(abjad.SegmentMaker):
                     \tag violin.viola.cello
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 6/16
                             \newSpacingSection
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -2094,23 +2199,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \tag violin
                             \context ViolinMusicStaff = "Violin Music Staff" {
                                 \context ViolinMusicVoice = "Violin Music Voice" {
-                                    % measure 1
+                <BLANKLINE>
+                                    %%% Violin Music Voice [measure 1] %%%
                                     \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                     \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                     \clef "treble"
                                     R1 * 3/8
                                     \bar "|"
+                <BLANKLINE>
                                 }
                             }
                             \tag viola
                             \context ViolaMusicStaff = "Viola Music Staff" {
                                 \context ViolaMusicVoice = "Viola Music Voice" {
-                                    % measure 1
+                <BLANKLINE>
+                                    %%% Viola Music Voice [measure 1] %%%
                                     \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                     \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
                                     \clef "alto"
                                     R1 * 3/8
                                     \bar "|"
+                <BLANKLINE>
                                 }
                             }
                             \tag cello
@@ -2118,17 +2227,24 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \context CelloMusicVoice = "Cello Music Voice" {
                                     {
                                         {
-                                            % measure 1
+                <BLANKLINE>
+                                            %%% Cello Music Voice [measure 1] %%%
                                             \set CelloMusicStaff.instrumentName = \markup { Cello }
                                             \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
                                             \clef "bass"
                                             a16 [
+                <BLANKLINE>
                                             g16
+                <BLANKLINE>
                                             f16
+                <BLANKLINE>
                                             e16
+                <BLANKLINE>
                                             d16
+                <BLANKLINE>
                                             c16 ]
                                             \bar "|"
+                <BLANKLINE>
                                         }
                                     }
                                 }
@@ -2201,26 +2317,31 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
                             \newSpacingSection
                             s1 * 1/16
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 7/16
                             \newSpacingSection
                             s1 * 7/16
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
                             \newSpacingSection
                             s1 * 1/16
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/8
                             \newSpacingSection
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -2228,14 +2349,16 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "Music Voice" {
                                 {
                                     {
-                                        % measure 1
+                <BLANKLINE>
+                                        %%% Music Voice [measure 1] %%%
                                         \clef "treble"
                                         e'16
                                     }
                                 }
                                 {
                                     {
-                                        % measure 2
+                <BLANKLINE>
+                                        %%% Music Voice [measure 2] %%%
                                         \once \override Accidental.color = #red
                                         \once \override Beam.color = #red
                                         \once \override Dots.color = #red
@@ -2244,30 +2367,44 @@ class SegmentMaker(abjad.SegmentMaker):
                                         c16 [
                                             - \tweak color #red
                                             ^ \markup { * }
+                <BLANKLINE>
                                         d'16
+                <BLANKLINE>
                                         ef'16
+                <BLANKLINE>
                                         f'16
+                <BLANKLINE>
                                         af'16
+                <BLANKLINE>
                                         a'16
+                <BLANKLINE>
                                         c'16 ]
                                     }
                                 }
                                 {
                                     {
-                                        % measure 3
+                <BLANKLINE>
+                                        %%% Music Voice [measure 3] %%%
                                         b'16
                                     }
                                 }
                                 {
                                     {
-                                        % measure 4
+                <BLANKLINE>
+                                        %%% Music Voice [measure 4] %%%
                                         bf'16 [
+                <BLANKLINE>
                                         g'16
+                <BLANKLINE>
                                         a'16
+                <BLANKLINE>
                                         bf'16
+                <BLANKLINE>
                                         c'16
+                <BLANKLINE>
                                         f'16 ]
                                         \bar "|"
+                <BLANKLINE>
                                     }
                                 }
                             }
@@ -2337,26 +2474,31 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
                             \newSpacingSection
                             s1 * 1/16
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 7/16
                             \newSpacingSection
                             s1 * 7/16
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
                             \newSpacingSection
                             s1 * 1/16
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/8
                             \newSpacingSection
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -2364,18 +2506,24 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "Music Voice" {
                                 {
                                     {
-                                        % measure 1
+                <BLANKLINE>
+                                        %%% Music Voice [measure 1] %%%
                                         \clef "treble"
                                         e'16
                                     }
                                 }
                                 {
                                     {
-                                        % measure 2
+                <BLANKLINE>
+                                        %%% Music Voice [measure 2] %%%
                                         fs'16 [
+                <BLANKLINE>
                                         d'16
+                <BLANKLINE>
                                         ef'16
+                <BLANKLINE>
                                         f'16
+                <BLANKLINE>
                                         \once \override Accidental.color = #red
                                         \once \override Beam.color = #red
                                         \once \override Dots.color = #red
@@ -2384,6 +2532,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         a'16
                                             - \tweak color #red
                                             ^ \markup { @ }
+                <BLANKLINE>
                                         \once \override Accidental.color = #red
                                         \once \override Beam.color = #red
                                         \once \override Dots.color = #red
@@ -2392,21 +2541,27 @@ class SegmentMaker(abjad.SegmentMaker):
                                         a'16
                                             - \tweak color #red
                                             ^ \markup { @ }
+                <BLANKLINE>
                                         c'16 ]
                                     }
                                 }
                                 {
                                     {
-                                        % measure 3
+                <BLANKLINE>
+                                        %%% Music Voice [measure 3] %%%
                                         b'16
                                     }
                                 }
                                 {
                                     {
-                                        % measure 4
+                <BLANKLINE>
+                                        %%% Music Voice [measure 4] %%%
                                         bf'16 [
+                <BLANKLINE>
                                         g'16
+                <BLANKLINE>
                                         a'16
+                <BLANKLINE>
                                         \once \override Accidental.color = #red
                                         \once \override Beam.color = #red
                                         \once \override Dots.color = #red
@@ -2415,6 +2570,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         c''16
                                             - \tweak color #red
                                             ^ \markup { @ }
+                <BLANKLINE>
                                         \once \override Accidental.color = #red
                                         \once \override Beam.color = #red
                                         \once \override Dots.color = #red
@@ -2423,8 +2579,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                         c'16
                                             - \tweak color #red
                                             ^ \markup { @ }
+                <BLANKLINE>
                                         f'16 ]
                                         \bar "|"
+                <BLANKLINE>
                                     }
                                 }
                             }
@@ -2481,25 +2639,31 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
-                                    % measure 1
+                <BLANKLINE>
+                                    %%% Music Voice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2507,18 +2671,21 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     \clef "treble"
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2527,19 +2694,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 2
+                <BLANKLINE>
+                                    %%% Music Voice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2548,25 +2718,29 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 3
+                <BLANKLINE>
+                                    %%% Music Voice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2575,19 +2749,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 4
+                <BLANKLINE>
+                                    %%% Music Voice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2595,6 +2772,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     c'8 ]
                                     \bar "|"
+                <BLANKLINE>
                                 }
                             }
                         }
@@ -2628,25 +2806,31 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
-                                    % measure 1
+                <BLANKLINE>
+                                    %%% Music Voice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2654,18 +2838,21 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     \clef "treble"
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2674,19 +2861,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 2
+                <BLANKLINE>
+                                    %%% Music Voice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2695,25 +2885,29 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 3
+                <BLANKLINE>
+                                    %%% Music Voice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2722,19 +2916,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 4
+                <BLANKLINE>
+                                    %%% Music Voice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2742,6 +2939,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     c'8 ]
                                     \bar "|."
+                <BLANKLINE>
                                 }
                             }
                         }
@@ -2772,25 +2970,31 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
-                                    % measure 1
+                <BLANKLINE>
+                                    %%% Music Voice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2798,18 +3002,21 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     \clef "treble"
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2818,19 +3025,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 2
+                <BLANKLINE>
+                                    %%% Music Voice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2839,25 +3049,29 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 3
+                <BLANKLINE>
+                                    %%% Music Voice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2866,19 +3080,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 4
+                <BLANKLINE>
+                                    %%% Music Voice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2886,6 +3103,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     c'8 ]
                                     \bar "||"
+                <BLANKLINE>
                                 }
                             }
                         }
@@ -2920,25 +3138,31 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
-                                    % measure 1
+                <BLANKLINE>
+                                    %%% Music Voice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2946,18 +3170,21 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     \clef "treble"
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2966,19 +3193,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 2
+                <BLANKLINE>
+                                    %%% Music Voice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -2987,25 +3217,29 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 3
+                <BLANKLINE>
+                                    %%% Music Voice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3014,19 +3248,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 4
+                <BLANKLINE>
+                                    %%% Music Voice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3034,6 +3271,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     c'8 ]
                                     \bar "||"
+                <BLANKLINE>
                                 }
                             }
                         }
@@ -3073,25 +3311,31 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
-                                    % measure 1
+                <BLANKLINE>
+                                    %%% Music Voice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3099,18 +3343,21 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     \clef "treble"
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3119,19 +3366,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 2
+                <BLANKLINE>
+                                    %%% Music Voice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3140,25 +3390,29 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 3
+                <BLANKLINE>
+                                    %%% Music Voice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3167,19 +3421,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 4
+                <BLANKLINE>
+                                    %%% Music Voice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3187,6 +3444,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     c'8 ]
                                     \bar "|"
+                <BLANKLINE>
                                 }
                             }
                         }
@@ -3219,25 +3477,31 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
-                                    % measure 1
+                <BLANKLINE>
+                                    %%% Music Voice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3245,18 +3509,21 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     \clef "treble"
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3265,19 +3532,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 2
+                <BLANKLINE>
+                                    %%% Music Voice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3286,25 +3556,29 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 3
+                <BLANKLINE>
+                                    %%% Music Voice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3313,19 +3587,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 4
+                <BLANKLINE>
+                                    %%% Music Voice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3351,6 +3628,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                                             }
                                             }
                                     \bar "|."
+                <BLANKLINE>
                                 }
                             }
                         }
@@ -3433,25 +3711,31 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
-                                    % measure 1
+                <BLANKLINE>
+                                    %%% Music Voice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3459,18 +3743,21 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     \clef "treble"
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3479,19 +3766,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 2
+                <BLANKLINE>
+                                    %%% Music Voice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3500,25 +3790,29 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 3
+                <BLANKLINE>
+                                    %%% Music Voice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3527,19 +3821,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 4
+                <BLANKLINE>
+                                    %%% Music Voice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -3547,6 +3844,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     c'8 ]
                                     \bar "|"
+                <BLANKLINE>
                                 }
                             }
                         }
@@ -3577,50 +3875,70 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
-                                    % measure 1
+                <BLANKLINE>
+                                    %%% Music Voice [measure 1] %%%
                                     \clef "treble"
                                     c'8 [
+                <BLANKLINE>
                                     c'8
+                <BLANKLINE>
                                     c'8
+                <BLANKLINE>
                                     c'8 ]
                                 }
                                 {
-                                    % measure 2
+                <BLANKLINE>
+                                    %%% Music Voice [measure 2] %%%
                                     c'8 [
+                <BLANKLINE>
                                     c'8
+                <BLANKLINE>
                                     c'8 ]
                                 }
                                 {
-                                    % measure 3
+                <BLANKLINE>
+                                    %%% Music Voice [measure 3] %%%
                                     c'8 [
+                <BLANKLINE>
                                     c'8
+                <BLANKLINE>
                                     c'8
+                <BLANKLINE>
                                     c'8 ]
                                 }
                                 {
-                                    % measure 4
+                <BLANKLINE>
+                                    %%% Music Voice [measure 4] %%%
                                     c'8 [
+                <BLANKLINE>
                                     c'8
+                <BLANKLINE>
                                     c'8 ]
                                     \bar "|"
+                <BLANKLINE>
                                 }
                             }
                         }
@@ -3708,26 +4026,31 @@ class SegmentMaker(abjad.SegmentMaker):
                 } <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
                             \newSpacingSection
                             s1 * 3/16
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
                             \newSpacingSection
                             s1 * 3/16
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
                             \newSpacingSection
                             s1 * 3/16
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
                             \newSpacingSection
                             s1 * 3/16
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -3735,7 +4058,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "Music Voice" {
                                 {
                                     {
-                                        % measure 1
+                <BLANKLINE>
+                                        %%% Music Voice [measure 1] %%%
                                         \once \override Accidental.color = #magenta
                                         \once \override Beam.color = #magenta
                                         \once \override Dots.color = #magenta
@@ -3748,7 +4072,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                                     {
+                <BLANKLINE>
+                                        %%% Music Voice [measure 2] %%%
                                         \acciaccatura {
+                <BLANKLINE>
                                             \once \override Accidental.color = #magenta
                                             \once \override Beam.color = #magenta
                                             \once \override Dots.color = #magenta
@@ -3756,6 +4083,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \once \override NoteHead.color = #magenta
                                             \once \override Stem.color = #magenta
                                             fs'16 [
+                <BLANKLINE>
                                             \once \override Accidental.color = #magenta
                                             \once \override Beam.color = #magenta
                                             \once \override Dots.color = #magenta
@@ -3763,6 +4091,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \once \override NoteHead.color = #magenta
                                             \once \override Stem.color = #magenta
                                             d'16
+                <BLANKLINE>
                                             \once \override Accidental.color = #magenta
                                             \once \override Beam.color = #magenta
                                             \once \override Dots.color = #magenta
@@ -3770,6 +4099,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \once \override NoteHead.color = #magenta
                                             \once \override Stem.color = #magenta
                                             ef'16
+                <BLANKLINE>
                                             \once \override Accidental.color = #magenta
                                             \once \override Beam.color = #magenta
                                             \once \override Dots.color = #magenta
@@ -3777,6 +4107,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \once \override NoteHead.color = #magenta
                                             \once \override Stem.color = #magenta
                                             f'16
+                <BLANKLINE>
                                             \once \override Accidental.color = #magenta
                                             \once \override Beam.color = #magenta
                                             \once \override Dots.color = #magenta
@@ -3784,6 +4115,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \once \override NoteHead.color = #magenta
                                             \once \override Stem.color = #magenta
                                             a'16
+                <BLANKLINE>
                                             \once \override Accidental.color = #magenta
                                             \once \override Beam.color = #magenta
                                             \once \override Dots.color = #magenta
@@ -3791,8 +4123,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \once \override NoteHead.color = #magenta
                                             \once \override Stem.color = #magenta
                                             af'16 ]
+                <BLANKLINE>
                                         }
-                                        % measure 2
                                         \once \override Accidental.color = #magenta
                                         \once \override Beam.color = #magenta
                                         \once \override Dots.color = #magenta
@@ -3804,7 +4136,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                                     {
-                                        % measure 3
+                <BLANKLINE>
+                                        %%% Music Voice [measure 3] %%%
                                         \once \override Accidental.color = #magenta
                                         \once \override Beam.color = #magenta
                                         \once \override Dots.color = #magenta
@@ -3816,7 +4149,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                                     {
+                <BLANKLINE>
+                                        %%% Music Voice [measure 4] %%%
                                         \acciaccatura {
+                <BLANKLINE>
                                             \once \override Accidental.color = #magenta
                                             \once \override Beam.color = #magenta
                                             \once \override Dots.color = #magenta
@@ -3824,6 +4160,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \once \override NoteHead.color = #magenta
                                             \once \override Stem.color = #magenta
                                             bf'16 [
+                <BLANKLINE>
                                             \once \override Accidental.color = #magenta
                                             \once \override Beam.color = #magenta
                                             \once \override Dots.color = #magenta
@@ -3831,6 +4168,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \once \override NoteHead.color = #magenta
                                             \once \override Stem.color = #magenta
                                             g'16
+                <BLANKLINE>
                                             \once \override Accidental.color = #magenta
                                             \once \override Beam.color = #magenta
                                             \once \override Dots.color = #magenta
@@ -3838,6 +4176,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \once \override NoteHead.color = #magenta
                                             \once \override Stem.color = #magenta
                                             a'16
+                <BLANKLINE>
                                             \once \override Accidental.color = #magenta
                                             \once \override Beam.color = #magenta
                                             \once \override Dots.color = #magenta
@@ -3845,6 +4184,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \once \override NoteHead.color = #magenta
                                             \once \override Stem.color = #magenta
                                             af'16
+                <BLANKLINE>
                                             \once \override Accidental.color = #magenta
                                             \once \override Beam.color = #magenta
                                             \once \override Dots.color = #magenta
@@ -3852,8 +4192,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \once \override NoteHead.color = #magenta
                                             \once \override Stem.color = #magenta
                                             c'16 ]
+                <BLANKLINE>
                                         }
-                                        % measure 4
                                         \once \override Accidental.color = #magenta
                                         \once \override Beam.color = #magenta
                                         \once \override Dots.color = #magenta
@@ -3862,6 +4202,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override Stem.color = #magenta
                                         f'8.
                                         \bar "|"
+                <BLANKLINE>
                                     }
                                 }
                             }
@@ -3937,26 +4278,31 @@ class SegmentMaker(abjad.SegmentMaker):
                 } <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
                             \newSpacingSection
                             s1 * 3/16
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
                             \newSpacingSection
                             s1 * 3/16
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
                             \newSpacingSection
                             s1 * 3/16
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
                             \newSpacingSection
                             s1 * 3/16
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
@@ -3964,43 +4310,61 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "Music Voice" {
                                 {
                                     {
-                                        % measure 1
+                <BLANKLINE>
+                                        %%% Music Voice [measure 1] %%%
                                         \clef "treble"
                                         e'8.
                                     }
                                 }
                                 {
                                     {
+                <BLANKLINE>
+                                        %%% Music Voice [measure 2] %%%
                                         \acciaccatura {
+                <BLANKLINE>
                                             fs'16 [
+                <BLANKLINE>
                                             d'16
+                <BLANKLINE>
                                             ef'16
+                <BLANKLINE>
                                             f'16
+                <BLANKLINE>
                                             a'16
+                <BLANKLINE>
                                             af'16 ]
+                <BLANKLINE>
                                         }
-                                        % measure 2
                                         c'8.
                                     }
                                 }
                                 {
                                     {
-                                        % measure 3
+                <BLANKLINE>
+                                        %%% Music Voice [measure 3] %%%
                                         b'8.
                                     }
                                 }
                                 {
                                     {
+                <BLANKLINE>
+                                        %%% Music Voice [measure 4] %%%
                                         \acciaccatura {
+                <BLANKLINE>
                                             bf'16 [
+                <BLANKLINE>
                                             g'16
+                <BLANKLINE>
                                             a'16
+                <BLANKLINE>
                                             af'16
+                <BLANKLINE>
                                             c'16 ]
+                <BLANKLINE>
                                         }
-                                        % measure 4
                                         f'8.
                                         \bar "|"
+                <BLANKLINE>
                                     }
                                 }
                             }
@@ -4054,7 +4418,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2 ^ \markup {
                                 \fontsize
@@ -4072,22 +4437,27 @@ class SegmentMaker(abjad.SegmentMaker):
                                         90
                                     }
                                 }
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
-                                    % measure 1
+                <BLANKLINE>
+                                    %%% Music Voice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4095,18 +4465,21 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     \clef "treble"
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4115,19 +4488,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 2
+                <BLANKLINE>
+                                    %%% Music Voice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4136,25 +4512,29 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 3
+                <BLANKLINE>
+                                    %%% Music Voice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4163,19 +4543,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 4
+                <BLANKLINE>
+                                    %%% Music Voice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4183,6 +4566,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     c'8 ]
                                     \bar "|"
+                <BLANKLINE>
                                 }
                             }
                         }
@@ -4218,7 +4602,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2 ^ \markup {
                                 \fontsize
@@ -4236,22 +4621,27 @@ class SegmentMaker(abjad.SegmentMaker):
                                         90
                                     }
                                 }
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
-                                    % measure 1
+                <BLANKLINE>
+                                    %%% Music Voice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4259,18 +4649,21 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     \clef "treble"
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4279,19 +4672,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 2
+                <BLANKLINE>
+                                    %%% Music Voice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4300,25 +4696,29 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 3
+                <BLANKLINE>
+                                    %%% Music Voice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4327,19 +4727,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 4
+                <BLANKLINE>
+                                    %%% Music Voice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4347,6 +4750,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     c'8 ]
                                     \bar "|"
+                <BLANKLINE>
                                 }
                             }
                         }
@@ -4388,25 +4792,31 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
-                                    % measure 1
+                <BLANKLINE>
+                                    %%% Music Voice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4414,18 +4824,21 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     \clef "treble"
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4434,19 +4847,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 2
+                <BLANKLINE>
+                                    %%% Music Voice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4455,25 +4871,29 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 3
+                <BLANKLINE>
+                                    %%% Music Voice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4482,19 +4902,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 4
+                <BLANKLINE>
+                                    %%% Music Voice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4502,6 +4925,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     c'8 ]
                                     \bar "|"
+                <BLANKLINE>
                                 }
                             }
                         }
@@ -4532,7 +4956,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                                 - \markup {
@@ -4542,22 +4967,27 @@ class SegmentMaker(abjad.SegmentMaker):
                                             #blue
                                             [1]
                                     }
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
-                                    % measure 1
+                <BLANKLINE>
+                                    %%% Music Voice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4565,18 +4995,21 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     \clef "treble"
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4585,19 +5018,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 2
+                <BLANKLINE>
+                                    %%% Music Voice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4606,25 +5042,29 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 3
+                <BLANKLINE>
+                                    %%% Music Voice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4633,19 +5073,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 4
+                <BLANKLINE>
+                                    %%% Music Voice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4653,6 +5096,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     c'8 ]
                                     \bar "|"
+                <BLANKLINE>
                                 }
                             }
                         }
@@ -4687,7 +5131,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                                 - \markup {
@@ -4697,22 +5142,27 @@ class SegmentMaker(abjad.SegmentMaker):
                                             #blue
                                             [K.1]
                                     }
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
-                                    % measure 1
+                <BLANKLINE>
+                                    %%% Music Voice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4720,18 +5170,21 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     \clef "treble"
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4740,19 +5193,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 2
+                <BLANKLINE>
+                                    %%% Music Voice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4761,25 +5217,29 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 3
+                <BLANKLINE>
+                                    %%% Music Voice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4788,19 +5248,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 4
+                <BLANKLINE>
+                                    %%% Music Voice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4808,6 +5271,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     c'8 ]
                                     \bar "|"
+                <BLANKLINE>
                                 }
                             }
                         }
@@ -4890,25 +5354,31 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
-                                    % measure 1
+                <BLANKLINE>
+                                    %%% Music Voice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4916,18 +5386,21 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     \clef "treble"
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4936,19 +5409,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 2
+                <BLANKLINE>
+                                    %%% Music Voice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4957,25 +5433,29 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 3
+                <BLANKLINE>
+                                    %%% Music Voice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4984,19 +5464,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 4
+                <BLANKLINE>
+                                    %%% Music Voice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5004,6 +5487,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     c'8 ]
                                     \bar "|"
+                <BLANKLINE>
                                 }
                             }
                         }
@@ -5036,7 +5520,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2 ^ \markup {
                                 \fontsize
@@ -5054,22 +5539,27 @@ class SegmentMaker(abjad.SegmentMaker):
                                         90
                                     }
                                 }
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
-                                    % measure 1
+                <BLANKLINE>
+                                    %%% Music Voice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5077,18 +5567,21 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     \clef "treble"
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5097,19 +5590,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 2
+                <BLANKLINE>
+                                    %%% Music Voice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5118,25 +5614,29 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 3
+                <BLANKLINE>
+                                    %%% Music Voice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5145,19 +5645,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 4
+                <BLANKLINE>
+                                    %%% Music Voice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5165,6 +5668,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     c'8 ]
                                     \bar "|"
+                <BLANKLINE>
                                 }
                             }
                         }
@@ -5311,33 +5815,43 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
-                                % measure 1
+                <BLANKLINE>
+                                %%% Music Voice [measure 1] %%%
                                 \clef "treble"
                                 R1 * 1/2
-                                % measure 2
+                <BLANKLINE>
+                                %%% Music Voice [measure 2] %%%
                                 R1 * 3/8
-                                % measure 3
+                <BLANKLINE>
+                                %%% Music Voice [measure 3] %%%
                                 R1 * 1/2
-                                % measure 4
+                <BLANKLINE>
+                                %%% Music Voice [measure 4] %%%
                                 R1 * 3/8
                                 \bar "|"
+                <BLANKLINE>
                             }
                         }
                     >>
@@ -5362,33 +5876,43 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
-                                % measure 1
+                <BLANKLINE>
+                                %%% Music Voice [measure 1] %%%
                                 \clef "treble"
                                 s1 * 1/2
-                                % measure 2
+                <BLANKLINE>
+                                %%% Music Voice [measure 2] %%%
                                 s1 * 3/8
-                                % measure 3
+                <BLANKLINE>
+                                %%% Music Voice [measure 3] %%%
                                 s1 * 1/2
-                                % measure 4
+                <BLANKLINE>
+                                %%% Music Voice [measure 4] %%%
                                 s1 * 3/8
                                 \bar "|"
+                <BLANKLINE>
                             }
                         }
                     >>
@@ -5458,7 +5982,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                                 - \markup {
@@ -5468,22 +5993,27 @@ class SegmentMaker(abjad.SegmentMaker):
                                             #blue
                                             [K.1]
                                     }
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
-                                    % measure 1
+                <BLANKLINE>
+                                    %%% Music Voice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5491,18 +6021,21 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     \clef "treble"
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5511,19 +6044,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 2
+                <BLANKLINE>
+                                    %%% Music Voice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5532,25 +6068,29 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 3
+                <BLANKLINE>
+                                    %%% Music Voice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5559,19 +6099,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 4
+                <BLANKLINE>
+                                    %%% Music Voice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5579,6 +6122,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     c'8 ]
                                     \bar "|"
+                <BLANKLINE>
                                 }
                             }
                         }
@@ -5614,7 +6158,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                                 - \markup {
@@ -5624,22 +6169,27 @@ class SegmentMaker(abjad.SegmentMaker):
                                             #blue
                                             [intermezzo.1]
                                     }
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
-                                    % measure 1
+                <BLANKLINE>
+                                    %%% Music Voice [measure 1] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5647,18 +6197,21 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     \clef "treble"
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5667,19 +6220,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 2
+                <BLANKLINE>
+                                    %%% Music Voice [measure 2] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5688,25 +6244,29 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 3
+                <BLANKLINE>
+                                    %%% Music Voice [measure 3] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5715,19 +6275,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8 ]
                                 }
                                 {
-                                    % measure 4
+                <BLANKLINE>
+                                    %%% Music Voice [measure 4] %%%
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8 [
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
+                <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -5735,6 +6298,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     c'8 ]
                                     \bar "|"
+                <BLANKLINE>
                                 }
                             }
                         }
@@ -5787,50 +6351,70 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
                         \context GlobalSkips = "Global Skips" {
-                            % measure 1
+                <BLANKLINE>
+                            %%% Global Skips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 2
+                <BLANKLINE>
+                            %%% Global Skips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            % measure 3
+                <BLANKLINE>
+                            %%% Global Skips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            % measure 4
+                <BLANKLINE>
+                            %%% Global Skips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "Music Context" <<
                         \context Staff = "Music Staff" {
                             \context Voice = "Music Voice" {
                                 {
-                                    % measure 1
+                <BLANKLINE>
+                                    %%% Music Voice [measure 1] %%%
                                     \clef "treble"
                                     e'8 [
+                <BLANKLINE>
                                     f'8
+                <BLANKLINE>
                                     e'8
+                <BLANKLINE>
                                     f'8 ]
                                 }
                                 {
-                                    % measure 2
+                <BLANKLINE>
+                                    %%% Music Voice [measure 2] %%%
                                     e'8 [
+                <BLANKLINE>
                                     f'8
+                <BLANKLINE>
                                     e'8 ]
                                 }
                                 {
-                                    % measure 3
+                <BLANKLINE>
+                                    %%% Music Voice [measure 3] %%%
                                     f'8 [
+                <BLANKLINE>
                                     e'8
+                <BLANKLINE>
                                     f'8
+                <BLANKLINE>
                                     e'8 ]
                                 }
                                 {
-                                    % measure 4
+                <BLANKLINE>
+                                    %%% Music Voice [measure 4] %%%
                                     f'8 [
+                <BLANKLINE>
                                     e'8
+                <BLANKLINE>
                                     f'8 ]
                                     \bar "|"
+                <BLANKLINE>
                                 }
                             }
                         }
@@ -5925,7 +6509,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._label_instrument_changes()
         self._transpose_score_()
         self._attach_rehearsal_mark()
-        self._comment_measure_numbers()
         self._add_final_bar_line()
         self._add_final_markup()
         self._color_unregistered_pitches()
@@ -5935,6 +6518,8 @@ class SegmentMaker(abjad.SegmentMaker):
         self._check_range()
         self._color_repeat_pitch_classes_()
         self._color_octaves_()
+        self._whitespace_leaves()
+        self._comment_measure_numbers()
         self._apply_layout_measure_map()
         self._update_metadata(environment=environment)
         self._print_segment_duration_()

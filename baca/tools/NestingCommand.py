@@ -135,16 +135,19 @@ class NestingCommand(Command):
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        % measure 1
+            <BLANKLINE>
+                        %%% Global Skips [measure 1] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                         \time 1/2
                         \newSpacingSection
                         s1 * 1/2
-                        % measure 2
+            <BLANKLINE>
+                        %%% Global Skips [measure 2] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                         \time 1/4
                         \newSpacingSection
                         s1 * 1/4
+            <BLANKLINE>
                     }
                 >>
                 \context MusicContext = "Music Context" <<
@@ -156,28 +159,35 @@ class NestingCommand(Command):
                                 \tweak text #tuplet-number::calc-fraction-text
                                 \times 8/7 {
                                     {
-                                        % measure 1
+            <BLANKLINE>
+                                        %%% Music Voice [measure 1] %%%
                                         \set stemLeftBeamCount = #0
                                         \set stemRightBeamCount = #2
                                         \clef "treble"
                                         c'16 [
+            <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
                                         d'16
+            <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
                                         bf'16
+            <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #1
                                         fs''16
                                     }
                                     {
+            <BLANKLINE>
                                         \set stemLeftBeamCount = #1
                                         \set stemRightBeamCount = #2
                                         e''16
+            <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
                                         ef''16
+            <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #1
                                         b''16
@@ -186,20 +196,25 @@ class NestingCommand(Command):
                             }
                             {
                                 {
-                                    % measure 2
+            <BLANKLINE>
+                                    %%% Music Voice [measure 2] %%%
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #2
                                     g''16
+            <BLANKLINE>
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     cs''16
+            <BLANKLINE>
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     a'16
+            <BLANKLINE>
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #0
                                     af'16 ]
                                     \bar "|"
+            <BLANKLINE>
                                 }
                             }
                         }

@@ -22,18 +22,23 @@ class StringTrioScoreTemplate(ScoreTemplate):
                 \tag violin.viola.cello
                 \context GlobalContext = "Global Context" <<
                     \context GlobalSkips = "Global Skips" {
-                        % measure 1
+            <BLANKLINE>
+                        %%% Global Skips [measure 1] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 2
+            <BLANKLINE>
+                        %%% Global Skips [measure 2] %%%
                         \time 3/8
                         s1 * 3/8
-                        % measure 3
+            <BLANKLINE>
+                        %%% Global Skips [measure 3] %%%
                         \time 4/8
                         s1 * 1/2
-                        % measure 4
+            <BLANKLINE>
+                        %%% Global Skips [measure 4] %%%
                         \time 3/8
                         s1 * 3/8
+            <BLANKLINE>
                     }
                 >>
                 \context MusicContext = "Music Context" <<
@@ -41,52 +46,67 @@ class StringTrioScoreTemplate(ScoreTemplate):
                         \tag violin
                         \context ViolinMusicStaff = "Violin Music Staff" {
                             \context ViolinMusicVoice = "Violin Music Voice" {
-                                % measure 1
+            <BLANKLINE>
+                                %%% Violin Music Voice [measure 1] %%%
                                 \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                 \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
                                 \clef "treble"
                                 R1 * 1/2
-                                % measure 2
+            <BLANKLINE>
+                                %%% Violin Music Voice [measure 2] %%%
                                 R1 * 3/8
-                                % measure 3
+            <BLANKLINE>
+                                %%% Violin Music Voice [measure 3] %%%
                                 R1 * 1/2
-                                % measure 4
+            <BLANKLINE>
+                                %%% Violin Music Voice [measure 4] %%%
                                 R1 * 3/8
                                 \bar "|"
+            <BLANKLINE>
                             }
                         }
                         \tag viola
                         \context ViolaMusicStaff = "Viola Music Staff" {
                             \context ViolaMusicVoice = "Viola Music Voice" {
-                                % measure 1
+            <BLANKLINE>
+                                %%% Viola Music Voice [measure 1] %%%
                                 \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                 \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
                                 \clef "alto"
                                 R1 * 1/2
-                                % measure 2
+            <BLANKLINE>
+                                %%% Viola Music Voice [measure 2] %%%
                                 R1 * 3/8
-                                % measure 3
+            <BLANKLINE>
+                                %%% Viola Music Voice [measure 3] %%%
                                 R1 * 1/2
-                                % measure 4
+            <BLANKLINE>
+                                %%% Viola Music Voice [measure 4] %%%
                                 R1 * 3/8
                                 \bar "|"
+            <BLANKLINE>
                             }
                         }
                         \tag cello
                         \context CelloMusicStaff = "Cello Music Staff" {
                             \context CelloMusicVoice = "Cello Music Voice" {
-                                % measure 1
+            <BLANKLINE>
+                                %%% Cello Music Voice [measure 1] %%%
                                 \set CelloMusicStaff.instrumentName = \markup { Cello }
                                 \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
                                 \clef "bass"
                                 R1 * 1/2
-                                % measure 2
+            <BLANKLINE>
+                                %%% Cello Music Voice [measure 2] %%%
                                 R1 * 3/8
-                                % measure 3
+            <BLANKLINE>
+                                %%% Cello Music Voice [measure 3] %%%
                                 R1 * 1/2
-                                % measure 4
+            <BLANKLINE>
+                                %%% Cello Music Voice [measure 4] %%%
                                 R1 * 3/8
                                 \bar "|"
+            <BLANKLINE>
                             }
                         }
                     >>
