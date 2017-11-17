@@ -1266,6 +1266,10 @@ class SegmentMaker(abjad.SegmentMaker):
             if line_count is not None:
                 return baca.StaffLines(line_count=line_count)
 
+    def _get_previous_time_signature(self):
+        if self._previous_metadata:
+            return self._previous_metadata.get('end_time_signature')
+
     def _get_rehearsal_letter(self):
         if self.rehearsal_letter:
             return self.rehearsal_letter
@@ -1592,6 +1596,14 @@ class SegmentMaker(abjad.SegmentMaker):
             previous_mark = self._get_previous_metronome_mark()
             spanner.attach(previous_mark, skip)
             string = rf'\once \override TextScript.color ='
+            string += " #(x11-color 'DeepPink1) % FROM PREVIOUS SEGMENT"
+            literal = abjad.LilyPondLiteral(string)
+            abjad.attach(literal, skip)
+        time_signature = abjad.inspect(skip).get_indicator(abjad.TimeSignature)
+        assert time_signature is not None
+        previous_time_signature = self._get_previous_time_signature()
+        if str(previous_time_signature) == str(time_signature):
+            string = rf'\once \override GlobalContext.TimeSignature.color ='
             string += " #(x11-color 'DeepPink1) % FROM PREVIOUS SEGMENT"
             literal = abjad.LilyPondLiteral(string)
             abjad.attach(literal, skip)
