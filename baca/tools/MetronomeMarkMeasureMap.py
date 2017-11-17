@@ -30,9 +30,9 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
-                    \context GlobalSkips = "Global Skips" {
+                    \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        %%% Global Skips [measure 1] %%%
+                        %%% GlobalSkips [measure 1] %%%
                         \time 4/8
                         s1 * 1/2 ^ \markup {
                             \fontsize
@@ -51,11 +51,11 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                                 }
                             }
             <BLANKLINE>
-                        %%% Global Skips [measure 2] %%%
+                        %%% GlobalSkips [measure 2] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
-                        %%% Global Skips [measure 3] %%%
+                        %%% GlobalSkips [measure 3] %%%
                         \time 4/8
                         s1 * 1/2 ^ \markup {
                             \fontsize
@@ -74,7 +74,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                                 }
                             }
             <BLANKLINE>
-                        %%% Global Skips [measure 4] %%%
+                        %%% GlobalSkips [measure 4] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>

@@ -133,37 +133,37 @@ class RegisterInterpolationCommand(Command):
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
-                    \context GlobalSkips = "Global Skips" {
+                    \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        %%% Global Skips [measure 1] %%%
+                        %%% GlobalSkips [measure 1] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 2] %%%
+                        %%% GlobalSkips [measure 2] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
-                        %%% Global Skips [measure 3] %%%
+                        %%% GlobalSkips [measure 3] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 4] %%%
+                        %%% GlobalSkips [measure 4] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
-                        %%% Global Skips [measure 5] %%%
+                        %%% GlobalSkips [measure 5] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 6] %%%
+                        %%% GlobalSkips [measure 6] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
-                        %%% Global Skips [measure 7] %%%
+                        %%% GlobalSkips [measure 7] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 8] %%%
+                        %%% GlobalSkips [measure 8] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
@@ -286,37 +286,37 @@ class RegisterInterpolationCommand(Command):
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
-                    \context GlobalSkips = "Global Skips" {
+                    \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        %%% Global Skips [measure 1] %%%
+                        %%% GlobalSkips [measure 1] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 2] %%%
+                        %%% GlobalSkips [measure 2] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
-                        %%% Global Skips [measure 3] %%%
+                        %%% GlobalSkips [measure 3] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 4] %%%
+                        %%% GlobalSkips [measure 4] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
-                        %%% Global Skips [measure 5] %%%
+                        %%% GlobalSkips [measure 5] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 6] %%%
+                        %%% GlobalSkips [measure 6] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
-                        %%% Global Skips [measure 7] %%%
+                        %%% GlobalSkips [measure 7] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 8] %%%
+                        %%% GlobalSkips [measure 8] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
@@ -439,37 +439,37 @@ class RegisterInterpolationCommand(Command):
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
-                    \context GlobalSkips = "Global Skips" {
+                    \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        %%% Global Skips [measure 1] %%%
+                        %%% GlobalSkips [measure 1] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 2] %%%
+                        %%% GlobalSkips [measure 2] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
-                        %%% Global Skips [measure 3] %%%
+                        %%% GlobalSkips [measure 3] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 4] %%%
+                        %%% GlobalSkips [measure 4] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
-                        %%% Global Skips [measure 5] %%%
+                        %%% GlobalSkips [measure 5] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 6] %%%
+                        %%% GlobalSkips [measure 6] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
-                        %%% Global Skips [measure 7] %%%
+                        %%% GlobalSkips [measure 7] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 8] %%%
+                        %%% GlobalSkips [measure 8] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
@@ -592,37 +592,37 @@ class RegisterInterpolationCommand(Command):
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
-                    \context GlobalSkips = "Global Skips" {
+                    \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        %%% Global Skips [measure 1] %%%
+                        %%% GlobalSkips [measure 1] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 2] %%%
+                        %%% GlobalSkips [measure 2] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
-                        %%% Global Skips [measure 3] %%%
+                        %%% GlobalSkips [measure 3] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 4] %%%
+                        %%% GlobalSkips [measure 4] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
-                        %%% Global Skips [measure 5] %%%
+                        %%% GlobalSkips [measure 5] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 6] %%%
+                        %%% GlobalSkips [measure 6] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
-                        %%% Global Skips [measure 7] %%%
+                        %%% GlobalSkips [measure 7] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 8] %%%
+                        %%% GlobalSkips [measure 8] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
@@ -745,37 +745,37 @@ class RegisterInterpolationCommand(Command):
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
-                    \context GlobalSkips = "Global Skips" {
+                    \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        %%% Global Skips [measure 1] %%%
+                        %%% GlobalSkips [measure 1] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 2] %%%
+                        %%% GlobalSkips [measure 2] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
-                        %%% Global Skips [measure 3] %%%
+                        %%% GlobalSkips [measure 3] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 4] %%%
+                        %%% GlobalSkips [measure 4] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
-                        %%% Global Skips [measure 5] %%%
+                        %%% GlobalSkips [measure 5] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 6] %%%
+                        %%% GlobalSkips [measure 6] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
-                        %%% Global Skips [measure 7] %%%
+                        %%% GlobalSkips [measure 7] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 8] %%%
+                        %%% GlobalSkips [measure 8] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>

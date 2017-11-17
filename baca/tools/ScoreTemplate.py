@@ -26,11 +26,11 @@ class ScoreTemplate(abjad.ScoreTemplate):
     def _make_global_context(self):
         global_context_multimeasure_rests = abjad.Context(
             context_name='GlobalRests',
-            name='Global Rests',
+            name='GlobalRests',
             )
         global_context_skips = abjad.Context(
             context_name='GlobalSkips',
-            name='Global Skips',
+            name='GlobalSkips',
             )
         global_context = abjad.Context(
             [

@@ -1633,21 +1633,21 @@ class LibraryTZ(abjad.AbjadObject):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
@@ -1729,21 +1729,21 @@ class LibraryTZ(abjad.AbjadObject):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
@@ -3443,7 +3443,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Global Skips', 1),
+            ...     baca.scope('GlobalSkips', 1),
             ...     baca.volta(baca.skips()[1:3]),
             ...     )
 
@@ -3455,24 +3455,24 @@ class LibraryTZ(abjad.AbjadObject):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                             \repeat volta 2
                             {
                 <BLANKLINE>
-                                %%% Global Skips [measure 2] %%%
+                                %%% GlobalSkips [measure 2] %%%
                                 \time 3/8
                                 s1 * 3/8
                 <BLANKLINE>
-                                %%% Global Skips [measure 3] %%%
+                                %%% GlobalSkips [measure 3] %%%
                                 \time 4/8
                                 s1 * 1/2
                             }
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
@@ -3546,7 +3546,7 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> maker(
-            ...     baca.scope('Global Skips', 2),
+            ...     baca.scope('GlobalSkips', 2),
             ...     baca.volta(),
             ...     )
 
@@ -3558,9 +3558,9 @@ class LibraryTZ(abjad.AbjadObject):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                                 - \markup {
@@ -3573,7 +3573,7 @@ class LibraryTZ(abjad.AbjadObject):
                             \repeat volta 2
                             {
                 <BLANKLINE>
-                                %%% Global Skips [measure 2] %%%
+                                %%% GlobalSkips [measure 2] %%%
                                 \time 3/8
                                 s1 * 3/8
                                     - \markup {
@@ -3584,12 +3584,12 @@ class LibraryTZ(abjad.AbjadObject):
                                                 [2]
                                         }
                 <BLANKLINE>
-                                %%% Global Skips [measure 3] %%%
+                                %%% GlobalSkips [measure 3] %%%
                                 \time 4/8
                                 s1 * 1/2
                             }
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                                 - \markup {

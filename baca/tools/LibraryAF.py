@@ -629,27 +629,27 @@ class LibraryAF(abjad.AbjadObject):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)
                             \time 4/8
                             \newSpacingSection
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)
                             \time 3/8
                             \newSpacingSection
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)
                             \time 4/8
                             \newSpacingSection
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)
                             \time 3/8
                             \newSpacingSection
@@ -2435,9 +2435,9 @@ class LibraryAF(abjad.AbjadObject):
                 \context Score = "Score" <<
                     \tag violin.viola.cello
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 5/8
                             s1 * 5/8
                 <BLANKLINE>
@@ -2568,9 +2568,9 @@ class LibraryAF(abjad.AbjadObject):
                 \context Score = "Score" <<
                     \tag violin.viola.cello
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 5/8
                             s1 * 5/8
                 <BLANKLINE>

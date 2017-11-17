@@ -32,29 +32,29 @@ class LayoutMeasureMap(abjad.AbjadObject):
             \context Score = "Score" <<
                 \tag violin.viola.cello
                 \context GlobalContext = "Global Context" <<
-                    \context GlobalSkips = "Global Skips" {
+                    \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        %%% Global Skips [measure 1] %%%
+                        %%% GlobalSkips [measure 1] %%%
                         \time 4/8
                         s1 * 1/2
                         \break
             <BLANKLINE>
-                        %%% Global Skips [measure 2] %%%
+                        %%% GlobalSkips [measure 2] %%%
                         \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details
                         #'((Y-offset . 100) (alignment-distances . (30 30)))
                         \time 3/8
                         s1 * 3/8
                         \break
             <BLANKLINE>
-                        %%% Global Skips [measure 3] %%%
+                        %%% GlobalSkips [measure 3] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 4] %%%
+                        %%% GlobalSkips [measure 4] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
-                        %%% Global Skips [measure 5] %%%
+                        %%% GlobalSkips [measure 5] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>

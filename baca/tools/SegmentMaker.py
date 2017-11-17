@@ -27,21 +27,21 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
-                    \context GlobalSkips = "Global Skips" {
+                    \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        %%% Global Skips [measure 1] %%%
+                        %%% GlobalSkips [measure 1] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 2] %%%
+                        %%% GlobalSkips [measure 2] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
-                        %%% Global Skips [measure 3] %%%
+                        %%% GlobalSkips [measure 3] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 4] %%%
+                        %%% GlobalSkips [measure 4] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
@@ -90,21 +90,21 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \context GlobalContext = "Global Context" <<
-                    \context GlobalSkips = "Global Skips" {
+                    \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        %%% Global Skips [measure 1] %%%
+                        %%% GlobalSkips [measure 1] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 2] %%%
+                        %%% GlobalSkips [measure 2] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
-                        %%% Global Skips [measure 3] %%%
+                        %%% GlobalSkips [measure 3] %%%
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
-                        %%% Global Skips [measure 4] %%%
+                        %%% GlobalSkips [measure 4] %%%
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
@@ -482,21 +482,21 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
@@ -769,7 +769,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _apply_layout_measure_map(self):
         if self.layout_measure_map is None:
             return
-        self.layout_measure_map(self._score['Global Skips'])
+        self.layout_measure_map(self._score['GlobalSkips'])
 
     def _apply_spacing_specifier(self):
         start_time = time.time()
@@ -802,16 +802,16 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _attach_fermatas(self):
         if not self.metronome_mark_measure_map:
-            del(self._score['Global Rests'])
+            del(self._score['GlobalRests'])
             return
         has_fermata = False
         for entry in self.metronome_mark_measure_map:
             if isinstance(entry[1], abjad.Fermata):
                 has_fermata = True
         if not has_fermata:
-            del(self._score['Global Rests'])
+            del(self._score['GlobalRests'])
             return
-        context = self._score['Global Rests']
+        context = self._score['GlobalRests']
         rests = self._make_multimeasure_rests()
         context.extend(rests)
         directive_prototype = (
@@ -861,7 +861,7 @@ class SegmentMaker(abjad.SegmentMaker):
             self.score_template.attach_defaults(self._score)
 
     def _attach_metronome_marks(self):
-        skips = baca.select(self._score['Global Skips']).skips()
+        skips = baca.select(self._score['GlobalSkips']).skips()
         left_broken_text = abjad.Markup().null()
         left_broken_text = abjad.new(left_broken_text, direction=None)
         spanner = abjad.MetronomeMarkSpanner(
@@ -894,7 +894,7 @@ class SegmentMaker(abjad.SegmentMaker):
         rehearsal_mark = abjad.RehearsalMark(
             number=letter_number
             )
-        skip = baca.select(self._score['Global Skips']).skip(0)
+        skip = baca.select(self._score['GlobalSkips']).skip(0)
         abjad.attach(rehearsal_mark, skip)
 
     def _cache_leaves(self):
@@ -905,7 +905,7 @@ class SegmentMaker(abjad.SegmentMaker):
             stage_timespan = abjad.Timespan(*stage_offsets)
             stage_timespans.append(stage_timespan)
         self._cache = abjad.TypedOrderedDict()
-        contexts = [self._score['Global Skips']]
+        contexts = [self._score['GlobalSkips']]
         contexts.extend(abjad.select(self._score).components(abjad.Voice))
         for context in contexts:
             leaves_by_stage_number = abjad.TypedOrderedDict()
@@ -1070,7 +1070,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _comment_measure_numbers(self):
         offset_to_measure_number = {}
         measure_number = self._metadata.get('first_bar_number', 1)
-        for skip in baca.select(self._score['Global Skips']).skips():
+        for skip in baca.select(self._score['GlobalSkips']).skips():
             offset = abjad.inspect(skip).get_timespan().start_offset
             offset_to_measure_number[offset] = measure_number
             measure_number += 1
@@ -1182,7 +1182,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return result
 
     def _get_end_metronome_mark(self):
-        skip = baca.select(self._score['Global Skips']).skip(-1)
+        skip = baca.select(self._score['GlobalSkips']).skip(-1)
         mark = abjad.inspect(skip).get_effective(abjad.MetronomeMark)
         if not mark:
             return
@@ -1221,7 +1221,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return result
 
     def _get_end_time_signature(self):
-        skip = baca.select(self._score['Global Skips']).skip(-1)
+        skip = baca.select(self._score['GlobalSkips']).skip(-1)
         time_signature = abjad.inspect(skip).get_effective(abjad.TimeSignature)
         if not time_signature:
             return
@@ -1288,7 +1288,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._metadata.get('segment_number', 1)
 
     def _get_stage_offsets(self, start_stage, stop_stage):
-        skips = baca.select(self._score['Global Skips']).skips()
+        skips = baca.select(self._score['GlobalSkips']).skips()
         result = self._stage_number_to_measure_indices(start_stage)
         start_measure_index, stop_measure_index = result
         start_skip = skips[start_measure_index]
@@ -1409,7 +1409,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _label_clock_time_(self):
         if not self.label_clock_time:
             return
-        for skip in baca.select(self._score['Global Skips']).skips():
+        for skip in baca.select(self._score['GlobalSkips']).skips():
             start_offset = abjad.inspect(skip).get_timespan().start_offset
             if start_offset in self._fermata_start_offsets:
                 continue
@@ -1445,7 +1445,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _label_stage_numbers_(self):
         if not self.label_stages:
             return
-        skips = baca.select(self._score['Global Skips']).skips()
+        skips = baca.select(self._score['GlobalSkips']).skips()
         for stage_index in range(self.stage_count):
             stage_number = stage_index + 1
             result = self._stage_number_to_measure_indices(stage_number)
@@ -1464,7 +1464,7 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.attach(markup, skip)
 
     def _make_global_skips(self):
-        context = self._score['Global Skips']
+        context = self._score['GlobalSkips']
         for time_signature in self.time_signatures:
             skip = abjad.Skip(1)
             multiplier = abjad.Multiplier(time_signature.duration)
@@ -1532,7 +1532,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if not self.print_segment_duration:
             return
         current_tempo = None
-        skips = baca.select(self._score['Global Skips']).skips()
+        skips = baca.select(self._score['GlobalSkips']).skips()
         measure_summaries = []
         tempo_index = 0
         is_trending = False
@@ -1584,7 +1584,7 @@ class SegmentMaker(abjad.SegmentMaker):
             segment = self._get_segment_identifier()
             print(f'can not find previous metadata before {segment}.')
             return
-        skip = baca.select(self._score['Global Skips']).skip(0)
+        skip = baca.select(self._score['GlobalSkips']).skip(0)
         mark = abjad.inspect(skip).get_piecewise(abjad.MetronomeMark)
         if mark is None:
             prototype = abjad.MetronomeMarkSpanner
@@ -1833,27 +1833,27 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
                             \newSpacingSection
                             s1 * 1/16
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 7/16
                             \newSpacingSection
                             s1 * 7/16
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
                             \newSpacingSection
                             s1 * 1/16
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/8
                             \newSpacingSection
@@ -1977,27 +1977,27 @@ class SegmentMaker(abjad.SegmentMaker):
                     \override TextScript.staff-padding = #3
                 } <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
                             \newSpacingSection
                             s1 * 1/16
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 7/16
                             \newSpacingSection
                             s1 * 7/16
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
                             \newSpacingSection
                             s1 * 1/16
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/8
                             \newSpacingSection
@@ -2189,9 +2189,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context Score = "Score" <<
                     \tag violin.viola.cello
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 6/16
                             \newSpacingSection
@@ -2321,27 +2321,27 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
                             \newSpacingSection
                             s1 * 1/16
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 7/16
                             \newSpacingSection
                             s1 * 7/16
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
                             \newSpacingSection
                             s1 * 1/16
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/8
                             \newSpacingSection
@@ -2478,27 +2478,27 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
                             \newSpacingSection
                             s1 * 1/16
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 7/16
                             \newSpacingSection
                             s1 * 7/16
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
                             \newSpacingSection
                             s1 * 1/16
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/8
                             \newSpacingSection
@@ -2643,21 +2643,21 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
@@ -2810,21 +2810,21 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
@@ -2974,21 +2974,21 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
@@ -3142,21 +3142,21 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
@@ -3315,21 +3315,21 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
@@ -3481,21 +3481,21 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
@@ -3715,21 +3715,21 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
@@ -3879,21 +3879,21 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
@@ -4030,27 +4030,27 @@ class SegmentMaker(abjad.SegmentMaker):
                     \override SpacingSpanner.strict-note-spacing = ##f
                 } <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
                             \newSpacingSection
                             s1 * 3/16
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
                             \newSpacingSection
                             s1 * 3/16
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
                             \newSpacingSection
                             s1 * 3/16
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
                             \newSpacingSection
@@ -4282,27 +4282,27 @@ class SegmentMaker(abjad.SegmentMaker):
                     \override SpacingSpanner.strict-note-spacing = ##f
                 } <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
                             \newSpacingSection
                             s1 * 3/16
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
                             \newSpacingSection
                             s1 * 3/16
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
                             \newSpacingSection
                             s1 * 3/16
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
                             \newSpacingSection
@@ -4422,9 +4422,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2 ^ \markup {
                                 \fontsize
@@ -4443,15 +4443,15 @@ class SegmentMaker(abjad.SegmentMaker):
                                     }
                                 }
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
@@ -4606,9 +4606,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2 ^ \markup {
                                 \fontsize
@@ -4627,15 +4627,15 @@ class SegmentMaker(abjad.SegmentMaker):
                                     }
                                 }
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
@@ -4796,21 +4796,21 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
@@ -4960,9 +4960,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                                 - \markup {
@@ -4973,15 +4973,15 @@ class SegmentMaker(abjad.SegmentMaker):
                                             [1]
                                     }
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
@@ -5135,9 +5135,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                                 - \markup {
@@ -5148,15 +5148,15 @@ class SegmentMaker(abjad.SegmentMaker):
                                             [K.1]
                                     }
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
@@ -5358,21 +5358,21 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
@@ -5524,9 +5524,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2 ^ \markup {
                                 \fontsize
@@ -5545,15 +5545,15 @@ class SegmentMaker(abjad.SegmentMaker):
                                     }
                                 }
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
@@ -5819,21 +5819,21 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
@@ -5880,21 +5880,21 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
@@ -5986,9 +5986,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                                 - \markup {
@@ -5999,15 +5999,15 @@ class SegmentMaker(abjad.SegmentMaker):
                                             [K.1]
                                     }
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
@@ -6162,9 +6162,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                                 - \markup {
@@ -6175,15 +6175,15 @@ class SegmentMaker(abjad.SegmentMaker):
                                             [intermezzo.1]
                                     }
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
@@ -6355,21 +6355,21 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> abjad.f(lilypond_file[abjad.Score])
                 \context Score = "Score" <<
                     \context GlobalContext = "Global Context" <<
-                        \context GlobalSkips = "Global Skips" {
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% Global Skips [measure 1] %%%
+                            %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 2] %%%
+                            %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% Global Skips [measure 3] %%%
+                            %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% Global Skips [measure 4] %%%
+                            %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
                 <BLANKLINE>
