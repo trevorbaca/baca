@@ -1623,6 +1623,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 staff_lines = abjad.inspect(leaf).get_indicator(prototype)
                 if staff_lines is None:
                     abjad.attach(previous_staff_lines, leaf)
+                    string = rf'\once \override {context.context_name}'
+                    string += ".StaffSymbol.color = #(x11-color 'DeepPink1)"
+                    string += ' % FROM PREVIOUS SEGMENT'
+                    literal = abjad.LilyPondLiteral(string)
+                    abjad.attach(literal, leaf)
             if previous_clef is not None:
                 clef = abjad.inspect(leaf).get_indicator(abjad.Clef)
                 if clef is None:
