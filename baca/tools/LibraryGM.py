@@ -959,13 +959,14 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
-    def lbsd(y_offset, alignment_distances, selector='baca.leaf(0)'):
+    def lbsd(y_offset, alignment_distances, selector='baca.leaf(0)', tag=None):
         r'''Makes line-break system details.
 
         Returns indicator command.
         '''
         lbsd = baca.LBSD(
             alignment_distances=alignment_distances,
+            tag=tag,
             y_offset=y_offset,
             )
         return baca.IndicatorCommand(

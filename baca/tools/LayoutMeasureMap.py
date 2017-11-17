@@ -1,4 +1,5 @@
 import abjad
+import baca
 
 
 class LayoutMeasureMap(abjad.AbjadObject):
@@ -184,12 +185,27 @@ class LayoutMeasureMap(abjad.AbjadObject):
 
     __slots__ = (
         '_items',
+        '_tag',
         )
 
     ### INITIALIZER ###
 
-    def __init__(self, items=None):
+    def __init__(self, items=None, tag=None):
+        if tag is not None:
+            assert isinstance(tag, str), repr(tag)
+        self._tag = tag
         if items is not None:
+            if tag is not None:
+                items_ = []
+                for item in items:
+                    lbsd = item.indicators[0]
+                    lbsd = abjad.new(lbsd, tag=tag)
+                    item_ = baca.IndicatorCommand(
+                        indicators=[lbsd],
+                        selector=item.selector,
+                        )
+                    items_.append(item_)
+                items = items_
             items = tuple(items)
         self._items = items
 
@@ -243,3 +259,9 @@ class LayoutMeasureMap(abjad.AbjadObject):
         Returns items.
         '''
         return self._items
+
+    @property
+    def tag(self):
+        r'''Gets tag.
+        '''
+        return self._tag

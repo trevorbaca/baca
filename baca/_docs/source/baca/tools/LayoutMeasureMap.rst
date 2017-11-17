@@ -22,6 +22,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.LayoutMeasureMap.LayoutMeasureMap.items
+      ~baca.tools.LayoutMeasureMap.LayoutMeasureMap.tag
       ~baca.tools.LayoutMeasureMap.LayoutMeasureMap.__call__
       ~baca.tools.LayoutMeasureMap.LayoutMeasureMap.__eq__
       ~baca.tools.LayoutMeasureMap.LayoutMeasureMap.__format__
@@ -33,6 +34,8 @@ Read-only properties
 --------------------
 
 .. autoattribute:: baca.tools.LayoutMeasureMap.LayoutMeasureMap.items
+
+.. autoattribute:: baca.tools.LayoutMeasureMap.LayoutMeasureMap.tag
 
 Special methods
 ---------------
