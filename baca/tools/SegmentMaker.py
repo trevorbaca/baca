@@ -47,7 +47,7 @@ class SegmentMaker(abjad.SegmentMaker):
             <BLANKLINE>
                     }
                 >>
-                \context MusicContext = "Music Context" <<
+                \context MusicContext = "MusicContext" <<
                     \context Staff = "MusicStaff" {
                         \context Voice = "MusicVoice" {
             <BLANKLINE>
@@ -110,7 +110,7 @@ class SegmentMaker(abjad.SegmentMaker):
             <BLANKLINE>
                     }
                 >>
-                \context MusicContext = "Music Context" <<
+                \context MusicContext = "MusicContext" <<
                     \context Staff = "MusicStaff" {
                         \context Voice = "MusicVoice" {
                             {
@@ -502,7 +502,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -1861,7 +1861,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -2005,7 +2005,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -2199,7 +2199,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context StringSectionStaffGroup = "String Section Staff Group" <<
                             \tag violin
                             \context ViolinMusicStaff = "ViolinMusicStaff" {
@@ -2349,7 +2349,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -2506,7 +2506,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -2663,7 +2663,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -2830,7 +2830,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -2994,7 +2994,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -3162,7 +3162,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -3335,7 +3335,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -3501,7 +3501,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -3735,7 +3735,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -3899,7 +3899,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -4058,7 +4058,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -4310,7 +4310,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -4457,7 +4457,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -4641,7 +4641,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -4816,7 +4816,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -4987,7 +4987,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -5162,7 +5162,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -5378,7 +5378,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -5559,7 +5559,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -5839,7 +5839,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
@@ -5900,7 +5900,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
@@ -6013,7 +6013,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -6189,7 +6189,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -6375,7 +6375,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {

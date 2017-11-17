@@ -41,7 +41,7 @@ class SingleStaffScoreTemplate(ScoreTemplate):
             <BLANKLINE>
                     }
                 >>
-                \context MusicContext = "Music Context" <<
+                \context MusicContext = "MusicContext" <<
                     \context Staff = "MusicStaff" {
                         \context Voice = "MusicVoice" {
             <BLANKLINE>
@@ -99,7 +99,7 @@ class SingleStaffScoreTemplate(ScoreTemplate):
                 ],
             context_name='MusicContext',
             is_simultaneous=True,
-            name='Music Context',
+            name='MusicContext',
             )
         score = abjad.Score(
             [

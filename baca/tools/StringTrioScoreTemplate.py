@@ -41,7 +41,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
             <BLANKLINE>
                     }
                 >>
-                \context MusicContext = "Music Context" <<
+                \context MusicContext = "MusicContext" <<
                     \context StringSectionStaffGroup = "String Section Staff Group" <<
                         \tag violin
                         \context ViolinMusicStaff = "ViolinMusicStaff" {
@@ -226,7 +226,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
                 ],
             context_name='MusicContext',
             is_simultaneous=True,
-            name='Music Context',
+            name='MusicContext',
             )
         score = abjad.Score(
             [

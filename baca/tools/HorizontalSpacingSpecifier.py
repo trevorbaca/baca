@@ -52,7 +52,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                     }
                 >>
-                \context MusicContext = "Music Context" <<
+                \context MusicContext = "MusicContext" <<
                     \context Staff = "MusicStaff" {
                         \context Voice = "MusicVoice" {
                             {
@@ -159,7 +159,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                     }
                 >>
-                \context MusicContext = "Music Context" <<
+                \context MusicContext = "MusicContext" <<
                     \context Staff = "MusicStaff" {
                         \context Voice = "MusicVoice" {
                             {
@@ -268,7 +268,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                     }
                 >>
-                \context MusicContext = "Music Context" <<
+                \context MusicContext = "MusicContext" <<
                     \context Staff = "MusicStaff" {
                         \context Voice = "MusicVoice" {
                             {
@@ -378,7 +378,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                     }
                 >>
-                \context MusicContext = "Music Context" <<
+                \context MusicContext = "MusicContext" <<
                     \context Staff = "MusicStaff" {
                         \context Voice = "MusicVoice" {
                             {
@@ -489,7 +489,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                     }
                 >>
-                \context MusicContext = "Music Context" <<
+                \context MusicContext = "MusicContext" <<
                     \context Staff = "MusicStaff" {
                         \context Voice = "MusicVoice" {
                             {
@@ -598,7 +598,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                     }
                 >>
-                \context MusicContext = "Music Context" <<
+                \context MusicContext = "MusicContext" <<
                     \context Staff = "MusicStaff" {
                         \context Voice = "MusicVoice" {
                             \override TupletNumber.text = \markup {

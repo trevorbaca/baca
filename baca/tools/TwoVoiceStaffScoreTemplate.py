@@ -40,7 +40,7 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
             <BLANKLINE>
                     }
                 >>
-                \context MusicContext = "Music Context" <<
+                \context MusicContext = "MusicContext" <<
                     \context MusicStaff = "MusicStaff" <<
                         \context MusicVoiceOne = "MusicVoiceOne" {
             <BLANKLINE>
@@ -118,7 +118,7 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
             ],
             context_name='MusicContext',
             is_simultaneous=True,
-            name='Music Context',
+            name='MusicContext',
             )
 
         score = abjad.Score([

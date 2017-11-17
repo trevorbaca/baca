@@ -850,7 +850,7 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context MusicStaff = "MusicStaff" <<
                             \context MusicVoiceOne = "MusicVoiceOne" {
                                 {

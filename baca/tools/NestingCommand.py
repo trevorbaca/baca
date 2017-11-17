@@ -150,7 +150,7 @@ class NestingCommand(Command):
             <BLANKLINE>
                     }
                 >>
-                \context MusicContext = "Music Context" <<
+                \context MusicContext = "MusicContext" <<
                     \context Staff = "MusicStaff" \with {
                         \override Beam.positions = #'(-5.5 . -5.5)
                     } {

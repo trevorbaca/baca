@@ -657,7 +657,7 @@ class LibraryAF(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
@@ -2443,7 +2443,7 @@ class LibraryAF(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context StringSectionStaffGroup = "String Section Staff Group" <<
                             \tag violin
                             \context ViolinMusicStaff = "ViolinMusicStaff" {
@@ -2576,7 +2576,7 @@ class LibraryAF(abjad.AbjadObject):
                 <BLANKLINE>
                         }
                     >>
-                    \context MusicContext = "Music Context" <<
+                    \context MusicContext = "MusicContext" <<
                         \context StringSectionStaffGroup = "String Section Staff Group" <<
                             \tag violin
                             \context ViolinMusicStaff = "ViolinMusicStaff" {

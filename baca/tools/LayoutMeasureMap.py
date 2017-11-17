@@ -60,7 +60,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
             <BLANKLINE>
                     }
                 >>
-                \context MusicContext = "Music Context" <<
+                \context MusicContext = "MusicContext" <<
                     \context StringSectionStaffGroup = "String Section Staff Group" <<
                         \tag violin
                         \context ViolinMusicStaff = "ViolinMusicStaff" {

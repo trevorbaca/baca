@@ -42,7 +42,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             <BLANKLINE>
                     }
                 >>
-                \context MusicContext = "Music Context" <<
+                \context MusicContext = "MusicContext" <<
                     \tag violin
                     \context ViolinMusicStaff = "ViolinMusicStaff" {
                         \context ViolinMusicVoice = "ViolinMusicVoice" {
@@ -133,7 +133,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                 ],
             context_name='MusicContext',
             is_simultaneous=True,
-            name='Music Context',
+            name='MusicContext',
             )
         score = abjad.Score(
             [
