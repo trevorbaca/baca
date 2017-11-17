@@ -1156,7 +1156,7 @@ class SegmentMaker(abjad.SegmentMaker):
         result = abjad.TypedOrderedDict()
         staves = abjad.iterate(self._score).components(abjad.Staff)
         staves = list(staves)
-        staves.sort(key=lambda x: x.name)
+        staves.sort(key=lambda _: _.name)
         for staff in staves:
             last_leaf = abjad.inspect(staff).get_leaf(-1)
             clef = abjad.inspect(last_leaf).get_effective(abjad.Clef)
@@ -1164,6 +1164,18 @@ class SegmentMaker(abjad.SegmentMaker):
                 result[staff.name] = clef.name
             else:
                 result[staff.name] = None
+        return result
+
+    def _get_end_dynamics(self):
+        result = abjad.TypedOrderedDict()
+        voices = abjad.iterate(self._score).components(abjad.Voice)
+        voices = list(voices)
+        voices.sort(key=lambda _: _.name)
+        for voice in voices:
+            leaf = abjad.inspect(voice).get_leaf(-1)
+            dynamic = abjad.inspect(leaf).get_effective(abjad.Dynamic)
+            if dynamic is not None:
+                result[voice.name] = dynamic.name
         return result
 
     def _get_end_instruments(self):
@@ -1202,6 +1214,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if docs:
             return result
         result['end_clefs_by_staff'] = self._get_end_clefs()
+        result['end_dynamics_by_context'] = self._get_end_dynamics()
         result['end_instruments_by_context'] = self._get_end_instruments()
         result['end_metronome_mark'] = self._get_end_metronome_mark()
         result['end_staff_lines_by_staff'] = self._get_end_staff_lines()
@@ -1240,6 +1253,16 @@ class SegmentMaker(abjad.SegmentMaker):
             clef_name = dictionary.get(context)
             if clef_name is not None:
                 return abjad.Clef(clef_name)
+
+    def _get_previous_dynamic(self, context):
+        if not self._previous_metadata:
+            return
+        string = 'end_dynamics_by_context'
+        dictionary = self._previous_metadata.get(string)
+        if dictionary:
+            dynamic_name = dictionary.get(context)
+            if dynamic_name is not None:
+                return abjad.Dynamic(dynamic_name)
 
     def _get_previous_instrument(self, context):
         if not self._previous_metadata:
@@ -1609,10 +1632,14 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.attach(literal, skip)
         for context in abjad.iterate(self._score).components(abjad.Context):
             previous_clef = self._get_previous_clef(context.name)
+            previous_dynamic = self._get_previous_dynamic(context.name)
             previous_instrument = self._get_previous_instrument(context.name)
             previous_staff_lines = self._get_previous_staff_lines(context.name)
             if not any([
-                previous_clef, previous_instrument, previous_staff_lines,
+                previous_clef,
+                previous_dynamic,
+                previous_instrument,
+                previous_staff_lines,
                 ]):
                 continue
             leaf = abjad.inspect(context).get_leaf(0)
@@ -1646,6 +1673,15 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(previous_clef, leaf)
                     string = rf'\once \override {context.context_name}'
                     string += ".Clef.color = #(x11-color 'DeepPink1)"
+                    string += ' % FROM PREVIOUS SEGMENT'
+                    literal = abjad.LilyPondLiteral(string)
+                    abjad.attach(literal, leaf)
+            if previous_dynamic is not None:
+                dynamic = abjad.inspect(leaf).get_effective(abjad.Dynamic)
+                if dynamic is None:
+                    abjad.attach(previous_dynamic, leaf)
+                    string = rf'\once \override {context.context_name}'
+                    string += ".DynamicText.color = #(x11-color 'DeepPink1)"
                     string += ' % FROM PREVIOUS SEGMENT'
                     literal = abjad.LilyPondLiteral(string)
                     abjad.attach(literal, leaf)
