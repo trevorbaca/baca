@@ -1188,9 +1188,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             leaf = abjad.inspect(context).get_leaf(-1)
             instrument = abjad.inspect(leaf).get_effective(abjad.Instrument)
-            if instrument is None:
+            if instrument is not None:
+                result[context.name] = instrument.name
+            else:
                 print(f'can not find {context.name!r} end-instrument.')
-            result[context.name] = instrument.name
         return result
 
     def _get_end_metronome_mark(self):
