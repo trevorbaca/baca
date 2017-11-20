@@ -1220,6 +1220,7 @@ class SegmentMaker(abjad.SegmentMaker):
         result['end_metronome_mark'] = self._get_end_metronome_mark()
         result['end_staff_lines_by_staff'] = self._get_end_staff_lines()
         result['end_time_signature'] = self._get_end_time_signature()
+        result['time_signatures'] = self._get_time_signatures()
         return result
 
     def _get_end_staff_lines(self):
@@ -1361,6 +1362,16 @@ class SegmentMaker(abjad.SegmentMaker):
         if 1 < self._get_segment_number():
             includes.append(self._score_package_nonfirst_stylesheet_path)
         return includes
+
+    def _get_time_signatures(self):
+        strings = []
+        prototype = abjad.TimeSignature
+        for skip in baca.select(self._score['GlobalSkips']).skips():
+            time_signature = abjad.inspect(skip).get_effective(prototype)
+            assert time_signature is not None
+            string = str(time_signature)
+            strings.append(string)
+        return strings
 
     def _handle_mutator(self, command):
         if (hasattr(command.command, '_mutates_score') and
