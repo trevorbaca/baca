@@ -659,18 +659,6 @@ class LibraryGM(abjad.AbjadObject):
             selector=selector,
             )
 
-    # TODO: remove
-    @staticmethod
-    def invert_segments(axis=None):
-        r'''Inverts pitch-class segments.
-        '''
-        operator = baca.pitch_class_segment().invert(axis=axis)
-        expression = baca.sequence().map(operator)
-        return baca.PitchSpecifier(
-            expressions=[expression],
-            to_pitch_classes=True,
-            )
-
     @staticmethod
     def label(expression, selector='baca.leaves()'):
         r'''Labels selections with label `expression`.

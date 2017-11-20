@@ -254,28 +254,22 @@ class CollectionList(abjad.AbjadValueObject):
 
             >>> collections_1 == collections_1
             True
-
             >>> collections_1 == collections_2
             True
-
             >>> collections_1 == collections_3
             False
 
             >>> collections_2 == collections_1
             True
-
             >>> collections_2 == collections_2
             True
-
             >>> collections_2 == collections_3
             False
 
             >>> collections_3 == collections_1
             False
-
             >>> collections_3 == collections_2
             False
-
             >>> collections_3 == collections_3
             True
 
@@ -1982,6 +1976,65 @@ class CollectionList(abjad.AbjadValueObject):
             collection_ = collection.to_pitches()
             collections_.append(collection_)
         return abjad.new(self, collections=collections_, item_class=item_class)
+
+    def transpose(self, n=0):
+        r'''Transposes collections.
+
+        ..  container:: example
+
+            To numbered pitch collections:
+
+            ..  container:: example
+
+                >>> collections = baca.CollectionList(
+                ...     [[12, 14, 18, 17], [16, 20, 19]],
+                ...     item_class=abjad.NumberedPitch,
+                ...     )
+
+                >>> collections.transpose(28)
+                CollectionList([<40, 42, 46, 45>, <44, 48, 47>])
+
+            ..  container:: example
+
+                >>> collections = baca.CollectionList(
+                ...     [[0, 2, 6, 5], [4, 8, 7]],
+                ...     item_class=abjad.NumberedPitchClass,
+                ...     )
+
+                >>> collections.transpose(28)
+                CollectionList([PC<4, 6, 10, 9>, PC<8, 0, 11>])
+
+        ..  container:: example
+
+            To named pitch collections:
+
+            ..  container:: example
+
+                >>> collections = baca.CollectionList(
+                ...     [[12, 14, 18, 17], [16, 20, 19]],
+                ...     item_class=abjad.NamedPitch,
+                ...     )
+
+                >>> collections.transpose(-28)
+                CollectionList([<af, bf, d df>, <c ff ef>])
+
+            ..  container:: example
+
+                >>> collections = baca.CollectionList(
+                ...     [[0, 2, 6, 5], [4, 8, 7]],
+                ...     item_class=abjad.NamedPitchClass,
+                ...     )
+
+                >>> collections.transpose(-28)
+                CollectionList([PC<af bf d df>, PC<c ff ef>])
+
+        Returns new collection list.
+        '''
+        collections_ = []
+        for collection in self:
+            collection_ = collection.transpose(n)
+            collections_.append(collection_)
+        return abjad.new(self, collections=collections_)
 
 
 collections_module.Sequence.register(CollectionList)

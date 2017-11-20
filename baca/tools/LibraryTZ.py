@@ -2059,18 +2059,6 @@ class LibraryTZ(abjad.AbjadObject):
             selector=selector,
             )
 
-    # TODO: remove
-    @staticmethod
-    def transpose_segments(n=0):
-        r'''Transposes segments.
-        '''
-        operator = baca.pitch_class_segment().transpose(n=n)
-        expression = baca.sequence().map(operator)
-        return baca.PitchSpecifier(
-            expressions=[expression],
-            to_pitch_classes=True,
-            )
-
     @staticmethod
     def tremolo_down(n, selector='baca.tleaves()'):
         r'''Overrides stem tremolo extra offset on trimmed leaves.

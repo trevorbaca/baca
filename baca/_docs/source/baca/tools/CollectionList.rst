@@ -53,6 +53,7 @@ Bases
       ~baca.tools.CollectionList.CollectionList.space_up
       ~baca.tools.CollectionList.CollectionList.to_pitch_classes
       ~baca.tools.CollectionList.CollectionList.to_pitches
+      ~baca.tools.CollectionList.CollectionList.transpose
       ~baca.tools.CollectionList.CollectionList.__add__
       ~baca.tools.CollectionList.CollectionList.__copy__
       ~baca.tools.CollectionList.CollectionList.__eq__
@@ -127,6 +128,8 @@ Methods
 .. automethod:: baca.tools.CollectionList.CollectionList.to_pitch_classes
 
 .. automethod:: baca.tools.CollectionList.CollectionList.to_pitches
+
+.. automethod:: baca.tools.CollectionList.CollectionList.transpose
 
 Special methods
 ---------------

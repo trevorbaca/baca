@@ -38,7 +38,6 @@ Bases
       ~baca.tools.LibraryTZ.LibraryTZ.transparent_rests
       ~baca.tools.LibraryTZ.LibraryTZ.transparent_span_bars
       ~baca.tools.LibraryTZ.LibraryTZ.transparent_time_signatures
-      ~baca.tools.LibraryTZ.LibraryTZ.transpose_segments
       ~baca.tools.LibraryTZ.LibraryTZ.tremolo_down
       ~baca.tools.LibraryTZ.LibraryTZ.trill
       ~baca.tools.LibraryTZ.LibraryTZ.tuplet_bracket_extra_offset
@@ -91,8 +90,6 @@ Class & static methods
 .. automethod:: baca.tools.LibraryTZ.LibraryTZ.transparent_span_bars
 
 .. automethod:: baca.tools.LibraryTZ.LibraryTZ.transparent_time_signatures
-
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.transpose_segments
 
 .. automethod:: baca.tools.LibraryTZ.LibraryTZ.tremolo_down
 
