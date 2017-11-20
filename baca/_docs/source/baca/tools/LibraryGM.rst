@@ -28,8 +28,8 @@ Bases
       ~baca.tools.LibraryGM.LibraryGM.instrument
       ~baca.tools.LibraryGM.LibraryGM.label
       ~baca.tools.LibraryGM.LibraryGM.laissez_vibrer
+      ~baca.tools.LibraryGM.LibraryGM.layout
       ~baca.tools.LibraryGM.LibraryGM.lbsd
-      ~baca.tools.LibraryGM.LibraryGM.line_break
       ~baca.tools.LibraryGM.LibraryGM.literal
       ~baca.tools.LibraryGM.LibraryGM.long_fermata
       ~baca.tools.LibraryGM.LibraryGM.loop
@@ -67,9 +67,9 @@ Class & static methods
 
 .. automethod:: baca.tools.LibraryGM.LibraryGM.laissez_vibrer
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.lbsd
+.. automethod:: baca.tools.LibraryGM.LibraryGM.layout
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.line_break
+.. automethod:: baca.tools.LibraryGM.LibraryGM.lbsd
 
 .. automethod:: baca.tools.LibraryGM.LibraryGM.literal
 

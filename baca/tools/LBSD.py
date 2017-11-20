@@ -12,7 +12,6 @@ class LBSD(abjad.AbjadObject):
 
     __slots__ = (
         '_alignment_distances',
-        '_tag',
         '_y_offset',
         )
 
@@ -21,15 +20,12 @@ class LBSD(abjad.AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, y_offset=None, alignment_distances=None, tag=None):
+    def __init__(self, y_offset=None, alignment_distances=None):
         self._y_offset = y_offset
         if alignment_distances is not None:
             assert isinstance(alignment_distances, collections.Iterable)
             alignment_distances = tuple(alignment_distances)
         self._alignment_distances = alignment_distances
-        if tag is not None:
-            assert isinstance(tag, str), repr(tag)
-        self._tag = tag
 
     ### PRIVATE METHODS ###
 
@@ -39,8 +35,6 @@ class LBSD(abjad.AbjadObject):
         alignment_distances = [str(_) for _ in self.alignment_distances]
         alignment_distances = ' '.join(alignment_distances)
         string += f' (alignment-distances . ({alignment_distances})))'
-        if self.tag is not None:
-            string += f' % {self.tag}'
         bundle = abjad.LilyPondFormatBundle()
         bundle.before.commands.append(string)
         return bundle
@@ -52,12 +46,6 @@ class LBSD(abjad.AbjadObject):
         r'''Gets alignment distances.
         '''
         return self._alignment_distances
-
-    @property
-    def tag(self):
-        r'''Gets tag.
-        '''
-        return self._tag
 
     @property
     def y_offset(self):

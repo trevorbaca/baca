@@ -11,10 +11,12 @@ class LayoutMeasureMap(abjad.AbjadObject):
         ...     score_template=baca.StringTrioScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8)],
         ...     layout_measure_map=baca.LayoutMeasureMap([
-        ...         baca.line_break(baca.skip(0)),
+        ...         baca.system_break(baca.skip(0)),
         ...         baca.lbsd(100, [30, 30], baca.skip(1)),
-        ...         baca.line_break(baca.skip(1)),
-        ...         ]),
+        ...         baca.system_break(baca.skip(1)),
+        ...         ],
+        ...         tag='SEGMENT',
+        ...         ),
         ...     )
 
         >>> maker(
@@ -37,14 +39,13 @@ class LayoutMeasureMap(abjad.AbjadObject):
                         %%% GlobalSkips [measure 1] %%%
                         \time 4/8
                         s1 * 1/2
-                        \break
+                        \break % SEGMENT
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
-                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details
-                        #'((Y-offset . 100) (alignment-distances . (30 30)))
+                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 100) (alignment-distances . (30 30))) % SEGMENT
                         \time 3/8
                         s1 * 3/8
-                        \break
+                        \break % SEGMENT
             <BLANKLINE>
                         %%% GlobalSkips [measure 3] %%%
                         \time 4/8
@@ -184,30 +185,27 @@ class LayoutMeasureMap(abjad.AbjadObject):
     __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
-        '_items',
+        '_commands',
         '_tag',
         )
 
+    _publish_storage_format = True
+
     ### INITIALIZER ###
 
-    def __init__(self, items=None, tag=None):
+    def __init__(self, commands=None, tag=None):
         if tag is not None:
             assert isinstance(tag, str), repr(tag)
         self._tag = tag
-        if items is not None:
+        if commands is not None:
             if tag is not None:
-                items_ = []
-                for item in items:
-                    lbsd = item.indicators[0]
-                    lbsd = abjad.new(lbsd, tag=tag)
-                    item_ = baca.IndicatorCommand(
-                        indicators=[lbsd],
-                        selector=item.selector,
-                        )
-                    items_.append(item_)
-                items = items_
-            items = tuple(items)
-        self._items = items
+                commands_ = []
+                for command in commands:
+                    command_ = abjad.new(command, tag=tag)
+                    commands_.append(command_)
+                commands = commands_
+            commands = tuple(commands)
+        self._commands = commands
 
     ### SPECIAL METHODS ###
 
@@ -218,8 +216,8 @@ class LayoutMeasureMap(abjad.AbjadObject):
         '''
         if context is None:
             return
-        for indicator in self.items:
-            indicator(context)
+        for command in self.commands:
+            command(context)
 
     def __getitem__(self, argument):
         r'''Gets `argument`.
@@ -227,38 +225,48 @@ class LayoutMeasureMap(abjad.AbjadObject):
         ..  container:: example
 
             >>> layout = baca.LayoutMeasureMap([
-            ...     baca.line_break(baca.skip(0)),
+            ...     baca.system_break(baca.skip(0)),
             ...     baca.page_break(baca.skip(1)),
             ...     ])
 
-            >>> layout[1]
-            IndicatorCommand(indicators=CyclicTuple([PageBreak()]), selector=baca.skip(1))
+            >>> abjad.f(layout[1])
+            baca.IndicatorCommand(
+                indicators=abjad.CyclicTuple(
+                    [
+                        abjad.PageBreak(
+                            format_slot='closing',
+                            ),
+                        ]
+                    ),
+                selector=baca.skip(1),
+                )
 
         Returns item.
         '''
-        return self.items.__getitem__(argument)
+        return self.commands.__getitem__(argument)
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def items(self):
-        r'''Gets items.
+    def commands(self):
+        r'''Gets commands.
 
         ..  container:: example
 
             >>> layout = baca.LayoutMeasureMap([
-            ...     baca.line_break(baca.skip(0)),
+            ...     baca.system_break(baca.skip(0)),
             ...     baca.page_break(baca.skip(1)),
             ...     ])
 
-            >>> for item in layout.items:
-            ...     item
-            IndicatorCommand(indicators=CyclicTuple([SystemBreak()]), selector=baca.skip(0))
-            IndicatorCommand(indicators=CyclicTuple([PageBreak()]), selector=baca.skip(1))
+            >>> for command in layout.commands:
+            ...     command
+            ...
+            IndicatorCommand(indicators=CyclicTuple([SystemBreak(format_slot='closing')]), selector=baca.skip(0))
+            IndicatorCommand(indicators=CyclicTuple([PageBreak(format_slot='closing')]), selector=baca.skip(1))
 
-        Returns items.
+        Returns commands.
         '''
-        return self._items
+        return self._commands
 
     @property
     def tag(self):

@@ -161,11 +161,12 @@ class IndicatorCommand(Command):
 
     __slots__ = (
         '_indicators',
+        '_tag',
         )
 
     ### INITIALIZER ###
 
-    def __init__(self, indicators=None, selector='baca.pheads()'):
+    def __init__(self, indicators=None, selector='baca.pheads()', tag=None):
         Command.__init__(self, selector=selector)
         if indicators is not None:
             if isinstance(indicators, collections.Iterable):
@@ -173,6 +174,9 @@ class IndicatorCommand(Command):
             else:
                 indicators = abjad.CyclicTuple([indicators])
         self._indicators = indicators
+        if tag is not None:
+            assert isinstance(tag, str), repr(tag)
+        self._tag = tag
 
     ### SPECIAL METHODS ###
 
@@ -193,7 +197,7 @@ class IndicatorCommand(Command):
             indicators = self.indicators[i]
             indicators = self._token_to_indicators(indicators)
             for indicator in indicators:
-                abjad.attach(indicator, leaf)
+                abjad.attach(indicator, leaf, tag=self.tag)
 
     ### PRIVATE METHODS ###
 
@@ -329,3 +333,11 @@ class IndicatorCommand(Command):
         Returns indicators or none.
         '''
         return self._indicators
+
+    @property
+    def tag(self):
+        r'''Gets tag.
+
+        Returns string or none.
+        '''
+        return self._tag

@@ -947,136 +947,129 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
-    def lbsd(y_offset, alignment_distances, selector='baca.leaf(0)', tag=None):
+    def layout(*arguments, score=False):
+        r'''Makes layout measure map.
+
+        ..  container:: example
+
+            >>> layout = baca.layout(
+            ...     (1, 20, [15, 20, 20]), 
+            ...     (13, 140, [15, 20, 20]), 
+            ...     (23, 20, [15, 20, 20], True),
+            ...     )
+
+            >>> abjad.f(layout)
+            baca.LayoutMeasureMap(
+                commands=(
+                    baca.IndicatorCommand(
+                        indicators=abjad.CyclicTuple(
+                            [
+                                baca.LBSD(
+                                    y_offset=20,
+                                    alignment_distances=(15, 20, 20),
+                                    ),
+                                ]
+                            ),
+                        selector=baca.skip(0),
+                        tag='SEGMENT',
+                        ),
+                    baca.IndicatorCommand(
+                        indicators=abjad.CyclicTuple(
+                            [
+                                abjad.SystemBreak(
+                                    format_slot='before',
+                                    ),
+                                ]
+                            ),
+                        selector=baca.skip(12),
+                        tag='SEGMENT',
+                        ),
+                    baca.IndicatorCommand(
+                        indicators=abjad.CyclicTuple(
+                            [
+                                baca.LBSD(
+                                    y_offset=140,
+                                    alignment_distances=(15, 20, 20),
+                                    ),
+                                ]
+                            ),
+                        selector=baca.skip(12),
+                        tag='SEGMENT',
+                        ),
+                    baca.IndicatorCommand(
+                        indicators=abjad.CyclicTuple(
+                            [
+                                abjad.PageBreak(
+                                    format_slot='before',
+                                    ),
+                                ]
+                            ),
+                        selector=baca.skip(22),
+                        tag='SEGMENT',
+                        ),
+                    baca.IndicatorCommand(
+                        indicators=abjad.CyclicTuple(
+                            [
+                                baca.LBSD(
+                                    y_offset=20,
+                                    alignment_distances=(15, 20, 20),
+                                    ),
+                                ]
+                            ),
+                        selector=baca.skip(22),
+                        tag='SEGMENT',
+                        ),
+                    ),
+                tag='SEGMENT',
+                )
+
+        Returns layout measure map.
+        '''
+        tag = None
+        if score is not True:
+            tag = 'SEGMENT'
+        commands = []
+        if not arguments:
+            return baca.LayoutMeasureMap(commands=commands, tag=tag)
+        first_measure_number = arguments[0][0]
+        for argument in arguments:
+            if len(argument) == 4:
+                new_page = True
+                argument = argument[:3]
+            else:
+                new_page = False
+            assert len(argument) == 3, repr(argument)
+            measure_number = argument[0]
+            skip_index = measure_number - first_measure_number
+            y_offset = argument[1]
+            alignment_distances = argument[2]
+            selector = baca.skip(skip_index)
+            if first_measure_number < measure_number:
+                if new_page:
+                    break_ = abjad.PageBreak(format_slot='before')
+                else:
+                    break_ = abjad.SystemBreak(format_slot='before')
+                command = baca.IndicatorCommand(
+                    indicators=[break_],
+                    selector=selector,
+                    )
+                commands.append(command)
+            lbsd = baca.lbsd(y_offset, alignment_distances, selector)
+            commands.append(lbsd)
+        return baca.LayoutMeasureMap(commands=commands, tag=tag)
+
+    @staticmethod
+    def lbsd(y_offset, alignment_distances, selector='baca.leaf(0)'):
         r'''Makes line-break system details.
 
         Returns indicator command.
         '''
         lbsd = baca.LBSD(
             alignment_distances=alignment_distances,
-            tag=tag,
             y_offset=y_offset,
             )
         return baca.IndicatorCommand(
             indicators=[lbsd],
-            selector=selector,
-            )
-
-    @staticmethod
-    def line_break(selector='baca.leaf(-1)'):
-        r'''Attaches line break command after last leaf.
-
-        ..  container:: example
-
-            Attaches line break after last leaf:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.line_break(),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16 [
-                                e''16 ]
-                                ef''4 ~
-                                ef''16
-                                r16
-                                af''16 [
-                                g''16 ]
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \break
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Attaches line break after last leaf in tuplet 1:
-
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice 1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.line_break(baca.tuplets()[1:2].leaf(-1)),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Staff])
-                \new Staff <<
-                    \context Voice = "Voice 1" {
-                        \voiceOne
-                        {
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
-                                r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
-                                bf'16
-                                r16
-                            }
-                            \tweak text #tuplet-number::calc-fraction-text
-                            \times 9/10 {
-                                fs''16 [
-                                e''16 ]
-                                ef''4 ~
-                                ef''16
-                                r16
-                                af''16 [
-                                g''16 ]
-                                \break
-                            }
-                            \times 4/5 {
-                                a'16
-                                r4
-                                \revert TupletBracket.staff-padding
-                            }
-                        }
-                    }
-                >>
-
-        '''
-        return baca.IndicatorCommand(
-            indicators=[abjad.SystemBreak()],
             selector=selector,
             )
 
