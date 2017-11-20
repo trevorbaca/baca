@@ -72,7 +72,6 @@ Bases
       ~baca.tools.LibraryNS.LibraryNS.suite
       ~baca.tools.LibraryNS.LibraryNS.sustain_pedal
       ~baca.tools.LibraryNS.LibraryNS.sustain_pedal_staff_padding
-      ~baca.tools.LibraryNS.LibraryNS.system_break
       ~baca.tools.LibraryNS.LibraryNS.__eq__
       ~baca.tools.LibraryNS.LibraryNS.__format__
       ~baca.tools.LibraryNS.LibraryNS.__hash__
@@ -185,8 +184,6 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNS.LibraryNS.sustain_pedal
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.sustain_pedal_staff_padding
-
-.. automethod:: baca.tools.LibraryNS.LibraryNS.system_break
 
 Special methods
 ---------------

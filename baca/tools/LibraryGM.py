@@ -976,7 +976,7 @@ class LibraryGM(abjad.AbjadObject):
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
                             [
-                                abjad.SystemBreak(
+                                abjad.LineBreak(
                                     format_slot='before',
                                     ),
                                 ]
@@ -1048,7 +1048,7 @@ class LibraryGM(abjad.AbjadObject):
                 if new_page:
                     break_ = abjad.PageBreak(format_slot='before')
                 else:
-                    break_ = abjad.SystemBreak(format_slot='before')
+                    break_ = abjad.LineBreak(format_slot='before')
                 command = baca.IndicatorCommand(
                     indicators=[break_],
                     selector=selector,
@@ -1070,6 +1070,124 @@ class LibraryGM(abjad.AbjadObject):
             )
         return baca.IndicatorCommand(
             indicators=[lbsd],
+            selector=selector,
+            )
+
+    @staticmethod
+    def line_break(selector='baca.leaf(-1)'):
+        r'''Attaches line break after last leaf.
+
+        ..  container:: example
+
+            Attaches line break after last leaf:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.line_break(),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 [
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 [
+                                e''16 ]
+                                ef''4 ~
+                                ef''16
+                                r16
+                                af''16 [
+                                g''16 ]
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \break
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Attaches line break after last leaf in tuplet 1:
+
+            >>> music_maker = baca.MusicMaker()
+            >>> contribution = music_maker(
+            ...     'Voice 1',
+            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+            ...     baca.line_break(baca.tuplets()[1:2].leaf(-1)),
+            ...     baca.rests_around([2], [4]),
+            ...     baca.tuplet_bracket_staff_padding(5),
+            ...     counts=[1, 1, 5, -1],
+            ...     time_treatments=[-1],
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Staff])
+                \new Staff <<
+                    \context Voice = "Voice 1" {
+                        \voiceOne
+                        {
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                \override TupletBracket.staff-padding = #5
+                                r8
+                                c'16 [
+                                d'16 ]
+                                bf'4 ~
+                                bf'16
+                                r16
+                            }
+                            \tweak text #tuplet-number::calc-fraction-text
+                            \times 9/10 {
+                                fs''16 [
+                                e''16 ]
+                                ef''4 ~
+                                ef''16
+                                r16
+                                af''16 [
+                                g''16 ]
+                                \break
+                            }
+                            \times 4/5 {
+                                a'16
+                                r4
+                                \revert TupletBracket.staff-padding
+                            }
+                        }
+                    }
+                >>
+
+        '''
+        return baca.IndicatorCommand(
+            indicators=[abjad.LineBreak()],
             selector=selector,
             )
 

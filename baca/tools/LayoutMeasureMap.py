@@ -11,9 +11,9 @@ class LayoutMeasureMap(abjad.AbjadObject):
         ...     score_template=baca.StringTrioScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8)],
         ...     layout_measure_map=baca.LayoutMeasureMap([
-        ...         baca.system_break(baca.skip(0)),
+        ...         baca.line_break(baca.skip(0)),
         ...         baca.lbsd(100, [30, 30], baca.skip(1)),
-        ...         baca.system_break(baca.skip(1)),
+        ...         baca.line_break(baca.skip(1)),
         ...         ],
         ...         tag='SEGMENT',
         ...         ),
@@ -225,7 +225,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
         ..  container:: example
 
             >>> layout = baca.LayoutMeasureMap([
-            ...     baca.system_break(baca.skip(0)),
+            ...     baca.line_break(baca.skip(0)),
             ...     baca.page_break(baca.skip(1)),
             ...     ])
 
@@ -254,14 +254,14 @@ class LayoutMeasureMap(abjad.AbjadObject):
         ..  container:: example
 
             >>> layout = baca.LayoutMeasureMap([
-            ...     baca.system_break(baca.skip(0)),
+            ...     baca.line_break(baca.skip(0)),
             ...     baca.page_break(baca.skip(1)),
             ...     ])
 
             >>> for command in layout.commands:
             ...     command
             ...
-            IndicatorCommand(indicators=CyclicTuple([SystemBreak(format_slot='closing')]), selector=baca.skip(0))
+            IndicatorCommand(indicators=CyclicTuple([LineBreak(format_slot='closing')]), selector=baca.skip(0))
             IndicatorCommand(indicators=CyclicTuple([PageBreak(format_slot='closing')]), selector=baca.skip(1))
 
         Returns commands.
