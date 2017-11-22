@@ -1508,8 +1508,12 @@ class SegmentMaker(abjad.SegmentMaker):
             skip = abjad.Skip(1)
             multiplier = abjad.Multiplier(time_signature.duration)
             abjad.attach(multiplier, skip)
-            time_signature = abjad.new(time_signature, context='Score')
-            abjad.attach(time_signature, skip)
+
+            #time_signature = abjad.new(time_signature, context='Score')
+            #abjad.attach(time_signature, skip)
+            # TODO: instead:
+            abjad.attach(time_signature, skip, context='Score')
+
             context.append(skip)
 
     def _make_instrument_change_markup(self, instrument):
