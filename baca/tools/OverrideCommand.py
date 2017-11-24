@@ -168,6 +168,7 @@ class OverrideCommand(Command):
         '_attribute',
         '_context',
         '_grob',
+        '_tag',
         '_value',
         )
 
@@ -180,6 +181,7 @@ class OverrideCommand(Command):
         context=None,
         grob=None,
         selector='baca.leaves()',
+        tag=None,
         value=None,
         ):
         Command.__init__(self, selector=selector)
@@ -195,6 +197,9 @@ class OverrideCommand(Command):
         if grob is not None:
             assert isinstance(grob, str), repr(grob)
         self._grob = grob
+        if tag is not None:
+            assert isinstance(tag, str), repr(tag)
+        self._tag = tag
         self._value = value
 
     ### SPECIAL METHODS ###
@@ -228,7 +233,7 @@ class OverrideCommand(Command):
         if self.after is True:
             format_slot = 'after'
         override = abjad.LilyPondCommand(string, format_slot=format_slot)
-        abjad.attach(override, leaves[0])
+        abjad.attach(override, leaves[0], tag=self.tag)
         if once:
             return
         string = abjad.LilyPondFormatManager.make_lilypond_revert_string(
@@ -238,7 +243,7 @@ class OverrideCommand(Command):
             )
         string = string[1:]
         revert = abjad.LilyPondCommand(string, format_slot='after')
-        abjad.attach(revert, leaves[-1])
+        abjad.attach(revert, leaves[-1], tag=self.tag)
 
     ### PUBLIC PROPERTIES ###
 
@@ -275,6 +280,14 @@ class OverrideCommand(Command):
         Set to string or none.
         '''
         return self._grob
+
+    @property
+    def tag(self):
+        r'''Gets tag.
+
+        Set to string or none.
+        '''
+        return self._tag
 
     @property
     def value(self):

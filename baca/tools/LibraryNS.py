@@ -3964,6 +3964,25 @@ class LibraryNS(abjad.AbjadObject):
             ) 
 
     @staticmethod
+    def staff_symbol_extra_offset(
+        pair,
+        selector='baca.leaf(0)',
+        after=False,
+        tag=None,
+        ):
+        r'''Overrides staff symbol extra offset.
+        '''
+        return baca.OverrideCommand(
+            after=after,
+            attribute='extra_offset',
+            value=pair,
+            context='Staff',
+            grob='staff_symbol',
+            selector=selector,
+            tag=tag,
+            )
+
+    @staticmethod
     def stem_color(color='red', context=None, selector='baca.tleaves()'):
         r'''Overrides stem color.
 

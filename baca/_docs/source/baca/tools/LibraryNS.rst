@@ -63,6 +63,7 @@ Bases
       ~baca.tools.LibraryNS.LibraryNS.staccatissimi
       ~baca.tools.LibraryNS.LibraryNS.staff_lines
       ~baca.tools.LibraryNS.LibraryNS.staff_positions
+      ~baca.tools.LibraryNS.LibraryNS.staff_symbol_extra_offset
       ~baca.tools.LibraryNS.LibraryNS.stem_color
       ~baca.tools.LibraryNS.LibraryNS.stem_tremolo
       ~baca.tools.LibraryNS.LibraryNS.stems_down
@@ -166,6 +167,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNS.LibraryNS.staff_lines
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.staff_positions
+
+.. automethod:: baca.tools.LibraryNS.LibraryNS.staff_symbol_extra_offset
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.stem_color
 
