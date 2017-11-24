@@ -971,7 +971,7 @@ class LibraryGM(abjad.AbjadObject):
                                 ]
                             ),
                         selector=baca.skip(0),
-                        tag='SEGMENT',
+                        tag='SEGMENT:LINE-BREAKING',
                         ),
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
@@ -982,7 +982,7 @@ class LibraryGM(abjad.AbjadObject):
                                 ]
                             ),
                         selector=baca.skip(12),
-                        tag='SEGMENT',
+                        tag='SEGMENT:LINE-BREAKING',
                         ),
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
@@ -994,7 +994,7 @@ class LibraryGM(abjad.AbjadObject):
                                 ]
                             ),
                         selector=baca.skip(12),
-                        tag='SEGMENT',
+                        tag='SEGMENT:LINE-BREAKING',
                         ),
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
@@ -1005,7 +1005,7 @@ class LibraryGM(abjad.AbjadObject):
                                 ]
                             ),
                         selector=baca.skip(22),
-                        tag='SEGMENT',
+                        tag='SEGMENT:LINE-BREAKING',
                         ),
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
@@ -1017,17 +1017,17 @@ class LibraryGM(abjad.AbjadObject):
                                 ]
                             ),
                         selector=baca.skip(22),
-                        tag='SEGMENT',
+                        tag='SEGMENT:LINE-BREAKING',
                         ),
                     ),
-                tag='SEGMENT',
+                tag='SEGMENT:LINE-BREAKING',
                 )
 
         Returns layout measure map.
         '''
         tag = None
         if score is not True:
-            tag = 'SEGMENT'
+            tag = 'SEGMENT:LINE-BREAKING'
         commands = []
         if not arguments:
             return baca.LayoutMeasureMap(commands=commands, tag=tag)
