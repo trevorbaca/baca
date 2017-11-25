@@ -139,6 +139,7 @@ class NestingCommand(Command):
                         %%% GlobalSkips [measure 1] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                         \time 1/2
+                        \bar "" % SEGMENT
                         \newSpacingSection
                         s1 * 1/2
             <BLANKLINE>

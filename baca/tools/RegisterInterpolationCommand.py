@@ -137,6 +137,7 @@ class RegisterInterpolationCommand(Command):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 4/8
+                        \bar "" % SEGMENT
                         s1 * 1/2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
@@ -290,6 +291,7 @@ class RegisterInterpolationCommand(Command):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 4/8
+                        \bar "" % SEGMENT
                         s1 * 1/2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
@@ -443,6 +445,7 @@ class RegisterInterpolationCommand(Command):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 4/8
+                        \bar "" % SEGMENT
                         s1 * 1/2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
@@ -596,6 +599,7 @@ class RegisterInterpolationCommand(Command):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 4/8
+                        \bar "" % SEGMENT
                         s1 * 1/2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
@@ -749,6 +753,7 @@ class RegisterInterpolationCommand(Command):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 4/8
+                        \bar "" % SEGMENT
                         s1 * 1/2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
