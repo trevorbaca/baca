@@ -1422,41 +1422,51 @@ class SegmentMaker(abjad.SegmentMaker):
             time_signatures_ = None
         self._time_signatures = time_signatures_
 
-    def _intercalate_silences(self, rhythms):
-        durations = [_.duration for _ in self.time_signatures]
-        start_offsets = abjad.mathtools.cumulative_sums(durations)
-        segment_duration = start_offsets[-1]
-        start_offsets = start_offsets[:-1]
-        start_offsets = [abjad.Offset(_) for _ in start_offsets]
-        assert len(start_offsets) == len(self.time_signatures)
-        pairs = zip(start_offsets, self.time_signatures)
-        result = []
-        previous_stop_offset = abjad.Offset(0)
-        for rhythm in rhythms:
-            start_offset = rhythm.start_offset
-            if start_offset < previous_stop_offset:
-                raise Exception('overlapping offsets: {rhythm!r}.')
-            if previous_stop_offset < start_offset:
-                duration = start_offset - previous_stop_offset
-                multiplier = abjad.Multiplier(duration)
-                if self.skips_instead_of_rests:
-                    silence = abjad.Skip(1)
-                else:
-                    silence = abjad.MultimeasureRest(1)
-                abjad.attach(multiplier, silence)
-                result.append(silence)
-            result.extend(rhythm.annotation)
-            duration = abjad.inspect(rhythm.annotation).get_duration()
-            previous_stop_offset = start_offset + duration
-        if previous_stop_offset < segment_duration:
-            duration = segment_duration - previous_stop_offset
+    def _make_measure_silences(self, start, stop, measure_start_offsets):
+        offsets = [start]
+        for measure_start_offset in measure_start_offsets:
+            if start < measure_start_offset < stop:
+                offsets.append(measure_start_offset)
+        offsets.append(stop)
+        silences = []
+        durations = abjad.mathtools.difference_series(offsets)
+        for duration in durations:
             multiplier = abjad.Multiplier(duration)
             if self.skips_instead_of_rests:
                 silence = abjad.Skip(1)
             else:
                 silence = abjad.MultimeasureRest(1)
             abjad.attach(multiplier, silence)
-            result.append(silence)
+            silences.append(silence)
+        return silences
+
+    def _intercalate_silences(self, rhythms):
+        result = []
+        durations = [_.duration for _ in self.time_signatures]
+        measure_start_offsets = abjad.mathtools.cumulative_sums(durations)
+        segment_duration = measure_start_offsets[-1]
+        previous_stop_offset = abjad.Offset(0)
+        for rhythm in rhythms:
+            start_offset = rhythm.start_offset
+            if start_offset < previous_stop_offset:
+                raise Exception('overlapping offsets: {rhythm!r}.')
+            if previous_stop_offset < start_offset:
+                silences = self._make_measure_silences(
+                    previous_stop_offset,
+                    start_offset,
+                    measure_start_offsets,
+                    )
+                result.extend(silences)
+            result.extend(rhythm.annotation)
+            duration = abjad.inspect(rhythm.annotation).get_duration()
+            previous_stop_offset = start_offset + duration
+        if previous_stop_offset < segment_duration:
+            silences = self._make_measure_silences(
+                previous_stop_offset,
+                segment_duration,
+                measure_start_offsets,
+                )
+            result.extend(silences)
         return result
 
     def _is_first_segment(self):

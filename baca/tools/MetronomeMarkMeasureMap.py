@@ -107,7 +107,10 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                             }
             <BLANKLINE>
                             %%% MusicVoice [measure 3] %%%
-                            R1 * 7/8
+                            R1 * 1/2
+            <BLANKLINE>
+                            %%% MusicVoice [measure 4] %%%
+                            R1 * 3/8
                             \bar "|"
             <BLANKLINE>
                         }
