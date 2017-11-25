@@ -1035,6 +1035,26 @@ class SegmentMaker(abjad.SegmentMaker):
                 for leaf in notes_and_chords:
                     abjad.attach(markup, leaf)
 
+    @staticmethod
+    def _color_duplicate(grob, context=None):
+        if context is not None:
+            context = getattr(context, 'context_name', context)
+            string = rf'\once \override {context}.{grob}.color ='
+        else:
+            string = rf'\once \override {grob}.color ='
+        string += " #(x11-color 'DarkCyan)"
+        return string
+
+    @staticmethod
+    def _color_reminder(grob, context=None):
+        if context is not None:
+            context = getattr(context, 'context_name', context)
+            string = rf'\once \override {context}.{grob}.color ='
+        else:
+            string = rf'\once \override {grob}.color ='
+        string += " #(x11-color 'DeepPink1)"
+        return string
+
     def _color_repeat_pitch_classes_(self):
         manager = baca.WellformednessManager
         lts = manager._find_repeat_pitch_classes(self._score)
@@ -1514,9 +1534,10 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.attach(time_signature, skip, context='Score')
             context.append(skip)
         # ghost bar line allows LilyPond to print first bar number
+        tag = 'SEGMENT:EMPTY-BAR'
         first_skip = baca.select(context).skip(0)
         literal = abjad.LilyPondLiteral(r'\bar ""')
-        abjad.attach(literal, first_skip, tag='SEGMENT:EMPTY-BAR')
+        abjad.attach(literal, first_skip, tag=tag)
 
     def _make_instrument_change_markup(self, instrument):
         string = f'to {instrument.name}'
@@ -1632,34 +1653,33 @@ class SegmentMaker(abjad.SegmentMaker):
         skip = baca.select(self._score['GlobalSkips']).skip(0)
         mark = abjad.inspect(skip).get_piecewise(abjad.MetronomeMark)
         if mark is None:
+            tag = 'SEGMENT:REMINDER-METRONOME-MARK'
             prototype = abjad.MetronomeMarkSpanner
             spanner = abjad.inspect(skip).get_spanner(prototype)
             previous_mark = self._get_previous_metronome_mark()
-            spanner.attach(previous_mark, skip, tag='SEGMENT-ONLY')
-            string = rf'\once \override TextScript.color ='
-            string += " #(x11-color 'DeepPink1)"
+            spanner.attach(previous_mark, skip, tag=tag)
+#            string = rf'\once \override TextScript.color ='
+#            string += " #(x11-color 'DeepPink1)"
+            string = self._color_reminder('TextScript')
             literal = abjad.LilyPondLiteral(string)
-            abjad.attach(literal, skip, tag='SEGMENT-ONLY')
+            abjad.attach(literal, skip, tag=tag)
         time_signature = abjad.inspect(skip).get_indicator(abjad.TimeSignature)
         assert time_signature is not None
         previous_time_signature = self._get_previous_time_signature()
         if str(previous_time_signature) == str(time_signature):
+            tag = 'SEGMENT:DUPLICATE-TIME-SIGNATURE'
             wrapper = abjad.inspect(skip).get_indicator(
                 abjad.TimeSignature,
                 unwrap=False,
                 )
             context = wrapper.context
             abjad.detach(time_signature, skip)
-            abjad.attach(
-                time_signature,
-                skip,
-                context=context,
-                tag='SEGMENT-ONLY',
-                )
-            string = rf'\once \override GlobalContext.TimeSignature.color ='
-            string += " #(x11-color 'DarkCyan)"
+            abjad.attach(time_signature, skip, context=context, tag=tag)
+#            string = rf'\once \override GlobalContext.TimeSignature.color ='
+#            string += " #(x11-color 'DarkCyan)"
+            string = self._color_duplicate('TimeSignature', context)
             literal = abjad.LilyPondLiteral(string)
-            abjad.attach(literal, skip, tag='SEGMENT-ONLY')
+            abjad.attach(literal, skip, tag=tag)
         for context in abjad.iterate(self._score).components(abjad.Context):
             previous_clef = self._get_previous_clef(context.name)
             previous_dynamic = self._get_previous_dynamic(context.name)
@@ -1677,44 +1697,48 @@ class SegmentMaker(abjad.SegmentMaker):
                 prototype = abjad.Instrument
                 instrument = abjad.inspect(leaf).get_indicator(prototype)
                 if instrument is None:
+                    tag = 'SEGMENT:REMINDER-INSTRUMENT'
                     instrument = abjad.new(
                         previous_instrument,
                         context=context.context_name,
                         )
-                    abjad.attach(instrument, leaf, tag='SEGMENT-ONLY')
-                    string = rf'\once \override {context.context_name}'
-                    string += ".InstrumentName.color = #(x11-color 'DeepPink1)"
+                    abjad.attach(instrument, leaf, tag=tag)
+#                    string = rf'\once \override {context.context_name}'
+#                    string += ".InstrumentName.color = #(x11-color 'DeepPink1)"
+                    string = self._color_reminder('InstrumentName', context)
                     literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(literal, leaf, tag='SEGMENT-ONLY')
+                    abjad.attach(literal, leaf, tag=tag)
             if previous_staff_lines is not None:
                 prototype = baca.StaffLines
                 staff_lines = abjad.inspect(leaf).get_indicator(prototype)
                 if staff_lines is None:
-                    abjad.attach(
-                        previous_staff_lines,
-                        leaf,
-                        tag='SEGMENT-ONLY',
-                        )
-                    string = rf'\once \override {context.context_name}'
-                    string += ".StaffSymbol.color = #(x11-color 'DeepPink1)"
+                    tag = 'SEGMENT:REMINDER-STAFF-LINES'
+                    abjad.attach(previous_staff_lines, leaf, tag=tag)
+#                    string = rf'\once \override {context.context_name}'
+#                    string += ".StaffSymbol.color = #(x11-color 'DeepPink1)"
+                    string = self._color_reminder('StaffSymbol', context)
                     literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(literal, leaf, tag='SEGMENT-ONLY')
+                    abjad.attach(literal, leaf, tag=tag)
             if previous_clef is not None:
                 clef = abjad.inspect(leaf).get_indicator(abjad.Clef)
                 if clef is None:
-                    abjad.attach(previous_clef, leaf, tag='SEGMENT-ONLY')
-                    string = rf'\once \override {context.context_name}'
-                    string += ".Clef.color = #(x11-color 'DeepPink1)"
+                    tag = 'SEGMENT:REMINDER-CLEF'
+                    abjad.attach(previous_clef, leaf, tag=tag)
+#                    string = rf'\once \override {context.context_name}'
+#                    string += ".Clef.color = #(x11-color 'DeepPink1)"
+                    string = self._color_reminder('Clef', context)
                     literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(literal, leaf, tag='SEGMENT-ONLY')
+                    abjad.attach(literal, leaf, tag=tag)
             if previous_dynamic is not None:
                 dynamic = abjad.inspect(leaf).get_effective(abjad.Dynamic)
                 if dynamic is None:
-                    abjad.attach(previous_dynamic, leaf, tag='SEGMENT-ONLY')
-                    string = rf'\once \override {context.context_name}'
-                    string += ".DynamicText.color = #(x11-color 'DeepPink1)"
+                    tag = 'SEGMENT:REMINDER-DYNAMIC'
+                    abjad.attach(previous_dynamic, leaf, tag=tag)
+#                    string = rf'\once \override {context.context_name}'
+#                    string += ".DynamicText.color = #(x11-color 'DeepPink1)"
+                    string = self._color_reminder('DynamicText', context)
                     literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(literal, leaf, tag='SEGMENT-ONLY')
+                    abjad.attach(literal, leaf, tag=tag)
 
     def _scope_to_leaf_selection(self, wrapper):
         leaves = []
