@@ -36,7 +36,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 8/16
-                        \bar "" % SEGMENT
+                        \bar "" % SEGMENT:EMPTY-BAR
                         s1 * 1/2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
@@ -137,7 +137,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         %%% GlobalSkips [measure 1] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                         \time 8/16
-                        \bar "" % SEGMENT
+                        \bar "" % SEGMENT:EMPTY-BAR
                         \newSpacingSection
                         s1 * 1/2
             <BLANKLINE>
@@ -247,7 +247,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         %%% GlobalSkips [measure 1] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                         \time 8/16
-                        \bar "" % SEGMENT
+                        \bar "" % SEGMENT:EMPTY-BAR
                         \newSpacingSection
                         s1 * 1/2
             <BLANKLINE>
@@ -358,7 +358,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         %%% GlobalSkips [measure 1] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)
                         \time 8/16
-                        \bar "" % SEGMENT
+                        \bar "" % SEGMENT:EMPTY-BAR
                         \newSpacingSection
                         s1 * 1/2
             <BLANKLINE>
@@ -470,7 +470,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         %%% GlobalSkips [measure 1] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)
                         \time 8/16
-                        \bar "" % SEGMENT
+                        \bar "" % SEGMENT:EMPTY-BAR
                         \newSpacingSection
                         s1 * 1/2
             <BLANKLINE>
@@ -592,7 +592,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         %%% GlobalSkips [measure 1] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                         \time 4/8
-                        \bar "" % SEGMENT
+                        \bar "" % SEGMENT:EMPTY-BAR
                         \newSpacingSection
                         s1 * 1/2
             <BLANKLINE>

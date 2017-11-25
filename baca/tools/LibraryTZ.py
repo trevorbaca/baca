@@ -1637,7 +1637,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -1734,7 +1734,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -3449,7 +3449,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2
                             \repeat volta 2
                             {
@@ -3553,7 +3553,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2
                                 - \markup {
                                     \fontsize

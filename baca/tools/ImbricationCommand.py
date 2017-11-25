@@ -839,7 +839,7 @@ class ImbricationCommand(Command):
                             %%% GlobalSkips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 7/16
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             \newSpacingSection
                             s1 * 7/16
                 <BLANKLINE>

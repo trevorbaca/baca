@@ -634,7 +634,7 @@ class LibraryAF(abjad.AbjadObject):
                             %%% GlobalSkips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             \newSpacingSection
                             s1 * 1/2
                 <BLANKLINE>
@@ -2441,7 +2441,7 @@ class LibraryAF(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 5/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 5/8
                 <BLANKLINE>
                         }
@@ -2575,7 +2575,7 @@ class LibraryAF(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 5/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 5/8
                 <BLANKLINE>
                         }

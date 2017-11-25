@@ -48,7 +48,7 @@ class LibraryGM(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -145,7 +145,7 @@ class LibraryGM(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%

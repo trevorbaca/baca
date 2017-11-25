@@ -31,7 +31,7 @@ class SegmentMaker(abjad.SegmentMaker):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 4/8
-                        \bar "" % SEGMENT
+                        \bar "" % SEGMENT:EMPTY-BAR
                         s1 * 1/2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
@@ -95,7 +95,7 @@ class SegmentMaker(abjad.SegmentMaker):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 4/8
-                        \bar "" % SEGMENT
+                        \bar "" % SEGMENT:EMPTY-BAR
                         s1 * 1/2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
@@ -488,7 +488,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -1516,7 +1516,7 @@ class SegmentMaker(abjad.SegmentMaker):
         # ghost bar line allows LilyPond to print first bar number
         first_skip = baca.select(context).skip(0)
         literal = abjad.LilyPondLiteral(r'\bar ""')
-        abjad.attach(literal, first_skip, tag='SEGMENT')
+        abjad.attach(literal, first_skip, tag='SEGMENT:EMPTY-BAR')
 
     def _make_instrument_change_markup(self, instrument):
         string = f'to {instrument.name}'
@@ -1920,7 +1920,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             \newSpacingSection
                             s1 * 1/16
                 <BLANKLINE>
@@ -2065,7 +2065,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             \newSpacingSection
                             s1 * 1/16
                 <BLANKLINE>
@@ -2278,7 +2278,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 6/16
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             \newSpacingSection
                             s1 * 3/8
                 <BLANKLINE>
@@ -2411,7 +2411,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             \newSpacingSection
                             s1 * 1/16
                 <BLANKLINE>
@@ -2569,7 +2569,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             \newSpacingSection
                             s1 * 1/16
                 <BLANKLINE>
@@ -2734,7 +2734,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -2902,7 +2902,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -3067,7 +3067,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -3236,7 +3236,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -3410,7 +3410,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -3577,7 +3577,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -3812,7 +3812,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -3977,7 +3977,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -4130,7 +4130,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             \newSpacingSection
                             s1 * 3/16
                 <BLANKLINE>
@@ -4383,7 +4383,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             \newSpacingSection
                             s1 * 3/16
                 <BLANKLINE>
@@ -4523,7 +4523,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2 ^ \markup {
                                 \fontsize
                                     #-6
@@ -4708,7 +4708,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2 ^ \markup {
                                 \fontsize
                                     #-6
@@ -4899,7 +4899,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -5064,7 +5064,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2
                                 - \markup {
                                     \fontsize
@@ -5240,7 +5240,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2
                                 - \markup {
                                     \fontsize
@@ -5464,7 +5464,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -5631,7 +5631,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2 ^ \markup {
                                 \fontsize
                                     #-6
@@ -5927,7 +5927,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -5989,7 +5989,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -6096,7 +6096,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2
                                 - \markup {
                                     \fontsize
@@ -6273,7 +6273,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2
                                 - \markup {
                                     \fontsize
@@ -6467,7 +6467,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT
+                            \bar "" % SEGMENT:EMPTY-BAR
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
