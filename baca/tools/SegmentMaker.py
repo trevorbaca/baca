@@ -245,13 +245,11 @@ class SegmentMaker(abjad.SegmentMaker):
         '_allow_empty_selections',
         '_allow_figure_names',
         '_cache',
-        '_cached_score_template_start_clefs',
-        '_cached_score_template_start_instruments',
         '_color_octaves',
         '_color_out_of_range_pitches',
         '_color_repeat_pitch_classes',
         '_design_checker',
-        '_expression',
+        '_fermata_measure_staff_lines',
         '_fermata_start_offsets',
         '_final_bar_line',
         '_final_markup',
@@ -261,7 +259,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_ignore_unpitched_notes',
         '_ignore_unregistered_pitches',
         '_instruments',
-        '_docs',
         '_label_clock_time',
         '_label_stage_numbers',
         '_layout_measure_map',
@@ -278,7 +275,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_skips_instead_of_rests',
         '_spacing_specifier',
         '_stage_label_base_string',
-        '_stages',
         '_time_signatures',
         '_transpose_score',
         '_wrappers',
@@ -348,6 +344,7 @@ class SegmentMaker(abjad.SegmentMaker):
         color_out_of_range_pitches=None,
         color_repeat_pitch_classes=None,
         design_checker=None,
+        fermata_measure_staff_lines=None,
         final_bar_line=None,
         final_markup=None,
         final_markup_extra_offset=None,
@@ -374,8 +371,7 @@ class SegmentMaker(abjad.SegmentMaker):
         time_signatures=None,
         transpose_score=None,
         ):
-        superclass = super(SegmentMaker, self)
-        superclass.__init__()
+        super(SegmentMaker, self).__init__()
         if allow_empty_selections is not None:
             allow_empty_selections = bool(allow_empty_selections)
         self._allow_empty_selections = allow_empty_selections
@@ -1011,6 +1007,16 @@ class SegmentMaker(abjad.SegmentMaker):
             message = manager.tabulate_wellformedness(score)
             raise Exception(message)
 
+    @staticmethod
+    def _color_duplicate(grob, context=None):
+        if context is not None:
+            context = getattr(context, 'context_name', context)
+            string = rf'\once \override {context}.{grob}.color ='
+        else:
+            string = rf'\once \override {grob}.color ='
+        string += " #(x11-color 'DarkCyan)"
+        return string
+
     def _color_octaves_(self):
         if not self.color_octaves:
             return
@@ -1034,16 +1040,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 abjad.label(notes_and_chords).color_leaves('red')
                 for leaf in notes_and_chords:
                     abjad.attach(markup, leaf)
-
-    @staticmethod
-    def _color_duplicate(grob, context=None):
-        if context is not None:
-            context = getattr(context, 'context_name', context)
-            string = rf'\once \override {context}.{grob}.color ='
-        else:
-            string = rf'\once \override {grob}.color ='
-        string += " #(x11-color 'DarkCyan)"
-        return string
 
     @staticmethod
     def _color_reminder(grob, context=None):
@@ -1422,24 +1418,6 @@ class SegmentMaker(abjad.SegmentMaker):
             time_signatures_ = None
         self._time_signatures = time_signatures_
 
-    def _make_measure_silences(self, start, stop, measure_start_offsets):
-        offsets = [start]
-        for measure_start_offset in measure_start_offsets:
-            if start < measure_start_offset < stop:
-                offsets.append(measure_start_offset)
-        offsets.append(stop)
-        silences = []
-        durations = abjad.mathtools.difference_series(offsets)
-        for duration in durations:
-            multiplier = abjad.Multiplier(duration)
-            if self.skips_instead_of_rests:
-                silence = abjad.Skip(1)
-            else:
-                silence = abjad.MultimeasureRest(1)
-            abjad.attach(multiplier, silence)
-            silences.append(silence)
-        return silences
-
     def _intercalate_silences(self, rhythms):
         result = []
         durations = [_.duration for _ in self.time_signatures]
@@ -1579,6 +1557,24 @@ class SegmentMaker(abjad.SegmentMaker):
                 lilypond_file.items.remove(item)
         self._lilypond_file = lilypond_file
 
+    def _make_measure_silences(self, start, stop, measure_start_offsets):
+        offsets = [start]
+        for measure_start_offset in measure_start_offsets:
+            if start < measure_start_offset < stop:
+                offsets.append(measure_start_offset)
+        offsets.append(stop)
+        silences = []
+        durations = abjad.mathtools.difference_series(offsets)
+        for duration in durations:
+            multiplier = abjad.Multiplier(duration)
+            if self.skips_instead_of_rests:
+                silence = abjad.Skip(1)
+            else:
+                silence = abjad.MultimeasureRest(1)
+            abjad.attach(multiplier, silence)
+            silences.append(silence)
+        return silences
+
     def _make_multimeasure_rests(self):
         rests = []
         for time_signature in self.time_signatures:
@@ -1664,15 +1660,13 @@ class SegmentMaker(abjad.SegmentMaker):
         mark = abjad.inspect(skip).get_piecewise(abjad.MetronomeMark)
         if mark is None:
             tag = 'SEGMENT:REMINDER-METRONOME-MARK'
+            string = self._color_reminder('TextScript')
+            literal = abjad.LilyPondLiteral(string)
+            abjad.attach(literal, skip, tag=tag)
             prototype = abjad.MetronomeMarkSpanner
             spanner = abjad.inspect(skip).get_spanner(prototype)
             previous_mark = self._get_previous_metronome_mark()
             spanner.attach(previous_mark, skip, tag=tag)
-#            string = rf'\once \override TextScript.color ='
-#            string += " #(x11-color 'DeepPink1)"
-            string = self._color_reminder('TextScript')
-            literal = abjad.LilyPondLiteral(string)
-            abjad.attach(literal, skip, tag=tag)
         time_signature = abjad.inspect(skip).get_indicator(abjad.TimeSignature)
         assert time_signature is not None
         previous_time_signature = self._get_previous_time_signature()
@@ -1683,13 +1677,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 unwrap=False,
                 )
             context = wrapper.context
-            abjad.detach(time_signature, skip)
-            abjad.attach(time_signature, skip, context=context, tag=tag)
-#            string = rf'\once \override GlobalContext.TimeSignature.color ='
-#            string += " #(x11-color 'DarkCyan)"
             string = self._color_duplicate('TimeSignature', context)
             literal = abjad.LilyPondLiteral(string)
             abjad.attach(literal, skip, tag=tag)
+            abjad.detach(time_signature, skip)
+            abjad.attach(time_signature, skip, context=context, tag=tag)
         for context in abjad.iterate(self._score).components(abjad.Context):
             previous_clef = self._get_previous_clef(context.name)
             previous_dynamic = self._get_previous_dynamic(context.name)
@@ -1708,47 +1700,39 @@ class SegmentMaker(abjad.SegmentMaker):
                 instrument = abjad.inspect(leaf).get_indicator(prototype)
                 if instrument is None:
                     tag = 'SEGMENT:REMINDER-INSTRUMENT'
+                    string = self._color_reminder('InstrumentName', context)
+                    literal = abjad.LilyPondLiteral(string)
+                    abjad.attach(literal, leaf, tag=tag)
                     instrument = abjad.new(
                         previous_instrument,
                         context=context.context_name,
                         )
                     abjad.attach(instrument, leaf, tag=tag)
-#                    string = rf'\once \override {context.context_name}'
-#                    string += ".InstrumentName.color = #(x11-color 'DeepPink1)"
-                    string = self._color_reminder('InstrumentName', context)
-                    literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(literal, leaf, tag=tag)
             if previous_staff_lines is not None:
                 prototype = baca.StaffLines
                 staff_lines = abjad.inspect(leaf).get_indicator(prototype)
                 if staff_lines is None:
                     tag = 'SEGMENT:REMINDER-STAFF-LINES'
-                    abjad.attach(previous_staff_lines, leaf, tag=tag)
-#                    string = rf'\once \override {context.context_name}'
-#                    string += ".StaffSymbol.color = #(x11-color 'DeepPink1)"
                     string = self._color_reminder('StaffSymbol', context)
                     literal = abjad.LilyPondLiteral(string)
                     abjad.attach(literal, leaf, tag=tag)
+                    abjad.attach(previous_staff_lines, leaf, tag=tag)
             if previous_clef is not None:
                 clef = abjad.inspect(leaf).get_indicator(abjad.Clef)
                 if clef is None:
                     tag = 'SEGMENT:REMINDER-CLEF'
-                    abjad.attach(previous_clef, leaf, tag=tag)
-#                    string = rf'\once \override {context.context_name}'
-#                    string += ".Clef.color = #(x11-color 'DeepPink1)"
                     string = self._color_reminder('Clef', context)
                     literal = abjad.LilyPondLiteral(string)
                     abjad.attach(literal, leaf, tag=tag)
+                    abjad.attach(previous_clef, leaf, tag=tag)
             if previous_dynamic is not None:
                 dynamic = abjad.inspect(leaf).get_effective(abjad.Dynamic)
                 if dynamic is None:
                     tag = 'SEGMENT:REMINDER-DYNAMIC'
-                    abjad.attach(previous_dynamic, leaf, tag=tag)
-#                    string = rf'\once \override {context.context_name}'
-#                    string += ".DynamicText.color = #(x11-color 'DeepPink1)"
                     string = self._color_reminder('DynamicText', context)
                     literal = abjad.LilyPondLiteral(string)
                     abjad.attach(literal, leaf, tag=tag)
+                    abjad.attach(previous_dynamic, leaf, tag=tag)
 
     def _scope_to_leaf_selection(self, wrapper):
         leaves = []
@@ -1833,23 +1817,6 @@ class SegmentMaker(abjad.SegmentMaker):
     def _transpose_score_(self):
         if self.transpose_score:
             abjad.Instrument.transpose_from_sounding_pitch(self._score)
-
-    def _update_expression(
-        self,
-        frame,
-        evaluation_template=None,
-        lone=None,
-        template=None,
-        ):
-        callback = abjad.Expression._frame_to_callback(
-            frame,
-            evaluation_template=evaluation_template,
-            )
-        callback = abjad.new(callback, lone=lone)
-        expression = self._expression.append_callback(callback)
-        if template is None:
-            template = self._get_template(frame, self._expression)
-        return abjad.new(expression, template=template)
 
     def _update_metadata(self, environment=None):
         if environment is not None:
@@ -3789,7 +3756,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '''
         return self._final_markup_extra_offset
 
-    # TODO: write examples
     @property
     def hide_instrument_names(self):
         r'''Is true when segment hides instrument names.
@@ -6672,49 +6638,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._update_metadata(environment=environment)
         self._print_segment_duration_()
         return self._lilypond_file
-
-    def stage(self, n):
-        r'''Gets group `n` of items grouped by stage.
-
-        Returns selection (or expression).
-        '''
-        if self._expression:
-            return self._update_expression(inspect.currentframe(), lone=True)
-        return self.stages()[n]
-
-    def stages(self):
-        r'''Groups items by stage.
-
-        Returns selection (or expression).
-        '''
-        if self._expression:
-            return self._update_expression(inspect.currentframe())
-        counts = []
-        for item in self.stage_measure_map:
-            if isinstance(item, int):
-                counts.append(item)
-            elif isinstance(item, abjad.Fermata):
-                counts.append(1)
-            else:
-                raise TypeError(item)
-        measures = self.group_by_measure()
-        if len(measures) != sum(counts):
-            message = f'{len(measures)} measures found;'
-            message += f' stage measure map gives {sum(counts)} instead.'
-            raise Exception(message)
-        measures = baca.sequence(measures)
-        parts = measures.partition_by_counts(
-            counts,
-            overhang=abjad.Exact,
-            )
-        selections = []
-        for part in parts:
-            selection = []
-            for measure in part:
-                selection.extend(measure)
-            selection = baca.select(selection)
-            selections.append(selection)
-        return baca.select(selections)
 
     def validate_measure_count(self, measure_count):
         r'''Validates measure count.

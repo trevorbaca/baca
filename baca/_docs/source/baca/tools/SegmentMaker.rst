@@ -56,10 +56,8 @@ Bases
       ~baca.tools.SegmentMaker.SegmentMaker.skip_wellformedness_checks
       ~baca.tools.SegmentMaker.SegmentMaker.skips_instead_of_rests
       ~baca.tools.SegmentMaker.SegmentMaker.spacing_specifier
-      ~baca.tools.SegmentMaker.SegmentMaker.stage
       ~baca.tools.SegmentMaker.SegmentMaker.stage_count
       ~baca.tools.SegmentMaker.SegmentMaker.stage_label_base_string
-      ~baca.tools.SegmentMaker.SegmentMaker.stages
       ~baca.tools.SegmentMaker.SegmentMaker.time_signatures
       ~baca.tools.SegmentMaker.SegmentMaker.transpose_score
       ~baca.tools.SegmentMaker.SegmentMaker.validate_measure_count
@@ -154,10 +152,6 @@ Methods
 .. automethod:: baca.tools.SegmentMaker.SegmentMaker.copy_rhythm
 
 .. automethod:: baca.tools.SegmentMaker.SegmentMaker.run
-
-.. automethod:: baca.tools.SegmentMaker.SegmentMaker.stage
-
-.. automethod:: baca.tools.SegmentMaker.SegmentMaker.stages
 
 .. automethod:: baca.tools.SegmentMaker.SegmentMaker.validate_measure_count
 
