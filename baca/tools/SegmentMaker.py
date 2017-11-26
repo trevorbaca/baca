@@ -273,6 +273,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_rehearsal_letter',
         '_score',
         '_score_template',
+        '_segment_duration',
         '_skip_wellformedness_checks',
         '_skips_instead_of_rests',
         '_spacing_specifier',
@@ -445,6 +446,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if score_template is not None:
             assert isinstance(score_template, baca.ScoreTemplate)
         self._score_template = score_template
+        self._segment_duration = None
         if skip_wellformedness_checks is not None:
             skip_wellformedness_checks = bool(skip_wellformedness_checks)
         self._skip_wellformedness_checks = skip_wellformedness_checks
@@ -1491,6 +1493,7 @@ class SegmentMaker(abjad.SegmentMaker):
         durations = [_.duration for _ in self.time_signatures]
         measure_start_offsets = abjad.mathtools.cumulative_sums(durations)
         segment_duration = measure_start_offsets[-1]
+        self._segment_duration = segment_duration
         previous_stop_offset = abjad.Offset(0)
         for rhythm in rhythms:
             start_offset = rhythm.start_offset

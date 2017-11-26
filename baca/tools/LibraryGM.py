@@ -949,8 +949,8 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
-    def layout(*arguments, score=False):
-        r'''Makes layout measure map.
+    def layout(*arguments, build=None):
+        r'''Makes layout measure map for `build`.
 
         ..  container:: example
 
@@ -1027,9 +1027,8 @@ class LibraryGM(abjad.AbjadObject):
 
         Returns layout measure map.
         '''
-        tag = None
-        if score is not True:
-            tag = 'SEGMENT:BREAK'
+        tag = build or 'SEGMENT'
+        tag += ':BREAK'
         commands = []
         if not arguments:
             return baca.LayoutMeasureMap(commands=commands, tag=tag)
