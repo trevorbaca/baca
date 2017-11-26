@@ -244,6 +244,7 @@ class SegmentMaker(abjad.SegmentMaker):
     __slots__ = (
         '_allow_empty_selections',
         '_allow_figure_names',
+        '_break_offsets',
         '_cache',
         '_color_octaves',
         '_color_out_of_range_pitches',
@@ -379,6 +380,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if allow_figure_names is not None:
             allow_figure_names = bool(allow_figure_names)
         self._allow_figure_names = allow_figure_names
+        self._break_offsets = []
         if color_octaves is not None:
             color_octaves = bool(color_octaves)
         self._color_octaves = color_octaves
@@ -736,13 +738,16 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         prototype = baca.StaffLines
         staff_lines = baca.StaffLines(self.fermata_measure_staff_line_count)
-        final_bar_line_treatment = False
+        final_bar_already_treated = False
+        breaks_already_treated = []
         tag = 'SEGMENT:FINAL-BAR-LINE'
         for staff in abjad.iterate(self._score).components(abjad.Staff):
             for leaf in abjad.iterate(staff).leaves():
                 start_offset = abjad.inspect(leaf).get_timespan().start_offset
                 if start_offset not in self._fermata_start_offsets:
                     continue
+                leaf_stop = abjad.inspect(leaf).get_timespan().stop_offset
+                ends_at_break = leaf_stop in self._break_offsets
                 before = abjad.inspect(leaf).get_effective(prototype)
                 next_leaf = abjad.inspect(leaf).get_leaf(1)
                 if next_leaf is not None:
@@ -754,7 +759,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.override(leaf).staff.bar_line.bar_extent = pair
                 if next_leaf is not None and staff_lines != after:
                     abjad.attach(after, next_leaf)
-                if next_leaf is None and not final_bar_line_treatment:
+                if ends_at_break and leaf_stop not in breaks_already_treated:
                     if staff_lines.line_count == 0:
                         string = r'\override Score.BarLine.transparent = ##t'
                         string = r'\once ' + string
@@ -769,7 +774,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         string = r'\once \override ' + string
                         literal = abjad.LilyPondLiteral(string, 'after')
                         abjad.attach(literal, leaf, tag=tag)
-                    final_bar_line_treatment = True
+                    breaks_already_treated.append(leaf_stop)
                 if next_leaf is None and before != staff_lines:
                     name = staff.name
                     before_line_count = getattr(before, 'line_count', 5)
@@ -947,6 +952,15 @@ class SegmentMaker(abjad.SegmentMaker):
             )
         skip = baca.select(self._score['GlobalSkips']).skip(0)
         abjad.attach(rehearsal_mark, skip)
+
+    def _cache_break_offsets(self):
+        prototype = (abjad.LineBreak, abjad.PageBreak)
+        for skip in baca.select(self._score['GlobalSkips']).skips():
+            if abjad.inspect(skip).has_indicator(prototype):
+                offset = abjad.inspect(skip).get_timespan().start_offset
+                self._break_offsets.append(offset)
+        segment_stop_offset = abjad.inspect(skip).get_timespan().stop_offset
+        self._break_offsets.append(segment_stop_offset)
 
     def _cache_leaves(self):
         stage_timespans = []
@@ -6683,7 +6697,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._shorten_long_repeat_ties()
         self._reapply_previous_segment_settings()
         self._attach_first_segment_score_template_defaults()
-        self._apply_fermata_measure_staff_line_count()
         self._apply_spacing_specifier()
         self._label_clock_time_()
         self._hide_instrument_names_()
@@ -6702,6 +6715,8 @@ class SegmentMaker(abjad.SegmentMaker):
         self._whitespace_leaves()
         self._comment_measure_numbers()
         self._apply_layout_measure_map()
+        self._cache_break_offsets()
+        self._apply_fermata_measure_staff_line_count()
         self._update_metadata(environment=environment)
         self._print_segment_duration_()
         return self._lilypond_file
