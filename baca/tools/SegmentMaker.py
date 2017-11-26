@@ -743,7 +743,7 @@ class SegmentMaker(abjad.SegmentMaker):
         staff_lines = baca.StaffLines(self.fermata_measure_staff_line_count)
         final_bar_already_treated = False
         breaks_already_treated = []
-        tag = 'SEGMENT:FINAL-BAR-LINE'
+        tag = 'SEGMENT:FERMATA-MEASURE-TREATMENT'
         for staff in abjad.iterate(self._score).components(abjad.Staff):
             for leaf in abjad.iterate(staff).leaves():
                 start_offset = abjad.inspect(leaf).get_timespan().start_offset
