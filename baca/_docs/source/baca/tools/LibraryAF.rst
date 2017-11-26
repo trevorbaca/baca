@@ -37,6 +37,8 @@ Bases
       ~baca.tools.LibraryAF.LibraryAF.beam_runs
       ~baca.tools.LibraryAF.LibraryAF.center_to_octave
       ~baca.tools.LibraryAF.LibraryAF.clef
+      ~baca.tools.LibraryAF.LibraryAF.clef_extra_offset
+      ~baca.tools.LibraryAF.LibraryAF.clef_x_extent_false
       ~baca.tools.LibraryAF.LibraryAF.clusters
       ~baca.tools.LibraryAF.LibraryAF.coat
       ~baca.tools.LibraryAF.LibraryAF.color
@@ -102,6 +104,10 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAF.LibraryAF.center_to_octave
 
 .. automethod:: baca.tools.LibraryAF.LibraryAF.clef
+
+.. automethod:: baca.tools.LibraryAF.LibraryAF.clef_extra_offset
+
+.. automethod:: baca.tools.LibraryAF.LibraryAF.clef_x_extent_false
 
 .. automethod:: baca.tools.LibraryAF.LibraryAF.clusters
 

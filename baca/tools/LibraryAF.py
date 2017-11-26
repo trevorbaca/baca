@@ -1942,6 +1942,30 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
+    def clef_extra_offset(pair, selector='baca.leaf(0)'):
+        r'''Overrides clef extra offset.
+        '''
+        return baca.OverrideCommand(
+            attribute='extra_offset',
+            context='Staff',
+            grob='clef',
+            selector=selector,
+            value=pair,
+            )
+
+    @staticmethod
+    def clef_x_extent_false(selector='baca.leaf(0)'):
+        r'''Overrides clef x-extent.
+        '''
+        return baca.OverrideCommand(
+            attribute='X_extent',
+            context='Staff',
+            grob='clef',
+            selector=selector,
+            value=False,
+            )
+
+    @staticmethod
     def clusters(widths, selector='baca.plts()', start_pitch=None):
         r'''Makes clusters.
         '''

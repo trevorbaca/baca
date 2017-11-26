@@ -249,7 +249,8 @@ class SegmentMaker(abjad.SegmentMaker):
         '_color_out_of_range_pitches',
         '_color_repeat_pitch_classes',
         '_design_checker',
-        '_fermata_measure_staff_lines',
+        '_end_staff_lines_by_staff',
+        '_fermata_measure_staff_line_count',
         '_fermata_start_offsets',
         '_final_bar_line',
         '_final_markup',
@@ -344,7 +345,7 @@ class SegmentMaker(abjad.SegmentMaker):
         color_out_of_range_pitches=None,
         color_repeat_pitch_classes=None,
         design_checker=None,
-        fermata_measure_staff_lines=None,
+        fermata_measure_staff_line_count=None,
         final_bar_line=None,
         final_markup=None,
         final_markup_extra_offset=None,
@@ -389,6 +390,11 @@ class SegmentMaker(abjad.SegmentMaker):
         self._color_repeat_pitch_classes = color_repeat_pitch_classes
         self._cache = None
         self._design_checker = design_checker
+        self._end_staff_lines_by_staff = abjad.TypedOrderedDict()
+        if fermata_measure_staff_line_count is not None:
+            assert isinstance(fermata_measure_staff_line_count, int)
+            assert 0 <= fermata_measure_staff_line_count
+        self._fermata_measure_staff_line_count = fermata_measure_staff_line_count
         self._fermata_start_offsets = []
         if final_bar_line not in (None, False, abjad.Exact):
             assert isinstance(final_bar_line, str), repr(final_bar_line)
@@ -722,6 +728,52 @@ class SegmentMaker(abjad.SegmentMaker):
             command.indicators[0],
             extra_offset=self.final_markup_extra_offset,
             )
+
+    def _apply_fermata_measure_staff_line_count(self):
+        if self.fermata_measure_staff_line_count is None:
+            return
+        if not self._fermata_start_offsets:
+            return
+        prototype = baca.StaffLines
+        staff_lines = baca.StaffLines(self.fermata_measure_staff_line_count)
+        final_bar_line_treatment = False
+        tag = 'SEGMENT:FINAL-BAR-LINE'
+        for staff in abjad.iterate(self._score).components(abjad.Staff):
+            for leaf in abjad.iterate(staff).leaves():
+                start_offset = abjad.inspect(leaf).get_timespan().start_offset
+                if start_offset not in self._fermata_start_offsets:
+                    continue
+                before = abjad.inspect(leaf).get_effective(prototype)
+                next_leaf = abjad.inspect(leaf).get_leaf(1)
+                if next_leaf is not None:
+                    after = abjad.inspect(next_leaf).get_effective(prototype)
+                if before != staff_lines:
+                    abjad.attach(staff_lines, leaf)
+                    if getattr(before, 'line_count', 5) == 5:
+                        pair = (-2, 2)
+                        abjad.override(leaf).staff.bar_line.bar_extent = pair
+                if next_leaf is not None and staff_lines != after:
+                    abjad.attach(after, next_leaf)
+                if next_leaf is None and not final_bar_line_treatment:
+                    if staff_lines.line_count == 0:
+                        string = r'\override Score.BarLine.transparent = ##t'
+                        string = r'\once ' + string
+                        literal = abjad.LilyPondLiteral(string, 'after')
+                        abjad.attach(literal, leaf, tag=tag)
+                        string = r'\override Score.SpanBar.transparent = ##t'
+                        string = r'\once ' + string
+                        literal = abjad.LilyPondLiteral(string, 'after')
+                        abjad.attach(literal, leaf, tag=tag)
+                    elif staff_lines.line_count == 1:
+                        string = "Score.BarLine.bar-extent = #'(-2 . 2)"
+                        string = r'\once \override ' + string
+                        literal = abjad.LilyPondLiteral(string, 'after')
+                        abjad.attach(literal, leaf, tag=tag)
+                    final_bar_line_treatment = True
+                if next_leaf is None and before != staff_lines:
+                    name = staff.name
+                    before_line_count = getattr(before, 'line_count', 5)
+                    self._end_staff_lines_by_staff[name] = before_line_count
 
     def _apply_first_and_last_ties(self, voice):
         dummy_tie = abjad.Tie()
@@ -1243,6 +1295,8 @@ class SegmentMaker(abjad.SegmentMaker):
         return result
 
     def _get_end_staff_lines(self):
+        if self._end_staff_lines_by_staff:
+            return self._end_staff_lines_by_staff
         result = abjad.TypedOrderedDict()
         staves = abjad.iterate(self._score).components(abjad.Staff)
         staves = list(staves)
@@ -2702,6 +2756,18 @@ class SegmentMaker(abjad.SegmentMaker):
         Returns design-checker or none.
         '''
         return self._design_checker
+
+    @property
+    def fermata_measure_staff_line_count(self):
+        r'''Gets fermata measure staff lines.
+
+        Defaults to none.
+
+        Set to nonnegative integer or none.
+
+        Returns nonnegative integer or none.
+        '''
+        return self._fermata_measure_staff_line_count
 
     # TODO: write examples showing Score.BarLine.transparent = ##f
     #       for mensurstriche final_bar_line=abjad.Exact
@@ -6617,6 +6683,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._shorten_long_repeat_ties()
         self._reapply_previous_segment_settings()
         self._attach_first_segment_score_template_defaults()
+        self._apply_fermata_measure_staff_line_count()
         self._apply_spacing_specifier()
         self._label_clock_time_()
         self._hide_instrument_names_()
