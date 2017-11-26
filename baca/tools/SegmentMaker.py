@@ -245,6 +245,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_allow_empty_selections',
         '_allow_figure_names',
         '_break_offsets',
+        '_builds_metadata',
         '_cache',
         '_color_octaves',
         '_color_out_of_range_pitches',
@@ -6671,6 +6672,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def run(
         self,
+        builds_metadata=None,
         environment=None,
         metadata=None,
         midi=None,
@@ -6687,6 +6689,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         Returns LilyPond file.
         '''
+        self._builds_metadata = builds_metadata or abjad.TypedOrderedDict()
         self._metadata = metadata or abjad.TypedOrderedDict()
         self._previous_metadata = previous_metadata or abjad.TypedOrderedDict()
         self._make_score()
