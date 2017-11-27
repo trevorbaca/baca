@@ -59,7 +59,8 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                                     #10
                                     Vn.
                                 }
-                            \clef "treble"
+                            \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
                             R1 * 1/2
             <BLANKLINE>
                             %%% ViolinMusicVoice [measure 2] %%%

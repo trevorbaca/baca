@@ -405,7 +405,8 @@ class ClusterCommand(Command):
                             \once \override NoteHead.text = \markup {
                                 \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
-                            \clef "treble"
+                            \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
                             <e' g' b'>2
                                 ^ \markup {
                                     \center-align
@@ -622,7 +623,8 @@ class ClusterCommand(Command):
                                 \once \override NoteHead.text = \markup {
                                     \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \clef "treble"
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
                                 <e' g' b'>2
                                     ^ \markup {
                                         \center-align
@@ -757,7 +759,8 @@ class ClusterCommand(Command):
                                 \once \override NoteHead.text = \markup {
                                     \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \clef "treble"
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
                                 <c' e' g'>2
                                     ^ \markup {
                                         \center-align
@@ -884,7 +887,8 @@ class ClusterCommand(Command):
                                 \once \override NoteHead.text = \markup {
                                     \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \clef "treble"
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
                                 <g' b' d''>2
                                     ^ \markup {
                                         \center-align
@@ -1021,7 +1025,8 @@ class ClusterCommand(Command):
                                 \once \override NoteHead.text = \markup {
                                     \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \clef "treble"
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
                                 <e'>2
                                     ^ \markup {
                                         \center-align
@@ -1148,7 +1153,8 @@ class ClusterCommand(Command):
                                 \once \override NoteHead.text = \markup {
                                     \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \clef "treble"
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
                                 <e'>2
                                     ^ \markup {
                                         \center-align
@@ -1269,7 +1275,8 @@ class ClusterCommand(Command):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble"
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
                                 e'2
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%

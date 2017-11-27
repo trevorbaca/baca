@@ -113,7 +113,8 @@ class OverrideCommand(Command):
                             %%% MusicVoice [measure 1] %%%
                             \override Beam.positions = #'(6 . 6)
                             \override Stem.direction = #up
-                            \clef "treble"
+                            \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
                             e'8 [
             <BLANKLINE>
                             d''8

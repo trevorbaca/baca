@@ -59,7 +59,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble"
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
                                 e'16 [
             <BLANKLINE>
                                 f'16
@@ -167,7 +168,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble"
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
                                 e'16 [
             <BLANKLINE>
                                 f'16
@@ -277,7 +279,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble"
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
                                 e'16 [
             <BLANKLINE>
                                 f'16
@@ -388,7 +391,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble"
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
                                 e'16 [
             <BLANKLINE>
                                 f'16
@@ -500,7 +504,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble"
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
                                 e'16 [
             <BLANKLINE>
                                 f'16
@@ -641,7 +646,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
                                 \once \override Beam.grow-direction = #right
-                                \clef "treble"
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
                                 e'16 * 63/32 [
             <BLANKLINE>
                                 f'16 * 115/64

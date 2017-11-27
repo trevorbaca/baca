@@ -164,7 +164,8 @@ class NestingCommand(Command):
                                         %%% MusicVoice [measure 1] %%%
                                         \set stemLeftBeamCount = #0
                                         \set stemRightBeamCount = #2
-                                        \clef "treble"
+                                        \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
                                         c'16 [
             <BLANKLINE>
                                         \set stemLeftBeamCount = #2

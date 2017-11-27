@@ -102,7 +102,8 @@ class SpannerCommand(Command):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble"
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
                                 e'8 [
             <BLANKLINE>
                                 d''8

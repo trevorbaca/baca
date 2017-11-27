@@ -57,7 +57,8 @@ class PitchCommand(Command):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble"
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
                                 g''8 [
             <BLANKLINE>
                                 cs''8
@@ -152,7 +153,8 @@ class PitchCommand(Command):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble"
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
                                 c'8 [
             <BLANKLINE>
                                 f'8
@@ -247,7 +249,8 @@ class PitchCommand(Command):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble"
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
                                 <c' d' e' f' g' a' b'>8 [
             <BLANKLINE>
                                 <c' d' e' f' g' a' b'>8

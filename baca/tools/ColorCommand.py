@@ -182,7 +182,8 @@ class ColorCommand(Command):
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                \clef "treble"
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
                                 e'8 [
             <BLANKLINE>
                                 \once \override Accidental.color = #blue
