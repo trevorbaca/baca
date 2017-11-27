@@ -741,11 +741,15 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         self._attach_fermata_measure_adjustments(self._break_offsets)
         for build_name, build_metadata in self._builds_metadata.items():
-            break_measures = build_metadata.get('break_measures')
-            break_offsets = self._get_measure_start_offsets(break_measures)
-            if break_measures:
+            break_measure_numbers = build_metadata.get('break_measures')
+            break_measure_timespans = self._get_measure_timespans(
+                break_measure_numbers)
+            break_measure_stop_offsets = [
+                _.stop_offset for _ in break_measure_timespans
+                ]
+            if break_measure_stop_offsets:
                 self._attach_fermata_measure_adjustments(
-                    break_offsets,
+                    break_measure_stop_offsets,
                     build_name,
                     )
 
@@ -1351,16 +1355,18 @@ class SegmentMaker(abjad.SegmentMaker):
     def _get_first_measure_number(self):
         return self._metadata.get('first_bar_number', 1)
 
-    def _get_measure_start_offsets(self, measure_numbers):
-        start_offsets = []
+    def _get_measure_timespans(self, measure_numbers):
+        timespans = []
         first_measure_number = self._get_first_measure_number()
-        measure_indices = [_ - first_measure_number for _ in measure_numbers]
+        measure_indices = [
+            _ - first_measure_number - 1 for _ in measure_numbers
+            ]
         skips = baca.select(self._score['GlobalSkips']).skips()
         for i, skip in enumerate(skips):
             if i in measure_indices:
-                start_offset = abjad.inspect(skip).get_timespan().start_offset
-                start_offsets.append(start_offset)
-        return start_offsets
+                timespan = abjad.inspect(skip).get_timespan()
+                timespans.append(timespan)
+        return timespans
 
     def _get_name(self):
         return self._metadata.get('name')
