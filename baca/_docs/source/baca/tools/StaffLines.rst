@@ -25,7 +25,6 @@ Bases
       ~baca.tools.StaffLines.StaffLines.line_count
       ~baca.tools.StaffLines.StaffLines.__eq__
       ~baca.tools.StaffLines.StaffLines.__format__
-      ~baca.tools.StaffLines.StaffLines.__hash__
       ~baca.tools.StaffLines.StaffLines.__repr__
 
 Read-only properties
@@ -38,23 +37,13 @@ Read-only properties
 Special methods
 ---------------
 
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.StaffLines.StaffLines.__eq__
+.. automethod:: baca.tools.StaffLines.StaffLines.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
       .. automethod:: baca.tools.StaffLines.StaffLines.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.StaffLines.StaffLines.__hash__
 
 .. only:: html
 

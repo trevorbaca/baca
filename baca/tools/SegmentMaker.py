@@ -1104,7 +1104,7 @@ class SegmentMaker(abjad.SegmentMaker):
             string = rf'\once \override {context}.{grob}.color ='
         else:
             string = rf'\once \override {grob}.color ='
-        string += " #(x11-color 'DarkCyan)"
+        string += " #(x11-color 'DeepPink1)"
         return string
 
     def _color_octaves_(self):
@@ -1132,13 +1132,33 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(markup, leaf)
 
     @staticmethod
+    def _color_reapplied(grob, context=None):
+        if context is not None:
+            context = getattr(context, 'context_name', context)
+            string = rf'\once \override {context}.{grob}.color ='
+        else:
+            string = rf'\once \override {grob}.color ='
+        string += " #(x11-color 'DarkBlue)"
+        return string
+
+    @staticmethod
     def _color_reminder(grob, context=None):
         if context is not None:
             context = getattr(context, 'context_name', context)
             string = rf'\once \override {context}.{grob}.color ='
         else:
             string = rf'\once \override {grob}.color ='
-        string += " #(x11-color 'DeepPink1)"
+        string += " #(x11-color 'DarkCyan)"
+        return string
+
+    @staticmethod
+    def _color_restated(grob, context=None):
+        if context is not None:
+            context = getattr(context, 'context_name', context)
+            string = rf'\once \override {context}.{grob}.color ='
+        else:
+            string = rf'\once \override {grob}.color ='
+        string += " #(x11-color 'ForestGreen)"
         return string
 
     def _color_repeat_pitch_classes_(self):
@@ -1803,45 +1823,53 @@ class SegmentMaker(abjad.SegmentMaker):
                 previous_staff_lines,
                 ]):
                 continue
-            leaf = abjad.inspect(context).get_leaf(0)
+            first_leaf = abjad.inspect(context).get_leaf(0)
             if previous_instrument is not None:
                 prototype = abjad.Instrument
-                instrument = abjad.inspect(leaf).get_indicator(prototype)
+                instrument = abjad.inspect(first_leaf).get_indicator(prototype)
                 if instrument is None:
-                    tag = 'SEGMENT:REMINDER-INSTRUMENT'
-                    string = self._color_reminder('InstrumentName', context)
+                    tag = 'SEGMENT:RESTATED-INSTRUMENT'
+                    string = self._color_restated('InstrumentName', context)
                     literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(literal, leaf, tag=tag)
+                    abjad.attach(literal, first_leaf, tag=tag)
                     instrument = abjad.new(
                         previous_instrument,
                         context=context.context_name,
                         )
-                    abjad.attach(instrument, leaf, tag=tag)
+                    abjad.attach(instrument, first_leaf, tag=tag)
             if previous_staff_lines is not None:
                 prototype = baca.StaffLines
-                staff_lines = abjad.inspect(leaf).get_indicator(prototype)
+                staff_lines = abjad.inspect(first_leaf).get_indicator(
+                    prototype)
                 if staff_lines is None:
-                    tag = 'SEGMENT:REMINDER-STAFF-LINES'
-                    string = self._color_reminder('StaffSymbol', context)
+                    tag = 'SEGMENT:REAPPLIED-STAFF-LINES'
+                    string = self._color_reapplied('StaffSymbol', context)
                     literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(literal, leaf, tag=tag)
-                    abjad.attach(previous_staff_lines, leaf, tag=tag)
+                    abjad.attach(literal, first_leaf, tag=tag)
+                    abjad.attach(previous_staff_lines, first_leaf, tag=tag)
+                elif previous_staff_lines == staff_lines:
+                    tag = 'SEGMENT:DUPLICATE-STAFF-LINES'
+                    string = self._color_duplicate('StaffSymbol', context)
+                    literal = abjad.LilyPondLiteral(string)
+                    abjad.attach(literal, first_leaf, tag=tag)
+
             if previous_clef is not None:
-                clef = abjad.inspect(leaf).get_indicator(abjad.Clef)
+                clef = abjad.inspect(first_leaf).get_indicator(abjad.Clef)
                 if clef is None:
-                    tag = 'SEGMENT:REMINDER-CLEF'
-                    string = self._color_reminder('Clef', context)
+                    tag = 'SEGMENT:RESTATED-CLEF'
+                    string = self._color_restated('Clef', context)
                     literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(literal, leaf, tag=tag)
-                    abjad.attach(previous_clef, leaf, tag=tag)
+                    abjad.attach(literal, first_leaf, tag=tag)
+                    abjad.attach(previous_clef, first_leaf, tag=tag)
             if previous_dynamic is not None:
-                dynamic = abjad.inspect(leaf).get_effective(abjad.Dynamic)
+                prototype = abjad.Dynamic
+                dynamic = abjad.inspect(first_leaf).get_effective(prototype)
                 if dynamic is None:
                     tag = 'SEGMENT:REMINDER-DYNAMIC'
                     string = self._color_reminder('DynamicText', context)
                     literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(literal, leaf, tag=tag)
-                    abjad.attach(previous_dynamic, leaf, tag=tag)
+                    abjad.attach(literal, first_leaf, tag=tag)
+                    abjad.attach(previous_dynamic, first_leaf, tag=tag)
 
     def _scope_to_leaf_selection(self, wrapper):
         leaves = []
