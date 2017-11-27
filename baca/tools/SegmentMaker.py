@@ -833,8 +833,10 @@ class SegmentMaker(abjad.SegmentMaker):
         prototype = baca.StaffLines
         staff_lines = baca.StaffLines(self.fermata_measure_staff_line_count)
         breaks_already_treated = []
-        tag = build or 'SEGMENT'
-        tag = tag.upper()
+        if build is None:
+            tag = 'SEGMENT'
+        else:
+            tag = 'BUILD:' + build.upper()
         tag += ':FERMATA-MEASURE-TREATMENT'
         for staff in abjad.iterate(self._score).components(abjad.Staff):
             for leaf in abjad.iterate(staff).leaves():
