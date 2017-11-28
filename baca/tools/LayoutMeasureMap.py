@@ -37,15 +37,15 @@ class LayoutMeasureMap(abjad.AbjadObject):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 4/8
-                        \bar "" % SEGMENT:EMPTY-BAR
+                        \bar "" % SEGMENT:EMPTY-BAR:1
                         s1 * 1/2
-                        \break % SEGMENT
+                        \break % SEGMENT:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
-                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 100) (alignment-distances . (30 30))) % SEGMENT
+                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 100) (alignment-distances . (30 30))) % SEGMENT:1
                         \time 3/8
                         s1 * 3/8
-                        \break % SEGMENT
+                        \break % SEGMENT:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 3] %%%
                         \time 4/8
@@ -71,8 +71,8 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                     %%% ViolinMusicVoice [measure 1] %%%
                                     \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                     \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                     e'8 [
             <BLANKLINE>
                                     e'8
@@ -132,8 +132,8 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                 %%% ViolaMusicVoice [measure 1] %%%
                                 \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                 \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
-                                \clef "alto" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \clef "alto" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                 R1 * 1/2
             <BLANKLINE>
                                 %%% ViolaMusicVoice [measure 2] %%%
@@ -158,8 +158,8 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                 %%% CelloMusicVoice [measure 1] %%%
                                 \set CelloMusicStaff.instrumentName = \markup { Cello }
                                 \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
-                                \clef "bass" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \clef "bass" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                 R1 * 1/2
             <BLANKLINE>
                                 %%% CelloMusicVoice [measure 2] %%%

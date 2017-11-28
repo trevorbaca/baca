@@ -139,7 +139,7 @@ class NestingCommand(Command):
                         %%% GlobalSkips [measure 1] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                         \time 1/2
-                        \bar "" % SEGMENT:EMPTY-BAR
+                        \bar "" % SEGMENT:EMPTY-BAR:1
                         \newSpacingSection
                         s1 * 1/2
             <BLANKLINE>
@@ -164,8 +164,8 @@ class NestingCommand(Command):
                                         %%% MusicVoice [measure 1] %%%
                                         \set stemLeftBeamCount = #0
                                         \set stemRightBeamCount = #2
-                                        \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                        \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                         c'16 [
             <BLANKLINE>
                                         \set stemLeftBeamCount = #2

@@ -25,7 +25,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 4/8
-                        \bar "" % SEGMENT:EMPTY-BAR
+                        \bar "" % SEGMENT:EMPTY-BAR:1
                         s1 * 1/2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
@@ -51,8 +51,8 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 %%% ViolinMusicVoice [measure 1] %%%
                                 \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                 \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                 R1 * 1/2
             <BLANKLINE>
                                 %%% ViolinMusicVoice [measure 2] %%%
@@ -74,8 +74,8 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 %%% ViolaMusicVoice [measure 1] %%%
                                 \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                 \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
-                                \clef "alto" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \clef "alto" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                 R1 * 1/2
             <BLANKLINE>
                                 %%% ViolaMusicVoice [measure 2] %%%
@@ -97,8 +97,8 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 %%% CelloMusicVoice [measure 1] %%%
                                 \set CelloMusicStaff.instrumentName = \markup { Cello }
                                 \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
-                                \clef "bass" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \clef "bass" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                 R1 * 1/2
             <BLANKLINE>
                                 %%% CelloMusicVoice [measure 2] %%%

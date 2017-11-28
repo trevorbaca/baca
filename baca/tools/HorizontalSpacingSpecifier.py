@@ -36,7 +36,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 8/16
-                        \bar "" % SEGMENT:EMPTY-BAR
+                        \bar "" % SEGMENT:EMPTY-BAR:1
                         s1 * 1/2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
@@ -59,8 +59,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                 e'16 [
             <BLANKLINE>
                                 f'16
@@ -138,7 +138,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         %%% GlobalSkips [measure 1] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                         \time 8/16
-                        \bar "" % SEGMENT:EMPTY-BAR
+                        \bar "" % SEGMENT:EMPTY-BAR:1
                         \newSpacingSection
                         s1 * 1/2
             <BLANKLINE>
@@ -168,8 +168,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                 e'16 [
             <BLANKLINE>
                                 f'16
@@ -249,7 +249,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         %%% GlobalSkips [measure 1] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                         \time 8/16
-                        \bar "" % SEGMENT:EMPTY-BAR
+                        \bar "" % SEGMENT:EMPTY-BAR:1
                         \newSpacingSection
                         s1 * 1/2
             <BLANKLINE>
@@ -279,8 +279,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                 e'16 [
             <BLANKLINE>
                                 f'16
@@ -361,7 +361,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         %%% GlobalSkips [measure 1] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)
                         \time 8/16
-                        \bar "" % SEGMENT:EMPTY-BAR
+                        \bar "" % SEGMENT:EMPTY-BAR:1
                         \newSpacingSection
                         s1 * 1/2
             <BLANKLINE>
@@ -391,8 +391,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                 e'16 [
             <BLANKLINE>
                                 f'16
@@ -474,7 +474,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         %%% GlobalSkips [measure 1] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)
                         \time 8/16
-                        \bar "" % SEGMENT:EMPTY-BAR
+                        \bar "" % SEGMENT:EMPTY-BAR:1
                         \newSpacingSection
                         s1 * 1/2
             <BLANKLINE>
@@ -504,8 +504,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                 e'16 [
             <BLANKLINE>
                                 f'16
@@ -597,7 +597,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         %%% GlobalSkips [measure 1] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)
                         \time 4/8
-                        \bar "" % SEGMENT:EMPTY-BAR
+                        \bar "" % SEGMENT:EMPTY-BAR:1
                         \newSpacingSection
                         s1 * 1/2
             <BLANKLINE>
@@ -646,8 +646,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
                                 \once \override Beam.grow-direction = #right
-                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                 e'16 * 63/32 [
             <BLANKLINE>
                                 f'16 * 115/64

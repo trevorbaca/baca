@@ -31,7 +31,7 @@ class SegmentMaker(abjad.SegmentMaker):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 4/8
-                        \bar "" % SEGMENT:EMPTY-BAR
+                        \bar "" % SEGMENT:EMPTY-BAR:1
                         s1 * 1/2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
@@ -53,8 +53,8 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Voice = "MusicVoice" {
             <BLANKLINE>
                             %%% MusicVoice [measure 1] %%%
-                            \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                            \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                             R1 * 1/2
             <BLANKLINE>
                             %%% MusicVoice [measure 2] %%%
@@ -96,7 +96,7 @@ class SegmentMaker(abjad.SegmentMaker):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 4/8
-                        \bar "" % SEGMENT:EMPTY-BAR
+                        \bar "" % SEGMENT:EMPTY-BAR:1
                         s1 * 1/2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
@@ -124,8 +124,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \once \override Flag.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
-                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                 c'8 [
             <BLANKLINE>
                                 \once \override Beam.color = #blue
@@ -497,7 +497,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -525,8 +525,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                     c'8 [
                                         ^ \markup {
                                             \small
@@ -2114,7 +2114,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             \newSpacingSection
                             s1 * 1/16
                 <BLANKLINE>
@@ -2145,8 +2145,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                 <BLANKLINE>
                                         %%% MusicVoice [measure 1] %%%
-                                        \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                        \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                         e'16
                                     }
                                 }
@@ -2260,7 +2260,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             \newSpacingSection
                             s1 * 1/16
                 <BLANKLINE>
@@ -2291,8 +2291,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                 <BLANKLINE>
                                         %%% MusicVoice [measure 1] %%%
-                                        \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                        \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                         e'16
                                             ^ \markup {
                                                 \fontsize
@@ -2474,7 +2474,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 6/16
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             \newSpacingSection
                             s1 * 3/8
                 <BLANKLINE>
@@ -2489,8 +2489,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %%% ViolinMusicVoice [measure 1] %%%
                                     \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                     \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                     R1 * 3/8
                                     \bar "|"
                 <BLANKLINE>
@@ -2503,8 +2503,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %%% ViolaMusicVoice [measure 1] %%%
                                     \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                     \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
-                                    \clef "alto" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                    \clef "alto" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                     R1 * 3/8
                                     \bar "|"
                 <BLANKLINE>
@@ -2519,8 +2519,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                             %%% CelloMusicVoice [measure 1] %%%
                                             \set CelloMusicStaff.instrumentName = \markup { Cello }
                                             \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
-                                            \clef "bass" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                            \clef "bass" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                             a16 [
                 <BLANKLINE>
                                             g16
@@ -2610,7 +2610,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             \newSpacingSection
                             s1 * 1/16
                 <BLANKLINE>
@@ -2641,8 +2641,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                 <BLANKLINE>
                                         %%% MusicVoice [measure 1] %%%
-                                        \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                        \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                         e'16
                                     }
                                 }
@@ -2769,7 +2769,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 1/16
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             \newSpacingSection
                             s1 * 1/16
                 <BLANKLINE>
@@ -2800,8 +2800,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                 <BLANKLINE>
                                         %%% MusicVoice [measure 1] %%%
-                                        \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                        \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                         e'16
                                     }
                                 }
@@ -2947,7 +2947,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -2975,8 +2975,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -3116,7 +3116,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -3144,8 +3144,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -3282,7 +3282,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -3310,8 +3310,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -3452,7 +3452,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -3480,8 +3480,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -3627,7 +3627,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -3655,8 +3655,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -3795,7 +3795,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -3823,8 +3823,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -4030,7 +4030,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -4058,8 +4058,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -4196,7 +4196,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -4219,8 +4219,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                     c'8 [
                 <BLANKLINE>
                                     c'8
@@ -4350,7 +4350,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             \newSpacingSection
                             s1 * 3/16
                 <BLANKLINE>
@@ -4387,8 +4387,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override Flag.color = #magenta
                                         \once \override NoteHead.color = #magenta
                                         \once \override Stem.color = #magenta
-                                        \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                        \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                         e'8.
                                     }
                                 }
@@ -4604,7 +4604,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 1] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
                             \time 3/16
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             \newSpacingSection
                             s1 * 3/16
                 <BLANKLINE>
@@ -4635,8 +4635,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                 <BLANKLINE>
                                         %%% MusicVoice [measure 1] %%%
-                                        \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                        \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                         e'8.
                                     }
                                 }
@@ -4745,7 +4745,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2 ^ \markup {
                                 \fontsize
                                     #-6
@@ -4788,8 +4788,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -4931,7 +4931,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2 ^ \markup {
                                 \fontsize
                                     #-6
@@ -4974,8 +4974,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -5123,7 +5123,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -5151,8 +5151,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -5289,7 +5289,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
                                 - \markup {
                                     \fontsize
@@ -5324,8 +5324,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -5466,7 +5466,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
                                 - \markup {
                                     \fontsize
@@ -5501,8 +5501,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -5691,7 +5691,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -5719,8 +5719,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -5859,7 +5859,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2 ^ \markup {
                                 \fontsize
                                     #-6
@@ -5902,8 +5902,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -6156,7 +6156,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -6178,8 +6178,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                 R1 * 1/2
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
@@ -6219,7 +6219,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -6241,8 +6241,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                 s1 * 1/2
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
@@ -6327,7 +6327,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
                                 - \markup {
                                     \fontsize
@@ -6362,8 +6362,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -6505,7 +6505,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
                                 - \markup {
                                     \fontsize
@@ -6540,8 +6540,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -6700,7 +6700,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -6723,8 +6723,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                     e'8 [
                 <BLANKLINE>
                                     f'8

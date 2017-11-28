@@ -34,7 +34,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 4/8
-                        \bar "" % SEGMENT:EMPTY-BAR
+                        \bar "" % SEGMENT:EMPTY-BAR:1
                         s1 * 1/2 ^ \markup {
                             \fontsize
                                 #-6
@@ -87,8 +87,8 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                 e'8 [
             <BLANKLINE>
                                 f'8

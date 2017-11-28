@@ -376,7 +376,7 @@ class ClusterCommand(Command):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 4/8
-                        \bar "" % SEGMENT:EMPTY-BAR
+                        \bar "" % SEGMENT:EMPTY-BAR:1
                         s1 * 1/2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
@@ -403,10 +403,10 @@ class ClusterCommand(Command):
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
                             \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
-                            \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                            \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                             <e' g' b'>2
                                 ^ \markup {
                                     \center-align
@@ -423,7 +423,7 @@ class ClusterCommand(Command):
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
                             \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
                             <e' g' b' d''>4.
                                 ^ \markup {
@@ -441,7 +441,7 @@ class ClusterCommand(Command):
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
                             \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
                             <e' g' b'>2
                                 ^ \markup {
@@ -459,7 +459,7 @@ class ClusterCommand(Command):
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
                             \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
                             <e' g' b' d''>4.
                                 ^ \markup {
@@ -594,7 +594,7 @@ class ClusterCommand(Command):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -621,10 +621,10 @@ class ClusterCommand(Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                 <e' g' b'>2
                                     ^ \markup {
                                         \center-align
@@ -637,7 +637,7 @@ class ClusterCommand(Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b'>4.
                                     ^ \markup {
@@ -651,7 +651,7 @@ class ClusterCommand(Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b'>2
                                     ^ \markup {
@@ -665,7 +665,7 @@ class ClusterCommand(Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b'>4.
                                     ^ \markup {
@@ -730,7 +730,7 @@ class ClusterCommand(Command):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -757,10 +757,10 @@ class ClusterCommand(Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                 <c' e' g'>2
                                     ^ \markup {
                                         \center-align
@@ -777,7 +777,7 @@ class ClusterCommand(Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <d' f' a'>4.
                                     ^ \markup {
@@ -795,7 +795,7 @@ class ClusterCommand(Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b'>2
                                     ^ \markup {
@@ -813,7 +813,7 @@ class ClusterCommand(Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <f' a' c''>4.
                                     ^ \markup {
@@ -858,7 +858,7 @@ class ClusterCommand(Command):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -885,10 +885,10 @@ class ClusterCommand(Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                 <g' b' d''>2
                                     ^ \markup {
                                         \center-align
@@ -905,7 +905,7 @@ class ClusterCommand(Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <g' b' d''>4.
                                     ^ \markup {
@@ -923,7 +923,7 @@ class ClusterCommand(Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <g' b' d''>2
                                     ^ \markup {
@@ -941,7 +941,7 @@ class ClusterCommand(Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <g' b' d''>4.
                                     ^ \markup {
@@ -996,7 +996,7 @@ class ClusterCommand(Command):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -1023,10 +1023,10 @@ class ClusterCommand(Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                 <e'>2
                                     ^ \markup {
                                         \center-align
@@ -1043,7 +1043,7 @@ class ClusterCommand(Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g'>4.
                                     ^ \markup {
@@ -1061,7 +1061,7 @@ class ClusterCommand(Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b'>2
                                     ^ \markup {
@@ -1079,7 +1079,7 @@ class ClusterCommand(Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b' d''>4.
                                     ^ \markup {
@@ -1124,7 +1124,7 @@ class ClusterCommand(Command):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -1151,10 +1151,10 @@ class ClusterCommand(Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                 <e'>2
                                     ^ \markup {
                                         \center-align
@@ -1171,7 +1171,7 @@ class ClusterCommand(Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b'>4.
                                     ^ \markup {
@@ -1189,7 +1189,7 @@ class ClusterCommand(Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e'>2
                                     ^ \markup {
@@ -1207,7 +1207,7 @@ class ClusterCommand(Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b'>4.
                                     ^ \markup {
@@ -1253,7 +1253,7 @@ class ClusterCommand(Command):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR
+                            \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -1275,8 +1275,8 @@ class ClusterCommand(Command):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                                \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                                 e'2
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%

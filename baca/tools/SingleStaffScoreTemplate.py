@@ -25,7 +25,7 @@ class SingleStaffScoreTemplate(ScoreTemplate):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 4/8
-                        \bar "" % SEGMENT:EMPTY-BAR
+                        \bar "" % SEGMENT:EMPTY-BAR:1
                         s1 * 1/2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
@@ -47,8 +47,8 @@ class SingleStaffScoreTemplate(ScoreTemplate):
                         \context Voice = "MusicVoice" {
             <BLANKLINE>
                             %%% MusicVoice [measure 1] %%%
-                            \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
-                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR
+                            \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
                             R1 * 1/2
             <BLANKLINE>
                             %%% MusicVoice [measure 2] %%%
