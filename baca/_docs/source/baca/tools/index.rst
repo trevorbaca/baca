@@ -167,6 +167,7 @@ baca.tools
    Loop
    Matrix
    MetronomeMarkMeasureMap
+   PageSpecifier
    PitchArray
    PitchArrayCell
    PitchArrayColumn
@@ -218,6 +219,7 @@ baca.tools
    Loop
    Matrix
    MetronomeMarkMeasureMap
+   PageSpecifier
    PitchArray
    PitchArrayCell
    PitchArrayColumn

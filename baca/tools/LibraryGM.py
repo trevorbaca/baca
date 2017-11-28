@@ -951,20 +951,35 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
-    def layout(*arguments, build=None):
+    def layout(*pages, build=None):
         r'''Makes layout measure map for `build`.
 
         ..  container:: example
 
             >>> layout = baca.layout(
-            ...     (1, 20, [15, 20, 20]), 
-            ...     (13, 140, [15, 20, 20]), 
-            ...     (23, 20, [15, 20, 20], True),
+            ...     baca.page(
+            ...         [1, 20, [15, 20, 20]], 
+            ...         [13, 140, [15, 20, 20]], 
+            ...         ),
+            ...     baca.page(
+            ...         [23, 20, [15, 20, 20]],
+            ...         ),
             ...     )
 
             >>> abjad.f(layout)
             baca.LayoutMeasureMap(
                 commands=(
+                    baca.IndicatorCommand(
+                        indicators=abjad.CyclicTuple(
+                            [
+                                abjad.PageBreak(
+                                    format_slot='before',
+                                    ),
+                                ]
+                            ),
+                        selector=baca.skip(0),
+                        tag='SEGMENT:BREAK',
+                        ),
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
                             [
@@ -1032,23 +1047,17 @@ class LibraryGM(abjad.AbjadObject):
         tag = build or 'SEGMENT'
         tag += ':BREAK'
         commands = []
-        if not arguments:
+        if not pages:
             return baca.LayoutMeasureMap(commands=commands, tag=tag)
-        first_measure_number = arguments[0][0]
-        for argument in arguments:
-            if len(argument) == 4:
-                new_page = True
-                argument = argument[:3]
-            else:
-                new_page = False
-            assert len(argument) == 3, repr(argument)
-            measure_number = argument[0]
-            skip_index = measure_number - first_measure_number
-            y_offset = argument[1]
-            alignment_distances = argument[2]
-            selector = baca.skip(skip_index)
-            if first_measure_number < measure_number:
-                if new_page:
+        first_measure_number = pages[0].items[0][0]
+        for page in pages:
+            for i, item in enumerate(page.items):
+                measure_number = item[0]
+                skip_index = measure_number - first_measure_number
+                y_offset = item[1]
+                alignment_distances = item[2]
+                selector = baca.skip(skip_index)
+                if i == 0:
                     break_ = abjad.PageBreak(format_slot='before')
                 else:
                     break_ = abjad.LineBreak(format_slot='before')
@@ -1057,8 +1066,8 @@ class LibraryGM(abjad.AbjadObject):
                     selector=selector,
                     )
                 commands.append(command)
-            lbsd = baca.lbsd(y_offset, alignment_distances, selector)
-            commands.append(lbsd)
+                lbsd = baca.lbsd(y_offset, alignment_distances, selector)
+                commands.append(lbsd)
         return baca.LayoutMeasureMap(commands=commands, tag=tag)
 
     @staticmethod

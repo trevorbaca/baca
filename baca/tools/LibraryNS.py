@@ -347,6 +347,12 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
+    def page(*arguments):
+        r'''Makes page specifier.
+        '''
+        return baca.PageSpecifier(items=arguments)
+
+    @staticmethod
     def page_break(selector='baca.leaf(-1)'):
         r'''Attaches page break command after last leaf.
 

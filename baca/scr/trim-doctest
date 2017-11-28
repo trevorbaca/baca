@@ -1,0 +1,24 @@
+#! /usr/bin/env python
+import os
+import pathlib
+
+
+output = pathlib.Path('/Users/trevorbaca/.tmp/doctest.out')
+os.system('clear')
+print('Running doctest ...')
+os.system(f'ajv doctest --external-modules=baca -x > {str(output)}')
+os.system(f'cat {str(output)}')
+
+keep, got = [], False
+for line in output.open('r'):
+    if line.startswith('File') and 'line' in line:
+        print(line)
+    if got:
+        if line.startswith('*********'):
+            break
+        keep.append(line)
+    if line == 'Got:\n':
+        got = True
+text = ''.join(keep)
+trimmed_output = output.with_suffix('.trimmed')
+trimmed_output.write_text(text)
