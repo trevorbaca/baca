@@ -3541,7 +3541,6 @@ class LibraryTZ(abjad.AbjadObject):
             Wraps stage 2 global skips in volta container:
 
             >>> maker = baca.SegmentMaker(
-            ...     label_stages=True,
             ...     measures_per_stage=[1, 2, 1],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],

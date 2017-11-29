@@ -40,7 +40,6 @@ Bases
       ~baca.tools.SegmentMaker.SegmentMaker.ignore_unregistered_pitches
       ~baca.tools.SegmentMaker.SegmentMaker.instruments
       ~baca.tools.SegmentMaker.SegmentMaker.label_clock_time
-      ~baca.tools.SegmentMaker.SegmentMaker.label_stages
       ~baca.tools.SegmentMaker.SegmentMaker.layout_measure_map
       ~baca.tools.SegmentMaker.SegmentMaker.measure_count
       ~baca.tools.SegmentMaker.SegmentMaker.measures_per_stage
@@ -106,8 +105,6 @@ Read-only properties
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.instruments
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.label_clock_time
-
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.label_stages
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.layout_measure_map
 
