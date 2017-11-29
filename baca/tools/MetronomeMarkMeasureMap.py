@@ -36,6 +36,11 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                         \time 4/8
                         \bar "" % SEGMENT:EMPTY-BAR:1
                         s1 * 1/2
+                            ^ \markup { % CLOCK-TIME:3
+                                \fontsize % CLOCK-TIME:3
+                                    #-2 % CLOCK-TIME:3
+                                    0'00'' % CLOCK-TIME:3
+                                } % CLOCK-TIME:3
                             - \markup { % STAGE-NUMBER:2
                                 \fontsize % STAGE-NUMBER:2
                                     #-3 % STAGE-NUMBER:2
@@ -63,10 +68,20 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                         %%% GlobalSkips [measure 2] %%%
                         \time 3/8
                         s1 * 3/8
+                            ^ \markup { % CLOCK-TIME:1
+                                \fontsize % CLOCK-TIME:1
+                                    #-2 % CLOCK-TIME:1
+                                    0'01'' % CLOCK-TIME:1
+                                } % CLOCK-TIME:1
             <BLANKLINE>
                         %%% GlobalSkips [measure 3] %%%
                         \time 4/8
                         s1 * 1/2
+                            ^ \markup { % CLOCK-TIME:2
+                                \fontsize % CLOCK-TIME:2
+                                    #-2 % CLOCK-TIME:2
+                                    0'02'' % CLOCK-TIME:2
+                                } % CLOCK-TIME:2
                             - \markup { % STAGE-NUMBER:1
                                 \fontsize % STAGE-NUMBER:1
                                     #-3 % STAGE-NUMBER:1
@@ -94,6 +109,11 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                         %%% GlobalSkips [measure 4] %%%
                         \time 3/8
                         s1 * 3/8
+                            ^ \markup { % CLOCK-TIME:1
+                                \fontsize % CLOCK-TIME:1
+                                    #-2 % CLOCK-TIME:1
+                                    0'04'' % CLOCK-TIME:1
+                                } % CLOCK-TIME:1
             <BLANKLINE>
                     }
                 >>

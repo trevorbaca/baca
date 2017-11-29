@@ -262,6 +262,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_break_offsets',
         '_builds_metadata',
         '_cache',
+        '_clock_time',
         '_color_octaves',
         '_color_out_of_range_pitches',
         '_color_repeat_pitch_classes',
@@ -277,7 +278,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_ignore_unpitched_notes',
         '_ignore_unregistered_pitches',
         '_instruments',
-        '_label_clock_time',
         '_layout_measure_map',
         '_measures_per_stage',
         '_metronome_mark_measure_map',
@@ -370,7 +370,6 @@ class SegmentMaker(abjad.SegmentMaker):
         ignore_unpitched_notes=None,
         ignore_unregistered_pitches=None,
         instruments=None,
-        label_clock_time=None,
         layout_measure_map=None,
         measures_per_stage=None,
         metronome_mark_measure_map=None,
@@ -392,6 +391,7 @@ class SegmentMaker(abjad.SegmentMaker):
             allow_empty_selections = bool(allow_empty_selections)
         self._allow_empty_selections = allow_empty_selections
         self._break_offsets = []
+        self._clock_time = None
         if color_octaves is not None:
             color_octaves = bool(color_octaves)
         self._color_octaves = color_octaves
@@ -431,12 +431,9 @@ class SegmentMaker(abjad.SegmentMaker):
         if ignore_unregistered_pitches is not None:
             ignore_unregistered_pitches = bool(ignore_unregistered_pitches)
         self._ignore_unregistered_pitches = ignore_unregistered_pitches
-        if label_clock_time is not None:
-            label_clock_time = bool(label_clock_time)
         if instruments is not None:
             assert isinstance(instruments, abjad.TypedOrderedDict)
         self._instruments = instruments
-        self._label_clock_time = label_clock_time
         if layout_measure_map is not None:
             assert isinstance(layout_measure_map, baca.LayoutMeasureMap)
         self._layout_measure_map = layout_measure_map
@@ -1393,6 +1390,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if docs:
             return result
         result['end_clefs_by_staff'] = self._get_end_clefs()
+        result['end_clock_time'] = self._clock_time
         result['end_dynamics_by_context'] = self._get_end_dynamics()
         result['end_instruments_by_context'] = self._get_end_instruments()
         result['end_metronome_mark'] = self._get_end_metronome_mark()
@@ -1461,6 +1459,11 @@ class SegmentMaker(abjad.SegmentMaker):
             dynamic_name = dictionary.get(context)
             if dynamic_name is not None:
                 return abjad.Dynamic(dynamic_name)
+
+    def _get_previous_clock_time(self):
+        if not self._previous_metadata:
+            return
+        return self._previous_metadata.get('end_clock_time')
 
     def _get_previous_instrument(self, context):
         if not self._previous_metadata:
@@ -1633,17 +1636,6 @@ class SegmentMaker(abjad.SegmentMaker):
         segment_number = self._get_segment_number()
         segment_count = self._metadata.get('segment_count')
         return segment_number == segment_count
-
-    def _label_clock_time_(self):
-        if not self.label_clock_time:
-            return
-        for skip in baca.select(self._score['GlobalSkips']).skips():
-            start_offset = abjad.inspect(skip).get_timespan().start_offset
-            if start_offset in self._fermata_start_offsets:
-                continue
-            skips.append(skip)
-        skips = abjad.select(skips)
-        abjad.label(skips).with_start_offsets(clock_time=True, font_size=-2)
 
     def _label_instrument_changes(self):
         prototype = abjad.Instrument
@@ -2018,6 +2010,37 @@ class SegmentMaker(abjad.SegmentMaker):
         start_measure_index = measure_indices[stop]
         stop_measure_index = measure_indices[stage_number] - 1
         return start_measure_index, stop_measure_index
+
+    def _tag_clock_time(self):
+        tag = 'CLOCK-TIME'
+        skips = baca.select(self._score['GlobalSkips']).skips()
+        if abjad.inspect(skips[0]).get_effective(abjad.MetronomeMark) is None:
+            return
+        skips_ = []
+        for skip in skips:
+            start_offset = abjad.inspect(skip).get_timespan().start_offset
+            if start_offset in self._fermata_start_offsets:
+                continue
+            skips_.append(skip)
+        clock_string = self._get_previous_clock_time()
+        if clock_string is not None:
+            minutes = 0
+            if "'" in clock_string:
+                tick_index = clock_string.find("'")
+                minutes = clock_string[:tick_index]
+                minutes = int(minutes)
+            seconds = clock_string[-4:-2]
+            seconds = int(seconds)
+            seconds = 60 * minutes + seconds
+            global_offset = abjad.Duration(seconds)
+        else:
+            global_offset = None
+        duration = abjad.label(skips_, tag=tag).with_start_offsets(
+            clock_time=True,
+            font_size=-2,
+            global_offset=global_offset,
+            )
+        self._clock_time = duration.to_clock_string()
 
     def _transpose_score_(self):
         if self.transpose_score:
@@ -4591,403 +4614,6 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._instruments
 
     @property
-    def label_clock_time(self):
-        r'''Is true when segment labels clock time. Otherwise false.
-
-        ..  container:: example
-
-            Does not label clock time:
-
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     metronome_mark_measure_map=baca.MetronomeMarkMeasureMap([
-            ...         (1, abjad.MetronomeMark((1, 8), 90)),
-            ...         ]),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     baca.scope('MusicVoice', 1),
-            ...     baca.make_even_runs(),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score])
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR:1
-                            s1 * 1/2
-                                - \markup { % STAGE-NUMBER:2
-                                    \fontsize % STAGE-NUMBER:2
-                                        #-3 % STAGE-NUMBER:2
-                                        \with-color % STAGE-NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                            [1] % STAGE-NUMBER:2
-                                    } % STAGE-NUMBER:2
-                                ^ \markup {
-                                \fontsize
-                                    #-6
-                                    \general-align
-                                        #Y
-                                        #DOWN
-                                        \note-by-number
-                                            #3
-                                            #0
-                                            #1
-                                \upright
-                                    {
-                                        =
-                                        90
-                                    }
-                                }
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/8
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 4/8
-                            s1 * 1/2
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
-                            s1 * 3/8
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 1] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
-                                    c'8 [
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 3] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 4] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                    \bar "|"
-                <BLANKLINE>
-                                }
-                            }
-                        }
-                    >>
-                >>
-
-        ..  container:: example
-
-            Does label clock time:
-
-            >>> maker = baca.SegmentMaker(
-            ...     label_clock_time=True,
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     metronome_mark_measure_map=baca.MetronomeMarkMeasureMap([
-            ...         (1, abjad.MetronomeMark((1, 8), 90)),
-            ...         ]),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     baca.scope('MusicVoice', 1),
-            ...     baca.make_even_runs(),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs') # doctest: +SKIP
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  todo:: MAKE THIS WORK AGAIN.
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score])
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR:1
-                            s1 * 1/2
-                                - \markup { % STAGE-NUMBER:2
-                                    \fontsize % STAGE-NUMBER:2
-                                        #-3 % STAGE-NUMBER:2
-                                        \with-color % STAGE-NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                            [1] % STAGE-NUMBER:2
-                                    } % STAGE-NUMBER:2
-                                ^ \markup {
-                                \fontsize
-                                    #-6
-                                    \general-align
-                                        #Y
-                                        #DOWN
-                                        \note-by-number
-                                            #3
-                                            #0
-                                            #1
-                                \upright
-                                    {
-                                        =
-                                        90
-                                    }
-                                }
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/8
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 4/8
-                            s1 * 1/2
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
-                            s1 * 3/8
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 1] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
-                                    c'8 [
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 3] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 4] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                    \bar "|"
-                <BLANKLINE>
-                                }
-                            }
-                        }
-                    >>
-                >>
-
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
-        '''
-        return self._label_clock_time
-
-    @property
     def layout_measure_map(self):
         r'''Gets layout measure map.
 
@@ -5235,6 +4861,11 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
+                                ^ \markup { % CLOCK-TIME:3
+                                    \fontsize % CLOCK-TIME:3
+                                        #-2 % CLOCK-TIME:3
+                                        0'00'' % CLOCK-TIME:3
+                                    } % CLOCK-TIME:3
                                 - \markup { % STAGE-NUMBER:2
                                     \fontsize % STAGE-NUMBER:2
                                         #-3 % STAGE-NUMBER:2
@@ -5262,14 +4893,29 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
+                                ^ \markup { % CLOCK-TIME:1
+                                    \fontsize % CLOCK-TIME:1
+                                        #-2 % CLOCK-TIME:1
+                                        0'02'' % CLOCK-TIME:1
+                                    } % CLOCK-TIME:1
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
+                                ^ \markup { % CLOCK-TIME:1
+                                    \fontsize % CLOCK-TIME:1
+                                        #-2 % CLOCK-TIME:1
+                                        0'04'' % CLOCK-TIME:1
+                                    } % CLOCK-TIME:1
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
+                                ^ \markup { % CLOCK-TIME:1
+                                    \fontsize % CLOCK-TIME:1
+                                        #-2 % CLOCK-TIME:1
+                                        0'07'' % CLOCK-TIME:1
+                                    } % CLOCK-TIME:1
                 <BLANKLINE>
                         }
                     >>
@@ -6255,7 +5901,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._reapply_previous_segment_settings()
         self._blacken_explicit_contexted_indicators()
         self._apply_spacing_specifier()
-        self._label_clock_time_()
+        self._tag_clock_time()
         self._hide_instrument_names_()
         self._label_instrument_changes()
         self._transpose_score_()
@@ -6312,6 +5958,6 @@ class SegmentMaker(abjad.SegmentMaker):
         Returns none.
         '''
         if not stage_count == self.stage_count:
-            message = f'segment stage count is not {stage_count}'
+            message = f'stage count is not {stage_count}'
             message += f' but {self.stage_count}.'
             raise Exception(message)
