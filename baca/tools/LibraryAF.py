@@ -664,8 +664,8 @@ class LibraryAF(abjad.AbjadObject):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
+                                    \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
                                     e'8 [
                 <BLANKLINE>
                                     d''8
@@ -2483,8 +2483,8 @@ class LibraryAF(abjad.AbjadObject):
                                             \override Stem.direction = #up
                                             \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                             \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                                            \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
-                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
+                                            \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
+                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
                                             a'8
                 <BLANKLINE>
                                             b'8
@@ -2511,9 +2511,9 @@ class LibraryAF(abjad.AbjadObject):
                                             \override Stem.direction = #up
                                             \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                             \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
-                                            \clef "alto" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
+                                            \clef "alto" % SEGMENT:EXPLICIT-CLEF:2
                                             \crossStaff
-                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
+                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
                                             c'8
                 <BLANKLINE>
                                             \crossStaff
@@ -2541,8 +2541,8 @@ class LibraryAF(abjad.AbjadObject):
                                     %%% CelloMusicVoice [measure 1] %%%
                                     \set CelloMusicStaff.instrumentName = \markup { Cello }
                                     \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
-                                    \clef "bass" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
+                                    \clef "bass" % SEGMENT:EXPLICIT-CLEF:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
                                     R1 * 5/8
                                     \bar "|"
                 <BLANKLINE>
@@ -2620,8 +2620,8 @@ class LibraryAF(abjad.AbjadObject):
                                             \override Stem.direction = #up
                                             \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                             \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                                            \clef "treble" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
-                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
+                                            \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
+                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
                                             a'8
                 <BLANKLINE>
                                             b'8
@@ -2648,8 +2648,8 @@ class LibraryAF(abjad.AbjadObject):
                                             \override Stem.direction = #up
                                             \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                             \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
-                                            \clef "alto" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
-                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
+                                            \clef "alto" % SEGMENT:EXPLICIT-CLEF:2
+                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
                                             c'8
                 <BLANKLINE>
                                             d'8
@@ -2675,8 +2675,8 @@ class LibraryAF(abjad.AbjadObject):
                                     %%% CelloMusicVoice [measure 1] %%%
                                     \set CelloMusicStaff.instrumentName = \markup { Cello }
                                     \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
-                                    \clef "bass" % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:2
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CONTEXTED-INDICATOR:1
+                                    \clef "bass" % SEGMENT:EXPLICIT-CLEF:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
                                     R1 * 5/8
                                     \bar "|"
                 <BLANKLINE>
