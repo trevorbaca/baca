@@ -259,7 +259,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
     __slots__ = (
         '_allow_empty_selections',
-        '_allow_figure_names',
         '_break_offsets',
         '_builds_metadata',
         '_cache',
@@ -358,7 +357,6 @@ class SegmentMaker(abjad.SegmentMaker):
     def __init__(
         self,
         allow_empty_selections=None,
-        allow_figure_names=None,
         color_octaves=None,
         color_out_of_range_pitches=None,
         color_repeat_pitch_classes=None,
@@ -393,9 +391,6 @@ class SegmentMaker(abjad.SegmentMaker):
         if allow_empty_selections is not None:
             allow_empty_selections = bool(allow_empty_selections)
         self._allow_empty_selections = allow_empty_selections
-        if allow_figure_names is not None:
-            allow_figure_names = bool(allow_figure_names)
-        self._allow_figure_names = allow_figure_names
         self._break_offsets = []
         if color_octaves is not None:
             color_octaves = bool(color_octaves)
@@ -1280,16 +1275,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 literal = abjad.LilyPondLiteral(string, 'absolute_before')
                 abjad.attach(literal, leaf)
 
-    def _detach_figure_names(self):
-        if self.allow_figure_names:
-            return
-        for leaf in abjad.iterate(self._score).leaves():
-            markups = abjad.inspect(leaf).get_indicators(abjad.Markup)
-            for markup in markups:
-                if (isinstance(markup._annotation, str) and
-                    markup._annotation.startswith('figure name:')):
-                    abjad.detach(markup, leaf)
-
     @staticmethod
     def _extend_beam(leaf):
         beam = abjad.inspect(leaf).get_spanner(abjad.Beam)
@@ -2081,389 +2066,6 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._allow_empty_selections
 
     @property
-    def allow_figure_names(self):
-        r'''Is true when segment allows figure names.
-
-        Is false when segment strips figure names.
-
-        ..  container:: example
-
-            Strips figure names by default:
-
-                >>> music_maker = baca.MusicMaker()
-
-            >>> collection_lists = [
-            ...     [[4]],
-            ...     [[6, 2, 3, 5, 9, 8, 0]],
-            ...     [[11]],
-            ...     [[10, 7, 9, 8, 0, 5]],
-            ...     ]
-            >>> figures, time_signatures = [], []
-            >>> for i, collections in enumerate(collection_lists):
-            ...     contribution = music_maker(
-            ...         'Voice 1',
-            ...         collections,
-            ...         figure_name=i,
-            ...         )
-            ...     figures.append(contribution['Voice 1'])
-            ...     time_signatures.append(contribution.time_signature)
-            ...
-            >>> figures_ = []
-            >>> for figure in figures:
-            ...     figures_.extend(figure)
-            ...
-            >>> figures = abjad.select(figures_)
-
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
-            ...         minimum_width=abjad.Duration(1, 24),
-            ...         ),
-            ...     time_signatures=time_signatures,
-            ...     )
-            >>> maker(
-            ...     baca.scope('MusicVoice', 1),
-            ...     baca.RhythmCommand(
-            ...         rhythm_maker=figures,
-            ...         ),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score])
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                            \time 1/16
-                            \bar "" % SEGMENT:EMPTY-BAR:1
-                            \newSpacingSection
-                            s1 * 1/16
-                                - \markup { % STAGE-NUMBER:2
-                                    \fontsize % STAGE-NUMBER:2
-                                        #-3 % STAGE-NUMBER:2
-                                        \with-color % STAGE-NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                            [1] % STAGE-NUMBER:2
-                                    } % STAGE-NUMBER:2
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                            \time 7/16
-                            \newSpacingSection
-                            s1 * 7/16
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                            \time 1/16
-                            \newSpacingSection
-                            s1 * 1/16
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                            \time 3/8
-                            \newSpacingSection
-                            s1 * 3/8
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
-                                {
-                                    {
-                <BLANKLINE>
-                                        %%% MusicVoice [measure 1] %%%
-                                        \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
-                                        e'16
-                                    }
-                                }
-                                {
-                                    {
-                <BLANKLINE>
-                                        %%% MusicVoice [measure 2] %%%
-                                        fs'16 [
-                <BLANKLINE>
-                                        d'16
-                <BLANKLINE>
-                                        ef'16
-                <BLANKLINE>
-                                        f'16
-                <BLANKLINE>
-                                        a'16
-                <BLANKLINE>
-                                        af'16
-                <BLANKLINE>
-                                        c'16 ]
-                                    }
-                                }
-                                {
-                                    {
-                <BLANKLINE>
-                                        %%% MusicVoice [measure 3] %%%
-                                        b'16
-                                    }
-                                }
-                                {
-                                    {
-                <BLANKLINE>
-                                        %%% MusicVoice [measure 4] %%%
-                                        bf'16 [
-                <BLANKLINE>
-                                        g'16
-                <BLANKLINE>
-                                        a'16
-                <BLANKLINE>
-                                        af'16
-                <BLANKLINE>
-                                        c'16
-                <BLANKLINE>
-                                        f'16 ]
-                                        \bar "|"
-                <BLANKLINE>
-                                    }
-                                }
-                            }
-                        }
-                    >>
-                >>
-
-        ..  container:: example
-
-            Allows figure names:
-
-            >>> music_maker = baca.MusicMaker()
-
-            >>> collection_lists = [
-            ...     [[4]],
-            ...     [[6, 2, 3, 5, 9, 8, 0]],
-            ...     [[11]],
-            ...     [[10, 7, 9, 8, 0, 5]],
-            ...     ]
-            >>> figures, time_signatures = [], []
-            >>> for i, collections in enumerate(collection_lists):
-            ...     contribution = music_maker(
-            ...         'Voice 1',
-            ...         collections,
-            ...         figure_name=i,
-            ...         )
-            ...     figures.append(contribution['Voice 1'])
-            ...     time_signatures.append(contribution.time_signature)
-            ...
-            >>> figures_ = []
-            >>> for figure in figures:
-            ...     figures_.extend(figure)
-            ...
-            >>> figures = abjad.select(figures_)
-
-            >>> maker = baca.SegmentMaker(
-            ...     allow_figure_names=True,
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
-            ...         minimum_width=abjad.Duration(1, 24),
-            ...         ),
-            ...     time_signatures=time_signatures,
-            ...     )
-            >>> maker(
-            ...     baca.scope('MusicVoice', 1),
-            ...     baca.RhythmCommand(
-            ...         rhythm_maker=figures,
-            ...         ),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).text_script.staff_padding = 3
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score])
-                \context Score = "Score" \with {
-                    \override TextScript.staff-padding = #3
-                } <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                            \time 1/16
-                            \bar "" % SEGMENT:EMPTY-BAR:1
-                            \newSpacingSection
-                            s1 * 1/16
-                                - \markup { % STAGE-NUMBER:2
-                                    \fontsize % STAGE-NUMBER:2
-                                        #-3 % STAGE-NUMBER:2
-                                        \with-color % STAGE-NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                            [1] % STAGE-NUMBER:2
-                                    } % STAGE-NUMBER:2
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                            \time 7/16
-                            \newSpacingSection
-                            s1 * 7/16
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                            \time 1/16
-                            \newSpacingSection
-                            s1 * 1/16
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
-                            \time 3/8
-                            \newSpacingSection
-                            s1 * 3/8
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
-                                {
-                                    {
-                <BLANKLINE>
-                                        %%% MusicVoice [measure 1] %%%
-                                        \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
-                                        e'16
-                                            ^ \markup {
-                                                \fontsize
-                                                    #2
-                                                    \concat
-                                                        {
-                                                            [
-                                                            0
-                                                            \hspace
-                                                                #1
-                                                            \raise
-                                                                #0.25
-                                                                \fontsize
-                                                                    #-2
-                                                                    (None)
-                                                            ]
-                                                        }
-                                                }
-                                    }
-                                }
-                                {
-                                    {
-                <BLANKLINE>
-                                        %%% MusicVoice [measure 2] %%%
-                                        fs'16 [
-                                            ^ \markup {
-                                                \fontsize
-                                                    #2
-                                                    \concat
-                                                        {
-                                                            [
-                                                            1
-                                                            \hspace
-                                                                #1
-                                                            \raise
-                                                                #0.25
-                                                                \fontsize
-                                                                    #-2
-                                                                    (None)
-                                                            ]
-                                                        }
-                                                }
-                <BLANKLINE>
-                                        d'16
-                <BLANKLINE>
-                                        ef'16
-                <BLANKLINE>
-                                        f'16
-                <BLANKLINE>
-                                        a'16
-                <BLANKLINE>
-                                        af'16
-                <BLANKLINE>
-                                        c'16 ]
-                                    }
-                                }
-                                {
-                                    {
-                <BLANKLINE>
-                                        %%% MusicVoice [measure 3] %%%
-                                        b'16
-                                            ^ \markup {
-                                                \fontsize
-                                                    #2
-                                                    \concat
-                                                        {
-                                                            [
-                                                            2
-                                                            \hspace
-                                                                #1
-                                                            \raise
-                                                                #0.25
-                                                                \fontsize
-                                                                    #-2
-                                                                    (None)
-                                                            ]
-                                                        }
-                                                }
-                                    }
-                                }
-                                {
-                                    {
-                <BLANKLINE>
-                                        %%% MusicVoice [measure 4] %%%
-                                        bf'16 [
-                                            ^ \markup {
-                                                \fontsize
-                                                    #2
-                                                    \concat
-                                                        {
-                                                            [
-                                                            3
-                                                            \hspace
-                                                                #1
-                                                            \raise
-                                                                #0.25
-                                                                \fontsize
-                                                                    #-2
-                                                                    (None)
-                                                            ]
-                                                        }
-                                                }
-                <BLANKLINE>
-                                        g'16
-                <BLANKLINE>
-                                        a'16
-                <BLANKLINE>
-                                        af'16
-                <BLANKLINE>
-                                        c'16
-                <BLANKLINE>
-                                        f'16 ]
-                                        \bar "|"
-                <BLANKLINE>
-                                    }
-                                }
-                            }
-                        }
-                    >>
-                >>
-
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
-        '''
-        return self._allow_figure_names
-
-    @property
     def color_octaves(self):
         r'''Is true when segment-maker colors octaves.
 
@@ -2696,9 +2298,26 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                 <BLANKLINE>
                                         %%% MusicVoice [measure 1] %%%
-                                        \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                        \clef "treble" % SEGMENT:EXPLICIT-CLEF:3
+                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:2
                                         e'16
+                                            ^ \markup { % FIGURE-NAME:1
+                                                \fontsize % FIGURE-NAME:1
+                                                    #2 % FIGURE-NAME:1
+                                                    \concat % FIGURE-NAME:1
+                                                        { % FIGURE-NAME:1
+                                                            [ % FIGURE-NAME:1
+                                                            0 % FIGURE-NAME:1
+                                                            \hspace % FIGURE-NAME:1
+                                                                #1 % FIGURE-NAME:1
+                                                            \raise % FIGURE-NAME:1
+                                                                #0.25 % FIGURE-NAME:1
+                                                                \fontsize % FIGURE-NAME:1
+                                                                    #-2 % FIGURE-NAME:1
+                                                                    (None) % FIGURE-NAME:1
+                                                            ] % FIGURE-NAME:1
+                                                        } % FIGURE-NAME:1
+                                                } % FIGURE-NAME:1
                                     }
                                 }
                                 {
@@ -2711,8 +2330,33 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override NoteHead.color = #red
                                         \once \override Stem.color = #red
                                         c16 [
-                                            - \tweak color #red
-                                            ^ \markup { * }
+                                            ^ \markup {
+                                                \column
+                                                    {
+                                                        \line % FIGURE-NAME:1
+                                                            { % FIGURE-NAME:1
+                                                                \fontsize % FIGURE-NAME:1
+                                                                    #2 % FIGURE-NAME:1
+                                                                    \concat % FIGURE-NAME:1
+                                                                        { % FIGURE-NAME:1
+                                                                            [ % FIGURE-NAME:1
+                                                                            1 % FIGURE-NAME:1
+                                                                            \hspace % FIGURE-NAME:1
+                                                                                #1 % FIGURE-NAME:1
+                                                                            \raise % FIGURE-NAME:1
+                                                                                #0.25 % FIGURE-NAME:1
+                                                                                \fontsize % FIGURE-NAME:1
+                                                                                    #-2 % FIGURE-NAME:1
+                                                                                    (None) % FIGURE-NAME:1
+                                                                            ] % FIGURE-NAME:1
+                                                                        } % FIGURE-NAME:1
+                                                            } % FIGURE-NAME:1
+                                                        \line
+                                                            {
+                                                                *
+                                                            }
+                                                    }
+                                                }
                 <BLANKLINE>
                                         d'16
                 <BLANKLINE>
@@ -2732,6 +2376,23 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         %%% MusicVoice [measure 3] %%%
                                         b'16
+                                            ^ \markup { % FIGURE-NAME:1
+                                                \fontsize % FIGURE-NAME:1
+                                                    #2 % FIGURE-NAME:1
+                                                    \concat % FIGURE-NAME:1
+                                                        { % FIGURE-NAME:1
+                                                            [ % FIGURE-NAME:1
+                                                            2 % FIGURE-NAME:1
+                                                            \hspace % FIGURE-NAME:1
+                                                                #1 % FIGURE-NAME:1
+                                                            \raise % FIGURE-NAME:1
+                                                                #0.25 % FIGURE-NAME:1
+                                                                \fontsize % FIGURE-NAME:1
+                                                                    #-2 % FIGURE-NAME:1
+                                                                    (None) % FIGURE-NAME:1
+                                                            ] % FIGURE-NAME:1
+                                                        } % FIGURE-NAME:1
+                                                } % FIGURE-NAME:1
                                     }
                                 }
                                 {
@@ -2739,6 +2400,23 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         %%% MusicVoice [measure 4] %%%
                                         bf'16 [
+                                            ^ \markup { % FIGURE-NAME:1
+                                                \fontsize % FIGURE-NAME:1
+                                                    #2 % FIGURE-NAME:1
+                                                    \concat % FIGURE-NAME:1
+                                                        { % FIGURE-NAME:1
+                                                            [ % FIGURE-NAME:1
+                                                            3 % FIGURE-NAME:1
+                                                            \hspace % FIGURE-NAME:1
+                                                                #1 % FIGURE-NAME:1
+                                                            \raise % FIGURE-NAME:1
+                                                                #0.25 % FIGURE-NAME:1
+                                                                \fontsize % FIGURE-NAME:1
+                                                                    #-2 % FIGURE-NAME:1
+                                                                    (None) % FIGURE-NAME:1
+                                                            ] % FIGURE-NAME:1
+                                                        } % FIGURE-NAME:1
+                                                } % FIGURE-NAME:1
                 <BLANKLINE>
                                         g'16
                 <BLANKLINE>
@@ -2862,9 +2540,26 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                 <BLANKLINE>
                                         %%% MusicVoice [measure 1] %%%
-                                        \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                        \clef "treble" % SEGMENT:EXPLICIT-CLEF:3
+                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:2
                                         e'16
+                                            ^ \markup { % FIGURE-NAME:1
+                                                \fontsize % FIGURE-NAME:1
+                                                    #2 % FIGURE-NAME:1
+                                                    \concat % FIGURE-NAME:1
+                                                        { % FIGURE-NAME:1
+                                                            [ % FIGURE-NAME:1
+                                                            0 % FIGURE-NAME:1
+                                                            \hspace % FIGURE-NAME:1
+                                                                #1 % FIGURE-NAME:1
+                                                            \raise % FIGURE-NAME:1
+                                                                #0.25 % FIGURE-NAME:1
+                                                                \fontsize % FIGURE-NAME:1
+                                                                    #-2 % FIGURE-NAME:1
+                                                                    (None) % FIGURE-NAME:1
+                                                            ] % FIGURE-NAME:1
+                                                        } % FIGURE-NAME:1
+                                                } % FIGURE-NAME:1
                                     }
                                 }
                                 {
@@ -2872,6 +2567,23 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         %%% MusicVoice [measure 2] %%%
                                         fs'16 [
+                                            ^ \markup { % FIGURE-NAME:1
+                                                \fontsize % FIGURE-NAME:1
+                                                    #2 % FIGURE-NAME:1
+                                                    \concat % FIGURE-NAME:1
+                                                        { % FIGURE-NAME:1
+                                                            [ % FIGURE-NAME:1
+                                                            1 % FIGURE-NAME:1
+                                                            \hspace % FIGURE-NAME:1
+                                                                #1 % FIGURE-NAME:1
+                                                            \raise % FIGURE-NAME:1
+                                                                #0.25 % FIGURE-NAME:1
+                                                                \fontsize % FIGURE-NAME:1
+                                                                    #-2 % FIGURE-NAME:1
+                                                                    (None) % FIGURE-NAME:1
+                                                            ] % FIGURE-NAME:1
+                                                        } % FIGURE-NAME:1
+                                                } % FIGURE-NAME:1
                 <BLANKLINE>
                                         d'16
                 <BLANKLINE>
@@ -2905,6 +2617,23 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         %%% MusicVoice [measure 3] %%%
                                         b'16
+                                            ^ \markup { % FIGURE-NAME:1
+                                                \fontsize % FIGURE-NAME:1
+                                                    #2 % FIGURE-NAME:1
+                                                    \concat % FIGURE-NAME:1
+                                                        { % FIGURE-NAME:1
+                                                            [ % FIGURE-NAME:1
+                                                            2 % FIGURE-NAME:1
+                                                            \hspace % FIGURE-NAME:1
+                                                                #1 % FIGURE-NAME:1
+                                                            \raise % FIGURE-NAME:1
+                                                                #0.25 % FIGURE-NAME:1
+                                                                \fontsize % FIGURE-NAME:1
+                                                                    #-2 % FIGURE-NAME:1
+                                                                    (None) % FIGURE-NAME:1
+                                                            ] % FIGURE-NAME:1
+                                                        } % FIGURE-NAME:1
+                                                } % FIGURE-NAME:1
                                     }
                                 }
                                 {
@@ -2912,6 +2641,23 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         %%% MusicVoice [measure 4] %%%
                                         bf'16 [
+                                            ^ \markup { % FIGURE-NAME:1
+                                                \fontsize % FIGURE-NAME:1
+                                                    #2 % FIGURE-NAME:1
+                                                    \concat % FIGURE-NAME:1
+                                                        { % FIGURE-NAME:1
+                                                            [ % FIGURE-NAME:1
+                                                            3 % FIGURE-NAME:1
+                                                            \hspace % FIGURE-NAME:1
+                                                                #1 % FIGURE-NAME:1
+                                                            \raise % FIGURE-NAME:1
+                                                                #0.25 % FIGURE-NAME:1
+                                                                \fontsize % FIGURE-NAME:1
+                                                                    #-2 % FIGURE-NAME:1
+                                                                    (None) % FIGURE-NAME:1
+                                                            ] % FIGURE-NAME:1
+                                                        } % FIGURE-NAME:1
+                                                } % FIGURE-NAME:1
                 <BLANKLINE>
                                         g'16
                 <BLANKLINE>
@@ -6504,7 +6250,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._call_rhythm_commands()
         self._extend_beams()
         self._call_commands()
-        self._detach_figure_names()
         self._shorten_long_repeat_ties()
         self._attach_first_segment_score_template_defaults()
         self._reapply_previous_segment_settings()

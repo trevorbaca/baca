@@ -2453,7 +2453,6 @@ class LibraryAF(abjad.AbjadObject):
             ...     )
 
             >>> maker = baca.SegmentMaker(
-            ...     allow_figure_names=False,
             ...     ignore_repeat_pitch_classes=True,
             ...     ignore_unregistered_pitches=True,
             ...     score_template=accumulator.score_template,
@@ -2497,9 +2496,26 @@ class LibraryAF(abjad.AbjadObject):
                                             \override Stem.direction = #up
                                             \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                             \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                                            \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                            \clef "treble" % SEGMENT:EXPLICIT-CLEF:3
+                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:2
                                             a'8
+                                                ^ \markup { % FIGURE-NAME:1
+                                                    \fontsize % FIGURE-NAME:1
+                                                        #2 % FIGURE-NAME:1
+                                                        \concat % FIGURE-NAME:1
+                                                            { % FIGURE-NAME:1
+                                                                [ % FIGURE-NAME:1
+                                                                "vn 1" % FIGURE-NAME:1
+                                                                \hspace % FIGURE-NAME:1
+                                                                    #1 % FIGURE-NAME:1
+                                                                \raise % FIGURE-NAME:1
+                                                                    #0.25 % FIGURE-NAME:1
+                                                                    \fontsize % FIGURE-NAME:1
+                                                                        #-2 % FIGURE-NAME:1
+                                                                        (None) % FIGURE-NAME:1
+                                                                ] % FIGURE-NAME:1
+                                                            } % FIGURE-NAME:1
+                                                    } % FIGURE-NAME:1
                 <BLANKLINE>
                                             b'8
                 <BLANKLINE>
@@ -2525,10 +2541,27 @@ class LibraryAF(abjad.AbjadObject):
                                             \override Stem.direction = #up
                                             \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                             \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
-                                            \clef "alto" % SEGMENT:EXPLICIT-CLEF:2
+                                            \clef "alto" % SEGMENT:EXPLICIT-CLEF:3
                                             \crossStaff
-                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:2
                                             c'8
+                                                ^ \markup { % FIGURE-NAME:1
+                                                    \fontsize % FIGURE-NAME:1
+                                                        #2 % FIGURE-NAME:1
+                                                        \concat % FIGURE-NAME:1
+                                                            { % FIGURE-NAME:1
+                                                                [ % FIGURE-NAME:1
+                                                                "vn 2" % FIGURE-NAME:1
+                                                                \hspace % FIGURE-NAME:1
+                                                                    #1 % FIGURE-NAME:1
+                                                                \raise % FIGURE-NAME:1
+                                                                    #0.25 % FIGURE-NAME:1
+                                                                    \fontsize % FIGURE-NAME:1
+                                                                        #-2 % FIGURE-NAME:1
+                                                                        (None) % FIGURE-NAME:1
+                                                                ] % FIGURE-NAME:1
+                                                            } % FIGURE-NAME:1
+                                                    } % FIGURE-NAME:1
                 <BLANKLINE>
                                             \crossStaff
                                             d'8
@@ -2597,7 +2630,6 @@ class LibraryAF(abjad.AbjadObject):
             ...     )
 
             >>> maker = baca.SegmentMaker(
-            ...     allow_figure_names=False,
             ...     ignore_repeat_pitch_classes=True,
             ...     ignore_unregistered_pitches=True,
             ...     score_template=accumulator.score_template,
@@ -2641,9 +2673,26 @@ class LibraryAF(abjad.AbjadObject):
                                             \override Stem.direction = #up
                                             \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                             \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                                            \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                            \clef "treble" % SEGMENT:EXPLICIT-CLEF:3
+                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:2
                                             a'8
+                                                ^ \markup { % FIGURE-NAME:1
+                                                    \fontsize % FIGURE-NAME:1
+                                                        #2 % FIGURE-NAME:1
+                                                        \concat % FIGURE-NAME:1
+                                                            { % FIGURE-NAME:1
+                                                                [ % FIGURE-NAME:1
+                                                                "vn 1" % FIGURE-NAME:1
+                                                                \hspace % FIGURE-NAME:1
+                                                                    #1 % FIGURE-NAME:1
+                                                                \raise % FIGURE-NAME:1
+                                                                    #0.25 % FIGURE-NAME:1
+                                                                    \fontsize % FIGURE-NAME:1
+                                                                        #-2 % FIGURE-NAME:1
+                                                                        (None) % FIGURE-NAME:1
+                                                                ] % FIGURE-NAME:1
+                                                            } % FIGURE-NAME:1
+                                                    } % FIGURE-NAME:1
                 <BLANKLINE>
                                             b'8
                 <BLANKLINE>
@@ -2669,9 +2718,26 @@ class LibraryAF(abjad.AbjadObject):
                                             \override Stem.direction = #up
                                             \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                             \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
-                                            \clef "alto" % SEGMENT:EXPLICIT-CLEF:2
-                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                            \clef "alto" % SEGMENT:EXPLICIT-CLEF:3
+                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:2
                                             c'8
+                                                ^ \markup { % FIGURE-NAME:1
+                                                    \fontsize % FIGURE-NAME:1
+                                                        #2 % FIGURE-NAME:1
+                                                        \concat % FIGURE-NAME:1
+                                                            { % FIGURE-NAME:1
+                                                                [ % FIGURE-NAME:1
+                                                                "vn 2" % FIGURE-NAME:1
+                                                                \hspace % FIGURE-NAME:1
+                                                                    #1 % FIGURE-NAME:1
+                                                                \raise % FIGURE-NAME:1
+                                                                    #0.25 % FIGURE-NAME:1
+                                                                    \fontsize % FIGURE-NAME:1
+                                                                        #-2 % FIGURE-NAME:1
+                                                                        (None) % FIGURE-NAME:1
+                                                                ] % FIGURE-NAME:1
+                                                            } % FIGURE-NAME:1
+                                                    } % FIGURE-NAME:1
                 <BLANKLINE>
                                             d'8
                 <BLANKLINE>
