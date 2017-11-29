@@ -39,7 +39,14 @@ class LayoutMeasureMap(abjad.AbjadObject):
                         \time 4/8
                         \bar "" % SEGMENT:EMPTY-BAR:1
                         s1 * 1/2
-                        \break % SEGMENT:2
+                            - \markup { % STAGE-NUMBER:2
+                                \fontsize % STAGE-NUMBER:2
+                                    #-3 % STAGE-NUMBER:2
+                                    \with-color % STAGE-NUMBER:2
+                                        #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                        [1] % STAGE-NUMBER:2
+                                } % STAGE-NUMBER:2
+                        \break % SEGMENT:3
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
                         \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 100) (alignment-distances . (30 30))) % SEGMENT:1

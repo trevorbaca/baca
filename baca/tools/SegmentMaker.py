@@ -33,6 +33,13 @@ class SegmentMaker(abjad.SegmentMaker):
                         \time 4/8
                         \bar "" % SEGMENT:EMPTY-BAR:1
                         s1 * 1/2
+                            - \markup { % STAGE-NUMBER:2
+                                \fontsize % STAGE-NUMBER:2
+                                    #-3 % STAGE-NUMBER:2
+                                    \with-color % STAGE-NUMBER:2
+                                        #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                        [1] % STAGE-NUMBER:2
+                                } % STAGE-NUMBER:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
                         \time 3/8
@@ -98,6 +105,13 @@ class SegmentMaker(abjad.SegmentMaker):
                         \time 4/8
                         \bar "" % SEGMENT:EMPTY-BAR:1
                         s1 * 1/2
+                            - \markup { % STAGE-NUMBER:2
+                                \fontsize % STAGE-NUMBER:2
+                                    #-3 % STAGE-NUMBER:2
+                                    \with-color % STAGE-NUMBER:2
+                                        #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                        [1] % STAGE-NUMBER:2
+                                } % STAGE-NUMBER:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
                         \time 3/8
@@ -499,6 +513,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -1670,8 +1691,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(markup, leaf)
 
     def _label_stage_numbers_(self):
-        if not self.label_stages:
-            return
+        tag = 'STAGE-NUMBER'
         skips = baca.select(self._score['GlobalSkips']).skips()
         for stage_index in range(self.stage_count):
             stage_number = stage_index + 1
@@ -1685,10 +1705,10 @@ class SegmentMaker(abjad.SegmentMaker):
             else:
                 string = f'[{stage_number}]'
             markup = abjad.Markup(string)
-            markup = markup.with_color('blue')
+            markup = markup.with_color(abjad.SchemeColor('DarkCyan'))
             markup = markup.fontsize(-3)
             skip = skips[start_measure_index]
-            abjad.attach(markup, skip)
+            abjad.attach(markup, skip, tag=tag)
 
     def _make_global_skips(self):
         context = self._score['GlobalSkips']
@@ -2129,6 +2149,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             \newSpacingSection
                             s1 * 1/16
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
@@ -2275,6 +2302,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             \newSpacingSection
                             s1 * 1/16
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
@@ -2489,6 +2523,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             \newSpacingSection
                             s1 * 3/8
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                         }
                     >>
@@ -2625,6 +2666,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             \newSpacingSection
                             s1 * 1/16
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
@@ -2784,6 +2832,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             \newSpacingSection
                             s1 * 1/16
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
@@ -2961,6 +3016,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -3130,6 +3192,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -3296,6 +3365,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -3466,6 +3542,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -3641,6 +3724,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -3809,6 +3899,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -4044,6 +4141,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -4210,6 +4314,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -4365,6 +4476,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             \newSpacingSection
                             s1 * 3/16
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
@@ -4619,6 +4737,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             \newSpacingSection
                             s1 * 3/16
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)
@@ -4758,7 +4883,15 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             \bar "" % SEGMENT:EMPTY-BAR:1
-                            s1 * 1/2 ^ \markup {
+                            s1 * 1/2
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
+                                ^ \markup {
                                 \fontsize
                                     #-6
                                     \general-align
@@ -4944,7 +5077,15 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             \bar "" % SEGMENT:EMPTY-BAR:1
-                            s1 * 1/2 ^ \markup {
+                            s1 * 1/2
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
+                                ^ \markup {
                                 \fontsize
                                     #-6
                                     \general-align
@@ -5137,6 +5278,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -5303,13 +5451,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
-                                - \markup {
-                                    \fontsize
-                                        #-3
-                                        \with-color
-                                            #blue
-                                            [1]
-                                    }
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -5480,13 +5628,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
-                                - \markup {
-                                    \fontsize
-                                        #-3
-                                        \with-color
-                                            #blue
-                                            [K.1]
-                                    }
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [K.1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -5705,6 +5853,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -5872,7 +6027,15 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             \bar "" % SEGMENT:EMPTY-BAR:1
-                            s1 * 1/2 ^ \markup {
+                            s1 * 1/2
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
+                                ^ \markup {
                                 \fontsize
                                     #-6
                                     \general-align
@@ -6170,6 +6333,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -6233,6 +6403,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -6341,13 +6518,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
-                                - \markup {
-                                    \fontsize
-                                        #-3
-                                        \with-color
-                                            #blue
-                                            [K.1]
-                                    }
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [K.1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -6519,13 +6696,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
-                                - \markup {
-                                    \fontsize
-                                        #-3
-                                        \with-color
-                                            #blue
-                                            [intermezzo.1]
-                                    }
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [intermezzo.1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -6714,6 +6891,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 1/2
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8

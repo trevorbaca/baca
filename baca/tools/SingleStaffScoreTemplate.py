@@ -27,6 +27,13 @@ class SingleStaffScoreTemplate(ScoreTemplate):
                         \time 4/8
                         \bar "" % SEGMENT:EMPTY-BAR:1
                         s1 * 1/2
+                            - \markup { % STAGE-NUMBER:2
+                                \fontsize % STAGE-NUMBER:2
+                                    #-3 % STAGE-NUMBER:2
+                                    \with-color % STAGE-NUMBER:2
+                                        #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                        [1] % STAGE-NUMBER:2
+                                } % STAGE-NUMBER:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
                         \time 3/8

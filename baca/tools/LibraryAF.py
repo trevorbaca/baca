@@ -637,6 +637,13 @@ class LibraryAF(abjad.AbjadObject):
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             \newSpacingSection
                             s1 * 1/2
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)
@@ -2468,6 +2475,13 @@ class LibraryAF(abjad.AbjadObject):
                             \time 5/8
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 5/8
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                         }
                     >>
@@ -2605,6 +2619,13 @@ class LibraryAF(abjad.AbjadObject):
                             \time 5/8
                             \bar "" % SEGMENT:EMPTY-BAR:1
                             s1 * 5/8
+                                - \markup { % STAGE-NUMBER:2
+                                    \fontsize % STAGE-NUMBER:2
+                                        #-3 % STAGE-NUMBER:2
+                                        \with-color % STAGE-NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                            [1] % STAGE-NUMBER:2
+                                    } % STAGE-NUMBER:2
                 <BLANKLINE>
                         }
                     >>

@@ -142,6 +142,13 @@ class NestingCommand(Command):
                         \bar "" % SEGMENT:EMPTY-BAR:1
                         \newSpacingSection
                         s1 * 1/2
+                            - \markup { % STAGE-NUMBER:2
+                                \fontsize % STAGE-NUMBER:2
+                                    #-3 % STAGE-NUMBER:2
+                                    \with-color % STAGE-NUMBER:2
+                                        #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                        [1] % STAGE-NUMBER:2
+                                } % STAGE-NUMBER:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)

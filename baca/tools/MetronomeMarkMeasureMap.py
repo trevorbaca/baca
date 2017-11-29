@@ -35,7 +35,15 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                         %%% GlobalSkips [measure 1] %%%
                         \time 4/8
                         \bar "" % SEGMENT:EMPTY-BAR:1
-                        s1 * 1/2 ^ \markup {
+                        s1 * 1/2
+                            - \markup { % STAGE-NUMBER:2
+                                \fontsize % STAGE-NUMBER:2
+                                    #-3 % STAGE-NUMBER:2
+                                    \with-color % STAGE-NUMBER:2
+                                        #(x11-color 'DarkCyan) % STAGE-NUMBER:2
+                                        [1] % STAGE-NUMBER:2
+                                } % STAGE-NUMBER:2
+                            ^ \markup {
                             \fontsize
                                 #-6
                                 \general-align
@@ -58,7 +66,15 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
             <BLANKLINE>
                         %%% GlobalSkips [measure 3] %%%
                         \time 4/8
-                        s1 * 1/2 ^ \markup {
+                        s1 * 1/2
+                            - \markup { % STAGE-NUMBER:1
+                                \fontsize % STAGE-NUMBER:1
+                                    #-3 % STAGE-NUMBER:1
+                                    \with-color % STAGE-NUMBER:1
+                                        #(x11-color 'DarkCyan) % STAGE-NUMBER:1
+                                        [2] % STAGE-NUMBER:1
+                                } % STAGE-NUMBER:1
+                            ^ \markup {
                             \fontsize
                                 #-6
                                 \general-align
