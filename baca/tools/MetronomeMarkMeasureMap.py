@@ -34,7 +34,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 4/8
-                        \bar "" % SEGMENT:EMPTY_BAR:1
+                        \bar "" % SEGMENT:EMPTY_START_BAR:1
                         s1 * 1/2
                             ^ \markup { % CLOCK_TIME:3
                                 \fontsize % CLOCK_TIME:3

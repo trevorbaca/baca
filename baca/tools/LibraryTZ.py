@@ -1637,7 +1637,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY_BAR:1
+                            \bar "" % SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
                                 - \markup { % STAGE_NUMBER:2
                                     \fontsize % STAGE_NUMBER:2
@@ -1742,7 +1742,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY_BAR:1
+                            \bar "" % SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
                                 - \markup { % STAGE_NUMBER:2
                                     \fontsize % STAGE_NUMBER:2
@@ -3465,7 +3465,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY_BAR:1
+                            \bar "" % SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
                                 - \markup { % STAGE_NUMBER:2
                                     \fontsize % STAGE_NUMBER:2
@@ -3576,7 +3576,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY_BAR:1
+                            \bar "" % SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
                                 - \markup { % STAGE_NUMBER:2
                                     \fontsize % STAGE_NUMBER:2
