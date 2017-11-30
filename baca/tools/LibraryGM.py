@@ -966,7 +966,7 @@ class LibraryGM(abjad.AbjadObject):
 
     @staticmethod
     def layout(*pages, build=None):
-        r'''Makes layout measure map for `build`.
+        r'''Makes layout.
 
         ..  container:: example
 
@@ -1058,7 +1058,10 @@ class LibraryGM(abjad.AbjadObject):
 
         Returns layout measure map.
         '''
-        tag = build or 'SEGMENT'
+        if build is None:
+            tag = 'SEGMENT'
+        else:
+            tag = 'BUILD:' + build.upper()
         tag += ':BREAK'
         commands = []
         if not pages:

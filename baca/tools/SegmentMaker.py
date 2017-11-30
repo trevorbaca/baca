@@ -282,6 +282,8 @@ class SegmentMaker(abjad.SegmentMaker):
         '_measures_per_stage',
         '_metronome_mark_measure_map',
         '_metronome_marks',
+        '_omit_empty_start_bar',
+        '_omit_stage_number_markup',
         '_print_segment_duration',
         '_print_timings',
         '_range_checker',
@@ -374,6 +376,8 @@ class SegmentMaker(abjad.SegmentMaker):
         measures_per_stage=None,
         metronome_mark_measure_map=None,
         metronome_marks=None,
+        omit_empty_start_bar=None,
+        omit_stage_number_markup=None,
         print_segment_duration=None,
         print_timings=None,
         range_checker=None,
@@ -442,6 +446,12 @@ class SegmentMaker(abjad.SegmentMaker):
         if metronome_marks is not None:
             assert isinstance(metronome_marks, abjad.TypedOrderedDict)
         self._metronome_marks = metronome_marks
+        if omit_empty_start_bar is not None:
+            omit_empty_start_bar = bool(omit_empty_start_bar)
+        self._omit_empty_start_bar = omit_empty_start_bar
+        if omit_stage_number_markup is not None:
+            omit_stage_number_markup = bool(omit_stage_number_markup)
+        self._omit_stage_number_markup = omit_stage_number_markup
         self._print_segment_duration = print_segment_duration
         self._print_timings = print_timings
         self._range_checker = range_checker
@@ -1663,7 +1673,9 @@ class SegmentMaker(abjad.SegmentMaker):
                         current_instrument)
                     abjad.attach(markup, leaf)
 
-    def _label_stage_numbers_(self):
+    def _label_stage_numbers(self):
+        if self.omit_stage_number_markup:
+            return
         tag = 'STAGE_NUMBER'
         skips = baca.select(self._score['GlobalSkips']).skips()
         for stage_index in range(self.stage_count):
@@ -1691,7 +1703,9 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.attach(multiplier, skip)
             abjad.attach(time_signature, skip, context='Score')
             context.append(skip)
-        # ghost bar line allows LilyPond to print first bar number
+        # empty start bar allows LilyPond to print first bar number
+        if self.omit_empty_start_bar:
+            return
         tag = 'SEGMENT:EMPTY_START_BAR'
         first_skip = baca.select(context).skip(0)
         literal = abjad.LilyPondLiteral(r'\bar ""')
@@ -5221,6 +5235,22 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._midi
 
     @property
+    def omit_empty_start_bar(self):
+        r'''Is true when segment-mark omits empty start bar.
+
+        Returns true, false or none.
+        '''
+        return self._omit_empty_start_bar
+
+    @property
+    def omit_stage_number_markup(self):
+        r'''Is true when segment-mark omits stage number markup.
+
+        Returns true, false or none.
+        '''
+        return self._omit_stage_number_markup
+
+    @property
     def print_segment_duration(self):
         r'''Is true when segment prints duration in seconds.
 
@@ -6047,7 +6077,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._make_score()
         self._make_lilypond_file(environment=environment, midi=midi)
         self._make_global_skips()
-        self._label_stage_numbers_()
+        self._label_stage_numbers()
         self._call_rhythm_commands()
         self._extend_beams()
         self._call_commands()
