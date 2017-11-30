@@ -412,8 +412,8 @@ class ClusterCommand(Command):
                             \once \override NoteHead.text = \markup {
                             	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
-                            \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                            \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                             <e' g' b'>2
                                 ^ \markup {
                                     \center-align
@@ -637,8 +637,8 @@ class ClusterCommand(Command):
                                 \once \override NoteHead.text = \markup {
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                 <e' g' b'>2
                                     ^ \markup {
                                         \center-align
@@ -780,8 +780,8 @@ class ClusterCommand(Command):
                                 \once \override NoteHead.text = \markup {
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                 <c' e' g'>2
                                     ^ \markup {
                                         \center-align
@@ -915,8 +915,8 @@ class ClusterCommand(Command):
                                 \once \override NoteHead.text = \markup {
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                 <g' b' d''>2
                                     ^ \markup {
                                         \center-align
@@ -1060,8 +1060,8 @@ class ClusterCommand(Command):
                                 \once \override NoteHead.text = \markup {
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                 <e'>2
                                     ^ \markup {
                                         \center-align
@@ -1195,8 +1195,8 @@ class ClusterCommand(Command):
                                 \once \override NoteHead.text = \markup {
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                 <e'>2
                                     ^ \markup {
                                         \center-align
@@ -1324,8 +1324,8 @@ class ClusterCommand(Command):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                 e'2
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%

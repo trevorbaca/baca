@@ -64,8 +64,8 @@ class PitchCommand(Command):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                 g''8 [
             <BLANKLINE>
                                 cs''8
@@ -167,8 +167,8 @@ class PitchCommand(Command):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                 c'8 [
             <BLANKLINE>
                                 f'8
@@ -270,8 +270,8 @@ class PitchCommand(Command):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                 <c' d' e' f' g' a' b'>8 [
             <BLANKLINE>
                                 <c' d' e' f' g' a' b'>8

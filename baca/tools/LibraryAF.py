@@ -706,8 +706,8 @@ class LibraryAF(abjad.AbjadObject):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                    \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                     e'8 [
                 <BLANKLINE>
                                     d''8
@@ -2531,8 +2531,8 @@ class LibraryAF(abjad.AbjadObject):
                                             \override Stem.direction = #up
                                             \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                             \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                                            \clef "treble" % SEGMENT:EXPLICIT-CLEF:3
-                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:2
+                                            \clef "treble" % SEGMENT:EXPLICIT_CLEF:3
+                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:2
                                             a'8
                                                 ^ \markup { % FIGURE_NAME:1
                                                     \fontsize % FIGURE_NAME:1
@@ -2576,9 +2576,9 @@ class LibraryAF(abjad.AbjadObject):
                                             \override Stem.direction = #up
                                             \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                             \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
-                                            \clef "alto" % SEGMENT:EXPLICIT-CLEF:3
+                                            \clef "alto" % SEGMENT:EXPLICIT_CLEF:3
                                             \crossStaff
-                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:2
+                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:2
                                             c'8
                                                 ^ \markup { % FIGURE_NAME:1
                                                     \fontsize % FIGURE_NAME:1
@@ -2623,8 +2623,8 @@ class LibraryAF(abjad.AbjadObject):
                                     %%% CelloMusicVoice [measure 1] %%%
                                     \set CelloMusicStaff.instrumentName = \markup { Cello }
                                     \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
-                                    \clef "bass" % SEGMENT:EXPLICIT-CLEF:2
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                    \clef "bass" % SEGMENT:EXPLICIT_CLEF:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                     R1 * 5/8
                                     \bar "|"
                 <BLANKLINE>
@@ -2708,8 +2708,8 @@ class LibraryAF(abjad.AbjadObject):
                                             \override Stem.direction = #up
                                             \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                             \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                                            \clef "treble" % SEGMENT:EXPLICIT-CLEF:3
-                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:2
+                                            \clef "treble" % SEGMENT:EXPLICIT_CLEF:3
+                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:2
                                             a'8
                                                 ^ \markup { % FIGURE_NAME:1
                                                     \fontsize % FIGURE_NAME:1
@@ -2753,8 +2753,8 @@ class LibraryAF(abjad.AbjadObject):
                                             \override Stem.direction = #up
                                             \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                             \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
-                                            \clef "alto" % SEGMENT:EXPLICIT-CLEF:3
-                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:2
+                                            \clef "alto" % SEGMENT:EXPLICIT_CLEF:3
+                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:2
                                             c'8
                                                 ^ \markup { % FIGURE_NAME:1
                                                     \fontsize % FIGURE_NAME:1
@@ -2797,8 +2797,8 @@ class LibraryAF(abjad.AbjadObject):
                                     %%% CelloMusicVoice [measure 1] %%%
                                     \set CelloMusicStaff.instrumentName = \markup { Cello }
                                     \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
-                                    \clef "bass" % SEGMENT:EXPLICIT-CLEF:2
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                    \clef "bass" % SEGMENT:EXPLICIT_CLEF:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                     R1 * 5/8
                                     \bar "|"
                 <BLANKLINE>

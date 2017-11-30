@@ -1667,8 +1667,8 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
                                 \override Score.BarLine.transparent = ##t
-                                \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                 e'8 [
                 <BLANKLINE>
                                 d''8
@@ -1771,8 +1771,8 @@ class LibraryTZ(abjad.AbjadObject):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                 e'8 [
                 <BLANKLINE>
                                 d''8
@@ -3497,8 +3497,8 @@ class LibraryTZ(abjad.AbjadObject):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                 e'8 [
                 <BLANKLINE>
                                 d''8
@@ -3622,8 +3622,8 @@ class LibraryTZ(abjad.AbjadObject):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                 e'8 [
                 <BLANKLINE>
                                 d''8

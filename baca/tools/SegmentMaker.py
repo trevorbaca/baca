@@ -60,8 +60,8 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Voice = "MusicVoice" {
             <BLANKLINE>
                             %%% MusicVoice [measure 1] %%%
-                            \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                            \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                             R1 * 1/2
             <BLANKLINE>
                             %%% MusicVoice [measure 2] %%%
@@ -138,8 +138,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \once \override Flag.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
-                                \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                 c'8 [
             <BLANKLINE>
                                 \once \override Beam.color = #blue
@@ -543,8 +543,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                    \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                     c'8 [
                                         ^ \markup {
                                             \small
@@ -1006,14 +1006,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 unwrap=False,
                 )
             if wrapper is not None and wrapper.tag is None:
-                tag = 'SEGMENT:EXPLICIT-CLEF:COLOR'
+                tag = 'SEGMENT:EXPLICIT_CLEF:COLOR'
                 clef = wrapper.indicator
                 context = wrapper.context
                 string = self._color_explicit('Clef', context, once=False)
                 literal = abjad.LilyPondLiteral(string)
                 abjad.attach(literal, leaf, tag=tag)
                 abjad.detach(clef, leaf)
-                tag = 'SEGMENT:EXPLICIT-CLEF'
+                tag = 'SEGMENT:EXPLICIT_CLEF'
                 abjad.attach(clef, leaf, context=context, tag=tag)
 
     def _cache_break_offsets(self):
@@ -1843,7 +1843,7 @@ class SegmentMaker(abjad.SegmentMaker):
         skip = baca.select(self._score['GlobalSkips']).skip(0)
         mark = abjad.inspect(skip).get_piecewise(abjad.MetronomeMark)
         if mark is None:
-            tag = 'SEGMENT:REMINDER-METRONOME-MARK'
+            tag = 'SEGMENT:REMINDER_METRONOME_MARK'
             string = self._color_reminder('TextScript')
             literal = abjad.LilyPondLiteral(string)
             abjad.attach(literal, skip, tag=tag)
@@ -1855,7 +1855,7 @@ class SegmentMaker(abjad.SegmentMaker):
         assert time_signature is not None
         previous_time_signature = self._get_previous_time_signature()
         if str(previous_time_signature) == str(time_signature):
-            tag = 'SEGMENT:DUPLICATE-TIME-SIGNATURE'
+            tag = 'SEGMENT:DUPLICATE_TIME_SIGNATURE'
             wrapper = abjad.inspect(skip).get_indicator(
                 abjad.TimeSignature,
                 unwrap=False,
@@ -1883,7 +1883,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 prototype = abjad.Instrument
                 instrument = abjad.inspect(first_leaf).get_indicator(prototype)
                 if instrument is None:
-                    tag = 'SEGMENT:RESTATED-INSTRUMENT'
+                    tag = 'SEGMENT:RESTATED_INSTRUMENT'
                     string = self._color_restated('InstrumentName', context)
                     literal = abjad.LilyPondLiteral(string)
                     abjad.attach(literal, first_leaf, tag=tag)
@@ -1897,20 +1897,20 @@ class SegmentMaker(abjad.SegmentMaker):
                 staff_lines = abjad.inspect(first_leaf).get_indicator(
                     prototype)
                 if staff_lines is None:
-                    tag = 'SEGMENT:REAPPLIED-STAFF-LINES'
+                    tag = 'SEGMENT:REAPPLIED_STAFF_LINES'
                     string = self._color_reapplied('StaffSymbol', context)
                     literal = abjad.LilyPondLiteral(string)
                     abjad.attach(literal, first_leaf, tag=tag)
                     abjad.attach(previous_staff_lines, first_leaf, tag=tag)
                 elif previous_staff_lines == staff_lines:
-                    tag = 'SEGMENT:DUPLICATE-STAFF-LINES'
+                    tag = 'SEGMENT:DUPLICATE_STAFF_LINES'
                     string = self._color_duplicate('StaffSymbol', context)
                     literal = abjad.LilyPondLiteral(string)
                     abjad.attach(literal, first_leaf, tag=tag)
             if previous_clef is not None:
                 clef = abjad.inspect(first_leaf).get_indicator(abjad.Clef)
                 if clef is None:
-                    tag = 'SEGMENT:RESTATED-CLEF'
+                    tag = 'SEGMENT:RESTATED_CLEF'
                     string = self._color_restated('Clef', context, once=False)
                     literal = abjad.LilyPondLiteral(string)
                     abjad.attach(literal, first_leaf, tag=tag)
@@ -1923,7 +1923,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.Clef,
                         unwrap=False,
                         )
-                    tag = 'SEGMENT:DUPLICATE-CLEF'
+                    tag = 'SEGMENT:DUPLICATE_CLEF'
                     string = self._color_duplicate(
                         'Clef',
                         context=wrapper.context,
@@ -1940,7 +1940,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 prototype = abjad.Dynamic
                 dynamic = abjad.inspect(first_leaf).get_effective(prototype)
                 if dynamic is None:
-                    tag = 'SEGMENT:REMINDER-DYNAMIC'
+                    tag = 'SEGMENT:REMINDER_DYNAMIC'
                     string = self._color_reminder('DynamicText', context)
                     literal = abjad.LilyPondLiteral(string)
                     abjad.attach(literal, first_leaf, tag=tag)
@@ -2191,8 +2191,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %%% ViolinMusicVoice [measure 1] %%%
                                     \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                     \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                                    \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                    \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                     R1 * 3/8
                                     \bar "|"
                 <BLANKLINE>
@@ -2205,8 +2205,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %%% ViolaMusicVoice [measure 1] %%%
                                     \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                     \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
-                                    \clef "alto" % SEGMENT:EXPLICIT-CLEF:2
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                    \clef "alto" % SEGMENT:EXPLICIT_CLEF:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                     R1 * 3/8
                                     \bar "|"
                 <BLANKLINE>
@@ -2221,8 +2221,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                             %%% CelloMusicVoice [measure 1] %%%
                                             \set CelloMusicStaff.instrumentName = \markup { Cello }
                                             \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
-                                            \clef "bass" % SEGMENT:EXPLICIT-CLEF:2
-                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                            \clef "bass" % SEGMENT:EXPLICIT_CLEF:2
+                                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                             a16 [
                 <BLANKLINE>
                                             g16
@@ -2385,8 +2385,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                 <BLANKLINE>
                                         %%% MusicVoice [measure 1] %%%
-                                        \clef "treble" % SEGMENT:EXPLICIT-CLEF:3
-                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:2
+                                        \clef "treble" % SEGMENT:EXPLICIT_CLEF:3
+                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:2
                                         e'16
                                             ^ \markup { % FIGURE_NAME:1
                                                 \fontsize % FIGURE_NAME:1
@@ -2662,8 +2662,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                 <BLANKLINE>
                                         %%% MusicVoice [measure 1] %%%
-                                        \clef "treble" % SEGMENT:EXPLICIT-CLEF:3
-                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:2
+                                        \clef "treble" % SEGMENT:EXPLICIT_CLEF:3
+                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:2
                                         e'16
                                             ^ \markup { % FIGURE_NAME:1
                                                 \fontsize % FIGURE_NAME:1
@@ -2912,8 +2912,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                    \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -3088,8 +3088,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                    \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -3261,8 +3261,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                    \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -3438,8 +3438,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                    \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -3620,8 +3620,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                    \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -3795,8 +3795,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                    \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -4037,8 +4037,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                    \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -4205,8 +4205,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                    \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                     c'8 [
                 <BLANKLINE>
                                     c'8
@@ -4415,8 +4415,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override Flag.color = #magenta
                                         \once \override NoteHead.color = #magenta
                                         \once \override Stem.color = #magenta
-                                        \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                        \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                         e'8.
                                     }
                                 }
@@ -4705,8 +4705,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                 <BLANKLINE>
                                         %%% MusicVoice [measure 1] %%%
-                                        \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                        \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                        \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                         e'8.
                                     }
                                 }
@@ -4888,8 +4888,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                    \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -5099,8 +5099,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                    \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -5398,8 +5398,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                 R1 * 1/2
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
@@ -5468,8 +5468,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                 s1 * 1/2
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
@@ -5588,8 +5588,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                    \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -5765,8 +5765,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                    \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                     c'8 [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -5955,8 +5955,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                                    \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                                    \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                                     e'8 [
                 <BLANKLINE>
                                     f'8

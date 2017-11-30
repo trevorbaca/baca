@@ -63,8 +63,8 @@ class ColorFingeringCommand(Command):
                         \context Voice = "MusicVoice" {
             <BLANKLINE>
                             %%% MusicVoice [measure 1] %%%
-                            \clef "treble" % SEGMENT:EXPLICIT-CLEF:2
-                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:1
+                            \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
+                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
                             e'2
             <BLANKLINE>
                             %%% MusicVoice [measure 2] %%%
