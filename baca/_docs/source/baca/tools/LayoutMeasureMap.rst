@@ -23,10 +23,10 @@ Bases
 
       ~baca.tools.LayoutMeasureMap.LayoutMeasureMap.build
       ~baca.tools.LayoutMeasureMap.LayoutMeasureMap.commands
+      ~baca.tools.LayoutMeasureMap.LayoutMeasureMap.tag
       ~baca.tools.LayoutMeasureMap.LayoutMeasureMap.__call__
       ~baca.tools.LayoutMeasureMap.LayoutMeasureMap.__eq__
       ~baca.tools.LayoutMeasureMap.LayoutMeasureMap.__format__
-      ~baca.tools.LayoutMeasureMap.LayoutMeasureMap.__getitem__
       ~baca.tools.LayoutMeasureMap.LayoutMeasureMap.__hash__
       ~baca.tools.LayoutMeasureMap.LayoutMeasureMap.__repr__
 
@@ -36,6 +36,8 @@ Read-only properties
 .. autoattribute:: baca.tools.LayoutMeasureMap.LayoutMeasureMap.build
 
 .. autoattribute:: baca.tools.LayoutMeasureMap.LayoutMeasureMap.commands
+
+.. autoattribute:: baca.tools.LayoutMeasureMap.LayoutMeasureMap.tag
 
 Special methods
 ---------------
@@ -53,8 +55,6 @@ Special methods
    .. container:: inherited
 
       .. automethod:: baca.tools.LayoutMeasureMap.LayoutMeasureMap.__format__
-
-.. automethod:: baca.tools.LayoutMeasureMap.LayoutMeasureMap.__getitem__
 
 .. only:: html
 

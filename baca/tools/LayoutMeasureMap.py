@@ -35,6 +35,8 @@ class LayoutMeasureMap(abjad.AbjadObject):
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
+                        \autoPageBreaksOff % SEGMENT:BREAK:4
+                        \noBreak % SEGMENT:BREAK:5
                         \time 4/8
                         \bar "" % SEGMENT:EMPTY_START_BAR:1
                         s1 * 1/2
@@ -54,14 +56,17 @@ class LayoutMeasureMap(abjad.AbjadObject):
                         \break % SEGMENT:BREAK:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 3] %%%
+                        \noBreak % SEGMENT:BREAK:1
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
                         %%% GlobalSkips [measure 4] %%%
+                        \noBreak % SEGMENT:BREAK:1
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
                         %%% GlobalSkips [measure 5] %%%
+                        \noBreak % SEGMENT:BREAK:1
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
@@ -194,8 +199,9 @@ class LayoutMeasureMap(abjad.AbjadObject):
     __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
-        '_commands',
         '_build',
+        '_commands',
+        '_tag',
         )
 
     _publish_storage_format = True
@@ -209,6 +215,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
         else:
             tag = 'BUILD:' + build.upper()
         tag += ':BREAK'
+        self._tag = tag
         if commands is not None:
             if tag is not None:
                 commands_ = []
@@ -230,33 +237,14 @@ class LayoutMeasureMap(abjad.AbjadObject):
             return
         for command in self.commands:
             command(context)
-
-    def __getitem__(self, argument):
-        r'''Gets `argument`.
-
-        ..  container:: example
-
-            >>> layout = baca.LayoutMeasureMap([
-            ...     baca.line_break(baca.skip(0)),
-            ...     baca.page_break(baca.skip(1)),
-            ...     ])
-
-            >>> abjad.f(layout[1])
-            baca.IndicatorCommand(
-                indicators=abjad.CyclicTuple(
-                    [
-                        abjad.PageBreak(
-                            format_slot='closing',
-                            ),
-                        ]
-                    ),
-                selector=baca.skip(1),
-                tag='SEGMENT:BREAK',
-                )
-
-        Returns item.
-        '''
-        return self.commands.__getitem__(argument)
+        skips = baca.select(context).skips()
+        command = abjad.LilyPondCommand('autoPageBreaksOff', 'before')
+        abjad.attach(command, skips[0], tag=self.tag)
+        for skip in skips:
+            #abjad.detach(abjad.TimeSignature, skip)
+            if not abjad.inspect(skip).has_indicator(baca.LBSD):
+                literal = abjad.LilyPondLiteral(r'\noBreak', 'before')
+                abjad.attach(literal, skip, tag=self.tag)
 
     ### PUBLIC PROPERTIES ###
 
@@ -286,3 +274,9 @@ class LayoutMeasureMap(abjad.AbjadObject):
         Returns commands.
         '''
         return self._commands
+
+    @property
+    def tag(self):
+        r'''Gets tag.
+        '''
+        return self._tag
