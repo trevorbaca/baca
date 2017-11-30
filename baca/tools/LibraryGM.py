@@ -992,7 +992,7 @@ class LibraryGM(abjad.AbjadObject):
                                 ]
                             ),
                         selector=baca.skip(0),
-                        tag='SEGMENT:BREAK',
+                        tag='SEGMENT:LAYOUT',
                         ),
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
@@ -1004,7 +1004,7 @@ class LibraryGM(abjad.AbjadObject):
                                 ]
                             ),
                         selector=baca.skip(0),
-                        tag='SEGMENT:BREAK',
+                        tag='SEGMENT:LAYOUT',
                         ),
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
@@ -1015,7 +1015,7 @@ class LibraryGM(abjad.AbjadObject):
                                 ]
                             ),
                         selector=baca.skip(12),
-                        tag='SEGMENT:BREAK',
+                        tag='SEGMENT:LAYOUT',
                         ),
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
@@ -1027,7 +1027,7 @@ class LibraryGM(abjad.AbjadObject):
                                 ]
                             ),
                         selector=baca.skip(12),
-                        tag='SEGMENT:BREAK',
+                        tag='SEGMENT:LAYOUT',
                         ),
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
@@ -1038,7 +1038,7 @@ class LibraryGM(abjad.AbjadObject):
                                 ]
                             ),
                         selector=baca.skip(22),
-                        tag='SEGMENT:BREAK',
+                        tag='SEGMENT:LAYOUT',
                         ),
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
@@ -1050,7 +1050,7 @@ class LibraryGM(abjad.AbjadObject):
                                 ]
                             ),
                         selector=baca.skip(22),
-                        tag='SEGMENT:BREAK',
+                        tag='SEGMENT:LAYOUT',
                         ),
                     ),
                 )

@@ -35,8 +35,8 @@ class LayoutMeasureMap(abjad.AbjadObject):
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
-                        \autoPageBreaksOff % SEGMENT:BREAK:4
-                        \noBreak % SEGMENT:BREAK:5
+                        \autoPageBreaksOff % SEGMENT:LAYOUT:4
+                        \noBreak % SEGMENT:LAYOUT:5
                         \time 4/8
                         \bar "" % SEGMENT:EMPTY_START_BAR:1
                         s1 * 1/2
@@ -47,26 +47,26 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                         #(x11-color 'DarkCyan) % STAGE_NUMBER:2
                                         [1] % STAGE_NUMBER:2
                                 } % STAGE_NUMBER:2
-                        \break % SEGMENT:BREAK:3
+                        \break % SEGMENT:LAYOUT:3
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
-                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 100) (alignment-distances . (30 30))) % SEGMENT:BREAK:1
+                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 100) (alignment-distances . (30 30))) % SEGMENT:LAYOUT:1
                         \time 3/8
                         s1 * 3/8
-                        \break % SEGMENT:BREAK:2
+                        \break % SEGMENT:LAYOUT:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 3] %%%
-                        \noBreak % SEGMENT:BREAK:1
+                        \noBreak % SEGMENT:LAYOUT:1
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
                         %%% GlobalSkips [measure 4] %%%
-                        \noBreak % SEGMENT:BREAK:1
+                        \noBreak % SEGMENT:LAYOUT:1
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
                         %%% GlobalSkips [measure 5] %%%
-                        \noBreak % SEGMENT:BREAK:1
+                        \noBreak % SEGMENT:LAYOUT:1
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
@@ -214,7 +214,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
             tag = 'SEGMENT'
         else:
             tag = 'BUILD:' + build.upper()
-        tag += ':BREAK'
+        tag += ':LAYOUT'
         self._tag = tag
         if commands is not None:
             if tag is not None:
@@ -241,7 +241,6 @@ class LayoutMeasureMap(abjad.AbjadObject):
         command = abjad.LilyPondCommand('autoPageBreaksOff', 'before')
         abjad.attach(command, skips[0], tag=self.tag)
         for skip in skips:
-            #abjad.detach(abjad.TimeSignature, skip)
             if not abjad.inspect(skip).has_indicator(baca.LBSD):
                 literal = abjad.LilyPondLiteral(r'\noBreak', 'before')
                 abjad.attach(literal, skip, tag=self.tag)
@@ -268,8 +267,8 @@ class LayoutMeasureMap(abjad.AbjadObject):
             >>> for command in layout.commands:
             ...     command
             ...
-            IndicatorCommand(indicators=CyclicTuple([LineBreak(format_slot='closing')]), selector=baca.skip(0), tag='SEGMENT:BREAK')
-            IndicatorCommand(indicators=CyclicTuple([PageBreak(format_slot='closing')]), selector=baca.skip(1), tag='SEGMENT:BREAK')
+            IndicatorCommand(indicators=CyclicTuple([LineBreak(format_slot='closing')]), selector=baca.skip(0), tag='SEGMENT:LAYOUT')
+            IndicatorCommand(indicators=CyclicTuple([PageBreak(format_slot='closing')]), selector=baca.skip(1), tag='SEGMENT:LAYOUT')
 
         Returns commands.
         '''
