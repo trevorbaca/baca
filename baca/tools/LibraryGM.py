@@ -1053,19 +1053,13 @@ class LibraryGM(abjad.AbjadObject):
                         tag='SEGMENT:BREAK',
                         ),
                     ),
-                tag='SEGMENT:BREAK',
                 )
 
         Returns layout measure map.
         '''
-        if build is None:
-            tag = 'SEGMENT'
-        else:
-            tag = 'BUILD:' + build.upper()
-        tag += ':BREAK'
         commands = []
         if not pages:
-            return baca.LayoutMeasureMap(commands=commands, tag=tag)
+            return baca.LayoutMeasureMap(commands=commands, build=build)
         first_measure_number = pages[0].items[0][0]
         for page in pages:
             for i, item in enumerate(page.items):
@@ -1085,7 +1079,7 @@ class LibraryGM(abjad.AbjadObject):
                 commands.append(command)
                 lbsd = baca.lbsd(y_offset, alignment_distances, selector)
                 commands.append(lbsd)
-        return baca.LayoutMeasureMap(commands=commands, tag=tag)
+        return baca.LayoutMeasureMap(commands=commands, build=build)
 
     @staticmethod
     def lbsd(y_offset, alignment_distances, selector='baca.leaf(0)'):

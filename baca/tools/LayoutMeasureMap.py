@@ -14,9 +14,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
         ...         baca.line_break(baca.skip(0)),
         ...         baca.lbsd(100, [30, 30], baca.skip(1)),
         ...         baca.line_break(baca.skip(1)),
-        ...         ],
-        ...         tag='SEGMENT',
-        ...         ),
+        ...         ]),
         ...     )
 
         >>> maker(
@@ -29,6 +27,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
+
             >>> abjad.f(lilypond_file[abjad.Score])
             \context Score = "Score" <<
                 \tag violin.viola.cello
@@ -46,13 +45,13 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                         #(x11-color 'DarkCyan) % STAGE_NUMBER:2
                                         [1] % STAGE_NUMBER:2
                                 } % STAGE_NUMBER:2
-                        \break % SEGMENT:3
+                        \break % SEGMENT:BREAK:3
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
-                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 100) (alignment-distances . (30 30))) % SEGMENT:1
+                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 100) (alignment-distances . (30 30))) % SEGMENT:BREAK:1
                         \time 3/8
                         s1 * 3/8
-                        \break % SEGMENT:2
+                        \break % SEGMENT:BREAK:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 3] %%%
                         \time 4/8
@@ -196,17 +195,20 @@ class LayoutMeasureMap(abjad.AbjadObject):
 
     __slots__ = (
         '_commands',
-        '_tag',
+        '_build',
         )
 
     _publish_storage_format = True
 
     ### INITIALIZER ###
 
-    def __init__(self, commands=None, tag=None):
-        if tag is not None:
-            assert isinstance(tag, str), repr(tag)
-        self._tag = tag
+    def __init__(self, commands=None, build=None):
+        self._build = build
+        if build is None:
+            tag = 'SEGMENT'
+        else:
+            tag = 'BUILD:' + build.upper()
+        tag += ':BREAK'
         if commands is not None:
             if tag is not None:
                 commands_ = []
@@ -249,6 +251,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
                         ]
                     ),
                 selector=baca.skip(1),
+                tag='SEGMENT:BREAK',
                 )
 
         Returns item.
@@ -256,6 +259,12 @@ class LayoutMeasureMap(abjad.AbjadObject):
         return self.commands.__getitem__(argument)
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def build(self):
+        r'''Gets build.
+        '''
+        return self._build
 
     @property
     def commands(self):
@@ -271,15 +280,9 @@ class LayoutMeasureMap(abjad.AbjadObject):
             >>> for command in layout.commands:
             ...     command
             ...
-            IndicatorCommand(indicators=CyclicTuple([LineBreak(format_slot='closing')]), selector=baca.skip(0))
-            IndicatorCommand(indicators=CyclicTuple([PageBreak(format_slot='closing')]), selector=baca.skip(1))
+            IndicatorCommand(indicators=CyclicTuple([LineBreak(format_slot='closing')]), selector=baca.skip(0), tag='SEGMENT:BREAK')
+            IndicatorCommand(indicators=CyclicTuple([PageBreak(format_slot='closing')]), selector=baca.skip(1), tag='SEGMENT:BREAK')
 
         Returns commands.
         '''
         return self._commands
-
-    @property
-    def tag(self):
-        r'''Gets tag.
-        '''
-        return self._tag
