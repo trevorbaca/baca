@@ -859,7 +859,7 @@ class SegmentMaker(abjad.SegmentMaker):
             tag = 'SEGMENT'
         else:
             tag = 'BUILD:' + build.upper()
-        tag += ':FERMATA_MEASURE'
+        tag += ':FERMATA_BAR_LINE'
         for staff in abjad.iterate(self._score).components(abjad.Staff):
             for leaf in abjad.iterate(staff).leaves():
                 start_offset = abjad.inspect(leaf).get_timespan().start_offset
