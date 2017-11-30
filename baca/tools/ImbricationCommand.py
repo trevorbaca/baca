@@ -838,21 +838,21 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 7/16
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) % SEGMENT:SPACING:COMMAND:3
                             s1 * 7/16
                                 - \markup {
                                     \column
                                         {
-                                            \line % STAGE-NUMBER:2
-                                                { % STAGE-NUMBER:2
-                                                    \fontsize % STAGE-NUMBER:2
-                                                        #-3 % STAGE-NUMBER:2
-                                                        \with-color % STAGE-NUMBER:2
-                                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                                            [1] % STAGE-NUMBER:2
-                                                } % STAGE-NUMBER:2
+                                            \line % STAGE_NUMBER:2
+                                                { % STAGE_NUMBER:2
+                                                    \fontsize % STAGE_NUMBER:2
+                                                        #-3 % STAGE_NUMBER:2
+                                                        \with-color % STAGE_NUMBER:2
+                                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                                            [1] % STAGE_NUMBER:2
+                                                } % STAGE_NUMBER:2
                                             \line % SEGMENT:SPACING:MARKUP:4
                                                 { % SEGMENT:SPACING:MARKUP:4
                                                     \with-color % SEGMENT:SPACING:MARKUP:4
@@ -872,14 +872,14 @@ class ImbricationCommand(Command):
                                 - \markup {
                                     \column
                                         {
-                                            \line % STAGE-NUMBER:1
-                                                { % STAGE-NUMBER:1
-                                                    \fontsize % STAGE-NUMBER:1
-                                                        #-3 % STAGE-NUMBER:1
-                                                        \with-color % STAGE-NUMBER:1
-                                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:1
-                                                            [2] % STAGE-NUMBER:1
-                                                } % STAGE-NUMBER:1
+                                            \line % STAGE_NUMBER:1
+                                                { % STAGE_NUMBER:1
+                                                    \fontsize % STAGE_NUMBER:1
+                                                        #-3 % STAGE_NUMBER:1
+                                                        \with-color % STAGE_NUMBER:1
+                                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:1
+                                                            [2] % STAGE_NUMBER:1
+                                                } % STAGE_NUMBER:1
                                             \line % SEGMENT:SPACING:MARKUP:3
                                                 { % SEGMENT:SPACING:MARKUP:3
                                                     \with-color % SEGMENT:SPACING:MARKUP:3

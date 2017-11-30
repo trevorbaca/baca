@@ -1637,15 +1637,15 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             s1 * 1/2
-                                - \markup { % STAGE-NUMBER:2
-                                    \fontsize % STAGE-NUMBER:2
-                                        #-3 % STAGE-NUMBER:2
-                                        \with-color % STAGE-NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                            [1] % STAGE-NUMBER:2
-                                    } % STAGE-NUMBER:2
+                                - \markup { % STAGE_NUMBER:2
+                                    \fontsize % STAGE_NUMBER:2
+                                        #-3 % STAGE_NUMBER:2
+                                        \with-color % STAGE_NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                            [1] % STAGE_NUMBER:2
+                                    } % STAGE_NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -1742,15 +1742,15 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             s1 * 1/2
-                                - \markup { % STAGE-NUMBER:2
-                                    \fontsize % STAGE-NUMBER:2
-                                        #-3 % STAGE-NUMBER:2
-                                        \with-color % STAGE-NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                            [1] % STAGE-NUMBER:2
-                                    } % STAGE-NUMBER:2
+                                - \markup { % STAGE_NUMBER:2
+                                    \fontsize % STAGE_NUMBER:2
+                                        #-3 % STAGE_NUMBER:2
+                                        \with-color % STAGE_NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                            [1] % STAGE_NUMBER:2
+                                    } % STAGE_NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -3465,15 +3465,15 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             s1 * 1/2
-                                - \markup { % STAGE-NUMBER:2
-                                    \fontsize % STAGE-NUMBER:2
-                                        #-3 % STAGE-NUMBER:2
-                                        \with-color % STAGE-NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                            [1] % STAGE-NUMBER:2
-                                    } % STAGE-NUMBER:2
+                                - \markup { % STAGE_NUMBER:2
+                                    \fontsize % STAGE_NUMBER:2
+                                        #-3 % STAGE_NUMBER:2
+                                        \with-color % STAGE_NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                            [1] % STAGE_NUMBER:2
+                                    } % STAGE_NUMBER:2
                             \repeat volta 2
                             {
                 <BLANKLINE>
@@ -3576,28 +3576,28 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             s1 * 1/2
-                                - \markup { % STAGE-NUMBER:2
-                                    \fontsize % STAGE-NUMBER:2
-                                        #-3 % STAGE-NUMBER:2
-                                        \with-color % STAGE-NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                            [1] % STAGE-NUMBER:2
-                                    } % STAGE-NUMBER:2
+                                - \markup { % STAGE_NUMBER:2
+                                    \fontsize % STAGE_NUMBER:2
+                                        #-3 % STAGE_NUMBER:2
+                                        \with-color % STAGE_NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                            [1] % STAGE_NUMBER:2
+                                    } % STAGE_NUMBER:2
                             \repeat volta 2
                             {
                 <BLANKLINE>
                                 %%% GlobalSkips [measure 2] %%%
                                 \time 3/8
                                 s1 * 3/8
-                                    - \markup { % STAGE-NUMBER:1
-                                        \fontsize % STAGE-NUMBER:1
-                                            #-3 % STAGE-NUMBER:1
-                                            \with-color % STAGE-NUMBER:1
-                                                #(x11-color 'DarkCyan) % STAGE-NUMBER:1
-                                                [2] % STAGE-NUMBER:1
-                                        } % STAGE-NUMBER:1
+                                    - \markup { % STAGE_NUMBER:1
+                                        \fontsize % STAGE_NUMBER:1
+                                            #-3 % STAGE_NUMBER:1
+                                            \with-color % STAGE_NUMBER:1
+                                                #(x11-color 'DarkCyan) % STAGE_NUMBER:1
+                                                [2] % STAGE_NUMBER:1
+                                        } % STAGE_NUMBER:1
                 <BLANKLINE>
                                 %%% GlobalSkips [measure 3] %%%
                                 \time 4/8
@@ -3607,13 +3607,13 @@ class LibraryTZ(abjad.AbjadObject):
                             %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
-                                - \markup { % STAGE-NUMBER:1
-                                    \fontsize % STAGE-NUMBER:1
-                                        #-3 % STAGE-NUMBER:1
-                                        \with-color % STAGE-NUMBER:1
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:1
-                                            [3] % STAGE-NUMBER:1
-                                    } % STAGE-NUMBER:1
+                                - \markup { % STAGE_NUMBER:1
+                                    \fontsize % STAGE_NUMBER:1
+                                        #-3 % STAGE_NUMBER:1
+                                        \with-color % STAGE_NUMBER:1
+                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:1
+                                            [3] % STAGE_NUMBER:1
+                                    } % STAGE_NUMBER:1
                 <BLANKLINE>
                         }
                     >>

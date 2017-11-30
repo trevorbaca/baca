@@ -31,15 +31,15 @@ class SegmentMaker(abjad.SegmentMaker):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 4/8
-                        \bar "" % SEGMENT:EMPTY-BAR:1
+                        \bar "" % SEGMENT:EMPTY_BAR:1
                         s1 * 1/2
-                            - \markup { % STAGE-NUMBER:2
-                                \fontsize % STAGE-NUMBER:2
-                                    #-3 % STAGE-NUMBER:2
-                                    \with-color % STAGE-NUMBER:2
-                                        #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                        [1] % STAGE-NUMBER:2
-                                } % STAGE-NUMBER:2
+                            - \markup { % STAGE_NUMBER:2
+                                \fontsize % STAGE_NUMBER:2
+                                    #-3 % STAGE_NUMBER:2
+                                    \with-color % STAGE_NUMBER:2
+                                        #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                        [1] % STAGE_NUMBER:2
+                                } % STAGE_NUMBER:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
                         \time 3/8
@@ -103,15 +103,15 @@ class SegmentMaker(abjad.SegmentMaker):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 4/8
-                        \bar "" % SEGMENT:EMPTY-BAR:1
+                        \bar "" % SEGMENT:EMPTY_BAR:1
                         s1 * 1/2
-                            - \markup { % STAGE-NUMBER:2
-                                \fontsize % STAGE-NUMBER:2
-                                    #-3 % STAGE-NUMBER:2
-                                    \with-color % STAGE-NUMBER:2
-                                        #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                        [1] % STAGE-NUMBER:2
-                                } % STAGE-NUMBER:2
+                            - \markup { % STAGE_NUMBER:2
+                                \fontsize % STAGE_NUMBER:2
+                                    #-3 % STAGE_NUMBER:2
+                                    \with-color % STAGE_NUMBER:2
+                                        #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                        [1] % STAGE_NUMBER:2
+                                } % STAGE_NUMBER:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
                         \time 3/8
@@ -498,15 +498,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             s1 * 1/2
-                                - \markup { % STAGE-NUMBER:2
-                                    \fontsize % STAGE-NUMBER:2
-                                        #-3 % STAGE-NUMBER:2
-                                        \with-color % STAGE-NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                            [1] % STAGE-NUMBER:2
-                                    } % STAGE-NUMBER:2
+                                - \markup { % STAGE_NUMBER:2
+                                    \fontsize % STAGE_NUMBER:2
+                                        #-3 % STAGE_NUMBER:2
+                                        \with-color % STAGE_NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                            [1] % STAGE_NUMBER:2
+                                    } % STAGE_NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -849,7 +849,7 @@ class SegmentMaker(abjad.SegmentMaker):
             tag = 'SEGMENT'
         else:
             tag = 'BUILD:' + build.upper()
-        tag += ':FERMATA-MEASURE-TREATMENT'
+        tag += ':FERMATA_MEASURE'
         for staff in abjad.iterate(self._score).components(abjad.Staff):
             for leaf in abjad.iterate(staff).leaves():
                 start_offset = abjad.inspect(leaf).get_timespan().start_offset
@@ -1664,7 +1664,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(markup, leaf)
 
     def _label_stage_numbers_(self):
-        tag = 'STAGE-NUMBER'
+        tag = 'STAGE_NUMBER'
         skips = baca.select(self._score['GlobalSkips']).skips()
         for stage_index in range(self.stage_count):
             stage_number = stage_index + 1
@@ -1692,7 +1692,7 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.attach(time_signature, skip, context='Score')
             context.append(skip)
         # ghost bar line allows LilyPond to print first bar number
-        tag = 'SEGMENT:EMPTY-BAR'
+        tag = 'SEGMENT:EMPTY_BAR'
         first_skip = baca.select(context).skip(0)
         literal = abjad.LilyPondLiteral(r'\bar ""')
         abjad.attach(literal, first_skip, tag=tag)
@@ -2013,7 +2013,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return start_measure_index, stop_measure_index
 
     def _tag_clock_time(self):
-        tag = 'CLOCK-TIME'
+        tag = 'CLOCK_TIME'
         skips = baca.select(self._score['GlobalSkips']).skips()
         if abjad.inspect(skips[0]).get_effective(abjad.MetronomeMark) is None:
             return
@@ -2140,21 +2140,21 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 6/16
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) % SEGMENT:SPACING:COMMAND:3
                             s1 * 3/8
                                 - \markup {
                                     \column
                                         {
-                                            \line % STAGE-NUMBER:2
-                                                { % STAGE-NUMBER:2
-                                                    \fontsize % STAGE-NUMBER:2
-                                                        #-3 % STAGE-NUMBER:2
-                                                        \with-color % STAGE-NUMBER:2
-                                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                                            [1] % STAGE-NUMBER:2
-                                                } % STAGE-NUMBER:2
+                                            \line % STAGE_NUMBER:2
+                                                { % STAGE_NUMBER:2
+                                                    \fontsize % STAGE_NUMBER:2
+                                                        #-3 % STAGE_NUMBER:2
+                                                        \with-color % STAGE_NUMBER:2
+                                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                                            [1] % STAGE_NUMBER:2
+                                                } % STAGE_NUMBER:2
                                             \line % SEGMENT:SPACING:MARKUP:4
                                                 { % SEGMENT:SPACING:MARKUP:4
                                                     \with-color % SEGMENT:SPACING:MARKUP:4
@@ -2297,21 +2297,21 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 1/16
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) % SEGMENT:SPACING:COMMAND:3
                             s1 * 1/16
                                 - \markup {
                                     \column
                                         {
-                                            \line % STAGE-NUMBER:2
-                                                { % STAGE-NUMBER:2
-                                                    \fontsize % STAGE-NUMBER:2
-                                                        #-3 % STAGE-NUMBER:2
-                                                        \with-color % STAGE-NUMBER:2
-                                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                                            [1] % STAGE-NUMBER:2
-                                                } % STAGE-NUMBER:2
+                                            \line % STAGE_NUMBER:2
+                                                { % STAGE_NUMBER:2
+                                                    \fontsize % STAGE_NUMBER:2
+                                                        #-3 % STAGE_NUMBER:2
+                                                        \with-color % STAGE_NUMBER:2
+                                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                                            [1] % STAGE_NUMBER:2
+                                                } % STAGE_NUMBER:2
                                             \line % SEGMENT:SPACING:MARKUP:4
                                                 { % SEGMENT:SPACING:MARKUP:4
                                                     \with-color % SEGMENT:SPACING:MARKUP:4
@@ -2374,23 +2374,23 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \clef "treble" % SEGMENT:EXPLICIT-CLEF:3
                                         \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:2
                                         e'16
-                                            ^ \markup { % FIGURE-NAME:1
-                                                \fontsize % FIGURE-NAME:1
-                                                    #2 % FIGURE-NAME:1
-                                                    \concat % FIGURE-NAME:1
-                                                        { % FIGURE-NAME:1
-                                                            [ % FIGURE-NAME:1
-                                                            0 % FIGURE-NAME:1
-                                                            \hspace % FIGURE-NAME:1
-                                                                #1 % FIGURE-NAME:1
-                                                            \raise % FIGURE-NAME:1
-                                                                #0.25 % FIGURE-NAME:1
-                                                                \fontsize % FIGURE-NAME:1
-                                                                    #-2 % FIGURE-NAME:1
-                                                                    (None) % FIGURE-NAME:1
-                                                            ] % FIGURE-NAME:1
-                                                        } % FIGURE-NAME:1
-                                                } % FIGURE-NAME:1
+                                            ^ \markup { % FIGURE_NAME:1
+                                                \fontsize % FIGURE_NAME:1
+                                                    #2 % FIGURE_NAME:1
+                                                    \concat % FIGURE_NAME:1
+                                                        { % FIGURE_NAME:1
+                                                            [ % FIGURE_NAME:1
+                                                            0 % FIGURE_NAME:1
+                                                            \hspace % FIGURE_NAME:1
+                                                                #1 % FIGURE_NAME:1
+                                                            \raise % FIGURE_NAME:1
+                                                                #0.25 % FIGURE_NAME:1
+                                                                \fontsize % FIGURE_NAME:1
+                                                                    #-2 % FIGURE_NAME:1
+                                                                    (None) % FIGURE_NAME:1
+                                                            ] % FIGURE_NAME:1
+                                                        } % FIGURE_NAME:1
+                                                } % FIGURE_NAME:1
                                     }
                                 }
                                 {
@@ -2406,24 +2406,24 @@ class SegmentMaker(abjad.SegmentMaker):
                                             ^ \markup {
                                                 \column
                                                     {
-                                                        \line % FIGURE-NAME:1
-                                                            { % FIGURE-NAME:1
-                                                                \fontsize % FIGURE-NAME:1
-                                                                    #2 % FIGURE-NAME:1
-                                                                    \concat % FIGURE-NAME:1
-                                                                        { % FIGURE-NAME:1
-                                                                            [ % FIGURE-NAME:1
-                                                                            1 % FIGURE-NAME:1
-                                                                            \hspace % FIGURE-NAME:1
-                                                                                #1 % FIGURE-NAME:1
-                                                                            \raise % FIGURE-NAME:1
-                                                                                #0.25 % FIGURE-NAME:1
-                                                                                \fontsize % FIGURE-NAME:1
-                                                                                    #-2 % FIGURE-NAME:1
-                                                                                    (None) % FIGURE-NAME:1
-                                                                            ] % FIGURE-NAME:1
-                                                                        } % FIGURE-NAME:1
-                                                            } % FIGURE-NAME:1
+                                                        \line % FIGURE_NAME:1
+                                                            { % FIGURE_NAME:1
+                                                                \fontsize % FIGURE_NAME:1
+                                                                    #2 % FIGURE_NAME:1
+                                                                    \concat % FIGURE_NAME:1
+                                                                        { % FIGURE_NAME:1
+                                                                            [ % FIGURE_NAME:1
+                                                                            1 % FIGURE_NAME:1
+                                                                            \hspace % FIGURE_NAME:1
+                                                                                #1 % FIGURE_NAME:1
+                                                                            \raise % FIGURE_NAME:1
+                                                                                #0.25 % FIGURE_NAME:1
+                                                                                \fontsize % FIGURE_NAME:1
+                                                                                    #-2 % FIGURE_NAME:1
+                                                                                    (None) % FIGURE_NAME:1
+                                                                            ] % FIGURE_NAME:1
+                                                                        } % FIGURE_NAME:1
+                                                            } % FIGURE_NAME:1
                                                         \line
                                                             {
                                                                 *
@@ -2449,23 +2449,23 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         %%% MusicVoice [measure 3] %%%
                                         b'16
-                                            ^ \markup { % FIGURE-NAME:1
-                                                \fontsize % FIGURE-NAME:1
-                                                    #2 % FIGURE-NAME:1
-                                                    \concat % FIGURE-NAME:1
-                                                        { % FIGURE-NAME:1
-                                                            [ % FIGURE-NAME:1
-                                                            2 % FIGURE-NAME:1
-                                                            \hspace % FIGURE-NAME:1
-                                                                #1 % FIGURE-NAME:1
-                                                            \raise % FIGURE-NAME:1
-                                                                #0.25 % FIGURE-NAME:1
-                                                                \fontsize % FIGURE-NAME:1
-                                                                    #-2 % FIGURE-NAME:1
-                                                                    (None) % FIGURE-NAME:1
-                                                            ] % FIGURE-NAME:1
-                                                        } % FIGURE-NAME:1
-                                                } % FIGURE-NAME:1
+                                            ^ \markup { % FIGURE_NAME:1
+                                                \fontsize % FIGURE_NAME:1
+                                                    #2 % FIGURE_NAME:1
+                                                    \concat % FIGURE_NAME:1
+                                                        { % FIGURE_NAME:1
+                                                            [ % FIGURE_NAME:1
+                                                            2 % FIGURE_NAME:1
+                                                            \hspace % FIGURE_NAME:1
+                                                                #1 % FIGURE_NAME:1
+                                                            \raise % FIGURE_NAME:1
+                                                                #0.25 % FIGURE_NAME:1
+                                                                \fontsize % FIGURE_NAME:1
+                                                                    #-2 % FIGURE_NAME:1
+                                                                    (None) % FIGURE_NAME:1
+                                                            ] % FIGURE_NAME:1
+                                                        } % FIGURE_NAME:1
+                                                } % FIGURE_NAME:1
                                     }
                                 }
                                 {
@@ -2473,23 +2473,23 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         %%% MusicVoice [measure 4] %%%
                                         bf'16 [
-                                            ^ \markup { % FIGURE-NAME:1
-                                                \fontsize % FIGURE-NAME:1
-                                                    #2 % FIGURE-NAME:1
-                                                    \concat % FIGURE-NAME:1
-                                                        { % FIGURE-NAME:1
-                                                            [ % FIGURE-NAME:1
-                                                            3 % FIGURE-NAME:1
-                                                            \hspace % FIGURE-NAME:1
-                                                                #1 % FIGURE-NAME:1
-                                                            \raise % FIGURE-NAME:1
-                                                                #0.25 % FIGURE-NAME:1
-                                                                \fontsize % FIGURE-NAME:1
-                                                                    #-2 % FIGURE-NAME:1
-                                                                    (None) % FIGURE-NAME:1
-                                                            ] % FIGURE-NAME:1
-                                                        } % FIGURE-NAME:1
-                                                } % FIGURE-NAME:1
+                                            ^ \markup { % FIGURE_NAME:1
+                                                \fontsize % FIGURE_NAME:1
+                                                    #2 % FIGURE_NAME:1
+                                                    \concat % FIGURE_NAME:1
+                                                        { % FIGURE_NAME:1
+                                                            [ % FIGURE_NAME:1
+                                                            3 % FIGURE_NAME:1
+                                                            \hspace % FIGURE_NAME:1
+                                                                #1 % FIGURE_NAME:1
+                                                            \raise % FIGURE_NAME:1
+                                                                #0.25 % FIGURE_NAME:1
+                                                                \fontsize % FIGURE_NAME:1
+                                                                    #-2 % FIGURE_NAME:1
+                                                                    (None) % FIGURE_NAME:1
+                                                            ] % FIGURE_NAME:1
+                                                        } % FIGURE_NAME:1
+                                                } % FIGURE_NAME:1
                 <BLANKLINE>
                                         g'16
                 <BLANKLINE>
@@ -2574,21 +2574,21 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 1/16
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) % SEGMENT:SPACING:COMMAND:3
                             s1 * 1/16
                                 - \markup {
                                     \column
                                         {
-                                            \line % STAGE-NUMBER:2
-                                                { % STAGE-NUMBER:2
-                                                    \fontsize % STAGE-NUMBER:2
-                                                        #-3 % STAGE-NUMBER:2
-                                                        \with-color % STAGE-NUMBER:2
-                                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                                            [1] % STAGE-NUMBER:2
-                                                } % STAGE-NUMBER:2
+                                            \line % STAGE_NUMBER:2
+                                                { % STAGE_NUMBER:2
+                                                    \fontsize % STAGE_NUMBER:2
+                                                        #-3 % STAGE_NUMBER:2
+                                                        \with-color % STAGE_NUMBER:2
+                                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                                            [1] % STAGE_NUMBER:2
+                                                } % STAGE_NUMBER:2
                                             \line % SEGMENT:SPACING:MARKUP:4
                                                 { % SEGMENT:SPACING:MARKUP:4
                                                     \with-color % SEGMENT:SPACING:MARKUP:4
@@ -2651,23 +2651,23 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \clef "treble" % SEGMENT:EXPLICIT-CLEF:3
                                         \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT-CLEF:COLOR:2
                                         e'16
-                                            ^ \markup { % FIGURE-NAME:1
-                                                \fontsize % FIGURE-NAME:1
-                                                    #2 % FIGURE-NAME:1
-                                                    \concat % FIGURE-NAME:1
-                                                        { % FIGURE-NAME:1
-                                                            [ % FIGURE-NAME:1
-                                                            0 % FIGURE-NAME:1
-                                                            \hspace % FIGURE-NAME:1
-                                                                #1 % FIGURE-NAME:1
-                                                            \raise % FIGURE-NAME:1
-                                                                #0.25 % FIGURE-NAME:1
-                                                                \fontsize % FIGURE-NAME:1
-                                                                    #-2 % FIGURE-NAME:1
-                                                                    (None) % FIGURE-NAME:1
-                                                            ] % FIGURE-NAME:1
-                                                        } % FIGURE-NAME:1
-                                                } % FIGURE-NAME:1
+                                            ^ \markup { % FIGURE_NAME:1
+                                                \fontsize % FIGURE_NAME:1
+                                                    #2 % FIGURE_NAME:1
+                                                    \concat % FIGURE_NAME:1
+                                                        { % FIGURE_NAME:1
+                                                            [ % FIGURE_NAME:1
+                                                            0 % FIGURE_NAME:1
+                                                            \hspace % FIGURE_NAME:1
+                                                                #1 % FIGURE_NAME:1
+                                                            \raise % FIGURE_NAME:1
+                                                                #0.25 % FIGURE_NAME:1
+                                                                \fontsize % FIGURE_NAME:1
+                                                                    #-2 % FIGURE_NAME:1
+                                                                    (None) % FIGURE_NAME:1
+                                                            ] % FIGURE_NAME:1
+                                                        } % FIGURE_NAME:1
+                                                } % FIGURE_NAME:1
                                     }
                                 }
                                 {
@@ -2675,23 +2675,23 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         %%% MusicVoice [measure 2] %%%
                                         fs'16 [
-                                            ^ \markup { % FIGURE-NAME:1
-                                                \fontsize % FIGURE-NAME:1
-                                                    #2 % FIGURE-NAME:1
-                                                    \concat % FIGURE-NAME:1
-                                                        { % FIGURE-NAME:1
-                                                            [ % FIGURE-NAME:1
-                                                            1 % FIGURE-NAME:1
-                                                            \hspace % FIGURE-NAME:1
-                                                                #1 % FIGURE-NAME:1
-                                                            \raise % FIGURE-NAME:1
-                                                                #0.25 % FIGURE-NAME:1
-                                                                \fontsize % FIGURE-NAME:1
-                                                                    #-2 % FIGURE-NAME:1
-                                                                    (None) % FIGURE-NAME:1
-                                                            ] % FIGURE-NAME:1
-                                                        } % FIGURE-NAME:1
-                                                } % FIGURE-NAME:1
+                                            ^ \markup { % FIGURE_NAME:1
+                                                \fontsize % FIGURE_NAME:1
+                                                    #2 % FIGURE_NAME:1
+                                                    \concat % FIGURE_NAME:1
+                                                        { % FIGURE_NAME:1
+                                                            [ % FIGURE_NAME:1
+                                                            1 % FIGURE_NAME:1
+                                                            \hspace % FIGURE_NAME:1
+                                                                #1 % FIGURE_NAME:1
+                                                            \raise % FIGURE_NAME:1
+                                                                #0.25 % FIGURE_NAME:1
+                                                                \fontsize % FIGURE_NAME:1
+                                                                    #-2 % FIGURE_NAME:1
+                                                                    (None) % FIGURE_NAME:1
+                                                            ] % FIGURE_NAME:1
+                                                        } % FIGURE_NAME:1
+                                                } % FIGURE_NAME:1
                 <BLANKLINE>
                                         d'16
                 <BLANKLINE>
@@ -2725,23 +2725,23 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         %%% MusicVoice [measure 3] %%%
                                         b'16
-                                            ^ \markup { % FIGURE-NAME:1
-                                                \fontsize % FIGURE-NAME:1
-                                                    #2 % FIGURE-NAME:1
-                                                    \concat % FIGURE-NAME:1
-                                                        { % FIGURE-NAME:1
-                                                            [ % FIGURE-NAME:1
-                                                            2 % FIGURE-NAME:1
-                                                            \hspace % FIGURE-NAME:1
-                                                                #1 % FIGURE-NAME:1
-                                                            \raise % FIGURE-NAME:1
-                                                                #0.25 % FIGURE-NAME:1
-                                                                \fontsize % FIGURE-NAME:1
-                                                                    #-2 % FIGURE-NAME:1
-                                                                    (None) % FIGURE-NAME:1
-                                                            ] % FIGURE-NAME:1
-                                                        } % FIGURE-NAME:1
-                                                } % FIGURE-NAME:1
+                                            ^ \markup { % FIGURE_NAME:1
+                                                \fontsize % FIGURE_NAME:1
+                                                    #2 % FIGURE_NAME:1
+                                                    \concat % FIGURE_NAME:1
+                                                        { % FIGURE_NAME:1
+                                                            [ % FIGURE_NAME:1
+                                                            2 % FIGURE_NAME:1
+                                                            \hspace % FIGURE_NAME:1
+                                                                #1 % FIGURE_NAME:1
+                                                            \raise % FIGURE_NAME:1
+                                                                #0.25 % FIGURE_NAME:1
+                                                                \fontsize % FIGURE_NAME:1
+                                                                    #-2 % FIGURE_NAME:1
+                                                                    (None) % FIGURE_NAME:1
+                                                            ] % FIGURE_NAME:1
+                                                        } % FIGURE_NAME:1
+                                                } % FIGURE_NAME:1
                                     }
                                 }
                                 {
@@ -2749,23 +2749,23 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         %%% MusicVoice [measure 4] %%%
                                         bf'16 [
-                                            ^ \markup { % FIGURE-NAME:1
-                                                \fontsize % FIGURE-NAME:1
-                                                    #2 % FIGURE-NAME:1
-                                                    \concat % FIGURE-NAME:1
-                                                        { % FIGURE-NAME:1
-                                                            [ % FIGURE-NAME:1
-                                                            3 % FIGURE-NAME:1
-                                                            \hspace % FIGURE-NAME:1
-                                                                #1 % FIGURE-NAME:1
-                                                            \raise % FIGURE-NAME:1
-                                                                #0.25 % FIGURE-NAME:1
-                                                                \fontsize % FIGURE-NAME:1
-                                                                    #-2 % FIGURE-NAME:1
-                                                                    (None) % FIGURE-NAME:1
-                                                            ] % FIGURE-NAME:1
-                                                        } % FIGURE-NAME:1
-                                                } % FIGURE-NAME:1
+                                            ^ \markup { % FIGURE_NAME:1
+                                                \fontsize % FIGURE_NAME:1
+                                                    #2 % FIGURE_NAME:1
+                                                    \concat % FIGURE_NAME:1
+                                                        { % FIGURE_NAME:1
+                                                            [ % FIGURE_NAME:1
+                                                            3 % FIGURE_NAME:1
+                                                            \hspace % FIGURE_NAME:1
+                                                                #1 % FIGURE_NAME:1
+                                                            \raise % FIGURE_NAME:1
+                                                                #0.25 % FIGURE_NAME:1
+                                                                \fontsize % FIGURE_NAME:1
+                                                                    #-2 % FIGURE_NAME:1
+                                                                    (None) % FIGURE_NAME:1
+                                                            ] % FIGURE_NAME:1
+                                                        } % FIGURE_NAME:1
+                                                } % FIGURE_NAME:1
                 <BLANKLINE>
                                         g'16
                 <BLANKLINE>
@@ -2863,15 +2863,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             s1 * 1/2
-                                - \markup { % STAGE-NUMBER:2
-                                    \fontsize % STAGE-NUMBER:2
-                                        #-3 % STAGE-NUMBER:2
-                                        \with-color % STAGE-NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                            [1] % STAGE-NUMBER:2
-                                    } % STAGE-NUMBER:2
+                                - \markup { % STAGE_NUMBER:2
+                                    \fontsize % STAGE_NUMBER:2
+                                        #-3 % STAGE_NUMBER:2
+                                        \with-color % STAGE_NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                            [1] % STAGE_NUMBER:2
+                                    } % STAGE_NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -3039,15 +3039,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             s1 * 1/2
-                                - \markup { % STAGE-NUMBER:2
-                                    \fontsize % STAGE-NUMBER:2
-                                        #-3 % STAGE-NUMBER:2
-                                        \with-color % STAGE-NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                            [1] % STAGE-NUMBER:2
-                                    } % STAGE-NUMBER:2
+                                - \markup { % STAGE_NUMBER:2
+                                    \fontsize % STAGE_NUMBER:2
+                                        #-3 % STAGE_NUMBER:2
+                                        \with-color % STAGE_NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                            [1] % STAGE_NUMBER:2
+                                    } % STAGE_NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -3212,15 +3212,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             s1 * 1/2
-                                - \markup { % STAGE-NUMBER:2
-                                    \fontsize % STAGE-NUMBER:2
-                                        #-3 % STAGE-NUMBER:2
-                                        \with-color % STAGE-NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                            [1] % STAGE-NUMBER:2
-                                    } % STAGE-NUMBER:2
+                                - \markup { % STAGE_NUMBER:2
+                                    \fontsize % STAGE_NUMBER:2
+                                        #-3 % STAGE_NUMBER:2
+                                        \with-color % STAGE_NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                            [1] % STAGE_NUMBER:2
+                                    } % STAGE_NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -3389,15 +3389,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             s1 * 1/2
-                                - \markup { % STAGE-NUMBER:2
-                                    \fontsize % STAGE-NUMBER:2
-                                        #-3 % STAGE-NUMBER:2
-                                        \with-color % STAGE-NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                            [1] % STAGE-NUMBER:2
-                                    } % STAGE-NUMBER:2
+                                - \markup { % STAGE_NUMBER:2
+                                    \fontsize % STAGE_NUMBER:2
+                                        #-3 % STAGE_NUMBER:2
+                                        \with-color % STAGE_NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                            [1] % STAGE_NUMBER:2
+                                    } % STAGE_NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -3571,15 +3571,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             s1 * 1/2
-                                - \markup { % STAGE-NUMBER:2
-                                    \fontsize % STAGE-NUMBER:2
-                                        #-3 % STAGE-NUMBER:2
-                                        \with-color % STAGE-NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                            [1] % STAGE-NUMBER:2
-                                    } % STAGE-NUMBER:2
+                                - \markup { % STAGE_NUMBER:2
+                                    \fontsize % STAGE_NUMBER:2
+                                        #-3 % STAGE_NUMBER:2
+                                        \with-color % STAGE_NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                            [1] % STAGE_NUMBER:2
+                                    } % STAGE_NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -3746,15 +3746,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             s1 * 1/2
-                                - \markup { % STAGE-NUMBER:2
-                                    \fontsize % STAGE-NUMBER:2
-                                        #-3 % STAGE-NUMBER:2
-                                        \with-color % STAGE-NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                            [1] % STAGE-NUMBER:2
-                                    } % STAGE-NUMBER:2
+                                - \markup { % STAGE_NUMBER:2
+                                    \fontsize % STAGE_NUMBER:2
+                                        #-3 % STAGE_NUMBER:2
+                                        \with-color % STAGE_NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                            [1] % STAGE_NUMBER:2
+                                    } % STAGE_NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -3988,15 +3988,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             s1 * 1/2
-                                - \markup { % STAGE-NUMBER:2
-                                    \fontsize % STAGE-NUMBER:2
-                                        #-3 % STAGE-NUMBER:2
-                                        \with-color % STAGE-NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                            [1] % STAGE-NUMBER:2
-                                    } % STAGE-NUMBER:2
+                                - \markup { % STAGE_NUMBER:2
+                                    \fontsize % STAGE_NUMBER:2
+                                        #-3 % STAGE_NUMBER:2
+                                        \with-color % STAGE_NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                            [1] % STAGE_NUMBER:2
+                                    } % STAGE_NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -4161,15 +4161,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             s1 * 1/2
-                                - \markup { % STAGE-NUMBER:2
-                                    \fontsize % STAGE-NUMBER:2
-                                        #-3 % STAGE-NUMBER:2
-                                        \with-color % STAGE-NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                            [1] % STAGE-NUMBER:2
-                                    } % STAGE-NUMBER:2
+                                - \markup { % STAGE_NUMBER:2
+                                    \fontsize % STAGE_NUMBER:2
+                                        #-3 % STAGE_NUMBER:2
+                                        \with-color % STAGE_NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                            [1] % STAGE_NUMBER:2
+                                    } % STAGE_NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -4321,21 +4321,21 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 3/16
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) % SEGMENT:SPACING:COMMAND:3
                             s1 * 3/16
                                 - \markup {
                                     \column
                                         {
-                                            \line % STAGE-NUMBER:2
-                                                { % STAGE-NUMBER:2
-                                                    \fontsize % STAGE-NUMBER:2
-                                                        #-3 % STAGE-NUMBER:2
-                                                        \with-color % STAGE-NUMBER:2
-                                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                                            [1] % STAGE-NUMBER:2
-                                                } % STAGE-NUMBER:2
+                                            \line % STAGE_NUMBER:2
+                                                { % STAGE_NUMBER:2
+                                                    \fontsize % STAGE_NUMBER:2
+                                                        #-3 % STAGE_NUMBER:2
+                                                        \with-color % STAGE_NUMBER:2
+                                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                                            [1] % STAGE_NUMBER:2
+                                                } % STAGE_NUMBER:2
                                             \line % SEGMENT:SPACING:MARKUP:4
                                                 { % SEGMENT:SPACING:MARKUP:4
                                                     \with-color % SEGMENT:SPACING:MARKUP:4
@@ -4617,21 +4617,21 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 3/16
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) % SEGMENT:SPACING:COMMAND:3
                             s1 * 3/16
                                 - \markup {
                                     \column
                                         {
-                                            \line % STAGE-NUMBER:2
-                                                { % STAGE-NUMBER:2
-                                                    \fontsize % STAGE-NUMBER:2
-                                                        #-3 % STAGE-NUMBER:2
-                                                        \with-color % STAGE-NUMBER:2
-                                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                                            [1] % STAGE-NUMBER:2
-                                                } % STAGE-NUMBER:2
+                                            \line % STAGE_NUMBER:2
+                                                { % STAGE_NUMBER:2
+                                                    \fontsize % STAGE_NUMBER:2
+                                                        #-3 % STAGE_NUMBER:2
+                                                        \with-color % STAGE_NUMBER:2
+                                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                                            [1] % STAGE_NUMBER:2
+                                                } % STAGE_NUMBER:2
                                             \line % SEGMENT:SPACING:MARKUP:4
                                                 { % SEGMENT:SPACING:MARKUP:4
                                                     \with-color % SEGMENT:SPACING:MARKUP:4
@@ -4839,15 +4839,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             s1 * 1/2
-                                - \markup { % STAGE-NUMBER:2
-                                    \fontsize % STAGE-NUMBER:2
-                                        #-3 % STAGE-NUMBER:2
-                                        \with-color % STAGE-NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                            [1] % STAGE-NUMBER:2
-                                    } % STAGE-NUMBER:2
+                                - \markup { % STAGE_NUMBER:2
+                                    \fontsize % STAGE_NUMBER:2
+                                        #-3 % STAGE_NUMBER:2
+                                        \with-color % STAGE_NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                            [1] % STAGE_NUMBER:2
+                                    } % STAGE_NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -5014,20 +5014,20 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             s1 * 1/2
-                                ^ \markup { % CLOCK-TIME:3
-                                    \fontsize % CLOCK-TIME:3
-                                        #-2 % CLOCK-TIME:3
-                                        0'00'' % CLOCK-TIME:3
-                                    } % CLOCK-TIME:3
-                                - \markup { % STAGE-NUMBER:2
-                                    \fontsize % STAGE-NUMBER:2
-                                        #-3 % STAGE-NUMBER:2
-                                        \with-color % STAGE-NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                            [1] % STAGE-NUMBER:2
-                                    } % STAGE-NUMBER:2
+                                ^ \markup { % CLOCK_TIME:3
+                                    \fontsize % CLOCK_TIME:3
+                                        #-2 % CLOCK_TIME:3
+                                        0'00'' % CLOCK_TIME:3
+                                    } % CLOCK_TIME:3
+                                - \markup { % STAGE_NUMBER:2
+                                    \fontsize % STAGE_NUMBER:2
+                                        #-3 % STAGE_NUMBER:2
+                                        \with-color % STAGE_NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                            [1] % STAGE_NUMBER:2
+                                    } % STAGE_NUMBER:2
                                 ^ \markup {
                                 \fontsize
                                     #-6
@@ -5048,29 +5048,29 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                                ^ \markup { % CLOCK-TIME:1
-                                    \fontsize % CLOCK-TIME:1
-                                        #-2 % CLOCK-TIME:1
-                                        0'02'' % CLOCK-TIME:1
-                                    } % CLOCK-TIME:1
+                                ^ \markup { % CLOCK_TIME:1
+                                    \fontsize % CLOCK_TIME:1
+                                        #-2 % CLOCK_TIME:1
+                                        0'02'' % CLOCK_TIME:1
+                                    } % CLOCK_TIME:1
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                                ^ \markup { % CLOCK-TIME:1
-                                    \fontsize % CLOCK-TIME:1
-                                        #-2 % CLOCK-TIME:1
-                                        0'04'' % CLOCK-TIME:1
-                                    } % CLOCK-TIME:1
+                                ^ \markup { % CLOCK_TIME:1
+                                    \fontsize % CLOCK_TIME:1
+                                        #-2 % CLOCK_TIME:1
+                                        0'04'' % CLOCK_TIME:1
+                                    } % CLOCK_TIME:1
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
-                                ^ \markup { % CLOCK-TIME:1
-                                    \fontsize % CLOCK-TIME:1
-                                        #-2 % CLOCK-TIME:1
-                                        0'07'' % CLOCK-TIME:1
-                                    } % CLOCK-TIME:1
+                                ^ \markup { % CLOCK_TIME:1
+                                    \fontsize % CLOCK_TIME:1
+                                        #-2 % CLOCK_TIME:1
+                                        0'07'' % CLOCK_TIME:1
+                                    } % CLOCK_TIME:1
                 <BLANKLINE>
                         }
                     >>
@@ -5339,15 +5339,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             s1 * 1/2
-                                - \markup { % STAGE-NUMBER:2
-                                    \fontsize % STAGE-NUMBER:2
-                                        #-3 % STAGE-NUMBER:2
-                                        \with-color % STAGE-NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                            [1] % STAGE-NUMBER:2
-                                    } % STAGE-NUMBER:2
+                                - \markup { % STAGE_NUMBER:2
+                                    \fontsize % STAGE_NUMBER:2
+                                        #-3 % STAGE_NUMBER:2
+                                        \with-color % STAGE_NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                            [1] % STAGE_NUMBER:2
+                                    } % STAGE_NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -5409,15 +5409,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             s1 * 1/2
-                                - \markup { % STAGE-NUMBER:2
-                                    \fontsize % STAGE-NUMBER:2
-                                        #-3 % STAGE-NUMBER:2
-                                        \with-color % STAGE-NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                            [1] % STAGE-NUMBER:2
-                                    } % STAGE-NUMBER:2
+                                - \markup { % STAGE_NUMBER:2
+                                    \fontsize % STAGE_NUMBER:2
+                                        #-3 % STAGE_NUMBER:2
+                                        \with-color % STAGE_NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                            [1] % STAGE_NUMBER:2
+                                    } % STAGE_NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -5523,15 +5523,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             s1 * 1/2
-                                - \markup { % STAGE-NUMBER:2
-                                    \fontsize % STAGE-NUMBER:2
-                                        #-3 % STAGE-NUMBER:2
-                                        \with-color % STAGE-NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                            [K.1] % STAGE-NUMBER:2
-                                    } % STAGE-NUMBER:2
+                                - \markup { % STAGE_NUMBER:2
+                                    \fontsize % STAGE_NUMBER:2
+                                        #-3 % STAGE_NUMBER:2
+                                        \with-color % STAGE_NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                            [K.1] % STAGE_NUMBER:2
+                                    } % STAGE_NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -5700,15 +5700,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             s1 * 1/2
-                                - \markup { % STAGE-NUMBER:2
-                                    \fontsize % STAGE-NUMBER:2
-                                        #-3 % STAGE-NUMBER:2
-                                        \with-color % STAGE-NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                            [intermezzo.1] % STAGE-NUMBER:2
-                                    } % STAGE-NUMBER:2
+                                - \markup { % STAGE_NUMBER:2
+                                    \fontsize % STAGE_NUMBER:2
+                                        #-3 % STAGE_NUMBER:2
+                                        \with-color % STAGE_NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                            [intermezzo.1] % STAGE_NUMBER:2
+                                    } % STAGE_NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -5895,15 +5895,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY-BAR:1
+                            \bar "" % SEGMENT:EMPTY_BAR:1
                             s1 * 1/2
-                                - \markup { % STAGE-NUMBER:2
-                                    \fontsize % STAGE-NUMBER:2
-                                        #-3 % STAGE-NUMBER:2
-                                        \with-color % STAGE-NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                            [1] % STAGE-NUMBER:2
-                                    } % STAGE-NUMBER:2
+                                - \markup { % STAGE_NUMBER:2
+                                    \fontsize % STAGE_NUMBER:2
+                                        #-3 % STAGE_NUMBER:2
+                                        \with-color % STAGE_NUMBER:2
+                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                            [1] % STAGE_NUMBER:2
+                                    } % STAGE_NUMBER:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8

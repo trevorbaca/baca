@@ -36,15 +36,15 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 8/16
-                        \bar "" % SEGMENT:EMPTY-BAR:1
+                        \bar "" % SEGMENT:EMPTY_BAR:1
                         s1 * 1/2
-                            - \markup { % STAGE-NUMBER:2
-                                \fontsize % STAGE-NUMBER:2
-                                    #-3 % STAGE-NUMBER:2
-                                    \with-color % STAGE-NUMBER:2
-                                        #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                        [1] % STAGE-NUMBER:2
-                                } % STAGE-NUMBER:2
+                            - \markup { % STAGE_NUMBER:2
+                                \fontsize % STAGE_NUMBER:2
+                                    #-3 % STAGE_NUMBER:2
+                                    \with-color % STAGE_NUMBER:2
+                                        #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                        [1] % STAGE_NUMBER:2
+                                } % STAGE_NUMBER:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
                         \time 4/8
@@ -144,21 +144,21 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 8/16
-                        \bar "" % SEGMENT:EMPTY-BAR:1
+                        \bar "" % SEGMENT:EMPTY_BAR:1
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16) % SEGMENT:SPACING:COMMAND:3
                         s1 * 1/2
                             - \markup {
                                 \column
                                     {
-                                        \line % STAGE-NUMBER:2
-                                            { % STAGE-NUMBER:2
-                                                \fontsize % STAGE-NUMBER:2
-                                                    #-3 % STAGE-NUMBER:2
-                                                    \with-color % STAGE-NUMBER:2
-                                                        #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                                        [1] % STAGE-NUMBER:2
-                                            } % STAGE-NUMBER:2
+                                        \line % STAGE_NUMBER:2
+                                            { % STAGE_NUMBER:2
+                                                \fontsize % STAGE_NUMBER:2
+                                                    #-3 % STAGE_NUMBER:2
+                                                    \with-color % STAGE_NUMBER:2
+                                                        #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                                        [1] % STAGE_NUMBER:2
+                                            } % STAGE_NUMBER:2
                                         \line % SEGMENT:SPACING:MARKUP:4
                                             { % SEGMENT:SPACING:MARKUP:4
                                                 \with-color % SEGMENT:SPACING:MARKUP:4
@@ -297,21 +297,21 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 8/16
-                        \bar "" % SEGMENT:EMPTY-BAR:1
+                        \bar "" % SEGMENT:EMPTY_BAR:1
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16) % SEGMENT:SPACING:COMMAND:3
                         s1 * 1/2
                             - \markup {
                                 \column
                                     {
-                                        \line % STAGE-NUMBER:2
-                                            { % STAGE-NUMBER:2
-                                                \fontsize % STAGE-NUMBER:2
-                                                    #-3 % STAGE-NUMBER:2
-                                                    \with-color % STAGE-NUMBER:2
-                                                        #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                                        [1] % STAGE-NUMBER:2
-                                            } % STAGE-NUMBER:2
+                                        \line % STAGE_NUMBER:2
+                                            { % STAGE_NUMBER:2
+                                                \fontsize % STAGE_NUMBER:2
+                                                    #-3 % STAGE_NUMBER:2
+                                                    \with-color % STAGE_NUMBER:2
+                                                        #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                                        [1] % STAGE_NUMBER:2
+                                            } % STAGE_NUMBER:2
                                         \line % SEGMENT:SPACING:MARKUP:4
                                             { % SEGMENT:SPACING:MARKUP:4
                                                 \with-color % SEGMENT:SPACING:MARKUP:4
@@ -451,21 +451,21 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 8/16
-                        \bar "" % SEGMENT:EMPTY-BAR:1
+                        \bar "" % SEGMENT:EMPTY_BAR:1
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 32) % SEGMENT:SPACING:COMMAND:3
                         s1 * 1/2
                             - \markup {
                                 \column
                                     {
-                                        \line % STAGE-NUMBER:2
-                                            { % STAGE-NUMBER:2
-                                                \fontsize % STAGE-NUMBER:2
-                                                    #-3 % STAGE-NUMBER:2
-                                                    \with-color % STAGE-NUMBER:2
-                                                        #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                                        [1] % STAGE-NUMBER:2
-                                            } % STAGE-NUMBER:2
+                                        \line % STAGE_NUMBER:2
+                                            { % STAGE_NUMBER:2
+                                                \fontsize % STAGE_NUMBER:2
+                                                    #-3 % STAGE_NUMBER:2
+                                                    \with-color % STAGE_NUMBER:2
+                                                        #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                                        [1] % STAGE_NUMBER:2
+                                            } % STAGE_NUMBER:2
                                         \line % SEGMENT:SPACING:MARKUP:4
                                             { % SEGMENT:SPACING:MARKUP:4
                                                 \with-color % SEGMENT:SPACING:MARKUP:4
@@ -606,21 +606,21 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 8/16
-                        \bar "" % SEGMENT:EMPTY-BAR:1
+                        \bar "" % SEGMENT:EMPTY_BAR:1
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 32) % SEGMENT:SPACING:COMMAND:3
                         s1 * 1/2
                             - \markup {
                                 \column
                                     {
-                                        \line % STAGE-NUMBER:2
-                                            { % STAGE-NUMBER:2
-                                                \fontsize % STAGE-NUMBER:2
-                                                    #-3 % STAGE-NUMBER:2
-                                                    \with-color % STAGE-NUMBER:2
-                                                        #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                                        [1] % STAGE-NUMBER:2
-                                            } % STAGE-NUMBER:2
+                                        \line % STAGE_NUMBER:2
+                                            { % STAGE_NUMBER:2
+                                                \fontsize % STAGE_NUMBER:2
+                                                    #-3 % STAGE_NUMBER:2
+                                                    \with-color % STAGE_NUMBER:2
+                                                        #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                                        [1] % STAGE_NUMBER:2
+                                            } % STAGE_NUMBER:2
                                         \line % SEGMENT:SPACING:MARKUP:4
                                             { % SEGMENT:SPACING:MARKUP:4
                                                 \with-color % SEGMENT:SPACING:MARKUP:4
@@ -771,21 +771,21 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 4/8
-                        \bar "" % SEGMENT:EMPTY-BAR:1
+                        \bar "" % SEGMENT:EMPTY_BAR:1
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16) % SEGMENT:SPACING:COMMAND:3
                         s1 * 1/2
                             - \markup {
                                 \column
                                     {
-                                        \line % STAGE-NUMBER:2
-                                            { % STAGE-NUMBER:2
-                                                \fontsize % STAGE-NUMBER:2
-                                                    #-3 % STAGE-NUMBER:2
-                                                    \with-color % STAGE-NUMBER:2
-                                                        #(x11-color 'DarkCyan) % STAGE-NUMBER:2
-                                                        [1] % STAGE-NUMBER:2
-                                            } % STAGE-NUMBER:2
+                                        \line % STAGE_NUMBER:2
+                                            { % STAGE_NUMBER:2
+                                                \fontsize % STAGE_NUMBER:2
+                                                    #-3 % STAGE_NUMBER:2
+                                                    \with-color % STAGE_NUMBER:2
+                                                        #(x11-color 'DarkCyan) % STAGE_NUMBER:2
+                                                        [1] % STAGE_NUMBER:2
+                                            } % STAGE_NUMBER:2
                                         \line % SEGMENT:SPACING:MARKUP:4
                                             { % SEGMENT:SPACING:MARKUP:4
                                                 \with-color % SEGMENT:SPACING:MARKUP:4
