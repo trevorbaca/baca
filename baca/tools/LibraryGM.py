@@ -1629,3 +1629,11 @@ class LibraryGM(abjad.AbjadObject):
             indicators=[abjad.Articulation('marcato')],
             selector=selector,
             )
+
+    @staticmethod
+    def minimum_width(duration):
+        r'''Makes horizontal spacing specifier with `duration` minimum width.
+        '''
+        return baca.HorizontalSpacingSpecifier(
+            minimum_width=duration,
+            )

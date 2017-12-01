@@ -14,76 +14,10 @@ class SegmentMaker(abjad.SegmentMaker):
 
     ..  container:: example
 
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score])
-            \context Score = "Score" <<
-                \context GlobalContext = "GlobalContext" <<
-                    \context GlobalSkips = "GlobalSkips" {
-            <BLANKLINE>
-                        %%% GlobalSkips [measure 1] %%%
-                        \time 4/8
-                        \bar "" %! SEGMENT:EMPTY_START_BAR:1
-                        s1 * 1/2
-                            - \markup { %! STAGE_NUMBER_MARKUP:2
-                                \fontsize %! STAGE_NUMBER_MARKUP:2
-                                    #-3 %! STAGE_NUMBER_MARKUP:2
-                                    \with-color %! STAGE_NUMBER_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                        [1] %! STAGE_NUMBER_MARKUP:2
-                                } %! STAGE_NUMBER_MARKUP:2
-            <BLANKLINE>
-                        %%% GlobalSkips [measure 2] %%%
-                        \time 3/8
-                        s1 * 3/8
-            <BLANKLINE>
-                        %%% GlobalSkips [measure 3] %%%
-                        \time 4/8
-                        s1 * 1/2
-            <BLANKLINE>
-                        %%% GlobalSkips [measure 4] %%%
-                        \time 3/8
-                        s1 * 3/8
-            <BLANKLINE>
-                    }
-                >>
-                \context MusicContext = "MusicContext" <<
-                    \context Staff = "MusicStaff" {
-                        \context Voice = "MusicVoice" {
-            <BLANKLINE>
-                            %%% MusicVoice [measure 1] %%%
-                            \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
-                            \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                            \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                            R1 * 1/2
-                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
-            <BLANKLINE>
-                            %%% MusicVoice [measure 2] %%%
-                            R1 * 3/8
-            <BLANKLINE>
-                            %%% MusicVoice [measure 3] %%%
-                            R1 * 1/2
-            <BLANKLINE>
-                            %%% MusicVoice [measure 4] %%%
-                            R1 * 3/8
-                            \bar "|"
-            <BLANKLINE>
-                        }
-                    }
-                >>
-            >>
-
-    ..  container:: example
+        Default segment-maker:
 
         >>> maker = baca.SegmentMaker(
+        ...     ignore_unpitched_notes=True,
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
@@ -135,115 +69,45 @@ class SegmentMaker(abjad.SegmentMaker):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override Flag.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
                                 \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 c'8 [
                                 \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
             <BLANKLINE>
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override Flag.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
                                 c'8
             <BLANKLINE>
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override Flag.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
                                 c'8
             <BLANKLINE>
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override Flag.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
                                 c'8 ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override Flag.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
                                 c'8 [
             <BLANKLINE>
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override Flag.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
                                 c'8
             <BLANKLINE>
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override Flag.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
                                 c'8 ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 3] %%%
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override Flag.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
                                 c'8 [
             <BLANKLINE>
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override Flag.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
                                 c'8
             <BLANKLINE>
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override Flag.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
                                 c'8
             <BLANKLINE>
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override Flag.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
                                 c'8 ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 4] %%%
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override Flag.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
                                 c'8 [
             <BLANKLINE>
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override Flag.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
                                 c'8
             <BLANKLINE>
-                                \once \override Beam.color = #blue
-                                \once \override Dots.color = #blue
-                                \once \override Flag.color = #blue
-                                \once \override NoteHead.color = #blue
-                                \once \override Stem.color = #blue
                                 c'8 ]
                                 \bar "|"
             <BLANKLINE>
@@ -252,8 +116,6 @@ class SegmentMaker(abjad.SegmentMaker):
                     }
                 >>
             >>
-
-        Segment-maker colors unpitched notes blue.
 
     '''
 
@@ -2166,8 +2028,6 @@ class SegmentMaker(abjad.SegmentMaker):
         return string
 
     def _update_metadata(self, environment=None):
-        if environment is not None:
-            return
         self._metadata['measure_count'] = self.measure_count
         end_settings = self._get_end_settings()
         self._metadata.update(end_settings)
@@ -2199,9 +2059,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
         Otherwise segment raises exception on empty selectors.
 
-        Set to true, false or none.
-
         Defaults to none.
+
+        Set to true, false or none.
 
         Returns true, false or none.
         '''
@@ -2213,45 +2073,46 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
+            Colors octaves:
+
             >>> maker = baca.SegmentMaker(
             ...     color_octaves=True,
             ...     score_template=baca.StringTrioScoreTemplate(),
-            ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
-            ...         minimum_width=abjad.Duration(1, 24),
-            ...         ),
-            ...     time_signatures=[abjad.TimeSignature((6, 16))],
+            ...     spacing_specifier=baca.minimum_width((1, 31)),
+            ...     time_signatures=[(6, 16)],
             ...     )
 
             >>> music_maker = baca.MusicMaker()
             >>> contribution = music_maker(
-            ...     'MusicVoice',
+            ...     'ViolinMusicVoice',
             ...     [[2, 4, 5, 7, 9, 11]],
+            ...     baca.flags(),
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
-            ...     baca.RhythmCommand(
-            ...         rhythm_maker=contribution['MusicVoice'],
-            ...         ),
+            ...     baca.scope('ViolinMusicVoice', 1),
+            ...     baca.rhythm(contribution['ViolinMusicVoice']),
             ...     )
 
             >>> contribution = music_maker(
             ...     'CelloMusicVoice',
             ...     [[-3, -5, -7, -8, -10, -12]],
+            ...     baca.flags(),
             ...     )
             >>> maker(
             ...     baca.scope('CelloMusicVoice', 1),
-            ...     baca.RhythmCommand(
-            ...         rhythm_maker=contribution['CelloMusicVoice'],
-            ...         ),
+            ...     baca.rhythm(contribution['CelloMusicVoice']),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.setting(lilypond_file['Score']).auto_beaming = False
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score])
-                \context Score = "Score" <<
+                \context Score = "Score" \with {
+                    autoBeaming = ##f
+                } <<
                     \tag violin.viola.cello
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -2260,7 +2121,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 6/16
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 31) %! SEGMENT:SPACING_COMMAND:3
                             s1 * 3/8
                                 - \markup {
                                     \column
@@ -2279,7 +2140,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                                         #(x11-color 'DarkCyan) % SEGMENT:SPACING_MARKUP:4
                                                         \fontsize % SEGMENT:SPACING_MARKUP:4
                                                             #-3 % SEGMENT:SPACING_MARKUP:4
-                                                            (1/24) % SEGMENT:SPACING_MARKUP:4
+                                                            (1/31) % SEGMENT:SPACING_MARKUP:4
                                                 } % SEGMENT:SPACING_MARKUP:4
                                         }
                                     }
@@ -2291,17 +2152,46 @@ class SegmentMaker(abjad.SegmentMaker):
                             \tag violin
                             \context ViolinMusicStaff = "ViolinMusicStaff" {
                                 \context ViolinMusicVoice = "ViolinMusicVoice" {
+                                    {
+                                        {
                 <BLANKLINE>
-                                    %%% ViolinMusicVoice [measure 1] %%%
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    R1 * 3/8
-                                    \bar "|"
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
+                                            %%% ViolinMusicVoice [measure 1] %%%
+                                            \set ViolinMusicStaff.instrumentName = \markup {
+                                                \hcenter-in
+                                                    #10
+                                                    Violin
+                                                }
+                                            \set ViolinMusicStaff.shortInstrumentName = \markup {
+                                                \hcenter-in
+                                                    #10
+                                                    Vn.
+                                                }
+                                            \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
+                                            \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
+                                            \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                            d'16
+                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
+                                            e'16
+                <BLANKLINE>
+                                            \once \override Accidental.color = #red
+                                            \once \override Beam.color = #red
+                                            \once \override Dots.color = #red
+                                            \once \override NoteHead.color = #red
+                                            \once \override Stem.color = #red
+                                            f'16
+                                                - \tweak color #red
+                                                ^ \markup { OCTAVE }
+                <BLANKLINE>
+                                            g'16
+                <BLANKLINE>
+                                            a'16
+                <BLANKLINE>
+                                            b'16
+                                            \bar "|"
+                <BLANKLINE>
+                                        }
+                                    }
                                 }
                             }
                             \tag viola
@@ -2309,8 +2199,16 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \context ViolaMusicVoice = "ViolaMusicVoice" {
                 <BLANKLINE>
                                     %%% ViolaMusicVoice [measure 1] %%%
-                                    \set ViolaMusicStaff.instrumentName = \markup { Viola }
-                                    \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
+                                    \set ViolaMusicStaff.instrumentName = \markup {
+                                        \hcenter-in
+                                            #10
+                                            Viola
+                                        }
+                                    \set ViolaMusicStaff.shortInstrumentName = \markup {
+                                        \hcenter-in
+                                            #10
+                                            Va.
+                                        }
                                     \clef "alto" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
@@ -2327,23 +2225,38 @@ class SegmentMaker(abjad.SegmentMaker):
                                         {
                 <BLANKLINE>
                                             %%% CelloMusicVoice [measure 1] %%%
-                                            \set CelloMusicStaff.instrumentName = \markup { Cello }
-                                            \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
+                                            \set CelloMusicStaff.instrumentName = \markup {
+                                                \hcenter-in
+                                                    #10
+                                                    Cello
+                                                }
+                                            \set CelloMusicStaff.shortInstrumentName = \markup {
+                                                \hcenter-in
+                                                    #10
+                                                    Vc.
+                                                }
                                             \clef "bass" %! EXPLICIT_CLEF_COMMAND:3
                                             \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                             \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                            a16 [
+                                            a16
                                             \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                             g16
                 <BLANKLINE>
+                                            \once \override Accidental.color = #red
+                                            \once \override Beam.color = #red
+                                            \once \override Dots.color = #red
+                                            \once \override NoteHead.color = #red
+                                            \once \override Stem.color = #red
                                             f16
+                                                - \tweak color #red
+                                                ^ \markup { OCTAVE }
                 <BLANKLINE>
                                             e16
                 <BLANKLINE>
                                             d16
                 <BLANKLINE>
-                                            c16 ]
+                                            c16
                                             \bar "|"
                 <BLANKLINE>
                                         }
@@ -2354,9 +2267,9 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        Set to true, false or none.
-
         Defaults to none.
+
+        Set to true, false or none.
 
         Returns true, false or none.
         '''
@@ -2367,6 +2280,8 @@ class SegmentMaker(abjad.SegmentMaker):
         r'''Is true when segment-maker colors out-of-range pitches.
 
         ..  container:: example
+
+            Colors out-of-range pitches:
 
             >>> music_maker = baca.MusicMaker()
 
@@ -2381,7 +2296,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     contribution = music_maker(
             ...         'Voice 1',
             ...         collections,
-            ...         figure_name=i,
+            ...         baca.flags(),
             ...         )
             ...     figures.append(contribution['Voice 1'])
             ...     time_signatures.append(contribution.time_signature)
@@ -2392,30 +2307,29 @@ class SegmentMaker(abjad.SegmentMaker):
             ...
             >>> figures = abjad.select(figures_)
 
-            >>> pitch_range = abjad.instrumenttools.Violin().pitch_range
+            >>> pitch_range = abjad.Violin().pitch_range
             >>> maker = baca.SegmentMaker(
             ...     color_out_of_range_pitches=True,
             ...     range_checker=pitch_range,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
-            ...         minimum_width=abjad.Duration(1, 24),
-            ...         ),
+            ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
-            ...     baca.RhythmCommand(
-            ...         rhythm_maker=figures,
-            ...         ),
+            ...     baca.rhythm(figures),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.setting(lilypond_file['Score']).auto_beaming = False
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score])
-                \context Score = "Score" <<
+                \context Score = "Score" \with {
+                    autoBeaming = ##f
+                } <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
@@ -2495,28 +2409,11 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                 <BLANKLINE>
                                         %%% MusicVoice [measure 1] %%%
-                                        \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
-                                        \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:2
-                                        \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:3
+                                        \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
+                                        \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
+                                        \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                         e'16
-                                            ^ \markup { %! FIGURE_NAME_MARKUP:1
-                                                \fontsize %! FIGURE_NAME_MARKUP:1
-                                                    #2 %! FIGURE_NAME_MARKUP:1
-                                                    \concat %! FIGURE_NAME_MARKUP:1
-                                                        { %! FIGURE_NAME_MARKUP:1
-                                                            [ %! FIGURE_NAME_MARKUP:1
-                                                            0 %! FIGURE_NAME_MARKUP:1
-                                                            \hspace %! FIGURE_NAME_MARKUP:1
-                                                                #1 %! FIGURE_NAME_MARKUP:1
-                                                            \raise %! FIGURE_NAME_MARKUP:1
-                                                                #0.25 %! FIGURE_NAME_MARKUP:1
-                                                                \fontsize %! FIGURE_NAME_MARKUP:1
-                                                                    #-2 %! FIGURE_NAME_MARKUP:1
-                                                                    (None) %! FIGURE_NAME_MARKUP:1
-                                                            ] %! FIGURE_NAME_MARKUP:1
-                                                        } %! FIGURE_NAME_MARKUP:1
-                                                } %! FIGURE_NAME_MARKUP:1
-                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                                     }
                                 }
                                 {
@@ -2528,34 +2425,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override Dots.color = #red
                                         \once \override NoteHead.color = #red
                                         \once \override Stem.color = #red
-                                        c16 [
-                                            ^ \markup {
-                                                \column
-                                                    {
-                                                        \line % FIGURE_NAME_MARKUP:1
-                                                            { % FIGURE_NAME_MARKUP:1
-                                                                \fontsize % FIGURE_NAME_MARKUP:1
-                                                                    #2 % FIGURE_NAME_MARKUP:1
-                                                                    \concat % FIGURE_NAME_MARKUP:1
-                                                                        { % FIGURE_NAME_MARKUP:1
-                                                                            [ % FIGURE_NAME_MARKUP:1
-                                                                            1 % FIGURE_NAME_MARKUP:1
-                                                                            \hspace % FIGURE_NAME_MARKUP:1
-                                                                                #1 % FIGURE_NAME_MARKUP:1
-                                                                            \raise % FIGURE_NAME_MARKUP:1
-                                                                                #0.25 % FIGURE_NAME_MARKUP:1
-                                                                                \fontsize % FIGURE_NAME_MARKUP:1
-                                                                                    #-2 % FIGURE_NAME_MARKUP:1
-                                                                                    (None) % FIGURE_NAME_MARKUP:1
-                                                                            ] % FIGURE_NAME_MARKUP:1
-                                                                        } % FIGURE_NAME_MARKUP:1
-                                                            } % FIGURE_NAME_MARKUP:1
-                                                        \line
-                                                            {
-                                                                *
-                                                            }
-                                                    }
-                                                }
+                                        c16
+                                            - \tweak color #red
+                                            ^ \markup { * }
                 <BLANKLINE>
                                         d'16
                 <BLANKLINE>
@@ -2567,7 +2439,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         a'16
                 <BLANKLINE>
-                                        c'16 ]
+                                        c'16
                                     }
                                 }
                                 {
@@ -2575,47 +2447,13 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         %%% MusicVoice [measure 3] %%%
                                         b'16
-                                            ^ \markup { %! FIGURE_NAME_MARKUP:1
-                                                \fontsize %! FIGURE_NAME_MARKUP:1
-                                                    #2 %! FIGURE_NAME_MARKUP:1
-                                                    \concat %! FIGURE_NAME_MARKUP:1
-                                                        { %! FIGURE_NAME_MARKUP:1
-                                                            [ %! FIGURE_NAME_MARKUP:1
-                                                            2 %! FIGURE_NAME_MARKUP:1
-                                                            \hspace %! FIGURE_NAME_MARKUP:1
-                                                                #1 %! FIGURE_NAME_MARKUP:1
-                                                            \raise %! FIGURE_NAME_MARKUP:1
-                                                                #0.25 %! FIGURE_NAME_MARKUP:1
-                                                                \fontsize %! FIGURE_NAME_MARKUP:1
-                                                                    #-2 %! FIGURE_NAME_MARKUP:1
-                                                                    (None) %! FIGURE_NAME_MARKUP:1
-                                                            ] %! FIGURE_NAME_MARKUP:1
-                                                        } %! FIGURE_NAME_MARKUP:1
-                                                } %! FIGURE_NAME_MARKUP:1
                                     }
                                 }
                                 {
                                     {
                 <BLANKLINE>
                                         %%% MusicVoice [measure 4] %%%
-                                        bf'16 [
-                                            ^ \markup { %! FIGURE_NAME_MARKUP:1
-                                                \fontsize %! FIGURE_NAME_MARKUP:1
-                                                    #2 %! FIGURE_NAME_MARKUP:1
-                                                    \concat %! FIGURE_NAME_MARKUP:1
-                                                        { %! FIGURE_NAME_MARKUP:1
-                                                            [ %! FIGURE_NAME_MARKUP:1
-                                                            3 %! FIGURE_NAME_MARKUP:1
-                                                            \hspace %! FIGURE_NAME_MARKUP:1
-                                                                #1 %! FIGURE_NAME_MARKUP:1
-                                                            \raise %! FIGURE_NAME_MARKUP:1
-                                                                #0.25 %! FIGURE_NAME_MARKUP:1
-                                                                \fontsize %! FIGURE_NAME_MARKUP:1
-                                                                    #-2 %! FIGURE_NAME_MARKUP:1
-                                                                    (None) %! FIGURE_NAME_MARKUP:1
-                                                            ] %! FIGURE_NAME_MARKUP:1
-                                                        } %! FIGURE_NAME_MARKUP:1
-                                                } %! FIGURE_NAME_MARKUP:1
+                                        bf'16
                 <BLANKLINE>
                                         g'16
                 <BLANKLINE>
@@ -2625,7 +2463,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         c'16
                 <BLANKLINE>
-                                        f'16 ]
+                                        f'16
                                         \bar "|"
                 <BLANKLINE>
                                     }
@@ -2635,9 +2473,9 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        Set to true, false or none.
-
         Defaults to none.
+
+        Set to true, false or none.
 
         Returns true, false or none.
         '''
@@ -2648,6 +2486,8 @@ class SegmentMaker(abjad.SegmentMaker):
         r'''Is true when segment-maker colors repeat pitch-classes.
 
         ..  container:: example
+
+            Colors repeat pitch-classes:
 
             >>> music_maker = baca.MusicMaker()
 
@@ -2662,7 +2502,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     contribution = music_maker(
             ...         'Voice 1',
             ...         collections,
-            ...         figure_name=i,
+            ...         baca.flags(),
             ...         )
             ...     figures.append(contribution['Voice 1'])
             ...     time_signatures.append(contribution.time_signature)
@@ -2689,12 +2529,15 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.setting(lilypond_file['Score']).auto_beaming = False
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
                 >>> abjad.f(lilypond_file[abjad.Score])
-                \context Score = "Score" <<
+                \context Score = "Score" \with {
+                    autoBeaming = ##f
+                } <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
@@ -2774,52 +2617,18 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                 <BLANKLINE>
                                         %%% MusicVoice [measure 1] %%%
-                                        \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
-                                        \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:2
-                                        \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:3
+                                        \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
+                                        \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
+                                        \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                         e'16
-                                            ^ \markup { %! FIGURE_NAME_MARKUP:1
-                                                \fontsize %! FIGURE_NAME_MARKUP:1
-                                                    #2 %! FIGURE_NAME_MARKUP:1
-                                                    \concat %! FIGURE_NAME_MARKUP:1
-                                                        { %! FIGURE_NAME_MARKUP:1
-                                                            [ %! FIGURE_NAME_MARKUP:1
-                                                            0 %! FIGURE_NAME_MARKUP:1
-                                                            \hspace %! FIGURE_NAME_MARKUP:1
-                                                                #1 %! FIGURE_NAME_MARKUP:1
-                                                            \raise %! FIGURE_NAME_MARKUP:1
-                                                                #0.25 %! FIGURE_NAME_MARKUP:1
-                                                                \fontsize %! FIGURE_NAME_MARKUP:1
-                                                                    #-2 %! FIGURE_NAME_MARKUP:1
-                                                                    (None) %! FIGURE_NAME_MARKUP:1
-                                                            ] %! FIGURE_NAME_MARKUP:1
-                                                        } %! FIGURE_NAME_MARKUP:1
-                                                } %! FIGURE_NAME_MARKUP:1
-                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                                     }
                                 }
                                 {
                                     {
                 <BLANKLINE>
                                         %%% MusicVoice [measure 2] %%%
-                                        fs'16 [
-                                            ^ \markup { %! FIGURE_NAME_MARKUP:1
-                                                \fontsize %! FIGURE_NAME_MARKUP:1
-                                                    #2 %! FIGURE_NAME_MARKUP:1
-                                                    \concat %! FIGURE_NAME_MARKUP:1
-                                                        { %! FIGURE_NAME_MARKUP:1
-                                                            [ %! FIGURE_NAME_MARKUP:1
-                                                            1 %! FIGURE_NAME_MARKUP:1
-                                                            \hspace %! FIGURE_NAME_MARKUP:1
-                                                                #1 %! FIGURE_NAME_MARKUP:1
-                                                            \raise %! FIGURE_NAME_MARKUP:1
-                                                                #0.25 %! FIGURE_NAME_MARKUP:1
-                                                                \fontsize %! FIGURE_NAME_MARKUP:1
-                                                                    #-2 %! FIGURE_NAME_MARKUP:1
-                                                                    (None) %! FIGURE_NAME_MARKUP:1
-                                                            ] %! FIGURE_NAME_MARKUP:1
-                                                        } %! FIGURE_NAME_MARKUP:1
-                                                } %! FIGURE_NAME_MARKUP:1
+                                        fs'16
                 <BLANKLINE>
                                         d'16
                 <BLANKLINE>
@@ -2845,7 +2654,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             - \tweak color #red
                                             ^ \markup { @ }
                 <BLANKLINE>
-                                        c'16 ]
+                                        c'16
                                     }
                                 }
                                 {
@@ -2853,47 +2662,13 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         %%% MusicVoice [measure 3] %%%
                                         b'16
-                                            ^ \markup { %! FIGURE_NAME_MARKUP:1
-                                                \fontsize %! FIGURE_NAME_MARKUP:1
-                                                    #2 %! FIGURE_NAME_MARKUP:1
-                                                    \concat %! FIGURE_NAME_MARKUP:1
-                                                        { %! FIGURE_NAME_MARKUP:1
-                                                            [ %! FIGURE_NAME_MARKUP:1
-                                                            2 %! FIGURE_NAME_MARKUP:1
-                                                            \hspace %! FIGURE_NAME_MARKUP:1
-                                                                #1 %! FIGURE_NAME_MARKUP:1
-                                                            \raise %! FIGURE_NAME_MARKUP:1
-                                                                #0.25 %! FIGURE_NAME_MARKUP:1
-                                                                \fontsize %! FIGURE_NAME_MARKUP:1
-                                                                    #-2 %! FIGURE_NAME_MARKUP:1
-                                                                    (None) %! FIGURE_NAME_MARKUP:1
-                                                            ] %! FIGURE_NAME_MARKUP:1
-                                                        } %! FIGURE_NAME_MARKUP:1
-                                                } %! FIGURE_NAME_MARKUP:1
                                     }
                                 }
                                 {
                                     {
                 <BLANKLINE>
                                         %%% MusicVoice [measure 4] %%%
-                                        bf'16 [
-                                            ^ \markup { %! FIGURE_NAME_MARKUP:1
-                                                \fontsize %! FIGURE_NAME_MARKUP:1
-                                                    #2 %! FIGURE_NAME_MARKUP:1
-                                                    \concat %! FIGURE_NAME_MARKUP:1
-                                                        { %! FIGURE_NAME_MARKUP:1
-                                                            [ %! FIGURE_NAME_MARKUP:1
-                                                            3 %! FIGURE_NAME_MARKUP:1
-                                                            \hspace %! FIGURE_NAME_MARKUP:1
-                                                                #1 %! FIGURE_NAME_MARKUP:1
-                                                            \raise %! FIGURE_NAME_MARKUP:1
-                                                                #0.25 %! FIGURE_NAME_MARKUP:1
-                                                                \fontsize %! FIGURE_NAME_MARKUP:1
-                                                                    #-2 %! FIGURE_NAME_MARKUP:1
-                                                                    (None) %! FIGURE_NAME_MARKUP:1
-                                                            ] %! FIGURE_NAME_MARKUP:1
-                                                        } %! FIGURE_NAME_MARKUP:1
-                                                } %! FIGURE_NAME_MARKUP:1
+                                        bf'16
                 <BLANKLINE>
                                         g'16
                 <BLANKLINE>
@@ -2917,7 +2692,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             - \tweak color #red
                                             ^ \markup { @ }
                 <BLANKLINE>
-                                        f'16 ]
+                                        f'16
                                         \bar "|"
                 <BLANKLINE>
                                     }
@@ -2927,9 +2702,9 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        Set to true, false or none.
-
         Defaults to none.
+
+        Set to true, false or none.
 
         Returns true, false or none.
         '''
@@ -2959,8 +2734,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '''
         return self._fermata_measure_staff_line_count
 
-    # TODO: write examples showing Score.BarLine.transparent = ##f
-    #       for mensurstriche final_bar_line=abjad.Exact
     @property
     def final_bar_line(self):
         r'''Gets final bar line.
@@ -2970,6 +2743,7 @@ class SegmentMaker(abjad.SegmentMaker):
             Nonlast segment sets final bar line to ``'|'`` by default:
 
             >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
@@ -3021,117 +2795,151 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                     c'8 [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 2] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 [
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 3] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 [
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 4] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 [
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 ]
                                     \bar "|"
+                <BLANKLINE>
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+            Override nonlast segment final bar line like this:
+
+            >>> maker = baca.SegmentMaker(
+            ...     final_bar_line='||',
+            ...     ignore_unpitched_notes=True,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_even_runs(),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score])
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \time 4/8
+                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            s1 * 1/2
+                                - \markup { %! STAGE_NUMBER_MARKUP:2
+                                    \fontsize %! STAGE_NUMBER_MARKUP:2
+                                        #-3 %! STAGE_NUMBER_MARKUP:2
+                                        \with-color %! STAGE_NUMBER_MARKUP:2
+                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                            [1] %! STAGE_NUMBER_MARKUP:2
+                                    } %! STAGE_NUMBER_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 2] %%%
+                            \time 3/8
+                            s1 * 3/8
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 3] %%%
+                            \time 4/8
+                            s1 * 1/2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 4] %%%
+                            \time 3/8
+                            s1 * 3/8
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 1] %%%
+                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
+                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
+                                    \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                    c'8 [
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8 ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 2] %%%
+                                    c'8 [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8 ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 3] %%%
+                                    c'8 [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8 ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 4] %%%
+                                    c'8 [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8 ]
+                                    \bar "||"
                 <BLANKLINE>
                                 }
                             }
@@ -3144,6 +2952,7 @@ class SegmentMaker(abjad.SegmentMaker):
             Last segment in score sets final bar line to ``'|.'`` by default:
 
             >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
@@ -3199,115 +3008,45 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                     c'8 [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 2] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 [
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 3] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 [
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 4] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 [
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 ]
                                     \bar "|."
                 <BLANKLINE>
@@ -3317,187 +3056,11 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        ..  container:: example
-
-            Nonlast segment sets final bar line explicitly:
+            Override last segment final bar line like this:
 
             >>> maker = baca.SegmentMaker(
             ...     final_bar_line='||',
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     baca.scope('MusicVoice', 1),
-            ...     baca.make_even_runs(),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score])
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
-                            s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/8
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 4/8
-                            s1 * 1/2
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
-                            s1 * 3/8
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 1] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    c'8 [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 3] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 4] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                    \bar "||"
-                <BLANKLINE>
-                                }
-                            }
-                        }
-                    >>
-                >>
-
-        ..  container:: example
-
-            Last segment in score sets final bar line explicitly:
-
-            >>> maker = baca.SegmentMaker(
-            ...     final_bar_line='||',
+            ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
@@ -3553,115 +3116,45 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                     c'8 [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 2] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 [
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 3] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 [
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 4] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 [
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 ]
                                     \bar "||"
                 <BLANKLINE>
@@ -3683,186 +3176,13 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            No final markup by default:
-
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     baca.scope('MusicVoice', 1),
-            ...     baca.make_even_runs(),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score])
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
-                            s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/8
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 4/8
-                            s1 * 1/2
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
-                            s1 * 3/8
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 1] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    c'8 [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 3] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 4] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                    \bar "|"
-                <BLANKLINE>
-                                }
-                            }
-                        }
-                    >>
-                >>
-
-        ..  container:: example
-
-            With final markup:
+            Sets final markup:
 
             >>> maker = baca.SegmentMaker(
             ...     final_bar_line='|.',
             ...     final_markup=(['Madison, WI'], ['October 2016']),
             ...     final_markup_extra_offset=(-9, -2),
+            ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
@@ -3914,115 +3234,45 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                     c'8 [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 2] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 [
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 3] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 [
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 4] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 [
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     \once \override TextScript.extra-offset = #'(-9 . -2)
                                     c'8 ]
                                         _ \markup {
@@ -4086,8 +3336,6 @@ class SegmentMaker(abjad.SegmentMaker):
     def ignore_repeat_pitch_classes(self):
         r'''Is true when segment ignores repeat pitch-classes.
 
-        Is false when segment raises exception on repeat pitch-classes.
-
         Defaults to none.
 
         Set to true, false or none.
@@ -4099,182 +3347,6 @@ class SegmentMaker(abjad.SegmentMaker):
     @property
     def ignore_unpitched_notes(self):
         r'''Is true when segment ignores unpitched notes.
-
-        Is false when segment colors unpitched notes.
-
-        ..  container:: example
-
-            Colors unpitched notes by default:
-
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     baca.scope('MusicVoice', 1),
-            ...     baca.make_even_runs(),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score])
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
-                            s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/8
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 4/8
-                            s1 * 1/2
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
-                            s1 * 3/8
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 1] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    c'8 [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 3] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 4] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                    \bar "|"
-                <BLANKLINE>
-                                }
-                            }
-                        }
-                    >>
-                >>
 
         ..  container:: example
 
@@ -4381,6 +3453,180 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
+        ..  container:: example
+
+            Colors unpitched notes:
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_even_runs(),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score])
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \time 4/8
+                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            s1 * 1/2
+                                - \markup { %! STAGE_NUMBER_MARKUP:2
+                                    \fontsize %! STAGE_NUMBER_MARKUP:2
+                                        #-3 %! STAGE_NUMBER_MARKUP:2
+                                        \with-color %! STAGE_NUMBER_MARKUP:2
+                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                            [1] %! STAGE_NUMBER_MARKUP:2
+                                    } %! STAGE_NUMBER_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 2] %%%
+                            \time 3/8
+                            s1 * 3/8
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 3] %%%
+                            \time 4/8
+                            s1 * 1/2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 4] %%%
+                            \time 3/8
+                            s1 * 3/8
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 1] %%%
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
+                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
+                                    \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                    c'8 [
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
+                <BLANKLINE>
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                <BLANKLINE>
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                <BLANKLINE>
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 2] %%%
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                <BLANKLINE>
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                <BLANKLINE>
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 3] %%%
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                <BLANKLINE>
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                <BLANKLINE>
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                <BLANKLINE>
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 4] %%%
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 [
+                <BLANKLINE>
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8
+                <BLANKLINE>
+                                    \once \override Beam.color = #blue
+                                    \once \override Dots.color = #blue
+                                    \once \override Flag.color = #blue
+                                    \once \override NoteHead.color = #blue
+                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                    \bar "|"
+                <BLANKLINE>
+                                }
+                            }
+                        }
+                    >>
+                >>
+
         Defaults to none.
 
         Set to true, false or none.
@@ -4392,305 +3638,6 @@ class SegmentMaker(abjad.SegmentMaker):
     @property
     def ignore_unregistered_pitches(self):
         r'''Is true when segment ignores unregistered pitches.
-
-        Is false when segment colors unregistered pitches.
-
-        ..  container:: example
-
-            Colors unregistered pitches by default:
-
-                >>> music_maker = baca.MusicMaker(
-                ...     baca.PitchFirstRhythmCommand(
-                ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-                ...             acciaccatura_specifiers=[
-                ...                 baca.AcciaccaturaSpecifier(),
-                ...                 ],
-                ...             talea=rhythmos.Talea(
-                ...                 counts=[3],
-                ...                 denominator=16,
-                ...                 ),
-                ...             ),
-                ...         ),
-                ...     color_unregistered_pitches=True,
-                ...     denominator=8,
-                ...     )
-
-            >>> collection_lists = [
-            ...     [[4]],
-            ...     [[6, 2, 3, 5, 9, 8, 0]],
-            ...     [[11]],
-            ...     [[10, 7, 9, 8, 0, 5]],
-            ...     ]
-            >>> figures, time_signatures = [], []
-            >>> for collections in collection_lists:
-            ...     contribution = music_maker('Voice 1', collections)
-            ...     figures.append(contribution['Voice 1'])
-            ...     time_signatures.append(contribution.time_signature)
-            ...
-            >>> figures_ = []
-            >>> for figure in figures:
-            ...     figures_.extend(figure)
-            ...
-            >>> figures = abjad.select(figures_)
-
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
-            ...         minimum_width=abjad.Duration(1, 24),
-            ...         ),
-            ...     time_signatures=time_signatures,
-            ...     )
-            >>> maker(
-            ...     baca.scope('MusicVoice', 1),
-            ...     baca.RhythmCommand(
-            ...         rhythm_maker=figures,
-            ...         ),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score])
-                \context Score = "Score" \with {
-                    \override SpacingSpanner.strict-grace-spacing = ##f
-                    \override SpacingSpanner.strict-note-spacing = ##f
-                } <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 3/16
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
-                            s1 * 3/16
-                                - \markup {
-                                    \column
-                                        {
-                                            \line % STAGE_NUMBER_MARKUP:2
-                                                { % STAGE_NUMBER_MARKUP:2
-                                                    \fontsize % STAGE_NUMBER_MARKUP:2
-                                                        #-3 % STAGE_NUMBER_MARKUP:2
-                                                        \with-color % STAGE_NUMBER_MARKUP:2
-                                                            #(x11-color 'DarkCyan) % STAGE_NUMBER_MARKUP:2
-                                                            [1] % STAGE_NUMBER_MARKUP:2
-                                                } % STAGE_NUMBER_MARKUP:2
-                                            \line % SEGMENT:SPACING_MARKUP:4
-                                                { % SEGMENT:SPACING_MARKUP:4
-                                                    \with-color % SEGMENT:SPACING_MARKUP:4
-                                                        #(x11-color 'DarkCyan) % SEGMENT:SPACING_MARKUP:4
-                                                        \fontsize % SEGMENT:SPACING_MARKUP:4
-                                                            #-3 % SEGMENT:SPACING_MARKUP:4
-                                                            (1/24) % SEGMENT:SPACING_MARKUP:4
-                                                } % SEGMENT:SPACING_MARKUP:4
-                                        }
-                                    }
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/16
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
-                            s1 * 3/16
-                                - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                    \with-color %! SEGMENT:SPACING_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                        \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                            #-3 %! SEGMENT:SPACING_MARKUP:2
-                                            (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                    } %! SEGMENT:SPACING_MARKUP:2
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 3/16
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
-                            s1 * 3/16
-                                - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                    \with-color %! SEGMENT:SPACING_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                        \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                            #-3 %! SEGMENT:SPACING_MARKUP:2
-                                            (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                    } %! SEGMENT:SPACING_MARKUP:2
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/16
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
-                            s1 * 3/16
-                                - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                    \with-color %! SEGMENT:SPACING_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                        \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                            #-3 %! SEGMENT:SPACING_MARKUP:2
-                                            (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                    } %! SEGMENT:SPACING_MARKUP:2
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
-                                {
-                                    {
-                <BLANKLINE>
-                                        %%% MusicVoice [measure 1] %%%
-                                        \once \override Accidental.color = #magenta
-                                        \once \override Beam.color = #magenta
-                                        \once \override Dots.color = #magenta
-                                        \once \override Flag.color = #magenta
-                                        \once \override NoteHead.color = #magenta
-                                        \once \override Stem.color = #magenta
-                                        \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
-                                        \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                        \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                        e'8.
-                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
-                                    }
-                                }
-                                {
-                                    {
-                <BLANKLINE>
-                                        %%% MusicVoice [measure 2] %%%
-                                        \acciaccatura {
-                <BLANKLINE>
-                                            \once \override Accidental.color = #magenta
-                                            \once \override Beam.color = #magenta
-                                            \once \override Dots.color = #magenta
-                                            \once \override Flag.color = #magenta
-                                            \once \override NoteHead.color = #magenta
-                                            \once \override Stem.color = #magenta
-                                            fs'16 [
-                <BLANKLINE>
-                                            \once \override Accidental.color = #magenta
-                                            \once \override Beam.color = #magenta
-                                            \once \override Dots.color = #magenta
-                                            \once \override Flag.color = #magenta
-                                            \once \override NoteHead.color = #magenta
-                                            \once \override Stem.color = #magenta
-                                            d'16
-                <BLANKLINE>
-                                            \once \override Accidental.color = #magenta
-                                            \once \override Beam.color = #magenta
-                                            \once \override Dots.color = #magenta
-                                            \once \override Flag.color = #magenta
-                                            \once \override NoteHead.color = #magenta
-                                            \once \override Stem.color = #magenta
-                                            ef'16
-                <BLANKLINE>
-                                            \once \override Accidental.color = #magenta
-                                            \once \override Beam.color = #magenta
-                                            \once \override Dots.color = #magenta
-                                            \once \override Flag.color = #magenta
-                                            \once \override NoteHead.color = #magenta
-                                            \once \override Stem.color = #magenta
-                                            f'16
-                <BLANKLINE>
-                                            \once \override Accidental.color = #magenta
-                                            \once \override Beam.color = #magenta
-                                            \once \override Dots.color = #magenta
-                                            \once \override Flag.color = #magenta
-                                            \once \override NoteHead.color = #magenta
-                                            \once \override Stem.color = #magenta
-                                            a'16
-                <BLANKLINE>
-                                            \once \override Accidental.color = #magenta
-                                            \once \override Beam.color = #magenta
-                                            \once \override Dots.color = #magenta
-                                            \once \override Flag.color = #magenta
-                                            \once \override NoteHead.color = #magenta
-                                            \once \override Stem.color = #magenta
-                                            af'16 ]
-                <BLANKLINE>
-                                        }
-                                        \once \override Accidental.color = #magenta
-                                        \once \override Beam.color = #magenta
-                                        \once \override Dots.color = #magenta
-                                        \once \override Flag.color = #magenta
-                                        \once \override NoteHead.color = #magenta
-                                        \once \override Stem.color = #magenta
-                                        c'8.
-                                    }
-                                }
-                                {
-                                    {
-                <BLANKLINE>
-                                        %%% MusicVoice [measure 3] %%%
-                                        \once \override Accidental.color = #magenta
-                                        \once \override Beam.color = #magenta
-                                        \once \override Dots.color = #magenta
-                                        \once \override Flag.color = #magenta
-                                        \once \override NoteHead.color = #magenta
-                                        \once \override Stem.color = #magenta
-                                        b'8.
-                                    }
-                                }
-                                {
-                                    {
-                <BLANKLINE>
-                                        %%% MusicVoice [measure 4] %%%
-                                        \acciaccatura {
-                <BLANKLINE>
-                                            \once \override Accidental.color = #magenta
-                                            \once \override Beam.color = #magenta
-                                            \once \override Dots.color = #magenta
-                                            \once \override Flag.color = #magenta
-                                            \once \override NoteHead.color = #magenta
-                                            \once \override Stem.color = #magenta
-                                            bf'16 [
-                <BLANKLINE>
-                                            \once \override Accidental.color = #magenta
-                                            \once \override Beam.color = #magenta
-                                            \once \override Dots.color = #magenta
-                                            \once \override Flag.color = #magenta
-                                            \once \override NoteHead.color = #magenta
-                                            \once \override Stem.color = #magenta
-                                            g'16
-                <BLANKLINE>
-                                            \once \override Accidental.color = #magenta
-                                            \once \override Beam.color = #magenta
-                                            \once \override Dots.color = #magenta
-                                            \once \override Flag.color = #magenta
-                                            \once \override NoteHead.color = #magenta
-                                            \once \override Stem.color = #magenta
-                                            a'16
-                <BLANKLINE>
-                                            \once \override Accidental.color = #magenta
-                                            \once \override Beam.color = #magenta
-                                            \once \override Dots.color = #magenta
-                                            \once \override Flag.color = #magenta
-                                            \once \override NoteHead.color = #magenta
-                                            \once \override Stem.color = #magenta
-                                            af'16
-                <BLANKLINE>
-                                            \once \override Accidental.color = #magenta
-                                            \once \override Beam.color = #magenta
-                                            \once \override Dots.color = #magenta
-                                            \once \override Flag.color = #magenta
-                                            \once \override NoteHead.color = #magenta
-                                            \once \override Stem.color = #magenta
-                                            c'16 ]
-                <BLANKLINE>
-                                        }
-                                        \once \override Accidental.color = #magenta
-                                        \once \override Beam.color = #magenta
-                                        \once \override Dots.color = #magenta
-                                        \once \override Flag.color = #magenta
-                                        \once \override NoteHead.color = #magenta
-                                        \once \override Stem.color = #magenta
-                                        f'8.
-                                        \bar "|"
-                <BLANKLINE>
-                                    }
-                                }
-                            }
-                        }
-                    >>
-                >>
 
         ..  container:: example
 
@@ -4733,16 +3680,12 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unregistered_pitches=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
-            ...         minimum_width=abjad.Duration(1, 24),
-            ...         ),
+            ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
-            ...     baca.RhythmCommand(
-            ...         rhythm_maker=figures,
-            ...         ),
+            ...     baca.rhythm(figures),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -4890,6 +3833,299 @@ class SegmentMaker(abjad.SegmentMaker):
                                             c'16 ]
                 <BLANKLINE>
                                         }
+                                        f'8.
+                                        \bar "|"
+                <BLANKLINE>
+                                    }
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            Colors unregistered pitches:
+
+                >>> music_maker = baca.MusicMaker(
+                ...     baca.PitchFirstRhythmCommand(
+                ...         rhythm_maker=baca.PitchFirstRhythmMaker(
+                ...             acciaccatura_specifiers=[
+                ...                 baca.AcciaccaturaSpecifier(),
+                ...                 ],
+                ...             talea=rhythmos.Talea(
+                ...                 counts=[3],
+                ...                 denominator=16,
+                ...                 ),
+                ...             ),
+                ...         ),
+                ...     color_unregistered_pitches=True,
+                ...     denominator=8,
+                ...     )
+
+            >>> collection_lists = [
+            ...     [[4]],
+            ...     [[6, 2, 3, 5, 9, 8, 0]],
+            ...     [[11]],
+            ...     [[10, 7, 9, 8, 0, 5]],
+            ...     ]
+            >>> figures, time_signatures = [], []
+            >>> for collections in collection_lists:
+            ...     contribution = music_maker('Voice 1', collections)
+            ...     figures.append(contribution['Voice 1'])
+            ...     time_signatures.append(contribution.time_signature)
+            ...
+            >>> figures_ = []
+            >>> for figure in figures:
+            ...     figures_.extend(figure)
+            ...
+            >>> figures = abjad.select(figures_)
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     time_signatures=time_signatures,
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.rhythm(figures),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> score = lilypond_file[abjad.Score]
+            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
+            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score])
+                \context Score = "Score" \with {
+                    \override SpacingSpanner.strict-grace-spacing = ##f
+                    \override SpacingSpanner.strict-note-spacing = ##f
+                } <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \time 3/16
+                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
+                            s1 * 3/16
+                                - \markup {
+                                    \column
+                                        {
+                                            \line % STAGE_NUMBER_MARKUP:2
+                                                { % STAGE_NUMBER_MARKUP:2
+                                                    \fontsize % STAGE_NUMBER_MARKUP:2
+                                                        #-3 % STAGE_NUMBER_MARKUP:2
+                                                        \with-color % STAGE_NUMBER_MARKUP:2
+                                                            #(x11-color 'DarkCyan) % STAGE_NUMBER_MARKUP:2
+                                                            [1] % STAGE_NUMBER_MARKUP:2
+                                                } % STAGE_NUMBER_MARKUP:2
+                                            \line % SEGMENT:SPACING_MARKUP:4
+                                                { % SEGMENT:SPACING_MARKUP:4
+                                                    \with-color % SEGMENT:SPACING_MARKUP:4
+                                                        #(x11-color 'DarkCyan) % SEGMENT:SPACING_MARKUP:4
+                                                        \fontsize % SEGMENT:SPACING_MARKUP:4
+                                                            #-3 % SEGMENT:SPACING_MARKUP:4
+                                                            (1/24) % SEGMENT:SPACING_MARKUP:4
+                                                } % SEGMENT:SPACING_MARKUP:4
+                                        }
+                                    }
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 2] %%%
+                            \time 3/16
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 3/16
+                                - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                    \with-color %! SEGMENT:SPACING_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                        \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                            #-3 %! SEGMENT:SPACING_MARKUP:2
+                                            (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                    } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 3] %%%
+                            \time 3/16
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 3/16
+                                - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                    \with-color %! SEGMENT:SPACING_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                        \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                            #-3 %! SEGMENT:SPACING_MARKUP:2
+                                            (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                    } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 4] %%%
+                            \time 3/16
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 3/16
+                                - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                    \with-color %! SEGMENT:SPACING_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                        \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                            #-3 %! SEGMENT:SPACING_MARKUP:2
+                                            (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                    } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                                {
+                                    {
+                <BLANKLINE>
+                                        %%% MusicVoice [measure 1] %%%
+                                        \once \override Accidental.color = #magenta
+                                        \once \override Beam.color = #magenta
+                                        \once \override Dots.color = #magenta
+                                        \once \override Flag.color = #magenta
+                                        \once \override NoteHead.color = #magenta
+                                        \once \override Stem.color = #magenta
+                                        \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
+                                        \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
+                                        \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                        e'8.
+                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
+                                    }
+                                }
+                                {
+                                    {
+                <BLANKLINE>
+                                        %%% MusicVoice [measure 2] %%%
+                                        \acciaccatura {
+                <BLANKLINE>
+                                            \once \override Accidental.color = #magenta
+                                            \once \override Beam.color = #magenta
+                                            \once \override Dots.color = #magenta
+                                            \once \override Flag.color = #magenta
+                                            \once \override NoteHead.color = #magenta
+                                            \once \override Stem.color = #magenta
+                                            fs'16 [
+                <BLANKLINE>
+                                            \once \override Accidental.color = #magenta
+                                            \once \override Beam.color = #magenta
+                                            \once \override Dots.color = #magenta
+                                            \once \override Flag.color = #magenta
+                                            \once \override NoteHead.color = #magenta
+                                            \once \override Stem.color = #magenta
+                                            d'16
+                <BLANKLINE>
+                                            \once \override Accidental.color = #magenta
+                                            \once \override Beam.color = #magenta
+                                            \once \override Dots.color = #magenta
+                                            \once \override Flag.color = #magenta
+                                            \once \override NoteHead.color = #magenta
+                                            \once \override Stem.color = #magenta
+                                            ef'16
+                <BLANKLINE>
+                                            \once \override Accidental.color = #magenta
+                                            \once \override Beam.color = #magenta
+                                            \once \override Dots.color = #magenta
+                                            \once \override Flag.color = #magenta
+                                            \once \override NoteHead.color = #magenta
+                                            \once \override Stem.color = #magenta
+                                            f'16
+                <BLANKLINE>
+                                            \once \override Accidental.color = #magenta
+                                            \once \override Beam.color = #magenta
+                                            \once \override Dots.color = #magenta
+                                            \once \override Flag.color = #magenta
+                                            \once \override NoteHead.color = #magenta
+                                            \once \override Stem.color = #magenta
+                                            a'16
+                <BLANKLINE>
+                                            \once \override Accidental.color = #magenta
+                                            \once \override Beam.color = #magenta
+                                            \once \override Dots.color = #magenta
+                                            \once \override Flag.color = #magenta
+                                            \once \override NoteHead.color = #magenta
+                                            \once \override Stem.color = #magenta
+                                            af'16 ]
+                <BLANKLINE>
+                                        }
+                                        \once \override Accidental.color = #magenta
+                                        \once \override Beam.color = #magenta
+                                        \once \override Dots.color = #magenta
+                                        \once \override Flag.color = #magenta
+                                        \once \override NoteHead.color = #magenta
+                                        \once \override Stem.color = #magenta
+                                        c'8.
+                                    }
+                                }
+                                {
+                                    {
+                <BLANKLINE>
+                                        %%% MusicVoice [measure 3] %%%
+                                        \once \override Accidental.color = #magenta
+                                        \once \override Beam.color = #magenta
+                                        \once \override Dots.color = #magenta
+                                        \once \override Flag.color = #magenta
+                                        \once \override NoteHead.color = #magenta
+                                        \once \override Stem.color = #magenta
+                                        b'8.
+                                    }
+                                }
+                                {
+                                    {
+                <BLANKLINE>
+                                        %%% MusicVoice [measure 4] %%%
+                                        \acciaccatura {
+                <BLANKLINE>
+                                            \once \override Accidental.color = #magenta
+                                            \once \override Beam.color = #magenta
+                                            \once \override Dots.color = #magenta
+                                            \once \override Flag.color = #magenta
+                                            \once \override NoteHead.color = #magenta
+                                            \once \override Stem.color = #magenta
+                                            bf'16 [
+                <BLANKLINE>
+                                            \once \override Accidental.color = #magenta
+                                            \once \override Beam.color = #magenta
+                                            \once \override Dots.color = #magenta
+                                            \once \override Flag.color = #magenta
+                                            \once \override NoteHead.color = #magenta
+                                            \once \override Stem.color = #magenta
+                                            g'16
+                <BLANKLINE>
+                                            \once \override Accidental.color = #magenta
+                                            \once \override Beam.color = #magenta
+                                            \once \override Dots.color = #magenta
+                                            \once \override Flag.color = #magenta
+                                            \once \override NoteHead.color = #magenta
+                                            \once \override Stem.color = #magenta
+                                            a'16
+                <BLANKLINE>
+                                            \once \override Accidental.color = #magenta
+                                            \once \override Beam.color = #magenta
+                                            \once \override Dots.color = #magenta
+                                            \once \override Flag.color = #magenta
+                                            \once \override NoteHead.color = #magenta
+                                            \once \override Stem.color = #magenta
+                                            af'16
+                <BLANKLINE>
+                                            \once \override Accidental.color = #magenta
+                                            \once \override Beam.color = #magenta
+                                            \once \override Dots.color = #magenta
+                                            \once \override Flag.color = #magenta
+                                            \once \override NoteHead.color = #magenta
+                                            \once \override Stem.color = #magenta
+                                            c'16 ]
+                <BLANKLINE>
+                                        }
+                                        \once \override Accidental.color = #magenta
+                                        \once \override Beam.color = #magenta
+                                        \once \override Dots.color = #magenta
+                                        \once \override Flag.color = #magenta
+                                        \once \override NoteHead.color = #magenta
+                                        \once \override Stem.color = #magenta
                                         f'8.
                                         \bar "|"
                 <BLANKLINE>
@@ -4953,29 +4189,22 @@ class SegmentMaker(abjad.SegmentMaker):
     def metadata(self):
         r'''Gets segment metadata after run.
 
-        Returns ordered dictionary.
-        '''
-        return self._metadata
-
-    @property
-    def metronome_mark_measure_map(self):
-        r'''Gets metronome mark measure map.
-
         ..  container:: example
 
-            Without metronome mark measure map:
+            >>> metadata, end_clefs_by_staff = {}, {}
+            >>> metadata['end_clefs_by_staff'] = end_clefs_by_staff
+            >>> end_clefs_by_staff['MusicStaff'] = 'alto'
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
-            >>> maker(
-            ...     baca.scope('MusicVoice', 1),
-            ...     baca.make_even_runs(),
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     previous_metadata=metadata,
             ...     )
 
-            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5014,136 +4243,90 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
-                                {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 1] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    c'8 [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
+                                %%% MusicVoice [measure 1] %%%
+                                \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
+                                \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
+                                \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                R1 * 1/2
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
+                                %%% MusicVoice [measure 2] %%%
+                                R1 * 3/8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
+                                %%% MusicVoice [measure 3] %%%
+                                R1 * 1/2
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
+                                %%% MusicVoice [measure 4] %%%
+                                R1 * 3/8
+                                \bar "|"
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 3] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 4] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                    \bar "|"
-                <BLANKLINE>
-                                }
                             }
                         }
                     >>
                 >>
 
+            >>> abjad.f(maker.metadata)
+            abjad.TypedOrderedDict(
+                [
+                    (
+                        'end_clefs_by_staff',
+                        abjad.TypedOrderedDict(
+                            [
+                                ('MusicStaff', 'treble'),
+                                ]
+                            ),
+                        ),
+                    ('end_clock_time', None),
+                    (
+                        'end_dynamics_by_context',
+                        abjad.TypedOrderedDict(
+                            []
+                            ),
+                        ),
+                    (
+                        'end_instruments_by_context',
+                        abjad.TypedOrderedDict(
+                            []
+                            ),
+                        ),
+                    ('end_metronome_mark', None),
+                    (
+                        'end_staff_lines_by_staff',
+                        abjad.TypedOrderedDict(
+                            []
+                            ),
+                        ),
+                    ('end_time_signature', '3/8'),
+                    ('measure_count', 4),
+                    (
+                        'time_signatures',
+                        ['4/8', '3/8', '4/8', '3/8'],
+                        ),
+                    ]
+                )
+
+        Returns ordered dictionary.
+        '''
+        return self._metadata
+
+    @property
+    def metronome_mark_measure_map(self):
+        r'''Gets metronome mark measure map.
+
         ..  container:: example
 
             With metronome mark measure map:
 
+            >>> metronome_marks = abjad.MetronomeMarkDictionary()
+            >>> metronome_marks[90] = abjad.MetronomeMark((1, 4), 90)
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     ignore_unpitched_notes=True,
             ...     metronome_mark_measure_map=baca.MetronomeMarkMeasureMap([
-            ...         (1, abjad.MetronomeMark((1, 8), 90)),
+            ...         (1, metronome_marks[90]),
             ...         ]),
+            ...     metronome_marks=metronome_marks,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -5185,7 +4368,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         #Y
                                         #DOWN
                                         \note-by-number
-                                            #3
+                                            #2
                                             #0
                                             #1
                                 \upright
@@ -5201,7 +4384,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 ^ \markup { %! CLOCK_TIME_MARKUP:1
                                     \fontsize %! CLOCK_TIME_MARKUP:1
                                         #-2 %! CLOCK_TIME_MARKUP:1
-                                        0'02'' %! CLOCK_TIME_MARKUP:1
+                                        0'01'' %! CLOCK_TIME_MARKUP:1
                                     } %! CLOCK_TIME_MARKUP:1
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
@@ -5210,7 +4393,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 ^ \markup { %! CLOCK_TIME_MARKUP:1
                                     \fontsize %! CLOCK_TIME_MARKUP:1
                                         #-2 %! CLOCK_TIME_MARKUP:1
-                                        0'04'' %! CLOCK_TIME_MARKUP:1
+                                        0'02'' %! CLOCK_TIME_MARKUP:1
                                     } %! CLOCK_TIME_MARKUP:1
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
@@ -5219,7 +4402,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 ^ \markup { %! CLOCK_TIME_MARKUP:1
                                     \fontsize %! CLOCK_TIME_MARKUP:1
                                         #-2 %! CLOCK_TIME_MARKUP:1
-                                        0'07'' %! CLOCK_TIME_MARKUP:1
+                                        0'03'' %! CLOCK_TIME_MARKUP:1
                                     } %! CLOCK_TIME_MARKUP:1
                 <BLANKLINE>
                         }
@@ -5230,115 +4413,45 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                     c'8 [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 2] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 [
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 3] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 [
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 4] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 [
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 ]
                                     \bar "|"
                 <BLANKLINE>
@@ -5350,9 +4463,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
         Defaults to none.
 
-        Set to metornome mark measure map or none.
+        Set to metronome mark measure map or none.
 
-        Returns metornome mark measure map or none.
+        Returns metronome mark measure map or none.
         '''
         return self._metronome_mark_measure_map
 
@@ -5392,8 +4505,6 @@ class SegmentMaker(abjad.SegmentMaker):
     def print_segment_duration(self):
         r'''Is true when segment prints duration in seconds.
 
-        Output prints to terminal.
-
         Defaults to none.
 
         Set to true, false or none.
@@ -5405,8 +4516,6 @@ class SegmentMaker(abjad.SegmentMaker):
     @property
     def print_timings(self):
         r'''Is true when segment prints interpreter timings.
-
-        Output prints to terminal.
 
         Defaults to none.
 
@@ -5420,6 +4529,8 @@ class SegmentMaker(abjad.SegmentMaker):
     def range_checker(self):
         r'''Gets range checker.
 
+        Defaults to none.
+
         Set to pitch range, true, false or none.
 
         Returns pitch range, true, false or none.
@@ -5429,6 +4540,8 @@ class SegmentMaker(abjad.SegmentMaker):
     @property
     def rehearsal_letter(self):
         r'''Gets rehearsal letter.
+
+        Defaults to none.
 
         Set to string or none.
 
@@ -5445,15 +4558,6 @@ class SegmentMaker(abjad.SegmentMaker):
     @property
     def score_template(self):
         r'''Gets score template.
-
-        ..  container:: example
-
-            Gets none:
-
-            >>> maker = baca.SegmentMaker()
-
-            >>> maker.score_template is None
-            True
 
         ..  container:: example
 
@@ -5667,187 +4771,10 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            Takes base string from segment name by default:
+            Sets stage label base string explicitly:
 
             >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     baca.scope('MusicVoice', 1),
-            ...     baca.make_even_runs(),
-            ...     )
-
-            >>> metadata = {'name': 'K'}
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     metadata=metadata,
-            ...     )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score])
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
-                            s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [K.1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/8
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 4/8
-                            s1 * 1/2
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
-                            s1 * 3/8
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 1] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    c'8 [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 3] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 4] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 [
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8
-                <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
-                                    c'8 ]
-                                    \bar "|"
-                <BLANKLINE>
-                                }
-                            }
-                        }
-                    >>
-                >>
-
-        ..  container:: example
-
-            Takes base string from stage label property:
-
-            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     stage_label_base_string='intermezzo',
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -5904,115 +4831,154 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                     c'8 [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 2] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 [
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 3] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 [
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 4] %%%
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8 [
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    c'8 ]
+                                    \bar "|"
+                <BLANKLINE>
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            Takes stage label base string from segment name:
+
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_even_runs(),
+            ...     )
+
+            >>> metadata = {'name': 'K'}
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     metadata=metadata,
+            ...     )
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score])
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \time 4/8
+                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            s1 * 1/2
+                                - \markup { %! STAGE_NUMBER_MARKUP:2
+                                    \fontsize %! STAGE_NUMBER_MARKUP:2
+                                        #-3 %! STAGE_NUMBER_MARKUP:2
+                                        \with-color %! STAGE_NUMBER_MARKUP:2
+                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                            [K.1] %! STAGE_NUMBER_MARKUP:2
+                                    } %! STAGE_NUMBER_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 2] %%%
+                            \time 3/8
+                            s1 * 3/8
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 3] %%%
+                            \time 4/8
+                            s1 * 1/2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 4] %%%
+                            \time 3/8
+                            s1 * 3/8
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 1] %%%
+                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
+                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
+                                    \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                    c'8 [
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8 ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 2] %%%
+                                    c'8 [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8 ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 3] %%%
+                                    c'8 [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8 ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 4] %%%
+                                    c'8 [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
                                     c'8 ]
                                     \bar "|"
                 <BLANKLINE>
@@ -6046,15 +5012,20 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            Does not transpose score by default:
+            Transposes score:
 
+            >>> instruments = abjad.InstrumentDictionary()
+            >>> instruments['clarinet'] = abjad.ClarinetInBFlat()
             >>> maker = baca.SegmentMaker(
+            ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     transpose_score=True,
             ...     )
 
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
+            ...     baca.instrument(instruments['clarinet']),
             ...     baca.make_even_runs(),
             ...     baca.pitches('E4 F4'),
             ...     )
@@ -6101,6 +5072,120 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }
+                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
+                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
+                                    \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                    fs'8 [
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
+                <BLANKLINE>
+                                    g'8
+                <BLANKLINE>
+                                    fs'8
+                <BLANKLINE>
+                                    g'8 ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 2] %%%
+                                    fs'8 [
+                <BLANKLINE>
+                                    g'8
+                <BLANKLINE>
+                                    fs'8 ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 3] %%%
+                                    g'8 [
+                <BLANKLINE>
+                                    fs'8
+                <BLANKLINE>
+                                    g'8
+                <BLANKLINE>
+                                    fs'8 ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 4] %%%
+                                    g'8 [
+                <BLANKLINE>
+                                    fs'8
+                <BLANKLINE>
+                                    g'8 ]
+                                    \bar "|"
+                <BLANKLINE>
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            Does not transpose score:
+
+            >>> instruments = abjad.InstrumentDictionary()
+            >>> instruments['clarinet'] = abjad.ClarinetInBFlat()
+            >>> maker = baca.SegmentMaker(
+            ...     instruments=instruments,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     transpose_score=False,
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.instrument(instruments['clarinet']),
+            ...     baca.make_even_runs(),
+            ...     baca.pitches('E4 F4'),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score])
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \time 4/8
+                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            s1 * 1/2
+                                - \markup { %! STAGE_NUMBER_MARKUP:2
+                                    \fontsize %! STAGE_NUMBER_MARKUP:2
+                                        #-3 %! STAGE_NUMBER_MARKUP:2
+                                        \with-color %! STAGE_NUMBER_MARKUP:2
+                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                            [1] %! STAGE_NUMBER_MARKUP:2
+                                    } %! STAGE_NUMBER_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 2] %%%
+                            \time 3/8
+                            s1 * 3/8
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 3] %%%
+                            \time 4/8
+                            s1 * 1/2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 4] %%%
+                            \time 3/8
+                            s1 * 3/8
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 1] %%%
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
@@ -6148,9 +5233,6 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                 >>
-
-        ..  note:: Build example with transposing instrument.
-            Must pass in instrument manifest.
 
         Defaults to none.
 

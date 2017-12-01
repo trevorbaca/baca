@@ -12,7 +12,7 @@
 
 \layout {
     \accidentalStyle forget
-    indent = 0
+    indent = 10
     ragged-bottom = ##t
     ragged-last = ##t
     ragged-right = ##t

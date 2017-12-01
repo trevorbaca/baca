@@ -475,7 +475,7 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def instrument(string, column=True):
+    def instrument(string, hcenter_in=16, column=True):
         r'''Makes instrument name markup.
 
         ..  container:: example
@@ -529,7 +529,7 @@ class MarkupLibrary(abjad.AbjadObject):
         '''
         return MarkupLibrary._make_instrument_name_markup(
             string,
-            16,
+            hcenter_in,
             column=column,
             )
 
@@ -1076,7 +1076,7 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
-    def short_instrument(string, column=True):
+    def short_instrument(string, hcenter_in=10, column=True):
         r'''Makes short instrument name markup.
 
         ..  container:: example
@@ -1130,7 +1130,7 @@ class MarkupLibrary(abjad.AbjadObject):
         '''
         return MarkupLibrary._make_instrument_name_markup(
             string,
-            10,
+            hcenter_in,
             column=column,
             )
 

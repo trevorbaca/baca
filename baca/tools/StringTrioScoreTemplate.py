@@ -1,5 +1,6 @@
 import abjad
-from baca.tools.ScoreTemplate import ScoreTemplate
+import baca
+from .ScoreTemplate import ScoreTemplate
 
 
 class StringTrioScoreTemplate(ScoreTemplate):
@@ -56,8 +57,16 @@ class StringTrioScoreTemplate(ScoreTemplate):
                             \context ViolinMusicVoice = "ViolinMusicVoice" {
             <BLANKLINE>
                                 %%% ViolinMusicVoice [measure 1] %%%
-                                \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
+                                \set ViolinMusicStaff.instrumentName = \markup {
+                                    \hcenter-in
+                                        #10
+                                        Violin
+                                    }
+                                \set ViolinMusicStaff.shortInstrumentName = \markup {
+                                    \hcenter-in
+                                        #10
+                                        Vn.
+                                    }
                                 \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
@@ -81,8 +90,16 @@ class StringTrioScoreTemplate(ScoreTemplate):
                             \context ViolaMusicVoice = "ViolaMusicVoice" {
             <BLANKLINE>
                                 %%% ViolaMusicVoice [measure 1] %%%
-                                \set ViolaMusicStaff.instrumentName = \markup { Viola }
-                                \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
+                                \set ViolaMusicStaff.instrumentName = \markup {
+                                    \hcenter-in
+                                        #10
+                                        Viola
+                                    }
+                                \set ViolaMusicStaff.shortInstrumentName = \markup {
+                                    \hcenter-in
+                                        #10
+                                        Va.
+                                    }
                                 \clef "alto" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
@@ -106,8 +123,16 @@ class StringTrioScoreTemplate(ScoreTemplate):
                             \context CelloMusicVoice = "CelloMusicVoice" {
             <BLANKLINE>
                                 %%% CelloMusicVoice [measure 1] %%%
-                                \set CelloMusicStaff.instrumentName = \markup { Cello }
-                                \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
+                                \set CelloMusicStaff.instrumentName = \markup {
+                                    \hcenter-in
+                                        #10
+                                        Cello
+                                    }
+                                \set CelloMusicStaff.shortInstrumentName = \markup {
+                                    \hcenter-in
+                                        #10
+                                        Vc.
+                                    }
                                 \clef "bass" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
@@ -168,7 +193,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
             context_name='ViolinMusicStaff',
             name='ViolinMusicStaff',
             )
-        violin = abjad.instrumenttools.Violin()
+        violin = abjad.Violin(
+            name_markup=baca.markup.instrument('Violin', hcenter_in=10),
+            short_name_markup=baca.markup.short_instrument(
+                'Vn.',
+                hcenter_in=10,
+                ),
+            )
         abjad.annotate(
             violin_music_staff,
             'default_instrument',
@@ -195,7 +226,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
         abjad.annotate(
             viola_music_staff,
             'default_instrument',
-            abjad.instrumenttools.Viola(),
+            abjad.Viola(
+                name_markup=baca.markup.instrument('Viola', hcenter_in=10),
+                short_name_markup=baca.markup.short_instrument(
+                    'Va.',
+                    hcenter_in=10,
+                    ),
+                ),
             )
         abjad.annotate(
             viola_music_staff,
@@ -218,7 +255,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
         abjad.annotate(
             cello_music_staff,
             'default_instrument',
-            abjad.instrumenttools.Cello(),
+            abjad.Cello(
+                name_markup=baca.markup.instrument('Cello', hcenter_in=10),
+                short_name_markup=baca.markup.short_instrument(
+                    'Vc.',
+                    hcenter_in=10,
+                    ),
+                ),
             )
         abjad.annotate(
             cello_music_staff,

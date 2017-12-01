@@ -80,8 +80,16 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                 {
             <BLANKLINE>
                                     %%% ViolinMusicVoice [measure 1] %%%
-                                    \set ViolinMusicStaff.instrumentName = \markup { Violin }
-                                    \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
+                                    \set ViolinMusicStaff.instrumentName = \markup {
+                                        \hcenter-in
+                                            #10
+                                            Violin
+                                        }
+                                    \set ViolinMusicStaff.shortInstrumentName = \markup {
+                                        \hcenter-in
+                                            #10
+                                            Vn.
+                                        }
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
@@ -143,8 +151,16 @@ class LayoutMeasureMap(abjad.AbjadObject):
                             \context ViolaMusicVoice = "ViolaMusicVoice" {
             <BLANKLINE>
                                 %%% ViolaMusicVoice [measure 1] %%%
-                                \set ViolaMusicStaff.instrumentName = \markup { Viola }
-                                \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
+                                \set ViolaMusicStaff.instrumentName = \markup {
+                                    \hcenter-in
+                                        #10
+                                        Viola
+                                    }
+                                \set ViolaMusicStaff.shortInstrumentName = \markup {
+                                    \hcenter-in
+                                        #10
+                                        Va.
+                                    }
                                 \clef "alto" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
@@ -171,8 +187,16 @@ class LayoutMeasureMap(abjad.AbjadObject):
                             \context CelloMusicVoice = "CelloMusicVoice" {
             <BLANKLINE>
                                 %%% CelloMusicVoice [measure 1] %%%
-                                \set CelloMusicStaff.instrumentName = \markup { Cello }
-                                \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
+                                \set CelloMusicStaff.instrumentName = \markup {
+                                    \hcenter-in
+                                        #10
+                                        Cello
+                                    }
+                                \set CelloMusicStaff.shortInstrumentName = \markup {
+                                    \hcenter-in
+                                        #10
+                                        Vc.
+                                    }
                                 \clef "bass" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2

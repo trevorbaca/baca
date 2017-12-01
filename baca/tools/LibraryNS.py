@@ -1968,6 +1968,14 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
+    def rhythm(argument):
+        r'''Makes rhythm command.
+        '''
+        return baca.RhythmCommand(
+            rhythm_maker=argument,
+            )
+
+    @staticmethod
     def scope(voice, start, stop=None):
         r'''Scopes `voice` from `start` to `stop`.
 
