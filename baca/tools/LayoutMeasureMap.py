@@ -82,10 +82,11 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                     %%% ViolinMusicVoice [measure 1] %%%
                                     \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                     \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:2
+                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
+                                    \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                     e'8 [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:3
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
             <BLANKLINE>
                                     e'8
             <BLANKLINE>
@@ -144,10 +145,11 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                 %%% ViolaMusicVoice [measure 1] %%%
                                 \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                 \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
-                                \clef "alto" %! EXPLICIT_CLEF_COMMAND:2
+                                \clef "alto" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
+                                \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 R1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:3
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
             <BLANKLINE>
                                 %%% ViolaMusicVoice [measure 2] %%%
                                 R1 * 3/8
@@ -171,10 +173,11 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                 %%% CelloMusicVoice [measure 1] %%%
                                 \set CelloMusicStaff.instrumentName = \markup { Cello }
                                 \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
-                                \clef "bass" %! EXPLICIT_CLEF_COMMAND:2
+                                \clef "bass" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
+                                \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 R1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:3
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
             <BLANKLINE>
                                 %%% CelloMusicVoice [measure 2] %%%
                                 R1 * 3/8

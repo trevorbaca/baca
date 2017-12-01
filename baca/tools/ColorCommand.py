@@ -189,10 +189,11 @@ class ColorCommand(Command):
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                \clef "treble" %! EXPLICIT_CLEF_COMMAND:2
+                                \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
+                                \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 e'8 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:3
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
             <BLANKLINE>
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue

@@ -706,10 +706,11 @@ class LibraryAF(abjad.AbjadObject):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:2
+                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
+                                    \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                     e'8 [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:3
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                     d''8
                 <BLANKLINE>
@@ -2532,8 +2533,9 @@ class LibraryAF(abjad.AbjadObject):
                                             \override Stem.direction = #up
                                             \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                             \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                                            \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
+                                            \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
                                             \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:2
+                                            \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:3
                                             a'8
                                                 ^ \markup { %! FIGURE_NAME_MARKUP:1
                                                     \fontsize %! FIGURE_NAME_MARKUP:1
@@ -2552,7 +2554,7 @@ class LibraryAF(abjad.AbjadObject):
                                                                 ] %! FIGURE_NAME_MARKUP:1
                                                             } %! FIGURE_NAME_MARKUP:1
                                                     } %! FIGURE_NAME_MARKUP:1
-                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
+                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
                 <BLANKLINE>
                                             b'8
                 <BLANKLINE>
@@ -2578,9 +2580,10 @@ class LibraryAF(abjad.AbjadObject):
                                             \override Stem.direction = #up
                                             \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                             \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
-                                            \clef "alto" %! EXPLICIT_CLEF_COMMAND:3
+                                            \clef "alto" %! EXPLICIT_CLEF_COMMAND:4
                                             \crossStaff
                                             \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:2
+                                            \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:3
                                             c'8
                                                 ^ \markup { %! FIGURE_NAME_MARKUP:1
                                                     \fontsize %! FIGURE_NAME_MARKUP:1
@@ -2599,7 +2602,7 @@ class LibraryAF(abjad.AbjadObject):
                                                                 ] %! FIGURE_NAME_MARKUP:1
                                                             } %! FIGURE_NAME_MARKUP:1
                                                     } %! FIGURE_NAME_MARKUP:1
-                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
+                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
                 <BLANKLINE>
                                             \crossStaff
                                             d'8
@@ -2626,11 +2629,12 @@ class LibraryAF(abjad.AbjadObject):
                                     %%% CelloMusicVoice [measure 1] %%%
                                     \set CelloMusicStaff.instrumentName = \markup { Cello }
                                     \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
-                                    \clef "bass" %! EXPLICIT_CLEF_COMMAND:2
+                                    \clef "bass" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
+                                    \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                     R1 * 5/8
                                     \bar "|"
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:3
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                 }
                             }
@@ -2712,8 +2716,9 @@ class LibraryAF(abjad.AbjadObject):
                                             \override Stem.direction = #up
                                             \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                             \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                                            \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
+                                            \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
                                             \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:2
+                                            \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:3
                                             a'8
                                                 ^ \markup { %! FIGURE_NAME_MARKUP:1
                                                     \fontsize %! FIGURE_NAME_MARKUP:1
@@ -2732,7 +2737,7 @@ class LibraryAF(abjad.AbjadObject):
                                                                 ] %! FIGURE_NAME_MARKUP:1
                                                             } %! FIGURE_NAME_MARKUP:1
                                                     } %! FIGURE_NAME_MARKUP:1
-                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
+                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
                 <BLANKLINE>
                                             b'8
                 <BLANKLINE>
@@ -2758,8 +2763,9 @@ class LibraryAF(abjad.AbjadObject):
                                             \override Stem.direction = #up
                                             \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                             \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
-                                            \clef "alto" %! EXPLICIT_CLEF_COMMAND:3
+                                            \clef "alto" %! EXPLICIT_CLEF_COMMAND:4
                                             \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:2
+                                            \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:3
                                             c'8
                                                 ^ \markup { %! FIGURE_NAME_MARKUP:1
                                                     \fontsize %! FIGURE_NAME_MARKUP:1
@@ -2778,7 +2784,7 @@ class LibraryAF(abjad.AbjadObject):
                                                                 ] %! FIGURE_NAME_MARKUP:1
                                                             } %! FIGURE_NAME_MARKUP:1
                                                     } %! FIGURE_NAME_MARKUP:1
-                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
+                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
                 <BLANKLINE>
                                             d'8
                 <BLANKLINE>
@@ -2803,11 +2809,12 @@ class LibraryAF(abjad.AbjadObject):
                                     %%% CelloMusicVoice [measure 1] %%%
                                     \set CelloMusicStaff.instrumentName = \markup { Cello }
                                     \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
-                                    \clef "bass" %! EXPLICIT_CLEF_COMMAND:2
+                                    \clef "bass" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
+                                    \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                     R1 * 5/8
                                     \bar "|"
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:3
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                 }
                             }
