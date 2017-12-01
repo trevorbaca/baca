@@ -1227,27 +1227,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(markup, leaf)
 
     @staticmethod
-    def _color_reapplied(grob, context=None):
-        if context is not None:
-            context = getattr(context, 'context_name', context)
-            string = rf'\once \override {context}.{grob}.color ='
-        else:
-            string = rf'\once \override {grob}.color ='
-        string += " #(x11-color 'DarkBlue)"
-        return string
-
-    @staticmethod
-    def _color_reminder(grob, context=None):
-        if context is not None:
-            context = getattr(context, 'context_name', context)
-            string = rf'\once \override {context}.{grob}.color ='
-        else:
-            string = rf'\once \override {grob}.color ='
-        string += " #(x11-color 'DarkCyan)"
-        return string
-
-    @staticmethod
-    def _color_restated(grob, context=None, once=True):
+    def _color_reapplied(grob, context=None, once=True):
         if context is not None:
             context = getattr(context, 'context_name', context)
             string = rf'\override {context}.{grob}.color ='
@@ -1259,7 +1239,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return string
 
     @staticmethod
-    def _color_restated_shadow(grob, context=None, once=True):
+    def _color_reapplied_shadow(grob, context=None, once=True):
         if context is not None:
             context = getattr(context, 'context_name', context)
             string = rf'\override {context}.{grob}.color ='
@@ -1268,6 +1248,16 @@ class SegmentMaker(abjad.SegmentMaker):
         if once:
             string = rf'\once {string}'
         string = f"{string} #(x11-color 'DarkGreen)"
+        return string
+
+    @staticmethod
+    def _color_reminder(grob, context=None):
+        if context is not None:
+            context = getattr(context, 'context_name', context)
+            string = rf'\once \override {context}.{grob}.color ='
+        else:
+            string = rf'\once \override {grob}.color ='
+        string += " #(x11-color 'DarkCyan)"
         return string
 
     def _color_repeat_pitch_classes_(self):
@@ -1925,8 +1915,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 prototype = abjad.Instrument
                 instrument = abjad.inspect(first_leaf).get_indicator(prototype)
                 if instrument is None:
-                    tag = 'SEGMENT:RESTATED_INSTRUMENT'
-                    string = self._color_restated('InstrumentName', context)
+                    tag = 'SEGMENT:REAPPLIED_INSTRUMENT'
+                    string = self._color_reapplied('InstrumentName', context)
                     literal = abjad.LilyPondLiteral(string)
                     abjad.attach(literal, first_leaf, tag=tag)
                     instrument = abjad.new(
@@ -1952,33 +1942,33 @@ class SegmentMaker(abjad.SegmentMaker):
             if previous_clef is not None:
                 clef = abjad.inspect(first_leaf).get_indicator(abjad.Clef)
                 if clef is None:
-                    string = self._color_restated('Clef', context)
+                    string = self._color_reapplied('Clef', context)
                     literal = abjad.LilyPondLiteral(string)
                     abjad.attach(
                         literal,
                         first_leaf,
-                        tag='SEGMENT:RESTATED_CLEF_COLOR',
+                        tag='SEGMENT:REAPPLIED_CLEF_COLOR',
                         )
                     string = self._uncolor('Clef', context, once=False)
                     literal = abjad.LilyPondLiteral(string)
                     abjad.attach(
                         literal,
                         first_leaf,
-                        tag='SEGMENT:RESTATED_CLEF_UNCOLOR',
+                        tag='SEGMENT:REAPPLIED_CLEF_UNCOLOR',
                         )
                     abjad.attach(
                         previous_clef,
                         first_leaf,
-                        tag='SEGMENT:RESTATED_CLEF_COMMAND',
+                        tag='SEGMENT:REAPPLIED_CLEF_COMMAND',
                         )
                     string = rf'\set {context.context_name}.forceClef = ##t'
                     literal = abjad.LilyPondLiteral(string)
                     abjad.attach(
                         literal,
                         first_leaf,
-                        tag='SEGMENT:RESTATED_CLEF_COMMAND',
+                        tag='SEGMENT:REAPPLIED_CLEF_COMMAND',
                         )
-                    string = self._color_restated_shadow(
+                    string = self._color_reapplied_shadow(
                         'Clef',
                         context,
                         once=False,
@@ -1987,7 +1977,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(
                         literal,
                         first_leaf,
-                        tag='SEGMENT:RESTATED_CLEF_SHADOW',
+                        tag='SEGMENT:REAPPLIED_CLEF_SHADOW',
                         )
                 elif str(previous_clef) == str(clef):
                     wrapper = abjad.inspect(first_leaf).get_indicator(
