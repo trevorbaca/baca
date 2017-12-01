@@ -128,7 +128,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                                 %%% MusicVoice [measure 1] %%%
                                 \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 e'8 [
                                 \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
             <BLANKLINE>

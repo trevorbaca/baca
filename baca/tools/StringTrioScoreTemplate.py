@@ -69,7 +69,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                     }
                                 \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 R1 * 1/2
                                 \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
             <BLANKLINE>
@@ -102,7 +102,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                     }
                                 \clef "alto" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 R1 * 1/2
                                 \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
             <BLANKLINE>
@@ -135,7 +135,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                     }
                                 \clef "bass" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 R1 * 1/2
                                 \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
             <BLANKLINE>

@@ -414,7 +414,7 @@ class ClusterCommand(Command):
                             }
                             \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                             \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                            \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                            %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                             <e' g' b'>2
                                 ^ \markup {
                                     \center-align
@@ -641,7 +641,7 @@ class ClusterCommand(Command):
                                 }
                                 \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 <e' g' b'>2
                                     ^ \markup {
                                         \center-align
@@ -786,7 +786,7 @@ class ClusterCommand(Command):
                                 }
                                 \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 <c' e' g'>2
                                     ^ \markup {
                                         \center-align
@@ -923,7 +923,7 @@ class ClusterCommand(Command):
                                 }
                                 \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 <g' b' d''>2
                                     ^ \markup {
                                         \center-align
@@ -1070,7 +1070,7 @@ class ClusterCommand(Command):
                                 }
                                 \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 <e'>2
                                     ^ \markup {
                                         \center-align
@@ -1207,7 +1207,7 @@ class ClusterCommand(Command):
                                 }
                                 \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 <e'>2
                                     ^ \markup {
                                         \center-align
@@ -1338,7 +1338,7 @@ class ClusterCommand(Command):
                                 %%% MusicVoice [measure 1] %%%
                                 \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 e'2
                                 \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>

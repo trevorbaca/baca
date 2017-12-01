@@ -708,7 +708,7 @@ class LibraryAF(abjad.AbjadObject):
                                     %%% MusicVoice [measure 1] %%%
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                     e'8 [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
@@ -2543,7 +2543,7 @@ class LibraryAF(abjad.AbjadObject):
                                                 }
                                             \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
                                             \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:2
-                                            \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:3
+                                            %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:3
                                             a'8
                                                 ^ \markup { %! FIGURE_NAME_MARKUP:1
                                                     \fontsize %! FIGURE_NAME_MARKUP:1
@@ -2599,7 +2599,7 @@ class LibraryAF(abjad.AbjadObject):
                                             \clef "alto" %! EXPLICIT_CLEF_COMMAND:4
                                             \crossStaff
                                             \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:2
-                                            \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:3
+                                            %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:3
                                             c'8
                                                 ^ \markup { %! FIGURE_NAME_MARKUP:1
                                                     \fontsize %! FIGURE_NAME_MARKUP:1
@@ -2655,7 +2655,7 @@ class LibraryAF(abjad.AbjadObject):
                                         }
                                     \clef "bass" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                     R1 * 5/8
                                     \bar "|"
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
@@ -2750,7 +2750,7 @@ class LibraryAF(abjad.AbjadObject):
                                                 }
                                             \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
                                             \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:2
-                                            \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:3
+                                            %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:3
                                             a'8
                                                 ^ \markup { %! FIGURE_NAME_MARKUP:1
                                                     \fontsize %! FIGURE_NAME_MARKUP:1
@@ -2805,7 +2805,7 @@ class LibraryAF(abjad.AbjadObject):
                                                 }
                                             \clef "alto" %! EXPLICIT_CLEF_COMMAND:4
                                             \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:2
-                                            \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:3
+                                            %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:3
                                             c'8
                                                 ^ \markup { %! FIGURE_NAME_MARKUP:1
                                                     \fontsize %! FIGURE_NAME_MARKUP:1
@@ -2859,7 +2859,7 @@ class LibraryAF(abjad.AbjadObject):
                                         }
                                     \clef "bass" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                     R1 * 5/8
                                     \bar "|"
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
