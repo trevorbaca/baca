@@ -139,11 +139,13 @@ class SegmentMaker(abjad.SegmentMaker):
         '_final_bar_line',
         '_final_markup',
         '_final_markup_extra_offset',
+        '_first_segment',
         '_hide_instrument_names',
         '_ignore_repeat_pitch_classes',
         '_ignore_unpitched_notes',
         '_ignore_unregistered_pitches',
         '_instruments',
+        '_last_segment',
         '_layout_measure_map',
         '_measures_per_stage',
         '_metronome_mark_measure_map',
@@ -233,11 +235,13 @@ class SegmentMaker(abjad.SegmentMaker):
         final_bar_line=None,
         final_markup=None,
         final_markup_extra_offset=None,
+        first_segment=None,
         hide_instrument_names=None,
         ignore_repeat_pitch_classes=None,
         ignore_unpitched_notes=None,
         ignore_unregistered_pitches=None,
         instruments=None,
+        last_segment=None,
         layout_measure_map=None,
         measures_per_stage=None,
         metronome_mark_measure_map=None,
@@ -288,6 +292,9 @@ class SegmentMaker(abjad.SegmentMaker):
         if final_markup_extra_offset is not None:
             assert isinstance(final_markup_extra_offset, tuple)
         self._final_markup_extra_offset = final_markup_extra_offset
+        if first_segment is not None:
+            first_segment = bool(first_segment)
+        self._first_segment = first_segment
         if hide_instrument_names is not None:
             hide_instrument_names = bool(hide_instrument_names)
         self._hide_instrument_names = hide_instrument_names
@@ -304,6 +311,9 @@ class SegmentMaker(abjad.SegmentMaker):
         if instruments is not None:
             assert isinstance(instruments, abjad.TypedOrderedDict)
         self._instruments = instruments
+        if last_segment is not None:
+            last_segment = bool(last_segment)
+        self._last_segment = last_segment
         if layout_measure_map is not None:
             assert isinstance(layout_measure_map, baca.LayoutMeasureMap)
         self._layout_measure_map = layout_measure_map
@@ -1382,6 +1392,8 @@ class SegmentMaker(abjad.SegmentMaker):
     def _get_previous_metronome_mark(self):
         if not self._previous_metadata:
             return
+        if not self.metronome_marks:
+            return
         name = self._previous_metadata.get('end_metronome_mark')
         return self.metronome_marks.get(name)
 
@@ -1534,13 +1546,23 @@ class SegmentMaker(abjad.SegmentMaker):
         return result
 
     def _is_first_segment(self):
-        segment_number = self._get_segment_number()
-        return segment_number == 1
+        if self.first_segment is True:
+            return True
+        elif self.first_segment is False:
+            return False
+        else:
+            segment_number = self._get_segment_number()
+            return segment_number == 1
 
     def _is_last_segment(self):
-        segment_number = self._get_segment_number()
-        segment_count = self._metadata.get('segment_count')
-        return segment_number == segment_count
+        if self.last_segment is True:
+            return True
+        elif self.last_segment is False:
+            return False
+        else:
+            segment_number = self._get_segment_number()
+            segment_count = self._metadata.get('segment_count')
+            return segment_number == segment_count
 
     def _label_instrument_changes(self):
         prototype = abjad.Instrument
@@ -1728,7 +1750,7 @@ class SegmentMaker(abjad.SegmentMaker):
         print(f'segment duration {total_duration} {counter} ...')
 
     def _reapply_previous_segment_settings(self):
-        if self._is_first_segment():
+        if self._is_first_segment() and not self._previous_metadata:
             return
         if not self._previous_metadata:
             segment = self._get_segment_identifier()
@@ -3323,6 +3345,18 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._final_markup_extra_offset
 
     @property
+    def first_segment(self):
+        r'''Is true when composer declares segment to be first in score.
+
+        Defaults to none.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        '''
+        return self._first_segment
+
+    @property
     def hide_instrument_names(self):
         r'''Is true when segment hides instrument names.
 
@@ -4153,6 +4187,18 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._instruments
 
     @property
+    def last_segment(self):
+        r'''Is true when composer declares segment to be last in score.
+
+        Defaults to none.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        '''
+        return self._last_segment
+
+    @property
     def layout_measure_map(self):
         r'''Gets layout measure map.
 
@@ -4187,15 +4233,16 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @property
     def metadata(self):
-        r'''Gets segment metadata after run.
+        r'''Gets segment metadata.
 
         ..  container:: example
 
-            >>> metadata, end_clefs_by_staff = {}, {}
-            >>> metadata['end_clefs_by_staff'] = end_clefs_by_staff
-            >>> end_clefs_by_staff['MusicStaff'] = 'alto'
+            >>> metadata = {}
+            >>> metadata['end_clefs_by_staff'] = {}
+            >>> metadata['end_clefs_by_staff']['MusicStaff'] = 'alto'
 
             >>> maker = baca.SegmentMaker(
+            ...     first_segment=False,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
@@ -4217,6 +4264,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! SEGMENT:REMINDER_METRONOME_MARK:3
                             s1 * 1/2
                                 - \markup { %! STAGE_NUMBER_MARKUP:2
                                     \fontsize %! STAGE_NUMBER_MARKUP:2
@@ -4245,11 +4293,12 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
-                                \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                \clef "alto" %! SEGMENT:REAPPLIED_CLEF_COMMAND:3
+                                \once \override Staff.Clef.color = #(x11-color 'green) %! SEGMENT:REAPPLIED_CLEF_COLOR:1
+                                \override Staff.Clef.color = ##f %! SEGMENT:REAPPLIED_CLEF_UNCOLOR:2
+                                \set Staff.forceClef = ##t %! SEGMENT:REAPPLIED_CLEF_COMMAND:4
                                 R1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
+                                \override Staff.Clef.color = #(x11-color 'DarkGreen) %! SEGMENT:REAPPLIED_CLEF_SHADOW:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 R1 * 3/8
@@ -4273,7 +4322,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         'end_clefs_by_staff',
                         abjad.TypedOrderedDict(
                             [
-                                ('MusicStaff', 'treble'),
+                                ('MusicStaff', 'alto'),
                                 ]
                             ),
                         ),

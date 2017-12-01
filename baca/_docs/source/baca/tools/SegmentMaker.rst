@@ -33,11 +33,13 @@ Bases
       ~baca.tools.SegmentMaker.SegmentMaker.final_bar_line
       ~baca.tools.SegmentMaker.SegmentMaker.final_markup
       ~baca.tools.SegmentMaker.SegmentMaker.final_markup_extra_offset
+      ~baca.tools.SegmentMaker.SegmentMaker.first_segment
       ~baca.tools.SegmentMaker.SegmentMaker.hide_instrument_names
       ~baca.tools.SegmentMaker.SegmentMaker.ignore_repeat_pitch_classes
       ~baca.tools.SegmentMaker.SegmentMaker.ignore_unpitched_notes
       ~baca.tools.SegmentMaker.SegmentMaker.ignore_unregistered_pitches
       ~baca.tools.SegmentMaker.SegmentMaker.instruments
+      ~baca.tools.SegmentMaker.SegmentMaker.last_segment
       ~baca.tools.SegmentMaker.SegmentMaker.layout_measure_map
       ~baca.tools.SegmentMaker.SegmentMaker.measure_count
       ~baca.tools.SegmentMaker.SegmentMaker.measures_per_stage
@@ -92,6 +94,8 @@ Read-only properties
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.final_markup_extra_offset
 
+.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.first_segment
+
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.hide_instrument_names
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.ignore_repeat_pitch_classes
@@ -101,6 +105,8 @@ Read-only properties
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.ignore_unregistered_pitches
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.instruments
+
+.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.last_segment
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.layout_measure_map
 
