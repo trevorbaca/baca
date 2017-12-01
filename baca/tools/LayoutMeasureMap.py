@@ -35,38 +35,38 @@ class LayoutMeasureMap(abjad.AbjadObject):
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
-                        \autoPageBreaksOff % SEGMENT:LAYOUT:4
-                        \noBreak % SEGMENT:LAYOUT:5
+                        \autoPageBreaksOff %! SEGMENT:LAYOUT:4
+                        \noBreak %! SEGMENT:LAYOUT:5
                         \time 4/8
-                        \bar "" % SEGMENT:EMPTY_START_BAR:1
+                        \bar "" %! SEGMENT:EMPTY_START_BAR:1
                         s1 * 1/2
-                            - \markup { % STAGE_NUMBER:2
-                                \fontsize % STAGE_NUMBER:2
-                                    #-3 % STAGE_NUMBER:2
-                                    \with-color % STAGE_NUMBER:2
-                                        #(x11-color 'DarkCyan) % STAGE_NUMBER:2
-                                        [1] % STAGE_NUMBER:2
-                                } % STAGE_NUMBER:2
-                        \break % SEGMENT:LAYOUT:3
+                            - \markup { %! STAGE_NUMBER:2
+                                \fontsize %! STAGE_NUMBER:2
+                                    #-3 %! STAGE_NUMBER:2
+                                    \with-color %! STAGE_NUMBER:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER:2
+                                        [1] %! STAGE_NUMBER:2
+                                } %! STAGE_NUMBER:2
+                        \break %! SEGMENT:LAYOUT:3
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
-                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 100) (alignment-distances . (30 30))) % SEGMENT:LAYOUT:1
+                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 100) (alignment-distances . (30 30))) %! SEGMENT:LAYOUT:1
                         \time 3/8
                         s1 * 3/8
-                        \break % SEGMENT:LAYOUT:2
+                        \break %! SEGMENT:LAYOUT:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 3] %%%
-                        \noBreak % SEGMENT:LAYOUT:1
+                        \noBreak %! SEGMENT:LAYOUT:1
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
                         %%% GlobalSkips [measure 4] %%%
-                        \noBreak % SEGMENT:LAYOUT:1
+                        \noBreak %! SEGMENT:LAYOUT:1
                         \time 3/8
                         s1 * 3/8
             <BLANKLINE>
                         %%% GlobalSkips [measure 5] %%%
-                        \noBreak % SEGMENT:LAYOUT:1
+                        \noBreak %! SEGMENT:LAYOUT:1
                         \time 4/8
                         s1 * 1/2
             <BLANKLINE>
@@ -82,10 +82,10 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                     %%% ViolinMusicVoice [measure 1] %%%
                                     \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                     \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                                    \clef "treble" % EXPLICIT_CLEF_COMMAND:2
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) % EXPLICIT_CLEF_COLOR:1
+                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:2
+                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     e'8 [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) % EXPLICIT_CLEF_SHADOW:3
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:3
             <BLANKLINE>
                                     e'8
             <BLANKLINE>
@@ -144,10 +144,10 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                 %%% ViolaMusicVoice [measure 1] %%%
                                 \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                 \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
-                                \clef "alto" % EXPLICIT_CLEF_COMMAND:2
-                                \once \override Staff.Clef.color = #(x11-color 'blue) % EXPLICIT_CLEF_COLOR:1
+                                \clef "alto" %! EXPLICIT_CLEF_COMMAND:2
+                                \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 R1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) % EXPLICIT_CLEF_SHADOW:3
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:3
             <BLANKLINE>
                                 %%% ViolaMusicVoice [measure 2] %%%
                                 R1 * 3/8
@@ -171,10 +171,10 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                 %%% CelloMusicVoice [measure 1] %%%
                                 \set CelloMusicStaff.instrumentName = \markup { Cello }
                                 \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
-                                \clef "bass" % EXPLICIT_CLEF_COMMAND:2
-                                \once \override Staff.Clef.color = #(x11-color 'blue) % EXPLICIT_CLEF_COLOR:1
+                                \clef "bass" %! EXPLICIT_CLEF_COMMAND:2
+                                \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 R1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) % EXPLICIT_CLEF_SHADOW:3
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:3
             <BLANKLINE>
                                 %%% CelloMusicVoice [measure 2] %%%
                                 R1 * 3/8

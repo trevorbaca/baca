@@ -34,15 +34,15 @@ class LabelCommand(Command):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 4/8
-                        \bar "" % SEGMENT:EMPTY_START_BAR:1
+                        \bar "" %! SEGMENT:EMPTY_START_BAR:1
                         s1 * 1/2
-                            - \markup { % STAGE_NUMBER:2
-                                \fontsize % STAGE_NUMBER:2
-                                    #-3 % STAGE_NUMBER:2
-                                    \with-color % STAGE_NUMBER:2
-                                        #(x11-color 'DarkCyan) % STAGE_NUMBER:2
-                                        [1] % STAGE_NUMBER:2
-                                } % STAGE_NUMBER:2
+                            - \markup { %! STAGE_NUMBER:2
+                                \fontsize %! STAGE_NUMBER:2
+                                    #-3 %! STAGE_NUMBER:2
+                                    \with-color %! STAGE_NUMBER:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER:2
+                                        [1] %! STAGE_NUMBER:2
+                                } %! STAGE_NUMBER:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
                         \time 3/8
@@ -64,14 +64,14 @@ class LabelCommand(Command):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" % EXPLICIT_CLEF_COMMAND:2
-                                \once \override Staff.Clef.color = #(x11-color 'blue) % EXPLICIT_CLEF_COLOR:1
+                                \clef "treble" %! EXPLICIT_CLEF_COMMAND:2
+                                \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 e'8 [
                                     ^ \markup {
                                         \small
                                             E4
                                         }
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) % EXPLICIT_CLEF_SHADOW:3
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:3
             <BLANKLINE>
                                 d''8
                                     ^ \markup {

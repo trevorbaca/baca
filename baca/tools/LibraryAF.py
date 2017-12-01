@@ -633,9 +633,9 @@ class LibraryAF(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" % SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12) % SEGMENT:SPACING_COMMAND:3
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12) %! SEGMENT:SPACING_COMMAND:3
                             s1 * 1/2
                                 - \markup {
                                     \column
@@ -662,41 +662,41 @@ class LibraryAF(abjad.AbjadObject):
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12) % SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                - \markup { % SEGMENT:SPACING_MARKUP:2
-                                    \with-color % SEGMENT:SPACING_MARKUP:2
-                                        #(x11-color 'DarkCyan) % SEGMENT:SPACING_MARKUP:2
-                                        \fontsize % SEGMENT:SPACING_MARKUP:2
-                                            #-3 % SEGMENT:SPACING_MARKUP:2
-                                            (1/12) % SEGMENT:SPACING_MARKUP:2
-                                    } % SEGMENT:SPACING_MARKUP:2
+                                - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                    \with-color %! SEGMENT:SPACING_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                        \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                            #-3 %! SEGMENT:SPACING_MARKUP:2
+                                            (1/12) %! SEGMENT:SPACING_MARKUP:2
+                                    } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12) % SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/2
-                                - \markup { % SEGMENT:SPACING_MARKUP:2
-                                    \with-color % SEGMENT:SPACING_MARKUP:2
-                                        #(x11-color 'DarkCyan) % SEGMENT:SPACING_MARKUP:2
-                                        \fontsize % SEGMENT:SPACING_MARKUP:2
-                                            #-3 % SEGMENT:SPACING_MARKUP:2
-                                            (1/12) % SEGMENT:SPACING_MARKUP:2
-                                    } % SEGMENT:SPACING_MARKUP:2
+                                - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                    \with-color %! SEGMENT:SPACING_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                        \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                            #-3 %! SEGMENT:SPACING_MARKUP:2
+                                            (1/12) %! SEGMENT:SPACING_MARKUP:2
+                                    } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12) % SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                - \markup { % SEGMENT:SPACING_MARKUP:2
-                                    \with-color % SEGMENT:SPACING_MARKUP:2
-                                        #(x11-color 'DarkCyan) % SEGMENT:SPACING_MARKUP:2
-                                        \fontsize % SEGMENT:SPACING_MARKUP:2
-                                            #-3 % SEGMENT:SPACING_MARKUP:2
-                                            (1/12) % SEGMENT:SPACING_MARKUP:2
-                                    } % SEGMENT:SPACING_MARKUP:2
+                                - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                    \with-color %! SEGMENT:SPACING_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                        \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                            #-3 %! SEGMENT:SPACING_MARKUP:2
+                                            (1/12) %! SEGMENT:SPACING_MARKUP:2
+                                    } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                         }
                     >>
@@ -706,10 +706,10 @@ class LibraryAF(abjad.AbjadObject):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" % EXPLICIT_CLEF_COMMAND:2
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) % EXPLICIT_CLEF_COLOR:1
+                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:2
+                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     e'8 [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) % EXPLICIT_CLEF_SHADOW:3
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:3
                 <BLANKLINE>
                                     d''8
                 <BLANKLINE>
@@ -2508,15 +2508,15 @@ class LibraryAF(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 5/8
-                            \bar "" % SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 5/8
-                                - \markup { % STAGE_NUMBER:2
-                                    \fontsize % STAGE_NUMBER:2
-                                        #-3 % STAGE_NUMBER:2
-                                        \with-color % STAGE_NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
-                                            [1] % STAGE_NUMBER:2
-                                    } % STAGE_NUMBER:2
+                                - \markup { %! STAGE_NUMBER:2
+                                    \fontsize %! STAGE_NUMBER:2
+                                        #-3 %! STAGE_NUMBER:2
+                                        \with-color %! STAGE_NUMBER:2
+                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER:2
+                                            [1] %! STAGE_NUMBER:2
+                                    } %! STAGE_NUMBER:2
                 <BLANKLINE>
                         }
                     >>
@@ -2532,27 +2532,27 @@ class LibraryAF(abjad.AbjadObject):
                                             \override Stem.direction = #up
                                             \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                             \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                                            \clef "treble" % EXPLICIT_CLEF_COMMAND:3
-                                            \once \override Staff.Clef.color = #(x11-color 'blue) % EXPLICIT_CLEF_COLOR:2
+                                            \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
+                                            \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:2
                                             a'8
-                                                ^ \markup { % FIGURE_NAME:1
-                                                    \fontsize % FIGURE_NAME:1
-                                                        #2 % FIGURE_NAME:1
-                                                        \concat % FIGURE_NAME:1
-                                                            { % FIGURE_NAME:1
-                                                                [ % FIGURE_NAME:1
-                                                                "vn 1" % FIGURE_NAME:1
-                                                                \hspace % FIGURE_NAME:1
-                                                                    #1 % FIGURE_NAME:1
-                                                                \raise % FIGURE_NAME:1
-                                                                    #0.25 % FIGURE_NAME:1
-                                                                    \fontsize % FIGURE_NAME:1
-                                                                        #-2 % FIGURE_NAME:1
-                                                                        (None) % FIGURE_NAME:1
-                                                                ] % FIGURE_NAME:1
-                                                            } % FIGURE_NAME:1
-                                                    } % FIGURE_NAME:1
-                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) % EXPLICIT_CLEF_SHADOW:4
+                                                ^ \markup { %! FIGURE_NAME:1
+                                                    \fontsize %! FIGURE_NAME:1
+                                                        #2 %! FIGURE_NAME:1
+                                                        \concat %! FIGURE_NAME:1
+                                                            { %! FIGURE_NAME:1
+                                                                [ %! FIGURE_NAME:1
+                                                                "vn 1" %! FIGURE_NAME:1
+                                                                \hspace %! FIGURE_NAME:1
+                                                                    #1 %! FIGURE_NAME:1
+                                                                \raise %! FIGURE_NAME:1
+                                                                    #0.25 %! FIGURE_NAME:1
+                                                                    \fontsize %! FIGURE_NAME:1
+                                                                        #-2 %! FIGURE_NAME:1
+                                                                        (None) %! FIGURE_NAME:1
+                                                                ] %! FIGURE_NAME:1
+                                                            } %! FIGURE_NAME:1
+                                                    } %! FIGURE_NAME:1
+                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                             b'8
                 <BLANKLINE>
@@ -2578,28 +2578,28 @@ class LibraryAF(abjad.AbjadObject):
                                             \override Stem.direction = #up
                                             \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                             \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
-                                            \clef "alto" % EXPLICIT_CLEF_COMMAND:3
+                                            \clef "alto" %! EXPLICIT_CLEF_COMMAND:3
                                             \crossStaff
-                                            \once \override Staff.Clef.color = #(x11-color 'blue) % EXPLICIT_CLEF_COLOR:2
+                                            \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:2
                                             c'8
-                                                ^ \markup { % FIGURE_NAME:1
-                                                    \fontsize % FIGURE_NAME:1
-                                                        #2 % FIGURE_NAME:1
-                                                        \concat % FIGURE_NAME:1
-                                                            { % FIGURE_NAME:1
-                                                                [ % FIGURE_NAME:1
-                                                                "vn 2" % FIGURE_NAME:1
-                                                                \hspace % FIGURE_NAME:1
-                                                                    #1 % FIGURE_NAME:1
-                                                                \raise % FIGURE_NAME:1
-                                                                    #0.25 % FIGURE_NAME:1
-                                                                    \fontsize % FIGURE_NAME:1
-                                                                        #-2 % FIGURE_NAME:1
-                                                                        (None) % FIGURE_NAME:1
-                                                                ] % FIGURE_NAME:1
-                                                            } % FIGURE_NAME:1
-                                                    } % FIGURE_NAME:1
-                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) % EXPLICIT_CLEF_SHADOW:4
+                                                ^ \markup { %! FIGURE_NAME:1
+                                                    \fontsize %! FIGURE_NAME:1
+                                                        #2 %! FIGURE_NAME:1
+                                                        \concat %! FIGURE_NAME:1
+                                                            { %! FIGURE_NAME:1
+                                                                [ %! FIGURE_NAME:1
+                                                                "vn 2" %! FIGURE_NAME:1
+                                                                \hspace %! FIGURE_NAME:1
+                                                                    #1 %! FIGURE_NAME:1
+                                                                \raise %! FIGURE_NAME:1
+                                                                    #0.25 %! FIGURE_NAME:1
+                                                                    \fontsize %! FIGURE_NAME:1
+                                                                        #-2 %! FIGURE_NAME:1
+                                                                        (None) %! FIGURE_NAME:1
+                                                                ] %! FIGURE_NAME:1
+                                                            } %! FIGURE_NAME:1
+                                                    } %! FIGURE_NAME:1
+                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                             \crossStaff
                                             d'8
@@ -2626,11 +2626,11 @@ class LibraryAF(abjad.AbjadObject):
                                     %%% CelloMusicVoice [measure 1] %%%
                                     \set CelloMusicStaff.instrumentName = \markup { Cello }
                                     \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
-                                    \clef "bass" % EXPLICIT_CLEF_COMMAND:2
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) % EXPLICIT_CLEF_COLOR:1
+                                    \clef "bass" %! EXPLICIT_CLEF_COMMAND:2
+                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     R1 * 5/8
                                     \bar "|"
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) % EXPLICIT_CLEF_SHADOW:3
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:3
                 <BLANKLINE>
                                 }
                             }
@@ -2688,15 +2688,15 @@ class LibraryAF(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 5/8
-                            \bar "" % SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 5/8
-                                - \markup { % STAGE_NUMBER:2
-                                    \fontsize % STAGE_NUMBER:2
-                                        #-3 % STAGE_NUMBER:2
-                                        \with-color % STAGE_NUMBER:2
-                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
-                                            [1] % STAGE_NUMBER:2
-                                    } % STAGE_NUMBER:2
+                                - \markup { %! STAGE_NUMBER:2
+                                    \fontsize %! STAGE_NUMBER:2
+                                        #-3 %! STAGE_NUMBER:2
+                                        \with-color %! STAGE_NUMBER:2
+                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER:2
+                                            [1] %! STAGE_NUMBER:2
+                                    } %! STAGE_NUMBER:2
                 <BLANKLINE>
                         }
                     >>
@@ -2712,27 +2712,27 @@ class LibraryAF(abjad.AbjadObject):
                                             \override Stem.direction = #up
                                             \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                             \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                                            \clef "treble" % EXPLICIT_CLEF_COMMAND:3
-                                            \once \override Staff.Clef.color = #(x11-color 'blue) % EXPLICIT_CLEF_COLOR:2
+                                            \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
+                                            \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:2
                                             a'8
-                                                ^ \markup { % FIGURE_NAME:1
-                                                    \fontsize % FIGURE_NAME:1
-                                                        #2 % FIGURE_NAME:1
-                                                        \concat % FIGURE_NAME:1
-                                                            { % FIGURE_NAME:1
-                                                                [ % FIGURE_NAME:1
-                                                                "vn 1" % FIGURE_NAME:1
-                                                                \hspace % FIGURE_NAME:1
-                                                                    #1 % FIGURE_NAME:1
-                                                                \raise % FIGURE_NAME:1
-                                                                    #0.25 % FIGURE_NAME:1
-                                                                    \fontsize % FIGURE_NAME:1
-                                                                        #-2 % FIGURE_NAME:1
-                                                                        (None) % FIGURE_NAME:1
-                                                                ] % FIGURE_NAME:1
-                                                            } % FIGURE_NAME:1
-                                                    } % FIGURE_NAME:1
-                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) % EXPLICIT_CLEF_SHADOW:4
+                                                ^ \markup { %! FIGURE_NAME:1
+                                                    \fontsize %! FIGURE_NAME:1
+                                                        #2 %! FIGURE_NAME:1
+                                                        \concat %! FIGURE_NAME:1
+                                                            { %! FIGURE_NAME:1
+                                                                [ %! FIGURE_NAME:1
+                                                                "vn 1" %! FIGURE_NAME:1
+                                                                \hspace %! FIGURE_NAME:1
+                                                                    #1 %! FIGURE_NAME:1
+                                                                \raise %! FIGURE_NAME:1
+                                                                    #0.25 %! FIGURE_NAME:1
+                                                                    \fontsize %! FIGURE_NAME:1
+                                                                        #-2 %! FIGURE_NAME:1
+                                                                        (None) %! FIGURE_NAME:1
+                                                                ] %! FIGURE_NAME:1
+                                                            } %! FIGURE_NAME:1
+                                                    } %! FIGURE_NAME:1
+                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                             b'8
                 <BLANKLINE>
@@ -2758,27 +2758,27 @@ class LibraryAF(abjad.AbjadObject):
                                             \override Stem.direction = #up
                                             \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                             \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
-                                            \clef "alto" % EXPLICIT_CLEF_COMMAND:3
-                                            \once \override Staff.Clef.color = #(x11-color 'blue) % EXPLICIT_CLEF_COLOR:2
+                                            \clef "alto" %! EXPLICIT_CLEF_COMMAND:3
+                                            \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:2
                                             c'8
-                                                ^ \markup { % FIGURE_NAME:1
-                                                    \fontsize % FIGURE_NAME:1
-                                                        #2 % FIGURE_NAME:1
-                                                        \concat % FIGURE_NAME:1
-                                                            { % FIGURE_NAME:1
-                                                                [ % FIGURE_NAME:1
-                                                                "vn 2" % FIGURE_NAME:1
-                                                                \hspace % FIGURE_NAME:1
-                                                                    #1 % FIGURE_NAME:1
-                                                                \raise % FIGURE_NAME:1
-                                                                    #0.25 % FIGURE_NAME:1
-                                                                    \fontsize % FIGURE_NAME:1
-                                                                        #-2 % FIGURE_NAME:1
-                                                                        (None) % FIGURE_NAME:1
-                                                                ] % FIGURE_NAME:1
-                                                            } % FIGURE_NAME:1
-                                                    } % FIGURE_NAME:1
-                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) % EXPLICIT_CLEF_SHADOW:4
+                                                ^ \markup { %! FIGURE_NAME:1
+                                                    \fontsize %! FIGURE_NAME:1
+                                                        #2 %! FIGURE_NAME:1
+                                                        \concat %! FIGURE_NAME:1
+                                                            { %! FIGURE_NAME:1
+                                                                [ %! FIGURE_NAME:1
+                                                                "vn 2" %! FIGURE_NAME:1
+                                                                \hspace %! FIGURE_NAME:1
+                                                                    #1 %! FIGURE_NAME:1
+                                                                \raise %! FIGURE_NAME:1
+                                                                    #0.25 %! FIGURE_NAME:1
+                                                                    \fontsize %! FIGURE_NAME:1
+                                                                        #-2 %! FIGURE_NAME:1
+                                                                        (None) %! FIGURE_NAME:1
+                                                                ] %! FIGURE_NAME:1
+                                                            } %! FIGURE_NAME:1
+                                                    } %! FIGURE_NAME:1
+                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                             d'8
                 <BLANKLINE>
@@ -2803,11 +2803,11 @@ class LibraryAF(abjad.AbjadObject):
                                     %%% CelloMusicVoice [measure 1] %%%
                                     \set CelloMusicStaff.instrumentName = \markup { Cello }
                                     \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
-                                    \clef "bass" % EXPLICIT_CLEF_COMMAND:2
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) % EXPLICIT_CLEF_COLOR:1
+                                    \clef "bass" %! EXPLICIT_CLEF_COMMAND:2
+                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     R1 * 5/8
                                     \bar "|"
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) % EXPLICIT_CLEF_SHADOW:3
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:3
                 <BLANKLINE>
                                 }
                             }
