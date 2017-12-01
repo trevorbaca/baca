@@ -640,14 +640,14 @@ class LibraryAF(abjad.AbjadObject):
                                 - \markup {
                                     \column
                                         {
-                                            \line % STAGE_NUMBER:2
-                                                { % STAGE_NUMBER:2
-                                                    \fontsize % STAGE_NUMBER:2
-                                                        #-3 % STAGE_NUMBER:2
-                                                        \with-color % STAGE_NUMBER:2
-                                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
-                                                            [1] % STAGE_NUMBER:2
-                                                } % STAGE_NUMBER:2
+                                            \line % STAGE_NUMBER_MARKUP:2
+                                                { % STAGE_NUMBER_MARKUP:2
+                                                    \fontsize % STAGE_NUMBER_MARKUP:2
+                                                        #-3 % STAGE_NUMBER_MARKUP:2
+                                                        \with-color % STAGE_NUMBER_MARKUP:2
+                                                            #(x11-color 'DarkCyan) % STAGE_NUMBER_MARKUP:2
+                                                            [1] % STAGE_NUMBER_MARKUP:2
+                                                } % STAGE_NUMBER_MARKUP:2
                                             \line % SEGMENT:SPACING_MARKUP:4
                                                 { % SEGMENT:SPACING_MARKUP:4
                                                     \with-color % SEGMENT:SPACING_MARKUP:4
@@ -2510,13 +2510,13 @@ class LibraryAF(abjad.AbjadObject):
                             \time 5/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 5/8
-                                - \markup { %! STAGE_NUMBER:2
-                                    \fontsize %! STAGE_NUMBER:2
-                                        #-3 %! STAGE_NUMBER:2
-                                        \with-color %! STAGE_NUMBER:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER:2
-                                            [1] %! STAGE_NUMBER:2
-                                    } %! STAGE_NUMBER:2
+                                - \markup { %! STAGE_NUMBER_MARKUP:2
+                                    \fontsize %! STAGE_NUMBER_MARKUP:2
+                                        #-3 %! STAGE_NUMBER_MARKUP:2
+                                        \with-color %! STAGE_NUMBER_MARKUP:2
+                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                            [1] %! STAGE_NUMBER_MARKUP:2
+                                    } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                         }
                     >>
@@ -2535,23 +2535,23 @@ class LibraryAF(abjad.AbjadObject):
                                             \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                             \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:2
                                             a'8
-                                                ^ \markup { %! FIGURE_NAME:1
-                                                    \fontsize %! FIGURE_NAME:1
-                                                        #2 %! FIGURE_NAME:1
-                                                        \concat %! FIGURE_NAME:1
-                                                            { %! FIGURE_NAME:1
-                                                                [ %! FIGURE_NAME:1
-                                                                "vn 1" %! FIGURE_NAME:1
-                                                                \hspace %! FIGURE_NAME:1
-                                                                    #1 %! FIGURE_NAME:1
-                                                                \raise %! FIGURE_NAME:1
-                                                                    #0.25 %! FIGURE_NAME:1
-                                                                    \fontsize %! FIGURE_NAME:1
-                                                                        #-2 %! FIGURE_NAME:1
-                                                                        (None) %! FIGURE_NAME:1
-                                                                ] %! FIGURE_NAME:1
-                                                            } %! FIGURE_NAME:1
-                                                    } %! FIGURE_NAME:1
+                                                ^ \markup { %! FIGURE_NAME_MARKUP:1
+                                                    \fontsize %! FIGURE_NAME_MARKUP:1
+                                                        #2 %! FIGURE_NAME_MARKUP:1
+                                                        \concat %! FIGURE_NAME_MARKUP:1
+                                                            { %! FIGURE_NAME_MARKUP:1
+                                                                [ %! FIGURE_NAME_MARKUP:1
+                                                                "vn 1" %! FIGURE_NAME_MARKUP:1
+                                                                \hspace %! FIGURE_NAME_MARKUP:1
+                                                                    #1 %! FIGURE_NAME_MARKUP:1
+                                                                \raise %! FIGURE_NAME_MARKUP:1
+                                                                    #0.25 %! FIGURE_NAME_MARKUP:1
+                                                                    \fontsize %! FIGURE_NAME_MARKUP:1
+                                                                        #-2 %! FIGURE_NAME_MARKUP:1
+                                                                        (None) %! FIGURE_NAME_MARKUP:1
+                                                                ] %! FIGURE_NAME_MARKUP:1
+                                                            } %! FIGURE_NAME_MARKUP:1
+                                                    } %! FIGURE_NAME_MARKUP:1
                                             \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                             b'8
@@ -2582,23 +2582,23 @@ class LibraryAF(abjad.AbjadObject):
                                             \crossStaff
                                             \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:2
                                             c'8
-                                                ^ \markup { %! FIGURE_NAME:1
-                                                    \fontsize %! FIGURE_NAME:1
-                                                        #2 %! FIGURE_NAME:1
-                                                        \concat %! FIGURE_NAME:1
-                                                            { %! FIGURE_NAME:1
-                                                                [ %! FIGURE_NAME:1
-                                                                "vn 2" %! FIGURE_NAME:1
-                                                                \hspace %! FIGURE_NAME:1
-                                                                    #1 %! FIGURE_NAME:1
-                                                                \raise %! FIGURE_NAME:1
-                                                                    #0.25 %! FIGURE_NAME:1
-                                                                    \fontsize %! FIGURE_NAME:1
-                                                                        #-2 %! FIGURE_NAME:1
-                                                                        (None) %! FIGURE_NAME:1
-                                                                ] %! FIGURE_NAME:1
-                                                            } %! FIGURE_NAME:1
-                                                    } %! FIGURE_NAME:1
+                                                ^ \markup { %! FIGURE_NAME_MARKUP:1
+                                                    \fontsize %! FIGURE_NAME_MARKUP:1
+                                                        #2 %! FIGURE_NAME_MARKUP:1
+                                                        \concat %! FIGURE_NAME_MARKUP:1
+                                                            { %! FIGURE_NAME_MARKUP:1
+                                                                [ %! FIGURE_NAME_MARKUP:1
+                                                                "vn 2" %! FIGURE_NAME_MARKUP:1
+                                                                \hspace %! FIGURE_NAME_MARKUP:1
+                                                                    #1 %! FIGURE_NAME_MARKUP:1
+                                                                \raise %! FIGURE_NAME_MARKUP:1
+                                                                    #0.25 %! FIGURE_NAME_MARKUP:1
+                                                                    \fontsize %! FIGURE_NAME_MARKUP:1
+                                                                        #-2 %! FIGURE_NAME_MARKUP:1
+                                                                        (None) %! FIGURE_NAME_MARKUP:1
+                                                                ] %! FIGURE_NAME_MARKUP:1
+                                                            } %! FIGURE_NAME_MARKUP:1
+                                                    } %! FIGURE_NAME_MARKUP:1
                                             \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                             \crossStaff
@@ -2690,13 +2690,13 @@ class LibraryAF(abjad.AbjadObject):
                             \time 5/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 5/8
-                                - \markup { %! STAGE_NUMBER:2
-                                    \fontsize %! STAGE_NUMBER:2
-                                        #-3 %! STAGE_NUMBER:2
-                                        \with-color %! STAGE_NUMBER:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER:2
-                                            [1] %! STAGE_NUMBER:2
-                                    } %! STAGE_NUMBER:2
+                                - \markup { %! STAGE_NUMBER_MARKUP:2
+                                    \fontsize %! STAGE_NUMBER_MARKUP:2
+                                        #-3 %! STAGE_NUMBER_MARKUP:2
+                                        \with-color %! STAGE_NUMBER_MARKUP:2
+                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                            [1] %! STAGE_NUMBER_MARKUP:2
+                                    } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                         }
                     >>
@@ -2715,23 +2715,23 @@ class LibraryAF(abjad.AbjadObject):
                                             \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                             \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:2
                                             a'8
-                                                ^ \markup { %! FIGURE_NAME:1
-                                                    \fontsize %! FIGURE_NAME:1
-                                                        #2 %! FIGURE_NAME:1
-                                                        \concat %! FIGURE_NAME:1
-                                                            { %! FIGURE_NAME:1
-                                                                [ %! FIGURE_NAME:1
-                                                                "vn 1" %! FIGURE_NAME:1
-                                                                \hspace %! FIGURE_NAME:1
-                                                                    #1 %! FIGURE_NAME:1
-                                                                \raise %! FIGURE_NAME:1
-                                                                    #0.25 %! FIGURE_NAME:1
-                                                                    \fontsize %! FIGURE_NAME:1
-                                                                        #-2 %! FIGURE_NAME:1
-                                                                        (None) %! FIGURE_NAME:1
-                                                                ] %! FIGURE_NAME:1
-                                                            } %! FIGURE_NAME:1
-                                                    } %! FIGURE_NAME:1
+                                                ^ \markup { %! FIGURE_NAME_MARKUP:1
+                                                    \fontsize %! FIGURE_NAME_MARKUP:1
+                                                        #2 %! FIGURE_NAME_MARKUP:1
+                                                        \concat %! FIGURE_NAME_MARKUP:1
+                                                            { %! FIGURE_NAME_MARKUP:1
+                                                                [ %! FIGURE_NAME_MARKUP:1
+                                                                "vn 1" %! FIGURE_NAME_MARKUP:1
+                                                                \hspace %! FIGURE_NAME_MARKUP:1
+                                                                    #1 %! FIGURE_NAME_MARKUP:1
+                                                                \raise %! FIGURE_NAME_MARKUP:1
+                                                                    #0.25 %! FIGURE_NAME_MARKUP:1
+                                                                    \fontsize %! FIGURE_NAME_MARKUP:1
+                                                                        #-2 %! FIGURE_NAME_MARKUP:1
+                                                                        (None) %! FIGURE_NAME_MARKUP:1
+                                                                ] %! FIGURE_NAME_MARKUP:1
+                                                            } %! FIGURE_NAME_MARKUP:1
+                                                    } %! FIGURE_NAME_MARKUP:1
                                             \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                             b'8
@@ -2761,23 +2761,23 @@ class LibraryAF(abjad.AbjadObject):
                                             \clef "alto" %! EXPLICIT_CLEF_COMMAND:3
                                             \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:2
                                             c'8
-                                                ^ \markup { %! FIGURE_NAME:1
-                                                    \fontsize %! FIGURE_NAME:1
-                                                        #2 %! FIGURE_NAME:1
-                                                        \concat %! FIGURE_NAME:1
-                                                            { %! FIGURE_NAME:1
-                                                                [ %! FIGURE_NAME:1
-                                                                "vn 2" %! FIGURE_NAME:1
-                                                                \hspace %! FIGURE_NAME:1
-                                                                    #1 %! FIGURE_NAME:1
-                                                                \raise %! FIGURE_NAME:1
-                                                                    #0.25 %! FIGURE_NAME:1
-                                                                    \fontsize %! FIGURE_NAME:1
-                                                                        #-2 %! FIGURE_NAME:1
-                                                                        (None) %! FIGURE_NAME:1
-                                                                ] %! FIGURE_NAME:1
-                                                            } %! FIGURE_NAME:1
-                                                    } %! FIGURE_NAME:1
+                                                ^ \markup { %! FIGURE_NAME_MARKUP:1
+                                                    \fontsize %! FIGURE_NAME_MARKUP:1
+                                                        #2 %! FIGURE_NAME_MARKUP:1
+                                                        \concat %! FIGURE_NAME_MARKUP:1
+                                                            { %! FIGURE_NAME_MARKUP:1
+                                                                [ %! FIGURE_NAME_MARKUP:1
+                                                                "vn 2" %! FIGURE_NAME_MARKUP:1
+                                                                \hspace %! FIGURE_NAME_MARKUP:1
+                                                                    #1 %! FIGURE_NAME_MARKUP:1
+                                                                \raise %! FIGURE_NAME_MARKUP:1
+                                                                    #0.25 %! FIGURE_NAME_MARKUP:1
+                                                                    \fontsize %! FIGURE_NAME_MARKUP:1
+                                                                        #-2 %! FIGURE_NAME_MARKUP:1
+                                                                        (None) %! FIGURE_NAME_MARKUP:1
+                                                                ] %! FIGURE_NAME_MARKUP:1
+                                                            } %! FIGURE_NAME_MARKUP:1
+                                                    } %! FIGURE_NAME_MARKUP:1
                                             \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                             d'8

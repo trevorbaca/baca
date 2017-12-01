@@ -90,13 +90,13 @@ class IndicatorCommand(Command):
                         \time 4/8
                         \bar "" %! SEGMENT:EMPTY_START_BAR:1
                         s1 * 1/2
-                            - \markup { %! STAGE_NUMBER:2
-                                \fontsize %! STAGE_NUMBER:2
-                                    #-3 %! STAGE_NUMBER:2
-                                    \with-color %! STAGE_NUMBER:2
-                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER:2
-                                        [1] %! STAGE_NUMBER:2
-                                } %! STAGE_NUMBER:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
                         \time 3/8

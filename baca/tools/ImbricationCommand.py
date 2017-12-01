@@ -845,14 +845,14 @@ class ImbricationCommand(Command):
                                 - \markup {
                                     \column
                                         {
-                                            \line % STAGE_NUMBER:2
-                                                { % STAGE_NUMBER:2
-                                                    \fontsize % STAGE_NUMBER:2
-                                                        #-3 % STAGE_NUMBER:2
-                                                        \with-color % STAGE_NUMBER:2
-                                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:2
-                                                            [1] % STAGE_NUMBER:2
-                                                } % STAGE_NUMBER:2
+                                            \line % STAGE_NUMBER_MARKUP:2
+                                                { % STAGE_NUMBER_MARKUP:2
+                                                    \fontsize % STAGE_NUMBER_MARKUP:2
+                                                        #-3 % STAGE_NUMBER_MARKUP:2
+                                                        \with-color % STAGE_NUMBER_MARKUP:2
+                                                            #(x11-color 'DarkCyan) % STAGE_NUMBER_MARKUP:2
+                                                            [1] % STAGE_NUMBER_MARKUP:2
+                                                } % STAGE_NUMBER_MARKUP:2
                                             \line % SEGMENT:SPACING_MARKUP:4
                                                 { % SEGMENT:SPACING_MARKUP:4
                                                     \with-color % SEGMENT:SPACING_MARKUP:4
@@ -872,14 +872,14 @@ class ImbricationCommand(Command):
                                 - \markup {
                                     \column
                                         {
-                                            \line % STAGE_NUMBER:1
-                                                { % STAGE_NUMBER:1
-                                                    \fontsize % STAGE_NUMBER:1
-                                                        #-3 % STAGE_NUMBER:1
-                                                        \with-color % STAGE_NUMBER:1
-                                                            #(x11-color 'DarkCyan) % STAGE_NUMBER:1
-                                                            [2] % STAGE_NUMBER:1
-                                                } % STAGE_NUMBER:1
+                                            \line % STAGE_NUMBER_MARKUP:1
+                                                { % STAGE_NUMBER_MARKUP:1
+                                                    \fontsize % STAGE_NUMBER_MARKUP:1
+                                                        #-3 % STAGE_NUMBER_MARKUP:1
+                                                        \with-color % STAGE_NUMBER_MARKUP:1
+                                                            #(x11-color 'DarkCyan) % STAGE_NUMBER_MARKUP:1
+                                                            [2] % STAGE_NUMBER_MARKUP:1
+                                                } % STAGE_NUMBER_MARKUP:1
                                             \line % SEGMENT:SPACING_MARKUP:3
                                                 { % SEGMENT:SPACING_MARKUP:3
                                                     \with-color % SEGMENT:SPACING_MARKUP:3

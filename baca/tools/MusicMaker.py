@@ -964,7 +964,7 @@ class MusicMaker(abjad.AbjadObject):
         annotation = f'figure name: {original_figure_name}'
         figure_name_markup._annotation = annotation
         leaves = list(abjad.iterate(container).leaves())
-        abjad.attach(figure_name_markup, leaves[0], tag='FIGURE_NAME')
+        abjad.attach(figure_name_markup, leaves[0], tag='FIGURE_NAME_MARKUP')
 
     @staticmethod
     def _make_default_rhythm_command():

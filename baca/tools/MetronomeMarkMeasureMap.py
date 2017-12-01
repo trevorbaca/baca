@@ -36,18 +36,18 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                         \time 4/8
                         \bar "" %! SEGMENT:EMPTY_START_BAR:1
                         s1 * 1/2
-                            ^ \markup { %! CLOCK_TIME:3
-                                \fontsize %! CLOCK_TIME:3
-                                    #-2 %! CLOCK_TIME:3
-                                    0'00'' %! CLOCK_TIME:3
-                                } %! CLOCK_TIME:3
-                            - \markup { %! STAGE_NUMBER:2
-                                \fontsize %! STAGE_NUMBER:2
-                                    #-3 %! STAGE_NUMBER:2
-                                    \with-color %! STAGE_NUMBER:2
-                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER:2
-                                        [1] %! STAGE_NUMBER:2
-                                } %! STAGE_NUMBER:2
+                            ^ \markup { %! CLOCK_TIME_MARKUP:3
+                                \fontsize %! CLOCK_TIME_MARKUP:3
+                                    #-2 %! CLOCK_TIME_MARKUP:3
+                                    0'00'' %! CLOCK_TIME_MARKUP:3
+                                } %! CLOCK_TIME_MARKUP:3
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
                             ^ \markup {
                             \fontsize
                                 #-6
@@ -68,27 +68,27 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                         %%% GlobalSkips [measure 2] %%%
                         \time 3/8
                         s1 * 3/8
-                            ^ \markup { %! CLOCK_TIME:1
-                                \fontsize %! CLOCK_TIME:1
-                                    #-2 %! CLOCK_TIME:1
-                                    0'01'' %! CLOCK_TIME:1
-                                } %! CLOCK_TIME:1
+                            ^ \markup { %! CLOCK_TIME_MARKUP:1
+                                \fontsize %! CLOCK_TIME_MARKUP:1
+                                    #-2 %! CLOCK_TIME_MARKUP:1
+                                    0'01'' %! CLOCK_TIME_MARKUP:1
+                                } %! CLOCK_TIME_MARKUP:1
             <BLANKLINE>
                         %%% GlobalSkips [measure 3] %%%
                         \time 4/8
                         s1 * 1/2
-                            ^ \markup { %! CLOCK_TIME:2
-                                \fontsize %! CLOCK_TIME:2
-                                    #-2 %! CLOCK_TIME:2
-                                    0'02'' %! CLOCK_TIME:2
-                                } %! CLOCK_TIME:2
-                            - \markup { %! STAGE_NUMBER:1
-                                \fontsize %! STAGE_NUMBER:1
-                                    #-3 %! STAGE_NUMBER:1
-                                    \with-color %! STAGE_NUMBER:1
-                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER:1
-                                        [2] %! STAGE_NUMBER:1
-                                } %! STAGE_NUMBER:1
+                            ^ \markup { %! CLOCK_TIME_MARKUP:2
+                                \fontsize %! CLOCK_TIME_MARKUP:2
+                                    #-2 %! CLOCK_TIME_MARKUP:2
+                                    0'02'' %! CLOCK_TIME_MARKUP:2
+                                } %! CLOCK_TIME_MARKUP:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:1
+                                \fontsize %! STAGE_NUMBER_MARKUP:1
+                                    #-3 %! STAGE_NUMBER_MARKUP:1
+                                    \with-color %! STAGE_NUMBER_MARKUP:1
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:1
+                                        [2] %! STAGE_NUMBER_MARKUP:1
+                                } %! STAGE_NUMBER_MARKUP:1
                             ^ \markup {
                             \fontsize
                                 #-6
@@ -109,11 +109,11 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                         %%% GlobalSkips [measure 4] %%%
                         \time 3/8
                         s1 * 3/8
-                            ^ \markup { %! CLOCK_TIME:1
-                                \fontsize %! CLOCK_TIME:1
-                                    #-2 %! CLOCK_TIME:1
-                                    0'04'' %! CLOCK_TIME:1
-                                } %! CLOCK_TIME:1
+                            ^ \markup { %! CLOCK_TIME_MARKUP:1
+                                \fontsize %! CLOCK_TIME_MARKUP:1
+                                    #-2 %! CLOCK_TIME_MARKUP:1
+                                    0'04'' %! CLOCK_TIME_MARKUP:1
+                                } %! CLOCK_TIME_MARKUP:1
             <BLANKLINE>
                     }
                 >>
