@@ -58,9 +58,10 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 %%% ViolinMusicVoice [measure 1] %%%
                                 \set ViolinMusicStaff.instrumentName = \markup { Violin }
                                 \set ViolinMusicStaff.shortInstrumentName = \markup { Vn. }
-                                \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
+                                \clef "treble" % EXPLICIT_CLEF_COMMAND:2
+                                \once \override Staff.Clef.color = #(x11-color 'blue) % EXPLICIT_CLEF_COLOR:1
                                 R1 * 1/2
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) % EXPLICIT_CLEF_SHADOW:3
             <BLANKLINE>
                                 %%% ViolinMusicVoice [measure 2] %%%
                                 R1 * 3/8
@@ -81,9 +82,10 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 %%% ViolaMusicVoice [measure 1] %%%
                                 \set ViolaMusicStaff.instrumentName = \markup { Viola }
                                 \set ViolaMusicStaff.shortInstrumentName = \markup { Va. }
-                                \clef "alto" % SEGMENT:EXPLICIT_CLEF:2
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
+                                \clef "alto" % EXPLICIT_CLEF_COMMAND:2
+                                \once \override Staff.Clef.color = #(x11-color 'blue) % EXPLICIT_CLEF_COLOR:1
                                 R1 * 1/2
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) % EXPLICIT_CLEF_SHADOW:3
             <BLANKLINE>
                                 %%% ViolaMusicVoice [measure 2] %%%
                                 R1 * 3/8
@@ -104,9 +106,10 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 %%% CelloMusicVoice [measure 1] %%%
                                 \set CelloMusicStaff.instrumentName = \markup { Cello }
                                 \set CelloMusicStaff.shortInstrumentName = \markup { Vc. }
-                                \clef "bass" % SEGMENT:EXPLICIT_CLEF:2
-                                \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
+                                \clef "bass" % EXPLICIT_CLEF_COMMAND:2
+                                \once \override Staff.Clef.color = #(x11-color 'blue) % EXPLICIT_CLEF_COLOR:1
                                 R1 * 1/2
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) % EXPLICIT_CLEF_SHADOW:3
             <BLANKLINE>
                                 %%% CelloMusicVoice [measure 2] %%%
                                 R1 * 3/8

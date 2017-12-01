@@ -66,9 +66,10 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                                     #10
                                     Vn.
                                 }
-                            \clef "treble" % SEGMENT:EXPLICIT_CLEF:2
-                            \override Staff.Clef.color = #(x11-color 'black) % SEGMENT:EXPLICIT_CLEF:COLOR:1
+                            \clef "treble" % EXPLICIT_CLEF_COMMAND:2
+                            \once \override Staff.Clef.color = #(x11-color 'blue) % EXPLICIT_CLEF_COLOR:1
                             R1 * 1/2
+                            \override Staff.Clef.color = #(x11-color 'DarkCyan) % EXPLICIT_CLEF_SHADOW:3
             <BLANKLINE>
                             %%% ViolinMusicVoice [measure 2] %%%
                             R1 * 3/8
