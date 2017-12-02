@@ -15,7 +15,7 @@ class RangeDictionary(TypedOrderedDict):
         ...     ('soprano', '[C4, C6]'),
         ...     ])
 
-        >>> abjad.f(ranges)
+        >>> abjad.f(ranges, strict=True)
         baca.RangeDictionary(
             [
                 (
@@ -34,7 +34,7 @@ class RangeDictionary(TypedOrderedDict):
         ..  docs::
 
             >>> lilypond_file = ranges.__illustrate__()
-            >>> abjad.f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
             \new Score \with {
                 \override BarLine.stencil = ##f
                 \override Glissando.thickness = #2
@@ -46,12 +46,14 @@ class RangeDictionary(TypedOrderedDict):
                         \clef "treble"
                         s1 * 1/4
                         s1 * 1/4
-                        c'1 * 1/4 \glissando
+                        c'1 * 1/4
+                        \glissando
                         c'''1 * 1/4
                     }
                     \context Staff = "Bass Staff" {
                         \clef "bass"
-                        c1 * 1/4 \glissando
+                        c1 * 1/4
+                        \glissando
                         \change Staff = "Treble Staff"
                         c'''1 * 1/4
                         s1 * 1/4
@@ -85,7 +87,7 @@ class RangeDictionary(TypedOrderedDict):
             ..  docs::
 
                 >>> lilypond_file = ranges.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score \with {
                     \override BarLine.stencil = ##f
                     \override Glissando.thickness = #2
@@ -97,12 +99,14 @@ class RangeDictionary(TypedOrderedDict):
                             \clef "treble"
                             s1 * 1/4
                             s1 * 1/4
-                            c'1 * 1/4 \glissando
+                            c'1 * 1/4
+                            \glissando
                             c'''1 * 1/4
                         }
                         \context Staff = "Bass Staff" {
                             \clef "bass"
-                            c1 * 1/4 \glissando
+                            c1 * 1/4
+                            \glissando
                             \change Staff = "Treble Staff"
                             c'''1 * 1/4
                             s1 * 1/4

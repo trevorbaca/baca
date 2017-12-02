@@ -537,7 +537,7 @@ class Cursor(abjad.AbjadObject):
             ...     number_lists,
             ...     )
 
-            >>> abjad.f(cursor)
+            >>> abjad.f(cursor, strict=True)
             baca.Cursor(
                 source=abjad.CyclicTuple(
                     [

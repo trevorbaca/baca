@@ -39,7 +39,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -48,24 +48,41 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 -\accent [
-                                d'16 -\accent ]
-                                bf'4 -\accent ~
+                                c'16
+                                -\accent
+                                [
+                                d'16
+                                -\accent
+                                ]
+                                bf'4
+                                -\accent
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 -\accent [
-                                e''16 -\accent ]
-                                ef''4 -\accent ~
+                                fs''16
+                                -\accent
+                                [
+                                e''16
+                                -\accent
+                                ]
+                                ef''4
+                                -\accent
+                                ~
                                 ef''16
                                 r16
-                                af''16 -\accent [
-                                g''16 -\accent ]
+                                af''16
+                                -\accent
+                                [
+                                g''16
+                                -\accent
+                                ]
                             }
                             \times 4/5 {
-                                a'16 -\accent
+                                a'16
+                                -\accent
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -92,7 +109,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -101,21 +118,34 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 -\accent [
-                                e''16 -\accent ]
-                                ef''4 -\accent ~
+                                fs''16
+                                -\accent
+                                [
+                                e''16
+                                -\accent
+                                ]
+                                ef''4
+                                -\accent
+                                ~
                                 ef''16
                                 r16
-                                af''16 -\accent [
-                                g''16 -\accent ]
+                                af''16
+                                -\accent
+                                [
+                                g''16
+                                -\accent
+                                ]
                             }
                             \times 4/5 {
                                 a'16
@@ -156,7 +186,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -165,24 +195,41 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 -\downbow [
-                                d'16 -\upbow ]
-                                bf'4 -\downbow ~
+                                c'16
+                                -\downbow
+                                [
+                                d'16
+                                -\upbow
+                                ]
+                                bf'4
+                                -\downbow
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 -\upbow [
-                                e''16 -\downbow ]
-                                ef''4 -\upbow ~
+                                fs''16
+                                -\upbow
+                                [
+                                e''16
+                                -\downbow
+                                ]
+                                ef''4
+                                -\upbow
+                                ~
                                 ef''16
                                 r16
-                                af''16 -\downbow [
-                                g''16 -\upbow ]
+                                af''16
+                                -\downbow
+                                [
+                                g''16
+                                -\upbow
+                                ]
                             }
                             \times 4/5 {
-                                a'16 -\downbow
+                                a'16
+                                -\downbow
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -209,7 +256,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -218,24 +265,41 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #6
                                 r8
-                                c'16 -\upbow [
-                                d'16 -\downbow ]
-                                bf'4 -\upbow ~
+                                c'16
+                                -\upbow
+                                [
+                                d'16
+                                -\downbow
+                                ]
+                                bf'4
+                                -\upbow
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 -\downbow [
-                                e''16 -\upbow ]
-                                ef''4 -\downbow ~
+                                fs''16
+                                -\downbow
+                                [
+                                e''16
+                                -\upbow
+                                ]
+                                ef''4
+                                -\downbow
+                                ~
                                 ef''16
                                 r16
-                                af''16 -\upbow [
-                                g''16 -\downbow ]
+                                af''16
+                                -\upbow
+                                [
+                                g''16
+                                -\downbow
+                                ]
                             }
                             \times 4/5 {
-                                a'16 -\upbow
+                                a'16
+                                -\upbow
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -265,7 +329,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -274,21 +338,34 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #6
                                 r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 -\downbow [
-                                e''16 -\upbow ]
-                                ef''4 -\downbow ~
+                                fs''16
+                                -\downbow
+                                [
+                                e''16
+                                -\upbow
+                                ]
+                                ef''4
+                                -\downbow
+                                ~
                                 ef''16
                                 r16
-                                af''16 -\upbow [
-                                g''16 -\downbow ]
+                                af''16
+                                -\upbow
+                                [
+                                g''16
+                                -\downbow
+                                ]
                             }
                             \times 4/5 {
                                 a'16
@@ -370,7 +447,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -379,27 +456,35 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [
-                                    _ \markup {
-                                        \dynamic
-                                            ff
-                                        \upright
-                                            ancora
-                                        }
-                                d'16 ]
-                                bf'4 ~
+                                c'16
+                                [
+                                _ \markup {
+                                    \dynamic
+                                        ff
+                                    \upright
+                                        ancora
+                                    }
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 [
-                                e''16 ]
-                                ef''4 ~
+                                fs''16
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
-                                af''16 [
-                                g''16 ]
+                                af''16
+                                [
+                                g''16
+                                ]
                             }
                             \times 4/5 {
                                 a'16
@@ -432,7 +517,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -441,27 +526,35 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 [
-                                    _ \markup {
-                                        \dynamic
-                                            ff
-                                        \upright
-                                            ancora
-                                        }
-                                e''16 ]
-                                ef''4 ~
+                                fs''16
+                                [
+                                _ \markup {
+                                    \dynamic
+                                        ff
+                                    \upright
+                                        ancora
+                                    }
+                                e''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
-                                af''16 [
-                                g''16 ]
+                                af''16
+                                [
+                                g''16
+                                ]
                             }
                             \times 4/5 {
                                 a'16
@@ -502,34 +595,52 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
                             {
-                                <c' d' bf'>8 -\arpeggio ~ [
-                                <c' d' bf'>32 ]
+                                <c' d' bf'>8
+                                -\arpeggio
+                                ~
+                                [
+                                <c' d' bf'>32
+                                ]
                                 r16.
                             }
                             {
-                                f''8 ~ [
-                                f''32 ]
+                                f''8
+                                ~
+                                [
+                                f''32
+                                ]
                                 r16.
                             }
                             {
-                                <ef'' e'' fs'''>8 -\arpeggio ~ [
-                                <ef'' e'' fs'''>32 ]
+                                <ef'' e'' fs'''>8
+                                -\arpeggio
+                                ~
+                                [
+                                <ef'' e'' fs'''>32
+                                ]
                                 r16.
                             }
                             {
-                                <g' af''>8 -\arpeggio ~ [
-                                <g' af''>32 ]
+                                <g' af''>8
+                                -\arpeggio
+                                ~
+                                [
+                                <g' af''>32
+                                ]
                                 r16.
                             }
                             {
-                                a'8 ~ [
-                                a'32 ]
+                                a'8
+                                ~
+                                [
+                                a'32
+                                ]
                                 r16.
                             }
                         }
@@ -553,34 +664,51 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
                             {
-                                <c' d' bf'>8 ~ [
-                                <c' d' bf'>32 ]
+                                <c' d' bf'>8
+                                ~
+                                [
+                                <c' d' bf'>32
+                                ]
                                 r16.
                             }
                             {
-                                f''8 ~ [
-                                f''32 ]
+                                f''8
+                                ~
+                                [
+                                f''32
+                                ]
                                 r16.
                             }
                             {
-                                <ef'' e'' fs'''>8 -\arpeggio ~ [
-                                <ef'' e'' fs'''>32 ]
+                                <ef'' e'' fs'''>8
+                                -\arpeggio
+                                ~
+                                [
+                                <ef'' e'' fs'''>32
+                                ]
                                 r16.
                             }
                             {
-                                <g' af''>8 -\arpeggio ~ [
-                                <g' af''>32 ]
+                                <g' af''>8
+                                -\arpeggio
+                                ~
+                                [
+                                <g' af''>32
+                                ]
                                 r16.
                             }
                             {
-                                a'8 ~ [
-                                a'32 ]
+                                a'8
+                                ~
+                                [
+                                a'32
+                                ]
                                 r16.
                             }
                         }
@@ -626,7 +754,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -637,66 +765,66 @@ class LibraryAF(abjad.AbjadObject):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12) %! SEGMENT:SPACING_COMMAND:3
                             s1 * 1/2
-                                - \markup {
-                                    \column
-                                        {
-                                            \line %! STAGE_NUMBER_MARKUP:2
-                                                { %! STAGE_NUMBER_MARKUP:2
-                                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                                } %! STAGE_NUMBER_MARKUP:2
-                                            \line %! SEGMENT:SPACING_MARKUP:4
-                                                { %! SEGMENT:SPACING_MARKUP:4
-                                                    \with-color %! SEGMENT:SPACING_MARKUP:4
-                                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:4
-                                                        \fontsize %! SEGMENT:SPACING_MARKUP:4
-                                                            #-3 %! SEGMENT:SPACING_MARKUP:4
-                                                            (1/12) %! SEGMENT:SPACING_MARKUP:4
-                                                } %! SEGMENT:SPACING_MARKUP:4
-                                        }
+                            - \markup {
+                                \column
+                                    {
+                                        \line %! STAGE_NUMBER_MARKUP:2
+                                            { %! STAGE_NUMBER_MARKUP:2
+                                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                            } %! STAGE_NUMBER_MARKUP:2
+                                        \line %! SEGMENT:SPACING_MARKUP:4
+                                            { %! SEGMENT:SPACING_MARKUP:4
+                                                \with-color %! SEGMENT:SPACING_MARKUP:4
+                                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:4
+                                                    \fontsize %! SEGMENT:SPACING_MARKUP:4
+                                                        #-3 %! SEGMENT:SPACING_MARKUP:4
+                                                        (1/12) %! SEGMENT:SPACING_MARKUP:4
+                                            } %! SEGMENT:SPACING_MARKUP:4
                                     }
+                                }
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                    \with-color %! SEGMENT:SPACING_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                        \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                            #-3 %! SEGMENT:SPACING_MARKUP:2
-                                            (1/12) %! SEGMENT:SPACING_MARKUP:2
-                                    } %! SEGMENT:SPACING_MARKUP:2
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/12) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/2
-                                - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                    \with-color %! SEGMENT:SPACING_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                        \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                            #-3 %! SEGMENT:SPACING_MARKUP:2
-                                            (1/12) %! SEGMENT:SPACING_MARKUP:2
-                                    } %! SEGMENT:SPACING_MARKUP:2
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/12) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                    \with-color %! SEGMENT:SPACING_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                        \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                            #-3 %! SEGMENT:SPACING_MARKUP:2
-                                            (1/12) %! SEGMENT:SPACING_MARKUP:2
-                                    } %! SEGMENT:SPACING_MARKUP:2
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/12) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                         }
                     >>
@@ -709,45 +837,53 @@ class LibraryAF(abjad.AbjadObject):
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    e'8 [
+                                    e'8
+                                    [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                     d''8
                 <BLANKLINE>
                                     f'8
                 <BLANKLINE>
-                                    e''8 ]
+                                    e''8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 2] %%%
                                     \override Staff.BarLine.bar-extent = #'(-4 . 4)
-                                    g'8 [
+                                    g'8
+                                    [
                 <BLANKLINE>
                                     f''8
                 <BLANKLINE>
-                                    e'8 ]
+                                    e'8
+                                    ]
                                     \revert Staff.BarLine.bar-extent
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 3] %%%
-                                    d''8 [
+                                    d''8
+                                    [
                 <BLANKLINE>
                                     f'8
                 <BLANKLINE>
                                     e''8
                 <BLANKLINE>
-                                    g'8 ]
+                                    g'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 4] %%%
-                                    f''8 [
+                                    f''8
+                                    [
                 <BLANKLINE>
                                     e'8
                 <BLANKLINE>
-                                    d''8 ]
+                                    d''8
+                                    ]
                                     \bar "|"
                                     \once \override Staff.BarLine.bar-extent = #'(-4 . 4)
                 <BLANKLINE>
@@ -791,7 +927,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -802,13 +938,16 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #green
                                 \once \override NoteHead.color = #green
                                 \once \override Stem.color = #green
-                                <c d bf>8 ~ [
+                                <c d bf>8
+                                ~
+                                [
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
                                 \once \override NoteHead.color = #green
                                 \once \override Stem.color = #green
-                                <c d bf>32 ]
+                                <c d bf>32
+                                ]
                                 r16.
                             }
                             {
@@ -817,13 +956,16 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #green
                                 \once \override NoteHead.color = #green
                                 \once \override Stem.color = #green
-                                f'8 ~ [
+                                f'8
+                                ~
+                                [
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
                                 \once \override NoteHead.color = #green
                                 \once \override Stem.color = #green
-                                f'32 ]
+                                f'32
+                                ]
                                 r16.
                             }
                             {
@@ -832,13 +974,16 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #green
                                 \once \override NoteHead.color = #green
                                 \once \override Stem.color = #green
-                                <ef' e' fs''>8 ~ [
+                                <ef' e' fs''>8
+                                ~
+                                [
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
                                 \once \override NoteHead.color = #green
                                 \once \override Stem.color = #green
-                                <ef' e' fs''>32 ]
+                                <ef' e' fs''>32
+                                ]
                                 r16.
                             }
                             {
@@ -847,13 +992,16 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #green
                                 \once \override NoteHead.color = #green
                                 \once \override Stem.color = #green
-                                <g af'>8 ~ [
+                                <g af'>8
+                                ~
+                                [
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
                                 \once \override NoteHead.color = #green
                                 \once \override Stem.color = #green
-                                <g af'>32 ]
+                                <g af'>32
+                                ]
                                 r16.
                             }
                             {
@@ -862,13 +1010,16 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #green
                                 \once \override NoteHead.color = #green
                                 \once \override Stem.color = #green
-                                a8 ~ [
+                                a8
+                                ~
+                                [
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
                                 \once \override NoteHead.color = #green
                                 \once \override Stem.color = #green
-                                a32 ]
+                                a32
+                                ]
                                 r16.
                             }
                         }
@@ -894,7 +1045,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -905,13 +1056,16 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                <c d bf>8 ~ [
+                                <c d bf>8
+                                ~
+                                [
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                <c d bf>32 ]
+                                <c d bf>32
+                                ]
                                 r16.
                             }
                             {
@@ -920,13 +1074,16 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
-                                f8 ~ [
+                                f8
+                                ~
+                                [
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
-                                f32 ]
+                                f32
+                                ]
                                 r16.
                             }
                             {
@@ -935,13 +1092,16 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                <ef e fs'>8 ~ [
+                                <ef e fs'>8
+                                ~
+                                [
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                <ef e fs'>32 ]
+                                <ef e fs'>32
+                                ]
                                 r16.
                             }
                             {
@@ -950,13 +1110,16 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
-                                <g af'>8 ~ [
+                                <g af'>8
+                                ~
+                                [
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
-                                <g af'>32 ]
+                                <g af'>32
+                                ]
                                 r16.
                             }
                             {
@@ -965,13 +1128,16 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                a8 ~ [
+                                a8
+                                ~
+                                [
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                a32 ]
+                                a32
+                                ]
                                 r16.
                             }
                         }
@@ -997,24 +1163,33 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
                             {
-                                <c' d' bf'>8 ~ [
-                                <c' d' bf'>32 ]
+                                <c' d' bf'>8
+                                ~
+                                [
+                                <c' d' bf'>32
+                                ]
                                 r16.
                             }
                             {
-                                f''8 ~ [
-                                f''32 ]
+                                f''8
+                                ~
+                                [
+                                f''32
+                                ]
                                 r16.
                             }
                             {
-                                <ef'' e'' fs'''>8 ~ [
-                                <ef'' e'' fs'''>32 ]
+                                <ef'' e'' fs'''>8
+                                ~
+                                [
+                                <ef'' e'' fs'''>32
+                                ]
                                 r16.
                             }
                             {
@@ -1023,13 +1198,16 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                <g af'>8 ~ [
+                                <g af'>8
+                                ~
+                                [
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                <g af'>32 ]
+                                <g af'>32
+                                ]
                                 r16.
                             }
                             {
@@ -1038,13 +1216,16 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
-                                a8 ~ [
+                                a8
+                                ~
+                                [
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
-                                a32 ]
+                                a32
+                                ]
                                 r16.
                             }
                         }
@@ -1078,23 +1259,27 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
                             {
                                 r8
-                                c'16 [
+                                c'16
+                                [
                                 d'16
-                                bf'16 ]
+                                bf'16
+                                ]
                             }
                             {
-                                fs''16 [
+                                fs''16
+                                [
                                 e''16
                                 ef''16
                                 af''16
-                                g''16 ]
+                                g''16
+                                ]
                             }
                             {
                                 a'16
@@ -1120,33 +1305,39 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
                             {
                                 \override Staff.Stem.stemlet-length = #2
-                                r8 [
+                                r8
+                                [
                                 c'16
                                 d'16
                                 \revert Staff.Stem.stemlet-length
-                                bf'16 ]
+                                bf'16
+                                ]
                             }
                             {
                                 \override Staff.Stem.stemlet-length = #2
-                                fs''16 [
+                                fs''16
+                                [
                                 e''16
                                 ef''16
                                 af''16
                                 \revert Staff.Stem.stemlet-length
-                                g''16 ]
+                                g''16
+                                ]
                             }
                             {
                                 \override Staff.Stem.stemlet-length = #2
-                                a'16 [
+                                a'16
+                                [
                                 \revert Staff.Stem.stemlet-length
-                                r8 ]
+                                r8
+                                ]
                             }
                         }
                     }
@@ -1179,13 +1370,14 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
                             {
-                                r8 [
+                                r8
+                                [
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
                                 c'16
@@ -1217,7 +1409,8 @@ class LibraryAF(abjad.AbjadObject):
                                 \set stemLeftBeamCount = #1
                                 \set stemRightBeamCount = #2
                                 a'16
-                                r8 ]
+                                r8
+                                ]
                             }
                         }
                     }
@@ -1239,14 +1432,15 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
                             {
                                 \override Staff.Stem.stemlet-length = #2
-                                r8 [
+                                r8
+                                [
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
                                 c'16
@@ -1279,7 +1473,8 @@ class LibraryAF(abjad.AbjadObject):
                                 \set stemRightBeamCount = #2
                                 a'16
                                 \revert Staff.Stem.stemlet-length
-                                r8 ]
+                                r8
+                                ]
                             }
                         }
                     }
@@ -1301,13 +1496,14 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
                             {
-                                r8 [
+                                r8
+                                [
                                 c'16
                                 d'16
                                 bf'16
@@ -1321,7 +1517,8 @@ class LibraryAF(abjad.AbjadObject):
                             }
                             {
                                 a'16
-                                r8 ]
+                                r8
+                                ]
                             }
                         }
                     }
@@ -1357,7 +1554,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1365,16 +1562,20 @@ class LibraryAF(abjad.AbjadObject):
                             \times 4/5 {
                                 \override Beam.positions = #'(6 . 6)
                                 r8
-                                c'16 [
+                                c'16
+                                [
                                 d'16
-                                bf'16 ]
+                                bf'16
+                                ]
                             }
                             \times 4/5 {
-                                fs''16 [
+                                fs''16
+                                [
                                 e''16
                                 ef''16
                                 af''16
-                                g''16 ]
+                                g''16
+                                ]
                             }
                             \times 4/5 {
                                 a'16
@@ -1402,24 +1603,28 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
                             \times 4/5 {
                                 r8
-                                c'16 [
+                                c'16
+                                [
                                 d'16
-                                bf'16 ]
+                                bf'16
+                                ]
                             }
                             \times 4/5 {
                                 \override Beam.positions = #'(6 . 6)
-                                fs''16 [
+                                fs''16
+                                [
                                 e''16
                                 ef''16
                                 af''16
-                                g''16 ]
+                                g''16
+                                ]
                                 \revert Beam.positions
                             }
                             \times 4/5 {
@@ -1462,7 +1667,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1473,32 +1678,43 @@ class LibraryAF(abjad.AbjadObject):
                                 r8
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                c'16 [
+                                c'16
+                                [
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                d'16 ]
-                                bf'4 ~
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                bf'16 [ ]
+                                bf'16
+                                [
+                                ]
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \set stemLeftBeamCount = #1
                                 \set stemRightBeamCount = #2
-                                fs''16 [
+                                fs''16
+                                [
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                e''16 ]
-                                ef''4 ~
+                                e''16
+                                ]
+                                ef''4
+                                ~
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                ef''16 [ ]
+                                ef''16
+                                [
+                                ]
                                 r16
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                af''16 [
+                                af''16
+                                [
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #1
                                 g''16
@@ -1506,7 +1722,8 @@ class LibraryAF(abjad.AbjadObject):
                             \times 2/3 {
                                 \set stemLeftBeamCount = #1
                                 \set stemRightBeamCount = #2
-                                a'16 ]
+                                a'16
+                                ]
                                 r8
                                 \revert TupletBracket.staff-padding
                             }
@@ -1533,7 +1750,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1542,24 +1759,32 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 [
-                                e''16 ]
-                                ef''4 ~
+                                fs''16
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
-                                af''16 [
+                                af''16
+                                [
                                 g''16
                             }
                             \times 2/3 {
-                                a'16 ]
+                                a'16
+                                ]
                                 r8
                                 \revert TupletBracket.staff-padding
                             }
@@ -1598,7 +1823,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1609,13 +1834,16 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #green
                                 \once \override NoteHead.color = #green
                                 \once \override Stem.color = #green
-                                <c, d, bf,>8 ~ [
+                                <c, d, bf,>8
+                                ~
+                                [
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
                                 \once \override NoteHead.color = #green
                                 \once \override Stem.color = #green
-                                <c, d, bf,>32 ]
+                                <c, d, bf,>32
+                                ]
                                 r16.
                             }
                             {
@@ -1624,13 +1852,16 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #green
                                 \once \override NoteHead.color = #green
                                 \once \override Stem.color = #green
-                                f8 ~ [
+                                f8
+                                ~
+                                [
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
                                 \once \override NoteHead.color = #green
                                 \once \override Stem.color = #green
-                                f32 ]
+                                f32
+                                ]
                                 r16.
                             }
                             {
@@ -1639,13 +1870,16 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #green
                                 \once \override NoteHead.color = #green
                                 \once \override Stem.color = #green
-                                <ef e fs'>8 ~ [
+                                <ef e fs'>8
+                                ~
+                                [
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
                                 \once \override NoteHead.color = #green
                                 \once \override Stem.color = #green
-                                <ef e fs'>32 ]
+                                <ef e fs'>32
+                                ]
                                 r16.
                             }
                             {
@@ -1654,13 +1888,16 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #green
                                 \once \override NoteHead.color = #green
                                 \once \override Stem.color = #green
-                                <g, af>8 ~ [
+                                <g, af>8
+                                ~
+                                [
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
                                 \once \override NoteHead.color = #green
                                 \once \override Stem.color = #green
-                                <g, af>32 ]
+                                <g, af>32
+                                ]
                                 r16.
                             }
                             {
@@ -1669,13 +1906,16 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #green
                                 \once \override NoteHead.color = #green
                                 \once \override Stem.color = #green
-                                a,8 ~ [
+                                a,8
+                                ~
+                                [
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
                                 \once \override NoteHead.color = #green
                                 \once \override Stem.color = #green
-                                a,32 ]
+                                a,32
+                                ]
                                 r16.
                             }
                         }
@@ -1701,7 +1941,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1712,13 +1952,16 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                <c d bf>8 ~ [
+                                <c d bf>8
+                                ~
+                                [
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                <c d bf>32 ]
+                                <c d bf>32
+                                ]
                                 r16.
                             }
                             {
@@ -1727,13 +1970,16 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
-                                f8 ~ [
+                                f8
+                                ~
+                                [
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
-                                f32 ]
+                                f32
+                                ]
                                 r16.
                             }
                             {
@@ -1742,13 +1988,16 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                <ef e fs'>8 ~ [
+                                <ef e fs'>8
+                                ~
+                                [
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                <ef e fs'>32 ]
+                                <ef e fs'>32
+                                ]
                                 r16.
                             }
                             {
@@ -1757,13 +2006,16 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
-                                <g, af>8 ~ [
+                                <g, af>8
+                                ~
+                                [
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
-                                <g, af>32 ]
+                                <g, af>32
+                                ]
                                 r16.
                             }
                             {
@@ -1772,13 +2024,16 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                a8 ~ [
+                                a8
+                                ~
+                                [
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                a32 ]
+                                a32
+                                ]
                                 r16.
                             }
                         }
@@ -1804,24 +2059,33 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
                             {
-                                <c' d' bf'>8 ~ [
-                                <c' d' bf'>32 ]
+                                <c' d' bf'>8
+                                ~
+                                [
+                                <c' d' bf'>32
+                                ]
                                 r16.
                             }
                             {
-                                f''8 ~ [
-                                f''32 ]
+                                f''8
+                                ~
+                                [
+                                f''32
+                                ]
                                 r16.
                             }
                             {
-                                <ef'' e'' fs'''>8 ~ [
-                                <ef'' e'' fs'''>32 ]
+                                <ef'' e'' fs'''>8
+                                ~
+                                [
+                                <ef'' e'' fs'''>32
+                                ]
                                 r16.
                             }
                             {
@@ -1830,13 +2094,16 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                <g, af>8 ~ [
+                                <g, af>8
+                                ~
+                                [
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                <g, af>32 ]
+                                <g, af>32
+                                ]
                                 r16.
                             }
                             {
@@ -1845,13 +2112,16 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
-                                a8 ~ [
+                                a8
+                                ~
+                                [
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
-                                a32 ]
+                                a32
+                                ]
                                 r16.
                             }
                         }
@@ -1888,7 +2158,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1898,21 +2168,29 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #7
                                 \clef "alto"
                                 r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 [
-                                e''16 ]
-                                ef''4 ~
+                                fs''16
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
-                                af''16 [
-                                g''16 ]
+                                af''16
+                                [
+                                g''16
+                                ]
                             }
                             \times 4/5 {
                                 a'16
@@ -1945,7 +2223,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1954,22 +2232,30 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #7
                                 r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \clef "alto"
-                                fs''16 [
-                                e''16 ]
-                                ef''4 ~
+                                fs''16
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
-                                af''16 [
-                                g''16 ]
+                                af''16
+                                [
+                                g''16
+                                ]
                             }
                             \times 4/5 {
                                 a'16
@@ -2044,27 +2330,33 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
                             \times 4/5 {
                                 r8
-                                c'16 [
+                                c'16
+                                [
                                 d'16
-                                bf'16 ]
+                                bf'16
+                                ]
                             }
                             \times 2/3 {
-                                c'16 [
+                                c'16
+                                [
                                 d'16
-                                bf'16 ]
+                                bf'16
+                                ]
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 6/7 {
-                                c'16 [
+                                c'16
+                                [
                                 d'16
-                                bf'16 ]
+                                bf'16
+                                ]
                                 r4
                             }
                         }
@@ -2081,8 +2373,10 @@ class LibraryAF(abjad.AbjadObject):
                                 bf'16
                             }
                             \times 2/3 {
-                                c'16 [
-                                d'16 ]
+                                c'16
+                                [
+                                d'16
+                                ]
                                 s16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
@@ -2125,7 +2419,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2153,7 +2447,8 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
-                                bf'4 ~
+                                bf'4
+                                ~
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
@@ -2183,7 +2478,8 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                ef''4 ~
+                                ef''4
+                                ~
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
@@ -2242,7 +2538,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2253,7 +2549,8 @@ class LibraryAF(abjad.AbjadObject):
                                 r8
                                 c'16
                                 d'16
-                                bf'4 ~
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
@@ -2276,7 +2573,8 @@ class LibraryAF(abjad.AbjadObject):
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                ef''4 ~
+                                ef''4
+                                ~
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
@@ -2356,7 +2654,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2366,21 +2664,29 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 \override NoteHead.style = #'cross
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 [
-                                e''16 ]
-                                ef''4 ~
+                                fs''16
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
-                                af''16 [
-                                g''16 ]
+                                af''16
+                                [
+                                g''16
+                                ]
                             }
                             \times 4/5 {
                                 a'16
@@ -2411,7 +2717,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2420,22 +2726,30 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \override NoteHead.style = #'cross
-                                fs''16 [
-                                e''16 ]
-                                ef''4 ~
+                                fs''16
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
-                                af''16 [
-                                g''16 ]
+                                af''16
+                                [
+                                g''16
+                                ]
                                 \revert NoteHead.style
                             }
                             \times 4/5 {
@@ -2501,7 +2815,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \tag violin.viola.cello
                     \context GlobalContext = "GlobalContext" <<
@@ -2511,13 +2825,13 @@ class LibraryAF(abjad.AbjadObject):
                             \time 5/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 5/8
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                         }
                     >>
@@ -2545,23 +2859,23 @@ class LibraryAF(abjad.AbjadObject):
                                             \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:2
                                             %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:3
                                             a'8
-                                                ^ \markup { %! FIGURE_NAME_MARKUP:1
-                                                    \fontsize %! FIGURE_NAME_MARKUP:1
-                                                        #2 %! FIGURE_NAME_MARKUP:1
-                                                        \concat %! FIGURE_NAME_MARKUP:1
-                                                            { %! FIGURE_NAME_MARKUP:1
-                                                                [ %! FIGURE_NAME_MARKUP:1
-                                                                "vn 1" %! FIGURE_NAME_MARKUP:1
-                                                                \hspace %! FIGURE_NAME_MARKUP:1
-                                                                    #1 %! FIGURE_NAME_MARKUP:1
-                                                                \raise %! FIGURE_NAME_MARKUP:1
-                                                                    #0.25 %! FIGURE_NAME_MARKUP:1
-                                                                    \fontsize %! FIGURE_NAME_MARKUP:1
-                                                                        #-2 %! FIGURE_NAME_MARKUP:1
-                                                                        (None) %! FIGURE_NAME_MARKUP:1
-                                                                ] %! FIGURE_NAME_MARKUP:1
-                                                            } %! FIGURE_NAME_MARKUP:1
-                                                    } %! FIGURE_NAME_MARKUP:1
+                                            ^ \markup { %! FIGURE_NAME_MARKUP:1
+                                                \fontsize %! FIGURE_NAME_MARKUP:1
+                                                    #2 %! FIGURE_NAME_MARKUP:1
+                                                    \concat %! FIGURE_NAME_MARKUP:1
+                                                        { %! FIGURE_NAME_MARKUP:1
+                                                            [ %! FIGURE_NAME_MARKUP:1
+                                                            "vn 1" %! FIGURE_NAME_MARKUP:1
+                                                            \hspace %! FIGURE_NAME_MARKUP:1
+                                                                #1 %! FIGURE_NAME_MARKUP:1
+                                                            \raise %! FIGURE_NAME_MARKUP:1
+                                                                #0.25 %! FIGURE_NAME_MARKUP:1
+                                                                \fontsize %! FIGURE_NAME_MARKUP:1
+                                                                    #-2 %! FIGURE_NAME_MARKUP:1
+                                                                    (None) %! FIGURE_NAME_MARKUP:1
+                                                            ] %! FIGURE_NAME_MARKUP:1
+                                                        } %! FIGURE_NAME_MARKUP:1
+                                                } %! FIGURE_NAME_MARKUP:1
                                             \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
                 <BLANKLINE>
                                             b'8
@@ -2601,23 +2915,23 @@ class LibraryAF(abjad.AbjadObject):
                                             \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:2
                                             %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:3
                                             c'8
-                                                ^ \markup { %! FIGURE_NAME_MARKUP:1
-                                                    \fontsize %! FIGURE_NAME_MARKUP:1
-                                                        #2 %! FIGURE_NAME_MARKUP:1
-                                                        \concat %! FIGURE_NAME_MARKUP:1
-                                                            { %! FIGURE_NAME_MARKUP:1
-                                                                [ %! FIGURE_NAME_MARKUP:1
-                                                                "vn 2" %! FIGURE_NAME_MARKUP:1
-                                                                \hspace %! FIGURE_NAME_MARKUP:1
-                                                                    #1 %! FIGURE_NAME_MARKUP:1
-                                                                \raise %! FIGURE_NAME_MARKUP:1
-                                                                    #0.25 %! FIGURE_NAME_MARKUP:1
-                                                                    \fontsize %! FIGURE_NAME_MARKUP:1
-                                                                        #-2 %! FIGURE_NAME_MARKUP:1
-                                                                        (None) %! FIGURE_NAME_MARKUP:1
-                                                                ] %! FIGURE_NAME_MARKUP:1
-                                                            } %! FIGURE_NAME_MARKUP:1
-                                                    } %! FIGURE_NAME_MARKUP:1
+                                            ^ \markup { %! FIGURE_NAME_MARKUP:1
+                                                \fontsize %! FIGURE_NAME_MARKUP:1
+                                                    #2 %! FIGURE_NAME_MARKUP:1
+                                                    \concat %! FIGURE_NAME_MARKUP:1
+                                                        { %! FIGURE_NAME_MARKUP:1
+                                                            [ %! FIGURE_NAME_MARKUP:1
+                                                            "vn 2" %! FIGURE_NAME_MARKUP:1
+                                                            \hspace %! FIGURE_NAME_MARKUP:1
+                                                                #1 %! FIGURE_NAME_MARKUP:1
+                                                            \raise %! FIGURE_NAME_MARKUP:1
+                                                                #0.25 %! FIGURE_NAME_MARKUP:1
+                                                                \fontsize %! FIGURE_NAME_MARKUP:1
+                                                                    #-2 %! FIGURE_NAME_MARKUP:1
+                                                                    (None) %! FIGURE_NAME_MARKUP:1
+                                                            ] %! FIGURE_NAME_MARKUP:1
+                                                        } %! FIGURE_NAME_MARKUP:1
+                                                } %! FIGURE_NAME_MARKUP:1
                                             \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
                 <BLANKLINE>
                                             \crossStaff
@@ -2708,7 +3022,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \tag violin.viola.cello
                     \context GlobalContext = "GlobalContext" <<
@@ -2718,13 +3032,13 @@ class LibraryAF(abjad.AbjadObject):
                             \time 5/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 5/8
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                         }
                     >>
@@ -2752,23 +3066,23 @@ class LibraryAF(abjad.AbjadObject):
                                             \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:2
                                             %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:3
                                             a'8
-                                                ^ \markup { %! FIGURE_NAME_MARKUP:1
-                                                    \fontsize %! FIGURE_NAME_MARKUP:1
-                                                        #2 %! FIGURE_NAME_MARKUP:1
-                                                        \concat %! FIGURE_NAME_MARKUP:1
-                                                            { %! FIGURE_NAME_MARKUP:1
-                                                                [ %! FIGURE_NAME_MARKUP:1
-                                                                "vn 1" %! FIGURE_NAME_MARKUP:1
-                                                                \hspace %! FIGURE_NAME_MARKUP:1
-                                                                    #1 %! FIGURE_NAME_MARKUP:1
-                                                                \raise %! FIGURE_NAME_MARKUP:1
-                                                                    #0.25 %! FIGURE_NAME_MARKUP:1
-                                                                    \fontsize %! FIGURE_NAME_MARKUP:1
-                                                                        #-2 %! FIGURE_NAME_MARKUP:1
-                                                                        (None) %! FIGURE_NAME_MARKUP:1
-                                                                ] %! FIGURE_NAME_MARKUP:1
-                                                            } %! FIGURE_NAME_MARKUP:1
-                                                    } %! FIGURE_NAME_MARKUP:1
+                                            ^ \markup { %! FIGURE_NAME_MARKUP:1
+                                                \fontsize %! FIGURE_NAME_MARKUP:1
+                                                    #2 %! FIGURE_NAME_MARKUP:1
+                                                    \concat %! FIGURE_NAME_MARKUP:1
+                                                        { %! FIGURE_NAME_MARKUP:1
+                                                            [ %! FIGURE_NAME_MARKUP:1
+                                                            "vn 1" %! FIGURE_NAME_MARKUP:1
+                                                            \hspace %! FIGURE_NAME_MARKUP:1
+                                                                #1 %! FIGURE_NAME_MARKUP:1
+                                                            \raise %! FIGURE_NAME_MARKUP:1
+                                                                #0.25 %! FIGURE_NAME_MARKUP:1
+                                                                \fontsize %! FIGURE_NAME_MARKUP:1
+                                                                    #-2 %! FIGURE_NAME_MARKUP:1
+                                                                    (None) %! FIGURE_NAME_MARKUP:1
+                                                            ] %! FIGURE_NAME_MARKUP:1
+                                                        } %! FIGURE_NAME_MARKUP:1
+                                                } %! FIGURE_NAME_MARKUP:1
                                             \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
                 <BLANKLINE>
                                             b'8
@@ -2807,23 +3121,23 @@ class LibraryAF(abjad.AbjadObject):
                                             \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:2
                                             %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:3
                                             c'8
-                                                ^ \markup { %! FIGURE_NAME_MARKUP:1
-                                                    \fontsize %! FIGURE_NAME_MARKUP:1
-                                                        #2 %! FIGURE_NAME_MARKUP:1
-                                                        \concat %! FIGURE_NAME_MARKUP:1
-                                                            { %! FIGURE_NAME_MARKUP:1
-                                                                [ %! FIGURE_NAME_MARKUP:1
-                                                                "vn 2" %! FIGURE_NAME_MARKUP:1
-                                                                \hspace %! FIGURE_NAME_MARKUP:1
-                                                                    #1 %! FIGURE_NAME_MARKUP:1
-                                                                \raise %! FIGURE_NAME_MARKUP:1
-                                                                    #0.25 %! FIGURE_NAME_MARKUP:1
-                                                                    \fontsize %! FIGURE_NAME_MARKUP:1
-                                                                        #-2 %! FIGURE_NAME_MARKUP:1
-                                                                        (None) %! FIGURE_NAME_MARKUP:1
-                                                                ] %! FIGURE_NAME_MARKUP:1
-                                                            } %! FIGURE_NAME_MARKUP:1
-                                                    } %! FIGURE_NAME_MARKUP:1
+                                            ^ \markup { %! FIGURE_NAME_MARKUP:1
+                                                \fontsize %! FIGURE_NAME_MARKUP:1
+                                                    #2 %! FIGURE_NAME_MARKUP:1
+                                                    \concat %! FIGURE_NAME_MARKUP:1
+                                                        { %! FIGURE_NAME_MARKUP:1
+                                                            [ %! FIGURE_NAME_MARKUP:1
+                                                            "vn 2" %! FIGURE_NAME_MARKUP:1
+                                                            \hspace %! FIGURE_NAME_MARKUP:1
+                                                                #1 %! FIGURE_NAME_MARKUP:1
+                                                            \raise %! FIGURE_NAME_MARKUP:1
+                                                                #0.25 %! FIGURE_NAME_MARKUP:1
+                                                                \fontsize %! FIGURE_NAME_MARKUP:1
+                                                                    #-2 %! FIGURE_NAME_MARKUP:1
+                                                                    (None) %! FIGURE_NAME_MARKUP:1
+                                                            ] %! FIGURE_NAME_MARKUP:1
+                                                        } %! FIGURE_NAME_MARKUP:1
+                                                } %! FIGURE_NAME_MARKUP:1
                                             \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
                 <BLANKLINE>
                                             d'8
@@ -2933,7 +3247,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2942,25 +3256,34 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [
-                                d'16 ]
-                                ef4 ~
+                                c'16
+                                [
+                                d'16
+                                ]
+                                ef4
+                                ~
                                 ef16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 7/8 {
-                                c16 [
-                                d''16 ]
-                                ef''4 ~
+                                c16
+                                [
+                                d''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 11/12 {
-                                c'16 [
-                                d'16 ]
-                                ef4 ~
+                                c'16
+                                [
+                                d'16
+                                ]
+                                ef4
+                                ~
                                 ef16
                                 r16
                                 r4
@@ -2987,7 +3310,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3035,7 +3358,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3044,25 +3367,34 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [
-                                d'16 ]
-                                ef'4 ~
+                                c'16
+                                [
+                                d'16
+                                ]
+                                ef'4
+                                ~
                                 ef'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 7/8 {
-                                c'16 [
-                                d'16 ]
-                                ef4 ~
+                                c'16
+                                [
+                                d'16
+                                ]
+                                ef4
+                                ~
                                 ef16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 11/12 {
-                                c16 [
-                                d''16 ]
-                                ef''4 ~
+                                c16
+                                [
+                                d''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
                                 r4
@@ -3101,7 +3433,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3110,24 +3442,41 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 -\tongue #2 [
-                                d'16 -\tongue #2 ]
-                                bf'4 -\tongue #2 ~
+                                c'16
+                                -\tongue #2
+                                [
+                                d'16
+                                -\tongue #2
+                                ]
+                                bf'4
+                                -\tongue #2
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 -\tongue #2 [
-                                e''16 -\tongue #2 ]
-                                ef''4 -\tongue #2 ~
+                                fs''16
+                                -\tongue #2
+                                [
+                                e''16
+                                -\tongue #2
+                                ]
+                                ef''4
+                                -\tongue #2
+                                ~
                                 ef''16
                                 r16
-                                af''16 -\tongue #2 [
-                                g''16 -\tongue #2 ]
+                                af''16
+                                -\tongue #2
+                                [
+                                g''16
+                                -\tongue #2
+                                ]
                             }
                             \times 4/5 {
-                                a'16 -\tongue #2
+                                a'16
+                                -\tongue #2
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -3156,7 +3505,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3165,21 +3514,34 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 -\tongue #2 [
-                                e''16 -\tongue #2 ]
-                                ef''4 -\tongue #2 ~
+                                fs''16
+                                -\tongue #2
+                                [
+                                e''16
+                                -\tongue #2
+                                ]
+                                ef''4
+                                -\tongue #2
+                                ~
                                 ef''16
                                 r16
-                                af''16 -\tongue #2 [
-                                g''16 -\tongue #2 ]
+                                af''16
+                                -\tongue #2
+                                [
+                                g''16
+                                -\tongue #2
+                                ]
                             }
                             \times 4/5 {
                                 a'16
@@ -3217,37 +3579,55 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
                             {
                                 \arpeggioArrowDown
-                                <c' d' bf'>8 \arpeggio ~ [
-                                <c' d' bf'>32 ]
+                                <c' d' bf'>8
+                                \arpeggio
+                                ~
+                                [
+                                <c' d' bf'>32
+                                ]
                                 r16.
                             }
                             {
-                                f''8 ~ [
-                                f''32 ]
+                                f''8
+                                ~
+                                [
+                                f''32
+                                ]
                                 r16.
                             }
                             {
                                 \arpeggioArrowDown
-                                <ef'' e'' fs'''>8 \arpeggio ~ [
-                                <ef'' e'' fs'''>32 ]
+                                <ef'' e'' fs'''>8
+                                \arpeggio
+                                ~
+                                [
+                                <ef'' e'' fs'''>32
+                                ]
                                 r16.
                             }
                             {
                                 \arpeggioArrowDown
-                                <g' af''>8 \arpeggio ~ [
-                                <g' af''>32 ]
+                                <g' af''>8
+                                \arpeggio
+                                ~
+                                [
+                                <g' af''>32
+                                ]
                                 r16.
                             }
                             {
-                                a'8 ~ [
-                                a'32 ]
+                                a'8
+                                ~
+                                [
+                                a'32
+                                ]
                                 r16.
                             }
                         }
@@ -3271,36 +3651,53 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
                             {
-                                <c' d' bf'>8 ~ [
-                                <c' d' bf'>32 ]
+                                <c' d' bf'>8
+                                ~
+                                [
+                                <c' d' bf'>32
+                                ]
                                 r16.
                             }
                             {
-                                f''8 ~ [
-                                f''32 ]
+                                f''8
+                                ~
+                                [
+                                f''32
+                                ]
                                 r16.
                             }
                             {
                                 \arpeggioArrowDown
-                                <ef'' e'' fs'''>8 \arpeggio ~ [
-                                <ef'' e'' fs'''>32 ]
+                                <ef'' e'' fs'''>8
+                                \arpeggio
+                                ~
+                                [
+                                <ef'' e'' fs'''>32
+                                ]
                                 r16.
                             }
                             {
                                 \arpeggioArrowDown
-                                <g' af''>8 \arpeggio ~ [
-                                <g' af''>32 ]
+                                <g' af''>8
+                                \arpeggio
+                                ~
+                                [
+                                <g' af''>32
+                                ]
                                 r16.
                             }
                             {
-                                a'8 ~ [
-                                a'32 ]
+                                a'8
+                                ~
+                                [
+                                a'32
+                                ]
                                 r16.
                             }
                         }
@@ -3336,7 +3733,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3345,24 +3742,41 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 -\downbow [
-                                d'16 -\downbow ]
-                                bf'4 -\downbow ~
+                                c'16
+                                -\downbow
+                                [
+                                d'16
+                                -\downbow
+                                ]
+                                bf'4
+                                -\downbow
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 -\downbow [
-                                e''16 -\downbow ]
-                                ef''4 -\downbow ~
+                                fs''16
+                                -\downbow
+                                [
+                                e''16
+                                -\downbow
+                                ]
+                                ef''4
+                                -\downbow
+                                ~
                                 ef''16
                                 r16
-                                af''16 -\downbow [
-                                g''16 -\downbow ]
+                                af''16
+                                -\downbow
+                                [
+                                g''16
+                                -\downbow
+                                ]
                             }
                             \times 4/5 {
-                                a'16 -\downbow
+                                a'16
+                                -\downbow
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -3391,7 +3805,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3400,21 +3814,34 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 -\downbow [
-                                e''16 -\downbow ]
-                                ef''4 -\downbow ~
+                                fs''16
+                                -\downbow
+                                [
+                                e''16
+                                -\downbow
+                                ]
+                                ef''4
+                                -\downbow
+                                ~
                                 ef''16
                                 r16
-                                af''16 -\downbow [
-                                g''16 -\downbow ]
+                                af''16
+                                -\downbow
+                                [
+                                g''16
+                                -\downbow
+                                ]
                             }
                             \times 4/5 {
                                 a'16
@@ -3454,7 +3881,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3463,21 +3890,30 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 \f [
-                                d'16 ]
-                                bf'4 ~
+                                c'16
+                                \f
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 [
-                                e''16 ]
-                                ef''4 ~
+                                fs''16
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
-                                af''16 [
-                                g''16 ]
+                                af''16
+                                [
+                                g''16
+                                ]
                             }
                             \times 4/5 {
                                 a'16
@@ -3507,7 +3943,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3516,21 +3952,30 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 \f [
-                                e''16 ]
-                                ef''4 ~
+                                fs''16
+                                \f
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
-                                af''16 [
-                                g''16 ]
+                                af''16
+                                [
+                                g''16
+                                ]
                             }
                             \times 4/5 {
                                 a'16
@@ -3571,7 +4016,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3581,24 +4026,39 @@ class LibraryAF(abjad.AbjadObject):
                                 \override DynamicLineSpanner.staff-padding = #'4
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 \< \p [
-                                d'16 ]
-                                bf'4 ~
-                                bf'16 \f
+                                c'16
+                                \<
+                                \p
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                \f
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 \< \p [
-                                e''16 ]
-                                ef''4 ~
+                                fs''16
+                                \<
+                                \p
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
-                                af''16 [
-                                g''16 \f ]
+                                af''16
+                                [
+                                g''16
+                                \f
+                                ]
                             }
                             \times 4/5 {
-                                a'16 \p
+                                a'16
+                                \p
                                 r4
                                 \revert DynamicLineSpanner.staff-padding
                                 \revert TupletBracket.staff-padding
@@ -3627,7 +4087,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3636,26 +4096,41 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 \< \p [
-                                d'16 ]
-                                bf'4 ~
-                                bf'16 \f
+                                c'16
+                                \<
+                                \p
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                \f
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \override DynamicLineSpanner.staff-padding = #'4
-                                fs''16 \< \p [
-                                e''16 ]
-                                ef''4 ~
+                                fs''16
+                                \<
+                                \p
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
-                                af''16 [
-                                g''16 \f ]
+                                af''16
+                                [
+                                g''16
+                                \f
+                                ]
                                 \revert DynamicLineSpanner.staff-padding
                             }
                             \times 4/5 {
-                                a'16 \p
+                                a'16
+                                \p
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -3695,7 +4170,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3705,24 +4180,39 @@ class LibraryAF(abjad.AbjadObject):
                                 \override DynamicLineSpanner.direction = #up
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 \< \p [
-                                d'16 ]
-                                bf'4 ~
-                                bf'16 \f
+                                c'16
+                                \<
+                                \p
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                \f
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 \< \p [
-                                e''16 ]
-                                ef''4 ~
+                                fs''16
+                                \<
+                                \p
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
-                                af''16 [
-                                g''16 \f ]
+                                af''16
+                                [
+                                g''16
+                                \f
+                                ]
                             }
                             \times 4/5 {
-                                a'16 \p
+                                a'16
+                                \p
                                 r4
                                 \revert DynamicLineSpanner.direction
                                 \revert TupletBracket.staff-padding
@@ -3751,7 +4241,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3760,26 +4250,41 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 \< \p [
-                                d'16 ]
-                                bf'4 ~
-                                bf'16 \f
+                                c'16
+                                \<
+                                \p
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
+                                bf'16
+                                \f
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \override DynamicLineSpanner.direction = #up
-                                fs''16 \< \p [
-                                e''16 ]
-                                ef''4 ~
+                                fs''16
+                                \<
+                                \p
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
-                                af''16 [
-                                g''16 \f ]
+                                af''16
+                                [
+                                g''16
+                                \f
+                                ]
                                 \revert DynamicLineSpanner.direction
                             }
                             \times 4/5 {
-                                a'16 \p
+                                a'16
+                                \p
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -3820,7 +4325,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3830,21 +4335,31 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 \once \override DynamicText.extra-offset = #'(-3 . 0)
-                                c'16 \p [
-                                d'16 ]
-                                bf'4 ~
+                                c'16
+                                \p
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 \f [
-                                e''16 ]
-                                ef''4 ~
+                                fs''16
+                                \f
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
-                                af''16 [
-                                g''16 ]
+                                af''16
+                                [
+                                g''16
+                                ]
                             }
                             \times 4/5 {
                                 a'16
@@ -3880,7 +4395,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3889,22 +4404,32 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 \p [
-                                d'16 ]
-                                bf'4 ~
+                                c'16
+                                \p
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \once \override DynamicText.extra-offset = #'(-3 . 0)
-                                fs''16 \f [
-                                e''16 ]
-                                ef''4 ~
+                                fs''16
+                                \f
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
-                                af''16 [
-                                g''16 ]
+                                af''16
+                                [
+                                g''16
+                                ]
                             }
                             \times 4/5 {
                                 a'16
@@ -3961,7 +4486,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3971,21 +4496,31 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 \dynamicDown
                                 r8
-                                c'16 \p [
-                                d'16 ]
-                                bf'4 ~
+                                c'16
+                                \p
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 \f [
-                                e''16 ]
-                                ef''4 ~
+                                fs''16
+                                \f
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
-                                af''16 [
-                                g''16 ]
+                                af''16
+                                [
+                                g''16
+                                ]
                             }
                             \times 4/5 {
                                 a'16
@@ -4017,7 +4552,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4026,22 +4561,32 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 \p [
-                                d'16 ]
-                                bf'4 ~
+                                c'16
+                                \p
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \dynamicDown
-                                fs''16 \f [
-                                e''16 ]
-                                ef''4 ~
+                                fs''16
+                                \f
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
-                                af''16 [
-                                g''16 ]
+                                af''16
+                                [
+                                g''16
+                                ]
                             }
                             \times 4/5 {
                                 a'16
@@ -4083,7 +4628,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4093,21 +4638,31 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 \dynamicUp
                                 r8
-                                c'16 \p [
-                                d'16 ]
-                                bf'4 ~
+                                c'16
+                                \p
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 \f [
-                                e''16 ]
-                                ef''4 ~
+                                fs''16
+                                \f
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
-                                af''16 [
-                                g''16 ]
+                                af''16
+                                [
+                                g''16
+                                ]
                             }
                             \times 4/5 {
                                 a'16
@@ -4139,7 +4694,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4148,22 +4703,32 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 \p [
-                                d'16 ]
-                                bf'4 ~
+                                c'16
+                                \p
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \dynamicUp
-                                fs''16 \f [
-                                e''16 ]
-                                ef''4 ~
+                                fs''16
+                                \f
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
-                                af''16 [
-                                g''16 ]
+                                af''16
+                                [
+                                g''16
+                                ]
                             }
                             \times 4/5 {
                                 a'16
@@ -4207,7 +4772,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4216,33 +4781,41 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [
-                                    _ \markup {
-                                        \larger
-                                            \italic
-                                                “
-                                        \dynamic
-                                            \override
-                                                #'(font-name . #f)
-                                                f
-                                        \larger
-                                            \italic
-                                                ”
-                                        }
-                                d'16 ]
-                                bf'4 ~
+                                c'16
+                                [
+                                _ \markup {
+                                    \larger
+                                        \italic
+                                            “
+                                    \dynamic
+                                        \override
+                                            #'(font-name . #f)
+                                            f
+                                    \larger
+                                        \italic
+                                            ”
+                                    }
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 [
-                                e''16 ]
-                                ef''4 ~
+                                fs''16
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
-                                af''16 [
-                                g''16 ]
+                                af''16
+                                [
+                                g''16
+                                ]
                             }
                             \times 4/5 {
                                 a'16
@@ -4275,7 +4848,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4284,33 +4857,41 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 [
-                                    _ \markup {
-                                        \larger
-                                            \italic
-                                                “
-                                        \dynamic
-                                            \override
-                                                #'(font-name . #f)
-                                                f
-                                        \larger
-                                            \italic
-                                                ”
-                                        }
-                                e''16 ]
-                                ef''4 ~
+                                fs''16
+                                [
+                                _ \markup {
+                                    \larger
+                                        \italic
+                                            “
+                                    \dynamic
+                                        \override
+                                            #'(font-name . #f)
+                                            f
+                                    \larger
+                                        \italic
+                                            ”
+                                    }
+                                e''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
-                                af''16 [
-                                g''16 ]
+                                af''16
+                                [
+                                g''16
+                                ]
                             }
                             \times 4/5 {
                                 a'16
@@ -4360,7 +4941,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4368,22 +4949,31 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
-                                r8 -\fermata
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
+                                r8
+                                -\fermata
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 [
-                                e''16 ]
-                                ef''4 ~
+                                fs''16
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
-                                af''16 [
-                                g''16 ]
+                                af''16
+                                [
+                                g''16
+                                ]
                             }
                             \times 4/5 {
                                 a'16
@@ -4413,7 +5003,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4422,21 +5012,30 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 -\fermata [
-                                e''16 ]
-                                ef''4 ~
+                                fs''16
+                                -\fermata
+                                [
+                                e''16
+                                ]
+                                ef''4
+                                ~
                                 ef''16
                                 r16
-                                af''16 [
-                                g''16 ]
+                                af''16
+                                [
+                                g''16
+                                ]
                             }
                             \times 4/5 {
                                 a'16
@@ -4476,7 +5075,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4485,24 +5084,41 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 -\flageolet [
-                                d'16 -\flageolet ]
-                                bf'4 -\flageolet ~
+                                c'16
+                                -\flageolet
+                                [
+                                d'16
+                                -\flageolet
+                                ]
+                                bf'4
+                                -\flageolet
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 -\flageolet [
-                                e''16 -\flageolet ]
-                                ef''4 -\flageolet ~
+                                fs''16
+                                -\flageolet
+                                [
+                                e''16
+                                -\flageolet
+                                ]
+                                ef''4
+                                -\flageolet
+                                ~
                                 ef''16
                                 r16
-                                af''16 -\flageolet [
-                                g''16 -\flageolet ]
+                                af''16
+                                -\flageolet
+                                [
+                                g''16
+                                -\flageolet
+                                ]
                             }
                             \times 4/5 {
-                                a'16 -\flageolet
+                                a'16
+                                -\flageolet
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -4529,7 +5145,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4538,21 +5154,34 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                c'16 [
-                                d'16 ]
-                                bf'4 ~
+                                c'16
+                                [
+                                d'16
+                                ]
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                fs''16 -\flageolet [
-                                e''16 -\flageolet ]
-                                ef''4 -\flageolet ~
+                                fs''16
+                                -\flageolet
+                                [
+                                e''16
+                                -\flageolet
+                                ]
+                                ef''4
+                                -\flageolet
+                                ~
                                 ef''16
                                 r16
-                                af''16 -\flageolet [
-                                g''16 -\flageolet ]
+                                af''16
+                                -\flageolet
+                                [
+                                g''16
+                                -\flageolet
+                                ]
                             }
                             \times 4/5 {
                                 a'16
@@ -4592,7 +5221,7 @@ class LibraryAF(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4603,7 +5232,8 @@ class LibraryAF(abjad.AbjadObject):
                                 r8
                                 c'16
                                 d'16
-                                bf'4 ~
+                                bf'4
+                                ~
                                 bf'16
                                 r16
                             }
@@ -4611,7 +5241,8 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 e''16
-                                ef''4 ~
+                                ef''4
+                                ~
                                 ef''16
                                 r16
                                 af''16

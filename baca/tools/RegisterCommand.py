@@ -25,25 +25,31 @@ class RegisterCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
                         {
-                            bf''16 [
+                            bf''16
+                            [
                             c'''16
-                            d'''16 ]
+                            d'''16
+                            ]
                         }
                         {
-                            bf''16 [
+                            bf''16
+                            [
                             c'''16
-                            d'''16 ]
+                            d'''16
+                            ]
                         }
                         {
-                            bf''16 [
+                            bf''16
+                            [
                             c'''16
-                            d'''16 ]
+                            d'''16
+                            ]
                         }
                     }
                 }
@@ -69,25 +75,31 @@ class RegisterCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
                         {
-                            bf'16 [
+                            bf'16
+                            [
                             c'16
-                            d'16 ]
+                            d'16
+                            ]
                         }
                         {
-                            bf'16 [
+                            bf'16
+                            [
                             c''16
-                            d''16 ]
+                            d''16
+                            ]
                         }
                         {
-                            bf'16 [
+                            bf'16
+                            [
                             c''16
-                            d''16 ]
+                            d''16
+                            ]
                         }
                     }
                 }
@@ -114,25 +126,31 @@ class RegisterCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
                         {
-                            bf'16 [
+                            bf'16
+                            [
                             c''16
-                            d''16 ]
+                            d''16
+                            ]
                         }
                         {
-                            bf'16 [
+                            bf'16
+                            [
                             c''16
-                            d''16 ]
+                            d''16
+                            ]
                         }
                         {
-                            bf'16 [
+                            bf'16
+                            [
                             c'16
-                            d'16 ]
+                            d'16
+                            ]
                         }
                     }
                 }
@@ -163,7 +181,7 @@ class RegisterCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
             \context Score = "Score" <<
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
@@ -172,13 +190,13 @@ class RegisterCommand(Command):
                         \time 4/8
                         \bar "" %! SEGMENT:EMPTY_START_BAR:1
                         s1 * 1/2
-                            - \markup { %! STAGE_NUMBER_MARKUP:2
-                                \fontsize %! STAGE_NUMBER_MARKUP:2
-                                    #-3 %! STAGE_NUMBER_MARKUP:2
-                                    \with-color %! STAGE_NUMBER_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                        [1] %! STAGE_NUMBER_MARKUP:2
-                                } %! STAGE_NUMBER_MARKUP:2
+                        - \markup { %! STAGE_NUMBER_MARKUP:2
+                            \fontsize %! STAGE_NUMBER_MARKUP:2
+                                #-3 %! STAGE_NUMBER_MARKUP:2
+                                \with-color %! STAGE_NUMBER_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                    [1] %! STAGE_NUMBER_MARKUP:2
+                            } %! STAGE_NUMBER_MARKUP:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
                         \time 3/8
@@ -203,43 +221,51 @@ class RegisterCommand(Command):
                                 \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                g''8 [
+                                g''8
+                                [
                                 \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
             <BLANKLINE>
                                 gqs''8
             <BLANKLINE>
                                 gs''8
             <BLANKLINE>
-                                gtqs''8 ]
+                                gtqs''8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
-                                aqf''8 [
+                                aqf''8
+                                [
             <BLANKLINE>
                                 af''8
             <BLANKLINE>
-                                atqf''8 ]
+                                atqf''8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 3] %%%
-                                g''8 [
+                                g''8
+                                [
             <BLANKLINE>
                                 gqs''8
             <BLANKLINE>
                                 gs''8
             <BLANKLINE>
-                                gtqs''8 ]
+                                gtqs''8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 4] %%%
-                                aqf''8 [
+                                aqf''8
+                                [
             <BLANKLINE>
                                 af''8
             <BLANKLINE>
-                                atqf''8 ]
+                                atqf''8
+                                ]
                                 \bar "|"
             <BLANKLINE>
                             }
@@ -265,7 +291,7 @@ class RegisterCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -336,7 +362,7 @@ class RegisterCommand(Command):
             ...         ),
             ...     )
 
-            >>> abjad.f(command.registration)
+            >>> abjad.f(command.registration, strict=True)
             baca.Registration(
                 components=[
                     baca.RegistrationComponent(

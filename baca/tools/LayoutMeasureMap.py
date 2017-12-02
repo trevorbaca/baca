@@ -28,7 +28,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
             \context Score = "Score" <<
                 \tag violin.viola.cello
                 \context GlobalContext = "GlobalContext" <<
@@ -40,13 +40,13 @@ class LayoutMeasureMap(abjad.AbjadObject):
                         \time 4/8
                         \bar "" %! SEGMENT:EMPTY_START_BAR:1
                         s1 * 1/2
-                            - \markup { %! STAGE_NUMBER_MARKUP:2
-                                \fontsize %! STAGE_NUMBER_MARKUP:2
-                                    #-3 %! STAGE_NUMBER_MARKUP:2
-                                    \with-color %! STAGE_NUMBER_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                        [1] %! STAGE_NUMBER_MARKUP:2
-                                } %! STAGE_NUMBER_MARKUP:2
+                        - \markup { %! STAGE_NUMBER_MARKUP:2
+                            \fontsize %! STAGE_NUMBER_MARKUP:2
+                                #-3 %! STAGE_NUMBER_MARKUP:2
+                                \with-color %! STAGE_NUMBER_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                    [1] %! STAGE_NUMBER_MARKUP:2
+                            } %! STAGE_NUMBER_MARKUP:2
                         \break %! SEGMENT:LAYOUT:3
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
@@ -93,54 +93,64 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    e'8 [
+                                    e'8
+                                    [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
             <BLANKLINE>
                                     e'8
             <BLANKLINE>
                                     e'8
             <BLANKLINE>
-                                    e'8 ]
+                                    e'8
+                                    ]
                                 }
                                 {
             <BLANKLINE>
                                     %%% ViolinMusicVoice [measure 2] %%%
-                                    e'8 [
+                                    e'8
+                                    [
             <BLANKLINE>
                                     e'8
             <BLANKLINE>
-                                    e'8 ]
+                                    e'8
+                                    ]
                                 }
                                 {
             <BLANKLINE>
                                     %%% ViolinMusicVoice [measure 3] %%%
-                                    e'8 [
+                                    e'8
+                                    [
             <BLANKLINE>
                                     e'8
             <BLANKLINE>
                                     e'8
             <BLANKLINE>
-                                    e'8 ]
+                                    e'8
+                                    ]
                                 }
                                 {
             <BLANKLINE>
                                     %%% ViolinMusicVoice [measure 4] %%%
-                                    e'8 [
+                                    e'8
+                                    [
             <BLANKLINE>
                                     e'8
             <BLANKLINE>
-                                    e'8 ]
+                                    e'8
+                                    ]
                                 }
                                 {
             <BLANKLINE>
                                     %%% ViolinMusicVoice [measure 5] %%%
-                                    e'8 [
+                                    e'8
+                                    [
             <BLANKLINE>
                                     e'8
             <BLANKLINE>
                                     e'8
             <BLANKLINE>
-                                    e'8 ]
+                                    e'8
+                                    ]
                                     \bar "|"
             <BLANKLINE>
                                 }

@@ -28,7 +28,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new RhythmicStaff {
                 c'2
                 c'1
@@ -66,7 +66,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new RhythmicStaff {
                 c'8.
                 c'8.
@@ -148,7 +148,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 2/8
@@ -191,7 +191,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     c'2
                     c'1
@@ -230,7 +230,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     c'8.
                     c'8.
@@ -273,7 +273,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     c'8
                     c'8.
@@ -310,7 +310,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     c'\breve
                 }
@@ -345,7 +345,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     c'8.
                     c'8.
@@ -385,7 +385,7 @@ class FuseByCountsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     c'8
                     c'8.

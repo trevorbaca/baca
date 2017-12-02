@@ -38,7 +38,7 @@ class Sequence(abjad.Sequence):
             ..  docs::
 
                 >>> lilypond_file = collection.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Voice])
+                >>> abjad.f(lilypond_file[abjad.Voice], strict=True)
                 \new Voice {
                     bf'8
                     bqf'8
@@ -49,8 +49,6 @@ class Sequence(abjad.Sequence):
                     \bar "|."
                     \override Score.BarLine.transparent = ##f
                 }
-
-        ..  container:: example
 
             >>> baca.sequence(items=collection)
             Sequence([NumberedPitchClass(10), NumberedPitchClass(10.5), NumberedPitchClass(6), NumberedPitchClass(7), NumberedPitchClass(10.5), NumberedPitchClass(7)])
@@ -90,7 +88,7 @@ class Sequence(abjad.Sequence):
             ..  docs::
 
                 >>> lilypond_file = collection.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Voice])
+                >>> abjad.f(lilypond_file[abjad.Voice], strict=True)
                 \new Voice {
                     b'8
                     bqs'8
@@ -131,30 +129,30 @@ class Sequence(abjad.Sequence):
                 >>> lilypond_file = collection.__illustrate__(
                 ...     figure_name=markup,
                 ...     )
-                >>> abjad.f(lilypond_file[abjad.Voice])
+                >>> abjad.f(lilypond_file[abjad.Voice], strict=True)
                 \new Voice {
                     b'8
-                        ^ \markup {
-                            \concat
-                                {
-                                    join(
-                                    \line
-                                        {
-                                            \concat
-                                                {
-                                                    T
-                                                    \sub
-                                                        1
-                                                    \bold
-                                                        X
-                                                }
-                                            /@
-                                            \bold
-                                                J
-                                        }
-                                    )
-                                }
+                    ^ \markup {
+                        \concat
+                            {
+                                join(
+                                \line
+                                    {
+                                        \concat
+                                            {
+                                                T
+                                                \sub
+                                                    1
+                                                \bold
+                                                    X
+                                            }
+                                        /@
+                                        \bold
+                                            J
+                                    }
+                                )
                             }
+                        }
                     bqs'8
                     g'8
                     af'8
@@ -284,7 +282,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup)
+                    >>> abjad.f(markup, strict=True)
                     \markup {
                         \line
                             {
@@ -340,7 +338,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup)
+                    >>> abjad.f(markup, strict=True)
                     \markup {
                         \line
                             {
@@ -409,7 +407,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup)
+                    >>> abjad.f(markup, strict=True)
                     \markup {
                         \line
                             {
@@ -500,7 +498,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup)
+                    >>> abjad.f(markup, strict=True)
                     \markup {
                         \line
                             {
@@ -611,7 +609,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup)
+                    >>> abjad.f(markup, strict=True)
                     \markup {
                         \line
                             {
@@ -713,7 +711,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup)
+                    >>> abjad.f(markup, strict=True)
                     \markup {
                         \line
                             {
@@ -890,7 +888,7 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> abjad.f(markup)
+                >>> abjad.f(markup, strict=True)
                 \markup {
                     \concat
                         {
@@ -1350,7 +1348,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup)
+                    >>> abjad.f(markup, strict=True)
                     \markup {
                         \concat
                             {
@@ -1361,7 +1359,6 @@ class Sequence(abjad.Sequence):
                                     J
                             }
                         }
-
 
         Returns new sequence.
         '''
@@ -1401,7 +1398,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup)
+                    >>> abjad.f(markup, strict=True)
                     \markup {
                         \concat
                             {
@@ -1475,7 +1472,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup)
+                    >>> abjad.f(markup, strict=True)
                     \markup {
                         \concat
                             {
@@ -1534,7 +1531,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup)
+                    >>> abjad.f(markup, strict=True)
                     \markup {
                         \concat
                             {
@@ -1594,7 +1591,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup)
+                    >>> abjad.f(markup, strict=True)
                     \markup {
                         \concat
                             {
@@ -1629,7 +1626,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup)
+                    >>> abjad.f(markup, strict=True)
                     \markup {
                         \concat
                             {
@@ -1682,7 +1679,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup)
+                    >>> abjad.f(markup, strict=True)
                     \markup {
                         \concat
                             {
@@ -1735,7 +1732,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup)
+                    >>> abjad.f(markup, strict=True)
                     \markup {
                         \concat
                             {

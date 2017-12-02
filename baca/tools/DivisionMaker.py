@@ -33,7 +33,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new RhythmicStaff {
                 { % measure
                     \time 7/8
@@ -77,7 +77,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new RhythmicStaff {
                 c'1...
             }
@@ -107,7 +107,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new RhythmicStaff {
                 c'4
                 c'4
@@ -144,7 +144,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new RhythmicStaff {
                 { % measure
                     \time 7/8
@@ -187,7 +187,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new RhythmicStaff {
                 c'2.
                 c'2..
@@ -225,7 +225,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new RhythmicStaff {
                 c'2.
                 c'2..
@@ -405,7 +405,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     c'1..
                     c'4..
@@ -643,7 +643,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 7/8
@@ -691,7 +691,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 7/8
@@ -755,7 +755,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 5/8
@@ -768,7 +768,6 @@ class DivisionMaker(abjad.AbjadValueObject):
                         c'4
                     } % measure
                 }
-
 
         ..  container:: example
 
@@ -797,7 +796,7 @@ class DivisionMaker(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 5/8

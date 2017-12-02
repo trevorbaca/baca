@@ -308,7 +308,7 @@ class CollectionList(abjad.AbjadValueObject):
             ...     [16, 20, 19],
             ...     ])
 
-            >>> abjad.f(collections)
+            >>> abjad.f(collections, strict=True)
             baca.CollectionList(
                 collections=[
                     baca.PitchSegment(
@@ -394,7 +394,7 @@ class CollectionList(abjad.AbjadValueObject):
             ..  docs::
 
                 >>> lilypond_file = collections.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -415,14 +415,20 @@ class CollectionList(abjad.AbjadValueObject):
                             \consists Horizontal_bracket_engraver
                         } {
                             \time 1/8
-                            c''8 \startGroup ^ \markup { 0 }
+                            c''8
+                            \startGroup
+                            ^ \markup { 0 }
                             d''8
                             fs''8
-                            f''8 \stopGroup
+                            f''8
+                            \stopGroup
                             s8
-                            e''8 \startGroup ^ \markup { 1 }
+                            e''8
+                            \startGroup
+                            ^ \markup { 1 }
                             af''8
-                            g''8 \stopGroup
+                            g''8
+                            \stopGroup
                             s8
                             \bar "|."
                             \override Score.BarLine.transparent = ##f
@@ -981,7 +987,7 @@ class CollectionList(abjad.AbjadValueObject):
             >>> collections = baca.CollectionList([[5, 12, 14, 18], [16, 17]])
             >>> cursor = collections.cursor()
 
-            >>> abjad.f(cursor)
+            >>> abjad.f(cursor, strict=True)
             baca.Cursor(
                 source=baca.CollectionList(
                     collections=[

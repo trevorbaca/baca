@@ -28,7 +28,7 @@ class Tree(abjad.AbjadObject):
         >>> tree[1]
         Tree(items=[Tree(items=4), Tree(items=5)])
 
-        >>> abjad.f(tree[1])
+        >>> abjad.f(tree[1], strict=True)
         baca.Tree(
             items=[
                 baca.Tree(
@@ -53,7 +53,7 @@ class Tree(abjad.AbjadObject):
         >>> tree[1][0]
         Tree(items=4)
 
-        >>> abjad.f(tree[1][0])
+        >>> abjad.f(tree[1][0], strict=True)
         baca.Tree(
             items=4,
             )
@@ -78,7 +78,7 @@ class Tree(abjad.AbjadObject):
         ..  docs::
 
             >>> graph_ = tree.__graph__()
-            >>> abjad.f(graph_)
+            >>> abjad.f(graph_, strict=True)
             digraph G {
                 graph [bgcolor=transparent,
                     truecolor=true];
@@ -237,7 +237,7 @@ class Tree(abjad.AbjadObject):
             >>> items = [[[0, 1], [2, 3]], [4, 5]]
             >>> tree = baca.Tree(items=items)
 
-            >>> abjad.f(tree)
+            >>> abjad.f(tree, strict=True)
             baca.Tree(
                 items=[
                     baca.Tree(
@@ -319,7 +319,7 @@ class Tree(abjad.AbjadObject):
             >>> graph(tree) # doctest: +SKIP
 
             >>> tree_graph = tree.__graph__()
-            >>> abjad.f(tree_graph)
+            >>> abjad.f(tree_graph, strict=True)
             digraph G {
                 graph [bgcolor=transparent,
                     truecolor=true];

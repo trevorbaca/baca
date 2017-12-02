@@ -38,7 +38,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new Staff {
                 { % measure
                     \time 3/4
@@ -199,7 +199,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 3/4
@@ -282,7 +282,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 3/4
@@ -375,7 +375,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 3/4
@@ -425,6 +425,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                     } % measure
                 }
 
+
         ..  container:: example
 
             At most two acciaccaturas at the beginning of every collection:
@@ -462,7 +463,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 3/2
@@ -487,27 +488,33 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                                 af''16 [
                                 g''16 ]
                             }
-                            a'8 [
-                            c'8 ]
+                            a'8
+                            [
+                            c'8
+                            ]
                         }
                         {
                             \acciaccatura {
                                 d'16 [
                                 bf'16 ]
                             }
-                            fs''8 [
+                            fs''8
+                            [
                             e''8
-                            ef''8 ]
+                            ef''8
+                            ]
                         }
                         {
                             \acciaccatura {
                                 af''16 [
                                 g''16 ]
                             }
-                            a'8 [
+                            a'8
+                            [
                             c'8
                             d'8
-                            bf'8 ]
+                            bf'8
+                            ]
                         }
                     } % measure
                 }
@@ -549,7 +556,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 3/2
@@ -570,31 +577,37 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             ef''8
                         }
                         {
-                            af''8 [
+                            af''8
+                            [
                             \acciaccatura {
                                 g''16 [
                                 a'16 ]
                             }
-                            c'8 ]
+                            c'8
+                            ]
                         }
                         {
-                            d'8 [
+                            d'8
+                            [
                             bf'8
                             \acciaccatura {
                                 fs''16 [
                                 e''16 ]
                             }
-                            ef''8 ]
+                            ef''8
+                            ]
                         }
                         {
-                            af''8 [
+                            af''8
+                            [
                             g''8
                             a'8
                             \acciaccatura {
                                 c'16 [
                                 d'16 ]
                             }
-                            bf'8 ]
+                            bf'8
+                            ]
                         }
                     } % measure
                 }
@@ -638,7 +651,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 9/8
@@ -663,31 +676,37 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                                 af''16 [
                                 g''16 ]
                             }
-                            a'8 [
-                            c'8 ]
+                            a'8
+                            [
+                            c'8
+                            ]
                         }
                         {
                             \acciaccatura {
                                 d'16 [
                                 bf'16 ]
                             }
-                            fs''8 [
+                            fs''8
+                            [
                             \acciaccatura {
                                 e''16
                             }
-                            ef''8 ]
+                            ef''8
+                            ]
                         }
                         {
                             \acciaccatura {
                                 af''16 [
                                 g''16 ]
                             }
-                            a'8 [
+                            a'8
+                            [
                             \acciaccatura {
                                 c'16 [
                                 d'16 ]
                             }
-                            bf'8 ]
+                            bf'8
+                            ]
                         }
                     } % measure
                 }
@@ -727,7 +746,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 11/8
@@ -735,42 +754,52 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             c'8
                         }
                         {
-                            d'8 [
-                            bf'8 ]
+                            d'8
+                            [
+                            bf'8
+                            ]
                         }
                         {
-                            fs''8 [
+                            fs''8
+                            [
                             \acciaccatura {
                                 e''16
                             }
-                            ef''8 ]
+                            ef''8
+                            ]
                         }
                         {
-                            af''8 [
+                            af''8
+                            [
                             \acciaccatura {
                                 g''16 [
                                 a'16 ]
                             }
-                            c'8 ]
+                            c'8
+                            ]
                         }
                         {
-                            d'8 [
+                            d'8
+                            [
                             \acciaccatura {
                                 bf'16 [
                                 fs''16
                                 e''16 ]
                             }
-                            ef''8 ]
+                            ef''8
+                            ]
                         }
                         {
-                            af''8 [
+                            af''8
+                            [
                             \acciaccatura {
                                 g''16 [
                                 a'16
                                 c'16
                                 d'16 ]
                             }
-                            bf'8 ]
+                            bf'8
+                            ]
                         }
                     } % measure
                 }
@@ -818,7 +847,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 3/4
@@ -901,7 +930,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 2/1
@@ -909,26 +938,34 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             c'8
                         }
                         {
-                            d'8 [
-                            bf'8 ]
+                            d'8
+                            [
+                            bf'8
+                            ]
                         }
                         {
-                            fs''8 [
+                            fs''8
+                            [
                             e''8
-                            ef''8 ]
+                            ef''8
+                            ]
                         }
                         {
-                            af''8 [
+                            af''8
+                            [
                             g''8
                             a'8
-                            c'8 ]
+                            c'8
+                            ]
                         }
                         {
-                            d'8 [
+                            d'8
+                            [
                             bf'8
                             fs''8
                             e''8
-                            ef''8 ]
+                            ef''8
+                            ]
                         }
                         {
                             \acciaccatura {
@@ -976,7 +1013,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 3/2
@@ -990,9 +1027,11 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             bf'8
                         }
                         {
-                            fs''8 [
+                            fs''8
+                            [
                             e''8
-                            ef''8 ]
+                            ef''8
+                            ]
                         }
                         {
                             \acciaccatura {
@@ -1003,11 +1042,13 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             c'8
                         }
                         {
-                            d'8 [
+                            d'8
+                            [
                             bf'8
                             fs''8
                             e''8
-                            ef''8 ]
+                            ef''8
+                            ]
                         }
                         {
                             \acciaccatura {

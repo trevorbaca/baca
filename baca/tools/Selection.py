@@ -63,7 +63,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -76,7 +76,8 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             c'16
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             <d' e'>16
                         }
                         \times 8/9 {
@@ -84,7 +85,8 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             d'16
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -98,7 +100,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #green
                             \once \override NoteHead.color = #green
                             \once \override Stem.color = #green
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             <fs' gs'>16
                         }
                     } % measure
@@ -162,7 +165,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -185,7 +188,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             <d' e'>16
                         }
                         \times 8/9 {
@@ -203,7 +207,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -222,7 +227,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             <fs' gs'>16
                         }
                     } % measure
@@ -297,7 +303,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TextScript.staff-padding = #6
                     \override TupletBracket.direction = #up
@@ -308,160 +314,163 @@ class Selection(abjad.Selection):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                                ^ \markup {
-                                    \bold
-                                        \with-color
-                                            #red
-                                            *
-                                    }
+                            ^ \markup {
+                                \bold
+                                    \with-color
+                                        #red
+                                        *
+                                }
                             bf'16
-                                ^ \markup {
-                                    \bold
-                                        \with-color
-                                            #red
-                                            *
-                                    }
+                            ^ \markup {
+                                \bold
+                                    \with-color
+                                        #red
+                                        *
+                                }
                             <a'' b''>16
-                                ^ \markup {
-                                    \bold
-                                        \with-color
-                                            #red
-                                            *
-                                    }
+                            ^ \markup {
+                                \bold
+                                    \with-color
+                                        #red
+                                        *
+                                }
                             c'16
-                                ^ \markup {
-                                    \bold
-                                        \with-color
-                                            #red
-                                            *
-                                    }
-                            <d' e'>4 ~
-                                ^ \markup {
-                                    \bold
-                                        \with-color
-                                            #red
-                                            *
-                                    }
-                                _ \markup {
-                                    \bold
-                                        \with-color
-                                            #blue
-                                            *
-                                    }
+                            ^ \markup {
+                                \bold
+                                    \with-color
+                                        #red
+                                        *
+                                }
+                            <d' e'>4
+                            ~
+                            ^ \markup {
+                                \bold
+                                    \with-color
+                                        #red
+                                        *
+                                }
+                            _ \markup {
+                                \bold
+                                    \with-color
+                                        #blue
+                                        *
+                                }
                             <d' e'>16
-                                _ \markup {
-                                    \bold
-                                        \with-color
-                                            #blue
-                                            *
-                                    }
+                            _ \markup {
+                                \bold
+                                    \with-color
+                                        #blue
+                                        *
+                                }
                         }
                         \times 8/9 {
                             r16
-                                _ \markup {
-                                    \bold
-                                        \with-color
-                                            #blue
-                                            *
-                                    }
+                            _ \markup {
+                                \bold
+                                    \with-color
+                                        #blue
+                                        *
+                                }
                             bf'16
-                                _ \markup {
-                                    \bold
-                                        \with-color
-                                            #blue
-                                            *
-                                    }
+                            _ \markup {
+                                \bold
+                                    \with-color
+                                        #blue
+                                        *
+                                }
                             <a'' b''>16
-                                ^ \markup {
-                                    \bold
-                                        \with-color
-                                            #red
-                                            *
-                                    }
-                                _ \markup {
-                                    \bold
-                                        \with-color
-                                            #blue
-                                            *
-                                    }
+                            ^ \markup {
+                                \bold
+                                    \with-color
+                                        #red
+                                        *
+                                }
+                            _ \markup {
+                                \bold
+                                    \with-color
+                                        #blue
+                                        *
+                                }
                             d'16
-                                ^ \markup {
-                                    \bold
-                                        \with-color
-                                            #red
-                                            *
-                                    }
-                            <e' fs'>4 ~
-                                ^ \markup {
-                                    \bold
-                                        \with-color
-                                            #red
-                                            *
-                                    }
+                            ^ \markup {
+                                \bold
+                                    \with-color
+                                        #red
+                                        *
+                                }
+                            <e' fs'>4
+                            ~
+                            ^ \markup {
+                                \bold
+                                    \with-color
+                                        #red
+                                        *
+                                }
                             <e' fs'>16
-                                ^ \markup {
-                                    \bold
-                                        \with-color
-                                            #red
-                                            *
-                                    }
+                            ^ \markup {
+                                \bold
+                                    \with-color
+                                        #red
+                                        *
+                                }
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 10/9 {
                             r16
-                                ^ \markup {
-                                    \bold
-                                        \with-color
-                                            #red
-                                            *
-                                    }
-                                _ \markup {
-                                    \bold
-                                        \with-color
-                                            #blue
-                                            *
-                                    }
+                            ^ \markup {
+                                \bold
+                                    \with-color
+                                        #red
+                                        *
+                                }
+                            _ \markup {
+                                \bold
+                                    \with-color
+                                        #blue
+                                        *
+                                }
                             bf'16
-                                _ \markup {
-                                    \bold
-                                        \with-color
-                                            #blue
-                                            *
-                                    }
+                            _ \markup {
+                                \bold
+                                    \with-color
+                                        #blue
+                                        *
+                                }
                             <a'' b''>16
-                                _ \markup {
-                                    \bold
-                                        \with-color
-                                            #blue
-                                            *
-                                    }
+                            _ \markup {
+                                \bold
+                                    \with-color
+                                        #blue
+                                        *
+                                }
                             e'16
-                                _ \markup {
-                                    \bold
-                                        \with-color
-                                            #blue
-                                            *
-                                    }
-                            <fs' gs'>4 ~
-                                ^ \markup {
-                                    \bold
-                                        \with-color
-                                            #red
-                                            *
-                                    }
-                                _ \markup {
-                                    \bold
-                                        \with-color
-                                            #blue
-                                            *
-                                    }
+                            _ \markup {
+                                \bold
+                                    \with-color
+                                        #blue
+                                        *
+                                }
+                            <fs' gs'>4
+                            ~
+                            ^ \markup {
+                                \bold
+                                    \with-color
+                                        #red
+                                        *
+                                }
+                            _ \markup {
+                                \bold
+                                    \with-color
+                                        #blue
+                                        *
+                                }
                             <fs' gs'>16
-                                ^ \markup {
-                                    \bold
-                                        \with-color
-                                            #red
-                                            *
-                                    }
+                            ^ \markup {
+                                \bold
+                                    \with-color
+                                        #red
+                                        *
+                                }
                         }
                     } % measure
                 }
@@ -511,7 +520,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     autoBeaming = ##f
                 } {
@@ -520,7 +529,8 @@ class Selection(abjad.Selection):
                     \once \override Dots.color = #green
                     \once \override NoteHead.color = #green
                     \once \override Stem.color = #green
-                    c'8 ~
+                    c'8
+                    ~
                     \once \override Accidental.color = #green
                     \once \override Beam.color = #green
                     \once \override Dots.color = #green
@@ -551,7 +561,8 @@ class Selection(abjad.Selection):
                     \once \override Dots.color = #green
                     \once \override NoteHead.color = #green
                     \once \override Stem.color = #green
-                    d'8 ~
+                    d'8
+                    ~
                     \once \override Accidental.color = #green
                     \once \override Beam.color = #green
                     \once \override Dots.color = #green
@@ -622,7 +633,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     autoBeaming = ##f
                 } {
@@ -731,7 +742,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -744,7 +755,8 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             c'16
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             \once \override Accidental.color = #red
                             \once \override Beam.color = #red
                             \once \override Dots.color = #red
@@ -779,7 +791,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             \once \override Accidental.color = #red
                             \once \override Beam.color = #red
                             \once \override Dots.color = #red
@@ -793,7 +806,8 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             e'16
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             <fs' gs'>16
                         }
                     } % measure
@@ -845,7 +859,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -858,7 +872,8 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             c'16
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             <d' e'>16
                         }
                         \times 8/9 {
@@ -866,7 +881,8 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             d'16
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -880,7 +896,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #green
                             \once \override NoteHead.color = #green
                             \once \override Stem.color = #green
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             \once \override Accidental.color = #green
                             \once \override Beam.color = #green
                             \once \override Dots.color = #green
@@ -937,7 +954,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -950,7 +967,8 @@ class Selection(abjad.Selection):
                             c'16
                             c'16
                             c'16
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             <d' e'>16
                         }
                         \times 8/9 {
@@ -958,7 +976,8 @@ class Selection(abjad.Selection):
                             d'16
                             d'16
                             d'16
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -972,7 +991,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #green
                             \once \override NoteHead.color = #green
                             \once \override Stem.color = #green
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             \once \override Accidental.color = #green
                             \once \override Beam.color = #green
                             \once \override Dots.color = #green
@@ -1041,7 +1061,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -1074,7 +1094,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             \once \override Accidental.color = #blue
                             \once \override Beam.color = #blue
                             \once \override Dots.color = #blue
@@ -1107,7 +1128,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             \once \override Accidental.color = #blue
                             \once \override Beam.color = #blue
                             \once \override Dots.color = #blue
@@ -1141,7 +1163,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             \once \override Accidental.color = #blue
                             \once \override Beam.color = #blue
                             \once \override Dots.color = #blue
@@ -1203,7 +1226,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -1216,7 +1239,8 @@ class Selection(abjad.Selection):
                             c'16
                             c'16
                             c'16
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             <d' e'>16
                         }
                         \times 8/9 {
@@ -1224,7 +1248,8 @@ class Selection(abjad.Selection):
                             d'16
                             d'16
                             d'16
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -1253,7 +1278,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #green
                             \once \override NoteHead.color = #green
                             \once \override Stem.color = #green
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             \once \override Accidental.color = #green
                             \once \override Beam.color = #green
                             \once \override Dots.color = #green
@@ -1316,7 +1342,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -1349,7 +1375,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #red
                             \once \override NoteHead.color = #red
                             \once \override Stem.color = #red
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             \once \override Accidental.color = #red
                             \once \override Beam.color = #red
                             \once \override Dots.color = #red
@@ -1382,7 +1409,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             \once \override Accidental.color = #blue
                             \once \override Beam.color = #blue
                             \once \override Dots.color = #blue
@@ -1416,7 +1444,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #red
                             \once \override NoteHead.color = #red
                             \once \override Stem.color = #red
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             \once \override Accidental.color = #red
                             \once \override Beam.color = #red
                             \once \override Dots.color = #red
@@ -1504,7 +1533,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -1539,7 +1568,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #red
                             \once \override NoteHead.color = #red
                             \once \override Stem.color = #red
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             \once \override Accidental.color = #red
                             \once \override Beam.color = #red
                             \once \override Dots.color = #red
@@ -1574,7 +1604,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             \once \override Accidental.color = #blue
                             \once \override Beam.color = #blue
                             \once \override Dots.color = #blue
@@ -1610,7 +1641,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #red
                             \once \override NoteHead.color = #red
                             \once \override Stem.color = #red
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             \once \override Accidental.color = #red
                             \once \override Beam.color = #red
                             \once \override Dots.color = #red
@@ -1673,7 +1705,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -1706,7 +1738,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #red
                             \once \override NoteHead.color = #red
                             \once \override Stem.color = #red
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             \once \override Accidental.color = #red
                             \once \override Beam.color = #red
                             \once \override Dots.color = #red
@@ -1739,7 +1772,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             \once \override Accidental.color = #blue
                             \once \override Beam.color = #blue
                             \once \override Dots.color = #blue
@@ -1773,7 +1807,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #red
                             \once \override NoteHead.color = #red
                             \once \override Stem.color = #red
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             \once \override Accidental.color = #red
                             \once \override Beam.color = #red
                             \once \override Dots.color = #red
@@ -1830,7 +1865,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -1843,7 +1878,8 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             c'16
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             <d' e'>16
                         }
                         \times 8/9 {
@@ -1851,7 +1887,8 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             d'16
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -1865,7 +1902,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #green
                             \once \override NoteHead.color = #green
                             \once \override Stem.color = #green
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             <fs' gs'>16
                         }
                     } % measure
@@ -1941,7 +1979,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -1974,7 +2012,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             <d' e'>16
                         }
                         \times 8/9 {
@@ -2002,7 +2041,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -2031,7 +2071,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             <fs' gs'>16
                         }
                     } % measure
@@ -2083,7 +2124,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -2096,7 +2137,8 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             c'16
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             <d' e'>16
                         }
                         \times 8/9 {
@@ -2104,7 +2146,8 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             d'16
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -2113,7 +2156,8 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             e'16
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             \once \override Accidental.color = #green
                             \once \override Beam.color = #green
                             \once \override Dots.color = #green
@@ -2200,7 +2244,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -2233,7 +2277,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             \once \override Accidental.color = #red
                             \once \override Beam.color = #red
                             \once \override Dots.color = #red
@@ -2266,7 +2311,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #red
                             \once \override NoteHead.color = #red
                             \once \override Stem.color = #red
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             \once \override Accidental.color = #blue
                             \once \override Beam.color = #blue
                             \once \override Dots.color = #blue
@@ -2300,7 +2346,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             \once \override Accidental.color = #red
                             \once \override Beam.color = #red
                             \once \override Dots.color = #red
@@ -2360,7 +2407,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -2373,7 +2420,8 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             c'16
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             <d' e'>16
                         }
                         \times 8/9 {
@@ -2381,7 +2429,8 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             d'16
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -2395,7 +2444,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #green
                             \once \override NoteHead.color = #green
                             \once \override Stem.color = #green
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             \once \override Accidental.color = #green
                             \once \override Beam.color = #green
                             \once \override Dots.color = #green
@@ -2476,7 +2526,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -2509,7 +2559,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             \once \override Accidental.color = #blue
                             \once \override Beam.color = #blue
                             \once \override Dots.color = #blue
@@ -2542,7 +2593,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             \once \override Accidental.color = #blue
                             \once \override Beam.color = #blue
                             \once \override Dots.color = #blue
@@ -2576,7 +2628,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             \once \override Accidental.color = #blue
                             \once \override Beam.color = #blue
                             \once \override Dots.color = #blue
@@ -2633,7 +2686,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -2646,7 +2699,8 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             c'16
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             <d' e'>16
                         }
                         \times 8/9 {
@@ -2654,7 +2708,8 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             d'16
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -2663,7 +2718,8 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             e'16
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             \once \override Accidental.color = #green
                             \once \override Beam.color = #green
                             \once \override Dots.color = #green
@@ -2744,7 +2800,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -2772,7 +2828,8 @@ class Selection(abjad.Selection):
                             \once \override NoteHead.color = #red
                             \once \override Stem.color = #red
                             c'16
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             \once \override Accidental.color = #blue
                             \once \override Beam.color = #blue
                             \once \override Dots.color = #blue
@@ -2800,7 +2857,8 @@ class Selection(abjad.Selection):
                             \once \override NoteHead.color = #red
                             \once \override Stem.color = #red
                             d'16
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             \once \override Accidental.color = #blue
                             \once \override Beam.color = #blue
                             \once \override Dots.color = #blue
@@ -2829,7 +2887,8 @@ class Selection(abjad.Selection):
                             \once \override NoteHead.color = #red
                             \once \override Stem.color = #red
                             e'16
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             \once \override Accidental.color = #blue
                             \once \override Beam.color = #blue
                             \once \override Dots.color = #blue
@@ -2886,7 +2945,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -2899,7 +2958,8 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             c'16
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             <d' e'>16
                         }
                         \times 8/9 {
@@ -2907,7 +2967,8 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             d'16
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -2921,7 +2982,8 @@ class Selection(abjad.Selection):
                             \once \override NoteHead.color = #green
                             \once \override Stem.color = #green
                             e'16
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             <fs' gs'>16
                         }
                     } % measure
@@ -2991,7 +3053,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -3019,7 +3081,8 @@ class Selection(abjad.Selection):
                             \once \override NoteHead.color = #red
                             \once \override Stem.color = #red
                             c'16
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             <d' e'>16
                         }
                         \times 8/9 {
@@ -3042,7 +3105,8 @@ class Selection(abjad.Selection):
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
                             d'16
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -3066,7 +3130,8 @@ class Selection(abjad.Selection):
                             \once \override NoteHead.color = #red
                             \once \override Stem.color = #red
                             e'16
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             <fs' gs'>16
                         }
                     } % measure
@@ -3122,7 +3187,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -3135,7 +3200,8 @@ class Selection(abjad.Selection):
                             c'16
                             c'16
                             c'16
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             <d' e'>16
                         }
                         \times 8/9 {
@@ -3143,7 +3209,8 @@ class Selection(abjad.Selection):
                             d'16
                             d'16
                             d'16
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             <e' fs'>16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -3157,7 +3224,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #green
                             \once \override NoteHead.color = #green
                             \once \override Stem.color = #green
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             \once \override Accidental.color = #green
                             \once \override Beam.color = #green
                             \once \override Dots.color = #green
@@ -3226,7 +3294,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -3259,7 +3327,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             \once \override Accidental.color = #blue
                             \once \override Beam.color = #blue
                             \once \override Dots.color = #blue
@@ -3292,7 +3361,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             \once \override Accidental.color = #blue
                             \once \override Beam.color = #blue
                             \once \override Dots.color = #blue
@@ -3326,7 +3396,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             \once \override Accidental.color = #blue
                             \once \override Beam.color = #blue
                             \once \override Dots.color = #blue
@@ -3384,7 +3455,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     autoBeaming = ##f
                 } {
@@ -3493,7 +3564,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -3506,7 +3577,8 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             c'16
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             <d' e'>16
                         }
                         \times 8/9 {
@@ -3536,7 +3608,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #red
                             \once \override NoteHead.color = #red
                             \once \override Stem.color = #red
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             \once \override Accidental.color = #blue
                             \once \override Beam.color = #blue
                             \once \override Dots.color = #blue
@@ -3552,7 +3625,8 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             e'16
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             <fs' gs'>16
                         }
                     } % measure
@@ -3604,7 +3678,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -3617,7 +3691,8 @@ class Selection(abjad.Selection):
                             c'16
                             c'16
                             c'16
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             <d' e'>16
                         }
                         \times 8/9 {
@@ -3645,7 +3720,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #green
                             \once \override NoteHead.color = #green
                             \once \override Stem.color = #green
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             \once \override Accidental.color = #green
                             \once \override Beam.color = #green
                             \once \override Dots.color = #green
@@ -3661,7 +3737,8 @@ class Selection(abjad.Selection):
                             e'16
                             e'16
                             e'16
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             <fs' gs'>16
                         }
                     } % measure
@@ -3719,7 +3796,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -3752,7 +3829,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #red
                             \once \override NoteHead.color = #red
                             \once \override Stem.color = #red
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             \once \override Accidental.color = #red
                             \once \override Beam.color = #red
                             \once \override Dots.color = #red
@@ -3787,7 +3865,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             \once \override Accidental.color = #blue
                             \once \override Beam.color = #blue
                             \once \override Dots.color = #blue
@@ -3823,7 +3902,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #red
                             \once \override NoteHead.color = #red
                             \once \override Stem.color = #red
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             \once \override Accidental.color = #red
                             \once \override Beam.color = #red
                             \once \override Dots.color = #red
@@ -3874,7 +3954,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     autoBeaming = ##f
                 } {
@@ -3936,7 +4016,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     autoBeaming = ##f
                 } {
@@ -4036,7 +4116,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -4069,7 +4149,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             \once \override Accidental.color = #red
                             \once \override Beam.color = #red
                             \once \override Dots.color = #red
@@ -4104,7 +4185,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             \once \override Accidental.color = #red
                             \once \override Beam.color = #red
                             \once \override Dots.color = #red
@@ -4140,7 +4222,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             \once \override Accidental.color = #red
                             \once \override Beam.color = #red
                             \once \override Dots.color = #red
@@ -4213,7 +4296,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff)
+                >>> abjad.f(staff, strict=True)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -4226,7 +4309,8 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             c'16
-                            <d' e'>4 ~
+                            <d' e'>4
+                            ~
                             \once \override Accidental.color = #red
                             \once \override Beam.color = #red
                             \once \override Dots.color = #red
@@ -4261,7 +4345,8 @@ class Selection(abjad.Selection):
                             \once \override Dots.color = #blue
                             \once \override NoteHead.color = #blue
                             \once \override Stem.color = #blue
-                            <e' fs'>4 ~
+                            <e' fs'>4
+                            ~
                             \once \override Accidental.color = #red
                             \once \override Beam.color = #red
                             \once \override Dots.color = #red
@@ -4277,7 +4362,8 @@ class Selection(abjad.Selection):
                             bf'16
                             <a'' b''>16
                             e'16
-                            <fs' gs'>4 ~
+                            <fs' gs'>4
+                            ~
                             <fs' gs'>16
                         }
                     } % measure

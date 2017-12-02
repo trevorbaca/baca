@@ -28,15 +28,17 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new Staff {
                 { % measure
                     \time 5/16
                     {
-                        c'16 [
+                        c'16
+                        [
                         d'16
                         bf'8
-                        af'16 ]
+                        af'16
+                        ]
                     }
                 } % measure
             }
@@ -48,16 +50,18 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new Staff {
                 { % measure
                     \time 3/8
                     {
-                        fs''16 [
+                        fs''16
+                        [
                         e''16
                         ef''8
                         af''16
-                        g''16 ]
+                        g''16
+                        ]
                     }
                 } % measure
             }
@@ -69,7 +73,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new Staff {
                 { % measure
                     \time 1/16
@@ -86,22 +90,26 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new Staff {
                 { % measure
                     \time 13/16
                     {
-                        c'16 [
+                        c'16
+                        [
                         d'16
                         bf'8
-                        af'16 ]
+                        af'16
+                        ]
                     }
                     {
-                        fs''16 [
+                        fs''16
+                        [
                         e''8
                         ef''16
                         af''16
-                        g''8 ]
+                        g''8
+                        ]
                     }
                     {
                         a'16
@@ -200,21 +208,25 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 3/4
                         {
-                            c'16 [
+                            c'16
+                            [
                             d'16
-                            bf'8 ]
+                            bf'8
+                            ]
                         }
                         {
-                            fs''16 [
+                            fs''16
+                            [
                             e''16
                             ef''8
                             af''16
-                            g''16 ]
+                            g''16
+                            ]
                         }
                         {
                             a'8
@@ -248,21 +260,25 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 3/4
                         {
-                            c'8 [
+                            c'8
+                            [
                             d'16
-                            bf'16 ]
+                            bf'16
+                            ]
                         }
                         {
-                            fs''8 [
+                            fs''8
+                            [
                             e''16
                             ef''16
                             af''8
-                            g''16 ]
+                            g''16
+                            ]
                         }
                         {
                             a'16
@@ -758,7 +774,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 3/2
@@ -842,7 +858,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 7/4
@@ -942,7 +958,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
@@ -950,17 +966,21 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         \time 15/16
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 5/4 {
-                            c'16 [
+                            c'16
+                            [
                             d'16
-                            bf'8 ]
+                            bf'8
+                            ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/6 {
-                            fs''16 [
+                            fs''16
+                            [
                             e''16
                             ef''8
                             af''16
-                            g''16 ]
+                            g''16
+                            ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 3/2 {
@@ -993,7 +1013,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff \with {
                     \override Beam.positions = #'(-5.5 . -5.5)
                 } {
@@ -1003,7 +1023,8 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         \times 5/4 {
                             \set stemLeftBeamCount = #0
                             \set stemRightBeamCount = #2
-                            c'16 [
+                            c'16
+                            [
                             \set stemLeftBeamCount = #2
                             \set stemRightBeamCount = #1
                             d'16
@@ -1033,7 +1054,8 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         \times 3/2 {
                             \set stemLeftBeamCount = #1
                             \set stemRightBeamCount = #0
-                            a'8 ]
+                            a'8
+                            ]
                         }
                     } % measure
                 }
@@ -1060,7 +1082,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 15/16
@@ -1106,7 +1128,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
@@ -1115,15 +1137,19 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 5/4 {
                             r16
-                            d'16 [
-                            bf'8 ]
+                            d'16
+                            [
+                            bf'8
+                            ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/6 {
-                            fs''16 [
+                            fs''16
+                            [
                             e''16
                             ef''8
-                            af''16 ]
+                            af''16
+                            ]
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -1157,7 +1183,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
@@ -1165,17 +1191,21 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         \time 15/16
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 5/4 {
-                            r16 [
+                            r16
+                            [
                             d'16
-                            bf'8 ]
+                            bf'8
+                            ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/6 {
-                            fs''16 [
+                            fs''16
+                            [
                             e''16
                             ef''8
                             af''16
-                            r16 ]
+                            r16
+                            ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 3/2 {
@@ -1209,7 +1239,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
@@ -1218,20 +1248,24 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 5/4 {
                             \override Staff.Stem.stemlet-length = #0.75
-                            r16 [
+                            r16
+                            [
                             d'16
                             \revert Staff.Stem.stemlet-length
-                            bf'8 ]
+                            bf'8
+                            ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/6 {
                             \override Staff.Stem.stemlet-length = #0.75
-                            fs''16 [
+                            fs''16
+                            [
                             e''16
                             ef''8
                             af''16
                             \revert Staff.Stem.stemlet-length
-                            r16 ]
+                            r16
+                            ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 3/2 {
@@ -1278,21 +1312,25 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 3/4
                         {
-                            c'16 [
+                            c'16
+                            [
                             d'16
-                            bf'8 ]
+                            bf'8
+                            ]
                         }
                         {
-                            fs''16 [
+                            fs''16
+                            [
                             e''16
                             ef''8
                             af''16
-                            g''16 ]
+                            g''16
+                            ]
                         }
                         {
                             a'8
@@ -1321,14 +1359,16 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 3/4
                         {
-                            c'16 [
+                            c'16
+                            [
                             d'16
-                            bf'8 ]
+                            bf'8
+                            ]
                         }
                         r4.
                         {
@@ -1358,14 +1398,16 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 3/4
                         {
-                            c'16 [
+                            c'16
+                            [
                             d'16
-                            bf'8 ]
+                            bf'8
+                            ]
                         }
                         c'4.
                         {
@@ -1411,27 +1453,36 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 39/32
                         {
-                            c'8 [
+                            c'8
+                            [
                             d'8
-                            bf'8 ~
-                            bf'32 ]
+                            bf'8
+                            ~
+                            bf'32
+                            ]
                         }
                         {
-                            fs''8 [
+                            fs''8
+                            [
                             e''8
-                            ef''8 ~
+                            ef''8
+                            ~
                             ef''32
                             af''8
-                            g''8 ]
+                            g''8
+                            ]
                         }
                         {
-                            a'8 ~ [
-                            a'32 ]
+                            a'8
+                            ~
+                            [
+                            a'32
+                            ]
                         }
                     } % measure
                 }
@@ -1458,27 +1509,36 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 39/32
                         {
-                            c'8 [
+                            c'8
+                            [
                             d'8
-                            bf'32 ~
-                            bf'8 ]
+                            bf'32
+                            ~
+                            bf'8
+                            ]
                         }
                         {
-                            fs''8 [
+                            fs''8
+                            [
                             e''8
-                            ef''32 ~
+                            ef''32
+                            ~
                             ef''8
                             af''8
-                            g''8 ]
+                            g''8
+                            ]
                         }
                         {
-                            a'32 ~ [
-                            a'8 ]
+                            a'32
+                            ~
+                            [
+                            a'8
+                            ]
                         }
                     } % measure
                 }
@@ -1522,21 +1582,27 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 3/4
                         {
-                            c'16 [
-                            d'16 ]
+                            c'16
+                            [
+                            d'16
+                            ]
                             r8
                         }
                         {
-                            fs''16 [
-                            e''16 ]
+                            fs''16
+                            [
+                            e''16
+                            ]
                             r8
-                            af''16 [
-                            g''16 ]
+                            af''16
+                            [
+                            g''16
+                            ]
                         }
                         {
                             r8
@@ -1566,21 +1632,25 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 3/4
                         {
                             r16
-                            d'16 [
-                            bf'8 ]
+                            d'16
+                            [
+                            bf'8
+                            ]
                         }
                         {
-                            fs''16 [
+                            fs''16
+                            [
                             e''16
                             ef''8
                             af''16
-                            g''16 ]
+                            g''16
+                            ]
                         }
                         {
                             r8
@@ -1628,28 +1698,32 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 3/2
                         {
                             \override Staff.Stem.stemlet-length = #1.5
-                            c'8. [
+                            c'8.
+                            [
                             r16
                             d'8
                             \revert Staff.Stem.stemlet-length
-                            bf'8 ]
+                            bf'8
+                            ]
                         }
                         {
                             \override Staff.Stem.stemlet-length = #1.5
-                            fs''8. [
+                            fs''8.
+                            [
                             r16
                             e''8
                             ef''8
                             af''8.
                             r16
                             \revert Staff.Stem.stemlet-length
-                            g''8 ]
+                            g''8
+                            ]
                         }
                         {
                             \revert Staff.Stem.stemlet-length
@@ -1680,15 +1754,17 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 29/32
                         {
                             c'4..
-                            c'64 \repeatTie
+                            c'64
+                            \repeatTie
                             d'4..
-                            d'64 \repeatTie
+                            d'64
+                            \repeatTie
                         }
                     } % measure
                 }
@@ -1732,21 +1808,26 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 3/4
                         {
-                            c'16 [
+                            c'16
+                            [
                             d'16
-                            bf'8 ~ ]
+                            bf'8
+                            ~
+                            ]
                         }
                         {
-                            bf'16 [
+                            bf'16
+                            [
                             e''16
                             ef''8
                             af''16
-                            g''16 ]
+                            g''16
+                            ]
                         }
                         {
                             a'8
@@ -1775,21 +1856,29 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 3/4
                         {
-                            c'16 [
+                            c'16
+                            [
                             d'16
-                            bf'8 ~ ]
+                            bf'8
+                            ~
+                            ]
                         }
                         {
-                            bf'16 [
-                            e''16 ~
+                            bf'16
+                            [
+                            e''16
+                            ~
                             e''8
-                            g''16 ~
-                            g''16 ~ ]
+                            g''16
+                            ~
+                            g''16
+                            ~
+                            ]
                         }
                         {
                             g''8
@@ -1834,23 +1923,27 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 15/16
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 5/4 {
-                            c'16 [
+                            c'16
+                            [
                             d'16
-                            bf'8 ]
+                            bf'8
+                            ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/6 {
-                            fs''16 [
+                            fs''16
+                            [
                             e''16
                             ef''8
                             af''16
-                            g''16 ]
+                            g''16
+                            ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 3/2 {
@@ -1878,23 +1971,27 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff {
                     { % measure
                         \time 5/8
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 3/4 {
-                            c'16 [
+                            c'16
+                            [
                             d'16
-                            bf'8 ]
+                            bf'8
+                            ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 5/6 {
-                            fs''16 [
+                            fs''16
+                            [
                             e''16
                             ef''8
                             af''16
-                            g''16 ]
+                            g''16
+                            ]
                         }
                         {
                             a'8
@@ -1931,7 +2028,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff \with {
                     \override Beam.positions = #'(-5 . -5)
                     \override Stem.direction = #down
@@ -1973,8 +2070,10 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             }
                         \times 1/1 {
                             \once \override Beam.grow-direction = #right
-                            d'16 * 1328/1024 [
-                            bf'16 * 720/1024 ]
+                            d'16 * 1328/1024
+                            [
+                            bf'16 * 720/1024
+                            ]
                         }
                         \revert TupletNumber.text
                         \override TupletNumber.text = \markup {
@@ -2009,9 +2108,11 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             }
                         \times 1/1 {
                             \once \override Beam.grow-direction = #right
-                            fs''16 * 1552/1024 [
+                            fs''16 * 1552/1024
+                            [
                             e''16 * 832/1024
-                            ef''16 * 688/1024 ]
+                            ef''16 * 688/1024
+                            ]
                         }
                         \revert TupletNumber.text
                         \override TupletNumber.text = \markup {
@@ -2046,10 +2147,12 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             }
                         \times 1/1 {
                             \once \override Beam.grow-direction = #right
-                            af''16 * 1728/1024 [
+                            af''16 * 1728/1024
+                            [
                             g''16 * 928/1024
                             a'16 * 768/1024
-                            c'16 * 672/1024 ]
+                            c'16 * 672/1024
+                            ]
                         }
                         \revert TupletNumber.text
                         \override TupletNumber.text = \markup {
@@ -2085,11 +2188,13 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             }
                         \times 1/1 {
                             \once \override Beam.grow-direction = #right
-                            d'16 * 1872/1024 [
+                            d'16 * 1872/1024
+                            [
                             bf'16 * 1008/1024
                             fs''16 * 832/1024
                             e''16 * 736/1024
-                            ef''16 * 672/1024 ]
+                            ef''16 * 672/1024
+                            ]
                         }
                         \revert TupletNumber.text
                         \override TupletNumber.text = \markup {
@@ -2124,12 +2229,14 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             }
                         \times 1/1 {
                             \once \override Beam.grow-direction = #right
-                            af''16 * 2000/1024 [
+                            af''16 * 2000/1024
+                            [
                             g''16 * 1088/1024
                             a'16 * 896/1024
                             c'16 * 784/1024
                             d'16 * 720/1024
-                            bf'16 * 656/1024 ]
+                            bf'16 * 656/1024
+                            ]
                         }
                         \revert TupletNumber.text
                     } % measure
@@ -2164,7 +2271,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff \with {
                     \override Beam.positions = #'(-5 . -5)
                     \override Stem.direction = #down
@@ -2206,8 +2313,10 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             }
                         \times 1/1 {
                             \once \override Beam.grow-direction = #left
-                            d'16 * 656/1024 [
-                            bf'16 * 1392/1024 ]
+                            d'16 * 656/1024
+                            [
+                            bf'16 * 1392/1024
+                            ]
                         }
                         \revert TupletNumber.text
                         \override TupletNumber.text = \markup {
@@ -2242,9 +2351,11 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             }
                         \times 1/1 {
                             \once \override Beam.grow-direction = #left
-                            fs''16 * 512/1024 [
+                            fs''16 * 512/1024
+                            [
                             e''16 * 1072/1024
-                            ef''16 * 1488/1024 ]
+                            ef''16 * 1488/1024
+                            ]
                         }
                         \revert TupletNumber.text
                         \override TupletNumber.text = \markup {
@@ -2279,10 +2390,12 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             }
                         \times 1/1 {
                             \once \override Beam.grow-direction = #left
-                            af''16 * 432/1024 [
+                            af''16 * 432/1024
+                            [
                             g''16 * 896/1024
                             a'16 * 1232/1024
-                            c'16 * 1536/1024 ]
+                            c'16 * 1536/1024
+                            ]
                         }
                         \revert TupletNumber.text
                         \override TupletNumber.text = \markup {
@@ -2318,11 +2431,13 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             }
                         \times 1/1 {
                             \once \override Beam.grow-direction = #left
-                            d'16 * 368/1024 [
+                            d'16 * 368/1024
+                            [
                             bf'16 * 784/1024
                             fs''16 * 1072/1024
                             e''16 * 1328/1024
-                            ef''16 * 1568/1024 ]
+                            ef''16 * 1568/1024
+                            ]
                         }
                         \revert TupletNumber.text
                         \override TupletNumber.text = \markup {
@@ -2357,12 +2472,14 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             }
                         \times 1/1 {
                             \once \override Beam.grow-direction = #left
-                            af''16 * 336/1024 [
+                            af''16 * 336/1024
+                            [
                             g''16 * 704/1024
                             a'16 * 960/1024
                             c'16 * 1184/1024
                             d'16 * 1392/1024
-                            bf'16 * 1568/1024 ]
+                            bf'16 * 1568/1024
+                            ]
                         }
                         \revert TupletNumber.text
                     } % measure
@@ -2395,7 +2512,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff \with {
                     \override Beam.positions = #'(-5 . -5)
                     \override Stem.direction = #down
@@ -2435,11 +2552,13 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             }
                         \times 1/1 {
                             \once \override Beam.grow-direction = #right
-                            c'16 * 1872/1024 [
+                            c'16 * 1872/1024
+                            [
                             d'16 * 1008/1024
                             bf'16 * 832/1024
                             fs''16 * 736/1024
-                            e''16 * 672/1024 ]
+                            e''16 * 672/1024
+                            ]
                         }
                         \revert TupletNumber.text
                         \override TupletNumber.text = \markup {
@@ -2474,12 +2593,14 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             }
                         \times 1/1 {
                             \once \override Beam.grow-direction = #left
-                            ef''16 * 336/1024 [
+                            ef''16 * 336/1024
+                            [
                             af''16 * 704/1024
                             g''16 * 960/1024
                             a'16 * 1184/1024
                             c'16 * 1392/1024
-                            d'16 * 1568/1024 ]
+                            d'16 * 1568/1024
+                            ]
                         }
                         \revert TupletNumber.text
                         \override TupletNumber.text = \markup {
@@ -2515,11 +2636,13 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             }
                         \times 1/1 {
                             \once \override Beam.grow-direction = #right
-                            bf'16 * 1872/1024 [
+                            bf'16 * 1872/1024
+                            [
                             fs''16 * 1008/1024
                             e''16 * 832/1024
                             ef''16 * 736/1024
-                            af''16 * 672/1024 ]
+                            af''16 * 672/1024
+                            ]
                         }
                         \revert TupletNumber.text
                         \override TupletNumber.text = \markup {
@@ -2554,12 +2677,14 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             }
                         \times 1/1 {
                             \once \override Beam.grow-direction = #left
-                            g''16 * 336/1024 [
+                            g''16 * 336/1024
+                            [
                             a'16 * 704/1024
                             c'16 * 960/1024
                             d'16 * 1184/1024
                             bf'16 * 1392/1024
-                            fs''16 * 1568/1024 ]
+                            fs''16 * 1568/1024
+                            ]
                         }
                         \revert TupletNumber.text
                     } % measure
@@ -2594,7 +2719,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff \with {
                     \override Beam.positions = #'(-5 . -5)
                     \override Stem.direction = #down
@@ -2634,20 +2759,24 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             }
                         \times 1/1 {
                             \once \override Beam.grow-direction = #right
-                            c'16 * 1872/1024 [
+                            c'16 * 1872/1024
+                            [
                             d'16 * 1008/1024
                             bf'16 * 832/1024
                             fs''16 * 736/1024
-                            e''16 * 672/1024 ]
+                            e''16 * 672/1024
+                            ]
                         }
                         \revert TupletNumber.text
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 3/5 {
-                            ef''16 [
+                            ef''16
+                            [
                             af''16
                             g''16
                             a'16
-                            c'16 ]
+                            c'16
+                            ]
                         }
                         \override TupletNumber.text = \markup {
                             \scale
@@ -2682,11 +2811,13 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             }
                         \times 1/1 {
                             \once \override Beam.grow-direction = #left
-                            d'16 * 368/1024 [
+                            d'16 * 368/1024
+                            [
                             bf'16 * 784/1024
                             fs''16 * 1072/1024
                             e''16 * 1328/1024
-                            ef''16 * 1568/1024 ]
+                            ef''16 * 1568/1024
+                            ]
                         }
                         \revert TupletNumber.text
                         \override TupletNumber.text = \markup {
@@ -2722,20 +2853,24 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             }
                         \times 1/1 {
                             \once \override Beam.grow-direction = #right
-                            af''16 * 1872/1024 [
+                            af''16 * 1872/1024
+                            [
                             g''16 * 1008/1024
                             a'16 * 832/1024
                             c'16 * 736/1024
-                            d'16 * 672/1024 ]
+                            d'16 * 672/1024
+                            ]
                         }
                         \revert TupletNumber.text
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 3/5 {
-                            bf'16 [
+                            bf'16
+                            [
                             fs''16
                             e''16
                             ef''16
-                            af''16 ]
+                            af''16
+                            ]
                         }
                         \override TupletNumber.text = \markup {
                             \scale
@@ -2770,11 +2905,13 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             }
                         \times 1/1 {
                             \once \override Beam.grow-direction = #left
-                            g''16 * 368/1024 [
+                            g''16 * 368/1024
+                            [
                             a'16 * 784/1024
                             c'16 * 1072/1024
                             d'16 * 1328/1024
-                            bf'16 * 1568/1024 ]
+                            bf'16 * 1568/1024
+                            ]
                         }
                         \revert TupletNumber.text
                     } % measure
@@ -2809,7 +2946,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff \with {
                     \override Beam.positions = #'(-6 . -6)
                     \override Stem.direction = #down
@@ -2822,36 +2959,46 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         }
                         \tweak edge-height #'(0.7 . 0)
                         \times 2/3 {
-                            d'8 [
-                            bf'8 ]
+                            d'8
+                            [
+                            bf'8
+                            ]
                         }
                         \times 2/3 {
-                            fs''8 [
+                            fs''8
+                            [
                             e''8
-                            ef''8 ]
+                            ef''8
+                            ]
                         }
                         \tweak edge-height #'(0.7 . 0)
                         \times 2/3 {
-                            af''8 [
+                            af''8
+                            [
                             g''8
                             a'8
-                            c'8 ]
+                            c'8
+                            ]
                         }
                         \tweak edge-height #'(0.7 . 0)
                         \times 2/3 {
-                            d'8 [
+                            d'8
+                            [
                             bf'8
                             fs''8
                             e''8
-                            ef''8 ]
+                            ef''8
+                            ]
                         }
                         \times 2/3 {
-                            af''8 [
+                            af''8
+                            [
                             g''8
                             a'8
                             c'8
                             d'8
-                            bf'8 ]
+                            bf'8
+                            ]
                         }
                     } % measure
                 }
@@ -2888,7 +3035,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff \with {
                     \override Beam.positions = #'(-6 . -6)
                     \override Stem.direction = #down
@@ -2899,34 +3046,44 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             c'4
                         }
                         {
-                            d'8 [
-                            bf'8 ]
+                            d'8
+                            [
+                            bf'8
+                            ]
                         }
                         \times 4/6 {
-                            fs''8 [
+                            fs''8
+                            [
                             e''8
-                            ef''8 ]
+                            ef''8
+                            ]
                         }
                         {
-                            af''16 [
+                            af''16
+                            [
                             g''16
                             a'16
-                            c'16 ]
+                            c'16
+                            ]
                         }
                         \times 4/5 {
-                            d'16 [
+                            d'16
+                            [
                             bf'16
                             fs''16
                             e''16
-                            ef''16 ]
+                            ef''16
+                            ]
                         }
                         \times 4/6 {
-                            af''16 [
+                            af''16
+                            [
                             g''16
                             a'16
                             c'16
                             d'16
-                            bf'16 ]
+                            bf'16
+                            ]
                         }
                     } % measure
                 }
@@ -2964,7 +3121,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff \with {
                     \override Beam.positions = #'(-6 . -6)
                     \override Stem.direction = #down
@@ -2972,48 +3129,60 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                     { % measure
                         \time 15/8
                         \times 4/6 {
-                            c'16 [
+                            c'16
+                            [
                             d'16
                             bf'8
                             fs''16
-                            e''16 ]
+                            e''16
+                            ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 6/7 {
-                            ef''8 [
+                            ef''8
+                            [
                             af''16
                             g''16
                             a'8
-                            c'16 ]
+                            c'16
+                            ]
                         }
                         \times 4/7 {
-                            d'16 [
+                            d'16
+                            [
                             bf'8
                             fs''16
                             e''16
-                            ef''8 ]
+                            ef''8
+                            ]
                         }
                         {
-                            af''16 [
+                            af''16
+                            [
                             g''16
                             a'8
                             c'16
-                            d'16 ]
+                            d'16
+                            ]
                         }
                         \times 4/7 {
-                            bf'8 [
+                            bf'8
+                            [
                             fs''16
                             e''16
                             ef''8
-                            af''16 ]
+                            af''16
+                            ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 6/7 {
-                            g''16 [
+                            g''16
+                            [
                             a'8
                             c'16
                             d'16
-                            bf'8 ]
+                            bf'8
+                            ]
                         }
                     } % measure
                 }
@@ -3060,30 +3229,38 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
                     { % measure
                         \time 11/8
                         \times 2/3 {
-                            c'8. [
-                            d'8. ]
+                            c'8.
+                            [
+                            d'8.
+                            ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/9 {
-                            bf'8. [
+                            bf'8.
+                            [
                             fs''8.
-                            e''8. ]
+                            e''8.
+                            ]
                         }
                         \times 2/3 {
-                            ef''8. [
-                            af''8. ]
+                            ef''8.
+                            [
+                            af''8.
+                            ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/9 {
-                            g''8. [
-                            a'8. ]
+                            g''8.
+                            [
+                            a'8.
+                            ]
                             r8.
                         }
                     } % measure
@@ -3113,30 +3290,38 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
                     { % measure
                         \time 11/8
                         {
-                            c'8 [
-                            d'8 ]
+                            c'8
+                            [
+                            d'8
+                            ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/9 {
-                            bf'8. [
+                            bf'8.
+                            [
                             fs''8.
-                            e''8. ]
+                            e''8.
+                            ]
                         }
                         {
-                            ef''8 [
-                            af''8 ]
+                            ef''8
+                            [
+                            af''8
+                            ]
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/9 {
-                            g''8. [
-                            a'8. ]
+                            g''8.
+                            [
+                            a'8.
+                            ]
                             r8.
                         }
                     } % measure

@@ -23,13 +23,14 @@ class RegisterInterpolationCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
                         {
-                            fs'16 [
+                            fs'16
+                            [
                             e'16
                             ef'16
                             f'16
@@ -40,10 +41,12 @@ class RegisterInterpolationCommand(Command):
                             af'16
                             g''16
                             cs''16
-                            d''16 ]
+                            d''16
+                            ]
                         }
                         {
-                            fs''16 [
+                            fs''16
+                            [
                             e''16
                             ef''16
                             f''16
@@ -54,7 +57,8 @@ class RegisterInterpolationCommand(Command):
                             af''16
                             g'''16
                             cs'''16
-                            d'''16 ]
+                            d'''16
+                            ]
                         }
                     }
                 }
@@ -80,7 +84,7 @@ class RegisterInterpolationCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -130,7 +134,7 @@ class RegisterInterpolationCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
             \context Score = "Score" <<
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
@@ -139,13 +143,13 @@ class RegisterInterpolationCommand(Command):
                         \time 4/8
                         \bar "" %! SEGMENT:EMPTY_START_BAR:1
                         s1 * 1/2
-                            - \markup { %! STAGE_NUMBER_MARKUP:2
-                                \fontsize %! STAGE_NUMBER_MARKUP:2
-                                    #-3 %! STAGE_NUMBER_MARKUP:2
-                                    \with-color %! STAGE_NUMBER_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                        [1] %! STAGE_NUMBER_MARKUP:2
-                                } %! STAGE_NUMBER_MARKUP:2
+                        - \markup { %! STAGE_NUMBER_MARKUP:2
+                            \fontsize %! STAGE_NUMBER_MARKUP:2
+                                #-3 %! STAGE_NUMBER_MARKUP:2
+                                \with-color %! STAGE_NUMBER_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                    [1] %! STAGE_NUMBER_MARKUP:2
+                            } %! STAGE_NUMBER_MARKUP:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
                         \time 3/8
@@ -186,83 +190,99 @@ class RegisterInterpolationCommand(Command):
                                 \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                fs''8 [
+                                fs''8
+                                [
                                 \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
             <BLANKLINE>
                                 e''8
             <BLANKLINE>
                                 ef''8
             <BLANKLINE>
-                                f''8 ]
+                                f''8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
-                                a''8 [
+                                a''8
+                                [
             <BLANKLINE>
                                 bf''8
             <BLANKLINE>
-                                c''8 ]
+                                c''8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 3] %%%
-                                b''8 [
+                                b''8
+                                [
             <BLANKLINE>
                                 af''8
             <BLANKLINE>
                                 g''8
             <BLANKLINE>
-                                cs''8 ]
+                                cs''8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 4] %%%
-                                d''8 [
+                                d''8
+                                [
             <BLANKLINE>
                                 fs''8
             <BLANKLINE>
-                                e''8 ]
+                                e''8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 5] %%%
-                                ef''8 [
+                                ef''8
+                                [
             <BLANKLINE>
                                 f''8
             <BLANKLINE>
                                 a''8
             <BLANKLINE>
-                                bf''8 ]
+                                bf''8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 6] %%%
-                                c''8 [
+                                c''8
+                                [
             <BLANKLINE>
                                 b''8
             <BLANKLINE>
-                                af''8 ]
+                                af''8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 7] %%%
-                                g''8 [
+                                g''8
+                                [
             <BLANKLINE>
                                 cs''8
             <BLANKLINE>
                                 d''8
             <BLANKLINE>
-                                fs''8 ]
+                                fs''8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 8] %%%
-                                e''8 [
+                                e''8
+                                [
             <BLANKLINE>
                                 ef''8
             <BLANKLINE>
-                                f''8 ]
+                                f''8
+                                ]
                                 \bar "|"
             <BLANKLINE>
                             }
@@ -294,7 +314,7 @@ class RegisterInterpolationCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
             \context Score = "Score" <<
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
@@ -303,13 +323,13 @@ class RegisterInterpolationCommand(Command):
                         \time 4/8
                         \bar "" %! SEGMENT:EMPTY_START_BAR:1
                         s1 * 1/2
-                            - \markup { %! STAGE_NUMBER_MARKUP:2
-                                \fontsize %! STAGE_NUMBER_MARKUP:2
-                                    #-3 %! STAGE_NUMBER_MARKUP:2
-                                    \with-color %! STAGE_NUMBER_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                        [1] %! STAGE_NUMBER_MARKUP:2
-                                } %! STAGE_NUMBER_MARKUP:2
+                        - \markup { %! STAGE_NUMBER_MARKUP:2
+                            \fontsize %! STAGE_NUMBER_MARKUP:2
+                                #-3 %! STAGE_NUMBER_MARKUP:2
+                                \with-color %! STAGE_NUMBER_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                    [1] %! STAGE_NUMBER_MARKUP:2
+                            } %! STAGE_NUMBER_MARKUP:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
                         \time 3/8
@@ -350,83 +370,99 @@ class RegisterInterpolationCommand(Command):
                                 \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                fs''8 [
+                                fs''8
+                                [
                                 \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
             <BLANKLINE>
                                 e''8
             <BLANKLINE>
                                 ef''8
             <BLANKLINE>
-                                f''8 ]
+                                f''8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
-                                a''8 [
+                                a''8
+                                [
             <BLANKLINE>
                                 bf'8
             <BLANKLINE>
-                                c''8 ]
+                                c''8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 3] %%%
-                                b'8 [
+                                b'8
+                                [
             <BLANKLINE>
                                 af'8
             <BLANKLINE>
                                 g''8
             <BLANKLINE>
-                                cs''8 ]
+                                cs''8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 4] %%%
-                                d''8 [
+                                d''8
+                                [
             <BLANKLINE>
                                 fs'8
             <BLANKLINE>
-                                e''8 ]
+                                e''8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 5] %%%
-                                ef''8 [
+                                ef''8
+                                [
             <BLANKLINE>
                                 f'8
             <BLANKLINE>
                                 a'8
             <BLANKLINE>
-                                bf'8 ]
+                                bf'8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 6] %%%
-                                c''8 [
+                                c''8
+                                [
             <BLANKLINE>
                                 b'8
             <BLANKLINE>
-                                af'8 ]
+                                af'8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 7] %%%
-                                g'8 [
+                                g'8
+                                [
             <BLANKLINE>
                                 cs''8
             <BLANKLINE>
                                 d'8
             <BLANKLINE>
-                                fs'8 ]
+                                fs'8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 8] %%%
-                                e'8 [
+                                e'8
+                                [
             <BLANKLINE>
                                 ef'8
             <BLANKLINE>
-                                f'8 ]
+                                f'8
+                                ]
                                 \bar "|"
             <BLANKLINE>
                             }
@@ -458,7 +494,7 @@ class RegisterInterpolationCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
             \context Score = "Score" <<
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
@@ -467,13 +503,13 @@ class RegisterInterpolationCommand(Command):
                         \time 4/8
                         \bar "" %! SEGMENT:EMPTY_START_BAR:1
                         s1 * 1/2
-                            - \markup { %! STAGE_NUMBER_MARKUP:2
-                                \fontsize %! STAGE_NUMBER_MARKUP:2
-                                    #-3 %! STAGE_NUMBER_MARKUP:2
-                                    \with-color %! STAGE_NUMBER_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                        [1] %! STAGE_NUMBER_MARKUP:2
-                                } %! STAGE_NUMBER_MARKUP:2
+                        - \markup { %! STAGE_NUMBER_MARKUP:2
+                            \fontsize %! STAGE_NUMBER_MARKUP:2
+                                #-3 %! STAGE_NUMBER_MARKUP:2
+                                \with-color %! STAGE_NUMBER_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                    [1] %! STAGE_NUMBER_MARKUP:2
+                            } %! STAGE_NUMBER_MARKUP:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
                         \time 3/8
@@ -514,83 +550,99 @@ class RegisterInterpolationCommand(Command):
                                 \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                fs'8 [
+                                fs'8
+                                [
                                 \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
             <BLANKLINE>
                                 e'8
             <BLANKLINE>
                                 ef'8
             <BLANKLINE>
-                                f'8 ]
+                                f'8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
-                                a'8 [
+                                a'8
+                                [
             <BLANKLINE>
                                 bf'8
             <BLANKLINE>
-                                c''8 ]
+                                c''8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 3] %%%
-                                b'8 [
+                                b'8
+                                [
             <BLANKLINE>
                                 af'8
             <BLANKLINE>
                                 g'8
             <BLANKLINE>
-                                cs''8 ]
+                                cs''8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 4] %%%
-                                d''8 [
+                                d''8
+                                [
             <BLANKLINE>
                                 fs'8
             <BLANKLINE>
-                                e''8 ]
+                                e''8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 5] %%%
-                                ef''8 [
+                                ef''8
+                                [
             <BLANKLINE>
                                 f''8
             <BLANKLINE>
                                 a'8
             <BLANKLINE>
-                                bf'8 ]
+                                bf'8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 6] %%%
-                                c''8 [
+                                c''8
+                                [
             <BLANKLINE>
                                 b'8
             <BLANKLINE>
-                                af'8 ]
+                                af'8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 7] %%%
-                                g''8 [
+                                g''8
+                                [
             <BLANKLINE>
                                 cs''8
             <BLANKLINE>
                                 d''8
             <BLANKLINE>
-                                fs''8 ]
+                                fs''8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 8] %%%
-                                e''8 [
+                                e''8
+                                [
             <BLANKLINE>
                                 ef''8
             <BLANKLINE>
-                                f''8 ]
+                                f''8
+                                ]
                                 \bar "|"
             <BLANKLINE>
                             }
@@ -622,7 +674,7 @@ class RegisterInterpolationCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
             \context Score = "Score" <<
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
@@ -631,13 +683,13 @@ class RegisterInterpolationCommand(Command):
                         \time 4/8
                         \bar "" %! SEGMENT:EMPTY_START_BAR:1
                         s1 * 1/2
-                            - \markup { %! STAGE_NUMBER_MARKUP:2
-                                \fontsize %! STAGE_NUMBER_MARKUP:2
-                                    #-3 %! STAGE_NUMBER_MARKUP:2
-                                    \with-color %! STAGE_NUMBER_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                        [1] %! STAGE_NUMBER_MARKUP:2
-                                } %! STAGE_NUMBER_MARKUP:2
+                        - \markup { %! STAGE_NUMBER_MARKUP:2
+                            \fontsize %! STAGE_NUMBER_MARKUP:2
+                                #-3 %! STAGE_NUMBER_MARKUP:2
+                                \with-color %! STAGE_NUMBER_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                    [1] %! STAGE_NUMBER_MARKUP:2
+                            } %! STAGE_NUMBER_MARKUP:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
                         \time 3/8
@@ -678,83 +730,99 @@ class RegisterInterpolationCommand(Command):
                                 \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                fs''8 [
+                                fs''8
+                                [
                                 \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
             <BLANKLINE>
                                 e''8
             <BLANKLINE>
                                 ef''8
             <BLANKLINE>
-                                f''8 ]
+                                f''8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
-                                a'8 [
+                                a'8
+                                [
             <BLANKLINE>
                                 bf'8
             <BLANKLINE>
-                                c''8 ]
+                                c''8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 3] %%%
-                                b'8 [
+                                b'8
+                                [
             <BLANKLINE>
                                 af'8
             <BLANKLINE>
                                 g'8
             <BLANKLINE>
-                                cs''8 ]
+                                cs''8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 4] %%%
-                                d'8 [
+                                d'8
+                                [
             <BLANKLINE>
                                 fs'8
             <BLANKLINE>
-                                e'8 ]
+                                e'8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 5] %%%
-                                ef'8 [
+                                ef'8
+                                [
             <BLANKLINE>
                                 f'8
             <BLANKLINE>
                                 a'8
             <BLANKLINE>
-                                bf8 ]
+                                bf8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 6] %%%
-                                c'8 [
+                                c'8
+                                [
             <BLANKLINE>
                                 b8
             <BLANKLINE>
-                                af8 ]
+                                af8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 7] %%%
-                                g8 [
+                                g8
+                                [
             <BLANKLINE>
                                 cs'8
             <BLANKLINE>
                                 d'8
             <BLANKLINE>
-                                fs8 ]
+                                fs8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 8] %%%
-                                e8 [
+                                e8
+                                [
             <BLANKLINE>
                                 ef8
             <BLANKLINE>
-                                f8 ]
+                                f8
+                                ]
                                 \bar "|"
             <BLANKLINE>
                             }
@@ -786,7 +854,7 @@ class RegisterInterpolationCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
             \context Score = "Score" <<
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
@@ -795,13 +863,13 @@ class RegisterInterpolationCommand(Command):
                         \time 4/8
                         \bar "" %! SEGMENT:EMPTY_START_BAR:1
                         s1 * 1/2
-                            - \markup { %! STAGE_NUMBER_MARKUP:2
-                                \fontsize %! STAGE_NUMBER_MARKUP:2
-                                    #-3 %! STAGE_NUMBER_MARKUP:2
-                                    \with-color %! STAGE_NUMBER_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                        [1] %! STAGE_NUMBER_MARKUP:2
-                                } %! STAGE_NUMBER_MARKUP:2
+                        - \markup { %! STAGE_NUMBER_MARKUP:2
+                            \fontsize %! STAGE_NUMBER_MARKUP:2
+                                #-3 %! STAGE_NUMBER_MARKUP:2
+                                \with-color %! STAGE_NUMBER_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                    [1] %! STAGE_NUMBER_MARKUP:2
+                            } %! STAGE_NUMBER_MARKUP:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
                         \time 3/8
@@ -842,83 +910,99 @@ class RegisterInterpolationCommand(Command):
                                 \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                fs8 [
+                                fs8
+                                [
                                 \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
             <BLANKLINE>
                                 e8
             <BLANKLINE>
                                 ef8
             <BLANKLINE>
-                                f8 ]
+                                f8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
-                                a8 [
+                                a8
+                                [
             <BLANKLINE>
                                 bf8
             <BLANKLINE>
-                                c'8 ]
+                                c'8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 3] %%%
-                                b8 [
+                                b8
+                                [
             <BLANKLINE>
                                 af8
             <BLANKLINE>
                                 g'8
             <BLANKLINE>
-                                cs'8 ]
+                                cs'8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 4] %%%
-                                d'8 [
+                                d'8
+                                [
             <BLANKLINE>
                                 fs'8
             <BLANKLINE>
-                                e'8 ]
+                                e'8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 5] %%%
-                                ef'8 [
+                                ef'8
+                                [
             <BLANKLINE>
                                 f'8
             <BLANKLINE>
                                 a'8
             <BLANKLINE>
-                                bf'8 ]
+                                bf'8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 6] %%%
-                                c''8 [
+                                c''8
+                                [
             <BLANKLINE>
                                 b'8
             <BLANKLINE>
-                                af'8 ]
+                                af'8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 7] %%%
-                                g'8 [
+                                g'8
+                                [
             <BLANKLINE>
                                 cs''8
             <BLANKLINE>
                                 d''8
             <BLANKLINE>
-                                fs''8 ]
+                                fs''8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 8] %%%
-                                e''8 [
+                                e''8
+                                [
             <BLANKLINE>
                                 ef''8
             <BLANKLINE>
-                                f''8 ]
+                                f''8
+                                ]
                                 \bar "|"
             <BLANKLINE>
                             }
@@ -1016,7 +1100,7 @@ class RegisterInterpolationCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1027,7 +1111,8 @@ class RegisterInterpolationCommand(Command):
                                 \once \override Dots.color = #green
                                 \once \override NoteHead.color = #green
                                 \once \override Stem.color = #green
-                                fs'16 [
+                                fs'16
+                                [
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
@@ -1093,10 +1178,12 @@ class RegisterInterpolationCommand(Command):
                                 \once \override Dots.color = #green
                                 \once \override NoteHead.color = #green
                                 \once \override Stem.color = #green
-                                d'''16 ]
+                                d'''16
+                                ]
                             }
                             {
-                                fs'16 [
+                                fs'16
+                                [
                                 e'16
                                 ef'16
                                 f'16
@@ -1107,7 +1194,8 @@ class RegisterInterpolationCommand(Command):
                                 af'16
                                 g'16
                                 cs'16
-                                d'16 ]
+                                d'16
+                                ]
                             }
                         }
                     }
@@ -1131,13 +1219,14 @@ class RegisterInterpolationCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
                             {
-                                fs'16 [
+                                fs'16
+                                [
                                 e'16
                                 ef'16
                                 f'16
@@ -1148,7 +1237,8 @@ class RegisterInterpolationCommand(Command):
                                 af'16
                                 g'16
                                 cs'16
-                                d'16 ]
+                                d'16
+                                ]
                             }
                             {
                                 \once \override Accidental.color = #green
@@ -1156,7 +1246,8 @@ class RegisterInterpolationCommand(Command):
                                 \once \override Dots.color = #green
                                 \once \override NoteHead.color = #green
                                 \once \override Stem.color = #green
-                                fs'16 [
+                                fs'16
+                                [
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
@@ -1222,7 +1313,8 @@ class RegisterInterpolationCommand(Command):
                                 \once \override Dots.color = #green
                                 \once \override NoteHead.color = #green
                                 \once \override Stem.color = #green
-                                d'''16 ]
+                                d'''16
+                                ]
                             }
                         }
                     }
@@ -1246,7 +1338,7 @@ class RegisterInterpolationCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1257,7 +1349,8 @@ class RegisterInterpolationCommand(Command):
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                fs'16 [
+                                fs'16
+                                [
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
@@ -1323,7 +1416,8 @@ class RegisterInterpolationCommand(Command):
                                 \once \override Dots.color = #red
                                 \once \override NoteHead.color = #red
                                 \once \override Stem.color = #red
-                                d'''16 ]
+                                d'''16
+                                ]
                             }
                             {
                                 \once \override Accidental.color = #blue
@@ -1331,7 +1425,8 @@ class RegisterInterpolationCommand(Command):
                                 \once \override Dots.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
-                                fs'16 [
+                                fs'16
+                                [
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
@@ -1397,7 +1492,8 @@ class RegisterInterpolationCommand(Command):
                                 \once \override Dots.color = #blue
                                 \once \override NoteHead.color = #blue
                                 \once \override Stem.color = #blue
-                                d'''16 ]
+                                d'''16
+                                ]
                             }
                         }
                     }

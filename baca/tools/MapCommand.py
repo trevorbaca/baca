@@ -31,7 +31,7 @@ class MapCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -40,21 +40,34 @@ class MapCommand(Command):
                         \times 9/10 {
                             \override TupletBracket.staff-padding = #5
                             r8
-                            c'16 [
-                            d'16 ]
-                            bf'4 ~
+                            c'16
+                            [
+                            d'16
+                            ]
+                            bf'4
+                            ~
                             bf'16
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            fs''16 -\accent [
-                            e''16 -\accent ]
-                            ef''4 -\accent ~
+                            fs''16
+                            -\accent
+                            [
+                            e''16
+                            -\accent
+                            ]
+                            ef''4
+                            -\accent
+                            ~
                             ef''16
                             r16
-                            af''16 -\accent [
-                            g''16 -\accent ]
+                            af''16
+                            -\accent
+                            [
+                            g''16
+                            -\accent
+                            ]
                         }
                         \times 4/5 {
                             a'16

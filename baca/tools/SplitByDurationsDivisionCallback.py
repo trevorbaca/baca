@@ -32,7 +32,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new RhythmicStaff {
                 { % measure
                     \time 7/8
@@ -80,7 +80,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new RhythmicStaff {
                 { % measure
                     \time 7/8
@@ -185,7 +185,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 3/4
@@ -218,7 +218,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 7/8
@@ -257,7 +257,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 2/4
@@ -293,7 +293,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 6/32
@@ -495,7 +495,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 3/4
@@ -537,7 +537,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 3/4
@@ -593,7 +593,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 7/8
@@ -641,17 +641,19 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 7/8
                         c'4
-                        c'2 ~
+                        c'2
+                        ~
                         c'8
                     } % measure
                     { % measure
                         c'4
-                        c'2 ~
+                        c'2
+                        ~
                         c'8
                     } % measure
                     { % measure
@@ -696,7 +698,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 7/8
@@ -736,7 +738,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 7/8
@@ -796,7 +798,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 7/16
@@ -844,7 +846,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 7/16
@@ -892,7 +894,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 7/16
@@ -948,7 +950,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 3/4
@@ -981,7 +983,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 3/4
@@ -1018,7 +1020,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 3/4
@@ -1053,7 +1055,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 3/4
@@ -1101,7 +1103,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 5/8
@@ -1135,7 +1137,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 5/8
@@ -1170,7 +1172,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 5/8
@@ -1206,7 +1208,7 @@ class SplitByDurationsDivisionCallback(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new RhythmicStaff {
                     { % measure
                         \time 5/8

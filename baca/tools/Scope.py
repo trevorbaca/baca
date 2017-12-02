@@ -12,7 +12,7 @@ class Scope(abjad.AbjadObject):
         ...     stages=(1, 9),
         ...     )
 
-        >>> abjad.f(scope)
+        >>> abjad.f(scope, strict=True)
         baca.Scope(
             voice_name='ViolinMusicVoice',
             stages=(1, 9),

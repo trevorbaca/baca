@@ -27,67 +27,83 @@ class PitchSpecifier(abjad.AbjadObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
                         {
-                            c'16 [
+                            c'16
+                            [
                             d'16
-                            bf'16 ]
+                            bf'16
+                            ]
                         }
                         {
-                            fs'16 [
+                            fs'16
+                            [
                             e'16
                             ef'16
                             af'16
-                            g'16 ]
+                            g'16
+                            ]
                         }
                         {
                             a'16
                         }
                         {
-                            ef'16 [
+                            ef'16
+                            [
                             f'16
-                            cs'16 ]
+                            cs'16
+                            ]
                         }
                         {
-                            a'16 [
+                            a'16
+                            [
                             g'16
                             fs'16
                             b'16
-                            bf'16 ]
+                            bf'16
+                            ]
                         }
                         {
                             c'16
                         }
                         {
-                            fs'16 [
+                            fs'16
+                            [
                             af'16
-                            e'16 ]
+                            e'16
+                            ]
                         }
                         {
-                            c'16 [
+                            c'16
+                            [
                             bf'16
                             a'16
                             d'16
-                            cs'16 ]
+                            cs'16
+                            ]
                         }
                         {
                             ef'16
                         }
                         {
-                            a'16 [
+                            a'16
+                            [
                             b'16
-                            g'16 ]
+                            g'16
+                            ]
                         }
                         {
-                            ef'16 [
+                            ef'16
+                            [
                             cs'16
                             c'16
                             f'16
-                            e'16 ]
+                            e'16
+                            ]
                         }
                         {
                             fs'16
@@ -226,22 +242,26 @@ class PitchSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
                             {
-                                ef'16 [
+                                ef'16
+                                [
                                 f'16
-                                cs'16 ]
+                                cs'16
+                                ]
                             }
                             {
-                                a'16 [
+                                a'16
+                                [
                                 g'16
                                 fs'16
                                 b'16
-                                bf'16 ]
+                                bf'16
+                                ]
                             }
                             {
                                 c'16
@@ -327,22 +347,26 @@ class PitchSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
                             {
-                                c'16 [
+                                c'16
+                                [
                                 d'16
-                                bf'16 ]
+                                bf'16
+                                ]
                             }
                             {
-                                fs''16 [
+                                fs''16
+                                [
                                 e''16
                                 ef''16
                                 af''16
-                                g''16 ]
+                                g''16
+                                ]
                             }
                             {
                                 a'16
@@ -368,22 +392,26 @@ class PitchSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
                             {
-                                c'16 [
+                                c'16
+                                [
                                 d'16
-                                bf'16 ]
+                                bf'16
+                                ]
                             }
                             {
-                                fs'16 [
+                                fs'16
+                                [
                                 e'16
                                 ef'16
                                 af'16
-                                g'16 ]
+                                g'16
+                                ]
                             }
                             {
                                 a'16

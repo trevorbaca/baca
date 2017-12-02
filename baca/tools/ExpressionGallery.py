@@ -33,7 +33,7 @@ class ExpressionGallery(abjad.AbjadObject):
 
         ..  docs::
 
-            >>> abjad.f(markup)
+            >>> abjad.f(markup, strict=True)
             \markup {
                 \line
                     {
@@ -78,7 +78,7 @@ class ExpressionGallery(abjad.AbjadObject):
 
         ..  docs::
 
-            >>> abjad.f(markup)
+            >>> abjad.f(markup, strict=True)
             \markup {
                 \concat
                     {
@@ -137,7 +137,7 @@ class ExpressionGallery(abjad.AbjadObject):
 
         ..  docs::
 
-            >>> abjad.f(markup)
+            >>> abjad.f(markup, strict=True)
             \markup {
                 \concat
                     {
@@ -189,7 +189,7 @@ class ExpressionGallery(abjad.AbjadObject):
 
         ..  docs::
 
-            >>> abjad.f(markup)
+            >>> abjad.f(markup, strict=True)
             \markup {
                 \line
                     {
@@ -257,7 +257,7 @@ class ExpressionGallery(abjad.AbjadObject):
 
         ..  docs::
 
-            >>> abjad.f(markup)
+            >>> abjad.f(markup, strict=True)
             \markup {
                 \concat
                     {

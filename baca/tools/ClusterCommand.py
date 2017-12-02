@@ -19,7 +19,7 @@ class ClusterCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -30,49 +30,51 @@ class ClusterCommand(Command):
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
                             \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
-                            <c' e' g'>16 [
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
+                            <c' e' g'>16
+                            [
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
                             \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
                             <d' f' a' c''>16
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
                             \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
-                            <bf' d'' f''>16 ]
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
+                            <bf' d'' f''>16
+                            ]
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
                         }
                         {
                             \once \override Accidental.stencil = ##f
@@ -80,81 +82,83 @@ class ClusterCommand(Command):
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
                             \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
-                            <fs'' a'' c''' e'''>16 [
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
+                            <fs'' a'' c''' e'''>16
+                            [
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
                             \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
                             <e'' g'' b''>16
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
                             \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
                             <ef'' g'' b'' d'''>16
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
                             \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
                             <af'' c''' e'''>16
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
                             \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
-                            <g'' b'' d''' f'''>16 ]
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
+                            <g'' b'' d''' f'''>16
+                            ]
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
                         }
                         {
                             \once \override Accidental.stencil = ##f
@@ -162,17 +166,17 @@ class ClusterCommand(Command):
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
                             \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
                             <a' c'' e''>16
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
                         }
                     }
                 }
@@ -196,15 +200,17 @@ class ClusterCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
                         {
-                            c'16 [
+                            c'16
+                            [
                             d'16
-                            bf'16 ]
+                            bf'16
+                            ]
                         }
                         {
                             \once \override Accidental.stencil = ##f
@@ -212,81 +218,83 @@ class ClusterCommand(Command):
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
                             \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
-                            <fs'' a'' c'''>16 [
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
+                            <fs'' a'' c'''>16
+                            [
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
                             \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
                             <e'' g'' b'' d'''>16
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
                             \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
                             <ef'' g'' b''>16
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
                             \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
                             <af'' c''' e''' g'''>16
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
                             \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
-                            <g'' b'' d'''>16 ]
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
+                            <g'' b'' d'''>16
+                            ]
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
                         }
                         {
                             a'16
@@ -310,22 +318,26 @@ class ClusterCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
                         {
-                            c'16 [
+                            c'16
+                            [
                             d'16
-                            bf'16 ]
+                            bf'16
+                            ]
                         }
                         {
-                            fs''16 [
+                            fs''16
+                            [
                             e''16
                             ef''16
                             af''16
-                            g''16 ]
+                            g''16
+                            ]
                         }
                         {
                             \once \override Accidental.stencil = ##f
@@ -333,17 +345,17 @@ class ClusterCommand(Command):
                             \once \override Arpeggio.X-offset = #-2
                             \once \override NoteHead.stencil = #ly:text-interface::print
                             \once \override NoteHead.text = \markup {
-                                \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
                             <a' c'' e''>16
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
                         }
                     }
                 }
@@ -369,7 +381,7 @@ class ClusterCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
             \context Score = "Score" <<
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
@@ -378,13 +390,13 @@ class ClusterCommand(Command):
                         \time 4/8
                         \bar "" %! SEGMENT:EMPTY_START_BAR:1
                         s1 * 1/2
-                            - \markup { %! STAGE_NUMBER_MARKUP:2
-                                \fontsize %! STAGE_NUMBER_MARKUP:2
-                                    #-3 %! STAGE_NUMBER_MARKUP:2
-                                    \with-color %! STAGE_NUMBER_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                        [1] %! STAGE_NUMBER_MARKUP:2
-                                } %! STAGE_NUMBER_MARKUP:2
+                        - \markup { %! STAGE_NUMBER_MARKUP:2
+                            \fontsize %! STAGE_NUMBER_MARKUP:2
+                                #-3 %! STAGE_NUMBER_MARKUP:2
+                                \with-color %! STAGE_NUMBER_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                    [1] %! STAGE_NUMBER_MARKUP:2
+                            } %! STAGE_NUMBER_MARKUP:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
                         \time 3/8
@@ -416,14 +428,14 @@ class ClusterCommand(Command):
                             \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                             %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                             <e' g' b'>2
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
                             \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
             <BLANKLINE>
                             %%% MusicVoice [measure 2] %%%
@@ -435,14 +447,14 @@ class ClusterCommand(Command):
                             	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
                             <e' g' b' d''>4.
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
             <BLANKLINE>
                             %%% MusicVoice [measure 3] %%%
                             \once \override Accidental.stencil = ##f
@@ -453,14 +465,14 @@ class ClusterCommand(Command):
                             	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
                             <e' g' b'>2
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
             <BLANKLINE>
                             %%% MusicVoice [measure 4] %%%
                             \once \override Accidental.stencil = ##f
@@ -471,14 +483,14 @@ class ClusterCommand(Command):
                             	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
                             <e' g' b' d''>4.
-                                ^ \markup {
-                                    \center-align
-                                        \concat
-                                            {
-                                                \natural
-                                                \flat
-                                            }
-                                    }
+                            ^ \markup {
+                                \center-align
+                                    \concat
+                                        {
+                                            \natural
+                                            \flat
+                                        }
+                                }
                             \bar "|"
             <BLANKLINE>
                         }
@@ -596,7 +608,7 @@ class ClusterCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -605,13 +617,13 @@ class ClusterCommand(Command):
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -643,10 +655,10 @@ class ClusterCommand(Command):
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 <e' g' b'>2
-                                    ^ \markup {
-                                        \center-align
-                                            \natural
-                                        }
+                                ^ \markup {
+                                    \center-align
+                                        \natural
+                                    }
                                 \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
@@ -658,10 +670,10 @@ class ClusterCommand(Command):
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b'>4.
-                                    ^ \markup {
-                                        \center-align
-                                            \natural
-                                        }
+                                ^ \markup {
+                                    \center-align
+                                        \natural
+                                    }
                 <BLANKLINE>
                                 %%% MusicVoice [measure 3] %%%
                                 \once \override Accidental.stencil = ##f
@@ -672,10 +684,10 @@ class ClusterCommand(Command):
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b'>2
-                                    ^ \markup {
-                                        \center-align
-                                            \natural
-                                        }
+                                ^ \markup {
+                                    \center-align
+                                        \natural
+                                    }
                 <BLANKLINE>
                                 %%% MusicVoice [measure 4] %%%
                                 \once \override Accidental.stencil = ##f
@@ -686,10 +698,10 @@ class ClusterCommand(Command):
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b'>4.
-                                    ^ \markup {
-                                        \center-align
-                                            \natural
-                                        }
+                                ^ \markup {
+                                    \center-align
+                                        \natural
+                                    }
                                 \bar "|"
                 <BLANKLINE>
                             }
@@ -741,7 +753,7 @@ class ClusterCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -750,13 +762,13 @@ class ClusterCommand(Command):
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -788,14 +800,14 @@ class ClusterCommand(Command):
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 <c' e' g'>2
-                                    ^ \markup {
-                                        \center-align
-                                            \concat
-                                                {
-                                                    \natural
-                                                    \flat
-                                                }
-                                        }
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
                                 \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
@@ -807,14 +819,14 @@ class ClusterCommand(Command):
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <d' f' a'>4.
-                                    ^ \markup {
-                                        \center-align
-                                            \concat
-                                                {
-                                                    \natural
-                                                    \flat
-                                                }
-                                        }
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
                 <BLANKLINE>
                                 %%% MusicVoice [measure 3] %%%
                                 \once \override Accidental.stencil = ##f
@@ -825,14 +837,14 @@ class ClusterCommand(Command):
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b'>2
-                                    ^ \markup {
-                                        \center-align
-                                            \concat
-                                                {
-                                                    \natural
-                                                    \flat
-                                                }
-                                        }
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
                 <BLANKLINE>
                                 %%% MusicVoice [measure 4] %%%
                                 \once \override Accidental.stencil = ##f
@@ -843,14 +855,14 @@ class ClusterCommand(Command):
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <f' a' c''>4.
-                                    ^ \markup {
-                                        \center-align
-                                            \concat
-                                                {
-                                                    \natural
-                                                    \flat
-                                                }
-                                        }
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
                                 \bar "|"
                 <BLANKLINE>
                             }
@@ -878,7 +890,7 @@ class ClusterCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -887,13 +899,13 @@ class ClusterCommand(Command):
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -925,14 +937,14 @@ class ClusterCommand(Command):
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 <g' b' d''>2
-                                    ^ \markup {
-                                        \center-align
-                                            \concat
-                                                {
-                                                    \natural
-                                                    \flat
-                                                }
-                                        }
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
                                 \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
@@ -944,14 +956,14 @@ class ClusterCommand(Command):
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <g' b' d''>4.
-                                    ^ \markup {
-                                        \center-align
-                                            \concat
-                                                {
-                                                    \natural
-                                                    \flat
-                                                }
-                                        }
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
                 <BLANKLINE>
                                 %%% MusicVoice [measure 3] %%%
                                 \once \override Accidental.stencil = ##f
@@ -962,14 +974,14 @@ class ClusterCommand(Command):
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <g' b' d''>2
-                                    ^ \markup {
-                                        \center-align
-                                            \concat
-                                                {
-                                                    \natural
-                                                    \flat
-                                                }
-                                        }
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
                 <BLANKLINE>
                                 %%% MusicVoice [measure 4] %%%
                                 \once \override Accidental.stencil = ##f
@@ -980,14 +992,14 @@ class ClusterCommand(Command):
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <g' b' d''>4.
-                                    ^ \markup {
-                                        \center-align
-                                            \concat
-                                                {
-                                                    \natural
-                                                    \flat
-                                                }
-                                        }
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
                                 \bar "|"
                 <BLANKLINE>
                             }
@@ -1025,7 +1037,7 @@ class ClusterCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -1034,13 +1046,13 @@ class ClusterCommand(Command):
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -1072,14 +1084,14 @@ class ClusterCommand(Command):
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 <e'>2
-                                    ^ \markup {
-                                        \center-align
-                                            \concat
-                                                {
-                                                    \natural
-                                                    \flat
-                                                }
-                                        }
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
                                 \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
@@ -1091,14 +1103,14 @@ class ClusterCommand(Command):
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g'>4.
-                                    ^ \markup {
-                                        \center-align
-                                            \concat
-                                                {
-                                                    \natural
-                                                    \flat
-                                                }
-                                        }
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
                 <BLANKLINE>
                                 %%% MusicVoice [measure 3] %%%
                                 \once \override Accidental.stencil = ##f
@@ -1109,14 +1121,14 @@ class ClusterCommand(Command):
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b'>2
-                                    ^ \markup {
-                                        \center-align
-                                            \concat
-                                                {
-                                                    \natural
-                                                    \flat
-                                                }
-                                        }
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
                 <BLANKLINE>
                                 %%% MusicVoice [measure 4] %%%
                                 \once \override Accidental.stencil = ##f
@@ -1127,14 +1139,14 @@ class ClusterCommand(Command):
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b' d''>4.
-                                    ^ \markup {
-                                        \center-align
-                                            \concat
-                                                {
-                                                    \natural
-                                                    \flat
-                                                }
-                                        }
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
                                 \bar "|"
                 <BLANKLINE>
                             }
@@ -1162,7 +1174,7 @@ class ClusterCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -1171,13 +1183,13 @@ class ClusterCommand(Command):
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -1209,14 +1221,14 @@ class ClusterCommand(Command):
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 <e'>2
-                                    ^ \markup {
-                                        \center-align
-                                            \concat
-                                                {
-                                                    \natural
-                                                    \flat
-                                                }
-                                        }
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
                                 \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
@@ -1228,14 +1240,14 @@ class ClusterCommand(Command):
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b'>4.
-                                    ^ \markup {
-                                        \center-align
-                                            \concat
-                                                {
-                                                    \natural
-                                                    \flat
-                                                }
-                                        }
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
                 <BLANKLINE>
                                 %%% MusicVoice [measure 3] %%%
                                 \once \override Accidental.stencil = ##f
@@ -1246,14 +1258,14 @@ class ClusterCommand(Command):
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e'>2
-                                    ^ \markup {
-                                        \center-align
-                                            \concat
-                                                {
-                                                    \natural
-                                                    \flat
-                                                }
-                                        }
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
                 <BLANKLINE>
                                 %%% MusicVoice [measure 4] %%%
                                 \once \override Accidental.stencil = ##f
@@ -1264,14 +1276,14 @@ class ClusterCommand(Command):
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b'>4.
-                                    ^ \markup {
-                                        \center-align
-                                            \concat
-                                                {
-                                                    \natural
-                                                    \flat
-                                                }
-                                        }
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
                                 \bar "|"
                 <BLANKLINE>
                             }
@@ -1300,7 +1312,7 @@ class ClusterCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -1309,13 +1321,13 @@ class ClusterCommand(Command):
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8

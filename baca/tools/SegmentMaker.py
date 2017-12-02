@@ -32,7 +32,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
             \context Score = "Score" <<
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
@@ -41,13 +41,13 @@ class SegmentMaker(abjad.SegmentMaker):
                         \time 4/8
                         \bar "" %! SEGMENT:EMPTY_START_BAR:1
                         s1 * 1/2
-                            - \markup { %! STAGE_NUMBER_MARKUP:2
-                                \fontsize %! STAGE_NUMBER_MARKUP:2
-                                    #-3 %! STAGE_NUMBER_MARKUP:2
-                                    \with-color %! STAGE_NUMBER_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                        [1] %! STAGE_NUMBER_MARKUP:2
-                                } %! STAGE_NUMBER_MARKUP:2
+                        - \markup { %! STAGE_NUMBER_MARKUP:2
+                            \fontsize %! STAGE_NUMBER_MARKUP:2
+                                #-3 %! STAGE_NUMBER_MARKUP:2
+                                \with-color %! STAGE_NUMBER_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                    [1] %! STAGE_NUMBER_MARKUP:2
+                            } %! STAGE_NUMBER_MARKUP:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
                         \time 3/8
@@ -72,43 +72,51 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                c'8 [
+                                c'8
+                                [
                                 \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
             <BLANKLINE>
                                 c'8
             <BLANKLINE>
                                 c'8
             <BLANKLINE>
-                                c'8 ]
+                                c'8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
-                                c'8 [
+                                c'8
+                                [
             <BLANKLINE>
                                 c'8
             <BLANKLINE>
-                                c'8 ]
+                                c'8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 3] %%%
-                                c'8 [
+                                c'8
+                                [
             <BLANKLINE>
                                 c'8
             <BLANKLINE>
                                 c'8
             <BLANKLINE>
-                                c'8 ]
+                                c'8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 4] %%%
-                                c'8 [
+                                c'8
+                                [
             <BLANKLINE>
                                 c'8
             <BLANKLINE>
-                                c'8 ]
+                                c'8
+                                ]
                                 \bar "|"
             <BLANKLINE>
                             }
@@ -116,6 +124,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     }
                 >>
             >>
+
 
     '''
 
@@ -377,7 +386,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -386,13 +395,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -422,11 +431,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    c'8 [
-                                        ^ \markup {
-                                            \small
-                                                0
-                                            }
+                                    c'8
+                                    [
+                                    ^ \markup {
+                                        \small
+                                            0
+                                        }
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -435,10 +445,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
-                                        ^ \markup {
-                                            \small
-                                                1
-                                            }
+                                    ^ \markup {
+                                        \small
+                                            1
+                                        }
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -446,21 +456,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
-                                        ^ \markup {
-                                            \small
-                                                2
-                                            }
+                                    ^ \markup {
+                                        \small
+                                            2
+                                        }
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    c'8 ]
-                                        ^ \markup {
-                                            \small
-                                                3
-                                            }
+                                    c'8
+                                    ]
+                                    ^ \markup {
+                                        \small
+                                            3
+                                        }
                                 }
                                 {
                 <BLANKLINE>
@@ -470,11 +481,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    c'8 [
-                                        ^ \markup {
-                                            \small
-                                                4
-                                            }
+                                    c'8
+                                    [
+                                    ^ \markup {
+                                        \small
+                                            4
+                                        }
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -482,21 +494,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
-                                        ^ \markup {
-                                            \small
-                                                5
-                                            }
+                                    ^ \markup {
+                                        \small
+                                            5
+                                        }
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    c'8 ]
-                                        ^ \markup {
-                                            \small
-                                                6
-                                            }
+                                    c'8
+                                    ]
+                                    ^ \markup {
+                                        \small
+                                            6
+                                        }
                                 }
                                 {
                 <BLANKLINE>
@@ -506,11 +519,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    c'8 [
-                                        ^ \markup {
-                                            \small
-                                                7
-                                            }
+                                    c'8
+                                    [
+                                    ^ \markup {
+                                        \small
+                                            7
+                                        }
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -518,10 +532,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
-                                        ^ \markup {
-                                            \small
-                                                8
-                                            }
+                                    ^ \markup {
+                                        \small
+                                            8
+                                        }
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -529,21 +543,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
-                                        ^ \markup {
-                                            \small
-                                                9
-                                            }
+                                    ^ \markup {
+                                        \small
+                                            9
+                                        }
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    c'8 ]
-                                        ^ \markup {
-                                            \small
-                                                10
-                                            }
+                                    c'8
+                                    ]
+                                    ^ \markup {
+                                        \small
+                                            10
+                                        }
                                 }
                                 {
                 <BLANKLINE>
@@ -553,11 +568,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    c'8 [
-                                        ^ \markup {
-                                            \small
-                                                11
-                                            }
+                                    c'8
+                                    [
+                                    ^ \markup {
+                                        \small
+                                            11
+                                        }
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -565,21 +581,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
                                     c'8
-                                        ^ \markup {
-                                            \small
-                                                12
-                                            }
+                                    ^ \markup {
+                                        \small
+                                            12
+                                        }
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    c'8 ]
-                                        ^ \markup {
-                                            \small
-                                                13
-                                            }
+                                    c'8
+                                    ]
+                                    ^ \markup {
+                                        \small
+                                            13
+                                        }
                                     \bar "|"
                 <BLANKLINE>
                                 }
@@ -2200,7 +2217,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -2215,27 +2232,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 25) %! SEGMENT:SPACING_COMMAND:5
                             s1 * 1/2
-                                - \markup {
-                                    \column
-                                        {
-                                            %%% \line %! STAGE_NUMBER_MARKUP:2
-                                            %%%     { %! STAGE_NUMBER_MARKUP:2
-                                            %%%         \fontsize %! STAGE_NUMBER_MARKUP:2
-                                            %%%             #-3 %! STAGE_NUMBER_MARKUP:2
-                                            %%%             \with-color %! STAGE_NUMBER_MARKUP:2
-                                            %%%                 #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            %%%                 [1] %! STAGE_NUMBER_MARKUP:2
-                                            %%%     } %! STAGE_NUMBER_MARKUP:2
-                                            %%% \line %! SEGMENT:SPACING_MARKUP:6
-                                            %%%     { %! SEGMENT:SPACING_MARKUP:6
-                                            %%%         \with-color %! SEGMENT:SPACING_MARKUP:6
-                                            %%%             #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:6
-                                            %%%             \fontsize %! SEGMENT:SPACING_MARKUP:6
-                                            %%%                 #-3 %! SEGMENT:SPACING_MARKUP:6
-                                            %%%                 (1/25) %! SEGMENT:SPACING_MARKUP:6
-                                            %%%     } %! SEGMENT:SPACING_MARKUP:6
-                                        }
+                            - \markup {
+                                \column
+                                    {
+                                        %%% \line %! STAGE_NUMBER_MARKUP:2
+                                        %%%     { %! STAGE_NUMBER_MARKUP:2
+                                        %%%         \fontsize %! STAGE_NUMBER_MARKUP:2
+                                        %%%             #-3 %! STAGE_NUMBER_MARKUP:2
+                                        %%%             \with-color %! STAGE_NUMBER_MARKUP:2
+                                        %%%                 #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        %%%                 [1] %! STAGE_NUMBER_MARKUP:2
+                                        %%%     } %! STAGE_NUMBER_MARKUP:2
+                                        %%% \line %! SEGMENT:SPACING_MARKUP:6
+                                        %%%     { %! SEGMENT:SPACING_MARKUP:6
+                                        %%%         \with-color %! SEGMENT:SPACING_MARKUP:6
+                                        %%%             #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:6
+                                        %%%             \fontsize %! SEGMENT:SPACING_MARKUP:6
+                                        %%%                 #-3 %! SEGMENT:SPACING_MARKUP:6
+                                        %%%                 (1/25) %! SEGMENT:SPACING_MARKUP:6
+                                        %%%     } %! SEGMENT:SPACING_MARKUP:6
                                     }
+                                }
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -2243,13 +2260,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 25) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/25) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/25) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -2257,13 +2274,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 25) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/4
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/25) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/25) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -2271,13 +2288,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 25) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/25) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/25) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 5] %%%
                             \break %! SEGMENT:LAYOUT:3
@@ -2286,13 +2303,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 25) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/2
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/25) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/25) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 6] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -2300,13 +2317,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 25) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/25) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/25) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 7] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -2314,13 +2331,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 25) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/4
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/25) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/25) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 8] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -2328,13 +2345,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 25) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/25) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/25) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 9] %%%
                             \break %! SEGMENT:LAYOUT:3
@@ -2343,13 +2360,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 25) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/2
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/25) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/25) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 10] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -2357,13 +2374,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 25) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/25) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/25) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 11] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -2371,13 +2388,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 25) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/4
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/25) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/25) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 12] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -2385,13 +2402,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 25) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/25) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/25) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                         }
                     >>
@@ -2404,59 +2421,71 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    c'8 [
+                                    c'8
+                                    [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 2] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 3] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 4] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 5] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 6] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
@@ -2464,55 +2493,67 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \clef "alto" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    c'8 [
+                                    c'8
+                                    [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 8] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 9] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 10] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 11] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 12] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                     \bar "|"
                 <BLANKLINE>
                                 }
@@ -2569,7 +2610,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -2584,27 +2625,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:5
                             s1 * 1/2
-                                - \markup {
-                                    \column
-                                        {
-                                            %%% \line %! STAGE_NUMBER_MARKUP:2
-                                            %%%     { %! STAGE_NUMBER_MARKUP:2
-                                            %%%         \fontsize %! STAGE_NUMBER_MARKUP:2
-                                            %%%             #-3 %! STAGE_NUMBER_MARKUP:2
-                                            %%%             \with-color %! STAGE_NUMBER_MARKUP:2
-                                            %%%                 #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            %%%                 [1] %! STAGE_NUMBER_MARKUP:2
-                                            %%%     } %! STAGE_NUMBER_MARKUP:2
-                                            %%% \line %! SEGMENT:SPACING_MARKUP:6
-                                            %%%     { %! SEGMENT:SPACING_MARKUP:6
-                                            %%%         \with-color %! SEGMENT:SPACING_MARKUP:6
-                                            %%%             #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:6
-                                            %%%             \fontsize %! SEGMENT:SPACING_MARKUP:6
-                                            %%%                 #-3 %! SEGMENT:SPACING_MARKUP:6
-                                            %%%                 (1/24) %! SEGMENT:SPACING_MARKUP:6
-                                            %%%     } %! SEGMENT:SPACING_MARKUP:6
-                                        }
+                            - \markup {
+                                \column
+                                    {
+                                        %%% \line %! STAGE_NUMBER_MARKUP:2
+                                        %%%     { %! STAGE_NUMBER_MARKUP:2
+                                        %%%         \fontsize %! STAGE_NUMBER_MARKUP:2
+                                        %%%             #-3 %! STAGE_NUMBER_MARKUP:2
+                                        %%%             \with-color %! STAGE_NUMBER_MARKUP:2
+                                        %%%                 #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        %%%                 [1] %! STAGE_NUMBER_MARKUP:2
+                                        %%%     } %! STAGE_NUMBER_MARKUP:2
+                                        %%% \line %! SEGMENT:SPACING_MARKUP:6
+                                        %%%     { %! SEGMENT:SPACING_MARKUP:6
+                                        %%%         \with-color %! SEGMENT:SPACING_MARKUP:6
+                                        %%%             #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:6
+                                        %%%             \fontsize %! SEGMENT:SPACING_MARKUP:6
+                                        %%%                 #-3 %! SEGMENT:SPACING_MARKUP:6
+                                        %%%                 (1/24) %! SEGMENT:SPACING_MARKUP:6
+                                        %%%     } %! SEGMENT:SPACING_MARKUP:6
                                     }
+                                }
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -2612,13 +2653,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -2626,13 +2667,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/4
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -2640,13 +2681,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 5] %%%
                             \break %! SEGMENT:LAYOUT:3
@@ -2655,13 +2696,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/2
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 6] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -2669,13 +2710,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 7] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -2683,13 +2724,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/4
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 8] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -2697,13 +2738,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 9] %%%
                             \break %! SEGMENT:LAYOUT:3
@@ -2712,13 +2753,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/2
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 10] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -2726,13 +2767,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 11] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -2740,13 +2781,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/4
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 12] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -2754,13 +2795,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                         }
                     >>
@@ -2774,59 +2815,71 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Staff.Clef.color = #(x11-color 'green) %! SEGMENT:REAPPLIED_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! SEGMENT:REAPPLIED_CLEF_UNCOLOR:2
                                     \set Staff.forceClef = ##t %! SEGMENT:REAPPLIED_CLEF_COMMAND:4
-                                    c'8 [
+                                    c'8
+                                    [
                                     \override Staff.Clef.color = #(x11-color 'DarkGreen) %! SEGMENT:REAPPLIED_CLEF_SHADOW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 2] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 3] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 4] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 5] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 6] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
@@ -2834,55 +2887,67 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    c'8 [
+                                    c'8
+                                    [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 8] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 9] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 10] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 11] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 12] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                     \bar "|"
                 <BLANKLINE>
                                 }
@@ -2946,7 +3011,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -2961,27 +3026,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:5
                             s1 * 1/2
-                                - \markup {
-                                    \column
-                                        {
-                                            %%% \line %! STAGE_NUMBER_MARKUP:2
-                                            %%%     { %! STAGE_NUMBER_MARKUP:2
-                                            %%%         \fontsize %! STAGE_NUMBER_MARKUP:2
-                                            %%%             #-3 %! STAGE_NUMBER_MARKUP:2
-                                            %%%             \with-color %! STAGE_NUMBER_MARKUP:2
-                                            %%%                 #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            %%%                 [1] %! STAGE_NUMBER_MARKUP:2
-                                            %%%     } %! STAGE_NUMBER_MARKUP:2
-                                            %%% \line %! SEGMENT:SPACING_MARKUP:6
-                                            %%%     { %! SEGMENT:SPACING_MARKUP:6
-                                            %%%         \with-color %! SEGMENT:SPACING_MARKUP:6
-                                            %%%             #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:6
-                                            %%%             \fontsize %! SEGMENT:SPACING_MARKUP:6
-                                            %%%                 #-3 %! SEGMENT:SPACING_MARKUP:6
-                                            %%%                 (1/24) %! SEGMENT:SPACING_MARKUP:6
-                                            %%%     } %! SEGMENT:SPACING_MARKUP:6
-                                        }
+                            - \markup {
+                                \column
+                                    {
+                                        %%% \line %! STAGE_NUMBER_MARKUP:2
+                                        %%%     { %! STAGE_NUMBER_MARKUP:2
+                                        %%%         \fontsize %! STAGE_NUMBER_MARKUP:2
+                                        %%%             #-3 %! STAGE_NUMBER_MARKUP:2
+                                        %%%             \with-color %! STAGE_NUMBER_MARKUP:2
+                                        %%%                 #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        %%%                 [1] %! STAGE_NUMBER_MARKUP:2
+                                        %%%     } %! STAGE_NUMBER_MARKUP:2
+                                        %%% \line %! SEGMENT:SPACING_MARKUP:6
+                                        %%%     { %! SEGMENT:SPACING_MARKUP:6
+                                        %%%         \with-color %! SEGMENT:SPACING_MARKUP:6
+                                        %%%             #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:6
+                                        %%%             \fontsize %! SEGMENT:SPACING_MARKUP:6
+                                        %%%                 #-3 %! SEGMENT:SPACING_MARKUP:6
+                                        %%%                 (1/24) %! SEGMENT:SPACING_MARKUP:6
+                                        %%%     } %! SEGMENT:SPACING_MARKUP:6
                                     }
+                                }
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -2989,13 +3054,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -3003,13 +3068,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/4
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -3017,13 +3082,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 5] %%%
                             \break %! SEGMENT:LAYOUT:3
@@ -3032,13 +3097,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/2
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 6] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -3046,13 +3111,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 7] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -3060,13 +3125,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/4
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 8] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -3074,13 +3139,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 9] %%%
                             \break %! SEGMENT:LAYOUT:3
@@ -3089,13 +3154,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/2
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 10] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -3103,13 +3168,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 11] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -3117,13 +3182,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/4
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 12] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -3131,13 +3196,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 13] %%%
                             \break %! SEGMENT:LAYOUT:3
@@ -3146,13 +3211,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/2
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 14] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -3160,13 +3225,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 15] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -3174,13 +3239,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/4
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 16] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -3188,13 +3253,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
-                                %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
-                                %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                %%%     } %! SEGMENT:SPACING_MARKUP:2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                         }
                     >>
@@ -3208,59 +3273,71 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Staff.Clef.color = #(x11-color 'DeepPink1) %! REDUNDANT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! REDUNDANT_CLEF_UNCOLOR:2
                                     \set Staff.forceClef = ##t %! REDUNDANT_CLEF_COMMAND:4
-                                    c'8 [
+                                    c'8
+                                    [
                                     \override Staff.Clef.color = #(x11-color 'DeepPink4) %! REDUNDANT_CLEF_SHADOW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 2] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 3] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 4] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 5] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 6] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
@@ -3268,39 +3345,47 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    c'8 [
+                                    c'8
+                                    [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 8] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 9] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 10] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
@@ -3309,55 +3394,67 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Staff.Clef.color = #(x11-color 'DeepPink1) %! REDUNDANT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! REDUNDANT_CLEF_UNCOLOR:2
                                     \set Staff.forceClef = ##t %! REDUNDANT_CLEF_COMMAND:3
-                                    c'8 [
+                                    c'8
+                                    [
                                     \override Staff.Clef.color = #(x11-color 'DeepPink4) %! REDUNDANT_CLEF_SHADOW:5
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 12] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 13] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 14] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 15] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 16] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                     \bar "|"
                 <BLANKLINE>
                                 }
@@ -3412,7 +3509,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" \with {
                     autoBeaming = ##f
                 } <<
@@ -3426,27 +3523,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 31) %! SEGMENT:SPACING_COMMAND:3
                             s1 * 3/8
-                                - \markup {
-                                    \column
-                                        {
-                                            \line %! STAGE_NUMBER_MARKUP:2
-                                                { %! STAGE_NUMBER_MARKUP:2
-                                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                                } %! STAGE_NUMBER_MARKUP:2
-                                            \line %! SEGMENT:SPACING_MARKUP:4
-                                                { %! SEGMENT:SPACING_MARKUP:4
-                                                    \with-color %! SEGMENT:SPACING_MARKUP:4
-                                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:4
-                                                        \fontsize %! SEGMENT:SPACING_MARKUP:4
-                                                            #-3 %! SEGMENT:SPACING_MARKUP:4
-                                                            (1/31) %! SEGMENT:SPACING_MARKUP:4
-                                                } %! SEGMENT:SPACING_MARKUP:4
-                                        }
+                            - \markup {
+                                \column
+                                    {
+                                        \line %! STAGE_NUMBER_MARKUP:2
+                                            { %! STAGE_NUMBER_MARKUP:2
+                                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                            } %! STAGE_NUMBER_MARKUP:2
+                                        \line %! SEGMENT:SPACING_MARKUP:4
+                                            { %! SEGMENT:SPACING_MARKUP:4
+                                                \with-color %! SEGMENT:SPACING_MARKUP:4
+                                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:4
+                                                    \fontsize %! SEGMENT:SPACING_MARKUP:4
+                                                        #-3 %! SEGMENT:SPACING_MARKUP:4
+                                                        (1/31) %! SEGMENT:SPACING_MARKUP:4
+                                            } %! SEGMENT:SPACING_MARKUP:4
                                     }
+                                }
                 <BLANKLINE>
                         }
                     >>
@@ -3483,8 +3580,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \once \override NoteHead.color = #red
                                             \once \override Stem.color = #red
                                             f'16
-                                                - \tweak color #red
-                                                ^ \markup { OCTAVE }
+                                            - \tweak color #red
+                                            ^ \markup { OCTAVE }
                 <BLANKLINE>
                                             g'16
                 <BLANKLINE>
@@ -3552,8 +3649,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \once \override NoteHead.color = #red
                                             \once \override Stem.color = #red
                                             f16
-                                                - \tweak color #red
-                                                ^ \markup { OCTAVE }
+                                            - \tweak color #red
+                                            ^ \markup { OCTAVE }
                 <BLANKLINE>
                                             e16
                 <BLANKLINE>
@@ -3629,7 +3726,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" \with {
                     autoBeaming = ##f
                 } <<
@@ -3642,66 +3739,66 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
                             s1 * 1/16
-                                - \markup {
-                                    \column
-                                        {
-                                            \line %! STAGE_NUMBER_MARKUP:2
-                                                { %! STAGE_NUMBER_MARKUP:2
-                                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                                } %! STAGE_NUMBER_MARKUP:2
-                                            \line %! SEGMENT:SPACING_MARKUP:4
-                                                { %! SEGMENT:SPACING_MARKUP:4
-                                                    \with-color %! SEGMENT:SPACING_MARKUP:4
-                                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:4
-                                                        \fontsize %! SEGMENT:SPACING_MARKUP:4
-                                                            #-3 %! SEGMENT:SPACING_MARKUP:4
-                                                            (1/24) %! SEGMENT:SPACING_MARKUP:4
-                                                } %! SEGMENT:SPACING_MARKUP:4
-                                        }
+                            - \markup {
+                                \column
+                                    {
+                                        \line %! STAGE_NUMBER_MARKUP:2
+                                            { %! STAGE_NUMBER_MARKUP:2
+                                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                            } %! STAGE_NUMBER_MARKUP:2
+                                        \line %! SEGMENT:SPACING_MARKUP:4
+                                            { %! SEGMENT:SPACING_MARKUP:4
+                                                \with-color %! SEGMENT:SPACING_MARKUP:4
+                                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:4
+                                                    \fontsize %! SEGMENT:SPACING_MARKUP:4
+                                                        #-3 %! SEGMENT:SPACING_MARKUP:4
+                                                        (1/24) %! SEGMENT:SPACING_MARKUP:4
+                                            } %! SEGMENT:SPACING_MARKUP:4
                                     }
+                                }
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 7/16
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 7/16
-                                - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                    \with-color %! SEGMENT:SPACING_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                        \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                            #-3 %! SEGMENT:SPACING_MARKUP:2
-                                            (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                    } %! SEGMENT:SPACING_MARKUP:2
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
                             \time 1/16
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/16
-                                - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                    \with-color %! SEGMENT:SPACING_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                        \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                            #-3 %! SEGMENT:SPACING_MARKUP:2
-                                            (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                    } %! SEGMENT:SPACING_MARKUP:2
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                    \with-color %! SEGMENT:SPACING_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                        \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                            #-3 %! SEGMENT:SPACING_MARKUP:2
-                                            (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                    } %! SEGMENT:SPACING_MARKUP:2
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                         }
                     >>
@@ -3729,8 +3826,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override NoteHead.color = #red
                                         \once \override Stem.color = #red
                                         c16
-                                            - \tweak color #red
-                                            ^ \markup { * }
+                                        - \tweak color #red
+                                        ^ \markup { * }
                 <BLANKLINE>
                                         d'16
                 <BLANKLINE>
@@ -3835,7 +3932,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" \with {
                     autoBeaming = ##f
                 } <<
@@ -3848,66 +3945,66 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
                             s1 * 1/16
-                                - \markup {
-                                    \column
-                                        {
-                                            \line %! STAGE_NUMBER_MARKUP:2
-                                                { %! STAGE_NUMBER_MARKUP:2
-                                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                                } %! STAGE_NUMBER_MARKUP:2
-                                            \line %! SEGMENT:SPACING_MARKUP:4
-                                                { %! SEGMENT:SPACING_MARKUP:4
-                                                    \with-color %! SEGMENT:SPACING_MARKUP:4
-                                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:4
-                                                        \fontsize %! SEGMENT:SPACING_MARKUP:4
-                                                            #-3 %! SEGMENT:SPACING_MARKUP:4
-                                                            (1/24) %! SEGMENT:SPACING_MARKUP:4
-                                                } %! SEGMENT:SPACING_MARKUP:4
-                                        }
+                            - \markup {
+                                \column
+                                    {
+                                        \line %! STAGE_NUMBER_MARKUP:2
+                                            { %! STAGE_NUMBER_MARKUP:2
+                                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                            } %! STAGE_NUMBER_MARKUP:2
+                                        \line %! SEGMENT:SPACING_MARKUP:4
+                                            { %! SEGMENT:SPACING_MARKUP:4
+                                                \with-color %! SEGMENT:SPACING_MARKUP:4
+                                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:4
+                                                    \fontsize %! SEGMENT:SPACING_MARKUP:4
+                                                        #-3 %! SEGMENT:SPACING_MARKUP:4
+                                                        (1/24) %! SEGMENT:SPACING_MARKUP:4
+                                            } %! SEGMENT:SPACING_MARKUP:4
                                     }
+                                }
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 7/16
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 7/16
-                                - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                    \with-color %! SEGMENT:SPACING_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                        \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                            #-3 %! SEGMENT:SPACING_MARKUP:2
-                                            (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                    } %! SEGMENT:SPACING_MARKUP:2
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
                             \time 1/16
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/16
-                                - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                    \with-color %! SEGMENT:SPACING_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                        \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                            #-3 %! SEGMENT:SPACING_MARKUP:2
-                                            (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                    } %! SEGMENT:SPACING_MARKUP:2
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
-                                - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                    \with-color %! SEGMENT:SPACING_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                        \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                            #-3 %! SEGMENT:SPACING_MARKUP:2
-                                            (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                    } %! SEGMENT:SPACING_MARKUP:2
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                         }
                     >>
@@ -3943,8 +4040,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override NoteHead.color = #red
                                         \once \override Stem.color = #red
                                         a'16
-                                            - \tweak color #red
-                                            ^ \markup { @ }
+                                        - \tweak color #red
+                                        ^ \markup { @ }
                 <BLANKLINE>
                                         \once \override Accidental.color = #red
                                         \once \override Beam.color = #red
@@ -3952,8 +4049,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override NoteHead.color = #red
                                         \once \override Stem.color = #red
                                         a'16
-                                            - \tweak color #red
-                                            ^ \markup { @ }
+                                        - \tweak color #red
+                                        ^ \markup { @ }
                 <BLANKLINE>
                                         c'16
                                     }
@@ -3981,8 +4078,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override NoteHead.color = #red
                                         \once \override Stem.color = #red
                                         c''16
-                                            - \tweak color #red
-                                            ^ \markup { @ }
+                                        - \tweak color #red
+                                        ^ \markup { @ }
                 <BLANKLINE>
                                         \once \override Accidental.color = #red
                                         \once \override Beam.color = #red
@@ -3990,8 +4087,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override NoteHead.color = #red
                                         \once \override Stem.color = #red
                                         c'16
-                                            - \tweak color #red
-                                            ^ \markup { @ }
+                                        - \tweak color #red
+                                        ^ \markup { @ }
                 <BLANKLINE>
                                         f'16
                                         \bar "|"
@@ -4059,7 +4156,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -4068,13 +4165,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -4099,43 +4196,51 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    c'8 [
+                                    c'8
+                                    [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 2] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 3] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 4] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                     \bar "|"
                 <BLANKLINE>
                                 }
@@ -4163,7 +4268,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -4172,13 +4277,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -4203,43 +4308,51 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    c'8 [
+                                    c'8
+                                    [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 2] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 3] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 4] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                     \bar "||"
                 <BLANKLINE>
                                 }
@@ -4272,7 +4385,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -4281,13 +4394,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -4312,43 +4425,51 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    c'8 [
+                                    c'8
+                                    [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 2] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 3] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 4] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                     \bar "|."
                 <BLANKLINE>
                                 }
@@ -4380,7 +4501,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -4389,13 +4510,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -4420,43 +4541,51 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    c'8 [
+                                    c'8
+                                    [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 2] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 3] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 4] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                     \bar "||"
                 <BLANKLINE>
                                 }
@@ -4498,7 +4627,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -4507,13 +4636,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -4538,61 +4667,69 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    c'8 [
+                                    c'8
+                                    [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 2] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 3] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 4] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     \once \override TextScript.extra-offset = #'(-9 . -2)
-                                    c'8 ]
-                                        _ \markup {
-                                            \whiteout
-                                                \upright
-                                                    \with-color
-                                                        #black
-                                                        \right-column
-                                                            {
-                                                                \line
-                                                                    {
-                                                                        "Madison, WI"
-                                                                    }
-                                                                \line
-                                                                    {
-                                                                        "October 2016"
-                                                                    }
-                                                            }
-                                            }
+                                    c'8
+                                    ]
+                                    _ \markup {
+                                        \whiteout
+                                            \upright
+                                                \with-color
+                                                    #black
+                                                    \right-column
+                                                        {
+                                                            \line
+                                                                {
+                                                                    "Madison, WI"
+                                                                }
+                                                            \line
+                                                                {
+                                                                    "October 2016"
+                                                                }
+                                                        }
+                                        }
                                     \bar "|."
                 <BLANKLINE>
                                 }
@@ -4681,7 +4818,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -4690,13 +4827,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -4721,43 +4858,51 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    c'8 [
+                                    c'8
+                                    [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 2] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 3] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 4] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                     \bar "|"
                 <BLANKLINE>
                                 }
@@ -4785,7 +4930,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -4794,13 +4939,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -4830,7 +4975,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    c'8 [
+                                    c'8
+                                    [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
@@ -4852,7 +4998,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
@@ -4862,7 +5009,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -4876,7 +5024,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
@@ -4886,7 +5035,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -4907,7 +5057,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
@@ -4917,7 +5068,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -4931,7 +5083,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    c'8 ]
+                                    c'8
+                                    ]
                                     \bar "|"
                 <BLANKLINE>
                                 }
@@ -5009,7 +5162,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" \with {
                     \override SpacingSpanner.strict-grace-spacing = ##f
                     \override SpacingSpanner.strict-note-spacing = ##f
@@ -5023,66 +5176,66 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
                             s1 * 3/16
-                                - \markup {
-                                    \column
-                                        {
-                                            \line %! STAGE_NUMBER_MARKUP:2
-                                                { %! STAGE_NUMBER_MARKUP:2
-                                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                                } %! STAGE_NUMBER_MARKUP:2
-                                            \line %! SEGMENT:SPACING_MARKUP:4
-                                                { %! SEGMENT:SPACING_MARKUP:4
-                                                    \with-color %! SEGMENT:SPACING_MARKUP:4
-                                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:4
-                                                        \fontsize %! SEGMENT:SPACING_MARKUP:4
-                                                            #-3 %! SEGMENT:SPACING_MARKUP:4
-                                                            (1/24) %! SEGMENT:SPACING_MARKUP:4
-                                                } %! SEGMENT:SPACING_MARKUP:4
-                                        }
+                            - \markup {
+                                \column
+                                    {
+                                        \line %! STAGE_NUMBER_MARKUP:2
+                                            { %! STAGE_NUMBER_MARKUP:2
+                                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                            } %! STAGE_NUMBER_MARKUP:2
+                                        \line %! SEGMENT:SPACING_MARKUP:4
+                                            { %! SEGMENT:SPACING_MARKUP:4
+                                                \with-color %! SEGMENT:SPACING_MARKUP:4
+                                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:4
+                                                    \fontsize %! SEGMENT:SPACING_MARKUP:4
+                                                        #-3 %! SEGMENT:SPACING_MARKUP:4
+                                                        (1/24) %! SEGMENT:SPACING_MARKUP:4
+                                            } %! SEGMENT:SPACING_MARKUP:4
                                     }
+                                }
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/16
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/16
-                                - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                    \with-color %! SEGMENT:SPACING_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                        \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                            #-3 %! SEGMENT:SPACING_MARKUP:2
-                                            (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                    } %! SEGMENT:SPACING_MARKUP:2
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
                             \time 3/16
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/16
-                                - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                    \with-color %! SEGMENT:SPACING_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                        \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                            #-3 %! SEGMENT:SPACING_MARKUP:2
-                                            (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                    } %! SEGMENT:SPACING_MARKUP:2
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
                             \time 3/16
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/16
-                                - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                    \with-color %! SEGMENT:SPACING_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                        \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                            #-3 %! SEGMENT:SPACING_MARKUP:2
-                                            (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                    } %! SEGMENT:SPACING_MARKUP:2
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                         }
                     >>
@@ -5212,7 +5365,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" \with {
                     \override SpacingSpanner.strict-grace-spacing = ##f
                     \override SpacingSpanner.strict-note-spacing = ##f
@@ -5226,66 +5379,66 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
                             s1 * 3/16
-                                - \markup {
-                                    \column
-                                        {
-                                            \line %! STAGE_NUMBER_MARKUP:2
-                                                { %! STAGE_NUMBER_MARKUP:2
-                                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                                } %! STAGE_NUMBER_MARKUP:2
-                                            \line %! SEGMENT:SPACING_MARKUP:4
-                                                { %! SEGMENT:SPACING_MARKUP:4
-                                                    \with-color %! SEGMENT:SPACING_MARKUP:4
-                                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:4
-                                                        \fontsize %! SEGMENT:SPACING_MARKUP:4
-                                                            #-3 %! SEGMENT:SPACING_MARKUP:4
-                                                            (1/24) %! SEGMENT:SPACING_MARKUP:4
-                                                } %! SEGMENT:SPACING_MARKUP:4
-                                        }
+                            - \markup {
+                                \column
+                                    {
+                                        \line %! STAGE_NUMBER_MARKUP:2
+                                            { %! STAGE_NUMBER_MARKUP:2
+                                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                            } %! STAGE_NUMBER_MARKUP:2
+                                        \line %! SEGMENT:SPACING_MARKUP:4
+                                            { %! SEGMENT:SPACING_MARKUP:4
+                                                \with-color %! SEGMENT:SPACING_MARKUP:4
+                                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:4
+                                                    \fontsize %! SEGMENT:SPACING_MARKUP:4
+                                                        #-3 %! SEGMENT:SPACING_MARKUP:4
+                                                        (1/24) %! SEGMENT:SPACING_MARKUP:4
+                                            } %! SEGMENT:SPACING_MARKUP:4
                                     }
+                                }
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/16
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/16
-                                - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                    \with-color %! SEGMENT:SPACING_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                        \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                            #-3 %! SEGMENT:SPACING_MARKUP:2
-                                            (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                    } %! SEGMENT:SPACING_MARKUP:2
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
                             \time 3/16
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/16
-                                - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                    \with-color %! SEGMENT:SPACING_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                        \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                            #-3 %! SEGMENT:SPACING_MARKUP:2
-                                            (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                    } %! SEGMENT:SPACING_MARKUP:2
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
                             \time 3/16
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/16
-                                - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                    \with-color %! SEGMENT:SPACING_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                        \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                            #-3 %! SEGMENT:SPACING_MARKUP:2
-                                            (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                    } %! SEGMENT:SPACING_MARKUP:2
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                         }
                     >>
@@ -5535,7 +5688,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -5545,13 +5698,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             \once \override TextScript.color = #(x11-color 'DarkCyan) %! SEGMENT:REMINDER_METRONOME_MARK:3
                             s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -5594,7 +5747,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-            >>> abjad.f(maker.metadata)
+            >>> abjad.f(maker.metadata, strict=True)
             abjad.TypedOrderedDict(
                 [
                     (
@@ -5668,7 +5821,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -5677,19 +5830,19 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
-                                ^ \markup { %! CLOCK_TIME_MARKUP:3
-                                    \fontsize %! CLOCK_TIME_MARKUP:3
-                                        #-2 %! CLOCK_TIME_MARKUP:3
-                                        0'00'' %! CLOCK_TIME_MARKUP:3
-                                    } %! CLOCK_TIME_MARKUP:3
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
-                                ^ \markup {
+                            ^ \markup { %! CLOCK_TIME_MARKUP:3
+                                \fontsize %! CLOCK_TIME_MARKUP:3
+                                    #-2 %! CLOCK_TIME_MARKUP:3
+                                    0'00'' %! CLOCK_TIME_MARKUP:3
+                                } %! CLOCK_TIME_MARKUP:3
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
+                            ^ \markup {
                                 \fontsize
                                     #-6
                                     \general-align
@@ -5709,29 +5862,29 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                                ^ \markup { %! CLOCK_TIME_MARKUP:1
-                                    \fontsize %! CLOCK_TIME_MARKUP:1
-                                        #-2 %! CLOCK_TIME_MARKUP:1
-                                        0'01'' %! CLOCK_TIME_MARKUP:1
-                                    } %! CLOCK_TIME_MARKUP:1
+                            ^ \markup { %! CLOCK_TIME_MARKUP:1
+                                \fontsize %! CLOCK_TIME_MARKUP:1
+                                    #-2 %! CLOCK_TIME_MARKUP:1
+                                    0'01'' %! CLOCK_TIME_MARKUP:1
+                                } %! CLOCK_TIME_MARKUP:1
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                                ^ \markup { %! CLOCK_TIME_MARKUP:1
-                                    \fontsize %! CLOCK_TIME_MARKUP:1
-                                        #-2 %! CLOCK_TIME_MARKUP:1
-                                        0'02'' %! CLOCK_TIME_MARKUP:1
-                                    } %! CLOCK_TIME_MARKUP:1
+                            ^ \markup { %! CLOCK_TIME_MARKUP:1
+                                \fontsize %! CLOCK_TIME_MARKUP:1
+                                    #-2 %! CLOCK_TIME_MARKUP:1
+                                    0'02'' %! CLOCK_TIME_MARKUP:1
+                                } %! CLOCK_TIME_MARKUP:1
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
-                                ^ \markup { %! CLOCK_TIME_MARKUP:1
-                                    \fontsize %! CLOCK_TIME_MARKUP:1
-                                        #-2 %! CLOCK_TIME_MARKUP:1
-                                        0'03'' %! CLOCK_TIME_MARKUP:1
-                                    } %! CLOCK_TIME_MARKUP:1
+                            ^ \markup { %! CLOCK_TIME_MARKUP:1
+                                \fontsize %! CLOCK_TIME_MARKUP:1
+                                    #-2 %! CLOCK_TIME_MARKUP:1
+                                    0'03'' %! CLOCK_TIME_MARKUP:1
+                                } %! CLOCK_TIME_MARKUP:1
                 <BLANKLINE>
                         }
                     >>
@@ -5744,43 +5897,51 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    c'8 [
+                                    c'8
+                                    [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 2] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 3] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 4] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                     \bar "|"
                 <BLANKLINE>
                                 }
@@ -5932,7 +6093,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -5941,13 +6102,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -6004,7 +6165,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -6013,13 +6174,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -6122,7 +6283,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -6131,13 +6292,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [intermezzo.1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [intermezzo.1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -6162,43 +6323,51 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    c'8 [
+                                    c'8
+                                    [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 2] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 3] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 4] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                     \bar "|"
                 <BLANKLINE>
                                 }
@@ -6231,7 +6400,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -6240,13 +6409,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [K.1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [K.1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -6271,43 +6440,51 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    c'8 [
+                                    c'8
+                                    [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 2] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 3] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 4] %%%
-                                    c'8 [
+                                    c'8
+                                    [
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
-                                    c'8 ]
+                                    c'8
+                                    ]
                                     \bar "|"
                 <BLANKLINE>
                                 }
@@ -6363,7 +6540,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -6372,13 +6549,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -6405,43 +6582,51 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    fs'8 [
+                                    fs'8
+                                    [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                     g'8
                 <BLANKLINE>
                                     fs'8
                 <BLANKLINE>
-                                    g'8 ]
+                                    g'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 2] %%%
-                                    fs'8 [
+                                    fs'8
+                                    [
                 <BLANKLINE>
                                     g'8
                 <BLANKLINE>
-                                    fs'8 ]
+                                    fs'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 3] %%%
-                                    g'8 [
+                                    g'8
+                                    [
                 <BLANKLINE>
                                     fs'8
                 <BLANKLINE>
                                     g'8
                 <BLANKLINE>
-                                    fs'8 ]
+                                    fs'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 4] %%%
-                                    g'8 [
+                                    g'8
+                                    [
                 <BLANKLINE>
                                     fs'8
                 <BLANKLINE>
-                                    g'8 ]
+                                    g'8
+                                    ]
                                     \bar "|"
                 <BLANKLINE>
                                 }
@@ -6475,7 +6660,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -6484,13 +6669,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
                             s1 * 1/2
-                                - \markup { %! STAGE_NUMBER_MARKUP:2
-                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                    } %! STAGE_NUMBER_MARKUP:2
+                            - \markup { %! STAGE_NUMBER_MARKUP:2
+                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                } %! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -6517,43 +6702,51 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    e'8 [
+                                    e'8
+                                    [
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
                 <BLANKLINE>
                                     f'8
                 <BLANKLINE>
                                     e'8
                 <BLANKLINE>
-                                    f'8 ]
+                                    f'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 2] %%%
-                                    e'8 [
+                                    e'8
+                                    [
                 <BLANKLINE>
                                     f'8
                 <BLANKLINE>
-                                    e'8 ]
+                                    e'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 3] %%%
-                                    f'8 [
+                                    f'8
+                                    [
                 <BLANKLINE>
                                     e'8
                 <BLANKLINE>
                                     f'8
                 <BLANKLINE>
-                                    e'8 ]
+                                    e'8
+                                    ]
                                 }
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 4] %%%
-                                    f'8 [
+                                    f'8
+                                    [
                 <BLANKLINE>
                                     e'8
                 <BLANKLINE>
-                                    f'8 ]
+                                    f'8
+                                    ]
                                     \bar "|"
                 <BLANKLINE>
                                 }

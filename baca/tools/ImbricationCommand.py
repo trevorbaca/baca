@@ -38,7 +38,7 @@ class ImbricationCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
             \new Score <<
                 \new GlobalContext {
                     { % measure
@@ -62,15 +62,19 @@ class ImbricationCommand(Command):
                             {
                                 s16
                                 s16
-                                g''16 [
-                                a'16 ]
+                                g''16
+                                [
+                                a'16
+                                ]
                                 s16
                             }
                             {
                                 s16
                                 s16
-                                fs''16 [
-                                e''16 ]
+                                fs''16
+                                [
+                                e''16
+                                ]
                                 s16
                             }
                             \revert TupletBracket.stencil
@@ -83,7 +87,8 @@ class ImbricationCommand(Command):
                             {
                                 \set stemLeftBeamCount = #0
                                 \set stemRightBeamCount = #2
-                                c'16 [
+                                c'16
+                                [
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
                                 d'16
@@ -129,7 +134,8 @@ class ImbricationCommand(Command):
                                 e''16
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #0
-                                ef''16 ]
+                                ef''16
+                                ]
                             }
                         }
                     }
@@ -172,7 +178,7 @@ class ImbricationCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
             \new Score <<
                 \new GlobalContext {
                     { % measure
@@ -187,10 +193,12 @@ class ImbricationCommand(Command):
                             \override TupletBracket.stencil = ##f
                             \override TupletNumber.stencil = ##f
                             {
-                                s16 [
+                                s16
+                                [
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                d'16 -\staccato
+                                d'16
+                                -\staccato
                                 s16
                                 s16
                                 s16
@@ -200,10 +208,12 @@ class ImbricationCommand(Command):
                                 s16
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                g''16 -\staccato
+                                g''16
+                                -\staccato
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                a'16 -\staccato
+                                a'16
+                                -\staccato
                                 s16
                             }
                             {
@@ -211,7 +221,8 @@ class ImbricationCommand(Command):
                                 s16
                                 s16
                                 s16
-                                s16 ]
+                                s16
+                                ]
                             }
                             \revert TupletBracket.stencil
                             \revert TupletNumber.stencil
@@ -223,7 +234,8 @@ class ImbricationCommand(Command):
                             {
                                 \set stemLeftBeamCount = #0
                                 \set stemRightBeamCount = #2
-                                c'16 [
+                                c'16
+                                [
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
                                 d'16
@@ -269,7 +281,8 @@ class ImbricationCommand(Command):
                                 e''16
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #0
-                                ef''16 ]
+                                ef''16
+                                ]
                             }
                         }
                     }
@@ -279,13 +292,15 @@ class ImbricationCommand(Command):
                             \override TupletBracket.stencil = ##f
                             \override TupletNumber.stencil = ##f
                             {
-                                s16 [
+                                s16
+                                [
                                 s16
                                 s16
                                 s16
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #1
-                                e''16 -\accent
+                                e''16
+                                -\accent
                             }
                             {
                                 s16
@@ -298,12 +313,15 @@ class ImbricationCommand(Command):
                                 s16
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                bf'16 -\accent
+                                bf'16
+                                -\accent
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                fs''16 -\accent
+                                fs''16
+                                -\accent
                                 s16
-                                s16 ]
+                                s16
+                                ]
                             }
                             \revert TupletBracket.stencil
                             \revert TupletNumber.stencil
@@ -353,7 +371,7 @@ class ImbricationCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
             \new Score <<
                 \new GlobalContext {
                     { % measure
@@ -369,10 +387,12 @@ class ImbricationCommand(Command):
                             \override TupletNumber.stencil = ##f
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 6/5 {
-                                s16 [
+                                s16
+                                [
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                d'16 -\accent
+                                d'16
+                                -\accent
                                 s16
                                 s16
                                 s16
@@ -383,10 +403,12 @@ class ImbricationCommand(Command):
                                 s16
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                g''16 -\accent
+                                g''16
+                                -\accent
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                a'16 -\accent
+                                a'16
+                                -\accent
                                 s16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
@@ -395,11 +417,14 @@ class ImbricationCommand(Command):
                                 s16
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                fs''16 -\accent
+                                fs''16
+                                -\accent
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                e''16 -\accent
-                                s16 ]
+                                e''16
+                                -\accent
+                                s16
+                                ]
                             }
                             \revert TupletBracket.stencil
                             \revert TupletNumber.stencil
@@ -412,55 +437,72 @@ class ImbricationCommand(Command):
                             \times 6/5 {
                                 \set stemLeftBeamCount = #0
                                 \set stemRightBeamCount = #2
-                                c'16 -\staccato [
+                                c'16
+                                -\staccato
+                                [
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                d'16 -\staccato
+                                d'16
+                                -\staccato
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                bf'16 -\staccato
+                                bf'16
+                                -\staccato
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                fs''16 -\staccato
+                                fs''16
+                                -\staccato
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #1
-                                e''16 -\staccato
+                                e''16
+                                -\staccato
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 6/5 {
                                 \set stemLeftBeamCount = #1
                                 \set stemRightBeamCount = #2
-                                ef''16 -\staccato
+                                ef''16
+                                -\staccato
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                af''16 -\staccato
+                                af''16
+                                -\staccato
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                g''16 -\staccato
+                                g''16
+                                -\staccato
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                a'16 -\staccato
+                                a'16
+                                -\staccato
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #1
-                                c'16 -\staccato
+                                c'16
+                                -\staccato
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 6/5 {
                                 \set stemLeftBeamCount = #1
                                 \set stemRightBeamCount = #2
-                                d'16 -\staccato
+                                d'16
+                                -\staccato
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                bf'16 -\staccato
+                                bf'16
+                                -\staccato
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                fs''16 -\staccato
+                                fs''16
+                                -\staccato
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
-                                e''16 -\staccato
+                                e''16
+                                -\staccato
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #0
-                                ef''16 -\staccato ]
+                                ef''16
+                                -\staccato
+                                ]
                             }
                         }
                     }
@@ -566,7 +608,7 @@ class ImbricationCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score <<
                     \new GlobalContext {
                         { % measure
@@ -581,27 +623,33 @@ class ImbricationCommand(Command):
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
                                 {
-                                    s8. [
+                                    s8.
+                                    [
                                     s8.
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #1
-                                    bf'8. -\accent
+                                    bf'8.
+                                    -\accent
                                 }
                                 {
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #1
-                                    fs''8. -\accent
+                                    fs''8.
+                                    -\accent
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #1
-                                    e''8. -\accent
+                                    e''8.
+                                    -\accent
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #1
-                                    ef''8. -\accent
+                                    ef''8.
+                                    -\accent
                                     s8.
                                     s8.
                                 }
                                 {
-                                    s8. ]
+                                    s8.
+                                    ]
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
@@ -611,16 +659,20 @@ class ImbricationCommand(Command):
                             \voiceTwo
                             {
                                 {
-                                    c'8. [
+                                    c'8.
+                                    [
                                     d'8.
-                                    bf'8. ]
+                                    bf'8.
+                                    ]
                                 }
                                 {
-                                    fs''8. [
+                                    fs''8.
+                                    [
                                     e''8.
                                     ef''8.
                                     af''8.
-                                    g''8. ]
+                                    g''8.
+                                    ]
                                 }
                                 {
                                     a'8.
@@ -661,7 +713,7 @@ class ImbricationCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score <<
                     \new GlobalContext {
                         { % measure
@@ -678,7 +730,9 @@ class ImbricationCommand(Command):
                                 {
                                     \set stemLeftBeamCount = #0
                                     \set stemRightBeamCount = #2
-                                    c'16 -\accent [
+                                    c'16
+                                    -\accent
+                                    [
                                     s16
                                     s16
                                     s16
@@ -695,17 +749,20 @@ class ImbricationCommand(Command):
                                     s16
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    bf'16 -\accent
+                                    bf'16
+                                    -\accent
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    fs''16 -\accent
+                                    fs''16
+                                    -\accent
                                     s16
                                 }
                                 {
                                     s16
                                     s16
                                     s16
-                                    s16 ]
+                                    s16
+                                    ]
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
@@ -715,30 +772,38 @@ class ImbricationCommand(Command):
                             \voiceTwo
                             {
                                 {
-                                    c'16 [
+                                    c'16
+                                    [
                                     d'16
                                     bf'16
                                     fs''16
-                                    e''16 ]
+                                    e''16
+                                    ]
                                 }
                                 {
-                                    ef''16 [
+                                    ef''16
+                                    [
                                     af''16
                                     g''16
-                                    a'16 ]
+                                    a'16
+                                    ]
                                 }
                                 {
-                                    c'16 [
+                                    c'16
+                                    [
                                     d'16
                                     bf'16
                                     fs''16
-                                    e''16 ]
+                                    e''16
+                                    ]
                                 }
                                 {
-                                    ef''16 [
+                                    ef''16
+                                    [
                                     af''16
                                     g''16
-                                    a'16 ]
+                                    a'16
+                                    ]
                                 }
                             }
                         }
@@ -831,7 +896,7 @@ class ImbricationCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
@@ -842,54 +907,54 @@ class ImbricationCommand(Command):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
                             s1 * 7/16
-                                - \markup {
-                                    \column
-                                        {
-                                            \line %! STAGE_NUMBER_MARKUP:2
-                                                { %! STAGE_NUMBER_MARKUP:2
-                                                    \fontsize %! STAGE_NUMBER_MARKUP:2
-                                                        #-3 %! STAGE_NUMBER_MARKUP:2
-                                                        \with-color %! STAGE_NUMBER_MARKUP:2
-                                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                                            [1] %! STAGE_NUMBER_MARKUP:2
-                                                } %! STAGE_NUMBER_MARKUP:2
-                                            \line %! SEGMENT:SPACING_MARKUP:4
-                                                { %! SEGMENT:SPACING_MARKUP:4
-                                                    \with-color %! SEGMENT:SPACING_MARKUP:4
-                                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:4
-                                                        \fontsize %! SEGMENT:SPACING_MARKUP:4
-                                                            #-3 %! SEGMENT:SPACING_MARKUP:4
-                                                            (1/24) %! SEGMENT:SPACING_MARKUP:4
-                                                } %! SEGMENT:SPACING_MARKUP:4
-                                        }
+                            - \markup {
+                                \column
+                                    {
+                                        \line %! STAGE_NUMBER_MARKUP:2
+                                            { %! STAGE_NUMBER_MARKUP:2
+                                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                            } %! STAGE_NUMBER_MARKUP:2
+                                        \line %! SEGMENT:SPACING_MARKUP:4
+                                            { %! SEGMENT:SPACING_MARKUP:4
+                                                \with-color %! SEGMENT:SPACING_MARKUP:4
+                                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:4
+                                                    \fontsize %! SEGMENT:SPACING_MARKUP:4
+                                                        #-3 %! SEGMENT:SPACING_MARKUP:4
+                                                        (1/24) %! SEGMENT:SPACING_MARKUP:4
+                                            } %! SEGMENT:SPACING_MARKUP:4
                                     }
+                                }
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 1/4
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:2
                             s1 * 1/4
-                                - \markup {
-                                    \column
-                                        {
-                                            \line %! STAGE_NUMBER_MARKUP:1
-                                                { %! STAGE_NUMBER_MARKUP:1
-                                                    \fontsize %! STAGE_NUMBER_MARKUP:1
-                                                        #-3 %! STAGE_NUMBER_MARKUP:1
-                                                        \with-color %! STAGE_NUMBER_MARKUP:1
-                                                            #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:1
-                                                            [2] %! STAGE_NUMBER_MARKUP:1
-                                                } %! STAGE_NUMBER_MARKUP:1
-                                            \line %! SEGMENT:SPACING_MARKUP:3
-                                                { %! SEGMENT:SPACING_MARKUP:3
-                                                    \with-color %! SEGMENT:SPACING_MARKUP:3
-                                                        #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:3
-                                                        \fontsize %! SEGMENT:SPACING_MARKUP:3
-                                                            #-3 %! SEGMENT:SPACING_MARKUP:3
-                                                            (1/24) %! SEGMENT:SPACING_MARKUP:3
-                                                } %! SEGMENT:SPACING_MARKUP:3
-                                        }
+                            - \markup {
+                                \column
+                                    {
+                                        \line %! STAGE_NUMBER_MARKUP:1
+                                            { %! STAGE_NUMBER_MARKUP:1
+                                                \fontsize %! STAGE_NUMBER_MARKUP:1
+                                                    #-3 %! STAGE_NUMBER_MARKUP:1
+                                                    \with-color %! STAGE_NUMBER_MARKUP:1
+                                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:1
+                                                        [2] %! STAGE_NUMBER_MARKUP:1
+                                            } %! STAGE_NUMBER_MARKUP:1
+                                        \line %! SEGMENT:SPACING_MARKUP:3
+                                            { %! SEGMENT:SPACING_MARKUP:3
+                                                \with-color %! SEGMENT:SPACING_MARKUP:3
+                                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:3
+                                                    \fontsize %! SEGMENT:SPACING_MARKUP:3
+                                                        #-3 %! SEGMENT:SPACING_MARKUP:3
+                                                        (1/24) %! SEGMENT:SPACING_MARKUP:3
+                                            } %! SEGMENT:SPACING_MARKUP:3
                                     }
+                                }
                 <BLANKLINE>
                         }
                     >>
@@ -902,15 +967,18 @@ class ImbricationCommand(Command):
                                     {
                 <BLANKLINE>
                                         %%% MusicVoiceOne [measure 1] %%%
-                                        s16 [
+                                        s16
+                                        [
                 <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
-                                        d'16 -\staccato
+                                        d'16
+                                        -\staccato
                 <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
-                                        bf'16 -\staccato
+                                        bf'16
+                                        -\staccato
                 <BLANKLINE>
                                         s16
                                     }
@@ -935,13 +1003,16 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
-                                        cs''16 -\staccato
+                                        cs''16
+                                        -\staccato
                 <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
-                                        a'16 -\staccato
+                                        a'16
+                                        -\staccato
                 <BLANKLINE>
-                                        s16 ]
+                                        s16
+                                        ]
                                         \bar "|"
                 <BLANKLINE>
                                     }
@@ -958,7 +1029,8 @@ class ImbricationCommand(Command):
                                         %%% MusicVoiceTwo [measure 1] %%%
                                         \set stemLeftBeamCount = #0
                                         \set stemRightBeamCount = #2
-                                        c'16 [
+                                        c'16
+                                        [
                 <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
@@ -984,7 +1056,8 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #0
-                                        b''16 ]
+                                        b''16
+                                        ]
                                     }
                                 }
                                 {
@@ -993,7 +1066,8 @@ class ImbricationCommand(Command):
                                         %%% MusicVoiceTwo [measure 2] %%%
                                         \set stemLeftBeamCount = #0
                                         \set stemRightBeamCount = #2
-                                        g''16 [
+                                        g''16
+                                        [
                 <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
@@ -1005,7 +1079,8 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #0
-                                        af'16 ]
+                                        af'16
+                                        ]
                                         \bar "|"
                 <BLANKLINE>
                                     }
@@ -1043,7 +1118,7 @@ class ImbricationCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score <<
                     \new GlobalContext {
                         { % measure
@@ -1063,15 +1138,19 @@ class ImbricationCommand(Command):
                                 {
                                     s16
                                     s16
-                                    g''16 [
-                                    a'16 ]
+                                    g''16
+                                    [
+                                    a'16
+                                    ]
                                     s16
                                 }
                                 {
                                     s16
                                     s16
-                                    fs''16 [
-                                    e''16 ]
+                                    fs''16
+                                    [
+                                    e''16
+                                    ]
                                     s16
                                 }
                                 \revert TupletBracket.stencil
@@ -1084,7 +1163,8 @@ class ImbricationCommand(Command):
                                 {
                                     \set stemLeftBeamCount = #0
                                     \set stemRightBeamCount = #2
-                                    <c' d' bf' e'' fs''>16 [
+                                    <c' d' bf' e'' fs''>16
+                                    [
                                 }
                                 {
                                     \set stemLeftBeamCount = #1
@@ -1118,7 +1198,8 @@ class ImbricationCommand(Command):
                                     e''16
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #0
-                                    ef''16 ]
+                                    ef''16
+                                    ]
                                 }
                             }
                         }
@@ -1154,7 +1235,7 @@ class ImbricationCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score <<
                     \new GlobalContext {
                         { % measure
@@ -1179,15 +1260,19 @@ class ImbricationCommand(Command):
                                 {
                                     s16
                                     s16
-                                    g''16 [
-                                    a'16 ]
+                                    g''16
+                                    [
+                                    a'16
+                                    ]
                                     s16
                                 }
                                 {
                                     s16
                                     s16
-                                    fs''16 [
-                                    e''16 ]
+                                    fs''16
+                                    [
+                                    e''16
+                                    ]
                                     s16
                                     s8
                                 }
@@ -1202,7 +1287,8 @@ class ImbricationCommand(Command):
                                     r8
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    c'16 [
+                                    c'16
+                                    [
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     d'16
@@ -1248,7 +1334,8 @@ class ImbricationCommand(Command):
                                     e''16
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    ef''16 ]
+                                    ef''16
+                                    ]
                                     r8
                                 }
                             }
@@ -1436,7 +1523,7 @@ class ImbricationCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score <<
                     \new GlobalContext {
                         { % measure
@@ -1451,10 +1538,12 @@ class ImbricationCommand(Command):
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
                                 {
-                                    s16 [
+                                    s16
+                                    [
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    d'16 -\accent
+                                    d'16
+                                    -\accent
                                     s16
                                     s16
                                     s16
@@ -1464,11 +1553,14 @@ class ImbricationCommand(Command):
                                     s16
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    g''16 -\accent
+                                    g''16
+                                    -\accent
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    a'16 -\accent
-                                    s16 ]
+                                    a'16
+                                    -\accent
+                                    s16
+                                    ]
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
@@ -1480,36 +1572,48 @@ class ImbricationCommand(Command):
                                 {
                                     \set stemLeftBeamCount = #0
                                     \set stemRightBeamCount = #2
-                                    c'16 -\staccato [
+                                    c'16
+                                    -\staccato
+                                    [
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    d'16 -\staccato
+                                    d'16
+                                    -\staccato
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    bf'16 -\staccato
+                                    bf'16
+                                    -\staccato
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    fs''16 -\staccato
+                                    fs''16
+                                    -\staccato
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #1
-                                    e''16 -\staccato
+                                    e''16
+                                    -\staccato
                                 }
                                 {
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #2
-                                    ef''16 -\staccato
+                                    ef''16
+                                    -\staccato
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    af''16 -\staccato
+                                    af''16
+                                    -\staccato
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    g''16 -\staccato
+                                    g''16
+                                    -\staccato
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    a'16 -\staccato
+                                    a'16
+                                    -\staccato
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #0
-                                    c'16 -\staccato ]
+                                    c'16
+                                    -\staccato
+                                    ]
                                 }
                             }
                         }
@@ -1621,7 +1725,7 @@ class ImbricationCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score <<
                     \new GlobalContext {
                         { % measure
@@ -1636,10 +1740,12 @@ class ImbricationCommand(Command):
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
                                 {
-                                    s16 [
+                                    s16
+                                    [
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    d'16 -\accent
+                                    d'16
+                                    -\accent
                                     s16
                                     s16
                                     s16
@@ -1649,10 +1755,12 @@ class ImbricationCommand(Command):
                                     s16
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    g''16 -\accent
+                                    g''16
+                                    -\accent
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    a'16 -\accent
+                                    a'16
+                                    -\accent
                                     s16
                                 }
                                 {
@@ -1660,11 +1768,14 @@ class ImbricationCommand(Command):
                                     s16
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    fs''16 -\accent
+                                    fs''16
+                                    -\accent
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    e''16 -\accent
-                                    s16 ]
+                                    e''16
+                                    -\accent
+                                    s16
+                                    ]
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
@@ -1676,43 +1787,55 @@ class ImbricationCommand(Command):
                                 {
                                     \set stemLeftBeamCount = #0
                                     \set stemRightBeamCount = #2
-                                    c'16 -\staccato [
+                                    c'16
+                                    -\staccato
+                                    [
                                     s16
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    bf'16 -\staccato
+                                    bf'16
+                                    -\staccato
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    fs''16 -\staccato
+                                    fs''16
+                                    -\staccato
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #1
-                                    e''16 -\staccato
+                                    e''16
+                                    -\staccato
                                 }
                                 {
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #2
-                                    ef''16 -\staccato
+                                    ef''16
+                                    -\staccato
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    af''16 -\staccato
+                                    af''16
+                                    -\staccato
                                     s16
                                     s16
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #1
-                                    c'16 -\staccato
+                                    c'16
+                                    -\staccato
                                 }
                                 {
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #2
-                                    d'16 -\staccato
+                                    d'16
+                                    -\staccato
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    bf'16 -\staccato
+                                    bf'16
+                                    -\staccato
                                     s16
                                     s16
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #0
-                                    ef''16 -\staccato ]
+                                    ef''16
+                                    -\staccato
+                                    ]
                                 }
                             }
                         }
@@ -1777,7 +1900,7 @@ class ImbricationCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score <<
                     \new GlobalContext {
                         { % measure
@@ -1792,7 +1915,8 @@ class ImbricationCommand(Command):
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
                                 {
-                                    s16 [
+                                    s16
+                                    [
                                     s16
                                     s16
                                     s16
@@ -1808,22 +1932,27 @@ class ImbricationCommand(Command):
                                     s16
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    d'16 -\accent
+                                    d'16
+                                    -\accent
                                     s16
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    fs''16 -\accent
+                                    fs''16
+                                    -\accent
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #1
-                                    e''16 -\accent
+                                    e''16
+                                    -\accent
                                 }
                                 {
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #2
-                                    ef''16 -\accent
+                                    ef''16
+                                    -\accent
                                     s16
                                     s16
-                                    s16 ]
+                                    s16
+                                    ]
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
@@ -1835,64 +1964,84 @@ class ImbricationCommand(Command):
                                 {
                                     \set stemLeftBeamCount = #0
                                     \set stemRightBeamCount = #2
-                                    c'16 -\staccato [
+                                    c'16
+                                    -\staccato
+                                    [
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    d'16 -\staccato
+                                    d'16
+                                    -\staccato
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    bf'16 -\staccato
+                                    bf'16
+                                    -\staccato
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    fs''16 -\staccato
+                                    fs''16
+                                    -\staccato
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #1
-                                    e''16 -\staccato
+                                    e''16
+                                    -\staccato
                                 }
                                 {
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #2
-                                    ef''16 -\staccato
+                                    ef''16
+                                    -\staccato
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    af''16 -\staccato
+                                    af''16
+                                    -\staccato
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    g''16 -\staccato
+                                    g''16
+                                    -\staccato
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #1
-                                    a'16 -\staccato
+                                    a'16
+                                    -\staccato
                                 }
                                 {
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #2
-                                    c'16 -\staccato
+                                    c'16
+                                    -\staccato
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    d'16 -\staccato
+                                    d'16
+                                    -\staccato
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    bf'16 -\staccato
+                                    bf'16
+                                    -\staccato
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    fs''16 -\staccato
+                                    fs''16
+                                    -\staccato
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #1
-                                    e''16 -\staccato
+                                    e''16
+                                    -\staccato
                                 }
                                 {
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #2
-                                    ef''16 -\staccato
+                                    ef''16
+                                    -\staccato
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    af''16 -\staccato
+                                    af''16
+                                    -\staccato
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    g''16 -\staccato
+                                    g''16
+                                    -\staccato
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #0
-                                    a'16 -\staccato ]
+                                    a'16
+                                    -\staccato
+                                    ]
                                 }
                             }
                         }
@@ -1948,7 +2097,7 @@ class ImbricationCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score <<
                     \new GlobalContext {
                         { % measure
@@ -1993,7 +2142,8 @@ class ImbricationCommand(Command):
                                 {
                                     \set stemLeftBeamCount = #0
                                     \set stemRightBeamCount = #2
-                                    c'16 [
+                                    c'16
+                                    [
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     d'16
@@ -2039,7 +2189,8 @@ class ImbricationCommand(Command):
                                     e''16
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #0
-                                    ef''16 ]
+                                    ef''16
+                                    ]
                                 }
                             }
                         }
@@ -2077,7 +2228,7 @@ class ImbricationCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score <<
                     \new GlobalContext {
                         { % measure
@@ -2095,7 +2246,9 @@ class ImbricationCommand(Command):
                                     s16
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    d'16 [ ]
+                                    d'16
+                                    [
+                                    ]
                                     s16
                                     s16
                                     s16
@@ -2105,10 +2258,12 @@ class ImbricationCommand(Command):
                                     s16
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    g''16 [
+                                    g''16
+                                    [
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    a'16 ]
+                                    a'16
+                                    ]
                                     s16
                                 }
                                 {
@@ -2116,10 +2271,12 @@ class ImbricationCommand(Command):
                                     s16
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    fs''16 [
+                                    fs''16
+                                    [
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    e''16 ]
+                                    e''16
+                                    ]
                                     s16
                                 }
                                 \revert TupletBracket.stencil
@@ -2132,7 +2289,8 @@ class ImbricationCommand(Command):
                                 {
                                     \set stemLeftBeamCount = #0
                                     \set stemRightBeamCount = #2
-                                    c'16 [
+                                    c'16
+                                    [
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     d'16
@@ -2178,7 +2336,8 @@ class ImbricationCommand(Command):
                                     e''16
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #0
-                                    ef''16 ]
+                                    ef''16
+                                    ]
                                 }
                             }
                         }
@@ -2214,7 +2373,7 @@ class ImbricationCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score <<
                     \new GlobalContext {
                         { % measure
@@ -2229,7 +2388,8 @@ class ImbricationCommand(Command):
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
                                 {
-                                    s16 [
+                                    s16
+                                    [
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     d'16
@@ -2257,7 +2417,8 @@ class ImbricationCommand(Command):
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     e''16
-                                    s16 ]
+                                    s16
+                                    ]
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
@@ -2269,7 +2430,8 @@ class ImbricationCommand(Command):
                                 {
                                     \set stemLeftBeamCount = #0
                                     \set stemRightBeamCount = #2
-                                    c'16 [
+                                    c'16
+                                    [
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     d'16
@@ -2315,7 +2477,8 @@ class ImbricationCommand(Command):
                                     e''16
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #0
-                                    ef''16 ]
+                                    ef''16
+                                    ]
                                 }
                             }
                         }
@@ -2353,7 +2516,7 @@ class ImbricationCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score <<
                     \new GlobalContext {
                         { % measure
@@ -2368,25 +2531,31 @@ class ImbricationCommand(Command):
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
                                 {
-                                    s16 [
+                                    s16
+                                    [
                                     d'16
                                     s16
                                     s16
-                                    s16 ]
+                                    s16
+                                    ]
                                 }
                                 {
-                                    s16 [
+                                    s16
+                                    [
                                     s16
                                     g''16
                                     a'16
-                                    s16 ]
+                                    s16
+                                    ]
                                 }
                                 {
-                                    s16 [
+                                    s16
+                                    [
                                     s16
                                     fs''16
                                     e''16
-                                    s16 ]
+                                    s16
+                                    ]
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
@@ -2398,7 +2567,8 @@ class ImbricationCommand(Command):
                                 {
                                     \set stemLeftBeamCount = #0
                                     \set stemRightBeamCount = #2
-                                    c'16 [
+                                    c'16
+                                    [
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     d'16
@@ -2444,7 +2614,8 @@ class ImbricationCommand(Command):
                                     e''16
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #0
-                                    ef''16 ]
+                                    ef''16
+                                    ]
                                 }
                             }
                         }
@@ -2490,7 +2661,7 @@ class ImbricationCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score <<
                     \new GlobalContext {
                         { % measure
@@ -2505,7 +2676,8 @@ class ImbricationCommand(Command):
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
                                 {
-                                    s8 [
+                                    s8
+                                    [
                                     s32
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #1
@@ -2536,7 +2708,8 @@ class ImbricationCommand(Command):
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #1
                                     a'8
-                                    s32 ]
+                                    s32
+                                    ]
                                 }
                                 \revert TupletBracket.stencil
                                 \revert TupletNumber.stencil
@@ -2546,28 +2719,43 @@ class ImbricationCommand(Command):
                             \voiceTwo
                             {
                                 {
-                                    c'8 ~ [
+                                    c'8
+                                    ~
+                                    [
                                     c'32
-                                    d'8 ~
+                                    d'8
+                                    ~
                                     d'32
-                                    bf'8 ~
-                                    bf'32 ]
+                                    bf'8
+                                    ~
+                                    bf'32
+                                    ]
                                 }
                                 {
-                                    fs''8 ~ [
+                                    fs''8
+                                    ~
+                                    [
                                     fs''32
-                                    e''8 ~
+                                    e''8
+                                    ~
                                     e''32
-                                    ef''8 ~
+                                    ef''8
+                                    ~
                                     ef''32
-                                    af''8 ~
+                                    af''8
+                                    ~
                                     af''32
-                                    g''8 ~
-                                    g''32 ]
+                                    g''8
+                                    ~
+                                    g''32
+                                    ]
                                 }
                                 {
-                                    a'8 ~ [
-                                    a'32 ]
+                                    a'8
+                                    ~
+                                    [
+                                    a'32
+                                    ]
                                 }
                             }
                         }

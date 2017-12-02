@@ -231,8 +231,9 @@ class Constellation(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(constellation.generator_chord)
-                <c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4 - \markup { 1-80 }
+                >>> abjad.f(constellation.generator_chord, strict=True)
+                <c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                - \markup { 1-80 }
 
         """
         pitch_numbers = self._generator_pitch_numbers
@@ -285,8 +286,9 @@ class Constellation(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(constellation.pivot_chord)
-                <c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4 - \markup { 1-80 }
+                >>> abjad.f(constellation.pivot_chord, strict=True)
+                <c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
+                - \markup { 1-80 }
 
         """
         next_pitch_number_list = self._next._generator_pitch_numbers

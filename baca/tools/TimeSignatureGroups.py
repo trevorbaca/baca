@@ -15,7 +15,7 @@ class TimeSignatureGroups(abjad.AbjadObject):
         >>> groups = [group_1, group_2]
         >>> groups = baca.TimeSignatureGroups(groups)
 
-        >>> abjad.f(groups)
+        >>> abjad.f(groups, strict=True)
         baca.TimeSignatureGroups(
             [
                 [
@@ -64,7 +64,7 @@ class TimeSignatureGroups(abjad.AbjadObject):
         ..  docs::
 
             >>> lilypond_file = groups.__illustrate__()
-            >>> abjad.f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
             \new Score \with {
                 proportionalNotationDuration = #(ly:make-moment 1 8)
             } <<
@@ -81,12 +81,13 @@ class TimeSignatureGroups(abjad.AbjadObject):
                 } {
                     { % measure
                         \time 3/8
-                        r1 * 3/8 \startGroup
-                            ^ \markup {
-                                \circle
-                                    \smaller
-                                        0
-                                }
+                        r1 * 3/8
+                        \startGroup
+                        ^ \markup {
+                            \circle
+                                \smaller
+                                    0
+                            }
                     } % measure
                     { % measure
                         \time 3/16
@@ -94,16 +95,18 @@ class TimeSignatureGroups(abjad.AbjadObject):
                     } % measure
                     { % measure
                         \time 3/16
-                        r1 * 3/16 \stopGroup
+                        r1 * 3/16
+                        \stopGroup
                     } % measure
                     { % measure
                         \time 5/8
-                        r1 * 5/8 \startGroup
-                            ^ \markup {
-                                \circle
-                                    \smaller
-                                        1
-                                }
+                        r1 * 5/8
+                        \startGroup
+                        ^ \markup {
+                            \circle
+                                \smaller
+                                    1
+                            }
                     } % measure
                     { % measure
                         \time 5/16
@@ -115,7 +118,8 @@ class TimeSignatureGroups(abjad.AbjadObject):
                     } % measure
                     { % measure
                         \time 5/16
-                        r1 * 5/16 \stopGroup
+                        r1 * 5/16
+                        \stopGroup
                     } % measure
                 }
             >>

@@ -24,22 +24,28 @@ class SpannerCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
                         {
-                            c'16 [
+                            c'16
+                            [
                             d'16
-                            bf'16 ]
+                            bf'16
+                            ]
                         }
                         {
-                            fs''16 [ (
+                            fs''16
+                            [
+                            (
                             e''16
                             ef''16
                             af''16
-                            g''16 ] )
+                            g''16
+                            ]
+                            )
                         }
                         {
                             a'16
@@ -72,7 +78,7 @@ class SpannerCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
             \context Score = "Score" <<
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
@@ -81,13 +87,13 @@ class SpannerCommand(Command):
                         \time 4/8
                         \bar "" %! SEGMENT:EMPTY_START_BAR:1
                         s1 * 1/2
-                            - \markup { %! STAGE_NUMBER_MARKUP:2
-                                \fontsize %! STAGE_NUMBER_MARKUP:2
-                                    #-3 %! STAGE_NUMBER_MARKUP:2
-                                    \with-color %! STAGE_NUMBER_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                        [1] %! STAGE_NUMBER_MARKUP:2
-                                } %! STAGE_NUMBER_MARKUP:2
+                        - \markup { %! STAGE_NUMBER_MARKUP:2
+                            \fontsize %! STAGE_NUMBER_MARKUP:2
+                                #-3 %! STAGE_NUMBER_MARKUP:2
+                                \with-color %! STAGE_NUMBER_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                    [1] %! STAGE_NUMBER_MARKUP:2
+                            } %! STAGE_NUMBER_MARKUP:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
                         \time 3/8
@@ -112,43 +118,53 @@ class SpannerCommand(Command):
                                 \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                e'8 [
+                                e'8
+                                [
                                 \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
             <BLANKLINE>
                                 d''8
             <BLANKLINE>
                                 f'8
             <BLANKLINE>
-                                e''8 ]
+                                e''8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
-                                g'8 [ (
+                                g'8
+                                [
+                                (
             <BLANKLINE>
                                 f''8
             <BLANKLINE>
-                                e'8 ] )
+                                e'8
+                                ]
+                                )
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 3] %%%
-                                d''8 [
+                                d''8
+                                [
             <BLANKLINE>
                                 f'8
             <BLANKLINE>
                                 e''8
             <BLANKLINE>
-                                g'8 ]
+                                g'8
+                                ]
                             }
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 4] %%%
-                                f''8 [
+                                f''8
+                                [
             <BLANKLINE>
                                 e'8
             <BLANKLINE>
-                                d''8 ]
+                                d''8
+                                ]
                                 \bar "|"
             <BLANKLINE>
                             }
@@ -217,25 +233,31 @@ class SpannerCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
                             {
-                                c'16 [ (
+                                c'16
+                                [
+                                (
                                 d'16
-                                bf'16 ]
+                                bf'16
+                                ]
                             }
                             {
-                                fs''16 [
+                                fs''16
+                                [
                                 e''16
                                 ef''16
                                 af''16
-                                g''16 ]
+                                g''16
+                                ]
                             }
                             {
-                                a'16 )
+                                a'16
+                                )
                             }
                         }
                     }
@@ -267,17 +289,20 @@ class SpannerCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
                             {
-                                d''4 ~
+                                d''4
+                                ~
                                 d''16
-                                d''4 ~
+                                d''4
+                                ~
                                 d''16
-                                d''4 ~
+                                d''4
+                                ~
                                 d''16
                             }
                         }
@@ -295,17 +320,22 @@ class SpannerCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
                             {
-                                d''4 ~
-                                d''16 ~
-                                d''4 ~
-                                d''16 ~
-                                d''4 ~
+                                d''4
+                                ~
+                                d''16
+                                ~
+                                d''4
+                                ~
+                                d''16
+                                ~
+                                d''4
+                                ~
                                 d''16
                             }
                         }

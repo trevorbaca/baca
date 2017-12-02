@@ -32,7 +32,7 @@ class NestingCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -42,7 +42,8 @@ class NestingCommand(Command):
                             {
                                 \set stemLeftBeamCount = #0
                                 \set stemRightBeamCount = #2
-                                c'16 [
+                                c'16
+                                [
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
                                 d'16
@@ -76,7 +77,8 @@ class NestingCommand(Command):
                                 a'16
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #0
-                                af'16 ]
+                                af'16
+                                ]
                             }
                         }
                     }
@@ -131,7 +133,7 @@ class NestingCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
             \context Score = "Score" <<
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
@@ -142,40 +144,40 @@ class NestingCommand(Command):
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
                         s1 * 1/2
-                            - \markup {
-                                \column
-                                    {
-                                        \line %! STAGE_NUMBER_MARKUP:2
-                                            { %! STAGE_NUMBER_MARKUP:2
-                                                \fontsize %! STAGE_NUMBER_MARKUP:2
-                                                    #-3 %! STAGE_NUMBER_MARKUP:2
-                                                    \with-color %! STAGE_NUMBER_MARKUP:2
-                                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                                        [1] %! STAGE_NUMBER_MARKUP:2
-                                            } %! STAGE_NUMBER_MARKUP:2
-                                        \line %! SEGMENT:SPACING_MARKUP:4
-                                            { %! SEGMENT:SPACING_MARKUP:4
-                                                \with-color %! SEGMENT:SPACING_MARKUP:4
-                                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:4
-                                                    \fontsize %! SEGMENT:SPACING_MARKUP:4
-                                                        #-3 %! SEGMENT:SPACING_MARKUP:4
-                                                        (1/24) %! SEGMENT:SPACING_MARKUP:4
-                                            } %! SEGMENT:SPACING_MARKUP:4
-                                    }
+                        - \markup {
+                            \column
+                                {
+                                    \line %! STAGE_NUMBER_MARKUP:2
+                                        { %! STAGE_NUMBER_MARKUP:2
+                                            \fontsize %! STAGE_NUMBER_MARKUP:2
+                                                #-3 %! STAGE_NUMBER_MARKUP:2
+                                                \with-color %! STAGE_NUMBER_MARKUP:2
+                                                    #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                                    [1] %! STAGE_NUMBER_MARKUP:2
+                                        } %! STAGE_NUMBER_MARKUP:2
+                                    \line %! SEGMENT:SPACING_MARKUP:4
+                                        { %! SEGMENT:SPACING_MARKUP:4
+                                            \with-color %! SEGMENT:SPACING_MARKUP:4
+                                                #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:4
+                                                \fontsize %! SEGMENT:SPACING_MARKUP:4
+                                                    #-3 %! SEGMENT:SPACING_MARKUP:4
+                                                    (1/24) %! SEGMENT:SPACING_MARKUP:4
+                                        } %! SEGMENT:SPACING_MARKUP:4
                                 }
+                            }
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
                         \time 1/4
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                         s1 * 1/4
-                            - \markup { %! SEGMENT:SPACING_MARKUP:2
-                                \with-color %! SEGMENT:SPACING_MARKUP:2
-                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
-                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
-                                        #-3 %! SEGMENT:SPACING_MARKUP:2
-                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
-                                } %! SEGMENT:SPACING_MARKUP:2
+                        - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            \with-color %! SEGMENT:SPACING_MARKUP:2
+                                #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                    #-3 %! SEGMENT:SPACING_MARKUP:2
+                                    (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            } %! SEGMENT:SPACING_MARKUP:2
             <BLANKLINE>
                     }
                 >>
@@ -195,7 +197,8 @@ class NestingCommand(Command):
                                         \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
                                         \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                         %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                        c'16 [
+                                        c'16
+                                        [
                                         \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
             <BLANKLINE>
                                         \set stemLeftBeamCount = #2
@@ -244,7 +247,8 @@ class NestingCommand(Command):
             <BLANKLINE>
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #0
-                                    af'16 ]
+                                    af'16
+                                    ]
                                     \bar "|"
             <BLANKLINE>
                                 }
@@ -312,7 +316,7 @@ class NestingCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -323,7 +327,8 @@ class NestingCommand(Command):
                                     r8
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    c'16 [
+                                    c'16
+                                    [
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     d'16
@@ -357,7 +362,8 @@ class NestingCommand(Command):
                                     a'16
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
-                                    af'16 ]
+                                    af'16
+                                    ]
                                     r8.
                                 }
                             }

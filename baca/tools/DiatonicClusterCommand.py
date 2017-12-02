@@ -15,7 +15,7 @@ class DiatonicClusterCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(staff)
+            >>> abjad.f(staff, strict=True)
             \new Staff {
                 <c' d' e' f'>4
                 <d' e' f' g' a' b'>4

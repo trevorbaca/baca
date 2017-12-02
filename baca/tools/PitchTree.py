@@ -17,7 +17,7 @@ class PitchTree(Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
-            >>> abjad.f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
             \new Score \with {
                 \override BarLine.transparent = ##t
                 \override BarNumber.stencil = ##f
@@ -38,21 +38,30 @@ class PitchTree(Tree):
                         \consists Horizontal_bracket_engraver
                     } {
                         \time 1/8
-                        e''8 \startGroup ^ \markup { 0 }
+                        e''8
+                        \startGroup
+                        ^ \markup { 0 }
                         fs''8
-                        bf'8 \stopGroup
+                        bf'8
+                        \stopGroup
                         s8
-                        a'8 \startGroup ^ \markup { 1 }
+                        a'8
+                        \startGroup
+                        ^ \markup { 1 }
                         g'8
                         af'8
                         b'8
                         a'8
-                        cs'8 \stopGroup
+                        cs'8
+                        \stopGroup
                         s8
-                        c'8 \startGroup ^ \markup { 2 }
+                        c'8
+                        \startGroup
+                        ^ \markup { 2 }
                         d'8
                         ef'8
-                        f'8 \stopGroup
+                        f'8
+                        \stopGroup
                         s8
                         \bar "|."
                         \override Score.BarLine.transparent = ##f
@@ -78,7 +87,7 @@ class PitchTree(Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
-            >>> abjad.f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
             \new Score \with {
                 \override BarLine.transparent = ##t
                 \override BarNumber.stencil = ##f
@@ -99,21 +108,30 @@ class PitchTree(Tree):
                         \consists Horizontal_bracket_engraver
                     } {
                         \time 1/8
-                        e''8 \startGroup ^ \markup { 0 }
+                        e''8
+                        \startGroup
+                        ^ \markup { 0 }
                         fs''8
-                        bf'8 \stopGroup
+                        bf'8
+                        \stopGroup
                         s8
-                        a'8 \startGroup ^ \markup { 1 }
+                        a'8
+                        \startGroup
+                        ^ \markup { 1 }
                         g'8
                         af'8
                         b'8
                         a'8
-                        cs'8 \stopGroup
+                        cs'8
+                        \stopGroup
                         s8
-                        c'8 \startGroup ^ \markup { 2 }
+                        c'8
+                        \startGroup
+                        ^ \markup { 2 }
                         d'8
                         ef'8
-                        f'8 \stopGroup
+                        f'8
+                        \stopGroup
                         s8
                         \bar "|."
                         \override Score.BarLine.transparent = ##f
@@ -135,7 +153,7 @@ class PitchTree(Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
-            >>> abjad.f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
             \new Score \with {
                 \override BarLine.transparent = ##t
                 \override BarNumber.stencil = ##f
@@ -156,21 +174,30 @@ class PitchTree(Tree):
                         \consists Horizontal_bracket_engraver
                     } {
                         \time 1/8
-                        e'8 \startGroup ^ \markup { 0 }
+                        e'8
+                        \startGroup
+                        ^ \markup { 0 }
                         fs'8
-                        bf'8 \stopGroup
+                        bf'8
+                        \stopGroup
                         s8
-                        a'8 \startGroup ^ \markup { 1 }
+                        a'8
+                        \startGroup
+                        ^ \markup { 1 }
                         g'8
                         af'8
                         b'8
                         a'8
-                        cs'8 \stopGroup
+                        cs'8
+                        \stopGroup
                         s8
-                        c'8 \startGroup ^ \markup { 2 }
+                        c'8
+                        \startGroup
+                        ^ \markup { 2 }
                         d'8
                         ef'8
-                        f'8 \stopGroup
+                        f'8
+                        \stopGroup
                         s8
                         \bar "|."
                         \override Score.BarLine.transparent = ##f
@@ -196,7 +223,7 @@ class PitchTree(Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
-            >>> abjad.f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
             \new Score \with {
                 \override BarLine.transparent = ##t
                 \override BarNumber.stencil = ##f
@@ -217,21 +244,30 @@ class PitchTree(Tree):
                         \consists Horizontal_bracket_engraver
                     } {
                         \time 1/8
-                        e'8 \startGroup ^ \markup { 0 }
+                        e'8
+                        \startGroup
+                        ^ \markup { 0 }
                         fs'8
-                        bf'8 \stopGroup
+                        bf'8
+                        \stopGroup
                         s8
-                        a'8 \startGroup ^ \markup { 1 }
+                        a'8
+                        \startGroup
+                        ^ \markup { 1 }
                         g'8
                         af'8
                         b'8
                         a'8
-                        cs'8 \stopGroup
+                        cs'8
+                        \stopGroup
                         s8
-                        c'8 \startGroup ^ \markup { 2 }
+                        c'8
+                        \startGroup
+                        ^ \markup { 2 }
                         d'8
                         ef'8
-                        f'8 \stopGroup
+                        f'8
+                        \stopGroup
                         s8
                         \bar "|."
                         \override Score.BarLine.transparent = ##f
@@ -256,7 +292,7 @@ class PitchTree(Tree):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
             \new Score \with {
                 \override BarLine.transparent = ##t
                 \override BarNumber.stencil = ##f
@@ -277,21 +313,27 @@ class PitchTree(Tree):
                         \consists Horizontal_bracket_engraver
                     } {
                         \time 1/8
-                        e'8 \startGroup
+                        e'8
+                        \startGroup
                         fs'8
-                        bf'8 \stopGroup
+                        bf'8
+                        \stopGroup
                         s8
-                        a'8 \startGroup
+                        a'8
+                        \startGroup
                         g'8
                         af'8
                         b'8
                         a'8
-                        cs'8 \stopGroup
+                        cs'8
+                        \stopGroup
                         s8
-                        c'8 \startGroup
+                        c'8
+                        \startGroup
                         d'8
                         ef'8
-                        f'8 \stopGroup
+                        f'8
+                        \stopGroup
                         s8
                         \bar "|."
                         \override Score.BarLine.transparent = ##f
@@ -315,7 +357,7 @@ class PitchTree(Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__(cell_indices=False)
-            >>> abjad.f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
             \new Score \with {
                 \override BarLine.transparent = ##t
                 \override BarNumber.stencil = ##f
@@ -336,21 +378,27 @@ class PitchTree(Tree):
                         \consists Horizontal_bracket_engraver
                     } {
                         \time 1/8
-                        bf'8 \startGroup
+                        bf'8
+                        \startGroup
                         e'8
-                        fs'8 \stopGroup
+                        fs'8
+                        \stopGroup
                         s8
-                        cs'8 \startGroup
+                        cs'8
+                        \startGroup
                         a'8
                         g'8
                         af'8
                         b'8
-                        a'8 \stopGroup
+                        a'8
+                        \stopGroup
                         s8
-                        f'8 \startGroup
+                        f'8
+                        \startGroup
                         c'8
                         d'8
-                        ef'8 \stopGroup
+                        ef'8
+                        \stopGroup
                         s8
                         \bar "|."
                         \override Score.BarLine.transparent = ##f
@@ -375,7 +423,7 @@ class PitchTree(Tree):
         ..  docs::
 
             >>> graph_ = tree.__graph__()
-            >>> abjad.f(graph_)
+            >>> abjad.f(graph_, strict=True)
             digraph G {
                 graph [bgcolor=transparent,
                     truecolor=true];
@@ -439,7 +487,7 @@ class PitchTree(Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__(cell_indices=False)
-            >>> abjad.f(lilypond_file[abjad.Score])
+            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
             \new Score \with {
                 \override BarLine.transparent = ##t
                 \override BarNumber.stencil = ##f
@@ -460,21 +508,29 @@ class PitchTree(Tree):
                         \consists Horizontal_bracket_engraver
                     } {
                         \time 1/8
-                        f'8 \startGroup \startGroup
+                        f'8
+                        \startGroup
+                        \startGroup
                         g'8
-                        b'8 \stopGroup
+                        b'8
+                        \stopGroup
                         s8
-                        bf'8 \startGroup
+                        bf'8
+                        \startGroup
                         af'8
                         a'8
                         c'8
                         bf'8
-                        d'8 \stopGroup \stopGroup
+                        d'8
+                        \stopGroup
+                        \stopGroup
                         s8
-                        cs'8 \startGroup
+                        cs'8
+                        \startGroup
                         ef'8
                         e'8
-                        fs'8 \stopGroup
+                        fs'8
+                        \stopGroup
                         s8
                         \bar "|."
                         \override Score.BarLine.transparent = ##f
@@ -522,7 +578,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> tree_graph = tree.__graph__()
-                >>> abjad.f(tree_graph)
+                >>> abjad.f(tree_graph, strict=True)
                 digraph G {
                     graph [bgcolor=transparent,
                         truecolor=true];
@@ -593,7 +649,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> tree_graph = tree.__graph__()
-                >>> abjad.f(tree_graph)
+                >>> abjad.f(tree_graph, strict=True)
                 digraph G {
                     graph [bgcolor=transparent,
                         truecolor=true];
@@ -678,7 +734,7 @@ class PitchTree(Tree):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -699,21 +755,30 @@ class PitchTree(Tree):
                             \consists Horizontal_bracket_engraver
                         } {
                             \time 1/8
-                            e'8 \startGroup ^ \markup { 0 }
+                            e'8
+                            \startGroup
+                            ^ \markup { 0 }
                             fs'8
-                            bf'8 \stopGroup
+                            bf'8
+                            \stopGroup
                             s8
-                            a'8 \startGroup ^ \markup { 1 }
+                            a'8
+                            \startGroup
+                            ^ \markup { 1 }
                             g'8
                             af'8
                             b'8
                             a'8
-                            cs'8 \stopGroup
+                            cs'8
+                            \stopGroup
                             s8
-                            c'8 \startGroup ^ \markup { 2 }
+                            c'8
+                            \startGroup
+                            ^ \markup { 2 }
                             d'8
                             ef'8
-                            f'8 \stopGroup
+                            f'8
+                            \stopGroup
                             s8
                             \bar "|."
                             \override Score.BarLine.transparent = ##f
@@ -735,7 +800,7 @@ class PitchTree(Tree):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -756,48 +821,54 @@ class PitchTree(Tree):
                             \consists Horizontal_bracket_engraver
                         } {
                             \time 1/8
-                            e'8 \startGroup
-                                ^ \markup {
-                                    \small
-                                        \line
-                                            {
-                                                "SC(3-9){0, 2, 6}"
-                                            }
-                                    }
-                                - \tweak staff-padding #7
-                                _ \markup { 0 }
+                            e'8
+                            \startGroup
+                            ^ \markup {
+                                \small
+                                    \line
+                                        {
+                                            "SC(3-9){0, 2, 6}"
+                                        }
+                                }
+                            - \tweak staff-padding #7
+                            _ \markup { 0 }
                             fs'8
-                            bf'8 \stopGroup
+                            bf'8
+                            \stopGroup
                             s8
-                            a'8 \startGroup
-                                ^ \markup {
-                                    \small
-                                        \line
-                                            {
-                                                "SC(5-6){0, 1, 2, 4, 6}"
-                                            }
-                                    }
-                                - \tweak staff-padding #7
-                                _ \markup { 1 }
+                            a'8
+                            \startGroup
+                            ^ \markup {
+                                \small
+                                    \line
+                                        {
+                                            "SC(5-6){0, 1, 2, 4, 6}"
+                                        }
+                                }
+                            - \tweak staff-padding #7
+                            _ \markup { 1 }
                             g'8
                             af'8
                             b'8
                             a'8
-                            cs'8 \stopGroup
+                            cs'8
+                            \stopGroup
                             s8
-                            c'8 \startGroup
-                                ^ \markup {
-                                    \small
-                                        \line
-                                            {
-                                                "SC(4-19){0, 2, 3, 5}"
-                                            }
-                                    }
-                                - \tweak staff-padding #7
-                                _ \markup { 2 }
+                            c'8
+                            \startGroup
+                            ^ \markup {
+                                \small
+                                    \line
+                                        {
+                                            "SC(4-19){0, 2, 3, 5}"
+                                        }
+                                }
+                            - \tweak staff-padding #7
+                            _ \markup { 2 }
                             d'8
                             ef'8
-                            f'8 \stopGroup
+                            f'8
+                            \stopGroup
                             s8
                             \bar "|."
                             \override Score.BarLine.transparent = ##f
@@ -824,7 +895,7 @@ class PitchTree(Tree):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -845,27 +916,35 @@ class PitchTree(Tree):
                             \consists Horizontal_bracket_engraver
                         } {
                             \time 1/8
-                            f'8 \startGroup \startGroup
-                                - \tweak staff-padding #7
-                                _ \markup { 0 }
+                            f'8
+                            \startGroup
+                            \startGroup
+                            - \tweak staff-padding #7
+                            _ \markup { 0 }
                             g'8
-                            b'8 \stopGroup
+                            b'8
+                            \stopGroup
                             s8
-                            bf'8 \startGroup
-                                - \tweak staff-padding #7
-                                _ \markup { 1 }
+                            bf'8
+                            \startGroup
+                            - \tweak staff-padding #7
+                            _ \markup { 1 }
                             af'8
                             a'8
                             c'8
                             bf'8
-                            d'8 \stopGroup \stopGroup
+                            d'8
+                            \stopGroup
+                            \stopGroup
                             s8
-                            cs'8 \startGroup
-                                - \tweak staff-padding #7
-                                _ \markup { 2 }
+                            cs'8
+                            \startGroup
+                            - \tweak staff-padding #7
+                            _ \markup { 2 }
                             ef'8
                             e'8
-                            fs'8 \stopGroup
+                            fs'8
+                            \stopGroup
                             s8
                             \bar "|."
                             \override Score.BarLine.transparent = ##f
@@ -1105,7 +1184,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1131,11 +1210,16 @@ class PitchTree(Tree):
                             \once \override NoteHead.color = #red
                             \once \override Stem.color = #red
                             \time 1/8
-                            e'8 \startGroup ^ \markup { 0 }
+                            e'8
+                            \startGroup
+                            ^ \markup { 0 }
                             fs'8
-                            bf'8 \stopGroup
+                            bf'8
+                            \stopGroup
                             s8
-                            a'8 \startGroup ^ \markup { 1 }
+                            a'8
+                            \startGroup
+                            ^ \markup { 1 }
                             g'8
                             af'8
                             b'8
@@ -1145,14 +1229,17 @@ class PitchTree(Tree):
                             \once \override Dots.color = #red
                             \once \override NoteHead.color = #red
                             \once \override Stem.color = #red
-                            cs'8 \stopGroup
+                            cs'8
+                            \stopGroup
                             s8
                             \once \override Accidental.color = #red
                             \once \override Beam.color = #red
                             \once \override Dots.color = #red
                             \once \override NoteHead.color = #red
                             \once \override Stem.color = #red
-                            cs'8 \startGroup ^ \markup { 2 }
+                            cs'8
+                            \startGroup
+                            ^ \markup { 2 }
                             \once \override Accidental.color = #blue
                             \once \override Beam.color = #blue
                             \once \override Dots.color = #blue
@@ -1170,7 +1257,8 @@ class PitchTree(Tree):
                             \once \override Dots.color = #red
                             \once \override NoteHead.color = #red
                             \once \override Stem.color = #red
-                            e'8 \stopGroup
+                            e'8
+                            \stopGroup
                             s8
                             \bar "|."
                             \override Score.BarLine.transparent = ##f
@@ -1192,7 +1280,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1213,21 +1301,30 @@ class PitchTree(Tree):
                             \consists Horizontal_bracket_engraver
                         } {
                             \time 1/8
-                            e'8 \startGroup ^ \markup { 0 }
+                            e'8
+                            \startGroup
+                            ^ \markup { 0 }
                             fs'8
-                            bf'8 \stopGroup
+                            bf'8
+                            \stopGroup
                             s8
-                            a'8 \startGroup ^ \markup { 1 }
+                            a'8
+                            \startGroup
+                            ^ \markup { 1 }
                             g'8
                             af'8
                             b'8
                             a'8
-                            cs'8 \stopGroup
+                            cs'8
+                            \stopGroup
                             s8
-                            c'8 \startGroup ^ \markup { 2 }
+                            c'8
+                            \startGroup
+                            ^ \markup { 2 }
                             d'8
                             ef'8
-                            f'8 \stopGroup
+                            f'8
+                            \stopGroup
                             s8
                             \bar "|."
                             \override Score.BarLine.transparent = ##f
@@ -1257,7 +1354,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1278,21 +1375,30 @@ class PitchTree(Tree):
                             \consists Horizontal_bracket_engraver
                         } {
                             \time 1/8
-                            e''8 \startGroup ^ \markup { 0 }
+                            e''8
+                            \startGroup
+                            ^ \markup { 0 }
                             fs''8
-                            bf'8 \stopGroup
+                            bf'8
+                            \stopGroup
                             s8
-                            a'8 \startGroup ^ \markup { 1 }
+                            a'8
+                            \startGroup
+                            ^ \markup { 1 }
                             g'8
                             af'8
                             b'8
                             a'8
-                            cs'8 \stopGroup
+                            cs'8
+                            \stopGroup
                             s8
-                            c'8 \startGroup ^ \markup { 2 }
+                            c'8
+                            \startGroup
+                            ^ \markup { 2 }
                             d'8
                             ef'8
-                            f'8 \stopGroup
+                            f'8
+                            \stopGroup
                             s8
                             \bar "|."
                             \override Score.BarLine.transparent = ##f
@@ -1310,7 +1416,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = inversion.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1331,21 +1437,30 @@ class PitchTree(Tree):
                             \consists Horizontal_bracket_engraver
                         } {
                             \time 1/8
-                            e''8 \startGroup ^ \markup { 0 }
+                            e''8
+                            \startGroup
+                            ^ \markup { 0 }
                             d''8
-                            bf''8 \stopGroup
+                            bf''8
+                            \stopGroup
                             s8
-                            b''8 \startGroup ^ \markup { 1 }
+                            b''8
+                            \startGroup
+                            ^ \markup { 1 }
                             cs'''8
                             c'''8
                             a''8
                             b''8
-                            g'''8 \stopGroup
+                            g'''8
+                            \stopGroup
                             s8
-                            af'''8 \startGroup ^ \markup { 2 }
+                            af'''8
+                            \startGroup
+                            ^ \markup { 2 }
                             fs'''8
                             f'''8
-                            ef'''8 \stopGroup
+                            ef'''8
+                            \stopGroup
                             s8
                             \bar "|."
                             \override Score.BarLine.transparent = ##f
@@ -1363,7 +1478,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = inversion.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1384,21 +1499,30 @@ class PitchTree(Tree):
                             \consists Horizontal_bracket_engraver
                         } {
                             \time 1/8
-                            af,8 \startGroup ^ \markup { 0 }
+                            af,8
+                            \startGroup
+                            ^ \markup { 0 }
                             fs,8
-                            d8 \stopGroup
+                            d8
+                            \stopGroup
                             s8
-                            ef8 \startGroup ^ \markup { 1 }
+                            ef8
+                            \startGroup
+                            ^ \markup { 1 }
                             f8
                             e8
                             cs8
                             ef8
-                            b8 \stopGroup
+                            b8
+                            \stopGroup
                             s8
-                            c'8 \startGroup ^ \markup { 2 }
+                            c'8
+                            \startGroup
+                            ^ \markup { 2 }
                             bf8
                             a8
-                            g8 \stopGroup
+                            g8
+                            \stopGroup
                             s8
                             \bar "|."
                             \override Score.BarLine.transparent = ##f
@@ -1416,7 +1540,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = inversion.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1437,21 +1561,30 @@ class PitchTree(Tree):
                             \consists Horizontal_bracket_engraver
                         } {
                             \time 1/8
-                            bf'8 \startGroup ^ \markup { 0 }
+                            bf'8
+                            \startGroup
+                            ^ \markup { 0 }
                             af'8
-                            e''8 \stopGroup
+                            e''8
+                            \stopGroup
                             s8
-                            f''8 \startGroup ^ \markup { 1 }
+                            f''8
+                            \startGroup
+                            ^ \markup { 1 }
                             g''8
                             fs''8
                             ef''8
                             f''8
-                            cs'''8 \stopGroup
+                            cs'''8
+                            \stopGroup
                             s8
-                            d'''8 \startGroup ^ \markup { 2 }
+                            d'''8
+                            \startGroup
+                            ^ \markup { 2 }
                             c'''8
                             b''8
-                            a''8 \stopGroup
+                            a''8
+                            \stopGroup
                             s8
                             \bar "|."
                             \override Score.BarLine.transparent = ##f
@@ -1487,7 +1620,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1508,21 +1641,30 @@ class PitchTree(Tree):
                             \consists Horizontal_bracket_engraver
                         } {
                             \time 1/8
-                            e''8 \startGroup ^ \markup { 0 }
+                            e''8
+                            \startGroup
+                            ^ \markup { 0 }
                             fs''8
-                            bf'8 \stopGroup
+                            bf'8
+                            \stopGroup
                             s8
-                            a'8 \startGroup ^ \markup { 1 }
+                            a'8
+                            \startGroup
+                            ^ \markup { 1 }
                             g'8
                             af'8
                             b'8
                             a'8
-                            cs'8 \stopGroup
+                            cs'8
+                            \stopGroup
                             s8
-                            c'8 \startGroup ^ \markup { 2 }
+                            c'8
+                            \startGroup
+                            ^ \markup { 2 }
                             d'8
                             ef'8
-                            f'8 \stopGroup
+                            f'8
+                            \stopGroup
                             s8
                             \bar "|."
                             \override Score.BarLine.transparent = ##f
@@ -1540,7 +1682,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = retrograde.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1561,21 +1703,30 @@ class PitchTree(Tree):
                             \consists Horizontal_bracket_engraver
                         } {
                             \time 1/8
-                            c'8 \startGroup ^ \markup { 0 }
+                            c'8
+                            \startGroup
+                            ^ \markup { 0 }
                             d'8
                             ef'8
-                            f'8 \stopGroup
+                            f'8
+                            \stopGroup
                             s8
-                            a'8 \startGroup ^ \markup { 1 }
+                            a'8
+                            \startGroup
+                            ^ \markup { 1 }
                             g'8
                             af'8
                             b'8
                             a'8
-                            cs'8 \stopGroup
+                            cs'8
+                            \stopGroup
                             s8
-                            e''8 \startGroup ^ \markup { 2 }
+                            e''8
+                            \startGroup
+                            ^ \markup { 2 }
                             fs''8
-                            bf'8 \stopGroup
+                            bf'8
+                            \stopGroup
                             s8
                             \bar "|."
                             \override Score.BarLine.transparent = ##f
@@ -1610,7 +1761,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1631,21 +1782,30 @@ class PitchTree(Tree):
                             \consists Horizontal_bracket_engraver
                         } {
                             \time 1/8
-                            e''8 \startGroup ^ \markup { 0 }
+                            e''8
+                            \startGroup
+                            ^ \markup { 0 }
                             fs''8
-                            bf'8 \stopGroup
+                            bf'8
+                            \stopGroup
                             s8
-                            a'8 \startGroup ^ \markup { 1 }
+                            a'8
+                            \startGroup
+                            ^ \markup { 1 }
                             g'8
                             af'8
                             b'8
                             a'8
-                            cs'8 \stopGroup
+                            cs'8
+                            \stopGroup
                             s8
-                            c'8 \startGroup ^ \markup { 2 }
+                            c'8
+                            \startGroup
+                            ^ \markup { 2 }
                             d'8
                             ef'8
-                            f'8 \stopGroup
+                            f'8
+                            \stopGroup
                             s8
                             \bar "|."
                             \override Score.BarLine.transparent = ##f
@@ -1663,7 +1823,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = rotation.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1684,21 +1844,30 @@ class PitchTree(Tree):
                             \consists Horizontal_bracket_engraver
                         } {
                             \time 1/8
-                            c'8 \startGroup ^ \markup { 0 }
+                            c'8
+                            \startGroup
+                            ^ \markup { 0 }
                             d'8
                             ef'8
-                            f'8 \stopGroup
+                            f'8
+                            \stopGroup
                             s8
-                            e''8 \startGroup ^ \markup { 1 }
+                            e''8
+                            \startGroup
+                            ^ \markup { 1 }
                             fs''8
-                            bf'8 \stopGroup
+                            bf'8
+                            \stopGroup
                             s8
-                            a'8 \startGroup ^ \markup { 2 }
+                            a'8
+                            \startGroup
+                            ^ \markup { 2 }
                             g'8
                             af'8
                             b'8
                             a'8
-                            cs'8 \stopGroup
+                            cs'8
+                            \stopGroup
                             s8
                             \bar "|."
                             \override Score.BarLine.transparent = ##f
@@ -1716,7 +1885,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = rotation.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1737,21 +1906,30 @@ class PitchTree(Tree):
                             \consists Horizontal_bracket_engraver
                         } {
                             \time 1/8
-                            a'8 \startGroup ^ \markup { 0 }
+                            a'8
+                            \startGroup
+                            ^ \markup { 0 }
                             g'8
                             af'8
                             b'8
                             a'8
-                            cs'8 \stopGroup
+                            cs'8
+                            \stopGroup
                             s8
-                            c'8 \startGroup ^ \markup { 1 }
+                            c'8
+                            \startGroup
+                            ^ \markup { 1 }
                             d'8
                             ef'8
-                            f'8 \stopGroup
+                            f'8
+                            \stopGroup
                             s8
-                            e''8 \startGroup ^ \markup { 2 }
+                            e''8
+                            \startGroup
+                            ^ \markup { 2 }
                             fs''8
-                            bf'8 \stopGroup
+                            bf'8
+                            \stopGroup
                             s8
                             \bar "|."
                             \override Score.BarLine.transparent = ##f
@@ -1769,7 +1947,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = rotation.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1790,21 +1968,30 @@ class PitchTree(Tree):
                             \consists Horizontal_bracket_engraver
                         } {
                             \time 1/8
-                            e''8 \startGroup ^ \markup { 0 }
+                            e''8
+                            \startGroup
+                            ^ \markup { 0 }
                             fs''8
-                            bf'8 \stopGroup
+                            bf'8
+                            \stopGroup
                             s8
-                            a'8 \startGroup ^ \markup { 1 }
+                            a'8
+                            \startGroup
+                            ^ \markup { 1 }
                             g'8
                             af'8
                             b'8
                             a'8
-                            cs'8 \stopGroup
+                            cs'8
+                            \stopGroup
                             s8
-                            c'8 \startGroup ^ \markup { 2 }
+                            c'8
+                            \startGroup
+                            ^ \markup { 2 }
                             d'8
                             ef'8
-                            f'8 \stopGroup
+                            f'8
+                            \stopGroup
                             s8
                             \bar "|."
                             \override Score.BarLine.transparent = ##f
@@ -1840,7 +2027,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1861,21 +2048,30 @@ class PitchTree(Tree):
                             \consists Horizontal_bracket_engraver
                         } {
                             \time 1/8
-                            e''8 \startGroup ^ \markup { 0 }
+                            e''8
+                            \startGroup
+                            ^ \markup { 0 }
                             fs''8
-                            bf'8 \stopGroup
+                            bf'8
+                            \stopGroup
                             s8
-                            a'8 \startGroup ^ \markup { 1 }
+                            a'8
+                            \startGroup
+                            ^ \markup { 1 }
                             g'8
                             af'8
                             b'8
                             a'8
-                            cs'8 \stopGroup
+                            cs'8
+                            \stopGroup
                             s8
-                            c'8 \startGroup ^ \markup { 2 }
+                            c'8
+                            \startGroup
+                            ^ \markup { 2 }
                             d'8
                             ef'8
-                            f'8 \stopGroup
+                            f'8
+                            \stopGroup
                             s8
                             \bar "|."
                             \override Score.BarLine.transparent = ##f
@@ -1893,7 +2089,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = transposition.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1914,21 +2110,30 @@ class PitchTree(Tree):
                             \consists Horizontal_bracket_engraver
                         } {
                             \time 1/8
-                            f'''8 \startGroup ^ \markup { 0 }
+                            f'''8
+                            \startGroup
+                            ^ \markup { 0 }
                             g'''8
-                            b''8 \stopGroup
+                            b''8
+                            \stopGroup
                             s8
-                            bf''8 \startGroup ^ \markup { 1 }
+                            bf''8
+                            \startGroup
+                            ^ \markup { 1 }
                             af''8
                             a''8
                             c'''8
                             bf''8
-                            d''8 \stopGroup
+                            d''8
+                            \stopGroup
                             s8
-                            cs''8 \startGroup ^ \markup { 2 }
+                            cs''8
+                            \startGroup
+                            ^ \markup { 2 }
                             ef''8
                             e''8
-                            fs''8 \stopGroup
+                            fs''8
+                            \stopGroup
                             s8
                             \bar "|."
                             \override Score.BarLine.transparent = ##f
@@ -1946,7 +2151,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = transposition.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1967,21 +2172,30 @@ class PitchTree(Tree):
                             \consists Horizontal_bracket_engraver
                         } {
                             \time 1/8
-                            ef'8 \startGroup ^ \markup { 0 }
+                            ef'8
+                            \startGroup
+                            ^ \markup { 0 }
                             f'8
-                            a8 \stopGroup
+                            a8
+                            \stopGroup
                             s8
-                            af8 \startGroup ^ \markup { 1 }
+                            af8
+                            \startGroup
+                            ^ \markup { 1 }
                             fs8
                             g8
                             bf8
                             af8
-                            c8 \stopGroup
+                            c8
+                            \stopGroup
                             s8
-                            b,8 \startGroup ^ \markup { 2 }
+                            b,8
+                            \startGroup
+                            ^ \markup { 2 }
                             cs8
                             d8
-                            e8 \stopGroup
+                            e8
+                            \stopGroup
                             s8
                             \bar "|."
                             \override Score.BarLine.transparent = ##f
@@ -1999,7 +2213,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = transposition.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score])
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -2020,21 +2234,30 @@ class PitchTree(Tree):
                             \consists Horizontal_bracket_engraver
                         } {
                             \time 1/8
-                            e''8 \startGroup ^ \markup { 0 }
+                            e''8
+                            \startGroup
+                            ^ \markup { 0 }
                             fs''8
-                            bf'8 \stopGroup
+                            bf'8
+                            \stopGroup
                             s8
-                            a'8 \startGroup ^ \markup { 1 }
+                            a'8
+                            \startGroup
+                            ^ \markup { 1 }
                             g'8
                             af'8
                             b'8
                             a'8
-                            cs'8 \stopGroup
+                            cs'8
+                            \stopGroup
                             s8
-                            c'8 \startGroup ^ \markup { 2 }
+                            c'8
+                            \startGroup
+                            ^ \markup { 2 }
                             d'8
                             ef'8
-                            f'8 \stopGroup
+                            f'8
+                            \stopGroup
                             s8
                             \bar "|."
                             \override Score.BarLine.transparent = ##f
