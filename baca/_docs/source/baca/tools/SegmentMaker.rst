@@ -24,6 +24,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.SegmentMaker.SegmentMaker.allow_empty_selections
+      ~baca.tools.SegmentMaker.SegmentMaker.clefs
       ~baca.tools.SegmentMaker.SegmentMaker.color_octaves
       ~baca.tools.SegmentMaker.SegmentMaker.color_out_of_range_pitches
       ~baca.tools.SegmentMaker.SegmentMaker.color_repeat_pitch_classes
@@ -77,6 +78,8 @@ Read-only properties
 --------------------
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.allow_empty_selections
+
+.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.clefs
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.color_octaves
 
