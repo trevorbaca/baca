@@ -145,22 +145,22 @@ class NestingCommand(Command):
                             - \markup {
                                 \column
                                     {
-                                        \line % STAGE_NUMBER_MARKUP:2
-                                            { % STAGE_NUMBER_MARKUP:2
-                                                \fontsize % STAGE_NUMBER_MARKUP:2
-                                                    #-3 % STAGE_NUMBER_MARKUP:2
-                                                    \with-color % STAGE_NUMBER_MARKUP:2
-                                                        #(x11-color 'DarkCyan) % STAGE_NUMBER_MARKUP:2
-                                                        [1] % STAGE_NUMBER_MARKUP:2
-                                            } % STAGE_NUMBER_MARKUP:2
-                                        \line % SEGMENT:SPACING_MARKUP:4
-                                            { % SEGMENT:SPACING_MARKUP:4
-                                                \with-color % SEGMENT:SPACING_MARKUP:4
-                                                    #(x11-color 'DarkCyan) % SEGMENT:SPACING_MARKUP:4
-                                                    \fontsize % SEGMENT:SPACING_MARKUP:4
-                                                        #-3 % SEGMENT:SPACING_MARKUP:4
-                                                        (1/24) % SEGMENT:SPACING_MARKUP:4
-                                            } % SEGMENT:SPACING_MARKUP:4
+                                        \line %! STAGE_NUMBER_MARKUP:2
+                                            { %! STAGE_NUMBER_MARKUP:2
+                                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                            } %! STAGE_NUMBER_MARKUP:2
+                                        \line %! SEGMENT:SPACING_MARKUP:4
+                                            { %! SEGMENT:SPACING_MARKUP:4
+                                                \with-color %! SEGMENT:SPACING_MARKUP:4
+                                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:4
+                                                    \fontsize %! SEGMENT:SPACING_MARKUP:4
+                                                        #-3 %! SEGMENT:SPACING_MARKUP:4
+                                                        (1/24) %! SEGMENT:SPACING_MARKUP:4
+                                            } %! SEGMENT:SPACING_MARKUP:4
                                     }
                                 }
             <BLANKLINE>
