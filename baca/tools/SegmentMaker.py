@@ -1032,7 +1032,7 @@ class SegmentMaker(abjad.SegmentMaker):
             raise Exception(message)
 
     @staticmethod
-    def _color_duplicate(grob, context=None, once=True):
+    def _color_redundant(grob, context=None, once=True):
         if context is not None:
             context = getattr(context, 'context_name', context)
             string = rf'\override {context}.{grob}.color ='
@@ -1044,7 +1044,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return string
 
     @staticmethod
-    def _color_duplicate_shadow(grob, context=None, once=True):
+    def _color_redundant_shadow(grob, context=None, once=True):
         if context is not None:
             context = getattr(context, 'context_name', context)
             string = rf'\override {context}.{grob}.color ='
@@ -1776,13 +1776,13 @@ class SegmentMaker(abjad.SegmentMaker):
         assert time_signature is not None
         previous_time_signature = self._get_previous_time_signature()
         if str(previous_time_signature) == str(time_signature):
-            tag = 'SEGMENT:DUPLICATE_TIME_SIGNATURE'
+            tag = 'SEGMENT:REDUNDANT_TIME_SIGNATURE'
             wrapper = abjad.inspect(skip).get_indicator(
                 abjad.TimeSignature,
                 unwrap=False,
                 )
             context = wrapper.context
-            string = self._color_duplicate('TimeSignature', context)
+            string = self._color_redundant('TimeSignature', context)
             literal = abjad.LilyPondLiteral(string)
             abjad.attach(literal, skip, tag=tag)
             abjad.detach(time_signature, skip)
@@ -1824,8 +1824,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(literal, first_leaf, tag=tag)
                     abjad.attach(previous_staff_lines, first_leaf, tag=tag)
                 elif previous_staff_lines == staff_lines:
-                    tag = 'SEGMENT:DUPLICATE_STAFF_LINES'
-                    string = self._color_duplicate('StaffSymbol', context)
+                    tag = 'SEGMENT:REDUNDANT_STAFF_LINES'
+                    string = self._color_redundant('StaffSymbol', context)
                     literal = abjad.LilyPondLiteral(string)
                     abjad.attach(literal, first_leaf, tag=tag)
             if previous_clef is not None:
@@ -1874,7 +1874,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.Clef,
                         unwrap=False,
                         )
-                    string = self._color_duplicate(
+                    string = self._color_redundant(
                         'Clef',
                         context=wrapper.context,
                         )
@@ -1882,7 +1882,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(
                         literal,
                         first_leaf,
-                        tag='DUPLICATE_CLEF_COLOR',
+                        tag='REDUNDANT_CLEF_COLOR',
                         )
                     string = self._uncolor(
                         'Clef',
@@ -1894,22 +1894,22 @@ class SegmentMaker(abjad.SegmentMaker):
                         literal,
                         first_leaf,
                         deactivate=True,
-                        tag='DUPLICATE_CLEF_UNCOLOR',
+                        tag='REDUNDANT_CLEF_UNCOLOR',
                         )
                     abjad.detach(clef, first_leaf)
                     abjad.attach(
                         clef,
                         first_leaf,
-                        tag='DUPLICATE_CLEF_COMMAND',
+                        tag='REDUNDANT_CLEF_COMMAND',
                         )
                     string = rf'\set {wrapper.context}.forceClef = ##t'
                     literal = abjad.LilyPondLiteral(string)
                     abjad.attach(
                         literal,
                         first_leaf,
-                        tag='DUPLICATE_CLEF_COMMAND',
+                        tag='REDUNDANT_CLEF_COMMAND',
                         )
-                    string = self._color_duplicate_shadow(
+                    string = self._color_redundant_shadow(
                         'Clef',
                         context=wrapper.context,
                         once=False,
@@ -1918,7 +1918,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(
                         literal,
                         first_leaf,
-                        tag='DUPLICATE_CLEF_SHADOW',
+                        tag='REDUNDANT_CLEF_SHADOW',
                         )
             if previous_dynamic is not None:
                 prototype = abjad.Dynamic
