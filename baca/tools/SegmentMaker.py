@@ -1013,41 +1013,8 @@ class SegmentMaker(abjad.SegmentMaker):
             message = manager.tabulate_wellformedness(score)
             raise Exception(message)
 
-    @staticmethod
-    def _color_redundant(grob, context=None, once=True):
-        if context is not None:
-            context = getattr(context, 'context_name', context)
-            string = rf'\override {context}.{grob}.color ='
-        else:
-            string = rf'\override {grob}.color ='
-        if once:
-            string = rf'\once {string}'
-        string += " #(x11-color 'DeepPink1)"
-        return string
-
-    @staticmethod
-    def _color_redundant_shadow(grob, context=None, once=True):
-        if context is not None:
-            context = getattr(context, 'context_name', context)
-            string = rf'\override {context}.{grob}.color ='
-        else:
-            string = rf'\override {grob}.color ='
-        if once:
-            string = rf'\once {string}'
-        string += " #(x11-color 'DeepPink4)"
-        return string
-
-    @staticmethod
-    def _color_explicit(grob, context=None, once=True):
-        if context is not None:
-            context = getattr(context, 'context_name', context)
-            string = rf'\override {context}.{grob}.color ='
-        else:
-            string = rf'\override {grob}.color ='
-        if once:
-            string = rf'\once {string}'
-        string += " #(x11-color 'blue)"
-        return string
+    def _color_explicit(self, grob, context=None, once=True):
+        return self._color_something('blue', grob, context, once)
 
     def _color_explicit_contexted_indicators(self):
         for leaf in abjad.iterate(self._score).leaves():
@@ -1124,17 +1091,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 literal = abjad.LilyPondLiteral(string, 'after')
                 abjad.attach(literal, leaf, tag='EXPLICIT_CLEF_SHADOW')
 
-    @staticmethod
-    def _color_explicit_shadow(grob, context=None, once=True):
-        if context is not None:
-            context = getattr(context, 'context_name', context)
-            string = rf'\override {context}.{grob}.color ='
-        else:
-            string = rf'\override {grob}.color ='
-        if once:
-            string = rf'\once {string}'
-        string += " #(x11-color 'DarkCyan)"
-        return string
+    def _color_explicit_shadow(self, grob, context=None, once=True):
+        return self._color_something('DarkCyan', grob, context, once)
 
     def _color_octaves_(self):
         if not self.color_octaves:
@@ -1160,39 +1118,20 @@ class SegmentMaker(abjad.SegmentMaker):
                 for leaf in notes_and_chords:
                     abjad.attach(markup, leaf)
 
-    @staticmethod
-    def _color_reapplied(grob, context=None, once=True):
-        if context is not None:
-            context = getattr(context, 'context_name', context)
-            string = rf'\override {context}.{grob}.color ='
-        else:
-            string = rf'\override {grob}.color ='
-        if once:
-            string = rf'\once {string}'
-        string = f"{string} #(x11-color 'green)"
-        return string
+    def _color_reapplied(self, grob, context=None, once=True):
+        return self._color_something('green', grob, context, once)
 
-    @staticmethod
-    def _color_reapplied_shadow(grob, context=None, once=True):
-        if context is not None:
-            context = getattr(context, 'context_name', context)
-            string = rf'\override {context}.{grob}.color ='
-        else:
-            string = rf'\override {grob}.color ='
-        if once:
-            string = rf'\once {string}'
-        string = f"{string} #(x11-color 'DarkGreen)"
-        return string
+    def _color_reapplied_shadow(self, grob, context=None, once=True):
+        return self._color_something('DarkGreen', grob, context, once)
 
-    @staticmethod
-    def _color_reminder(grob, context=None):
-        if context is not None:
-            context = getattr(context, 'context_name', context)
-            string = rf'\once \override {context}.{grob}.color ='
-        else:
-            string = rf'\once \override {grob}.color ='
-        string += " #(x11-color 'DarkCyan)"
-        return string
+    def _color_redundant(self, grob, context=None, once=True):
+        return self._color_something('DeepPink1', grob, context, once)
+
+    def _color_redundant_shadow(self, grob, context=None, once=True):
+        return self._color_something('DeepPink4', grob, context, once)
+
+    def _color_reminder(self, grob, context=None, once=True):
+        return self._color_something('DarkCyan', grob, context, once)
 
     def _color_repeat_pitch_classes_(self):
         manager = baca.WellformednessManager
@@ -1203,6 +1142,18 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.label(lt).color_leaves('red')
             for leaf in lt:
                 abjad.attach(markup, leaf)
+
+    @staticmethod
+    def _color_something(color, grob, context=None, once=True):
+        if context is not None:
+            context = getattr(context, 'context_name', context)
+            string = rf'\override {context}.{grob}.color ='
+        else:
+            string = rf'\override {grob}.color ='
+        if once:
+            string = rf'\once {string}'
+        string += f" #(x11-color '{color})"
+        return string
 
     def _color_unpitched_notes(self):
         if self.ignore_unpitched_notes:
@@ -1439,6 +1390,11 @@ class SegmentMaker(abjad.SegmentMaker):
             if clef_name is not None:
                 return abjad.Clef(clef_name)
 
+    def _get_previous_clock_time(self):
+        if not self._previous_metadata:
+            return
+        return self._previous_metadata.get('end_clock_time')
+
     def _get_previous_dynamic(self, context):
         if not self._previous_metadata:
             return
@@ -1448,11 +1404,6 @@ class SegmentMaker(abjad.SegmentMaker):
             dynamic_name = dictionary.get(context)
             if dynamic_name is not None:
                 return abjad.Dynamic(dynamic_name)
-
-    def _get_previous_clock_time(self):
-        if not self._previous_metadata:
-            return
-        return self._previous_metadata.get('end_clock_time')
 
     def _get_previous_instrument(self, context):
         if not self._previous_metadata:
