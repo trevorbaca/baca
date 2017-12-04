@@ -1771,22 +1771,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 prototype = abjad.Instrument
                 instrument = abjad.inspect(first_leaf).get_indicator(prototype)
                 if instrument is None:
-                    self._tag_grob_color(
+                    self._tag_instrument(
                         first_leaf,
-                        'reapplied',
-                        'InstrumentName',
-                        context,
-                        tagged_grob_name='INSTRUMENT',
-                        )
-                    instrument = abjad.new(
                         previous_instrument,
-                        context=context.context_name,
-                        )
-                    self._tag_grob_command(
-                        first_leaf,
+                        context,
                         'reapplied',
-                        'INSTRUMENT',
-                        instrument,
                         )
             if previous_staff_lines is not None:
                 prototype = baca.StaffLines
@@ -1927,6 +1916,27 @@ class SegmentMaker(abjad.SegmentMaker):
         abjad.detach(abjad.Clef, leaf)
         self._tag_grob_command(leaf, status, grob, clef, context=context)
         self._tag_grob_shadow(leaf, status, grob, context)
+
+    def _tag_instrument(self, leaf, instrument, context, status):
+        if not isinstance(context, str):
+            context = context.context_name
+        grob = 'InstrumentName'
+        tagged_grob_name = 'INSTRUMENT'
+        self._tag_grob_color(
+            leaf,
+            status,
+            grob,
+            context,
+            tagged_grob_name=tagged_grob_name,
+            )
+        abjad.detach(abjad.Instrument, leaf)
+        self._tag_grob_command(
+            leaf,
+            status,
+            tagged_grob_name,
+            instrument,
+            context=context,
+            )
 
     def _tag_clock_time(self):
         skips = baca.select(self._score['GlobalSkips']).skips()
@@ -5586,9 +5596,1212 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @property
     def instruments(self):
-        r'''Gets instrument list.
+        r'''Gets instrument manifest.
 
-        Returns typed ordered dictionary or none.
+        ..  container:: example
+
+            Explicit instruments color blue; shadow instruments color
+            shadow-blue:
+
+            >>> layout_measure_map = baca.layout(
+            ...     baca.page(
+            ...         [1, 0, (7,)],
+            ...         [5, 20, (7,)],
+            ...         [9, 40, (7,)],
+            ...         ),
+            ...     )
+            >>> instruments = abjad.InstrumentDictionary()
+            >>> instruments['flute'] = abjad.Flute()
+            >>> instruments['piccolo'] = abjad.Piccolo()
+            >>> maker = baca.SegmentMaker(
+            ...     first_segment=False,
+            ...     ignore_unpitched_notes=True,
+            ...     instruments=instruments,
+            ...     layout_measure_map=layout_measure_map,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     time_signatures=3 * [(4, 8), (3, 8), (2, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.instrument(instruments['flute']),
+            ...     baca.map(
+            ...         baca.instrument(instruments['piccolo']),
+            ...         baca.leaves().group_by_measure()[6],
+            ...         ),
+            ...     baca.make_even_runs(),
+            ...     )
+
+            >>> metadata = {}
+            >>> metadata['end_instrument_by_context'] = {}
+            >>> metadata['end_instrument_by_context']['MusicStaff'] = 'piccolo'
+            >>> lilypond_file = maker.run(
+            ...     deactivate=(
+            ...         'SEGMENT:SPACING_MARKUP',
+            ...         'STAGE_NUMBER_MARKUP',
+            ...         ),
+            ...     environment='docs',
+            ...     previous_metadata=metadata,
+            ...     )
+            >>> layout_block = abjad.Block(name='layout')
+            >>> layout_block.indent = 0
+            >>> lilypond_file.items.insert(0, layout_block)
+
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \pageBreak %! SEGMENT:LAYOUT:7
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT:8
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:9
+                            \time 4/8
+                            \bar "" %! EMPTY_START_BAR:1
+                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK_COLOR:3
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:5
+                            s1 * 1/2
+                            - \markup {
+                                \column
+                                    {
+                                        %%% \line %! STAGE_NUMBER_MARKUP:2
+                                        %%%     { %! STAGE_NUMBER_MARKUP:2
+                                        %%%         \fontsize %! STAGE_NUMBER_MARKUP:2
+                                        %%%             #-3 %! STAGE_NUMBER_MARKUP:2
+                                        %%%             \with-color %! STAGE_NUMBER_MARKUP:2
+                                        %%%                 #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        %%%                 [1] %! STAGE_NUMBER_MARKUP:2
+                                        %%%     } %! STAGE_NUMBER_MARKUP:2
+                                        %%% \line %! SEGMENT:SPACING_MARKUP:6
+                                        %%%     { %! SEGMENT:SPACING_MARKUP:6
+                                        %%%         \with-color %! SEGMENT:SPACING_MARKUP:6
+                                        %%%             #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:6
+                                        %%%             \fontsize %! SEGMENT:SPACING_MARKUP:6
+                                        %%%                 #-3 %! SEGMENT:SPACING_MARKUP:6
+                                        %%%                 (1/24) %! SEGMENT:SPACING_MARKUP:6
+                                        %%%     } %! SEGMENT:SPACING_MARKUP:6
+                                    }
+                                }
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 2] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 3/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 3/8
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 3] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 2/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 1/4
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 4] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 3/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 3/8
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 5] %%%
+                            \break %! SEGMENT:LAYOUT:3
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
+                            \time 4/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 1/2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 6] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 3/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 3/8
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 7] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 2/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 1/4
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 8] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 3/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 3/8
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 9] %%%
+                            \break %! SEGMENT:LAYOUT:3
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 40) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
+                            \time 4/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 1/2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 10] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 3/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 3/8
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 11] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 2/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 1/4
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 12] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 3/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 3/8
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 1] %%%
+                                    \set Staff.instrumentName = \markup { Flute }
+                                    \set Staff.shortInstrumentName = \markup { Fl. }
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 2] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 3] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 4] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 5] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 6] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 7] %%%
+                                    \set Staff.instrumentName = \markup { Piccolo }
+                                    \set Staff.shortInstrumentName = \markup { Picc. }
+                                    c'8
+                                    [
+                                    ^ \markup {
+                                        \override
+                                            #'(box-padding . 0.75)
+                                            \box
+                                                "to piccolo"
+                                        }
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 8] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 9] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 10] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 11] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 12] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                    \bar "|"
+                <BLANKLINE>
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            Reapplied instruments (at start of nonfirst segments) color green;
+            shadow instruments color shadow-green:
+
+            >>> layout_measure_map = baca.layout(
+            ...     baca.page(
+            ...         [1, 0, (7,)],
+            ...         [5, 20, (7,)],
+            ...         [9, 40, (7,)],
+            ...         ),
+            ...     )
+            >>> instruments = abjad.InstrumentDictionary()
+            >>> instruments['flute'] = abjad.Flute()
+            >>> instruments['piccolo'] = abjad.Piccolo()
+            >>> maker = baca.SegmentMaker(
+            ...     first_segment=False,
+            ...     ignore_unpitched_notes=True,
+            ...     instruments=instruments,
+            ...     layout_measure_map=layout_measure_map,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     time_signatures=3 * [(4, 8), (3, 8), (2, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.map(
+            ...         baca.instrument(instruments['piccolo']),
+            ...         baca.leaves().group_by_measure()[6],
+            ...         ),
+            ...     baca.make_even_runs(),
+            ...     )
+
+            >>> metadata = {}
+            >>> metadata['end_instrument_by_context'] = {}
+            >>> metadata['end_instrument_by_context']['MusicStaff'] = 'flute'
+            >>> lilypond_file = maker.run(
+            ...     deactivate=(
+            ...         'SEGMENT:SPACING_MARKUP',
+            ...         'STAGE_NUMBER_MARKUP',
+            ...         ),
+            ...     environment='docs',
+            ...     previous_metadata=metadata,
+            ...     )
+            >>> layout_block = abjad.Block(name='layout')
+            >>> layout_block.indent = 0
+            >>> lilypond_file.items.insert(0, layout_block)
+
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \pageBreak %! SEGMENT:LAYOUT:7
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT:8
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:9
+                            \time 4/8
+                            \bar "" %! EMPTY_START_BAR:1
+                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK_COLOR:3
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:5
+                            s1 * 1/2
+                            - \markup {
+                                \column
+                                    {
+                                        %%% \line %! STAGE_NUMBER_MARKUP:2
+                                        %%%     { %! STAGE_NUMBER_MARKUP:2
+                                        %%%         \fontsize %! STAGE_NUMBER_MARKUP:2
+                                        %%%             #-3 %! STAGE_NUMBER_MARKUP:2
+                                        %%%             \with-color %! STAGE_NUMBER_MARKUP:2
+                                        %%%                 #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        %%%                 [1] %! STAGE_NUMBER_MARKUP:2
+                                        %%%     } %! STAGE_NUMBER_MARKUP:2
+                                        %%% \line %! SEGMENT:SPACING_MARKUP:6
+                                        %%%     { %! SEGMENT:SPACING_MARKUP:6
+                                        %%%         \with-color %! SEGMENT:SPACING_MARKUP:6
+                                        %%%             #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:6
+                                        %%%             \fontsize %! SEGMENT:SPACING_MARKUP:6
+                                        %%%                 #-3 %! SEGMENT:SPACING_MARKUP:6
+                                        %%%                 (1/24) %! SEGMENT:SPACING_MARKUP:6
+                                        %%%     } %! SEGMENT:SPACING_MARKUP:6
+                                    }
+                                }
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 2] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 3/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 3/8
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 3] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 2/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 1/4
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 4] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 3/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 3/8
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 5] %%%
+                            \break %! SEGMENT:LAYOUT:3
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
+                            \time 4/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 1/2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 6] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 3/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 3/8
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 7] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 2/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 1/4
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 8] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 3/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 3/8
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 9] %%%
+                            \break %! SEGMENT:LAYOUT:3
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 40) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
+                            \time 4/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 1/2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 10] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 3/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 3/8
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 11] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 2/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 1/4
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 12] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 3/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 3/8
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 1] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 2] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 3] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 4] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 5] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 6] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 7] %%%
+                                    \set Staff.instrumentName = \markup { Piccolo }
+                                    \set Staff.shortInstrumentName = \markup { Picc. }
+                                    c'8
+                                    [
+                                    ^ \markup {
+                                        \override
+                                            #'(box-padding . 0.75)
+                                            \box
+                                                "to piccolo"
+                                        }
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 8] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 9] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 10] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 11] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 12] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                    \bar "|"
+                <BLANKLINE>
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            Redundant instruments color pink; shadow instruments color
+            shadow-pink:
+
+            >>> layout_measure_map = baca.layout(
+            ...     baca.page(
+            ...         [1, 0, (7,)],
+            ...         [5, 20, (7,)],
+            ...         [9, 40, (7,)],
+            ...         ),
+            ...     )
+            >>> instruments = abjad.InstrumentDictionary()
+            >>> instruments['flute'] = abjad.Flute()
+            >>> instruments['piccolo'] = abjad.Piccolo()
+            >>> maker = baca.SegmentMaker(
+            ...     first_segment=False,
+            ...     ignore_unpitched_notes=True,
+            ...     instruments=instruments,
+            ...     layout_measure_map=layout_measure_map,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     time_signatures=3 * [(4, 8), (3, 8), (2, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.instrument(instruments['flute']),
+            ...     baca.map(
+            ...         baca.instrument(instruments['piccolo']),
+            ...         baca.leaves().group_by_measure()[6],
+            ...         ),
+            ...     baca.map(
+            ...         baca.instrument(instruments['piccolo']),
+            ...         baca.leaves().group_by_measure()[10],
+            ...         ),
+            ...     baca.make_even_runs(),
+            ...     )
+
+            >>> metadata = {}
+            >>> metadata['end_instrument_by_context'] = {}
+            >>> metadata['end_instrument_by_context']['MusicStaff'] = 'flute'
+            >>> lilypond_file = maker.run(
+            ...     deactivate=(
+            ...         'SEGMENT:SPACING_MARKUP',
+            ...         'STAGE_NUMBER_MARKUP',
+            ...         ),
+            ...     environment='docs',
+            ...     previous_metadata=metadata,
+            ...     )
+            >>> layout_block = abjad.Block(name='layout')
+            >>> layout_block.indent = 0
+            >>> lilypond_file.items.insert(0, layout_block)
+
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \pageBreak %! SEGMENT:LAYOUT:7
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT:8
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:9
+                            \time 4/8
+                            \bar "" %! EMPTY_START_BAR:1
+                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK_COLOR:3
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:5
+                            s1 * 1/2
+                            - \markup {
+                                \column
+                                    {
+                                        %%% \line %! STAGE_NUMBER_MARKUP:2
+                                        %%%     { %! STAGE_NUMBER_MARKUP:2
+                                        %%%         \fontsize %! STAGE_NUMBER_MARKUP:2
+                                        %%%             #-3 %! STAGE_NUMBER_MARKUP:2
+                                        %%%             \with-color %! STAGE_NUMBER_MARKUP:2
+                                        %%%                 #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                        %%%                 [1] %! STAGE_NUMBER_MARKUP:2
+                                        %%%     } %! STAGE_NUMBER_MARKUP:2
+                                        %%% \line %! SEGMENT:SPACING_MARKUP:6
+                                        %%%     { %! SEGMENT:SPACING_MARKUP:6
+                                        %%%         \with-color %! SEGMENT:SPACING_MARKUP:6
+                                        %%%             #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:6
+                                        %%%             \fontsize %! SEGMENT:SPACING_MARKUP:6
+                                        %%%                 #-3 %! SEGMENT:SPACING_MARKUP:6
+                                        %%%                 (1/24) %! SEGMENT:SPACING_MARKUP:6
+                                        %%%     } %! SEGMENT:SPACING_MARKUP:6
+                                    }
+                                }
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 2] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 3/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 3/8
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 3] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 2/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 1/4
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 4] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 3/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 3/8
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 5] %%%
+                            \break %! SEGMENT:LAYOUT:3
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
+                            \time 4/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 1/2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 6] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 3/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 3/8
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 7] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 2/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 1/4
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 8] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 3/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 3/8
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 9] %%%
+                            \break %! SEGMENT:LAYOUT:3
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 40) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
+                            \time 4/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 1/2
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 10] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 3/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 3/8
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 11] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 2/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 1/4
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 12] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 3/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 3/8
+                            %%% - \markup { %! SEGMENT:SPACING_MARKUP:2
+                            %%%     \with-color %! SEGMENT:SPACING_MARKUP:2
+                            %%%         #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                            %%%         \fontsize %! SEGMENT:SPACING_MARKUP:2
+                            %%%             #-3 %! SEGMENT:SPACING_MARKUP:2
+                            %%%             (1/24) %! SEGMENT:SPACING_MARKUP:2
+                            %%%     } %! SEGMENT:SPACING_MARKUP:2
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 1] %%%
+                                    \set Staff.instrumentName = \markup { Flute }
+                                    \set Staff.shortInstrumentName = \markup { Fl. }
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 2] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 3] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 4] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 5] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 6] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 7] %%%
+                                    \set Staff.instrumentName = \markup { Piccolo }
+                                    \set Staff.shortInstrumentName = \markup { Picc. }
+                                    c'8
+                                    [
+                                    ^ \markup {
+                                        \override
+                                            #'(box-padding . 0.75)
+                                            \box
+                                                "to piccolo"
+                                        }
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 8] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 9] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 10] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 11] %%%
+                                    \set Staff.instrumentName = \markup { Piccolo }
+                                    \set Staff.shortInstrumentName = \markup { Picc. }
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 12] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                    \bar "|"
+                <BLANKLINE>
+                                }
+                            }
+                        }
+                    >>
+                >>
+
+        Returns instrument dictionary or none.
         '''
         return self._instruments
 
