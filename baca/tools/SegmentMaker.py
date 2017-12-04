@@ -2046,7 +2046,11 @@ class SegmentMaker(abjad.SegmentMaker):
         abjad.attach(literal, leaf, tag=tag)
 
     def _tag_grob_uncolor(self, leaf, status, grob, context=None):
-        string = self._uncolor(grob, context, once=False)
+        if context is not None:
+            context = getattr(context, 'context_name', context)
+            string = rf'\override {context}.{grob}.color = ##f'
+        else:
+            string = rf'\override {grob}.color = ##f'
         literal = abjad.LilyPondLiteral(string)
         tag = self._get_tag(status, grob, 'uncolor')
         abjad.attach(literal, leaf, deactivate=True, tag=tag)
@@ -2061,15 +2065,13 @@ class SegmentMaker(abjad.SegmentMaker):
             context,
             tagged_grob_name=tagged_grob_name,
             )
-        # TODO: detach and reattach even for redundant staff lines:
-        if status != 'redundant':
-            abjad.detach(baca.StaffLines, leaf)
-            self._tag_grob_command(
-                leaf,
-                status,
-                tagged_grob_name,
-                staff_lines,
-                )
+        abjad.detach(baca.StaffLines, leaf)
+        self._tag_grob_command(
+            leaf,
+            status,
+            tagged_grob_name,
+            staff_lines,
+            )
 
     def _tag_time_signature(self, skip, time_signature, context, status):
         grob = 'TimeSignature'
@@ -2080,17 +2082,6 @@ class SegmentMaker(abjad.SegmentMaker):
     def _transpose_score_(self):
         if self.transpose_score:
             abjad.Instrument.transpose_from_sounding_pitch(self._score)
-
-    @staticmethod
-    def _uncolor(grob, context=None, once=True):
-        if context is not None:
-            context = getattr(context, 'context_name', context)
-            string = rf'\override {context}.{grob}.color = ##f'
-        else:
-            string = rf'\override {grob}.color = ##f'
-        if once:
-            string = rf'\once {string}'
-        return string
 
     def _update_metadata(self, environment=None):
         self._metadata['measure_count'] = self.measure_count
