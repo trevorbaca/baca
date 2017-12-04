@@ -1785,7 +1785,7 @@ class SegmentMaker(abjad.SegmentMaker):
         skip = baca.select(self._score['GlobalSkips']).skip(0)
         mark = abjad.inspect(skip).get_piecewise(abjad.MetronomeMark)
         if mark is None:
-            tag = 'SEGMENT:REMINDER_METRONOME_MARK'
+            tag = 'REMINDER_METRONOME_MARK'
             string = self._color_reminder('TextScript')
             literal = abjad.LilyPondLiteral(string)
             abjad.attach(literal, skip, tag=tag)
@@ -1797,7 +1797,7 @@ class SegmentMaker(abjad.SegmentMaker):
         assert time_signature is not None
         previous_time_signature = self._get_previous_time_signature()
         if str(previous_time_signature) == str(time_signature):
-            tag = 'SEGMENT:REDUNDANT_TIME_SIGNATURE'
+            tag = 'REDUNDANT_TIME_SIGNATURE'
             wrapper = abjad.inspect(skip).get_indicator(
                 abjad.TimeSignature,
                 unwrap=False,
@@ -1845,7 +1845,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(literal, first_leaf, tag=tag)
                     abjad.attach(previous_staff_lines, first_leaf, tag=tag)
                 elif previous_staff_lines == staff_lines:
-                    tag = 'SEGMENT:REDUNDANT_STAFF_LINES'
+                    tag = 'REDUNDANT_STAFF_LINES'
                     string = self._color_redundant('StaffSymbol', context)
                     literal = abjad.LilyPondLiteral(string)
                     abjad.attach(literal, first_leaf, tag=tag)
@@ -1945,7 +1945,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 prototype = abjad.Dynamic
                 dynamic = abjad.inspect(first_leaf).get_effective(prototype)
                 if dynamic is None:
-                    tag = 'SEGMENT:REMINDER_DYNAMIC'
+                    tag = 'REMINDER_DYNAMIC'
                     string = self._color_reminder('DynamicText', context)
                     literal = abjad.LilyPondLiteral(string)
                     abjad.attach(literal, first_leaf, tag=tag)
@@ -2180,7 +2180,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \autoPageBreaksOff %! SEGMENT:LAYOUT:9
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
-                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! SEGMENT:REMINDER_METRONOME_MARK:3
+                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK:3
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 25) %! SEGMENT:SPACING_COMMAND:5
                             s1 * 1/2
@@ -2573,7 +2573,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \autoPageBreaksOff %! SEGMENT:LAYOUT:9
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
-                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! SEGMENT:REMINDER_METRONOME_MARK:3
+                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK:3
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:5
                             s1 * 1/2
@@ -2974,7 +2974,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \autoPageBreaksOff %! SEGMENT:LAYOUT:9
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
-                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! SEGMENT:REMINDER_METRONOME_MARK:3
+                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK:3
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:5
                             s1 * 1/2
@@ -5648,7 +5648,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
-                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! SEGMENT:REMINDER_METRONOME_MARK:3
+                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK:3
                             s1 * 1/2
                             - \markup { %! STAGE_NUMBER_MARKUP:2
                                 \fontsize %! STAGE_NUMBER_MARKUP:2
