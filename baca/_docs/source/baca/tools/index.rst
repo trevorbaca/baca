@@ -191,6 +191,7 @@ baca.tools
    StaffLines
    StageMeasureMap
    StringTrioScoreTemplate
+   Tags
    TimeSignatureGroups
    TimeSignatureMaker
    TimelineScope
@@ -243,6 +244,7 @@ baca.tools
    StaffLines
    StageMeasureMap
    StringTrioScoreTemplate
+   Tags
    TimeSignatureGroups
    TimeSignatureMaker
    TimelineScope
