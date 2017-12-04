@@ -90,12 +90,13 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                             #10
                                             Vn.
                                         }
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:3
+                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     e'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
             <BLANKLINE>
                                     e'8
             <BLANKLINE>
@@ -171,11 +172,12 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                         #10
                                         Va.
                                     }
-                                \clef "alto" %! EXPLICIT_CLEF_COMMAND:3
+                                \clef "alto" %! EXPLICIT_CLEF_COMMAND:4
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                 R1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
             <BLANKLINE>
                                 %%% ViolaMusicVoice [measure 2] %%%
                                 R1 * 3/8
@@ -207,11 +209,12 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                         #10
                                         Vc.
                                     }
-                                \clef "bass" %! EXPLICIT_CLEF_COMMAND:3
+                                \clef "bass" %! EXPLICIT_CLEF_COMMAND:4
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                 R1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:4
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
             <BLANKLINE>
                                 %%% CelloMusicVoice [measure 2] %%%
                                 R1 * 3/8
