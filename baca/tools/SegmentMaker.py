@@ -204,6 +204,22 @@ class SegmentMaker(abjad.SegmentMaker):
 
     _publish_storage_format = True
 
+    _status_to_color = {
+        'explicit': 'blue',
+        'explicit_shadow': 'DarkCyan',
+        'reapplied': 'green',
+        'reapplied_shadow': 'DarkGreen',
+        'reminder': 'DarkCyan',
+        'redundant': 'DeepPink1',
+        'redundant_shadow': 'DeepPink4',
+        }
+
+    _status_to_shadow_color = {
+        'explicit': 'DarkCyan',
+        'reapplied': 'DarkGreen',
+        'redundant': 'DeepPink4',
+        }
+
     _relative_string_trio_stylesheet_path = pathlib.Path(
         '..',
         '..',
@@ -1010,10 +1026,7 @@ class SegmentMaker(abjad.SegmentMaker):
             message = manager.tabulate_wellformedness(score)
             raise Exception(message)
 
-    def _color_explicit(self, grob, context=None, once=True):
-        return self._color_something('blue', grob, context, once)
-
-    def _color_explicit_contexted_indicators(self):
+    def _color_contexted_indicators(self):
         for leaf in abjad.iterate(self._score).leaves():
             wrapper = abjad.inspect(leaf).get_indicator(
                 abjad.Clef,
@@ -1027,69 +1040,65 @@ class SegmentMaker(abjad.SegmentMaker):
             context = wrapper.context
             previous_clef = abjad.inspect(leaf).get_effective(abjad.Clef, n=-1)
             if str(previous_clef) == str(clef):
-                redundant = True
-                string = self._color_redundant('Clef', context)
-                literal = abjad.LilyPondLiteral(string)
-                abjad.attach(literal, leaf, tag=tags.REDUNDANT_CLEF_COLOR)
-                string = self._uncolor('Clef', context, once=False)
-                literal = abjad.LilyPondLiteral(string)
-                abjad.attach(
-                    literal,
+                self._tag_grob_color(
                     leaf,
-                    deactivate=True,
-                    tag=tags.REDUNDANT_CLEF_UNCOLOR,
-                    )
-                string = rf'\set {context}.forceClef = ##t'
-                literal = abjad.LilyPondLiteral(string)
-                abjad.attach(
-                    literal,
-                    leaf,
-                    tag=tags.REDUNDANT_CLEF_COMMAND,
-                    )
-                abjad.detach(clef, leaf)
-                abjad.attach(
-                    clef,
-                    leaf,
-                    context=context,
-                    tag=tags.REDUNDANT_CLEF_COMMAND,
-                    )
-                string = self._color_redundant_shadow(
+                    'redundant',
                     'Clef',
                     context,
-                    once=False,
                     )
-                literal = abjad.LilyPondLiteral(string, 'after')
-                abjad.attach(literal, leaf, tag=tags.REDUNDANT_CLEF_SHADOW)
+                self._tag_grob_uncolor(
+                    leaf,
+                    'redundant',
+                    'Clef',
+                    context,
+                    )
+                self._tag_grob_command(
+                    leaf,
+                    'redundant',
+                    'Clef',
+                    rf'\set {context}.forceClef = ##t',
+                    )
+                abjad.detach(clef, leaf)
+                self._tag_grob_command(
+                    leaf,
+                    'redundant',
+                    'Clef',
+                    clef,
+                    context=context,
+                    )
+                self._tag_grob_shadow(
+                    leaf,
+                    'redundant',
+                    'Clef',
+                    context,
+                    )
             else:
-                redundant = False
-                string = self._color_explicit('Clef', context)
-                literal = abjad.LilyPondLiteral(string)
-                abjad.attach(literal, leaf, tag=tags.EXPLICIT_CLEF_COLOR)
-                string = self._uncolor('Clef', context, once=False)
-                literal = abjad.LilyPondLiteral(string)
-                abjad.attach(
-                    literal,
+                self._tag_grob_color(
                     leaf,
-                    deactivate=True,
-                    tag=tags.EXPLICIT_CLEF_UNCOLOR,
-                    )
-                abjad.detach(clef, leaf)
-                abjad.attach(
-                    clef,
-                    leaf,
-                    context=context,
-                    tag=tags.EXPLICIT_CLEF_COMMAND,
-                    )
-                string = self._color_explicit_shadow(
+                    'explicit',
                     'Clef',
                     context,
-                    once=False,
                     )
-                literal = abjad.LilyPondLiteral(string, 'after')
-                abjad.attach(literal, leaf, tag=tags.EXPLICIT_CLEF_SHADOW)
-
-    def _color_explicit_shadow(self, grob, context=None, once=True):
-        return self._color_something('DarkCyan', grob, context, once)
+                self._tag_grob_uncolor(
+                    leaf,
+                    'explicit',
+                    'Clef',
+                    context,
+                    )
+                abjad.detach(clef, leaf)
+                self._tag_grob_command(
+                    leaf,
+                    'explicit',
+                    'Clef',
+                    clef,
+                    context=context,
+                    )
+                self._tag_grob_shadow(
+                    leaf,
+                    'explicit',
+                    'Clef',
+                    context,
+                    )
 
     def _color_octaves_(self):
         if not self.color_octaves:
@@ -1115,21 +1124,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 for leaf in notes_and_chords:
                     abjad.attach(markup, leaf)
 
-    def _color_reapplied(self, grob, context=None, once=True):
-        return self._color_something('green', grob, context, once)
-
-    def _color_reapplied_shadow(self, grob, context=None, once=True):
-        return self._color_something('DarkGreen', grob, context, once)
-
-    def _color_redundant(self, grob, context=None, once=True):
-        return self._color_something('DeepPink1', grob, context, once)
-
-    def _color_redundant_shadow(self, grob, context=None, once=True):
-        return self._color_something('DeepPink4', grob, context, once)
-
-    def _color_reminder(self, grob, context=None, once=True):
-        return self._color_something('DarkCyan', grob, context, once)
-
     def _color_repeat_pitch_classes_(self):
         manager = baca.WellformednessManager
         lts = manager._find_repeat_pitch_classes(self._score)
@@ -1139,18 +1133,6 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.label(lt).color_leaves('red')
             for leaf in lt:
                 abjad.attach(markup, leaf)
-
-    @staticmethod
-    def _color_something(color, grob, context=None, once=True):
-        if context is not None:
-            context = getattr(context, 'context_name', context)
-            string = rf'\override {context}.{grob}.color ='
-        else:
-            string = rf'\override {grob}.color ='
-        if once:
-            string = rf'\once {string}'
-        string += f" #(x11-color '{color})"
-        return string
 
     def _color_unpitched_notes(self):
         if self.ignore_unpitched_notes:
@@ -1501,6 +1483,14 @@ class SegmentMaker(abjad.SegmentMaker):
             includes.append(self._score_package_nonfirst_stylesheet_path)
         return includes
 
+    @staticmethod
+    def _get_tag(status, grob, item):
+        grob = abjad.String(grob).delimit_words()
+        grob = '_'.join([_.upper() for _ in grob])
+        name = f'{status.upper()}_{grob}_{item.upper()}'
+        tag = getattr(tags, name)
+        return tag
+
     def _get_time_signatures(self):
         strings = []
         prototype = abjad.TimeSignature
@@ -1711,6 +1701,26 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.setting(score).current_bar_number = first_bar_number
         self._score = score
 
+    def _make_status_color_string(
+        self,
+        status,
+        grob,
+        context=None,
+        shadow=False,
+        ):
+        if context is not None:
+            context = getattr(context, 'context_name', context)
+            string = rf'\override {context}.{grob}.color ='
+        else:
+            string = rf'\override {grob}.color ='
+        if shadow is True:
+            color = self._status_to_shadow_color[status]
+        else:
+            string = rf'\once {string}'
+            color = self._status_to_color[status]
+        string += f" #(x11-color '{color})"
+        return string
+
     def _print_cache(self):
         for context in self._cache:
             print(f'CONTEXT {context} ...')
@@ -1779,20 +1789,21 @@ class SegmentMaker(abjad.SegmentMaker):
         skip = baca.select(self._score['GlobalSkips']).skip(0)
         mark = abjad.inspect(skip).get_piecewise(abjad.MetronomeMark)
         if mark is None:
-            string = self._color_reminder('TextScript')
-            literal = abjad.LilyPondLiteral(string)
-            abjad.attach(
-                literal,
+            self._tag_grob_color(
                 skip,
-                tag=tags.REMINDER_METRONOME_MARK_COLOR,
+                'reminder',
+                'TextScript',
+                tagged_grob_name='METRONOME_MARK',
                 )
             prototype = abjad.MetronomeMarkSpanner
             spanner = abjad.inspect(skip).get_spanner(prototype)
             previous_mark = self._get_previous_metronome_mark()
-            spanner.attach(
-                previous_mark,
+            self._tag_grob_command(
                 skip,
-                tag=tags.REMINDER_METRONOME_MARK_COMMAND,
+                'reminder',
+                'METRONOME_MARK',
+                previous_mark,
+                spanner=spanner,
                 )
         time_signature = abjad.inspect(skip).get_indicator(abjad.TimeSignature)
         assert time_signature is not None
@@ -1803,19 +1814,19 @@ class SegmentMaker(abjad.SegmentMaker):
                 unwrap=False,
                 )
             context = wrapper.context
-            string = self._color_redundant('TimeSignature', context)
-            literal = abjad.LilyPondLiteral(string)
-            abjad.attach(
-                literal,
+            self._tag_grob_color(
                 skip,
-                tag=tags.REDUNDANT_TIME_SIGNATURE_COLOR,
+                'redundant',
+                'TimeSignature',
+                context,
                 )
             abjad.detach(time_signature, skip)
-            abjad.attach(
-                time_signature,
+            self._tag_grob_command(
                 skip,
-                context=context,
-                tag=tags.REDUNDANT_TIME_SIGNATURE_COMMAND,
+                'redundant',
+                'TimeSignature',
+                time_signature,
+                context,
                 )
         for context in abjad.iterate(self._score).components(abjad.Context):
             previous_clef = self._get_previous_clef(context.name)
@@ -1834,154 +1845,134 @@ class SegmentMaker(abjad.SegmentMaker):
                 prototype = abjad.Instrument
                 instrument = abjad.inspect(first_leaf).get_indicator(prototype)
                 if instrument is None:
-                    string = self._color_reapplied('InstrumentName', context)
-                    literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(
-                        literal,
+                    self._tag_grob_color(
                         first_leaf,
-                        tag=tags.REAPPLIED_INSTRUMENT_COLOR,
+                        'reapplied',
+                        'InstrumentName',
+                        context,
+                        tagged_grob_name='INSTRUMENT',
                         )
                     instrument = abjad.new(
                         previous_instrument,
                         context=context.context_name,
                         )
-                    abjad.attach(
-                        instrument,
+                    self._tag_grob_command(
                         first_leaf,
-                        tag=tags.REAPPLIED_INSTRUMENT_COMMAND,
+                        'reapplied',
+                        'INSTRUMENT',
+                        instrument,
                         )
             if previous_staff_lines is not None:
                 prototype = baca.StaffLines
                 staff_lines = abjad.inspect(first_leaf).get_indicator(
                     prototype)
                 if staff_lines is None:
-                    string = self._color_reapplied('StaffSymbol', context)
-                    literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(
-                        literal,
+                    self._tag_grob_color(
                         first_leaf,
-                        tag=tags.REAPPLIED_STAFF_LINES_COLOR,
+                        'reapplied',
+                        'StaffSymbol',
+                        context,
+                        tagged_grob_name='STAFF_LINES',
                         )
-                    abjad.attach(
-                        previous_staff_lines,
+                    self._tag_grob_command(
                         first_leaf,
-                        tag=tags.REAPPLIED_STAFF_LINES_COMMAND,
+                        'reapplied',
+                        'STAFF_LINES',
+                        previous_staff_lines,
                         )
                 elif previous_staff_lines == staff_lines:
-                    string = self._color_redundant('StaffSymbol', context)
-                    literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(
-                        literal,
+                    self._tag_grob_color(
                         first_leaf,
-                        tag=tags.REDUNDANT_STAFF_LINES_COLOR,
+                        'redundant',
+                        'StaffSymbol',
+                        context,
+                        tagged_grob_name='STAFF_LINES',
                         )
             if previous_clef is not None:
                 clef = abjad.inspect(first_leaf).get_indicator(abjad.Clef)
                 if clef is None:
-                    string = self._color_reapplied('Clef', context)
-                    literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(
-                        literal,
+                    self._tag_grob_color(
                         first_leaf,
-                        tag=tags.REAPPLIED_CLEF_COLOR,
-                        )
-                    string = self._uncolor('Clef', context, once=False)
-                    literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(
-                        literal,
-                        first_leaf,
-                        deactivate=True,
-                        tag=tags.REAPPLIED_CLEF_UNCOLOR,
-                        )
-                    abjad.attach(
-                        previous_clef,
-                        first_leaf,
-                        tag=tags.REAPPLIED_CLEF_COMMAND,
-                        )
-                    string = rf'\set {context.context_name}.forceClef = ##t'
-                    literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(
-                        literal,
-                        first_leaf,
-                        tag=tags.REAPPLIED_CLEF_COMMAND,
-                        )
-                    string = self._color_reapplied_shadow(
+                        'reapplied',
                         'Clef',
                         context,
-                        once=False,
                         )
-                    literal = abjad.LilyPondLiteral(string, 'after')
-                    abjad.attach(
-                        literal,
+                    self._tag_grob_uncolor(
                         first_leaf,
-                        tag=tags.REAPPLIED_CLEF_SHADOW,
+                        'reapplied',
+                        'Clef',
+                        context,
+                        )
+                    self._tag_grob_command(
+                        first_leaf,
+                        'reapplied',
+                        'Clef',
+                        previous_clef,
+                        )
+                    self._tag_grob_command(
+                        first_leaf,
+                        'reapplied',
+                        'Clef',
+                        rf'\set {context.context_name}.forceClef = ##t',
+                        )
+                    self._tag_grob_shadow(
+                        first_leaf,
+                        'reapplied',
+                        'Clef',
+                        context,
                         )
                 elif str(previous_clef) == str(clef):
                     wrapper = abjad.inspect(first_leaf).get_indicator(
                         abjad.Clef,
                         unwrap=False,
                         )
-                    string = self._color_redundant(
-                        'Clef',
-                        context=wrapper.context,
-                        )
-                    literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(
-                        literal,
+                    self._tag_grob_color(
                         first_leaf,
-                        tag=tags.REDUNDANT_CLEF_COLOR,
-                        )
-                    string = self._uncolor(
+                        'redundant',
                         'Clef',
-                        context=wrapper.context,
-                        once=False,
+                        wrapper.context,
                         )
-                    literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(
-                        literal,
+                    self._tag_grob_uncolor(
                         first_leaf,
-                        deactivate=True,
-                        tag=tags.REDUNDANT_CLEF_UNCOLOR,
+                        'redundant',
+                        'Clef',
+                        wrapper.context,
                         )
                     abjad.detach(clef, first_leaf)
-                    abjad.attach(
-                        clef,
+                    self._tag_grob_command(
                         first_leaf,
-                        tag=tags.REDUNDANT_CLEF_COMMAND,
-                        )
-                    string = rf'\set {wrapper.context}.forceClef = ##t'
-                    literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(
-                        literal,
-                        first_leaf,
-                        tag=tags.REDUNDANT_CLEF_COMMAND,
-                        )
-                    string = self._color_redundant_shadow(
+                        'redundant',
                         'Clef',
-                        context=wrapper.context,
-                        once=False,
+                        clef,
                         )
-                    literal = abjad.LilyPondLiteral(string, 'after')
-                    abjad.attach(
-                        literal,
+                    self._tag_grob_command(
                         first_leaf,
-                        tag=tags.REDUNDANT_CLEF_SHADOW,
+                        'redundant',
+                        'Clef',
+                        rf'\set {wrapper.context}.forceClef = ##t',
+                        )
+                    self._tag_grob_shadow(
+                        first_leaf,
+                        'redundant',
+                        'Clef',
+                        wrapper.context,
                         )
             if previous_dynamic is not None:
                 prototype = abjad.Dynamic
                 dynamic = abjad.inspect(first_leaf).get_effective(prototype)
                 if dynamic is None:
-                    string = self._color_reminder('DynamicText', context)
-                    literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(
-                        literal,
+                    self._tag_grob_color(
                         first_leaf,
-                        tag=tags.REMINDER_DYNAMIC_COLOR,
+                        'reminder',
+                        'DynamicText',
+                        context,
+                        tagged_grob_name='DYNAMIC',
                         )
-                    abjad.attach(
-                        previous_dynamic,
+                    self._tag_grob_command(
                         first_leaf,
-                        tag=tags.REMINDER_DYNAMIC_COMMAND,
+                        'reminder',
+                        'DYNAMIC',
+                        previous_dynamic,
                         )
 
     def _scope_to_leaf_selection(self, wrapper):
@@ -2042,7 +2033,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             minimum_duration = abjad.Duration(1, 8)
             if abjad.inspect(previous_leaf).get_duration() < minimum_duration:
-                string = r"shape #'((2 . 0) (1 . 0) (0.5 . 0) (0 . 0)) RepeatTie"
+                string = r"shape #'((2 . 0) (1 . 0) (0.5 . 0) (0 . 0))"
+                string += " RepeatTie"
                 command = abjad.LilyPondCommand(string)
                 abjad.attach(command, leaf)
 
@@ -2094,6 +2086,61 @@ class SegmentMaker(abjad.SegmentMaker):
             global_offset=global_offset,
             )
         self._clock_time = duration.to_clock_string()
+
+    def _tag_grob_color(
+        self,
+        leaf,
+        status,
+        grob,
+        context=None,
+        tagged_grob_name=None,
+        ):
+        string = self._make_status_color_string(
+            status,
+            grob,
+            context,
+            shadow=False,
+            )
+        literal = abjad.LilyPondLiteral(string)
+        if tagged_grob_name is not None:
+            tag = self._get_tag(status, tagged_grob_name, 'color')
+        else:
+            tag = self._get_tag(status, grob, 'color')
+        abjad.attach(literal, leaf, tag=tag)
+
+    def _tag_grob_command(
+        self,
+        leaf,
+        status,
+        tagged_grob_name,
+        command,
+        context=None,
+        spanner=None,
+        ):
+        if isinstance(command, str):
+            command = abjad.LilyPondLiteral(command)
+        tag = self._get_tag(status, tagged_grob_name, 'command')
+        if spanner is None:
+            abjad.attach(command, leaf, context=context, tag=tag)
+        else:
+            spanner.attach(command, leaf, tag=tag)
+
+    def _tag_grob_shadow(self, leaf, status, grob, context=None):
+        string = self._make_status_color_string(
+            status,
+            grob,
+            context,
+            shadow=True,
+            )
+        literal = abjad.LilyPondLiteral(string, 'after')
+        tag = self._get_tag(status, grob, 'shadow')
+        abjad.attach(literal, leaf, tag=tag)
+
+    def _tag_grob_uncolor(self, leaf, status, grob, context=None):
+        string = self._uncolor(grob, context, once=False)
+        literal = abjad.LilyPondLiteral(string)
+        tag = self._get_tag(status, grob, 'uncolor')
+        abjad.attach(literal, leaf, deactivate=True, tag=tag)
 
     def _transpose_score_(self):
         if self.transpose_score:
@@ -6822,7 +6869,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._shorten_long_repeat_ties()
         self._attach_first_segment_score_template_defaults()
         self._reapply_previous_segment_settings()
-        self._color_explicit_contexted_indicators()
+        self._color_contexted_indicators()
         self._apply_spacing_specifier()
         self._tag_clock_time()
         self._hide_instrument_names_()
