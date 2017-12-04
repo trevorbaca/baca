@@ -48,7 +48,7 @@ class LibraryGM(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             s1 * 1/2
                             - \markup { %! STAGE_NUMBER_MARKUP:2
                                 \fontsize %! STAGE_NUMBER_MARKUP:2
@@ -176,7 +176,7 @@ class LibraryGM(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             s1 * 1/2
                             - \markup { %! STAGE_NUMBER_MARKUP:2
                                 \fontsize %! STAGE_NUMBER_MARKUP:2

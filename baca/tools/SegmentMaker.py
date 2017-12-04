@@ -40,7 +40,7 @@ class SegmentMaker(abjad.SegmentMaker):
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 4/8
-                        \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                        \bar "" %! EMPTY_START_BAR:1
                         s1 * 1/2
                         - \markup { %! STAGE_NUMBER_MARKUP:2
                             \fontsize %! STAGE_NUMBER_MARKUP:2
@@ -394,7 +394,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             s1 * 1/2
                             - \markup { %! STAGE_NUMBER_MARKUP:2
                                 \fontsize %! STAGE_NUMBER_MARKUP:2
@@ -1643,12 +1643,9 @@ class SegmentMaker(abjad.SegmentMaker):
         # empty start bar allows LilyPond to print first bar number
         if self.omit_empty_start_bar:
             return
-        # TODO: change SEGMENT:EMPTY_START_BAR to EMPTY_START_BAR
-        #tag = 'SEGMENT:EMPTY_START_BAR'
-        tag = tags.tag(tags.EMPTY_START_BAR)
         first_skip = baca.select(context).skip(0)
         literal = abjad.LilyPondLiteral(r'\bar ""')
-        abjad.attach(literal, first_skip, tag=tag)
+        abjad.attach(literal, first_skip, tag=tags.EMPTY_START_BAR)
 
     def _make_instrument_change_markup(self, instrument):
         string = f'to {instrument.name}'
@@ -2215,7 +2212,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT:8
                             \autoPageBreaksOff %! SEGMENT:LAYOUT:9
                             \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK_COLOR:3
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 25) %! SEGMENT:SPACING_COMMAND:5
@@ -2608,7 +2605,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT:8
                             \autoPageBreaksOff %! SEGMENT:LAYOUT:9
                             \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK_COLOR:3
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:5
@@ -3009,7 +3006,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT:8
                             \autoPageBreaksOff %! SEGMENT:LAYOUT:9
                             \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK_COLOR:3
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:5
@@ -3507,7 +3504,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 6/16
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 31) %! SEGMENT:SPACING_COMMAND:3
                             s1 * 3/8
@@ -3723,7 +3720,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 1/16
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
                             s1 * 1/16
@@ -3929,7 +3926,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 1/16
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
                             s1 * 1/16
@@ -4151,7 +4148,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             s1 * 1/2
                             - \markup { %! STAGE_NUMBER_MARKUP:2
                                 \fontsize %! STAGE_NUMBER_MARKUP:2
@@ -4263,7 +4260,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             s1 * 1/2
                             - \markup { %! STAGE_NUMBER_MARKUP:2
                                 \fontsize %! STAGE_NUMBER_MARKUP:2
@@ -4380,7 +4377,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             s1 * 1/2
                             - \markup { %! STAGE_NUMBER_MARKUP:2
                                 \fontsize %! STAGE_NUMBER_MARKUP:2
@@ -4496,7 +4493,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             s1 * 1/2
                             - \markup { %! STAGE_NUMBER_MARKUP:2
                                 \fontsize %! STAGE_NUMBER_MARKUP:2
@@ -4622,7 +4619,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             s1 * 1/2
                             - \markup { %! STAGE_NUMBER_MARKUP:2
                                 \fontsize %! STAGE_NUMBER_MARKUP:2
@@ -4813,7 +4810,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             s1 * 1/2
                             - \markup { %! STAGE_NUMBER_MARKUP:2
                                 \fontsize %! STAGE_NUMBER_MARKUP:2
@@ -4925,7 +4922,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             s1 * 1/2
                             - \markup { %! STAGE_NUMBER_MARKUP:2
                                 \fontsize %! STAGE_NUMBER_MARKUP:2
@@ -5160,7 +5157,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 3/16
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
                             s1 * 3/16
@@ -5363,7 +5360,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 3/16
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
                             s1 * 3/16
@@ -5683,7 +5680,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK_COLOR:3
                             s1 * 1/2
                             - \markup { %! STAGE_NUMBER_MARKUP:2
@@ -5815,7 +5812,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             s1 * 1/2
                             ^ \markup { %! CLOCK_TIME_MARKUP:3
                                 \fontsize %! CLOCK_TIME_MARKUP:3
@@ -6087,7 +6084,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             s1 * 1/2
                             - \markup { %! STAGE_NUMBER_MARKUP:2
                                 \fontsize %! STAGE_NUMBER_MARKUP:2
@@ -6159,7 +6156,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             s1 * 1/2
                             - \markup { %! STAGE_NUMBER_MARKUP:2
                                 \fontsize %! STAGE_NUMBER_MARKUP:2
@@ -6277,7 +6274,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             s1 * 1/2
                             - \markup { %! STAGE_NUMBER_MARKUP:2
                                 \fontsize %! STAGE_NUMBER_MARKUP:2
@@ -6394,7 +6391,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             s1 * 1/2
                             - \markup { %! STAGE_NUMBER_MARKUP:2
                                 \fontsize %! STAGE_NUMBER_MARKUP:2
@@ -6534,7 +6531,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             s1 * 1/2
                             - \markup { %! STAGE_NUMBER_MARKUP:2
                                 \fontsize %! STAGE_NUMBER_MARKUP:2
@@ -6654,7 +6651,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             s1 * 1/2
                             - \markup { %! STAGE_NUMBER_MARKUP:2
                                 \fontsize %! STAGE_NUMBER_MARKUP:2

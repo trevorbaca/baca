@@ -761,7 +761,7 @@ class LibraryAF(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12) %! SEGMENT:SPACING_COMMAND:3
                             s1 * 1/2
@@ -2823,7 +2823,7 @@ class LibraryAF(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 5/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             s1 * 5/8
                             - \markup { %! STAGE_NUMBER_MARKUP:2
                                 \fontsize %! STAGE_NUMBER_MARKUP:2
@@ -3030,7 +3030,7 @@ class LibraryAF(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 5/8
-                            \bar "" %! SEGMENT:EMPTY_START_BAR:1
+                            \bar "" %! EMPTY_START_BAR:1
                             s1 * 5/8
                             - \markup { %! STAGE_NUMBER_MARKUP:2
                                 \fontsize %! STAGE_NUMBER_MARKUP:2
