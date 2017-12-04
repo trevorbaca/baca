@@ -1735,22 +1735,10 @@ class SegmentMaker(abjad.SegmentMaker):
         skip = baca.select(self._score['GlobalSkips']).skip(0)
         mark = abjad.inspect(skip).get_piecewise(abjad.MetronomeMark)
         if mark is None:
-            self._tag_grob_color(
-                skip,
-                'reminder',
-                'TextScript',
-                tagged_grob_name='METRONOME_MARK',
-                )
             prototype = abjad.MetronomeMarkSpanner
             spanner = abjad.inspect(skip).get_spanner(prototype)
             previous_mark = self._get_previous_metronome_mark()
-            self._tag_grob_command(
-                skip,
-                'reminder',
-                'METRONOME_MARK',
-                previous_mark,
-                spanner=spanner,
-                )
+            self._tag_metronome_mark(spanner, skip, previous_mark, 'reminder')
         time_signature = abjad.inspect(skip).get_indicator(abjad.TimeSignature)
         assert time_signature is not None
         previous_time_signature = self._get_previous_time_signature()
@@ -1760,19 +1748,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 unwrap=False,
                 )
             context = wrapper.context
-            self._tag_grob_color(
+            self._tag_time_signature(
                 skip,
-                'redundant',
-                'TimeSignature',
-                context,
-                )
-            abjad.detach(time_signature, skip)
-            self._tag_grob_command(
-                skip,
-                'redundant',
-                'TimeSignature',
                 time_signature,
                 context,
+                'redundant',
                 )
         for context in abjad.iterate(self._score).components(abjad.Context):
             previous_clef = self._get_previous_clef(context.name)
@@ -1812,27 +1792,17 @@ class SegmentMaker(abjad.SegmentMaker):
                 prototype = baca.StaffLines
                 staff_lines = abjad.inspect(first_leaf).get_indicator(
                     prototype)
+                status = None
                 if staff_lines is None:
-                    self._tag_grob_color(
-                        first_leaf,
-                        'reapplied',
-                        'StaffSymbol',
-                        context,
-                        tagged_grob_name='STAFF_LINES',
-                        )
-                    self._tag_grob_command(
-                        first_leaf,
-                        'reapplied',
-                        'STAFF_LINES',
-                        previous_staff_lines,
-                        )
+                    status = 'reapplied'
                 elif previous_staff_lines == staff_lines:
-                    self._tag_grob_color(
+                    status = 'redundant'
+                if status is not None:
+                    self._tag_staff_lines(
                         first_leaf,
-                        'redundant',
-                        'StaffSymbol',
+                        previous_staff_lines,
                         context,
-                        tagged_grob_name='STAFF_LINES',
+                        status,
                         )
             if previous_clef is not None:
                 clef = abjad.inspect(first_leaf).get_indicator(abjad.Clef)
@@ -1858,18 +1828,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 prototype = abjad.Dynamic
                 dynamic = abjad.inspect(first_leaf).get_effective(prototype)
                 if dynamic is None:
-                    self._tag_grob_color(
+                    self._tag_dynamic(
                         first_leaf,
-                        'reminder',
-                        'DynamicText',
-                        context,
-                        tagged_grob_name='DYNAMIC',
-                        )
-                    self._tag_grob_command(
-                        first_leaf,
-                        'reminder',
-                        'DYNAMIC',
                         previous_dynamic,
+                        context,
+                        'reminder',
                         )
 
     def _scope_to_leaf_selection(self, wrapper):
@@ -1996,6 +1959,43 @@ class SegmentMaker(abjad.SegmentMaker):
             )
         self._clock_time = duration.to_clock_string()
 
+    def _tag_dynamic(self, leaf, dynamic, context, status):
+        if not isinstance(context, str):
+            context = context.context_name
+        grob = 'DynamicText'
+        tagged_grob_name = 'DYNAMIC'
+        self._tag_grob_color(
+            leaf,
+            status,
+            grob,
+            context,
+            tagged_grob_name=tagged_grob_name,
+            )
+        abjad.detach(abjad.Dynamic, leaf)
+        self._tag_grob_command(
+            leaf,
+            status,
+            tagged_grob_name,
+            dynamic,
+            )
+
+    def _tag_metronome_mark(self, spanner, skip, metronome_mark, status):
+        grob = 'TextScript'
+        tagged_grob_name = 'METRONOME_MARK'
+        self._tag_grob_color(
+            skip,
+            status,
+            grob,
+            tagged_grob_name=tagged_grob_name,
+            )
+        self._tag_grob_command(
+            skip,
+            status,
+            tagged_grob_name,
+            metronome_mark,
+            spanner=spanner,
+            )
+
     def _tag_grob_color(
         self,
         leaf,
@@ -2050,6 +2050,32 @@ class SegmentMaker(abjad.SegmentMaker):
         literal = abjad.LilyPondLiteral(string)
         tag = self._get_tag(status, grob, 'uncolor')
         abjad.attach(literal, leaf, deactivate=True, tag=tag)
+
+    def _tag_staff_lines(self, leaf, staff_lines, context, status):
+        grob = 'StaffSymbol'
+        tagged_grob_name = 'STAFF_LINES'
+        self._tag_grob_color(
+            leaf,
+            status,
+            grob,
+            context,
+            tagged_grob_name=tagged_grob_name,
+            )
+        # TODO: detach and reattach even for redundant staff lines:
+        if status != 'redundant':
+            abjad.detach(baca.StaffLines, leaf)
+            self._tag_grob_command(
+                leaf,
+                status,
+                tagged_grob_name,
+                staff_lines,
+                )
+
+    def _tag_time_signature(self, skip, time_signature, context, status):
+        grob = 'TimeSignature'
+        self._tag_grob_color(skip, status, grob, context)
+        abjad.detach(time_signature, skip)
+        self._tag_grob_command(skip, status, grob, time_signature, context)
 
     def _transpose_score_(self):
         if self.transpose_score:
