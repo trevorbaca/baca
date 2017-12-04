@@ -5,6 +5,7 @@ import pathlib
 import time
 import traceback
 from abjad import rhythmmakertools as rhythmos
+from .Tags import Tags as tags
 
 
 class SegmentMaker(abjad.SegmentMaker):
@@ -1033,28 +1034,28 @@ class SegmentMaker(abjad.SegmentMaker):
                 redundant = True
                 string = self._color_redundant('Clef', context)
                 literal = abjad.LilyPondLiteral(string)
-                abjad.attach(literal, leaf, tag='REDUNDANT_CLEF_COLOR')
+                abjad.attach(literal, leaf, tag=tags.REDUNDANT_CLEF_COLOR)
                 string = self._uncolor('Clef', context, once=False)
                 literal = abjad.LilyPondLiteral(string)
                 abjad.attach(
                     literal,
                     leaf,
                     deactivate=True,
-                    tag='REDUNDANT_CLEF_UNCOLOR',
+                    tag=tags.REDUNDANT_CLEF_UNCOLOR,
                     )
                 string = rf'\set {context}.forceClef = ##t'
                 literal = abjad.LilyPondLiteral(string)
                 abjad.attach(
                     literal,
                     leaf,
-                    tag='REDUNDANT_CLEF_COMMAND',
+                    tag=tags.REDUNDANT_CLEF_COMMAND,
                     )
                 abjad.detach(clef, leaf)
                 abjad.attach(
                     clef,
                     leaf,
                     context=context,
-                    tag='REDUNDANT_CLEF_COMMAND',
+                    tag=tags.REDUNDANT_CLEF_COMMAND,
                     )
                 string = self._color_redundant_shadow(
                     'Clef',
@@ -1062,26 +1063,26 @@ class SegmentMaker(abjad.SegmentMaker):
                     once=False,
                     )
                 literal = abjad.LilyPondLiteral(string, 'after')
-                abjad.attach(literal, leaf, tag='REDUNDANT_CLEF_SHADOW')
+                abjad.attach(literal, leaf, tag=tags.REDUNDANT_CLEF_SHADOW)
             else:
                 redundant = False
                 string = self._color_explicit('Clef', context)
                 literal = abjad.LilyPondLiteral(string)
-                abjad.attach(literal, leaf, tag='EXPLICIT_CLEF_COLOR')
+                abjad.attach(literal, leaf, tag=tags.EXPLICIT_CLEF_COLOR)
                 string = self._uncolor('Clef', context, once=False)
                 literal = abjad.LilyPondLiteral(string)
                 abjad.attach(
                     literal,
                     leaf,
                     deactivate=True,
-                    tag='EXPLICIT_CLEF_UNCOLOR',
+                    tag=tags.EXPLICIT_CLEF_UNCOLOR,
                     )
                 abjad.detach(clef, leaf)
                 abjad.attach(
                     clef,
                     leaf,
                     context=context,
-                    tag='EXPLICIT_CLEF_COMMAND',
+                    tag=tags.EXPLICIT_CLEF_COMMAND,
                     )
                 string = self._color_explicit_shadow(
                     'Clef',
@@ -1089,7 +1090,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     once=False,
                     )
                 literal = abjad.LilyPondLiteral(string, 'after')
-                abjad.attach(literal, leaf, tag='EXPLICIT_CLEF_SHADOW')
+                abjad.attach(literal, leaf, tag=tags.EXPLICIT_CLEF_SHADOW)
 
     def _color_explicit_shadow(self, grob, context=None, once=True):
         return self._color_something('DarkCyan', grob, context, once)
