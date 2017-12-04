@@ -1835,71 +1835,22 @@ class SegmentMaker(abjad.SegmentMaker):
             if previous_clef is not None:
                 clef = abjad.inspect(first_leaf).get_indicator(abjad.Clef)
                 if clef is None:
-                    self._tag_grob_color(
+                    self._tag_clef(
                         first_leaf,
-                        'reapplied',
-                        'Clef',
-                        context,
-                        )
-                    self._tag_grob_uncolor(
-                        first_leaf,
-                        'reapplied',
-                        'Clef',
-                        context,
-                        )
-                    self._tag_grob_command(
-                        first_leaf,
-                        'reapplied',
-                        'Clef',
                         previous_clef,
-                        )
-                    self._tag_grob_command(
-                        first_leaf,
-                        'reapplied',
-                        'Clef',
-                        rf'\set {context.context_name}.forceClef = ##t',
-                        )
-                    self._tag_grob_shadow(
-                        first_leaf,
-                        'reapplied',
-                        'Clef',
                         context,
+                        'reapplied',
                         )
                 elif str(previous_clef) == str(clef):
                     wrapper = abjad.inspect(first_leaf).get_indicator(
                         abjad.Clef,
                         unwrap=False,
                         )
-                    self._tag_grob_color(
+                    self._tag_clef(
                         first_leaf,
-                        'redundant',
-                        'Clef',
-                        wrapper.context,
-                        )
-                    self._tag_grob_uncolor(
-                        first_leaf,
-                        'redundant',
-                        'Clef',
-                        wrapper.context,
-                        )
-                    abjad.detach(clef, first_leaf)
-                    self._tag_grob_command(
-                        first_leaf,
-                        'redundant',
-                        'Clef',
                         clef,
-                        )
-                    self._tag_grob_command(
-                        first_leaf,
+                        wrapper.context, 
                         'redundant',
-                        'Clef',
-                        rf'\set {wrapper.context}.forceClef = ##t',
-                        )
-                    self._tag_grob_shadow(
-                        first_leaf,
-                        'redundant',
-                        'Clef',
-                        wrapper.context,
                         )
             if previous_dynamic is not None:
                 prototype = abjad.Dynamic
@@ -2001,6 +1952,8 @@ class SegmentMaker(abjad.SegmentMaker):
         return start_measure_index, stop_measure_index
 
     def _tag_clef(self, leaf, clef, context, status):
+        if not isinstance(context, str):
+            context = context.context_name
         grob = 'Clef'
         self._tag_grob_color(leaf, status, grob, context)
         self._tag_grob_uncolor(leaf, status, grob, context)
@@ -2008,7 +1961,8 @@ class SegmentMaker(abjad.SegmentMaker):
         if status != 'explicit':
             command = rf'\set {context}.forceClef = ##t'
             self._tag_grob_command(leaf, status, grob, command)
-        abjad.detach(clef, leaf)
+        if status != 'reapplied':
+            abjad.detach(clef, leaf)
         self._tag_grob_command(leaf, status, grob, clef, context=context)
         self._tag_grob_shadow(leaf, status, grob, context)
 
@@ -2799,10 +2753,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "alto" %! REAPPLIED_CLEF_COMMAND:3
+                                    \clef "alto" %! REAPPLIED_CLEF_COMMAND:4
                                     \once \override Staff.Clef.color = #(x11-color 'green) %! REAPPLIED_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! REAPPLIED_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! REAPPLIED_CLEF_COMMAND:4
+                                    \set Staff.forceClef = ##t %! REAPPLIED_CLEF_COMMAND:3
                                     c'8
                                     [
                                     \override Staff.Clef.color = #(x11-color 'DarkGreen) %! REAPPLIED_CLEF_SHADOW:5
@@ -2947,8 +2901,6 @@ class SegmentMaker(abjad.SegmentMaker):
         ..  container:: example
 
             Redundant clefs color pink; shadow clefs color shadow-pink:
-
-            ..  todo:: Color last treble clef as redudant.
 
             >>> layout_measure_map = baca.layout(
             ...     baca.page(
@@ -3257,10 +3209,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "alto" %! REDUNDANT_CLEF_COMMAND:3
+                                    \clef "alto" %! REDUNDANT_CLEF_COMMAND:4
                                     \once \override Staff.Clef.color = #(x11-color 'DeepPink1) %! REDUNDANT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! REDUNDANT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! REDUNDANT_CLEF_COMMAND:4
+                                    \set Staff.forceClef = ##t %! REDUNDANT_CLEF_COMMAND:3
                                     c'8
                                     [
                                     \override Staff.Clef.color = #(x11-color 'DeepPink4) %! REDUNDANT_CLEF_SHADOW:5
@@ -5713,10 +5665,10 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "alto" %! REAPPLIED_CLEF_COMMAND:3
+                                \clef "alto" %! REAPPLIED_CLEF_COMMAND:4
                                 \once \override Staff.Clef.color = #(x11-color 'green) %! REAPPLIED_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! REAPPLIED_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! REAPPLIED_CLEF_COMMAND:4
+                                \set Staff.forceClef = ##t %! REAPPLIED_CLEF_COMMAND:3
                                 R1 * 1/2
                                 \override Staff.Clef.color = #(x11-color 'DarkGreen) %! REAPPLIED_CLEF_SHADOW:5
                 <BLANKLINE>
