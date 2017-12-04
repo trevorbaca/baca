@@ -1825,7 +1825,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 prototype = abjad.Instrument
                 instrument = abjad.inspect(first_leaf).get_indicator(prototype)
                 if instrument is None:
-                    tag = 'SEGMENT:REAPPLIED_INSTRUMENT'
+                    tag = 'REAPPLIED_INSTRUMENT'
                     string = self._color_reapplied('InstrumentName', context)
                     literal = abjad.LilyPondLiteral(string)
                     abjad.attach(literal, first_leaf, tag=tag)
@@ -1839,7 +1839,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 staff_lines = abjad.inspect(first_leaf).get_indicator(
                     prototype)
                 if staff_lines is None:
-                    tag = 'SEGMENT:REAPPLIED_STAFF_LINES'
+                    tag = 'REAPPLIED_STAFF_LINES'
                     string = self._color_reapplied('StaffSymbol', context)
                     literal = abjad.LilyPondLiteral(string)
                     abjad.attach(literal, first_leaf, tag=tag)
@@ -1857,7 +1857,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(
                         literal,
                         first_leaf,
-                        tag='SEGMENT:REAPPLIED_CLEF_COLOR',
+                        tag='REAPPLIED_CLEF_COLOR',
                         )
                     string = self._uncolor('Clef', context, once=False)
                     literal = abjad.LilyPondLiteral(string)
@@ -1865,19 +1865,19 @@ class SegmentMaker(abjad.SegmentMaker):
                         literal,
                         first_leaf,
                         deactivate=True,
-                        tag='SEGMENT:REAPPLIED_CLEF_UNCOLOR',
+                        tag='REAPPLIED_CLEF_UNCOLOR',
                         )
                     abjad.attach(
                         previous_clef,
                         first_leaf,
-                        tag='SEGMENT:REAPPLIED_CLEF_COMMAND',
+                        tag='REAPPLIED_CLEF_COMMAND',
                         )
                     string = rf'\set {context.context_name}.forceClef = ##t'
                     literal = abjad.LilyPondLiteral(string)
                     abjad.attach(
                         literal,
                         first_leaf,
-                        tag='SEGMENT:REAPPLIED_CLEF_COMMAND',
+                        tag='REAPPLIED_CLEF_COMMAND',
                         )
                     string = self._color_reapplied_shadow(
                         'Clef',
@@ -1888,7 +1888,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(
                         literal,
                         first_leaf,
-                        tag='SEGMENT:REAPPLIED_CLEF_SHADOW',
+                        tag='REAPPLIED_CLEF_SHADOW',
                         )
                 elif str(previous_clef) == str(clef):
                     wrapper = abjad.inspect(first_leaf).get_indicator(
@@ -2763,13 +2763,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "alto" %! SEGMENT:REAPPLIED_CLEF_COMMAND:3
-                                    \once \override Staff.Clef.color = #(x11-color 'green) %! SEGMENT:REAPPLIED_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! SEGMENT:REAPPLIED_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! SEGMENT:REAPPLIED_CLEF_COMMAND:4
+                                    \clef "alto" %! REAPPLIED_CLEF_COMMAND:3
+                                    \once \override Staff.Clef.color = #(x11-color 'green) %! REAPPLIED_CLEF_COLOR:1
+                                    %%% \override Staff.Clef.color = ##f %! REAPPLIED_CLEF_UNCOLOR:2
+                                    \set Staff.forceClef = ##t %! REAPPLIED_CLEF_COMMAND:4
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkGreen) %! SEGMENT:REAPPLIED_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkGreen) %! REAPPLIED_CLEF_SHADOW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -5677,12 +5677,12 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "alto" %! SEGMENT:REAPPLIED_CLEF_COMMAND:3
-                                \once \override Staff.Clef.color = #(x11-color 'green) %! SEGMENT:REAPPLIED_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! SEGMENT:REAPPLIED_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! SEGMENT:REAPPLIED_CLEF_COMMAND:4
+                                \clef "alto" %! REAPPLIED_CLEF_COMMAND:3
+                                \once \override Staff.Clef.color = #(x11-color 'green) %! REAPPLIED_CLEF_COLOR:1
+                                %%% \override Staff.Clef.color = ##f %! REAPPLIED_CLEF_UNCOLOR:2
+                                \set Staff.forceClef = ##t %! REAPPLIED_CLEF_COMMAND:4
                                 R1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'DarkGreen) %! SEGMENT:REAPPLIED_CLEF_SHADOW:5
+                                \override Staff.Clef.color = #(x11-color 'DarkGreen) %! REAPPLIED_CLEF_SHADOW:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 R1 * 3/8
