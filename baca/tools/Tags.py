@@ -46,15 +46,15 @@ class Tags(abjad.Enumeration):
     EXPLICIT_DYNAMIC_SHADOW = enum.auto()
     EXPLICIT_DYNAMIC_UNCOLOR = enum.auto()
 
-    REAPPLIED_DYNAMIC_COLOR = enum.auto() 
-    REAPPLIED_DYNAMIC_COMMAND = enum.auto()
-    REAPPLIED_DYNAMIC_SHADOW = enum.auto()
-    REAPPLIED_DYNAMIC_UNCOLOR = enum.auto()
-
     REDUNDANT_DYNAMIC_COLOR = enum.auto()
     REDUNDANT_DYNAMIC_COMMAND = enum.auto()
     REDUNDANT_DYNAMIC_SHADOW = enum.auto()
     REDUNDANT_DYNAMIC_UNCOLOR = enum.auto()
+
+    REMINDER_DYNAMIC_COLOR = enum.auto() 
+    REMINDER_DYNAMIC_COMMAND = enum.auto()
+    REMINDER_DYNAMIC_SHADOW = enum.auto()
+    REMINDER_DYNAMIC_UNCOLOR = enum.auto()
 
     ### INSTRUMENTS ###
 
@@ -80,15 +80,32 @@ class Tags(abjad.Enumeration):
     EXPLICIT_METRONOME_MARK_SHADOW = enum.auto()
     EXPLICIT_METRONOME_MARK_UNCOLOR = enum.auto()
 
-    REAPPLIED_METRONOME_MARK_COLOR = enum.auto() 
-    REAPPLIED_METRONOME_MARK_COMMAND = enum.auto()
-    REAPPLIED_METRONOME_MARK_SHADOW = enum.auto()
-    REAPPLIED_METRONOME_MARK_UNCOLOR = enum.auto()
-
     REDUNDANT_METRONOME_MARK_COLOR = enum.auto()
     REDUNDANT_METRONOME_MARK_COMMAND = enum.auto()
     REDUNDANT_METRONOME_MARK_SHADOW = enum.auto()
     REDUNDANT_METRONOME_MARK_UNCOLOR = enum.auto()
+
+    REMINDER_METRONOME_MARK_COLOR = enum.auto() 
+    REMINDER_METRONOME_MARK_COMMAND = enum.auto()
+    REMINDER_METRONOME_MARK_SHADOW = enum.auto()
+    REMINDER_METRONOME_MARK_UNCOLOR = enum.auto()
+
+    ### STAFF LINES ###
+
+    EXPLICIT_STAFF_LINES_COLOR = enum.auto()
+    EXPLICIT_STAFF_LINES_COMMAND = enum.auto()
+    EXPLICIT_STAFF_LINES_SHADOW = enum.auto()
+    EXPLICIT_STAFF_LINES_UNCOLOR = enum.auto()
+
+    REAPPLIED_STAFF_LINES_COLOR = enum.auto() 
+    REAPPLIED_STAFF_LINES_COMMAND = enum.auto()
+    REAPPLIED_STAFF_LINES_SHADOW = enum.auto()
+    REAPPLIED_STAFF_LINES_UNCOLOR = enum.auto()
+
+    REDUNDANT_STAFF_LINES_COLOR = enum.auto()
+    REDUNDANT_STAFF_LINES_COMMAND = enum.auto()
+    REDUNDANT_STAFF_LINES_SHADOW = enum.auto()
+    REDUNDANT_STAFF_LINES_UNCOLOR = enum.auto()
 
     ### TIME SIGNATURES ###
 
@@ -97,12 +114,28 @@ class Tags(abjad.Enumeration):
     EXPLICIT_TIME_SIGNATURE_SHADOW = enum.auto()
     EXPLICIT_TIME_SIGNATURE_UNCOLOR = enum.auto()
 
-    REAPPLIED_TIME_SIGNATURE_COLOR = enum.auto() 
-    REAPPLIED_TIME_SIGNATURE_COMMAND = enum.auto()
-    REAPPLIED_TIME_SIGNATURE_SHADOW = enum.auto()
-    REAPPLIED_TIME_SIGNATURE_UNCOLOR = enum.auto()
-
     REDUNDANT_TIME_SIGNATURE_COLOR = enum.auto()
     REDUNDANT_TIME_SIGNATURE_COMMAND = enum.auto()
     REDUNDANT_TIME_SIGNATURE_SHADOW = enum.auto()
     REDUNDANT_TIME_SIGNATURE_UNCOLOR = enum.auto()
+
+    ### OTHER ###
+
+    CLOCK_TIME_MARKUP = enum.auto()
+    EMPTY_START_BAR = enum.auto()
+    FERMATA_BAR_LINE = enum.auto()
+    FIGURE_NAME_MARKUP = enum.auto()
+    SPACING = enum.auto()
+    STAGE_NUMBER_MARKUP = enum.auto()
+
+    ### PUBLIC METHODS ###
+
+    @staticmethod
+    def tag(tag, build=None):
+        r'''Tags `tag` with `build` name or with SEGMENT.
+
+        Returns string.
+        '''
+        if build is not None:
+            return f'BUILD:{build.upper()}:{tag.name}'
+        return f'SEGMENT:{tag.name}'

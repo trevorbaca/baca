@@ -721,8 +721,7 @@ class SegmentMaker(abjad.SegmentMaker):
         start_time = time.time()
         if self.spacing_specifier is None:
             return
-        tag = 'SEGMENT:SPACING'
-        self.spacing_specifier(self, tag=tag)
+        self.spacing_specifier(self, tag=tags.tag(tags.SPACING))
         stop_time = time.time()
         total_time = int(stop_time - start_time)
         if self.print_timings:
@@ -751,10 +750,7 @@ class SegmentMaker(abjad.SegmentMaker):
         prototype = baca.StaffLines
         staff_lines = baca.StaffLines(self.fermata_measure_staff_line_count)
         breaks_already_treated = []
-        if build is None:
-            tag = 'SEGMENT:FERMATA_BAR_LINE'
-        else:
-            tag = f'BUILD:{build.upper()}:FERMATA_BAR_LINE'
+        tag = tags.tag(tags.FERMATA_BAR_LINE, build)
         for staff in abjad.iterate(self._score).components(abjad.Staff):
             for leaf in abjad.iterate(staff).leaves():
                 start_offset = abjad.inspect(leaf).get_timespan().start_offset
@@ -1618,7 +1614,6 @@ class SegmentMaker(abjad.SegmentMaker):
     def _label_stage_numbers(self):
         if self.omit_stage_number_markup:
             return
-        tag = 'STAGE_NUMBER_MARKUP'
         skips = baca.select(self._score['GlobalSkips']).skips()
         for stage_index in range(self.stage_count):
             stage_number = stage_index + 1
@@ -1635,7 +1630,7 @@ class SegmentMaker(abjad.SegmentMaker):
             markup = markup.with_color(abjad.SchemeColor('DarkCyan'))
             markup = markup.fontsize(-3)
             skip = skips[start_measure_index]
-            abjad.attach(markup, skip, tag=tag)
+            abjad.attach(markup, skip, tag=tags.STAGE_NUMBER_MARKUP)
 
     def _make_global_skips(self):
         context = self._score['GlobalSkips']
@@ -1648,7 +1643,9 @@ class SegmentMaker(abjad.SegmentMaker):
         # empty start bar allows LilyPond to print first bar number
         if self.omit_empty_start_bar:
             return
-        tag = 'SEGMENT:EMPTY_START_BAR'
+        # TODO: change SEGMENT:EMPTY_START_BAR to EMPTY_START_BAR
+        #tag = 'SEGMENT:EMPTY_START_BAR'
+        tag = tags.tag(tags.EMPTY_START_BAR)
         first_skip = baca.select(context).skip(0)
         literal = abjad.LilyPondLiteral(r'\bar ""')
         abjad.attach(literal, first_skip, tag=tag)
@@ -1785,19 +1782,25 @@ class SegmentMaker(abjad.SegmentMaker):
         skip = baca.select(self._score['GlobalSkips']).skip(0)
         mark = abjad.inspect(skip).get_piecewise(abjad.MetronomeMark)
         if mark is None:
-            tag = 'REMINDER_METRONOME_MARK'
             string = self._color_reminder('TextScript')
             literal = abjad.LilyPondLiteral(string)
-            abjad.attach(literal, skip, tag=tag)
+            abjad.attach(
+                literal,
+                skip,
+                tag=tags.REMINDER_METRONOME_MARK_COLOR,
+                )
             prototype = abjad.MetronomeMarkSpanner
             spanner = abjad.inspect(skip).get_spanner(prototype)
             previous_mark = self._get_previous_metronome_mark()
-            spanner.attach(previous_mark, skip, tag=tag)
+            spanner.attach(
+                previous_mark,
+                skip,
+                tag=tags.REMINDER_METRONOME_MARK_COMMAND,
+                )
         time_signature = abjad.inspect(skip).get_indicator(abjad.TimeSignature)
         assert time_signature is not None
         previous_time_signature = self._get_previous_time_signature()
         if str(previous_time_signature) == str(time_signature):
-            tag = 'REDUNDANT_TIME_SIGNATURE'
             wrapper = abjad.inspect(skip).get_indicator(
                 abjad.TimeSignature,
                 unwrap=False,
@@ -1805,9 +1808,18 @@ class SegmentMaker(abjad.SegmentMaker):
             context = wrapper.context
             string = self._color_redundant('TimeSignature', context)
             literal = abjad.LilyPondLiteral(string)
-            abjad.attach(literal, skip, tag=tag)
+            abjad.attach(
+                literal,
+                skip,
+                tag=tags.REDUNDANT_TIME_SIGNATURE_COLOR,
+                )
             abjad.detach(time_signature, skip)
-            abjad.attach(time_signature, skip, context=context, tag=tag)
+            abjad.attach(
+                time_signature,
+                skip,
+                context=context,
+                tag=tags.REDUNDANT_TIME_SIGNATURE_COMMAND,
+                )
         for context in abjad.iterate(self._score).components(abjad.Context):
             previous_clef = self._get_previous_clef(context.name)
             previous_dynamic = self._get_previous_dynamic(context.name)
@@ -1825,30 +1837,47 @@ class SegmentMaker(abjad.SegmentMaker):
                 prototype = abjad.Instrument
                 instrument = abjad.inspect(first_leaf).get_indicator(prototype)
                 if instrument is None:
-                    tag = 'REAPPLIED_INSTRUMENT'
                     string = self._color_reapplied('InstrumentName', context)
                     literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(literal, first_leaf, tag=tag)
+                    abjad.attach(
+                        literal,
+                        first_leaf,
+                        tag=tags.REAPPLIED_INSTRUMENT_COLOR,
+                        )
                     instrument = abjad.new(
                         previous_instrument,
                         context=context.context_name,
                         )
-                    abjad.attach(instrument, first_leaf, tag=tag)
+                    abjad.attach(
+                        instrument,
+                        first_leaf,
+                        tag=tags.REAPPLIED_INSTRUMENT_COMMAND,
+                        )
             if previous_staff_lines is not None:
                 prototype = baca.StaffLines
                 staff_lines = abjad.inspect(first_leaf).get_indicator(
                     prototype)
                 if staff_lines is None:
-                    tag = 'REAPPLIED_STAFF_LINES'
                     string = self._color_reapplied('StaffSymbol', context)
                     literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(literal, first_leaf, tag=tag)
-                    abjad.attach(previous_staff_lines, first_leaf, tag=tag)
+                    abjad.attach(
+                        literal,
+                        first_leaf,
+                        tag=tags.REAPPLIED_STAFF_LINES_COLOR,
+                        )
+                    abjad.attach(
+                        previous_staff_lines,
+                        first_leaf,
+                        tag=tags.REAPPLIED_STAFF_LINES_COMMAND,
+                        )
                 elif previous_staff_lines == staff_lines:
-                    tag = 'REDUNDANT_STAFF_LINES'
                     string = self._color_redundant('StaffSymbol', context)
                     literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(literal, first_leaf, tag=tag)
+                    abjad.attach(
+                        literal,
+                        first_leaf,
+                        tag=tags.REDUNDANT_STAFF_LINES_COLOR,
+                        )
             if previous_clef is not None:
                 clef = abjad.inspect(first_leaf).get_indicator(abjad.Clef)
                 if clef is None:
@@ -1857,7 +1886,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(
                         literal,
                         first_leaf,
-                        tag='REAPPLIED_CLEF_COLOR',
+                        tag=tags.REAPPLIED_CLEF_COLOR,
                         )
                     string = self._uncolor('Clef', context, once=False)
                     literal = abjad.LilyPondLiteral(string)
@@ -1865,19 +1894,19 @@ class SegmentMaker(abjad.SegmentMaker):
                         literal,
                         first_leaf,
                         deactivate=True,
-                        tag='REAPPLIED_CLEF_UNCOLOR',
+                        tag=tags.REAPPLIED_CLEF_UNCOLOR,
                         )
                     abjad.attach(
                         previous_clef,
                         first_leaf,
-                        tag='REAPPLIED_CLEF_COMMAND',
+                        tag=tags.REAPPLIED_CLEF_COMMAND,
                         )
                     string = rf'\set {context.context_name}.forceClef = ##t'
                     literal = abjad.LilyPondLiteral(string)
                     abjad.attach(
                         literal,
                         first_leaf,
-                        tag='REAPPLIED_CLEF_COMMAND',
+                        tag=tags.REAPPLIED_CLEF_COMMAND,
                         )
                     string = self._color_reapplied_shadow(
                         'Clef',
@@ -1888,7 +1917,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(
                         literal,
                         first_leaf,
-                        tag='REAPPLIED_CLEF_SHADOW',
+                        tag=tags.REAPPLIED_CLEF_SHADOW,
                         )
                 elif str(previous_clef) == str(clef):
                     wrapper = abjad.inspect(first_leaf).get_indicator(
@@ -1903,7 +1932,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(
                         literal,
                         first_leaf,
-                        tag='REDUNDANT_CLEF_COLOR',
+                        tag=tags.REDUNDANT_CLEF_COLOR,
                         )
                     string = self._uncolor(
                         'Clef',
@@ -1915,20 +1944,20 @@ class SegmentMaker(abjad.SegmentMaker):
                         literal,
                         first_leaf,
                         deactivate=True,
-                        tag='REDUNDANT_CLEF_UNCOLOR',
+                        tag=tags.REDUNDANT_CLEF_UNCOLOR,
                         )
                     abjad.detach(clef, first_leaf)
                     abjad.attach(
                         clef,
                         first_leaf,
-                        tag='REDUNDANT_CLEF_COMMAND',
+                        tag=tags.REDUNDANT_CLEF_COMMAND,
                         )
                     string = rf'\set {wrapper.context}.forceClef = ##t'
                     literal = abjad.LilyPondLiteral(string)
                     abjad.attach(
                         literal,
                         first_leaf,
-                        tag='REDUNDANT_CLEF_COMMAND',
+                        tag=tags.REDUNDANT_CLEF_COMMAND,
                         )
                     string = self._color_redundant_shadow(
                         'Clef',
@@ -1939,17 +1968,24 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(
                         literal,
                         first_leaf,
-                        tag='REDUNDANT_CLEF_SHADOW',
+                        tag=tags.REDUNDANT_CLEF_SHADOW,
                         )
             if previous_dynamic is not None:
                 prototype = abjad.Dynamic
                 dynamic = abjad.inspect(first_leaf).get_effective(prototype)
                 if dynamic is None:
-                    tag = 'REMINDER_DYNAMIC'
                     string = self._color_reminder('DynamicText', context)
                     literal = abjad.LilyPondLiteral(string)
-                    abjad.attach(literal, first_leaf, tag=tag)
-                    abjad.attach(previous_dynamic, first_leaf, tag=tag)
+                    abjad.attach(
+                        literal,
+                        first_leaf,
+                        tag=tags.REMINDER_DYNAMIC_COLOR,
+                        )
+                    abjad.attach(
+                        previous_dynamic,
+                        first_leaf,
+                        tag=tags.REMINDER_DYNAMIC_COMMAND,
+                        )
 
     def _scope_to_leaf_selection(self, wrapper):
         leaves = []
@@ -2032,7 +2068,6 @@ class SegmentMaker(abjad.SegmentMaker):
         return start_measure_index, stop_measure_index
 
     def _tag_clock_time(self):
-        tag = 'CLOCK_TIME_MARKUP'
         skips = baca.select(self._score['GlobalSkips']).skips()
         if abjad.inspect(skips[0]).get_effective(abjad.MetronomeMark) is None:
             return
@@ -2055,6 +2090,7 @@ class SegmentMaker(abjad.SegmentMaker):
             global_offset = abjad.Duration(seconds)
         else:
             global_offset = None
+        tag = tags.CLOCK_TIME_MARKUP
         duration = abjad.label(skips_, tag=tag).with_start_offsets(
             clock_time=True,
             font_size=-2,
@@ -2180,7 +2216,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \autoPageBreaksOff %! SEGMENT:LAYOUT:9
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
-                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK:3
+                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK_COLOR:3
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 25) %! SEGMENT:SPACING_COMMAND:5
                             s1 * 1/2
@@ -2573,7 +2609,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \autoPageBreaksOff %! SEGMENT:LAYOUT:9
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
-                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK:3
+                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK_COLOR:3
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:5
                             s1 * 1/2
@@ -2974,7 +3010,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \autoPageBreaksOff %! SEGMENT:LAYOUT:9
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
-                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK:3
+                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK_COLOR:3
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:5
                             s1 * 1/2
@@ -5648,7 +5684,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
                             \bar "" %! SEGMENT:EMPTY_START_BAR:1
-                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK:3
+                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK_COLOR:3
                             s1 * 1/2
                             - \markup { %! STAGE_NUMBER_MARKUP:2
                                 \fontsize %! STAGE_NUMBER_MARKUP:2
@@ -5769,7 +5805,6 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
