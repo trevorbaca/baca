@@ -1040,65 +1040,9 @@ class SegmentMaker(abjad.SegmentMaker):
             context = wrapper.context
             previous_clef = abjad.inspect(leaf).get_effective(abjad.Clef, n=-1)
             if str(previous_clef) == str(clef):
-                self._tag_grob_color(
-                    leaf,
-                    'redundant',
-                    'Clef',
-                    context,
-                    )
-                self._tag_grob_uncolor(
-                    leaf,
-                    'redundant',
-                    'Clef',
-                    context,
-                    )
-                self._tag_grob_command(
-                    leaf,
-                    'redundant',
-                    'Clef',
-                    rf'\set {context}.forceClef = ##t',
-                    )
-                abjad.detach(clef, leaf)
-                self._tag_grob_command(
-                    leaf,
-                    'redundant',
-                    'Clef',
-                    clef,
-                    context=context,
-                    )
-                self._tag_grob_shadow(
-                    leaf,
-                    'redundant',
-                    'Clef',
-                    context,
-                    )
+                self._tag_clef(leaf, clef, context, 'redundant')
             else:
-                self._tag_grob_color(
-                    leaf,
-                    'explicit',
-                    'Clef',
-                    context,
-                    )
-                self._tag_grob_uncolor(
-                    leaf,
-                    'explicit',
-                    'Clef',
-                    context,
-                    )
-                abjad.detach(clef, leaf)
-                self._tag_grob_command(
-                    leaf,
-                    'explicit',
-                    'Clef',
-                    clef,
-                    context=context,
-                    )
-                self._tag_grob_shadow(
-                    leaf,
-                    'explicit',
-                    'Clef',
-                    context,
-                    )
+                self._tag_clef(leaf, clef, context, 'explicit')
 
     def _color_octaves_(self):
         if not self.color_octaves:
@@ -2055,6 +1999,18 @@ class SegmentMaker(abjad.SegmentMaker):
         start_measure_index = measure_indices[stop]
         stop_measure_index = measure_indices[stage_number] - 1
         return start_measure_index, stop_measure_index
+
+    def _tag_clef(self, leaf, clef, context, status):
+        grob = 'Clef'
+        self._tag_grob_color(leaf, status, grob, context)
+        self._tag_grob_uncolor(leaf, status, grob, context)
+        # TODO: remove this branch and force explicit clefs too:
+        if status != 'explicit':
+            command = rf'\set {context}.forceClef = ##t'
+            self._tag_grob_command(leaf, status, grob, command)
+        abjad.detach(clef, leaf)
+        self._tag_grob_command(leaf, status, grob, clef, context=context)
+        self._tag_grob_shadow(leaf, status, grob, context)
 
     def _tag_clock_time(self):
         skips = baca.select(self._score['GlobalSkips']).skips()
