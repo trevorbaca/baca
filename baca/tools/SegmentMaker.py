@@ -5340,9 +5340,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            Explicit instruments color blue; shadow instruments color
-            shadow-blue:
-
+            >>> instruments = abjad.InstrumentDictionary()
+            >>> instruments['flute'] = abjad.Flute()
+            >>> instruments['piccolo'] = abjad.Piccolo()
             >>> layout_measure_map = baca.layout(
             ...     baca.page(
             ...         [1, 0, (7,)],
@@ -5350,9 +5350,13 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         [9, 40, (7,)],
             ...         ),
             ...     )
-            >>> instruments = abjad.InstrumentDictionary()
-            >>> instruments['flute'] = abjad.Flute()
-            >>> instruments['piccolo'] = abjad.Piccolo()
+            >>> remove = ['SEGMENT:SPACING_MARKUP', 'STAGE_NUMBER_MARKUP']
+
+        ..  container:: example
+
+            Explicit instruments color blue; shadow instruments color
+            shadow-blue:
+
             >>> maker = baca.SegmentMaker(
             ...     first_segment=False,
             ...     ignore_unpitched_notes=True,
@@ -5378,10 +5382,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=(
-            ...         'SEGMENT:SPACING_MARKUP',
-            ...         'STAGE_NUMBER_MARKUP',
-            ...         ),
+            ...     remove=remove,
             ...     )
             >>> layout_block = abjad.Block(name='layout')
             >>> layout_block.indent = 0
@@ -5647,16 +5648,6 @@ class SegmentMaker(abjad.SegmentMaker):
             Reapplied instruments (at start of nonfirst segments) color green;
             shadow instruments color shadow-green:
 
-            >>> layout_measure_map = baca.layout(
-            ...     baca.page(
-            ...         [1, 0, (7,)],
-            ...         [5, 20, (7,)],
-            ...         [9, 40, (7,)],
-            ...         ),
-            ...     )
-            >>> instruments = abjad.InstrumentDictionary()
-            >>> instruments['flute'] = abjad.Flute()
-            >>> instruments['piccolo'] = abjad.Piccolo()
             >>> maker = baca.SegmentMaker(
             ...     first_segment=False,
             ...     ignore_unpitched_notes=True,
@@ -5681,10 +5672,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=(
-            ...         'SEGMENT:SPACING_MARKUP',
-            ...         'STAGE_NUMBER_MARKUP',
-            ...         ),
+            ...     remove=remove,
             ...     )
             >>> layout_block = abjad.Block(name='layout')
             >>> layout_block.indent = 0
@@ -5950,16 +5938,6 @@ class SegmentMaker(abjad.SegmentMaker):
             Redundant instruments color pink; shadow instruments color
             shadow-pink:
 
-            >>> layout_measure_map = baca.layout(
-            ...     baca.page(
-            ...         [1, 0, (7,)],
-            ...         [5, 20, (7,)],
-            ...         [9, 40, (7,)],
-            ...         ),
-            ...     )
-            >>> instruments = abjad.InstrumentDictionary()
-            >>> instruments['flute'] = abjad.Flute()
-            >>> instruments['piccolo'] = abjad.Piccolo()
             >>> maker = baca.SegmentMaker(
             ...     first_segment=False,
             ...     ignore_unpitched_notes=True,
@@ -5989,10 +5967,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=(
-            ...         'SEGMENT:SPACING_MARKUP',
-            ...         'STAGE_NUMBER_MARKUP',
-            ...         ),
+            ...     remove=remove,
             ...     )
             >>> layout_block = abjad.Block(name='layout')
             >>> layout_block.indent = 0
