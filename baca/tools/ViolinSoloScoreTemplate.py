@@ -66,13 +66,24 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                                     #10 %! EXPLICIT_INSTRUMENT_COMMAND:2
                                     Vn. %! EXPLICIT_INSTRUMENT_COMMAND:2
                                 } %! EXPLICIT_INSTRUMENT_COMMAND:2
-                            \clef "treble" %! EXPLICIT_CLEF_COMMAND:6
+                            \clef "treble" %! EXPLICIT_CLEF_COMMAND:8
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
-                            \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:3
-                            %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:4
-                            \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:5
+                            \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:5
+                            %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:6
+                            \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:7
                             R1 * 1/2
-                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:7
+                            \set Staff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
+                                \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
+                                    #16 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
+                                    Violin %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
+                                } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
+                            \set Staff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
+                                \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
+                                    #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
+                                    Vn. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
+                                } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
+                            \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW:3
+                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:9
             <BLANKLINE>
                             %%% ViolinMusicVoice [measure 2] %%%
                             R1 * 3/8

@@ -61,6 +61,7 @@ class Tags(abjad.Enumeration):
     EXPLICIT_INSTRUMENT_COLOR = enum.auto()
     EXPLICIT_INSTRUMENT_COMMAND = enum.auto()
     EXPLICIT_INSTRUMENT_SHADOW = enum.auto()
+    EXPLICIT_INSTRUMENT_SHADOW_COMMAND = enum.auto()
     EXPLICIT_INSTRUMENT_UNCOLOR = enum.auto()
 
     INSTRUMENT_CHANGE_COLORED_MARKUP = enum.auto()
@@ -69,11 +70,13 @@ class Tags(abjad.Enumeration):
     REAPPLIED_INSTRUMENT_COLOR = enum.auto() 
     REAPPLIED_INSTRUMENT_COMMAND = enum.auto()
     REAPPLIED_INSTRUMENT_SHADOW = enum.auto()
+    REAPPLIED_INSTRUMENT_SHADOW_COMMAND = enum.auto()
     REAPPLIED_INSTRUMENT_UNCOLOR = enum.auto()
 
     REDUNDANT_INSTRUMENT_COLOR = enum.auto()
     REDUNDANT_INSTRUMENT_COMMAND = enum.auto()
     REDUNDANT_INSTRUMENT_SHADOW = enum.auto()
+    REDUNDANT_INSTRUMENT_SHADOW_COMMAND = enum.auto()
     REDUNDANT_INSTRUMENT_UNCOLOR = enum.auto()
 
     ### METRONOME MARKS ###
