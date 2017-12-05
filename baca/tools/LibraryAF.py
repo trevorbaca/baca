@@ -840,7 +840,7 @@ class LibraryAF(abjad.AbjadObject):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     e'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                     d''8
                 <BLANKLINE>
@@ -2889,8 +2889,8 @@ class LibraryAF(abjad.AbjadObject):
                                                     #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:5
                                                     Vn. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:5
                                                 } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:5
-                                            \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW:4
-                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:10
+                                            \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:4
+                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:10
                 <BLANKLINE>
                                             b'8
                 <BLANKLINE>
@@ -2958,8 +2958,8 @@ class LibraryAF(abjad.AbjadObject):
                                                     #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:5
                                                     Va. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:5
                                                 } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:5
-                                            \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW:4
-                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:10
+                                            \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:4
+                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:10
                 <BLANKLINE>
                                             \crossStaff
                                             d'8
@@ -3011,8 +3011,8 @@ class LibraryAF(abjad.AbjadObject):
                                             Vc. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                         } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                     \bar "|"
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW:3
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:9
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
                 <BLANKLINE>
                                 }
                             }
@@ -3135,8 +3135,8 @@ class LibraryAF(abjad.AbjadObject):
                                                     #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:5
                                                     Vn. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:5
                                                 } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:5
-                                            \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW:4
-                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:10
+                                            \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:4
+                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:10
                 <BLANKLINE>
                                             b'8
                 <BLANKLINE>
@@ -3203,8 +3203,8 @@ class LibraryAF(abjad.AbjadObject):
                                                     #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:5
                                                     Va. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:5
                                                 } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:5
-                                            \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW:4
-                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:10
+                                            \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:4
+                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:10
                 <BLANKLINE>
                                             d'8
                 <BLANKLINE>
@@ -3254,8 +3254,8 @@ class LibraryAF(abjad.AbjadObject):
                                             Vc. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                         } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                     \bar "|"
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW:3
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:9
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
                 <BLANKLINE>
                                 }
                             }

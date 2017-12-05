@@ -72,7 +72,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                 e'16
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
             <BLANKLINE>
                                 f'16
             <BLANKLINE>
@@ -230,7 +230,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                 e'16
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
             <BLANKLINE>
                                 f'16
             <BLANKLINE>
@@ -390,7 +390,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                 e'16
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
             <BLANKLINE>
                                 f'16
             <BLANKLINE>
@@ -551,7 +551,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                 e'16
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
             <BLANKLINE>
                                 f'16
             <BLANKLINE>
@@ -713,7 +713,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                 e'16
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
             <BLANKLINE>
                                 f'16
             <BLANKLINE>
@@ -890,7 +890,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                 e'16 * 63/32
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
             <BLANKLINE>
                                 f'16 * 115/64
             <BLANKLINE>

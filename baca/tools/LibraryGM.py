@@ -85,7 +85,7 @@ class LibraryGM(abjad.AbjadObject):
                                     e'8
                                     \glissando
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                     d''8
                                     \glissando
@@ -214,7 +214,7 @@ class LibraryGM(abjad.AbjadObject):
                                     e'8
                                     \glissando
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                     d''8
                 <BLANKLINE>

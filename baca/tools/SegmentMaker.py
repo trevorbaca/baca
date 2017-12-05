@@ -76,7 +76,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                 c'8
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
             <BLANKLINE>
                                 c'8
             <BLANKLINE>
@@ -456,7 +456,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \small
                                             0
                                         }
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -1934,7 +1934,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._tag_grob_command(leaf, status, grob, command)
         abjad.detach(abjad.Clef, leaf)
         self._tag_grob_command(leaf, status, grob, clef, context=context)
-        self._tag_grob_shadow(leaf, status, grob, context)
+        self._tag_grob_shadow_color(leaf, status, grob, context)
 
     def _tag_clock_time(self):
         skips = baca.select(self._score['GlobalSkips']).skips()
@@ -2029,7 +2029,7 @@ class SegmentMaker(abjad.SegmentMaker):
         else:
             spanner.attach(command, leaf, tag=tag)
 
-    def _tag_grob_shadow(
+    def _tag_grob_shadow_color(
         self,
         leaf,
         status,
@@ -2045,9 +2045,9 @@ class SegmentMaker(abjad.SegmentMaker):
             )
         literal = abjad.LilyPondLiteral(string, 'after')
         if tagged_grob_name is not None:
-            tag = self._get_tag(status, tagged_grob_name, 'shadow')
+            tag = self._get_tag(status, tagged_grob_name, 'shadow_color')
         else:
-            tag = self._get_tag(status, grob, 'shadow')
+            tag = self._get_tag(status, grob, 'shadow_color')
         abjad.attach(literal, leaf, tag=tag)
 
     def _tag_grob_uncolor(self, leaf, status, grob, context=None):
@@ -2081,7 +2081,7 @@ class SegmentMaker(abjad.SegmentMaker):
             context=context,
             )
         # SHADOW
-        self._tag_grob_shadow(
+        self._tag_grob_shadow_color(
             leaf,
             status,
             grob,
@@ -2401,7 +2401,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -2474,7 +2474,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -2698,7 +2698,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! REAPPLIED_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkGreen) %! REAPPLIED_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkGreen) %! REAPPLIED_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -2771,7 +2771,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -3029,7 +3029,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! REDUNDANT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DeepPink4) %! REDUNDANT_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DeepPink4) %! REDUNDANT_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -3102,7 +3102,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -3151,7 +3151,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! REDUNDANT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DeepPink4) %! REDUNDANT_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DeepPink4) %! REDUNDANT_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -3337,8 +3337,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                                     Vn. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                                 } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                            \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW:3
-                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:9
+                                            \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
+                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
                 <BLANKLINE>
                                             e'16
                 <BLANKLINE>
@@ -3394,8 +3394,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                             Va. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                         } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                     \bar "|"
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW:3
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:9
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
                 <BLANKLINE>
                                 }
                             }
@@ -3432,8 +3432,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                                     Vc. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                                 } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                            \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW:3
-                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:9
+                                            \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
+                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
                 <BLANKLINE>
                                             g16
                 <BLANKLINE>
@@ -3608,7 +3608,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                         \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                         e'16
-                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
                                     }
                                 }
                                 {
@@ -3815,7 +3815,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                         \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                         e'16
-                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
                                     }
                                 }
                                 {
@@ -3995,7 +3995,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4108,7 +4108,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4226,7 +4226,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4343,7 +4343,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4470,7 +4470,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4662,7 +4662,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4780,7 +4780,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -5054,7 +5054,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                         \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                         e'8.
-                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
                                     }
                                 }
                                 {
@@ -5264,7 +5264,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                         \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                         e'8.
-                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
                                     }
                                 }
                                 {
@@ -5604,7 +5604,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         }
                                     \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
                                     \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW:5
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -5699,7 +5699,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         }
                                     \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                     \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW:3
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -5936,7 +5936,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         }
                                     \set Staff.instrumentName = \markup { Flute } %! REAPPLIED_INSTRUMENT_SHADOW_COMMAND:4
                                     \set Staff.shortInstrumentName = \markup { Fl. } %! REAPPLIED_INSTRUMENT_SHADOW_COMMAND:4
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkGreen) %! REAPPLIED_INSTRUMENT_SHADOW:3
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkGreen) %! REAPPLIED_INSTRUMENT_SHADOW_COLOR:3
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -6031,7 +6031,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         }
                                     \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                     \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW:3
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -6310,7 +6310,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         }
                                     \set Staff.instrumentName = \markup { Flute } %! REDUNDANT_INSTRUMENT_SHADOW_COMMAND:4
                                     \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_INSTRUMENT_SHADOW:3
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_INSTRUMENT_SHADOW_COLOR:3
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -6405,7 +6405,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         }
                                     \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                     \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW:3
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -6476,7 +6476,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         }
                                     \set Staff.instrumentName = \markup { Piccolo } %! REDUNDANT_INSTRUMENT_SHADOW_COMMAND:4
                                     \set Staff.shortInstrumentName = \markup { Picc. } %! REDUNDANT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_INSTRUMENT_SHADOW:3
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_INSTRUMENT_SHADOW_COLOR:3
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -6659,7 +6659,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 %%% \override Staff.Clef.color = ##f %! REAPPLIED_CLEF_UNCOLOR:2
                                 \set Staff.forceClef = ##t %! REAPPLIED_CLEF_COMMAND:3
                                 R1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'DarkGreen) %! REAPPLIED_CLEF_SHADOW:5
+                                \override Staff.Clef.color = #(x11-color 'DarkGreen) %! REAPPLIED_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 R1 * 3/8
@@ -6828,7 +6828,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -7063,7 +7063,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                 R1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 R1 * 3/8
@@ -7136,7 +7136,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                 s1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 s1 * 3/8
@@ -7257,7 +7257,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -7375,7 +7375,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -7521,8 +7521,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     [
                                     \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                     \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW:3
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:9
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
                 <BLANKLINE>
                                     g'8
                 <BLANKLINE>
@@ -7646,8 +7646,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     [
                                     \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                     \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW:3
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:9
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
                 <BLANKLINE>
                                     f'8
                 <BLANKLINE>

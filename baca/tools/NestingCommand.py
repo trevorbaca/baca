@@ -200,7 +200,7 @@ class NestingCommand(Command):
                                         \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                         c'16
                                         [
-                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
             <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
