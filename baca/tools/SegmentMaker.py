@@ -1918,6 +1918,22 @@ class SegmentMaker(abjad.SegmentMaker):
             instrument,
             context=context,
             )
+        strings = instrument._get_lilypond_format()
+#        command = abjad.LilyPondLiteral(strings, 'after')
+#        self._tag_grob_command(
+#            leaf,
+#            status,
+#            tagged_grob_name,
+#            command,
+#            context=context,
+#            )
+#        self._tag_grob_shadow(
+#            leaf,
+#            status,
+#            grob,
+#            context,
+#            tagged_grob_name=tagged_grob_name,
+#            )
 
     def _tag_clock_time(self):
         skips = baca.select(self._score['GlobalSkips']).skips()
@@ -2025,7 +2041,14 @@ class SegmentMaker(abjad.SegmentMaker):
         else:
             spanner.attach(command, leaf, tag=tag)
 
-    def _tag_grob_shadow(self, leaf, status, grob, context=None):
+    def _tag_grob_shadow(
+        self,
+        leaf,
+        status,
+        grob,
+        context=None,
+        tagged_grob_name=None,
+        ):
         string = self._make_status_color_string(
             status,
             grob,
@@ -2033,7 +2056,10 @@ class SegmentMaker(abjad.SegmentMaker):
             shadow=True,
             )
         literal = abjad.LilyPondLiteral(string, 'after')
-        tag = self._get_tag(status, grob, 'shadow')
+        if tagged_grob_name is not None:
+            tag = self._get_tag(status, tagged_grob_name, 'shadow')
+        else:
+            tag = self._get_tag(status, grob, 'shadow')
         abjad.attach(literal, leaf, tag=tag)
 
     def _tag_grob_uncolor(self, leaf, status, grob, context=None):
