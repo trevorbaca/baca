@@ -63,6 +63,9 @@ class Tags(abjad.Enumeration):
     EXPLICIT_INSTRUMENT_SHADOW = enum.auto()
     EXPLICIT_INSTRUMENT_UNCOLOR = enum.auto()
 
+    INSTRUMENT_CHANGE_COLORED_MARKUP = enum.auto()
+    INSTRUMENT_CHANGE_MARKUP = enum.auto()
+
     REAPPLIED_INSTRUMENT_COLOR = enum.auto() 
     REAPPLIED_INSTRUMENT_COMMAND = enum.auto()
     REAPPLIED_INSTRUMENT_SHADOW = enum.auto()

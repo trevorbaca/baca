@@ -1504,30 +1504,31 @@ class SegmentMaker(abjad.SegmentMaker):
             segment_count = self._metadata.get('segment_count')
             return segment_number == segment_count
 
-    def _label_instrument_changes(self):
-        prototype = abjad.Instrument
+    def _label_noninitial_instrument_changes(self):
         for staff in abjad.iterate(self._score).components(abjad.Staff):
             for i, leaf in enumerate(abjad.iterate(staff).leaves()):
-                instrument = abjad.inspect(leaf).get_indicator(prototype)
-                if not instrument:
+                my_instrument = abjad.inspect(leaf).get_indicator(
+                    abjad.Instrument
+                    )
+                if my_instrument is None:
                     continue
-                current_instrument = instrument
-                previous_leaf = abjad.inspect(leaf).get_leaf(-1)
-                if previous_leaf is not None:
-                    agent = abjad.inspect(previous_leaf)
-                    result = agent.get_effective(abjad.Instrument)
-                    previous_instrument = result
-                elif (i == 0 and 1 < self._get_segment_number()):
-                    instrument = self._get_previous_instrument(staff.name)
-                    previous_instrument = instrument
-                else:
+                previous_instrument = abjad.inspect(leaf).get_effective(
+                    abjad.Instrument,
+                    n=-1,
+                    )
+                if previous_instrument is None:
                     continue
+                my_name = getattr(my_instrument, 'name', None)
                 previous_name = getattr(previous_instrument, 'name', None)
-                current_name = getattr(current_instrument, 'name', None)
-                if previous_name != current_name:
-                    markup = self._make_instrument_change_markup(
-                        current_instrument)
-                    abjad.attach(markup, leaf)
+                if previous_name == my_name:
+                    status = 'redundant'
+                else:
+                    status = 'explicit'
+                self._tag_instrument_change_markup(
+                    leaf,
+                    my_instrument,
+                    status,
+                    )
 
     def _label_stage_numbers(self):
         if self.omit_stage_number_markup:
@@ -1565,8 +1566,11 @@ class SegmentMaker(abjad.SegmentMaker):
         literal = abjad.LilyPondLiteral(r'\bar ""')
         abjad.attach(literal, first_skip, tag=tags.EMPTY_START_BAR)
 
-    def _make_instrument_change_markup(self, instrument):
-        string = f'to {instrument.name}'
+    def _make_instrument_change_markup(self, instrument, status):
+        if status == 'explicit':
+            string = f'to {instrument.name}'
+        else:
+            string = f'{instrument.name}'
         markup = abjad.Markup(string, direction=abjad.Up)
         markup = markup.box().override(('box-padding', 0.75))
         return markup
@@ -1763,19 +1767,40 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             first_leaf = abjad.inspect(context).get_leaf(0)
             if previous_instrument is not None:
-                prototype = abjad.Instrument
-                instrument = abjad.inspect(first_leaf).get_indicator(prototype)
-                status = None
-                if instrument is None:
+                my_instrument = abjad.inspect(first_leaf).get_indicator(
+                    abjad.Instrument
+                    )
+                if my_instrument is None:
                     status = 'reapplied'
-                elif previous_instrument == instrument:
-                    status = 'redundant'
-                if status is not None:
                     self._tag_instrument(
                         first_leaf,
                         previous_instrument,
                         context,
                         status
+                        )
+                    self._tag_instrument_change_markup(
+                        first_leaf,
+                        previous_instrument,
+                        status,
+                        )
+                elif previous_instrument == my_instrument:
+                    status = 'redundant'
+                    self._tag_instrument(
+                        first_leaf,
+                        my_instrument,
+                        context,
+                        status
+                        )
+                    self._tag_instrument_change_markup(
+                        first_leaf,
+                        my_instrument,
+                        status,
+                        )
+                else:
+                    self._tag_instrument_change_markup(
+                        first_leaf,
+                        my_instrument,
+                        'explicit',
                         )
             if previous_staff_lines is not None:
                 prototype = baca.StaffLines
@@ -2067,6 +2092,23 @@ class SegmentMaker(abjad.SegmentMaker):
 #            context,
 #            tagged_grob_name=tagged_grob_name,
 #            )
+
+    def _tag_instrument_change_markup(self, leaf, instrument, status):
+        markup = self._make_instrument_change_markup(instrument, status)
+        abjad.attach(
+            markup,
+            leaf,
+            deactivate=True,
+            tag=tags.INSTRUMENT_CHANGE_MARKUP,
+            )
+        color = self._status_to_color[status]
+        color = abjad.SchemeColor(color)
+        markup = markup.with_color(color)
+        abjad.attach(
+            markup,
+            leaf,
+            tag=tags.INSTRUMENT_CHANGE_COLORED_MARKUP,
+            )
 
     def _tag_metronome_mark(self, spanner, skip, metronome_mark, status):
         grob = 'TextScript'
@@ -5345,9 +5387,9 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> instruments['piccolo'] = abjad.Piccolo()
             >>> layout_measure_map = baca.layout(
             ...     baca.page(
-            ...         [1, 0, (7,)],
-            ...         [5, 20, (7,)],
-            ...         [9, 40, (7,)],
+            ...         [1, 0, (11,)],
+            ...         [5, 25, (11,)],
+            ...         [9, 50, (7,)],
             ...         ),
             ...     )
             >>> remove = ['SEGMENT:SPACING_MARKUP', 'STAGE_NUMBER_MARKUP']
@@ -5399,7 +5441,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \pageBreak %! SEGMENT:LAYOUT:7
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT:8
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT:8
                             \autoPageBreaksOff %! SEGMENT:LAYOUT:9
                             \time 4/8
                             \bar "" %! EMPTY_START_BAR:1
@@ -5431,7 +5473,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 5] %%%
                             \break %! SEGMENT:LAYOUT:3
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 25) (alignment-distances . (11))) %! SEGMENT:LAYOUT:4
                             \time 4/8
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
@@ -5460,7 +5502,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 9] %%%
                             \break %! SEGMENT:LAYOUT:3
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 40) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 50) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
                             \time 4/8
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
@@ -5495,11 +5537,32 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                    \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
+                                    \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                    \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:3
                                     c'8
                                     [
+                                    ^ \markup {
+                                        \column
+                                            {
+                                                %%% \line %! INSTRUMENT_CHANGE_MARKUP:1
+                                                %%%     { %! INSTRUMENT_CHANGE_MARKUP:1
+                                                %%%         \override %! INSTRUMENT_CHANGE_MARKUP:1
+                                                %%%             #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_MARKUP:1
+                                                %%%             \box %! INSTRUMENT_CHANGE_MARKUP:1
+                                                %%%                 "to flute" %! INSTRUMENT_CHANGE_MARKUP:1
+                                                %%%     } %! INSTRUMENT_CHANGE_MARKUP:1
+                                                \line %! INSTRUMENT_CHANGE_COLORED_MARKUP:2
+                                                    { %! INSTRUMENT_CHANGE_COLORED_MARKUP:2
+                                                        \with-color %! INSTRUMENT_CHANGE_COLORED_MARKUP:2
+                                                            #(x11-color 'blue) %! INSTRUMENT_CHANGE_COLORED_MARKUP:2
+                                                            \override %! INSTRUMENT_CHANGE_COLORED_MARKUP:2
+                                                                #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_COLORED_MARKUP:2
+                                                                \box %! INSTRUMENT_CHANGE_COLORED_MARKUP:2
+                                                                    "to flute" %! INSTRUMENT_CHANGE_COLORED_MARKUP:2
+                                                    } %! INSTRUMENT_CHANGE_COLORED_MARKUP:2
+                                            }
+                                        }
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -5572,10 +5635,25 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8
                                     [
                                     ^ \markup {
-                                        \override
-                                            #'(box-padding . 0.75)
-                                            \box
-                                                "to piccolo"
+                                        \column
+                                            {
+                                                %%% \line %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%     { %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%         \override %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%             #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%             \box %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%                 "to piccolo" %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%     } %! INSTRUMENT_CHANGE_MARKUP:3
+                                                \line %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                    { %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                        \with-color %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                            #(x11-color 'blue) %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                            \override %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                                #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                                \box %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                                    "to piccolo" %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                    } %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                            }
                                         }
                 <BLANKLINE>
                                     c'8
@@ -5689,7 +5767,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \pageBreak %! SEGMENT:LAYOUT:7
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT:8
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT:8
                             \autoPageBreaksOff %! SEGMENT:LAYOUT:9
                             \time 4/8
                             \bar "" %! EMPTY_START_BAR:1
@@ -5721,7 +5799,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 5] %%%
                             \break %! SEGMENT:LAYOUT:3
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 25) (alignment-distances . (11))) %! SEGMENT:LAYOUT:4
                             \time 4/8
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
@@ -5750,7 +5828,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 9] %%%
                             \break %! SEGMENT:LAYOUT:3
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 40) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 50) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
                             \time 4/8
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
@@ -5790,6 +5868,27 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Staff.InstrumentName.color = #(x11-color 'green) %! REAPPLIED_INSTRUMENT_COLOR:1
                                     c'8
                                     [
+                                    ^ \markup {
+                                        \column
+                                            {
+                                                %%% \line %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%     { %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%         \override %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%             #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%             \box %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%                 flute %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%     } %! INSTRUMENT_CHANGE_MARKUP:3
+                                                \line %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                    { %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                        \with-color %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                            #(x11-color 'green) %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                            \override %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                                #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                                \box %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                                    flute %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                    } %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                            }
+                                        }
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -5862,10 +5961,25 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8
                                     [
                                     ^ \markup {
-                                        \override
-                                            #'(box-padding . 0.75)
-                                            \box
-                                                "to piccolo"
+                                        \column
+                                            {
+                                                %%% \line %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%     { %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%         \override %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%             #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%             \box %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%                 "to piccolo" %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%     } %! INSTRUMENT_CHANGE_MARKUP:3
+                                                \line %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                    { %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                        \with-color %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                            #(x11-color 'blue) %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                            \override %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                                #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                                \box %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                                    "to piccolo" %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                    } %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                            }
                                         }
                 <BLANKLINE>
                                     c'8
@@ -5938,6 +6052,14 @@ class SegmentMaker(abjad.SegmentMaker):
             Redundant instruments color pink; shadow instruments color
             shadow-pink:
 
+            >>> layout_measure_map = baca.layout(
+            ...     baca.page(
+            ...         [1, 0, (11,)],
+            ...         [5, 25, (11,)],
+            ...         [9, 50, (11,)],
+            ...         [13, 75, (7,)],
+            ...         ),
+            ...     )
             >>> maker = baca.SegmentMaker(
             ...     first_segment=False,
             ...     ignore_unpitched_notes=True,
@@ -5945,7 +6067,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     layout_measure_map=layout_measure_map,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
-            ...     time_signatures=3 * [(4, 8), (3, 8), (2, 8), (3, 8)],
+            ...     time_signatures=4 * [(4, 8), (3, 8), (2, 8), (3, 8)],
             ...     )
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
@@ -5984,7 +6106,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \pageBreak %! SEGMENT:LAYOUT:7
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT:8
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT:8
                             \autoPageBreaksOff %! SEGMENT:LAYOUT:9
                             \time 4/8
                             \bar "" %! EMPTY_START_BAR:1
@@ -6016,7 +6138,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 5] %%%
                             \break %! SEGMENT:LAYOUT:3
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 25) (alignment-distances . (11))) %! SEGMENT:LAYOUT:4
                             \time 4/8
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
@@ -6045,7 +6167,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 9] %%%
                             \break %! SEGMENT:LAYOUT:3
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 40) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 50) (alignment-distances . (11))) %! SEGMENT:LAYOUT:4
                             \time 4/8
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
@@ -6072,6 +6194,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
                 <BLANKLINE>
+                            %%% GlobalSkips [measure 13] %%%
+                            \break %! SEGMENT:LAYOUT:3
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 75) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
+                            \time 4/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 1/2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 14] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 3/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 3/8
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 15] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 2/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 1/4
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 16] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \time 3/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            s1 * 3/8
+                <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "MusicContext" <<
@@ -6085,6 +6236,27 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_COLOR:1
                                     c'8
                                     [
+                                    ^ \markup {
+                                        \column
+                                            {
+                                                %%% \line %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%     { %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%         \override %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%             #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%             \box %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%                 flute %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%     } %! INSTRUMENT_CHANGE_MARKUP:3
+                                                \line %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                    { %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                        \with-color %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                            #(x11-color 'DeepPink1) %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                            \override %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                                #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                                \box %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                                    flute %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                    } %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                            }
+                                        }
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -6157,10 +6329,25 @@ class SegmentMaker(abjad.SegmentMaker):
                                     c'8
                                     [
                                     ^ \markup {
-                                        \override
-                                            #'(box-padding . 0.75)
-                                            \box
-                                                "to piccolo"
+                                        \column
+                                            {
+                                                %%% \line %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%     { %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%         \override %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%             #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%             \box %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%                 "to piccolo" %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%     } %! INSTRUMENT_CHANGE_MARKUP:3
+                                                \line %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                    { %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                        \with-color %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                            #(x11-color 'blue) %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                            \override %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                                #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                                \box %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                                    "to piccolo" %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                    } %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                            }
                                         }
                 <BLANKLINE>
                                     c'8
@@ -6209,6 +6396,27 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_COLOR:1
                                     c'8
                                     [
+                                    ^ \markup {
+                                        \column
+                                            {
+                                                %%% \line %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%     { %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%         \override %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%             #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%             \box %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%                 piccolo %! INSTRUMENT_CHANGE_MARKUP:3
+                                                %%%     } %! INSTRUMENT_CHANGE_MARKUP:3
+                                                \line %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                    { %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                        \with-color %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                            #(x11-color 'DeepPink1) %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                            \override %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                                #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                                \box %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                                    piccolo %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                                    } %! INSTRUMENT_CHANGE_COLORED_MARKUP:4
+                                            }
+                                        }
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -6216,6 +6424,50 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 12] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 13] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 14] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 15] %%%
+                                    c'8
+                                    [
+                <BLANKLINE>
+                                    c'8
+                                    ]
+                                }
+                                {
+                <BLANKLINE>
+                                    %%% MusicVoice [measure 16] %%%
                                     c'8
                                     [
                 <BLANKLINE>
@@ -7469,7 +7721,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._apply_spacing_specifier()
         self._tag_clock_time()
         self._hide_instrument_names_()
-        self._label_instrument_changes()
+        self._label_noninitial_instrument_changes()
         self._transpose_score_()
         self._attach_rehearsal_mark()
         self._add_final_bar_line()
