@@ -1028,24 +1028,6 @@ class SegmentMaker(abjad.SegmentMaker):
             message = manager.tabulate_wellformedness(score)
             raise Exception(message)
 
-    def _color_contexted_indicators(self):
-        for leaf in abjad.iterate(self._score).leaves():
-            wrapper = abjad.inspect(leaf).get_indicator(
-                abjad.Clef,
-                unwrap=False,
-                )
-            if wrapper is None:
-                continue
-            if wrapper.tag is not None:
-                continue
-            clef = wrapper.indicator
-            context = wrapper.context
-            previous_clef = abjad.inspect(leaf).get_effective(abjad.Clef, n=-1)
-            if str(previous_clef) == str(clef):
-                self._tag_clef(leaf, clef, context, 'redundant')
-            else:
-                self._tag_clef(leaf, clef, context, 'explicit')
-
     def _color_octaves_(self):
         if not self.color_octaves:
             return
@@ -1770,12 +1752,17 @@ class SegmentMaker(abjad.SegmentMaker):
             if previous_instrument is not None:
                 prototype = abjad.Instrument
                 instrument = abjad.inspect(first_leaf).get_indicator(prototype)
+                status = None
                 if instrument is None:
+                    status = 'reapplied'
+                elif previous_instrument == instrument:
+                    status = 'redundant'
+                if status is not None:
                     self._tag_instrument(
                         first_leaf,
                         previous_instrument,
                         context,
-                        'reapplied',
+                        status
                         )
             if previous_staff_lines is not None:
                 prototype = baca.StaffLines
@@ -1795,23 +1782,17 @@ class SegmentMaker(abjad.SegmentMaker):
                         )
             if previous_clef is not None:
                 clef = abjad.inspect(first_leaf).get_indicator(abjad.Clef)
+                status = None
                 if clef is None:
+                    status = 'reapplied'
+                elif str(previous_clef) == str(clef):
+                    status = 'redundant'
+                if status is not None:
                     self._tag_clef(
                         first_leaf,
                         previous_clef,
                         context,
-                        'reapplied',
-                        )
-                elif str(previous_clef) == str(clef):
-                    wrapper = abjad.inspect(first_leaf).get_indicator(
-                        abjad.Clef,
-                        unwrap=False,
-                        )
-                    self._tag_clef(
-                        first_leaf,
-                        clef,
-                        wrapper.context, 
-                        'redundant',
+                        status,
                         )
             if previous_dynamic is not None:
                 prototype = abjad.Dynamic
@@ -2088,6 +2069,45 @@ class SegmentMaker(abjad.SegmentMaker):
         self._tag_grob_color(skip, status, grob, context)
         abjad.detach(time_signature, skip)
         self._tag_grob_command(skip, status, grob, time_signature, context)
+
+    def _tag_untagged_clefs(self):
+        for leaf in abjad.iterate(self._score).leaves():
+            wrapper = abjad.inspect(leaf).get_indicator(
+                abjad.Clef,
+                unwrap=False,
+                )
+            if wrapper is None:
+                continue
+            if wrapper.tag is not None:
+                continue
+            clef = wrapper.indicator
+            context = wrapper.context
+            previous_clef = abjad.inspect(leaf).get_effective(abjad.Clef, n=-1)
+            if str(previous_clef) == str(clef):
+                self._tag_clef(leaf, clef, context, 'redundant')
+            else:
+                self._tag_clef(leaf, clef, context, 'explicit')
+
+    def _tag_untagged_instruments(self):
+        for leaf in abjad.iterate(self._score).leaves():
+            wrapper = abjad.inspect(leaf).get_indicator(
+                abjad.Instrument,
+                unwrap=False,
+                )
+            if wrapper is None:
+                continue
+            if wrapper.tag is not None:
+                continue
+            instrument = wrapper.indicator
+            context = wrapper.context
+            previous_instrument = abjad.inspect(leaf).get_effective(
+                abjad.Instrument,
+                n=-1,
+                )
+            if previous_instrument == instrument:
+                self._tag_instrument(leaf, instrument, context, 'redundant')
+            else:
+                self._tag_instrument(leaf, instrument, context, 'explicit')
 
     def _transpose_score_(self):
         if self.transpose_score:
@@ -3526,22 +3546,23 @@ class SegmentMaker(abjad.SegmentMaker):
                                         {
                 <BLANKLINE>
                                             %%% ViolinMusicVoice [measure 1] %%%
-                                            \set ViolinMusicStaff.instrumentName = \markup {
-                                                \hcenter-in
-                                                    #10
-                                                    Violin
-                                                }
-                                            \set ViolinMusicStaff.shortInstrumentName = \markup {
-                                                \hcenter-in
-                                                    #10
-                                                    Vn.
-                                                }
-                                            \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
-                                            \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                            %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                            \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                            \set ViolinMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                                \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                                    #10 %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                                    Violin %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                                } %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                            \set ViolinMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                                \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                                    #10 %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                                    Vn. %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                                } %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                            \clef "treble" %! EXPLICIT_CLEF_COMMAND:6
+                                            \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
+                                            \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:3
+                                            %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:4
+                                            \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:5
                                             d'16
-                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:7
                 <BLANKLINE>
                                             e'16
                 <BLANKLINE>
@@ -3570,23 +3591,24 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \context ViolaMusicVoice = "ViolaMusicVoice" {
                 <BLANKLINE>
                                     %%% ViolaMusicVoice [measure 1] %%%
-                                    \set ViolaMusicStaff.instrumentName = \markup {
-                                        \hcenter-in
-                                            #10
-                                            Viola
-                                        }
-                                    \set ViolaMusicStaff.shortInstrumentName = \markup {
-                                        \hcenter-in
-                                            #10
-                                            Va.
-                                        }
-                                    \clef "alto" %! EXPLICIT_CLEF_COMMAND:4
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                    \set ViolaMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                        \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                            #10 %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                            Viola %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                        } %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                    \set ViolaMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                        \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                            #10 %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                            Va. %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                        } %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                    \clef "alto" %! EXPLICIT_CLEF_COMMAND:6
+                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
+                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:3
+                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:4
+                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:5
                                     R1 * 3/8
                                     \bar "|"
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:7
                 <BLANKLINE>
                                 }
                             }
@@ -3597,22 +3619,23 @@ class SegmentMaker(abjad.SegmentMaker):
                                         {
                 <BLANKLINE>
                                             %%% CelloMusicVoice [measure 1] %%%
-                                            \set CelloMusicStaff.instrumentName = \markup {
-                                                \hcenter-in
-                                                    #10
-                                                    Cello
-                                                }
-                                            \set CelloMusicStaff.shortInstrumentName = \markup {
-                                                \hcenter-in
-                                                    #10
-                                                    Vc.
-                                                }
-                                            \clef "bass" %! EXPLICIT_CLEF_COMMAND:4
-                                            \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                            %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                            \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                            \set CelloMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                                \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                                    #10 %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                                    Cello %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                                } %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                            \set CelloMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                                \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                                    #10 %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                                    Vc. %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                                } %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                            \clef "bass" %! EXPLICIT_CLEF_COMMAND:6
+                                            \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
+                                            \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:3
+                                            %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:4
+                                            \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:5
                                             a16
-                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:7
                 <BLANKLINE>
                                             g16
                 <BLANKLINE>
@@ -5633,8 +5656,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> metadata = {}
-            >>> metadata['end_instrument_by_context'] = {}
-            >>> metadata['end_instrument_by_context']['MusicStaff'] = 'piccolo'
+            >>> metadata['end_instruments_by_context'] = {}
+            >>> metadata['end_instruments_by_context']['MusicStaff'] = 'piccolo'
             >>> lilypond_file = maker.run(
             ...     deactivate=(
             ...         'SEGMENT:SPACING_MARKUP',
@@ -5852,8 +5875,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \set Staff.instrumentName = \markup { Flute }
-                                    \set Staff.shortInstrumentName = \markup { Fl. }
+                                    \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                    \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
                                     c'8
                                     [
                 <BLANKLINE>
@@ -5922,8 +5946,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 7] %%%
-                                    \set Staff.instrumentName = \markup { Piccolo }
-                                    \set Staff.shortInstrumentName = \markup { Picc. }
+                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
                                     c'8
                                     [
                                     ^ \markup {
@@ -6032,8 +6057,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> metadata = {}
-            >>> metadata['end_instrument_by_context'] = {}
-            >>> metadata['end_instrument_by_context']['MusicStaff'] = 'flute'
+            >>> metadata['end_instruments_by_context'] = {}
+            >>> metadata['end_instruments_by_context']['MusicStaff'] = 'flute'
             >>> lilypond_file = maker.run(
             ...     deactivate=(
             ...         'SEGMENT:SPACING_MARKUP',
@@ -6251,6 +6276,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
+                                    \set Staff.instrumentName = \markup { Flute } %! REAPPLIED_INSTRUMENT_COMMAND:2
+                                    \set Staff.shortInstrumentName = \markup { Fl. } %! REAPPLIED_INSTRUMENT_COMMAND:2
+                                    \once \override Staff.InstrumentName.color = #(x11-color 'green) %! REAPPLIED_INSTRUMENT_COLOR:1
                                     c'8
                                     [
                 <BLANKLINE>
@@ -6319,8 +6347,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 7] %%%
-                                    \set Staff.instrumentName = \markup { Piccolo }
-                                    \set Staff.shortInstrumentName = \markup { Picc. }
+                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
                                     c'8
                                     [
                                     ^ \markup {
@@ -6434,8 +6463,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> metadata = {}
-            >>> metadata['end_instrument_by_context'] = {}
-            >>> metadata['end_instrument_by_context']['MusicStaff'] = 'flute'
+            >>> metadata['end_instruments_by_context'] = {}
+            >>> metadata['end_instruments_by_context']['MusicStaff'] = 'flute'
             >>> lilypond_file = maker.run(
             ...     deactivate=(
             ...         'SEGMENT:SPACING_MARKUP',
@@ -6653,8 +6682,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \set Staff.instrumentName = \markup { Flute }
-                                    \set Staff.shortInstrumentName = \markup { Fl. }
+                                    \set Staff.instrumentName = \markup { Flute } %! REDUNDANT_INSTRUMENT_COMMAND:2
+                                    \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_INSTRUMENT_COMMAND:2
+                                    \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_COLOR:1
                                     c'8
                                     [
                 <BLANKLINE>
@@ -6723,8 +6753,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 7] %%%
-                                    \set Staff.instrumentName = \markup { Piccolo }
-                                    \set Staff.shortInstrumentName = \markup { Picc. }
+                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
                                     c'8
                                     [
                                     ^ \markup {
@@ -6775,8 +6806,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 11] %%%
-                                    \set Staff.instrumentName = \markup { Piccolo }
-                                    \set Staff.shortInstrumentName = \markup { Picc. }
+                                    \set Staff.instrumentName = \markup { Piccolo } %! REDUNDANT_INSTRUMENT_COMMAND:2
+                                    \set Staff.shortInstrumentName = \markup { Picc. } %! REDUNDANT_INSTRUMENT_COMMAND:2
+                                    \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_COLOR:1
                                     c'8
                                     [
                 <BLANKLINE>
@@ -7768,15 +7800,16 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:6
+                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
+                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:3
+                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:4
+                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:5
                                     fs'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:7
                 <BLANKLINE>
                                     g'8
                 <BLANKLINE>
@@ -7889,15 +7922,16 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:6
+                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
+                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:3
+                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:4
+                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:5
                                     e'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW:7
                 <BLANKLINE>
                                     f'8
                 <BLANKLINE>
@@ -8031,7 +8065,8 @@ class SegmentMaker(abjad.SegmentMaker):
         self._shorten_long_repeat_ties()
         self._attach_first_segment_score_template_defaults()
         self._reapply_previous_segment_settings()
-        self._color_contexted_indicators()
+        self._tag_untagged_instruments()
+        self._tag_untagged_clefs()
         self._apply_spacing_specifier()
         self._tag_clock_time()
         self._hide_instrument_names_()
