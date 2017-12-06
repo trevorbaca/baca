@@ -175,6 +175,10 @@ class SegmentMaker(abjad.SegmentMaker):
         '_spacing_specifier',
         '_stage_label_base_string',
         '_time_signatures',
+        '_transient_clefs',
+        '_transient_dynamics',
+        '_transient_instruments',
+        '_transient_staff_lines',
         '_transpose_score',
         '_wrappers',
         )
@@ -376,6 +380,10 @@ class SegmentMaker(abjad.SegmentMaker):
         if stage_label_base_string is not None:
             assert isinstance(stage_label_base_string, str)
         self._stage_label_base_string = stage_label_base_string
+        self._transient_clefs = {}
+        self._transient_dynamics = {}
+        self._transient_instruments = {}
+        self._transient_staff_lines = {}
         if transpose_score is not None:
             transpose_score = bool(transpose_score)
         self._transpose_score = transpose_score
@@ -1182,10 +1190,12 @@ class SegmentMaker(abjad.SegmentMaker):
         for staff in staves:
             last_leaf = abjad.inspect(staff).get_leaf(-1)
             clef = abjad.inspect(last_leaf).get_effective(abjad.Clef)
-            if clef:
-                result[staff.name] = clef.name
+            if clef is not None:
+                string = clef.name
             else:
-                result[staff.name] = None
+                string = self._transient_clefs.get(staff.name)
+            if string is not None:
+                result[staff.name] = string
         return result
 
     def _get_end_dynamics(self):
@@ -1197,7 +1207,11 @@ class SegmentMaker(abjad.SegmentMaker):
             leaf = abjad.inspect(voice).get_leaf(-1)
             dynamic = abjad.inspect(leaf).get_effective(abjad.Dynamic)
             if dynamic is not None:
-                result[voice.name] = dynamic.name
+                string = dynamic.name
+            else:
+                string = self._transient_dynamics.get(voice.name)
+            if string is not None:
+                result[voice.name] = string
         return result
 
     def _get_end_instruments(self):
@@ -1211,9 +1225,13 @@ class SegmentMaker(abjad.SegmentMaker):
             leaf = abjad.inspect(context).get_leaf(-1)
             instrument = abjad.inspect(leaf).get_effective(abjad.Instrument)
             if instrument is not None:
-                result[context.name] = instrument.name
+                string = instrument.name
             else:
-                print(f'can not find {context.name!r} end-instrument.')
+                string = self._transient_instruments.get(context.name)
+            if string is not None:
+                result[context.name] = string
+            else:
+                print(f'Can not find {context.name} end-instrument ...')
         return result
 
     def _get_end_metronome_mark(self):
@@ -1248,6 +1266,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _get_end_staff_lines(self):
         if self._end_staff_lines_by_staff:
+            for staff_name, number in self._transient_staff_lines.items():
+                if number is not None:
+                    self._end_staff_lines_by_staff[staff_name] = number
             return self._end_staff_lines_by_staff
         result = abjad.TypedOrderedDict()
         staves = abjad.iterate(self._score).components(abjad.Staff)
@@ -1257,7 +1278,11 @@ class SegmentMaker(abjad.SegmentMaker):
             leaf = abjad.inspect(staff).get_leaf(-1)
             lines = abjad.inspect(leaf).get_effective(baca.StaffLines)
             if lines is not None:
-                result[staff.name] = lines.line_count
+                number = lines.line_count
+            else:
+                number = self._transient_staff_lines.get(staff.name)
+            if number is not None:
+                result[staff.name] = number
         return result
 
     def _get_end_time_signature(self):
@@ -1270,6 +1295,19 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _get_first_measure_number(self):
         return self._metadata.get('first_bar_number', 1)
+
+    @staticmethod
+    def _get_first_nontransient_leaf(context):
+        transient_voices = []
+        for voice in abjad.iterate([context]).components(abjad.Voice):
+            transient = abjad.inspect(voice).get_annotation('transient')
+            if abjad.inspect(voice).get_annotation('transient') is not True:
+                return abjad.inspect(voice).get_leaf(0)
+            transient_voices.append(voice)
+        for voice in transient_voices:
+            leaves = baca.select(voice).leaves()
+            if not all(isinstance(_, abjad.MultimeasureRest) for _ in leaves):
+                return leaves[0]
 
     def _get_measure_timespans(self, measure_numbers):
         timespans = []
@@ -1566,12 +1604,8 @@ class SegmentMaker(abjad.SegmentMaker):
         literal = abjad.LilyPondLiteral(r'\bar ""')
         abjad.attach(literal, first_skip, tag=tags.EMPTY_START_BAR)
 
-    def _make_instrument_change_markup(self, instrument, status):
-        if status == 'explicit':
-            string = f'to {instrument.name}'
-        else:
-            string = f'{instrument.name}'
-        markup = abjad.Markup(string, direction=abjad.Up)
+    def _make_instrument_change_markup(self, instrument):
+        markup = abjad.Markup(instrument.name, direction=abjad.Up)
         markup = markup.box().override(('box-padding', 0.75))
         return markup
 
@@ -1711,19 +1745,6 @@ class SegmentMaker(abjad.SegmentMaker):
         counter = abjad.Strin('second').pluralize(total_duration)
         print(f'segment duration {total_duration} {counter} ...')
 
-    def _remove_tags(self, tags):
-        if not tags:
-            return
-        for leaf in abjad.iterate(self._score).leaves():
-            for wrapper in abjad.inspect(leaf).get_indicators(unwrap=False):
-                if wrapper.tag is None:
-                    continue
-                index = wrapper.tag.rfind(':')
-                tag = wrapper.tag[:index]
-                if tag in tags:
-                    #wrapper._deactivate = True
-                    abjad.detach(wrapper, leaf)
-
     def _reapply_previous_segment_settings(self):
         if self._is_first_segment() and not self._previous_metadata:
             return
@@ -1758,14 +1779,28 @@ class SegmentMaker(abjad.SegmentMaker):
             previous_dynamic = self._get_previous_dynamic(context.name)
             previous_instrument = self._get_previous_instrument(context.name)
             previous_staff_lines = self._get_previous_staff_lines(context.name)
-            if not any([
+            previous_settings = [
                 previous_clef,
                 previous_dynamic,
                 previous_instrument,
                 previous_staff_lines,
-                ]):
+                ]
+            if not any(previous_settings):
                 continue
-            first_leaf = abjad.inspect(context).get_leaf(0)
+            first_leaf = self._get_first_nontransient_leaf(context)
+            if first_leaf is None:
+                if previous_clef is not None:
+                    self._transient_clefs[context.name] = previous_clef.name
+                if previous_dynamic is not None:
+                    self._transient_dynamics[
+                        context.name] = previous_dynamic.name
+                if previous_instrument is not None:
+                    self._transient_instruments[
+                        context.name] = previous_instrument.name
+                if previous_staff_lines is not None:
+                    self._transient_staff_lines[
+                        context.name] = previous_staff_lines.line_count
+                continue
             if previous_instrument is not None:
                 my_instrument = abjad.inspect(first_leaf).get_indicator(
                     abjad.Instrument
@@ -1842,6 +1877,19 @@ class SegmentMaker(abjad.SegmentMaker):
                         context,
                         'reminder',
                         )
+
+    def _remove_tags(self, tags):
+        if not tags:
+            return
+        for leaf in abjad.iterate(self._score).leaves():
+            for wrapper in abjad.inspect(leaf).get_indicators(unwrap=False):
+                if wrapper.tag is None:
+                    continue
+                index = wrapper.tag.rfind(':')
+                tag = wrapper.tag[:index]
+                if tag in tags:
+                    #wrapper._deactivate = True
+                    abjad.detach(wrapper, leaf)
 
     def _scope_to_leaf_selection(self, wrapper):
         leaves = []
@@ -2080,7 +2128,6 @@ class SegmentMaker(abjad.SegmentMaker):
             instrument,
             context=context,
             )
-        # SHADOW
         self._tag_grob_shadow_color(
             leaf,
             status,
@@ -2088,7 +2135,7 @@ class SegmentMaker(abjad.SegmentMaker):
             context,
             tagged_grob_name=tagged_grob_name,
             )
-        strings = instrument._get_lilypond_format()
+        strings = instrument._get_lilypond_format(context=context)
         command = abjad.LilyPondLiteral(strings, 'after')
         self._tag_grob_command(
             leaf,
@@ -2100,20 +2147,24 @@ class SegmentMaker(abjad.SegmentMaker):
             )
 
     def _tag_instrument_change_markup(self, leaf, instrument, status):
-        markup = self._make_instrument_change_markup(instrument, status)
+        markup = self._make_instrument_change_markup(instrument)
+        name = f'{status.upper()}_INSTRUMENT_CHANGE_MARKUP'
+        tag = getattr(tags, name)
         abjad.attach(
             markup,
             leaf,
             deactivate=True,
-            tag=tags.INSTRUMENT_CHANGE_MARKUP,
+            tag=tag,
             )
         color = self._status_to_color[status]
         color = abjad.SchemeColor(color)
         markup = markup.with_color(color)
+        name = f'{status.upper()}_INSTRUMENT_CHANGE_COLORED_MARKUP'
+        tag = getattr(tags, name)
         abjad.attach(
             markup,
             leaf,
-            tag=tags.INSTRUMENT_CHANGE_COLORED_MARKUP,
+            tag=tag,
             )
 
     def _tag_metronome_mark(self, spanner, skip, metronome_mark, status):
@@ -2186,7 +2237,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if wrapper.tag is not None:
                 continue
             instrument = wrapper.indicator
-            context = wrapper.context
+            context = wrapper._find_correct_effective_context()
             previous_instrument = abjad.inspect(leaf).get_effective(
                 abjad.Instrument,
                 n=-1,
@@ -3322,22 +3373,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     Vn. %! EXPLICIT_INSTRUMENT_COMMAND:2
                                                 } %! EXPLICIT_INSTRUMENT_COMMAND:2
                                             \clef "treble" %! EXPLICIT_CLEF_COMMAND:8
-                                            \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
+                                            \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
                                             \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:5
                                             %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:6
                                             \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:7
                                             d'16
-                                            \set Staff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
+                                            \set ViolinMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                                 \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                                     #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                                     Violin %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                                 } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                            \set Staff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
+                                            \set ViolinMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                                 \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                                     #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                                     Vn. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                                 } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                            \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
+                                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
                                             \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
                 <BLANKLINE>
                                             e'16
@@ -3378,23 +3429,23 @@ class SegmentMaker(abjad.SegmentMaker):
                                             Va. %! EXPLICIT_INSTRUMENT_COMMAND:2
                                         } %! EXPLICIT_INSTRUMENT_COMMAND:2
                                     \clef "alto" %! EXPLICIT_CLEF_COMMAND:8
-                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
+                                    \once \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:5
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:6
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:7
                                     R1 * 3/8
-                                    \set Staff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
+                                    \set ViolaMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                         \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                             #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                             Viola %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                         } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \set Staff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
+                                    \set ViolaMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                         \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                             #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                             Va. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                         } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                     \bar "|"
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
+                                    \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
                                     \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
                 <BLANKLINE>
                                 }
@@ -3417,22 +3468,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     Vc. %! EXPLICIT_INSTRUMENT_COMMAND:2
                                                 } %! EXPLICIT_INSTRUMENT_COMMAND:2
                                             \clef "bass" %! EXPLICIT_CLEF_COMMAND:8
-                                            \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
+                                            \once \override CelloMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
                                             \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:5
                                             %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:6
                                             \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:7
                                             a16
-                                            \set Staff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
+                                            \set CelloMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                                 \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                                     #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                                     Cello %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                                 } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                            \set Staff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
+                                            \set CelloMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                                 \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                                     #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                                     Vc. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                                 } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                            \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
+                                            \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
                                             \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
                 <BLANKLINE>
                                             g16
@@ -5463,11 +5514,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=remove,
             ...     )
-            >>> layout_block = abjad.Block(name='layout')
-            >>> layout_block.indent = 0
-            >>> lilypond_file.items.insert(0, layout_block)
 
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5488,6 +5535,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:5
                             s1 * 1/2
+                            - \markup {
+                                \column
+                                    {
+                                        \line %! STAGE_NUMBER_MARKUP:2
+                                            { %! STAGE_NUMBER_MARKUP:2
+                                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                            } %! STAGE_NUMBER_MARKUP:2
+                                        \line %! SEGMENT:SPACING_MARKUP:6
+                                            { %! SEGMENT:SPACING_MARKUP:6
+                                                \with-color %! SEGMENT:SPACING_MARKUP:6
+                                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:6
+                                                    \fontsize %! SEGMENT:SPACING_MARKUP:6
+                                                        #-3 %! SEGMENT:SPACING_MARKUP:6
+                                                        (1/24) %! SEGMENT:SPACING_MARKUP:6
+                                            } %! SEGMENT:SPACING_MARKUP:6
+                                    }
+                                }
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -5495,6 +5563,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -5502,6 +5577,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/4
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -5509,6 +5591,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 5] %%%
                             \break %! SEGMENT:LAYOUT:3
@@ -5517,6 +5606,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/2
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 6] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -5524,6 +5620,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 7] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -5531,6 +5634,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/4
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 8] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -5538,6 +5648,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 9] %%%
                             \break %! SEGMENT:LAYOUT:3
@@ -5546,6 +5663,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/2
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 10] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -5553,6 +5677,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 11] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -5560,6 +5691,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/4
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 12] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -5567,6 +5705,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                         }
                     >>
@@ -5584,22 +5729,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     ^ \markup {
                                         \column
                                             {
-                                                %%% \line %! INSTRUMENT_CHANGE_MARKUP:1
-                                                %%%     { %! INSTRUMENT_CHANGE_MARKUP:1
-                                                %%%         \override %! INSTRUMENT_CHANGE_MARKUP:1
-                                                %%%             #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_MARKUP:1
-                                                %%%             \box %! INSTRUMENT_CHANGE_MARKUP:1
-                                                %%%                 "to flute" %! INSTRUMENT_CHANGE_MARKUP:1
-                                                %%%     } %! INSTRUMENT_CHANGE_MARKUP:1
-                                                \line %! INSTRUMENT_CHANGE_COLORED_MARKUP:2
-                                                    { %! INSTRUMENT_CHANGE_COLORED_MARKUP:2
-                                                        \with-color %! INSTRUMENT_CHANGE_COLORED_MARKUP:2
-                                                            #(x11-color 'blue) %! INSTRUMENT_CHANGE_COLORED_MARKUP:2
-                                                            \override %! INSTRUMENT_CHANGE_COLORED_MARKUP:2
-                                                                #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_COLORED_MARKUP:2
-                                                                \box %! INSTRUMENT_CHANGE_COLORED_MARKUP:2
-                                                                    "to flute" %! INSTRUMENT_CHANGE_COLORED_MARKUP:2
-                                                    } %! INSTRUMENT_CHANGE_COLORED_MARKUP:2
+                                                %%% \line %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:1
+                                                %%%     { %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:1
+                                                %%%         \override %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:1
+                                                %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:1
+                                                %%%             \box %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:1
+                                                %%%                 flute %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:1
+                                                %%%     } %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:1
+                                                \line %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:2
+                                                    { %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:2
+                                                        \with-color %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:2
+                                                            #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:2
+                                                            \override %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:2
+                                                                #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:2
+                                                                \box %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:2
+                                                                    flute %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:2
+                                                    } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:2
                                             }
                                         }
                                     \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
@@ -5679,22 +5824,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     ^ \markup {
                                         \column
                                             {
-                                                %%% \line %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     { %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%         \override %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             \box %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%                 "to piccolo" %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     } %! INSTRUMENT_CHANGE_MARKUP:5
-                                                \line %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    { %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                        \with-color %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            #(x11-color 'blue) %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            \override %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                \box %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                    "to piccolo" %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    } %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                %%% \line %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%     { %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%         \override %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%             \box %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%                 piccolo %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%     } %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
+                                                \line %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                    { %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                        \with-color %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                            #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                            \override %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                                #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                                \box %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                                    piccolo %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                    } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
                                             }
                                         }
                                     \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
@@ -5795,11 +5940,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=remove,
             ...     )
-            >>> layout_block = abjad.Block(name='layout')
-            >>> layout_block.indent = 0
-            >>> lilypond_file.items.insert(0, layout_block)
 
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5820,6 +5961,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:5
                             s1 * 1/2
+                            - \markup {
+                                \column
+                                    {
+                                        \line %! STAGE_NUMBER_MARKUP:2
+                                            { %! STAGE_NUMBER_MARKUP:2
+                                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                            } %! STAGE_NUMBER_MARKUP:2
+                                        \line %! SEGMENT:SPACING_MARKUP:6
+                                            { %! SEGMENT:SPACING_MARKUP:6
+                                                \with-color %! SEGMENT:SPACING_MARKUP:6
+                                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:6
+                                                    \fontsize %! SEGMENT:SPACING_MARKUP:6
+                                                        #-3 %! SEGMENT:SPACING_MARKUP:6
+                                                        (1/24) %! SEGMENT:SPACING_MARKUP:6
+                                            } %! SEGMENT:SPACING_MARKUP:6
+                                    }
+                                }
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -5827,6 +5989,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -5834,6 +6003,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/4
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -5841,6 +6017,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 5] %%%
                             \break %! SEGMENT:LAYOUT:3
@@ -5849,6 +6032,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/2
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 6] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -5856,6 +6046,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 7] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -5863,6 +6060,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/4
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 8] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -5870,6 +6074,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 9] %%%
                             \break %! SEGMENT:LAYOUT:3
@@ -5878,6 +6089,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/2
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 10] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -5885,6 +6103,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 11] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -5892,6 +6117,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/4
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 12] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -5899,6 +6131,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                         }
                     >>
@@ -5916,22 +6155,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     ^ \markup {
                                         \column
                                             {
-                                                %%% \line %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     { %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%         \override %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             \box %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%                 flute %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     } %! INSTRUMENT_CHANGE_MARKUP:5
-                                                \line %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    { %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                        \with-color %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            #(x11-color 'green) %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            \override %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                \box %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                    flute %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    } %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                %%% \line %! REAPPLIED_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%     { %! REAPPLIED_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%         \override %! REAPPLIED_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%             #'(box-padding . 0.75) %! REAPPLIED_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%             \box %! REAPPLIED_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%                 flute %! REAPPLIED_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%     } %! REAPPLIED_INSTRUMENT_CHANGE_MARKUP:5
+                                                \line %! REAPPLIED_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                    { %! REAPPLIED_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                        \with-color %! REAPPLIED_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                            #(x11-color 'green) %! REAPPLIED_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                            \override %! REAPPLIED_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                                #'(box-padding . 0.75) %! REAPPLIED_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                                \box %! REAPPLIED_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                                    flute %! REAPPLIED_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                    } %! REAPPLIED_INSTRUMENT_CHANGE_COLORED_MARKUP:6
                                             }
                                         }
                                     \set Staff.instrumentName = \markup { Flute } %! REAPPLIED_INSTRUMENT_SHADOW_COMMAND:4
@@ -6011,22 +6250,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     ^ \markup {
                                         \column
                                             {
-                                                %%% \line %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     { %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%         \override %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             \box %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%                 "to piccolo" %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     } %! INSTRUMENT_CHANGE_MARKUP:5
-                                                \line %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    { %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                        \with-color %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            #(x11-color 'blue) %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            \override %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                \box %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                    "to piccolo" %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    } %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                %%% \line %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%     { %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%         \override %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%             \box %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%                 piccolo %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%     } %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
+                                                \line %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                    { %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                        \with-color %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                            #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                            \override %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                                #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                                \box %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                                    piccolo %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                    } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
                                             }
                                         }
                                     \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
@@ -6140,11 +6379,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=remove,
             ...     )
-            >>> layout_block = abjad.Block(name='layout')
-            >>> layout_block.indent = 0
-            >>> lilypond_file.items.insert(0, layout_block)
 
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -6165,6 +6400,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:5
                             s1 * 1/2
+                            - \markup {
+                                \column
+                                    {
+                                        \line %! STAGE_NUMBER_MARKUP:2
+                                            { %! STAGE_NUMBER_MARKUP:2
+                                                \fontsize %! STAGE_NUMBER_MARKUP:2
+                                                    #-3 %! STAGE_NUMBER_MARKUP:2
+                                                    \with-color %! STAGE_NUMBER_MARKUP:2
+                                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
+                                                        [1] %! STAGE_NUMBER_MARKUP:2
+                                            } %! STAGE_NUMBER_MARKUP:2
+                                        \line %! SEGMENT:SPACING_MARKUP:6
+                                            { %! SEGMENT:SPACING_MARKUP:6
+                                                \with-color %! SEGMENT:SPACING_MARKUP:6
+                                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:6
+                                                    \fontsize %! SEGMENT:SPACING_MARKUP:6
+                                                        #-3 %! SEGMENT:SPACING_MARKUP:6
+                                                        (1/24) %! SEGMENT:SPACING_MARKUP:6
+                                            } %! SEGMENT:SPACING_MARKUP:6
+                                    }
+                                }
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -6172,6 +6428,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -6179,6 +6442,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/4
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -6186,6 +6456,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 5] %%%
                             \break %! SEGMENT:LAYOUT:3
@@ -6194,6 +6471,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/2
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 6] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -6201,6 +6485,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 7] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -6208,6 +6499,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/4
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 8] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -6215,6 +6513,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 9] %%%
                             \break %! SEGMENT:LAYOUT:3
@@ -6223,6 +6528,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/2
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 10] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -6230,6 +6542,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 11] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -6237,6 +6556,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/4
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 12] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -6244,6 +6570,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 13] %%%
                             \break %! SEGMENT:LAYOUT:3
@@ -6252,6 +6585,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/2
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 14] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -6259,6 +6599,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 15] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -6266,6 +6613,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 1/4
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 16] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
@@ -6273,6 +6627,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
                             s1 * 3/8
+                            - \markup { %! SEGMENT:SPACING_MARKUP:2
+                                \with-color %! SEGMENT:SPACING_MARKUP:2
+                                    #(x11-color 'DarkCyan) %! SEGMENT:SPACING_MARKUP:2
+                                    \fontsize %! SEGMENT:SPACING_MARKUP:2
+                                        #-3 %! SEGMENT:SPACING_MARKUP:2
+                                        (1/24) %! SEGMENT:SPACING_MARKUP:2
+                                } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                         }
                     >>
@@ -6290,22 +6651,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     ^ \markup {
                                         \column
                                             {
-                                                %%% \line %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     { %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%         \override %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             \box %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%                 flute %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     } %! INSTRUMENT_CHANGE_MARKUP:5
-                                                \line %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    { %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                        \with-color %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            #(x11-color 'DeepPink1) %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            \override %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                \box %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                    flute %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    } %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                %%% \line %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%     { %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%         \override %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%             #'(box-padding . 0.75) %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%             \box %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%                 flute %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%     } %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
+                                                \line %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                    { %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                        \with-color %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                            #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                            \override %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                                #'(box-padding . 0.75) %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                                \box %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                                    flute %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                    } %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
                                             }
                                         }
                                     \set Staff.instrumentName = \markup { Flute } %! REDUNDANT_INSTRUMENT_SHADOW_COMMAND:4
@@ -6385,22 +6746,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     ^ \markup {
                                         \column
                                             {
-                                                %%% \line %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     { %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%         \override %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             \box %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%                 "to piccolo" %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     } %! INSTRUMENT_CHANGE_MARKUP:5
-                                                \line %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    { %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                        \with-color %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            #(x11-color 'blue) %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            \override %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                \box %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                    "to piccolo" %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    } %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                %%% \line %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%     { %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%         \override %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%             \box %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%                 piccolo %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%     } %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
+                                                \line %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                    { %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                        \with-color %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                            #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                            \override %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                                #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                                \box %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                                    piccolo %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                    } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
                                             }
                                         }
                                     \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
@@ -6456,22 +6817,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                     ^ \markup {
                                         \column
                                             {
-                                                %%% \line %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     { %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%         \override %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             \box %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%                 piccolo %! INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     } %! INSTRUMENT_CHANGE_MARKUP:5
-                                                \line %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    { %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                        \with-color %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            #(x11-color 'DeepPink1) %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            \override %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                #'(box-padding . 0.75) %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                \box %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                    piccolo %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    } %! INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                %%% \line %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%     { %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%         \override %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%             #'(box-padding . 0.75) %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%             \box %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%                 piccolo %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%     } %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
+                                                \line %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                    { %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                        \with-color %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                            #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                            \override %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                                #'(box-padding . 0.75) %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                                \box %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                                    piccolo %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                    } %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
                                             }
                                         }
                                     \set Staff.instrumentName = \markup { Piccolo } %! REDUNDANT_INSTRUMENT_SHADOW_COMMAND:4
@@ -7469,7 +7830,6 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -7594,7 +7954,6 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
