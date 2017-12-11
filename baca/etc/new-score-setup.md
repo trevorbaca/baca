@@ -1,186 +1,187 @@
-1.  Apply OS updates:
+NEW SCORE SETUP
+===============
 
-        Apple menu > App Store ... > Updates
+1.  Read and revise this document.
 
-2.  Check status:
+2.  Apply OS updates.
 
-        pull_all
+    Apple menu > App Store ... > Updates.
 
-        (st*)
+3.  Install TeXShop updates.
 
-        (up*)
+    TeXShop > Install updates.
 
-3.  Run tests under Python 3:
+    TeXShopw > Check for updates.
 
-        workon abjad3
+4.  Apply LilyPond updates.
 
-    Change to the abjad directory:
+    lilypond.org > Unstable release.
 
-        abjad api -M; ajv doctest; py.test -rf; git st
+5.  Pull scores.
+
+    pull_all
+
+    (st*)
+
+    (up*)
+
+6.  (cdj ..)
+
+    (!ajv api -M)
+
+    (^^ ++ ci)
+
+    (cdi)
+
+    (!ajv api -I)
+
+    (^^ ++ ci)
+
+    (ll make_baca_api.py)
+
+    (^^ ++ ci)
         
-    Change to the IDE diretory:
+    (q)
 
-        abjad api -I; ajv doctest; py.test -rf; git st
+    cd ~/Scores; make_scores_api.py; git st; git commit "Rebuilt API."
 
-    Change to the Bača directory:
+7.  Package unpshed trevor/dev commits and push into Abjad.
 
-        make_baca_api.py; ajv doctest; py.test -rf; git st
+    cd ~/abjad/abjad
 
-4.  Run tests under Python 2:
+    git checkout trevor/dev
+    
+    ...
 
-        workon abjad2
+8.  Update Abjad.
 
-    Change to the abjad directory:
+    cd ~/abjad
 
-        abjad api -M; ajv doctest; py.test -rf; git st
-        
-    Change to the IDE diretory:
+    pip install -e .
 
-        abjad api -I; ajv doctest; py.test -rf; git st
+    ajv api -M; ajv doctest; py.test -rf; git st
 
-    Change to the Bača directory:
+9.  Update the IDE.
 
-        make_baca_api.py; ajv doctest; py.test -rf; git st
+    cd ~/abjad-ide
 
-5.  Change back to Python 3:
+    pip install -e .
 
-        workon abjad3
+    ajv api -I; ajv doctest; py.test -rf; git st
 
-6.  Update Abjad.
+10. Update Bača.
 
-    Change back to the Abjad directory:
+    cd ~/baca
 
-        pip install -e .
+    git pull
 
-        ajv api -M; ajv doctest; py.test -rf; git st
+    make_baca_api.py; (^^); (++); git st
 
-7.  Update the IDE.
+11. Rebuild scores.
 
-    Change back to the IDE directory:
+    (mm > pdfm*)
 
-        pip install -e .
+    (gg > pdfm*)
 
-        ajv api -I; ajv doctest; py.test -rf; git st
+    (^^)
 
-8.  Update Bača.
+    (++)
 
-    Change to Bača directory:
+12. Select score title.
 
-        git pull
+    Select score package name.
 
-        make_baca_api.py; ajv doctest; py.test -rf; git st
-
-9.  Test all scores:
-
-    Start IDE. For every score:
-
-        (gg > pdfm*)
-
-        (tests)
-
-10. Decide the title of the score.
-
-    Decide the name of the score package.
-
-11. Go to www.github.com.
+13. Go to www.github.com.
 
     Click "New Repository".
 
     Name the repository.
 
-    Add description:
+    Add description: "Stirrings Still (2017) for narrator and string quartet."
 
-        Stirrings Still (2017) for narrator and string quartet
+    Make repository public.
 
-    Allow repository to be public.
+    Check "Initialze this repository with a README."
 
-    Check "Initialze this repository with a README".
-
-    Do not add a .gitignore.
+    Do not add .gitignore.
 
     Do not add license.
 
-    Click "Create Repository".
+    Click "Create Repository."
 
-12. Click "Clone or download".
+14. Click "Clone or download."
 
     Copy repository URL with clipboard icon.
 
-13. Return to terminal and clone repository:
+15. Return to terminal and clone repository.
 
-        https://github.com/trevorbaca/stirrings.git
+    https://github.com/trevorbaca/stirrings.git
 
-14. Use IDE `(new)` to create the score package.
+16. Start IDE and create score package.
+
+    (new)
 
     TODO: teach IDE to prompt for newly created repository.
 
-15. IDE includes composer, title and year metadata automatically.
+17. IDE includes composer, title and year metadata automatically.
 
-    Add catalog number and forces tagline metadata with `(meta)`:
+    Add catalog number and forces tagline metadata by hand.
+    
+    (meta).
 
-        metadata = abjad.TypedOrderedDict(
-            [
-                ('catalog_number', 'AWN-018'),
-                ('composer', 'Bača'),
-                ('forces_tagline', 'for narrator \& string quartet'),
-                ('title', 'Stirrings Still'),
-                ('year', 2017),
-                ]
-            )
+    metadata = abjad.TypedOrderedDict(
+        [
+            ('catalog_number', 'AWN-018'),
+            ('composer', 'Bača'),
+            ('forces_tagline', 'for narrator \& string quartet'),
+            ('title', 'Stirrings Still'),
+            ('year', 2017),
+            ]
+        )
 
-16. Change to the outer directory with `(ww)`.
+18. Copy .gitignore from existing score.
 
-    Copy Git ignore file from existing score.
+    (ww)
 
-17. Quit the IDE and list score packages.
+    (get > .gitignore)
 
-    Rename newly created score package if necessary.
+19. Quit IDE and list score packages.
 
-    Change outer directory and inner directory.
+    (ren) to rename score package if necessary.
 
-    Change score package __init__.py:
+20. Quit IDE again.
 
-        from stirrings_still import tools
-        from stirrings_still import materials
-        from stirrings_still import segments
+    Add aliases to ~/.profile.
 
-    To:
+    export STIRRINGS=$SCORES/stirrings
+    alias stix="clear; cd $STIRRINGS/stirrings"
+    alias sti="stix; start-abjad-ide sti"
 
-        from stirrings import tools
-        from stirrings import materials
-        from stirrings import segments
+    Quit terminal.
 
-    TODO: teach IDE to execute last step automatically.
+    Restart terminal.
 
-18. Quit the IDE. Edit `~/.profile` and add score package navigation aliases:
+21. Change to score package in three terminal windows.
 
-        export STIRRINGS=$SCORES/stirrings
-        alias stix="clear; cd $STIRRINGS/stirrings"
-        alias sti="stix; start-abjad-ide sti"
-
-    Quit and restart the terminal.
-
-19. Change to score package score directory in all three terminal windows.
-
-    Save terminal windows as a group:
-
-        Window > Save Windows as Group ...
+    Window > Save Windows as Group ...
 
     Use window group when terminal starts.
 
-    Quit and restart the terminal.
+    Quit and restart terminal.
 
-    Start the IDE at new score.
+    Restart IDE.
 
-20. Make etc files:
+22. Make etc files.
 
-    Make to-do.md file with `(ee > new > to-do.md)`. 
+    (ee > new > to-do.md)
 
-    Make stages.md file with `(ee > new > stages.md)`.
+    (ee > new > stages.md)
 
-    Commit.
+    (ci > "Added stages.")
 
-21. Copy an existing score template with (oo > cp).
+23. Copy ScoreTemplate.py from existing score package.
+
+    (oo > get > ScoreTemplate.py)
 
     Edit ScoreTemplate.py by hand.
 
@@ -188,61 +189,57 @@
 
     Make only one (master) score template per score.
 
-    Run (dt).
+    (^^)
 
-22. Copy an existing instruments package with (mm > cp).
+24. Copy instruments from existing score package.
+
+    (mm > get > instruments)
 
     Edit instruments/definition.py by hand.
 
     Define instruments in score order.
 
-    Run (dfk).
+    (dfk)
 
     Eventually run (pdfm).
 
-23. Copy an existing tempi package with (mm > cp).
+25. Copy metronome marks package from existing score package.
 
-    Edit tempi/definition.py by hand.
+    (mm > get > metronome_marks)
 
-    Define tempi alphabetically by tempo name.
+    Edit metronome_marks/definition.py by hand.
 
-    Run (dfk).
+    Define metronome marks alphabetically by metronome mark name.
+
+    (dfk)
 
     Eventually run (pdfm).
 
-24. If required copy an existing time signatures package with (mm > cp).
+26. Copy time signatures package from existing score package, if requred.
+
+    (mm > get > time_signatures) 
 
     Edit time_signatures/definition.py by hand.
 
-    Run (dfk).
+    (dfk)
 
     Eventually run (pdfm).
 
-25. Change to the stylesheets directory with (yy).
+27. Change to stylesheets directory.
+
+    (yy)
 
     Leave IDE-generated nonfirst-segment.ily as is.
 
-26. Copy an existing default-instrument-names.ily with (yy > cp).
+28. Copy contexts.ily from existing score package.
 
-    Edit default-instrument-names.ily by hand.
+    (yy > get > contexts.ily)
 
-    Define default instrument names in score order.
+    Edit contexts.ily by hand.
 
-    Insert blank lines between pairs of definitions.
-
-    Define only one default instrument name per player; ignore doublings.
-
-    (No method exists to check LilyPond stylesheet edits.)
-
-    (Probably IDE can create default-instrument-names.ily automatically.)
-
-27. Replace IDE-generated stylesheet.ily with existing stylesheet.ily.
-
-    Copy existing stylesheet.ily with (yy > cp).
-
-    Edit stylesheet.ily by hand.
-
-    Define generic contexts first; then define score contexts in score order.
+    Define global contexts first.
+    
+    Define score contexts in score order.
 
     Make sure stylesheet includes ...
 
@@ -252,28 +249,40 @@
 
     (No method exists to check LilyPond stylesheet edits.)
 
-    (Eventually create much of stylesheet.ily from ScoreTemplate.py.)
+    (Eventually create much of contexts.ily from ScoreTemplate.py.)
 
-28. If parts will be produced:
+29. Replace IDE-generated stylesheet.ily with stylesheet.ily from existing
+    score package.
 
-        Copy existing parts.ily with (yy > cp).
-        Edit parts.ily by hand.
+    (yy > get > stylesheet.ily).
 
-    Probably no editing will be required.
+    Edit stylesheet.ily by hand.
 
-29. Test and commit:
+30. Copy parts.ily from existing score packge if score requires parts.
 
-    Run (dt).
+    (yy > get > parts.ily)
 
-    Run (pt).
+    Edit parts.ily by hand.
 
-    Commit changes to score package:
+    (Probably no editing will be required.)
 
-    "Defined score template, instruments and stylesheet."
+    (No method exists to check LilyPond stylesheet edits.)
 
-30. Edit stages.txt and define score stages verbally.
+    (Eventually teach IDE more about part production.)
 
-31. Create all segments with yet-to-be-implemented (gg > setup).
+31. Test and commit.
+
+    (^^)
+
+    (++)
+
+    (ci > "Defined score template, instruments and stylesheet.")
+
+32. Edit stages.txt.
+
+    Detail score stages verbally.
+
+33. Create all segments with yet-to-be-implemented (gg > setup).
 
     To define 'name' by hand:
 
@@ -283,112 +292,135 @@
 
     To create segments by hand:
 
-        (gg > new > segment__introduction > meta > define 'name' by hand)
-        (gg > new > segment_a > meta > define 'name' by hand)
+        (gg > new > _ > meta > define 'name' by hand)
+        (gg > new > A > meta > define 'name' by hand)
         ...
-        (gg > new > segment_q > meta > define 'name' by hand)
+        (gg > new > Q > meta > define 'name' by hand)
 
-    NOTE: change 'segment_introduction' to 'segment__introduction', if needed.
+34. Define stub version of first segment.
 
-32. Define stub version of first segment.
+    (gg > new > _)
 
-    Go to (%introduction).
+    (%_)
 
-    Copy an existing definition.py with (cp).
+    (get > definition.py)
 
-    Edit introduction/definition.py by hand.
+    Edit _/definition.py by hand.
 
     Define figure infrastructure if figure-oriented.
 
     Define segment-maker.
 
-    If time signature-originated, define no music.
+    Define no music if time-signature-oriented.
 
-    If figure-originated, define only one figure.
+    Define one figure if figure-oriented.
 
-    Run (pdfm) repeatedly until PDF renders successfully.
+    Render PDF.
 
     Check title typography.
 
-    Edit stylesheet.ily with (@sty).
-
-    Check instrument names and short instrument names.
-
-    Edit materials/instruments/definition.py with (@instr).
-
-    Check (lpg) to make sure no errors or warnings appear in LilyPong log.
+    Check instrument names.
     
-33. Define stub version of nonfirst segment.
+    Check short instrument names.
 
-    Go to (%A).
+    (pdfm) to render PDF.
 
-    Copy an existing definition.py with (cp).
+    (@sty) to edit stylesheet.ily.
 
-    Edit introduction/definition.py by hand.
+    (@instr) to edit materials/instruments/definition.py.
+
+    (lp) to make sure no errors or warnings appear in LilyPong log.
+    
+35. Define stub version of nonfirst segment.
+
+    (gg > new > A)
+
+    (%A)
+
+    (get > definition.py)
+
+    Edit A/definition.py by hand.
 
     Define segment-maker.
 
-    Do not define time or color.
-
-    Supply enough time signatures to create two (or more) pages of music.
+    Supply time signatures for two (or more) pages of music.
 
     This will allow stylesheet footer-checking when stub score is built.
 
-    Run (pdfm) repeatedly until PDF renders successfully.
+    Render PDF.
 
     Footers will not appear in the output PDF.
 
     But footers will appear when stub score is built.
 
-    Make sure that no blue-colored default instrument names appear.
+    Check short instrument names.
 
-    Check (lpg) to make sure no errors or warnings appear in LilyPong log.
+    (lp) to make sure no errors or warnings appear in LilyPong log.
 
-34. Build stub version of score with yet-to-be-implemented (bb > setup).
+36. Build stub version of score.
 
-    (Until then: 
-        !trash assets
-        !trash segments
-        !trash parts.ily
-        !trash segments.ily
-        lyc > rf
-        fcg > pg > mg > bcg > sg
-        Edit music.ly by hand; comment-out not-yet-created segments
-        fci > pi > mi > bci > si
-        )
+    (bb > new > ledger) 
 
-    Run (lyc > mi > si). Debug as necessary.
+    (%led)
 
-    Call (score.pdf) to inspect stub score.
+    (!trash assets)
 
-    Check footers on pages two and greater; edit (@sty) as necessary.
+    (!trash segments)
 
-35. Go to score directory with (ss).
+    (!trash parts.ily)
 
-    Run (dt).
+    (!trash segments.ily)
 
-    Run (pt).
+    (lyc*)
 
-    Use (ci) to commit changes to score package: "Built stub segments."
+    (fcg pg mg bcg sg)
 
-    Quit the IDE.
+    Edit music.ly by hand.
+    
+    Comment-out not-yet-created segments.
 
-36. In the terminal, change to baca package with (cdb).
+    (fci pi mi bci si)
 
-    Run 'ajv doctest; py.test -rf'.
+    (mi)
 
-    Commit changes to baca package.
+    (si)
 
-37. Change to _docs package with (cds > cd _docs).
+    Check footers on pages two and greater.
+    
+    (@sty) to edit stylesheet.ily.
 
-    Run build_scores_api.py.
+    TODO: Teach IDE more about builds.
 
-    Commit changes to _docs package: "Rebuilt docs."
+37. Test and commit.
 
-38. Change to the abjad directory.
+    (ss)
 
-    Run "ajv api -M; ajv doctest; py.test -rf".
+    (^^)
 
-    Change to the IDE directory.
+    (++)
 
-    Run "ajv api -I; ajv doctest; py.test -rf".
+    (ci > "Built stub segments.")
+
+38. Run tests.
+
+    (cdj ..)
+
+    (!ajv api -M)
+
+    (^^ ++ ci)
+
+    (cdi)
+
+    (!ajv api -I)
+
+    (^^ ++ ci)
+
+    (ll make_baca_api.py)
+
+    (^^ ++ ci)
+        
+    (q)
+
+    cd ~/Scores; make_scores_api.py; git st; git commit "Rebuilt API."
+
+39. Read and revise this document.
