@@ -1,6 +1,20 @@
 NEW SCORE SETUP
 ===============
 
+Read and revise this document.
+
+Then follow the steps in the four areas below:
+
+    * pull repositories; test
+
+    * apply software updates; test
+
+    * package unpushed trevor/dev commits; test
+
+    * create new score package; test
+
+                                     * * *
+
 1.  Pull repositories.
 
     (!pull_all)
@@ -11,25 +25,7 @@ NEW SCORE SETUP
 
     TODO: Add IDE (pull_all) command.
 
-2.  Read and revise this document.
-
-3.  Sanity-check LilyPond with \new Staff { c'4 }.
-
-4.  Apply LilyPond updates.
-
-    lilypond.org > Unstable release.
-
-5.  Apply TeXShop updates.
-
-    TeXShop > Install updates or Check for updates.
-
-6.  Apply OS updates.
-
-    Apple menu > App Store ... > Updates.
-
-7.  Sanity-check LilyPond with \new Staff { c'4 }.
-
-8.  Test and rebuild everything.
+2.  Test and rebuild everything.
 
     (cdj ..)
 
@@ -51,15 +47,93 @@ NEW SCORE SETUP
 
     cd ~/Scores; make_scores_api.py; git st; git commit "Rebuilt API."
 
+3.  Rebuild scores.
+
+    (mm > pdfm*)
+
+    (gg > pdfm*)
+
+    (^^)
+
+    (++)
+
+4.  Rebuild docs make clean.
+
+    cd ~/abjad/abjad/docs; make clean; ajv api -M 
+
+    cd ~/abjad-ide/ide/docs; make clean; ajv api -I
+
+    cd ~/baca/baca/_docs; make clean; make_baca_api.py
+
+    cd ~/Scores/_docs; make clean; make_scores_api.py
+
+                                     * * *
+
+5.  Apply LilyPond, TeXShop and macOS updates.
+
+    lilypond.org > Unstable release.
+
+    TeXShop > Check for updates.
+
+    Apple menu > App Store ... > Updates.
+
+    Sanity-check LilyPond with \new Staff { c'4 }.
+
+6.  Test and rebuild everything.
+
+    (cdj ..)
+
+    (!ajv api -M)
+
+    (^^ ++ ci)
+
+    (cdi)
+
+    (!ajv api -I)
+
+    (^^ ++ ci)
+
+    (ll make_baca_api.py)
+
+    (^^ ++ ci)
+        
+    (q)
+
+    cd ~/Scores; make_scores_api.py; git st; git commit "Rebuilt API."
+
+7.  Rebuild scores.
+
+    (mm > pdfm*)
+
+    (gg > pdfm*)
+
+    (^^)
+
+    (++)
+
+8.  Rebuild docs make clean.
+
+    cd ~/abjad/abjad/docs; make clean; ajv api -M 
+
+    cd ~/abjad-ide/ide/docs; make clean; ajv api -I
+
+    cd ~/baca/baca/_docs; make clean; make_baca_api.py
+
+    cd ~/Scores/_docs; make clean; make_scores_api.py
+
 9.  Repeat steps above for secondary devices.
 
-10. Package unpshed trevor/dev commits and push into Abjad.
+                                     * * *
+
+10. Package unpushed trevor/dev commits.
 
     cd ~/abjad/abjad
 
     git checkout trevor/dev
     
     ...
+
+    Make sure trevor/dev is empty.
 
 11. Update Abjad.
 
@@ -85,7 +159,29 @@ NEW SCORE SETUP
 
     make_baca_api.py; (^^); (++); git st
 
-14. Rebuild scores.
+14. Test and rebuild everything.
+
+    (cdj ..)
+
+    (!ajv api -M)
+
+    (^^ ++ ci)
+
+    (cdi)
+
+    (!ajv api -I)
+
+    (^^ ++ ci)
+
+    (ll make_baca_api.py)
+
+    (^^ ++ ci)
+        
+    (q)
+
+    cd ~/Scores; make_scores_api.py; git st; git commit "Rebuilt API."
+
+15. Rebuild scores.
 
     (mm > pdfm*)
 
@@ -95,11 +191,23 @@ NEW SCORE SETUP
 
     (++)
 
-15. Select score title.
+16. Rebuild docs make clean.
+
+    cd ~/abjad/abjad/docs; make clean; ajv api -M 
+
+    cd ~/abjad-ide/ide/docs; make clean; ajv api -I
+
+    cd ~/baca/baca/_docs; make clean; make_baca_api.py
+
+    cd ~/Scores/_docs; make clean; make_scores_api.py
+
+                                     * * *
+
+17. Select score title.
 
     Select score package name.
 
-16. Go to www.github.com.
+18. Go to www.github.com.
 
     Click "New Repository".
 
@@ -117,21 +225,21 @@ NEW SCORE SETUP
 
     Click "Create Repository."
 
-17. Click "Clone or download."
+19. Click "Clone or download."
 
     Copy repository URL with clipboard icon.
 
-18. Return to terminal and clone repository.
+20. Return to terminal and clone repository.
 
     https://github.com/trevorbaca/stirrings.git
 
-19. Start IDE and create score package.
+21. Start IDE and create score package.
 
     (new)
 
     TODO: teach IDE to prompt for newly created repository.
 
-20. IDE includes composer, title and year metadata automatically.
+22. IDE includes composer, title and year metadata automatically.
 
     Add catalog number and forces tagline metadata by hand.
     
@@ -147,17 +255,17 @@ NEW SCORE SETUP
             ]
         )
 
-21. Copy .gitignore from existing score.
+23. Copy .gitignore from existing score.
 
     (ww)
 
     (get > .gitignore)
 
-22. Quit IDE and list score packages.
+24. Quit IDE and list score packages.
 
     (ren) to rename score package if necessary.
 
-23. Quit IDE again.
+25. Quit IDE again.
 
     Add aliases to ~/.profile.
 
@@ -169,7 +277,7 @@ NEW SCORE SETUP
 
     Restart terminal.
 
-24. Change to score package in three terminal windows.
+26. Change to score package in three terminal windows.
 
     Window > Save Windows as Group ...
 
@@ -179,7 +287,7 @@ NEW SCORE SETUP
 
     Restart IDE.
 
-25. Make etc files.
+27. Make etc files.
 
     (ee > new > to-do.md)
 
@@ -187,7 +295,7 @@ NEW SCORE SETUP
 
     (ci > "Added stages.")
 
-26. Copy ScoreTemplate.py from existing score package.
+28. Copy ScoreTemplate.py from existing score package.
 
     (oo > get > ScoreTemplate.py)
 
@@ -199,7 +307,7 @@ NEW SCORE SETUP
 
     (^^)
 
-27. Copy instruments from existing score package.
+29. Copy instruments from existing score package.
 
     (mm > get > instruments)
 
@@ -211,7 +319,7 @@ NEW SCORE SETUP
 
     Eventually run (pdfm).
 
-28. Copy metronome marks package from existing score package.
+30. Copy metronome marks package from existing score package.
 
     (mm > get > metronome_marks)
 
@@ -223,7 +331,7 @@ NEW SCORE SETUP
 
     Eventually run (pdfm).
 
-29. Copy time signatures package from existing score package, if requred.
+31. Copy time signatures package from existing score package, if requred.
 
     (mm > get > time_signatures) 
 
@@ -233,13 +341,13 @@ NEW SCORE SETUP
 
     Eventually run (pdfm).
 
-30. Change to stylesheets directory.
+32. Change to stylesheets directory.
 
     (yy)
 
     Leave IDE-generated nonfirst-segment.ily as is.
 
-31. Copy contexts.ily from existing score package.
+33. Copy contexts.ily from existing score package.
 
     (yy > get > contexts.ily)
 
@@ -259,14 +367,14 @@ NEW SCORE SETUP
 
     (Eventually create much of contexts.ily from ScoreTemplate.py.)
 
-32. Replace IDE-generated stylesheet.ily with stylesheet.ily from existing
+34. Replace IDE-generated stylesheet.ily with stylesheet.ily from existing
     score package.
 
     (yy > get > stylesheet.ily).
 
     Edit stylesheet.ily by hand.
 
-33. Copy parts.ily from existing score packge if score requires parts.
+35. Copy parts.ily from existing score packge if score requires parts.
 
     (yy > get > parts.ily)
 
@@ -278,7 +386,7 @@ NEW SCORE SETUP
 
     (Eventually teach IDE more about part production.)
 
-34. Test and commit.
+36. Test and commit.
 
     (^^)
 
@@ -286,11 +394,11 @@ NEW SCORE SETUP
 
     (ci > "Defined score template, instruments and stylesheet.")
 
-35. Edit stages.txt.
+37. Edit stages.txt.
 
     Detail score stages verbally.
 
-36. Create all segments with yet-to-be-implemented (gg > setup).
+38. Create all segments with yet-to-be-implemented (gg > setup).
 
     To define 'name' by hand:
 
@@ -305,7 +413,7 @@ NEW SCORE SETUP
         ...
         (gg > new > Q > meta > define 'name' by hand)
 
-37. Define stub version of first segment.
+39. Define stub version of first segment.
 
     (gg > new > _)
 
@@ -339,7 +447,7 @@ NEW SCORE SETUP
 
     (lp) to make sure no errors or warnings appear in LilyPong log.
     
-38. Define stub version of nonfirst segment.
+40. Define stub version of nonfirst segment.
 
     (gg > new > A)
 
@@ -365,7 +473,7 @@ NEW SCORE SETUP
 
     (lp) to make sure no errors or warnings appear in LilyPong log.
 
-39. Build stub version of score.
+41. Build stub version of score.
 
     (bb > new > ledger) 
 
@@ -399,7 +507,7 @@ NEW SCORE SETUP
 
     TODO: Teach IDE more about builds.
 
-40. Test and commit.
+42. Test and commit.
 
     (ss)
 
@@ -409,7 +517,7 @@ NEW SCORE SETUP
 
     (ci > "Built stub segments.")
 
-41. Run tests.
+43. Test and rebuild everything.
 
     (cdj ..)
 
@@ -431,4 +539,22 @@ NEW SCORE SETUP
 
     cd ~/Scores; make_scores_api.py; git st; git commit "Rebuilt API."
 
-42. Read and revise this document.
+44. Rebuild scores.
+
+    (mm > pdfm*)
+
+    (gg > pdfm*)
+
+    (^^)
+
+    (++)
+
+45. Rebuild docs make clean.
+
+    cd ~/abjad/abjad/docs; make clean; ajv api -M 
+
+    cd ~/abjad-ide/ide/docs; make clean; ajv api -I
+
+    cd ~/baca/baca/_docs; make clean; make_baca_api.py
+
+    cd ~/Scores/_docs; make clean; make_scores_api.py
