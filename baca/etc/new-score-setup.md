@@ -13,7 +13,8 @@ Then follow the steps in the four areas below:
 
     * create new score package; test
 
-                                     * * *
+Pull respositories
+------------------
 
 1.  Pull repositories.
 
@@ -67,7 +68,8 @@ Then follow the steps in the four areas below:
 
     cd ~/Scores/_docs; make clean; make_scores_api.py
 
-                                     * * *
+Apply software updates
+----------------------
 
 5.  Apply LilyPond, TeXShop and macOS updates.
 
@@ -123,7 +125,8 @@ Then follow the steps in the four areas below:
 
 9.  Repeat steps above for secondary devices.
 
-                                     * * *
+Package unpushed trevor/dev commits
+-----------------------------------
 
 10. Package unpushed trevor/dev commits.
 
@@ -201,7 +204,8 @@ Then follow the steps in the four areas below:
 
     cd ~/Scores/_docs; make clean; make_scores_api.py
 
-                                     * * *
+Make new score package
+----------------------
 
 17. Select score title.
 
