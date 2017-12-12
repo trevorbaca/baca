@@ -137,6 +137,12 @@ Package unpushed trevor/dev commits
 
     pip install -e .
 
+    Remove ~/.virtualenvs/abjad3/bin/start-abjad-ide
+
+    Quit and restart the terminal.
+    
+    Sanity-check IDE with restart.
+
     ajv api -I; ajv doctest; py.test -rf; git st
 
 13. Update Bača.
@@ -149,7 +155,7 @@ Package unpushed trevor/dev commits
 
     make_scores_api.py
 
-15. Rebuild scores.
+14. Rebuild scores.
 
     (mm > pdfm*)
 
@@ -159,7 +165,7 @@ Package unpushed trevor/dev commits
 
     (++)
 
-16. Rebuild docs make clean.
+15. Rebuild docs make clean.
 
     cd ~/abjad/abjad/docs; make clean; ajv api -M 
 
@@ -172,11 +178,11 @@ Package unpushed trevor/dev commits
 Make new score package
 ----------------------
 
-17. Select score title.
+16. Select score title.
 
     Select score package name.
 
-18. Go to www.github.com.
+17. Go to www.github.com.
 
     Click "New Repository".
 
@@ -186,7 +192,7 @@ Make new score package
 
     Make repository public.
 
-    Check "Initialze this repository with a README."
+    Do not initialize with README.
 
     Do not add .gitignore.
 
@@ -194,26 +200,26 @@ Make new score package
 
     Click "Create Repository."
 
-19. Click "Clone or download."
+18. Click "Clone or download."
 
     Copy repository URL with clipboard icon.
 
-20. Return to terminal and clone repository.
+19. Return to terminal and clone repository.
 
-    https://github.com/trevorbaca/stirrings.git
+    cd ~/Scores
 
-21. Start IDE and create score package.
+    git clone https://github.com/trevorbaca/stirrings.git
+
+20. Start IDE and create score package.
 
     (new)
 
-    TODO: teach IDE to prompt for newly created repository.
+    TODO: teach IDE to search (and prompt) for newly created repository.
 
-22. IDE includes composer, title and year metadata automatically.
+21. IDE includes composer, title, year metadata automatically.
 
     Add catalog number and forces tagline metadata by hand.
     
-    (meta).
-
     metadata = abjad.TypedOrderedDict(
         [
             ('catalog_number', 'AWN-018'),
@@ -224,17 +230,67 @@ Make new score package
             ]
         )
 
-23. Copy .gitignore from existing score.
+22. Symlink .gitignore:
 
     (ww)
 
-    (get > .gitignore)
+    (!ln -s ~/baca/baca/dotfiles/gitignore ~/Scores/my_score/.gitignore)
 
-24. Quit IDE and list score packages.
+23. Get .travis.yml from existing score.
 
-    (ren) to rename score package if necessary.
+    (ww get <score> .travis.yml)
 
-25. Quit IDE again.
+    Edit .travis.yml by hand.
+
+24. Get README.md from existing score.
+
+    (ww get <score> README.md)
+
+    Edit README.md by hand.
+
+25. Check IDE-generated wrapper files by hand.
+
+    requirements.txt
+    setup.cfg
+    setup.py
+
+26. Compare contents initializer to contents initializer of existing score.
+
+27. Commit.
+
+    (ci "Configured Python package.")
+
+    Visit https://github.com/trevorbaca/<score> and confirm changes.
+
+28. Configure score for continuous integration.
+
+    https://travis-ci.org.
+
+    Click "+" (next to "My Repositories) in upper left corner.
+
+    Leads to https://travis-ci.org/profile/trevorbaca.
+
+    Click "Sync account."
+
+    Toggle "trevorbaca/<score>." 
+
+29. Return to IDE.
+
+    Make test commit.
+
+    (ci "Configured contiguous integration.")
+
+    Return to https://travis-ci.org.
+
+    Make sure Travis lists score.
+
+    Make sure all tests pass.
+
+30. Add score alias to IDE aliases.
+
+    (al)
+
+31. Quit IDE.
 
     Add aliases to ~/.profile.
 
@@ -242,11 +298,9 @@ Make new score package
     alias stix="clear; cd $STIRRINGS/stirrings"
     alias sti="stix; start-abjad-ide sti"
 
-    Quit terminal.
+    Quit and restart terminal.
 
-    Restart terminal.
-
-26. Change to score package in three terminal windows.
+32. Change to score package in three terminal windows.
 
     Window > Save Windows as Group ...
 
@@ -254,9 +308,13 @@ Make new score package
 
     Quit and restart terminal.
 
-    Restart IDE.
+33. Restart IDE.
 
-27. Make etc files.
+    Copy existing scans and other artifacts into etc.
+
+    Commit.
+
+34. Make etc files.
 
     (ee > new > to-do.md)
 
@@ -264,7 +322,7 @@ Make new score package
 
     (ci > "Added stages.")
 
-28. Copy ScoreTemplate.py from existing score package.
+35. Copy ScoreTemplate.py from existing score package.
 
     (oo > get > ScoreTemplate.py)
 
@@ -276,7 +334,7 @@ Make new score package
 
     (^^)
 
-29. Copy instruments from existing score package.
+36. Copy instruments from existing score package.
 
     (mm > get > instruments)
 
@@ -288,7 +346,7 @@ Make new score package
 
     Eventually run (pdfm).
 
-30. Copy metronome marks package from existing score package.
+37. Copy metronome marks package from existing score package.
 
     (mm > get > metronome_marks)
 
@@ -300,7 +358,7 @@ Make new score package
 
     Eventually run (pdfm).
 
-31. Copy time signatures package from existing score package, if requred.
+38. Copy time signatures package from existing score package, if requred.
 
     (mm > get > time_signatures) 
 
@@ -310,13 +368,13 @@ Make new score package
 
     Eventually run (pdfm).
 
-32. Change to stylesheets directory.
+39. Change to stylesheets directory.
 
     (yy)
 
     Leave IDE-generated nonfirst-segment.ily as is.
 
-33. Copy contexts.ily from existing score package.
+40. Copy contexts.ily from existing score package.
 
     (yy > get > contexts.ily)
 
@@ -336,14 +394,14 @@ Make new score package
 
     (Eventually create much of contexts.ily from ScoreTemplate.py.)
 
-34. Replace IDE-generated stylesheet.ily with stylesheet.ily from existing
+41. Replace IDE-generated stylesheet.ily with stylesheet.ily from existing
     score package.
 
     (yy > get > stylesheet.ily).
 
     Edit stylesheet.ily by hand.
 
-35. Copy parts.ily from existing score packge if score requires parts.
+42. Copy parts.ily from existing score packge if score requires parts.
 
     (yy > get > parts.ily)
 
@@ -355,7 +413,7 @@ Make new score package
 
     (Eventually teach IDE more about part production.)
 
-36. Test and commit.
+43. Test and commit.
 
     (^^)
 
@@ -363,11 +421,11 @@ Make new score package
 
     (ci > "Defined score template, instruments and stylesheet.")
 
-37. Edit stages.txt.
+44. Edit stages.txt.
 
     Detail score stages verbally.
 
-38. Create all segments with yet-to-be-implemented (gg > setup).
+45. Create all segments with yet-to-be-implemented (gg > setup).
 
     To define 'name' by hand:
 
@@ -382,7 +440,7 @@ Make new score package
         ...
         (gg > new > Q > meta > define 'name' by hand)
 
-39. Define stub version of first segment.
+46. Define stub version of first segment.
 
     (gg > new > _)
 
@@ -416,7 +474,7 @@ Make new score package
 
     (lp) to make sure no errors or warnings appear in LilyPong log.
     
-40. Define stub version of nonfirst segment.
+47. Define stub version of nonfirst segment.
 
     (gg > new > A)
 
@@ -442,7 +500,7 @@ Make new score package
 
     (lp) to make sure no errors or warnings appear in LilyPong log.
 
-41. Build stub version of score.
+48. Build stub version of score.
 
     (bb > new > ledger) 
 
@@ -476,7 +534,7 @@ Make new score package
 
     TODO: Teach IDE more about builds.
 
-42. Test and commit.
+49. Test and commit.
 
     (ss)
 
@@ -486,7 +544,7 @@ Make new score package
 
     (ci > "Built stub segments.")
 
-43. Test and rebuild everything.
+50. Test and rebuild everything.
 
     (cdj ..)
 
@@ -508,7 +566,7 @@ Make new score package
 
     cd ~/Scores; make_scores_api.py; git st; git commit "Rebuilt API."
 
-44. Rebuild scores.
+51. Rebuild scores.
 
     (mm > pdfm*)
 
@@ -518,7 +576,7 @@ Make new score package
 
     (++)
 
-45. Rebuild docs make clean.
+52. Rebuild docs make clean.
 
     cd ~/abjad/abjad/docs; make clean; ajv api -M 
 
