@@ -28,24 +28,12 @@ Pull respositories
 
 2.  Test and rebuild everything.
 
-    (cdj ..)
+    (cdj .. !ajv api -M ^^ ++ ci)
 
-    (!ajv api -M)
+    (cdi !ajv api -I ^^ ++ ci)
 
-    (^^ ++ ci)
-
-    (cdi)
-
-    (!ajv api -I)
-
-    (^^ ++ ci)
-
-    (ll make_baca_api.py)
-
-    (^^ ++ ci)
+    (ll !make_baca_api.py ^^ ++ ci)
         
-    (q)
-
     cd ~/Scores; make_scores_api.py; git st; git commit "Rebuilt API."
 
 3.  Rebuild scores.
@@ -130,11 +118,8 @@ Package unpushed trevor/dev commits
 
 10. Package unpushed trevor/dev commits.
 
-    cd ~/abjad/abjad
-
-    git checkout trevor/dev
-    
-    ...
+    Follow feature management in Git workflow instructions.
+    ... 
 
     Make sure trevor/dev is empty.
 
@@ -162,27 +147,7 @@ Package unpushed trevor/dev commits
 
     make_baca_api.py; (^^); (++); git st
 
-14. Test and rebuild everything.
-
-    (cdj ..)
-
-    (!ajv api -M)
-
-    (^^ ++ ci)
-
-    (cdi)
-
-    (!ajv api -I)
-
-    (^^ ++ ci)
-
-    (ll make_baca_api.py)
-
-    (^^ ++ ci)
-        
-    (q)
-
-    cd ~/Scores; make_scores_api.py; git st; git commit "Rebuilt API."
+    make_scores_api.py
 
 15. Rebuild scores.
 

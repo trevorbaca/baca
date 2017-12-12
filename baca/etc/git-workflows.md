@@ -778,14 +778,24 @@ you'll create specifically for this purpose.
         12:12 $ git pull
         Already up-to-date.
 
-5. Decide which DB commits you want to gather together into a feature.
+5.  Rebase your development branch off of master:
+
+        (abjad3) ✔ ~/abjad/abjad [trevor/dev|✔] 
+        12:13 % git rebase -i master
+        Calling shell on 'git rebase -i master' ...
+        Successfully rebased and updated refs/heads/trevor/dev.
+
+    Run tests if rebase introduced any new functionality into your development
+    branch.
+
+6. Decide which DB commits you want to gather together into a feature.
 
         (abjad3) ✔ ~/abjad/abjad [trevor/dev|✔] 
         12:14 $ git lg
 
     Note hash suffixes for use in the next step.
 
-6. IMPORTANT: switch back to master:
+7. IMPORTANT: switch back to master:
 
         (abjad3) ✔ ~/abjad/abjad [trevor/dev|✔] 
         12:06 $ git checkout master
@@ -796,7 +806,7 @@ you'll create specifically for this purpose.
     status of the current branch: we will want to create a feature branch
     *based on master* and not based on your development branch.
 
-7. Create a feature branch:
+8. Create a feature branch:
 
         (abjad3) ✔ ~/abjad/abjad [master|✔] 
         12:18 $ git checkout -b trevor/pitchtools-cleanup
@@ -809,7 +819,7 @@ you'll create specifically for this purpose.
         14:47 $ ajv doctest tools/pitchtools-cleanup
         ...
     
-8. Populate your feature branch:
+9. Populate your feature branch:
 
         (abjad3) ✔ ~/abjad/abjad [trevor/pitchtools-cleanup L|✔] 
         10:24 $ git cherry-pick c96a20c
@@ -823,7 +833,7 @@ you'll create specifically for this purpose.
     ok after each cherry-pick. Calling `git st` between cherry-picks shows
     nothing.
 
-9. Push:
+10. Push:
 
         (abjad3) ✔ ~/abjad/abjad [trevor/trevor/pitchtools-cleanup L|✔] 
         10:25 $ git push
@@ -844,7 +854,7 @@ you'll create specifically for this purpose.
         * [new branch]      trevor/trevor/pitchtools-cleanup -> trevor/trevor/pitchtools-cleanup
         Branch trevor/trevor/pitchtools-cleanup set up to track remote branch trevor/trevor/pitchtools-cleanup from origin.
 
-10. Visit GitHub at http://github.com/Abjad/abjad:
+11. Visit GitHub at http://github.com/Abjad/abjad:
 
     - You'll be notified that you can make a PR from the newly pushed branch.
     - Make the PR ("Compare & pull request" > "Create pull request").
@@ -853,7 +863,7 @@ you'll create specifically for this purpose.
     - Merge the branch via the PR page.
     - Delete the branch.
 
-11. Return to the terminal and check out master:
+12. Return to the terminal and check out master:
 
         (abjad3) ✘-128 ~/abjad/abjad [trevor/trevor/pitchtools-cleanup L|✔] 
         14:21 $ git checkout master
@@ -861,7 +871,7 @@ you'll create specifically for this purpose.
         Your branch is behind 'origin/master' by 2 commits, and can be fast-forwarded.
         (use "git pull" to update your local branch)
 
-12. Pull master:
+13. Pull master:
 
         (abjad3) ✔ ~/abjad/abjad [master ↓·2|✔] 
         14:23 $ git pull
@@ -871,20 +881,20 @@ you'll create specifically for this purpose.
         abjad/etc/editors/vimrc                                       | 2 +-
         2 files changed, 3 insertions(+), 3 deletions(-)
 
-13. Delete the feature branch:
+14. Delete the feature branch:
 
         (abjad3) ✔ ~/abjad/abjad [master|✔] 
         14:21 $ git branch -d trevor/trevor/pitchtools-cleanup
         Deleted branch trevor/trevor/pitchtools-cleanup (was b4240a0).
 
-14. Check out your development branch again:
+15. Check out your development branch again:
 
         (abjad3) ✔ ~/abjad/abjad [master|✔] 
         10:36 $ git checkout trevor/dev
         Switched to branch 'trevor/dev'
         Your branch is up-to-date with 'origin/trevor/dev'.
 
-15. Git says that your development branch is up-to-date with origin.
+16. Git says that your development branch is up-to-date with origin.
     But you still need to interactively rebase against master to remove the
     cherry-picked commit from your development branch:
 
@@ -892,7 +902,7 @@ you'll create specifically for this purpose.
         10:36 $ git rebase -i master
         Successfully rebased and updated refs/heads/trevor/dev.
 
-16. Force-push:
+17. Force-push:
 
         (abjad3) ✔ ~/abjad/abjad [trevor/dev ↓·3↑·4|✔] 
         10:36 $ git push --force
