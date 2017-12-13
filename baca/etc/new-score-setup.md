@@ -18,11 +18,7 @@ Pull respositories
 
 1.  Pull repositories.
 
-    (!pull_all)
-
-    (st*)
-
-    (up*)
+    (!pull_all st* pull*)
 
     TODO: Add IDE (pull_all) command.
 
@@ -38,15 +34,9 @@ Pull respositories
 
 3.  Rebuild scores.
 
-    (mm > pdfm*)
+    (mm pdfm* gg pdfm* ^^ ++)
 
-    (gg > pdfm*)
-
-    (^^)
-
-    (++)
-
-4.  Rebuild docs make clean.
+4.  Rebuild docs.
 
     cd ~/abjad/abjad/docs; make clean; ajv api -M 
 
@@ -71,37 +61,19 @@ Apply software updates
 
 6.  Test and rebuild everything.
 
-    (cdj ..)
+    (cdj .. !ajv api -M ^^ ++ ci)
 
-    (!ajv api -M)
+    (cdi !ajv api -I ^^ ++ ci)
 
-    (^^ ++ ci)
-
-    (cdi)
-
-    (!ajv api -I)
-
-    (^^ ++ ci)
-
-    (ll make_baca_api.py)
-
-    (^^ ++ ci)
+    (ll !make_baca_api.py ^^ ++ ci)
         
-    (q)
-
     cd ~/Scores; make_scores_api.py; git st; git commit "Rebuilt API."
 
 7.  Rebuild scores.
 
-    (mm > pdfm*)
+    (mm pdfm* gg pdfm* ^^ ++)
 
-    (gg > pdfm*)
-
-    (^^)
-
-    (++)
-
-8.  Rebuild docs make clean.
+8.  Rebuild docs.
 
     cd ~/abjad/abjad/docs; make clean; ajv api -M 
 
@@ -119,7 +91,6 @@ Package unpushed trevor/dev commits
 10. Package unpushed trevor/dev commits.
 
     Follow feature management in Git workflow instructions.
-    ... 
 
     Make sure trevor/dev is empty.
 
@@ -157,15 +128,9 @@ Package unpushed trevor/dev commits
 
 14. Rebuild scores.
 
-    (mm > pdfm*)
+    (mm pdfm* gg pdfm* ^^ ++)
 
-    (gg > pdfm*)
-
-    (^^)
-
-    (++)
-
-15. Rebuild docs make clean.
+15. Rebuild docs.
 
     cd ~/abjad/abjad/docs; make clean; ajv api -M 
 
@@ -236,15 +201,15 @@ Make new score package
 
     (!ln -s ~/baca/baca/dotfiles/gitignore ~/Scores/my_score/.gitignore)
 
-23. Get .travis.yml from existing score.
+23. Get existing .travis.yml.
 
-    (ww get <score> .travis.yml)
+    (ww get [score] .travis.yml)
 
     Edit .travis.yml by hand.
 
-24. Get README.md from existing score.
+24. Get existing README.md.
 
-    (ww get <score> README.md)
+    (ww get [score] README.md)
 
     Edit README.md by hand.
 
@@ -290,23 +255,25 @@ Make new score package
 
     (al)
 
-31. Quit IDE.
+31. Add aliases to ~/.profile.
 
-    Add aliases to ~/.profile.
-
-    export STIRRINGS=$SCORES/stirrings
-    alias stix="clear; cd $STIRRINGS/stirrings"
+    export STIRRINGS_STILL=$SCORES/stirrings_still
+    alias stix="clear; cd $STIRRINGS_STILL/stirrings_still"
     alias sti="stix; start-abjad-ide sti"
+
+32. Add score package to PYTHONPATH.
+
+    export PYTHONPATH=$STIRRINGS_STILL:$PYTHONPATH
 
     Quit and restart terminal.
 
-32. Add repository to ~/baca/baca/scr/restart-travis-build-set-n script.
+33. Add repository to ~/baca/baca/scr/restart-travis-build-set-n script.
 
-33. Add repository to clone scores script.
+34. Add repository to clone scores script.
     
     .../clone_scores.py
 
-34. Change to score package in three terminal windows.
+35. Change to score package in three terminal windows.
 
     Window > Save Windows as Group ...
 
@@ -314,79 +281,31 @@ Make new score package
 
     Quit and restart terminal.
 
-35. Restart IDE.
+36. Restart IDE.
 
-    Copy existing scans and other artifacts into etc.
+    Move sketches into etc directory.
 
-    Commit.
+    (ci "Added materials PDF, map PDF.")
 
-36. Make etc files.
+37. Make etc files.
 
-    (ee > new > to-do.md)
+    (ee new to-do.md)
 
-    (ee > new > stages.md)
+    (ee new stages.md)
 
-    (ci > "Added stages.")
+    (ci "Added etc files.")
 
-37. Copy ScoreTemplate.py from existing score package.
-
-    (oo > get > ScoreTemplate.py)
-
-    Edit ScoreTemplate.py by hand.
-
-    Define instruments in score order.
-
-    Make only one (master) score template per score.
-
-    (^^)
-
-38. Copy instruments from existing score package.
-
-    (mm > get > instruments)
-
-    Edit instruments/definition.py by hand.
-
-    Define instruments in score order.
-
-    (dfk)
-
-    Eventually run (pdfm).
-
-39. Copy metronome marks package from existing score package.
-
-    (mm > get > metronome_marks)
-
-    Edit metronome_marks/definition.py by hand.
-
-    Define metronome marks alphabetically by metronome mark name.
-
-    (dfk)
-
-    Eventually run (pdfm).
-
-40. Copy time signatures package from existing score package, if requred.
-
-    (mm > get > time_signatures) 
-
-    Edit time_signatures/definition.py by hand.
-
-    (dfk)
-
-    Eventually run (pdfm).
-
-41. Change to stylesheets directory.
-
-    (yy)
+38. Change to stylesheets directory.
 
     Leave IDE-generated nonfirst-segment.ily as is.
 
-42. Copy contexts.ily from existing score package.
+39. Get existing contexts.ily.
 
-    (yy > get > contexts.ily)
+    (yy get [score] contexts.ily)
 
     Edit contexts.ily by hand.
 
-    Define global contexts first.
+    Define global contexts.
     
     Define score contexts in score order.
 
@@ -400,59 +319,93 @@ Make new score package
 
     (Eventually create much of contexts.ily from ScoreTemplate.py.)
 
-43. Replace IDE-generated stylesheet.ily with stylesheet.ily from existing
-    score package.
+40. Remove IDE-generated stylesheet.ily.
 
-    (yy > get > stylesheet.ily).
+    (yy rm stylesheet.ily)
+
+    Get existing stylesheet.ily.
+
+    (yy get [score] stylesheet.ily).
 
     Edit stylesheet.ily by hand.
 
-44. Copy parts.ily from existing score packge if score requires parts.
+41. Remove IDE-generated parts.ily.
 
-    (yy > get > parts.ily)
-
-    Edit parts.ily by hand.
-
-    (Probably no editing will be required.)
-
-    (No method exists to check LilyPond stylesheet edits.)
+    (yy rm parts.ily)
 
     (Eventually teach IDE more about part production.)
 
-45. Test and commit.
+    (ci "Added stylesheets.")
 
-    (^^)
+42. Get existing instruments.
 
-    (++)
+    (mm get [score] instruments)
 
-    (ci > "Defined score template, instruments and stylesheet.")
+    Edit instruments/definition.py by hand.
 
-46. Edit stages.txt.
+    Define instruments in score order.
 
-    Detail score stages verbally.
+    (dfk)
 
-47. Create all segments with yet-to-be-implemented (gg > setup).
+    Eventually run (pdfm).
 
-    To define 'name' by hand:
+    (ci "Added instruments.")
 
-        metadata = collections.OrderedDict([
-            ('name', 'K'),
-            ])
+43. Remove IDE-generated ScoreTemplate.py.
 
-    To create segments by hand:
+    (oo rm ScoreTemplate.py)
 
-        (gg > new > _ > meta > define 'name' by hand)
-        (gg > new > A > meta > define 'name' by hand)
-        ...
-        (gg > new > Q > meta > define 'name' by hand)
+    Remove IDE-generated SegmentMaker.py.
 
-48. Define stub version of first segment.
+    (oo rm SegmentMaker.py)
 
-    (gg > new > _)
+    Get existing ScoreTemplate.py.
 
-    (%_)
+    (oo get [score] ScoreTemplate.py)
 
-    (get > definition.py)
+    Edit ScoreTemplate.py by hand.
+
+    Replace existing package name with new package name.
+
+    Define instruments in score order.
+
+    Make only one master score template per score.
+
+    (^^ !make_scores_api.py)
+
+    Visually inspect scores API.
+
+    (ci "Added score template.")
+
+44. Get existing metronome marks.
+
+    (mm get [score] metronome_marks)
+
+    Edit metronome_marks/definition.py by hand.
+
+    Define metronome marks alphabetically by metronome mark name.
+
+    (dfk)
+
+    (pdfm)
+
+    (ci "Added metronome marks.")
+
+45. Get existing time signatures (if time-signature-oriented).
+
+    (mm get [score] time_signatures) 
+
+    Edit time_signatures/definition.py by hand.
+
+    (dfk)
+
+    (ci "Added time signatures.")
+
+46. Define stub version of first segment.
+
+    (gg new _)
+
+    (_ rm definition.py get [score] definition.py)
 
     Edit _/definition.py by hand.
 
@@ -472,23 +425,17 @@ Make new score package
     
     Check short instrument names.
 
-    (pdfm) to render PDF.
+    Check (pdfm) messaging for metadata handling.
 
-    (@sty) to edit stylesheet.ily.
-
-    (@instr) to edit materials/instruments/definition.py.
-
-    (lp) to make sure no errors or warnings appear in LilyPong log.
+    Check (lp) for LilyPond warnings.
     
-49. Define stub version of nonfirst segment.
+47. Define stub version of second segment.
 
-    (gg > new > A)
+    (gg new A)
 
-    (%A)
+    (A rm definition.py get [score] definition.py)
 
-    (get > definition.py)
-
-    Edit A/definition.py by hand.
+    Edit definition.py by hand.
 
     Define segment-maker.
 
@@ -504,85 +451,67 @@ Make new score package
 
     Check short instrument names.
 
-    (lp) to make sure no errors or warnings appear in LilyPong log.
+    Check (pdfm) messaging for metadata handling.
 
-50. Build stub version of score.
+    Check (lp) for LilyPond warnings.
 
-    (bb > new > ledger) 
+    (ci "Segments _, A.")
 
-    (%led)
+48. Build stub version of score.
 
-    (!trash assets)
+    (bb new ledger) 
 
-    (!trash segments)
+    (ledger)
 
-    (!trash parts.ily)
+    (lyc* mg)
 
-    (!trash segments.ily)
+    Get existing front cover.
 
-    (lyc*)
+    (rm front-cover.tex get [score] front-cover.tex)
 
-    (fcg pg mg bcg sg)
+    Check front-cover.tex by hand.
 
-    Edit music.ly by hand.
-    
-    Comment-out not-yet-created segments.
+    (fci)
 
-    (fci pi mi bci si)
+    Check preface.tex by hand.
+
+    (pi)
+
+    Check stylesheet.ily by hand.
+
+    Check music.ly by hand.
 
     (mi)
+
+    Check back-cover.tex by hand.
+
+    (bci)
+
+    Check score.tex by hand.
 
     (si)
 
     Check footers on pages two and greater.
     
-    (@sty) to edit stylesheet.ily.
-
     TODO: Teach IDE more about builds.
 
-51. Test and commit.
+    (cc ^^ ++ ci "Added ledger build.")
 
-    (ss)
+49. Test and rebuild everything.
 
-    (^^)
+    (cdj .. !ajv api -M ^^ ++ ci)
 
-    (++)
+    (cdi !ajv api -I ^^ ++ ci)
 
-    (ci > "Built stub segments.")
-
-52. Test and rebuild everything.
-
-    (cdj ..)
-
-    (!ajv api -M)
-
-    (^^ ++ ci)
-
-    (cdi)
-
-    (!ajv api -I)
-
-    (^^ ++ ci)
-
-    (ll make_baca_api.py)
-
-    (^^ ++ ci)
+    (ll !make_baca_api.py ^^ ++ ci)
         
-    (q)
-
     cd ~/Scores; make_scores_api.py; git st; git commit "Rebuilt API."
 
-53. Rebuild scores.
+50. Rebuild scores.
 
-    (mm > pdfm*)
+    (mm pdfm* gg pdfm* ^^ ++)
 
-    (gg > pdfm*)
-
-    (^^)
-
-    (++)
-
-54. Rebuild docs make clean.
+51. Rebuild docs.
 
     cd ~/abjad/abjad/docs; make clean; ajv api -M 
 
