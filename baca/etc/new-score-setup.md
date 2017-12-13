@@ -254,7 +254,7 @@ Make new score package
     setup.cfg
     setup.py
 
-26. Compare contents initializer to contents initializer of existing score.
+26. Compare package initializer to package initializer of existing score.
 
 27. Commit.
 
@@ -300,7 +300,13 @@ Make new score package
 
     Quit and restart terminal.
 
-32. Change to score package in three terminal windows.
+32. Add repository to ~/baca/baca/scr/restart-travis-build-set-n script.
+
+33. Add repository to clone scores script.
+    
+    .../clone_scores.py
+
+34. Change to score package in three terminal windows.
 
     Window > Save Windows as Group ...
 
@@ -308,13 +314,13 @@ Make new score package
 
     Quit and restart terminal.
 
-33. Restart IDE.
+35. Restart IDE.
 
     Copy existing scans and other artifacts into etc.
 
     Commit.
 
-34. Make etc files.
+36. Make etc files.
 
     (ee > new > to-do.md)
 
@@ -322,7 +328,7 @@ Make new score package
 
     (ci > "Added stages.")
 
-35. Copy ScoreTemplate.py from existing score package.
+37. Copy ScoreTemplate.py from existing score package.
 
     (oo > get > ScoreTemplate.py)
 
@@ -334,7 +340,7 @@ Make new score package
 
     (^^)
 
-36. Copy instruments from existing score package.
+38. Copy instruments from existing score package.
 
     (mm > get > instruments)
 
@@ -346,7 +352,7 @@ Make new score package
 
     Eventually run (pdfm).
 
-37. Copy metronome marks package from existing score package.
+39. Copy metronome marks package from existing score package.
 
     (mm > get > metronome_marks)
 
@@ -358,7 +364,7 @@ Make new score package
 
     Eventually run (pdfm).
 
-38. Copy time signatures package from existing score package, if requred.
+40. Copy time signatures package from existing score package, if requred.
 
     (mm > get > time_signatures) 
 
@@ -368,13 +374,13 @@ Make new score package
 
     Eventually run (pdfm).
 
-39. Change to stylesheets directory.
+41. Change to stylesheets directory.
 
     (yy)
 
     Leave IDE-generated nonfirst-segment.ily as is.
 
-40. Copy contexts.ily from existing score package.
+42. Copy contexts.ily from existing score package.
 
     (yy > get > contexts.ily)
 
@@ -394,14 +400,14 @@ Make new score package
 
     (Eventually create much of contexts.ily from ScoreTemplate.py.)
 
-41. Replace IDE-generated stylesheet.ily with stylesheet.ily from existing
+43. Replace IDE-generated stylesheet.ily with stylesheet.ily from existing
     score package.
 
     (yy > get > stylesheet.ily).
 
     Edit stylesheet.ily by hand.
 
-42. Copy parts.ily from existing score packge if score requires parts.
+44. Copy parts.ily from existing score packge if score requires parts.
 
     (yy > get > parts.ily)
 
@@ -413,7 +419,7 @@ Make new score package
 
     (Eventually teach IDE more about part production.)
 
-43. Test and commit.
+45. Test and commit.
 
     (^^)
 
@@ -421,11 +427,11 @@ Make new score package
 
     (ci > "Defined score template, instruments and stylesheet.")
 
-44. Edit stages.txt.
+46. Edit stages.txt.
 
     Detail score stages verbally.
 
-45. Create all segments with yet-to-be-implemented (gg > setup).
+47. Create all segments with yet-to-be-implemented (gg > setup).
 
     To define 'name' by hand:
 
@@ -440,7 +446,7 @@ Make new score package
         ...
         (gg > new > Q > meta > define 'name' by hand)
 
-46. Define stub version of first segment.
+48. Define stub version of first segment.
 
     (gg > new > _)
 
@@ -474,7 +480,7 @@ Make new score package
 
     (lp) to make sure no errors or warnings appear in LilyPong log.
     
-47. Define stub version of nonfirst segment.
+49. Define stub version of nonfirst segment.
 
     (gg > new > A)
 
@@ -500,7 +506,7 @@ Make new score package
 
     (lp) to make sure no errors or warnings appear in LilyPong log.
 
-48. Build stub version of score.
+50. Build stub version of score.
 
     (bb > new > ledger) 
 
@@ -534,7 +540,7 @@ Make new score package
 
     TODO: Teach IDE more about builds.
 
-49. Test and commit.
+51. Test and commit.
 
     (ss)
 
@@ -544,7 +550,7 @@ Make new score package
 
     (ci > "Built stub segments.")
 
-50. Test and rebuild everything.
+52. Test and rebuild everything.
 
     (cdj ..)
 
@@ -566,7 +572,7 @@ Make new score package
 
     cd ~/Scores; make_scores_api.py; git st; git commit "Rebuilt API."
 
-51. Rebuild scores.
+53. Rebuild scores.
 
     (mm > pdfm*)
 
@@ -576,7 +582,7 @@ Make new score package
 
     (++)
 
-52. Rebuild docs make clean.
+54. Rebuild docs make clean.
 
     cd ~/abjad/abjad/docs; make clean; ajv api -M 
 

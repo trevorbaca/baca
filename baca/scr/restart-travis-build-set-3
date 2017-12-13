@@ -5,7 +5,7 @@ body='{
 
 # TRAVIS LIMITS TO 10 BUILDS AT A TIME
 for repo in \
-    recursif sekka stirrings_still traiettorie \
+    myrkr recursif sekka stirrings_still traiettorie \
     baca scores_directory
 do
     curl -s -X POST \
