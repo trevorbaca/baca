@@ -257,9 +257,9 @@ Make new score package
 
 31. Add aliases to ~/.profile.
 
-    export STIRRINGS_STILL=$SCORES/stirrings_still
-    alias stix="clear; cd $STIRRINGS_STILL/stirrings_still"
-    alias sti="stix; start-abjad-ide sti"
+        export STIRRINGS_STILL=$SCORES/stirrings_still
+        alias stix="clear; cd $STIRRINGS_STILL/stirrings_still"
+        alias sti="stix; start-abjad-ide sti"
 
 32. Add score package to PYTHONPATH.
 
