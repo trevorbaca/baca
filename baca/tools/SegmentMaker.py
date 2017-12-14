@@ -15,8 +15,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
     ..  container:: example
 
-        Default segment-maker:
-
         >>> maker = baca.SegmentMaker(
         ...     ignore_unpitched_notes=True,
         ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -28,7 +26,10 @@ class SegmentMaker(abjad.SegmentMaker):
         ...     baca.make_even_runs(),
         ...     )
 
-        >>> lilypond_file = maker.run(environment='docs')
+        >>> lilypond_file = maker.run(
+        ...     environment='docs',
+        ...     remove=['STAGE_NUMBER_MARKUP'],
+        ...     )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -42,13 +43,6 @@ class SegmentMaker(abjad.SegmentMaker):
                         \time 4/8
                         \bar "" %! EMPTY_START_BAR:1
                         s1 * 1/2
-                        - \markup { %! STAGE_NUMBER_MARKUP:2
-                            \fontsize %! STAGE_NUMBER_MARKUP:2
-                                #-3 %! STAGE_NUMBER_MARKUP:2
-                                \with-color %! STAGE_NUMBER_MARKUP:2
-                                    #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                    [1] %! STAGE_NUMBER_MARKUP:2
-                            } %! STAGE_NUMBER_MARKUP:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
                         \time 3/8
@@ -126,7 +120,6 @@ class SegmentMaker(abjad.SegmentMaker):
                     }
                 >>
             >>
-
 
     '''
 
@@ -1184,18 +1177,17 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _get_end_clefs(self):
         result = abjad.TypedOrderedDict()
-        staves = abjad.iterate(self._score).components(abjad.Staff)
-        staves = list(staves)
-        staves.sort(key=lambda _: _.name)
-        for staff in staves:
-            last_leaf = abjad.inspect(staff).get_leaf(-1)
-            clef = abjad.inspect(last_leaf).get_effective(abjad.Clef)
-            if clef is not None:
-                string = clef.name
+        contexts = abjad.iterate(self._score).components(abjad.Context)
+        contexts = list(contexts)
+        contexts.sort(key=lambda _: _.name)
+        for context in contexts:
+            wrapper = context._get_last_wrapper(abjad.Clef)
+            if wrapper is not None:
+                string = wrapper.indicator.name
             else:
-                string = self._transient_clefs.get(staff.name)
+                string = self._transient_clefs.get(context.name)
             if string is not None:
-                result[staff.name] = string
+                result[context.name] = string
         return result
 
     def _get_end_dynamics(self):
