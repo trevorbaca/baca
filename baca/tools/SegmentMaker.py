@@ -1254,7 +1254,7 @@ class SegmentMaker(abjad.SegmentMaker):
         result = {}
         if docs:
             return result
-        result['end_clefs_by_staff'] = self._get_end_clefs()
+        result['end_clefs_by_context'] = self._get_end_clefs()
         result['end_clock_time'] = self._clock_time
         result['end_dynamics_by_context'] = self._get_end_dynamics()
         result['end_instruments_by_context'] = self._get_end_instruments()
@@ -1328,7 +1328,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _get_previous_clef(self, context):
         if not self._previous_metadata:
             return
-        string = 'end_clefs_by_staff'
+        string = 'end_clefs_by_context'
         dictionary = self._previous_metadata.get(string)
         if dictionary:
             clef_name = dictionary.get(context)
@@ -2325,8 +2325,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> metadata = {}
-            >>> metadata['end_clefs_by_staff'] = {}
-            >>> metadata['end_clefs_by_staff']['MusicStaff'] = 'alto'
+            >>> metadata['end_clefs_by_context'] = {}
+            >>> metadata['end_clefs_by_context']['MusicStaff'] = 'alto'
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
@@ -2622,8 +2622,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> metadata = {}
-            >>> metadata['end_clefs_by_staff'] = {}
-            >>> metadata['end_clefs_by_staff']['MusicStaff'] = 'alto'
+            >>> metadata['end_clefs_by_context'] = {}
+            >>> metadata['end_clefs_by_context']['MusicStaff'] = 'alto'
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
@@ -2924,8 +2924,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> metadata = {}
-            >>> metadata['end_clefs_by_staff'] = {}
-            >>> metadata['end_clefs_by_staff']['MusicStaff'] = 'alto'
+            >>> metadata['end_clefs_by_context'] = {}
+            >>> metadata['end_clefs_by_context']['MusicStaff'] = 'alto'
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
@@ -6960,8 +6960,8 @@ class SegmentMaker(abjad.SegmentMaker):
         ..  container:: example
 
             >>> metadata = {}
-            >>> metadata['end_clefs_by_staff'] = {}
-            >>> metadata['end_clefs_by_staff']['MusicStaff'] = 'alto'
+            >>> metadata['end_clefs_by_context'] = {}
+            >>> metadata['end_clefs_by_context']['MusicStaff'] = 'alto'
 
             >>> maker = baca.SegmentMaker(
             ...     first_segment=False,
@@ -7041,7 +7041,7 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.TypedOrderedDict(
                 [
                     (
-                        'end_clefs_by_staff',
+                        'end_clefs_by_context',
                         abjad.TypedOrderedDict(
                             [
                                 ('MusicStaff', 'alto'),
