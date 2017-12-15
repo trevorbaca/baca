@@ -43,6 +43,10 @@ class ScoreTemplate(abjad.ScoreTemplate):
             )
         return global_context
 
+    @staticmethod
+    def _set_square_delimiter(staff_group):
+        abjad.setting(staff_group).system_start_delimiter = 'SystemStartSquare'
+
     def _validate_voice_names(self, score):
         voice_names = []
         for voice in abjad.iterate(score).components(abjad.Voice):
