@@ -28,6 +28,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.attach_defaults
+      ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.group_families
       ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.make_music_context
       ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.make_piano_staff
       ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.make_square_staff_group
@@ -58,6 +59,12 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.attach_defaults
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.group_families
 
 .. only:: html
 

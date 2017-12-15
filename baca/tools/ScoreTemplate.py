@@ -86,6 +86,34 @@ class ScoreTemplate(abjad.ScoreTemplate):
 
     ### PUBLIC METHODS ###
 
+    def group_families(self, *families):
+        r'''Groups `families` only when more than one family is passed in.
+
+        Returns list of zero or more contexts.
+        '''
+        families_ = []
+        for family in families:
+            if family is not None:
+                if any(_ for _ in family[1:] if _ is not None):
+                    families_.append(family)
+        families = families_
+        contexts = []
+        if len(families) == 0:
+            pass
+        elif len(families) == 1:
+            family = families[0]
+            contexts.extend([_ for _ in family[1:] if _ is not None])
+        else:
+            for family in families:
+                if not isinstance(family, tuple):
+                    assert isinstance(family, abjad.Context)
+                    contexts.append(family)
+                    continue
+                square_staff_group = self.make_square_staff_group(*family)
+                assert square_staff_group is not None
+                contexts.append(square_staff_group)
+        return contexts
+
     def make_music_context(self, *contexts):
         contexts = [_ for _ in contexts if _ is not None]
         return abjad.Context(
@@ -96,12 +124,16 @@ class ScoreTemplate(abjad.ScoreTemplate):
             )
 
     def make_piano_staff(self, stem, *contexts):
+        if not isinstance(stem, str):
+            raise Exception(f'stem must be string: {stem!r}.')
         contexts = [_ for _ in contexts if _ is not None]
         if contexts:
             piano_staff = abjad.StaffGroup(contexts, name=f'{stem}PianoStaff')
             return piano_staff
 
     def make_square_staff_group(self, stem, *contexts):
+        if not isinstance(stem, str):
+            raise Exception(f'stem must be string: {stem!r}.')
         contexts = [_ for _ in contexts if _ is not None]
         if len(contexts) == 1:
             return contexts[0]
@@ -114,10 +146,18 @@ class ScoreTemplate(abjad.ScoreTemplate):
             return staff_group
 
     def make_staff_group(self, stem, *contexts):
+        if not isinstance(stem, str):
+            raise Exception(f'stem must be string: {stem!r}.')
         contexts = [_ for _ in contexts if _ is not None]
-        if len(contexts) == 1:
-            return contexts[0]
-        elif 1 < len(contexts):
+#        # flatten redundant staff group
+#        if len(contexts) == 1 and isinstance(contexts[0], abjad.StaffGroup):
+#            contexts_ = abjad.mutate(contexts[0]).eject_contents()
+#            staff_group = abjad.StaffGroup(
+#                contexts_,
+#                name=f'{stem}StaffGroup',
+#                )
+#            return staff_group
+#        elif 1 < len(contexts):
+        if contexts:
             staff_group = abjad.StaffGroup(contexts, name=f'{stem}StaffGroup')
-            self._set_square_delimiter(staff_group)
             return staff_group

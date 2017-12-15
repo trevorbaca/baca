@@ -28,6 +28,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.attach_defaults
+      ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.group_families
       ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.make_music_context
       ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.make_piano_staff
       ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.make_square_staff_group
@@ -58,6 +59,12 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.attach_defaults
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.group_families
 
 .. only:: html
 

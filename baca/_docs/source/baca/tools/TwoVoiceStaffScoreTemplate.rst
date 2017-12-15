@@ -28,6 +28,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.attach_defaults
+      ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.group_families
       ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.make_music_context
       ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.make_piano_staff
       ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.make_square_staff_group
@@ -58,6 +59,12 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.attach_defaults
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.group_families
 
 .. only:: html
 

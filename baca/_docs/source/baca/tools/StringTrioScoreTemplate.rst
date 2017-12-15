@@ -28,6 +28,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.attach_defaults
+      ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.group_families
       ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.make_music_context
       ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.make_piano_staff
       ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.make_square_staff_group
@@ -58,6 +59,12 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.attach_defaults
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.group_families
 
 .. only:: html
 
