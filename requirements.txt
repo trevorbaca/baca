@@ -4,3 +4,5 @@
 #-e git://github.com/Abjad/abjad.git#egg=abjad [development]
 
 funcsigs
+inflect
+roman
