@@ -1175,6 +1175,14 @@ class SegmentMaker(abjad.SegmentMaker):
             if abjad.inspect(leaf).get_indicator(self._extend_beam_tag):
                 self._extend_beam(leaf)
 
+    @staticmethod
+    def _get_enclosing_context(component):
+        parentage = abjad.inspect(component).get_parentage()
+        context = parentage.get_first(abjad.Context)
+        if context is not None:
+            name = context.name or context.context_name
+            return name
+
     def _get_end_clefs(self):
         result = abjad.TypedOrderedDict()
         contexts = abjad.iterate(self._score).components(abjad.Context)
@@ -1183,11 +1191,23 @@ class SegmentMaker(abjad.SegmentMaker):
         for context in contexts:
             wrapper = context._get_last_wrapper(abjad.Clef)
             if wrapper is not None:
-                string = wrapper.indicator.name
+                clef_name = wrapper.indicator.name
+                enclosing_name = self._get_enclosing_context(wrapper.component)
             else:
-                string = self._transient_clefs.get(context.name)
-            if string is not None:
-                result[context.name] = string
+                #clef_name = self._transient_clefs.get(context.name)
+                #enclosing_name = None
+                transient = self._transient_clefs.get(context.name)
+                if transient is None:
+                    clef_name = None
+                elif isinstance(transient, str):
+                    raise Exception('FOO', transient)
+                    clef_name = transient
+                elif isinstance(transient, tuple) and len(transient) == 2:
+                    clef_name, enclosing_name = transient
+                else:
+                    raise TypeError(transient)
+            if clef_name is not None:
+                result[context.name] = (clef_name, enclosing_name)
         return result
 
     def _get_end_dynamics(self):
@@ -1323,9 +1343,14 @@ class SegmentMaker(abjad.SegmentMaker):
         string = 'end_clefs_by_context'
         dictionary = self._previous_metadata.get(string)
         if dictionary:
-            clef_name = dictionary.get(context)
-            if clef_name is not None:
-                return abjad.Clef(clef_name)
+            result = dictionary.get(context)
+            if result is None:
+                return
+            if isinstance(result, str):
+                return abjad.Clef(result)
+            if isinstance(result, tuple) and len(result) == 2:
+                clef_name, enclosing_context_name = result
+                return abjad.Clef(clef_name), enclosing_context_name
 
     def _get_previous_clock_time(self):
         if not self._previous_metadata:
@@ -1767,12 +1792,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 'redundant',
                 )
         for context in abjad.iterate(self._score).components(abjad.Context):
-            previous_clef = self._get_previous_clef(context.name)
+            previous_clef_result = self._get_previous_clef(context.name)
             previous_dynamic = self._get_previous_dynamic(context.name)
             previous_instrument = self._get_previous_instrument(context.name)
             previous_staff_lines = self._get_previous_staff_lines(context.name)
             previous_settings = [
-                previous_clef,
+                previous_clef_result,
                 previous_dynamic,
                 previous_instrument,
                 previous_staff_lines,
@@ -1781,8 +1806,16 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             first_leaf = self._get_first_nontransient_leaf(context)
             if first_leaf is None:
-                if previous_clef is not None:
-                    self._transient_clefs[context.name] = previous_clef.name
+                if previous_clef_result is not None:
+                    if isinstance(previous_clef_result, abjad.Clef):
+                        name = previous_clef_result.name
+                        self._transient_clefs[context.name] = name
+                    elif isinstance(previous_clef_result, tuple):
+                        previous_clef, enclosing_name = previous_clef_result
+                        pair = (previous_clef.name, enclosing_name)
+                        self._transient_clefs[context.name] = pair
+                    else:
+                        raise Exception(previous_clef)
                 if previous_dynamic is not None:
                     self._transient_dynamics[
                         context.name] = previous_dynamic.name
@@ -1845,7 +1878,13 @@ class SegmentMaker(abjad.SegmentMaker):
                         context,
                         status,
                         )
-            if previous_clef is not None:
+            if previous_clef_result is not None:
+                if isinstance(previous_clef_result, abjad.Clef):
+                    previous_clef = previous_clef_result
+                elif isinstance(previous_clef_result, tuple):
+                    previous_clef, enclosing_name = previous_clef_result
+                else:
+                    raise Exception(previous_clef_result)
                 clef = abjad.inspect(first_leaf).get_indicator(abjad.Clef)
                 status = None
                 if clef is None:
@@ -1880,7 +1919,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 index = wrapper.tag.rfind(':')
                 tag = wrapper.tag[:index]
                 if tag in tags:
-                    #wrapper._deactivate = True
                     abjad.detach(wrapper, leaf)
 
     def _scope_to_leaf_selection(self, wrapper):
@@ -7036,7 +7074,10 @@ class SegmentMaker(abjad.SegmentMaker):
                         'end_clefs_by_context',
                         abjad.TypedOrderedDict(
                             [
-                                ('MusicStaff', 'alto'),
+                                (
+                                    'MusicStaff',
+                                    ('alto', 'MusicVoice'),
+                                    ),
                                 ]
                             ),
                         ),
