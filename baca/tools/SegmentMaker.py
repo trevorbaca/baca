@@ -1193,21 +1193,11 @@ class SegmentMaker(abjad.SegmentMaker):
             if wrapper is not None:
                 clef_name = wrapper.indicator.name
                 enclosing_name = self._get_enclosing_context(wrapper.component)
+                pair = (clef_name, enclosing_name)
             else:
-                #clef_name = self._transient_clefs.get(context.name)
-                #enclosing_name = None
-                transient = self._transient_clefs.get(context.name)
-                if transient is None:
-                    clef_name = None
-                elif isinstance(transient, str):
-                    raise Exception('FOO', transient)
-                    clef_name = transient
-                elif isinstance(transient, tuple) and len(transient) == 2:
-                    clef_name, enclosing_name = transient
-                else:
-                    raise TypeError(transient)
-            if clef_name is not None:
-                result[context.name] = (clef_name, enclosing_name)
+                pair = self._transient_clefs.get(context.name)
+            if pair is not None:
+                result[context.name] = pair
         return result
 
     def _get_end_dynamics(self):
@@ -1343,13 +1333,9 @@ class SegmentMaker(abjad.SegmentMaker):
         string = 'end_clefs_by_context'
         dictionary = self._previous_metadata.get(string)
         if dictionary:
-            result = dictionary.get(context)
-            if result is None:
-                return
-            if isinstance(result, str):
-                return abjad.Clef(result)
-            if isinstance(result, tuple) and len(result) == 2:
-                clef_name, enclosing_context_name = result
+            pair = dictionary.get(context)
+            if pair is not None:
+                clef_name, enclosing_context_name = pair
                 return abjad.Clef(clef_name), enclosing_context_name
 
     def _get_previous_clock_time(self):
@@ -1792,12 +1778,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 'redundant',
                 )
         for context in abjad.iterate(self._score).components(abjad.Context):
-            previous_clef_result = self._get_previous_clef(context.name)
+            previous_clef_pair = self._get_previous_clef(context.name)
             previous_dynamic = self._get_previous_dynamic(context.name)
             previous_instrument = self._get_previous_instrument(context.name)
             previous_staff_lines = self._get_previous_staff_lines(context.name)
             previous_settings = [
-                previous_clef_result,
+                previous_clef_pair,
                 previous_dynamic,
                 previous_instrument,
                 previous_staff_lines,
@@ -1806,16 +1792,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             first_leaf = self._get_first_nontransient_leaf(context)
             if first_leaf is None:
-                if previous_clef_result is not None:
-                    if isinstance(previous_clef_result, abjad.Clef):
-                        name = previous_clef_result.name
-                        self._transient_clefs[context.name] = name
-                    elif isinstance(previous_clef_result, tuple):
-                        previous_clef, enclosing_name = previous_clef_result
-                        pair = (previous_clef.name, enclosing_name)
-                        self._transient_clefs[context.name] = pair
-                    else:
-                        raise Exception(previous_clef)
+                if previous_clef_pair is not None:
+                    previous_clef, enclosing_name = previous_clef_pair
+                    pair = (previous_clef.name, enclosing_name)
+                    self._transient_clefs[context.name] = pair
                 if previous_dynamic is not None:
                     self._transient_dynamics[
                         context.name] = previous_dynamic.name
@@ -1878,13 +1858,8 @@ class SegmentMaker(abjad.SegmentMaker):
                         context,
                         status,
                         )
-            if previous_clef_result is not None:
-                if isinstance(previous_clef_result, abjad.Clef):
-                    previous_clef = previous_clef_result
-                elif isinstance(previous_clef_result, tuple):
-                    previous_clef, enclosing_name = previous_clef_result
-                else:
-                    raise Exception(previous_clef_result)
+            if previous_clef_pair is not None:
+                previous_clef, enclosing_name = previous_clef_pair
                 clef = abjad.inspect(first_leaf).get_indicator(abjad.Clef)
                 status = None
                 if clef is None:
@@ -2354,9 +2329,10 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
+            >>> pair = ('alto', 'MusicVoice')
             >>> metadata = {}
             >>> metadata['end_clefs_by_context'] = {}
-            >>> metadata['end_clefs_by_context']['MusicStaff'] = 'alto'
+            >>> metadata['end_clefs_by_context']['MusicStaff'] = pair
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
@@ -2651,9 +2627,10 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
+            >>> pair = ('alto', 'MusicVoice')
             >>> metadata = {}
             >>> metadata['end_clefs_by_context'] = {}
-            >>> metadata['end_clefs_by_context']['MusicStaff'] = 'alto'
+            >>> metadata['end_clefs_by_context']['MusicStaff'] = pair
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
@@ -2953,9 +2930,10 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     )
 
+            >>> pair = ('alto', 'MusicVoice')
             >>> metadata = {}
             >>> metadata['end_clefs_by_context'] = {}
-            >>> metadata['end_clefs_by_context']['MusicStaff'] = 'alto'
+            >>> metadata['end_clefs_by_context']['MusicStaff'] = pair
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
@@ -6989,9 +6967,10 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
+            >>> pair = ('alto', 'MusicVoice')
             >>> metadata = {}
             >>> metadata['end_clefs_by_context'] = {}
-            >>> metadata['end_clefs_by_context']['MusicStaff'] = 'alto'
+            >>> metadata['end_clefs_by_context']['MusicStaff'] = pair
 
             >>> maker = baca.SegmentMaker(
             ...     first_segment=False,
