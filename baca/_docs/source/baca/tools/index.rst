@@ -111,6 +111,7 @@ baca.tools
    SpannerCommand
    StaffPositionCommand
    SuiteCommand
+   TagCommand
    VoltaCommand
 
 .. autosummary::
@@ -141,6 +142,7 @@ baca.tools
    SpannerCommand
    StaffPositionCommand
    SuiteCommand
+   TagCommand
    VoltaCommand
 
 --------

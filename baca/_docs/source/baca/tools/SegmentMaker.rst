@@ -55,6 +55,7 @@ Bases
       ~baca.tools.SegmentMaker.SegmentMaker.range_checker
       ~baca.tools.SegmentMaker.SegmentMaker.rehearsal_letter
       ~baca.tools.SegmentMaker.SegmentMaker.run
+      ~baca.tools.SegmentMaker.SegmentMaker.score
       ~baca.tools.SegmentMaker.SegmentMaker.score_template
       ~baca.tools.SegmentMaker.SegmentMaker.skip_wellformedness_checks
       ~baca.tools.SegmentMaker.SegmentMaker.skips_instead_of_rests
@@ -136,6 +137,8 @@ Read-only properties
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.range_checker
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.rehearsal_letter
+
+.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.score
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.score_template
 

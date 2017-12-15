@@ -21,6 +21,83 @@ class LibraryTZ(abjad.AbjadObject):
     ### PUBLIC METHODS ###
 
     @staticmethod
+    def tag(tag, selector='baca.leaves()'):
+        r'''Attaches LilyPond tag command to leaves.
+
+        ..  container:: example
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_notes(repeat_ties=True),
+            ...     baca.pitches('E4 F4'),
+            ...     baca.tag('ViolinI', baca.leaves()[:2]),
+            ...     baca.tag('ViolinI.ViolinII', baca.leaves()[2:]),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs', remove=True)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+            \context Score = "Score" <<
+                \context GlobalContext = "GlobalContext" <<
+                    \context GlobalSkips = "GlobalSkips" {
+            <BLANKLINE>
+                        %%% GlobalSkips [measure 1] %%%
+                        \time 4/8
+                        s1 * 1/2
+            <BLANKLINE>
+                        %%% GlobalSkips [measure 2] %%%
+                        \time 3/8
+                        s1 * 3/8
+            <BLANKLINE>
+                        %%% GlobalSkips [measure 3] %%%
+                        \time 4/8
+                        s1 * 1/2
+            <BLANKLINE>
+                        %%% GlobalSkips [measure 4] %%%
+                        \time 3/8
+                        s1 * 3/8
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext" <<
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
+                            \tag ViolinI
+                            {
+            <BLANKLINE>
+                                %%% MusicVoice [measure 1] %%%
+                                e'2
+            <BLANKLINE>
+                                %%% MusicVoice [measure 2] %%%
+                                f'4.
+                            }
+                            \tag ViolinI.ViolinII
+                            {
+            <BLANKLINE>
+                                %%% MusicVoice [measure 3] %%%
+                                e'2
+            <BLANKLINE>
+                                %%% MusicVoice [measure 4] %%%
+                                f'4.
+                                \bar "|"
+            <BLANKLINE>
+                            }
+                        }
+                    }
+                >>
+            >>
+
+        Returns tag command.
+        '''
+        return baca.TagCommand(selector=selector, tag=tag)
+
+    @staticmethod
     def tenuti(selector='baca.pheads()'):
         r'''Attaches tenuti to pitched heads.
 

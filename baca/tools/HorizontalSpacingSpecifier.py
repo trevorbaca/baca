@@ -998,7 +998,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, segment_maker=None, tag=None):
+    def __call__(self, segment_maker=None):
         r'''Calls command on `segment_maker`.
 
         Returns none.
@@ -1016,12 +1016,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             '_fermata_start_offsets',
             [],
             )
-        if tag is not None:
-            command_tag = f'{tag}_COMMAND'
-            markup_tag = f'{tag}_MARKUP'
-        else:
-            command_tag = None
-            markup_tag = None
+        command_tag = baca.Tags.SPACING_COMMAND
+        command_tag = baca.Tags.tag(command_tag)
+        markup_tag = baca.Tags.SPACING_MARKUP
+        markup_tag = baca.Tags.tag(markup_tag)
         for measure_index, skip in enumerate(skips):
             measure_timespan = abjad.inspect(skip).get_timespan()
             if (self.fermata_measure_width is not None and

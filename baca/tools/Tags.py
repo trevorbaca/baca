@@ -134,7 +134,8 @@ class Tags(abjad.Enumeration):
     EMPTY_START_BAR = enum.auto()
     FERMATA_BAR_LINE = enum.auto()
     FIGURE_NAME_MARKUP = enum.auto()
-    SPACING = enum.auto()
+    SPACING_COMMAND = enum.auto()
+    SPACING_MARKUP = enum.auto()
     STAGE_NUMBER_MARKUP = enum.auto()
 
     ### PUBLIC METHODS ###

@@ -28,7 +28,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         >>> lilypond_file = maker.run(
         ...     environment='docs',
-        ...     remove=['STAGE_NUMBER_MARKUP'],
+        ...     remove=[baca.Tags.STAGE_NUMBER_MARKUP],
         ...     )
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -740,7 +740,7 @@ class SegmentMaker(abjad.SegmentMaker):
         start_time = time.time()
         if self.spacing_specifier is None:
             return
-        self.spacing_specifier(self, tag=tags.tag(tags.SPACING))
+        self.spacing_specifier(self)
         stop_time = time.time()
         total_time = int(stop_time - start_time)
         if self.print_timings:
@@ -1887,13 +1887,26 @@ class SegmentMaker(abjad.SegmentMaker):
     def _remove_tags(self, tags):
         if not tags:
             return
-        for leaf in abjad.iterate(self._score).leaves():
+        if tags is True:
+            remove_all_tags = True
+        else:
+            remove_all_tags = False
+            tags_ = []
+            for tag in tags:
+                if isinstance(tag, str):
+                    tags_.append(tag)
+                else:
+                    tags_.append(tag.name)
+        for leaf in abjad.iterate(self.score).leaves():
             for wrapper in abjad.inspect(leaf).get_indicators(unwrap=False):
                 if wrapper.tag is None:
                     continue
+                if remove_all_tags:
+                    abjad.detach(wrapper, leaf)
+                    continue
                 index = wrapper.tag.rfind(':')
                 tag = wrapper.tag[:index]
-                if tag in tags:
+                if tag in tags_:
                     abjad.detach(wrapper, leaf)
 
     def _scope_to_leaf_selection(self, wrapper):
@@ -2336,10 +2349,10 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=(
-            ...         'SEGMENT:SPACING_MARKUP',
-            ...         'STAGE_NUMBER_MARKUP',
-            ...         ),
+            ...     remove=[
+            ...         baca.Tags.tag(baca.Tags.SPACING_MARKUP),
+            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         ],
             ...     )
             >>> layout_block = abjad.Block(name='layout')
             >>> layout_block.indent = 0
@@ -2634,10 +2647,10 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=(
-            ...         'SEGMENT:SPACING_MARKUP',
-            ...         'STAGE_NUMBER_MARKUP',
-            ...         ),
+            ...     remove=[
+            ...         baca.Tags.tag(baca.Tags.SPACING_MARKUP),
+            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         ],
             ...     )
             >>> layout_block = abjad.Block(name='layout')
             >>> layout_block.indent = 0
@@ -2938,8 +2951,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=(
-            ...         'SEGMENT:SPACING_MARKUP',
-            ...         'STAGE_NUMBER_MARKUP',
+            ...         baca.Tags.tag(baca.Tags.SPACING_MARKUP),
+            ...         baca.Tags.STAGE_NUMBER_MARKUP,
             ...         ),
             ...     )
             >>> layout_block = abjad.Block(name='layout')
@@ -7345,6 +7358,14 @@ class SegmentMaker(abjad.SegmentMaker):
         Returns string or none.
         '''
         return self._rehearsal_letter
+
+    @property
+    def score(self):
+        r'''Gets score.
+
+        Returns score or none.
+        '''
+        return self._score
 
     @property
     def score_template(self):
