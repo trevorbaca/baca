@@ -28,6 +28,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.attach_defaults
+      ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.parts
       ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__call__
       ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__copy__
       ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__eq__
@@ -35,6 +36,15 @@ Bases
       ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__hash__
       ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__illustrate__
       ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__repr__
+
+Read-only properties
+--------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.parts
 
 Methods
 -------

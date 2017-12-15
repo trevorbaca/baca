@@ -26,6 +26,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.ScoreTemplate.ScoreTemplate.attach_defaults
+      ~baca.tools.ScoreTemplate.ScoreTemplate.parts
       ~baca.tools.ScoreTemplate.ScoreTemplate.__call__
       ~baca.tools.ScoreTemplate.ScoreTemplate.__copy__
       ~baca.tools.ScoreTemplate.ScoreTemplate.__eq__
@@ -33,6 +34,15 @@ Bases
       ~baca.tools.ScoreTemplate.ScoreTemplate.__hash__
       ~baca.tools.ScoreTemplate.ScoreTemplate.__illustrate__
       ~baca.tools.ScoreTemplate.ScoreTemplate.__repr__
+
+Read-only properties
+--------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ScoreTemplate.ScoreTemplate.parts
 
 Methods
 -------

@@ -28,6 +28,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.attach_defaults
+      ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.parts
       ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__call__
       ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__copy__
       ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__eq__
@@ -35,6 +36,15 @@ Bases
       ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__hash__
       ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__illustrate__
       ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__repr__
+
+Read-only properties
+--------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.parts
 
 Methods
 -------

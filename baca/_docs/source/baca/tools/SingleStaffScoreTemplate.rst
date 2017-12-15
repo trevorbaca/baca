@@ -28,6 +28,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.attach_defaults
+      ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.parts
       ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.__call__
       ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.__copy__
       ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.__eq__
@@ -35,6 +36,15 @@ Bases
       ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.__hash__
       ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.__illustrate__
       ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.__repr__
+
+Read-only properties
+--------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.parts
 
 Methods
 -------

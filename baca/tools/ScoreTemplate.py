@@ -1,4 +1,5 @@
 import abjad
+import roman
 
 
 class ScoreTemplate(abjad.ScoreTemplate):
@@ -14,14 +15,38 @@ class ScoreTemplate(abjad.ScoreTemplate):
 
     ### PRIVATE METHODS ###
 
-    def _attach_tag(self, instrument_tag, context):
-        assert isinstance(instrument_tag, str), repr(str)
-        tag_string = f'tag {instrument_tag}'
-        tag_command = abjad.LilyPondCommand(
-            tag_string,
-            'before',
-            )
-        abjad.attach(tag_command, context)
+    @staticmethod
+    def _assert_lilypond_identifiers(score):
+        for context in abjad.iterate(score).components(abjad.Context):
+            if not abjad.String(context.name).is_lilypond_identifier():
+                message = f'invalid LilyPond identifier: {context.name!r}'
+                raise Exception(message)
+        
+    @staticmethod
+    def _assert_matching_custom_context_names(score):
+        for context in abjad.iterate(score).components(abjad.Context):
+            if context.context_name in abjad.Context.lilypond_context_names:
+                continue
+            if context.name != context.context_name:
+                message = f'context {context.context_name}'
+                message += f' has name {context.name!r}.'
+                raise Exception(message)
+
+    @staticmethod
+    def _assert_unique_context_names(score):
+        names = []
+        for context in abjad.iterate(score).components(abjad.Context):
+            if context.name in names:
+                raise Exception(f'duplicate context name: {context.name!r}.')
+
+    def _attach_tag(self, tag, context):
+        for tag_ in tag.split('.'):
+            if not abjad.String(tag_).is_lilypond_identifier():
+                raise Exception(f'invalid LilyPond identifier: {tag_!r}.')
+            if self.parts and tag_ not in self.parts:
+                raise Exception(f'not listed in parts manifest: {tag_!r}.')
+        literal = abjad.LilyPondLiteral(fr'\tag {tag}', 'before')
+        abjad.attach(literal, context)
 
     def _make_global_context(self):
         global_context_multimeasure_rests = abjad.Context(
@@ -46,6 +71,10 @@ class ScoreTemplate(abjad.ScoreTemplate):
     @staticmethod
     def _set_square_delimiter(staff_group):
         abjad.setting(staff_group).system_start_delimiter = 'SystemStartSquare'
+
+    @staticmethod
+    def _to_roman(n):
+        return roman.toRoman(n)
 
     def _validate_voice_names(self, score):
         voice_names = []

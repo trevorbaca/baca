@@ -28,6 +28,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.attach_defaults
+      ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.parts
       ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__call__
       ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__copy__
       ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__eq__
@@ -35,6 +36,15 @@ Bases
       ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__hash__
       ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__illustrate__
       ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__repr__
+
+Read-only properties
+--------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.parts
 
 Methods
 -------
