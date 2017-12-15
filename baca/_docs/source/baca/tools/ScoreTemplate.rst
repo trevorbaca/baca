@@ -26,6 +26,10 @@ Bases
    .. autosummary::
 
       ~baca.tools.ScoreTemplate.ScoreTemplate.attach_defaults
+      ~baca.tools.ScoreTemplate.ScoreTemplate.make_music_context
+      ~baca.tools.ScoreTemplate.ScoreTemplate.make_piano_staff
+      ~baca.tools.ScoreTemplate.ScoreTemplate.make_square_staff_group
+      ~baca.tools.ScoreTemplate.ScoreTemplate.make_staff_group
       ~baca.tools.ScoreTemplate.ScoreTemplate.parts
       ~baca.tools.ScoreTemplate.ScoreTemplate.__call__
       ~baca.tools.ScoreTemplate.ScoreTemplate.__copy__
@@ -52,6 +56,14 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.ScoreTemplate.ScoreTemplate.attach_defaults
+
+.. automethod:: baca.tools.ScoreTemplate.ScoreTemplate.make_music_context
+
+.. automethod:: baca.tools.ScoreTemplate.ScoreTemplate.make_piano_staff
+
+.. automethod:: baca.tools.ScoreTemplate.ScoreTemplate.make_square_staff_group
+
+.. automethod:: baca.tools.ScoreTemplate.ScoreTemplate.make_staff_group
 
 Special methods
 ---------------

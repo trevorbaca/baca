@@ -28,6 +28,10 @@ Bases
    .. autosummary::
 
       ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.attach_defaults
+      ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.make_music_context
+      ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.make_piano_staff
+      ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.make_square_staff_group
+      ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.make_staff_group
       ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.parts
       ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__call__
       ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__copy__
@@ -54,6 +58,30 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.attach_defaults
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.make_music_context
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.make_piano_staff
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.make_square_staff_group
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.make_staff_group
 
 Special methods
 ---------------

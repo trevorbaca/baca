@@ -28,6 +28,10 @@ Bases
    .. autosummary::
 
       ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.attach_defaults
+      ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.make_music_context
+      ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.make_piano_staff
+      ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.make_square_staff_group
+      ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.make_staff_group
       ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.parts
       ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.__call__
       ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.__copy__
@@ -54,6 +58,30 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.attach_defaults
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.make_music_context
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.make_piano_staff
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.make_square_staff_group
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.make_staff_group
 
 Special methods
 ---------------

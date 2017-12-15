@@ -28,6 +28,10 @@ Bases
    .. autosummary::
 
       ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.attach_defaults
+      ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.make_music_context
+      ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.make_piano_staff
+      ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.make_square_staff_group
+      ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.make_staff_group
       ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.parts
       ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__call__
       ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.__copy__
@@ -54,6 +58,30 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.attach_defaults
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.make_music_context
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.make_piano_staff
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.make_square_staff_group
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.make_staff_group
 
 Special methods
 ---------------

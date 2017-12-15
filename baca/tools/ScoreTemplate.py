@@ -83,3 +83,41 @@ class ScoreTemplate(abjad.ScoreTemplate):
         for voice_name in sorted(self.voice_colors):
             if voice_name not in voice_names:
                 raise Exception(f'voice not in score: {voice_name!r}.')
+
+    ### PUBLIC METHODS ###
+
+    def make_music_context(self, *contexts):
+        contexts = [_ for _ in contexts if _ is not None]
+        return abjad.Context(
+            contexts,
+            context_name='MusicContext',
+            is_simultaneous=True,
+            name='MusicContext',
+            )
+
+    def make_piano_staff(self, stem, *contexts):
+        contexts = [_ for _ in contexts if _ is not None]
+        if contexts:
+            piano_staff = abjad.StaffGroup(contexts, name=f'{stem}PianoStaff')
+            return piano_staff
+
+    def make_square_staff_group(self, stem, *contexts):
+        contexts = [_ for _ in contexts if _ is not None]
+        if len(contexts) == 1:
+            return contexts[0]
+        elif 1 < len(contexts):
+            staff_group = abjad.StaffGroup(
+                contexts,
+                name=f'{stem}SquareStaffGroup',
+                )
+            self._set_square_delimiter(staff_group)
+            return staff_group
+
+    def make_staff_group(self, stem, *contexts):
+        contexts = [_ for _ in contexts if _ is not None]
+        if len(contexts) == 1:
+            return contexts[0]
+        elif 1 < len(contexts):
+            staff_group = abjad.StaffGroup(contexts, name=f'{stem}StaffGroup')
+            self._set_square_delimiter(staff_group)
+            return staff_group

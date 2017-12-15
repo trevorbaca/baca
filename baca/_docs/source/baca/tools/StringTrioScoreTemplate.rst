@@ -28,6 +28,10 @@ Bases
    .. autosummary::
 
       ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.attach_defaults
+      ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.make_music_context
+      ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.make_piano_staff
+      ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.make_square_staff_group
+      ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.make_staff_group
       ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.parts
       ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__call__
       ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__copy__
@@ -54,6 +58,30 @@ Methods
    .. container:: inherited
 
       .. automethod:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.attach_defaults
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.make_music_context
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.make_piano_staff
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.make_square_staff_group
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.make_staff_group
 
 Special methods
 ---------------
