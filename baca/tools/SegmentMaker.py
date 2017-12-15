@@ -2202,6 +2202,44 @@ class SegmentMaker(abjad.SegmentMaker):
             spanner=spanner,
             )
 
+    def _tag_margin_markup(self, leaf, margin_markup, context, status):
+        if not isinstance(context, str):
+            context = context.context_name
+        grob = 'InstrumentName'
+        tagged_grob_name = 'MARGIN_MARKUP'
+        self._tag_grob_color(
+            leaf,
+            status,
+            grob,
+            context,
+            tagged_grob_name=tagged_grob_name,
+            )
+        abjad.detach(baca.MarginMarkup, leaf)
+        self._tag_grob_command(
+            leaf,
+            status,
+            tagged_grob_name,
+            margin_markup,
+            context=context,
+            )
+        self._tag_grob_shadow_color(
+            leaf,
+            status,
+            grob,
+            context,
+            tagged_grob_name=tagged_grob_name,
+            )
+        strings = margin_markup._get_lilypond_format(context=context)
+        command = abjad.LilyPondLiteral(strings, 'after')
+        self._tag_grob_command(
+            leaf,
+            status,
+            tagged_grob_name,
+            command,
+            context=context,
+            shadow_command=True,
+            )
+
     def _tag_staff_lines(self, leaf, staff_lines, context, status):
         grob = 'StaffSymbol'
         tagged_grob_name = 'STAFF_LINES'
@@ -2264,6 +2302,37 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._tag_instrument(leaf, instrument, context, 'redundant')
             else:
                 self._tag_instrument(leaf, instrument, context, 'explicit')
+
+    def _tag_untagged_margin_markup(self):
+        for leaf in abjad.iterate(self.score).leaves():
+            wrapper = abjad.inspect(leaf).get_indicator(
+                baca.MarginMarkup,
+                unwrap=False,
+                )
+            if wrapper is None:
+                continue
+            if wrapper.tag is not None:
+                continue
+            margin_markup = wrapper.indicator
+            context = wrapper._find_correct_effective_context()
+            previous_margin_markup = abjad.inspect(leaf).get_effective(
+                baca.MarginMarkup,
+                n=-1,
+                )
+            if previous_margin_markup == margin_markup:
+                self._tag_margin_markup(
+                    leaf,
+                    margin_markup,
+                    context,
+                    'redundant',
+                    )
+            else:
+                self._tag_margin_markup(
+                    leaf,
+                    margin_markup,
+                    context,
+                    'explicit',
+                    )
 
     def _transpose_score_(self):
         if self.transpose_score:
@@ -8174,6 +8243,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._shorten_long_repeat_ties()
         self._attach_first_segment_score_template_defaults()
         self._reapply_previous_segment_settings()
+        self._tag_untagged_margin_markup()
         self._tag_untagged_instruments()
         self._tag_untagged_clefs()
         self._apply_spacing_specifier()

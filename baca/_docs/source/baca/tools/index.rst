@@ -167,6 +167,7 @@ baca.tools
    LBSD
    LayoutMeasureMap
    Loop
+   MarginMarkup
    Matrix
    MetronomeMarkMeasureMap
    PageSpecifier
@@ -220,6 +221,7 @@ baca.tools
    LBSD
    LayoutMeasureMap
    Loop
+   MarginMarkup
    Matrix
    MetronomeMarkMeasureMap
    PageSpecifier

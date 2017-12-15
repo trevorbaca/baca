@@ -1834,6 +1834,109 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
+    def margin_markup(
+        markup,
+        short_markup,
+        context='Staff',
+        selector='baca.leaf(0)',
+        ):
+        r'''Sets margin markup on leaf.
+
+        ..  container:: example
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_notes(repeat_ties=True),
+            ...     baca.margin_markup(
+            ...         abjad.Markup('Flute'),
+            ...         abjad.Markup('Fl.'),
+            ...     ),
+            ...     baca.pitches('E4 F4'),
+            ...     )
+
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     remove=[baca.Tags.STAGE_NUMBER_MARKUP],
+            ...     )
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \time 4/8
+                            \bar "" %! EMPTY_START_BAR:1
+                            s1 * 1/2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 2] %%%
+                            \time 3/8
+                            s1 * 3/8
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 3] %%%
+                            \time 4/8
+                            s1 * 1/2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 4] %%%
+                            \time 3/8
+                            s1 * 3/8
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                %%% MusicVoice [measure 1] %%%
+                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_MARGIN_MARKUP_COMMAND:2
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_MARGIN_MARKUP_COMMAND:2
+                                \clef "treble" %! EXPLICIT_CLEF_COMMAND:8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:1
+                                \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:5
+                                %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:6
+                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:7
+                                e'2
+                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_MARGIN_MARKUP_SHADOW_COMMAND:4
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_MARGIN_MARKUP_SHADOW_COMMAND:4
+                                \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_MARGIN_MARKUP_SHADOW_COLOR:3
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
+                <BLANKLINE>
+                                %%% MusicVoice [measure 2] %%%
+                                f'4.
+                <BLANKLINE>
+                                %%% MusicVoice [measure 3] %%%
+                                e'2
+                <BLANKLINE>
+                                %%% MusicVoice [measure 4] %%%
+                                f'4.
+                                \bar "|"
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+        Returns indicator command.
+        '''
+        margin_markup = baca.MarginMarkup(
+            context=context,
+            markup=markup,
+            short_markup=short_markup,
+            )
+        return baca.IndicatorCommand(
+            indicators=[margin_markup],
+            selector=selector,
+            )
+
+    @staticmethod
     def minimum_width(duration):
         r'''Makes horizontal spacing specifier with `duration` minimum width.
         '''

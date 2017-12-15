@@ -46,6 +46,7 @@ Bases
       ~baca.tools.LibraryGM.LibraryGM.make_tied_notes
       ~baca.tools.LibraryGM.LibraryGM.make_tied_repeated_durations
       ~baca.tools.LibraryGM.LibraryGM.marcati
+      ~baca.tools.LibraryGM.LibraryGM.margin_markup
       ~baca.tools.LibraryGM.LibraryGM.minimum_width
       ~baca.tools.LibraryGM.LibraryGM.__eq__
       ~baca.tools.LibraryGM.LibraryGM.__format__
@@ -104,6 +105,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryGM.LibraryGM.make_tied_repeated_durations
 
 .. automethod:: baca.tools.LibraryGM.LibraryGM.marcati
+
+.. automethod:: baca.tools.LibraryGM.LibraryGM.margin_markup
 
 .. automethod:: baca.tools.LibraryGM.LibraryGM.minimum_width
 
