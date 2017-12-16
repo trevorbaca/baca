@@ -151,6 +151,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_instruments',
         '_last_segment',
         '_layout_measure_map',
+        '_margin_markup',
         '_measures_per_stage',
         '_metronome_mark_measure_map',
         '_metronome_marks',
@@ -168,10 +169,11 @@ class SegmentMaker(abjad.SegmentMaker):
         '_spacing_specifier',
         '_stage_label_base_string',
         '_time_signatures',
-        '_transient_clefs',
-        '_transient_dynamics',
-        '_transient_instruments',
-        '_transient_staff_lines',
+        '_absent_clefs',
+        '_absent_dynamics',
+        '_absent_instruments',
+        '_absent_margin_markup',
+        '_absent_staff_lines',
         '_transpose_score',
         '_wrappers',
         )
@@ -267,6 +269,7 @@ class SegmentMaker(abjad.SegmentMaker):
         instruments=None,
         last_segment=None,
         layout_measure_map=None,
+        margin_markup=None,
         measures_per_stage=None,
         metronome_mark_measure_map=None,
         metronome_marks=None,
@@ -341,6 +344,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if layout_measure_map is not None:
             assert isinstance(layout_measure_map, baca.LayoutMeasureMap)
         self._layout_measure_map = layout_measure_map
+        self._margin_markup = margin_markup
         self._measures_per_stage = measures_per_stage
         self._metronome_mark_measure_map = metronome_mark_measure_map
         if metronome_marks is not None:
@@ -373,10 +377,11 @@ class SegmentMaker(abjad.SegmentMaker):
         if stage_label_base_string is not None:
             assert isinstance(stage_label_base_string, str)
         self._stage_label_base_string = stage_label_base_string
-        self._transient_clefs = {}
-        self._transient_dynamics = {}
-        self._transient_instruments = {}
-        self._transient_staff_lines = {}
+        self._absent_clefs = {}
+        self._absent_dynamics = {}
+        self._absent_instruments = {}
+        self._absent_margin_markup = {}
+        self._absent_staff_lines = {}
         if transpose_score is not None:
             transpose_score = bool(transpose_score)
         self._transpose_score = transpose_score
@@ -1176,7 +1181,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._extend_beam(leaf)
 
     @staticmethod
-    def _get_enclosing_context(component):
+    def _get_local_context(component):
         parentage = abjad.inspect(component).get_parentage()
         context = parentage.get_first(abjad.Context)
         if context is not None:
@@ -1192,13 +1197,14 @@ class SegmentMaker(abjad.SegmentMaker):
             wrapper = context._get_last_wrapper(abjad.Clef)
             if wrapper is not None:
                 clef_name = wrapper.indicator.name
-                enclosing_name = self._get_enclosing_context(wrapper.component)
-                pair = (clef_name, enclosing_name)
+                local_context = self._get_local_context(wrapper.component)
+                pair = (clef_name, local_context)
             else:
-                pair = self._transient_clefs.get(context.name)
+                pair = self._absent_clefs.get(context.name)
             if pair is not None:
                 result[context.name] = pair
-        return result
+        if len(result):
+            return result
 
     def _get_end_dynamics(self):
         result = abjad.TypedOrderedDict()
@@ -1211,10 +1217,11 @@ class SegmentMaker(abjad.SegmentMaker):
             if dynamic is not None:
                 string = dynamic.name
             else:
-                string = self._transient_dynamics.get(voice.name)
+                string = self._absent_dynamics.get(voice.name)
             if string is not None:
                 result[voice.name] = string
-        return result
+        if len(result):
+            return result
 
     def _get_end_instruments(self):
         result = abjad.TypedOrderedDict()
@@ -1229,12 +1236,31 @@ class SegmentMaker(abjad.SegmentMaker):
             if instrument is not None:
                 string = instrument.name
             else:
-                string = self._transient_instruments.get(context.name)
+                string = self._absent_instruments.get(context.name)
             if string is not None:
                 result[context.name] = string
             else:
                 print(f'Can not find {context.name} end-instrument ...')
-        return result
+        if len(result):
+            return result
+
+    def _get_end_margin_markup(self):
+        result = abjad.TypedOrderedDict()
+        contexts = abjad.iterate(self._score).components(abjad.Context)
+        contexts = list(contexts)
+        contexts.sort(key=lambda _: _.name)
+        for context in contexts:
+            wrapper = context._get_last_wrapper(baca.MarginMarkup)
+            if wrapper is not None:
+                key = self._get_key(self.margin_markup, wrapper.indicator)
+                local_context = self._get_local_context(wrapper.component)
+                pair = (key, local_context)
+            else:
+                pair = self._absent_clefs.get(context.name)
+            if pair is not None:
+                result[context.name] = pair
+        if len(result):
+            return result
 
     def _get_end_metronome_mark(self):
         skip = baca.select(self._score['GlobalSkips']).skip(-1)
@@ -1250,7 +1276,8 @@ class SegmentMaker(abjad.SegmentMaker):
         else:
             message = f'can not find {mark!r} in {self.metronome_marks!r}.'
             raise Exception(message)
-        return name
+        if name:
+            return name
 
     def _get_end_settings(self, docs=None):
         result = {}
@@ -1260,6 +1287,7 @@ class SegmentMaker(abjad.SegmentMaker):
         result['end_clock_time'] = self._clock_time
         result['end_dynamics'] = self._get_end_dynamics()
         result['end_instruments'] = self._get_end_instruments()
+        result['end_margin_markup'] = self._get_end_margin_markup()
         result['end_metronome_mark'] = self._get_end_metronome_mark()
         result['end_staff_lines'] = self._get_end_staff_lines()
         result['end_time_signature'] = self._get_end_time_signature()
@@ -1268,7 +1296,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _get_end_staff_lines(self):
         if self._end_staff_lines:
-            for staff_name, number in self._transient_staff_lines.items():
+            for staff_name, number in self._absent_staff_lines.items():
                 if number is not None:
                     self._end_staff_lines[staff_name] = number
             return self._end_staff_lines
@@ -1282,10 +1310,11 @@ class SegmentMaker(abjad.SegmentMaker):
             if lines is not None:
                 number = lines.line_count
             else:
-                number = self._transient_staff_lines.get(staff.name)
+                number = self._absent_staff_lines.get(staff.name)
             if number is not None:
                 result[staff.name] = number
-        return result
+        if len(result):
+            return result
 
     def _get_end_time_signature(self):
         skip = baca.select(self._score['GlobalSkips']).skip(-1)
@@ -1299,17 +1328,24 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._metadata.get('first_bar_number', 1)
 
     @staticmethod
-    def _get_first_nontransient_leaf(context):
-        transient_voices = []
+    def _get_first_nonabsent_leaf(context):
+        absent_voices = []
         for voice in abjad.iterate([context]).components(abjad.Voice):
-            transient = abjad.inspect(voice).get_annotation('transient')
-            if abjad.inspect(voice).get_annotation('transient') is not True:
+            absent = abjad.inspect(voice).get_annotation('absent')
+            if abjad.inspect(voice).get_annotation('absent') is not True:
                 return abjad.inspect(voice).get_leaf(0)
-            transient_voices.append(voice)
-        for voice in transient_voices:
+            absent_voices.append(voice)
+        for voice in absent_voices:
             leaves = baca.select(voice).leaves()
             if not all(isinstance(_, abjad.MultimeasureRest) for _ in leaves):
                 return leaves[0]
+
+    @staticmethod
+    def _get_key(dictionary, value):
+        if dictionary is not None:
+            for key, value_ in dictionary.items():
+                if value_ == value:
+                    return key
 
     def _get_measure_timespans(self, measure_numbers):
         timespans = []
@@ -1335,8 +1371,8 @@ class SegmentMaker(abjad.SegmentMaker):
         if dictionary:
             pair = dictionary.get(context)
             if pair is not None:
-                clef_name, enclosing_context_name = pair
-                return abjad.Clef(clef_name), enclosing_context_name
+                clef_name, local_context_name = pair
+                return abjad.Clef(clef_name), local_context_name
 
     def _get_previous_clock_time(self):
         if not self._previous_metadata:
@@ -1790,20 +1826,20 @@ class SegmentMaker(abjad.SegmentMaker):
                 ]
             if not any(previous_settings):
                 continue
-            first_leaf = self._get_first_nontransient_leaf(context)
+            first_leaf = self._get_first_nonabsent_leaf(context)
             if first_leaf is None:
                 if previous_clef_pair is not None:
-                    previous_clef, enclosing_name = previous_clef_pair
-                    pair = (previous_clef.name, enclosing_name)
-                    self._transient_clefs[context.name] = pair
+                    previous_clef, local_context = previous_clef_pair
+                    pair = (previous_clef.name, local_context)
+                    self._absent_clefs[context.name] = pair
                 if previous_dynamic is not None:
-                    self._transient_dynamics[
+                    self._absent_dynamics[
                         context.name] = previous_dynamic.name
                 if previous_instrument is not None:
-                    self._transient_instruments[
+                    self._absent_instruments[
                         context.name] = previous_instrument.name
                 if previous_staff_lines is not None:
-                    self._transient_staff_lines[
+                    self._absent_staff_lines[
                         context.name] = previous_staff_lines.line_count
                 continue
             if previous_instrument is not None:
@@ -1859,7 +1895,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         status,
                         )
             if previous_clef_pair is not None:
-                previous_clef, enclosing_name = previous_clef_pair
+                previous_clef, local_context = previous_clef_pair
                 clef = abjad.inspect(first_leaf).get_indicator(abjad.Clef)
                 status = None
                 if clef is None:
@@ -7021,6 +7057,14 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._layout_measure_map
 
     @property
+    def margin_markup(self):
+        r'''Gets margin markup dictionary.
+
+        Returns ordered dictionary or none.
+        '''
+        return self._margin_markup
+
+    @property
     def measure_count(self):
         r'''Gets measure count.
 
@@ -7143,25 +7187,11 @@ class SegmentMaker(abjad.SegmentMaker):
                             ),
                         ),
                     ('end_clock_time', None),
-                    (
-                        'end_dynamics',
-                        abjad.TypedOrderedDict(
-                            []
-                            ),
-                        ),
-                    (
-                        'end_instruments',
-                        abjad.TypedOrderedDict(
-                            []
-                            ),
-                        ),
+                    ('end_dynamics', None),
+                    ('end_instruments', None),
+                    ('end_margin_markup', None),
                     ('end_metronome_mark', None),
-                    (
-                        'end_staff_lines',
-                        abjad.TypedOrderedDict(
-                            []
-                            ),
-                        ),
+                    ('end_staff_lines', None),
                     ('end_time_signature', '3/8'),
                     ('measure_count', 4),
                     (
