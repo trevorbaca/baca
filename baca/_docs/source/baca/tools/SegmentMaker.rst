@@ -34,7 +34,6 @@ Bases
       ~baca.tools.SegmentMaker.SegmentMaker.final_bar_line
       ~baca.tools.SegmentMaker.SegmentMaker.final_markup
       ~baca.tools.SegmentMaker.SegmentMaker.final_markup_extra_offset
-      ~baca.tools.SegmentMaker.SegmentMaker.first_segment
       ~baca.tools.SegmentMaker.SegmentMaker.hide_instrument_names
       ~baca.tools.SegmentMaker.SegmentMaker.ignore_repeat_pitch_classes
       ~baca.tools.SegmentMaker.SegmentMaker.ignore_unpitched_notes
@@ -98,8 +97,6 @@ Read-only properties
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.final_markup
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.final_markup_extra_offset
-
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.first_segment
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.hide_instrument_names
 
