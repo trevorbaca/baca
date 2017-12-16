@@ -945,7 +945,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _cache_metadata(self):
         metadata = self._get_end_settings()
         metadata['segment_number'] = self._get_segment_number()
-        metadata['first_bar_number'] = self._get_first_measure_number()
+        metadata['first_measure_number'] = self._get_first_measure_number()
         items = sorted(metadata.items())
         self._metadata = abjad.TypedOrderedDict(items)
 
@@ -1098,7 +1098,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _comment_measure_numbers(self):
         offset_to_measure_number = {}
-        #measure_number = self._metadata.get('first_bar_number', 1)
         measure_number = self._get_first_measure_number()
         for skip in baca.select(self._score['GlobalSkips']).skips():
             offset = abjad.inspect(skip).get_timespan().start_offset
@@ -1183,14 +1182,6 @@ class SegmentMaker(abjad.SegmentMaker):
         for leaf in abjad.iterate(self._score).leaves():
             if abjad.inspect(leaf).get_indicator(self._extend_beam_tag):
                 self._extend_beam(leaf)
-
-    @staticmethod
-    def _get_local_context(component):
-        parentage = abjad.inspect(component).get_parentage()
-        context = parentage.get_first(abjad.Context)
-        if context is not None:
-            name = context.name or context.context_name
-            return name
 
     def _get_end_clefs(self):
         result = abjad.TypedOrderedDict()
@@ -1320,12 +1311,13 @@ class SegmentMaker(abjad.SegmentMaker):
     def _get_first_measure_number(self):
         if not self._previous_metadata:
             return 1
-        first_bar_number = self._previous_metadata.get('first_bar_number')
+        string = 'first_measure_number'
+        first_measure_number = self._previous_metadata.get(string)
         time_signatures = self._previous_metadata.get('time_signatures')
-        if first_bar_number is None or time_signatures is None:
+        if first_measure_number is None or time_signatures is None:
             return 1
-        first_bar_number += len(time_signatures)
-        return first_bar_number
+        first_measure_number += len(time_signatures)
+        return first_measure_number
 
     @staticmethod
     def _get_first_nonabsent_leaf(context):
@@ -1347,6 +1339,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 if value_ == value:
                     return key
 
+    @staticmethod
+    def _get_local_context(component):
+        parentage = abjad.inspect(component).get_parentage()
+        context = parentage.get_first(abjad.Context)
+        if context is not None:
+            name = context.name or context.context_name
+            return name
+
     def _get_measure_timespans(self, measure_numbers):
         timespans = []
         first_measure_number = self._get_first_measure_number()
@@ -1359,10 +1359,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 timespan = abjad.inspect(skip).get_timespan()
                 timespans.append(timespan)
         return timespans
-
-    def _get_name(self):
-        #return self._metadata.get('name')
-        pass
 
     def _get_previous_clef(self, context):
         if not self._previous_metadata:
@@ -1615,7 +1611,6 @@ class SegmentMaker(abjad.SegmentMaker):
             result = self._stage_number_to_measure_indices(stage_number)
             start_measure_index, stop_measure_index = result
             base = self.stage_label_base_string
-            base = base or self._get_name()
             base = base or self._get_rehearsal_letter()
             if base not in ('', None):
                 string = f'[{base}.{stage_number}]'
@@ -1700,10 +1695,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _make_score(self):
         score = self.score_template()
-        #first_bar_number = self._metadata.get('first_bar_number')
-        first_bar_number = self._get_first_measure_number()
-        if first_bar_number != 1:
-            abjad.setting(score).current_bar_number = first_bar_number
+        first_measure_number = self._get_first_measure_number()
+        if first_measure_number != 1:
+            abjad.setting(score).current_bar_number = first_measure_number
         self._score = score
 
     def _make_status_color_string(
@@ -2221,23 +2215,6 @@ class SegmentMaker(abjad.SegmentMaker):
             tag=tag,
             )
 
-    def _tag_metronome_mark(self, spanner, skip, metronome_mark, status):
-        grob = 'TextScript'
-        tagged_grob_name = 'METRONOME_MARK'
-        self._tag_grob_color(
-            skip,
-            status,
-            grob,
-            tagged_grob_name=tagged_grob_name,
-            )
-        self._tag_grob_command(
-            skip,
-            status,
-            tagged_grob_name,
-            metronome_mark,
-            spanner=spanner,
-            )
-
     def _tag_margin_markup(self, leaf, margin_markup, context, status):
         if not isinstance(context, str):
             context = context.context_name
@@ -2274,6 +2251,23 @@ class SegmentMaker(abjad.SegmentMaker):
             command,
             context=context,
             shadow_command=True,
+            )
+
+    def _tag_metronome_mark(self, spanner, skip, metronome_mark, status):
+        grob = 'TextScript'
+        tagged_grob_name = 'METRONOME_MARK'
+        self._tag_grob_color(
+            skip,
+            status,
+            grob,
+            tagged_grob_name=tagged_grob_name,
+            )
+        self._tag_grob_command(
+            skip,
+            status,
+            tagged_grob_name,
+            metronome_mark,
+            spanner=spanner,
             )
 
     def _tag_staff_lines(self, leaf, staff_lines, context, status):
@@ -6854,7 +6848,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     ('end_margin_markup', None),
                     ('end_metronome_mark', None),
                     ('end_staff_lines', None),
-                    ('first_bar_number', 1),
+                    ('first_measure_number', 1),
                     ('segment_number', 2),
                     (
                         'time_signatures',
@@ -7806,7 +7800,6 @@ class SegmentMaker(abjad.SegmentMaker):
         assert all(isinstance(_, str) for _ in deactivate), repr(deactivate)
         self._builds_metadata = abjad.TypedOrderedDict(builds_metadata)
         self._environment = environment
-        #self._metadata = abjad.TypedOrderedDict(metadata)
         self._previous_metadata = abjad.TypedOrderedDict(previous_metadata)
         self._make_score()
         self._make_lilypond_file(environment=environment, midi=midi)
