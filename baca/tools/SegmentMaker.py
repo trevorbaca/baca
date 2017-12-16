@@ -132,11 +132,11 @@ class SegmentMaker(abjad.SegmentMaker):
         '_break_offsets',
         '_builds_metadata',
         '_cache',
-        '_clock_time',
         '_color_octaves',
         '_color_out_of_range_pitches',
         '_color_repeat_pitch_classes',
         '_design_checker',
+        '_duration',
         '_end_staff_lines',
         '_environment',
         '_fermata_measure_staff_line_count',
@@ -168,6 +168,8 @@ class SegmentMaker(abjad.SegmentMaker):
         '_skips_instead_of_rests',
         '_spacing_specifier',
         '_stage_label_base_string',
+        '_start_clock_time',
+        '_stop_clock_time',
         '_time_signatures',
         '_absent_clefs',
         '_absent_dynamics',
@@ -287,11 +289,15 @@ class SegmentMaker(abjad.SegmentMaker):
         transpose_score=None,
         ):
         super(SegmentMaker, self).__init__()
+        self._absent_clefs = {}
+        self._absent_dynamics = {}
+        self._absent_instruments = {}
+        self._absent_margin_markup = {}
+        self._absent_staff_lines = {}
         if allow_empty_selections is not None:
             allow_empty_selections = bool(allow_empty_selections)
         self._allow_empty_selections = allow_empty_selections
         self._break_offsets = []
-        self._clock_time = None
         if color_octaves is not None:
             color_octaves = bool(color_octaves)
         self._color_octaves = color_octaves
@@ -303,11 +309,13 @@ class SegmentMaker(abjad.SegmentMaker):
         self._color_repeat_pitch_classes = color_repeat_pitch_classes
         self._cache = None
         self._design_checker = design_checker
+        self._duration = None
         self._end_staff_lines = abjad.TypedOrderedDict()
         if fermata_measure_staff_line_count is not None:
             assert isinstance(fermata_measure_staff_line_count, int)
             assert 0 <= fermata_measure_staff_line_count
-        self._fermata_measure_staff_line_count = fermata_measure_staff_line_count
+        self._fermata_measure_staff_line_count = \
+            fermata_measure_staff_line_count
         self._fermata_start_offsets = []
         if final_bar_line not in (None, False, abjad.Exact):
             assert isinstance(final_bar_line, str), repr(final_bar_line)
@@ -373,11 +381,8 @@ class SegmentMaker(abjad.SegmentMaker):
         if stage_label_base_string is not None:
             assert isinstance(stage_label_base_string, str)
         self._stage_label_base_string = stage_label_base_string
-        self._absent_clefs = {}
-        self._absent_dynamics = {}
-        self._absent_instruments = {}
-        self._absent_margin_markup = {}
-        self._absent_staff_lines = {}
+        self._start_clock_time = None
+        self._stop_clock_time = None
         if transpose_score is not None:
             transpose_score = bool(transpose_score)
         self._transpose_score = transpose_score
@@ -1276,13 +1281,15 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _get_end_settings(self):
         result = {}
+        result['duration'] = self._duration
         result['end_clefs'] = self._get_end_clefs()
-        result['end_clock_time'] = self._clock_time
         result['end_dynamics'] = self._get_end_dynamics()
         result['end_instruments'] = self._get_end_instruments()
         result['end_margin_markup'] = self._get_end_margin_markup()
         result['end_metronome_mark'] = self._get_end_metronome_mark()
         result['end_staff_lines'] = self._get_end_staff_lines()
+        result['start_clock_time'] = self._start_clock_time
+        result['stop_clock_time'] = self._stop_clock_time
         result['time_signatures'] = self._get_time_signatures()
         return result
 
@@ -1371,10 +1378,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 clef_name, local_context_name = pair
                 return abjad.Clef(clef_name), local_context_name
 
-    def _get_previous_clock_time(self):
-        if not self._previous_metadata:
-            return
-        return self._previous_metadata.get('end_clock_time')
+    def _get_previous_stop_clock_time(self):
+        if self._previous_metadata:
+            return self._previous_metadata.get('stop_clock_time')
 
     def _get_previous_dynamic(self, context):
         if not self._previous_metadata:
@@ -2042,26 +2048,30 @@ class SegmentMaker(abjad.SegmentMaker):
             if start_offset in self._fermata_start_offsets:
                 continue
             skips_.append(skip)
-        clock_string = self._get_previous_clock_time()
-        if clock_string is not None:
-            minutes = 0
-            if "'" in clock_string:
-                tick_index = clock_string.find("'")
-                minutes = clock_string[:tick_index]
-                minutes = int(minutes)
-            seconds = clock_string[-4:-2]
-            seconds = int(seconds)
-            seconds = 60 * minutes + seconds
-            global_offset = abjad.Duration(seconds)
-        else:
-            global_offset = None
+        start_clock_time = self._get_previous_stop_clock_time()
+        start_clock_time = start_clock_time or "0'00''"
+        self._start_clock_time = start_clock_time 
+        minutes = 0
+        if "'" in self._start_clock_time:
+            tick_index = self._start_clock_time.find("'")
+            minutes = self._start_clock_time[:tick_index]
+            minutes = int(minutes)
+        seconds = self._start_clock_time[-4:-2]
+        seconds = int(seconds)
+        seconds = 60 * minutes + seconds
+        segment_start_offset = abjad.Duration(seconds)
         tag = tags.CLOCK_TIME_MARKUP
-        duration = abjad.label(skips_, tag=tag).with_start_offsets(
+        label = abjad.label(skips_, tag=tag)
+        segment_stop_duration = label.with_start_offsets(
             clock_time=True,
             font_size=-2,
-            global_offset=global_offset,
+            global_offset=segment_start_offset,
             )
-        self._clock_time = duration.to_clock_string()
+        segment_stop_offset = abjad.Offset(segment_stop_duration)
+        self._stop_clock_time = segment_stop_offset.to_clock_string()
+        segment_duration = segment_stop_offset - segment_start_offset
+        segment_duration = segment_duration.to_clock_string()
+        self._duration = segment_duration
 
     def _tag_dynamic(self, leaf, dynamic, context, status):
         if not isinstance(context, str):
@@ -6831,6 +6841,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> abjad.f(maker.metadata, strict=True)
             abjad.TypedOrderedDict(
                 [
+                    ('duration', None),
                     (
                         'end_clefs',
                         abjad.TypedOrderedDict(
@@ -6842,7 +6853,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                 ]
                             ),
                         ),
-                    ('end_clock_time', None),
                     ('end_dynamics', None),
                     ('end_instruments', None),
                     ('end_margin_markup', None),
@@ -6850,6 +6860,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     ('end_staff_lines', None),
                     ('first_measure_number', 1),
                     ('segment_number', 2),
+                    ('start_clock_time', None),
+                    ('stop_clock_time', None),
                     (
                         'time_signatures',
                         ['4/8', '3/8', '4/8', '3/8'],
