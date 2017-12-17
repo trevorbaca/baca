@@ -4067,6 +4067,7 @@ class LibraryAF(abjad.AbjadObject):
 
         '''
         return baca.IndicatorCommand(
+            context='Voice',
             indicators=[abjad.Dynamic(dynamic)],
             selector=selector,
             )

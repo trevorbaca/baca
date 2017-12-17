@@ -14,7 +14,7 @@ class IndicatorCommand(Command):
         With music-maker:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.IndicatorCommand([abjad.Fermata()]),
+        ...     baca.IndicatorCommand(indicators=[abjad.Fermata()]),
         ...     baca.PitchFirstRhythmCommand(
         ...         rhythm_maker=baca.PitchFirstRhythmMaker(
         ...             talea=rhythmos.Talea(
@@ -92,7 +92,7 @@ class IndicatorCommand(Command):
         ...     baca.scope('MusicVoice', 1),
         ...     baca.make_even_runs(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     baca.IndicatorCommand([abjad.Fermata()]),
+        ...     baca.IndicatorCommand(indicators=[abjad.Fermata()]),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
@@ -213,14 +213,24 @@ class IndicatorCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
+        '_context',
         '_indicators',
         '_tag',
         )
 
     ### INITIALIZER ###
 
-    def __init__(self, indicators=None, selector='baca.pheads()', tag=None):
+    def __init__(
+        self,
+        context=None,
+        indicators=None,
+        selector='baca.pheads()',
+        tag=None,
+        ):
         Command.__init__(self, selector=selector)
+        if context is not None:
+            assert isinstance(context, str), repr(context)
+        self._context = context
         if indicators is not None:
             if isinstance(indicators, collections.Iterable):
                 indicators = abjad.CyclicTuple(indicators)
@@ -250,7 +260,12 @@ class IndicatorCommand(Command):
             indicators = self.indicators[i]
             indicators = self._token_to_indicators(indicators)
             for indicator in indicators:
-                abjad.attach(indicator, leaf, tag=self.tag)
+                abjad.attach(
+                    indicator,
+                    leaf,
+                    context=self.context,
+                    tag=self.tag,
+                    )
 
     ### PRIVATE METHODS ###
 
@@ -268,6 +283,14 @@ class IndicatorCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
+    def context(self):
+        r'''Gets context name.
+
+        Returns string or none.
+        '''
+        return self._context
+
+    @property
     def indicators(self):
         r'''Gets indicators.
 
@@ -276,7 +299,7 @@ class IndicatorCommand(Command):
             Attaches fermata to head of every pitched logical tie:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.IndicatorCommand([abjad.Fermata()]),
+            ...     baca.IndicatorCommand(indicators=[abjad.Fermata()]),
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             talea=rhythmos.Talea(

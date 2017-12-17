@@ -540,8 +540,11 @@ class LibraryGM(abjad.AbjadObject):
                 >>
 
         '''
-        hairpin = abjad.Hairpin(hairpin)
-        return baca.SpannerCommand(selector=selector, spanner=hairpin)
+        hairpin = abjad.Hairpin(hairpin, context='Voice')
+        return baca.SpannerCommand(
+            selector=selector,
+            spanner=hairpin,
+            )
 
     @staticmethod
     def helianthate(sequence, n=0, m=0):

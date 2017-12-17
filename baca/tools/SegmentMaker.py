@@ -5,7 +5,6 @@ import pathlib
 import time
 import traceback
 from abjad import rhythmmakertools as rhythmos
-from .Tags import Tags as tags
 
 
 class SegmentMaker(abjad.SegmentMaker):
@@ -777,7 +776,7 @@ class SegmentMaker(abjad.SegmentMaker):
         prototype = baca.StaffLines
         staff_lines = baca.StaffLines(self.fermata_measure_staff_line_count)
         breaks_already_treated = []
-        tag = tags.tag(tags.FERMATA_BAR_LINE, build)
+        tag = baca.Tags.tag(baca.Tags.FERMATA_BAR_LINE, build)
         for staff in abjad.iterate(self._score).components(abjad.Staff):
             for leaf in abjad.iterate(staff).leaves():
                 start_offset = abjad.inspect(leaf).get_timespan().start_offset
@@ -1200,9 +1199,9 @@ class SegmentMaker(abjad.SegmentMaker):
         for context in contexts:
             wrapper = context._get_last_wrapper(abjad.Clef)
             if wrapper is not None:
-                clef_name = wrapper.indicator.name
+                key = wrapper.indicator.name
                 local_context = self._get_local_context(wrapper.component)
-                pair = (clef_name, local_context)
+                pair = (key, local_context)
             else:
                 pair = self._absent_clefs.get(context.name)
             if pair is not None:
@@ -1212,18 +1211,19 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _get_end_dynamics(self):
         result = abjad.TypedOrderedDict()
-        voices = abjad.iterate(self._score).components(abjad.Voice)
-        voices = list(voices)
-        voices.sort(key=lambda _: _.name)
-        for voice in voices:
-            leaf = abjad.inspect(voice).get_leaf(-1)
-            dynamic = abjad.inspect(leaf).get_effective(abjad.Dynamic)
-            if dynamic is not None:
-                string = dynamic.name
+        contexts = abjad.iterate(self._score).components(abjad.Context)
+        contexts = list(contexts)
+        contexts.sort(key=lambda _: _.name)
+        for context in contexts:
+            wrapper = context._get_last_wrapper(abjad.Dynamic)
+            if wrapper is not None:
+                key = wrapper.indicator.name
+                local_context = self._get_local_context(wrapper.component)
+                pair = (key, local_context)
             else:
-                string = self._absent_dynamics.get(voice.name)
-            if string is not None:
-                result[voice.name] = string
+                pair = self._absent_dynamics.get(context.name)
+            if pair is not None:
+                result[context.name] = pair
         if len(result):
             return result
 
@@ -1370,28 +1370,26 @@ class SegmentMaker(abjad.SegmentMaker):
                 timespans.append(timespan)
         return timespans
 
-    def _get_previous_clef(self, context):
+    def _get_previous_clef(self, context_name):
         if not self._previous_metadata:
             return
         dictionary = self._previous_metadata.get('end_clefs')
         if dictionary:
-            pair = dictionary.get(context)
+            pair = dictionary.get(context_name)
             if pair is not None:
                 clef_name, local_context_name = pair
                 return abjad.Clef(clef_name), local_context_name
 
-    def _get_previous_stop_clock_time(self):
-        if self._previous_metadata:
-            return self._previous_metadata.get('stop_clock_time')
-
-    def _get_previous_dynamic(self, context):
+    def _get_previous_dynamic(self, context_name):
         if not self._previous_metadata:
             return
         dictionary = self._previous_metadata.get('end_dynamics')
         if dictionary:
-            dynamic_name = dictionary.get(context)
-            if dynamic_name is not None:
-                return abjad.Dynamic(dynamic_name)
+            pair = dictionary.get(context_name)
+            if pair is not None:
+                key, local_context_name = pair
+                previous_dynamic = abjad.Dynamic(key)
+                return previous_dynamic, local_context_name
 
     def _get_previous_instrument(self, context_name):
         if not self._previous_metadata:
@@ -1427,6 +1425,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 key, local_context_name = pair
                 previous_staff_lines = baca.StaffLines(line_count=key)
                 return previous_staff_lines, local_context_name
+
+    def _get_previous_stop_clock_time(self):
+        if self._previous_metadata:
+            return self._previous_metadata.get('stop_clock_time')
 
     def _get_previous_time_signature(self):
         if self._previous_metadata:
@@ -1514,7 +1516,7 @@ class SegmentMaker(abjad.SegmentMaker):
         grob = abjad.String(grob).delimit_words()
         grob = '_'.join([_.upper() for _ in grob])
         name = f'{status.upper()}_{grob}_{item.upper()}'
-        tag = getattr(tags, name)
+        tag = getattr(baca.Tags, name)
         return tag
 
     def _get_time_signatures(self):
@@ -1635,7 +1637,7 @@ class SegmentMaker(abjad.SegmentMaker):
             markup = markup.with_color(abjad.SchemeColor('DarkCyan'))
             markup = markup.fontsize(-3)
             skip = skips[start_measure_index]
-            abjad.attach(markup, skip, tag=tags.STAGE_NUMBER_MARKUP)
+            abjad.attach(markup, skip, tag=baca.Tags.STAGE_NUMBER_MARKUP)
 
     def _make_global_skips(self):
         context = self._score['GlobalSkips']
@@ -1650,7 +1652,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         first_skip = baca.select(context).skip(0)
         literal = abjad.LilyPondLiteral(r'\bar ""')
-        abjad.attach(literal, first_skip, tag=tags.EMPTY_START_BAR)
+        abjad.attach(literal, first_skip, tag=baca.Tags.EMPTY_START_BAR)
 
     def _make_instrument_change_markup(self, instrument):
         markup = abjad.Markup(instrument.name, direction=abjad.Up)
@@ -1833,14 +1835,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
         for context in abjad.iterate(self._score).components(abjad.Context):
             previous_clef_pair = self._get_previous_clef(context.name)
-            previous_dynamic = self._get_previous_dynamic(context.name)
+            previous_dynamic_pair = self._get_previous_dynamic(context.name)
             previous_instrument_pair = self._get_previous_instrument(
                 context.name)
             previous_staff_lines_pair = self._get_previous_staff_lines(
                 context.name)
             previous_settings = [
                 previous_clef_pair,
-                previous_dynamic,
+                previous_dynamic_pair,
                 previous_instrument_pair,
                 previous_staff_lines_pair,
                 ]
@@ -1849,12 +1851,17 @@ class SegmentMaker(abjad.SegmentMaker):
             first_leaf = self._get_first_nonabsent_leaf(context)
             if first_leaf is None:
                 if previous_clef_pair is not None:
-                    previous_clef, local_context = previous_clef_pair
-                    pair = (previous_clef.name, local_context)
+                    previous_clef = previous_clef_pair[0]
+                    local_context_name = previous_clef_pair[1]
+                    key = previous_clef.name
+                    pair = (key, local_context_name)
                     self._absent_clefs[context.name] = pair
-                if previous_dynamic is not None:
+                if previous_dynamic_pair is not None:
+                    previous_dynamic = previous_dynamic_pair[0]
+                    local_context_name = previous_dynamic_pair[1]
                     key = previous_dynamic.name
-                    self._absent_dynamics[context.name] = key
+                    pair = (key, local_context_name)
+                    self._absent_dynamics[context.name] = pair
                 if previous_instrument_pair is not None:
                     previous_instrument = previous_instrument_pair[0]
                     local_context_name = previous_instrument_pair[1]
@@ -1940,7 +1947,9 @@ class SegmentMaker(abjad.SegmentMaker):
                         context,
                         status,
                         )
-            if previous_dynamic is not None:
+            if previous_dynamic_pair is not None:
+                previous_dynamic = previous_dynamic_pair[0]
+                local_context_name = previous_dynamic_pair[1]
                 prototype = abjad.Dynamic
                 dynamic = abjad.inspect(first_leaf).get_effective(prototype)
                 if dynamic is None:
@@ -2091,7 +2100,7 @@ class SegmentMaker(abjad.SegmentMaker):
         seconds = int(seconds)
         seconds = 60 * minutes + seconds
         segment_start_offset = abjad.Duration(seconds)
-        tag = tags.CLOCK_TIME_MARKUP
+        tag = baca.Tags.CLOCK_TIME_MARKUP
         label = abjad.label(skips_, tag=tag)
         segment_stop_duration = label.with_start_offsets(
             clock_time=True,
@@ -2104,7 +2113,9 @@ class SegmentMaker(abjad.SegmentMaker):
         segment_duration = segment_duration.to_clock_string()
         self._duration = segment_duration
 
+    # TODO: eventually pass in only context *name*
     def _tag_dynamic(self, leaf, dynamic, context, status):
+        # TODO: eventually pass in only context *name*
         if not isinstance(context, str):
             context = context.context_name
         grob = 'DynamicText'
@@ -2122,6 +2133,7 @@ class SegmentMaker(abjad.SegmentMaker):
             status,
             tagged_grob_name,
             dynamic,
+            context=context,
             )
 
     def _tag_grob_color(
@@ -2238,7 +2250,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _tag_instrument_change_markup(self, leaf, instrument, status):
         markup = self._make_instrument_change_markup(instrument)
         name = f'{status.upper()}_INSTRUMENT_CHANGE_MARKUP'
-        tag = getattr(tags, name)
+        tag = getattr(baca.Tags, name)
         abjad.attach(
             markup,
             leaf,
@@ -2249,7 +2261,7 @@ class SegmentMaker(abjad.SegmentMaker):
         color = abjad.SchemeColor(color)
         markup = markup.with_color(color)
         name = f'{status.upper()}_INSTRUMENT_CHANGE_COLORED_MARKUP'
-        tag = getattr(tags, name)
+        tag = getattr(baca.Tags, name)
         abjad.attach(
             markup,
             leaf,
@@ -4119,6 +4131,12 @@ class SegmentMaker(abjad.SegmentMaker):
         Returns design-checker or none.
         '''
         return self._design_checker
+
+    @property
+    def dynamics(self):
+        r'''Documents dynamics.
+        '''
+        pass
 
     @property
     def fermata_measure_staff_line_count(self):
