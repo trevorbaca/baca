@@ -133,6 +133,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_absent_margin_markup',
         '_absent_metronome_marks',
         '_absent_staff_lines',
+        '_absent_time_signatures',
         '_allow_empty_selections',
         '_break_offsets',
         '_builds_metadata',
@@ -296,6 +297,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._absent_margin_markup = {}
         self._absent_metronome_marks = {}
         self._absent_staff_lines = {}
+        self._absent_time_signatures = {}
         if allow_empty_selections is not None:
             allow_empty_selections = bool(allow_empty_selections)
         self._allow_empty_selections = allow_empty_selections
@@ -1292,6 +1294,7 @@ class SegmentMaker(abjad.SegmentMaker):
         result['end_margin_markup'] = self._get_end_margin_markup()
         result['end_metronome_marks'] = self._get_end_metronome_marks()
         result['end_staff_lines'] = self._get_end_staff_lines()
+        result['end_time_signatures'] = self._get_end_time_signatures()
         result['start_clock_time'] = self._start_clock_time
         result['stop_clock_time'] = self._stop_clock_time
         result['time_signatures'] = self._get_time_signatures()
@@ -1315,6 +1318,24 @@ class SegmentMaker(abjad.SegmentMaker):
                 pair = (key, local_context)
             else:
                 pair = self._absent_staff_lines.get(context.name)
+            if pair is not None:
+                result[context.name] = pair
+        if len(result):
+            return result
+
+    def _get_end_time_signatures(self):
+        result = abjad.TypedOrderedDict()
+        contexts = abjad.iterate(self._score).components(abjad.Context)
+        contexts = list(contexts)
+        contexts.sort(key=lambda _: _.name)
+        for context in contexts:
+            wrapper = context._get_last_wrapper(abjad.TimeSignature)
+            if wrapper is not None:
+                key = str(wrapper.indicator)
+                local_context = self._get_local_context(wrapper.component)
+                pair = (key, local_context)
+            else:
+                pair = self._absent_time_signatures.get(context.name)
             if pair is not None:
                 result[context.name] = pair
         if len(result):
@@ -1388,7 +1409,7 @@ class SegmentMaker(abjad.SegmentMaker):
         #elif prototype is baca.StaffLines:
         #    dictionary_name = 'end_staff_lines',
         elif prototype is abjad.TimeSignature:
-            pair = self._get_previous_time_signature(headword)
+            dictionary_name = 'end_time_signatures'
         elif prototype is baca.MarginMarkup:
             dictionary_name = 'end_margin_markup'
         else:
@@ -1410,7 +1431,7 @@ class SegmentMaker(abjad.SegmentMaker):
             elif prototype is abjad.MetronomeMark:
                 indicator = self.metronome_marks.get(key)
             elif prototype is abjad.TimeSignature:
-                indictor = abjad.TimeSignature.from_fraction(key)
+                indicator = abjad.TimeSignature.from_string(key)
             else:
                 raise Exception(prototype)
             pair = (indicator, local_context_headword)
@@ -1435,11 +1456,11 @@ class SegmentMaker(abjad.SegmentMaker):
         if self._previous_metadata:
             return self._previous_metadata.get('stop_clock_time')
 
-    def _get_previous_time_signature(self):
-        if self._previous_metadata:
-            time_signatures = self._previous_metadata.get('time_signatures')
-            if time_signatures:
-                return time_signatures[-1]
+#    def _get_previous_time_signature(self):
+#        if self._previous_metadata:
+#            time_signatures = self._previous_metadata.get('time_signatures')
+#            if time_signatures:
+#                return time_signatures[-1]
 
     def _get_rehearsal_letter(self):
         if self.rehearsal_letter:
@@ -1798,28 +1819,12 @@ class SegmentMaker(abjad.SegmentMaker):
             duration_ /= 1000
             total_duration += duration_
         total_duration = int(round(total_duration))
-        counter = abjad.Strin('second').pluralize(total_duration)
+        counter = abjad.String('second').pluralize(total_duration)
         print(f'segment duration {total_duration} {counter} ...')
 
     def _reapply_persistent_indicators(self):
         if self._is_first_segment():
             return
-        skip = baca.select(self._score['GlobalSkips']).skip(0)
-        time_signature = abjad.inspect(skip).get_indicator(abjad.TimeSignature)
-        assert time_signature is not None
-        previous_time_signature = self._get_previous_time_signature()
-        if str(previous_time_signature) == str(time_signature):
-            wrapper = abjad.inspect(skip).get_indicator(
-                abjad.TimeSignature,
-                unwrap=False,
-                )
-            context = wrapper.context
-            self._tag_time_signature(
-                skip,
-                time_signature,
-                context,
-                'redundant',
-                )
         for context in abjad.iterate(self._score).components(abjad.Context):
             persistent_clef_pair = self._get_persistent_indicator(
                 context.name,
@@ -1840,12 +1845,17 @@ class SegmentMaker(abjad.SegmentMaker):
             persistent_staff_lines_pair = self._get_previous_staff_lines(
                 context.name,
                 )
+            persistent_time_signature_pair = self._get_persistent_indicator(
+                context.name,
+                abjad.TimeSignature,
+                )
             persistent_indicator_pairs = [
                 persistent_clef_pair,
                 persistent_dynamic_pair,
                 persistent_instrument_pair,
                 persistent_metronome_mark_pair,
                 persistent_staff_lines_pair,
+                persistent_time_signature_pair,
                 ]
             if not any(persistent_indicator_pairs):
                 continue
@@ -1884,6 +1894,12 @@ class SegmentMaker(abjad.SegmentMaker):
                     key = previous_staff_lines.line_count
                     pair = (key, local_context_headword)
                     self._absent_staff_lines[context.name] = pair
+                if persistent_time_signature_pair is not None:
+                    previous_time_signature = persistent_time_signature_pair[0]
+                    local_headword = persistent_time_signature_pair[1]
+                    key = str(previous_time_signature)
+                    pair = (key, local_headword)
+                    self._absent_time_signatures[context.name] = pair
                 continue
             if persistent_metronome_mark_pair is not None:
                 previous_metronome_mark = persistent_metronome_mark_pair[0]
@@ -1900,9 +1916,29 @@ class SegmentMaker(abjad.SegmentMaker):
                     status = 'reminder'
                     self._tag_metronome_mark(
                         spanner,
-                        skip,
+                        first_local_leaf,
                         previous_metronome_mark,
                         status,
+                        )
+            if persistent_time_signature_pair is not None:
+                previous_time_signature = persistent_time_signature_pair[0]
+                local_context_headword = persistent_time_signature_pair[1]
+                local_context = self.score[local_context_headword]
+                first_local_leaf = abjad.select(local_context).leaf(0)
+                my_time_signature = abjad.inspect(
+                    first_local_leaf).get_indicator(abjad.TimeSignature)
+                assert my_time_signature is not None, repr(my_time_signature)
+                if str(previous_time_signature) == str(my_time_signature):
+                    wrapper = abjad.inspect(first_local_leaf).get_indicator(
+                        abjad.TimeSignature,
+                        unwrap=False,
+                        )
+                    context = wrapper.context
+                    self._tag_time_signature(
+                        first_local_leaf,
+                        my_time_signature,
+                        context,
+                        'redundant',
                         )
             if persistent_instrument_pair is not None:
                 previous_instrument = persistent_instrument_pair[0]
@@ -6961,6 +6997,17 @@ class SegmentMaker(abjad.SegmentMaker):
                     ('end_margin_markup', None),
                     ('end_metronome_marks', None),
                     ('end_staff_lines', None),
+                    (
+                        'end_time_signatures',
+                        abjad.TypedOrderedDict(
+                            [
+                                (
+                                    'Score',
+                                    ('3/8', 'GlobalSkips'),
+                                    ),
+                                ]
+                            ),
+                        ),
                     ('first_measure_number', 1),
                     ('segment_number', 2),
                     ('start_clock_time', None),
