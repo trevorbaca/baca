@@ -68,9 +68,9 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                                 } %! EXPLICIT_INSTRUMENT_COMMAND:2
                             \clef "treble" %! EXPLICIT_CLEF_COMMAND:8
                             \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
-                            \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:5
-                            %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:6
-                            \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:7
+                            \once \override ViolinMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:5
+                            %%% \override ViolinMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:6
+                            \set ViolinMusicStaff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:7
                             R1 * 1/2
                             \set ViolinMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                 \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
@@ -83,7 +83,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                                     Vn. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                 } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                             \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
-                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
+                            \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
             <BLANKLINE>
                             %%% ViolinMusicVoice [measure 2] %%%
                             R1 * 3/8

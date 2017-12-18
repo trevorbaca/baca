@@ -154,6 +154,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_measures_per_stage',
         '_metronome_mark_measure_map',
         '_metronome_marks',
+        '_midi',
         '_omit_empty_start_bar',
         '_omit_stage_number_markup',
         '_print_segment_duration',
@@ -355,6 +356,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if metronome_marks is not None:
             assert isinstance(metronome_marks, abjad.TypedOrderedDict)
         self._metronome_marks = metronome_marks
+        self._midi = None
         if omit_empty_start_bar is not None:
             omit_empty_start_bar = bool(omit_empty_start_bar)
         self._omit_empty_start_bar = omit_empty_start_bar
@@ -1494,13 +1496,13 @@ class SegmentMaker(abjad.SegmentMaker):
         start_offset, stop_offset = self._get_stage_offsets(*pair)
         return start_offset, time_signatures
 
-    def _get_stylesheets(self, environment=None):
-        if environment == 'docs':
+    def _get_stylesheets(self):
+        if self._environment == 'docs':
             if abjad.inspect(self._score).get_indicator('two-voice'):
                 return [self._relative_two_voice_staff_stylesheet_path]
             else:
                 return [self._relative_string_trio_stylesheet_path]
-        elif environment == 'external':
+        elif self._environment == 'external':
             if abjad.inspect(self._score).get_indicator('two-voice'):
                 return [self._absolute_two_voice_staff_stylesheet_path]
             else:
@@ -1659,9 +1661,9 @@ class SegmentMaker(abjad.SegmentMaker):
         markup = markup.box().override(('box-padding', 0.75))
         return markup
 
-    def _make_lilypond_file(self, environment=None, midi=None):
-        includes = self._get_stylesheets(environment=environment)
-        if environment == 'external':
+    def _make_lilypond_file(self):
+        includes = self._get_stylesheets()
+        if self._environment == 'external':
             use_relative_includes = False
         else:
             use_relative_includes = True
@@ -1675,7 +1677,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for item in lilypond_file.items[:]:
             if getattr(item, 'name', None) in block_names:
                 lilypond_file.items.remove(item)
-        if midi:
+        if self._midi:
             block = abjad.Block(name='midi')
             lilypond_file.items.append(block)
         for item in lilypond_file.items[:]:
@@ -1725,7 +1727,8 @@ class SegmentMaker(abjad.SegmentMaker):
         shadow=False,
         ):
         if context is not None:
-            context = getattr(context, 'context_name', context)
+            assert isinstance(context, str), repr(context)
+        if context is not None:
             string = rf'\override {context}.{grob}.color ='
         else:
             string = rf'\override {grob}.color ='
@@ -1795,10 +1798,10 @@ class SegmentMaker(abjad.SegmentMaker):
         counter = abjad.Strin('second').pluralize(total_duration)
         print(f'segment duration {total_duration} {counter} ...')
 
-    def _reapply_previous_segment_settings(self, environment=None):
-        if self._is_first_segment() and not self._previous_metadata:
+    def _reapply_previous_segment_settings(self):
+        if self._is_first_segment():
             return
-        if not self._previous_metadata and environment != 'docs':
+        if not self._previous_metadata:
             segment = self._get_segment_identifier()
             print(f'can not find previous metadata before {segment}.')
             return
@@ -1886,7 +1889,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     self._tag_instrument(
                         first_leaf,
                         previous_instrument,
-                        context,
+                        #context,
+                        context.context_name,
                         status
                         )
                     self._tag_instrument_change_markup(
@@ -1900,7 +1904,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     self._tag_instrument(
                         first_leaf,
                         my_instrument,
-                        context,
+                        #context,
+                        context.context_name,
                         status
                         )
                     self._tag_instrument_change_markup(
@@ -1929,7 +1934,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     self._tag_staff_lines(
                         first_leaf,
                         previous_staff_lines,
-                        context,
+                        #context,
+                        context.context_name,
                         status,
                         )
             if previous_clef_pair is not None:
@@ -1944,7 +1950,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     self._tag_clef(
                         first_leaf,
                         previous_clef,
-                        context,
+                        #context,
+                        context.context_name,
                         status,
                         )
             if previous_dynamic_pair is not None:
@@ -1956,7 +1963,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     self._tag_dynamic(
                         first_leaf,
                         previous_dynamic,
-                        context,
+                        #context,
+                        context.context_name,
                         'reminder',
                         )
 
@@ -2067,8 +2075,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return start_measure_index, stop_measure_index
 
     def _tag_clef(self, leaf, clef, context, status):
-        if not isinstance(context, str):
-            context = context.context_name
+        assert isinstance(context, str), repr(context)
         grob = 'Clef'
         self._tag_grob_color(leaf, status, grob, context)
         self._tag_grob_uncolor(leaf, status, grob, context)
@@ -2113,11 +2120,9 @@ class SegmentMaker(abjad.SegmentMaker):
         segment_duration = segment_duration.to_clock_string()
         self._duration = segment_duration
 
-    # TODO: eventually pass in only context *name*
     def _tag_dynamic(self, leaf, dynamic, context, status):
-        # TODO: eventually pass in only context *name*
-        if not isinstance(context, str):
-            context = context.context_name
+        if context is not None:
+            assert isinstance(context, str), repr(context)
         grob = 'DynamicText'
         tagged_grob_name = 'DYNAMIC'
         self._tag_grob_color(
@@ -2144,6 +2149,8 @@ class SegmentMaker(abjad.SegmentMaker):
         context=None,
         tagged_grob_name=None,
         ):
+        if context is not None:
+            assert isinstance(context, str), repr(context)
         string = self._make_status_color_string(
             status,
             grob,
@@ -2167,6 +2174,8 @@ class SegmentMaker(abjad.SegmentMaker):
         shadow_command=None,
         spanner=None,
         ):
+        if context is not None:
+            assert isinstance(context, str), repr(context)
         if isinstance(command, str):
             command = abjad.LilyPondLiteral(command)
         if shadow_command is True:
@@ -2186,6 +2195,8 @@ class SegmentMaker(abjad.SegmentMaker):
         context=None,
         tagged_grob_name=None,
         ):
+        if context is not None:
+            assert isinstance(context, str), repr(context)
         string = self._make_status_color_string(
             status,
             grob,
@@ -2201,7 +2212,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _tag_grob_uncolor(self, leaf, status, grob, context=None):
         if context is not None:
-            context = getattr(context, 'context_name', context)
+            assert isinstance(context, str), repr(context)
+        if context is not None:
             string = rf'\override {context}.{grob}.color = ##f'
         else:
             string = rf'\override {grob}.color = ##f'
@@ -2210,8 +2222,8 @@ class SegmentMaker(abjad.SegmentMaker):
         abjad.attach(literal, leaf, deactivate=True, tag=tag)
 
     def _tag_instrument(self, leaf, instrument, context, status):
-        if not isinstance(context, str):
-            context = context.context_name
+        if context is not None:
+            assert isinstance(context, str), repr(context)
         grob = 'InstrumentName'
         tagged_grob_name = 'INSTRUMENT'
         self._tag_grob_color(
@@ -2269,8 +2281,8 @@ class SegmentMaker(abjad.SegmentMaker):
             )
 
     def _tag_margin_markup(self, leaf, margin_markup, context, status):
-        if not isinstance(context, str):
-            context = context.context_name
+        if context is not None:
+            assert isinstance(context, str), repr(context)
         grob = 'InstrumentName'
         tagged_grob_name = 'MARGIN_MARKUP'
         self._tag_grob_color(
@@ -2324,6 +2336,8 @@ class SegmentMaker(abjad.SegmentMaker):
             )
 
     def _tag_staff_lines(self, leaf, staff_lines, context, status):
+        if context is not None:
+            assert isinstance(context, str), repr(context)
         grob = 'StaffSymbol'
         tagged_grob_name = 'STAFF_LINES'
         self._tag_grob_color(
@@ -2342,6 +2356,8 @@ class SegmentMaker(abjad.SegmentMaker):
             )
 
     def _tag_time_signature(self, skip, time_signature, context, status):
+        if context is not None:
+            assert isinstance(context, str), repr(context)
         grob = 'TimeSignature'
         self._tag_grob_color(skip, status, grob, context)
         abjad.detach(time_signature, skip)
@@ -2358,12 +2374,22 @@ class SegmentMaker(abjad.SegmentMaker):
             if wrapper.tag is not None:
                 continue
             clef = wrapper.indicator
-            context = wrapper.context
+            context = wrapper._find_correct_effective_context()
             previous_clef = abjad.inspect(leaf).get_effective(abjad.Clef, n=-1)
             if str(previous_clef) == str(clef):
-                self._tag_clef(leaf, clef, context, 'redundant')
+                self._tag_clef(
+                    leaf,
+                    clef,
+                    context.context_name,
+                    'redundant',
+                    )
             else:
-                self._tag_clef(leaf, clef, context, 'explicit')
+                self._tag_clef(
+                    leaf,
+                    clef,
+                    context.context_name,
+                    'explicit',
+                    )
 
     def _tag_untagged_instruments(self):
         for leaf in abjad.iterate(self._score).leaves():
@@ -2383,9 +2409,19 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
             # TODO: compare on keys instead
             if previous_instrument == instrument:
-                self._tag_instrument(leaf, instrument, context, 'redundant')
+                self._tag_instrument(
+                    leaf,
+                    instrument,
+                    context.context_name,
+                    'redundant',
+                    )
             else:
-                self._tag_instrument(leaf, instrument, context, 'explicit')
+                self._tag_instrument(
+                    leaf,
+                    instrument,
+                    context.context_name,
+                    'explicit',
+                    )
 
     def _tag_untagged_margin_markup(self):
         for leaf in abjad.iterate(self.score).leaves():
@@ -2407,14 +2443,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._tag_margin_markup(
                     leaf,
                     margin_markup,
-                    context,
+                    context.context_name,
                     'redundant',
                     )
             else:
                 self._tag_margin_markup(
                     leaf,
                     margin_markup,
-                    context,
+                    context.context_name,
                     'explicit',
                     )
 
@@ -3539,9 +3575,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 } %! EXPLICIT_INSTRUMENT_COMMAND:2
                                             \clef "treble" %! EXPLICIT_CLEF_COMMAND:8
                                             \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
-                                            \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:5
-                                            %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:6
-                                            \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:7
+                                            \once \override ViolinMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:5
+                                            %%% \override ViolinMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:6
+                                            \set ViolinMusicStaff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:7
                                             d'16
                                             \set ViolinMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                                 \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
@@ -3554,7 +3590,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     Vn. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                                 } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                             \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
-                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
+                                            \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
                 <BLANKLINE>
                                             e'16
                 <BLANKLINE>
@@ -3595,9 +3631,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                         } %! EXPLICIT_INSTRUMENT_COMMAND:2
                                     \clef "alto" %! EXPLICIT_CLEF_COMMAND:8
                                     \once \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:5
-                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:6
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:7
+                                    \once \override ViolaMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:5
+                                    %%% \override ViolaMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:6
+                                    \set ViolaMusicStaff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:7
                                     R1 * 3/8
                                     \set ViolaMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                         \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
@@ -3611,7 +3647,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                     \bar "|"
                                     \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
+                                    \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
                 <BLANKLINE>
                                 }
                             }
@@ -3634,9 +3670,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 } %! EXPLICIT_INSTRUMENT_COMMAND:2
                                             \clef "bass" %! EXPLICIT_CLEF_COMMAND:8
                                             \once \override CelloMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
-                                            \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:5
-                                            %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:6
-                                            \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:7
+                                            \once \override CelloMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:5
+                                            %%% \override CelloMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:6
+                                            \set CelloMusicStaff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:7
                                             a16
                                             \set CelloMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                                 \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
@@ -3649,7 +3685,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     Vc. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                                 } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                             \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
-                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
+                                            \override CelloMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
                 <BLANKLINE>
                                             g16
                 <BLANKLINE>
@@ -7868,9 +7904,10 @@ class SegmentMaker(abjad.SegmentMaker):
         assert all(isinstance(_, str) for _ in deactivate), repr(deactivate)
         self._builds_metadata = abjad.TypedOrderedDict(builds_metadata)
         self._environment = environment
+        self._midi = midi
         self._previous_metadata = abjad.TypedOrderedDict(previous_metadata)
         self._make_score()
-        self._make_lilypond_file(environment=environment, midi=midi)
+        self._make_lilypond_file()
         self._make_global_skips()
         self._label_stage_numbers()
         self._call_rhythm_commands()
@@ -7878,7 +7915,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._call_commands()
         self._shorten_long_repeat_ties()
         self._attach_first_segment_score_template_defaults()
-        self._reapply_previous_segment_settings(environment=environment)
+        self._reapply_previous_segment_settings()
         self._tag_untagged_margin_markup()
         self._tag_untagged_instruments()
         self._tag_untagged_clefs()

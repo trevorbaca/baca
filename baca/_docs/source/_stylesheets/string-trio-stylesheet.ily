@@ -16,7 +16,8 @@
     ragged-bottom = ##t
     ragged-last = ##t
     ragged-right = ##t
-    % TIME SIGNATURE CONTEXT
+
+    % GLOBAL SKIPS
     \context {
         \name GlobalSkips
         \type Engraver_group
@@ -30,6 +31,8 @@
         \override TextSpanner.bound-details.right.attach-dir = #LEFT
         \override TextSpanner.staff-padding = 4
         }
+
+    % GLOBAL RESTS
     \context {
         \name GlobalRests
         \type Engraver_group
@@ -39,6 +42,8 @@
         \override MultiMeasureRestText.outside-staff-priority = 0
         \override MultiMeasureRestText.padding = 0
         }
+
+    % GLOBAL CONTEXT
     \context {
         \name GlobalContext
         \type Engraver_group
@@ -71,26 +76,34 @@
         \override VerticalAxisGroup.default-staff-staff-spacing.minimum-distance = 12
         \override VerticalAxisGroup.minimum-Y-extent = #'(-4 . 4)
     }
-    % GENERIC CONTEXTS
+
+    % PIANO STAFF
     \context {
         \PianoStaff
         \remove "Keep_alive_together_engraver" 
     }
+
+    % STAFF
     \context {
         \Staff
         \remove Time_signature_engraver
     }
+
+    % VOICE
     \context {
         \Voice
         \remove Forbid_line_break_engraver
     }
-    % VIOLIN
+
+    % VIOLIN MUSIC VOICE
     \context {
         \Voice
         \name ViolinMusicVoice
         \type Engraver_group
         \alias Voice
     }
+
+    % VIOLIN MUSIC STAFF
     \context {
         \Staff
         \name ViolinMusicStaff
@@ -98,13 +111,16 @@
         \alias Staff
         \accepts ViolinMusicVoice
     }
-    % VIOLA
+
+    % VIOLA MUSIC VOICE
     \context {
         \Voice
         \name ViolaMusicVoice
         \type Engraver_group
         \alias Voice
     }
+
+    % VIOLA MUSIC STAFF
     \context {
         \Staff
         \name ViolaMusicStaff
@@ -112,13 +128,16 @@
         \alias Staff
         \accepts ViolaMusicVoice
     }
-    % CELLO
+
+    % CELLO MUSIC VOICE
     \context {
         \Voice
         \name CelloMusicVoice
         \type Engraver_group
         \alias Voice
     }
+
+    % CELLO MUSIC STAFF
     \context {
         \Staff
         \name CelloMusicStaff
@@ -126,7 +145,8 @@
         \alias Staff
         \accepts CelloMusicVoice
     }
-    % STRING SECTION
+
+    % STRING SECTION STAFF GROUP
     \context {
         \StaffGroup
         \name StringSectionStaffGroup
@@ -138,13 +158,15 @@
         \consists #Span_stem_engraver
         \override StaffGrouper.staff-staff-spacing.minimum-distance = 12
     }
-    % MUSIC
+
+    % MUSIC CONTEXT
     \context {
         \name MusicContext
         \type Engraver_group
         \consists System_start_delimiter_engraver
         \accepts StringSectionStaffGroup
     }
+
     % SCORE
     \context {
         \Score

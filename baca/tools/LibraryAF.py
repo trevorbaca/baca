@@ -2858,9 +2858,9 @@ class LibraryAF(abjad.AbjadObject):
                                                 } %! EXPLICIT_INSTRUMENT_COMMAND:3
                                             \clef "treble" %! EXPLICIT_CLEF_COMMAND:9
                                             \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:2
-                                            \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:6
-                                            %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:7
-                                            \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:8
+                                            \once \override ViolinMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:6
+                                            %%% \override ViolinMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:7
+                                            \set ViolinMusicStaff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:8
                                             a'8
                                             ^ \markup { %! FIGURE_NAME_MARKUP:1
                                                 \fontsize %! FIGURE_NAME_MARKUP:1
@@ -2890,7 +2890,7 @@ class LibraryAF(abjad.AbjadObject):
                                                     Vn. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:5
                                                 } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:5
                                             \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:4
-                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:10
+                                            \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:10
                 <BLANKLINE>
                                             b'8
                 <BLANKLINE>
@@ -2927,9 +2927,9 @@ class LibraryAF(abjad.AbjadObject):
                                             \clef "alto" %! EXPLICIT_CLEF_COMMAND:9
                                             \crossStaff
                                             \once \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:2
-                                            \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:6
-                                            %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:7
-                                            \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:8
+                                            \once \override ViolaMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:6
+                                            %%% \override ViolaMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:7
+                                            \set ViolaMusicStaff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:8
                                             c'8
                                             ^ \markup { %! FIGURE_NAME_MARKUP:1
                                                 \fontsize %! FIGURE_NAME_MARKUP:1
@@ -2959,7 +2959,7 @@ class LibraryAF(abjad.AbjadObject):
                                                     Va. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:5
                                                 } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:5
                                             \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:4
-                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:10
+                                            \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:10
                 <BLANKLINE>
                                             \crossStaff
                                             d'8
@@ -2996,9 +2996,9 @@ class LibraryAF(abjad.AbjadObject):
                                         } %! EXPLICIT_INSTRUMENT_COMMAND:2
                                     \clef "bass" %! EXPLICIT_CLEF_COMMAND:8
                                     \once \override CelloMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:5
-                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:6
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:7
+                                    \once \override CelloMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:5
+                                    %%% \override CelloMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:6
+                                    \set CelloMusicStaff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:7
                                     R1 * 5/8
                                     \set CelloMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                         \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
@@ -3012,7 +3012,7 @@ class LibraryAF(abjad.AbjadObject):
                                         } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                     \bar "|"
                                     \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
+                                    \override CelloMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
                 <BLANKLINE>
                                 }
                             }
@@ -3104,9 +3104,9 @@ class LibraryAF(abjad.AbjadObject):
                                                 } %! EXPLICIT_INSTRUMENT_COMMAND:3
                                             \clef "treble" %! EXPLICIT_CLEF_COMMAND:9
                                             \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:2
-                                            \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:6
-                                            %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:7
-                                            \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:8
+                                            \once \override ViolinMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:6
+                                            %%% \override ViolinMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:7
+                                            \set ViolinMusicStaff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:8
                                             a'8
                                             ^ \markup { %! FIGURE_NAME_MARKUP:1
                                                 \fontsize %! FIGURE_NAME_MARKUP:1
@@ -3136,7 +3136,7 @@ class LibraryAF(abjad.AbjadObject):
                                                     Vn. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:5
                                                 } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:5
                                             \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:4
-                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:10
+                                            \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:10
                 <BLANKLINE>
                                             b'8
                 <BLANKLINE>
@@ -3172,9 +3172,9 @@ class LibraryAF(abjad.AbjadObject):
                                                 } %! EXPLICIT_INSTRUMENT_COMMAND:3
                                             \clef "alto" %! EXPLICIT_CLEF_COMMAND:9
                                             \once \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:2
-                                            \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:6
-                                            %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:7
-                                            \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:8
+                                            \once \override ViolaMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:6
+                                            %%% \override ViolaMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:7
+                                            \set ViolaMusicStaff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:8
                                             c'8
                                             ^ \markup { %! FIGURE_NAME_MARKUP:1
                                                 \fontsize %! FIGURE_NAME_MARKUP:1
@@ -3204,7 +3204,7 @@ class LibraryAF(abjad.AbjadObject):
                                                     Va. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:5
                                                 } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:5
                                             \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:4
-                                            \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:10
+                                            \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:10
                 <BLANKLINE>
                                             d'8
                 <BLANKLINE>
@@ -3239,9 +3239,9 @@ class LibraryAF(abjad.AbjadObject):
                                         } %! EXPLICIT_INSTRUMENT_COMMAND:2
                                     \clef "bass" %! EXPLICIT_CLEF_COMMAND:8
                                     \once \override CelloMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:5
-                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:6
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:7
+                                    \once \override CelloMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:5
+                                    %%% \override CelloMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:6
+                                    \set CelloMusicStaff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:7
                                     R1 * 5/8
                                     \set CelloMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                         \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
@@ -3255,7 +3255,7 @@ class LibraryAF(abjad.AbjadObject):
                                         } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
                                     \bar "|"
                                     \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
+                                    \override CelloMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
                 <BLANKLINE>
                                 }
                             }
