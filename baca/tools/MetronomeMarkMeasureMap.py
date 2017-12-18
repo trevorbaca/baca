@@ -7,14 +7,14 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
     ..  container:: example
 
         >>> metronome_marks = abjad.MetronomeMarkDictionary()
-        >>> metronome_marks[72] = abjad.MetronomeMark((1, 4), 72)
-        >>> metronome_marks[90] = abjad.MetronomeMark((1, 4), 90)
+        >>> metronome_marks['72'] = abjad.MetronomeMark((1, 4), 72)
+        >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
         >>> maker = baca.SegmentMaker(
         ...     measures_per_stage=[2, 2],
         ...     score_template=baca.SingleStaffScoreTemplate(),
         ...     metronome_mark_measure_map=baca.MetronomeMarkMeasureMap([
-        ...         (1, metronome_marks[90]),
-        ...         (2, metronome_marks[72]),
+        ...         (1, metronome_marks['90']),
+        ...         (2, metronome_marks['72']),
         ...         ]),
         ...     metronome_marks=metronome_marks,
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],

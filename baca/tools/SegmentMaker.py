@@ -1057,6 +1057,8 @@ class SegmentMaker(abjad.SegmentMaker):
             result[string] = self._collect_persistent_indicators(prototype)
         string = self._class_string(baca.StaffLines)
         result[string] = self._get_end_staff_lines()
+        dictionary = self._collect_persistent_indicators_by_context()
+        result['persistent_indicators'] = dictionary
         result['start_clock_time'] = self._start_clock_time
         result['stop_clock_time'] = self._stop_clock_time
         result['time_signatures'] = self._get_time_signatures()
@@ -1079,6 +1081,45 @@ class SegmentMaker(abjad.SegmentMaker):
                 result[context.name] = pair
         if len(result):
             return result
+
+    def _collect_persistent_indicators_by_context(self):
+        result = abjad.TypedOrderedDict()
+        contexts = abjad.iterate(self.score).components(abjad.Context)
+        contexts = list(contexts)
+        contexts.sort(key=lambda _: _.name)
+        for context in contexts:
+            momentos = []
+            for prototype in (
+                abjad.Clef,
+                abjad.Dynamic,
+                abjad.Instrument,
+                abjad.MetronomeMark,
+                abjad.TimeSignature,
+                baca.MarginMarkup,
+                ):
+                wrapper = context._get_last_wrapper(prototype)
+                if wrapper is not None:
+                    key = self._indicator_to_key(wrapper.indicator)
+                    local_context = self._get_local_context(wrapper.component)
+                    pair = (key, local_context)
+                    absent = None
+                else:
+                    pair = self._get_absent_indicator(prototype, context)
+                    absent = True
+                if pair is not None:
+                    class_string = self._class_string(prototype)
+                    key, local_context_name = pair
+                    momento = abjad.Momento(
+                        absent=absent,
+                        context=local_context_name,
+                        prototype=self._class_string(prototype),
+                        value=key,
+                        )
+                    momentos.append(momento)
+                if momentos:
+                    momentos.sort(key=lambda _: _.prototype)
+                    result[context.name] = momentos
+        return result
 
     def _color_octaves_(self):
         if not self.color_octaves:
@@ -6942,6 +6983,33 @@ class SegmentMaker(abjad.SegmentMaker):
                     ('baca.StaffLines', None),
                     ('duration', None),
                     ('first_measure_number', 1),
+                    (
+                        'persistent_indicators',
+                        abjad.TypedOrderedDict(
+                            [
+                                (
+                                    'MusicStaff',
+                                    [
+                                        abjad.Momento(
+                                            context='MusicVoice',
+                                            prototype='abjad.Clef',
+                                            value='alto',
+                                            ),
+                                        ],
+                                    ),
+                                (
+                                    'Score',
+                                    [
+                                        abjad.Momento(
+                                            context='GlobalSkips',
+                                            prototype='abjad.TimeSignature',
+                                            value='3/8',
+                                            ),
+                                        ],
+                                    ),
+                                ]
+                            ),
+                        ),
                     ('segment_number', 2),
                     ('start_clock_time', None),
                     ('stop_clock_time', None),
@@ -6965,11 +7033,11 @@ class SegmentMaker(abjad.SegmentMaker):
             With metronome mark measure map:
 
             >>> metronome_marks = abjad.MetronomeMarkDictionary()
-            >>> metronome_marks[90] = abjad.MetronomeMark((1, 4), 90)
+            >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     metronome_mark_measure_map=baca.MetronomeMarkMeasureMap([
-            ...         (1, metronome_marks[90]),
+            ...         (1, metronome_marks['90']),
             ...         ]),
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),

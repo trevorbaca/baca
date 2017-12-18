@@ -170,6 +170,7 @@ baca.tools
    MarginMarkup
    Matrix
    MetronomeMarkMeasureMap
+   Momento
    PageSpecifier
    PitchArray
    PitchArrayCell
@@ -224,6 +225,7 @@ baca.tools
    MarginMarkup
    Matrix
    MetronomeMarkMeasureMap
+   Momento
    PageSpecifier
    PitchArray
    PitchArrayCell
