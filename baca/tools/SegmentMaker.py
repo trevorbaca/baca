@@ -943,7 +943,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         leaves_by_stage_number[stage_number].append(leaf)
 
     def _cache_metadata(self):
-        metadata = self._get_end_settings()
+        metadata = self._collect_metadata()
         metadata['segment_number'] = self._get_segment_number()
         metadata['first_measure_number'] = self._get_first_measure_number()
         items = sorted(metadata.items())
@@ -1041,6 +1041,43 @@ class SegmentMaker(abjad.SegmentMaker):
     def _class_string(class_):
         parts = class_.__module__.split('.')
         return f'{parts[0]}.{parts[-1]}'
+
+    def _collect_metadata(self):
+        result = {}
+        result['duration'] = self._duration
+        for prototype in (
+            abjad.Clef,
+            abjad.Dynamic,
+            abjad.Instrument,
+            abjad.MetronomeMark,
+            abjad.TimeSignature,
+            baca.MarginMarkup,
+            ):
+            string = self._class_string(prototype)
+            result[string] = self._collect_persistent_indicators(prototype)
+        result['end_staff_lines'] = self._get_end_staff_lines()
+        result['start_clock_time'] = self._start_clock_time
+        result['stop_clock_time'] = self._stop_clock_time
+        result['time_signatures'] = self._get_time_signatures()
+        return result
+
+    def _collect_persistent_indicators(self, prototype):
+        result = abjad.TypedOrderedDict()
+        contexts = abjad.iterate(self.score).components(abjad.Context)
+        contexts = list(contexts)
+        contexts.sort(key=lambda _: _.name)
+        for context in contexts:
+            wrapper = context._get_last_wrapper(prototype)
+            if wrapper is not None:
+                key = self._indicator_to_key(wrapper.indicator)
+                local_context = self._get_local_context(wrapper.component)
+                pair = (key, local_context)
+            else:
+                pair = self._get_absent_indicator(prototype, context)
+            if pair is not None:
+                result[context.name] = pair
+        if len(result):
+            return result
 
     def _color_octaves_(self):
         if not self.color_octaves:
@@ -1196,45 +1233,6 @@ class SegmentMaker(abjad.SegmentMaker):
             pair = dictionary.get(context.name)
             return pair
 
-    def _get_end_indicators(self, prototype):
-        result = abjad.TypedOrderedDict()
-        contexts = abjad.iterate(self.score).components(abjad.Context)
-        contexts = list(contexts)
-        contexts.sort(key=lambda _: _.name)
-        for context in contexts:
-            wrapper = context._get_last_wrapper(prototype)
-            if wrapper is not None:
-                key = self._indicator_to_key(wrapper.indicator)
-                local_context = self._get_local_context(wrapper.component)
-                pair = (key, local_context)
-            else:
-                pair = self._get_absent_indicator(prototype, context)
-            if pair is not None:
-                result[context.name] = pair
-        if len(result):
-            return result
-
-    def _get_end_settings(self):
-        result = {}
-        result['duration'] = self._duration
-        result['end_clefs'] = self._get_end_indicators(abjad.Clef)
-        result['end_dynamics'] = self._get_end_indicators(abjad.Dynamic)
-        result['end_instruments'] = self._get_end_indicators(abjad.Instrument)
-        result['end_margin_markup'] = self._get_end_indicators(
-            baca.MarginMarkup
-            )
-        result['end_metronome_marks'] = self._get_end_indicators(
-            abjad.MetronomeMark
-            )
-        result['end_staff_lines'] = self._get_end_staff_lines()
-        result['end_time_signatures'] = self._get_end_indicators(
-            abjad.TimeSignature
-            )
-        result['start_clock_time'] = self._start_clock_time
-        result['stop_clock_time'] = self._stop_clock_time
-        result['time_signatures'] = self._get_time_signatures()
-        return result
-
     def _get_end_staff_lines(self):
         if self._end_staff_lines:
             string = self._class_string(baca.StaffLines)
@@ -1317,23 +1315,7 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(headword, str), repr(headword)
         if not self._previous_metadata:
             return
-        dictionary_name = None
-        if prototype is abjad.Clef:
-            dictionary_name = 'end_clefs'
-        elif prototype is abjad.Dynamic:
-            dictionary_name = 'end_dynamics'
-        elif prototype is abjad.Instrument:
-            dictionary_name = 'end_instruments'
-        elif prototype is abjad.MetronomeMark:
-            dictionary_name = 'end_metronome_marks'
-        #elif prototype is baca.StaffLines:
-        #    dictionary_name = 'end_staff_lines',
-        elif prototype is abjad.TimeSignature:
-            dictionary_name = 'end_time_signatures'
-        elif prototype is baca.MarginMarkup:
-            dictionary_name = 'end_margin_markup'
-        else:
-            raise Exception(prototype)
+        dictionary_name = self._class_string(prototype)
         if dictionary_name is not None:
             dictionary = self._previous_metadata.get(dictionary_name)
             if not dictionary:
@@ -2527,8 +2509,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> metadata = {}
-            >>> metadata['end_clefs'] = {}
-            >>> metadata['end_clefs']['MusicStaff'] = ('alto', 'MusicVoice')
+            >>> metadata['abjad.Clef'] = {}
+            >>> metadata['abjad.Clef']['MusicStaff'] = ('alto', 'MusicVoice')
             >>> metadata['segment_number'] = 1
             >>> lilypond_file = maker.run(
             ...     environment='docs',
@@ -2824,8 +2806,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> metadata = {}
-            >>> metadata['end_clefs'] = {}
-            >>> metadata['end_clefs']['MusicStaff'] = ('alto', 'MusicVoice')
+            >>> metadata['abjad.Clef'] = {}
+            >>> metadata['abjad.Clef']['MusicStaff'] = ('alto', 'MusicVoice')
             >>> metadata['segment_number'] = 1
             >>> lilypond_file = maker.run(
             ...     environment='docs',
@@ -3126,8 +3108,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> metadata = {}
-            >>> metadata['end_clefs'] = {}
-            >>> metadata['end_clefs']['MusicStaff'] = ('alto', 'MusicVoice')
+            >>> metadata['abjad.Clef'] = {}
+            >>> metadata['abjad.Clef']['MusicStaff'] = ('alto', 'MusicVoice')
             >>> metadata['segment_number'] = 1
             >>> lilypond_file = maker.run(
             ...     environment='docs',
@@ -5705,8 +5687,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> metadata = {}
-            >>> metadata['end_instruments'] = {}
-            >>> metadata['end_instruments']['MusicStaff'] = (
+            >>> metadata['abjad.Instrument'] = {}
+            >>> metadata['abjad.Instrument']['MusicStaff'] = (
             ...     'piccolo', 'MusicVoice',
             ...     )
             >>> metadata['segment_number'] = 1
@@ -6036,8 +6018,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> metadata = {}
-            >>> metadata['end_instruments'] = {}
-            >>> metadata['end_instruments']['MusicStaff'] = (
+            >>> metadata['abjad.Instrument'] = {}
+            >>> metadata['abjad.Instrument']['MusicStaff'] = (
             ...     'flute', 'MusicVoice',
             ...     )
             >>> metadata['segment_number'] = 1
@@ -6380,8 +6362,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> metadata = {}
-            >>> metadata['end_instruments'] = {}
-            >>> metadata['end_instruments']['MusicStaff'] = (
+            >>> metadata['abjad.Instrument'] = {}
+            >>> metadata['abjad.Instrument']['MusicStaff'] = (
             ...     'flute', 'MusicVoice',
             ...     )
             >>> metadata['segment_number'] = 1
@@ -6852,8 +6834,8 @@ class SegmentMaker(abjad.SegmentMaker):
         ..  container:: example
 
             >>> metadata = {}
-            >>> metadata['end_clefs'] = {}
-            >>> metadata['end_clefs']['MusicStaff'] = ('alto', 'MusicVoice')
+            >>> metadata['abjad.Clef'] = {}
+            >>> metadata['abjad.Clef']['MusicStaff'] = ('alto', 'MusicVoice')
             >>> metadata['segment_number'] = 1
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -6931,9 +6913,8 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> abjad.f(maker.metadata, strict=True)
             abjad.TypedOrderedDict(
                 [
-                    ('duration', None),
                     (
-                        'end_clefs',
+                        'abjad.Clef',
                         abjad.TypedOrderedDict(
                             [
                                 (
@@ -6943,13 +6924,11 @@ class SegmentMaker(abjad.SegmentMaker):
                                 ]
                             ),
                         ),
-                    ('end_dynamics', None),
-                    ('end_instruments', None),
-                    ('end_margin_markup', None),
-                    ('end_metronome_marks', None),
-                    ('end_staff_lines', None),
+                    ('abjad.Dynamic', None),
+                    ('abjad.Instrument', None),
+                    ('abjad.MetronomeMark', None),
                     (
-                        'end_time_signatures',
+                        'abjad.TimeSignature',
                         abjad.TypedOrderedDict(
                             [
                                 (
@@ -6959,6 +6938,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                 ]
                             ),
                         ),
+                    ('baca.MarginMarkup', None),
+                    ('duration', None),
+                    ('end_staff_lines', None),
                     ('first_measure_number', 1),
                     ('segment_number', 2),
                     ('start_clock_time', None),
