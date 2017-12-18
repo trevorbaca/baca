@@ -1420,19 +1420,6 @@ class SegmentMaker(abjad.SegmentMaker):
             assert isinstance(pair[1], str)
         return pair
 
-    def _get_previous_metronome_mark(self):
-        if not self._previous_metadata:
-            return
-        if not self.metronome_marks:
-            return
-        dictionary = self._previous_metadata.get('end_metronome_marks')
-        if dictionary:
-            pair = dictionary.get('Score')
-            if pair is not None:
-                key, local_context_headword = pair
-                previous_metronome_mark = self.metronome_marks.get(key)
-                return previous_metronome_mark, local_context_headword
-
     def _get_previous_staff_lines(self, headword):
         if not self._previous_metadata:
             return
@@ -1826,7 +1813,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if metronome_mark is None:
             prototype = abjad.MetronomeMarkSpanner
             spanner = abjad.inspect(skip).get_spanner(prototype)
-            pair = self._get_previous_metronome_mark()
+            pair = self._get_persistent_indicator('Score', abjad.MetronomeMark)
             if pair is not None:
                 previous_metronome_mark, local_context_headword = pair
             else:
