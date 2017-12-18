@@ -127,6 +127,12 @@ class SegmentMaker(abjad.SegmentMaker):
     __documentation_section__ = '(2) Makers'
 
     __slots__ = (
+        '_absent_clefs',
+        '_absent_dynamics',
+        '_absent_instruments',
+        '_absent_margin_markup',
+        '_absent_metronome_marks',
+        '_absent_staff_lines',
         '_allow_empty_selections',
         '_break_offsets',
         '_builds_metadata',
@@ -171,12 +177,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_start_clock_time',
         '_stop_clock_time',
         '_time_signatures',
-        '_absent_clefs',
-        '_absent_dynamics',
-        '_absent_instruments',
-        '_absent_margin_markup',
-        '_absent_metronome_marks',
-        '_absent_staff_lines',
         '_transpose_score',
         '_wrappers',
         )
@@ -1804,26 +1804,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _reapply_persistent_indicators(self):
         if self._is_first_segment():
             return
-        if not self._previous_metadata:
-            segment = self._get_segment_identifier()
-            print(f'can not find previous metadata before {segment}.')
-            return
         skip = baca.select(self._score['GlobalSkips']).skip(0)
-        metronome_mark = abjad.inspect(skip).get_piecewise(abjad.MetronomeMark)
-        if metronome_mark is None:
-            prototype = abjad.MetronomeMarkSpanner
-            spanner = abjad.inspect(skip).get_spanner(prototype)
-            pair = self._get_persistent_indicator('Score', abjad.MetronomeMark)
-            if pair is not None:
-                previous_metronome_mark, local_context_headword = pair
-            else:
-                previous_metronome_mark = None
-            self._tag_metronome_mark(
-                spanner,
-                skip,
-                previous_metronome_mark,
-                'reminder',
-                )
         time_signature = abjad.inspect(skip).get_indicator(abjad.TimeSignature)
         assert time_signature is not None
         previous_time_signature = self._get_previous_time_signature()
@@ -1852,6 +1833,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 context.name,
                 abjad.Instrument,
                 )
+            persistent_metronome_mark_pair = self._get_persistent_indicator(
+                context.name,
+                abjad.MetronomeMark,
+                )
             persistent_staff_lines_pair = self._get_previous_staff_lines(
                 context.name,
                 )
@@ -1859,6 +1844,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 persistent_clef_pair,
                 persistent_dynamic_pair,
                 persistent_instrument_pair,
+                persistent_metronome_mark_pair,
                 persistent_staff_lines_pair,
                 ]
             if not any(persistent_indicator_pairs):
@@ -1883,6 +1869,15 @@ class SegmentMaker(abjad.SegmentMaker):
                     key = self._get_key(self.instruments, previous_instrument)
                     pair = (key, local_context_headword)
                     self._absent_instruments[context.name] = pair
+                if persistent_metronome_mark_pair is not None:
+                    previous_metronome_mark = persistent_metronome_mark_pair[0]
+                    local_headword = persistent_metronome_mark_pair[1]
+                    key = self._get_key(
+                        self.metronome_marks,
+                        previous_metronome_mark,
+                        )
+                    pair = (key, local_headword)
+                    self._absent_metronome_marks[context.name] = pair
                 if persistent_staff_lines_pair is not None:
                     previous_staff_lines = persistent_staff_lines_pair[0]
                     local_context_headword = persistent_staff_lines_pair[1]
@@ -1890,6 +1885,25 @@ class SegmentMaker(abjad.SegmentMaker):
                     pair = (key, local_context_headword)
                     self._absent_staff_lines[context.name] = pair
                 continue
+            if persistent_metronome_mark_pair is not None:
+                previous_metronome_mark = persistent_metronome_mark_pair[0]
+                local_context_headword = persistent_metronome_mark_pair[1]
+                local_context = self.score[local_context_headword]
+                first_local_leaf = abjad.select(local_context).leaf(0)
+                spanner = abjad.inspect(first_local_leaf).get_spanner(
+                    abjad.MetronomeMarkSpanner
+                    )
+                assert spanner is not None, repr(spanner)
+                my_metronome_mark = abjad.inspect(
+                    first_local_leaf).get_indicator(abjad.MetronomeMark)
+                if my_metronome_mark is None:
+                    status = 'reminder'
+                    self._tag_metronome_mark(
+                        spanner,
+                        skip,
+                        previous_metronome_mark,
+                        status,
+                        )
             if persistent_instrument_pair is not None:
                 previous_instrument = persistent_instrument_pair[0]
                 local_context_headword = persistent_instrument_pair[1]
@@ -2551,15 +2565,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
-                            \pageBreak %! SEGMENT:LAYOUT:7
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT:8
-                            \autoPageBreaksOff %! SEGMENT:LAYOUT:9
+                            \pageBreak %! SEGMENT:LAYOUT:5
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT:6
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:7
                             \time 4/8
                             \mark #1
                             \bar "" %! EMPTY_START_BAR:1
-                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK_COLOR:3
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:5
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -2849,15 +2862,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
-                            \pageBreak %! SEGMENT:LAYOUT:7
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT:8
-                            \autoPageBreaksOff %! SEGMENT:LAYOUT:9
+                            \pageBreak %! SEGMENT:LAYOUT:5
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT:6
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:7
                             \time 4/8
                             \mark #1
                             \bar "" %! EMPTY_START_BAR:1
-                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK_COLOR:3
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:5
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -3152,15 +3164,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
-                            \pageBreak %! SEGMENT:LAYOUT:7
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT:8
-                            \autoPageBreaksOff %! SEGMENT:LAYOUT:9
+                            \pageBreak %! SEGMENT:LAYOUT:5
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT:6
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:7
                             \time 4/8
                             \mark #1
                             \bar "" %! EMPTY_START_BAR:1
-                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK_COLOR:3
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:5
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -5728,15 +5739,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
-                            \pageBreak %! SEGMENT:LAYOUT:7
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT:8
-                            \autoPageBreaksOff %! SEGMENT:LAYOUT:9
+                            \pageBreak %! SEGMENT:LAYOUT:5
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT:6
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:7
                             \time 4/8
                             \mark #1
                             \bar "" %! EMPTY_START_BAR:1
-                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK_COLOR:3
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:5
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -6060,15 +6070,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
-                            \pageBreak %! SEGMENT:LAYOUT:7
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT:8
-                            \autoPageBreaksOff %! SEGMENT:LAYOUT:9
+                            \pageBreak %! SEGMENT:LAYOUT:5
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT:6
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:7
                             \time 4/8
                             \mark #1
                             \bar "" %! EMPTY_START_BAR:1
-                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK_COLOR:3
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:5
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -6405,15 +6414,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
-                            \pageBreak %! SEGMENT:LAYOUT:7
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT:8
-                            \autoPageBreaksOff %! SEGMENT:LAYOUT:9
+                            \pageBreak %! SEGMENT:LAYOUT:5
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT:6
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:7
                             \time 4/8
                             \mark #1
                             \bar "" %! EMPTY_START_BAR:1
-                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK_COLOR:3
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:5
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -6883,7 +6891,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \mark #1
                             \bar "" %! EMPTY_START_BAR:1
-                            \once \override TextScript.color = #(x11-color 'DarkCyan) %! REMINDER_METRONOME_MARK_COLOR:3
                             s1 * 1/2
                             - \markup { %! STAGE_NUMBER_MARKUP:2
                                 \fontsize %! STAGE_NUMBER_MARKUP:2
