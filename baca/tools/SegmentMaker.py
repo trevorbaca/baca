@@ -127,13 +127,7 @@ class SegmentMaker(abjad.SegmentMaker):
     __documentation_section__ = '(2) Makers'
 
     __slots__ = (
-        '_absent_clefs',
-        '_absent_dynamics',
-        '_absent_instruments',
-        '_absent_margin_markup',
-        '_absent_metronome_marks',
-        '_absent_staff_lines',
-        '_absent_time_signatures',
+        '_absent_indicators',
         '_allow_empty_selections',
         '_break_offsets',
         '_builds_metadata',
@@ -291,13 +285,7 @@ class SegmentMaker(abjad.SegmentMaker):
         transpose_score=None,
         ):
         super(SegmentMaker, self).__init__()
-        self._absent_clefs = {}
-        self._absent_dynamics = {}
-        self._absent_instruments = {}
-        self._absent_margin_markup = {}
-        self._absent_metronome_marks = {}
-        self._absent_staff_lines = {}
-        self._absent_time_signatures = {}
+        self._absent_indicators = {}
         if allow_empty_selections is not None:
             allow_empty_selections = bool(allow_empty_selections)
         self._allow_empty_selections = allow_empty_selections
@@ -1049,6 +1037,11 @@ class SegmentMaker(abjad.SegmentMaker):
             message = manager.tabulate_wellformedness(score)
             raise Exception(message)
 
+    @staticmethod
+    def _class_string(class_):
+        parts = class_.__module__.split('.')
+        return f'{parts[0]}.{parts[-1]}'
+
     def _color_octaves_(self):
         if not self.color_octaves:
             return
@@ -1195,6 +1188,14 @@ class SegmentMaker(abjad.SegmentMaker):
             if abjad.inspect(leaf).get_indicator(self._extend_beam_tag):
                 self._extend_beam(leaf)
 
+    def _get_absent_indicator(self, prototype, context):
+        assert isinstance(context, abjad.Context), repr(context)
+        string = self._class_string(prototype)
+        dictionary = self._absent_indicators.get(string)
+        if dictionary:
+            pair = dictionary.get(context.name)
+            return pair
+
     def _get_end_clefs(self):
         result = abjad.TypedOrderedDict()
         contexts = abjad.iterate(self._score).components(abjad.Context)
@@ -1207,7 +1208,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 local_context = self._get_local_context(wrapper.component)
                 pair = (key, local_context)
             else:
-                pair = self._absent_clefs.get(context.name)
+                pair = self._get_absent_indicator(abjad.Clef, context)
             if pair is not None:
                 result[context.name] = pair
         if len(result):
@@ -1225,7 +1226,25 @@ class SegmentMaker(abjad.SegmentMaker):
                 local_context = self._get_local_context(wrapper.component)
                 pair = (key, local_context)
             else:
-                pair = self._absent_dynamics.get(context.name)
+                pair = self._get_absent_indicator(abjad.Dynamic, context)
+            if pair is not None:
+                result[context.name] = pair
+        if len(result):
+            return result
+
+    def _get_end_indicators(self, prototype):
+        result = abjad.TypedOrderedDict()
+        contexts = abjad.iterate(self.score).components(abjad.Context)
+        contexts = list(contexts)
+        contexts.sort(key=lambda _: _.name)
+        for context in contexts:
+            wrapper = context._get_last_wrapper(prototype)
+            if wrapper is not None:
+                key = wrapper.indicator.name
+                local_context = self._get_local_context(wrapper.component)
+                pair = (key, local_context)
+            else:
+                pair = self._get_absent_indicator(prototype, context)
             if pair is not None:
                 result[context.name] = pair
         if len(result):
@@ -1243,7 +1262,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 local_context = self._get_local_context(wrapper.component)
                 pair = (key, local_context)
             else:
-                pair = self._absent_instruments.get(context.name)
+                pair = self._get_absent_indicator(abjad.Instrument, context)
             if pair is not None:
                 result[context.name] = pair
         if len(result):
@@ -1261,7 +1280,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 local_context = self._get_local_context(wrapper.component)
                 pair = (key, local_context)
             else:
-                pair = self._absent_clefs.get(context.name)
+                pair = self._get_absent_indicator(baca.MarginMarkup, context)
             if pair is not None:
                 result[context.name] = pair
         if len(result):
@@ -1279,7 +1298,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 local_context = self._get_local_context(wrapper.component)
                 pair = (key, local_context)
             else:
-                pair = self._absent_metronome_marks.get(context.name)
+                pair = self._get_absent_indicator(abjad.MetronomeMark, context)
             if pair is not None:
                 result[context.name] = pair
         if len(result):
@@ -1302,7 +1321,10 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _get_end_staff_lines(self):
         if self._end_staff_lines:
-            for staff_name, number in self._absent_staff_lines.items():
+            string = self._class_string(baca.StaffLines)
+            if string not in self._absent_indicators:
+                self._absent_indicators[string] = {}
+            for staff_name, number in self._absent_indicators[string].items():
                 if number is not None:
                     self._end_staff_lines[staff_name] = number
             return self._end_staff_lines
@@ -1317,7 +1339,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 local_context = self._get_local_context(wrapper.component)
                 pair = (key, local_context)
             else:
-                pair = self._absent_staff_lines.get(context.name)
+                pair = self._get_absent_indicator(baca.StaffLines, context)
             if pair is not None:
                 result[context.name] = pair
         if len(result):
@@ -1335,7 +1357,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 local_context = self._get_local_context(wrapper.component)
                 pair = (key, local_context)
             else:
-                pair = self._absent_time_signatures.get(context.name)
+                pair = self._get_absent_indicator(abjad.TimeSignature, context)
             if pair is not None:
                 result[context.name] = pair
         if len(result):
@@ -1377,8 +1399,8 @@ class SegmentMaker(abjad.SegmentMaker):
         parentage = abjad.inspect(component).get_parentage()
         context = parentage.get_first(abjad.Context)
         if context is not None:
-            name = context.name or context.headword
-            return name
+            assert context.name is not None, repr(context)
+            return context.name
 
     def _get_measure_timespans(self, measure_numbers):
         timespans = []
@@ -1866,19 +1888,28 @@ class SegmentMaker(abjad.SegmentMaker):
                     local_context_headword = persistent_clef_pair[1]
                     key = previous_clef.name
                     pair = (key, local_context_headword)
-                    self._absent_clefs[context.name] = pair
+                    string = self._class_string(abjad.Clef)
+                    if string not in self._absent_indicators:
+                        self._absent_indicators[string] = {}
+                    self._absent_indicators[string][context.name] = pair
                 if persistent_dynamic_pair is not None:
                     previous_dynamic = persistent_dynamic_pair[0]
                     local_context_headword = persistent_dynamic_pair[1]
                     key = previous_dynamic.name
                     pair = (key, local_context_headword)
-                    self._absent_dynamics[context.name] = pair
+                    string = self._class_string(abjad.Dynamic)
+                    if string not in self._absent_indicators:
+                        self._absent_indicators[string] = {}
+                    self._absent_indicators[string][context.name] = pair
                 if persistent_instrument_pair is not None:
                     previous_instrument = persistent_instrument_pair[0]
                     local_context_headword = persistent_instrument_pair[1]
                     key = self._get_key(self.instruments, previous_instrument)
                     pair = (key, local_context_headword)
-                    self._absent_instruments[context.name] = pair
+                    string = self._class_string(abjad.Instrument)
+                    if string not in self._absent_indicators:
+                        self._absent_indicators[string] = {}
+                    self._absent_indicators[string][context.name] = pair
                 if persistent_metronome_mark_pair is not None:
                     previous_metronome_mark = persistent_metronome_mark_pair[0]
                     local_headword = persistent_metronome_mark_pair[1]
@@ -1887,19 +1918,28 @@ class SegmentMaker(abjad.SegmentMaker):
                         previous_metronome_mark,
                         )
                     pair = (key, local_headword)
-                    self._absent_metronome_marks[context.name] = pair
+                    string = self._class_string(abjad.MetronomeMark)
+                    if string not in self._absent_indicators:
+                        self._absent_indicators[string] = {}
+                    self._absent_indicators[string][context.name] = pair
                 if persistent_staff_lines_pair is not None:
                     previous_staff_lines = persistent_staff_lines_pair[0]
                     local_context_headword = persistent_staff_lines_pair[1]
                     key = previous_staff_lines.line_count
                     pair = (key, local_context_headword)
-                    self._absent_staff_lines[context.name] = pair
+                    string = self._class_string(baca.StaffLines)
+                    if string not in self._absent_indicators:
+                        self._absent_indicators[string] = {}
+                    self._absent_indicators[string][context.name] = pair
                 if persistent_time_signature_pair is not None:
                     previous_time_signature = persistent_time_signature_pair[0]
                     local_headword = persistent_time_signature_pair[1]
                     key = str(previous_time_signature)
                     pair = (key, local_headword)
-                    self._absent_time_signatures[context.name] = pair
+                    string = self._class_string(abjad.TimeSignature)
+                    if string not in self._absent_indicators:
+                        self._absent_indicators[string] = {}
+                    self._absent_indicators[string][context.name] = pair
                 continue
             if persistent_metronome_mark_pair is not None:
                 previous_metronome_mark = persistent_metronome_mark_pair[0]
