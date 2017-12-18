@@ -1055,7 +1055,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ):
             string = self._class_string(prototype)
             result[string] = self._collect_persistent_indicators(prototype)
-        result['end_staff_lines'] = self._get_end_staff_lines()
+        string = self._class_string(baca.StaffLines)
+        result[string] = self._get_end_staff_lines()
         result['start_clock_time'] = self._start_clock_time
         result['stop_clock_time'] = self._stop_clock_time
         result['time_signatures'] = self._get_time_signatures()
@@ -1311,58 +1312,41 @@ class SegmentMaker(abjad.SegmentMaker):
                 timespans.append(timespan)
         return timespans
 
-    def _get_persistent_indicator(self, headword, prototype):
-        assert isinstance(headword, str), repr(headword)
+    def _get_persistent_indicator(self, context, prototype):
+        assert isinstance(context, abjad.Context), repr(context)
         if not self._previous_metadata:
             return
-        dictionary_name = self._class_string(prototype)
-        if dictionary_name is not None:
-            dictionary = self._previous_metadata.get(dictionary_name)
-            if not dictionary:
-                return
-            pair = dictionary.get(headword)
-            if pair is None:
-                return
-            key, local_context_headword = pair
-            if key is None:
-                indicator = None
-            elif prototype in (abjad.Clef, abjad.Dynamic):
-                indicator = prototype(key)
-            elif prototype is abjad.Instrument:
-                indicator = self.instruments.get(key)
-            elif prototype is abjad.MetronomeMark:
-                indicator = self.metronome_marks.get(key)
-            elif prototype is abjad.TimeSignature:
-                indicator = abjad.TimeSignature.from_string(key)
-            else:
-                raise Exception(prototype)
-            pair = (indicator, local_context_headword)
-        if pair is not None:
-            assert isinstance(pair, tuple)
-            assert len(pair) == 2
-            assert isinstance(pair[1], str)
+        string = self._class_string(prototype)
+        dictionary = self._previous_metadata.get(string)
+        if not dictionary:
+            return
+        pair = dictionary.get(context.name)
+        if pair is None:
+            return
+        key, local_context_name = pair
+        indicator = self._key_to_indicator(key, prototype)
+        pair = (indicator, local_context_name)
+        assert isinstance(pair, tuple)
+        assert len(pair) == 2
+        assert isinstance(pair[1], str)
         return pair
 
-    def _get_previous_staff_lines(self, headword):
+    def _get_previous_staff_lines(self, context):
+        assert isinstance(context, abjad.Context), repr(context)
         if not self._previous_metadata:
             return
-        dictionary = self._previous_metadata.get('end_staff_lines')
+        string = self._class_string(baca.StaffLines)
+        dictionary = self._previous_metadata.get(string)
         if dictionary:
-            pair = dictionary.get(headword)
+            pair = dictionary.get(context.name)
             if pair is not None:
-                key, local_context_headword = pair
+                key, local_context_name = pair
                 previous_staff_lines = baca.StaffLines(line_count=key)
-                return previous_staff_lines, local_context_headword
+                return previous_staff_lines, local_context_name
 
     def _get_previous_stop_clock_time(self):
         if self._previous_metadata:
             return self._previous_metadata.get('stop_clock_time')
-
-#    def _get_previous_time_signature(self):
-#        if self._previous_metadata:
-#            time_signatures = self._previous_metadata.get('time_signatures')
-#            if time_signatures:
-#                return time_signatures[-1]
 
     def _get_rehearsal_letter(self):
         if self.rehearsal_letter:
@@ -1533,6 +1517,22 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _is_last_segment(self):
         return self.last_segment
+
+    def _key_to_indicator(self, key, prototype):
+        assert isinstance(key, str), repr(key)
+        if key is None:
+            return 
+        if prototype in (abjad.Clef, abjad.Dynamic):
+            indicator = prototype(key)
+        elif prototype is abjad.Instrument:
+            indicator = self.instruments.get(key)
+        elif prototype is abjad.MetronomeMark:
+            indicator = self.metronome_marks.get(key)
+        elif prototype is abjad.TimeSignature:
+            indicator = abjad.TimeSignature.from_string(key)
+        else:
+            raise Exception(prototype)
+        return indicator
 
     def _label_noninitial_instrument_changes(self):
         for staff in abjad.iterate(self._score).components(abjad.Staff):
@@ -1740,28 +1740,28 @@ class SegmentMaker(abjad.SegmentMaker):
     def _reapply_persistent_indicators(self):
         if self._is_first_segment():
             return
-        for context in abjad.iterate(self._score).components(abjad.Context):
+        for context in abjad.iterate(self.score).components(abjad.Context):
             persistent_clef_pair = self._get_persistent_indicator(
-                context.name,
+                context,
                 abjad.Clef,
                 )
             persistent_dynamic_pair = self._get_persistent_indicator(
-                context.name,
+                context,
                 abjad.Dynamic,
                 )
             persistent_instrument_pair = self._get_persistent_indicator(
-                context.name,
+                context,
                 abjad.Instrument,
                 )
             persistent_metronome_mark_pair = self._get_persistent_indicator(
-                context.name,
+                context,
                 abjad.MetronomeMark,
                 )
             persistent_staff_lines_pair = self._get_previous_staff_lines(
-                context.name,
+                context,
                 )
             persistent_time_signature_pair = self._get_persistent_indicator(
-                context.name,
+                context,
                 abjad.TimeSignature,
                 )
             persistent_indicator_pairs = [
@@ -6939,8 +6939,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             ),
                         ),
                     ('baca.MarginMarkup', None),
+                    ('baca.StaffLines', None),
                     ('duration', None),
-                    ('end_staff_lines', None),
                     ('first_measure_number', 1),
                     ('segment_number', 2),
                     ('start_clock_time', None),
