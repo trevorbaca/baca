@@ -1211,7 +1211,7 @@ class MarkupLibrary(abjad.AbjadObject):
         string_number = to_roman_numeral[n]
         return baca.markup(
             string_number,
-            direction=Down,
+            direction=abjad.Down,
             selector=selector,
             )
 
@@ -1227,7 +1227,7 @@ class MarkupLibrary(abjad.AbjadObject):
         string_numbers = '+'.join(string_numbers)
         return baca.markup(
             string_numbers,
-            direction=Down,
+            direction=abjad.Down,
             selector=selector,
             )
 

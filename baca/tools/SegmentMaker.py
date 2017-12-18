@@ -2057,9 +2057,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 abjad.attach(command, leaf)
 
     def _stage_number_to_measure_indices(self, stage_number):
-        if stage_number is Infinity:
-            stage_number = self.stage_count
-        elif stage_number == Infinity:
+        if stage_number is abjad.Infinity or stage_number == abjad.Infinity:
             stage_number = self.stage_count
         if self.stage_count < stage_number:
             count = self.stage_count

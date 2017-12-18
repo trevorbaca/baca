@@ -296,7 +296,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
         Returns pitch segment.
         """
-        specifier = baca.ArpeggiationSpacingSpecifier(direction=Down)
+        specifier = baca.ArpeggiationSpacingSpecifier(direction=abjad.Down)
         result = specifier([self])
         assert len(result) == 1
         segment = result[0]
@@ -1051,7 +1051,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
         '''
         specifier = baca.ChordalSpacingSpecifier(
             bass=bass,
-            direction=Down,
+            direction=abjad.Down,
             minimum_semitones=semitones,
             soprano=soprano,
             )

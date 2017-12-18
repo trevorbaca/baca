@@ -435,7 +435,7 @@ class PitchSegment(abjad.PitchSegment):
         '''
         specifier = baca.ChordalSpacingSpecifier(
             bass=bass,
-            direction=Down,
+            direction=abjad.Down,
             minimum_semitones=semitones,
             soprano=soprano,
             )
