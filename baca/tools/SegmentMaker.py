@@ -1196,42 +1196,6 @@ class SegmentMaker(abjad.SegmentMaker):
             pair = dictionary.get(context.name)
             return pair
 
-    def _get_end_clefs(self):
-        result = abjad.TypedOrderedDict()
-        contexts = abjad.iterate(self._score).components(abjad.Context)
-        contexts = list(contexts)
-        contexts.sort(key=lambda _: _.name)
-        for context in contexts:
-            wrapper = context._get_last_wrapper(abjad.Clef)
-            if wrapper is not None:
-                key = wrapper.indicator.name
-                local_context = self._get_local_context(wrapper.component)
-                pair = (key, local_context)
-            else:
-                pair = self._get_absent_indicator(abjad.Clef, context)
-            if pair is not None:
-                result[context.name] = pair
-        if len(result):
-            return result
-
-    def _get_end_dynamics(self):
-        result = abjad.TypedOrderedDict()
-        contexts = abjad.iterate(self._score).components(abjad.Context)
-        contexts = list(contexts)
-        contexts.sort(key=lambda _: _.name)
-        for context in contexts:
-            wrapper = context._get_last_wrapper(abjad.Dynamic)
-            if wrapper is not None:
-                key = wrapper.indicator.name
-                local_context = self._get_local_context(wrapper.component)
-                pair = (key, local_context)
-            else:
-                pair = self._get_absent_indicator(abjad.Dynamic, context)
-            if pair is not None:
-                result[context.name] = pair
-        if len(result):
-            return result
-
     def _get_end_indicators(self, prototype):
         result = abjad.TypedOrderedDict()
         contexts = abjad.iterate(self.score).components(abjad.Context)
@@ -1240,7 +1204,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for context in contexts:
             wrapper = context._get_last_wrapper(prototype)
             if wrapper is not None:
-                key = wrapper.indicator.name
+                key = self._indicator_to_key(wrapper.indicator)
                 local_context = self._get_local_context(wrapper.component)
                 pair = (key, local_context)
             else:
@@ -1250,70 +1214,22 @@ class SegmentMaker(abjad.SegmentMaker):
         if len(result):
             return result
 
-    def _get_end_instruments(self):
-        result = abjad.TypedOrderedDict()
-        contexts = abjad.iterate(self._score).components(abjad.Context)
-        contexts = list(contexts)
-        contexts.sort(key=lambda _: _.name)
-        for context in contexts:
-            wrapper = context._get_last_wrapper(abjad.Instrument)
-            if wrapper is not None:
-                key = self._get_key(self.instruments, wrapper.indicator)
-                local_context = self._get_local_context(wrapper.component)
-                pair = (key, local_context)
-            else:
-                pair = self._get_absent_indicator(abjad.Instrument, context)
-            if pair is not None:
-                result[context.name] = pair
-        if len(result):
-            return result
-
-    def _get_end_margin_markup(self):
-        result = abjad.TypedOrderedDict()
-        contexts = abjad.iterate(self._score).components(abjad.Context)
-        contexts = list(contexts)
-        contexts.sort(key=lambda _: _.name)
-        for context in contexts:
-            wrapper = context._get_last_wrapper(baca.MarginMarkup)
-            if wrapper is not None:
-                key = self._get_key(self.margin_markup, wrapper.indicator)
-                local_context = self._get_local_context(wrapper.component)
-                pair = (key, local_context)
-            else:
-                pair = self._get_absent_indicator(baca.MarginMarkup, context)
-            if pair is not None:
-                result[context.name] = pair
-        if len(result):
-            return result
-
-    def _get_end_metronome_marks(self):
-        result = abjad.TypedOrderedDict()
-        contexts = abjad.iterate(self._score).components(abjad.Context)
-        contexts = list(contexts)
-        contexts.sort(key=lambda _: _.name)
-        for context in contexts:
-            wrapper = context._get_last_wrapper(abjad.MetronomeMark)
-            if wrapper is not None:
-                key = self._get_key(self.metronome_marks, wrapper.indicator)
-                local_context = self._get_local_context(wrapper.component)
-                pair = (key, local_context)
-            else:
-                pair = self._get_absent_indicator(abjad.MetronomeMark, context)
-            if pair is not None:
-                result[context.name] = pair
-        if len(result):
-            return result
-
     def _get_end_settings(self):
         result = {}
         result['duration'] = self._duration
-        result['end_clefs'] = self._get_end_clefs()
-        result['end_dynamics'] = self._get_end_dynamics()
-        result['end_instruments'] = self._get_end_instruments()
-        result['end_margin_markup'] = self._get_end_margin_markup()
-        result['end_metronome_marks'] = self._get_end_metronome_marks()
+        result['end_clefs'] = self._get_end_indicators(abjad.Clef)
+        result['end_dynamics'] = self._get_end_indicators(abjad.Dynamic)
+        result['end_instruments'] = self._get_end_indicators(abjad.Instrument)
+        result['end_margin_markup'] = self._get_end_indicators(
+            baca.MarginMarkup
+            )
+        result['end_metronome_marks'] = self._get_end_indicators(
+            abjad.MetronomeMark
+            )
         result['end_staff_lines'] = self._get_end_staff_lines()
-        result['end_time_signatures'] = self._get_end_time_signatures()
+        result['end_time_signatures'] = self._get_end_indicators(
+            abjad.TimeSignature
+            )
         result['start_clock_time'] = self._start_clock_time
         result['stop_clock_time'] = self._stop_clock_time
         result['time_signatures'] = self._get_time_signatures()
@@ -1340,24 +1256,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 pair = (key, local_context)
             else:
                 pair = self._get_absent_indicator(baca.StaffLines, context)
-            if pair is not None:
-                result[context.name] = pair
-        if len(result):
-            return result
-
-    def _get_end_time_signatures(self):
-        result = abjad.TypedOrderedDict()
-        contexts = abjad.iterate(self._score).components(abjad.Context)
-        contexts = list(contexts)
-        contexts.sort(key=lambda _: _.name)
-        for context in contexts:
-            wrapper = context._get_last_wrapper(abjad.TimeSignature)
-            if wrapper is not None:
-                key = str(wrapper.indicator)
-                local_context = self._get_local_context(wrapper.component)
-                pair = (key, local_context)
-            else:
-                pair = self._get_absent_indicator(abjad.TimeSignature, context)
             if pair is not None:
                 result[context.name] = pair
         if len(result):
@@ -1590,6 +1488,19 @@ class SegmentMaker(abjad.SegmentMaker):
         for staff in abjad.iterate(self._score).components(classes):
             if abjad.inspect(staff).get_indicator(prototype):
                 abjad.detach(prototype, staff)
+
+    def _indicator_to_key(self, indicator):
+        if isinstance(indicator, (abjad.Clef, abjad.Dynamic)):
+            return indicator.name
+        if isinstance(indicator, abjad.Instrument):
+            return self._get_key(self.instruments, indicator)
+        elif isinstance(indicator, abjad.MetronomeMark):
+            return self._get_key(self.metronome_marks, indicator)
+        elif isinstance(indicator, baca.MarginMarkup):
+            return self._get_key(self.margin_markup, indicator)
+        elif isinstance(indicator, baca.StaffLines):
+            return indicator.line_count
+        return str(indicator)
 
     def _initialize_time_signatures(self, time_signatures):
         time_signatures = time_signatures or ()
