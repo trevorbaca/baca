@@ -669,6 +669,26 @@ class SegmentMaker(abjad.SegmentMaker):
             extra_offset=self.final_markup_extra_offset,
             )
 
+    def _analyze_persistent_indicator(self, prototype, momentos):
+        for momento in momentos:
+            if momento.prototype == self._prototype_string(prototype):
+                break
+        else:
+            return
+        previous_indicator = self._key_to_indicator(momento.value, prototype)
+        local_context = self.score[momento.context]
+        first_leaf = abjad.inspect(local_context).get_leaf(0)
+        my_indicator = abjad.inspect(first_leaf).get_indicator(prototype)
+        status = None
+        if my_indicator is None:
+            status = 'uncontested'
+        elif previous_indicator == my_indicator:
+            #status = 'redundant'
+            status = 'same'
+        else:
+            status = 'different'
+        return status, first_leaf, previous_indicator
+
     def _apply_fermata_measure_staff_line_count(self):
         if self.fermata_measure_staff_line_count is None:
             return
@@ -1753,59 +1773,45 @@ class SegmentMaker(abjad.SegmentMaker):
             if not persistent_indicators:
                 continue
             persistent_indicators = persistent_indicators.get(context.name)
+            momentos = persistent_indicators
             if not persistent_indicators:
                 continue
 
-            # ABJAD.CLEF
-            found = False
-            prototype = abjad.Clef
-            for momento in persistent_indicators:
-                if momento.prototype == self._prototype_string(prototype):
-                    found = True
-                    break
-            if found:
-                previous_clef = self._key_to_indicator(
-                    momento.value,
-                    prototype,
+            result = self._analyze_persistent_indicator(
+                abjad.Clef,
+                momentos,
+                ) 
+            if result is not None:
+                status, first_leaf, previous_indicator = result
+                status = {
+                    'uncontested': 'reapplied',
+                    'same': 'redundant',
+                    'different': None,
+                    }[status]
+                self._tag_clef(
+                    first_leaf,
+                    previous_indicator,
+                    context.headword,
+                    status,
                     )
-                local_context = self.score[momento.context]
-                first_leaf = abjad.inspect(local_context).get_leaf(0)
-                clef = abjad.inspect(first_leaf).get_indicator(abjad.Clef)
-                status = None
-                if clef is None:
-                    status = 'reapplied'
-                elif str(previous_clef) == str(clef):
-                    status = 'redundant'
-                if status is not None:
-                    self._tag_clef(
-                        first_leaf,
-                        previous_clef,
-                        context.headword,
-                        status,
-                        )
 
-            # ABJAD.DYNAMIC
-            found = False
-            prototype = abjad.Dynamic
-            for momento in persistent_indicators:
-                if momento.prototype == self._prototype_string(prototype):
-                    found = True
-                    break
-            if found:
-                previous_dynamic = self._key_to_indicator(
-                    momento.value,
-                    prototype,
+            result = self._analyze_persistent_indicator(
+                abjad.Dynamic,
+                momentos,
+                ) 
+            if result is not None:
+                status, first_leaf, previous_indicator = result
+                status = {
+                    'uncontested': 'reminder',
+                    'same': None,
+                    'different': None,
+                    }[status]
+                self._tag_dynamic(
+                    first_leaf,
+                    previous_indicator,
+                    context.headword,
+                    status,
                     )
-                local_context = self.score[momento.context]
-                first_leaf = abjad.inspect(local_context).get_leaf(0)
-                dynamic = abjad.inspect(first_leaf).get_effective(prototype)
-                if dynamic is None:
-                    self._tag_dynamic(
-                        first_leaf,
-                        previous_dynamic,
-                        context.headword,
-                        'reminder',
-                        )
 
             # ABJAD.INSTRUMENT
             found = False
@@ -1850,12 +1856,6 @@ class SegmentMaker(abjad.SegmentMaker):
                         my_instrument,
                         status,
                         )
-                else:
-                    self._tag_instrument_change_markup(
-                        first_leaf,
-                        my_instrument,
-                        'explicit',
-                        )
 
             # ABJAD.METRONOME_MARK
             found = False
@@ -1870,7 +1870,6 @@ class SegmentMaker(abjad.SegmentMaker):
                     prototype,
                     )
                 local_context = self.score[momento.context]
-                #first_local_leaf = abjad.select(local_context).leaf(0)
                 first_leaf = abjad.select(local_context).leaf(0)
                 spanner = abjad.inspect(first_leaf).get_spanner(
                     abjad.MetronomeMarkSpanner
@@ -2053,6 +2052,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _tag_clef(self, leaf, clef, context, status):
         assert isinstance(context, str), repr(context)
+        if status is None:
+            return
         grob = 'Clef'
         self._tag_grob_color(leaf, status, grob, context)
         self._tag_grob_uncolor(leaf, status, grob, context)
@@ -2100,6 +2101,8 @@ class SegmentMaker(abjad.SegmentMaker):
     def _tag_dynamic(self, leaf, dynamic, context, status):
         if context is not None:
             assert isinstance(context, str), repr(context)
+        if status is None:
+            return
         grob = 'DynamicText'
         tagged_grob_name = 'DYNAMIC'
         self._tag_grob_color(
@@ -5811,35 +5814,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT_COMMAND:4
-                                    \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT_COMMAND:4
-                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:3
+                                    \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                    \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
                                     c'8
                                     [
-                                    ^ \markup {
-                                        \column
-                                            {
-                                                %%% \line %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:1
-                                                %%%     { %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:1
-                                                %%%         \override %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:1
-                                                %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:1
-                                                %%%             \box %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:1
-                                                %%%                 flute %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:1
-                                                %%%     } %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:1
-                                                \line %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:2
-                                                    { %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:2
-                                                        \with-color %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:2
-                                                            #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:2
-                                                            \override %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:2
-                                                                #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:2
-                                                                \box %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:2
-                                                                    flute %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:2
-                                                    } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:2
-                                            }
-                                        }
-                                    \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
-                                    \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:5
+                                    \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
+                                    \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
