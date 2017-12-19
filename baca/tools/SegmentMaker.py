@@ -1824,18 +1824,17 @@ class SegmentMaker(abjad.SegmentMaker):
                     'same': 'redundant',
                     'different': None,
                     }[status]
-                if status is not None:
-                    self._tag_instrument(
-                        first_leaf,
-                        previous_indicator,
-                        context.headword,
-                        status
-                        )
-                    self._tag_instrument_change_markup(
-                        first_leaf,
-                        previous_indicator,
-                        status,
-                        )
+                self._tag_instrument(
+                    first_leaf,
+                    previous_indicator,
+                    context.headword,
+                    status
+                    )
+                self._tag_instrument_change_markup(
+                    first_leaf,
+                    previous_indicator,
+                    status,
+                    )
 
             result = self._analyze_persistent_indicator(
                 abjad.MetronomeMark,
@@ -1850,47 +1849,34 @@ class SegmentMaker(abjad.SegmentMaker):
                     'same': None,
                     'different': None,
                     }[status]
-                if status is not None:
-                    spanner = abjad.inspect(first_leaf).get_spanner(
-                        abjad.MetronomeMarkSpanner
-                        )
-                    assert spanner is not None, repr(spanner)
-                    self._tag_metronome_mark(
-                        spanner,
-                        first_leaf,
-                        previous_indicator,
-                        status,
-                        )
+                spanner = abjad.inspect(first_leaf).get_spanner(
+                    abjad.MetronomeMarkSpanner
+                    )
+                assert spanner is not None, repr(spanner)
+                self._tag_metronome_mark(
+                    spanner,
+                    first_leaf,
+                    previous_indicator,
+                    status,
+                    )
 
-            # ABJAD.TIME_SIGNATURE
-            found = False
-            prototype = abjad.TimeSignature
-            for momento in persistent_indicators:
-                if momento.prototype == self._prototype_string(prototype):
-                    found = True
-                    break
-            if found:
-                previous_time_signature = self._key_to_indicator(
-                    momento.value,
-                    prototype,
+            result = self._analyze_persistent_indicator(
+                abjad.TimeSignature,
+                momentos,
+                )
+            if result is not None:
+                status, first_leaf, previous_indicator = result
+                status = {
+                    'uncontested': None,
+                    'same': 'redundant',
+                    'different': None,
+                    }[status]
+                self._tag_time_signature(
+                    first_leaf,
+                    previous_indicator,
+                    context.headword,
+                    status,
                     )
-                local_context = self.score[momento.context]
-                first_leaf = abjad.select(local_context).leaf(0)
-                my_time_signature = abjad.inspect(first_leaf).get_indicator(
-                    prototype
-                    )
-                assert my_time_signature is not None, repr(my_time_signature)
-                if str(previous_time_signature) == str(my_time_signature):
-                    wrapper = abjad.inspect(first_leaf).get_indicator(
-                        abjad.TimeSignature,
-                        unwrap=False,
-                        )
-                    self._tag_time_signature(
-                        first_leaf,
-                        my_time_signature,
-                        wrapper.context,
-                        'redundant',
-                        )
 
             # BACA.STAFF_LINES
             #found = False
@@ -2179,6 +2165,8 @@ class SegmentMaker(abjad.SegmentMaker):
     def _tag_instrument(self, leaf, instrument, context, status):
         if context is not None:
             assert isinstance(context, str), repr(context)
+        if status is None:
+            return
         grob = 'InstrumentName'
         tagged_grob_name = 'INSTRUMENT'
         self._tag_grob_color(
@@ -2215,6 +2203,8 @@ class SegmentMaker(abjad.SegmentMaker):
             )
 
     def _tag_instrument_change_markup(self, leaf, instrument, status):
+        if status is None:
+            return
         markup = self._make_instrument_change_markup(instrument)
         name = f'{status.upper()}_INSTRUMENT_CHANGE_MARKUP'
         tag = getattr(baca.Tags, name)
@@ -2274,6 +2264,8 @@ class SegmentMaker(abjad.SegmentMaker):
             )
 
     def _tag_metronome_mark(self, spanner, skip, metronome_mark, status):
+        if status is None:
+            return
         grob = 'TextScript'
         tagged_grob_name = 'METRONOME_MARK'
         self._tag_grob_color(
@@ -2313,6 +2305,8 @@ class SegmentMaker(abjad.SegmentMaker):
     def _tag_time_signature(self, skip, time_signature, context, status):
         if context is not None:
             assert isinstance(context, str), repr(context)
+        if status is None:
+            return
         grob = 'TimeSignature'
         self._tag_grob_color(skip, status, grob, context)
         abjad.detach(time_signature, skip)
