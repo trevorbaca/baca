@@ -1755,65 +1755,59 @@ class SegmentMaker(abjad.SegmentMaker):
             persistent_indicators = persistent_indicators.get(context.name)
             if not persistent_indicators:
                 continue
-            first_leaf = self._get_first_nonabsent_leaf(context)
 
+            # ABJAD.CLEF
             found = False
-            prototype = abjad.MetronomeMark
+            prototype = abjad.Clef
             for momento in persistent_indicators:
                 if momento.prototype == self._prototype_string(prototype):
                     found = True
                     break
             if found:
-                previous_metronome_mark = self._key_to_indicator(
+                previous_clef = self._key_to_indicator(
                     momento.value,
                     prototype,
                     )
                 local_context = self.score[momento.context]
-                first_local_leaf = abjad.select(local_context).leaf(0)
-                spanner = abjad.inspect(first_local_leaf).get_spanner(
-                    abjad.MetronomeMarkSpanner
-                    )
-                assert spanner is not None, repr(spanner)
-                my_metronome_mark = abjad.inspect(
-                    first_local_leaf).get_indicator(abjad.MetronomeMark)
-                if my_metronome_mark is None:
-                    status = 'reminder'
-                    self._tag_metronome_mark(
-                        spanner,
-                        first_local_leaf,
-                        previous_metronome_mark,
+                first_leaf = abjad.inspect(local_context).get_leaf(0)
+                clef = abjad.inspect(first_leaf).get_indicator(abjad.Clef)
+                status = None
+                if clef is None:
+                    status = 'reapplied'
+                elif str(previous_clef) == str(clef):
+                    status = 'redundant'
+                if status is not None:
+                    self._tag_clef(
+                        first_leaf,
+                        previous_clef,
+                        context.headword,
                         status,
                         )
 
+            # ABJAD.DYNAMIC
             found = False
-            prototype = abjad.TimeSignature
+            prototype = abjad.Dynamic
             for momento in persistent_indicators:
                 if momento.prototype == self._prototype_string(prototype):
                     found = True
                     break
             if found:
-                previous_time_signature = self._key_to_indicator(
+                previous_dynamic = self._key_to_indicator(
                     momento.value,
                     prototype,
                     )
                 local_context = self.score[momento.context]
-                first_local_leaf = abjad.select(local_context).leaf(0)
-                my_time_signature = abjad.inspect(
-                    first_local_leaf).get_indicator(abjad.TimeSignature)
-                assert my_time_signature is not None, repr(my_time_signature)
-                if str(previous_time_signature) == str(my_time_signature):
-                    wrapper = abjad.inspect(first_local_leaf).get_indicator(
-                        abjad.TimeSignature,
-                        unwrap=False,
-                        )
-                    #context = wrapper.context
-                    self._tag_time_signature(
-                        first_local_leaf,
-                        my_time_signature,
-                        wrapper.context,
-                        'redundant',
+                first_leaf = abjad.inspect(local_context).get_leaf(0)
+                dynamic = abjad.inspect(first_leaf).get_effective(prototype)
+                if dynamic is None:
+                    self._tag_dynamic(
+                        first_leaf,
+                        previous_dynamic,
+                        context.headword,
+                        'reminder',
                         )
 
+            # ABJAD.INSTRUMENT
             found = False
             prototype = abjad.Instrument
             for momento in persistent_indicators:
@@ -1825,6 +1819,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     momento.value,
                     prototype,
                     )
+                local_context = self.score[momento.context]
+                first_leaf = abjad.inspect(local_context).get_leaf(0)
                 my_instrument = abjad.inspect(first_leaf).get_indicator(
                     abjad.Instrument
                     )
@@ -1861,6 +1857,68 @@ class SegmentMaker(abjad.SegmentMaker):
                         'explicit',
                         )
 
+            # ABJAD.METRONOME_MARK
+            found = False
+            prototype = abjad.MetronomeMark
+            for momento in persistent_indicators:
+                if momento.prototype == self._prototype_string(prototype):
+                    found = True
+                    break
+            if found:
+                previous_metronome_mark = self._key_to_indicator(
+                    momento.value,
+                    prototype,
+                    )
+                local_context = self.score[momento.context]
+                #first_local_leaf = abjad.select(local_context).leaf(0)
+                first_leaf = abjad.select(local_context).leaf(0)
+                spanner = abjad.inspect(first_leaf).get_spanner(
+                    abjad.MetronomeMarkSpanner
+                    )
+                assert spanner is not None, repr(spanner)
+                my_metronome_mark = abjad.inspect(first_leaf).get_indicator(
+                    prototype
+                    )
+                if my_metronome_mark is None:
+                    status = 'reminder'
+                    self._tag_metronome_mark(
+                        spanner,
+                        first_leaf,
+                        previous_metronome_mark,
+                        status,
+                        )
+
+            # ABJAD.TIME_SIGNATURE
+            found = False
+            prototype = abjad.TimeSignature
+            for momento in persistent_indicators:
+                if momento.prototype == self._prototype_string(prototype):
+                    found = True
+                    break
+            if found:
+                previous_time_signature = self._key_to_indicator(
+                    momento.value,
+                    prototype,
+                    )
+                local_context = self.score[momento.context]
+                first_leaf = abjad.select(local_context).leaf(0)
+                my_time_signature = abjad.inspect(first_leaf).get_indicator(
+                    prototype
+                    )
+                assert my_time_signature is not None, repr(my_time_signature)
+                if str(previous_time_signature) == str(my_time_signature):
+                    wrapper = abjad.inspect(first_leaf).get_indicator(
+                        abjad.TimeSignature,
+                        unwrap=False,
+                        )
+                    self._tag_time_signature(
+                        first_leaf,
+                        my_time_signature,
+                        wrapper.context,
+                        'redundant',
+                        )
+
+            # BACA.STAFF_LINES
             #found = False
             #prototype = baca.StaffLines
             #for momento in persistent_indicators:
@@ -1873,6 +1931,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if persistent_staff_lines_pair is not None:
                 previous_staff_lines = persistent_staff_lines_pair[0]
                 prototype = baca.StaffLines
+                first_leaf = self._get_first_nonabsent_leaf(context)
                 staff_lines = abjad.inspect(first_leaf).get_indicator(
                     prototype)
                 status = None
@@ -1886,51 +1945,6 @@ class SegmentMaker(abjad.SegmentMaker):
                         previous_staff_lines,
                         context.headword,
                         status,
-                        )
-
-            found = False
-            prototype = abjad.Clef
-            for momento in persistent_indicators:
-                if momento.prototype == self._prototype_string(prototype):
-                    found = True
-                    break
-            if found:
-                previous_clef = self._key_to_indicator(
-                    momento.value,
-                    prototype,
-                    )
-                clef = abjad.inspect(first_leaf).get_indicator(abjad.Clef)
-                status = None
-                if clef is None:
-                    status = 'reapplied'
-                elif str(previous_clef) == str(clef):
-                    status = 'redundant'
-                if status is not None:
-                    self._tag_clef(
-                        first_leaf,
-                        previous_clef,
-                        context.headword,
-                        status,
-                        )
-
-            found = False
-            prototype = abjad.Dynamic
-            for momento in persistent_indicators:
-                if momento.prototype == self._prototype_string(prototype):
-                    found = True
-                    break
-            if found:
-                previous_dynamic = self._key_to_indicator(
-                    momento.value,
-                    prototype,
-                    )
-                dynamic = abjad.inspect(first_leaf).get_effective(prototype)
-                if dynamic is None:
-                    self._tag_dynamic(
-                        first_leaf,
-                        previous_dynamic,
-                        context.headword,
-                        'reminder',
                         )
 
     def _remove_tags(self, tags):
