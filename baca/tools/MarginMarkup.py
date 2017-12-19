@@ -39,6 +39,8 @@ class MarginMarkup(abjad.AbjadValueObject):
         '_short_markup',
         )
 
+    _line_redraw = True
+
     _persistent = True
 
     _publish_storage_format = True
@@ -141,7 +143,11 @@ class MarginMarkup(abjad.AbjadValueObject):
 
     def _get_lilypond_format(self, context=None):
         lines = []
-        context = context or self.context
+        if context is None:
+            context = self.context
+        elif isinstance(context, abjad.Context):
+            context = context.headword
+        assert isinstance(context, str), repr(context)
         markup = format(self.markup)
         lines.append(rf'\set {context}.instrumentName = {markup}')
         short_markup = format(self.short_markup)

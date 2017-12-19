@@ -1614,9 +1614,9 @@ class SegmentMaker(abjad.SegmentMaker):
         shadow=False,
         ):
         if context is not None:
-            assert isinstance(context, str), repr(context)
+            assert isinstance(context, abjad.Context), repr(context)
         if context is not None:
-            string = rf'\override {context}.{grob}.color ='
+            string = rf'\override {context.headword}.{grob}.color ='
         else:
             string = rf'\override {grob}.color ='
         if shadow is True:
@@ -1690,6 +1690,23 @@ class SegmentMaker(abjad.SegmentMaker):
         parts = class_.__module__.split('.')
         return f'{parts[0]}.{parts[-1]}'
 
+    def _reapply_persistent_indicator_type(
+        self,
+        context,
+        momentos,
+        prototype,
+        ):
+        result = self._analyze_persistent_indicator(prototype, momentos)
+        if result is None:
+            return
+        status, first_leaf, previous_indicator = result
+        self._tag_persistent_indicator(
+            first_leaf,
+            previous_indicator,
+            context,
+            status,
+            )
+
     def _reapply_persistent_indicators(self):
         if self._is_first_segment():
             return
@@ -1702,31 +1719,17 @@ class SegmentMaker(abjad.SegmentMaker):
             if not momentos:
                 continue
             # ABJAD.CLEF
-            result = self._analyze_persistent_indicator(
+            self._reapply_persistent_indicator_type(
+                context,
+                momentos,
                 abjad.Clef,
-                momentos,
                 )
-            if result is not None:
-                status, first_leaf, previous_indicator = result
-                self._tag_clef(
-                    first_leaf,
-                    previous_indicator,
-                    context.headword,
-                    status,
-                    )
             # ABJAD.DYNAMIC
-            result = self._analyze_persistent_indicator(
-                abjad.Dynamic,
+            self._reapply_persistent_indicator_type(
+                context,
                 momentos,
+                abjad.Dynamic,
                 )
-            if result is not None:
-                status, first_leaf, previous_indicator = result
-                self._tag_dynamic(
-                    first_leaf,
-                    previous_indicator,
-                    context.headword,
-                    status,
-                    )
             # ABJAD.INSTRUMENT
             result = self._analyze_persistent_indicator(
                 abjad.Instrument,
@@ -1737,7 +1740,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._tag_instrument(
                     first_leaf,
                     previous_indicator,
-                    context.headword,
+                    context,
                     status
                     )
                 self._tag_instrument_change_markup(
@@ -1772,7 +1775,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._tag_time_signature(
                     first_leaf,
                     previous_indicator,
-                    context.headword,
+                    context,
                     status,
                     )
             # BACA.STAFF_LINES
@@ -1785,7 +1788,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._tag_staff_lines(
                     first_leaf,
                     previous_indicator,
-                    context.headword,
+                    context,
                     status,
                     )
 
@@ -1893,19 +1896,6 @@ class SegmentMaker(abjad.SegmentMaker):
         stop_measure_index = measure_indices[stage_number] - 1
         return start_measure_index, stop_measure_index
 
-    def _tag_clef(self, leaf, clef, context, status):
-        assert isinstance(context, str), repr(context)
-        if status is None:
-            return
-        grob = 'Clef'
-        self._tag_grob_color(leaf, status, grob, context)
-        self._tag_grob_uncolor(leaf, status, grob, context)
-        command = rf'\set {context}.forceClef = ##t'
-        self._tag_grob_command(leaf, status, grob, command)
-        abjad.detach(abjad.Clef, leaf)
-        self._tag_grob_command(leaf, status, grob, clef, context=context)
-        self._tag_grob_shadow_color(leaf, status, grob, context)
-
     def _tag_clock_time(self):
         skips = baca.select(self._score['GlobalSkips']).skips()
         if abjad.inspect(skips[0]).get_effective(abjad.MetronomeMark) is None:
@@ -1941,29 +1931,6 @@ class SegmentMaker(abjad.SegmentMaker):
         segment_duration = segment_duration.to_clock_string()
         self._duration = segment_duration
 
-    def _tag_dynamic(self, leaf, dynamic, context, status):
-        if context is not None:
-            assert isinstance(context, str), repr(context)
-        if status is None:
-            return
-        grob = 'DynamicText'
-        tagged_grob_name = 'DYNAMIC'
-        self._tag_grob_color(
-            leaf,
-            status,
-            grob,
-            context,
-            tagged_grob_name=tagged_grob_name,
-            )
-        abjad.detach(abjad.Dynamic, leaf)
-        self._tag_grob_command(
-            leaf,
-            status,
-            tagged_grob_name,
-            dynamic,
-            context=context,
-            )
-
     def _tag_grob_color(
         self,
         leaf,
@@ -1973,7 +1940,7 @@ class SegmentMaker(abjad.SegmentMaker):
         tagged_grob_name=None,
         ):
         if context is not None:
-            assert isinstance(context, str), repr(context)
+            assert isinstance(context, abjad.Context), repr(context)
         string = self._make_status_color_string(
             status,
             grob,
@@ -1998,7 +1965,7 @@ class SegmentMaker(abjad.SegmentMaker):
         spanner=None,
         ):
         if context is not None:
-            assert isinstance(context, str), repr(context)
+            assert isinstance(context, abjad.Context), repr(context)
         if isinstance(command, str):
             command = abjad.LilyPondLiteral(command)
         if shadow_command is True:
@@ -2006,9 +1973,11 @@ class SegmentMaker(abjad.SegmentMaker):
         else:
             tag = self._get_tag(status, tagged_grob_name, 'command')
         if spanner is None:
-            abjad.attach(command, leaf, context=context, tag=tag)
+            if context is None:
+                abjad.attach(command, leaf, tag=tag)
+            else:
+                abjad.attach(command, leaf, context=context.headword, tag=tag)
         else:
-            # HERE: should spanner-detach first
             spanner.attach(command, leaf, tag=tag)
 
     def _tag_grob_shadow_color(
@@ -2020,7 +1989,7 @@ class SegmentMaker(abjad.SegmentMaker):
         tagged_grob_name=None,
         ):
         if context is not None:
-            assert isinstance(context, str), repr(context)
+            assert isinstance(context, abjad.Context), repr(context)
         string = self._make_status_color_string(
             status,
             grob,
@@ -2034,11 +2003,18 @@ class SegmentMaker(abjad.SegmentMaker):
             tag = self._get_tag(status, grob, 'shadow_color')
         abjad.attach(literal, leaf, tag=tag)
 
-    def _tag_grob_uncolor(self, leaf, status, grob, context=None):
+    def _tag_grob_uncolor(
+        self,
+        leaf,
+        status,
+        grob,
+        context=None,
+        tagged_grob_name=None,
+        ):
         if context is not None:
-            assert isinstance(context, str), repr(context)
+            assert isinstance(context, abjad.Context), repr(context)
         if context is not None:
-            string = rf'\override {context}.{grob}.color = ##f'
+            string = rf'\override {context.headword}.{grob}.color = ##f'
         else:
             string = rf'\override {grob}.color = ##f'
         literal = abjad.LilyPondLiteral(string)
@@ -2047,7 +2023,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _tag_instrument(self, leaf, instrument, context, status):
         if context is not None:
-            assert isinstance(context, str), repr(context)
+            assert isinstance(context, abjad.Context), repr(context)
         if status is None:
             return
         grob = 'InstrumentName'
@@ -2110,7 +2086,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _tag_margin_markup(self, leaf, margin_markup, context, status):
         if context is not None:
-            assert isinstance(context, str), repr(context)
+            assert isinstance(context, abjad.Context), repr(context)
         grob = 'InstrumentName'
         tagged_grob_name = 'MARGIN_MARKUP'
         self._tag_grob_color(
@@ -2166,9 +2142,56 @@ class SegmentMaker(abjad.SegmentMaker):
             spanner=spanner,
             )
 
+    def _tag_persistent_indicator(self, leaf, indicator, context, status):
+        assert isinstance(context, abjad.Context), repr(context)
+        if status is None:
+            return
+        if isinstance(indicator, abjad.Dynamic):
+            grob = 'DynamicText'
+            tagged_grob_name = 'DYNAMIC'
+        else:
+            grob = type(indicator).__name__
+            tagged_grob_name = grob
+        self._tag_grob_color(
+            leaf,
+            status,
+            grob,
+            context,
+            tagged_grob_name=tagged_grob_name,
+            )
+        if (getattr(indicator, '_line_redraw', False)
+            and not getattr(indicator, 'suppress_markup', False)):
+            self._tag_grob_uncolor(
+                leaf,
+                status,
+                grob,
+                context,
+                tagged_grob_name=tagged_grob_name,
+                )
+        if isinstance(indicator, abjad.Clef):
+            command = rf'\set {context.headword}.forceClef = ##t'
+            self._tag_grob_command(leaf, status, grob, command)
+        abjad.detach(indicator, leaf)
+        self._tag_grob_command(
+            leaf,
+            status,
+            tagged_grob_name,
+            indicator,
+            context=context,
+            )
+        if (getattr(indicator, '_line_redraw', False)
+            and not getattr(indicator, 'suppress_markup', False)):
+            self._tag_grob_shadow_color(
+                leaf,
+                status,
+                grob,
+                context,
+                tagged_grob_name=tagged_grob_name,
+                )
+
     def _tag_staff_lines(self, leaf, staff_lines, context, status):
         if context is not None:
-            assert isinstance(context, str), repr(context)
+            assert isinstance(context, abjad.Context), repr(context)
         if status is None:
             return
         grob = 'StaffSymbol'
@@ -2190,7 +2213,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _tag_time_signature(self, skip, time_signature, context, status):
         if context is not None:
-            assert isinstance(context, str), repr(context)
+            assert isinstance(context, abjad.Context), repr(context)
         if status is None:
             return
         grob = 'TimeSignature'
@@ -2199,7 +2222,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._tag_grob_command(skip, status, grob, time_signature, context)
 
     def _tag_untagged_clefs(self):
-        for leaf in abjad.iterate(self._score).leaves():
+        for leaf in abjad.iterate(self.score).leaves():
             wrapper = abjad.inspect(leaf).get_indicator(
                 abjad.Clef,
                 unwrap=False,
@@ -2212,22 +2235,22 @@ class SegmentMaker(abjad.SegmentMaker):
             context = wrapper._find_correct_effective_context()
             previous_clef = abjad.inspect(leaf).get_effective(abjad.Clef, n=-1)
             if str(previous_clef) == str(clef):
-                self._tag_clef(
+                self._tag_persistent_indicator(
                     leaf,
                     clef,
-                    context.headword,
+                    context,
                     'redundant',
                     )
             else:
-                self._tag_clef(
+                self._tag_persistent_indicator(
                     leaf,
                     clef,
-                    context.headword,
+                    context,
                     'explicit',
                     )
 
     def _tag_untagged_instruments(self):
-        for leaf in abjad.iterate(self._score).leaves():
+        for leaf in abjad.iterate(self.score).leaves():
             wrapper = abjad.inspect(leaf).get_indicator(
                 abjad.Instrument,
                 unwrap=False,
@@ -2246,14 +2269,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._tag_instrument(
                     leaf,
                     instrument,
-                    context.headword,
+                    context,
                     'redundant',
                     )
             else:
                 self._tag_instrument(
                     leaf,
                     instrument,
-                    context.headword,
+                    context,
                     'explicit',
                     )
 
@@ -2277,14 +2300,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._tag_margin_markup(
                     leaf,
                     margin_markup,
-                    context.headword,
+                    context,
                     'redundant',
                     )
             else:
                 self._tag_margin_markup(
                     leaf,
                     margin_markup,
-                    context.headword,
+                    context,
                     'explicit',
                     )
 
