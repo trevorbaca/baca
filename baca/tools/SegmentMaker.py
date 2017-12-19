@@ -1693,6 +1693,51 @@ class SegmentMaker(abjad.SegmentMaker):
         parts = class_.__module__.split('.')
         return f'{parts[0]}.{parts[-1]}'
 
+    @staticmethod
+    def _prototype_to_status(prototype, status):
+        if prototype is abjad.Clef:
+            dictionary = {
+                'uncontested': 'reapplied',
+                'same': 'redundant',
+                'different': None,
+                }
+        elif prototype is abjad.Dynamic:
+            dictionary = {
+                'uncontested': 'reminder',
+                'same': None,
+                'different': None,
+                }
+        elif prototype is abjad.Instrument:
+            dictionary = {
+                'uncontested': 'reapplied',
+                'same': 'redundant',
+                'different': None,
+                }
+        elif prototype is abjad.MetronomeMark:
+            dictionary = {
+                'uncontested': 'reminder',
+                # TODO: tag redundant metronome marks here (not later):
+                #'same': 'redundant',
+                'same': None,
+                'different': None,
+                }
+        elif prototype is abjad.TimeSignature:
+            dictionary = {
+                'uncontested': None,
+                'same': 'redundant',
+                'different': None,
+                }
+        elif prototype is baca.StaffLines:
+            dictionary = {
+                'uncontested': 'reapplied',
+                'same': 'redundant',
+                'different': None,
+                }
+        else:
+            raise Exception(prototype)
+        status = dictionary[status]
+        return status
+
     def _reapply_persistent_indicators(self):
         if self._is_first_segment():
             return
@@ -1701,9 +1746,8 @@ class SegmentMaker(abjad.SegmentMaker):
             persistent_indicators = self._previous_metadata.get(string)
             if not persistent_indicators:
                 continue
-            persistent_indicators = persistent_indicators.get(context.name)
-            momentos = persistent_indicators
-            if not persistent_indicators:
+            momentos = persistent_indicators.get(context.name)
+            if not momentos:
                 continue
             # ABJAD.CLEF
             result = self._analyze_persistent_indicator(
@@ -1712,11 +1756,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
             if result is not None:
                 status, first_leaf, previous_indicator = result
-                status = {
-                    'uncontested': 'reapplied',
-                    'same': 'redundant',
-                    'different': None,
-                    }[status]
+                status = self._prototype_to_status(abjad.Clef, status)
                 self._tag_clef(
                     first_leaf,
                     previous_indicator,
@@ -1730,11 +1770,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
             if result is not None:
                 status, first_leaf, previous_indicator = result
-                status = {
-                    'uncontested': 'reminder',
-                    'same': None,
-                    'different': None,
-                    }[status]
+                status = self._prototype_to_status(abjad.Dynamic, status)
                 self._tag_dynamic(
                     first_leaf,
                     previous_indicator,
@@ -1748,11 +1784,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
             if result is not None:
                 status, first_leaf, previous_indicator = result
-                status = {
-                    'uncontested': 'reapplied',
-                    'same': 'redundant',
-                    'different': None,
-                    }[status]
+                status = self._prototype_to_status(abjad.Instrument, status)
                 self._tag_instrument(
                     first_leaf,
                     previous_indicator,
@@ -1771,13 +1803,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
             if result is not None:
                 status, first_leaf, previous_indicator = result
-                status = {
-                    'uncontested': 'reminder',
-                    # TODO: tag redundant metronome marks here (not later):
-                    #'same': 'redundant',
-                    'same': None,
-                    'different': None,
-                    }[status]
+                status = self._prototype_to_status(abjad.MetronomeMark, status)
                 spanner = abjad.inspect(first_leaf).get_spanner(
                     abjad.MetronomeMarkSpanner
                     )
@@ -1795,11 +1821,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
             if result is not None:
                 status, first_leaf, previous_indicator = result
-                status = {
-                    'uncontested': None,
-                    'same': 'redundant',
-                    'different': None,
-                    }[status]
+                status = self._prototype_to_status(abjad.TimeSignature, status)
                 self._tag_time_signature(
                     first_leaf,
                     previous_indicator,
@@ -1813,11 +1835,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
             if result is not None:
                 status, first_leaf, previous_indicator = result
-                status = {
-                    'uncontested': 'reapplied',
-                    'same': 'redundant',
-                    'different': None,
-                    }[status]
+                status = self._prototype_to_status(baca.StaffLines, status)
                 self._tag_staff_lines(
                     first_leaf,
                     previous_indicator,
