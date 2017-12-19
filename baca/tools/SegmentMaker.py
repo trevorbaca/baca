@@ -673,11 +673,12 @@ class SegmentMaker(abjad.SegmentMaker):
         my_indicator = abjad.inspect(first_leaf).get_indicator(prototype)
         status = None
         if my_indicator is None:
-            status = 'uncontested'
+            status = 'persistent'
         elif previous_indicator == my_indicator:
-            status = 'same'
-        else:
-            status = 'different'
+            if prototype is abjad.TimeSignature:
+                status = 'persistent'
+            elif prototype is not abjad.Dynamic:
+                status = 'redundant'
         return status, first_leaf, previous_indicator
 
     def _apply_fermata_measure_staff_line_count(self):
@@ -1689,45 +1690,6 @@ class SegmentMaker(abjad.SegmentMaker):
         parts = class_.__module__.split('.')
         return f'{parts[0]}.{parts[-1]}'
 
-    @staticmethod
-    def _prototype_to_status(prototype, status):
-        if status == 'different':
-            return
-        if prototype is abjad.Clef:
-            dictionary = {
-                'uncontested': 'persistent',
-                'same': 'redundant',
-                }
-        elif prototype is abjad.Dynamic:
-            dictionary = {
-                'uncontested': 'persistent',
-                'same': None,
-                }
-        elif prototype is abjad.Instrument:
-            dictionary = {
-                'uncontested': 'persistent',
-                'same': 'redundant',
-                }
-        elif prototype is abjad.MetronomeMark:
-            dictionary = {
-                'uncontested': 'persistent',
-                'same': 'redundant',
-                }
-        elif prototype is abjad.TimeSignature:
-            dictionary = {
-                'uncontested': 'persistent',
-                'same': 'persistent',
-                }
-        elif prototype is baca.StaffLines:
-            dictionary = {
-                'uncontested': 'persistent',
-                'same': 'redundant',
-                }
-        else:
-            raise Exception(prototype)
-        status = dictionary[status]
-        return status
-
     def _reapply_persistent_indicators(self):
         if self._is_first_segment():
             return
@@ -1746,7 +1708,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
             if result is not None:
                 status, first_leaf, previous_indicator = result
-                status = self._prototype_to_status(abjad.Clef, status)
                 self._tag_clef(
                     first_leaf,
                     previous_indicator,
@@ -1760,7 +1721,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
             if result is not None:
                 status, first_leaf, previous_indicator = result
-                status = self._prototype_to_status(abjad.Dynamic, status)
                 self._tag_dynamic(
                     first_leaf,
                     previous_indicator,
@@ -1774,7 +1734,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
             if result is not None:
                 status, first_leaf, previous_indicator = result
-                status = self._prototype_to_status(abjad.Instrument, status)
                 self._tag_instrument(
                     first_leaf,
                     previous_indicator,
@@ -1793,7 +1752,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
             if result is not None:
                 status, first_leaf, previous_indicator = result
-                status = self._prototype_to_status(abjad.MetronomeMark, status)
                 spanner = abjad.inspect(first_leaf).get_spanner(
                     abjad.MetronomeMarkSpanner
                     )
@@ -1811,7 +1769,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
             if result is not None:
                 status, first_leaf, previous_indicator = result
-                status = self._prototype_to_status(abjad.TimeSignature, status)
                 self._tag_time_signature(
                     first_leaf,
                     previous_indicator,
@@ -1825,7 +1782,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
             if result is not None:
                 status, first_leaf, previous_indicator = result
-                status = self._prototype_to_status(baca.StaffLines, status)
                 self._tag_staff_lines(
                     first_leaf,
                     previous_indicator,
