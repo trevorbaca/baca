@@ -1044,45 +1044,16 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _collect_metadata(self):
         result = {}
-        result['duration'] = self._duration
-        for prototype in (
-            abjad.Clef,
-            abjad.Dynamic,
-            abjad.Instrument,
-            abjad.MetronomeMark,
-            abjad.TimeSignature,
-            baca.MarginMarkup,
-            ):
-            string = self._class_string(prototype)
-            result[string] = self._collect_persistent_indicators(prototype)
         string = self._class_string(baca.StaffLines)
         result[string] = self._get_end_staff_lines()
-        dictionary = self._collect_persistent_indicators_by_context()
-        result['persistent_indicators'] = dictionary
+        result['duration'] = self._duration
+        result['persistent_indicators'] = self._collect_persistent_indicators()
         result['start_clock_time'] = self._start_clock_time
         result['stop_clock_time'] = self._stop_clock_time
         result['time_signatures'] = self._get_time_signatures()
         return result
 
-    def _collect_persistent_indicators(self, prototype):
-        result = abjad.TypedOrderedDict()
-        contexts = abjad.iterate(self.score).components(abjad.Context)
-        contexts = list(contexts)
-        contexts.sort(key=lambda _: _.name)
-        for context in contexts:
-            wrapper = context._get_last_wrapper(prototype)
-            if wrapper is not None:
-                key = self._indicator_to_key(wrapper.indicator)
-                local_context = self._get_local_context(wrapper.component)
-                pair = (key, local_context)
-            else:
-                pair = self._get_absent_indicator(prototype, context)
-            if pair is not None:
-                result[context.name] = pair
-        if len(result):
-            return result
-
-    def _collect_persistent_indicators_by_context(self):
+    def _collect_persistent_indicators(self):
         result = abjad.TypedOrderedDict()
         contexts = abjad.iterate(self.score).components(abjad.Context)
         contexts = list(contexts)
@@ -1357,20 +1328,17 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(context, abjad.Context), repr(context)
         if not self._previous_metadata:
             return
-        string = self._class_string(prototype)
-        dictionary = self._previous_metadata.get(string)
+        dictionary = self._previous_metadata.get('persistent_indicators')
         if not dictionary:
             return
-        pair = dictionary.get(context.name)
-        if pair is None:
+        momentos = dictionary.get(context.name)
+        if not momentos:
             return
-        key, local_context_name = pair
-        indicator = self._key_to_indicator(key, prototype)
-        pair = (indicator, local_context_name)
-        assert isinstance(pair, tuple)
-        assert len(pair) == 2
-        assert isinstance(pair[1], str)
-        return pair
+        class_string = self._class_string(prototype)
+        for momento in momentos:
+            if momento.prototype == class_string:
+                indicator = self._key_to_indicator(momento.value, prototype)
+                return (indicator, momento.context)
 
     def _get_previous_staff_lines(self, context):
         assert isinstance(context, abjad.Context), repr(context)
@@ -2847,8 +2815,14 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> metadata = {}
-            >>> metadata['abjad.Clef'] = {}
-            >>> metadata['abjad.Clef']['MusicStaff'] = ('alto', 'MusicVoice')
+            >>> metadata['persistent_indicators'] = {}
+            >>> metadata['persistent_indicators']['MusicStaff'] = [
+            ...     abjad.Momento(
+            ...         context='MusicVoice',
+            ...         prototype='abjad.Clef',
+            ...         value='alto',
+            ...         )
+            ...     ]
             >>> metadata['segment_number'] = 1
             >>> lilypond_file = maker.run(
             ...     environment='docs',
@@ -3149,8 +3123,14 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> metadata = {}
-            >>> metadata['abjad.Clef'] = {}
-            >>> metadata['abjad.Clef']['MusicStaff'] = ('alto', 'MusicVoice')
+            >>> metadata['persistent_indicators'] = {}
+            >>> metadata['persistent_indicators']['MusicStaff'] = [
+            ...     abjad.Momento(
+            ...         context='MusicVoice',
+            ...         prototype='abjad.Clef',
+            ...         value='alto',
+            ...         )
+            ...     ]
             >>> metadata['segment_number'] = 1
             >>> lilypond_file = maker.run(
             ...     environment='docs',
@@ -5690,8 +5670,8 @@ class SegmentMaker(abjad.SegmentMaker):
         ..  container:: example
 
             >>> instruments = abjad.InstrumentDictionary()
-            >>> instruments['flute'] = abjad.Flute()
-            >>> instruments['piccolo'] = abjad.Piccolo()
+            >>> instruments['Flute'] = abjad.Flute()
+            >>> instruments['Piccolo'] = abjad.Piccolo()
             >>> layout_measure_map = baca.layout(
             ...     baca.page(
             ...         [1, 0, (11,)],
@@ -5719,19 +5699,23 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
-            ...     baca.instrument(instruments['flute']),
+            ...     baca.instrument(instruments['Flute']),
             ...     baca.map(
-            ...         baca.instrument(instruments['piccolo']),
+            ...         baca.instrument(instruments['Piccolo']),
             ...         baca.leaves().group_by_measure()[6],
             ...         ),
             ...     baca.make_even_runs(),
             ...     )
 
             >>> metadata = {}
-            >>> metadata['abjad.Instrument'] = {}
-            >>> metadata['abjad.Instrument']['MusicStaff'] = (
-            ...     'piccolo', 'MusicVoice',
-            ...     )
+            >>> metadata['persistent_indicators'] = {}
+            >>> metadata['persistent_indicators']['MusicStaff'] = [
+            ...     abjad.Momento(
+            ...         context='MusicVoice',
+            ...         prototype='abjad.Instrument',
+            ...         value='Piccolo',
+            ...         )
+            ...     ]
             >>> metadata['segment_number'] = 1
             >>> lilypond_file = maker.run(
             ...     environment='docs',
@@ -6052,17 +6036,21 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
             ...     baca.map(
-            ...         baca.instrument(instruments['piccolo']),
+            ...         baca.instrument(instruments['Piccolo']),
             ...         baca.leaves().group_by_measure()[6],
             ...         ),
             ...     baca.make_even_runs(),
             ...     )
 
             >>> metadata = {}
-            >>> metadata['abjad.Instrument'] = {}
-            >>> metadata['abjad.Instrument']['MusicStaff'] = (
-            ...     'flute', 'MusicVoice',
-            ...     )
+            >>> metadata['persistent_indicators'] = {}
+            >>> metadata['persistent_indicators']['MusicStaff'] = [
+            ...     abjad.Momento(
+            ...         context='MusicVoice',
+            ...         prototype='abjad.Instrument',
+            ...         value='Flute',
+            ...         )
+            ...     ]
             >>> metadata['segment_number'] = 1
             >>> lilypond_file = maker.run(
             ...     environment='docs',
@@ -6390,23 +6378,27 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
-            ...     baca.instrument(instruments['flute']),
+            ...     baca.instrument(instruments['Flute']),
             ...     baca.map(
-            ...         baca.instrument(instruments['piccolo']),
+            ...         baca.instrument(instruments['Piccolo']),
             ...         baca.leaves().group_by_measure()[6],
             ...         ),
             ...     baca.map(
-            ...         baca.instrument(instruments['piccolo']),
+            ...         baca.instrument(instruments['Piccolo']),
             ...         baca.leaves().group_by_measure()[10],
             ...         ),
             ...     baca.make_even_runs(),
             ...     )
 
             >>> metadata = {}
-            >>> metadata['abjad.Instrument'] = {}
-            >>> metadata['abjad.Instrument']['MusicStaff'] = (
-            ...     'flute', 'MusicVoice',
-            ...     )
+            >>> metadata['persistent_indicators'] = {}
+            >>> metadata['persistent_indicators']['MusicStaff'] = [
+            ...     abjad.Momento(
+            ...         context='MusicVoice',
+            ...         prototype='abjad.Instrument',
+            ...         value='Flute',
+            ...         )
+            ...     ]
             >>> metadata['segment_number'] = 1
             >>> lilypond_file = maker.run(
             ...     environment='docs',
@@ -6875,8 +6867,14 @@ class SegmentMaker(abjad.SegmentMaker):
         ..  container:: example
 
             >>> metadata = {}
-            >>> metadata['abjad.Clef'] = {}
-            >>> metadata['abjad.Clef']['MusicStaff'] = ('alto', 'MusicVoice')
+            >>> metadata['persistent_indicators'] = {}
+            >>> metadata['persistent_indicators']['MusicStaff'] = [
+            ...     abjad.Momento(
+            ...         context='MusicVoice',
+            ...         prototype='abjad.Clef',
+            ...         value='alto',
+            ...         )
+            ...     ]
             >>> metadata['segment_number'] = 1
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -6954,32 +6952,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> abjad.f(maker.metadata, strict=True)
             abjad.TypedOrderedDict(
                 [
-                    (
-                        'abjad.Clef',
-                        abjad.TypedOrderedDict(
-                            [
-                                (
-                                    'MusicStaff',
-                                    ('alto', 'MusicVoice'),
-                                    ),
-                                ]
-                            ),
-                        ),
-                    ('abjad.Dynamic', None),
-                    ('abjad.Instrument', None),
-                    ('abjad.MetronomeMark', None),
-                    (
-                        'abjad.TimeSignature',
-                        abjad.TypedOrderedDict(
-                            [
-                                (
-                                    'Score',
-                                    ('3/8', 'GlobalSkips'),
-                                    ),
-                                ]
-                            ),
-                        ),
-                    ('baca.MarginMarkup', None),
                     ('baca.StaffLines', None),
                     ('duration', None),
                     ('first_measure_number', 1),
