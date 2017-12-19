@@ -1780,7 +1780,7 @@ class SegmentMaker(abjad.SegmentMaker):
             result = self._analyze_persistent_indicator(
                 abjad.Clef,
                 momentos,
-                ) 
+                )
             if result is not None:
                 status, first_leaf, previous_indicator = result
                 status = {
@@ -1798,7 +1798,7 @@ class SegmentMaker(abjad.SegmentMaker):
             result = self._analyze_persistent_indicator(
                 abjad.Dynamic,
                 momentos,
-                ) 
+                )
             if result is not None:
                 status, first_leaf, previous_indicator = result
                 status = {
@@ -1813,77 +1813,52 @@ class SegmentMaker(abjad.SegmentMaker):
                     status,
                     )
 
-            # ABJAD.INSTRUMENT
-            found = False
-            prototype = abjad.Instrument
-            for momento in persistent_indicators:
-                if momento.prototype == self._prototype_string(prototype):
-                    found = True
-                    break
-            if found:
-                previous_instrument = self._key_to_indicator(
-                    momento.value,
-                    prototype,
-                    )
-                local_context = self.score[momento.context]
-                first_leaf = abjad.inspect(local_context).get_leaf(0)
-                my_instrument = abjad.inspect(first_leaf).get_indicator(
-                    abjad.Instrument
-                    )
-                if my_instrument is None:
-                    status = 'reapplied'
+            result = self._analyze_persistent_indicator(
+                abjad.Instrument,
+                momentos,
+                )
+            if result is not None:
+                status, first_leaf, previous_indicator = result
+                status = {
+                    'uncontested': 'reapplied',
+                    'same': 'redundant',
+                    'different': None,
+                    }[status]
+                if status is not None:
                     self._tag_instrument(
                         first_leaf,
-                        previous_instrument,
+                        previous_indicator,
                         context.headword,
                         status
                         )
                     self._tag_instrument_change_markup(
                         first_leaf,
-                        previous_instrument,
-                        status,
-                        )
-                elif previous_instrument == my_instrument:
-                    status = 'redundant'
-                    self._tag_instrument(
-                        first_leaf,
-                        my_instrument,
-                        context.headword,
-                        status
-                        )
-                    self._tag_instrument_change_markup(
-                        first_leaf,
-                        my_instrument,
+                        previous_indicator,
                         status,
                         )
 
-            # ABJAD.METRONOME_MARK
-            found = False
-            prototype = abjad.MetronomeMark
-            for momento in persistent_indicators:
-                if momento.prototype == self._prototype_string(prototype):
-                    found = True
-                    break
-            if found:
-                previous_metronome_mark = self._key_to_indicator(
-                    momento.value,
-                    prototype,
-                    )
-                local_context = self.score[momento.context]
-                first_leaf = abjad.select(local_context).leaf(0)
-                spanner = abjad.inspect(first_leaf).get_spanner(
-                    abjad.MetronomeMarkSpanner
-                    )
-                assert spanner is not None, repr(spanner)
-                my_metronome_mark = abjad.inspect(first_leaf).get_indicator(
-                    prototype
-                    )
-                if my_metronome_mark is None:
-                    status = 'reminder'
+            result = self._analyze_persistent_indicator(
+                abjad.MetronomeMark,
+                momentos,
+                )
+            if result is not None:
+                status, first_leaf, previous_indicator = result
+                status = {
+                    'uncontested': 'reminder',
+                    # TODO: tag redundant metronome marks here (not later):
+                    #'same': 'redundant',
+                    'same': None,
+                    'different': None,
+                    }[status]
+                if status is not None:
+                    spanner = abjad.inspect(first_leaf).get_spanner(
+                        abjad.MetronomeMarkSpanner
+                        )
+                    assert spanner is not None, repr(spanner)
                     self._tag_metronome_mark(
                         spanner,
                         first_leaf,
-                        previous_metronome_mark,
+                        previous_indicator,
                         status,
                         )
 
