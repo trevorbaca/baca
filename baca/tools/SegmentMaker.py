@@ -1695,7 +1695,6 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         if prototype is abjad.Clef:
             dictionary = {
-                #'uncontested': 'reapplied',
                 'uncontested': 'reminder',
                 'same': 'redundant',
                 }
@@ -1706,7 +1705,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 }
         elif prototype is abjad.Instrument:
             dictionary = {
-                #'uncontested': 'reapplied',
                 'uncontested': 'reminder',
                 'same': 'redundant',
                 }
@@ -1718,11 +1716,10 @@ class SegmentMaker(abjad.SegmentMaker):
         elif prototype is abjad.TimeSignature:
             dictionary = {
                 'uncontested': 'reminder',
-                'same': 'redundant',
+                'same': 'reminder',
                 }
         elif prototype is baca.StaffLines:
             dictionary = {
-                #'uncontested': 'reapplied',
                 'uncontested': 'reminder',
                 'same': 'redundant',
                 }

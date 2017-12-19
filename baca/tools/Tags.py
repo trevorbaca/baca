@@ -154,6 +154,11 @@ class Tags(abjad.Enumeration):
     REDUNDANT_TIME_SIGNATURE_SHADOW_COLOR = enum.auto()
     REDUNDANT_TIME_SIGNATURE_UNCOLOR = enum.auto()
 
+    REMINDER_TIME_SIGNATURE_COLOR = enum.auto()
+    REMINDER_TIME_SIGNATURE_COMMAND = enum.auto()
+    REMINDER_TIME_SIGNATURE_SHADOW_COLOR = enum.auto()
+    REMINDER_TIME_SIGNATURE_UNCOLOR = enum.auto()
+
     ### OTHER ###
 
     CLOCK_TIME_MARKUP = enum.auto()
