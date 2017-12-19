@@ -10,15 +10,19 @@ class StaffLines(abjad.AbjadObject):
     __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
-        '_context',
         '_line_count',
+        '_suppress_format',
         )
+
+    _context = 'Staff'
 
     ### INITIALIZER ###
 
-    def __init__(self, line_count=None):
-        self._context = 'Staff'
+    def __init__(self, line_count=None, suppress_format=None):
         self._line_count = line_count
+        if suppress_format is not None:
+            suppress_format = bool(suppress_format)
+        self._suppress_format = suppress_format
 
     ### SPECIAL METHODS ###
 
@@ -61,6 +65,8 @@ class StaffLines(abjad.AbjadObject):
 
     def _get_lilypond_format_bundle(self, component=None):
         bundle = abjad.LilyPondFormatBundle()
+        if self.suppress_format:
+            return bundle
         bundle.before.commands.append(r'\stopStaff')
         string = r'\once \override Staff.StaffSymbol.line-count ='
         string += f' {self.line_count}'
@@ -72,14 +78,14 @@ class StaffLines(abjad.AbjadObject):
 
     @property
     def context(self):
-        r'''Is staff.
+        r'''Returns ``'Staff'``.
 
         ..  container:: example
 
             >>> baca.StaffLines(1).context
             'Staff'
 
-        Returns staff.
+        Returns ``'Staff'``.
         '''
         return self._context
 
@@ -88,3 +94,11 @@ class StaffLines(abjad.AbjadObject):
         r'''Gets line count.
         '''
         return self._line_count
+
+    @property
+    def suppress_format(self):
+        r'''Is true when staff lines should not format.
+
+        Returns true, false or none.
+        '''
+        return self._suppress_format

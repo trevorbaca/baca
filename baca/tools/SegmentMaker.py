@@ -683,7 +683,6 @@ class SegmentMaker(abjad.SegmentMaker):
         if my_indicator is None:
             status = 'uncontested'
         elif previous_indicator == my_indicator:
-            #status = 'redundant'
             status = 'same'
         else:
             status = 'different'
@@ -827,11 +826,19 @@ class SegmentMaker(abjad.SegmentMaker):
                 if (build is None and
                     next_leaf is None and
                     before != staff_lines):
-                    name = staff.name
                     before_line_count = getattr(before, 'line_count', 5)
-                    local_context_headword = self._get_local_context(leaf)
-                    pair = (before_line_count, local_context_headword)
-                    self._end_staff_lines[name] = pair
+                    local_context_name = self._get_local_context(leaf)
+                    pair = (before_line_count, local_context_name)
+                    self._end_staff_lines[staff.name] = pair
+                    before_staff_lines = baca.StaffLines(
+                        line_count=before_line_count,
+                        suppress_format=True,
+                        )
+                    abjad.attach(
+                        before_staff_lines,
+                        leaf,
+                        synthetic_offset=1_000_000,
+                        )
 
     def _attach_fermatas(self):
         if not self.metronome_mark_measure_map:
@@ -1082,6 +1089,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 abjad.MetronomeMark,
                 abjad.TimeSignature,
                 baca.MarginMarkup,
+                baca.StaffLines,
                 ):
                 wrapper = context._get_last_wrapper(prototype)
                 if wrapper is not None:
@@ -1541,7 +1549,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self.last_segment
 
     def _key_to_indicator(self, key, prototype):
-        assert isinstance(key, str), repr(key)
+        assert isinstance(key, (int, str)), repr(key)
         if key is None:
             return 
         if prototype in (abjad.Clef, abjad.Dynamic):
@@ -1552,6 +1560,8 @@ class SegmentMaker(abjad.SegmentMaker):
             indicator = self.metronome_marks.get(key)
         elif prototype is abjad.TimeSignature:
             indicator = abjad.TimeSignature.from_string(key)
+        elif prototype is baca.StaffLines:
+            indicator = baca.StaffLines(line_count=key)
         else:
             raise Exception(prototype)
         return indicator
@@ -1878,34 +1888,23 @@ class SegmentMaker(abjad.SegmentMaker):
                     status,
                     )
 
-            # BACA.STAFF_LINES
-            #found = False
-            #prototype = baca.StaffLines
-            #for momento in persistent_indicators:
-            #    if momento.prototype == self._prototype_string(prototype):
-            #        found = True
-            #        break
-            persistent_staff_lines_pair = self._get_persistent_staff_lines(
-                context,
+            result = self._analyze_persistent_indicator(
+                baca.StaffLines,
+                momentos,
                 )
-            if persistent_staff_lines_pair is not None:
-                previous_staff_lines = persistent_staff_lines_pair[0]
-                prototype = baca.StaffLines
-                first_leaf = self._get_first_nonabsent_leaf(context)
-                staff_lines = abjad.inspect(first_leaf).get_indicator(
-                    prototype)
-                status = None
-                if staff_lines is None:
-                    status = 'reapplied'
-                elif previous_staff_lines == staff_lines:
-                    status = 'redundant'
-                if status is not None:
-                    self._tag_staff_lines(
-                        first_leaf,
-                        previous_staff_lines,
-                        context.headword,
-                        status,
-                        )
+            if result is not None:
+                status, first_leaf, previous_indicator = result
+                status = {
+                    'uncontested': 'reapplied',
+                    'same': 'redundant',
+                    'different': None,
+                    }[status]
+                self._tag_staff_lines(
+                    first_leaf,
+                    previous_indicator,
+                    context.headword,
+                    status,
+                    )
 
     def _remove_tags(self, tags):
         if not tags:
@@ -2285,6 +2284,8 @@ class SegmentMaker(abjad.SegmentMaker):
     def _tag_staff_lines(self, leaf, staff_lines, context, status):
         if context is not None:
             assert isinstance(context, str), repr(context)
+        if status is None:
+            return
         grob = 'StaffSymbol'
         tagged_grob_name = 'STAFF_LINES'
         self._tag_grob_color(
