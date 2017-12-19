@@ -39,6 +39,8 @@ class MarginMarkup(abjad.AbjadValueObject):
         '_short_markup',
         )
 
+    _persistent = True
+
     _publish_storage_format = True
 
     ### INITIALIZER ##
@@ -188,6 +190,23 @@ class MarginMarkup(abjad.AbjadValueObject):
         Returns markup.
         '''
         return self._markup
+
+    @property
+    def persistent(self):
+        r'''Is true.
+
+        ..  container:: example
+
+            >>> margin_markup = baca.MarginMarkup(
+            ...     markup=abjad.Markup('Cello'),
+            ...     short_markup=abjad.Markup('Vc.')
+            ...     )
+            >>> margin_markup.persistent
+            True
+
+        Returns true.
+        '''
+        return self._persistent
 
     @property
     def short_markup(self):

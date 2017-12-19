@@ -16,6 +16,8 @@ class StaffLines(abjad.AbjadObject):
 
     _context = 'Staff'
 
+    _persistent = True
+
     ### INITIALIZER ###
 
     def __init__(self, line_count=None, suppress_format=None):
@@ -94,6 +96,19 @@ class StaffLines(abjad.AbjadObject):
         r'''Gets line count.
         '''
         return self._line_count
+
+    @property
+    def persistent(self):
+        r'''Is true.
+
+        ..  container:: example
+
+            >>> baca.StaffLines(1).persistent
+            True
+
+        Returns true.
+        '''
+        return self._persistent
 
     @property
     def suppress_format(self):

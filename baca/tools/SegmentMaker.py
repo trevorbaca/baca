@@ -1069,28 +1069,24 @@ class SegmentMaker(abjad.SegmentMaker):
         contexts.sort(key=lambda _: _.name)
         for context in contexts:
             momentos = []
-            for prototype in (
-                abjad.Clef,
-                abjad.Dynamic,
-                abjad.Instrument,
-                abjad.MetronomeMark,
-                abjad.TimeSignature,
-                baca.MarginMarkup,
-                baca.StaffLines,
-                ):
-                wrapper = context._get_last_wrapper(prototype)
-                if wrapper is not None:
-                    leaf = wrapper.component
-                    parentage = abjad.inspect(leaf).get_parentage()
-                    first_context = parentage.get_first(abjad.Context)
-                    indicator = wrapper.indicator
-                    value = self._indicator_to_key(indicator)
-                    momento = abjad.Momento(
-                        context=first_context.name,
-                        prototype=self._prototype_string(prototype),
-                        value=value,
-                        )
-                    momentos.append(momento)
+            dictionary = context._get_persistent_wrappers()
+            for wrapper in dictionary.values():
+                leaf = wrapper.component
+                parentage = abjad.inspect(leaf).get_parentage()
+                first_context = parentage.get_first(abjad.Context)
+                indicator = wrapper.indicator
+                value = self._indicator_to_key(indicator)
+                if isinstance(indicator.persistent, str):
+                    prototype = indicator.persistent
+                else:
+                    prototype = type(indicator)
+                    prototype = self._prototype_string(prototype)
+                momento = abjad.Momento(
+                    context=first_context.name,
+                    prototype=prototype,
+                    value=value,
+                    )
+                momentos.append(momento)
             if momentos:
                 momentos.sort(key=lambda _: _.prototype)
                 result[context.name] = momentos
