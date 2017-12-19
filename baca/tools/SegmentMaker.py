@@ -1037,15 +1037,10 @@ class SegmentMaker(abjad.SegmentMaker):
             message = manager.tabulate_wellformedness(score)
             raise Exception(message)
 
-    @staticmethod
-    def _class_string(class_):
-        parts = class_.__module__.split('.')
-        return f'{parts[0]}.{parts[-1]}'
-
     def _collect_metadata(self):
         result = {}
-        string = self._class_string(baca.StaffLines)
-        result[string] = self._get_end_staff_lines()
+        string = self._prototype_string(baca.StaffLines)
+        result[string] = self._collect_persistent_staff_lines()
         result['duration'] = self._duration
         result['persistent_indicators'] = self._collect_persistent_indicators()
         result['start_clock_time'] = self._start_clock_time
@@ -1078,12 +1073,12 @@ class SegmentMaker(abjad.SegmentMaker):
                     pair = self._get_absent_indicator(prototype, context)
                     absent = True
                 if pair is not None:
-                    class_string = self._class_string(prototype)
+                    prototype_string = self._prototype_string(prototype)
                     key, local_context_name = pair
                     momento = abjad.Momento(
                         absent=absent,
                         context=local_context_name,
-                        prototype=self._class_string(prototype),
+                        prototype=self._prototype_string(prototype),
                         value=key,
                         )
                     momentos.append(momento)
@@ -1091,6 +1086,28 @@ class SegmentMaker(abjad.SegmentMaker):
                     momentos.sort(key=lambda _: _.prototype)
                     result[context.name] = momentos
         return result
+
+    # TODO: merge
+    def _collect_persistent_staff_lines(self):
+        # TODO: remove
+        if self._end_staff_lines:
+            return self._end_staff_lines
+        result = abjad.TypedOrderedDict()
+        contexts = abjad.iterate(self._score).components(abjad.Context)
+        contexts = list(contexts)
+        contexts.sort(key=lambda _: _.name)
+        for context in contexts:
+            wrapper = context._get_last_wrapper(baca.StaffLines)
+            if wrapper is not None:
+                key = wrapper.indicator.line_count
+                local_context = self._get_local_context(wrapper.component)
+                pair = (key, local_context)
+            else:
+                pair = self._get_absent_indicator(baca.StaffLines, context)
+            if pair is not None:
+                result[context.name] = pair
+        if len(result):
+            return result
 
     def _color_octaves_(self):
         if not self.color_octaves:
@@ -1240,37 +1257,12 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _get_absent_indicator(self, prototype, context):
         assert isinstance(context, abjad.Context), repr(context)
-        string = self._class_string(prototype)
+        string = self._prototype_string(prototype)
         dictionary = self._absent_indicators.get(string)
         if dictionary:
             pair = dictionary.get(context.name)
+            raise Exception('BLAH')
             return pair
-
-    def _get_end_staff_lines(self):
-        if self._end_staff_lines:
-            string = self._class_string(baca.StaffLines)
-            if string not in self._absent_indicators:
-                self._absent_indicators[string] = {}
-            for staff_name, number in self._absent_indicators[string].items():
-                if number is not None:
-                    self._end_staff_lines[staff_name] = number
-            return self._end_staff_lines
-        result = abjad.TypedOrderedDict()
-        contexts = abjad.iterate(self._score).components(abjad.Context)
-        contexts = list(contexts)
-        contexts.sort(key=lambda _: _.name)
-        for context in contexts:
-            wrapper = context._get_last_wrapper(baca.StaffLines)
-            if wrapper is not None:
-                key = wrapper.indicator.line_count
-                local_context = self._get_local_context(wrapper.component)
-                pair = (key, local_context)
-            else:
-                pair = self._get_absent_indicator(baca.StaffLines, context)
-            if pair is not None:
-                result[context.name] = pair
-        if len(result):
-            return result
 
     def _get_first_measure_number(self):
         if not self._previous_metadata:
@@ -1291,6 +1283,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if abjad.inspect(voice).get_annotation('absent') is not True:
                 return abjad.inspect(voice).get_leaf(0)
             absent_voices.append(voice)
+        raise Exception('FOO')
         for voice in absent_voices:
             leaves = baca.select(voice).leaves()
             if not all(isinstance(_, abjad.MultimeasureRest) for _ in leaves):
@@ -1334,17 +1327,17 @@ class SegmentMaker(abjad.SegmentMaker):
         momentos = dictionary.get(context.name)
         if not momentos:
             return
-        class_string = self._class_string(prototype)
+        prototype_string = self._prototype_string(prototype)
         for momento in momentos:
-            if momento.prototype == class_string:
+            if momento.prototype == prototype_string:
                 indicator = self._key_to_indicator(momento.value, prototype)
                 return (indicator, momento.context)
 
-    def _get_previous_staff_lines(self, context):
+    def _get_persistent_staff_lines(self, context):
         assert isinstance(context, abjad.Context), repr(context)
         if not self._previous_metadata:
             return
-        string = self._class_string(baca.StaffLines)
+        string = self._prototype_string(baca.StaffLines)
         dictionary = self._previous_metadata.get(string)
         if dictionary:
             pair = dictionary.get(context.name)
@@ -1746,107 +1739,36 @@ class SegmentMaker(abjad.SegmentMaker):
         counter = abjad.String('second').pluralize(total_duration)
         print(f'segment duration {total_duration} {counter} ...')
 
+    @staticmethod
+    def _prototype_string(class_):
+        parts = class_.__module__.split('.')
+        return f'{parts[0]}.{parts[-1]}'
+
     def _reapply_persistent_indicators(self):
         if self._is_first_segment():
             return
         for context in abjad.iterate(self.score).components(abjad.Context):
-            persistent_clef_pair = self._get_persistent_indicator(
-                context,
-                abjad.Clef,
-                )
-            persistent_dynamic_pair = self._get_persistent_indicator(
-                context,
-                abjad.Dynamic,
-                )
-            persistent_instrument_pair = self._get_persistent_indicator(
-                context,
-                abjad.Instrument,
-                )
-            persistent_metronome_mark_pair = self._get_persistent_indicator(
-                context,
-                abjad.MetronomeMark,
-                )
-            persistent_staff_lines_pair = self._get_previous_staff_lines(
-                context,
-                )
-            persistent_time_signature_pair = self._get_persistent_indicator(
-                context,
-                abjad.TimeSignature,
-                )
-            persistent_indicator_pairs = [
-                persistent_clef_pair,
-                persistent_dynamic_pair,
-                persistent_instrument_pair,
-                persistent_metronome_mark_pair,
-                persistent_staff_lines_pair,
-                persistent_time_signature_pair,
-                ]
-            if not any(persistent_indicator_pairs):
+            string = 'persistent_indicators'
+            persistent_indicators = self._previous_metadata.get(string)
+            if not persistent_indicators:
+                continue
+            persistent_indicators = persistent_indicators.get(context.name)
+            if not persistent_indicators:
                 continue
             first_leaf = self._get_first_nonabsent_leaf(context)
-            if first_leaf is None:
-                if persistent_clef_pair is not None:
-                    previous_clef = persistent_clef_pair[0]
-                    local_context_headword = persistent_clef_pair[1]
-                    key = previous_clef.name
-                    pair = (key, local_context_headword)
-                    string = self._class_string(abjad.Clef)
-                    if string not in self._absent_indicators:
-                        self._absent_indicators[string] = {}
-                    self._absent_indicators[string][context.name] = pair
-                if persistent_dynamic_pair is not None:
-                    previous_dynamic = persistent_dynamic_pair[0]
-                    local_context_headword = persistent_dynamic_pair[1]
-                    key = previous_dynamic.name
-                    pair = (key, local_context_headword)
-                    string = self._class_string(abjad.Dynamic)
-                    if string not in self._absent_indicators:
-                        self._absent_indicators[string] = {}
-                    self._absent_indicators[string][context.name] = pair
-                if persistent_instrument_pair is not None:
-                    previous_instrument = persistent_instrument_pair[0]
-                    local_context_headword = persistent_instrument_pair[1]
-                    key = self._get_key(self.instruments, previous_instrument)
-                    pair = (key, local_context_headword)
-                    string = self._class_string(abjad.Instrument)
-                    if string not in self._absent_indicators:
-                        self._absent_indicators[string] = {}
-                    self._absent_indicators[string][context.name] = pair
-                if persistent_metronome_mark_pair is not None:
-                    previous_metronome_mark = persistent_metronome_mark_pair[0]
-                    local_headword = persistent_metronome_mark_pair[1]
-                    key = self._get_key(
-                        self.metronome_marks,
-                        previous_metronome_mark,
-                        )
-                    pair = (key, local_headword)
-                    string = self._class_string(abjad.MetronomeMark)
-                    if string not in self._absent_indicators:
-                        self._absent_indicators[string] = {}
-                    self._absent_indicators[string][context.name] = pair
-                if persistent_staff_lines_pair is not None:
-                    previous_staff_lines = persistent_staff_lines_pair[0]
-                    local_context_headword = persistent_staff_lines_pair[1]
-                    key = previous_staff_lines.line_count
-                    pair = (key, local_context_headword)
-                    string = self._class_string(baca.StaffLines)
-                    if string not in self._absent_indicators:
-                        self._absent_indicators[string] = {}
-                    self._absent_indicators[string][context.name] = pair
-                if persistent_time_signature_pair is not None:
-                    previous_time_signature = persistent_time_signature_pair[0]
-                    local_headword = persistent_time_signature_pair[1]
-                    key = str(previous_time_signature)
-                    pair = (key, local_headword)
-                    string = self._class_string(abjad.TimeSignature)
-                    if string not in self._absent_indicators:
-                        self._absent_indicators[string] = {}
-                    self._absent_indicators[string][context.name] = pair
-                continue
-            if persistent_metronome_mark_pair is not None:
-                previous_metronome_mark = persistent_metronome_mark_pair[0]
-                local_context_headword = persistent_metronome_mark_pair[1]
-                local_context = self.score[local_context_headword]
+
+            found = False
+            prototype = abjad.MetronomeMark
+            for momento in persistent_indicators:
+                if momento.prototype == self._prototype_string(prototype):
+                    found = True
+                    break
+            if found:
+                previous_metronome_mark = self._key_to_indicator(
+                    momento.value,
+                    prototype,
+                    )
+                local_context = self.score[momento.context]
                 first_local_leaf = abjad.select(local_context).leaf(0)
                 spanner = abjad.inspect(first_local_leaf).get_spanner(
                     abjad.MetronomeMarkSpanner
@@ -1862,10 +1784,19 @@ class SegmentMaker(abjad.SegmentMaker):
                         previous_metronome_mark,
                         status,
                         )
-            if persistent_time_signature_pair is not None:
-                previous_time_signature = persistent_time_signature_pair[0]
-                local_context_headword = persistent_time_signature_pair[1]
-                local_context = self.score[local_context_headword]
+
+            found = False
+            prototype = abjad.TimeSignature
+            for momento in persistent_indicators:
+                if momento.prototype == self._prototype_string(prototype):
+                    found = True
+                    break
+            if found:
+                previous_time_signature = self._key_to_indicator(
+                    momento.value,
+                    prototype,
+                    )
+                local_context = self.score[momento.context]
                 first_local_leaf = abjad.select(local_context).leaf(0)
                 my_time_signature = abjad.inspect(
                     first_local_leaf).get_indicator(abjad.TimeSignature)
@@ -1875,16 +1806,25 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.TimeSignature,
                         unwrap=False,
                         )
-                    context = wrapper.context
+                    #context = wrapper.context
                     self._tag_time_signature(
                         first_local_leaf,
                         my_time_signature,
-                        context,
+                        wrapper.context,
                         'redundant',
                         )
-            if persistent_instrument_pair is not None:
-                previous_instrument = persistent_instrument_pair[0]
-                local_context_headword = persistent_instrument_pair[1]
+
+            found = False
+            prototype = abjad.Instrument
+            for momento in persistent_indicators:
+                if momento.prototype == self._prototype_string(prototype):
+                    found = True
+                    break
+            if found:
+                previous_instrument = self._key_to_indicator(
+                    momento.value,
+                    prototype,
+                    )
                 my_instrument = abjad.inspect(first_leaf).get_indicator(
                     abjad.Instrument
                     )
@@ -1920,9 +1860,18 @@ class SegmentMaker(abjad.SegmentMaker):
                         my_instrument,
                         'explicit',
                         )
+
+            #found = False
+            #prototype = baca.StaffLines
+            #for momento in persistent_indicators:
+            #    if momento.prototype == self._prototype_string(prototype):
+            #        found = True
+            #        break
+            persistent_staff_lines_pair = self._get_persistent_staff_lines(
+                context,
+                )
             if persistent_staff_lines_pair is not None:
                 previous_staff_lines = persistent_staff_lines_pair[0]
-                local_context_headword = persistent_staff_lines_pair[1]
                 prototype = baca.StaffLines
                 staff_lines = abjad.inspect(first_leaf).get_indicator(
                     prototype)
@@ -1938,8 +1887,18 @@ class SegmentMaker(abjad.SegmentMaker):
                         context.headword,
                         status,
                         )
-            if persistent_clef_pair is not None:
-                previous_clef, local_context = persistent_clef_pair
+
+            found = False
+            prototype = abjad.Clef
+            for momento in persistent_indicators:
+                if momento.prototype == self._prototype_string(prototype):
+                    found = True
+                    break
+            if found:
+                previous_clef = self._key_to_indicator(
+                    momento.value,
+                    prototype,
+                    )
                 clef = abjad.inspect(first_leaf).get_indicator(abjad.Clef)
                 status = None
                 if clef is None:
@@ -1953,10 +1912,18 @@ class SegmentMaker(abjad.SegmentMaker):
                         context.headword,
                         status,
                         )
-            if persistent_dynamic_pair is not None:
-                previous_dynamic = persistent_dynamic_pair[0]
-                local_context_headword = persistent_dynamic_pair[1]
-                prototype = abjad.Dynamic
+
+            found = False
+            prototype = abjad.Dynamic
+            for momento in persistent_indicators:
+                if momento.prototype == self._prototype_string(prototype):
+                    found = True
+                    break
+            if found:
+                previous_dynamic = self._key_to_indicator(
+                    momento.value,
+                    prototype,
+                    )
                 dynamic = abjad.inspect(first_leaf).get_effective(prototype)
                 if dynamic is None:
                     self._tag_dynamic(
@@ -7974,6 +7941,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._remove_tags(remove)
         self._cache_metadata()
         self._print_segment_duration_()
+        assert not self._absent_indicators, repr(self._absent_indicators)
         return self._lilypond_file
 
     def validate_measure_count(self, measure_count):
