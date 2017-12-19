@@ -202,14 +202,14 @@ class SegmentMaker(abjad.SegmentMaker):
 
     _status_to_color = {
         'explicit': 'blue',
+        'persistent': 'green',
         'redundant': 'DeepPink1',
-        'reminder': 'green',
         }
 
     _status_to_shadow_color = {
         'explicit': 'DarkCyan',
+        'persistent': 'DarkGreen',
         'redundant': 'DeepPink4',
-        'reminder': 'DarkGreen',
         }
 
     _relative_string_trio_stylesheet_path = pathlib.Path(
@@ -1695,32 +1695,32 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         if prototype is abjad.Clef:
             dictionary = {
-                'uncontested': 'reminder',
+                'uncontested': 'persistent',
                 'same': 'redundant',
                 }
         elif prototype is abjad.Dynamic:
             dictionary = {
-                'uncontested': 'reminder',
+                'uncontested': 'persistent',
                 'same': None,
                 }
         elif prototype is abjad.Instrument:
             dictionary = {
-                'uncontested': 'reminder',
+                'uncontested': 'persistent',
                 'same': 'redundant',
                 }
         elif prototype is abjad.MetronomeMark:
             dictionary = {
-                'uncontested': 'reminder',
+                'uncontested': 'persistent',
                 'same': 'redundant',
                 }
         elif prototype is abjad.TimeSignature:
             dictionary = {
-                'uncontested': 'reminder',
-                'same': 'reminder',
+                'uncontested': 'persistent',
+                'same': 'persistent',
                 }
         elif prototype is baca.StaffLines:
             dictionary = {
-                'uncontested': 'reminder',
+                'uncontested': 'persistent',
                 'same': 'redundant',
                 }
         else:
@@ -2825,13 +2825,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "alto" %! REMINDER_CLEF_COMMAND:4
-                                    \once \override Staff.Clef.color = #(x11-color 'green) %! REMINDER_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! REMINDER_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! REMINDER_CLEF_COMMAND:3
+                                    \clef "alto" %! PERSISTENT_CLEF_COMMAND:4
+                                    \once \override Staff.Clef.color = #(x11-color 'green) %! PERSISTENT_CLEF_COLOR:1
+                                    %%% \override Staff.Clef.color = ##f %! PERSISTENT_CLEF_UNCOLOR:2
+                                    \set Staff.forceClef = ##t %! PERSISTENT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkGreen) %! REMINDER_CLEF_SHADOW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkGreen) %! PERSISTENT_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -6026,35 +6026,35 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \set Staff.instrumentName = \markup { Flute } %! REMINDER_INSTRUMENT_COMMAND:2
-                                    \set Staff.shortInstrumentName = \markup { Fl. } %! REMINDER_INSTRUMENT_COMMAND:2
-                                    \once \override Staff.InstrumentName.color = #(x11-color 'green) %! REMINDER_INSTRUMENT_COLOR:1
+                                    \set Staff.instrumentName = \markup { Flute } %! PERSISTENT_INSTRUMENT_COMMAND:2
+                                    \set Staff.shortInstrumentName = \markup { Fl. } %! PERSISTENT_INSTRUMENT_COMMAND:2
+                                    \once \override Staff.InstrumentName.color = #(x11-color 'green) %! PERSISTENT_INSTRUMENT_COLOR:1
                                     c'8
                                     [
                                     ^ \markup {
                                         \column
                                             {
-                                                %%% \line %! REMINDER_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     { %! REMINDER_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%         \override %! REMINDER_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             #'(box-padding . 0.75) %! REMINDER_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             \box %! REMINDER_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%                 flute %! REMINDER_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     } %! REMINDER_INSTRUMENT_CHANGE_MARKUP:5
-                                                \line %! REMINDER_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    { %! REMINDER_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                        \with-color %! REMINDER_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            #(x11-color 'green) %! REMINDER_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            \override %! REMINDER_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                #'(box-padding . 0.75) %! REMINDER_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                \box %! REMINDER_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                    flute %! REMINDER_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    } %! REMINDER_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                %%% \line %! PERSISTENT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%     { %! PERSISTENT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%         \override %! PERSISTENT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%             #'(box-padding . 0.75) %! PERSISTENT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%             \box %! PERSISTENT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%                 flute %! PERSISTENT_INSTRUMENT_CHANGE_MARKUP:5
+                                                %%%     } %! PERSISTENT_INSTRUMENT_CHANGE_MARKUP:5
+                                                \line %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                    { %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                        \with-color %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                            #(x11-color 'green) %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                            \override %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                                #'(box-padding . 0.75) %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                                \box %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                                    flute %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                    } %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { Flute } %! REMINDER_INSTRUMENT_SHADOW_COMMAND:4
-                                    \set Staff.shortInstrumentName = \markup { Fl. } %! REMINDER_INSTRUMENT_SHADOW_COMMAND:4
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkGreen) %! REMINDER_INSTRUMENT_SHADOW_COLOR:3
+                                    \set Staff.instrumentName = \markup { Flute } %! PERSISTENT_INSTRUMENT_SHADOW_COMMAND:4
+                                    \set Staff.shortInstrumentName = \markup { Fl. } %! PERSISTENT_INSTRUMENT_SHADOW_COMMAND:4
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkGreen) %! PERSISTENT_INSTRUMENT_SHADOW_COLOR:3
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -6788,12 +6788,12 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "alto" %! REMINDER_CLEF_COMMAND:4
-                                \once \override Staff.Clef.color = #(x11-color 'green) %! REMINDER_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! REMINDER_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! REMINDER_CLEF_COMMAND:3
+                                \clef "alto" %! PERSISTENT_CLEF_COMMAND:4
+                                \once \override Staff.Clef.color = #(x11-color 'green) %! PERSISTENT_CLEF_COLOR:1
+                                %%% \override Staff.Clef.color = ##f %! PERSISTENT_CLEF_UNCOLOR:2
+                                \set Staff.forceClef = ##t %! PERSISTENT_CLEF_COMMAND:3
                                 R1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'DarkGreen) %! REMINDER_CLEF_SHADOW_COLOR:5
+                                \override Staff.Clef.color = #(x11-color 'DarkGreen) %! PERSISTENT_CLEF_SHADOW_COLOR:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 R1 * 3/8
