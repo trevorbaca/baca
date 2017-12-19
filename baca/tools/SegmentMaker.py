@@ -1716,8 +1716,7 @@ class SegmentMaker(abjad.SegmentMaker):
         elif prototype is abjad.MetronomeMark:
             dictionary = {
                 'uncontested': 'reminder',
-                # TODO: tag redundant metronome marks here (not later):
-                #'same': 'redundant',
+                'same': 'redundant',
                 'same': None,
                 'different': None,
                 }
@@ -2294,7 +2293,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 abjad.Instrument,
                 n=-1,
                 )
-            # TODO: compare on keys instead
             if previous_instrument == instrument:
                 self._tag_instrument(
                     leaf,
