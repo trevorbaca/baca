@@ -905,7 +905,7 @@ class ImbricationCommand(Command):
                             \time 7/16
                             \bar "" %! EMPTY_START_BAR:1
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
                             s1 * 7/16
                             - \markup {
                                 \column
@@ -932,7 +932,7 @@ class ImbricationCommand(Command):
                             %%% GlobalSkips [measure 2] %%%
                             \time 1/4
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:2
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:2
                             s1 * 1/4
                             - \markup {
                                 \column

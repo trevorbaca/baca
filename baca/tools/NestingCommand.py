@@ -142,7 +142,7 @@ class NestingCommand(Command):
                         \time 1/2
                         \bar "" %! EMPTY_START_BAR:1
                         \newSpacingSection
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
                         s1 * 1/2
                         - \markup {
                             \column
@@ -169,7 +169,7 @@ class NestingCommand(Command):
                         %%% GlobalSkips [measure 2] %%%
                         \time 1/4
                         \newSpacingSection
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                         s1 * 1/4
                         - \markup { %! SEGMENT:SPACING_MARKUP:2
                             \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -194,13 +194,13 @@ class NestingCommand(Command):
                                         %%% MusicVoice [measure 1] %%%
                                         \set stemLeftBeamCount = #0
                                         \set stemRightBeamCount = #2
-                                        \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                        \clef "treble" %! EXPLICIT_CLEF:4
                                         \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                         %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                        \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                        \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                         c'16
                                         [
-                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
             <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2

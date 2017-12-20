@@ -63,13 +63,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                \clef "treble" %! EXPLICIT_CLEF:4
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                 c'8
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
             <BLANKLINE>
                                 c'8
             <BLANKLINE>
@@ -435,17 +435,17 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                    \clef "treble" %! EXPLICIT_CLEF:4
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                     c'8
                                     [
                                     ^ \markup {
                                         \small
                                             0
                                         }
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -780,7 +780,7 @@ class SegmentMaker(abjad.SegmentMaker):
         prototype = baca.StaffLines
         staff_lines = baca.StaffLines(self.fermata_measure_staff_line_count)
         breaks_already_treated = []
-        tag = baca.Tags.tag(baca.Tags.FERMATA_BAR_LINE, build)
+        tag = baca.Tags.build(baca.Tags.FERMATA_BAR_LINE, build)
         for staff in abjad.iterate(self._score).components(abjad.Staff):
             for leaf in abjad.iterate(staff).leaves():
                 start_offset = abjad.inspect(leaf).get_timespan().start_offset
@@ -1139,7 +1139,7 @@ class SegmentMaker(abjad.SegmentMaker):
         else:
             literal = abjad.LilyPondLiteral(string)
         if redraw:
-            item = 'redraw_color'
+            item = 'color_redraw'
         else:
             item = 'color'
         stem = stem or grob
@@ -1395,10 +1395,13 @@ class SegmentMaker(abjad.SegmentMaker):
         return includes
 
     @staticmethod
-    def _get_tag(status, stem, item):
+    def _get_tag(status, stem, suffix=None):
         stem = abjad.String(stem).delimit_words()
         stem = '_'.join([_.upper() for _ in stem])
-        name = f'{status.upper()}_{stem}_{item.upper()}'
+        if suffix is not None:
+            name = f'{status.upper()}_{stem}_{suffix.upper()}'
+        else:
+            name = f'{status.upper()}_{stem}'
         tag = getattr(baca.Tags, name)
         return tag
 
@@ -1901,9 +1904,9 @@ class SegmentMaker(abjad.SegmentMaker):
         if isinstance(command, str):
             command = abjad.LilyPondLiteral(command)
         if redraw_command is True:
-            tag = self._get_tag(status, stem, 'redraw_command')
+            tag = self._get_tag(status, stem, 'redraw')
         else:
-            tag = self._get_tag(status, stem, 'command')
+            tag = self._get_tag(status, stem)
         if spanner is None:
             if context is None:
                 abjad.attach(command, leaf, tag=tag)
@@ -2108,7 +2111,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         baca.Tags.tag(baca.Tags.SPACING_MARKUP),
+            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
             ...         baca.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
@@ -2132,28 +2135,28 @@ class SegmentMaker(abjad.SegmentMaker):
                             \mark #1
                             \bar "" %! EMPTY_START_BAR:1
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 2/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/4
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 5] %%%
@@ -2161,28 +2164,28 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
                             \time 4/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 6] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 7] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 2/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/4
                 <BLANKLINE>
                             %%% GlobalSkips [measure 8] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 9] %%%
@@ -2190,28 +2193,28 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 40) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
                             \time 4/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 10] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 11] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 2/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/4
                 <BLANKLINE>
                             %%% GlobalSkips [measure 12] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -2222,13 +2225,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                    \clef "treble" %! EXPLICIT_CLEF:4
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -2295,13 +2298,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 7] %%%
-                                    \clef "alto" %! EXPLICIT_CLEF_COMMAND:4
+                                    \clef "alto" %! EXPLICIT_CLEF:4
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -2410,7 +2413,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         baca.Tags.tag(baca.Tags.SPACING_MARKUP),
+            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
             ...         baca.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
@@ -2435,28 +2438,28 @@ class SegmentMaker(abjad.SegmentMaker):
                             \mark #1
                             \bar "" %! EMPTY_START_BAR:1
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 2/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/4
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 5] %%%
@@ -2464,28 +2467,28 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
                             \time 4/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 6] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 7] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 2/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/4
                 <BLANKLINE>
                             %%% GlobalSkips [measure 8] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 9] %%%
@@ -2493,28 +2496,28 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 40) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
                             \time 4/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 10] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 11] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 2/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/4
                 <BLANKLINE>
                             %%% GlobalSkips [measure 12] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -2525,13 +2528,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "alto" %! REAPPLIED_CLEF_COMMAND:4
+                                    \clef "alto" %! REAPPLIED_CLEF:4
                                     \once \override Staff.Clef.color = #(x11-color 'green) %! REAPPLIED_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! REAPPLIED_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! REAPPLIED_CLEF_COMMAND:3
+                                    \set Staff.forceClef = ##t %! REAPPLIED_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkGreen) %! REAPPLIED_CLEF_REDRAW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkGreen) %! REAPPLIED_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -2598,13 +2601,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 7] %%%
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                    \clef "treble" %! EXPLICIT_CLEF:4
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -2719,7 +2722,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=(
-            ...         baca.Tags.tag(baca.Tags.SPACING_MARKUP),
+            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
             ...         baca.Tags.STAGE_NUMBER_MARKUP,
             ...         ),
             ...     )
@@ -2744,28 +2747,28 @@ class SegmentMaker(abjad.SegmentMaker):
                             \mark #1
                             \bar "" %! EMPTY_START_BAR:1
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 2/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/4
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 5] %%%
@@ -2773,28 +2776,28 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
                             \time 4/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 6] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 7] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 2/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/4
                 <BLANKLINE>
                             %%% GlobalSkips [measure 8] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 9] %%%
@@ -2802,28 +2805,28 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 40) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
                             \time 4/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 10] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 11] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 2/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/4
                 <BLANKLINE>
                             %%% GlobalSkips [measure 12] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 13] %%%
@@ -2831,28 +2834,28 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 60) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
                             \time 4/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 14] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 15] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 2/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/4
                 <BLANKLINE>
                             %%% GlobalSkips [measure 16] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -2863,13 +2866,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "alto" %! REDUNDANT_CLEF_COMMAND:4
+                                    \clef "alto" %! REDUNDANT_CLEF:4
                                     \once \override Staff.Clef.color = #(x11-color 'DeepPink1) %! REDUNDANT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! REDUNDANT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! REDUNDANT_CLEF_COMMAND:3
+                                    \set Staff.forceClef = ##t %! REDUNDANT_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DeepPink4) %! REDUNDANT_CLEF_REDRAW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DeepPink4) %! REDUNDANT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -2936,13 +2939,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 7] %%%
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                    \clef "treble" %! EXPLICIT_CLEF:4
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -2985,13 +2988,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 11] %%%
-                                    \clef "treble" %! REDUNDANT_CLEF_COMMAND:4
+                                    \clef "treble" %! REDUNDANT_CLEF:4
                                     \once \override Staff.Clef.color = #(x11-color 'DeepPink1) %! REDUNDANT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! REDUNDANT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! REDUNDANT_CLEF_COMMAND:3
+                                    \set Staff.forceClef = ##t %! REDUNDANT_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DeepPink4) %! REDUNDANT_CLEF_REDRAW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DeepPink4) %! REDUNDANT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -3116,7 +3119,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 6/16
                             \bar "" %! EMPTY_START_BAR:1
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 31) %! SEGMENT:SPACING_COMMAND:3
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 31) %! SEGMENT:SPACING:3
                             s1 * 3/8
                             - \markup {
                                 \column
@@ -3151,20 +3154,20 @@ class SegmentMaker(abjad.SegmentMaker):
                                         {
                 <BLANKLINE>
                                             %%% ViolinMusicVoice [measure 1] %%%
-                                            \set ViolinMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                                \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                                    #10 %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                                    Violin %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                                } %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                            \set ViolinMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                                \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                                    #10 %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                                    Vn. %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                                } %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                            \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                            \set ViolinMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT:9
+                                                \hcenter-in %! EXPLICIT_INSTRUMENT:9
+                                                    #10 %! EXPLICIT_INSTRUMENT:9
+                                                    Violin %! EXPLICIT_INSTRUMENT:9
+                                                } %! EXPLICIT_INSTRUMENT:9
+                                            \set ViolinMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT:9
+                                                \hcenter-in %! EXPLICIT_INSTRUMENT:9
+                                                    #10 %! EXPLICIT_INSTRUMENT:9
+                                                    Vn. %! EXPLICIT_INSTRUMENT:9
+                                                } %! EXPLICIT_INSTRUMENT:9
+                                            \clef "treble" %! EXPLICIT_CLEF:4
                                             \once \override ViolinMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                             %%% \override ViolinMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                            \set ViolinMusicStaff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                            \set ViolinMusicStaff.forceClef = ##t %! EXPLICIT_CLEF:3
                                             \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:6
                                             d'16
                                             ^ \markup {
@@ -3188,18 +3191,18 @@ class SegmentMaker(abjad.SegmentMaker):
                                                             } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:8
                                                     }
                                                 }
-                                            \set ViolinMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                                \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                                    #10 %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                                    Violin %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                                } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                            \set ViolinMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                                \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                                    #10 %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                                    Vn. %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                                } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                            \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
-                                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_REDRAW_COLOR:10
+                                            \set ViolinMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                                \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                                    #10 %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                                    Violin %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                                } %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                            \set ViolinMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                                \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                                    #10 %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                                    Vn. %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                                } %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                            \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_COLOR_REDRAW:10
                 <BLANKLINE>
                                             e'16
                 <BLANKLINE>
@@ -3228,20 +3231,20 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \context ViolaMusicVoice = "ViolaMusicVoice" {
                 <BLANKLINE>
                                     %%% ViolaMusicVoice [measure 1] %%%
-                                    \set ViolaMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                        \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                            #10 %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                            Viola %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                        } %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                    \set ViolaMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                        \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                            #10 %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                            Va. %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                        } %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                    \clef "alto" %! EXPLICIT_CLEF_COMMAND:4
+                                    \set ViolaMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT:9
+                                        \hcenter-in %! EXPLICIT_INSTRUMENT:9
+                                            #10 %! EXPLICIT_INSTRUMENT:9
+                                            Viola %! EXPLICIT_INSTRUMENT:9
+                                        } %! EXPLICIT_INSTRUMENT:9
+                                    \set ViolaMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT:9
+                                        \hcenter-in %! EXPLICIT_INSTRUMENT:9
+                                            #10 %! EXPLICIT_INSTRUMENT:9
+                                            Va. %! EXPLICIT_INSTRUMENT:9
+                                        } %! EXPLICIT_INSTRUMENT:9
+                                    \clef "alto" %! EXPLICIT_CLEF:4
                                     \once \override ViolaMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override ViolaMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set ViolaMusicStaff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                    \set ViolaMusicStaff.forceClef = ##t %! EXPLICIT_CLEF:3
                                     \once \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:6
                                     R1 * 3/8
                                     ^ \markup {
@@ -3265,19 +3268,19 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:8
                                             }
                                         }
-                                    \set ViolaMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                        \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                            #10 %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                            Viola %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                        } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                    \set ViolaMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                        \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                            #10 %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                            Va. %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                        } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                    \set ViolaMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                        \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                            #10 %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                            Viola %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                        } %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                    \set ViolaMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                        \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                            #10 %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                            Va. %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                        } %! EXPLICIT_INSTRUMENT_REDRAW:11
                                     \bar "|"
-                                    \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
-                                    \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_REDRAW_COLOR:10
+                                    \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                    \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_COLOR_REDRAW:10
                 <BLANKLINE>
                                 }
                             }
@@ -3288,20 +3291,20 @@ class SegmentMaker(abjad.SegmentMaker):
                                         {
                 <BLANKLINE>
                                             %%% CelloMusicVoice [measure 1] %%%
-                                            \set CelloMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                                \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                                    #10 %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                                    Cello %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                                } %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                            \set CelloMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                                \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                                    #10 %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                                    Vc. %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                                } %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                            \clef "bass" %! EXPLICIT_CLEF_COMMAND:4
+                                            \set CelloMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT:9
+                                                \hcenter-in %! EXPLICIT_INSTRUMENT:9
+                                                    #10 %! EXPLICIT_INSTRUMENT:9
+                                                    Cello %! EXPLICIT_INSTRUMENT:9
+                                                } %! EXPLICIT_INSTRUMENT:9
+                                            \set CelloMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT:9
+                                                \hcenter-in %! EXPLICIT_INSTRUMENT:9
+                                                    #10 %! EXPLICIT_INSTRUMENT:9
+                                                    Vc. %! EXPLICIT_INSTRUMENT:9
+                                                } %! EXPLICIT_INSTRUMENT:9
+                                            \clef "bass" %! EXPLICIT_CLEF:4
                                             \once \override CelloMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                             %%% \override CelloMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                            \set CelloMusicStaff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                            \set CelloMusicStaff.forceClef = ##t %! EXPLICIT_CLEF:3
                                             \once \override CelloMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:6
                                             a16
                                             ^ \markup {
@@ -3325,18 +3328,18 @@ class SegmentMaker(abjad.SegmentMaker):
                                                             } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:8
                                                     }
                                                 }
-                                            \set CelloMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                                \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                                    #10 %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                                    Cello %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                                } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                            \set CelloMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                                \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                                    #10 %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                                    Vc. %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                                } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                            \override CelloMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
-                                            \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_REDRAW_COLOR:10
+                                            \set CelloMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                                \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                                    #10 %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                                    Cello %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                                } %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                            \set CelloMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                                \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                                    #10 %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                                    Vc. %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                                } %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                            \override CelloMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                            \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_COLOR_REDRAW:10
                 <BLANKLINE>
                                             g16
                 <BLANKLINE>
@@ -3434,7 +3437,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 1/16
                             \bar "" %! EMPTY_START_BAR:1
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
                             s1 * 1/16
                             - \markup {
                                 \column
@@ -3461,7 +3464,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 2] %%%
                             \time 7/16
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 7/16
                             - \markup { %! SEGMENT:SPACING_MARKUP:2
                                 \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -3474,7 +3477,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 3] %%%
                             \time 1/16
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/16
                             - \markup { %! SEGMENT:SPACING_MARKUP:2
                                 \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -3487,7 +3490,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                             - \markup { %! SEGMENT:SPACING_MARKUP:2
                                 \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -3506,12 +3509,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                 <BLANKLINE>
                                         %%% MusicVoice [measure 1] %%%
-                                        \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                        \clef "treble" %! EXPLICIT_CLEF:4
                                         \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                         %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                        \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                        \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                         e'16
-                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                                     }
                                 }
                                 {
@@ -3641,7 +3644,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 1/16
                             \bar "" %! EMPTY_START_BAR:1
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
                             s1 * 1/16
                             - \markup {
                                 \column
@@ -3668,7 +3671,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 2] %%%
                             \time 7/16
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 7/16
                             - \markup { %! SEGMENT:SPACING_MARKUP:2
                                 \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -3681,7 +3684,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 3] %%%
                             \time 1/16
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/16
                             - \markup { %! SEGMENT:SPACING_MARKUP:2
                                 \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -3694,7 +3697,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                             - \markup { %! SEGMENT:SPACING_MARKUP:2
                                 \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -3713,12 +3716,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                 <BLANKLINE>
                                         %%% MusicVoice [measure 1] %%%
-                                        \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                        \clef "treble" %! EXPLICIT_CLEF:4
                                         \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                         %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                        \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                        \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                         e'16
-                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                                     }
                                 }
                                 {
@@ -3898,13 +3901,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                    \clef "treble" %! EXPLICIT_CLEF:4
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4011,13 +4014,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                    \clef "treble" %! EXPLICIT_CLEF:4
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4126,13 +4129,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                    \clef "treble" %! EXPLICIT_CLEF:4
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4243,13 +4246,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                    \clef "treble" %! EXPLICIT_CLEF:4
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4370,13 +4373,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                    \clef "treble" %! EXPLICIT_CLEF:4
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4540,13 +4543,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                    \clef "treble" %! EXPLICIT_CLEF:4
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4658,13 +4661,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                    \clef "treble" %! EXPLICIT_CLEF:4
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -4861,7 +4864,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/16
                             \bar "" %! EMPTY_START_BAR:1
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
                             s1 * 3/16
                             - \markup {
                                 \column
@@ -4888,7 +4891,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/16
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/16
                             - \markup { %! SEGMENT:SPACING_MARKUP:2
                                 \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -4901,7 +4904,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 3] %%%
                             \time 3/16
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/16
                             - \markup { %! SEGMENT:SPACING_MARKUP:2
                                 \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -4914,7 +4917,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 4] %%%
                             \time 3/16
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/16
                             - \markup { %! SEGMENT:SPACING_MARKUP:2
                                 \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -4933,12 +4936,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                 <BLANKLINE>
                                         %%% MusicVoice [measure 1] %%%
-                                        \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                        \clef "treble" %! EXPLICIT_CLEF:4
                                         \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                         %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                        \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                        \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                         e'8.
-                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                                     }
                                 }
                                 {
@@ -5065,7 +5068,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/16
                             \bar "" %! EMPTY_START_BAR:1
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
                             s1 * 3/16
                             - \markup {
                                 \column
@@ -5092,7 +5095,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/16
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/16
                             - \markup { %! SEGMENT:SPACING_MARKUP:2
                                 \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -5105,7 +5108,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 3] %%%
                             \time 3/16
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/16
                             - \markup { %! SEGMENT:SPACING_MARKUP:2
                                 \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -5118,7 +5121,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 4] %%%
                             \time 3/16
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/16
                             - \markup { %! SEGMENT:SPACING_MARKUP:2
                                 \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -5143,12 +5146,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override Flag.color = #magenta
                                         \once \override NoteHead.color = #magenta
                                         \once \override Stem.color = #magenta
-                                        \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                        \clef "treble" %! EXPLICIT_CLEF:4
                                         \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                         %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                        \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                        \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                         e'8.
-                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                                     }
                                 }
                                 {
@@ -5316,7 +5319,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     )
             >>> remove = [
-            ...     baca.Tags.tag(baca.Tags.SPACING_MARKUP),
+            ...     baca.Tags.build(baca.Tags.SPACING_MARKUP),
             ...     baca.Tags.STAGE_NUMBER_MARKUP,
             ...     ]
 
@@ -5378,28 +5381,28 @@ class SegmentMaker(abjad.SegmentMaker):
                             \mark #1
                             \bar "" %! EMPTY_START_BAR:1
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 2/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/4
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 5] %%%
@@ -5407,28 +5410,28 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 25) (alignment-distances . (11))) %! SEGMENT:LAYOUT:4
                             \time 4/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 6] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 7] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 2/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/4
                 <BLANKLINE>
                             %%% GlobalSkips [measure 8] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 9] %%%
@@ -5436,28 +5439,28 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 50) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
                             \time 4/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 10] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 11] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 2/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/4
                 <BLANKLINE>
                             %%% GlobalSkips [measure 12] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -5468,8 +5471,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT_COMMAND:4
-                                    \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                    \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT:4
+                                    \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT:4
                                     \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
                                     c'8
                                     [
@@ -5494,9 +5497,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:6
-                                    \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:6
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_REDRAW_COLOR:5
+                                    \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT_REDRAW:6
+                                    \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT_REDRAW:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -5563,8 +5566,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 7] %%%
-                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_COMMAND:4
-                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT:4
+                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT:4
                                     \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
                                     c'8
                                     [
@@ -5589,9 +5592,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:6
-                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:6
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_REDRAW_COLOR:5
+                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_REDRAW:6
+                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_REDRAW:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -5715,28 +5718,28 @@ class SegmentMaker(abjad.SegmentMaker):
                             \mark #1
                             \bar "" %! EMPTY_START_BAR:1
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 2/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/4
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 5] %%%
@@ -5744,28 +5747,28 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 25) (alignment-distances . (11))) %! SEGMENT:LAYOUT:4
                             \time 4/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 6] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 7] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 2/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/4
                 <BLANKLINE>
                             %%% GlobalSkips [measure 8] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 9] %%%
@@ -5773,28 +5776,28 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 50) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
                             \time 4/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 10] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 11] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 2/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/4
                 <BLANKLINE>
                             %%% GlobalSkips [measure 12] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -5805,8 +5808,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \set Staff.instrumentName = \markup { Flute } %! REAPPLIED_INSTRUMENT_COMMAND:4
-                                    \set Staff.shortInstrumentName = \markup { Fl. } %! REAPPLIED_INSTRUMENT_COMMAND:4
+                                    \set Staff.instrumentName = \markup { Flute } %! REAPPLIED_INSTRUMENT:4
+                                    \set Staff.shortInstrumentName = \markup { Fl. } %! REAPPLIED_INSTRUMENT:4
                                     \once \override Staff.InstrumentName.color = #(x11-color 'green) %! REAPPLIED_INSTRUMENT_COLOR:1
                                     c'8
                                     [
@@ -5831,9 +5834,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     } %! REAPPLIED_INSTRUMENT_CHANGE_COLORED_MARKUP:3
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { Flute } %! REAPPLIED_INSTRUMENT_REDRAW_COMMAND:6
-                                    \set Staff.shortInstrumentName = \markup { Fl. } %! REAPPLIED_INSTRUMENT_REDRAW_COMMAND:6
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkGreen) %! REAPPLIED_INSTRUMENT_REDRAW_COLOR:5
+                                    \set Staff.instrumentName = \markup { Flute } %! REAPPLIED_INSTRUMENT_REDRAW:6
+                                    \set Staff.shortInstrumentName = \markup { Fl. } %! REAPPLIED_INSTRUMENT_REDRAW:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkGreen) %! REAPPLIED_INSTRUMENT_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -5900,8 +5903,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 7] %%%
-                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_COMMAND:4
-                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT:4
+                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT:4
                                     \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
                                     c'8
                                     [
@@ -5926,9 +5929,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:6
-                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:6
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_REDRAW_COLOR:5
+                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_REDRAW:6
+                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_REDRAW:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -6065,28 +6068,28 @@ class SegmentMaker(abjad.SegmentMaker):
                             \mark #1
                             \bar "" %! EMPTY_START_BAR:1
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:3
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 2/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/4
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 5] %%%
@@ -6094,28 +6097,28 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 25) (alignment-distances . (11))) %! SEGMENT:LAYOUT:4
                             \time 4/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 6] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 7] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 2/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/4
                 <BLANKLINE>
                             %%% GlobalSkips [measure 8] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 9] %%%
@@ -6123,28 +6126,28 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 50) (alignment-distances . (11))) %! SEGMENT:LAYOUT:4
                             \time 4/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 10] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 11] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 2/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/4
                 <BLANKLINE>
                             %%% GlobalSkips [measure 12] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 13] %%%
@@ -6152,28 +6155,28 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 75) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
                             \time 4/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 14] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 15] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 2/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 1/4
                 <BLANKLINE>
                             %%% GlobalSkips [measure 16] %%%
                             \noBreak %! SEGMENT:LAYOUT:3
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING_COMMAND:1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -6184,8 +6187,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \set Staff.instrumentName = \markup { Flute } %! REDUNDANT_INSTRUMENT_COMMAND:4
-                                    \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_INSTRUMENT_COMMAND:4
+                                    \set Staff.instrumentName = \markup { Flute } %! REDUNDANT_INSTRUMENT:4
+                                    \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_INSTRUMENT:4
                                     \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_COLOR:1
                                     c'8
                                     [
@@ -6210,9 +6213,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     } %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { Flute } %! REDUNDANT_INSTRUMENT_REDRAW_COMMAND:6
-                                    \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_INSTRUMENT_REDRAW_COMMAND:6
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_INSTRUMENT_REDRAW_COLOR:5
+                                    \set Staff.instrumentName = \markup { Flute } %! REDUNDANT_INSTRUMENT_REDRAW:6
+                                    \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_INSTRUMENT_REDRAW:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_INSTRUMENT_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -6279,8 +6282,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 7] %%%
-                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_COMMAND:4
-                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT:4
+                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT:4
                                     \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
                                     c'8
                                     [
@@ -6305,9 +6308,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:6
-                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:6
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_REDRAW_COLOR:5
+                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_REDRAW:6
+                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_REDRAW:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -6350,8 +6353,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 11] %%%
-                                    \set Staff.instrumentName = \markup { Piccolo } %! REDUNDANT_INSTRUMENT_COMMAND:4
-                                    \set Staff.shortInstrumentName = \markup { Picc. } %! REDUNDANT_INSTRUMENT_COMMAND:4
+                                    \set Staff.instrumentName = \markup { Piccolo } %! REDUNDANT_INSTRUMENT:4
+                                    \set Staff.shortInstrumentName = \markup { Picc. } %! REDUNDANT_INSTRUMENT:4
                                     \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_COLOR:1
                                     c'8
                                     [
@@ -6376,9 +6379,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     } %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { Piccolo } %! REDUNDANT_INSTRUMENT_REDRAW_COMMAND:6
-                                    \set Staff.shortInstrumentName = \markup { Picc. } %! REDUNDANT_INSTRUMENT_REDRAW_COMMAND:6
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_INSTRUMENT_REDRAW_COLOR:5
+                                    \set Staff.instrumentName = \markup { Piccolo } %! REDUNDANT_INSTRUMENT_REDRAW:6
+                                    \set Staff.shortInstrumentName = \markup { Picc. } %! REDUNDANT_INSTRUMENT_REDRAW:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_INSTRUMENT_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -6569,12 +6572,12 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "alto" %! REAPPLIED_CLEF_COMMAND:4
+                                \clef "alto" %! REAPPLIED_CLEF:4
                                 \once \override Staff.Clef.color = #(x11-color 'green) %! REAPPLIED_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! REAPPLIED_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! REAPPLIED_CLEF_COMMAND:3
+                                \set Staff.forceClef = ##t %! REAPPLIED_CLEF:3
                                 R1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'DarkGreen) %! REAPPLIED_CLEF_REDRAW_COLOR:5
+                                \override Staff.Clef.color = #(x11-color 'DarkGreen) %! REAPPLIED_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 R1 * 3/8
@@ -6739,13 +6742,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                    \clef "treble" %! EXPLICIT_CLEF:4
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -6983,12 +6986,12 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                \clef "treble" %! EXPLICIT_CLEF:4
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                 R1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 R1 * 3/8
@@ -7056,12 +7059,12 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                \clef "treble" %! EXPLICIT_CLEF:4
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                 s1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 s1 * 3/8
@@ -7176,13 +7179,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                    \clef "treble" %! EXPLICIT_CLEF:4
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -7316,12 +7319,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT:9
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT:9
+                                    \clef "treble" %! EXPLICIT_CLEF:4
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                     \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:6
                                     fs'8
                                     [
@@ -7346,10 +7349,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:8
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_REDRAW_COLOR:10
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_COLOR_REDRAW:10
                 <BLANKLINE>
                                     g'8
                 <BLANKLINE>
@@ -7461,12 +7464,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT:9
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT:9
+                                    \clef "treble" %! EXPLICIT_CLEF:4
                                     \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                     \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:6
                                     e'8
                                     [
@@ -7491,10 +7494,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:8
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_REDRAW_COLOR:10
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_COLOR_REDRAW:10
                 <BLANKLINE>
                                     f'8
                 <BLANKLINE>

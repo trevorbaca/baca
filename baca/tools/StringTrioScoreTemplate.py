@@ -57,20 +57,20 @@ class StringTrioScoreTemplate(ScoreTemplate):
                             \context ViolinMusicVoice = "ViolinMusicVoice" {
             <BLANKLINE>
                                 %%% ViolinMusicVoice [measure 1] %%%
-                                \set ViolinMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                    \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                        #10 %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                        Violin %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                    } %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                    \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                        #10 %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                        Vn. %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                    } %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                \set ViolinMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT:9
+                                    \hcenter-in %! EXPLICIT_INSTRUMENT:9
+                                        #10 %! EXPLICIT_INSTRUMENT:9
+                                        Violin %! EXPLICIT_INSTRUMENT:9
+                                    } %! EXPLICIT_INSTRUMENT:9
+                                \set ViolinMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT:9
+                                    \hcenter-in %! EXPLICIT_INSTRUMENT:9
+                                        #10 %! EXPLICIT_INSTRUMENT:9
+                                        Vn. %! EXPLICIT_INSTRUMENT:9
+                                    } %! EXPLICIT_INSTRUMENT:9
+                                \clef "treble" %! EXPLICIT_CLEF:4
                                 \once \override ViolinMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override ViolinMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                \set ViolinMusicStaff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                \set ViolinMusicStaff.forceClef = ##t %! EXPLICIT_CLEF:3
                                 \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:6
                                 R1 * 1/2
                                 ^ \markup {
@@ -94,18 +94,18 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                                 } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:8
                                         }
                                     }
-                                \set ViolinMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                    \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                        #10 %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                        Violin %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                    } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                    \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                        #10 %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                        Vn. %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                    } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
-                                \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_REDRAW_COLOR:10
+                                \set ViolinMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                    \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                        #10 %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                        Violin %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                    } %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                \set ViolinMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                    \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                        #10 %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                        Vn. %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                    } %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_COLOR_REDRAW:10
             <BLANKLINE>
                                 %%% ViolinMusicVoice [measure 2] %%%
                                 R1 * 3/8
@@ -124,20 +124,20 @@ class StringTrioScoreTemplate(ScoreTemplate):
                             \context ViolaMusicVoice = "ViolaMusicVoice" {
             <BLANKLINE>
                                 %%% ViolaMusicVoice [measure 1] %%%
-                                \set ViolaMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                    \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                        #10 %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                        Viola %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                    } %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                \set ViolaMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                    \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                        #10 %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                        Va. %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                    } %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                \clef "alto" %! EXPLICIT_CLEF_COMMAND:4
+                                \set ViolaMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT:9
+                                    \hcenter-in %! EXPLICIT_INSTRUMENT:9
+                                        #10 %! EXPLICIT_INSTRUMENT:9
+                                        Viola %! EXPLICIT_INSTRUMENT:9
+                                    } %! EXPLICIT_INSTRUMENT:9
+                                \set ViolaMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT:9
+                                    \hcenter-in %! EXPLICIT_INSTRUMENT:9
+                                        #10 %! EXPLICIT_INSTRUMENT:9
+                                        Va. %! EXPLICIT_INSTRUMENT:9
+                                    } %! EXPLICIT_INSTRUMENT:9
+                                \clef "alto" %! EXPLICIT_CLEF:4
                                 \once \override ViolaMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override ViolaMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                \set ViolaMusicStaff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                \set ViolaMusicStaff.forceClef = ##t %! EXPLICIT_CLEF:3
                                 \once \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:6
                                 R1 * 1/2
                                 ^ \markup {
@@ -161,18 +161,18 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                                 } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:8
                                         }
                                     }
-                                \set ViolaMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                    \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                        #10 %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                        Viola %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                    } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                \set ViolaMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                    \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                        #10 %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                        Va. %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                    } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
-                                \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_REDRAW_COLOR:10
+                                \set ViolaMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                    \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                        #10 %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                        Viola %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                    } %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                \set ViolaMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                    \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                        #10 %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                        Va. %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                    } %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_COLOR_REDRAW:10
             <BLANKLINE>
                                 %%% ViolaMusicVoice [measure 2] %%%
                                 R1 * 3/8
@@ -191,20 +191,20 @@ class StringTrioScoreTemplate(ScoreTemplate):
                             \context CelloMusicVoice = "CelloMusicVoice" {
             <BLANKLINE>
                                 %%% CelloMusicVoice [measure 1] %%%
-                                \set CelloMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                    \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                        #10 %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                        Cello %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                    } %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                \set CelloMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                    \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                        #10 %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                        Vc. %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                    } %! EXPLICIT_INSTRUMENT_COMMAND:9
-                                \clef "bass" %! EXPLICIT_CLEF_COMMAND:4
+                                \set CelloMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT:9
+                                    \hcenter-in %! EXPLICIT_INSTRUMENT:9
+                                        #10 %! EXPLICIT_INSTRUMENT:9
+                                        Cello %! EXPLICIT_INSTRUMENT:9
+                                    } %! EXPLICIT_INSTRUMENT:9
+                                \set CelloMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT:9
+                                    \hcenter-in %! EXPLICIT_INSTRUMENT:9
+                                        #10 %! EXPLICIT_INSTRUMENT:9
+                                        Vc. %! EXPLICIT_INSTRUMENT:9
+                                    } %! EXPLICIT_INSTRUMENT:9
+                                \clef "bass" %! EXPLICIT_CLEF:4
                                 \once \override CelloMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override CelloMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                \set CelloMusicStaff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                \set CelloMusicStaff.forceClef = ##t %! EXPLICIT_CLEF:3
                                 \once \override CelloMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:6
                                 R1 * 1/2
                                 ^ \markup {
@@ -228,18 +228,18 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                                 } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:8
                                         }
                                     }
-                                \set CelloMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                    \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                        #10 %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                        Cello %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                    } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                \set CelloMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                    \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                        #10 %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                        Vc. %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                    } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
-                                \override CelloMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
-                                \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_REDRAW_COLOR:10
+                                \set CelloMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                    \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                        #10 %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                        Cello %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                    } %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                \set CelloMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                    \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                        #10 %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                        Vc. %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                    } %! EXPLICIT_INSTRUMENT_REDRAW:11
+                                \override CelloMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_COLOR_REDRAW:10
             <BLANKLINE>
                                 %%% CelloMusicVoice [measure 2] %%%
                                 R1 * 3/8

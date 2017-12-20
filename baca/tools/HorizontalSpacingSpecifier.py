@@ -66,13 +66,13 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                \clef "treble" %! EXPLICIT_CLEF:4
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                 e'16
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
             <BLANKLINE>
                                 f'16
             <BLANKLINE>
@@ -153,7 +153,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \time 8/16
                         \bar "" %! EMPTY_START_BAR:1
                         \newSpacingSection
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16) %! SEGMENT:SPACING_COMMAND:3
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16) %! SEGMENT:SPACING:3
                         s1 * 1/2
                         - \markup {
                             \column
@@ -180,7 +180,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         %%% GlobalSkips [measure 2] %%%
                         \time 4/8
                         \newSpacingSection
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 8) %! SEGMENT:SPACING_COMMAND:1
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 8) %! SEGMENT:SPACING:1
                         s1 * 1/2
                         - \markup { %! SEGMENT:SPACING_MARKUP:2
                             \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -193,7 +193,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         %%% GlobalSkips [measure 3] %%%
                         \time 2/4
                         \newSpacingSection
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 4) %! SEGMENT:SPACING_COMMAND:1
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 4) %! SEGMENT:SPACING:1
                         s1 * 1/2
                         - \markup { %! SEGMENT:SPACING_MARKUP:2
                             \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -206,7 +206,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         %%% GlobalSkips [measure 4] %%%
                         \time 1/2
                         \newSpacingSection
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 2) %! SEGMENT:SPACING_COMMAND:1
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 2) %! SEGMENT:SPACING:1
                         s1 * 1/2
                         - \markup { %! SEGMENT:SPACING_MARKUP:2
                             \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -224,13 +224,13 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                \clef "treble" %! EXPLICIT_CLEF:4
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                 e'16
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
             <BLANKLINE>
                                 f'16
             <BLANKLINE>
@@ -313,7 +313,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \time 8/16
                         \bar "" %! EMPTY_START_BAR:1
                         \newSpacingSection
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16) %! SEGMENT:SPACING_COMMAND:3
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16) %! SEGMENT:SPACING:3
                         s1 * 1/2
                         - \markup {
                             \column
@@ -340,7 +340,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         %%% GlobalSkips [measure 2] %%%
                         \time 4/8
                         \newSpacingSection
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 8) %! SEGMENT:SPACING_COMMAND:1
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 8) %! SEGMENT:SPACING:1
                         s1 * 1/2
                         - \markup { %! SEGMENT:SPACING_MARKUP:2
                             \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -353,7 +353,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         %%% GlobalSkips [measure 3] %%%
                         \time 2/4
                         \newSpacingSection
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 4) %! SEGMENT:SPACING_COMMAND:1
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 4) %! SEGMENT:SPACING:1
                         s1 * 1/2
                         - \markup { %! SEGMENT:SPACING_MARKUP:2
                             \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -366,7 +366,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         %%% GlobalSkips [measure 4] %%%
                         \time 1/2
                         \newSpacingSection
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 2) %! SEGMENT:SPACING_COMMAND:1
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 2) %! SEGMENT:SPACING:1
                         s1 * 1/2
                         - \markup { %! SEGMENT:SPACING_MARKUP:2
                             \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -384,13 +384,13 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                \clef "treble" %! EXPLICIT_CLEF:4
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                 e'16
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
             <BLANKLINE>
                                 f'16
             <BLANKLINE>
@@ -474,7 +474,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \time 8/16
                         \bar "" %! EMPTY_START_BAR:1
                         \newSpacingSection
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 32) %! SEGMENT:SPACING_COMMAND:3
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 32) %! SEGMENT:SPACING:3
                         s1 * 1/2
                         - \markup {
                             \column
@@ -501,7 +501,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         %%% GlobalSkips [measure 2] %%%
                         \time 4/8
                         \newSpacingSection
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16) %! SEGMENT:SPACING_COMMAND:1
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16) %! SEGMENT:SPACING:1
                         s1 * 1/2
                         - \markup { %! SEGMENT:SPACING_MARKUP:2
                             \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -514,7 +514,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         %%% GlobalSkips [measure 3] %%%
                         \time 2/4
                         \newSpacingSection
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 8) %! SEGMENT:SPACING_COMMAND:1
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 8) %! SEGMENT:SPACING:1
                         s1 * 1/2
                         - \markup { %! SEGMENT:SPACING_MARKUP:2
                             \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -527,7 +527,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         %%% GlobalSkips [measure 4] %%%
                         \time 1/2
                         \newSpacingSection
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 4) %! SEGMENT:SPACING_COMMAND:1
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 4) %! SEGMENT:SPACING:1
                         s1 * 1/2
                         - \markup { %! SEGMENT:SPACING_MARKUP:2
                             \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -545,13 +545,13 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                \clef "treble" %! EXPLICIT_CLEF:4
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                 e'16
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
             <BLANKLINE>
                                 f'16
             <BLANKLINE>
@@ -636,7 +636,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \time 8/16
                         \bar "" %! EMPTY_START_BAR:1
                         \newSpacingSection
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 32) %! SEGMENT:SPACING_COMMAND:3
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 32) %! SEGMENT:SPACING:3
                         s1 * 1/2
                         - \markup {
                             \column
@@ -663,7 +663,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         %%% GlobalSkips [measure 2] %%%
                         \time 4/8
                         \newSpacingSection
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16) %! SEGMENT:SPACING_COMMAND:1
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16) %! SEGMENT:SPACING:1
                         s1 * 1/2
                         - \markup { %! SEGMENT:SPACING_MARKUP:2
                             \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -676,7 +676,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         %%% GlobalSkips [measure 3] %%%
                         \time 2/4
                         \newSpacingSection
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16) %! SEGMENT:SPACING_COMMAND:1
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16) %! SEGMENT:SPACING:1
                         s1 * 1/2
                         - \markup { %! SEGMENT:SPACING_MARKUP:2
                             \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -689,7 +689,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         %%% GlobalSkips [measure 4] %%%
                         \time 1/2
                         \newSpacingSection
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16) %! SEGMENT:SPACING_COMMAND:1
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16) %! SEGMENT:SPACING:1
                         s1 * 1/2
                         - \markup { %! SEGMENT:SPACING_MARKUP:2
                             \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -707,13 +707,13 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                \clef "treble" %! EXPLICIT_CLEF:4
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                 e'16
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
             <BLANKLINE>
                                 f'16
             <BLANKLINE>
@@ -808,7 +808,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \time 4/8
                         \bar "" %! EMPTY_START_BAR:1
                         \newSpacingSection
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16) %! SEGMENT:SPACING_COMMAND:3
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16) %! SEGMENT:SPACING:3
                         s1 * 1/2
                         - \markup {
                             \column
@@ -835,7 +835,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         %%% GlobalSkips [measure 2] %%%
                         \time 3/8
                         \newSpacingSection
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16) %! SEGMENT:SPACING_COMMAND:1
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 16) %! SEGMENT:SPACING:1
                         s1 * 3/8
                         - \markup { %! SEGMENT:SPACING_MARKUP:2
                             \with-color %! SEGMENT:SPACING_MARKUP:2
@@ -884,13 +884,13 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
                                 \once \override Beam.grow-direction = #right
-                                \clef "treble" %! EXPLICIT_CLEF_COMMAND:4
+                                \clef "treble" %! EXPLICIT_CLEF:4
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
+                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                 e'16 * 63/32
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
             <BLANKLINE>
                                 f'16 * 115/64
             <BLANKLINE>
@@ -1016,10 +1016,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             '_fermata_start_offsets',
             [],
             )
-        command_tag = baca.Tags.SPACING_COMMAND
-        command_tag = baca.Tags.tag(command_tag)
+        command_tag = baca.Tags.SPACING
+        command_tag = baca.Tags.build(command_tag)
         markup_tag = baca.Tags.SPACING_MARKUP
-        markup_tag = baca.Tags.tag(markup_tag)
+        markup_tag = baca.Tags.build(markup_tag)
         for measure_index, skip in enumerate(skips):
             measure_timespan = abjad.inspect(skip).get_timespan()
             if (self.fermata_measure_width is not None and
