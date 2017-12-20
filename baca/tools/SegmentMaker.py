@@ -1126,6 +1126,7 @@ class SegmentMaker(abjad.SegmentMaker):
         indicator,
         status,
         redraw=False,
+        uncolor=False,
         ):
         if context is not None:
             assert isinstance(context, abjad.Context), repr(context)
@@ -1134,23 +1135,31 @@ class SegmentMaker(abjad.SegmentMaker):
             string = rf'\override {context.headword}.{grob}.color ='
         else:
             string = rf'\override {grob}.color ='
-        if redraw is True:
+        if uncolor is True:
+            string += ' ##f'
+        elif redraw is True:
             color = self._status_to_redraw_color[status]
+            string += f" #(x11-color '{color})"
         else:
             string = rf'\once {string}'
             color = self._status_to_color[status]
-        string += f" #(x11-color '{color})"
+            string += f" #(x11-color '{color})"
         if redraw:
             literal = abjad.LilyPondLiteral(string, 'after')
         else:
             literal = abjad.LilyPondLiteral(string)
-        if redraw:
-            item = 'color_redraw'
+        if uncolor:
+            suffix = 'uncolor'
+        elif redraw:
+            suffix = 'color_redraw'
         else:
-            item = 'color'
+            suffix = 'color'
         stem = self._indicator_to_stem(indicator)
-        tag = self._get_tag(status, stem, item)
-        abjad.attach(literal, leaf, tag=tag)
+        tag = self._get_tag(status, stem, suffix)
+        if uncolor is True:
+            abjad.attach(literal, leaf, deactivate=True, tag=tag)
+        else:
+            abjad.attach(literal, leaf, tag=tag)
 
     def _color_repeat_pitch_classes_(self):
         manager = baca.WellformednessManager
@@ -1867,26 +1876,6 @@ class SegmentMaker(abjad.SegmentMaker):
         segment_duration = segment_duration.to_clock_string()
         self._duration = segment_duration
 
-    def _tag_deactivated_grob_uncolor(
-        self,
-        leaf,
-        status,
-        indicator,
-        context=None,
-        ):
-        if context is not None:
-            assert isinstance(context, abjad.Context), repr(context)
-        grob = self._indicator_to_grob(indicator)
-        if context is not None:
-            string = rf'\override {context.headword}.{grob}.color = ##f'
-        else:
-            string = rf'\override {grob}.color = ##f'
-        literal = abjad.LilyPondLiteral(string)
-        stem = self._indicator_to_stem(indicator)
-        assert stem is not None, repr(stem)
-        tag = self._get_tag(status, stem, 'uncolor')
-        abjad.attach(literal, leaf, deactivate=True, tag=tag)
-
     def _tag_grob_command(
         self,
         leaf,
@@ -1952,12 +1941,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
         elif (getattr(indicator, 'redraw', False)
             and not getattr(indicator, 'suppress', False)):
-            self._tag_deactivated_grob_uncolor(
-                leaf,
-                status,
-                indicator,
+            self._color_persistent_indicator(
                 context,
-                #stem=stem,
+                leaf,
+                indicator,
+                status,
+                uncolor=True,
                 )
         if isinstance(indicator, abjad.Clef):
             string = rf'\set {context.headword}.forceClef = ##t'
