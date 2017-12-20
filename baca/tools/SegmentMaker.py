@@ -1739,23 +1739,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 abjad.Dynamic,
                 )
             # ABJAD.INSTRUMENT
-            result = self._analyze_persistent_indicator(
-                abjad.Instrument,
+            self._reapply_persistent_indicator_type(
+                context,
                 momentos,
+                abjad.Instrument,
                 )
-            if result is not None:
-                status, first_leaf, previous_indicator = result
-                self._tag_instrument(
-                    first_leaf,
-                    previous_indicator,
-                    context,
-                    status
-                    )
-                self._tag_instrument_change_markup(
-                    first_leaf,
-                    previous_indicator,
-                    status,
-                    )
             # ABJAD.METRONOME_MARK
             self._reapply_persistent_indicator_type(
                 context,
@@ -2119,6 +2107,9 @@ class SegmentMaker(abjad.SegmentMaker):
         if isinstance(indicator, abjad.Dynamic):
             grob = 'DynamicText'
             tagged_grob_name = 'DYNAMIC'
+        elif isinstance(indicator, abjad.Instrument):
+            grob = 'InstrumentName'
+            tagged_grob_name = 'INSTRUMENT'
         elif isinstance(indicator, abjad.MetronomeMark):
             context = None
             grob = 'TextScript'
@@ -2136,7 +2127,27 @@ class SegmentMaker(abjad.SegmentMaker):
             context,
             tagged_grob_name=tagged_grob_name,
             )
-        if (getattr(indicator, '_line_redraw', False)
+        if isinstance(indicator, abjad.Instrument):
+            markup = self._make_instrument_change_markup(indicator)
+            tag = f'{status.upper()}_INSTRUMENT_CHANGE_MARKUP'
+            tag = getattr(baca.Tags, tag)
+            abjad.attach(
+                markup,
+                leaf,
+                deactivate=True,
+                tag=tag,
+                )
+            color = self._status_to_color[status]
+            color = abjad.SchemeColor(color)
+            markup = markup.with_color(color)
+            tag = f'{status.upper()}_INSTRUMENT_CHANGE_COLORED_MARKUP'
+            tag = getattr(baca.Tags, tag)
+            abjad.attach(
+                markup,
+                leaf,
+                tag=tag,
+                )
+        elif (getattr(indicator, '_line_redraw', False)
             and not getattr(indicator, 'suppress_markup', False)):
             self._tag_grob_uncolor(
                 leaf,
@@ -2166,6 +2177,17 @@ class SegmentMaker(abjad.SegmentMaker):
                 context,
                 tagged_grob_name=tagged_grob_name,
                 )
+            if isinstance(indicator, abjad.Instrument):
+                strings = indicator._get_lilypond_format(context=context)
+                shadow_indicator = abjad.LilyPondLiteral(strings, 'after')
+                self._tag_grob_command(
+                    leaf,
+                    status,
+                    tagged_grob_name,
+                    shadow_indicator,
+                    context=context,
+                    shadow_command=True,
+                    )
 
     def _tag_untagged_clefs(self):
         for leaf in abjad.iterate(self.score).leaves():
@@ -5951,35 +5973,35 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \set Staff.instrumentName = \markup { Flute } %! PERSISTENT_INSTRUMENT_COMMAND:2
-                                    \set Staff.shortInstrumentName = \markup { Fl. } %! PERSISTENT_INSTRUMENT_COMMAND:2
+                                    \set Staff.instrumentName = \markup { Flute } %! PERSISTENT_INSTRUMENT_COMMAND:4
+                                    \set Staff.shortInstrumentName = \markup { Fl. } %! PERSISTENT_INSTRUMENT_COMMAND:4
                                     \once \override Staff.InstrumentName.color = #(x11-color 'green) %! PERSISTENT_INSTRUMENT_COLOR:1
                                     c'8
                                     [
                                     ^ \markup {
                                         \column
                                             {
-                                                %%% \line %! PERSISTENT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     { %! PERSISTENT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%         \override %! PERSISTENT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             #'(box-padding . 0.75) %! PERSISTENT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             \box %! PERSISTENT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%                 flute %! PERSISTENT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     } %! PERSISTENT_INSTRUMENT_CHANGE_MARKUP:5
-                                                \line %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    { %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                        \with-color %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            #(x11-color 'green) %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            \override %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                #'(box-padding . 0.75) %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                \box %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                    flute %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    } %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                %%% \line %! PERSISTENT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%     { %! PERSISTENT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%         \override %! PERSISTENT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%             #'(box-padding . 0.75) %! PERSISTENT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%             \box %! PERSISTENT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%                 flute %! PERSISTENT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%     } %! PERSISTENT_INSTRUMENT_CHANGE_MARKUP:2
+                                                \line %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                    { %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                        \with-color %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                            #(x11-color 'green) %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                            \override %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                #'(box-padding . 0.75) %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                \box %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                    flute %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                    } %! PERSISTENT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { Flute } %! PERSISTENT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \set Staff.shortInstrumentName = \markup { Fl. } %! PERSISTENT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkGreen) %! PERSISTENT_INSTRUMENT_SHADOW_COLOR:3
+                                    \set Staff.instrumentName = \markup { Flute } %! PERSISTENT_INSTRUMENT_SHADOW_COMMAND:6
+                                    \set Staff.shortInstrumentName = \markup { Fl. } %! PERSISTENT_INSTRUMENT_SHADOW_COMMAND:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkGreen) %! PERSISTENT_INSTRUMENT_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -6328,35 +6350,35 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \set Staff.instrumentName = \markup { Flute } %! REDUNDANT_INSTRUMENT_COMMAND:2
-                                    \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_INSTRUMENT_COMMAND:2
+                                    \set Staff.instrumentName = \markup { Flute } %! REDUNDANT_INSTRUMENT_COMMAND:4
+                                    \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_INSTRUMENT_COMMAND:4
                                     \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_COLOR:1
                                     c'8
                                     [
                                     ^ \markup {
                                         \column
                                             {
-                                                %%% \line %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     { %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%         \override %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             #'(box-padding . 0.75) %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             \box %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%                 flute %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     } %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
-                                                \line %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    { %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                        \with-color %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            \override %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                #'(box-padding . 0.75) %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                \box %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                    flute %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    } %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                %%% \line %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%     { %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%         \override %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%             #'(box-padding . 0.75) %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%             \box %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%                 flute %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%     } %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:2
+                                                \line %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                    { %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                        \with-color %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                            #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                            \override %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                #'(box-padding . 0.75) %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                \box %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                    flute %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                    } %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { Flute } %! REDUNDANT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_INSTRUMENT_SHADOW_COLOR:3
+                                    \set Staff.instrumentName = \markup { Flute } %! REDUNDANT_INSTRUMENT_SHADOW_COMMAND:6
+                                    \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_INSTRUMENT_SHADOW_COMMAND:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_INSTRUMENT_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
