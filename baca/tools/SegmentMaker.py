@@ -1113,6 +1113,39 @@ class SegmentMaker(abjad.SegmentMaker):
                 for leaf in notes_and_chords:
                     abjad.attach(markup, leaf)
 
+    def _color_persistent_indicator(
+        self,
+        context,
+        leaf,
+        grob,
+        status,
+        redraw=False,
+        stem=None,
+        ):
+        if context is not None:
+            assert isinstance(context, abjad.Context), repr(context)
+        if context is not None:
+            string = rf'\override {context.headword}.{grob}.color ='
+        else:
+            string = rf'\override {grob}.color ='
+        if redraw is True:
+            color = self._status_to_redraw_color[status]
+        else:
+            string = rf'\once {string}'
+            color = self._status_to_color[status]
+        string += f" #(x11-color '{color})"
+        if redraw:
+            literal = abjad.LilyPondLiteral(string, 'after')
+        else:
+            literal = abjad.LilyPondLiteral(string)
+        if redraw:
+            item = 'redraw_color'
+        else:
+            item = 'color'
+        stem = stem or grob
+        tag = self._get_tag(status, stem, item)
+        abjad.attach(literal, leaf, tag=tag)
+
     def _color_repeat_pitch_classes_(self):
         manager = baca.WellformednessManager
         lts = manager._find_repeat_pitch_classes(self._score)
@@ -1362,10 +1395,10 @@ class SegmentMaker(abjad.SegmentMaker):
         return includes
 
     @staticmethod
-    def _get_tag(status, grob, item):
-        grob = abjad.String(grob).delimit_words()
-        grob = '_'.join([_.upper() for _ in grob])
-        name = f'{status.upper()}_{grob}_{item.upper()}'
+    def _get_tag(status, stem, item):
+        stem = abjad.String(stem).delimit_words()
+        stem = '_'.join([_.upper() for _ in stem])
+        name = f'{status.upper()}_{stem}_{item.upper()}'
         tag = getattr(baca.Tags, name)
         return tag
 
@@ -1383,6 +1416,20 @@ class SegmentMaker(abjad.SegmentMaker):
         if (hasattr(command.command, '_mutates_score') and
             command.command._mutates_score()):
             self._cache = None
+
+    @staticmethod
+    def _indicator_to_grob(indicator):
+        if isinstance(indicator, abjad.Dynamic):
+            return 'DynamicText'
+        elif isinstance(indicator, abjad.Instrument):
+            return 'InstrumentName'
+        elif isinstance(indicator, abjad.MetronomeMark):
+            return 'TextScript'
+        elif isinstance(indicator, baca.MarginMarkup):
+            return 'InstrumentName'
+        elif isinstance(indicator, baca.StaffLines):
+            return 'StaffSymbol'
+        return type(indicator).__name__
 
     def _indicator_to_key(self, indicator):
         if isinstance(indicator, (abjad.Clef, abjad.Dynamic)):
@@ -1565,27 +1612,6 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.setting(score).current_bar_number = first_measure_number
         self._score = score
 
-    def _make_status_color_string(
-        self,
-        status,
-        grob,
-        context=None,
-        redraw=False,
-        ):
-        if context is not None:
-            assert isinstance(context, abjad.Context), repr(context)
-        if context is not None:
-            string = rf'\override {context.headword}.{grob}.color ='
-        else:
-            string = rf'\override {grob}.color ='
-        if redraw is True:
-            color = self._status_to_redraw_color[status]
-        else:
-            string = rf'\once {string}'
-            color = self._status_to_color[status]
-        string += f" #(x11-color '{color})"
-        return string
-
     def _momento_to_indicator(self, momento):
         if momento.value is None:
             return
@@ -1693,9 +1719,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 else:
                     spanner = None
                 self._tag_persistent_indicator(
+                    context,
                     first_leaf,
                     previous_indicator,
-                    context,
                     status,
                     spanner=spanner,
                     )
@@ -1845,7 +1871,7 @@ class SegmentMaker(abjad.SegmentMaker):
         status,
         grob,
         context=None,
-        tagged_grob_name=None,
+        stem=None,
         ):
         if context is not None:
             assert isinstance(context, abjad.Context), repr(context)
@@ -1854,40 +1880,17 @@ class SegmentMaker(abjad.SegmentMaker):
         else:
             string = rf'\override {grob}.color = ##f'
         literal = abjad.LilyPondLiteral(string)
-        if tagged_grob_name is not None:
-            tag = self._get_tag(status, tagged_grob_name, 'uncolor')
+        if stem is not None:
+            tag = self._get_tag(status, stem, 'uncolor')
         else:
             tag = self._get_tag(status, grob, 'uncolor')
         abjad.attach(literal, leaf, deactivate=True, tag=tag)
-
-    def _tag_grob_color(
-        self,
-        leaf,
-        status,
-        grob,
-        context=None,
-        tagged_grob_name=None,
-        ):
-        if context is not None:
-            assert isinstance(context, abjad.Context), repr(context)
-        string = self._make_status_color_string(
-            status,
-            grob,
-            context,
-            redraw=False,
-            )
-        literal = abjad.LilyPondLiteral(string)
-        if tagged_grob_name is not None:
-            tag = self._get_tag(status, tagged_grob_name, 'color')
-        else:
-            tag = self._get_tag(status, grob, 'color')
-        abjad.attach(literal, leaf, tag=tag)
 
     def _tag_grob_command(
         self,
         leaf,
         status,
-        tagged_grob_name,
+        stem,
         command,
         context=None,
         redraw_command=None,
@@ -1898,9 +1901,9 @@ class SegmentMaker(abjad.SegmentMaker):
         if isinstance(command, str):
             command = abjad.LilyPondLiteral(command)
         if redraw_command is True:
-            tag = self._get_tag(status, tagged_grob_name, 'redraw_command')
+            tag = self._get_tag(status, stem, 'redraw_command')
         else:
-            tag = self._get_tag(status, tagged_grob_name, 'command')
+            tag = self._get_tag(status, stem, 'command')
         if spanner is None:
             if context is None:
                 abjad.attach(command, leaf, tag=tag)
@@ -1909,65 +1912,31 @@ class SegmentMaker(abjad.SegmentMaker):
         else:
             spanner.attach(command, leaf, tag=tag)
 
-    def _tag_grob_redraw_color(
-        self,
-        leaf,
-        status,
-        grob,
-        context=None,
-        tagged_grob_name=None,
-        ):
-        if context is not None:
-            assert isinstance(context, abjad.Context), repr(context)
-        string = self._make_status_color_string(
-            status,
-            grob,
-            context,
-            redraw=True,
-            )
-        literal = abjad.LilyPondLiteral(string, 'after')
-        if tagged_grob_name is not None:
-            tag = self._get_tag(status, tagged_grob_name, 'redraw_color')
-        else:
-            tag = self._get_tag(status, grob, 'redraw_color')
-        abjad.attach(literal, leaf, tag=tag)
-
     def _tag_persistent_indicator(
         self,
+        context,
         leaf,
         indicator,
-        context,
         status,
         spanner=None,
         ):
         assert isinstance(context, abjad.Context), repr(context)
         if status is None:
             return
-        if isinstance(indicator, abjad.Dynamic):
-            grob = 'DynamicText'
-            tagged_grob_name = 'DYNAMIC'
-        elif isinstance(indicator, abjad.Instrument):
-            grob = 'InstrumentName'
-            tagged_grob_name = 'INSTRUMENT'
-        elif isinstance(indicator, abjad.MetronomeMark):
+        if isinstance(indicator, abjad.MetronomeMark):
             context = None
-            grob = 'TextScript'
-            tagged_grob_name = 'METRONOME_MARK'
-        elif isinstance(indicator, baca.MarginMarkup):
-            grob = 'InstrumentName'
-            tagged_grob_name = 'MARGIN_MARKUP'
-        elif isinstance(indicator, baca.StaffLines):
-            grob = 'StaffSymbol'
-            tagged_grob_name = 'STAFF_LINES'
+        grob = self._indicator_to_grob(indicator)
+        if isinstance(indicator, abjad.Instrument):
+            stem = 'Instrument'
         else:
-            grob = type(indicator).__name__
-            tagged_grob_name = grob
-        self._tag_grob_color(
-            leaf,
-            status,
-            grob,
+            stem = type(indicator).__name__
+        self._color_persistent_indicator(
             context,
-            tagged_grob_name=tagged_grob_name,
+            leaf,
+            grob,
+            status,
+            redraw=False,
+            stem=stem,
             )
         if isinstance(indicator, abjad.Instrument):
             markup = self._make_instrument_change_markup(indicator)
@@ -1996,7 +1965,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 status,
                 grob,
                 context,
-                tagged_grob_name=tagged_grob_name,
+                stem=stem,
                 )
         if isinstance(indicator, abjad.Clef):
             command = rf'\set {context.headword}.forceClef = ##t'
@@ -2005,19 +1974,20 @@ class SegmentMaker(abjad.SegmentMaker):
         self._tag_grob_command(
             leaf,
             status,
-            tagged_grob_name,
+            stem,
             indicator,
             context=context,
             spanner=spanner,
             )
         if (getattr(indicator, '_line_redraw', False)
             and not getattr(indicator, 'suppress_markup', False)):
-            self._tag_grob_redraw_color(
-                leaf,
-                status,
-                grob,
+            self._color_persistent_indicator(
                 context,
-                tagged_grob_name=tagged_grob_name,
+                leaf,
+                grob,
+                status,
+                redraw=True,
+                stem=stem,
                 )
             if isinstance(indicator, (abjad.Instrument, baca.MarginMarkup)):
                 strings = indicator._get_lilypond_format(context=context)
@@ -2025,7 +1995,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._tag_grob_command(
                     leaf,
                     status,
-                    tagged_grob_name,
+                    stem,
                     redraw_indicator,
                     context=context,
                     redraw_command=True,
@@ -2057,9 +2027,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 else:
                     status = 'explicit'
                 self._tag_persistent_indicator(
+                    context,
                     leaf,
                     indicator,
-                    context,
                     status,
                     )
 
