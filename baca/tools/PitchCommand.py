@@ -70,7 +70,7 @@ class PitchCommand(Command):
                                 \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                 g''8
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
             <BLANKLINE>
                                 cs''8
             <BLANKLINE>
@@ -184,7 +184,7 @@ class PitchCommand(Command):
                                 \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                 c'8
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
             <BLANKLINE>
                                 f'8
             <BLANKLINE>
@@ -298,7 +298,7 @@ class PitchCommand(Command):
                                 \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                 <c' d' e' f' g' a' b'>8
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
             <BLANKLINE>
                                 <c' d' e' f' g' a' b'>8
             <BLANKLINE>

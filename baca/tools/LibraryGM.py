@@ -85,7 +85,7 @@ class LibraryGM(abjad.AbjadObject):
                                     e'8
                                     \glissando
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
                 <BLANKLINE>
                                     d''8
                                     \glissando
@@ -214,7 +214,7 @@ class LibraryGM(abjad.AbjadObject):
                                     e'8
                                     \glissando
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
                 <BLANKLINE>
                                     d''8
                 <BLANKLINE>
@@ -1908,10 +1908,10 @@ class LibraryGM(abjad.AbjadObject):
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:6
                                 %%% \override Staff.InstrumentName.color = ##f %! EXPLICIT_MARGIN_MARKUP_UNCOLOR:7
                                 e'2
-                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_MARGIN_MARKUP_SHADOW_COMMAND:10
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_MARGIN_MARKUP_SHADOW_COMMAND:10
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
-                                \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_MARGIN_MARKUP_SHADOW_COLOR:9
+                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_MARGIN_MARKUP_REDRAW_COMMAND:10
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_MARGIN_MARKUP_REDRAW_COMMAND:10
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_MARGIN_MARKUP_REDRAW_COLOR:9
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 f'4.

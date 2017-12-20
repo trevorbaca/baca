@@ -69,7 +69,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                 c'8
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
             <BLANKLINE>
                                 c'8
             <BLANKLINE>
@@ -205,7 +205,7 @@ class SegmentMaker(abjad.SegmentMaker):
         'redundant': 'DeepPink1',
         }
 
-    _status_to_shadow_color = {
+    _status_to_redraw_color = {
         'explicit': 'DarkCyan',
         'reapplied': 'DarkGreen',
         'redundant': 'DeepPink4',
@@ -445,7 +445,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \small
                                             0
                                         }
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -1575,7 +1575,7 @@ class SegmentMaker(abjad.SegmentMaker):
         status,
         grob,
         context=None,
-        shadow=False,
+        redraw=False,
         ):
         if context is not None:
             assert isinstance(context, abjad.Context), repr(context)
@@ -1583,8 +1583,8 @@ class SegmentMaker(abjad.SegmentMaker):
             string = rf'\override {context.headword}.{grob}.color ='
         else:
             string = rf'\override {grob}.color ='
-        if shadow is True:
-            color = self._status_to_shadow_color[status]
+        if redraw is True:
+            color = self._status_to_redraw_color[status]
         else:
             string = rf'\once {string}'
             color = self._status_to_color[status]
@@ -1907,7 +1907,7 @@ class SegmentMaker(abjad.SegmentMaker):
             status,
             grob,
             context,
-            shadow=False,
+            redraw=False,
             )
         literal = abjad.LilyPondLiteral(string)
         if tagged_grob_name is not None:
@@ -1923,15 +1923,15 @@ class SegmentMaker(abjad.SegmentMaker):
         tagged_grob_name,
         command,
         context=None,
-        shadow_command=None,
+        redraw_command=None,
         spanner=None,
         ):
         if context is not None:
             assert isinstance(context, abjad.Context), repr(context)
         if isinstance(command, str):
             command = abjad.LilyPondLiteral(command)
-        if shadow_command is True:
-            tag = self._get_tag(status, tagged_grob_name, 'shadow_command')
+        if redraw_command is True:
+            tag = self._get_tag(status, tagged_grob_name, 'redraw_command')
         else:
             tag = self._get_tag(status, tagged_grob_name, 'command')
         if spanner is None:
@@ -1942,7 +1942,7 @@ class SegmentMaker(abjad.SegmentMaker):
         else:
             spanner.attach(command, leaf, tag=tag)
 
-    def _tag_grob_shadow_color(
+    def _tag_grob_redraw_color(
         self,
         leaf,
         status,
@@ -1956,13 +1956,13 @@ class SegmentMaker(abjad.SegmentMaker):
             status,
             grob,
             context,
-            shadow=True,
+            redraw=True,
             )
         literal = abjad.LilyPondLiteral(string, 'after')
         if tagged_grob_name is not None:
-            tag = self._get_tag(status, tagged_grob_name, 'shadow_color')
+            tag = self._get_tag(status, tagged_grob_name, 'redraw_color')
         else:
-            tag = self._get_tag(status, grob, 'shadow_color')
+            tag = self._get_tag(status, grob, 'redraw_color')
         abjad.attach(literal, leaf, tag=tag)
 
     def _tag_persistent_indicator(
@@ -2045,7 +2045,7 @@ class SegmentMaker(abjad.SegmentMaker):
             )
         if (getattr(indicator, '_line_redraw', False)
             and not getattr(indicator, 'suppress_markup', False)):
-            self._tag_grob_shadow_color(
+            self._tag_grob_redraw_color(
                 leaf,
                 status,
                 grob,
@@ -2054,14 +2054,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
             if isinstance(indicator, (abjad.Instrument, baca.MarginMarkup)):
                 strings = indicator._get_lilypond_format(context=context)
-                shadow_indicator = abjad.LilyPondLiteral(strings, 'after')
+                redraw_indicator = abjad.LilyPondLiteral(strings, 'after')
                 self._tag_grob_command(
                     leaf,
                     status,
                     tagged_grob_name,
-                    shadow_indicator,
+                    redraw_indicator,
                     context=context,
-                    shadow_command=True,
+                    redraw_command=True,
                     )
 
     def _tag_untagged_persistent_indicators(self):
@@ -2137,7 +2137,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            Explicit clefs color blue; shadow clefs color shadow-blue:
+            Explicit clefs color blue; redrawn explicit clefs color dull blue:
 
             >>> layout_measure_map = baca.layout(
             ...     baca.page(
@@ -2291,7 +2291,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -2364,7 +2364,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -2433,8 +2433,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            Reapplied clefs (at start of nonfirst segments) color green; shadow
-            clefs color shadow-green:
+            Reapplied clefs (at start of nonfirst segments) color green;
+            redrawn reapplied clefs color dull green:
 
             >>> layout_measure_map = baca.layout(
             ...     baca.page(
@@ -2594,7 +2594,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! REAPPLIED_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkGreen) %! REAPPLIED_CLEF_SHADOW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkGreen) %! REAPPLIED_CLEF_REDRAW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -2667,7 +2667,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -2736,7 +2736,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            Redundant clefs color pink; shadow clefs color shadow-pink:
+            Redundant clefs color pink; redrawn redundant clefs color dull
+            pink:
 
             >>> layout_measure_map = baca.layout(
             ...     baca.page(
@@ -2931,7 +2932,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! REDUNDANT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DeepPink4) %! REDUNDANT_CLEF_SHADOW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DeepPink4) %! REDUNDANT_CLEF_REDRAW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -3004,7 +3005,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -3053,7 +3054,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! REDUNDANT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DeepPink4) %! REDUNDANT_CLEF_SHADOW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DeepPink4) %! REDUNDANT_CLEF_REDRAW_COLOR:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -3250,18 +3251,18 @@ class SegmentMaker(abjad.SegmentMaker):
                                                             } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:8
                                                     }
                                                 }
-                                            \set ViolinMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                                \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                                    #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                                    Violin %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                                } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                            \set ViolinMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                                \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                                    #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                                    Vn. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                                } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                            \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
-                                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:10
+                                            \set ViolinMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                                \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                                    #10 %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                                    Violin %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                                } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                            \set ViolinMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                                \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                                    #10 %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                                    Vn. %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                                } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                            \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_REDRAW_COLOR:10
                 <BLANKLINE>
                                             e'16
                 <BLANKLINE>
@@ -3327,19 +3328,19 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:8
                                             }
                                         }
-                                    \set ViolaMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                        \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                            #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                            Viola %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                        } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                    \set ViolaMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                        \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                            #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                            Va. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                        } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
+                                    \set ViolaMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                        \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                            #10 %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                            Viola %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                        } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                    \set ViolaMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                        \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                            #10 %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                            Va. %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                        } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
                                     \bar "|"
-                                    \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
-                                    \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:10
+                                    \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                    \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_REDRAW_COLOR:10
                 <BLANKLINE>
                                 }
                             }
@@ -3387,18 +3388,18 @@ class SegmentMaker(abjad.SegmentMaker):
                                                             } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:8
                                                     }
                                                 }
-                                            \set CelloMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                                \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                                    #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                                    Cello %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                                } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                            \set CelloMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                                \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                                    #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                                    Vc. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                                } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                            \override CelloMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
-                                            \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:10
+                                            \set CelloMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                                \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                                    #10 %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                                    Cello %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                                } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                            \set CelloMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                                \hcenter-in %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                                    #10 %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                                    Vc. %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                                } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                            \override CelloMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                            \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_REDRAW_COLOR:10
                 <BLANKLINE>
                                             g16
                 <BLANKLINE>
@@ -3573,7 +3574,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                         \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                         e'16
-                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
                                     }
                                 }
                                 {
@@ -3780,7 +3781,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                         \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                         e'16
-                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
                                     }
                                 }
                                 {
@@ -3966,7 +3967,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4079,7 +4080,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4194,7 +4195,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4311,7 +4312,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4438,7 +4439,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4608,7 +4609,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4726,7 +4727,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -5000,7 +5001,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                         \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                         e'8.
-                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
                                     }
                                 }
                                 {
@@ -5210,7 +5211,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                         \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                         e'8.
-                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
                                     }
                                 }
                                 {
@@ -5384,8 +5385,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            Explicit instruments color blue; shadow instruments color
-            shadow-blue:
+            Explicit instruments color blue; redrawn explicit instruments color
+            dull blue:
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
@@ -5556,9 +5557,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
-                                    \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:5
+                                    \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:6
+                                    \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_REDRAW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -5651,9 +5652,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
-                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:5
+                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:6
+                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_REDRAW_COLOR:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -5723,7 +5724,7 @@ class SegmentMaker(abjad.SegmentMaker):
         ..  container:: example
 
             Reapplied instruments (at start of nonfirst segments) color green;
-            shadow instruments color shadow-green:
+            redrawn reapplied instruments color dull green:
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
@@ -5893,9 +5894,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     } %! REAPPLIED_INSTRUMENT_CHANGE_COLORED_MARKUP:3
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { Flute } %! REAPPLIED_INSTRUMENT_SHADOW_COMMAND:6
-                                    \set Staff.shortInstrumentName = \markup { Fl. } %! REAPPLIED_INSTRUMENT_SHADOW_COMMAND:6
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkGreen) %! REAPPLIED_INSTRUMENT_SHADOW_COLOR:5
+                                    \set Staff.instrumentName = \markup { Flute } %! REAPPLIED_INSTRUMENT_REDRAW_COMMAND:6
+                                    \set Staff.shortInstrumentName = \markup { Fl. } %! REAPPLIED_INSTRUMENT_REDRAW_COMMAND:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkGreen) %! REAPPLIED_INSTRUMENT_REDRAW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -5988,9 +5989,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
-                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:5
+                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:6
+                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_REDRAW_COLOR:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -6059,8 +6060,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            Redundant instruments color pink; shadow instruments color
-            shadow-pink:
+            Redundant instruments color pink; redrawn redundant instruments
+            color dull pink:
 
             >>> layout_measure_map = baca.layout(
             ...     baca.page(
@@ -6272,9 +6273,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     } %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { Flute } %! REDUNDANT_INSTRUMENT_SHADOW_COMMAND:6
-                                    \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_INSTRUMENT_SHADOW_COMMAND:6
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_INSTRUMENT_SHADOW_COLOR:5
+                                    \set Staff.instrumentName = \markup { Flute } %! REDUNDANT_INSTRUMENT_REDRAW_COMMAND:6
+                                    \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_INSTRUMENT_REDRAW_COMMAND:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_INSTRUMENT_REDRAW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -6367,9 +6368,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
-                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:5
+                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:6
+                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_REDRAW_COLOR:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -6438,9 +6439,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     } %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { Piccolo } %! REDUNDANT_INSTRUMENT_SHADOW_COMMAND:6
-                                    \set Staff.shortInstrumentName = \markup { Picc. } %! REDUNDANT_INSTRUMENT_SHADOW_COMMAND:6
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_INSTRUMENT_SHADOW_COLOR:5
+                                    \set Staff.instrumentName = \markup { Piccolo } %! REDUNDANT_INSTRUMENT_REDRAW_COMMAND:6
+                                    \set Staff.shortInstrumentName = \markup { Picc. } %! REDUNDANT_INSTRUMENT_REDRAW_COMMAND:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_INSTRUMENT_REDRAW_COLOR:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -6636,7 +6637,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 %%% \override Staff.Clef.color = ##f %! REAPPLIED_CLEF_UNCOLOR:2
                                 \set Staff.forceClef = ##t %! REAPPLIED_CLEF_COMMAND:3
                                 R1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'DarkGreen) %! REAPPLIED_CLEF_SHADOW_COLOR:5
+                                \override Staff.Clef.color = #(x11-color 'DarkGreen) %! REAPPLIED_CLEF_REDRAW_COLOR:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 R1 * 3/8
@@ -6807,7 +6808,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -7050,7 +7051,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                 R1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 R1 * 3/8
@@ -7123,7 +7124,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                 s1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 s1 * 3/8
@@ -7244,7 +7245,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -7408,10 +7409,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:8
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:10
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_REDRAW_COLOR:10
                 <BLANKLINE>
                                     g'8
                 <BLANKLINE>
@@ -7553,10 +7554,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:8
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:11
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:10
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT_REDRAW_COMMAND:11
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_REDRAW_COLOR:10
                 <BLANKLINE>
                                     f'8
                 <BLANKLINE>

@@ -193,7 +193,7 @@ class RegisterInterpolationCommand(Command):
                                 \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                 fs''8
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
             <BLANKLINE>
                                 e''8
             <BLANKLINE>
@@ -374,7 +374,7 @@ class RegisterInterpolationCommand(Command):
                                 \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                 fs''8
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
             <BLANKLINE>
                                 e''8
             <BLANKLINE>
@@ -555,7 +555,7 @@ class RegisterInterpolationCommand(Command):
                                 \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                 fs'8
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
             <BLANKLINE>
                                 e'8
             <BLANKLINE>
@@ -736,7 +736,7 @@ class RegisterInterpolationCommand(Command):
                                 \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                 fs''8
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
             <BLANKLINE>
                                 e''8
             <BLANKLINE>
@@ -917,7 +917,7 @@ class RegisterInterpolationCommand(Command):
                                 \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                 fs8
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
             <BLANKLINE>
                                 e8
             <BLANKLINE>

@@ -224,7 +224,7 @@ class RegisterCommand(Command):
                                 \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:3
                                 g''8
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:5
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_REDRAW_COLOR:5
             <BLANKLINE>
                                 gqs''8
             <BLANKLINE>
