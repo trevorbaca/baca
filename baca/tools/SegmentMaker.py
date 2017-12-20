@@ -658,23 +658,26 @@ class SegmentMaker(abjad.SegmentMaker):
             extra_offset=self.final_markup_extra_offset,
             )
 
-    def _analyze_persistent_indicator(self, prototype, momentos):
-        for momento in momentos:
-            if momento.prototype == self._prototype_string(prototype):
-                break
-        else:
+    def _analyze_momento(self, context, momento):
+        previous_indicator = self._momento_to_indicator(momento)
+        if previous_indicator is None:
             return
-        previous_indicator = self._key_to_indicator(momento.value, prototype)
         local_context = self.score[momento.context]
         first_leaf = abjad.inspect(local_context).get_leaf(0)
+        if isinstance(previous_indicator, abjad.Instrument):
+            prototype = abjad.Instrument
+        else:
+            prototype = type(previous_indicator)
         my_indicator = abjad.inspect(first_leaf).get_indicator(prototype)
         status = None
         if my_indicator is None:
             status = 'reapplied'
         elif previous_indicator == my_indicator:
-            if prototype is abjad.TimeSignature:
+            if isinstance(previous_indicator, abjad.TimeSignature):
                 status = 'reapplied'
-            elif prototype is not abjad.Dynamic:
+            elif isinstance(previous_indicator, abjad.Dynamic):
+                pass
+            else:
                 status = 'redundant'
         return status, first_leaf, previous_indicator
 
@@ -1250,14 +1253,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 if value_ == value:
                     return key
 
-#    @staticmethod
-#    def _get_local_context(component):
-#        parentage = abjad.inspect(component).get_parentage()
-#        context = parentage.get_first(abjad.Context)
-#        if context is not None:
-#            assert context.name is not None, repr(context)
-#            return context.name
-
     def _get_measure_timespans(self, measure_numbers):
         timespans = []
         first_measure_number = self._get_first_measure_number()
@@ -1591,6 +1586,26 @@ class SegmentMaker(abjad.SegmentMaker):
         string += f" #(x11-color '{color})"
         return string
 
+    def _momento_to_indicator(self, momento):
+        if momento.value is None:
+            return
+        class_ = eval(momento.prototype)
+        if class_ in (abjad.Clef, abjad.Dynamic):
+            indicator = class_(momento.value)
+        elif class_ is abjad.Instrument:
+            indicator = self.instruments.get(momento.value)
+        elif class_ is abjad.MetronomeMark:
+            indicator = self.metronome_marks.get(momento.value)
+        elif class_ is abjad.TimeSignature:
+            indicator = abjad.TimeSignature.from_string(momento.value)
+        elif class_ is baca.MarginMarkup:
+            indicator = self.margin_markup.get(momento.value)
+        elif class_ is baca.StaffLines:
+            indicator = baca.StaffLines(line_count=momento.value)
+        else:
+            raise Exception(momento.prototype)
+        return indicator
+
     def _print_cache(self):
         for context in self._cache:
             print(f'CONTEXT {context} ...')
@@ -1654,84 +1669,36 @@ class SegmentMaker(abjad.SegmentMaker):
         parts = class_.__module__.split('.')
         return f'{parts[0]}.{parts[-1]}'
 
-    def _reapply_persistent_indicator_type(
-        self,
-        context,
-        momentos,
-        prototype,
-        ):
-        result = self._analyze_persistent_indicator(prototype, momentos)
-        if result is None:
-            return
-        status, first_leaf, previous_indicator = result
-        if prototype is abjad.MetronomeMark:
-            spanner = abjad.inspect(first_leaf).get_spanner(
-                abjad.MetronomeMarkSpanner
-                )
-            assert spanner is not None, repr(spanner)
-        else:
-            spanner = None
-        self._tag_persistent_indicator(
-            first_leaf,
-            previous_indicator,
-            context,
-            status,
-            spanner=spanner,
-            )
-
     def _reapply_persistent_indicators(self):
         if self._is_first_segment():
             return
+        string = 'persistent_indicators'
+        persistent_indicators = self._previous_metadata.get(string)
+        if not persistent_indicators:
+            return
         for context in abjad.iterate(self.score).components(abjad.Context):
-            string = 'persistent_indicators'
-            persistent_indicators = self._previous_metadata.get(string)
-            if not persistent_indicators:
-                continue
             momentos = persistent_indicators.get(context.name)
             if not momentos:
                 continue
-            # ABJAD.CLEF
-            self._reapply_persistent_indicator_type(
-                context,
-                momentos,
-                abjad.Clef,
-                )
-            # ABJAD.DYNAMIC
-            self._reapply_persistent_indicator_type(
-                context,
-                momentos,
-                abjad.Dynamic,
-                )
-            # ABJAD.INSTRUMENT
-            self._reapply_persistent_indicator_type(
-                context,
-                momentos,
-                abjad.Instrument,
-                )
-            # ABJAD.METRONOME_MARK
-            self._reapply_persistent_indicator_type(
-                context,
-                momentos,
-                abjad.MetronomeMark,
-                )
-            # ABJAD.TIME_SIGNATURE
-            self._reapply_persistent_indicator_type(
-                context,
-                momentos,
-                abjad.TimeSignature,
-                )
-            # BACA.MARGIN_MARKUP
-            self._reapply_persistent_indicator_type(
-                context,
-                momentos,
-                baca.MarginMarkup,
-                )
-            # BACA.STAFF_LINES
-            self._reapply_persistent_indicator_type(
-                context,
-                momentos,
-                baca.StaffLines,
-                )
+            for momento in momentos:
+                result = self._analyze_momento(context, momento)
+                if result is None:
+                    continue
+                status, first_leaf, previous_indicator = result
+                if isinstance(previous_indicator, abjad.MetronomeMark):
+                    spanner = abjad.inspect(first_leaf).get_spanner(
+                        abjad.MetronomeMarkSpanner
+                        )
+                    assert spanner is not None, repr(spanner)
+                else:
+                    spanner = None
+                self._tag_persistent_indicator(
+                    first_leaf,
+                    previous_indicator,
+                    context,
+                    status,
+                    spanner=spanner,
+                    )
 
     def _remove_tags(self, tags):
         if not tags:
