@@ -1962,7 +1962,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 tag=tag,
                 )
         elif (getattr(indicator, 'redraw', False)
-            and not getattr(indicator, 'suppress_markup', False)):
+            and not getattr(indicator, 'suppress', False)):
             self._tag_deactivated_grob_uncolor(
                 leaf,
                 status,
@@ -1983,7 +1983,7 @@ class SegmentMaker(abjad.SegmentMaker):
             spanner=spanner,
             )
         if (getattr(indicator, 'redraw', False)
-            and not getattr(indicator, 'suppress_markup', False)):
+            and not getattr(indicator, 'suppress', False)):
             self._color_persistent_indicator(
                 context,
                 leaf,
