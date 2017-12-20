@@ -1700,11 +1700,19 @@ class SegmentMaker(abjad.SegmentMaker):
         if result is None:
             return
         status, first_leaf, previous_indicator = result
+        if prototype is abjad.MetronomeMark:
+            spanner = abjad.inspect(first_leaf).get_spanner(
+                abjad.MetronomeMarkSpanner
+                )
+            assert spanner is not None, repr(spanner)
+        else:
+            spanner = None
         self._tag_persistent_indicator(
             first_leaf,
             previous_indicator,
             context,
             status,
+            spanner=spanner,
             )
 
     def _reapply_persistent_indicators(self):
@@ -1749,48 +1757,23 @@ class SegmentMaker(abjad.SegmentMaker):
                     status,
                     )
             # ABJAD.METRONOME_MARK
-            result = self._analyze_persistent_indicator(
+            self._reapply_persistent_indicator_type(
+                context,
+                momentos,
                 abjad.MetronomeMark,
-                momentos,
                 )
-            if result is not None:
-                status, first_leaf, previous_indicator = result
-                spanner = abjad.inspect(first_leaf).get_spanner(
-                    abjad.MetronomeMarkSpanner
-                    )
-                assert spanner is not None, repr(spanner)
-                self._tag_metronome_mark(
-                    spanner,
-                    first_leaf,
-                    previous_indicator,
-                    status,
-                    )
             # ABJAD.TIME_SIGNATURE
-            result = self._analyze_persistent_indicator(
+            self._reapply_persistent_indicator_type(
+                context,
+                momentos,
                 abjad.TimeSignature,
-                momentos,
                 )
-            if result is not None:
-                status, first_leaf, previous_indicator = result
-                self._tag_time_signature(
-                    first_leaf,
-                    previous_indicator,
-                    context,
-                    status,
-                    )
             # BACA.STAFF_LINES
-            result = self._analyze_persistent_indicator(
-                baca.StaffLines,
+            self._reapply_persistent_indicator_type(
+                context,
                 momentos,
+                baca.StaffLines,
                 )
-            if result is not None:
-                status, first_leaf, previous_indicator = result
-                self._tag_staff_lines(
-                    first_leaf,
-                    previous_indicator,
-                    context,
-                    status,
-                    )
 
     def _remove_tags(self, tags):
         if not tags:
@@ -2122,33 +2105,27 @@ class SegmentMaker(abjad.SegmentMaker):
             shadow_command=True,
             )
 
-    def _tag_metronome_mark(self, spanner, skip, metronome_mark, status):
-        if status is None:
-            return
-        grob = 'TextScript'
-        tagged_grob_name = 'METRONOME_MARK'
-        self._tag_grob_color(
-            skip,
-            status,
-            grob,
-            tagged_grob_name=tagged_grob_name,
-            )
-        abjad.detach(abjad.MetronomeMark, skip)
-        self._tag_grob_command(
-            skip,
-            status,
-            tagged_grob_name,
-            metronome_mark,
-            spanner=spanner,
-            )
-
-    def _tag_persistent_indicator(self, leaf, indicator, context, status):
+    def _tag_persistent_indicator(
+        self,
+        leaf,
+        indicator,
+        context,
+        status,
+        spanner=None,
+        ):
         assert isinstance(context, abjad.Context), repr(context)
         if status is None:
             return
         if isinstance(indicator, abjad.Dynamic):
             grob = 'DynamicText'
             tagged_grob_name = 'DYNAMIC'
+        elif isinstance(indicator, abjad.MetronomeMark):
+            context = None
+            grob = 'TextScript'
+            tagged_grob_name = 'METRONOME_MARK'
+        elif isinstance(indicator, baca.StaffLines):
+            grob = 'StaffSymbol'
+            tagged_grob_name = 'STAFF_LINES'
         else:
             grob = type(indicator).__name__
             tagged_grob_name = grob
@@ -2178,6 +2155,7 @@ class SegmentMaker(abjad.SegmentMaker):
             tagged_grob_name,
             indicator,
             context=context,
+            spanner=spanner,
             )
         if (getattr(indicator, '_line_redraw', False)
             and not getattr(indicator, 'suppress_markup', False)):
@@ -2188,38 +2166,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 context,
                 tagged_grob_name=tagged_grob_name,
                 )
-
-    def _tag_staff_lines(self, leaf, staff_lines, context, status):
-        if context is not None:
-            assert isinstance(context, abjad.Context), repr(context)
-        if status is None:
-            return
-        grob = 'StaffSymbol'
-        tagged_grob_name = 'STAFF_LINES'
-        self._tag_grob_color(
-            leaf,
-            status,
-            grob,
-            context,
-            tagged_grob_name=tagged_grob_name,
-            )
-        abjad.detach(baca.StaffLines, leaf)
-        self._tag_grob_command(
-            leaf,
-            status,
-            tagged_grob_name,
-            staff_lines,
-            )
-
-    def _tag_time_signature(self, skip, time_signature, context, status):
-        if context is not None:
-            assert isinstance(context, abjad.Context), repr(context)
-        if status is None:
-            return
-        grob = 'TimeSignature'
-        self._tag_grob_color(skip, status, grob, context)
-        abjad.detach(time_signature, skip)
-        self._tag_grob_command(skip, status, grob, time_signature, context)
 
     def _tag_untagged_clefs(self):
         for leaf in abjad.iterate(self.score).leaves():
