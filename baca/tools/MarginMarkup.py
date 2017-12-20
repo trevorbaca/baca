@@ -39,11 +39,11 @@ class MarginMarkup(abjad.AbjadValueObject):
         '_short_markup',
         )
 
-    _line_redraw = True
-
     _persistent = True
 
     _publish_storage_format = True
+
+    _redraw = True
 
     ### INITIALIZER ##
 
@@ -210,9 +210,30 @@ class MarginMarkup(abjad.AbjadValueObject):
             >>> margin_markup.persistent
             True
 
+        Class constant.
+
         Returns true.
         '''
         return self._persistent
+
+    @property
+    def redraw(self):
+        r'''Is true.
+
+        ..  container:: example
+
+            >>> margin_markup = baca.MarginMarkup(
+            ...     markup=abjad.Markup('Cello'),
+            ...     short_markup=abjad.Markup('Vc.')
+            ...     )
+            >>> margin_markup.redraw
+            True
+
+        Class constant.
+
+        Returns true.
+        '''
+        return self._redraw
 
     @property
     def short_markup(self):
