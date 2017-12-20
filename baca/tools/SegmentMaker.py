@@ -131,6 +131,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_break_offsets',
         '_builds_metadata',
         '_cache',
+        '_cached_time_signatures',
         '_color_octaves',
         '_color_out_of_range_pitches',
         '_color_repeat_pitch_classes',
@@ -297,6 +298,7 @@ class SegmentMaker(abjad.SegmentMaker):
             color_repeat_pitch_classes = bool(color_repeat_pitch_classes)
         self._color_repeat_pitch_classes = color_repeat_pitch_classes
         self._cache = None
+        self._cached_time_signatures = []
         self._design_checker = design_checker
         self._duration = None
         if fermata_measure_staff_line_count is not None:
@@ -1061,7 +1063,7 @@ class SegmentMaker(abjad.SegmentMaker):
         result['segment_number'] = self._get_segment_number()
         result['start_clock_time'] = self._start_clock_time
         result['stop_clock_time'] = self._stop_clock_time
-        result['time_signatures'] = self._get_time_signatures()
+        result['time_signatures'] = self._cached_time_signatures
         items = sorted(result.items())
         self._metadata = abjad.TypedOrderedDict(items)
 
@@ -1424,15 +1426,15 @@ class SegmentMaker(abjad.SegmentMaker):
         tag = getattr(baca.Tags, name)
         return tag
 
-    def _get_time_signatures(self):
-        strings = []
-        prototype = abjad.TimeSignature
-        for skip in baca.select(self.score['GlobalSkips']).skips():
-            time_signature = abjad.inspect(skip).get_effective(prototype)
-            assert time_signature is not None
-            string = str(time_signature)
-            strings.append(string)
-        return strings
+#    def _get_time_signatures(self):
+#        strings = []
+#        prototype = abjad.TimeSignature
+#        for skip in baca.select(self.score['GlobalSkips']).skips():
+#            time_signature = abjad.inspect(skip).get_effective(prototype)
+#            assert time_signature is not None
+#            string = str(time_signature)
+#            strings.append(string)
+#        return strings
 
     def _handle_mutator(self, command):
         if (hasattr(command.command, '_mutates_score') and
@@ -1735,6 +1737,19 @@ class SegmentMaker(abjad.SegmentMaker):
                     status,
                     spanner=spanner,
                     )
+
+    def _remove_redundant_time_signatures(self):
+        previous_time_signature = None
+        self._cached_time_signatures = []
+        for skip in baca.select(self.score['GlobalSkips']).skips():
+            time_signature = abjad.inspect(skip).get_indicator(
+                abjad.TimeSignature
+                )
+            self._cached_time_signatures.append(str(time_signature))
+            if time_signature == previous_time_signature:
+                abjad.detach(time_signature, skip)
+            else:
+                previous_time_signature = time_signature
 
     def _remove_tags(self, tags):
         if not tags:
@@ -4860,7 +4875,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
-                            \time 3/16
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/16
@@ -4873,7 +4887,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                 } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
-                            \time 3/16
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/16
@@ -4886,7 +4899,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                 } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
-                            \time 3/16
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/16
@@ -5064,7 +5076,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
-                            \time 3/16
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/16
@@ -5077,7 +5088,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                 } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
-                            \time 3/16
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/16
@@ -5090,7 +5100,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                 } %! SEGMENT:SPACING_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
-                            \time 3/16
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/16
@@ -7564,6 +7573,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._check_range()
         self._color_repeat_pitch_classes_()
         self._color_octaves_()
+        self._remove_redundant_time_signatures()
         self._whitespace_leaves()
         self._comment_measure_numbers()
         self._apply_layout_measure_map()
