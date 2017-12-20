@@ -142,7 +142,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_final_bar_line',
         '_final_markup',
         '_final_markup_extra_offset',
-        '_hide_instrument_names',
         '_ignore_repeat_pitch_classes',
         '_ignore_unpitched_notes',
         '_ignore_unregistered_pitches',
@@ -253,7 +252,6 @@ class SegmentMaker(abjad.SegmentMaker):
         final_bar_line=None,
         final_markup=None,
         final_markup_extra_offset=None,
-        hide_instrument_names=None,
         ignore_repeat_pitch_classes=None,
         ignore_unpitched_notes=None,
         ignore_unregistered_pitches=None,
@@ -310,9 +308,6 @@ class SegmentMaker(abjad.SegmentMaker):
         if final_markup_extra_offset is not None:
             assert isinstance(final_markup_extra_offset, tuple)
         self._final_markup_extra_offset = final_markup_extra_offset
-        if hide_instrument_names is not None:
-            hide_instrument_names = bool(hide_instrument_names)
-        self._hide_instrument_names = hide_instrument_names
         if ignore_repeat_pitch_classes is not None:
             ignore_repeat_pitch_classes = bool(
                 ignore_repeat_pitch_classes)
@@ -1392,15 +1387,6 @@ class SegmentMaker(abjad.SegmentMaker):
             command.command._mutates_score()):
             self._cache = None
 
-    def _hide_instrument_names_(self):
-        if not self.hide_instrument_names:
-            return
-        classes = (abjad.Staff, abjad.StaffGroup)
-        prototype = abjad.Instrument
-        for staff in abjad.iterate(self._score).components(classes):
-            if abjad.inspect(staff).get_indicator(prototype):
-                abjad.detach(prototype, staff)
-
     def _indicator_to_key(self, indicator):
         if isinstance(indicator, (abjad.Clef, abjad.Dynamic)):
             return indicator.name
@@ -1482,31 +1468,31 @@ class SegmentMaker(abjad.SegmentMaker):
             raise Exception(prototype)
         return indicator
 
-    def _label_noninitial_instrument_changes(self):
-        for staff in abjad.iterate(self._score).components(abjad.Staff):
-            for i, leaf in enumerate(abjad.iterate(staff).leaves()):
-                my_instrument = abjad.inspect(leaf).get_indicator(
-                    abjad.Instrument
-                    )
-                if my_instrument is None:
-                    continue
-                previous_instrument = abjad.inspect(leaf).get_effective(
-                    abjad.Instrument,
-                    n=-1,
-                    )
-                if previous_instrument is None:
-                    continue
-                my_name = getattr(my_instrument, 'name', None)
-                previous_name = getattr(previous_instrument, 'name', None)
-                if previous_name == my_name:
-                    status = 'redundant'
-                else:
-                    status = 'explicit'
-                self._tag_instrument_change_markup(
-                    leaf,
-                    my_instrument,
-                    status,
-                    )
+#    def _label_noninitial_instrument_changes(self):
+#        for staff in abjad.iterate(self._score).components(abjad.Staff):
+#            for i, leaf in enumerate(abjad.iterate(staff).leaves()):
+#                my_instrument = abjad.inspect(leaf).get_indicator(
+#                    abjad.Instrument
+#                    )
+#                if my_instrument is None:
+#                    continue
+#                previous_instrument = abjad.inspect(leaf).get_effective(
+#                    abjad.Instrument,
+#                    n=-1,
+#                    )
+#                if previous_instrument is None:
+#                    continue
+#                my_name = getattr(my_instrument, 'name', None)
+#                previous_name = getattr(previous_instrument, 'name', None)
+#                if previous_name == my_name:
+#                    status = 'redundant'
+#                else:
+#                    status = 'explicit'
+#                self._tag_instrument_change_markup(
+#                    leaf,
+#                    my_instrument,
+#                    status,
+#                    )
 
     def _label_stage_numbers(self):
         if self.omit_stage_number_markup:
@@ -1992,68 +1978,68 @@ class SegmentMaker(abjad.SegmentMaker):
         tag = self._get_tag(status, grob, 'uncolor')
         abjad.attach(literal, leaf, deactivate=True, tag=tag)
 
-    def _tag_instrument(self, leaf, instrument, context, status):
-        if context is not None:
-            assert isinstance(context, abjad.Context), repr(context)
-        if status is None:
-            return
-        grob = 'InstrumentName'
-        tagged_grob_name = 'INSTRUMENT'
-        self._tag_grob_color(
-            leaf,
-            status,
-            grob,
-            context,
-            tagged_grob_name=tagged_grob_name,
-            )
-        abjad.detach(abjad.Instrument, leaf)
-        self._tag_grob_command(
-            leaf,
-            status,
-            tagged_grob_name,
-            instrument,
-            context=context,
-            )
-        self._tag_grob_shadow_color(
-            leaf,
-            status,
-            grob,
-            context,
-            tagged_grob_name=tagged_grob_name,
-            )
-        strings = instrument._get_lilypond_format(context=context)
-        command = abjad.LilyPondLiteral(strings, 'after')
-        self._tag_grob_command(
-            leaf,
-            status,
-            tagged_grob_name,
-            command,
-            context=context,
-            shadow_command=True,
-            )
+#    def _tag_instrument(self, leaf, instrument, context, status):
+#        if context is not None:
+#            assert isinstance(context, abjad.Context), repr(context)
+#        if status is None:
+#            return
+#        grob = 'InstrumentName'
+#        tagged_grob_name = 'INSTRUMENT'
+#        self._tag_grob_color(
+#            leaf,
+#            status,
+#            grob,
+#            context,
+#            tagged_grob_name=tagged_grob_name,
+#            )
+#        abjad.detach(abjad.Instrument, leaf)
+#        self._tag_grob_command(
+#            leaf,
+#            status,
+#            tagged_grob_name,
+#            instrument,
+#            context=context,
+#            )
+#        self._tag_grob_shadow_color(
+#            leaf,
+#            status,
+#            grob,
+#            context,
+#            tagged_grob_name=tagged_grob_name,
+#            )
+#        strings = instrument._get_lilypond_format(context=context)
+#        command = abjad.LilyPondLiteral(strings, 'after')
+#        self._tag_grob_command(
+#            leaf,
+#            status,
+#            tagged_grob_name,
+#            command,
+#            context=context,
+#            shadow_command=True,
+#            )
 
-    def _tag_instrument_change_markup(self, leaf, instrument, status):
-        if status is None:
-            return
-        markup = self._make_instrument_change_markup(instrument)
-        name = f'{status.upper()}_INSTRUMENT_CHANGE_MARKUP'
-        tag = getattr(baca.Tags, name)
-        abjad.attach(
-            markup,
-            leaf,
-            deactivate=True,
-            tag=tag,
-            )
-        color = self._status_to_color[status]
-        color = abjad.SchemeColor(color)
-        markup = markup.with_color(color)
-        name = f'{status.upper()}_INSTRUMENT_CHANGE_COLORED_MARKUP'
-        tag = getattr(baca.Tags, name)
-        abjad.attach(
-            markup,
-            leaf,
-            tag=tag,
-            )
+#    def _tag_instrument_change_markup(self, leaf, instrument, status):
+#        if status is None:
+#            return
+#        markup = self._make_instrument_change_markup(instrument)
+#        name = f'{status.upper()}_INSTRUMENT_CHANGE_MARKUP'
+#        tag = getattr(baca.Tags, name)
+#        abjad.attach(
+#            markup,
+#            leaf,
+#            deactivate=True,
+#            tag=tag,
+#            )
+#        color = self._status_to_color[status]
+#        color = abjad.SchemeColor(color)
+#        markup = markup.with_color(color)
+#        name = f'{status.upper()}_INSTRUMENT_CHANGE_COLORED_MARKUP'
+#        tag = getattr(baca.Tags, name)
+#        abjad.attach(
+#            markup,
+#            leaf,
+#            tag=tag,
+#            )
 
     def _tag_margin_markup(self, leaf, margin_markup, context, status):
         if context is not None:
@@ -2234,14 +2220,16 @@ class SegmentMaker(abjad.SegmentMaker):
                 n=-1,
                 )
             if previous_instrument == instrument:
-                self._tag_instrument(
+                #self._tag_instrument(
+                self._tag_persistent_indicator(
                     leaf,
                     instrument,
                     context,
                     'redundant',
                     )
             else:
-                self._tag_instrument(
+                #self._tag_instrument(
+                self._tag_persistent_indicator(
                     leaf,
                     instrument,
                     context,
@@ -2358,10 +2346,9 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         baca.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
-            >>> layout_block = abjad.Block(name='layout')
-            >>> layout_block.indent = 0
-            >>> lilypond_file.items.insert(0, layout_block)
-
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(0, block)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -2661,9 +2648,9 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         baca.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
-            >>> layout_block = abjad.Block(name='layout')
-            >>> layout_block.indent = 0
-            >>> lilypond_file.items.insert(0, layout_block)
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(0, block)
 
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -2969,9 +2956,9 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         baca.Tags.STAGE_NUMBER_MARKUP,
             ...         ),
             ...     )
-            >>> layout_block = abjad.Block(name='layout')
-            >>> layout_block.indent = 0
-            >>> lilypond_file.items.insert(0, layout_block)
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(0, block)
 
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -3397,34 +3384,55 @@ class SegmentMaker(abjad.SegmentMaker):
                                         {
                 <BLANKLINE>
                                             %%% ViolinMusicVoice [measure 1] %%%
-                                            \set ViolinMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                                \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                                    #10 %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                                    Violin %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                                } %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                            \set ViolinMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                                \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                                    #10 %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                                    Vn. %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                                } %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                            \clef "treble" %! EXPLICIT_CLEF_COMMAND:8
+                                            \set ViolinMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                                \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                                    #10 %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                                    Violin %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                                } %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                            \set ViolinMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                                \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                                    #10 %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                                    Vn. %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                                } %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                            \clef "treble" %! EXPLICIT_CLEF_COMMAND:10
                                             \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
-                                            \once \override ViolinMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:5
-                                            %%% \override ViolinMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:6
-                                            \set ViolinMusicStaff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:7
+                                            \once \override ViolinMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:7
+                                            %%% \override ViolinMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:8
+                                            \set ViolinMusicStaff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:9
                                             d'16
-                                            \set ViolinMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                                \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                                    #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                                    Violin %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                                } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                            \set ViolinMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                                \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                                    #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                                    Vn. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                                } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
-                                            \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
+                                            ^ \markup {
+                                                \column
+                                                    {
+                                                        %%% \line %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                        %%%     { %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                        %%%         \override %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                        %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                        %%%             \box %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                        %%%                 violin %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                        %%%     } %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                        \line %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                            { %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                \with-color %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                    #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                    \override %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                        #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                        \box %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                            violin %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                            } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                    }
+                                                }
+                                            \set ViolinMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                                \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                                    #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                                    Violin %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                                } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                            \set ViolinMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                                \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                                    #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                                    Vn. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                                } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:5
+                                            \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:11
                 <BLANKLINE>
                                             e'16
                 <BLANKLINE>
@@ -3453,35 +3461,56 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \context ViolaMusicVoice = "ViolaMusicVoice" {
                 <BLANKLINE>
                                     %%% ViolaMusicVoice [measure 1] %%%
-                                    \set ViolaMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                        \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                            #10 %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                            Viola %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                        } %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                    \set ViolaMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                        \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                            #10 %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                            Va. %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                        } %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                    \clef "alto" %! EXPLICIT_CLEF_COMMAND:8
+                                    \set ViolaMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                        \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                            #10 %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                            Viola %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                        } %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                    \set ViolaMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                        \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                            #10 %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                            Va. %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                        } %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                    \clef "alto" %! EXPLICIT_CLEF_COMMAND:10
                                     \once \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
-                                    \once \override ViolaMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:5
-                                    %%% \override ViolaMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:6
-                                    \set ViolaMusicStaff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:7
+                                    \once \override ViolaMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:7
+                                    %%% \override ViolaMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:8
+                                    \set ViolaMusicStaff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:9
                                     R1 * 3/8
-                                    \set ViolaMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                        \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                            #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                            Viola %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                        } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \set ViolaMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                        \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                            #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                            Va. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                        } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
+                                    ^ \markup {
+                                        \column
+                                            {
+                                                %%% \line %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%     { %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%         \override %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%             \box %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%                 viola %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%     } %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                \line %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                    { %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                        \with-color %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                            #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                            \override %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                \box %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                    viola %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                    } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                            }
+                                        }
+                                    \set ViolaMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                        \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                            #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                            Viola %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                        } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                    \set ViolaMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                        \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                            #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                            Va. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                        } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
                                     \bar "|"
-                                    \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
-                                    \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
+                                    \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:5
+                                    \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:11
                 <BLANKLINE>
                                 }
                             }
@@ -3492,34 +3521,55 @@ class SegmentMaker(abjad.SegmentMaker):
                                         {
                 <BLANKLINE>
                                             %%% CelloMusicVoice [measure 1] %%%
-                                            \set CelloMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                                \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                                    #10 %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                                    Cello %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                                } %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                            \set CelloMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                                \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                                    #10 %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                                    Vc. %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                                } %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                            \clef "bass" %! EXPLICIT_CLEF_COMMAND:8
+                                            \set CelloMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                                \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                                    #10 %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                                    Cello %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                                } %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                            \set CelloMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                                \hcenter-in %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                                    #10 %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                                    Vc. %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                                } %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                            \clef "bass" %! EXPLICIT_CLEF_COMMAND:10
                                             \once \override CelloMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
-                                            \once \override CelloMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:5
-                                            %%% \override CelloMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:6
-                                            \set CelloMusicStaff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:7
+                                            \once \override CelloMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:7
+                                            %%% \override CelloMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:8
+                                            \set CelloMusicStaff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:9
                                             a16
-                                            \set CelloMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                                \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                                    #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                                    Cello %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                                } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                            \set CelloMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                                \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                                    #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                                    Vc. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                                } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                            \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
-                                            \override CelloMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
+                                            ^ \markup {
+                                                \column
+                                                    {
+                                                        %%% \line %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                        %%%     { %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                        %%%         \override %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                        %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                        %%%             \box %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                        %%%                 cello %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                        %%%     } %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                        \line %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                            { %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                \with-color %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                    #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                    \override %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                        #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                        \box %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                            cello %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                            } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                    }
+                                                }
+                                            \set CelloMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                                \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                                    #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                                    Cello %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                                } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                            \set CelloMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                                \hcenter-in %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                                    #10 %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                                    Vc. %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                                } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                            \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:5
+                                            \override CelloMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:11
                 <BLANKLINE>
                                             g16
                 <BLANKLINE>
@@ -4651,16 +4701,6 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._final_markup_extra_offset
 
     @property
-    def hide_instrument_names(self):
-        r'''Is true when segment hides instrument names.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
-        '''
-        return self._hide_instrument_names
-
-    @property
     def ignore_repeat_pitch_classes(self):
         r'''Is true when segment ignores repeat pitch-classes.
 
@@ -5494,7 +5534,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @property
     def instruments(self):
-        r'''Gets instrument manifest.
+        r'''Gets instrument dictionary.
 
         ..  container:: example
 
@@ -5551,7 +5591,9 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     previous_metadata=metadata,
             ...     remove=remove,
             ...     )
-
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(1, block)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5659,14 +5701,35 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                    \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                    \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                    \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT_COMMAND:4
                                     \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
                                     c'8
                                     [
-                                    \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
+                                    ^ \markup {
+                                        \column
+                                            {
+                                                %%% \line %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%     { %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%         \override %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%             \box %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%                 flute %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%     } %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                \line %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                    { %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                        \with-color %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                            #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                            \override %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                \box %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                    flute %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                    } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                            }
+                                        }
+                                    \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                    \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -5733,35 +5796,35 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 7] %%%
-                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_COMMAND:4
                                     \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
                                     c'8
                                     [
                                     ^ \markup {
                                         \column
                                             {
-                                                %%% \line %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     { %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%         \override %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             \box %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%                 piccolo %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     } %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
-                                                \line %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    { %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                        \with-color %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            \override %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                \box %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                    piccolo %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                %%% \line %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%     { %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%         \override %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%             \box %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%                 piccolo %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%     } %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                \line %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                    { %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                        \with-color %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                            #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                            \override %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                \box %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                    piccolo %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                    } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
+                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -5865,7 +5928,9 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     previous_metadata=metadata,
             ...     remove=remove,
             ...     )
-
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(1, block)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6068,35 +6133,35 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 7] %%%
-                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_COMMAND:4
                                     \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
                                     c'8
                                     [
                                     ^ \markup {
                                         \column
                                             {
-                                                %%% \line %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     { %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%         \override %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             \box %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%                 piccolo %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     } %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
-                                                \line %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    { %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                        \with-color %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            \override %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                \box %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                    piccolo %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                %%% \line %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%     { %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%         \override %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%             \box %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%                 piccolo %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%     } %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                \line %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                    { %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                        \with-color %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                            #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                            \override %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                \box %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                    piccolo %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                    } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
+                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -6213,7 +6278,9 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     previous_metadata=metadata,
             ...     remove=remove,
             ...     )
-
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(1, block)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6445,35 +6512,35 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 7] %%%
-                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_COMMAND:2
+                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_COMMAND:4
                                     \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
                                     c'8
                                     [
                                     ^ \markup {
                                         \column
                                             {
-                                                %%% \line %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     { %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%         \override %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             \box %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%                 piccolo %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     } %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:5
-                                                \line %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    { %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                        \with-color %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            \override %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                \box %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                    piccolo %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                %%% \line %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%     { %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%         \override %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%             \box %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%                 piccolo %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%     } %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                \line %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                    { %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                        \with-color %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                            #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                            \override %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                \box %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                    piccolo %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                    } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
+                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -6516,35 +6583,35 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 11] %%%
-                                    \set Staff.instrumentName = \markup { Piccolo } %! REDUNDANT_INSTRUMENT_COMMAND:2
-                                    \set Staff.shortInstrumentName = \markup { Picc. } %! REDUNDANT_INSTRUMENT_COMMAND:2
+                                    \set Staff.instrumentName = \markup { Piccolo } %! REDUNDANT_INSTRUMENT_COMMAND:4
+                                    \set Staff.shortInstrumentName = \markup { Picc. } %! REDUNDANT_INSTRUMENT_COMMAND:4
                                     \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_COLOR:1
                                     c'8
                                     [
                                     ^ \markup {
                                         \column
                                             {
-                                                %%% \line %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     { %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%         \override %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             #'(box-padding . 0.75) %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%             \box %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%                 piccolo %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
-                                                %%%     } %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:5
-                                                \line %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    { %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                        \with-color %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                            \override %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                #'(box-padding . 0.75) %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                \box %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                                    piccolo %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
-                                                    } %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:6
+                                                %%% \line %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%     { %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%         \override %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%             #'(box-padding . 0.75) %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%             \box %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%                 piccolo %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%     } %! REDUNDANT_INSTRUMENT_CHANGE_MARKUP:2
+                                                \line %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                    { %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                        \with-color %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                            #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                            \override %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                #'(box-padding . 0.75) %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                \box %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                    piccolo %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                    } %! REDUNDANT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { Piccolo } %! REDUNDANT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \set Staff.shortInstrumentName = \markup { Picc. } %! REDUNDANT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_INSTRUMENT_SHADOW_COLOR:3
+                                    \set Staff.instrumentName = \markup { Piccolo } %! REDUNDANT_INSTRUMENT_SHADOW_COMMAND:6
+                                    \set Staff.shortInstrumentName = \markup { Picc. } %! REDUNDANT_INSTRUMENT_SHADOW_COMMAND:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_INSTRUMENT_SHADOW_COLOR:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -6972,7 +7039,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @property
     def metronome_marks(self):
-        r'''Gets metronome marks.
+        r'''Gets metronome mark dictionary.
 
         Returns typed ordered dictionary or none.
         '''
@@ -7482,19 +7549,40 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:8
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:10
                                     \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:5
-                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:6
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:7
+                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:7
+                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:8
+                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:9
                                     fs'8
                                     [
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
+                                    ^ \markup {
+                                        \column
+                                            {
+                                                %%% \line %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%     { %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%         \override %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%             \box %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%                 "clarinet in B-flat" %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%     } %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                \line %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                    { %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                        \with-color %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                            #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                            \override %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                \box %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                    "clarinet in B-flat" %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                    } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                            }
+                                        }
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:11
                 <BLANKLINE>
                                     g'8
                 <BLANKLINE>
@@ -7606,19 +7694,40 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT_COMMAND:2
-                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:8
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT_COMMAND:4
+                                    \clef "treble" %! EXPLICIT_CLEF_COMMAND:10
                                     \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:5
-                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:6
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:7
+                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:7
+                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:8
+                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:9
                                     e'8
                                     [
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:4
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:3
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
+                                    ^ \markup {
+                                        \column
+                                            {
+                                                %%% \line %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%     { %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%         \override %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%             \box %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%                 "clarinet in B-flat" %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                %%%     } %! EXPLICIT_INSTRUMENT_CHANGE_MARKUP:2
+                                                \line %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                    { %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                        \with-color %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                            #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                            \override %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                \box %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                                    "clarinet in B-flat" %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                                    } %! EXPLICIT_INSTRUMENT_CHANGE_COLORED_MARKUP:3
+                                            }
+                                        }
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT_SHADOW_COMMAND:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_INSTRUMENT_SHADOW_COLOR:5
+                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:11
                 <BLANKLINE>
                                     f'8
                 <BLANKLINE>
@@ -7759,8 +7868,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._tag_untagged_clefs()
         self._apply_spacing_specifier()
         self._tag_clock_time()
-        self._hide_instrument_names_()
-        self._label_noninitial_instrument_changes()
+#        self._label_noninitial_instrument_changes()
         self._transpose_score_()
         self._attach_rehearsal_mark()
         self._add_final_bar_line()
