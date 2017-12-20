@@ -327,6 +327,8 @@ class SegmentMaker(abjad.SegmentMaker):
         if layout_measure_map is not None:
             assert isinstance(layout_measure_map, baca.LayoutMeasureMap)
         self._layout_measure_map = layout_measure_map
+        if margin_markup is not None:
+            assert isinstance(margin_markup, abjad.TypedOrderedDict)
         self._margin_markup = margin_markup
         self._measures_per_stage = measures_per_stage
         self._metronome_mark_measure_map = metronome_mark_measure_map
@@ -1462,37 +1464,13 @@ class SegmentMaker(abjad.SegmentMaker):
             indicator = self.metronome_marks.get(key)
         elif prototype is abjad.TimeSignature:
             indicator = abjad.TimeSignature.from_string(key)
+        elif prototype is baca.MarginMarkup:
+            indicator = self.margin_markup.get(key)
         elif prototype is baca.StaffLines:
             indicator = baca.StaffLines(line_count=key)
         else:
             raise Exception(prototype)
         return indicator
-
-#    def _label_noninitial_instrument_changes(self):
-#        for staff in abjad.iterate(self._score).components(abjad.Staff):
-#            for i, leaf in enumerate(abjad.iterate(staff).leaves()):
-#                my_instrument = abjad.inspect(leaf).get_indicator(
-#                    abjad.Instrument
-#                    )
-#                if my_instrument is None:
-#                    continue
-#                previous_instrument = abjad.inspect(leaf).get_effective(
-#                    abjad.Instrument,
-#                    n=-1,
-#                    )
-#                if previous_instrument is None:
-#                    continue
-#                my_name = getattr(my_instrument, 'name', None)
-#                previous_name = getattr(previous_instrument, 'name', None)
-#                if previous_name == my_name:
-#                    status = 'redundant'
-#                else:
-#                    status = 'explicit'
-#                self._tag_instrument_change_markup(
-#                    leaf,
-#                    my_instrument,
-#                    status,
-#                    )
 
     def _label_stage_numbers(self):
         if self.omit_stage_number_markup:
@@ -1742,6 +1720,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 momentos,
                 abjad.TimeSignature,
                 )
+            # BACA.MARGIN_MARKUP
+            self._reapply_persistent_indicator_type(
+                context,
+                momentos,
+                baca.MarginMarkup,
+                )
             # BACA.STAFF_LINES
             self._reapply_persistent_indicator_type(
                 context,
@@ -1888,6 +1872,27 @@ class SegmentMaker(abjad.SegmentMaker):
         segment_duration = segment_duration.to_clock_string()
         self._duration = segment_duration
 
+    def _tag_deactivated_grob_uncolor(
+        self,
+        leaf,
+        status,
+        grob,
+        context=None,
+        tagged_grob_name=None,
+        ):
+        if context is not None:
+            assert isinstance(context, abjad.Context), repr(context)
+        if context is not None:
+            string = rf'\override {context.headword}.{grob}.color = ##f'
+        else:
+            string = rf'\override {grob}.color = ##f'
+        literal = abjad.LilyPondLiteral(string)
+        if tagged_grob_name is not None:
+            tag = self._get_tag(status, tagged_grob_name, 'uncolor')
+        else:
+            tag = self._get_tag(status, grob, 'uncolor')
+        abjad.attach(literal, leaf, deactivate=True, tag=tag)
+
     def _tag_grob_color(
         self,
         leaf,
@@ -1960,125 +1965,6 @@ class SegmentMaker(abjad.SegmentMaker):
             tag = self._get_tag(status, grob, 'shadow_color')
         abjad.attach(literal, leaf, tag=tag)
 
-    def _tag_grob_uncolor(
-        self,
-        leaf,
-        status,
-        grob,
-        context=None,
-        tagged_grob_name=None,
-        ):
-        if context is not None:
-            assert isinstance(context, abjad.Context), repr(context)
-        if context is not None:
-            string = rf'\override {context.headword}.{grob}.color = ##f'
-        else:
-            string = rf'\override {grob}.color = ##f'
-        literal = abjad.LilyPondLiteral(string)
-        tag = self._get_tag(status, grob, 'uncolor')
-        abjad.attach(literal, leaf, deactivate=True, tag=tag)
-
-#    def _tag_instrument(self, leaf, instrument, context, status):
-#        if context is not None:
-#            assert isinstance(context, abjad.Context), repr(context)
-#        if status is None:
-#            return
-#        grob = 'InstrumentName'
-#        tagged_grob_name = 'INSTRUMENT'
-#        self._tag_grob_color(
-#            leaf,
-#            status,
-#            grob,
-#            context,
-#            tagged_grob_name=tagged_grob_name,
-#            )
-#        abjad.detach(abjad.Instrument, leaf)
-#        self._tag_grob_command(
-#            leaf,
-#            status,
-#            tagged_grob_name,
-#            instrument,
-#            context=context,
-#            )
-#        self._tag_grob_shadow_color(
-#            leaf,
-#            status,
-#            grob,
-#            context,
-#            tagged_grob_name=tagged_grob_name,
-#            )
-#        strings = instrument._get_lilypond_format(context=context)
-#        command = abjad.LilyPondLiteral(strings, 'after')
-#        self._tag_grob_command(
-#            leaf,
-#            status,
-#            tagged_grob_name,
-#            command,
-#            context=context,
-#            shadow_command=True,
-#            )
-
-#    def _tag_instrument_change_markup(self, leaf, instrument, status):
-#        if status is None:
-#            return
-#        markup = self._make_instrument_change_markup(instrument)
-#        name = f'{status.upper()}_INSTRUMENT_CHANGE_MARKUP'
-#        tag = getattr(baca.Tags, name)
-#        abjad.attach(
-#            markup,
-#            leaf,
-#            deactivate=True,
-#            tag=tag,
-#            )
-#        color = self._status_to_color[status]
-#        color = abjad.SchemeColor(color)
-#        markup = markup.with_color(color)
-#        name = f'{status.upper()}_INSTRUMENT_CHANGE_COLORED_MARKUP'
-#        tag = getattr(baca.Tags, name)
-#        abjad.attach(
-#            markup,
-#            leaf,
-#            tag=tag,
-#            )
-
-    def _tag_margin_markup(self, leaf, margin_markup, context, status):
-        if context is not None:
-            assert isinstance(context, abjad.Context), repr(context)
-        grob = 'InstrumentName'
-        tagged_grob_name = 'MARGIN_MARKUP'
-        self._tag_grob_color(
-            leaf,
-            status,
-            grob,
-            context,
-            tagged_grob_name=tagged_grob_name,
-            )
-        abjad.detach(baca.MarginMarkup, leaf)
-        self._tag_grob_command(
-            leaf,
-            status,
-            tagged_grob_name,
-            margin_markup,
-            context=context,
-            )
-        self._tag_grob_shadow_color(
-            leaf,
-            status,
-            grob,
-            context,
-            tagged_grob_name=tagged_grob_name,
-            )
-        strings = margin_markup._get_lilypond_format(context=context)
-        command = abjad.LilyPondLiteral(strings, 'after')
-        self._tag_grob_command(
-            leaf,
-            status,
-            tagged_grob_name,
-            command,
-            context=context,
-            shadow_command=True,
-            )
-
     def _tag_persistent_indicator(
         self,
         leaf,
@@ -2100,6 +1986,9 @@ class SegmentMaker(abjad.SegmentMaker):
             context = None
             grob = 'TextScript'
             tagged_grob_name = 'METRONOME_MARK'
+        elif isinstance(indicator, baca.MarginMarkup):
+            grob = 'InstrumentName'
+            tagged_grob_name = 'MARGIN_MARKUP'
         elif isinstance(indicator, baca.StaffLines):
             grob = 'StaffSymbol'
             tagged_grob_name = 'STAFF_LINES'
@@ -2135,7 +2024,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
         elif (getattr(indicator, '_line_redraw', False)
             and not getattr(indicator, 'suppress_markup', False)):
-            self._tag_grob_uncolor(
+            self._tag_deactivated_grob_uncolor(
                 leaf,
                 status,
                 grob,
@@ -2163,7 +2052,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 context,
                 tagged_grob_name=tagged_grob_name,
                 )
-            if isinstance(indicator, abjad.Instrument):
+            if isinstance(indicator, (abjad.Instrument, baca.MarginMarkup)):
                 strings = indicator._get_lilypond_format(context=context)
                 shadow_indicator = abjad.LilyPondLiteral(strings, 'after')
                 self._tag_grob_command(
@@ -2253,14 +2142,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 n=-1,
                 )
             if previous_margin_markup == margin_markup:
-                self._tag_margin_markup(
+                self._tag_persistent_indicator(
                     leaf,
                     margin_markup,
                     context,
                     'redundant',
                     )
             else:
-                self._tag_margin_markup(
+                self._tag_persistent_indicator(
                     leaf,
                     margin_markup,
                     context,

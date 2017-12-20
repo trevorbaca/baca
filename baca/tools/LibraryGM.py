@@ -1899,18 +1899,19 @@ class LibraryGM(abjad.AbjadObject):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_MARGIN_MARKUP_COMMAND:2
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_MARGIN_MARKUP_COMMAND:2
-                                \clef "treble" %! EXPLICIT_CLEF_COMMAND:8
+                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_MARGIN_MARKUP_COMMAND:3
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_MARGIN_MARKUP_COMMAND:3
+                                \clef "treble" %! EXPLICIT_CLEF_COMMAND:9
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:1
-                                \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:5
-                                %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:6
-                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:7
+                                %%% \override Staff.InstrumentName.color = ##f %! EXPLICIT_MARGIN_MARKUP_UNCOLOR:2
+                                \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:6
+                                %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:7
+                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF_COMMAND:8
                                 e'2
-                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_MARGIN_MARKUP_SHADOW_COMMAND:4
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_MARGIN_MARKUP_SHADOW_COMMAND:4
-                                \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_MARGIN_MARKUP_SHADOW_COLOR:3
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:9
+                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_MARGIN_MARKUP_SHADOW_COMMAND:5
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_MARGIN_MARKUP_SHADOW_COMMAND:5
+                                \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_MARGIN_MARKUP_SHADOW_COLOR:4
+                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_SHADOW_COLOR:10
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 f'4.
