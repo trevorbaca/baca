@@ -77,19 +77,13 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                                     {
                                         %%% \line %! EXPLICIT_INSTRUMENT_ALERT:7
                                         %%%     { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                        %%%         \override %! EXPLICIT_INSTRUMENT_ALERT:7
-                                        %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_ALERT:7
-                                        %%%             \box %! EXPLICIT_INSTRUMENT_ALERT:7
-                                        %%%                 violin %! EXPLICIT_INSTRUMENT_ALERT:7
+                                        %%%         [[violin]] %! EXPLICIT_INSTRUMENT_ALERT:7
                                         %%%     } %! EXPLICIT_INSTRUMENT_ALERT:7
                                         \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                             { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                 \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                     #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                    \override %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                        #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                        \box %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            violin %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                    [[violin]] %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                             } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                     }
                                 }

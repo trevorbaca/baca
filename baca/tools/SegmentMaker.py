@@ -1918,8 +1918,12 @@ class SegmentMaker(abjad.SegmentMaker):
             context = None
         self._color_persistent_indicator(context, leaf, indicator, status)
         if isinstance(indicator, abjad.Instrument):
-            markup = abjad.Markup(indicator.name, direction=abjad.Up)
-            markup = markup.box().override(('box-padding', 0.75))
+            key = self._indicator_to_key(indicator)
+            if key is not None:
+                markup = abjad.Markup(f'[{key}]', direction=abjad.Up)
+            else:
+                key = indicator.name
+                markup = abjad.Markup(f'[[{key}]]', direction=abjad.Up)
             tag = f'{status.upper()}_INSTRUMENT_ALERT'
             tag = getattr(baca.Tags, tag)
             abjad.attach(
@@ -3152,19 +3156,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     {
                                                         %%% \line %! EXPLICIT_INSTRUMENT_ALERT:7
                                                         %%%     { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%         \override %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%             \box %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%                 violin %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                        %%%         [[violin]] %! EXPLICIT_INSTRUMENT_ALERT:7
                                                         %%%     } %! EXPLICIT_INSTRUMENT_ALERT:7
                                                         \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                             { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                                 \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                                     #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    \override %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                        #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                        \box %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                            violin %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    [[violin]] %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                             } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                     }
                                                 }
@@ -3229,19 +3227,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                             {
                                                 %%% \line %! EXPLICIT_INSTRUMENT_ALERT:7
                                                 %%%     { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%         \override %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%             \box %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%                 viola %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%         [[viola]] %! EXPLICIT_INSTRUMENT_ALERT:7
                                                 %%%     } %! EXPLICIT_INSTRUMENT_ALERT:7
                                                 \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                     { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                         \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                             #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            \override %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                \box %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    viola %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                            [[viola]] %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                     } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                             }
                                         }
@@ -3289,19 +3281,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     {
                                                         %%% \line %! EXPLICIT_INSTRUMENT_ALERT:7
                                                         %%%     { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%         \override %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%             \box %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%                 cello %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                        %%%         [[cello]] %! EXPLICIT_INSTRUMENT_ALERT:7
                                                         %%%     } %! EXPLICIT_INSTRUMENT_ALERT:7
                                                         \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                             { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                                 \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                                     #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    \override %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                        #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                        \box %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                            cello %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    [[cello]] %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                             } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                     }
                                                 }
@@ -5466,19 +5452,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                             {
                                                 %%% \line %! EXPLICIT_INSTRUMENT_ALERT:2
                                                 %%%     { %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%         \override %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%             \box %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%                 flute %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%         [Flute] %! EXPLICIT_INSTRUMENT_ALERT:2
                                                 %%%     } %! EXPLICIT_INSTRUMENT_ALERT:2
                                                 \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
                                                     { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
                                                         \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
                                                             #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                            \override %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                \box %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                    flute %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            [Flute] %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
                                                     } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
                                             }
                                         }
@@ -5561,19 +5541,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                             {
                                                 %%% \line %! EXPLICIT_INSTRUMENT_ALERT:2
                                                 %%%     { %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%         \override %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%             \box %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%                 piccolo %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%         [Piccolo] %! EXPLICIT_INSTRUMENT_ALERT:2
                                                 %%%     } %! EXPLICIT_INSTRUMENT_ALERT:2
                                                 \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
                                                     { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
                                                         \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
                                                             #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                            \override %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                \box %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                    piccolo %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            [Piccolo] %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
                                                     } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
                                             }
                                         }
@@ -5803,19 +5777,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                             {
                                                 %%% \line %! REAPPLIED_INSTRUMENT_ALERT:2
                                                 %%%     { %! REAPPLIED_INSTRUMENT_ALERT:2
-                                                %%%         \override %! REAPPLIED_INSTRUMENT_ALERT:2
-                                                %%%             #'(box-padding . 0.75) %! REAPPLIED_INSTRUMENT_ALERT:2
-                                                %%%             \box %! REAPPLIED_INSTRUMENT_ALERT:2
-                                                %%%                 flute %! REAPPLIED_INSTRUMENT_ALERT:2
+                                                %%%         [Flute] %! REAPPLIED_INSTRUMENT_ALERT:2
                                                 %%%     } %! REAPPLIED_INSTRUMENT_ALERT:2
                                                 \line %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:3
                                                     { %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:3
                                                         \with-color %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:3
                                                             #(x11-color 'green) %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                            \override %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                #'(box-padding . 0.75) %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                \box %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                    flute %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            [Flute] %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:3
                                                     } %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:3
                                             }
                                         }
@@ -5898,19 +5866,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                             {
                                                 %%% \line %! EXPLICIT_INSTRUMENT_ALERT:2
                                                 %%%     { %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%         \override %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%             \box %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%                 piccolo %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%         [Piccolo] %! EXPLICIT_INSTRUMENT_ALERT:2
                                                 %%%     } %! EXPLICIT_INSTRUMENT_ALERT:2
                                                 \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
                                                     { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
                                                         \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
                                                             #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                            \override %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                \box %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                    piccolo %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            [Piccolo] %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
                                                     } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
                                             }
                                         }
@@ -6182,19 +6144,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                             {
                                                 %%% \line %! REDUNDANT_INSTRUMENT_ALERT:2
                                                 %%%     { %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%         \override %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%             #'(box-padding . 0.75) %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%             \box %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%                 flute %! REDUNDANT_INSTRUMENT_ALERT:2
+                                                %%%         [Flute] %! REDUNDANT_INSTRUMENT_ALERT:2
                                                 %%%     } %! REDUNDANT_INSTRUMENT_ALERT:2
                                                 \line %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
                                                     { %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
                                                         \with-color %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
                                                             #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                            \override %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                #'(box-padding . 0.75) %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                \box %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                    flute %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            [Flute] %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
                                                     } %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
                                             }
                                         }
@@ -6277,19 +6233,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                             {
                                                 %%% \line %! EXPLICIT_INSTRUMENT_ALERT:2
                                                 %%%     { %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%         \override %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%             \box %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%                 piccolo %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%         [Piccolo] %! EXPLICIT_INSTRUMENT_ALERT:2
                                                 %%%     } %! EXPLICIT_INSTRUMENT_ALERT:2
                                                 \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
                                                     { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
                                                         \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
                                                             #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                            \override %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                \box %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                    piccolo %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            [Piccolo] %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
                                                     } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
                                             }
                                         }
@@ -6348,19 +6298,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                             {
                                                 %%% \line %! REDUNDANT_INSTRUMENT_ALERT:2
                                                 %%%     { %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%         \override %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%             #'(box-padding . 0.75) %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%             \box %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%                 piccolo %! REDUNDANT_INSTRUMENT_ALERT:2
+                                                %%%         [Piccolo] %! REDUNDANT_INSTRUMENT_ALERT:2
                                                 %%%     } %! REDUNDANT_INSTRUMENT_ALERT:2
                                                 \line %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
                                                     { %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
                                                         \with-color %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
                                                             #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                            \override %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                #'(box-padding . 0.75) %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                \box %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                    piccolo %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            [Piccolo] %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
                                                     } %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
                                             }
                                         }
@@ -7318,19 +7262,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                             {
                                                 %%% \line %! EXPLICIT_INSTRUMENT_ALERT:7
                                                 %%%     { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%         \override %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%             \box %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%                 "clarinet in B-flat" %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%         [clarinet] %! EXPLICIT_INSTRUMENT_ALERT:7
                                                 %%%     } %! EXPLICIT_INSTRUMENT_ALERT:7
                                                 \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                     { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                         \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                             #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            \override %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                \box %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    "clarinet in B-flat" %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                            [clarinet] %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                     } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                             }
                                         }
@@ -7463,19 +7401,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                             {
                                                 %%% \line %! EXPLICIT_INSTRUMENT_ALERT:7
                                                 %%%     { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%         \override %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%             #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%             \box %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%                 "clarinet in B-flat" %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%         [clarinet] %! EXPLICIT_INSTRUMENT_ALERT:7
                                                 %%%     } %! EXPLICIT_INSTRUMENT_ALERT:7
                                                 \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                     { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                         \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                             #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            \override %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                #'(box-padding . 0.75) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                \box %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    "clarinet in B-flat" %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                            [clarinet] %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                     } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                             }
                                         }
