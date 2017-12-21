@@ -39,6 +39,11 @@ class Tags(abjad.Enumeration):
     REDUNDANT_CLEF_COLOR_REDRAW = enum.auto()
     REDUNDANT_CLEF_UNCOLOR = enum.auto()
 
+    TEMPLATE_CLEF = enum.auto()
+    TEMPLATE_CLEF_COLOR = enum.auto()
+    TEMPLATE_CLEF_COLOR_REDRAW = enum.auto()
+    TEMPLATE_CLEF_UNCOLOR = enum.auto()
+
     ### DYNAMICS ###
 
     EXPLICIT_DYNAMIC = enum.auto()
@@ -79,6 +84,13 @@ class Tags(abjad.Enumeration):
     REDUNDANT_REDRAW_INSTRUMENT = enum.auto()
     REDUNDANT_REDRAW_INSTRUMENT_COLOR = enum.auto()
 
+    TEMPLATE_INSTRUMENT = enum.auto()
+    TEMPLATE_INSTRUMENT_ALERT = enum.auto()
+    TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR = enum.auto()
+    TEMPLATE_INSTRUMENT_COLOR = enum.auto()
+    TEMPLATE_REDRAW_INSTRUMENT = enum.auto()
+    TEMPLATE_REDRAW_INSTRUMENT_COLOR = enum.auto()
+
     ### MARGIN MARKUP ###
 
     EXPLICIT_MARGIN_MARKUP = enum.auto()
@@ -101,6 +113,13 @@ class Tags(abjad.Enumeration):
     REDUNDANT_MARGIN_MARKUP_COLOR = enum.auto()
     REDUNDANT_REDRAW_MARGIN_MARKUP = enum.auto()
     REDUNDANT_REDRAW_MARGIN_MARKUP_COLOR = enum.auto()
+
+    TEMPLATE_MARGIN_MARKUP = enum.auto()
+    TEMPLATE_MARGIN_MARKUP_ALERT = enum.auto()
+    TEMPLATE_MARGIN_MARKUP_ALERT_WITH_COLOR = enum.auto()
+    TEMPLATE_MARGIN_MARKUP_COLOR = enum.auto()
+    TEMPLATE_REDRAW_MARGIN_MARKUP = enum.auto()
+    TEMPLATE_REDRAW_MARGIN_MARKUP_COLOR = enum.auto()
 
     ### METRONOME MARKS ###
 

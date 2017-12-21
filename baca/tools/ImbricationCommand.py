@@ -890,9 +890,6 @@ class ImbricationCommand(Command):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> voice = lilypond_file['MusicVoiceTwo']
-            >>> abjad.override(voice).beam.positions = (-5, -5)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1020,9 +1017,7 @@ class ImbricationCommand(Command):
                                     \revert TupletNumber.stencil
                                 }
                             }
-                            \context MusicVoiceTwo = "MusicVoiceTwo" \with {
-                                \override Beam.positions = #'(-5 . -5)
-                            } {
+                            \context MusicVoiceTwo = "MusicVoiceTwo" {
                                 {
                                     {
                 <BLANKLINE>

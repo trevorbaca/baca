@@ -63,13 +63,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" %! EXPLICIT_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
+                                \clef "treble" %! TEMPLATE_CLEF:4
+                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
+                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
+                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                 c'8
                                 [
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
             <BLANKLINE>
                                 c'8
             <BLANKLINE>
@@ -208,14 +208,16 @@ class SegmentMaker(abjad.SegmentMaker):
 
     _status_to_color = {
         'explicit': 'blue',
-        'reapplied': 'green',
+        'reapplied': 'green4',
         'redundant': 'DeepPink1',
+        'template': 'DarkViolet',
         }
 
     _status_to_redraw_color = {
-        'explicit': 'DarkCyan',
-        'reapplied': 'DarkGreen',
+        'explicit': 'DeepSkyBlue2',
+        'reapplied': 'OliveDrab',
         'redundant': 'DeepPink4',
+        'template': 'violet',
         }
 
     _relative_string_trio_stylesheet_path = pathlib.Path(
@@ -443,17 +445,17 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" %! EXPLICIT_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
+                                    \clef "treble" %! TEMPLATE_CLEF:4
+                                    \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
+                                    %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
+                                    \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                     c'8
                                     [
                                     ^ \markup {
                                         \small
                                             0
                                         }
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                    \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -895,8 +897,26 @@ class SegmentMaker(abjad.SegmentMaker):
             self._fermata_start_offsets.append(start_offset)
 
     def _attach_first_segment_score_template_defaults(self):
-        if self.first_segment:
-            self.score_template.attach_defaults(self.score)
+        if not self.first_segment:
+            return
+        pairs = self.score_template.attach_defaults(self.score)
+        #for pair in pairs:
+        #    print(pair)
+        #print()
+        for leaf, indicator in pairs:
+            wrapper = abjad.inspect(leaf).get_indicator(
+                indicator,
+                unwrap=False,
+                )
+            assert wrapper is not None
+            assert getattr(wrapper.indicator, 'persistent', False)
+            context = wrapper._find_correct_effective_context()
+            self._tag_persistent_indicator(
+                context,
+                leaf, 
+                wrapper.indicator,
+                'template',
+                )
 
     def _attach_latent_indicator_alert(self, leaf, indicator, status):
         assert indicator.latent, repr(indicator)
@@ -2243,7 +2263,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                    \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -2316,7 +2336,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                    \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -2541,12 +2561,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
                                     \clef "alto" %! REAPPLIED_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'green) %! REAPPLIED_CLEF_COLOR:1
+                                    \once \override Staff.Clef.color = #(x11-color 'green4) %! REAPPLIED_CLEF_COLOR:1
                                     %%% \override Staff.Clef.color = ##f %! REAPPLIED_CLEF_UNCOLOR:2
                                     \set Staff.forceClef = ##t %! REAPPLIED_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkGreen) %! REAPPLIED_CLEF_COLOR_REDRAW:5
+                                    \override Staff.Clef.color = #(x11-color 'OliveDrab) %! REAPPLIED_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -2619,7 +2639,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                    \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -2957,7 +2977,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                    \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -3166,79 +3186,79 @@ class SegmentMaker(abjad.SegmentMaker):
                                         {
                 <BLANKLINE>
                                             %%% ViolinMusicVoice [measure 1] %%%
-                                            \set ViolinMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT:9
-                                                \hcenter-in %! EXPLICIT_INSTRUMENT:9
-                                                    #10 %! EXPLICIT_INSTRUMENT:9
-                                                    Violin %! EXPLICIT_INSTRUMENT:9
-                                                } %! EXPLICIT_INSTRUMENT:9
-                                            \set ViolinMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT:9
-                                                \hcenter-in %! EXPLICIT_INSTRUMENT:9
-                                                    #10 %! EXPLICIT_INSTRUMENT:9
-                                                    Vn. %! EXPLICIT_INSTRUMENT:9
-                                                } %! EXPLICIT_INSTRUMENT:9
-                                            \clef "treble" %! EXPLICIT_CLEF:4
-                                            \once \override ViolinMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                            %%% \override ViolinMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                            \set ViolinMusicStaff.forceClef = ##t %! EXPLICIT_CLEF:3
-                                            \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:6
+                                            \set ViolinMusicStaff.instrumentName = \markup { %! TEMPLATE_INSTRUMENT:4
+                                                \hcenter-in %! TEMPLATE_INSTRUMENT:4
+                                                    #10 %! TEMPLATE_INSTRUMENT:4
+                                                    Violin %! TEMPLATE_INSTRUMENT:4
+                                                } %! TEMPLATE_INSTRUMENT:4
+                                            \set ViolinMusicStaff.shortInstrumentName = \markup { %! TEMPLATE_INSTRUMENT:4
+                                                \hcenter-in %! TEMPLATE_INSTRUMENT:4
+                                                    #10 %! TEMPLATE_INSTRUMENT:4
+                                                    Vn. %! TEMPLATE_INSTRUMENT:4
+                                                } %! TEMPLATE_INSTRUMENT:4
+                                            \clef "treble" %! TEMPLATE_CLEF:10
+                                            \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! TEMPLATE_INSTRUMENT_COLOR:1
+                                            \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:7
+                                            %%% \override ViolinMusicStaff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:8
+                                            \set ViolinMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:9
                                             d'16
                                             ^ \markup {
                                                 \column
                                                     {
-                                                        %%% \line %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%     { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%             (Violin %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%             \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%                 #10 %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%                 Violin %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%             { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%                     \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%                         #10 %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%                         Vn. %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%             } %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%     } %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                            (Violin %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                            \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                                #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                                Violin %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                        \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                            { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                                    \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                                        #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                                        Vn. %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                                    ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                            } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                        %%% \line %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%     { %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%         \vcenter %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%             (Violin %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%         \vcenter %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%             \hcenter-in %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%                 #10 %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%                 Violin %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%         \concat %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%             { %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%                 \vcenter %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%                     \hcenter-in %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%                         #10 %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%                         Vn. %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%                 \vcenter %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%                     ) %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%             } %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%     } %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        \line %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            { %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                \with-color %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    #(x11-color 'DarkViolet) %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    { %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        \vcenter %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                            (Violin %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        \vcenter %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                            \hcenter-in %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                                #10 %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                                Violin %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        \concat %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                            { %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                                \vcenter %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                                    \hcenter-in %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                                        #10 %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                                        Vn. %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                                \vcenter %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                                    ) %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                            } %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    } %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            } %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
                                                     }
                                                 }
-                                            \set ViolinMusicStaff.instrumentName = \markup { %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                                \hcenter-in %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                                    #10 %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                                    Violin %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                                } %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                            \set ViolinMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                                \hcenter-in %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                                    #10 %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                                    Vn. %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                                } %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                            \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
-                                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:10
+                                            \set ViolinMusicStaff.instrumentName = \markup { %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                                \hcenter-in %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                                    #10 %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                                    Violin %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                                } %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                            \set ViolinMusicStaff.shortInstrumentName = \markup { %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                                \hcenter-in %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                                    #10 %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                                    Vn. %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                                } %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'violet) %! TEMPLATE_REDRAW_INSTRUMENT_COLOR:5
+                                            \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:11
                 <BLANKLINE>
                                             e'16
                 <BLANKLINE>
@@ -3267,80 +3287,80 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \context ViolaMusicVoice = "ViolaMusicVoice" {
                 <BLANKLINE>
                                     %%% ViolaMusicVoice [measure 1] %%%
-                                    \set ViolaMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT:9
-                                        \hcenter-in %! EXPLICIT_INSTRUMENT:9
-                                            #10 %! EXPLICIT_INSTRUMENT:9
-                                            Viola %! EXPLICIT_INSTRUMENT:9
-                                        } %! EXPLICIT_INSTRUMENT:9
-                                    \set ViolaMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT:9
-                                        \hcenter-in %! EXPLICIT_INSTRUMENT:9
-                                            #10 %! EXPLICIT_INSTRUMENT:9
-                                            Va. %! EXPLICIT_INSTRUMENT:9
-                                        } %! EXPLICIT_INSTRUMENT:9
-                                    \clef "alto" %! EXPLICIT_CLEF:4
-                                    \once \override ViolaMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    %%% \override ViolaMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set ViolaMusicStaff.forceClef = ##t %! EXPLICIT_CLEF:3
-                                    \once \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:6
+                                    \set ViolaMusicStaff.instrumentName = \markup { %! TEMPLATE_INSTRUMENT:4
+                                        \hcenter-in %! TEMPLATE_INSTRUMENT:4
+                                            #10 %! TEMPLATE_INSTRUMENT:4
+                                            Viola %! TEMPLATE_INSTRUMENT:4
+                                        } %! TEMPLATE_INSTRUMENT:4
+                                    \set ViolaMusicStaff.shortInstrumentName = \markup { %! TEMPLATE_INSTRUMENT:4
+                                        \hcenter-in %! TEMPLATE_INSTRUMENT:4
+                                            #10 %! TEMPLATE_INSTRUMENT:4
+                                            Va. %! TEMPLATE_INSTRUMENT:4
+                                        } %! TEMPLATE_INSTRUMENT:4
+                                    \clef "alto" %! TEMPLATE_CLEF:10
+                                    \once \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! TEMPLATE_INSTRUMENT_COLOR:1
+                                    \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:7
+                                    %%% \override ViolaMusicStaff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:8
+                                    \set ViolaMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:9
                                     R1 * 3/8
                                     ^ \markup {
                                         \column
                                             {
-                                                %%% \line %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%     { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%             (Viola %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%             \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%                 #10 %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%                 Viola %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%             { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%                     \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%                         #10 %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%                         Va. %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%             } %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%     } %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                    { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                        \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    (Viola %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                        #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                        Viola %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                            \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                                #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                                Va. %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                            ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                    } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                %%% \line %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                %%%     { %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                %%%         \vcenter %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                %%%             (Viola %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                %%%         \vcenter %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                %%%             \hcenter-in %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                %%%                 #10 %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                %%%                 Viola %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                %%%         \concat %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                %%%             { %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                %%%                 \vcenter %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                %%%                     \hcenter-in %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                %%%                         #10 %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                %%%                         Va. %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                %%%                 \vcenter %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                %%%                     ) %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                %%%             } %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                %%%     } %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                \line %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                    { %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                        \with-color %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            #(x11-color 'DarkViolet) %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            { %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                \vcenter %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    (Viola %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                \vcenter %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    \hcenter-in %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        #10 %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        Viola %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                \concat %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    { %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        \vcenter %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                            \hcenter-in %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                                #10 %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                                Va. %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        \vcenter %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                            ) %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    } %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            } %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                    } %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
                                             }
                                         }
-                                    \set ViolaMusicStaff.instrumentName = \markup { %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                        \hcenter-in %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                            #10 %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                            Viola %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                        } %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                    \set ViolaMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                        \hcenter-in %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                            #10 %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                            Va. %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                        } %! EXPLICIT_REDRAW_INSTRUMENT:11
+                                    \set ViolaMusicStaff.instrumentName = \markup { %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                        \hcenter-in %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                            #10 %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                            Viola %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                        } %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                    \set ViolaMusicStaff.shortInstrumentName = \markup { %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                        \hcenter-in %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                            #10 %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                            Va. %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                        } %! TEMPLATE_REDRAW_INSTRUMENT:6
                                     \bar "|"
-                                    \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
-                                    \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:10
+                                    \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'violet) %! TEMPLATE_REDRAW_INSTRUMENT_COLOR:5
+                                    \override ViolaMusicStaff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:11
                 <BLANKLINE>
                                 }
                             }
@@ -3351,79 +3371,79 @@ class SegmentMaker(abjad.SegmentMaker):
                                         {
                 <BLANKLINE>
                                             %%% CelloMusicVoice [measure 1] %%%
-                                            \set CelloMusicStaff.instrumentName = \markup { %! EXPLICIT_INSTRUMENT:9
-                                                \hcenter-in %! EXPLICIT_INSTRUMENT:9
-                                                    #10 %! EXPLICIT_INSTRUMENT:9
-                                                    Cello %! EXPLICIT_INSTRUMENT:9
-                                                } %! EXPLICIT_INSTRUMENT:9
-                                            \set CelloMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_INSTRUMENT:9
-                                                \hcenter-in %! EXPLICIT_INSTRUMENT:9
-                                                    #10 %! EXPLICIT_INSTRUMENT:9
-                                                    Vc. %! EXPLICIT_INSTRUMENT:9
-                                                } %! EXPLICIT_INSTRUMENT:9
-                                            \clef "bass" %! EXPLICIT_CLEF:4
-                                            \once \override CelloMusicStaff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                            %%% \override CelloMusicStaff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                            \set CelloMusicStaff.forceClef = ##t %! EXPLICIT_CLEF:3
-                                            \once \override CelloMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:6
+                                            \set CelloMusicStaff.instrumentName = \markup { %! TEMPLATE_INSTRUMENT:4
+                                                \hcenter-in %! TEMPLATE_INSTRUMENT:4
+                                                    #10 %! TEMPLATE_INSTRUMENT:4
+                                                    Cello %! TEMPLATE_INSTRUMENT:4
+                                                } %! TEMPLATE_INSTRUMENT:4
+                                            \set CelloMusicStaff.shortInstrumentName = \markup { %! TEMPLATE_INSTRUMENT:4
+                                                \hcenter-in %! TEMPLATE_INSTRUMENT:4
+                                                    #10 %! TEMPLATE_INSTRUMENT:4
+                                                    Vc. %! TEMPLATE_INSTRUMENT:4
+                                                } %! TEMPLATE_INSTRUMENT:4
+                                            \clef "bass" %! TEMPLATE_CLEF:10
+                                            \once \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! TEMPLATE_INSTRUMENT_COLOR:1
+                                            \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:7
+                                            %%% \override CelloMusicStaff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:8
+                                            \set CelloMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:9
                                             a16
                                             ^ \markup {
                                                 \column
                                                     {
-                                                        %%% \line %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%     { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%             (Cello %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%             \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%                 #10 %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%                 Cello %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%             { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%                     \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%                         #10 %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%                         Vc. %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%             } %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        %%%     } %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                        \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                            (Cello %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                            \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                                #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                                Cello %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                        \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                            { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                                    \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                                        #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                                        Vc. %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                                    ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                            } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                        %%% \line %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%     { %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%         \vcenter %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%             (Cello %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%         \vcenter %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%             \hcenter-in %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%                 #10 %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%                 Cello %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%         \concat %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%             { %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%                 \vcenter %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%                     \hcenter-in %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%                         #10 %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%                         Vc. %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%                 \vcenter %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%                     ) %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%             } %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        %%%     } %! TEMPLATE_INSTRUMENT_ALERT:2
+                                                        \line %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            { %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                \with-color %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    #(x11-color 'DarkViolet) %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    { %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        \vcenter %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                            (Cello %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        \vcenter %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                            \hcenter-in %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                                #10 %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                                Cello %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        \concat %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                            { %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                                \vcenter %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                                    \hcenter-in %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                                        #10 %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                                        Vc. %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                                \vcenter %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                                    ) %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                            } %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    } %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            } %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
                                                     }
                                                 }
-                                            \set CelloMusicStaff.instrumentName = \markup { %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                                \hcenter-in %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                                    #10 %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                                    Cello %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                                } %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                            \set CelloMusicStaff.shortInstrumentName = \markup { %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                                \hcenter-in %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                                    #10 %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                                    Vc. %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                                } %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                            \override CelloMusicStaff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
-                                            \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:10
+                                            \set CelloMusicStaff.instrumentName = \markup { %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                                \hcenter-in %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                                    #10 %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                                    Cello %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                                } %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                            \set CelloMusicStaff.shortInstrumentName = \markup { %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                                \hcenter-in %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                                    #10 %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                                    Vc. %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                                } %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                            \override CelloMusicStaff.InstrumentName.color = #(x11-color 'violet) %! TEMPLATE_REDRAW_INSTRUMENT_COLOR:5
+                                            \override CelloMusicStaff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:11
                 <BLANKLINE>
                                             g16
                 <BLANKLINE>
@@ -3593,12 +3613,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                 <BLANKLINE>
                                         %%% MusicVoice [measure 1] %%%
-                                        \clef "treble" %! EXPLICIT_CLEF:4
-                                        \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                        %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                        \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
+                                        \clef "treble" %! TEMPLATE_CLEF:4
+                                        \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
+                                        %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
+                                        \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                         e'16
-                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                        \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                                     }
                                 }
                                 {
@@ -3800,12 +3820,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                 <BLANKLINE>
                                         %%% MusicVoice [measure 1] %%%
-                                        \clef "treble" %! EXPLICIT_CLEF:4
-                                        \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                        %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                        \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
+                                        \clef "treble" %! TEMPLATE_CLEF:4
+                                        \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
+                                        %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
+                                        \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                         e'16
-                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                        \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                                     }
                                 }
                                 {
@@ -3985,13 +4005,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! EXPLICIT_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
+                                    \clef "treble" %! TEMPLATE_CLEF:4
+                                    \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
+                                    %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
+                                    \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                    \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4098,13 +4118,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! EXPLICIT_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
+                                    \clef "treble" %! TEMPLATE_CLEF:4
+                                    \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
+                                    %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
+                                    \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                    \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4213,13 +4233,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! EXPLICIT_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
+                                    \clef "treble" %! TEMPLATE_CLEF:4
+                                    \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
+                                    %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
+                                    \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                    \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4330,13 +4350,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! EXPLICIT_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
+                                    \clef "treble" %! TEMPLATE_CLEF:4
+                                    \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
+                                    %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
+                                    \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                    \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4457,13 +4477,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! EXPLICIT_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
+                                    \clef "treble" %! TEMPLATE_CLEF:4
+                                    \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
+                                    %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
+                                    \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                    \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4635,13 +4655,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! EXPLICIT_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
+                                    \clef "treble" %! TEMPLATE_CLEF:4
+                                    \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
+                                    %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
+                                    \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                    \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4753,13 +4773,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" %! EXPLICIT_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
+                                    \clef "treble" %! TEMPLATE_CLEF:4
+                                    \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
+                                    %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
+                                    \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                    \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -5025,12 +5045,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                 <BLANKLINE>
                                         %%% MusicVoice [measure 1] %%%
-                                        \clef "treble" %! EXPLICIT_CLEF:4
-                                        \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                        %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                        \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
+                                        \clef "treble" %! TEMPLATE_CLEF:4
+                                        \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
+                                        %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
+                                        \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                         e'8.
-                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                        \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                                     }
                                 }
                                 {
@@ -5232,12 +5252,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override Flag.color = #magenta
                                         \once \override NoteHead.color = #magenta
                                         \once \override Stem.color = #magenta
-                                        \clef "treble" %! EXPLICIT_CLEF:4
-                                        \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                        %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                        \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
+                                        \clef "treble" %! TEMPLATE_CLEF:4
+                                        \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
+                                        %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
+                                        \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                         e'8.
-                                        \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                        \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                                     }
                                 }
                                 {
@@ -5601,7 +5621,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         }
                                     \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_REDRAW_INSTRUMENT:6
                                     \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_REDRAW_INSTRUMENT:6
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:5
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -5712,7 +5732,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         }
                                     \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_REDRAW_INSTRUMENT:6
                                     \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_REDRAW_INSTRUMENT:6
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:5
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -5928,7 +5948,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %%% MusicVoice [measure 1] %%%
                                     \set Staff.instrumentName = \markup { Flute } %! REAPPLIED_INSTRUMENT:4
                                     \set Staff.shortInstrumentName = \markup { Fl. } %! REAPPLIED_INSTRUMENT:4
-                                    \once \override Staff.InstrumentName.color = #(x11-color 'green) %! REAPPLIED_INSTRUMENT_COLOR:1
+                                    \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! REAPPLIED_INSTRUMENT_COLOR:1
                                     c'8
                                     [
                                     ^ \markup {
@@ -5951,7 +5971,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 \line %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:3
                                                     { %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:3
                                                         \with-color %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                            #(x11-color 'green) %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            #(x11-color 'green4) %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:3
                                                             { %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:3
                                                                 \vcenter %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:3
                                                                     (“Flute” %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:3
@@ -5970,7 +5990,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         }
                                     \set Staff.instrumentName = \markup { Flute } %! REAPPLIED_REDRAW_INSTRUMENT:6
                                     \set Staff.shortInstrumentName = \markup { Fl. } %! REAPPLIED_REDRAW_INSTRUMENT:6
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkGreen) %! REAPPLIED_REDRAW_INSTRUMENT_COLOR:5
+                                    \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! REAPPLIED_REDRAW_INSTRUMENT_COLOR:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -6081,7 +6101,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         }
                                     \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_REDRAW_INSTRUMENT:6
                                     \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_REDRAW_INSTRUMENT:6
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:5
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -6492,7 +6512,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         }
                                     \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_REDRAW_INSTRUMENT:6
                                     \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_REDRAW_INSTRUMENT:6
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:5
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:5
                 <BLANKLINE>
                                     c'8
                                     ]
@@ -6771,11 +6791,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
                                 \clef "alto" %! REAPPLIED_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'green) %! REAPPLIED_CLEF_COLOR:1
+                                \once \override Staff.Clef.color = #(x11-color 'green4) %! REAPPLIED_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! REAPPLIED_CLEF_UNCOLOR:2
                                 \set Staff.forceClef = ##t %! REAPPLIED_CLEF:3
                                 R1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'DarkGreen) %! REAPPLIED_CLEF_COLOR_REDRAW:5
+                                \override Staff.Clef.color = #(x11-color 'OliveDrab) %! REAPPLIED_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 R1 * 3/8
@@ -6940,13 +6960,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! EXPLICIT_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
+                                    \clef "treble" %! TEMPLATE_CLEF:4
+                                    \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
+                                    %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
+                                    \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                    \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -7184,12 +7204,12 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" %! EXPLICIT_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
+                                \clef "treble" %! TEMPLATE_CLEF:4
+                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
+                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
+                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                 R1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 R1 * 3/8
@@ -7257,12 +7277,12 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" %! EXPLICIT_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
+                                \clef "treble" %! TEMPLATE_CLEF:4
+                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
+                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
+                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                 s1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 s1 * 3/8
@@ -7377,13 +7397,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! EXPLICIT_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
+                                    \clef "treble" %! TEMPLATE_CLEF:4
+                                    \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
+                                    %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
+                                    \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                    \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -7519,10 +7539,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %%% MusicVoice [measure 1] %%%
                                     \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT:9
                                     \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT:9
-                                    \clef "treble" %! EXPLICIT_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
+                                    \clef "treble" %! TEMPLATE_CLEF:4
+                                    \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
+                                    %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
+                                    \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                     \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:6
                                     fs'8
                                     [
@@ -7565,8 +7585,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                         }
                                     \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_REDRAW_INSTRUMENT:11
                                     \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:10
+                                    \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:10
                 <BLANKLINE>
                                     g'8
                 <BLANKLINE>
@@ -7680,10 +7700,10 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %%% MusicVoice [measure 1] %%%
                                     \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT:9
                                     \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT:9
-                                    \clef "treble" %! EXPLICIT_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
+                                    \clef "treble" %! TEMPLATE_CLEF:4
+                                    \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
+                                    %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
+                                    \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                     \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:6
                                     e'8
                                     [
@@ -7726,8 +7746,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                         }
                                     \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_REDRAW_INSTRUMENT:11
                                     \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                    \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
-                                    \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:10
+                                    \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:10
                 <BLANKLINE>
                                     f'8
                 <BLANKLINE>
