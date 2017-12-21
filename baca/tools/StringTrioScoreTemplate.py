@@ -368,8 +368,8 @@ class StringTrioScoreTemplate(ScoreTemplate):
             name='ViolinMusicStaff',
             )
         violin = abjad.Violin(
-            name_markup=baca.markup.instrument('Violin', hcenter_in=10),
-            short_name_markup=baca.markup.short_instrument(
+            markup=baca.markup.instrument('Violin', hcenter_in=10),
+            short_markup=baca.markup.short_instrument(
                 'Vn.',
                 hcenter_in=10,
                 ),
@@ -401,8 +401,8 @@ class StringTrioScoreTemplate(ScoreTemplate):
             viola_music_staff,
             'default_instrument',
             abjad.Viola(
-                name_markup=baca.markup.instrument('Viola', hcenter_in=10),
-                short_name_markup=baca.markup.short_instrument(
+                markup=baca.markup.instrument('Viola', hcenter_in=10),
+                short_markup=baca.markup.short_instrument(
                     'Va.',
                     hcenter_in=10,
                     ),
@@ -430,8 +430,8 @@ class StringTrioScoreTemplate(ScoreTemplate):
             cello_music_staff,
             'default_instrument',
             abjad.Cello(
-                name_markup=baca.markup.instrument('Cello', hcenter_in=10),
-                short_name_markup=baca.markup.short_instrument(
+                markup=baca.markup.instrument('Cello', hcenter_in=10),
+                short_markup=baca.markup.short_instrument(
                     'Vc.',
                     hcenter_in=10,
                     ),

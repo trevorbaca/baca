@@ -181,8 +181,8 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             name='ViolinMusicStaff',
             )
         violin = abjad.Violin(
-            name_markup=baca.markup.instrument('Violin'),
-            short_name_markup=baca.markup.short_instrument('Vn.'),
+            markup=baca.markup.instrument('Violin'),
+            short_markup=baca.markup.short_instrument('Vn.'),
             )
         abjad.annotate(
             violin_music_staff,

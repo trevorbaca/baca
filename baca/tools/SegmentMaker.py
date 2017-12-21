@@ -900,6 +900,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _attach_latent_indicator_alert(self, leaf, indicator, status):
         assert indicator.latent, repr(indicator)
+        if isinstance(indicator, abjad.Clef):
+            return
         key = self._indicator_to_key(indicator)
         if key is not None:
             key = f'“{key}”'
@@ -907,22 +909,17 @@ class SegmentMaker(abjad.SegmentMaker):
             key = type(indicator).__name__
         if isinstance(indicator, abjad.Instrument):
             left, right = '(', ')'
-            name = indicator.name_markup.vcenter()
-            short_name = indicator.short_name_markup.vcenter()
         elif isinstance(indicator, baca.MarginMarkup):
             left, right = '[', ']'
-            name = indicator.markup.vcenter()
-            short_name = indicator.short_markup.vcenter()
         else:
             raise TypeError(indicator)
         if getattr(indicator, 'suppress', False):
             markup = abjad.Markup.from_literal(f'{left}{key}{right}')
         else:
             items = [abjad.Markup.from_literal(f'{left}{key}').vcenter()]
-            items.append(name)
-            item = abjad.Markup.concat(
-                [short_name, abjad.Markup(right).vcenter()]
-                )
+            items.append(indicator.markup.vcenter())
+            item = indicator.short_markup.vcenter()
+            item = abjad.Markup.concat([item, abjad.Markup(right).vcenter()])
             items.append(item)
             markup = abjad.Markup(items)
         markup = abjad.new(markup, direction=abjad.Up)
@@ -1195,7 +1192,6 @@ class SegmentMaker(abjad.SegmentMaker):
             suffix = 'color_redraw'
         else:
             suffix = 'color'
-        #if isinstance(indicator, abjad.Instrument) and redraw:
         if getattr(indicator, 'latent', False) and redraw:
             stem = 'REDRAW_INSTRUMENT'
             suffix = 'COLOR'
