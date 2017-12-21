@@ -933,7 +933,7 @@ class SegmentMaker(abjad.SegmentMaker):
             left, right = '[', ']'
         else:
             raise TypeError(indicator)
-        if getattr(indicator, 'suppress', False):
+        if getattr(indicator, 'hide', False):
             markup = abjad.Markup.from_literal(f'{left}{key}{right}')
         else:
             items = [abjad.Markup.from_literal(f'{left}{key}').vcenter()]
@@ -1994,7 +1994,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if getattr(indicator, 'latent', False):
             self._attach_latent_indicator_alert(leaf, indicator, status)
         elif (getattr(indicator, 'redraw', False)
-            and not getattr(indicator, 'suppress', False)):
+            and not getattr(indicator, 'hide', False)):
             self._color_persistent_indicator(
                 context,
                 leaf,
@@ -2015,7 +2015,7 @@ class SegmentMaker(abjad.SegmentMaker):
             spanner=spanner,
             )
         if (getattr(indicator, 'redraw', False)
-            and not getattr(indicator, 'suppress', False)):
+            and not getattr(indicator, 'hide', False)):
             self._color_persistent_indicator(
                 context,
                 leaf,
@@ -6717,7 +6717,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         Calculates rehearsal letter automatically when none.
 
-        Suppressed rehearsal letter when set to empty string.
+        Suppresses rehearsal letter when set to empty string.
 
         Sets rehearsal letter explicitly when set to nonempty string.
 
