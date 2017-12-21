@@ -10,8 +10,8 @@ class StaffLines(abjad.AbjadObject):
     __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
+        '_hide',
         '_line_count',
-        '_suppress_format',
         )
 
     _context = 'Staff'
@@ -20,11 +20,11 @@ class StaffLines(abjad.AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, line_count=None, suppress_format=None):
+    def __init__(self, line_count=None, hide=None):
         self._line_count = line_count
-        if suppress_format is not None:
-            suppress_format = bool(suppress_format)
-        self._suppress_format = suppress_format
+        if hide is not None:
+            hide = bool(hide)
+        self._hide = hide
 
     ### SPECIAL METHODS ###
 
@@ -67,7 +67,7 @@ class StaffLines(abjad.AbjadObject):
 
     def _get_lilypond_format_bundle(self, component=None):
         bundle = abjad.LilyPondFormatBundle()
-        if self.suppress_format:
+        if self.hide:
             return bundle
         bundle.before.commands.append(r'\stopStaff')
         string = r'\once \override Staff.StaffSymbol.line-count ='
@@ -91,6 +91,15 @@ class StaffLines(abjad.AbjadObject):
         '''
         return self._context
 
+
+    @property
+    def hide(self):
+        r'''Is true when staff lines should not appear in output.
+
+        Returns true, false or none.
+        '''
+        return self._hide
+
     @property
     def line_count(self):
         r'''Gets line count.
@@ -109,11 +118,3 @@ class StaffLines(abjad.AbjadObject):
         Returns true.
         '''
         return self._persistent
-
-    @property
-    def suppress_format(self):
-        r'''Is true when staff lines should not format.
-
-        Returns true, false or none.
-        '''
-        return self._suppress_format

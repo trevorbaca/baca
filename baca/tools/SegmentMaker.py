@@ -832,7 +832,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     before_line_count = getattr(before, 'line_count', 5)
                     before_staff_lines = baca.StaffLines(
                         line_count=before_line_count,
-                        suppress_format=True,
+                        hide=True,
                         )
                     abjad.attach(
                         before_staff_lines,
