@@ -3472,6 +3472,77 @@ class SegmentMaker(abjad.SegmentMaker):
     @property
     def dynamics(self):
         r'''Gets dynamics.
+
+        ..  container:: example
+
+            Reapplied dynamics color green:
+
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_notes(),
+            ...     )
+
+            >>> metadata = {}
+            >>> metadata['persistent_indicators'] = {}
+            >>> metadata['persistent_indicators']['MusicStaff'] = [
+            ...     abjad.Momento(
+            ...         context='MusicVoice',
+            ...         prototype='abjad.Dynamic',
+            ...         value='f',
+            ...         )
+            ...     ]
+            >>> metadata['segment_number'] = 1
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     previous_metadata=metadata,
+            ...     remove=[
+            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
+            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         ],
+            ...     )
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(0, block)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \time 3/8
+                            \mark #1
+                            \bar "" %! EMPTY_START_BAR:1
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
+                            s1 * 3/8
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                %%% MusicVoice [measure 1] %%%
+                                \once \override Staff.DynamicText.color = #(x11-color 'green4) %! REAPPLIED_DYNAMIC_COLOR:1
+                                c'4.
+                                \f %! REAPPLIED_DYNAMIC:2
+                                \bar "|"
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
         '''
         pass
 
