@@ -2109,13 +2109,12 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            Explicit clefs color blue; redrawn explicit clefs color dull blue:
+            Template clefs color purple and redraw dull purple:
 
             >>> layout_measure_map = baca.layout(
             ...     baca.page(
             ...         [1, 0, (7,)],
-            ...         [5, 20, (7,)],
-            ...         [9, 40, (7,)],
+            ...         [2, 20, (7,)],
             ...         ),
             ...     )
             >>> maker = baca.SegmentMaker(
@@ -2123,25 +2122,11 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     layout_measure_map=layout_measure_map,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
-            ...     time_signatures=3 * [(4, 8), (3, 8), (2, 8), (3, 8)],
-            ...     )
-            >>> maker(
-            ...     baca.scope('MusicVoice', 1),
-            ...     baca.clef('treble'),
-            ...     baca.map(
-            ...         baca.clef('alto'),
-            ...         baca.leaves().group_by_measure()[6],
-            ...         ),
-            ...     baca.make_even_runs(),
+            ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
 
-            >>> metadata = {}
-            >>> metadata['abjad.Clef'] = {}
-            >>> metadata['abjad.Clef']['MusicStaff'] = ('alto', 'MusicVoice')
-            >>> metadata['segment_number'] = 1
             >>> lilypond_file = maker.run(
             ...     environment='docs',
-            ...     previous_metadata=metadata,
             ...     remove=[
             ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
             ...         baca.Tags.STAGE_NUMBER_MARKUP,
@@ -2163,88 +2148,15 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak %! SEGMENT:LAYOUT:5
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT:6
                             \autoPageBreaksOff %! SEGMENT:LAYOUT:7
-                            \time 4/8
-                            \mark #1
+                            \time 3/8
                             \bar "" %! EMPTY_START_BAR:1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
-                            s1 * 1/2
+                            s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 2/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 1/4
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 5] %%%
                             \break %! SEGMENT:LAYOUT:3
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
-                            \time 4/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 1/2
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 6] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 7] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 2/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 1/4
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 8] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 9] %%%
-                            \break %! SEGMENT:LAYOUT:3
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 40) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
-                            \time 4/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 1/2
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 10] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 11] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 2/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 1/4
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 12] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
@@ -2254,150 +2166,19 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
-                                {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! EXPLICIT_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
-                                    c'8
-                                    [
-                                    \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                                %%% MusicVoice [measure 1] %%%
+                                \clef "treble" %! TEMPLATE_CLEF:4
+                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
+                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
+                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
+                                R1 * 3/8
+                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
-                                    c'8
+                                %%% MusicVoice [measure 2] %%%
+                                R1 * 3/8
+                                \bar "|"
                 <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 3] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 4] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 5] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 6] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 7] %%%
-                                    \clef "alto" %! EXPLICIT_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
-                                    c'8
-                                    [
-                                    \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_CLEF_COLOR_REDRAW:5
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 8] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 9] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 10] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 11] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 12] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                    \bar "|"
-                <BLANKLINE>
-                                }
                             }
                         }
                     >>
@@ -2405,14 +2186,12 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            Reapplied clefs (at start of nonfirst segments) color green;
-            redrawn reapplied clefs color dull green:
+            Explicit clefs color blue and redraw dull blue:
 
             >>> layout_measure_map = baca.layout(
             ...     baca.page(
             ...         [1, 0, (7,)],
-            ...         [5, 20, (7,)],
-            ...         [9, 40, (7,)],
+            ...         [2, 20, (7,)],
             ...         ),
             ...     )
             >>> maker = baca.SegmentMaker(
@@ -2420,15 +2199,88 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     layout_measure_map=layout_measure_map,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
-            ...     time_signatures=3 * [(4, 8), (3, 8), (2, 8), (3, 8)],
+            ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
-            ...     baca.map(
-            ...         baca.clef('treble'),
-            ...         baca.leaves().group_by_measure()[6],
+            ...     baca.clef('treble'),
+            ...     )
+
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     remove=[
+            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
+            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         ],
+            ...     )
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(0, block)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \pageBreak %! SEGMENT:LAYOUT:5
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT:6
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:7
+                            \time 3/8
+                            \bar "" %! EMPTY_START_BAR:1
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
+                            s1 * 3/8
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 2] %%%
+                            \break %! SEGMENT:LAYOUT:3
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
+                            s1 * 3/8
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                %%% MusicVoice [measure 1] %%%
+                                \clef "treble" %! EXPLICIT_CLEF:4
+                                \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
+                                %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
+                                R1 * 3/8
+                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                <BLANKLINE>
+                                %%% MusicVoice [measure 2] %%%
+                                R1 * 3/8
+                                \bar "|"
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            Reapplied clefs color green and redraw dull green:
+
+            >>> layout_measure_map = baca.layout(
+            ...     baca.page(
+            ...         [1, 0, (7,)],
+            ...         [2, 20, (7,)],
             ...         ),
-            ...     baca.make_even_runs(),
+            ...     )
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     layout_measure_map=layout_measure_map,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
 
             >>> metadata = {}
@@ -2437,7 +2289,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     abjad.Momento(
             ...         context='MusicVoice',
             ...         prototype='abjad.Clef',
-            ...         value='alto',
+            ...         value='treble',
             ...         )
             ...     ]
             >>> metadata['segment_number'] = 1
@@ -2466,88 +2318,16 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak %! SEGMENT:LAYOUT:5
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT:6
                             \autoPageBreaksOff %! SEGMENT:LAYOUT:7
-                            \time 4/8
+                            \time 3/8
                             \mark #1
                             \bar "" %! EMPTY_START_BAR:1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
-                            s1 * 1/2
+                            s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 2/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 1/4
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 5] %%%
                             \break %! SEGMENT:LAYOUT:3
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
-                            \time 4/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 1/2
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 6] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 7] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 2/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 1/4
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 8] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 9] %%%
-                            \break %! SEGMENT:LAYOUT:3
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 40) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
-                            \time 4/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 1/2
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 10] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 11] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 2/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 1/4
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 12] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
@@ -2557,150 +2337,19 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
-                                {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 1] %%%
-                                    \clef "alto" %! REAPPLIED_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'green4) %! REAPPLIED_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! REAPPLIED_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! REAPPLIED_CLEF:3
-                                    c'8
-                                    [
-                                    \override Staff.Clef.color = #(x11-color 'OliveDrab) %! REAPPLIED_CLEF_COLOR_REDRAW:5
+                                %%% MusicVoice [measure 1] %%%
+                                \clef "treble" %! REAPPLIED_CLEF:4
+                                \once \override Staff.Clef.color = #(x11-color 'green4) %! REAPPLIED_CLEF_COLOR:1
+                                %%% \override Staff.Clef.color = ##f %! REAPPLIED_CLEF_UNCOLOR:2
+                                \set Staff.forceClef = ##t %! REAPPLIED_CLEF:3
+                                R1 * 3/8
+                                \override Staff.Clef.color = #(x11-color 'OliveDrab) %! REAPPLIED_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
-                                    c'8
+                                %%% MusicVoice [measure 2] %%%
+                                R1 * 3/8
+                                \bar "|"
                 <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 3] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 4] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 5] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 6] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 7] %%%
-                                    \clef "treble" %! EXPLICIT_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
-                                    c'8
-                                    [
-                                    \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_CLEF_COLOR_REDRAW:5
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 8] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 9] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 10] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 11] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 12] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                    \bar "|"
-                <BLANKLINE>
-                                }
                             }
                         }
                     >>
@@ -2708,15 +2357,12 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            Redundant clefs color pink; redrawn redundant clefs color dull
-            pink:
+            Redundant clefs color pink and redraw dull pink:
 
             >>> layout_measure_map = baca.layout(
             ...     baca.page(
             ...         [1, 0, (7,)],
-            ...         [5, 20, (7,)],
-            ...         [9, 40, (7,)],
-            ...         [13, 60, (7,)],
+            ...         [3, 20, (7,)],
             ...         ),
             ...     )
             >>> maker = baca.SegmentMaker(
@@ -2724,20 +2370,105 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     layout_measure_map=layout_measure_map,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
-            ...     time_signatures=4 * [(4, 8), (3, 8), (2, 8), (3, 8)],
+            ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
             ...     )
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
-            ...     baca.make_even_runs(),
-            ...     baca.clef('alto'),
-            ...     baca.map(
-            ...         baca.clef('treble'),
-            ...         baca.leaves().group_by_measure()[6],
+            ...     baca.clef('treble', baca.leaf(1)),
+            ...     )
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     remove=(
+            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
+            ...         baca.Tags.STAGE_NUMBER_MARKUP,
             ...         ),
-            ...     baca.map(
-            ...         baca.clef('treble'),
-            ...         baca.leaves().group_by_measure()[10],
+            ...     )
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(0, block)
+
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \pageBreak %! SEGMENT:LAYOUT:5
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT:6
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:7
+                            \time 3/8
+                            \bar "" %! EMPTY_START_BAR:1
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
+                            s1 * 3/8
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 2] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
+                            s1 * 3/8
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 3] %%%
+                            \break %! SEGMENT:LAYOUT:3
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
+                            s1 * 3/8
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                %%% MusicVoice [measure 1] %%%
+                                \clef "treble" %! TEMPLATE_CLEF:4
+                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
+                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
+                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
+                                R1 * 3/8
+                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
+                <BLANKLINE>
+                                %%% MusicVoice [measure 2] %%%
+                                \clef "treble" %! REDUNDANT_CLEF:4
+                                \once \override Staff.Clef.color = #(x11-color 'DeepPink1) %! REDUNDANT_CLEF_COLOR:1
+                                %%% \override Staff.Clef.color = ##f %! REDUNDANT_CLEF_UNCOLOR:2
+                                \set Staff.forceClef = ##t %! REDUNDANT_CLEF:3
+                                R1 * 3/8
+                                \override Staff.Clef.color = #(x11-color 'DeepPink4) %! REDUNDANT_CLEF_COLOR_REDRAW:5
+                <BLANKLINE>
+                                %%% MusicVoice [measure 3] %%%
+                                R1 * 3/8
+                                \bar "|"
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            Even at the beginning of a segment:
+
+            >>> layout_measure_map = baca.layout(
+            ...     baca.page(
+            ...         [1, 0, (7,)],
+            ...         [2, 20, (7,)],
             ...         ),
+            ...     )
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     layout_measure_map=layout_measure_map,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.clef('treble'),
             ...     )
 
             >>> metadata = {}
@@ -2746,7 +2477,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     abjad.Momento(
             ...         context='MusicVoice',
             ...         prototype='abjad.Clef',
-            ...         value='alto',
+            ...         value='treble',
             ...         )
             ...     ]
             >>> metadata['segment_number'] = 1
@@ -2775,117 +2506,16 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak %! SEGMENT:LAYOUT:5
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT:6
                             \autoPageBreaksOff %! SEGMENT:LAYOUT:7
-                            \time 4/8
+                            \time 3/8
                             \mark #1
                             \bar "" %! EMPTY_START_BAR:1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
-                            s1 * 1/2
+                            s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 2/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 1/4
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 5] %%%
                             \break %! SEGMENT:LAYOUT:3
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
-                            \time 4/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 1/2
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 6] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 7] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 2/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 1/4
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 8] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 9] %%%
-                            \break %! SEGMENT:LAYOUT:3
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 40) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
-                            \time 4/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 1/2
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 10] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 11] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 2/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 1/4
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 12] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 13] %%%
-                            \break %! SEGMENT:LAYOUT:3
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 60) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
-                            \time 4/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 1/2
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 14] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 15] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 2/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 1/4
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 16] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
@@ -2895,199 +2525,112 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
-                                {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 1] %%%
-                                    \clef "alto" %! REDUNDANT_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'DeepPink1) %! REDUNDANT_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! REDUNDANT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! REDUNDANT_CLEF:3
-                                    c'8
-                                    [
-                                    \override Staff.Clef.color = #(x11-color 'DeepPink4) %! REDUNDANT_CLEF_COLOR_REDRAW:5
+                                %%% MusicVoice [measure 1] %%%
+                                \clef "treble" %! REDUNDANT_CLEF:4
+                                \once \override Staff.Clef.color = #(x11-color 'DeepPink1) %! REDUNDANT_CLEF_COLOR:1
+                                %%% \override Staff.Clef.color = ##f %! REDUNDANT_CLEF_UNCOLOR:2
+                                \set Staff.forceClef = ##t %! REDUNDANT_CLEF:3
+                                R1 * 3/8
+                                \override Staff.Clef.color = #(x11-color 'DeepPink4) %! REDUNDANT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
-                                    c'8
+                                %%% MusicVoice [measure 2] %%%
+                                R1 * 3/8
+                                \bar "|"
                 <BLANKLINE>
-                                    c'8
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            Explicit clefs supersede previous metadata:
+
+            >>> layout_measure_map = baca.layout(
+            ...     baca.page(
+            ...         [1, 0, (7,)],
+            ...         [2, 20, (7,)],
+            ...         ),
+            ...     )
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     layout_measure_map=layout_measure_map,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.clef('alto'),
+            ...     )
+
+            >>> metadata = {}
+            >>> metadata['persistent_indicators'] = {}
+            >>> metadata['persistent_indicators']['MusicStaff'] = [
+            ...     abjad.Momento(
+            ...         context='MusicVoice',
+            ...         prototype='abjad.Clef',
+            ...         value='treble',
+            ...         )
+            ...     ]
+            >>> metadata['segment_number'] = 1
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     previous_metadata=metadata,
+            ...     remove=[
+            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
+            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         ],
+            ...     )
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(0, block)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
+                            %%% GlobalSkips [measure 1] %%%
+                            \pageBreak %! SEGMENT:LAYOUT:5
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT:6
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:7
+                            \time 3/8
+                            \mark #1
+                            \bar "" %! EMPTY_START_BAR:1
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
+                            s1 * 3/8
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
-                                    c'8
-                                    [
+                            %%% GlobalSkips [measure 2] %%%
+                            \break %! SEGMENT:LAYOUT:3
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
+                            s1 * 3/8
                 <BLANKLINE>
-                                    c'8
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
+                                %%% MusicVoice [measure 1] %%%
+                                \clef "alto" %! EXPLICIT_CLEF:4
+                                \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
+                                %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
+                                R1 * 3/8
+                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 3] %%%
-                                    c'8
-                                    [
+                                %%% MusicVoice [measure 2] %%%
+                                R1 * 3/8
+                                \bar "|"
                 <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 4] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 5] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 6] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 7] %%%
-                                    \clef "treble" %! EXPLICIT_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
-                                    c'8
-                                    [
-                                    \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_CLEF_COLOR_REDRAW:5
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 8] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 9] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 10] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 11] %%%
-                                    \clef "treble" %! REDUNDANT_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'DeepPink1) %! REDUNDANT_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! REDUNDANT_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! REDUNDANT_CLEF:3
-                                    c'8
-                                    [
-                                    \override Staff.Clef.color = #(x11-color 'DeepPink4) %! REDUNDANT_CLEF_COLOR_REDRAW:5
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 12] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 13] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 14] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 15] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 16] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                    \bar "|"
-                <BLANKLINE>
-                                }
                             }
                         }
                     >>
