@@ -1899,19 +1899,55 @@ class LibraryGM(abjad.AbjadObject):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_MARGIN_MARKUP:8
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_MARGIN_MARKUP:8
+                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_MARGIN_MARKUP:9
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_MARGIN_MARKUP:9
                                 \clef "treble" %! EXPLICIT_CLEF:4
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:6
-                                %%% \override Staff.InstrumentName.color = ##f %! EXPLICIT_MARGIN_MARKUP_UNCOLOR:7
                                 e'2
-                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_MARGIN_MARKUP_REDRAW:10
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_MARGIN_MARKUP_REDRAW:10
+                                ^ \markup {
+                                    \column
+                                        {
+                                            %%% \line %! EXPLICIT_MARGIN_MARKUP_ALERT:7
+                                            %%%     { %! EXPLICIT_MARGIN_MARKUP_ALERT:7
+                                            %%%         \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:7
+                                            %%%             [MarginMarkup %! EXPLICIT_MARGIN_MARKUP_ALERT:7
+                                            %%%         \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:7
+                                            %%%             Flute %! EXPLICIT_MARGIN_MARKUP_ALERT:7
+                                            %%%         \concat %! EXPLICIT_MARGIN_MARKUP_ALERT:7
+                                            %%%             { %! EXPLICIT_MARGIN_MARKUP_ALERT:7
+                                            %%%                 \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:7
+                                            %%%                     Fl. %! EXPLICIT_MARGIN_MARKUP_ALERT:7
+                                            %%%                 \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:7
+                                            %%%                     ] %! EXPLICIT_MARGIN_MARKUP_ALERT:7
+                                            %%%             } %! EXPLICIT_MARGIN_MARKUP_ALERT:7
+                                            %%%     } %! EXPLICIT_MARGIN_MARKUP_ALERT:7
+                                            \line %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:8
+                                                { %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:8
+                                                    \with-color %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:8
+                                                        #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:8
+                                                        { %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:8
+                                                            \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:8
+                                                                [MarginMarkup %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:8
+                                                            \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:8
+                                                                Flute %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:8
+                                                            \concat %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:8
+                                                                { %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:8
+                                                                    \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:8
+                                                                        Fl. %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:8
+                                                                    \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:8
+                                                                        ] %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:8
+                                                                } %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:8
+                                                        } %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:8
+                                                } %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:8
+                                        }
+                                    }
+                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_REDRAW_MARGIN_MARKUP:11
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_REDRAW_MARGIN_MARKUP:11
                                 \override Staff.Clef.color = #(x11-color 'DarkCyan) %! EXPLICIT_CLEF_COLOR_REDRAW:5
-                                \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_MARGIN_MARKUP_COLOR_REDRAW:9
+                                \override Staff.InstrumentName.color = #(x11-color 'DarkCyan) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:10
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 f'4.

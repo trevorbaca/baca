@@ -2848,13 +2848,43 @@ class LibraryAF(abjad.AbjadObject):
                                                     {
                                                         %%% \line %! EXPLICIT_INSTRUMENT_ALERT:8
                                                         %%%     { %! EXPLICIT_INSTRUMENT_ALERT:8
-                                                        %%%         [[violin]] %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%             (Violin %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%             \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                 #10 %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                 Violin %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%             { %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                     \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                         #10 %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                         Vn. %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%             } %! EXPLICIT_INSTRUMENT_ALERT:8
                                                         %%%     } %! EXPLICIT_INSTRUMENT_ALERT:8
                                                         \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
                                                             { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
                                                                 \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
                                                                     #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
-                                                                    [[violin]] %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                    { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                            (Violin %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                            \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                Violin %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                        \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                            { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                    \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                        #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                        Vn. %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                    ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                            } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                    } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
                                                             } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
                                                     }
                                                 }
@@ -2922,13 +2952,43 @@ class LibraryAF(abjad.AbjadObject):
                                                     {
                                                         %%% \line %! EXPLICIT_INSTRUMENT_ALERT:8
                                                         %%%     { %! EXPLICIT_INSTRUMENT_ALERT:8
-                                                        %%%         [[viola]] %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%             (Viola %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%             \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                 #10 %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                 Viola %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%             { %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                     \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                         #10 %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                         Va. %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%             } %! EXPLICIT_INSTRUMENT_ALERT:8
                                                         %%%     } %! EXPLICIT_INSTRUMENT_ALERT:8
                                                         \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
                                                             { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
                                                                 \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
                                                                     #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
-                                                                    [[viola]] %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                    { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                            (Viola %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                            \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                Viola %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                        \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                            { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                    \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                        #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                        Va. %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                    ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                            } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                    } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
                                                             } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
                                                     }
                                                 }
@@ -2992,13 +3052,43 @@ class LibraryAF(abjad.AbjadObject):
                                             {
                                                 %%% \line %! EXPLICIT_INSTRUMENT_ALERT:7
                                                 %%%     { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%         [[cello]] %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%             (Cello %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%             \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%                 #10 %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%                 Cello %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%             { %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%                     \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%                         #10 %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%                         Vc. %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%             } %! EXPLICIT_INSTRUMENT_ALERT:7
                                                 %%%     } %! EXPLICIT_INSTRUMENT_ALERT:7
                                                 \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                     { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                         \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                             #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            [[cello]] %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                            { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    (Cello %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                        #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                        Cello %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                            \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                                #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                                Vc. %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                            ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                            } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                     } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                             }
                                         }
@@ -3136,13 +3226,43 @@ class LibraryAF(abjad.AbjadObject):
                                                     {
                                                         %%% \line %! EXPLICIT_INSTRUMENT_ALERT:8
                                                         %%%     { %! EXPLICIT_INSTRUMENT_ALERT:8
-                                                        %%%         [[violin]] %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%             (Violin %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%             \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                 #10 %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                 Violin %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%             { %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                     \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                         #10 %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                         Vn. %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%             } %! EXPLICIT_INSTRUMENT_ALERT:8
                                                         %%%     } %! EXPLICIT_INSTRUMENT_ALERT:8
                                                         \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
                                                             { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
                                                                 \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
                                                                     #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
-                                                                    [[violin]] %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                    { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                            (Violin %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                            \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                Violin %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                        \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                            { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                    \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                        #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                        Vn. %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                    ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                            } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                    } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
                                                             } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
                                                     }
                                                 }
@@ -3209,13 +3329,43 @@ class LibraryAF(abjad.AbjadObject):
                                                     {
                                                         %%% \line %! EXPLICIT_INSTRUMENT_ALERT:8
                                                         %%%     { %! EXPLICIT_INSTRUMENT_ALERT:8
-                                                        %%%         [[viola]] %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%             (Viola %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%             \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                 #10 %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                 Viola %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%             { %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                     \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                         #10 %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                         Va. %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:8
+                                                        %%%             } %! EXPLICIT_INSTRUMENT_ALERT:8
                                                         %%%     } %! EXPLICIT_INSTRUMENT_ALERT:8
                                                         \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
                                                             { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
                                                                 \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
                                                                     #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
-                                                                    [[viola]] %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                    { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                            (Viola %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                            \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                Viola %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                        \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                            { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                    \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                        #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                        Va. %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                                    ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                            } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
+                                                                    } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
                                                             } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:9
                                                     }
                                                 }
@@ -3277,13 +3427,43 @@ class LibraryAF(abjad.AbjadObject):
                                             {
                                                 %%% \line %! EXPLICIT_INSTRUMENT_ALERT:7
                                                 %%%     { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%         [[cello]] %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%             (Cello %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%             \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%                 #10 %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%                 Cello %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%             { %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%                     \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%                         #10 %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%                         Vc. %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:7
+                                                %%%             } %! EXPLICIT_INSTRUMENT_ALERT:7
                                                 %%%     } %! EXPLICIT_INSTRUMENT_ALERT:7
                                                 \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                     { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                         \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                             #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            [[cello]] %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                            { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    (Cello %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                        #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                        Cello %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                            \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                                #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                                Vc. %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                            ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                            } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                     } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                             }
                                         }

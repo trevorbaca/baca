@@ -77,13 +77,43 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                                     {
                                         %%% \line %! EXPLICIT_INSTRUMENT_ALERT:7
                                         %%%     { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                        %%%         [[violin]] %! EXPLICIT_INSTRUMENT_ALERT:7
+                                        %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                        %%%             (Violin %! EXPLICIT_INSTRUMENT_ALERT:7
+                                        %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                        %%%             \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:7
+                                        %%%                 #16 %! EXPLICIT_INSTRUMENT_ALERT:7
+                                        %%%                 Violin %! EXPLICIT_INSTRUMENT_ALERT:7
+                                        %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:7
+                                        %%%             { %! EXPLICIT_INSTRUMENT_ALERT:7
+                                        %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                        %%%                     \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:7
+                                        %%%                         #10 %! EXPLICIT_INSTRUMENT_ALERT:7
+                                        %%%                         Vn. %! EXPLICIT_INSTRUMENT_ALERT:7
+                                        %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                        %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:7
+                                        %%%             } %! EXPLICIT_INSTRUMENT_ALERT:7
                                         %%%     } %! EXPLICIT_INSTRUMENT_ALERT:7
                                         \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                             { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                 \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                     #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                    [[violin]] %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                    { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                            (Violin %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                            \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                #16 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                Violin %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                        \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                            { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                        #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                        Vn. %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                            } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                    } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                             } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                     }
                                 }

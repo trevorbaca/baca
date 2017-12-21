@@ -39,6 +39,8 @@ class MarginMarkup(abjad.AbjadValueObject):
         '_short_markup',
         )
 
+    _latent = True
+
     _persistent = True
 
     _publish_storage_format = True
@@ -123,7 +125,7 @@ class MarginMarkup(abjad.AbjadValueObject):
     def __hash__(self):
         r'''Hashes margin markup.
 
-        ..  container::
+        ..  container:: example
 
             >>> margin_markup = baca.MarginMarkup(
             ...     context='PianoStaff',
@@ -188,6 +190,25 @@ class MarginMarkup(abjad.AbjadValueObject):
         Returns string.
         '''
         return self._format_slot
+
+    @property
+    def latent(self):
+        r'''Is true.
+
+        ..  container::
+
+            >>> margin_markup = baca.MarginMarkup(
+            ...     markup=abjad.Markup('Cello'),
+            ...     short_markup=abjad.Markup('Vc.')
+            ...     )
+            >>> margin_markup.latent
+            True
+
+        Class constant.
+
+        Returns true.
+        '''
+        return self._latent
 
     @property
     def markup(self):

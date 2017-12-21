@@ -78,13 +78,43 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                         {
                                             %%% \line %! EXPLICIT_INSTRUMENT_ALERT:7
                                             %%%     { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%         [[violin]] %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%             (Violin %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%             \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                 #10 %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                 Violin %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%             { %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                     \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                         #10 %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                         Vn. %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%             } %! EXPLICIT_INSTRUMENT_ALERT:7
                                             %%%     } %! EXPLICIT_INSTRUMENT_ALERT:7
                                             \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                 { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                     \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                         #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                        [[violin]] %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                        { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                            \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                (Violin %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                            \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    Violin %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                            \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                        \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                            #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                            Vn. %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                        ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                        } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                 } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                         }
                                     }
@@ -139,13 +169,43 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                         {
                                             %%% \line %! EXPLICIT_INSTRUMENT_ALERT:7
                                             %%%     { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%         [[viola]] %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%             (Viola %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%             \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                 #10 %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                 Viola %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%             { %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                     \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                         #10 %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                         Va. %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%             } %! EXPLICIT_INSTRUMENT_ALERT:7
                                             %%%     } %! EXPLICIT_INSTRUMENT_ALERT:7
                                             \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                 { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                     \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                         #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                        [[viola]] %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                        { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                            \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                (Viola %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                            \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    Viola %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                            \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                        \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                            #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                            Va. %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                        ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                        } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                 } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                         }
                                     }
@@ -200,13 +260,43 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                         {
                                             %%% \line %! EXPLICIT_INSTRUMENT_ALERT:7
                                             %%%     { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%         [[cello]] %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%             (Cello %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%             \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                 #10 %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                 Cello %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%             { %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                     \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                         #10 %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                         Vc. %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%             } %! EXPLICIT_INSTRUMENT_ALERT:7
                                             %%%     } %! EXPLICIT_INSTRUMENT_ALERT:7
                                             \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                 { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                     \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                         #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                        [[cello]] %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                        { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                            \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                (Cello %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                            \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    Cello %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                            \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                        \hcenter-in %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                            #10 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                            Vc. %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                        ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                        } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                                 } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                         }
                                     }

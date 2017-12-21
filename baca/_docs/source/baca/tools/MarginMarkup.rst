@@ -25,6 +25,7 @@ Bases
 
       ~baca.tools.MarginMarkup.MarginMarkup.context
       ~baca.tools.MarginMarkup.MarginMarkup.format_slot
+      ~baca.tools.MarginMarkup.MarginMarkup.latent
       ~baca.tools.MarginMarkup.MarginMarkup.markup
       ~baca.tools.MarginMarkup.MarginMarkup.persistent
       ~baca.tools.MarginMarkup.MarginMarkup.redraw
@@ -41,6 +42,8 @@ Read-only properties
 .. autoattribute:: baca.tools.MarginMarkup.MarginMarkup.context
 
 .. autoattribute:: baca.tools.MarginMarkup.MarginMarkup.format_slot
+
+.. autoattribute:: baca.tools.MarginMarkup.MarginMarkup.latent
 
 .. autoattribute:: baca.tools.MarginMarkup.MarginMarkup.markup
 
