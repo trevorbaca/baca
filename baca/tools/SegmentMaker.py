@@ -5062,7 +5062,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('MusicVoice', 1),
+            ...     baca.scope('ViolinMusicVoice', 1),
             ...     baca.make_notes(),
             ...     )
 
@@ -5071,7 +5071,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     remove=remove,
             ...     )
             >>> block = abjad.Block(name='layout')
-            >>> block.indent = 0
+            >>> block.indent = 14
             >>> lilypond_file.items.insert(1, block)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5123,7 +5123,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:7
                                 %%% \override ViolinMusicStaff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:8
                                 \set ViolinMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:9
-                                R1 * 3/8
+                                c'4.
                                 ^ \markup {
                                     \column
                                         {
@@ -5183,7 +5183,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:11
                 <BLANKLINE>
                                 %%% ViolinMusicVoice [measure 2] %%%
-                                R1 * 3/8
+                                c'4.
                                 \bar "|"
                 <BLANKLINE>
                             }
@@ -5205,12 +5205,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
             ...     layout_measure_map=layout_measure_map_,
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('ViolinMusicVoice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.instrument(instruments['Flute']),
             ...     baca.make_notes(),
             ...     )
@@ -5228,7 +5228,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
@@ -5252,18 +5251,17 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "MusicContext" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "ViolinMusicStaff" {
-                            \context ViolinMusicVoice = "ViolinMusicVoice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% ViolinMusicVoice [measure 1] %%%
-                                \set ViolinMusicStaff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT:9
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT:9
+                                %%% MusicVoice [measure 1] %%%
+                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT:9
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT:9
                                 \clef "treble" %! TEMPLATE_CLEF:4
-                                \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                %%% \override ViolinMusicStaff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                \set ViolinMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:3
-                                \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:6
+                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
+                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
+                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:6
                                 c'4.
                                 ^ \markup {
                                     \column
@@ -5302,12 +5300,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
                                         }
                                     }
-                                \set ViolinMusicStaff.instrumentName = \markup { Flute } %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
-                                \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:10
+                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_REDRAW_INSTRUMENT:11
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_REDRAW_INSTRUMENT:11
+                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:10
                 <BLANKLINE>
-                                %%% ViolinMusicVoice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 c'4.
                                 \bar "|"
                 <BLANKLINE>
@@ -5318,27 +5316,26 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            Reapplied instruments (at start of nonfirst segments) color green;
-            redrawn reapplied instruments color dull green:
+            Reapplied instruments color green and redraw dull green:
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
             ...     layout_measure_map=layout_measure_map_,
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('ViolinMusicVoice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_notes(),
             ...     )
 
             >>> metadata = {}
             >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['ViolinMusicStaff'] = [
+            >>> metadata['persistent_indicators']['MusicStaff'] = [
             ...     abjad.Momento(
-            ...         context='ViolinMusicVoice',
+            ...         context='MusicVoice',
             ...         prototype='abjad.Instrument',
             ...         value='Flute',
             ...         )
@@ -5358,7 +5355,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
@@ -5383,14 +5379,13 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "MusicContext" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "ViolinMusicStaff" {
-                            \context ViolinMusicVoice = "ViolinMusicVoice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% ViolinMusicVoice [measure 1] %%%
-                                \set ViolinMusicStaff.instrumentName = \markup { Flute } %! REAPPLIED_INSTRUMENT:4
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Fl. } %! REAPPLIED_INSTRUMENT:4
-                                \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'green4) %! REAPPLIED_INSTRUMENT_COLOR:1
+                                %%% MusicVoice [measure 1] %%%
+                                \set Staff.instrumentName = \markup { Flute } %! REAPPLIED_INSTRUMENT:4
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! REAPPLIED_INSTRUMENT:4
+                                \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! REAPPLIED_INSTRUMENT_COLOR:1
                                 c'4.
                                 ^ \markup {
                                     \column
@@ -5429,11 +5424,11 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 } %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:3
                                         }
                                     }
-                                \set ViolinMusicStaff.instrumentName = \markup { Flute } %! REAPPLIED_REDRAW_INSTRUMENT:6
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { Fl. } %! REAPPLIED_REDRAW_INSTRUMENT:6
-                                \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'OliveDrab) %! REAPPLIED_REDRAW_INSTRUMENT_COLOR:5
+                                \set Staff.instrumentName = \markup { Flute } %! REAPPLIED_REDRAW_INSTRUMENT:6
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! REAPPLIED_REDRAW_INSTRUMENT:6
+                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! REAPPLIED_REDRAW_INSTRUMENT_COLOR:5
                 <BLANKLINE>
-                                %%% ViolinMusicVoice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 c'4.
                                 \bar "|"
                 <BLANKLINE>
@@ -5444,15 +5439,12 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            Redundant instruments color pink; redrawn redundant instruments
-            color dull pink:
+            Redundant instruments color pink and redraw dull pink:
 
             >>> layout_measure_map = baca.layout(
             ...     baca.page(
             ...         [1, 0, (11,)],
-            ...         [5, 25, (11,)],
-            ...         [9, 50, (11,)],
-            ...         [13, 75, (7,)],
+            ...         [3, 20, (11,)],
             ...         ),
             ...     )
             >>> maker = baca.SegmentMaker(
@@ -5461,20 +5453,189 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     layout_measure_map=layout_measure_map,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
-            ...     time_signatures=4 * [(4, 8), (3, 8), (2, 8), (3, 8)],
+            ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
             ...     )
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
             ...     baca.instrument(instruments['Flute']),
             ...     baca.map(
-            ...         baca.instrument(instruments['Piccolo']),
-            ...         baca.leaves().group_by_measure()[6],
+            ...         baca.instrument(instruments['Flute']),
+            ...         baca.leaves()[1],
             ...         ),
-            ...     baca.map(
-            ...         baca.instrument(instruments['Piccolo']),
-            ...         baca.leaves().group_by_measure()[10],
+            ...     baca.make_notes(),
+            ...     )
+
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     remove=remove,
+            ...     )
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(1, block)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \pageBreak %! SEGMENT:LAYOUT:5
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT:6
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:7
+                            \time 4/8
+                            \bar "" %! EMPTY_START_BAR:1
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
+                            s1 * 1/2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 2] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
+                            s1 * 1/2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 3] %%%
+                            \break %! SEGMENT:LAYOUT:3
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %! SEGMENT:LAYOUT:4
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
+                            s1 * 1/2
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                %%% MusicVoice [measure 1] %%%
+                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT:9
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT:9
+                                \clef "treble" %! TEMPLATE_CLEF:4
+                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
+                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
+                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:6
+                                c'2
+                                ^ \markup {
+                                    \column
+                                        {
+                                            %%% \line %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%     { %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%             (“Flute” %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%             Flute %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%             { %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                     Fl. %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%             } %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            %%%     } %! EXPLICIT_INSTRUMENT_ALERT:7
+                                            \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                    \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                        #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                        { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                            \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                (“Flute” %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                            \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                Flute %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                            \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                        Fl. %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                        ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                                } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                        } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                        }
+                                    }
+                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_REDRAW_INSTRUMENT:11
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_REDRAW_INSTRUMENT:11
+                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:10
+                <BLANKLINE>
+                                %%% MusicVoice [measure 2] %%%
+                                \set Staff.instrumentName = \markup { Flute } %! REDUNDANT_INSTRUMENT:4
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_INSTRUMENT:4
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_COLOR:1
+                                c'2
+                                ^ \markup {
+                                    \column
+                                        {
+                                            %%% \line %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%     { %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%         \vcenter %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%             (“Flute” %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%         \vcenter %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%             Flute %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%         \concat %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%             { %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%                 \vcenter %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%                     Fl. %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%                 \vcenter %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%                     ) %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%             } %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%     } %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            \line %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                { %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                    \with-color %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                        #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                        { %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            \vcenter %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                (“Flute” %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            \vcenter %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                Flute %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            \concat %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                { %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    \vcenter %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        Fl. %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    \vcenter %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        ) %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                } %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                        } %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                } %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                        }
+                                    }
+                                \set Staff.instrumentName = \markup { Flute } %! REDUNDANT_REDRAW_INSTRUMENT:6
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_REDRAW_INSTRUMENT:6
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_REDRAW_INSTRUMENT_COLOR:5
+                <BLANKLINE>
+                                %%% MusicVoice [measure 3] %%%
+                                c'2
+                                \bar "|"
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            Even at the beginning of a segment:
+
+            >>> layout_measure_map = baca.layout(
+            ...     baca.page(
+            ...         [1, 0, (11,)],
+            ...         [2, 20, (11,)],
             ...         ),
-            ...     baca.make_even_runs(),
+            ...     )
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     instruments=instruments,
+            ...     layout_measure_map=layout_measure_map,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.instrument(instruments['Flute']),
+            ...     baca.make_notes(),
             ...     )
 
             >>> metadata = {}
@@ -5508,117 +5669,16 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak %! SEGMENT:LAYOUT:5
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT:6
                             \autoPageBreaksOff %! SEGMENT:LAYOUT:7
-                            \time 4/8
+                            \time 3/8
                             \mark #1
                             \bar "" %! EMPTY_START_BAR:1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
-                            s1 * 1/2
+                            s1 * 3/8
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 2/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 1/4
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 5] %%%
                             \break %! SEGMENT:LAYOUT:3
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 25) (alignment-distances . (11))) %! SEGMENT:LAYOUT:4
-                            \time 4/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 1/2
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 6] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 7] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 2/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 1/4
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 8] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 9] %%%
-                            \break %! SEGMENT:LAYOUT:3
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 50) (alignment-distances . (11))) %! SEGMENT:LAYOUT:4
-                            \time 4/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 1/2
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 10] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 11] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 2/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 1/4
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 12] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 13] %%%
-                            \break %! SEGMENT:LAYOUT:3
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 75) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
-                            \time 4/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 1/2
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 14] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 15] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 2/8
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 1/4
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 16] %%%
-                            \noBreak %! SEGMENT:LAYOUT:3
-                            \time 3/8
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %! SEGMENT:LAYOUT:4
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
@@ -5628,313 +5688,57 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context MusicContext = "MusicContext" <<
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
-                                {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 1] %%%
-                                    \set Staff.instrumentName = \markup { Flute } %! REDUNDANT_INSTRUMENT:4
-                                    \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_INSTRUMENT:4
-                                    \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_COLOR:1
-                                    c'8
-                                    [
-                                    ^ \markup {
-                                        \column
-                                            {
-                                                %%% \line %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%     { %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%         \vcenter %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%             (“Flute” %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%         \vcenter %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%             Flute %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%         \concat %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%             { %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%                 \vcenter %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%                     Fl. %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%                 \vcenter %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%                     ) %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%             } %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%     } %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                \line %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                    { %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                        \with-color %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                            #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                            { %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                \vcenter %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                    (“Flute” %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                \vcenter %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                    Flute %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                \concat %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                    { %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                        \vcenter %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                            Fl. %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                        \vcenter %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                            ) %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                    } %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                            } %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                    } %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                            }
+                                %%% MusicVoice [measure 1] %%%
+                                \set Staff.instrumentName = \markup { Flute } %! REDUNDANT_INSTRUMENT:4
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_INSTRUMENT:4
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_COLOR:1
+                                c'4.
+                                ^ \markup {
+                                    \column
+                                        {
+                                            %%% \line %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%     { %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%         \vcenter %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%             (“Flute” %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%         \vcenter %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%             Flute %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%         \concat %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%             { %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%                 \vcenter %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%                     Fl. %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%                 \vcenter %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%                     ) %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%             } %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            %%%     } %! REDUNDANT_INSTRUMENT_ALERT:2
+                                            \line %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                { %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                    \with-color %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                        #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                        { %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            \vcenter %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                (“Flute” %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            \vcenter %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                Flute %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            \concat %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                { %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    \vcenter %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        Fl. %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    \vcenter %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        ) %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                } %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                        } %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                } %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
                                         }
-                                    \set Staff.instrumentName = \markup { Flute } %! REDUNDANT_REDRAW_INSTRUMENT:6
-                                    \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_REDRAW_INSTRUMENT:6
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_REDRAW_INSTRUMENT_COLOR:5
+                                    }
+                                \set Staff.instrumentName = \markup { Flute } %! REDUNDANT_REDRAW_INSTRUMENT:6
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_REDRAW_INSTRUMENT:6
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_REDRAW_INSTRUMENT_COLOR:5
                 <BLANKLINE>
-                                    c'8
+                                %%% MusicVoice [measure 2] %%%
+                                c'4.
+                                \bar "|"
                 <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 3] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 4] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 5] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 6] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 7] %%%
-                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_INSTRUMENT:4
-                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_INSTRUMENT:4
-                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
-                                    c'8
-                                    [
-                                    ^ \markup {
-                                        \column
-                                            {
-                                                %%% \line %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%     { %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%             (“Piccolo” %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%             Piccolo %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%             { %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%                     Picc. %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%             } %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                %%%     } %! EXPLICIT_INSTRUMENT_ALERT:2
-                                                \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                    { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                        \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                            #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                            { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                    (“Piccolo” %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                    Piccolo %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                    { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                            Picc. %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                            ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                    } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                            } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                    } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                            }
-                                        }
-                                    \set Staff.instrumentName = \markup { Piccolo } %! EXPLICIT_REDRAW_INSTRUMENT:6
-                                    \set Staff.shortInstrumentName = \markup { Picc. } %! EXPLICIT_REDRAW_INSTRUMENT:6
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:5
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 8] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 9] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 10] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 11] %%%
-                                    \set Staff.instrumentName = \markup { Piccolo } %! REDUNDANT_INSTRUMENT:4
-                                    \set Staff.shortInstrumentName = \markup { Picc. } %! REDUNDANT_INSTRUMENT:4
-                                    \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_COLOR:1
-                                    c'8
-                                    [
-                                    ^ \markup {
-                                        \column
-                                            {
-                                                %%% \line %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%     { %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%         \vcenter %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%             (“Piccolo” %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%         \vcenter %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%             Piccolo %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%         \concat %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%             { %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%                 \vcenter %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%                     Picc. %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%                 \vcenter %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%                     ) %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%             } %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                %%%     } %! REDUNDANT_INSTRUMENT_ALERT:2
-                                                \line %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                    { %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                        \with-color %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                            #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                            { %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                \vcenter %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                    (“Piccolo” %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                \vcenter %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                    Piccolo %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                \concat %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                    { %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                        \vcenter %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                            Picc. %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                        \vcenter %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                            ) %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                    } %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                            } %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                    } %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                            }
-                                        }
-                                    \set Staff.instrumentName = \markup { Piccolo } %! REDUNDANT_REDRAW_INSTRUMENT:6
-                                    \set Staff.shortInstrumentName = \markup { Picc. } %! REDUNDANT_REDRAW_INSTRUMENT:6
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_REDRAW_INSTRUMENT_COLOR:5
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 12] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 13] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 14] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 15] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    %%% MusicVoice [measure 16] %%%
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                    \bar "|"
-                <BLANKLINE>
-                                }
                             }
                         }
                     >>
