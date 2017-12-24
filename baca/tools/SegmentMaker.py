@@ -2258,6 +2258,98 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
+            Even after a previous clef:
+
+            >>> layout_measure_map = baca.layout(
+            ...     baca.page(
+            ...         [1, 0, (7,)],
+            ...         [2, 20, (7,)],
+            ...         ),
+            ...     )
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     layout_measure_map=layout_measure_map,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.clef('alto'),
+            ...     )
+
+            >>> metadata = {}
+            >>> metadata['persistent_indicators'] = {}
+            >>> metadata['persistent_indicators']['MusicStaff'] = [
+            ...     abjad.Momento(
+            ...         context='MusicVoice',
+            ...         prototype='abjad.Clef',
+            ...         value='treble',
+            ...         )
+            ...     ]
+            >>> metadata['segment_number'] = 1
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     previous_metadata=metadata,
+            ...     remove=[
+            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
+            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         ],
+            ...     )
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(0, block)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \pageBreak %! SEGMENT:LAYOUT:5
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT:6
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:7
+                            \time 3/8
+                            \mark #1
+                            \bar "" %! EMPTY_START_BAR:1
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
+                            s1 * 3/8
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 2] %%%
+                            \break %! SEGMENT:LAYOUT:3
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
+                            s1 * 3/8
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                %%% MusicVoice [measure 1] %%%
+                                \clef "alto" %! EXPLICIT_CLEF:4
+                                \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
+                                %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
+                                R1 * 3/8
+                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                <BLANKLINE>
+                                %%% MusicVoice [measure 2] %%%
+                                R1 * 3/8
+                                \bar "|"
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+
         ..  container:: example
 
             Reapplied clefs color green and redraw dull green:
@@ -2527,99 +2619,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.forceClef = ##t %! REDUNDANT_CLEF:3
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepPink4) %! REDUNDANT_CLEF_COLOR_REDRAW:5
-                <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
-                                R1 * 3/8
-                                \bar "|"
-                <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
-
-        ..  container:: example
-
-            Explicit clefs supersede previous metadata:
-
-            >>> layout_measure_map = baca.layout(
-            ...     baca.page(
-            ...         [1, 0, (7,)],
-            ...         [2, 20, (7,)],
-            ...         ),
-            ...     )
-            >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
-            ...     layout_measure_map=layout_measure_map,
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
-            ...     time_signatures=[(3, 8), (3, 8)],
-            ...     )
-            >>> maker(
-            ...     baca.scope('MusicVoice', 1),
-            ...     baca.clef('alto'),
-            ...     )
-
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['MusicStaff'] = [
-            ...     abjad.Momento(
-            ...         context='MusicVoice',
-            ...         prototype='abjad.Clef',
-            ...         value='treble',
-            ...         )
-            ...     ]
-            >>> metadata['segment_number'] = 1
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     previous_metadata=metadata,
-            ...     remove=[
-            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
-            ...         ],
-            ...     )
-            >>> block = abjad.Block(name='layout')
-            >>> block.indent = 0
-            >>> lilypond_file.items.insert(0, block)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \pageBreak %! SEGMENT:LAYOUT:5
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT:6
-                            \autoPageBreaksOff %! SEGMENT:LAYOUT:7
-                            \time 3/8
-                            \mark #1
-                            \bar "" %! EMPTY_START_BAR:1
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \break %! SEGMENT:LAYOUT:3
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %! SEGMENT:LAYOUT:4
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
-                <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
-                                \clef "alto" %! EXPLICIT_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
-                                R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 R1 * 3/8
@@ -4963,7 +4962,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @property
     def instruments(self):
-        r'''Gets instrument dictionary.
+        r'''Gets instruments.
 
         ..  container:: example
 
@@ -4992,16 +4991,19 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         [2, 20, (11,)],
             ...         ),
             ...     )
+            >>> score_template = baca.SingleStaffScoreTemplate()
+            >>> triple = ('MusicStaff', 'default_instrument', abjad.Flute())
+            >>> score_template.defaults.append(triple)
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
             ...     layout_measure_map=layout_measure_map_,
-            ...     score_template=baca.ViolinSoloScoreTemplate(),
+            ...     score_template=score_template,
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
-            ...     baca.scope('ViolinMusicVoice', 1),
+            ...     baca.scope('MusicVoice', 1),
             ...     baca.make_notes(),
             ...     )
 
@@ -5010,7 +5012,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     remove=remove,
             ...     )
             >>> block = abjad.Block(name='layout')
-            >>> block.indent = 14
+            >>> block.indent = 0
             >>> lilypond_file.items.insert(1, block)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5018,7 +5020,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=True)
                 \context Score = "Score" <<
-                    \tag violin
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
@@ -5042,26 +5043,13 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                     \context MusicContext = "MusicContext" <<
-                        \tag violin
-                        \context ViolinMusicStaff = "ViolinMusicStaff" {
-                            \context ViolinMusicVoice = "ViolinMusicVoice" {
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% ViolinMusicVoice [measure 1] %%%
-                                \set ViolinMusicStaff.instrumentName = \markup { %! TEMPLATE_INSTRUMENT:4
-                                    \hcenter-in %! TEMPLATE_INSTRUMENT:4
-                                        #16 %! TEMPLATE_INSTRUMENT:4
-                                        Violin %! TEMPLATE_INSTRUMENT:4
-                                    } %! TEMPLATE_INSTRUMENT:4
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { %! TEMPLATE_INSTRUMENT:4
-                                    \hcenter-in %! TEMPLATE_INSTRUMENT:4
-                                        #10 %! TEMPLATE_INSTRUMENT:4
-                                        Vn. %! TEMPLATE_INSTRUMENT:4
-                                    } %! TEMPLATE_INSTRUMENT:4
-                                \clef "treble" %! TEMPLATE_CLEF:10
-                                \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! TEMPLATE_INSTRUMENT_COLOR:1
-                                \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:7
-                                %%% \override ViolinMusicStaff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:8
-                                \set ViolinMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:9
+                                %%% MusicVoice [measure 1] %%%
+                                \set Staff.instrumentName = \markup { Flute } %! TEMPLATE_INSTRUMENT:4
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! TEMPLATE_INSTRUMENT:4
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! TEMPLATE_INSTRUMENT_COLOR:1
                                 c'4.
                                 ^ \markup {
                                     \column
@@ -5069,17 +5057,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                             %%% \line %! TEMPLATE_INSTRUMENT_ALERT:2
                                             %%%     { %! TEMPLATE_INSTRUMENT_ALERT:2
                                             %%%         \vcenter %! TEMPLATE_INSTRUMENT_ALERT:2
-                                            %%%             (Violin %! TEMPLATE_INSTRUMENT_ALERT:2
+                                            %%%             (“Flute” %! TEMPLATE_INSTRUMENT_ALERT:2
                                             %%%         \vcenter %! TEMPLATE_INSTRUMENT_ALERT:2
-                                            %%%             \hcenter-in %! TEMPLATE_INSTRUMENT_ALERT:2
-                                            %%%                 #16 %! TEMPLATE_INSTRUMENT_ALERT:2
-                                            %%%                 Violin %! TEMPLATE_INSTRUMENT_ALERT:2
+                                            %%%             Flute %! TEMPLATE_INSTRUMENT_ALERT:2
                                             %%%         \concat %! TEMPLATE_INSTRUMENT_ALERT:2
                                             %%%             { %! TEMPLATE_INSTRUMENT_ALERT:2
                                             %%%                 \vcenter %! TEMPLATE_INSTRUMENT_ALERT:2
-                                            %%%                     \hcenter-in %! TEMPLATE_INSTRUMENT_ALERT:2
-                                            %%%                         #10 %! TEMPLATE_INSTRUMENT_ALERT:2
-                                            %%%                         Vn. %! TEMPLATE_INSTRUMENT_ALERT:2
+                                            %%%                     Fl. %! TEMPLATE_INSTRUMENT_ALERT:2
                                             %%%                 \vcenter %! TEMPLATE_INSTRUMENT_ALERT:2
                                             %%%                     ) %! TEMPLATE_INSTRUMENT_ALERT:2
                                             %%%             } %! TEMPLATE_INSTRUMENT_ALERT:2
@@ -5090,17 +5074,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                                         #(x11-color 'DarkViolet) %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
                                                         { %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
                                                             \vcenter %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                (Violin %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                (“Flute” %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
                                                             \vcenter %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                \hcenter-in %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                    #16 %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                    Violin %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                Flute %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
                                                             \concat %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
                                                                 { %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
                                                                     \vcenter %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                        \hcenter-in %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                            #10 %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                            Vn. %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        Fl. %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
                                                                     \vcenter %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
                                                                         ) %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
                                                                 } %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
@@ -5108,20 +5088,11 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 } %! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR:3
                                         }
                                     }
-                                \set ViolinMusicStaff.instrumentName = \markup { %! TEMPLATE_REDRAW_INSTRUMENT:6
-                                    \hcenter-in %! TEMPLATE_REDRAW_INSTRUMENT:6
-                                        #16 %! TEMPLATE_REDRAW_INSTRUMENT:6
-                                        Violin %! TEMPLATE_REDRAW_INSTRUMENT:6
-                                    } %! TEMPLATE_REDRAW_INSTRUMENT:6
-                                \set ViolinMusicStaff.shortInstrumentName = \markup { %! TEMPLATE_REDRAW_INSTRUMENT:6
-                                    \hcenter-in %! TEMPLATE_REDRAW_INSTRUMENT:6
-                                        #10 %! TEMPLATE_REDRAW_INSTRUMENT:6
-                                        Vn. %! TEMPLATE_REDRAW_INSTRUMENT:6
-                                    } %! TEMPLATE_REDRAW_INSTRUMENT:6
-                                \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'violet) %! TEMPLATE_REDRAW_INSTRUMENT_COLOR:5
-                                \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:11
+                                \set Staff.instrumentName = \markup { Flute } %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! TEMPLATE_REDRAW_INSTRUMENT:6
+                                \override Staff.InstrumentName.color = #(x11-color 'violet) %! TEMPLATE_REDRAW_INSTRUMENT_COLOR:5
                 <BLANKLINE>
-                                %%% ViolinMusicVoice [measure 2] %%%
+                                %%% MusicVoice [measure 2] %%%
                                 c'4.
                                 \bar "|"
                 <BLANKLINE>
@@ -5194,55 +5165,178 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT:9
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT:9
-                                \clef "treble" %! TEMPLATE_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:6
+                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT:4
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT:4
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
                                 c'4.
                                 ^ \markup {
                                     \column
                                         {
-                                            %%% \line %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%     { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%             (“Flute” %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%             Flute %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%             { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%                     Fl. %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%             } %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%     } %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                    \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                        #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                        { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                (“Flute” %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                Flute %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                        Fl. %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                        ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                        } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                            %%% \line %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%     { %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%             (“Flute” %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%             Flute %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%             { %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%                     Fl. %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%             } %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%     } %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                    \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                        #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                        { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                (“Flute” %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                Flute %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        Fl. %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                        } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:10
+                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_REDRAW_INSTRUMENT:6
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_REDRAW_INSTRUMENT:6
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:5
+                <BLANKLINE>
+                                %%% MusicVoice [measure 2] %%%
+                                c'4.
+                                \bar "|"
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            Even after a previous instrument:
+
+            >>> layout_measure_map_ = baca.layout(
+            ...     baca.page(
+            ...         [1, 0, (11,)],
+            ...         [2, 25, (11,)],
+            ...         ),
+            ...     )
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     instruments=instruments,
+            ...     layout_measure_map=layout_measure_map_,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.instrument(instruments['Flute']),
+            ...     baca.make_notes(),
+            ...     )
+
+            >>> metadata = {}
+            >>> metadata['persistent_indicators'] = {}
+            >>> metadata['persistent_indicators']['MusicStaff'] = [
+            ...     abjad.Momento(
+            ...         context='MusicVoice',
+            ...         prototype='abjad.Instrument',
+            ...         value='Piccolo',
+            ...         )
+            ...     ]
+            >>> metadata['segment_number'] = 1
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     previous_metadata=metadata,
+            ...     remove=remove,
+            ...     )
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(1, block)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \pageBreak %! SEGMENT:LAYOUT:5
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT:6
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:7
+                            \time 3/8
+                            \mark #1
+                            \bar "" %! EMPTY_START_BAR:1
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
+                            s1 * 3/8
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 2] %%%
+                            \break %! SEGMENT:LAYOUT:3
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 25) (alignment-distances . (11))) %! SEGMENT:LAYOUT:4
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
+                            s1 * 3/8
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                %%% MusicVoice [measure 1] %%%
+                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT:4
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT:4
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
+                                c'4.
+                                ^ \markup {
+                                    \column
+                                        {
+                                            %%% \line %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%     { %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%             (“Flute” %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%             Flute %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%             { %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%                     Fl. %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%             } %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%     } %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                    \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                        #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                        { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                (“Flute” %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                Flute %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        Fl. %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                        } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                        }
+                                    }
+                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_REDRAW_INSTRUMENT:6
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_REDRAW_INSTRUMENT:6
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 c'4.
@@ -5310,7 +5404,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \break %! SEGMENT:LAYOUT:3
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %! SEGMENT:LAYOUT:4
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 25) (alignment-distances . (11))) %! SEGMENT:LAYOUT:4
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
                             s1 * 3/8
@@ -5450,55 +5544,50 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT:9
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT:9
-                                \clef "treble" %! TEMPLATE_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:6
+                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT:4
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT:4
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
                                 c'2
                                 ^ \markup {
                                     \column
                                         {
-                                            %%% \line %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%     { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%             (“Flute” %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%             Flute %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%             { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%                     Fl. %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%             } %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            %%%     } %! EXPLICIT_INSTRUMENT_ALERT:7
-                                            \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                    \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                        #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                        { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                (“Flute” %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                Flute %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                        Fl. %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                        ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                        } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                            %%% \line %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%     { %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%             (“Flute” %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%             Flute %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%             { %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%                     Fl. %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%             } %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            %%%     } %! EXPLICIT_INSTRUMENT_ALERT:2
+                                            \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                    \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                        #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                        { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                (“Flute” %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                Flute %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        Fl. %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                        } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:10
+                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_REDRAW_INSTRUMENT:6
+                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_REDRAW_INSTRUMENT:6
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 \set Staff.instrumentName = \markup { Flute } %! REDUNDANT_INSTRUMENT:4
@@ -5673,136 +5762,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.instrumentName = \markup { Flute } %! REDUNDANT_REDRAW_INSTRUMENT:6
                                 \set Staff.shortInstrumentName = \markup { Fl. } %! REDUNDANT_REDRAW_INSTRUMENT:6
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_REDRAW_INSTRUMENT_COLOR:5
-                <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
-                                c'4.
-                                \bar "|"
-                <BLANKLINE>
-                            }
-                        }
-                    >>
-                >>
-
-        ..  container:: example
-
-            Explicit instruments supersede previous metadata:
-
-            >>> layout_measure_map_ = baca.layout(
-            ...     baca.page(
-            ...         [1, 0, (11,)],
-            ...         [2, 25, (11,)],
-            ...         ),
-            ...     )
-            >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
-            ...     instruments=instruments,
-            ...     layout_measure_map=layout_measure_map_,
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
-            ...     time_signatures=[(3, 8), (3, 8)],
-            ...     )
-            >>> maker(
-            ...     baca.scope('MusicVoice', 1),
-            ...     baca.instrument(instruments['Flute']),
-            ...     baca.make_notes(),
-            ...     )
-
-            >>> metadata = {}
-            >>> metadata['persistent_indicators'] = {}
-            >>> metadata['persistent_indicators']['MusicStaff'] = [
-            ...     abjad.Momento(
-            ...         context='MusicVoice',
-            ...         prototype='abjad.Instrument',
-            ...         value='Piccolo',
-            ...         )
-            ...     ]
-            >>> metadata['segment_number'] = 1
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     previous_metadata=metadata,
-            ...     remove=remove,
-            ...     )
-            >>> block = abjad.Block(name='layout')
-            >>> block.indent = 0
-            >>> lilypond_file.items.insert(1, block)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \pageBreak %! SEGMENT:LAYOUT:5
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT:6
-                            \autoPageBreaksOff %! SEGMENT:LAYOUT:7
-                            \time 3/8
-                            \mark #1
-                            \bar "" %! EMPTY_START_BAR:1
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
-                            s1 * 3/8
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \break %! SEGMENT:LAYOUT:3
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 25) (alignment-distances . (11))) %! SEGMENT:LAYOUT:4
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
-                            s1 * 3/8
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
-                <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
-                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_INSTRUMENT:4
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_INSTRUMENT:4
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
-                                c'4.
-                                ^ \markup {
-                                    \column
-                                        {
-                                            %%% \line %! EXPLICIT_INSTRUMENT_ALERT:2
-                                            %%%     { %! EXPLICIT_INSTRUMENT_ALERT:2
-                                            %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
-                                            %%%             (“Flute” %! EXPLICIT_INSTRUMENT_ALERT:2
-                                            %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
-                                            %%%             Flute %! EXPLICIT_INSTRUMENT_ALERT:2
-                                            %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:2
-                                            %%%             { %! EXPLICIT_INSTRUMENT_ALERT:2
-                                            %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
-                                            %%%                     Fl. %! EXPLICIT_INSTRUMENT_ALERT:2
-                                            %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
-                                            %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:2
-                                            %%%             } %! EXPLICIT_INSTRUMENT_ALERT:2
-                                            %%%     } %! EXPLICIT_INSTRUMENT_ALERT:2
-                                            \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                    \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                        #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                        { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                            \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                (“Flute” %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                            \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                Flute %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                            \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                        Fl. %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                    \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                        ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                                } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                        } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                                } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
-                                        }
-                                    }
-                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_REDRAW_INSTRUMENT:6
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_REDRAW_INSTRUMENT:6
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 c'4.
@@ -6664,56 +6623,51 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT:9
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT:9
-                                    \clef "treble" %! TEMPLATE_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
-                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:6
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT:4
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT:4
+                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
                                     fs'8
                                     [
                                     ^ \markup {
                                         \column
                                             {
-                                                %%% \line %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%     { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%             (“clarinet” %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%             "Clarinet in B-flat" %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%             { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%                     "Cl. in B-flat" %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%             } %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%     } %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                    { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                        \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    (“clarinet” %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    "Clarinet in B-flat" %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                            "Cl. in B-flat" %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                            ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                    } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                %%% \line %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%     { %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%             (“clarinet” %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%             "Clarinet in B-flat" %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%             { %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%                     "Cl. in B-flat" %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%             } %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%     } %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                    { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                        \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    (“clarinet” %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    "Clarinet in B-flat" %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                            "Cl. in B-flat" %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                            ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                    } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                    \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:10
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_REDRAW_INSTRUMENT:6
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_REDRAW_INSTRUMENT:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:5
                 <BLANKLINE>
                                     g'8
                 <BLANKLINE>
@@ -6825,56 +6779,51 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT:9
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT:9
-                                    \clef "treble" %! TEMPLATE_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
-                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:6
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT:4
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT:4
+                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:1
                                     e'8
                                     [
                                     ^ \markup {
                                         \column
                                             {
-                                                %%% \line %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%     { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%             (“clarinet” %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%             "Clarinet in B-flat" %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%             { %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%                     "Cl. in B-flat" %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%             } %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                %%%     } %! EXPLICIT_INSTRUMENT_ALERT:7
-                                                \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                    { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                        \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    (“clarinet” %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    "Clarinet in B-flat" %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                            "Cl. in B-flat" %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                            ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                                    } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                            } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
-                                                    } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:8
+                                                %%% \line %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%     { %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%             (“clarinet” %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%         \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%             "Clarinet in B-flat" %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%         \concat %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%             { %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%                     "Cl. in B-flat" %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%                 \vcenter %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%                     ) %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%             } %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                %%%     } %! EXPLICIT_INSTRUMENT_ALERT:2
+                                                \line %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                    { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                        \with-color %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    (“clarinet” %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    "Clarinet in B-flat" %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                \concat %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    { %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                            "Cl. in B-flat" %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                        \vcenter %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                            ) %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                                    } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                            } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
+                                                    } %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:3
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_REDRAW_INSTRUMENT:11
-                                    \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:10
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_REDRAW_INSTRUMENT:6
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_REDRAW_INSTRUMENT:6
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:5
                 <BLANKLINE>
                                     f'8
                 <BLANKLINE>
