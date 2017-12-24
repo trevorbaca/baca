@@ -54,12 +54,7 @@ class SingleStaffScoreTemplate(ScoreTemplate):
                         \context Voice = "MusicVoice" {
             <BLANKLINE>
                             %%% MusicVoice [measure 1] %%%
-                            \clef "treble" %! TEMPLATE_CLEF:4
-                            \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                            %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                            \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                             R1 * 1/2
-                            \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
             <BLANKLINE>
                             %%% MusicVoice [measure 2] %%%
                             R1 * 3/8
@@ -89,35 +84,35 @@ class SingleStaffScoreTemplate(ScoreTemplate):
 
         Returns score.
         '''
+
+        # GLOBAL CONTEXT
         global_context = self._make_global_context()
-        # 
-        music_voice = abjad.Voice(
-            [],
-            name='MusicVoice',
-            )
+
+        # MUSIC VOICE, MUSIC STAFF
+        music_voice = abjad.Voice(name='MusicVoice')
         music_staff = abjad.Staff(
             [music_voice],
             name='MusicStaff',
             )
-        abjad.annotate(
-            music_staff,
-            'default_clef',
-            abjad.Clef('treble'),
-            )
-        # SCORE
+
+#        abjad.annotate(
+#            music_staff,
+#            'default_clef',
+#            abjad.Clef('treble'),
+#            )
+
+        # MUSIC CONTEXT
         music_context = abjad.Context(
-            [
-                music_staff,
-                ],
+            [music_staff],
             context_name='MusicContext',
             is_simultaneous=True,
             name='MusicContext',
             )
+
+        # SCORE
         score = abjad.Score(
-            [
-                global_context,
-                music_context,
-                ],
+            [global_context, music_context],
             name='Score',
             )
+
         return score

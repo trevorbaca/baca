@@ -63,13 +63,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" %! TEMPLATE_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                 c'8
                                 [
-                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
             <BLANKLINE>
                                 c'8
             <BLANKLINE>
@@ -445,17 +440,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" %! TEMPLATE_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                     c'8
                                     [
                                     ^ \markup {
                                         \small
                                             0
                                         }
-                                    \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -2168,12 +2158,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" %! TEMPLATE_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 R1 * 3/8
@@ -2427,20 +2412,15 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" %! TEMPLATE_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
-                                \clef "treble" %! REDUNDANT_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'DeepPink1) %! REDUNDANT_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! REDUNDANT_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! REDUNDANT_CLEF:3
+                                \clef "treble" %! EXPLICIT_CLEF:4
+                                \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
+                                %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
+                                \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'DeepPink4) %! REDUNDANT_CLEF_COLOR_REDRAW:5
+                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 3] %%%
                                 R1 * 3/8
@@ -3156,12 +3136,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                 <BLANKLINE>
                                         %%% MusicVoice [measure 1] %%%
-                                        \clef "treble" %! TEMPLATE_CLEF:4
-                                        \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                        %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                        \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                         e'16
-                                        \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                                     }
                                 }
                                 {
@@ -3363,12 +3338,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                 <BLANKLINE>
                                         %%% MusicVoice [measure 1] %%%
-                                        \clef "treble" %! TEMPLATE_CLEF:4
-                                        \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                        %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                        \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                         e'16
-                                        \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                                     }
                                 }
                                 {
@@ -3619,13 +3589,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! TEMPLATE_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -3732,13 +3697,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! TEMPLATE_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -3847,13 +3807,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! TEMPLATE_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -3964,13 +3919,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! TEMPLATE_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4091,13 +4041,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! TEMPLATE_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4269,13 +4214,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! TEMPLATE_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -4387,13 +4327,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Flag.color = #blue
                                     \once \override NoteHead.color = #blue
                                     \once \override Stem.color = #blue
-                                    \clef "treble" %! TEMPLATE_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
@@ -4659,12 +4594,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                 <BLANKLINE>
                                         %%% MusicVoice [measure 1] %%%
-                                        \clef "treble" %! TEMPLATE_CLEF:4
-                                        \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                        %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                        \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                         e'8.
-                                        \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                                     }
                                 }
                                 {
@@ -4866,12 +4796,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override Flag.color = #magenta
                                         \once \override NoteHead.color = #magenta
                                         \once \override Stem.color = #magenta
-                                        \clef "treble" %! TEMPLATE_CLEF:4
-                                        \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                        %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                        \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                         e'8.
-                                        \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                                     }
                                 }
                                 {
@@ -6168,13 +6093,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! TEMPLATE_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>
@@ -6412,12 +6332,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" %! TEMPLATE_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                 R1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 R1 * 3/8
@@ -6485,12 +6400,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" %! TEMPLATE_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                 s1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 s1 * 3/8
@@ -6605,13 +6515,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     %%% MusicVoice [measure 1] %%%
-                                    \clef "treble" %! TEMPLATE_CLEF:4
-                                    \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                    %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                    \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                     c'8
                                     [
-                                    \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                     c'8
                 <BLANKLINE>

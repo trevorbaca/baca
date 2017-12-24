@@ -424,10 +424,6 @@ class ClusterCommand(Command):
                             \once \override NoteHead.text = \markup {
                             	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                             }
-                            \clef "treble" %! TEMPLATE_CLEF:4
-                            \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                            %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                            \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                             <e' g' b'>2
                             ^ \markup {
                                 \center-align
@@ -437,7 +433,6 @@ class ClusterCommand(Command):
                                             \flat
                                         }
                                 }
-                            \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
             <BLANKLINE>
                             %%% MusicVoice [measure 2] %%%
                             \once \override Accidental.stencil = ##f
@@ -652,16 +647,11 @@ class ClusterCommand(Command):
                                 \once \override NoteHead.text = \markup {
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \clef "treble" %! TEMPLATE_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                 <e' g' b'>2
                                 ^ \markup {
                                     \center-align
                                         \natural
                                     }
-                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 \once \override Accidental.stencil = ##f
@@ -798,10 +788,6 @@ class ClusterCommand(Command):
                                 \once \override NoteHead.text = \markup {
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \clef "treble" %! TEMPLATE_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                 <c' e' g'>2
                                 ^ \markup {
                                     \center-align
@@ -811,7 +797,6 @@ class ClusterCommand(Command):
                                                 \flat
                                             }
                                     }
-                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 \once \override Accidental.stencil = ##f
@@ -936,10 +921,6 @@ class ClusterCommand(Command):
                                 \once \override NoteHead.text = \markup {
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \clef "treble" %! TEMPLATE_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                 <g' b' d''>2
                                 ^ \markup {
                                     \center-align
@@ -949,7 +930,6 @@ class ClusterCommand(Command):
                                                 \flat
                                             }
                                     }
-                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 \once \override Accidental.stencil = ##f
@@ -1084,10 +1064,6 @@ class ClusterCommand(Command):
                                 \once \override NoteHead.text = \markup {
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \clef "treble" %! TEMPLATE_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                 <e'>2
                                 ^ \markup {
                                     \center-align
@@ -1097,7 +1073,6 @@ class ClusterCommand(Command):
                                                 \flat
                                             }
                                     }
-                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 \once \override Accidental.stencil = ##f
@@ -1222,10 +1197,6 @@ class ClusterCommand(Command):
                                 \once \override NoteHead.text = \markup {
                                 	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
-                                \clef "treble" %! TEMPLATE_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                 <e'>2
                                 ^ \markup {
                                     \center-align
@@ -1235,7 +1206,6 @@ class ClusterCommand(Command):
                                                 \flat
                                             }
                                     }
-                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 \once \override Accidental.stencil = ##f
@@ -1354,12 +1324,7 @@ class ClusterCommand(Command):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" %! TEMPLATE_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                 e'2
-                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 e'4.

@@ -66,13 +66,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" %! TEMPLATE_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                 e'16
                                 [
-                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
             <BLANKLINE>
                                 f'16
             <BLANKLINE>
@@ -224,13 +219,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" %! TEMPLATE_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                 e'16
                                 [
-                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
             <BLANKLINE>
                                 f'16
             <BLANKLINE>
@@ -384,13 +374,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" %! TEMPLATE_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                 e'16
                                 [
-                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
             <BLANKLINE>
                                 f'16
             <BLANKLINE>
@@ -545,13 +530,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" %! TEMPLATE_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                 e'16
                                 [
-                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
             <BLANKLINE>
                                 f'16
             <BLANKLINE>
@@ -707,13 +687,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             {
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \clef "treble" %! TEMPLATE_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                 e'16
                                 [
-                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
             <BLANKLINE>
                                 f'16
             <BLANKLINE>
@@ -884,13 +859,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
                                 \once \override Beam.grow-direction = #right
-                                \clef "treble" %! TEMPLATE_CLEF:4
-                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
-                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
-                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                 e'16 * 63/32
                                 [
-                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
             <BLANKLINE>
                                 f'16 * 115/64
             <BLANKLINE>
