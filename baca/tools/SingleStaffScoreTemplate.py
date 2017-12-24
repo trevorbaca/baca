@@ -115,4 +115,6 @@ class SingleStaffScoreTemplate(ScoreTemplate):
             name='Score',
             )
 
+        self._attach_calltime_defaults(score)
+
         return score

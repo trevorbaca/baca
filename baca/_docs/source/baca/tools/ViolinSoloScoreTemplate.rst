@@ -28,6 +28,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.attach_defaults
+      ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.defaults
       ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.group_families
       ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.make_music_context
       ~baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.make_piano_staff
@@ -44,6 +45,12 @@ Bases
 
 Read-only properties
 --------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ViolinSoloScoreTemplate.ViolinSoloScoreTemplate.defaults
 
 .. only:: html
 

@@ -28,6 +28,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.attach_defaults
+      ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.defaults
       ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.group_families
       ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.make_music_context
       ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.make_piano_staff
@@ -44,6 +45,12 @@ Bases
 
 Read-only properties
 --------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.defaults
 
 .. only:: html
 

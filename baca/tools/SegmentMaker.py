@@ -2107,10 +2107,13 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         [2, 20, (7,)],
             ...         ),
             ...     )
+            >>> score_template = baca.SingleStaffScoreTemplate()
+            >>> triple = ('MusicStaff', 'default_clef', abjad.Clef('treble'))
+            >>> score_template.defaults.append(triple)
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     layout_measure_map=layout_measure_map,
-            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     score_template=score_template,
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
@@ -2158,7 +2161,12 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
+                                \clef "treble" %! TEMPLATE_CLEF:4
+                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:1
+                                %%% \override Staff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:2
+                                \set Staff.forceClef = ##t %! TEMPLATE_CLEF:3
                                 R1 * 3/8
+                                \override Staff.Clef.color = #(x11-color 'violet) %! TEMPLATE_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 R1 * 3/8
@@ -2359,6 +2367,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
+            ...     baca.clef('treble', baca.leaf(0)),
             ...     baca.clef('treble', baca.leaf(1)),
             ...     )
             >>> lilypond_file = maker.run(
@@ -2412,15 +2421,20 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                R1 * 3/8
-                <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
                                 \clef "treble" %! EXPLICIT_CLEF:4
                                 \once \override Staff.Clef.color = #(x11-color 'blue) %! EXPLICIT_CLEF_COLOR:1
                                 %%% \override Staff.Clef.color = ##f %! EXPLICIT_CLEF_UNCOLOR:2
                                 \set Staff.forceClef = ##t %! EXPLICIT_CLEF:3
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_CLEF_COLOR_REDRAW:5
+                <BLANKLINE>
+                                %%% MusicVoice [measure 2] %%%
+                                \clef "treble" %! REDUNDANT_CLEF:4
+                                \once \override Staff.Clef.color = #(x11-color 'DeepPink1) %! REDUNDANT_CLEF_COLOR:1
+                                %%% \override Staff.Clef.color = ##f %! REDUNDANT_CLEF_UNCOLOR:2
+                                \set Staff.forceClef = ##t %! REDUNDANT_CLEF:3
+                                R1 * 3/8
+                                \override Staff.Clef.color = #(x11-color 'DeepPink4) %! REDUNDANT_CLEF_COLOR_REDRAW:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 3] %%%
                                 R1 * 3/8

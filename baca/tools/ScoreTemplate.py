@@ -10,8 +10,17 @@ class ScoreTemplate(abjad.ScoreTemplate):
 
     __documentation_section__ = '(5) Utilities'
 
+    __slots__ = (
+        '_defaults',
+        )
+
     voice_colors = {
         }
+
+    ### INITIALIZER ###
+
+    def __init__(self):
+        self._defaults = []
 
     ### PRIVATE METHODS ###
 
@@ -39,6 +48,12 @@ class ScoreTemplate(abjad.ScoreTemplate):
             if context.name in names:
                 raise Exception(f'duplicate context name: {context.name!r}.')
 
+    def _attach_calltime_defaults(self, score):
+        assert isinstance(score, abjad.Score)
+        for context_name, annotation, indicator in self.defaults:
+            context = score[context_name]
+            abjad.annotate(context, annotation, indicator)
+        
     def _attach_tag(self, tag, context):
         for tag_ in tag.split('.'):
             if not abjad.String(tag_).is_lilypond_identifier():
@@ -83,6 +98,16 @@ class ScoreTemplate(abjad.ScoreTemplate):
         for voice_name in sorted(self.voice_colors):
             if voice_name not in voice_names:
                 raise Exception(f'voice not in score: {voice_name!r}.')
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def defaults(self):
+        r'''Gets defaults.
+
+        Returns list.
+        '''
+        return self._defaults
 
     ### PUBLIC METHODS ###
 

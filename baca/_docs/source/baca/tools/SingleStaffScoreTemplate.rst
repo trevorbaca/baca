@@ -28,6 +28,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.attach_defaults
+      ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.defaults
       ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.group_families
       ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.make_music_context
       ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.make_piano_staff
@@ -44,6 +45,12 @@ Bases
 
 Read-only properties
 --------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.defaults
 
 .. only:: html
 

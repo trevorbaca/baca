@@ -28,6 +28,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.attach_defaults
+      ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.defaults
       ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.group_families
       ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.make_music_context
       ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.make_piano_staff
@@ -44,6 +45,12 @@ Bases
 
 Read-only properties
 --------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.defaults
 
 .. only:: html
 

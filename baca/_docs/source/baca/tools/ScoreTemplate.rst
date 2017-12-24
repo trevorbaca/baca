@@ -26,6 +26,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.ScoreTemplate.ScoreTemplate.attach_defaults
+      ~baca.tools.ScoreTemplate.ScoreTemplate.defaults
       ~baca.tools.ScoreTemplate.ScoreTemplate.group_families
       ~baca.tools.ScoreTemplate.ScoreTemplate.make_music_context
       ~baca.tools.ScoreTemplate.ScoreTemplate.make_piano_staff
@@ -42,6 +43,8 @@ Bases
 
 Read-only properties
 --------------------
+
+.. autoattribute:: baca.tools.ScoreTemplate.ScoreTemplate.defaults
 
 .. only:: html
 
