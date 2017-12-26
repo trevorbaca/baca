@@ -67,11 +67,11 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                         #10 %! TEMPLATE_INSTRUMENT:4
                                         Vn. %! TEMPLATE_INSTRUMENT:4
                                     } %! TEMPLATE_INSTRUMENT:4
+                                \set ViolinMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:9
                                 \clef "treble" %! TEMPLATE_CLEF:10
                                 \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! TEMPLATE_INSTRUMENT_COLOR:1
                                 \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:7
                                 %%% \override ViolinMusicStaff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:8
-                                \set ViolinMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:9
                                 R1 * 1/2
                                 ^ \markup {
                                     \column
@@ -158,11 +158,11 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                         #10 %! TEMPLATE_INSTRUMENT:4
                                         Va. %! TEMPLATE_INSTRUMENT:4
                                     } %! TEMPLATE_INSTRUMENT:4
+                                \set ViolaMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:9
                                 \clef "alto" %! TEMPLATE_CLEF:10
                                 \once \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! TEMPLATE_INSTRUMENT_COLOR:1
                                 \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:7
                                 %%% \override ViolaMusicStaff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:8
-                                \set ViolaMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:9
                                 R1 * 1/2
                                 ^ \markup {
                                     \column
@@ -249,11 +249,11 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                         #10 %! TEMPLATE_INSTRUMENT:4
                                         Vc. %! TEMPLATE_INSTRUMENT:4
                                     } %! TEMPLATE_INSTRUMENT:4
+                                \set CelloMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:9
                                 \clef "bass" %! TEMPLATE_CLEF:10
                                 \once \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! TEMPLATE_INSTRUMENT_COLOR:1
                                 \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:7
                                 %%% \override CelloMusicStaff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:8
-                                \set CelloMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:9
                                 R1 * 1/2
                                 ^ \markup {
                                     \column

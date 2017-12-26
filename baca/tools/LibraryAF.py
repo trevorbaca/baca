@@ -2832,11 +2832,11 @@ class LibraryAF(abjad.AbjadObject):
                                                     #10 %! TEMPLATE_INSTRUMENT:5
                                                     Vn. %! TEMPLATE_INSTRUMENT:5
                                                 } %! TEMPLATE_INSTRUMENT:5
+                                            \set ViolinMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:10
                                             \clef "treble" %! TEMPLATE_CLEF:11
                                             \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! TEMPLATE_INSTRUMENT_COLOR:2
                                             \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:8
                                             %%% \override ViolinMusicStaff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:9
-                                            \set ViolinMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:10
                                             a'8
                                             ^ \markup {
                                                 \column
@@ -2935,12 +2935,12 @@ class LibraryAF(abjad.AbjadObject):
                                                     #10 %! TEMPLATE_INSTRUMENT:5
                                                     Va. %! TEMPLATE_INSTRUMENT:5
                                                 } %! TEMPLATE_INSTRUMENT:5
+                                            \set ViolaMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:10
                                             \clef "alto" %! TEMPLATE_CLEF:11
                                             \crossStaff
                                             \once \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! TEMPLATE_INSTRUMENT_COLOR:2
                                             \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:8
                                             %%% \override ViolaMusicStaff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:9
-                                            \set ViolaMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:10
                                             c'8
                                             ^ \markup {
                                                 \column
@@ -3036,11 +3036,11 @@ class LibraryAF(abjad.AbjadObject):
                                             #10 %! TEMPLATE_INSTRUMENT:4
                                             Vc. %! TEMPLATE_INSTRUMENT:4
                                         } %! TEMPLATE_INSTRUMENT:4
+                                    \set CelloMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:9
                                     \clef "bass" %! TEMPLATE_CLEF:10
                                     \once \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! TEMPLATE_INSTRUMENT_COLOR:1
                                     \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:7
                                     %%% \override CelloMusicStaff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:8
-                                    \set CelloMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:9
                                     R1 * 5/8
                                     ^ \markup {
                                         \column
@@ -3210,11 +3210,11 @@ class LibraryAF(abjad.AbjadObject):
                                                     #10 %! TEMPLATE_INSTRUMENT:5
                                                     Vn. %! TEMPLATE_INSTRUMENT:5
                                                 } %! TEMPLATE_INSTRUMENT:5
+                                            \set ViolinMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:10
                                             \clef "treble" %! TEMPLATE_CLEF:11
                                             \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! TEMPLATE_INSTRUMENT_COLOR:2
                                             \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:8
                                             %%% \override ViolinMusicStaff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:9
-                                            \set ViolinMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:10
                                             a'8
                                             ^ \markup {
                                                 \column
@@ -3313,11 +3313,11 @@ class LibraryAF(abjad.AbjadObject):
                                                     #10 %! TEMPLATE_INSTRUMENT:5
                                                     Va. %! TEMPLATE_INSTRUMENT:5
                                                 } %! TEMPLATE_INSTRUMENT:5
+                                            \set ViolaMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:10
                                             \clef "alto" %! TEMPLATE_CLEF:11
                                             \once \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! TEMPLATE_INSTRUMENT_COLOR:2
                                             \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:8
                                             %%% \override ViolaMusicStaff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:9
-                                            \set ViolaMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:10
                                             c'8
                                             ^ \markup {
                                                 \column
@@ -3411,11 +3411,11 @@ class LibraryAF(abjad.AbjadObject):
                                             #10 %! TEMPLATE_INSTRUMENT:4
                                             Vc. %! TEMPLATE_INSTRUMENT:4
                                         } %! TEMPLATE_INSTRUMENT:4
+                                    \set CelloMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:9
                                     \clef "bass" %! TEMPLATE_CLEF:10
                                     \once \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! TEMPLATE_INSTRUMENT_COLOR:1
                                     \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:7
                                     %%% \override CelloMusicStaff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:8
-                                    \set CelloMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:9
                                     R1 * 5/8
                                     ^ \markup {
                                         \column

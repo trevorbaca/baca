@@ -66,11 +66,11 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                                     #10 %! TEMPLATE_INSTRUMENT:4
                                     Vn. %! TEMPLATE_INSTRUMENT:4
                                 } %! TEMPLATE_INSTRUMENT:4
+                            \set ViolinMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:9
                             \clef "treble" %! TEMPLATE_CLEF:10
                             \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! TEMPLATE_INSTRUMENT_COLOR:1
                             \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! TEMPLATE_CLEF_COLOR:7
                             %%% \override ViolinMusicStaff.Clef.color = ##f %! TEMPLATE_CLEF_UNCOLOR:8
-                            \set ViolinMusicStaff.forceClef = ##t %! TEMPLATE_CLEF:9
                             R1 * 1/2
                             ^ \markup {
                                 \column
