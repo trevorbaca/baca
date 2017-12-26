@@ -2028,6 +2028,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     )
 
     def _tag_untagged_persistent_indicators(self):
+        # TODO: remove tuple and iterate over all persistent indicators:
         for prototype in (
             abjad.Clef,
             abjad.Instrument,
@@ -6800,7 +6801,10 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> lilypond_file = maker.run(environment='docs')
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     remove=[baca.Tags.CLOCK_TIME_MARKUP],
+            ...     )
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6814,11 +6818,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" %! EMPTY_START_BAR:1
                             s1 * 1/2
-                            ^ \markup { %! CLOCK_TIME_MARKUP:3
-                                \fontsize %! CLOCK_TIME_MARKUP:3
-                                    #-2 %! CLOCK_TIME_MARKUP:3
-                                    0'00'' %! CLOCK_TIME_MARKUP:3
-                                } %! CLOCK_TIME_MARKUP:3
                             - \markup { %! STAGE_NUMBER_MARKUP:2
                                 \fontsize %! STAGE_NUMBER_MARKUP:2
                                     #-3 %! STAGE_NUMBER_MARKUP:2
@@ -6846,29 +6845,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
                             s1 * 3/8
-                            ^ \markup { %! CLOCK_TIME_MARKUP:1
-                                \fontsize %! CLOCK_TIME_MARKUP:1
-                                    #-2 %! CLOCK_TIME_MARKUP:1
-                                    0'01'' %! CLOCK_TIME_MARKUP:1
-                                } %! CLOCK_TIME_MARKUP:1
                 <BLANKLINE>
                             %%% GlobalSkips [measure 3] %%%
                             \time 4/8
                             s1 * 1/2
-                            ^ \markup { %! CLOCK_TIME_MARKUP:1
-                                \fontsize %! CLOCK_TIME_MARKUP:1
-                                    #-2 %! CLOCK_TIME_MARKUP:1
-                                    0'02'' %! CLOCK_TIME_MARKUP:1
-                                } %! CLOCK_TIME_MARKUP:1
                 <BLANKLINE>
                             %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
-                            ^ \markup { %! CLOCK_TIME_MARKUP:1
-                                \fontsize %! CLOCK_TIME_MARKUP:1
-                                    #-2 %! CLOCK_TIME_MARKUP:1
-                                    0'03'' %! CLOCK_TIME_MARKUP:1
-                                } %! CLOCK_TIME_MARKUP:1
                 <BLANKLINE>
                         }
                     >>
@@ -6947,12 +6931,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> metronome_marks = abjad.MetronomeMarkDictionary()
             >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
             >>> metronome_marks['112'] = abjad.MetronomeMark((1, 4), 112)
-            >>> layout_measure_map = baca.layout(
-            ...     baca.page(
-            ...         [1, 0, (11,)],
-            ...         [2, 20, (11,)],
-            ...         ),
-            ...     )
             >>> remove = [
             ...     baca.Tags.build(baca.Tags.SPACING_MARKUP),
             ...     baca.Tags.CLOCK_TIME_MARKUP,
