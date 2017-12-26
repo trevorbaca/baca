@@ -1828,8 +1828,7 @@ class LibraryGM(abjad.AbjadObject):
 
     @staticmethod
     def margin_markup(
-        markup,
-        short_markup,
+        argument,
         context='Staff',
         selector='baca.leaf(0)',
         ):
@@ -1845,10 +1844,7 @@ class LibraryGM(abjad.AbjadObject):
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
             ...     baca.make_notes(repeat_ties=True),
-            ...     baca.margin_markup(
-            ...         abjad.Markup('Flute'),
-            ...         abjad.Markup('Fl.'),
-            ...     ),
+            ...     baca.margin_markup(('Flute', 'Fl.')),
             ...     baca.pitches('E4 F4'),
             ...     )
 
@@ -1951,11 +1947,31 @@ class LibraryGM(abjad.AbjadObject):
 
         Returns indicator command.
         '''
-        margin_markup = baca.MarginMarkup(
-            context=context,
-            markup=markup,
-            short_markup=short_markup,
-            )
+        if isinstance(argument, tuple):
+            assert len(argument) == 2, repr(argument)
+            markup, short_markup = argument
+            if isinstance(markup, str):
+                markup = abjad.Markup(markup)
+            if isinstance(short_markup, str):
+                short_markup = abjad.Markup(short_markup)
+            margin_markup = baca.MarginMarkup(
+                context=context,
+                markup=markup,
+                short_markup=short_markup,
+                )
+        elif isinstance(argument, (str, abjad.Markup)):
+            margin_markup = baca.MarginMarkup(
+                context=context,
+                markup=argument,
+                short_markup=argument,
+                )
+        elif isinstance(argument, baca.MarginMarkup):
+            margin_markup = abjad.new(
+                argument,
+                context=context,
+                )
+        else:
+            raise TypeError(argument)
         return baca.IndicatorCommand(
             indicators=[margin_markup],
             selector=selector,

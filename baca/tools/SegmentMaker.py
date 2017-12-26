@@ -890,9 +890,6 @@ class SegmentMaker(abjad.SegmentMaker):
         if not self.first_segment:
             return
         pairs = self.score_template.attach_defaults(self.score)
-        #for pair in pairs:
-        #    print(pair)
-        #print()
         for leaf, indicator in pairs:
             wrapper = abjad.inspect(leaf).get_indicator(
                 indicator,
@@ -5800,7 +5797,806 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @property
     def margin_markup(self):
-        r'''Gets margin markup dictionary.
+        r'''Gets margin markup.
+
+        ..  container:: example
+
+            >>> margin_markup = abjad.TypedOrderedDict()
+            >>> margin_markup['I+II'] = baca.MarginMarkup(
+            ...     markup=abjad.Markup('I+II'),
+            ...     short_markup=abjad.Markup('I+II'),
+            ...     )
+            >>> margin_markup['III+IV'] = baca.MarginMarkup(
+            ...     markup=abjad.Markup('III+IV'),
+            ...     short_markup=abjad.Markup('III+IV'),
+            ...     )
+            >>> layout_measure_map = baca.layout(
+            ...     baca.page(
+            ...         [1, 0, (11,)],
+            ...         [2, 20, (11,)],
+            ...         ),
+            ...     )
+            >>> remove = [
+            ...     baca.Tags.build(baca.Tags.SPACING_MARKUP),
+            ...     baca.Tags.STAGE_NUMBER_MARKUP,
+            ...     ]
+
+        ..  container:: example
+
+            Template margin markup color purple and redraw dull purple:
+
+            >>> score_template = baca.SingleStaffScoreTemplate()
+            >>> triple = (
+            ...     'MusicStaff',
+            ...     'default_margin_markup',
+            ...     margin_markup['I+II'],
+            ...     )
+            >>> score_template.defaults.append(triple)
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     margin_markup=margin_markup,
+            ...     layout_measure_map=layout_measure_map,
+            ...     score_template=score_template,
+            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_notes(),
+            ...     )
+
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     remove=remove,
+            ...     )
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(1, block)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \pageBreak %! SEGMENT:LAYOUT:5
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT:6
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:7
+                            \time 3/8
+                            \bar "" %! EMPTY_START_BAR:1
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
+                            s1 * 3/8
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 2] %%%
+                            \break %! SEGMENT:LAYOUT:3
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %! SEGMENT:LAYOUT:4
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
+                            s1 * 3/8
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                %%% MusicVoice [measure 1] %%%
+                                \set Staff.instrumentName = \markup { I+II } %! TEMPLATE_MARGIN_MARKUP:4
+                                \set Staff.shortInstrumentName = \markup { I+II } %! TEMPLATE_MARGIN_MARKUP:4
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! TEMPLATE_MARGIN_MARKUP_COLOR:1
+                                c'4.
+                                ^ \markup {
+                                    \column
+                                        {
+                                            %%% \line %! TEMPLATE_MARGIN_MARKUP_ALERT:2
+                                            %%%     { %! TEMPLATE_MARGIN_MARKUP_ALERT:2
+                                            %%%         \vcenter %! TEMPLATE_MARGIN_MARKUP_ALERT:2
+                                            %%%             [“I+II” %! TEMPLATE_MARGIN_MARKUP_ALERT:2
+                                            %%%         \vcenter %! TEMPLATE_MARGIN_MARKUP_ALERT:2
+                                            %%%             I+II %! TEMPLATE_MARGIN_MARKUP_ALERT:2
+                                            %%%         \concat %! TEMPLATE_MARGIN_MARKUP_ALERT:2
+                                            %%%             { %! TEMPLATE_MARGIN_MARKUP_ALERT:2
+                                            %%%                 \vcenter %! TEMPLATE_MARGIN_MARKUP_ALERT:2
+                                            %%%                     I+II %! TEMPLATE_MARGIN_MARKUP_ALERT:2
+                                            %%%                 \vcenter %! TEMPLATE_MARGIN_MARKUP_ALERT:2
+                                            %%%                     ] %! TEMPLATE_MARGIN_MARKUP_ALERT:2
+                                            %%%             } %! TEMPLATE_MARGIN_MARKUP_ALERT:2
+                                            %%%     } %! TEMPLATE_MARGIN_MARKUP_ALERT:2
+                                            \line %! TEMPLATE_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                { %! TEMPLATE_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                    \with-color %! TEMPLATE_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                        #(x11-color 'DarkViolet) %! TEMPLATE_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                        { %! TEMPLATE_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                            \vcenter %! TEMPLATE_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                [“I+II” %! TEMPLATE_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                            \vcenter %! TEMPLATE_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                I+II %! TEMPLATE_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                            \concat %! TEMPLATE_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                { %! TEMPLATE_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                    \vcenter %! TEMPLATE_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                        I+II %! TEMPLATE_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                    \vcenter %! TEMPLATE_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                        ] %! TEMPLATE_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                } %! TEMPLATE_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                        } %! TEMPLATE_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                } %! TEMPLATE_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                        }
+                                    }
+                                \set Staff.instrumentName = \markup { I+II } %! TEMPLATE_REDRAW_MARGIN_MARKUP:6
+                                \set Staff.shortInstrumentName = \markup { I+II } %! TEMPLATE_REDRAW_MARGIN_MARKUP:6
+                                \override Staff.InstrumentName.color = #(x11-color 'violet) %! TEMPLATE_REDRAW_INSTRUMENT_COLOR:5
+                <BLANKLINE>
+                                %%% MusicVoice [measure 2] %%%
+                                c'4.
+                                \bar "|"
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            Explicit margin markup color blue and redraw dull blue:
+
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     layout_measure_map=layout_measure_map,
+            ...     margin_markup=margin_markup,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.margin_markup(margin_markup['I+II']),
+            ...     baca.make_notes(),
+            ...     )
+
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     remove=remove,
+            ...     )
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(1, block)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \pageBreak %! SEGMENT:LAYOUT:5
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT:6
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:7
+                            \time 3/8
+                            \bar "" %! EMPTY_START_BAR:1
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
+                            s1 * 3/8
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 2] %%%
+                            \break %! SEGMENT:LAYOUT:3
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %! SEGMENT:LAYOUT:4
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
+                            s1 * 3/8
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                %%% MusicVoice [measure 1] %%%
+                                \set Staff.instrumentName = \markup { I+II } %! EXPLICIT_MARGIN_MARKUP:4
+                                \set Staff.shortInstrumentName = \markup { I+II } %! EXPLICIT_MARGIN_MARKUP:4
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:1
+                                c'4.
+                                ^ \markup {
+                                    \column
+                                        {
+                                            %%% \line %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%     { %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%         \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%             [“I+II” %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%         \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%             I+II %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%         \concat %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%             { %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%                 \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%                     I+II %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%                 \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%                     ] %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%             } %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%     } %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            \line %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                { %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                    \with-color %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                        #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                        { %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                            \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                [“I+II” %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                            \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                I+II %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                            \concat %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                { %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                    \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                        I+II %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                    \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                        ] %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                } %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                        } %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                } %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                        }
+                                    }
+                                \set Staff.instrumentName = \markup { I+II } %! EXPLICIT_REDRAW_MARGIN_MARKUP:6
+                                \set Staff.shortInstrumentName = \markup { I+II } %! EXPLICIT_REDRAW_MARGIN_MARKUP:6
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:5
+                <BLANKLINE>
+                                %%% MusicVoice [measure 2] %%%
+                                c'4.
+                                \bar "|"
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            Even after previous margin markup:
+
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     layout_measure_map=layout_measure_map,
+            ...     margin_markup=margin_markup,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.margin_markup(margin_markup['III+IV']),
+            ...     baca.make_notes(),
+            ...     )
+
+            >>> metadata = {}
+            >>> metadata['persistent_indicators'] = {}
+            >>> metadata['persistent_indicators']['MusicStaff'] = [
+            ...     abjad.Momento(
+            ...         context='MusicVoice',
+            ...         prototype='baca.MarginMarkup',
+            ...         value='I+II',
+            ...         )
+            ...     ]
+            >>> metadata['segment_number'] = 1
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     previous_metadata=metadata,
+            ...     remove=remove,
+            ...     )
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(1, block)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \pageBreak %! SEGMENT:LAYOUT:5
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT:6
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:7
+                            \time 3/8
+                            \mark #1
+                            \bar "" %! EMPTY_START_BAR:1
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
+                            s1 * 3/8
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 2] %%%
+                            \break %! SEGMENT:LAYOUT:3
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %! SEGMENT:LAYOUT:4
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
+                            s1 * 3/8
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                %%% MusicVoice [measure 1] %%%
+                                \set Staff.instrumentName = \markup { III+IV } %! EXPLICIT_MARGIN_MARKUP:4
+                                \set Staff.shortInstrumentName = \markup { III+IV } %! EXPLICIT_MARGIN_MARKUP:4
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:1
+                                c'4.
+                                ^ \markup {
+                                    \column
+                                        {
+                                            %%% \line %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%     { %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%         \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%             [“III+IV” %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%         \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%             III+IV %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%         \concat %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%             { %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%                 \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%                     III+IV %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%                 \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%                     ] %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%             } %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%     } %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            \line %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                { %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                    \with-color %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                        #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                        { %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                            \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                [“III+IV” %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                            \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                III+IV %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                            \concat %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                { %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                    \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                        III+IV %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                    \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                        ] %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                } %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                        } %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                } %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                        }
+                                    }
+                                \set Staff.instrumentName = \markup { III+IV } %! EXPLICIT_REDRAW_MARGIN_MARKUP:6
+                                \set Staff.shortInstrumentName = \markup { III+IV } %! EXPLICIT_REDRAW_MARGIN_MARKUP:6
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:5
+                <BLANKLINE>
+                                %%% MusicVoice [measure 2] %%%
+                                c'4.
+                                \bar "|"
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            Reapplied margin markup color green and redraw dull green:
+
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     layout_measure_map=layout_measure_map,
+            ...     margin_markup=margin_markup,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_notes(),
+            ...     )
+
+            >>> metadata = {}
+            >>> metadata['persistent_indicators'] = {}
+            >>> metadata['persistent_indicators']['MusicStaff'] = [
+            ...     abjad.Momento(
+            ...         context='MusicVoice',
+            ...         prototype='baca.MarginMarkup',
+            ...         value='I+II',
+            ...         )
+            ...     ]
+            >>> metadata['segment_number'] = 1
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     previous_metadata=metadata,
+            ...     remove=remove,
+            ...     )
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(1, block)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \pageBreak %! SEGMENT:LAYOUT:5
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT:6
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:7
+                            \time 3/8
+                            \mark #1
+                            \bar "" %! EMPTY_START_BAR:1
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
+                            s1 * 3/8
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 2] %%%
+                            \break %! SEGMENT:LAYOUT:3
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %! SEGMENT:LAYOUT:4
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
+                            s1 * 3/8
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                %%% MusicVoice [measure 1] %%%
+                                \set Staff.instrumentName = \markup { I+II } %! REAPPLIED_MARGIN_MARKUP:4
+                                \set Staff.shortInstrumentName = \markup { I+II } %! REAPPLIED_MARGIN_MARKUP:4
+                                \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! REAPPLIED_MARGIN_MARKUP_COLOR:1
+                                c'4.
+                                ^ \markup {
+                                    \column
+                                        {
+                                            %%% \line %! REAPPLIED_MARGIN_MARKUP_ALERT:2
+                                            %%%     { %! REAPPLIED_MARGIN_MARKUP_ALERT:2
+                                            %%%         \vcenter %! REAPPLIED_MARGIN_MARKUP_ALERT:2
+                                            %%%             [“I+II” %! REAPPLIED_MARGIN_MARKUP_ALERT:2
+                                            %%%         \vcenter %! REAPPLIED_MARGIN_MARKUP_ALERT:2
+                                            %%%             I+II %! REAPPLIED_MARGIN_MARKUP_ALERT:2
+                                            %%%         \concat %! REAPPLIED_MARGIN_MARKUP_ALERT:2
+                                            %%%             { %! REAPPLIED_MARGIN_MARKUP_ALERT:2
+                                            %%%                 \vcenter %! REAPPLIED_MARGIN_MARKUP_ALERT:2
+                                            %%%                     I+II %! REAPPLIED_MARGIN_MARKUP_ALERT:2
+                                            %%%                 \vcenter %! REAPPLIED_MARGIN_MARKUP_ALERT:2
+                                            %%%                     ] %! REAPPLIED_MARGIN_MARKUP_ALERT:2
+                                            %%%             } %! REAPPLIED_MARGIN_MARKUP_ALERT:2
+                                            %%%     } %! REAPPLIED_MARGIN_MARKUP_ALERT:2
+                                            \line %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                { %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                    \with-color %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                        #(x11-color 'green4) %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                        { %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                            \vcenter %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                [“I+II” %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                            \vcenter %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                I+II %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                            \concat %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                { %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                    \vcenter %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                        I+II %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                    \vcenter %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                        ] %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                } %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                        } %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                } %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                        }
+                                    }
+                                \set Staff.instrumentName = \markup { I+II } %! REAPPLIED_REDRAW_MARGIN_MARKUP:6
+                                \set Staff.shortInstrumentName = \markup { I+II } %! REAPPLIED_REDRAW_MARGIN_MARKUP:6
+                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! REAPPLIED_REDRAW_INSTRUMENT_COLOR:5
+                <BLANKLINE>
+                                %%% MusicVoice [measure 2] %%%
+                                c'4.
+                                \bar "|"
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            Redundant margin markup color pink and redraw dull pink:
+
+            >>> layout_measure_map = baca.layout(
+            ...     baca.page(
+            ...         [1, 0, (11,)],
+            ...         [3, 20, (11,)],
+            ...         ),
+            ...     )
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     layout_measure_map=layout_measure_map,
+            ...     margin_markup=margin_markup,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.margin_markup(margin_markup['I+II']),
+            ...     baca.map(
+            ...         baca.margin_markup(margin_markup['I+II']),
+            ...         baca.leaves()[1],
+            ...         ),
+            ...     baca.make_notes(),
+            ...     )
+
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     remove=remove,
+            ...     )
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(1, block)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \pageBreak %! SEGMENT:LAYOUT:5
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT:6
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:7
+                            \time 4/8
+                            \bar "" %! EMPTY_START_BAR:1
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
+                            s1 * 1/2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 2] %%%
+                            \noBreak %! SEGMENT:LAYOUT:3
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
+                            s1 * 1/2
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 3] %%%
+                            \break %! SEGMENT:LAYOUT:3
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %! SEGMENT:LAYOUT:4
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
+                            s1 * 1/2
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                %%% MusicVoice [measure 1] %%%
+                                \set Staff.instrumentName = \markup { I+II } %! EXPLICIT_MARGIN_MARKUP:4
+                                \set Staff.shortInstrumentName = \markup { I+II } %! EXPLICIT_MARGIN_MARKUP:4
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:1
+                                c'2
+                                ^ \markup {
+                                    \column
+                                        {
+                                            %%% \line %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%     { %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%         \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%             [“I+II” %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%         \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%             I+II %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%         \concat %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%             { %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%                 \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%                     I+II %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%                 \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%                     ] %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%             } %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%     } %! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            \line %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                { %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                    \with-color %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                        #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                        { %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                            \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                [“I+II” %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                            \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                I+II %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                            \concat %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                { %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                    \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                        I+II %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                    \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                        ] %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                } %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                        } %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                } %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                        }
+                                    }
+                                \set Staff.instrumentName = \markup { I+II } %! EXPLICIT_REDRAW_MARGIN_MARKUP:6
+                                \set Staff.shortInstrumentName = \markup { I+II } %! EXPLICIT_REDRAW_MARGIN_MARKUP:6
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:5
+                <BLANKLINE>
+                                %%% MusicVoice [measure 2] %%%
+                                \set Staff.instrumentName = \markup { I+II } %! REDUNDANT_MARGIN_MARKUP:4
+                                \set Staff.shortInstrumentName = \markup { I+II } %! REDUNDANT_MARGIN_MARKUP:4
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_COLOR:1
+                                c'2
+                                ^ \markup {
+                                    \column
+                                        {
+                                            %%% \line %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%     { %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%         \vcenter %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%             [“I+II” %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%         \vcenter %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%             I+II %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%         \concat %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%             { %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%                 \vcenter %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%                     I+II %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%                 \vcenter %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%                     ] %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%             } %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%     } %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            \line %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                { %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                    \with-color %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                        #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                        { %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                            \vcenter %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                [“I+II” %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                            \vcenter %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                I+II %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                            \concat %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                { %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                    \vcenter %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                        I+II %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                    \vcenter %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                        ] %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                } %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                        } %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                } %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                        }
+                                    }
+                                \set Staff.instrumentName = \markup { I+II } %! REDUNDANT_REDRAW_MARGIN_MARKUP:6
+                                \set Staff.shortInstrumentName = \markup { I+II } %! REDUNDANT_REDRAW_MARGIN_MARKUP:6
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_REDRAW_INSTRUMENT_COLOR:5
+                <BLANKLINE>
+                                %%% MusicVoice [measure 3] %%%
+                                c'2
+                                \bar "|"
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            Even at the beginning of a segment:
+
+            >>> layout_measure_map = baca.layout(
+            ...     baca.page(
+            ...         [1, 0, (11,)],
+            ...         [2, 20, (11,)],
+            ...         ),
+            ...     )
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     layout_measure_map=layout_measure_map,
+            ...     margin_markup=margin_markup,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.margin_markup(margin_markup['I+II']),
+            ...     baca.make_notes(),
+            ...     )
+
+            >>> metadata = {}
+            >>> metadata['persistent_indicators'] = {}
+            >>> metadata['persistent_indicators']['MusicStaff'] = [
+            ...     abjad.Momento(
+            ...         context='MusicVoice',
+            ...         prototype='baca.MarginMarkup',
+            ...         value='I+II',
+            ...         )
+            ...     ]
+            >>> metadata['segment_number'] = 1
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     previous_metadata=metadata,
+            ...     remove=remove,
+            ...     )
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(1, block)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \pageBreak %! SEGMENT:LAYOUT:5
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT:6
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:7
+                            \time 3/8
+                            \mark #1
+                            \bar "" %! EMPTY_START_BAR:1
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:3
+                            s1 * 3/8
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 2] %%%
+                            \break %! SEGMENT:LAYOUT:3
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %! SEGMENT:LAYOUT:4
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:1
+                            s1 * 3/8
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                %%% MusicVoice [measure 1] %%%
+                                \set Staff.instrumentName = \markup { I+II } %! REDUNDANT_MARGIN_MARKUP:4
+                                \set Staff.shortInstrumentName = \markup { I+II } %! REDUNDANT_MARGIN_MARKUP:4
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_COLOR:1
+                                c'4.
+                                ^ \markup {
+                                    \column
+                                        {
+                                            %%% \line %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%     { %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%         \vcenter %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%             [“I+II” %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%         \vcenter %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%             I+II %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%         \concat %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%             { %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%                 \vcenter %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%                     I+II %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%                 \vcenter %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%                     ] %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%             } %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            %%%     } %! REDUNDANT_MARGIN_MARKUP_ALERT:2
+                                            \line %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                { %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                    \with-color %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                        #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                        { %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                            \vcenter %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                [“I+II” %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                            \vcenter %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                I+II %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                            \concat %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                { %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                    \vcenter %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                        I+II %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                    \vcenter %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                        ] %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                } %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                        } %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                } %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                        }
+                                    }
+                                \set Staff.instrumentName = \markup { I+II } %! REDUNDANT_REDRAW_MARGIN_MARKUP:6
+                                \set Staff.shortInstrumentName = \markup { I+II } %! REDUNDANT_REDRAW_MARGIN_MARKUP:6
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_REDRAW_INSTRUMENT_COLOR:5
+                <BLANKLINE>
+                                %%% MusicVoice [measure 2] %%%
+                                c'4.
+                                \bar "|"
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
 
         Returns ordered dictionary or none.
         '''
