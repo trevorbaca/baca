@@ -6924,9 +6924,393 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @property
     def metronome_marks(self):
-        r'''Gets metronome mark dictionary.
+        r'''Gets metronome marks.
 
-        Returns typed ordered dictionary or none.
+        ..  container:: example
+
+            >>> metronome_marks = abjad.MetronomeMarkDictionary()
+            >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
+            >>> metronome_marks['112'] = abjad.MetronomeMark((1, 4), 112)
+            >>> layout_measure_map = baca.layout(
+            ...     baca.page(
+            ...         [1, 0, (11,)],
+            ...         [2, 20, (11,)],
+            ...         ),
+            ...     )
+            >>> remove = [
+            ...     baca.Tags.build(baca.Tags.SPACING_MARKUP),
+            ...     baca.Tags.CLOCK_TIME_MARKUP,
+            ...     baca.Tags.EMPTY_START_BAR,
+            ...     baca.Tags.STAGE_NUMBER_MARKUP,
+            ...     ]
+
+        ..  container:: example
+
+            Explicit metronome marks color blue and redraw dull blue:
+
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     metronome_marks=metronome_marks,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('GlobalSkips', 1),
+            ...     baca.metronome_mark(metronome_marks['112']),
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_notes(),
+            ...     )
+
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     remove=remove,
+            ...     )
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(1, block)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \tempo 4=112
+                            \time 3/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:4
+                            s1 * 3/8
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                %%% MusicVoice [measure 1] %%%
+                                c'4.
+                                \bar "|"
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            Even after a previous metronome mark:
+
+            >>> layout_measure_map_ = baca.layout(
+            ...     baca.page(
+            ...         [1, 0, (11,)],
+            ...         [2, 25, (11,)],
+            ...         ),
+            ...     )
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     metronome_marks=metronome_marks,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('GlobalSkips', 1),
+            ...     baca.metronome_mark(metronome_marks['112']),
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_notes(),
+            ...     )
+
+            >>> metadata = {}
+            >>> metadata['persistent_indicators'] = {}
+            >>> metadata['persistent_indicators']['Score'] = [
+            ...     abjad.Momento(
+            ...         context='GlobalSkips',
+            ...         prototype='abjad.MetronomeMark',
+            ...         value='90',
+            ...         )
+            ...     ]
+            >>> metadata['segment_number'] = 1
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     previous_metadata=metadata,
+            ...     remove=remove,
+            ...     )
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(1, block)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \tempo 4=112
+                            \time 3/8
+                            \mark #1
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:4
+                            s1 * 3/8
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                %%% MusicVoice [measure 1] %%%
+                                c'4.
+                                \bar "|"
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            Reapplied metronomne marks color green and redraw dull green:
+
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     metronome_marks=metronome_marks,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_notes(),
+            ...     )
+
+            >>> metadata = {}
+            >>> metadata['persistent_indicators'] = {}
+            >>> metadata['persistent_indicators']['Score'] = [
+            ...     abjad.Momento(
+            ...         context='GlobalSkips',
+            ...         prototype='abjad.MetronomeMark',
+            ...         value='90',
+            ...         )
+            ...     ]
+            >>> metadata['segment_number'] = 1
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     previous_metadata=metadata,
+            ...     remove=remove,
+            ...     )
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(1, block)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \time 3/8
+                            \mark #1
+                            \once \override TextScript.color = #(x11-color 'green4) %! REAPPLIED_METRONOME_MARK_COLOR:3
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:6
+                            s1 * 3/8
+                            ^ \markup { % REAPPLIED_METRONOME_MARK:4
+                                \fontsize % REAPPLIED_METRONOME_MARK:4
+                                    #-6 % REAPPLIED_METRONOME_MARK:4
+                                    \general-align % REAPPLIED_METRONOME_MARK:4
+                                        #Y % REAPPLIED_METRONOME_MARK:4
+                                        #DOWN % REAPPLIED_METRONOME_MARK:4
+                                        \note-by-number % REAPPLIED_METRONOME_MARK:4
+                                            #2 % REAPPLIED_METRONOME_MARK:4
+                                            #0 % REAPPLIED_METRONOME_MARK:4
+                                            #1 % REAPPLIED_METRONOME_MARK:4
+                                \upright % REAPPLIED_METRONOME_MARK:4
+                                    { % REAPPLIED_METRONOME_MARK:4
+                                        = % REAPPLIED_METRONOME_MARK:4
+                                        90 % REAPPLIED_METRONOME_MARK:4
+                                    } % REAPPLIED_METRONOME_MARK:4
+                                } % REAPPLIED_METRONOME_MARK:4
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                %%% MusicVoice [measure 1] %%%
+                                c'4.
+                                \bar "|"
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+        ..  container:: example
+
+            Redundant instruments color pink and redraw dull pink:
+
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     metronome_marks=metronome_marks,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8), (3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('GlobalSkips', 1),
+            ...     baca.metronome_mark(metronome_marks['112']),
+            ...     baca.metronome_mark(metronome_marks['112'], baca.leaf(1)),
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_notes(),
+            ...     )
+
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     remove=remove,
+            ...     )
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(1, block)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \tempo 4=112
+                            \time 3/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:4
+                            s1 * 3/8
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 2] %%%
+                            \tempo 4=112
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:2
+                            s1 * 3/8
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                %%% MusicVoice [measure 1] %%%
+                                c'4.
+                <BLANKLINE>
+                                %%% MusicVoice [measure 2] %%%
+                                c'4.
+                                \bar "|"
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            Even at the beginning of a segment:
+
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     metronome_marks=metronome_marks,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(3, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('GlobalSkips', 1),
+            ...     baca.metronome_mark(metronome_marks['112']),
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_notes(),
+            ...     )
+
+            >>> metadata = {}
+            >>> metadata['persistent_indicators'] = {}
+            >>> metadata['persistent_indicators']['Score'] = [
+            ...     abjad.Momento(
+            ...         context='GlobalSkips',
+            ...         prototype='abjad.MetronomeMark',
+            ...         value='112',
+            ...         )
+            ...     ]
+            >>> metadata['segment_number'] = 1
+            >>> lilypond_file = maker.run(
+            ...     environment='docs',
+            ...     previous_metadata=metadata,
+            ...     remove=remove,
+            ...     )
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(1, block)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 1] %%%
+                            \time 3/8
+                            \mark #1
+                            \once \override TextScript.color = #(x11-color 'DeepPink1) %! REDUNDANT_METRONOME_MARK_COLOR:3
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:6
+                            s1 * 3/8
+                            ^ \markup { % REDUNDANT_METRONOME_MARK:4
+                                \fontsize % REDUNDANT_METRONOME_MARK:4
+                                    #-6 % REDUNDANT_METRONOME_MARK:4
+                                    \general-align % REDUNDANT_METRONOME_MARK:4
+                                        #Y % REDUNDANT_METRONOME_MARK:4
+                                        #DOWN % REDUNDANT_METRONOME_MARK:4
+                                        \note-by-number % REDUNDANT_METRONOME_MARK:4
+                                            #2 % REDUNDANT_METRONOME_MARK:4
+                                            #0 % REDUNDANT_METRONOME_MARK:4
+                                            #1 % REDUNDANT_METRONOME_MARK:4
+                                \upright % REDUNDANT_METRONOME_MARK:4
+                                    { % REDUNDANT_METRONOME_MARK:4
+                                        = % REDUNDANT_METRONOME_MARK:4
+                                        112 % REDUNDANT_METRONOME_MARK:4
+                                    } % REDUNDANT_METRONOME_MARK:4
+                                } % REDUNDANT_METRONOME_MARK:4
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                %%% MusicVoice [measure 1] %%%
+                                c'4.
+                                \bar "|"
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+        Returns ordered dictionary or none.
         '''
         return self._metronome_marks
 

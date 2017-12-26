@@ -1978,6 +1978,19 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
+    def metronome_mark(metronome_mark, selector='baca.leaf(0)'):
+        r'''Attaches `metronome_mark`.
+
+        Returns indicator command.
+        '''
+        if not isinstance(metronome_mark, abjad.MetronomeMark):
+            raise Exception(f'metronome mark only: {metronome_mark!r}.')
+        return baca.IndicatorCommand(
+            indicators=[metronome_mark],
+            selector=selector,
+            )
+
+    @staticmethod
     def minimum_width(duration):
         r'''Makes horizontal spacing specifier with `duration` minimum width.
         '''
