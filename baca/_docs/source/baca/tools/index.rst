@@ -96,6 +96,7 @@ baca.tools
    IndicatorCommand
    LabelCommand
    MapCommand
+   MetronomeMarkCommand
    MicrotoneDeviationCommand
    NestingCommand
    OctaveDisplacementCommand
@@ -127,6 +128,7 @@ baca.tools
    IndicatorCommand
    LabelCommand
    MapCommand
+   MetronomeMarkCommand
    MicrotoneDeviationCommand
    NestingCommand
    OctaveDisplacementCommand

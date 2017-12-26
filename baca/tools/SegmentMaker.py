@@ -625,6 +625,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 raise Exception(f'commands only:\n\n{format(command)}')
         for scope in scopes:
             for command in commands:
+                manifest = getattr(command, '_manifest', None)
+                if manifest is not None:
+                    manifest = getattr(self, manifest)
+                    command._manifest = manifest
                 wrapper = baca.CommandWrapper(command=command, scope=scope)
                 self.wrappers.append(wrapper)
 
@@ -5796,6 +5800,17 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._layout_measure_map
 
     @property
+    def manifests(self):
+        r'''Gets manifests.
+
+        Returns ordered dictionary of ordered dictionaries.
+        '''
+        manifests = abjad.TypedOrderedDict()
+        manifests['abjad.Instrument'] = self.instruments
+        manifests['abjad.MetronomeMark'] = self.metronome_marks
+        manifests['baca.MarginMarkup'] = self.margin_markup
+
+    @property
     def margin_markup(self):
         r'''Gets margin markup.
 
@@ -6786,6 +6801,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6957,7 +6973,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker(
             ...     baca.scope('GlobalSkips', 1),
-            ...     baca.metronome_mark(metronome_marks['112']),
+            ...     baca.metronome_mark('112'),
             ...     )
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
@@ -6981,11 +6997,26 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
-                            \tempo 4=112
                             \time 3/8
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:4
                             s1 * 3/8
+                            ^ \markup {
+                                \fontsize
+                                    #-6
+                                    \general-align
+                                        #Y
+                                        #DOWN
+                                        \note-by-number
+                                            #2
+                                            #0
+                                            #1
+                                \upright
+                                    {
+                                        =
+                                        112
+                                    }
+                                }
                 <BLANKLINE>
                         }
                     >>
@@ -7019,7 +7050,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker(
             ...     baca.scope('GlobalSkips', 1),
-            ...     baca.metronome_mark(metronome_marks['112']),
+            ...     baca.metronome_mark('112'),
             ...     )
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
@@ -7054,12 +7085,27 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
-                            \tempo 4=112
                             \time 3/8
                             \mark #1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:4
                             s1 * 3/8
+                            ^ \markup {
+                                \fontsize
+                                    #-6
+                                    \general-align
+                                        #Y
+                                        #DOWN
+                                        \note-by-number
+                                            #2
+                                            #0
+                                            #1
+                                \upright
+                                    {
+                                        =
+                                        112
+                                    }
+                                }
                 <BLANKLINE>
                         }
                     >>
@@ -7171,8 +7217,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker(
             ...     baca.scope('GlobalSkips', 1),
-            ...     baca.metronome_mark(metronome_marks['112']),
-            ...     baca.metronome_mark(metronome_marks['112'], baca.leaf(1)),
+            ...     baca.metronome_mark('112'),
+            ...     baca.metronome_mark('112', baca.leaf(1)),
             ...     )
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
@@ -7196,17 +7242,47 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
-                            \tempo 4=112
                             \time 3/8
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:4
                             s1 * 3/8
+                            ^ \markup {
+                                \fontsize
+                                    #-6
+                                    \general-align
+                                        #Y
+                                        #DOWN
+                                        \note-by-number
+                                            #2
+                                            #0
+                                            #1
+                                \upright
+                                    {
+                                        =
+                                        112
+                                    }
+                                }
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
-                            \tempo 4=112
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:2
                             s1 * 3/8
+                            ^ \markup {
+                                \fontsize
+                                    #-6
+                                    \general-align
+                                        #Y
+                                        #DOWN
+                                        \note-by-number
+                                            #2
+                                            #0
+                                            #1
+                                \upright
+                                    {
+                                        =
+                                        112
+                                    }
+                                }
                 <BLANKLINE>
                         }
                     >>
@@ -7237,7 +7313,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker(
             ...     baca.scope('GlobalSkips', 1),
-            ...     baca.metronome_mark(metronome_marks['112']),
+            ...     baca.metronome_mark('112'),
             ...     )
             >>> maker(
             ...     baca.scope('MusicVoice', 1),

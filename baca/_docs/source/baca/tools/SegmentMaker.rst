@@ -42,6 +42,7 @@ Bases
       ~baca.tools.SegmentMaker.SegmentMaker.instruments
       ~baca.tools.SegmentMaker.SegmentMaker.last_segment
       ~baca.tools.SegmentMaker.SegmentMaker.layout_measure_map
+      ~baca.tools.SegmentMaker.SegmentMaker.manifests
       ~baca.tools.SegmentMaker.SegmentMaker.margin_markup
       ~baca.tools.SegmentMaker.SegmentMaker.measure_count
       ~baca.tools.SegmentMaker.SegmentMaker.measures_per_stage
@@ -114,6 +115,8 @@ Read-only properties
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.last_segment
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.layout_measure_map
+
+.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.manifests
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.margin_markup
 

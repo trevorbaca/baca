@@ -1978,15 +1978,13 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
-    def metronome_mark(metronome_mark, selector='baca.leaf(0)'):
-        r'''Attaches `metronome_mark`.
+    def metronome_mark(key, selector='baca.leaf(0)'):
+        r'''Attaches metronome mark with `key`.
 
-        Returns indicator command.
+        Returns metronome mark command.
         '''
-        if not isinstance(metronome_mark, abjad.MetronomeMark):
-            raise Exception(f'metronome mark only: {metronome_mark!r}.')
-        return baca.IndicatorCommand(
-            indicators=[metronome_mark],
+        return baca.MetronomeMarkCommand(
+            key=key,
             selector=selector,
             )
 
