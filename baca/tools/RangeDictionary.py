@@ -29,7 +29,7 @@ class RangeDictionary(TypedOrderedDict):
                 ]
             )
 
-        >>> abjad.show(ranges) # doctest: +SKIP
+        >>> abjad.show(ranges, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -82,7 +82,7 @@ class RangeDictionary(TypedOrderedDict):
             ...     ('soprano', '[C4, C6]'),
             ...     ])
 
-            >>> abjad.show(ranges) # doctest: +SKIP
+            >>> abjad.show(ranges, strict=79) # doctest: +SKIP
 
             ..  docs::
 

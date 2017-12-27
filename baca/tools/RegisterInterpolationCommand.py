@@ -19,7 +19,7 @@ class RegisterInterpolationCommand(Command):
         ...     baca.register(0, 24),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -80,7 +80,7 @@ class RegisterInterpolationCommand(Command):
         ...     baca.register(0, 24),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -130,7 +130,7 @@ class RegisterInterpolationCommand(Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -306,7 +306,7 @@ class RegisterInterpolationCommand(Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -482,7 +482,7 @@ class RegisterInterpolationCommand(Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -658,7 +658,7 @@ class RegisterInterpolationCommand(Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -834,7 +834,7 @@ class RegisterInterpolationCommand(Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -1076,7 +1076,7 @@ class RegisterInterpolationCommand(Command):
             ...     baca.register(0, 24, baca.tuplet(0)),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1195,7 +1195,7 @@ class RegisterInterpolationCommand(Command):
             ...     baca.register(0, 24, baca.tuplet(-1)),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1314,7 +1314,7 @@ class RegisterInterpolationCommand(Command):
             ...     baca.map(baca.register(0, 24), baca.tuplets()),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 

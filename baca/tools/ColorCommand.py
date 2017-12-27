@@ -29,7 +29,7 @@ class ColorCommand(Command):
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> contribution = music_maker('Voice 1', collections)
         >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -153,7 +153,7 @@ class ColorCommand(Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 

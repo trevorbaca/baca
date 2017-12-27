@@ -24,7 +24,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         >>> collections = [[0, 2, 10, 8]]
         >>> selections, state_manifest = rhythm_maker(collections)
         >>> lilypond_file = rhythm_maker.show(selections)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -46,7 +46,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         >>> collections = [[18, 16, 15, 20, 19]]
         >>> selections, state_manifest = rhythm_maker(collections)
         >>> lilypond_file = rhythm_maker.show(selections)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -69,7 +69,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         >>> collections = [[9]]
         >>> selections, state_manifest = rhythm_maker(collections)
         >>> lilypond_file = rhythm_maker.show(selections)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -86,7 +86,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         >>> collections = [[0, 2, 10, 8], [18, 16, 15, 20, 19], [9]]
         >>> selections, state_manifest = rhythm_maker(collections)
         >>> lilypond_file = rhythm_maker.show(selections)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -204,7 +204,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections, state_manifest = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -256,7 +256,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     state_manifest=state_manifest,
             ...     )
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -770,7 +770,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -854,7 +854,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -954,7 +954,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1009,7 +1009,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1078,7 +1078,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections, state_manifest = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1124,7 +1124,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1179,7 +1179,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1235,7 +1235,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1308,7 +1308,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections, state_manifest = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1355,7 +1355,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections, state_manifest = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1394,7 +1394,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections, state_manifest = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1449,7 +1449,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections, state_manifest = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1505,7 +1505,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections, state_manifest = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1578,7 +1578,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections, state_manifest = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1628,7 +1628,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections, state_manifest = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1694,7 +1694,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections, state_manifest = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1750,7 +1750,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> collections = [[0, 2]]
             >>> selections, state_manifest = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1804,7 +1804,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> collections = [[0, 2, 10], [10, 16, 15, 20, 19], [9]]
             >>> selections, state_manifest = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1852,7 +1852,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> collections = [[0, 2, 10], [10, 16, 16, 19, 19], [19]]
             >>> selections, state_manifest = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1919,7 +1919,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections, state_manifest = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1967,7 +1967,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections, state_manifest = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -2024,7 +2024,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).beam.positions = (-5, -5)
             >>> abjad.override(staff).stem.direction = Down
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -2267,7 +2267,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).beam.positions = (-5, -5)
             >>> abjad.override(staff).stem.direction = Down
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -2508,7 +2508,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).beam.positions = (-5, -5)
             >>> abjad.override(staff).stem.direction = Down
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -2715,7 +2715,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).beam.positions = (-5, -5)
             >>> abjad.override(staff).stem.direction = Down
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -2942,7 +2942,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).beam.positions = (-6, -6)
             >>> abjad.override(staff).stem.direction = Down
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -3031,7 +3031,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).beam.positions = (-6, -6)
             >>> abjad.override(staff).stem.direction = Down
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -3117,7 +3117,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).beam.positions = (-6, -6)
             >>> abjad.override(staff).stem.direction = Down
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -3225,7 +3225,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -3286,7 +3286,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 

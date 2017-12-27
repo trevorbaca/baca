@@ -32,7 +32,7 @@ class TimeSignatureGroups(abjad.AbjadObject):
                 ]
             )
 
-        >>> abjad.show(groups) # doctest: +SKIP
+        >>> abjad.show(groups, strict=79) # doctest: +SKIP
 
     '''
 
@@ -59,7 +59,7 @@ class TimeSignatureGroups(abjad.AbjadObject):
     def __illustrate__(self):
         r'''Illustrates time signature groups.
 
-        >>> abjad.show(groups) # doctest: +SKIP
+        >>> abjad.show(groups, strict=79) # doctest: +SKIP
 
         ..  docs::
 

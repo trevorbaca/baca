@@ -28,7 +28,7 @@ class NestingCommand(Command):
         ...     ]
         >>> contribution = music_maker('Voice 1', collections)
         >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -129,7 +129,7 @@ class NestingCommand(Command):
         >>> lilypond_file = maker.run(environment='docs')
         >>> staff = lilypond_file[abjad.Staff]
         >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -308,7 +308,7 @@ class NestingCommand(Command):
             ...     ]
             >>> contribution = music_maker('Voice 1', collections)
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 

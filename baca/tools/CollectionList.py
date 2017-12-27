@@ -389,7 +389,7 @@ class CollectionList(abjad.AbjadValueObject):
             ...     [16, 20, 19],
             ...     ])
 
-            >>> abjad.show(collections) # doctest: +SKIP
+            >>> abjad.show(collections, strict=79) # doctest: +SKIP
 
             ..  docs::
 

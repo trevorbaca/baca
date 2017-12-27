@@ -202,7 +202,7 @@ class Constellation(abjad.AbjadObject):
     def _show_chords(self, chords):
         lilypond_file, score = \
             self._make_lilypond_file_and_score_from_chords(chords)
-        abjad.show(lilypond_file)
+        abjad.show(lilypond_file, strict=79)
 
     ### PUBLIC PROPERTIES ###
 
@@ -227,7 +227,7 @@ class Constellation(abjad.AbjadObject):
         ..  container:: example
 
             >>> constellation = constellation_circuit[0]
-            >>> abjad.show(constellation.generator_chord) # doctest: +SKIP
+            >>> abjad.show(constellation.generator_chord, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -282,7 +282,7 @@ class Constellation(abjad.AbjadObject):
         ..  container:: example
 
             >>> constellation = constellation_circuit[0]
-            >>> abjad.show(constellation.pivot_chord) # doctest: +SKIP
+            >>> abjad.show(constellation.pivot_chord, strict=79) # doctest: +SKIP
 
             ..  docs::
 

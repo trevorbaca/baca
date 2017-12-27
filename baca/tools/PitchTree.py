@@ -12,7 +12,7 @@ class PitchTree(Tree):
 
         >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
         >>> tree = baca.PitchTree(items=items)
-        >>> abjad.show(tree) # doctest: +SKIP
+        >>> abjad.show(tree, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -82,7 +82,7 @@ class PitchTree(Tree):
         ...     items=items,
         ...     item_class=abjad.NamedPitch,
         ...     )
-        >>> abjad.show(tree) # doctest: +SKIP
+        >>> abjad.show(tree, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -148,7 +148,7 @@ class PitchTree(Tree):
         ...     items=items,
         ...     item_class=abjad.NumberedPitchClass,
         ...     )
-        >>> abjad.show(tree) # doctest: +SKIP
+        >>> abjad.show(tree, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -218,7 +218,7 @@ class PitchTree(Tree):
         ...     items=items,
         ...     item_class=abjad.NamedPitchClass,
         ...     )
-        >>> abjad.show(tree) # doctest: +SKIP
+        >>> abjad.show(tree, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -288,7 +288,7 @@ class PitchTree(Tree):
         >>> lilypond_file = tree.__illustrate__(
         ...     cell_indices=False,
         ...     )
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -352,7 +352,7 @@ class PitchTree(Tree):
         ...     ]
         >>> items = [segment.rotate(n=1) for segment in items]
         >>> tree = baca.PitchTree(items=items)
-        >>> abjad.show(tree, cell_indices=False) # doctest: +SKIP
+        >>> abjad.show(tree, cell_indices=False, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -482,7 +482,7 @@ class PitchTree(Tree):
                 node_13 -> node_17;
             }
 
-        >>> abjad.show(tree, cell_indices=False) # doctest: +SKIP
+        >>> abjad.show(tree, cell_indices=False, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -730,7 +730,7 @@ class PitchTree(Tree):
             >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
             >>> tree = baca.PitchTree(items=items)
             >>> lilypond_file = tree.__illustrate__()
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -796,7 +796,7 @@ class PitchTree(Tree):
             ...     cell_indices=abjad.Down,
             ...     set_classes=True,
             ...     )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -891,7 +891,7 @@ class PitchTree(Tree):
             >>> lilypond_file = tree.__illustrate__(
             ...     cell_indices=abjad.Down,
             ...     )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1176,7 +1176,7 @@ class PitchTree(Tree):
 
                 >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [1, 2, 2, 4]]
                 >>> tree = baca.PitchTree(items=items)
-                >>> abjad.show(tree) # doctest: +SKIP
+                >>> abjad.show(tree, strict=79) # doctest: +SKIP
 
             >>> tree.has_repeats()
             True
@@ -1272,7 +1272,7 @@ class PitchTree(Tree):
 
             >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
             >>> tree = baca.PitchTree(items=items)
-            >>> abjad.show(tree) # doctest: +SKIP
+            >>> abjad.show(tree, strict=79) # doctest: +SKIP
 
             >>> tree.has_repeats()
             False
@@ -1349,7 +1349,7 @@ class PitchTree(Tree):
 
             >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
             >>> tree = baca.PitchTree(items=items)
-            >>> abjad.show(tree) # doctest: +SKIP
+            >>> abjad.show(tree, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1411,7 +1411,7 @@ class PitchTree(Tree):
             Inverts tree about first pitch when axis is none:
 
             >>> inversion = tree.invert()
-            >>> abjad.show(inversion) # doctest: +SKIP
+            >>> abjad.show(inversion, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1473,7 +1473,7 @@ class PitchTree(Tree):
             Inverts tree about pitch 0:
 
             >>> inversion = tree.invert(axis=0)
-            >>> abjad.show(inversion) # doctest: +SKIP
+            >>> abjad.show(inversion, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1535,7 +1535,7 @@ class PitchTree(Tree):
             Inverts tree about pitch 13:
 
             >>> inversion = tree.invert(axis=13)
-            >>> abjad.show(inversion) # doctest: +SKIP
+            >>> abjad.show(inversion, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1615,7 +1615,7 @@ class PitchTree(Tree):
 
             >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
             >>> tree = baca.PitchTree(items=items)
-            >>> abjad.show(tree) # doctest: +SKIP
+            >>> abjad.show(tree, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1677,7 +1677,7 @@ class PitchTree(Tree):
             Gets retrograde of tree:
 
             >>> retrograde = tree.retrograde()
-            >>> abjad.show(retrograde) # doctest: +SKIP
+            >>> abjad.show(retrograde, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1756,7 +1756,7 @@ class PitchTree(Tree):
 
             >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
             >>> tree = baca.PitchTree(items=items)
-            >>> abjad.show(tree) # doctest: +SKIP
+            >>> abjad.show(tree, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1818,7 +1818,7 @@ class PitchTree(Tree):
             Rotates tree to the right:
 
             >>> rotation = tree.rotate(n=1)
-            >>> abjad.show(rotation) # doctest: +SKIP
+            >>> abjad.show(rotation, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1880,7 +1880,7 @@ class PitchTree(Tree):
             Rotates tree to the left:
 
             >>> rotation = tree.rotate(n=-1)
-            >>> abjad.show(rotation) # doctest: +SKIP
+            >>> abjad.show(rotation, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1942,7 +1942,7 @@ class PitchTree(Tree):
             Rotates by zero:
 
             >>> rotation = tree.rotate(n=0)
-            >>> abjad.show(rotation) # doctest: +SKIP
+            >>> abjad.show(rotation, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -2022,7 +2022,7 @@ class PitchTree(Tree):
 
             >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
             >>> tree = baca.PitchTree(items=items)
-            >>> abjad.show(tree) # doctest: +SKIP
+            >>> abjad.show(tree, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -2084,7 +2084,7 @@ class PitchTree(Tree):
             Transposes tree by positive index:
 
             >>> transposition = tree.transpose(n=13)
-            >>> abjad.show(transposition) # doctest: +SKIP
+            >>> abjad.show(transposition, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -2146,7 +2146,7 @@ class PitchTree(Tree):
             Transposes tree by negative index:
 
             >>> transposition = tree.transpose(n=-13)
-            >>> abjad.show(transposition) # doctest: +SKIP
+            >>> abjad.show(transposition, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -2208,7 +2208,7 @@ class PitchTree(Tree):
             Transposes tree by zero index:
 
             >>> transposition = tree.transpose(n=0)
-            >>> abjad.show(transposition) # doctest: +SKIP
+            >>> abjad.show(transposition, strict=79) # doctest: +SKIP
 
             ..  docs::
 

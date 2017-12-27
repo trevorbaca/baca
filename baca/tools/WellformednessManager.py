@@ -78,7 +78,7 @@ class WellformednessManager(abjad.AbjadObject):
             Finds no repeats:
 
             >>> voice = abjad.Voice("c'4 d' e' f'")
-            >>> abjad.show(voice) # doctest: +SKIP
+            >>> abjad.show(voice, strict=79) # doctest: +SKIP
 
             >>> manager = baca.WellformednessManager
             >>> manager.check_repeat_pitch_classes(voice)
@@ -89,7 +89,7 @@ class WellformednessManager(abjad.AbjadObject):
             Finds repeat pitches:
 
             >>> voice = abjad.Voice("c'4 c' d' d'")
-            >>> abjad.show(voice) # doctest: +SKIP
+            >>> abjad.show(voice, strict=79) # doctest: +SKIP
 
             >>> manager = baca.WellformednessManager
             >>> manager.check_repeat_pitch_classes(voice)
@@ -100,7 +100,7 @@ class WellformednessManager(abjad.AbjadObject):
             Finds repeat pitch-classes:
 
             >>> voice = abjad.Voice("c'4 d' e' e''")
-            >>> abjad.show(voice) # doctest: +SKIP
+            >>> abjad.show(voice, strict=79) # doctest: +SKIP
 
             >>> manager = baca.WellformednessManager
             >>> manager.check_repeat_pitch_classes(voice)

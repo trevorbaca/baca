@@ -33,7 +33,7 @@ class Sequence(abjad.Sequence):
 
             >>> items = [-2, -1.5, 6, 7, -1.5, 7]
             >>> collection = abjad.PitchClassSegment(items=items)
-            >>> abjad.show(collection) # doctest: +SKIP
+            >>> abjad.show(collection, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -83,7 +83,7 @@ class Sequence(abjad.Sequence):
             Sequence([PitchClassSegment([11, 11.5, 7, 8, 11.5, 8])])
 
             >>> collection = sequence.join()[0]
-            >>> abjad.show(collection) # doctest: +SKIP
+            >>> abjad.show(collection, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -122,7 +122,7 @@ class Sequence(abjad.Sequence):
 
             >>> collection = expression(collections)[0]
             >>> markup = expression.get_markup()
-            >>> abjad.show(collection, figure_name=markup) # doctest: +SKIP
+            >>> abjad.show(collection, figure_name=markup, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -278,7 +278,7 @@ class Sequence(abjad.Sequence):
                 'Identity Φ J'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
+                >>> abjad.show(markup, strict=79) # doctest: +SKIP
 
                 ..  docs::
 
@@ -334,7 +334,7 @@ class Sequence(abjad.Sequence):
                 'A(X) Φ J'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
+                >>> abjad.show(markup, strict=79) # doctest: +SKIP
 
                 ..  docs::
 
@@ -403,7 +403,7 @@ class Sequence(abjad.Sequence):
                 'T3(X) Φ J'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
+                >>> abjad.show(markup, strict=79) # doctest: +SKIP
 
                 ..  docs::
 
@@ -494,7 +494,7 @@ class Sequence(abjad.Sequence):
                 '[A(X), T3(X)] Φ J'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
+                >>> abjad.show(markup, strict=79) # doctest: +SKIP
 
                 ..  docs::
 
@@ -605,7 +605,7 @@ class Sequence(abjad.Sequence):
                 'permute(X, row=[10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11]) Φ J'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
+                >>> abjad.show(markup, strict=79) # doctest: +SKIP
 
                 ..  docs::
 
@@ -707,7 +707,7 @@ class Sequence(abjad.Sequence):
                 '[permute(X, row=[10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11]), T3(X)] Φ J'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
+                >>> abjad.show(markup, strict=79) # doctest: +SKIP
 
                 ..  docs::
 
@@ -884,7 +884,7 @@ class Sequence(abjad.Sequence):
             'β3(J)'
 
             >>> markup = expression.get_markup()
-            >>> abjad.show(markup) # doctest: +SKIP
+            >>> abjad.show(markup, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1344,7 +1344,7 @@ class Sequence(abjad.Sequence):
                 'P[3](J)'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
+                >>> abjad.show(markup, strict=79) # doctest: +SKIP
 
                 ..  docs::
 
@@ -1394,7 +1394,7 @@ class Sequence(abjad.Sequence):
                 'repeat_by(J)'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
+                >>> abjad.show(markup, strict=79) # doctest: +SKIP
 
                 ..  docs::
 
@@ -1468,7 +1468,7 @@ class Sequence(abjad.Sequence):
                 'repeat_by(J, counts=[2])'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
+                >>> abjad.show(markup, strict=79) # doctest: +SKIP
 
                 ..  docs::
 
@@ -1527,7 +1527,7 @@ class Sequence(abjad.Sequence):
                 'repeat_by(J, counts=[2], cyclic=True)'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
+                >>> abjad.show(markup, strict=79) # doctest: +SKIP
 
                 ..  docs::
 
@@ -1587,7 +1587,7 @@ class Sequence(abjad.Sequence):
                 'reveal(J)'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
+                >>> abjad.show(markup, strict=79) # doctest: +SKIP
 
                 ..  docs::
 
@@ -1622,7 +1622,7 @@ class Sequence(abjad.Sequence):
                 'reveal(J, count=0)'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
+                >>> abjad.show(markup, strict=79) # doctest: +SKIP
 
                 ..  docs::
 
@@ -1675,7 +1675,7 @@ class Sequence(abjad.Sequence):
                 'reveal(J, count=2)'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
+                >>> abjad.show(markup, strict=79) # doctest: +SKIP
 
                 ..  docs::
 
@@ -1728,7 +1728,7 @@ class Sequence(abjad.Sequence):
                 'reveal(J, count=-2)'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
+                >>> abjad.show(markup, strict=79) # doctest: +SKIP
 
                 ..  docs::
 

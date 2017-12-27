@@ -680,7 +680,7 @@ class PitchArrayRow(abjad.AbjadObject):
             [g'     ] [fs'   ] [ ]
 
             >>> measure = array.rows[0].to_measure()
-            >>> abjad.show(measure) # doctest: +SKIP
+            >>> abjad.show(measure, strict=79) # doctest: +SKIP
 
             ..  docs::
 

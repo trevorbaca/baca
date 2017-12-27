@@ -12,7 +12,7 @@ class MarginMarkup(abjad.AbjadValueObject):
         ...     short_markup=abjad.Markup('Vc.')
         ...     )
         >>> abjad.attach(margin_markup, staff[0])
-        >>> abjad.show(staff) # doctest: +SKIP
+        >>> abjad.show(staff, strict=79) # doctest: +SKIP
 
         ..  docs::
 

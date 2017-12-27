@@ -21,7 +21,7 @@ class RegisterToOctaveCommand(Command):
         ...         ),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -46,7 +46,7 @@ class RegisterToOctaveCommand(Command):
         ...         ),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -71,7 +71,7 @@ class RegisterToOctaveCommand(Command):
         ...         ),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -102,7 +102,7 @@ class RegisterToOctaveCommand(Command):
         ...         ),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -131,7 +131,7 @@ class RegisterToOctaveCommand(Command):
         ...         ),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -160,7 +160,7 @@ class RegisterToOctaveCommand(Command):
         ...         ),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -195,7 +195,7 @@ class RegisterToOctaveCommand(Command):
         ...         ),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -224,7 +224,7 @@ class RegisterToOctaveCommand(Command):
         ...         ),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -253,7 +253,7 @@ class RegisterToOctaveCommand(Command):
         ...         ),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -381,7 +381,7 @@ class RegisterToOctaveCommand(Command):
             ...     )
             >>> command(chord)
             >>> staff = abjad.Staff([chord])
-            >>> abjad.show(staff) # doctest: +SKIP
+            >>> abjad.show(staff, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -399,7 +399,7 @@ class RegisterToOctaveCommand(Command):
             ...     )
             >>> command(chord)
             >>> staff = abjad.Staff([chord])
-            >>> abjad.show(staff) # doctest: +SKIP
+            >>> abjad.show(staff, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -417,7 +417,7 @@ class RegisterToOctaveCommand(Command):
             ...     )
             >>> command(chord)
             >>> staff = abjad.Staff([chord])
-            >>> abjad.show(staff) # doctest: +SKIP
+            >>> abjad.show(staff, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -439,7 +439,7 @@ class RegisterToOctaveCommand(Command):
             >>> chord = abjad.Chord("<c, d e'>1")
             >>> staff = abjad.Staff([chord])
             >>> abjad.attach(abjad.Clef('bass'), staff[0])
-            >>> abjad.show(staff) # doctest: +SKIP
+            >>> abjad.show(staff, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -454,7 +454,7 @@ class RegisterToOctaveCommand(Command):
             >>> command(chord)
             >>> staff = abjad.Staff([chord])
             >>> abjad.attach(abjad.Clef('bass'), staff[0])
-            >>> abjad.show(staff) # doctest: +SKIP
+            >>> abjad.show(staff, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -469,7 +469,7 @@ class RegisterToOctaveCommand(Command):
             >>> command(chord)
             >>> staff = abjad.Staff([chord])
             >>> abjad.attach(abjad.Clef('bass'), staff[0])
-            >>> abjad.show(staff) # doctest: +SKIP
+            >>> abjad.show(staff, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -484,7 +484,7 @@ class RegisterToOctaveCommand(Command):
             >>> command(chord)
             >>> staff = abjad.Staff([chord])
             >>> abjad.attach(abjad.Clef('bass'), staff[0])
-            >>> abjad.show(chord) # doctest: +SKIP
+            >>> abjad.show(chord, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -497,7 +497,7 @@ class RegisterToOctaveCommand(Command):
             >>> chord = abjad.Chord("<c, d e'>1")
             >>> command = baca.RegisterToOctaveCommand(octave_number=4)
             >>> command(chord)
-            >>> abjad.show(chord) # doctest: +SKIP
+            >>> abjad.show(chord, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -509,7 +509,7 @@ class RegisterToOctaveCommand(Command):
             >>> chord = abjad.Chord("<c, d e'>1")
             >>> command = baca.RegisterToOctaveCommand(octave_number=5)
             >>> command(chord)
-            >>> abjad.show(chord) # doctest: +SKIP
+            >>> abjad.show(chord, strict=79) # doctest: +SKIP
 
             ..  docs::
 

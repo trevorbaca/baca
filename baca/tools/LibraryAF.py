@@ -35,7 +35,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -105,7 +105,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -182,7 +182,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -252,7 +252,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -325,7 +325,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -443,7 +443,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -513,7 +513,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -591,7 +591,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -660,7 +660,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -755,7 +755,7 @@ class LibraryAF(abjad.AbjadObject):
             ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
             ...         ],
             ...     )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -882,7 +882,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1000,7 +1000,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1118,7 +1118,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1214,7 +1214,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.rests_around([2], [2]),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1260,7 +1260,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.rests_around([2], [2]),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1325,7 +1325,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.rests_around([2], [2]),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1387,7 +1387,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.rests_around([2], [2]),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1451,7 +1451,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.rests_around([2], [2]),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1509,7 +1509,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1558,7 +1558,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1622,7 +1622,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1705,7 +1705,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1778,7 +1778,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1896,7 +1896,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -2014,7 +2014,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -2113,7 +2113,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -2178,7 +2178,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -2285,7 +2285,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -2374,7 +2374,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -2493,7 +2493,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -2609,7 +2609,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -2672,7 +2672,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -2787,7 +2787,7 @@ class LibraryAF(abjad.AbjadObject):
             ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
             ...         ],
             ...     )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -3165,7 +3165,7 @@ class LibraryAF(abjad.AbjadObject):
             ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
             ...         ],
             ...     )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -3544,7 +3544,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -3607,7 +3607,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     counts=[4],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -3655,7 +3655,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -3730,7 +3730,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -3802,7 +3802,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -3876,7 +3876,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -3948,7 +3948,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -4030,7 +4030,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -4102,7 +4102,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -4178,7 +4178,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -4240,7 +4240,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -4314,7 +4314,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -4385,7 +4385,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -4468,7 +4468,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -4539,7 +4539,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -4623,7 +4623,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -4692,7 +4692,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
 
             ..  docs::
@@ -4784,7 +4784,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -4850,7 +4850,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -4926,7 +4926,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -4992,7 +4992,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -5070,7 +5070,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -5146,7 +5146,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -5239,7 +5239,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -5301,7 +5301,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -5373,7 +5373,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -5443,7 +5443,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -5519,7 +5519,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 

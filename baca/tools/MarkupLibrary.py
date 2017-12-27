@@ -38,7 +38,7 @@ class MarkupLibrary(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -104,7 +104,7 @@ class MarkupLibrary(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -170,7 +170,7 @@ class MarkupLibrary(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -508,7 +508,7 @@ class MarkupLibrary(abjad.AbjadObject):
 
             >>> markup = baca.markup.instrument('Eng. horn')
 
-            >>> abjad.show(markup) # doctest: +SKIP
+            >>> abjad.show(markup, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -532,7 +532,7 @@ class MarkupLibrary(abjad.AbjadObject):
             ...     column=False,
             ...     )
 
-            >>> abjad.show(markup) # doctest: +SKIP
+            >>> abjad.show(markup, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1109,7 +1109,7 @@ class MarkupLibrary(abjad.AbjadObject):
 
             >>> markup = baca.markup.short_instrument('Eng. hn.')
 
-            >>> abjad.show(markup) # doctest: +SKIP
+            >>> abjad.show(markup, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1133,7 +1133,7 @@ class MarkupLibrary(abjad.AbjadObject):
             ...     column=False,
             ...     )
 
-            >>> abjad.show(markup) # doctest: +SKIP
+            >>> abjad.show(markup, strict=79) # doctest: +SKIP
 
             ..  docs::
 

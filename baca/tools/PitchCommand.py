@@ -23,7 +23,7 @@ class PitchCommand(Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -132,7 +132,7 @@ class PitchCommand(Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -241,7 +241,7 @@ class PitchCommand(Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -345,7 +345,7 @@ class PitchCommand(Command):
 
         >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
         >>> command(staff)
-        >>> abjad.show(staff) # doctest: +SKIP
+        >>> abjad.show(staff, strict=79) # doctest: +SKIP
 
         ..  docs::
 

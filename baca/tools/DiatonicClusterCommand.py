@@ -11,7 +11,7 @@ class DiatonicClusterCommand(Command):
         >>> staff = abjad.Staff("c' d' e' f'")
         >>> command = baca.diatonic_clusters([4, 6])
         >>> command(staff)
-        >>> abjad.show(staff) # doctest: +SKIP
+        >>> abjad.show(staff, strict=79) # doctest: +SKIP
 
         ..  docs::
 

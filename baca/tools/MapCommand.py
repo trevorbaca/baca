@@ -27,7 +27,7 @@ class MapCommand(Command):
         ...     time_treatments=[-1],
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 

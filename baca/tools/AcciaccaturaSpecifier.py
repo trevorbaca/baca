@@ -34,7 +34,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
         >>> score = lilypond_file[abjad.Score]
         >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
         >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -195,7 +195,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -278,7 +278,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -371,7 +371,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -459,7 +459,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -552,7 +552,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -647,7 +647,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -742,7 +742,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -843,7 +843,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -926,7 +926,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -1009,7 +1009,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 

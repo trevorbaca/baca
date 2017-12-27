@@ -29,7 +29,7 @@ class SegmentMaker(abjad.SegmentMaker):
         ...     environment='docs',
         ...     remove=[baca.Tags.STAGE_NUMBER_MARKUP],
         ...     )
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
@@ -394,7 +394,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -2130,7 +2130,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(0, block)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -2221,7 +2221,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(0, block)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -2311,7 +2311,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(0, block)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -2401,7 +2401,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> block.indent = 0
             >>> lilypond_file.items.insert(0, block)
 
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -2484,7 +2484,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> block.indent = 0
             >>> lilypond_file.items.insert(0, block)
 
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
 
             ..  docs::
@@ -2590,7 +2590,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> block.indent = 0
             >>> lilypond_file.items.insert(0, block)
 
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -2682,7 +2682,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.setting(lilypond_file['Score']).auto_beaming = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -3073,7 +3073,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.setting(lilypond_file['Score']).auto_beaming = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -3275,7 +3275,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.setting(lilypond_file['Score']).auto_beaming = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -3503,7 +3503,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(0, block)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -3572,7 +3572,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -3680,7 +3680,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -3790,7 +3790,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -3902,7 +3902,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     metadata=metadata,
             ...     )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -4024,7 +4024,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -4197,7 +4197,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -4305,7 +4305,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -4533,7 +4533,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -4729,7 +4729,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -5025,7 +5025,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(1, block)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -5143,7 +5143,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(1, block)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -5270,7 +5270,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(1, block)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -5393,7 +5393,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(1, block)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -5516,7 +5516,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(1, block)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -5695,7 +5695,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(1, block)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -5877,7 +5877,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(1, block)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -5989,7 +5989,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(1, block)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -6110,7 +6110,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(1, block)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -6233,7 +6233,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(1, block)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -6356,7 +6356,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(1, block)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -6535,7 +6535,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(1, block)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -6676,7 +6676,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     previous_metadata=metadata,
             ...     )
 
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -6814,7 +6814,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     remove=[baca.Tags.CLOCK_TIME_MARKUP],
             ...     )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -6996,7 +6996,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(1, block)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -7102,7 +7102,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(1, block)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -7207,7 +7207,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(1, block)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -7306,7 +7306,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(1, block)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -7457,7 +7457,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(1, block)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -7662,7 +7662,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -7730,7 +7730,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 
@@ -7844,7 +7844,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     metadata=metadata,
             ...     )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
             ..  docs::
 

@@ -13,7 +13,7 @@ class PitchClassSet(abjad.PitchClassSet):
 
             >>> items = [-2, -1.5, 6, 7, -1.5, 7]
             >>> setting = baca.pitch_class_set(items=items)
-            >>> abjad.show(setting) # doctest: +SKIP
+            >>> abjad.show(setting, strict=79) # doctest: +SKIP
 
             ..  docs::
 

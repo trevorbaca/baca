@@ -128,7 +128,7 @@ class PitchArrayList(abjad.TypedList):
             >>> arrays = baca.PitchArrayList(arrays)
 
             >>> score = arrays.to_score()
-            >>> abjad.show(score) # doctest: +SKIP
+            >>> abjad.show(score, strict=79) # doctest: +SKIP
 
             ..  docs::
 

@@ -23,7 +23,7 @@ class ColorFingeringCommand(Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         ..  docs::
 
