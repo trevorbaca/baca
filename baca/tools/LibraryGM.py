@@ -48,15 +48,15 @@ class LibraryGM(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" %! EMPTY_START_BAR:1
+                            \bar ""        %%! EMPTY_START_BAR:1
                             s1 * 1/2
-                            - \markup { %! STAGE_NUMBER_MARKUP:2
-                                \fontsize %! STAGE_NUMBER_MARKUP:2
-                                    #-3 %! STAGE_NUMBER_MARKUP:2
-                                    \with-color %! STAGE_NUMBER_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                        [1] %! STAGE_NUMBER_MARKUP:2
-                                } %! STAGE_NUMBER_MARKUP:2
+                            - \markup {                               %%! STAGE_NUMBER_MARKUP:2
+                                \fontsize                             %%! STAGE_NUMBER_MARKUP:2
+                                    #-3                               %%! STAGE_NUMBER_MARKUP:2
+                                    \with-color                       %%! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan)        %%! STAGE_NUMBER_MARKUP:2
+                                        [1]                           %%! STAGE_NUMBER_MARKUP:2
+                                }                                     %%! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -172,15 +172,15 @@ class LibraryGM(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" %! EMPTY_START_BAR:1
+                            \bar ""        %%! EMPTY_START_BAR:1
                             s1 * 1/2
-                            - \markup { %! STAGE_NUMBER_MARKUP:2
-                                \fontsize %! STAGE_NUMBER_MARKUP:2
-                                    #-3 %! STAGE_NUMBER_MARKUP:2
-                                    \with-color %! STAGE_NUMBER_MARKUP:2
-                                        #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
-                                        [1] %! STAGE_NUMBER_MARKUP:2
-                                } %! STAGE_NUMBER_MARKUP:2
+                            - \markup {                               %%! STAGE_NUMBER_MARKUP:2
+                                \fontsize                             %%! STAGE_NUMBER_MARKUP:2
+                                    #-3                               %%! STAGE_NUMBER_MARKUP:2
+                                    \with-color                       %%! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan)        %%! STAGE_NUMBER_MARKUP:2
+                                        [1]                           %%! STAGE_NUMBER_MARKUP:2
+                                }                                     %%! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -1863,7 +1863,7 @@ class LibraryGM(abjad.AbjadObject):
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar "" %! EMPTY_START_BAR:1
+                            \bar ""        %%! EMPTY_START_BAR:1
                             s1 * 1/2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
@@ -1885,50 +1885,50 @@ class LibraryGM(abjad.AbjadObject):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 %%% MusicVoice [measure 1] %%%
-                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_MARGIN_MARKUP:4
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_MARGIN_MARKUP:4
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:1
+                                \set Staff.instrumentName = \markup { Flute }           %%! EXPLICIT_MARGIN_MARKUP:4
+                                \set Staff.shortInstrumentName = \markup { Fl. }        %%! EXPLICIT_MARGIN_MARKUP:4
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)        %%! EXPLICIT_MARGIN_MARKUP_COLOR:1
                                 e'2
                                 ^ \markup {
                                     \column
                                         {
-                                            %%% \line %! EXPLICIT_MARGIN_MARKUP_ALERT:2
-                                            %%%     { %! EXPLICIT_MARGIN_MARKUP_ALERT:2
-                                            %%%         \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:2
-                                            %%%             [MarginMarkup %! EXPLICIT_MARGIN_MARKUP_ALERT:2
-                                            %%%         \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:2
-                                            %%%             Flute %! EXPLICIT_MARGIN_MARKUP_ALERT:2
-                                            %%%         \concat %! EXPLICIT_MARGIN_MARKUP_ALERT:2
-                                            %%%             { %! EXPLICIT_MARGIN_MARKUP_ALERT:2
-                                            %%%                 \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:2
-                                            %%%                     Fl. %! EXPLICIT_MARGIN_MARKUP_ALERT:2
-                                            %%%                 \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:2
-                                            %%%                     ] %! EXPLICIT_MARGIN_MARKUP_ALERT:2
-                                            %%%             } %! EXPLICIT_MARGIN_MARKUP_ALERT:2
-                                            %%%     } %! EXPLICIT_MARGIN_MARKUP_ALERT:2
-                                            \line %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
-                                                { %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
-                                                    \with-color %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
-                                                        #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
-                                                        { %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
-                                                            \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
-                                                                [MarginMarkup %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
-                                                            \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
-                                                                Flute %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
-                                                            \concat %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
-                                                                { %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
-                                                                    \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
-                                                                        Fl. %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
-                                                                    \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
-                                                                        ] %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
-                                                                } %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
-                                                        } %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
-                                                } %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                            %%% \line                            %%! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%     {                            %%! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%         \vcenter                 %%! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%             [MarginMarkup        %%! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%         \vcenter                 %%! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%             Flute                %%! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%         \concat                  %%! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%             {                    %%! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%                 \vcenter         %%! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%                     Fl.          %%! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%                 \vcenter         %%! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%                     ]            %%! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%             }                    %%! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            %%%     }                            %%! EXPLICIT_MARGIN_MARKUP_ALERT:2
+                                            \line                                    %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                {                                    %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                    \with-color                      %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                        #(x11-color 'blue)           %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                        {                            %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                            \vcenter                 %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                [MarginMarkup        %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                            \vcenter                 %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                Flute                %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                            \concat                  %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                {                    %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                    \vcenter         %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                        Fl.          %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                    \vcenter         %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                        ]            %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                                }                    %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                        }                            %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
+                                                }                                    %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:3
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { Flute } %! EXPLICIT_REDRAW_MARGIN_MARKUP:6
-                                \set Staff.shortInstrumentName = \markup { Fl. } %! EXPLICIT_REDRAW_MARGIN_MARKUP:6
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:5
+                                \set Staff.instrumentName = \markup { Flute }           %%! EXPLICIT_REDRAW_MARGIN_MARKUP:6
+                                \set Staff.shortInstrumentName = \markup { Fl. }        %%! EXPLICIT_REDRAW_MARGIN_MARKUP:6
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %%! EXPLICIT_REDRAW_INSTRUMENT_COLOR:5
                 <BLANKLINE>
                                 %%% MusicVoice [measure 2] %%%
                                 f'4.
