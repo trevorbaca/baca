@@ -27,58 +27,8 @@ class TagCommand(Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs', remove=True)
-        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
 
         >>> abjad.f(lilypond_file[abjad.Score], strict=79)
-        \context Score = "Score" <<
-            \context GlobalContext = "GlobalContext" <<
-                \context GlobalSkips = "GlobalSkips" {
-        <BLANKLINE>
-                    %%% GlobalSkips [measure 1] %%%
-                    \time 4/8
-                    s1 * 1/2
-        <BLANKLINE>
-                    %%% GlobalSkips [measure 2] %%%
-                    \time 3/8
-                    s1 * 3/8
-        <BLANKLINE>
-                    %%% GlobalSkips [measure 3] %%%
-                    \time 4/8
-                    s1 * 1/2
-        <BLANKLINE>
-                    %%% GlobalSkips [measure 4] %%%
-                    \time 3/8
-                    s1 * 3/8
-        <BLANKLINE>
-                }
-            >>
-            \context MusicContext = "MusicContext" <<
-                \context Staff = "MusicStaff" {
-                    \context Voice = "MusicVoice" {
-                        \tag ViolinI
-                        {
-        <BLANKLINE>
-                            %%% MusicVoice [measure 1] %%%
-                            e'2
-        <BLANKLINE>
-                            %%% MusicVoice [measure 2] %%%
-                            f'4.
-                        }
-                        \tag ViolinI.ViolinII
-                        {
-        <BLANKLINE>
-                            %%% MusicVoice [measure 3] %%%
-                            e'2
-        <BLANKLINE>
-                            %%% MusicVoice [measure 4] %%%
-                            f'4.
-                            \bar "|"
-        <BLANKLINE>
-                        }
-                    }
-                }
-            >>
-        >>
 
     '''
 
