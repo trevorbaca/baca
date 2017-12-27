@@ -26,10 +26,10 @@
         \consists Text_engraver
         \consists Text_spanner_engraver
         \override StaffSymbol.stencil = ##f
-        \override TextScript.outside-staff-priority = 600
-        \override TextScript.staff-padding = 3
-        \override TextSpanner.bound-details.right.attach-dir = #LEFT
-        \override TextSpanner.staff-padding = 4
+        %\override TextScript.outside-staff-priority = 600
+        %\override TextScript.staff-padding = 3
+        %\override TextSpanner.bound-details.right.attach-dir = #LEFT
+        %\override TextSpanner.staff-padding = 4
         }
 
     % GLOBAL RESTS
@@ -51,14 +51,16 @@
         \consists Mark_engraver
         \consists Metronome_mark_engraver
         \consists Time_signature_engraver
-        \accepts GlobalSkips
         \accepts GlobalRests
+        \accepts GlobalSkips
         \override BarNumber.color = #red
-        \override MetronomeMark.X-extent = #'(0 . 0)
-        \override MetronomeMark.Y-extent = #'(0 . 0)
-        \override MetronomeMark.break-align-symbols = #'(left-edge)
-        \override MetronomeMark.extra-offset = #'(0 . 4)
-        \override MetronomeMark.font-size = 3
+        %\override MetronomeMark.X-extent = #'(0 . 0)
+        %\override MetronomeMark.Y-extent = #'(0 . 0)
+        %\override MetronomeMark.break-align-symbols = #'(left-edge)
+        %\override MetronomeMark.extra-offset = #'(0 . 4)
+        %\override MetronomeMark.font-size = 3
+        % in red because custom scores format all metronome marks as markup:
+        \override MetronomeMark.color = #red
         \override RehearsalMark.X-extent = #'(0 . 0)
         \override RehearsalMark.Y-offset = -2.25
         \override RehearsalMark.X-offset = 6

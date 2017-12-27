@@ -974,19 +974,7 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(context, abjad.Context), repr(context)
         if status is None:
             return
-        if isinstance(indicator, abjad.MetronomeMark):
-            context = None
-            assert spanner is not None
-            assert leaf in spanner
-            markup = indicator._to_markup()
-            color = self._status_to_color[status]
-            color = abjad.SchemeColor(color)
-            markup = markup.with_color(color)
-            tag = f'{status.upper()}_METRONOME_MARK_WITH_COLOR'
-            tag = getattr(baca.Tags, tag)
-            abjad.attach(markup, leaf, tag=tag)
-        else:
-            self._color_persistent_indicator(context, leaf, indicator, status)
+        self._color_persistent_indicator(context, leaf, indicator, status)
         if getattr(indicator, 'latent', False):
             self._attach_latent_indicator_alert(leaf, indicator, status)
         elif (getattr(indicator, 'redraw', False)
@@ -1254,6 +1242,17 @@ class SegmentMaker(abjad.SegmentMaker):
         ):
         if context is not None:
             assert isinstance(context, abjad.Context), repr(context)
+        if isinstance(indicator, abjad.MetronomeMark):
+            context = None
+            markup = indicator._to_markup()
+            color = self._status_to_color[status]
+            color = abjad.SchemeColor(color)
+            markup = markup.with_color(color)
+            markup = abjad.new(markup, direction=abjad.Up)
+            tag = f'{status.upper()}_METRONOME_MARK_WITH_COLOR'
+            tag = getattr(baca.Tags, tag)
+            abjad.attach(markup, leaf, tag=tag)
+            return
         grob = self._indicator_to_grob(indicator)
         if context is not None:
             string = rf'\override {context.headword}.{grob}.color ='
@@ -2036,6 +2035,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for prototype in (
             abjad.Clef,
             abjad.Instrument,
+            abjad.MetronomeMark,
             baca.MarginMarkup,
             ):
             for leaf in abjad.iterate(self.score).leaves():
@@ -2057,11 +2057,13 @@ class SegmentMaker(abjad.SegmentMaker):
                     status = 'redundant'
                 else:
                     status = 'explicit'
+                spanner = wrapper.piecewise_spanner
                 self._categorize_persistent_indicator(
                     context,
                     leaf,
                     indicator,
                     status,
+                    spanner=spanner,
                     )
 
     def _transpose_score_(self):
@@ -6821,6 +6823,26 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar "" %! EMPTY_START_BAR:1
                             s1 * 1/2
+                            ^ \markup { %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                \with-color %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                    #(x11-color 'blue) %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                    { %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                        \fontsize %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                            #-6 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                            \general-align %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                #Y %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                #DOWN %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                \note-by-number %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                    #2 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                    #0 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                    #1 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                        \upright %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                            { %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                = %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                90 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                            } %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                    } %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                } %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
                             - \markup { %! STAGE_NUMBER_MARKUP:2
                                 \fontsize %! STAGE_NUMBER_MARKUP:2
                                     #-3 %! STAGE_NUMBER_MARKUP:2
@@ -6828,22 +6850,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                         #(x11-color 'DarkCyan) %! STAGE_NUMBER_MARKUP:2
                                         [1] %! STAGE_NUMBER_MARKUP:2
                                 } %! STAGE_NUMBER_MARKUP:2
-                            ^ \markup {
-                                \fontsize
-                                    #-6
-                                    \general-align
-                                        #Y
-                                        #DOWN
-                                        \note-by-number
-                                            #2
-                                            #0
-                                            #1
-                                \upright
-                                    {
-                                        =
-                                        90
-                                    }
-                                }
+                            %%% ^ \markup { %! EXPLICIT_METRONOME_MARK:4
+                            %%%     \fontsize %! EXPLICIT_METRONOME_MARK:4
+                            %%%         #-6 %! EXPLICIT_METRONOME_MARK:4
+                            %%%         \general-align %! EXPLICIT_METRONOME_MARK:4
+                            %%%             #Y %! EXPLICIT_METRONOME_MARK:4
+                            %%%             #DOWN %! EXPLICIT_METRONOME_MARK:4
+                            %%%             \note-by-number %! EXPLICIT_METRONOME_MARK:4
+                            %%%                 #2 %! EXPLICIT_METRONOME_MARK:4
+                            %%%                 #0 %! EXPLICIT_METRONOME_MARK:4
+                            %%%                 #1 %! EXPLICIT_METRONOME_MARK:4
+                            %%%     \upright %! EXPLICIT_METRONOME_MARK:4
+                            %%%         { %! EXPLICIT_METRONOME_MARK:4
+                            %%%             = %! EXPLICIT_METRONOME_MARK:4
+                            %%%             90 %! EXPLICIT_METRONOME_MARK:4
+                            %%%         } %! EXPLICIT_METRONOME_MARK:4
+                            %%%     } %! EXPLICIT_METRONOME_MARK:4
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -6931,6 +6953,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
+            >>> layout = baca.layout(baca.page([1, 0, (8,)]))
             >>> metronome_marks = abjad.MetronomeMarkDictionary()
             >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
             >>> metronome_marks['112'] = abjad.MetronomeMark((1, 4), 112)
@@ -6947,6 +6970,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
+            ...     layout_measure_map=layout,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
@@ -6978,26 +7002,49 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
+                            \pageBreak %! SEGMENT:LAYOUT:8
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (8))) %! SEGMENT:LAYOUT:9
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:10
                             \time 3/8
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:4
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:6
                             s1 * 3/8
-                            ^ \markup {
-                                \fontsize
-                                    #-6
-                                    \general-align
-                                        #Y
-                                        #DOWN
-                                        \note-by-number
-                                            #2
-                                            #0
-                                            #1
-                                \upright
-                                    {
-                                        =
-                                        112
-                                    }
-                                }
+                            ^ \markup { %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                \with-color %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                    #(x11-color 'blue) %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                    { %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                        \fontsize %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                            #-6 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                            \general-align %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                #Y %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                #DOWN %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                \note-by-number %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                    #2 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                    #0 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                    #1 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                        \upright %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                            { %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                = %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                112 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                            } %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                    } %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                } %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                            %%% ^ \markup { %! EXPLICIT_METRONOME_MARK:4
+                            %%%     \fontsize %! EXPLICIT_METRONOME_MARK:4
+                            %%%         #-6 %! EXPLICIT_METRONOME_MARK:4
+                            %%%         \general-align %! EXPLICIT_METRONOME_MARK:4
+                            %%%             #Y %! EXPLICIT_METRONOME_MARK:4
+                            %%%             #DOWN %! EXPLICIT_METRONOME_MARK:4
+                            %%%             \note-by-number %! EXPLICIT_METRONOME_MARK:4
+                            %%%                 #2 %! EXPLICIT_METRONOME_MARK:4
+                            %%%                 #0 %! EXPLICIT_METRONOME_MARK:4
+                            %%%                 #1 %! EXPLICIT_METRONOME_MARK:4
+                            %%%     \upright %! EXPLICIT_METRONOME_MARK:4
+                            %%%         { %! EXPLICIT_METRONOME_MARK:4
+                            %%%             = %! EXPLICIT_METRONOME_MARK:4
+                            %%%             112 %! EXPLICIT_METRONOME_MARK:4
+                            %%%         } %! EXPLICIT_METRONOME_MARK:4
+                            %%%     } %! EXPLICIT_METRONOME_MARK:4
                 <BLANKLINE>
                         }
                     >>
@@ -7016,14 +7063,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Even after a previous metronome mark:
 
-            >>> layout_measure_map_ = baca.layout(
-            ...     baca.page(
-            ...         [1, 0, (11,)],
-            ...         [2, 25, (11,)],
-            ...         ),
-            ...     )
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
+            ...     layout_measure_map=layout,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
@@ -7066,27 +7108,50 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
+                            \pageBreak %! SEGMENT:LAYOUT:8
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (8))) %! SEGMENT:LAYOUT:9
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:10
                             \time 3/8
                             \mark #1
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:4
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:6
                             s1 * 3/8
-                            ^ \markup {
-                                \fontsize
-                                    #-6
-                                    \general-align
-                                        #Y
-                                        #DOWN
-                                        \note-by-number
-                                            #2
-                                            #0
-                                            #1
-                                \upright
-                                    {
-                                        =
-                                        112
-                                    }
-                                }
+                            ^ \markup { %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                \with-color %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                    #(x11-color 'blue) %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                    { %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                        \fontsize %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                            #-6 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                            \general-align %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                #Y %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                #DOWN %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                \note-by-number %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                    #2 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                    #0 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                    #1 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                        \upright %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                            { %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                = %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                112 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                            } %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                    } %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                } %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                            %%% ^ \markup { %! EXPLICIT_METRONOME_MARK:4
+                            %%%     \fontsize %! EXPLICIT_METRONOME_MARK:4
+                            %%%         #-6 %! EXPLICIT_METRONOME_MARK:4
+                            %%%         \general-align %! EXPLICIT_METRONOME_MARK:4
+                            %%%             #Y %! EXPLICIT_METRONOME_MARK:4
+                            %%%             #DOWN %! EXPLICIT_METRONOME_MARK:4
+                            %%%             \note-by-number %! EXPLICIT_METRONOME_MARK:4
+                            %%%                 #2 %! EXPLICIT_METRONOME_MARK:4
+                            %%%                 #0 %! EXPLICIT_METRONOME_MARK:4
+                            %%%                 #1 %! EXPLICIT_METRONOME_MARK:4
+                            %%%     \upright %! EXPLICIT_METRONOME_MARK:4
+                            %%%         { %! EXPLICIT_METRONOME_MARK:4
+                            %%%             = %! EXPLICIT_METRONOME_MARK:4
+                            %%%             112 %! EXPLICIT_METRONOME_MARK:4
+                            %%%         } %! EXPLICIT_METRONOME_MARK:4
+                            %%%     } %! EXPLICIT_METRONOME_MARK:4
                 <BLANKLINE>
                         }
                     >>
@@ -7105,10 +7170,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            Reapplied metronomne marks color green and redraw dull green:
+            Reapplied metronome marks color green and redraw dull green:
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
+            ...     layout_measure_map=layout,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
@@ -7147,12 +7213,15 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
+                            \pageBreak %! SEGMENT:LAYOUT:8
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (8))) %! SEGMENT:LAYOUT:9
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:10
                             \time 3/8
                             \mark #1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:6
                             s1 * 3/8
-                            - \markup { %! REAPPLIED_METRONOME_MARK_WITH_COLOR:3
+                            ^ \markup { %! REAPPLIED_METRONOME_MARK_WITH_COLOR:3
                                 \with-color %! REAPPLIED_METRONOME_MARK_WITH_COLOR:3
                                     #(x11-color 'green4) %! REAPPLIED_METRONOME_MARK_WITH_COLOR:3
                                     { %! REAPPLIED_METRONOME_MARK_WITH_COLOR:3
@@ -7206,10 +7275,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            Redundant instruments color pink and redraw dull pink:
+            Redundant metronome marks color pink and redraw dull pink:
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
+            ...     layout_measure_map=layout,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
@@ -7242,47 +7312,91 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
+                            \pageBreak %! SEGMENT:LAYOUT:8
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (8))) %! SEGMENT:LAYOUT:9
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:10
                             \time 3/8
+                            \newSpacingSection
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:6
+                            s1 * 3/8
+                            ^ \markup { %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                \with-color %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                    #(x11-color 'blue) %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                    { %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                        \fontsize %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                            #-6 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                            \general-align %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                #Y %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                #DOWN %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                \note-by-number %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                    #2 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                    #0 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                    #1 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                        \upright %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                            { %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                = %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                                112 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                            } %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                    } %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                                } %! EXPLICIT_METRONOME_MARK_WITH_COLOR:3
+                            %%% ^ \markup { %! EXPLICIT_METRONOME_MARK:4
+                            %%%     \fontsize %! EXPLICIT_METRONOME_MARK:4
+                            %%%         #-6 %! EXPLICIT_METRONOME_MARK:4
+                            %%%         \general-align %! EXPLICIT_METRONOME_MARK:4
+                            %%%             #Y %! EXPLICIT_METRONOME_MARK:4
+                            %%%             #DOWN %! EXPLICIT_METRONOME_MARK:4
+                            %%%             \note-by-number %! EXPLICIT_METRONOME_MARK:4
+                            %%%                 #2 %! EXPLICIT_METRONOME_MARK:4
+                            %%%                 #0 %! EXPLICIT_METRONOME_MARK:4
+                            %%%                 #1 %! EXPLICIT_METRONOME_MARK:4
+                            %%%     \upright %! EXPLICIT_METRONOME_MARK:4
+                            %%%         { %! EXPLICIT_METRONOME_MARK:4
+                            %%%             = %! EXPLICIT_METRONOME_MARK:4
+                            %%%             112 %! EXPLICIT_METRONOME_MARK:4
+                            %%%         } %! EXPLICIT_METRONOME_MARK:4
+                            %%%     } %! EXPLICIT_METRONOME_MARK:4
+                <BLANKLINE>
+                            %%% GlobalSkips [measure 2] %%%
+                            \noBreak %! SEGMENT:LAYOUT:6
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:4
                             s1 * 3/8
-                            ^ \markup {
-                                \fontsize
-                                    #-6
-                                    \general-align
-                                        #Y
-                                        #DOWN
-                                        \note-by-number
-                                            #2
-                                            #0
-                                            #1
-                                \upright
-                                    {
-                                        =
-                                        112
-                                    }
-                                }
-                <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:2
-                            s1 * 3/8
-                            ^ \markup {
-                                \fontsize
-                                    #-6
-                                    \general-align
-                                        #Y
-                                        #DOWN
-                                        \note-by-number
-                                            #2
-                                            #0
-                                            #1
-                                \upright
-                                    {
-                                        =
-                                        112
-                                    }
-                                }
+                            ^ \markup { %! REDUNDANT_METRONOME_MARK_WITH_COLOR:1
+                                \with-color %! REDUNDANT_METRONOME_MARK_WITH_COLOR:1
+                                    #(x11-color 'DeepPink1) %! REDUNDANT_METRONOME_MARK_WITH_COLOR:1
+                                    { %! REDUNDANT_METRONOME_MARK_WITH_COLOR:1
+                                        \fontsize %! REDUNDANT_METRONOME_MARK_WITH_COLOR:1
+                                            #-6 %! REDUNDANT_METRONOME_MARK_WITH_COLOR:1
+                                            \general-align %! REDUNDANT_METRONOME_MARK_WITH_COLOR:1
+                                                #Y %! REDUNDANT_METRONOME_MARK_WITH_COLOR:1
+                                                #DOWN %! REDUNDANT_METRONOME_MARK_WITH_COLOR:1
+                                                \note-by-number %! REDUNDANT_METRONOME_MARK_WITH_COLOR:1
+                                                    #2 %! REDUNDANT_METRONOME_MARK_WITH_COLOR:1
+                                                    #0 %! REDUNDANT_METRONOME_MARK_WITH_COLOR:1
+                                                    #1 %! REDUNDANT_METRONOME_MARK_WITH_COLOR:1
+                                        \upright %! REDUNDANT_METRONOME_MARK_WITH_COLOR:1
+                                            { %! REDUNDANT_METRONOME_MARK_WITH_COLOR:1
+                                                = %! REDUNDANT_METRONOME_MARK_WITH_COLOR:1
+                                                112 %! REDUNDANT_METRONOME_MARK_WITH_COLOR:1
+                                            } %! REDUNDANT_METRONOME_MARK_WITH_COLOR:1
+                                    } %! REDUNDANT_METRONOME_MARK_WITH_COLOR:1
+                                } %! REDUNDANT_METRONOME_MARK_WITH_COLOR:1
+                            %%% ^ \markup { %! REDUNDANT_METRONOME_MARK:2
+                            %%%     \fontsize %! REDUNDANT_METRONOME_MARK:2
+                            %%%         #-6 %! REDUNDANT_METRONOME_MARK:2
+                            %%%         \general-align %! REDUNDANT_METRONOME_MARK:2
+                            %%%             #Y %! REDUNDANT_METRONOME_MARK:2
+                            %%%             #DOWN %! REDUNDANT_METRONOME_MARK:2
+                            %%%             \note-by-number %! REDUNDANT_METRONOME_MARK:2
+                            %%%                 #2 %! REDUNDANT_METRONOME_MARK:2
+                            %%%                 #0 %! REDUNDANT_METRONOME_MARK:2
+                            %%%                 #1 %! REDUNDANT_METRONOME_MARK:2
+                            %%%     \upright %! REDUNDANT_METRONOME_MARK:2
+                            %%%         { %! REDUNDANT_METRONOME_MARK:2
+                            %%%             = %! REDUNDANT_METRONOME_MARK:2
+                            %%%             112 %! REDUNDANT_METRONOME_MARK:2
+                            %%%         } %! REDUNDANT_METRONOME_MARK:2
+                            %%%     } %! REDUNDANT_METRONOME_MARK:2
                 <BLANKLINE>
                         }
                     >>
@@ -7306,6 +7420,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
+            ...     layout_measure_map=layout,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
@@ -7348,12 +7463,15 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
+                            \pageBreak %! SEGMENT:LAYOUT:8
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (8))) %! SEGMENT:LAYOUT:9
+                            \autoPageBreaksOff %! SEGMENT:LAYOUT:10
                             \time 3/8
                             \mark #1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SEGMENT:SPACING:6
                             s1 * 3/8
-                            - \markup { %! REDUNDANT_METRONOME_MARK_WITH_COLOR:3
+                            ^ \markup { %! REDUNDANT_METRONOME_MARK_WITH_COLOR:3
                                 \with-color %! REDUNDANT_METRONOME_MARK_WITH_COLOR:3
                                     #(x11-color 'DeepPink1) %! REDUNDANT_METRONOME_MARK_WITH_COLOR:3
                                     { %! REDUNDANT_METRONOME_MARK_WITH_COLOR:3
