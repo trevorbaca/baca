@@ -895,10 +895,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         pairs = self.score_template.attach_defaults(self.score)
         for leaf, indicator in pairs:
-            wrapper = abjad.inspect(leaf).get_indicator(
-                indicator,
-                unwrap=False,
-                )
+            wrapper = abjad.inspect(leaf).wrapper(indicator)
             assert wrapper is not None
             assert getattr(wrapper.indicator, 'persistent', False)
             context = wrapper._find_correct_effective_context()
@@ -1347,7 +1344,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if not tags:
             return
         for leaf in abjad.iterate(self.score).leaves():
-            for wrapper in abjad.inspect(leaf).get_indicators(unwrap=False):
+            for wrapper in abjad.inspect(leaf).wrappers():
                 if wrapper.tag is None:
                     continue
                 index = wrapper.tag.rfind(':')
@@ -1876,7 +1873,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 else:
                     tags_.append(tag.name)
         for leaf in abjad.iterate(self.score).leaves():
-            for wrapper in abjad.inspect(leaf).get_indicators(unwrap=False):
+            for wrapper in abjad.inspect(leaf).wrappers():
                 if wrapper.tag is None:
                     continue
                 if remove_all_tags:
@@ -2039,10 +2036,7 @@ class SegmentMaker(abjad.SegmentMaker):
             baca.MarginMarkup,
             ):
             for leaf in abjad.iterate(self.score).leaves():
-                wrapper = abjad.inspect(leaf).get_indicator(
-                    prototype,
-                    unwrap=False,
-                    )
+                wrapper = abjad.inspect(leaf).wrapper(prototype)
                 if wrapper is None:
                     continue
                 if wrapper.tag is not None:
