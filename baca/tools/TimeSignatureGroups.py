@@ -15,7 +15,7 @@ class TimeSignatureGroups(abjad.AbjadObject):
         >>> groups = [group_1, group_2]
         >>> groups = baca.TimeSignatureGroups(groups)
 
-        >>> abjad.f(groups, strict=True)
+        >>> abjad.f(groups, strict=79)
         baca.TimeSignatureGroups(
             [
                 [
@@ -64,7 +64,7 @@ class TimeSignatureGroups(abjad.AbjadObject):
         ..  docs::
 
             >>> lilypond_file = groups.__illustrate__()
-            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Score], strict=79)
             \new Score \with {
                 proportionalNotationDuration = #(ly:make-moment 1 8)
             } <<

@@ -29,7 +29,7 @@ class TagCommand(Command):
         >>> lilypond_file = maker.run(environment='docs', remove=True)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-        >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+        >>> abjad.f(lilypond_file[abjad.Score], strict=79)
         \context Score = "Score" <<
             \context GlobalContext = "GlobalContext" <<
                 \context GlobalSkips = "GlobalSkips" {

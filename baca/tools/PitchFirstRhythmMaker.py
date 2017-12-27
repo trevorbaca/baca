@@ -28,7 +28,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
             \new Staff {
                 { % measure
                     \time 5/16
@@ -50,7 +50,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
             \new Staff {
                 { % measure
                     \time 3/8
@@ -73,7 +73,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
             \new Staff {
                 { % measure
                     \time 1/16
@@ -90,7 +90,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
             \new Staff {
                 { % measure
                     \time 13/16
@@ -208,7 +208,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 3/4
@@ -260,7 +260,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 3/4
@@ -774,7 +774,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 3/2
@@ -858,7 +858,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 7/4
@@ -958,7 +958,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
@@ -1013,7 +1013,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override Beam.positions = #'(-5.5 . -5.5)
                 } {
@@ -1082,7 +1082,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 15/16
@@ -1128,7 +1128,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
@@ -1183,7 +1183,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
@@ -1239,7 +1239,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
@@ -1312,7 +1312,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 3/4
@@ -1359,7 +1359,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 3/4
@@ -1398,7 +1398,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 3/4
@@ -1453,7 +1453,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 39/32
@@ -1509,7 +1509,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 39/32
@@ -1582,7 +1582,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 3/4
@@ -1632,7 +1632,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 3/4
@@ -1698,7 +1698,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 3/2
@@ -1754,7 +1754,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 29/32
@@ -1808,7 +1808,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 3/4
@@ -1856,7 +1856,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 3/4
@@ -1923,7 +1923,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 15/16
@@ -1971,7 +1971,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 5/8
@@ -2028,7 +2028,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override Beam.positions = #'(-5 . -5)
                     \override Stem.direction = #down
@@ -2271,7 +2271,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override Beam.positions = #'(-5 . -5)
                     \override Stem.direction = #down
@@ -2512,7 +2512,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override Beam.positions = #'(-5 . -5)
                     \override Stem.direction = #down
@@ -2719,7 +2719,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override Beam.positions = #'(-5 . -5)
                     \override Stem.direction = #down
@@ -2946,7 +2946,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override Beam.positions = #'(-6 . -6)
                     \override Stem.direction = #down
@@ -3035,7 +3035,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override Beam.positions = #'(-6 . -6)
                     \override Stem.direction = #down
@@ -3121,7 +3121,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override Beam.positions = #'(-6 . -6)
                     \override Stem.direction = #down
@@ -3229,7 +3229,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {
@@ -3290,7 +3290,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override TupletBracket.staff-padding = #1.5
                 } {

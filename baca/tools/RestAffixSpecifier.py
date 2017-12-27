@@ -29,7 +29,7 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
             \new Staff \with {
                 \override TupletBracket.staff-padding = #4
             } <<
@@ -87,7 +87,7 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
             \new Staff \with {
                 \override TupletBracket.staff-padding = #4
             } <<
@@ -193,7 +193,7 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -264,7 +264,7 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -318,7 +318,7 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -361,7 +361,7 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -418,7 +418,7 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -482,7 +482,7 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -550,7 +550,7 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne

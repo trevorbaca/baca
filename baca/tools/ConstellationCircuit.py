@@ -238,7 +238,7 @@ class ConstellationCircuit(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \new Score \with {
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
@@ -486,7 +486,7 @@ class ConstellationCircuit(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \new Score \with {
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
@@ -752,7 +752,7 @@ class ConstellationCircuit(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \new Score \with {
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
@@ -801,7 +801,7 @@ class ConstellationCircuit(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \new Score \with {
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
@@ -868,7 +868,7 @@ class ConstellationCircuit(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \new Score \with {
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t

@@ -38,7 +38,7 @@ class Sequence(abjad.Sequence):
             ..  docs::
 
                 >>> lilypond_file = collection.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Voice], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Voice], strict=79)
                 \new Voice {
                     bf'8
                     bqf'8
@@ -88,7 +88,7 @@ class Sequence(abjad.Sequence):
             ..  docs::
 
                 >>> lilypond_file = collection.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Voice], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Voice], strict=79)
                 \new Voice {
                     b'8
                     bqs'8
@@ -129,7 +129,7 @@ class Sequence(abjad.Sequence):
                 >>> lilypond_file = collection.__illustrate__(
                 ...     figure_name=markup,
                 ...     )
-                >>> abjad.f(lilypond_file[abjad.Voice], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Voice], strict=79)
                 \new Voice {
                     b'8
                     ^ \markup {
@@ -282,7 +282,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=True)
+                    >>> abjad.f(markup, strict=79)
                     \markup {
                         \line
                             {
@@ -338,7 +338,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=True)
+                    >>> abjad.f(markup, strict=79)
                     \markup {
                         \line
                             {
@@ -407,7 +407,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=True)
+                    >>> abjad.f(markup, strict=79)
                     \markup {
                         \line
                             {
@@ -498,7 +498,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=True)
+                    >>> abjad.f(markup, strict=79)
                     \markup {
                         \line
                             {
@@ -609,7 +609,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=True)
+                    >>> abjad.f(markup, strict=79)
                     \markup {
                         \line
                             {
@@ -711,7 +711,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=True)
+                    >>> abjad.f(markup, strict=79)
                     \markup {
                         \line
                             {
@@ -888,7 +888,7 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> abjad.f(markup, strict=True)
+                >>> abjad.f(markup, strict=79)
                 \markup {
                     \concat
                         {
@@ -1348,7 +1348,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=True)
+                    >>> abjad.f(markup, strict=79)
                     \markup {
                         \concat
                             {
@@ -1398,7 +1398,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=True)
+                    >>> abjad.f(markup, strict=79)
                     \markup {
                         \concat
                             {
@@ -1472,7 +1472,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=True)
+                    >>> abjad.f(markup, strict=79)
                     \markup {
                         \concat
                             {
@@ -1531,7 +1531,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=True)
+                    >>> abjad.f(markup, strict=79)
                     \markup {
                         \concat
                             {
@@ -1591,7 +1591,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=True)
+                    >>> abjad.f(markup, strict=79)
                     \markup {
                         \concat
                             {
@@ -1626,7 +1626,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=True)
+                    >>> abjad.f(markup, strict=79)
                     \markup {
                         \concat
                             {
@@ -1679,7 +1679,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=True)
+                    >>> abjad.f(markup, strict=79)
                     \markup {
                         \concat
                             {
@@ -1732,7 +1732,7 @@ class Sequence(abjad.Sequence):
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=True)
+                    >>> abjad.f(markup, strict=79)
                     \markup {
                         \concat
                             {

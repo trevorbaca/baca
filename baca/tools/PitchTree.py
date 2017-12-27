@@ -17,7 +17,7 @@ class PitchTree(Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
-            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Score], strict=79)
             \new Score \with {
                 \override BarLine.transparent = ##t
                 \override BarNumber.stencil = ##f
@@ -87,7 +87,7 @@ class PitchTree(Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
-            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Score], strict=79)
             \new Score \with {
                 \override BarLine.transparent = ##t
                 \override BarNumber.stencil = ##f
@@ -153,7 +153,7 @@ class PitchTree(Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
-            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Score], strict=79)
             \new Score \with {
                 \override BarLine.transparent = ##t
                 \override BarNumber.stencil = ##f
@@ -223,7 +223,7 @@ class PitchTree(Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
-            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Score], strict=79)
             \new Score \with {
                 \override BarLine.transparent = ##t
                 \override BarNumber.stencil = ##f
@@ -292,7 +292,7 @@ class PitchTree(Tree):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Score], strict=79)
             \new Score \with {
                 \override BarLine.transparent = ##t
                 \override BarNumber.stencil = ##f
@@ -357,7 +357,7 @@ class PitchTree(Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__(cell_indices=False)
-            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Score], strict=79)
             \new Score \with {
                 \override BarLine.transparent = ##t
                 \override BarNumber.stencil = ##f
@@ -423,7 +423,7 @@ class PitchTree(Tree):
         ..  docs::
 
             >>> graph_ = tree.__graph__()
-            >>> abjad.f(graph_, strict=True)
+            >>> abjad.f(graph_, strict=79)
             digraph G {
                 graph [bgcolor=transparent,
                     truecolor=true];
@@ -487,7 +487,7 @@ class PitchTree(Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__(cell_indices=False)
-            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Score], strict=79)
             \new Score \with {
                 \override BarLine.transparent = ##t
                 \override BarNumber.stencil = ##f
@@ -578,7 +578,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> tree_graph = tree.__graph__()
-                >>> abjad.f(tree_graph, strict=True)
+                >>> abjad.f(tree_graph, strict=79)
                 digraph G {
                     graph [bgcolor=transparent,
                         truecolor=true];
@@ -649,7 +649,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> tree_graph = tree.__graph__()
-                >>> abjad.f(tree_graph, strict=True)
+                >>> abjad.f(tree_graph, strict=79)
                 digraph G {
                     graph [bgcolor=transparent,
                         truecolor=true];
@@ -734,7 +734,7 @@ class PitchTree(Tree):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -800,7 +800,7 @@ class PitchTree(Tree):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -895,7 +895,7 @@ class PitchTree(Tree):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1184,7 +1184,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1280,7 +1280,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1354,7 +1354,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1416,7 +1416,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = inversion.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1478,7 +1478,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = inversion.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1540,7 +1540,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = inversion.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1620,7 +1620,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1682,7 +1682,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = retrograde.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1761,7 +1761,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1823,7 +1823,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = rotation.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1885,7 +1885,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = rotation.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -1947,7 +1947,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = rotation.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -2027,7 +2027,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -2089,7 +2089,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = transposition.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -2151,7 +2151,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = transposition.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f
@@ -2213,7 +2213,7 @@ class PitchTree(Tree):
             ..  docs::
 
                 >>> lilypond_file = transposition.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \new Score \with {
                     \override BarLine.transparent = ##t
                     \override BarNumber.stencil = ##f

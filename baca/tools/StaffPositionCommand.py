@@ -16,7 +16,7 @@ class StaffPositionCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(staff, strict=True)
+            >>> abjad.f(staff, strict=79)
             \new Staff {
                 \clef "treble"
                 b'4
@@ -35,7 +35,7 @@ class StaffPositionCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(staff, strict=True)
+            >>> abjad.f(staff, strict=79)
             \new Staff {
                 \clef "percussion"
                 c'4

@@ -214,7 +214,7 @@ class PartitionDivisionCallback(abjad.AbjadValueObject):
         ..  container:: example
 
             >>> callback = baca.PartitionDivisionCallback()
-            >>> abjad.f(callback, strict=True)
+            >>> abjad.f(callback, strict=79)
             baca.PartitionDivisionCallback(
                 fuse_assignable_total_duration=False,
                 append_remainder=False,

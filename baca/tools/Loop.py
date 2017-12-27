@@ -8,7 +8,7 @@ class Loop(abjad.CyclicTuple):
     ..  container::
 
         >>> loop = baca.Loop([0, 2, 4], [1])
-        >>> abjad.f(loop, strict=True)
+        >>> abjad.f(loop, strict=79)
         baca.Loop(
             [
                 abjad.NamedPitch("c'"),
@@ -41,7 +41,7 @@ class Loop(abjad.CyclicTuple):
     ..  container:: example
 
         >>> command = baca.loop([0, 2, 4], [1])
-        >>> abjad.f(command, strict=True)
+        >>> abjad.f(command, strict=79)
         baca.PitchCommand(
             cyclic=True,
             pitches=baca.Loop(

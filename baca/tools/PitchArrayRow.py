@@ -18,7 +18,7 @@ class PitchArrayRow(abjad.AbjadObject):
         [c'] [d'    ] [  ]
         [       ] [ ] [e']
 
-        >>> abjad.f(array[0], strict=True)
+        >>> abjad.f(array[0], strict=79)
         baca.PitchArrayRow(
             cells=(
                 baca.PitchArrayCell(
@@ -684,7 +684,7 @@ class PitchArrayRow(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(measure, strict=True)
+                >>> abjad.f(measure, strict=79)
                 { % measure
                     \time 4/8
                     r8

@@ -42,7 +42,7 @@ class LibraryTZ(abjad.AbjadObject):
             >>> lilypond_file = maker.run(environment='docs', remove=True)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Score], strict=79)
             \context Score = "Score" <<
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
@@ -120,7 +120,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -190,7 +190,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -271,7 +271,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -349,7 +349,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -440,7 +440,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -518,7 +518,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -608,7 +608,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -689,7 +689,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -779,7 +779,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -857,7 +857,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -947,7 +947,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1025,7 +1025,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1127,7 +1127,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1228,7 +1228,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1332,7 +1332,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1395,7 +1395,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1457,7 +1457,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1532,7 +1532,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1598,7 +1598,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1676,7 +1676,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1742,7 +1742,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1818,7 +1818,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1912,22 +1912,22 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar ""        %%! EMPTY_START_BAR:1
+                            \bar ""                                                            %%! EMPTY_START_BAR:1
                             s1 * 1/2
-                            - \markup {                               %%! STAGE_NUMBER_MARKUP:2
-                                \fontsize                             %%! STAGE_NUMBER_MARKUP:2
-                                    #-3                               %%! STAGE_NUMBER_MARKUP:2
-                                    \with-color                       %%! STAGE_NUMBER_MARKUP:2
-                                        #(x11-color 'DarkCyan)        %%! STAGE_NUMBER_MARKUP:2
-                                        [1]                           %%! STAGE_NUMBER_MARKUP:2
-                                }                                     %%! STAGE_NUMBER_MARKUP:2
+                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP:2
+                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:2
+                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:2
+                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:2
+                                        [1]                                                    %%! STAGE_NUMBER_MARKUP:2
+                                }                                                              %%! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -2023,22 +2023,22 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar ""        %%! EMPTY_START_BAR:1
+                            \bar ""                                                            %%! EMPTY_START_BAR:1
                             s1 * 1/2
-                            - \markup {                               %%! STAGE_NUMBER_MARKUP:2
-                                \fontsize                             %%! STAGE_NUMBER_MARKUP:2
-                                    #-3                               %%! STAGE_NUMBER_MARKUP:2
-                                    \with-color                       %%! STAGE_NUMBER_MARKUP:2
-                                        #(x11-color 'DarkCyan)        %%! STAGE_NUMBER_MARKUP:2
-                                        [1]                           %%! STAGE_NUMBER_MARKUP:2
-                                }                                     %%! STAGE_NUMBER_MARKUP:2
+                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP:2
+                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:2
+                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:2
+                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:2
+                                        [1]                                                    %%! STAGE_NUMBER_MARKUP:2
+                                }                                                              %%! STAGE_NUMBER_MARKUP:2
                 <BLANKLINE>
                             %%% GlobalSkips [measure 2] %%%
                             \time 3/8
@@ -2138,7 +2138,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2201,7 +2201,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2275,7 +2275,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2350,7 +2350,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2442,7 +2442,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2506,7 +2506,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2586,7 +2586,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2654,7 +2654,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2719,7 +2719,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2808,7 +2808,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2919,7 +2919,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2984,7 +2984,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3057,7 +3057,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3120,7 +3120,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3193,7 +3193,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3256,7 +3256,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3331,7 +3331,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3394,7 +3394,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3469,7 +3469,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3534,7 +3534,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3608,7 +3608,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3680,7 +3680,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3762,7 +3762,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3834,7 +3834,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3910,7 +3910,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3974,7 +3974,7 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4059,22 +4059,22 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar ""        %%! EMPTY_START_BAR:1
+                            \bar ""                                                            %%! EMPTY_START_BAR:1
                             s1 * 1/2
-                            - \markup {                               %%! STAGE_NUMBER_MARKUP:2
-                                \fontsize                             %%! STAGE_NUMBER_MARKUP:2
-                                    #-3                               %%! STAGE_NUMBER_MARKUP:2
-                                    \with-color                       %%! STAGE_NUMBER_MARKUP:2
-                                        #(x11-color 'DarkCyan)        %%! STAGE_NUMBER_MARKUP:2
-                                        [1]                           %%! STAGE_NUMBER_MARKUP:2
-                                }                                     %%! STAGE_NUMBER_MARKUP:2
+                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP:2
+                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:2
+                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:2
+                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:2
+                                        [1]                                                    %%! STAGE_NUMBER_MARKUP:2
+                                }                                                              %%! STAGE_NUMBER_MARKUP:2
                             \repeat volta 2
                             {
                 <BLANKLINE>
@@ -4176,35 +4176,35 @@ class LibraryTZ(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             %%% GlobalSkips [measure 1] %%%
                             \time 4/8
-                            \bar ""        %%! EMPTY_START_BAR:1
+                            \bar ""                                                            %%! EMPTY_START_BAR:1
                             s1 * 1/2
-                            - \markup {                               %%! STAGE_NUMBER_MARKUP:2
-                                \fontsize                             %%! STAGE_NUMBER_MARKUP:2
-                                    #-3                               %%! STAGE_NUMBER_MARKUP:2
-                                    \with-color                       %%! STAGE_NUMBER_MARKUP:2
-                                        #(x11-color 'DarkCyan)        %%! STAGE_NUMBER_MARKUP:2
-                                        [1]                           %%! STAGE_NUMBER_MARKUP:2
-                                }                                     %%! STAGE_NUMBER_MARKUP:2
+                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP:2
+                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:2
+                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:2
+                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:2
+                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:2
+                                        [1]                                                    %%! STAGE_NUMBER_MARKUP:2
+                                }                                                              %%! STAGE_NUMBER_MARKUP:2
                             \repeat volta 2
                             {
                 <BLANKLINE>
                                 %%% GlobalSkips [measure 2] %%%
                                 \time 3/8
                                 s1 * 3/8
-                                - \markup {                               %%! STAGE_NUMBER_MARKUP:1
-                                    \fontsize                             %%! STAGE_NUMBER_MARKUP:1
-                                        #-3                               %%! STAGE_NUMBER_MARKUP:1
-                                        \with-color                       %%! STAGE_NUMBER_MARKUP:1
-                                            #(x11-color 'DarkCyan)        %%! STAGE_NUMBER_MARKUP:1
-                                            [2]                           %%! STAGE_NUMBER_MARKUP:1
-                                    }                                     %%! STAGE_NUMBER_MARKUP:1
+                                - \markup {                                                    %%! STAGE_NUMBER_MARKUP:1
+                                    \fontsize                                                  %%! STAGE_NUMBER_MARKUP:1
+                                        #-3                                                    %%! STAGE_NUMBER_MARKUP:1
+                                        \with-color                                            %%! STAGE_NUMBER_MARKUP:1
+                                            #(x11-color 'DarkCyan)                             %%! STAGE_NUMBER_MARKUP:1
+                                            [2]                                                %%! STAGE_NUMBER_MARKUP:1
+                                    }                                                          %%! STAGE_NUMBER_MARKUP:1
                 <BLANKLINE>
                                 %%% GlobalSkips [measure 3] %%%
                                 \time 4/8
@@ -4214,13 +4214,13 @@ class LibraryTZ(abjad.AbjadObject):
                             %%% GlobalSkips [measure 4] %%%
                             \time 3/8
                             s1 * 3/8
-                            - \markup {                               %%! STAGE_NUMBER_MARKUP:1
-                                \fontsize                             %%! STAGE_NUMBER_MARKUP:1
-                                    #-3                               %%! STAGE_NUMBER_MARKUP:1
-                                    \with-color                       %%! STAGE_NUMBER_MARKUP:1
-                                        #(x11-color 'DarkCyan)        %%! STAGE_NUMBER_MARKUP:1
-                                        [3]                           %%! STAGE_NUMBER_MARKUP:1
-                                }                                     %%! STAGE_NUMBER_MARKUP:1
+                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP:1
+                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:1
+                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:1
+                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:1
+                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:1
+                                        [3]                                                    %%! STAGE_NUMBER_MARKUP:1
+                                }                                                              %%! STAGE_NUMBER_MARKUP:1
                 <BLANKLINE>
                         }
                     >>

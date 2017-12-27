@@ -13,7 +13,7 @@ class StageMeasureMap(abjad.AbjadObject):
         ...     4,
         ...     ])
 
-        >>> abjad.f(stages, strict=True)
+        >>> abjad.f(stages, strict=79)
         baca.StageMeasureMap(
             items=(
                 4,
@@ -33,7 +33,7 @@ class StageMeasureMap(abjad.AbjadObject):
         ...     4,
         ...     ])
 
-        >>> abjad.f(stages, strict=True)
+        >>> abjad.f(stages, strict=79)
         baca.StageMeasureMap(
             items=(
                 4,

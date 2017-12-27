@@ -101,7 +101,7 @@ class Expression(abjad.Expression):
 
                 ..  docs::
 
-                    >>> abjad.f(staff, strict=True)
+                    >>> abjad.f(staff, strict=79)
                     \new Staff {
                         { % measure
                             \time 2/8

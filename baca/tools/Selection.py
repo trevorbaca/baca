@@ -63,7 +63,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -165,7 +165,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -303,7 +303,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TextScript.staff-padding = #6
                     \override TupletBracket.direction = #up
@@ -520,7 +520,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     autoBeaming = ##f
                 } {
@@ -633,7 +633,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     autoBeaming = ##f
                 } {
@@ -742,7 +742,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -859,7 +859,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -954,7 +954,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -1061,7 +1061,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -1226,7 +1226,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -1342,7 +1342,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -1533,7 +1533,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -1705,7 +1705,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -1865,7 +1865,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -1979,7 +1979,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -2124,7 +2124,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -2244,7 +2244,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -2407,7 +2407,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -2526,7 +2526,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -2686,7 +2686,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -2800,7 +2800,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -2945,7 +2945,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -3053,7 +3053,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -3187,7 +3187,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -3294,7 +3294,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -3455,7 +3455,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     autoBeaming = ##f
                 } {
@@ -3564,7 +3564,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -3678,7 +3678,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -3796,7 +3796,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -3954,7 +3954,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     autoBeaming = ##f
                 } {
@@ -4016,7 +4016,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     autoBeaming = ##f
                 } {
@@ -4116,7 +4116,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3
@@ -4296,7 +4296,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=True)
+                >>> abjad.f(staff, strict=79)
                 \new Staff \with {
                     \override TupletBracket.direction = #up
                     \override TupletBracket.staff-padding = #3

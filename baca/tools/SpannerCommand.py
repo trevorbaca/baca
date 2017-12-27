@@ -24,7 +24,7 @@ class SpannerCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -78,22 +78,22 @@ class SpannerCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Score], strict=79)
             \context Score = "Score" <<
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
                         %%% GlobalSkips [measure 1] %%%
                         \time 4/8
-                        \bar ""        %%! EMPTY_START_BAR:1
+                        \bar ""                                                            %%! EMPTY_START_BAR:1
                         s1 * 1/2
-                        - \markup {                               %%! STAGE_NUMBER_MARKUP:2
-                            \fontsize                             %%! STAGE_NUMBER_MARKUP:2
-                                #-3                               %%! STAGE_NUMBER_MARKUP:2
-                                \with-color                       %%! STAGE_NUMBER_MARKUP:2
-                                    #(x11-color 'DarkCyan)        %%! STAGE_NUMBER_MARKUP:2
-                                    [1]                           %%! STAGE_NUMBER_MARKUP:2
-                            }                                     %%! STAGE_NUMBER_MARKUP:2
+                        - \markup {                                                        %%! STAGE_NUMBER_MARKUP:2
+                            \fontsize                                                      %%! STAGE_NUMBER_MARKUP:2
+                                #-3                                                        %%! STAGE_NUMBER_MARKUP:2
+                                \with-color                                                %%! STAGE_NUMBER_MARKUP:2
+                                    #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:2
+                                    [1]                                                    %%! STAGE_NUMBER_MARKUP:2
+                            }                                                              %%! STAGE_NUMBER_MARKUP:2
             <BLANKLINE>
                         %%% GlobalSkips [measure 2] %%%
                         \time 3/8
@@ -229,7 +229,7 @@ class SpannerCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -285,7 +285,7 @@ class SpannerCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -316,7 +316,7 @@ class SpannerCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne

@@ -231,7 +231,7 @@ class Constellation(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(constellation.generator_chord, strict=True)
+                >>> abjad.f(constellation.generator_chord, strict=79)
                 <c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
                 - \markup { 1-80 }
 
@@ -286,7 +286,7 @@ class Constellation(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(constellation.pivot_chord, strict=True)
+                >>> abjad.f(constellation.pivot_chord, strict=79)
                 <c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
                 - \markup { 1-80 }
 

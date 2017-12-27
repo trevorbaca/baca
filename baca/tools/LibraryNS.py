@@ -51,7 +51,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -114,7 +114,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -187,7 +187,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -263,7 +263,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -336,7 +336,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -415,7 +415,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -518,7 +518,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -588,7 +588,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -668,7 +668,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -726,7 +726,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -784,7 +784,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -861,7 +861,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -921,7 +921,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1014,7 +1014,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1075,7 +1075,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1184,7 +1184,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1257,7 +1257,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1335,7 +1335,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1401,7 +1401,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1479,7 +1479,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1545,7 +1545,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1621,7 +1621,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1684,7 +1684,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1755,7 +1755,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1821,7 +1821,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1889,7 +1889,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1958,7 +1958,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2021,7 +2021,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2095,7 +2095,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2158,7 +2158,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2288,7 +2288,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2361,7 +2361,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2446,7 +2446,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2521,7 +2521,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2605,7 +2605,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2678,7 +2678,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2763,7 +2763,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2836,7 +2836,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2920,7 +2920,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2984,7 +2984,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3065,7 +3065,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3163,7 +3163,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3273,7 +3273,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3340,7 +3340,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3409,7 +3409,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3480,7 +3480,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3546,7 +3546,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3625,7 +3625,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3696,7 +3696,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3781,7 +3781,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3858,7 +3858,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3941,7 +3941,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4059,7 +4059,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4177,7 +4177,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4316,7 +4316,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4386,7 +4386,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4462,7 +4462,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4532,7 +4532,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4650,7 +4650,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4713,7 +4713,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4789,7 +4789,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4861,7 +4861,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4938,7 +4938,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5002,7 +5002,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5079,7 +5079,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 2" {
                         \voiceTwo
@@ -5143,7 +5143,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 2" {
                         \voiceTwo
@@ -5220,7 +5220,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5333,7 +5333,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5400,7 +5400,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5470,7 +5470,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5540,7 +5540,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5610,7 +5610,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5677,7 +5677,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5753,7 +5753,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5829,7 +5829,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5919,7 +5919,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5995,7 +5995,7 @@ class LibraryNS(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne

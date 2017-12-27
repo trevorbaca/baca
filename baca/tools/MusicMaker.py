@@ -23,7 +23,7 @@ class MusicMaker(abjad.AbjadObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -155,7 +155,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -200,7 +200,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -245,7 +245,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -290,7 +290,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -337,7 +337,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -369,7 +369,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -400,7 +400,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -436,7 +436,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -467,7 +467,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -503,7 +503,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -559,7 +559,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1086,7 +1086,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1141,7 +1141,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1198,7 +1198,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1258,7 +1258,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1316,7 +1316,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1357,7 +1357,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1406,7 +1406,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override DynamicLineSpanner.staff-padding = #4.5
                 } <<
@@ -1467,7 +1467,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override DynamicLineSpanner.staff-padding = #4.5
                 } <<
@@ -1525,7 +1525,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override DynamicLineSpanner.staff-padding = #4.5
                 } <<
@@ -1583,7 +1583,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override DynamicLineSpanner.staff-padding = #6
                 } <<
@@ -1644,7 +1644,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override Stem.direction = #down
                 } <<
@@ -1701,7 +1701,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override Stem.direction = #down
                 } <<
@@ -1764,7 +1764,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override Stem.direction = #down
                 } <<
@@ -1827,7 +1827,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override Stem.direction = #down
                 } <<
@@ -1890,7 +1890,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override Beam.positions = #'(-6 . -6)
                 } <<
@@ -1963,7 +1963,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2015,7 +2015,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override Beam.positions = #'(-5.5 . -5.5)
                 } <<
@@ -2099,7 +2099,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff \with {
                     \override Beam.positions = #'(-5.5 . -5.5)
                 } <<
@@ -2185,7 +2185,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2244,7 +2244,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2304,7 +2304,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2365,7 +2365,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2426,7 +2426,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2483,7 +2483,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2525,7 +2525,7 @@ class MusicMaker(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne

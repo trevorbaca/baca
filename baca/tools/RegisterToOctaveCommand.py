@@ -25,7 +25,7 @@ class RegisterToOctaveCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -50,7 +50,7 @@ class RegisterToOctaveCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -75,7 +75,7 @@ class RegisterToOctaveCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -106,7 +106,7 @@ class RegisterToOctaveCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -135,7 +135,7 @@ class RegisterToOctaveCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -164,7 +164,7 @@ class RegisterToOctaveCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -199,7 +199,7 @@ class RegisterToOctaveCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -228,7 +228,7 @@ class RegisterToOctaveCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -257,7 +257,7 @@ class RegisterToOctaveCommand(Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -385,7 +385,7 @@ class RegisterToOctaveCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(chord, strict=True)
+                >>> abjad.f(chord, strict=79)
                 <c'' d''' e''''>1
 
         ..  container:: example
@@ -403,7 +403,7 @@ class RegisterToOctaveCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(chord, strict=True)
+                >>> abjad.f(chord, strict=79)
                 <c' d'' e'''>1
 
         ..  container:: example
@@ -421,7 +421,7 @@ class RegisterToOctaveCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(chord, strict=True)
+                >>> abjad.f(chord, strict=79)
                 <c d' e''>1
 
         Set to up, down, center or none.
@@ -443,7 +443,7 @@ class RegisterToOctaveCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(chord, strict=True)
+                >>> abjad.f(chord, strict=79)
                 \clef "bass"
                 <c, d e'>1
 
@@ -458,7 +458,7 @@ class RegisterToOctaveCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(chord, strict=True)
+                >>> abjad.f(chord, strict=79)
                 \clef "bass"
                 <c,, d, e>1
 
@@ -473,7 +473,7 @@ class RegisterToOctaveCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(chord, strict=True)
+                >>> abjad.f(chord, strict=79)
                 \clef "bass"
                 <c, d e'>1
 
@@ -488,7 +488,7 @@ class RegisterToOctaveCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(chord, strict=True)
+                >>> abjad.f(chord, strict=79)
                 \clef "bass"
                 <c d' e''>1
 
@@ -501,7 +501,7 @@ class RegisterToOctaveCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(chord, strict=True)
+                >>> abjad.f(chord, strict=79)
                 <c' d'' e'''>1
 
         ..  container:: example
@@ -513,7 +513,7 @@ class RegisterToOctaveCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(chord, strict=True)
+                >>> abjad.f(chord, strict=79)
                 <c'' d''' e''''>1
 
         Returns integer.

@@ -14,7 +14,7 @@ class CommandWrapper(abjad.AbjadObject):
         ...     baca.scope('ViolinMusicVoice', 1, 4),
         ...     )
 
-        >>> abjad.f(command, strict=True)
+        >>> abjad.f(command, strict=79)
         baca.CommandWrapper(
             command=baca.PitchCommand(
                 cyclic=True,
@@ -47,7 +47,7 @@ class CommandWrapper(abjad.AbjadObject):
         ...         ]),
         ...     )
 
-        >>> abjad.f(command, strict=True)
+        >>> abjad.f(command, strict=79)
         baca.CommandWrapper(
             command=baca.PitchCommand(
                 cyclic=True,
@@ -113,7 +113,7 @@ class CommandWrapper(abjad.AbjadObject):
             ...     baca.scope('ViolinMusicVoice', 1, 4),
             ...     )
 
-            >>> abjad.f(command.command, strict=True)
+            >>> abjad.f(command.command, strict=79)
             baca.PitchCommand(
                 cyclic=True,
                 pitches=abjad.CyclicTuple(
@@ -149,7 +149,7 @@ class CommandWrapper(abjad.AbjadObject):
             ...     baca.scope('ViolinMusicVoice', 1, 4),
             ...     )
 
-            >>> abjad.f(command.scope, strict=True)
+            >>> abjad.f(command.scope, strict=79)
             baca.Scope(
                 voice_name='ViolinMusicVoice',
                 stages=(1, 4),

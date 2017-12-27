@@ -38,7 +38,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
             \new Staff {
                 { % measure
                     \time 3/4
@@ -199,7 +199,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 3/4
@@ -282,7 +282,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 3/4
@@ -375,7 +375,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 3/4
@@ -463,7 +463,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 3/2
@@ -556,7 +556,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 3/2
@@ -651,7 +651,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 9/8
@@ -746,7 +746,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 11/8
@@ -847,7 +847,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 3/4
@@ -930,7 +930,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 2/1
@@ -1013,7 +1013,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=True)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
                 \new Staff {
                     { % measure
                         \time 3/2
