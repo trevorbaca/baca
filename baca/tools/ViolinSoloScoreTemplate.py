@@ -56,79 +56,79 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                         \context ViolinMusicVoice = "ViolinMusicVoice" {
             <BLANKLINE>
                             %%% ViolinMusicVoice [measure 1] %%%
-                            \set ViolinMusicStaff.instrumentName = \markup {               %%! TEMPLATE_INSTRUMENT
-                                \hcenter-in                                                %%! TEMPLATE_INSTRUMENT
-                                    #16                                                    %%! TEMPLATE_INSTRUMENT
-                                    Violin                                                 %%! TEMPLATE_INSTRUMENT
-                                }                                                          %%! TEMPLATE_INSTRUMENT
-                            \set ViolinMusicStaff.shortInstrumentName = \markup {          %%! TEMPLATE_INSTRUMENT
-                                \hcenter-in                                                %%! TEMPLATE_INSTRUMENT
-                                    #10                                                    %%! TEMPLATE_INSTRUMENT
-                                    Vn.                                                    %%! TEMPLATE_INSTRUMENT
-                                }                                                          %%! TEMPLATE_INSTRUMENT
-                            \set ViolinMusicStaff.forceClef = ##t                          %%! TEMPLATE_CLEF
-                            \clef "treble"                                                 %%! TEMPLATE_CLEF
-                            \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %%! TEMPLATE_INSTRUMENT_COLOR
-                            \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %%! TEMPLATE_CLEF_COLOR
-                            %%% \override ViolinMusicStaff.Clef.color = ##f                %%! TEMPLATE_CLEF_UNCOLOR
+                            \set ViolinMusicStaff.instrumentName = \markup {               %%! DEFAULT_INSTRUMENT
+                                \hcenter-in                                                %%! DEFAULT_INSTRUMENT
+                                    #16                                                    %%! DEFAULT_INSTRUMENT
+                                    Violin                                                 %%! DEFAULT_INSTRUMENT
+                                }                                                          %%! DEFAULT_INSTRUMENT
+                            \set ViolinMusicStaff.shortInstrumentName = \markup {          %%! DEFAULT_INSTRUMENT
+                                \hcenter-in                                                %%! DEFAULT_INSTRUMENT
+                                    #10                                                    %%! DEFAULT_INSTRUMENT
+                                    Vn.                                                    %%! DEFAULT_INSTRUMENT
+                                }                                                          %%! DEFAULT_INSTRUMENT
+                            \set ViolinMusicStaff.forceClef = ##t                          %%! DEFAULT_CLEF
+                            \clef "treble"                                                 %%! DEFAULT_CLEF
+                            \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %%! DEFAULT_INSTRUMENT_COLOR
+                            \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %%! DEFAULT_CLEF_COLOR
+                            %%% \override ViolinMusicStaff.Clef.color = ##f                %%! DEFAULT_CLEF_UNCOLOR
                             R1 * 1/2
                             ^ \markup {
                                 \column
                                     {
-                                        %%% \line                                          %%! TEMPLATE_INSTRUMENT_ALERT
-                                        %%%     {                                          %%! TEMPLATE_INSTRUMENT_ALERT
-                                        %%%         \vcenter                               %%! TEMPLATE_INSTRUMENT_ALERT
-                                        %%%             (Violin                            %%! TEMPLATE_INSTRUMENT_ALERT
-                                        %%%         \vcenter                               %%! TEMPLATE_INSTRUMENT_ALERT
-                                        %%%             \hcenter-in                        %%! TEMPLATE_INSTRUMENT_ALERT
-                                        %%%                 #16                            %%! TEMPLATE_INSTRUMENT_ALERT
-                                        %%%                 Violin                         %%! TEMPLATE_INSTRUMENT_ALERT
-                                        %%%         \concat                                %%! TEMPLATE_INSTRUMENT_ALERT
-                                        %%%             {                                  %%! TEMPLATE_INSTRUMENT_ALERT
-                                        %%%                 \vcenter                       %%! TEMPLATE_INSTRUMENT_ALERT
-                                        %%%                     \hcenter-in                %%! TEMPLATE_INSTRUMENT_ALERT
-                                        %%%                         #10                    %%! TEMPLATE_INSTRUMENT_ALERT
-                                        %%%                         Vn.                    %%! TEMPLATE_INSTRUMENT_ALERT
-                                        %%%                 \vcenter                       %%! TEMPLATE_INSTRUMENT_ALERT
-                                        %%%                     )                          %%! TEMPLATE_INSTRUMENT_ALERT
-                                        %%%             }                                  %%! TEMPLATE_INSTRUMENT_ALERT
-                                        %%%     }                                          %%! TEMPLATE_INSTRUMENT_ALERT
-                                        \line                                              %%! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR
-                                            {                                              %%! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR
-                                                \with-color                                %%! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR
-                                                    #(x11-color 'DarkViolet)               %%! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR
-                                                    {                                      %%! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR
-                                                        \vcenter                           %%! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR
-                                                            (Violin                        %%! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR
-                                                        \vcenter                           %%! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR
-                                                            \hcenter-in                    %%! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR
-                                                                #16                        %%! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR
-                                                                Violin                     %%! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR
-                                                        \concat                            %%! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR
-                                                            {                              %%! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR
-                                                                \vcenter                   %%! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    \hcenter-in            %%! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        #10                %%! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        Vn.                %%! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR
-                                                                \vcenter                   %%! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    )                      %%! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR
-                                                            }                              %%! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR
-                                                    }                                      %%! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR
-                                            }                                              %%! TEMPLATE_INSTRUMENT_ALERT_WITH_COLOR
+                                        %%% \line                                          %%! DEFAULT_INSTRUMENT_ALERT
+                                        %%%     {                                          %%! DEFAULT_INSTRUMENT_ALERT
+                                        %%%         \vcenter                               %%! DEFAULT_INSTRUMENT_ALERT
+                                        %%%             (Violin                            %%! DEFAULT_INSTRUMENT_ALERT
+                                        %%%         \vcenter                               %%! DEFAULT_INSTRUMENT_ALERT
+                                        %%%             \hcenter-in                        %%! DEFAULT_INSTRUMENT_ALERT
+                                        %%%                 #16                            %%! DEFAULT_INSTRUMENT_ALERT
+                                        %%%                 Violin                         %%! DEFAULT_INSTRUMENT_ALERT
+                                        %%%         \concat                                %%! DEFAULT_INSTRUMENT_ALERT
+                                        %%%             {                                  %%! DEFAULT_INSTRUMENT_ALERT
+                                        %%%                 \vcenter                       %%! DEFAULT_INSTRUMENT_ALERT
+                                        %%%                     \hcenter-in                %%! DEFAULT_INSTRUMENT_ALERT
+                                        %%%                         #10                    %%! DEFAULT_INSTRUMENT_ALERT
+                                        %%%                         Vn.                    %%! DEFAULT_INSTRUMENT_ALERT
+                                        %%%                 \vcenter                       %%! DEFAULT_INSTRUMENT_ALERT
+                                        %%%                     )                          %%! DEFAULT_INSTRUMENT_ALERT
+                                        %%%             }                                  %%! DEFAULT_INSTRUMENT_ALERT
+                                        %%%     }                                          %%! DEFAULT_INSTRUMENT_ALERT
+                                        \line                                              %%! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                            {                                              %%! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                \with-color                                %%! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                    #(x11-color 'DarkViolet)               %%! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                    {                                      %%! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                        \vcenter                           %%! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                            (Violin                        %%! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                        \vcenter                           %%! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                            \hcenter-in                    %%! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                                #16                        %%! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                                Violin                     %%! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                        \concat                            %%! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                            {                              %%! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                                \vcenter                   %%! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                                    \hcenter-in            %%! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                                        #10                %%! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                                        Vn.                %%! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                                \vcenter                   %%! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                                    )                      %%! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                            }                              %%! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                    }                                      %%! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                            }                                              %%! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
                                     }
                                 }
-                            \set ViolinMusicStaff.instrumentName = \markup {               %%! TEMPLATE_REDRAW_INSTRUMENT
-                                \hcenter-in                                                %%! TEMPLATE_REDRAW_INSTRUMENT
-                                    #16                                                    %%! TEMPLATE_REDRAW_INSTRUMENT
-                                    Violin                                                 %%! TEMPLATE_REDRAW_INSTRUMENT
-                                }                                                          %%! TEMPLATE_REDRAW_INSTRUMENT
-                            \set ViolinMusicStaff.shortInstrumentName = \markup {          %%! TEMPLATE_REDRAW_INSTRUMENT
-                                \hcenter-in                                                %%! TEMPLATE_REDRAW_INSTRUMENT
-                                    #10                                                    %%! TEMPLATE_REDRAW_INSTRUMENT
-                                    Vn.                                                    %%! TEMPLATE_REDRAW_INSTRUMENT
-                                }                                                          %%! TEMPLATE_REDRAW_INSTRUMENT
-                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'violet) %%! TEMPLATE_REDRAW_INSTRUMENT_COLOR
-                            \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)   %%! TEMPLATE_CLEF_COLOR_REDRAW
+                            \set ViolinMusicStaff.instrumentName = \markup {               %%! DEFAULT_REDRAW_INSTRUMENT
+                                \hcenter-in                                                %%! DEFAULT_REDRAW_INSTRUMENT
+                                    #16                                                    %%! DEFAULT_REDRAW_INSTRUMENT
+                                    Violin                                                 %%! DEFAULT_REDRAW_INSTRUMENT
+                                }                                                          %%! DEFAULT_REDRAW_INSTRUMENT
+                            \set ViolinMusicStaff.shortInstrumentName = \markup {          %%! DEFAULT_REDRAW_INSTRUMENT
+                                \hcenter-in                                                %%! DEFAULT_REDRAW_INSTRUMENT
+                                    #10                                                    %%! DEFAULT_REDRAW_INSTRUMENT
+                                    Vn.                                                    %%! DEFAULT_REDRAW_INSTRUMENT
+                                }                                                          %%! DEFAULT_REDRAW_INSTRUMENT
+                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'violet) %%! DEFAULT_REDRAW_INSTRUMENT_COLOR
+                            \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)   %%! DEFAULT_CLEF_COLOR_REDRAW
             <BLANKLINE>
                             %%% ViolinMusicVoice [measure 2] %%%
                             R1 * 3/8
