@@ -124,13 +124,13 @@ class Tags(abjad.Enumeration):
     ### METRONOME MARKS ###
 
     EXPLICIT_METRONOME_MARK = enum.auto()
-    EXPLICIT_METRONOME_MARK_COLOR = enum.auto()
+    EXPLICIT_METRONOME_MARK_WITH_COLOR = enum.auto()
 
     REAPPLIED_METRONOME_MARK = enum.auto()
-    REAPPLIED_METRONOME_MARK_COLOR = enum.auto() 
+    REAPPLIED_METRONOME_MARK_WITH_COLOR = enum.auto() 
 
     REDUNDANT_METRONOME_MARK = enum.auto()
-    REDUNDANT_METRONOME_MARK_COLOR = enum.auto()
+    REDUNDANT_METRONOME_MARK_WITH_COLOR = enum.auto()
 
     ### STAFF LINES ###
 
