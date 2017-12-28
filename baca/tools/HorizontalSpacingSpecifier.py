@@ -38,7 +38,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \time 8/16
                         \bar ""                                                            %%! EMPTY_START_BAR
                         s1 * 1/2
-                        - \markup {                                                        %%! STAGE_NUMBER_MARKUP
+                        ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
                             \fontsize                                                      %%! STAGE_NUMBER_MARKUP
                                 #-3                                                        %%! STAGE_NUMBER_MARKUP
                                 \with-color                                                %%! STAGE_NUMBER_MARKUP
@@ -150,7 +150,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)   %%! SEGMENT:SPACING
                         s1 * 1/2
-                        - \markup {
+                        ^ \markup {
                             \column
                                 {
                                     \line                                                  %%! STAGE_NUMBER_MARKUP
@@ -177,7 +177,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)    %%! SEGMENT:SPACING
                         s1 * 1/2
-                        - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                        ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                             \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                 #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                 \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -190,7 +190,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)    %%! SEGMENT:SPACING
                         s1 * 1/2
-                        - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                        ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                             \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                 #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                 \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -203,7 +203,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 2)    %%! SEGMENT:SPACING
                         s1 * 1/2
-                        - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                        ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                             \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                 #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                 \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -305,7 +305,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)   %%! SEGMENT:SPACING
                         s1 * 1/2
-                        - \markup {
+                        ^ \markup {
                             \column
                                 {
                                     \line                                                  %%! STAGE_NUMBER_MARKUP
@@ -332,7 +332,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)    %%! SEGMENT:SPACING
                         s1 * 1/2
-                        - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                        ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                             \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                 #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                 \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -345,7 +345,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)    %%! SEGMENT:SPACING
                         s1 * 1/2
-                        - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                        ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                             \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                 #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                 \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -358,7 +358,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 2)    %%! SEGMENT:SPACING
                         s1 * 1/2
-                        - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                        ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                             \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                 #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                 \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -461,7 +461,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)   %%! SEGMENT:SPACING
                         s1 * 1/2
-                        - \markup {
+                        ^ \markup {
                             \column
                                 {
                                     \line                                                  %%! STAGE_NUMBER_MARKUP
@@ -488,7 +488,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)   %%! SEGMENT:SPACING
                         s1 * 1/2
-                        - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                        ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                             \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                 #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                 \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -501,7 +501,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)    %%! SEGMENT:SPACING
                         s1 * 1/2
-                        - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                        ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                             \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                 #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                 \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -514,7 +514,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)    %%! SEGMENT:SPACING
                         s1 * 1/2
-                        - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                        ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                             \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                 #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                 \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -618,7 +618,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)   %%! SEGMENT:SPACING
                         s1 * 1/2
-                        - \markup {
+                        ^ \markup {
                             \column
                                 {
                                     \line                                                  %%! STAGE_NUMBER_MARKUP
@@ -645,7 +645,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)   %%! SEGMENT:SPACING
                         s1 * 1/2
-                        - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                        ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                             \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                 #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                 \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -658,7 +658,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)   %%! SEGMENT:SPACING
                         s1 * 1/2
-                        - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                        ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                             \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                 #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                 \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -671,7 +671,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)   %%! SEGMENT:SPACING
                         s1 * 1/2
-                        - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                        ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                             \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                 #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                 \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -785,7 +785,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)   %%! SEGMENT:SPACING
                         s1 * 1/2
-                        - \markup {
+                        ^ \markup {
                             \column
                                 {
                                     \line                                                  %%! STAGE_NUMBER_MARKUP
@@ -812,7 +812,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)   %%! SEGMENT:SPACING
                         s1 * 3/8
-                        - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                        ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                             \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                 #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                 \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -1011,6 +1011,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             abjad.attach(literal, skip, tag=command_tag)
             markup = abjad.Markup(f'({duration!s})').fontsize(-3)
             markup = markup.with_color(abjad.SchemeColor('DarkCyan'))
+            markup = abjad.new(markup, direction=abjad.Up)
             abjad.attach(markup, skip, tag=markup_tag)
 
     ### PRIVATE METHODS ###

@@ -390,7 +390,7 @@ class ClusterCommand(Command):
                         \time 4/8
                         \bar ""                                                            %%! EMPTY_START_BAR
                         s1 * 1/2
-                        - \markup {                                                        %%! STAGE_NUMBER_MARKUP
+                        ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
                             \fontsize                                                      %%! STAGE_NUMBER_MARKUP
                                 #-3                                                        %%! STAGE_NUMBER_MARKUP
                                 \with-color                                                %%! STAGE_NUMBER_MARKUP
@@ -613,7 +613,7 @@ class ClusterCommand(Command):
                             \time 4/8
                             \bar ""                                                            %%! EMPTY_START_BAR
                             s1 * 1/2
-                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
                                 \fontsize                                                      %%! STAGE_NUMBER_MARKUP
                                     #-3                                                        %%! STAGE_NUMBER_MARKUP
                                     \with-color                                                %%! STAGE_NUMBER_MARKUP
@@ -754,7 +754,7 @@ class ClusterCommand(Command):
                             \time 4/8
                             \bar ""                                                            %%! EMPTY_START_BAR
                             s1 * 1/2
-                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
                                 \fontsize                                                      %%! STAGE_NUMBER_MARKUP
                                     #-3                                                        %%! STAGE_NUMBER_MARKUP
                                     \with-color                                                %%! STAGE_NUMBER_MARKUP
@@ -887,7 +887,7 @@ class ClusterCommand(Command):
                             \time 4/8
                             \bar ""                                                            %%! EMPTY_START_BAR
                             s1 * 1/2
-                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
                                 \fontsize                                                      %%! STAGE_NUMBER_MARKUP
                                     #-3                                                        %%! STAGE_NUMBER_MARKUP
                                     \with-color                                                %%! STAGE_NUMBER_MARKUP
@@ -1030,7 +1030,7 @@ class ClusterCommand(Command):
                             \time 4/8
                             \bar ""                                                            %%! EMPTY_START_BAR
                             s1 * 1/2
-                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
                                 \fontsize                                                      %%! STAGE_NUMBER_MARKUP
                                     #-3                                                        %%! STAGE_NUMBER_MARKUP
                                     \with-color                                                %%! STAGE_NUMBER_MARKUP
@@ -1163,7 +1163,7 @@ class ClusterCommand(Command):
                             \time 4/8
                             \bar ""                                                            %%! EMPTY_START_BAR
                             s1 * 1/2
-                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
                                 \fontsize                                                      %%! STAGE_NUMBER_MARKUP
                                     #-3                                                        %%! STAGE_NUMBER_MARKUP
                                     \with-color                                                %%! STAGE_NUMBER_MARKUP
@@ -1297,7 +1297,7 @@ class ClusterCommand(Command):
                             \time 4/8
                             \bar ""                                                            %%! EMPTY_START_BAR
                             s1 * 1/2
-                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
                                 \fontsize                                                      %%! STAGE_NUMBER_MARKUP
                                     #-3                                                        %%! STAGE_NUMBER_MARKUP
                                     \with-color                                                %%! STAGE_NUMBER_MARKUP

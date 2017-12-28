@@ -42,6 +42,14 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                         ^ \markup {
                             \column
                                 {
+                                    \line                                                  %%! STAGE_NUMBER_MARKUP
+                                        {                                                  %%! STAGE_NUMBER_MARKUP
+                                            \fontsize                                      %%! STAGE_NUMBER_MARKUP
+                                                #-3                                        %%! STAGE_NUMBER_MARKUP
+                                                \with-color                                %%! STAGE_NUMBER_MARKUP
+                                                    #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP
+                                                    [1]                                    %%! STAGE_NUMBER_MARKUP
+                                        }                                                  %%! STAGE_NUMBER_MARKUP
                                     \line                                                  %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
                                         {                                                  %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
                                             \with-color                                    %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
@@ -71,13 +79,6 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                                         }                                                  %%! CLOCK_TIME_MARKUP
                                 }
                             }
-                        - \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                            \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                    #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                    [1]                                                    %%! STAGE_NUMBER_MARKUP
-                            }                                                              %%! STAGE_NUMBER_MARKUP
                         %%% ^ \markup {                                                    %%! EXPLICIT_METRONOME_MARK
                         %%%     \fontsize                                                  %%! EXPLICIT_METRONOME_MARK
                         %%%         #-6                                                    %%! EXPLICIT_METRONOME_MARK
@@ -110,6 +111,14 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                         ^ \markup {
                             \column
                                 {
+                                    \line                                                  %%! STAGE_NUMBER_MARKUP
+                                        {                                                  %%! STAGE_NUMBER_MARKUP
+                                            \fontsize                                      %%! STAGE_NUMBER_MARKUP
+                                                #-3                                        %%! STAGE_NUMBER_MARKUP
+                                                \with-color                                %%! STAGE_NUMBER_MARKUP
+                                                    #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP
+                                                    [2]                                    %%! STAGE_NUMBER_MARKUP
+                                        }                                                  %%! STAGE_NUMBER_MARKUP
                                     \line                                                  %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
                                         {                                                  %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
                                             \with-color                                    %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
@@ -139,13 +148,6 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                                         }                                                  %%! CLOCK_TIME_MARKUP
                                 }
                             }
-                        - \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                            \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                    #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                    [2]                                                    %%! STAGE_NUMBER_MARKUP
-                            }                                                              %%! STAGE_NUMBER_MARKUP
                         %%% ^ \markup {                                                    %%! EXPLICIT_METRONOME_MARK
                         %%%     \fontsize                                                  %%! EXPLICIT_METRONOME_MARK
                         %%%         #-6                                                    %%! EXPLICIT_METRONOME_MARK

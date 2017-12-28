@@ -904,7 +904,7 @@ class ImbricationCommand(Command):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 7/16
-                            - \markup {
+                            ^ \markup {
                                 \column
                                     {
                                         \line                                                  %%! STAGE_NUMBER_MARKUP
@@ -931,7 +931,7 @@ class ImbricationCommand(Command):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 1/4
-                            - \markup {
+                            ^ \markup {
                                 \column
                                     {
                                         \line                                                  %%! STAGE_NUMBER_MARKUP

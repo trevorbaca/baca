@@ -407,7 +407,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar ""                                                            %%! EMPTY_START_BAR
                             s1 * 1/2
-                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
                                 \fontsize                                                      %%! STAGE_NUMBER_MARKUP
                                     #-3                                                        %%! STAGE_NUMBER_MARKUP
                                     \with-color                                                %%! STAGE_NUMBER_MARKUP
@@ -1667,6 +1667,7 @@ class SegmentMaker(abjad.SegmentMaker):
             markup = abjad.Markup(string)
             markup = markup.with_color(abjad.SchemeColor('DarkCyan'))
             markup = markup.fontsize(-3)
+            markup = abjad.new(markup, direction=abjad.Up)
             skip = skips[start_measure_index]
             abjad.attach(markup, skip, tag=baca.Tags.STAGE_NUMBER_MARKUP)
 
@@ -2686,7 +2687,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 31)   %%! SEGMENT:SPACING
                             s1 * 3/8
-                            - \markup {
+                            ^ \markup {
                                 \column
                                     {
                                         \line                                                  %%! STAGE_NUMBER_MARKUP
@@ -3076,7 +3077,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 1/16
-                            - \markup {
+                            ^ \markup {
                                 \column
                                     {
                                         \line                                                  %%! STAGE_NUMBER_MARKUP
@@ -3103,7 +3104,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 7/16
-                            - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                            ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                                 \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                     #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                     \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -3116,7 +3117,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 1/16
-                            - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                            ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                                 \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                     #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                     \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -3129,7 +3130,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/8
-                            - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                            ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                                 \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                     #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                     \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -3278,7 +3279,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 1/16
-                            - \markup {
+                            ^ \markup {
                                 \column
                                     {
                                         \line                                                  %%! STAGE_NUMBER_MARKUP
@@ -3305,7 +3306,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 7/16
-                            - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                            ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                                 \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                     #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                     \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -3318,7 +3319,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 1/16
-                            - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                            ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                                 \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                     #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                     \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -3331,7 +3332,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/8
-                            - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                            ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                                 \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                     #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                     \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -3571,7 +3572,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar ""                                                            %%! EMPTY_START_BAR
                             s1 * 1/2
-                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
                                 \fontsize                                                      %%! STAGE_NUMBER_MARKUP
                                     #-3                                                        %%! STAGE_NUMBER_MARKUP
                                     \with-color                                                %%! STAGE_NUMBER_MARKUP
@@ -3679,7 +3680,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar ""                                                            %%! EMPTY_START_BAR
                             s1 * 1/2
-                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
                                 \fontsize                                                      %%! STAGE_NUMBER_MARKUP
                                     #-3                                                        %%! STAGE_NUMBER_MARKUP
                                     \with-color                                                %%! STAGE_NUMBER_MARKUP
@@ -3789,7 +3790,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar ""                                                            %%! EMPTY_START_BAR
                             s1 * 1/2
-                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
                                 \fontsize                                                      %%! STAGE_NUMBER_MARKUP
                                     #-3                                                        %%! STAGE_NUMBER_MARKUP
                                     \with-color                                                %%! STAGE_NUMBER_MARKUP
@@ -3901,7 +3902,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar ""                                                            %%! EMPTY_START_BAR
                             s1 * 1/2
-                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
                                 \fontsize                                                      %%! STAGE_NUMBER_MARKUP
                                     #-3                                                        %%! STAGE_NUMBER_MARKUP
                                     \with-color                                                %%! STAGE_NUMBER_MARKUP
@@ -4023,7 +4024,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar ""                                                            %%! EMPTY_START_BAR
                             s1 * 1/2
-                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
                                 \fontsize                                                      %%! STAGE_NUMBER_MARKUP
                                     #-3                                                        %%! STAGE_NUMBER_MARKUP
                                     \with-color                                                %%! STAGE_NUMBER_MARKUP
@@ -4196,7 +4197,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar ""                                                            %%! EMPTY_START_BAR
                             s1 * 1/2
-                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
                                 \fontsize                                                      %%! STAGE_NUMBER_MARKUP
                                     #-3                                                        %%! STAGE_NUMBER_MARKUP
                                     \with-color                                                %%! STAGE_NUMBER_MARKUP
@@ -4304,7 +4305,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar ""                                                            %%! EMPTY_START_BAR
                             s1 * 1/2
-                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
                                 \fontsize                                                      %%! STAGE_NUMBER_MARKUP
                                     #-3                                                        %%! STAGE_NUMBER_MARKUP
                                     \with-color                                                %%! STAGE_NUMBER_MARKUP
@@ -4537,7 +4538,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/16
-                            - \markup {
+                            ^ \markup {
                                 \column
                                     {
                                         \line                                                  %%! STAGE_NUMBER_MARKUP
@@ -4563,7 +4564,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/16
-                            - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                            ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                                 \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                     #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                     \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -4575,7 +4576,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/16
-                            - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                            ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                                 \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                     #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                     \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -4587,7 +4588,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/16
-                            - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                            ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                                 \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                     #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                     \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -4733,7 +4734,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/16
-                            - \markup {
+                            ^ \markup {
                                 \column
                                     {
                                         \line                                                  %%! STAGE_NUMBER_MARKUP
@@ -4759,7 +4760,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/16
-                            - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                            ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                                 \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                     #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                     \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -4771,7 +4772,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/16
-                            - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                            ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                                 \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                     #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                     \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -4783,7 +4784,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/16
-                            - \markup {                                                        %%! SEGMENT:SPACING_MARKUP
+                            ^ \markup {                                                        %%! SEGMENT:SPACING_MARKUP
                                 \with-color                                                    %%! SEGMENT:SPACING_MARKUP
                                     #(x11-color 'DarkCyan)                                     %%! SEGMENT:SPACING_MARKUP
                                     \fontsize                                                  %%! SEGMENT:SPACING_MARKUP
@@ -6676,7 +6677,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \mark #1
                             \bar ""                                                            %%! EMPTY_START_BAR
                             s1 * 1/2
-                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
                                 \fontsize                                                      %%! STAGE_NUMBER_MARKUP
                                     #-3                                                        %%! STAGE_NUMBER_MARKUP
                                     \with-color                                                %%! STAGE_NUMBER_MARKUP
@@ -6813,33 +6814,40 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar ""                                                            %%! EMPTY_START_BAR
                             s1 * 1/2
-                            ^ \markup {                                                        %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                \with-color                                                    %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                    #(x11-color 'blue)                                         %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                    {                                                          %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                        \fontsize                                              %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                            #-6                                                %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                            \general-align                                     %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                #Y                                             %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                #DOWN                                          %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                \note-by-number                                %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                    #2                                         %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                    #0                                         %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                    #1                                         %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                        \upright                                               %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                            ^ \markup {
+                                \column
+                                    {
+                                        \line                                                  %%! STAGE_NUMBER_MARKUP
+                                            {                                                  %%! STAGE_NUMBER_MARKUP
+                                                \fontsize                                      %%! STAGE_NUMBER_MARKUP
+                                                    #-3                                        %%! STAGE_NUMBER_MARKUP
+                                                    \with-color                                %%! STAGE_NUMBER_MARKUP
+                                                        #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP
+                                                        [1]                                    %%! STAGE_NUMBER_MARKUP
+                                            }                                                  %%! STAGE_NUMBER_MARKUP
+                                        \line                                                  %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
                                             {                                                  %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                =                                              %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                90                                             %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                \with-color                                    %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                    #(x11-color 'blue)                         %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                    {                                          %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                        \fontsize                              %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                            #-6                                %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                            \general-align                     %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                                #Y                             %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                                #DOWN                          %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                                \note-by-number                %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                                    #2                         %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                                    #0                         %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                                    #1                         %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                        \upright                               %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                            {                                  %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                                =                              %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                                90                             %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                            }                                  %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                    }                                          %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
                                             }                                                  %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                    }                                                          %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                }                                                              %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                    #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                    \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                        [1]                                                    %%! STAGE_NUMBER_MARKUP
-                                }                                                              %%! STAGE_NUMBER_MARKUP
+                                    }
+                                }
                             %%% ^ \markup {                                                    %%! EXPLICIT_METRONOME_MARK
                             %%%     \fontsize                                                  %%! EXPLICIT_METRONOME_MARK
                             %%%         #-6                                                    %%! EXPLICIT_METRONOME_MARK
@@ -7661,7 +7669,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar ""                                                            %%! EMPTY_START_BAR
                             s1 * 1/2
-                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
                                 \fontsize                                                      %%! STAGE_NUMBER_MARKUP
                                     #-3                                                        %%! STAGE_NUMBER_MARKUP
                                     \with-color                                                %%! STAGE_NUMBER_MARKUP
@@ -7729,7 +7737,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar ""                                                            %%! EMPTY_START_BAR
                             s1 * 1/2
-                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
                                 \fontsize                                                      %%! STAGE_NUMBER_MARKUP
                                     #-3                                                        %%! STAGE_NUMBER_MARKUP
                                     \with-color                                                %%! STAGE_NUMBER_MARKUP
@@ -7843,7 +7851,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar ""                                                            %%! EMPTY_START_BAR
                             s1 * 1/2
-                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
                                 \fontsize                                                      %%! STAGE_NUMBER_MARKUP
                                     #-3                                                        %%! STAGE_NUMBER_MARKUP
                                     \with-color                                                %%! STAGE_NUMBER_MARKUP
@@ -7978,7 +7986,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar ""                                                            %%! EMPTY_START_BAR
                             s1 * 1/2
-                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
                                 \fontsize                                                      %%! STAGE_NUMBER_MARKUP
                                     #-3                                                        %%! STAGE_NUMBER_MARKUP
                                     \with-color                                                %%! STAGE_NUMBER_MARKUP
@@ -8134,7 +8142,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8
                             \bar ""                                                            %%! EMPTY_START_BAR
                             s1 * 1/2
-                            - \markup {                                                        %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
                                 \fontsize                                                      %%! STAGE_NUMBER_MARKUP
                                     #-3                                                        %%! STAGE_NUMBER_MARKUP
                                     \with-color                                                %%! STAGE_NUMBER_MARKUP
