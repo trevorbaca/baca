@@ -173,6 +173,8 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                                 #-2                                                        %! CLOCK_TIME_MARKUP
                                 0'04''                                                     %! CLOCK_TIME_MARKUP
                             }                                                              %! CLOCK_TIME_MARKUP
+                        \override Score.BarLine.transparent = ##f                          %! SM5
+                        \bar "|"                                                           %! SM5
             <BLANKLINE>
                     }
                 >>
@@ -209,7 +211,6 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
             <BLANKLINE>
                             % MusicVoice [measure 4]                                       %! SM4
                             R1 * 3/8
-                            \bar "|"
             <BLANKLINE>
                         }
                     }

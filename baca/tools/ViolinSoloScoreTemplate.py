@@ -47,6 +47,8 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                         % GlobalSkips [measure 4]                                          %! SM4
                         \time 3/8                                                          %! SM1
                         s1 * 3/8
+                        \override Score.BarLine.transparent = ##f                          %! SM5
+                        \bar "|"                                                           %! SM5
             <BLANKLINE>
                     }
                 >>
@@ -56,21 +58,21 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                         \context ViolinMusicVoice = "ViolinMusicVoice" {
             <BLANKLINE>
                             % ViolinMusicVoice [measure 1]                                 %! SM4
-                            \set ViolinMusicStaff.instrumentName = \markup {               %! DEFAULT_INSTRUMENT
-                                \hcenter-in                                                %! DEFAULT_INSTRUMENT
-                                    #16                                                    %! DEFAULT_INSTRUMENT
-                                    Violin                                                 %! DEFAULT_INSTRUMENT
-                                }                                                          %! DEFAULT_INSTRUMENT
-                            \set ViolinMusicStaff.shortInstrumentName = \markup {          %! DEFAULT_INSTRUMENT
-                                \hcenter-in                                                %! DEFAULT_INSTRUMENT
-                                    #10                                                    %! DEFAULT_INSTRUMENT
-                                    Vn.                                                    %! DEFAULT_INSTRUMENT
-                                }                                                          %! DEFAULT_INSTRUMENT
-                            \set ViolinMusicStaff.forceClef = ##t                          %! DEFAULT_CLEF
-                            \clef "treble"                                                 %! DEFAULT_CLEF
-                            \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR
-                            \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR
-                            %%% \override ViolinMusicStaff.Clef.color = ##f                %! DEFAULT_CLEF_UNCOLOR
+                            \set ViolinMusicStaff.instrumentName = \markup {               %! DEFAULT_INSTRUMENT:SM8
+                                \hcenter-in                                                %! DEFAULT_INSTRUMENT:SM8
+                                    #16                                                    %! DEFAULT_INSTRUMENT:SM8
+                                    Violin                                                 %! DEFAULT_INSTRUMENT:SM8
+                                }                                                          %! DEFAULT_INSTRUMENT:SM8
+                            \set ViolinMusicStaff.shortInstrumentName = \markup {          %! DEFAULT_INSTRUMENT:SM8
+                                \hcenter-in                                                %! DEFAULT_INSTRUMENT:SM8
+                                    #10                                                    %! DEFAULT_INSTRUMENT:SM8
+                                    Vn.                                                    %! DEFAULT_INSTRUMENT:SM8
+                                }                                                          %! DEFAULT_INSTRUMENT:SM8
+                            \set ViolinMusicStaff.forceClef = ##t                          %! DEFAULT_CLEF:SM8
+                            \clef "treble"                                                 %! DEFAULT_CLEF:SM8
+                            \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR:SM6
+                            \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:SM6
+                            %%% \override ViolinMusicStaff.Clef.color = ##f                %! DEFAULT_CLEF_UNCOLOR:SM7
                             R1 * 1/2
                             ^ \markup {
                                 \column
@@ -117,18 +119,18 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                                             }                                              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
                                     }
                                 }
-                            \set ViolinMusicStaff.instrumentName = \markup {               %! DEFAULT_REDRAW_INSTRUMENT
-                                \hcenter-in                                                %! DEFAULT_REDRAW_INSTRUMENT
-                                    #16                                                    %! DEFAULT_REDRAW_INSTRUMENT
-                                    Violin                                                 %! DEFAULT_REDRAW_INSTRUMENT
-                                }                                                          %! DEFAULT_REDRAW_INSTRUMENT
-                            \set ViolinMusicStaff.shortInstrumentName = \markup {          %! DEFAULT_REDRAW_INSTRUMENT
-                                \hcenter-in                                                %! DEFAULT_REDRAW_INSTRUMENT
-                                    #10                                                    %! DEFAULT_REDRAW_INSTRUMENT
-                                    Vn.                                                    %! DEFAULT_REDRAW_INSTRUMENT
-                                }                                                          %! DEFAULT_REDRAW_INSTRUMENT
-                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'violet) %! DEFAULT_REDRAW_INSTRUMENT_COLOR
-                            \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)   %! DEFAULT_CLEF_COLOR_REDRAW
+                            \set ViolinMusicStaff.instrumentName = \markup {               %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                \hcenter-in                                                %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                    #16                                                    %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                    Violin                                                 %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                }                                                          %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                            \set ViolinMusicStaff.shortInstrumentName = \markup {          %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                \hcenter-in                                                %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                    #10                                                    %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                    Vn.                                                    %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                }                                                          %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'violet) %! DEFAULT_REDRAW_INSTRUMENT_COLOR:SM6
+                            \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)   %! DEFAULT_CLEF_COLOR_REDRAW:SM6
             <BLANKLINE>
                             % ViolinMusicVoice [measure 2]                                 %! SM4
                             R1 * 3/8
@@ -138,7 +140,6 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             <BLANKLINE>
                             % ViolinMusicVoice [measure 4]                                 %! SM4
                             R1 * 3/8
-                            \bar "|"
             <BLANKLINE>
                         }
                     }

@@ -460,7 +460,8 @@ class LibraryNS(abjad.AbjadObject):
 
         '''
         return baca.IndicatorCommand(
-            indicators=[abjad.PageBreak()],
+            #indicators=[abjad.PageBreak()],
+            indicators=[abjad.LilyPondLiteral(r'\pageBreak', 'after')],
             selector=selector,
             )
 

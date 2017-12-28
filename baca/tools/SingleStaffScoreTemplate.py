@@ -46,6 +46,8 @@ class SingleStaffScoreTemplate(ScoreTemplate):
                         % GlobalSkips [measure 4]                                          %! SM4
                         \time 3/8                                                          %! SM1
                         s1 * 3/8
+                        \override Score.BarLine.transparent = ##f                          %! SM5
+                        \bar "|"                                                           %! SM5
             <BLANKLINE>
                     }
                 >>
@@ -64,7 +66,6 @@ class SingleStaffScoreTemplate(ScoreTemplate):
             <BLANKLINE>
                             % MusicVoice [measure 4]                                       %! SM4
                             R1 * 3/8
-                            \bar "|"
             <BLANKLINE>
                         }
                     }

@@ -178,6 +178,8 @@ class RegisterInterpolationCommand(Command):
                         % GlobalSkips [measure 8]                                          %! SM4
                         \time 3/8                                                          %! SM1
                         s1 * 3/8
+                        \override Score.BarLine.transparent = ##f                          %! SM5
+                        \bar "|"                                                           %! SM5
             <BLANKLINE>
                     }
                 >>
@@ -279,7 +281,6 @@ class RegisterInterpolationCommand(Command):
             <BLANKLINE>
                                 f''8
                                 ]
-                                \bar "|"
             <BLANKLINE>
                             }
                         }
@@ -354,6 +355,8 @@ class RegisterInterpolationCommand(Command):
                         % GlobalSkips [measure 8]                                          %! SM4
                         \time 3/8                                                          %! SM1
                         s1 * 3/8
+                        \override Score.BarLine.transparent = ##f                          %! SM5
+                        \bar "|"                                                           %! SM5
             <BLANKLINE>
                     }
                 >>
@@ -455,7 +458,6 @@ class RegisterInterpolationCommand(Command):
             <BLANKLINE>
                                 f'8
                                 ]
-                                \bar "|"
             <BLANKLINE>
                             }
                         }
@@ -530,6 +532,8 @@ class RegisterInterpolationCommand(Command):
                         % GlobalSkips [measure 8]                                          %! SM4
                         \time 3/8                                                          %! SM1
                         s1 * 3/8
+                        \override Score.BarLine.transparent = ##f                          %! SM5
+                        \bar "|"                                                           %! SM5
             <BLANKLINE>
                     }
                 >>
@@ -631,7 +635,6 @@ class RegisterInterpolationCommand(Command):
             <BLANKLINE>
                                 f''8
                                 ]
-                                \bar "|"
             <BLANKLINE>
                             }
                         }
@@ -706,6 +709,8 @@ class RegisterInterpolationCommand(Command):
                         % GlobalSkips [measure 8]                                          %! SM4
                         \time 3/8                                                          %! SM1
                         s1 * 3/8
+                        \override Score.BarLine.transparent = ##f                          %! SM5
+                        \bar "|"                                                           %! SM5
             <BLANKLINE>
                     }
                 >>
@@ -807,7 +812,6 @@ class RegisterInterpolationCommand(Command):
             <BLANKLINE>
                                 f8
                                 ]
-                                \bar "|"
             <BLANKLINE>
                             }
                         }
@@ -882,6 +886,8 @@ class RegisterInterpolationCommand(Command):
                         % GlobalSkips [measure 8]                                          %! SM4
                         \time 3/8                                                          %! SM1
                         s1 * 3/8
+                        \override Score.BarLine.transparent = ##f                          %! SM5
+                        \bar "|"                                                           %! SM5
             <BLANKLINE>
                     }
                 >>
@@ -983,7 +989,6 @@ class RegisterInterpolationCommand(Command):
             <BLANKLINE>
                                 f''8
                                 ]
-                                \bar "|"
             <BLANKLINE>
                             }
                         }

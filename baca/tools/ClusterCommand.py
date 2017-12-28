@@ -409,6 +409,8 @@ class ClusterCommand(Command):
                         % GlobalSkips [measure 4]                                          %! SM4
                         \time 3/8                                                          %! SM1
                         s1 * 3/8
+                        \override Score.BarLine.transparent = ##f                          %! SM5
+                        \bar "|"                                                           %! SM5
             <BLANKLINE>
                     }
                 >>
@@ -487,7 +489,6 @@ class ClusterCommand(Command):
                                             \flat
                                         }
                                 }
-                            \bar "|"
             <BLANKLINE>
                         }
                     }
@@ -632,6 +633,8 @@ class ClusterCommand(Command):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -694,7 +697,6 @@ class ClusterCommand(Command):
                                     \center-align
                                         \natural
                                     }
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -773,6 +775,8 @@ class ClusterCommand(Command):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -851,7 +855,6 @@ class ClusterCommand(Command):
                                                 \flat
                                             }
                                     }
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -906,6 +909,8 @@ class ClusterCommand(Command):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -984,7 +989,6 @@ class ClusterCommand(Command):
                                                 \flat
                                             }
                                     }
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -1049,6 +1053,8 @@ class ClusterCommand(Command):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -1127,7 +1133,6 @@ class ClusterCommand(Command):
                                                 \flat
                                             }
                                     }
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -1182,6 +1187,8 @@ class ClusterCommand(Command):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -1260,7 +1267,6 @@ class ClusterCommand(Command):
                                                 \flat
                                             }
                                     }
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -1316,6 +1322,8 @@ class ClusterCommand(Command):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -1334,7 +1342,6 @@ class ClusterCommand(Command):
                 <BLANKLINE>
                                 % MusicVoice [measure 4]                                       %! SM4
                                 e'4.
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }

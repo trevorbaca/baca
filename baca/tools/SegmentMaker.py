@@ -54,6 +54,8 @@ class SegmentMaker(abjad.SegmentMaker):
                         % GlobalSkips [measure 4]                                          %! SM4
                         \time 3/8                                                          %! SM1
                         s1 * 3/8
+                        \override Score.BarLine.transparent = ##f                          %! SM5
+                        \bar "|"                                                           %! SM5
             <BLANKLINE>
                     }
                 >>
@@ -107,7 +109,6 @@ class SegmentMaker(abjad.SegmentMaker):
             <BLANKLINE>
                                 c'8
                                 ]
-                                \bar "|"
             <BLANKLINE>
                             }
                         }
@@ -426,6 +427,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -605,7 +608,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \small
                                             13
                                         }
-                                    \bar "|"
                 <BLANKLINE>
                                 }
                             }
@@ -637,21 +639,17 @@ class SegmentMaker(abjad.SegmentMaker):
     def _add_final_bar_line(self):
         if self.final_bar_line is False:
             return
+        strings = []
         abbreviation = '|'
         if self.last_segment:
             abbreviation = '|.'
         if isinstance(self.final_bar_line, str):
             abbreviation = self.final_bar_line
-        self.score.add_final_bar_line(
-            abbreviation=abbreviation,
-            to_each_voice=True,
-            )
-        if self.final_bar_line == abjad.Exact:
-            selection = abjad.select(self.score)
-            last_leaf = selection._get_component(abjad.Leaf, -1)
-            command = 'override Score.BarLine.transparent = ##f'
-            command = abjad.LilyPondCommand(command)
-            abjad.attach(command, last_leaf)
+        strings.append(r'\override Score.BarLine.transparent = ##f')
+        strings.append(rf'\bar "{abbreviation}"')
+        literal = abjad.LilyPondLiteral(strings, 'after')
+        last_skip = baca.select(self.score['GlobalSkips']).skip(-1)
+        abjad.attach(literal, last_skip, site='SM5')
 
     def _add_final_markup(self):
         if self.final_markup is None:
@@ -1046,11 +1044,18 @@ class SegmentMaker(abjad.SegmentMaker):
         abjad.attach(rehearsal_mark, skip)
 
     def _cache_break_offsets(self):
-        prototype = (abjad.LineBreak, abjad.PageBreak)
+        #prototype = (abjad.LineBreak, abjad.PageBreak)
+        prototype = abjad.LilyPondLiteral
         for skip in baca.select(self.score['GlobalSkips']).skips():
-            if abjad.inspect(skip).has_indicator(prototype):
-                offset = abjad.inspect(skip).get_timespan().start_offset
-                self._break_offsets.append(offset)
+            literals = abjad.inspect(skip).get_indicators(prototype)
+            if not literals:
+                continue
+            if not any(
+                _.argument in (r'\break', r'\pageBreak') for _ in literals
+                ):
+                continue
+            offset = abjad.inspect(skip).get_timespan().start_offset
+            self._break_offsets.append(offset)
         segment_stop_offset = abjad.inspect(skip).get_timespan().stop_offset
         self._break_offsets.append(segment_stop_offset)
 
@@ -1284,9 +1289,9 @@ class SegmentMaker(abjad.SegmentMaker):
             stem = self._indicator_to_stem(indicator)
         tag = self._get_tag(status, stem, suffix)
         if uncolor is True:
-            abjad.attach(literal, leaf, deactivate=True, tag=tag)
+            abjad.attach(literal, leaf, deactivate=True, site='SM7', tag=tag)
         else:
-            abjad.attach(literal, leaf, tag=tag)
+            abjad.attach(literal, leaf, site='SM6', tag=tag)
 
     def _color_repeat_pitch_classes_(self):
         manager = baca.WellformednessManager
@@ -2032,7 +2037,13 @@ class SegmentMaker(abjad.SegmentMaker):
         elif context is None:
             abjad.attach(indicator, leaf, tag=tag)
         else:
-            abjad.attach(indicator, leaf, context=context.headword, tag=tag)
+            abjad.attach(
+                indicator,
+                leaf,
+                context=context.headword,
+                site='SM8',
+                tag=tag,
+                )
 
     def _categorize_uncategorized_persistent_indicators(self):
         # TODO: remove tuple and iterate over all persistent indicators:
@@ -2149,21 +2160,27 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                          %! SM4
-                            \pageBreak                                                         %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT
-                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT
+                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT:LMM1
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 0) (alignment-distances . (7)))                     %! SEGMENT:LAYOUT:LMM3
                             \time 3/8                                                          %! SM1
                             \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \pageBreak                                                         %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
-                            \break                                                             %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %! SEGMENT:LAYOUT
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 20) (alignment-distances . (7)))                    %! SEGMENT:LAYOUT:LMM3
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \break                                                             %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -2172,16 +2189,15 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
-                                \set Staff.forceClef = ##t                                     %! DEFAULT_CLEF
-                                \clef "treble"                                                 %! DEFAULT_CLEF
-                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet)    %! DEFAULT_CLEF_COLOR
-                                %%% \override Staff.Clef.color = ##f                           %! DEFAULT_CLEF_UNCOLOR
+                                \set Staff.forceClef = ##t                                     %! DEFAULT_CLEF:SM8
+                                \clef "treble"                                                 %! DEFAULT_CLEF:SM8
+                                \once \override Staff.Clef.color = #(x11-color 'DarkViolet)    %! DEFAULT_CLEF_COLOR:SM6
+                                %%% \override Staff.Clef.color = ##f                           %! DEFAULT_CLEF_UNCOLOR:SM7
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'violet)              %! DEFAULT_CLEF_COLOR_REDRAW
+                                \override Staff.Clef.color = #(x11-color 'violet)              %! DEFAULT_CLEF_COLOR_REDRAW:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                       %! SM4
                                 R1 * 3/8
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -2230,21 +2246,27 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                          %! SM4
-                            \pageBreak                                                         %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT
-                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT
+                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT:LMM1
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 0) (alignment-distances . (7)))                     %! SEGMENT:LAYOUT:LMM3
                             \time 3/8                                                          %! SM1
                             \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \pageBreak                                                         %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
-                            \break                                                             %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %! SEGMENT:LAYOUT
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 20) (alignment-distances . (7)))                    %! SEGMENT:LAYOUT:LMM3
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \break                                                             %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -2253,16 +2275,15 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
-                                \set Staff.forceClef = ##t                                     %! EXPLICIT_CLEF
-                                \clef "treble"                                                 %! EXPLICIT_CLEF
-                                \once \override Staff.Clef.color = #(x11-color 'blue)          %! EXPLICIT_CLEF_COLOR
-                                %%% \override Staff.Clef.color = ##f                           %! EXPLICIT_CLEF_UNCOLOR
+                                \set Staff.forceClef = ##t                                     %! EXPLICIT_CLEF:SM8
+                                \clef "treble"                                                 %! EXPLICIT_CLEF:SM8
+                                \once \override Staff.Clef.color = #(x11-color 'blue)          %! EXPLICIT_CLEF_COLOR:SM6
+                                %%% \override Staff.Clef.color = ##f                           %! EXPLICIT_CLEF_UNCOLOR:SM7
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)        %! EXPLICIT_CLEF_COLOR_REDRAW
+                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)        %! EXPLICIT_CLEF_COLOR_REDRAW:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                       %! SM4
                                 R1 * 3/8
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -2320,22 +2341,28 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                          %! SM4
-                            \pageBreak                                                         %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT
-                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT
+                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT:LMM1
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 0) (alignment-distances . (7)))                     %! SEGMENT:LAYOUT:LMM3
                             \time 3/8                                                          %! SM1
                             \mark #1
                             \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \pageBreak                                                         %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
-                            \break                                                             %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %! SEGMENT:LAYOUT
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 20) (alignment-distances . (7)))                    %! SEGMENT:LAYOUT:LMM3
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \break                                                             %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -2344,16 +2371,15 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
-                                \set Staff.forceClef = ##t                                     %! EXPLICIT_CLEF
-                                \clef "alto"                                                   %! EXPLICIT_CLEF
-                                \once \override Staff.Clef.color = #(x11-color 'blue)          %! EXPLICIT_CLEF_COLOR
-                                %%% \override Staff.Clef.color = ##f                           %! EXPLICIT_CLEF_UNCOLOR
+                                \set Staff.forceClef = ##t                                     %! EXPLICIT_CLEF:SM8
+                                \clef "alto"                                                   %! EXPLICIT_CLEF:SM8
+                                \once \override Staff.Clef.color = #(x11-color 'blue)          %! EXPLICIT_CLEF_COLOR:SM6
+                                %%% \override Staff.Clef.color = ##f                           %! EXPLICIT_CLEF_UNCOLOR:SM7
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)        %! EXPLICIT_CLEF_COLOR_REDRAW
+                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)        %! EXPLICIT_CLEF_COLOR_REDRAW:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                       %! SM4
                                 R1 * 3/8
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -2410,22 +2436,28 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                          %! SM4
-                            \pageBreak                                                         %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT
-                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT
+                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT:LMM1
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 0) (alignment-distances . (7)))                     %! SEGMENT:LAYOUT:LMM3
                             \time 3/8                                                          %! SM1
                             \mark #1
                             \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \pageBreak                                                         %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
-                            \break                                                             %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %! SEGMENT:LAYOUT
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 20) (alignment-distances . (7)))                    %! SEGMENT:LAYOUT:LMM3
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \break                                                             %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -2434,16 +2466,15 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
-                                \set Staff.forceClef = ##t                                     %! REAPPLIED_CLEF
-                                \clef "treble"                                                 %! REAPPLIED_CLEF
-                                \once \override Staff.Clef.color = #(x11-color 'green4)        %! REAPPLIED_CLEF_COLOR
-                                %%% \override Staff.Clef.color = ##f                           %! REAPPLIED_CLEF_UNCOLOR
+                                \set Staff.forceClef = ##t                                     %! REAPPLIED_CLEF:SM8
+                                \clef "treble"                                                 %! REAPPLIED_CLEF:SM8
+                                \once \override Staff.Clef.color = #(x11-color 'green4)        %! REAPPLIED_CLEF_COLOR:SM6
+                                %%% \override Staff.Clef.color = ##f                           %! REAPPLIED_CLEF_UNCOLOR:SM7
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'OliveDrab)           %! REAPPLIED_CLEF_COLOR_REDRAW
+                                \override Staff.Clef.color = #(x11-color 'OliveDrab)           %! REAPPLIED_CLEF_COLOR_REDRAW:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                       %! SM4
                                 R1 * 3/8
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -2494,27 +2525,33 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                          %! SM4
-                            \pageBreak                                                         %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT
-                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT
+                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT:LMM1
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 0) (alignment-distances . (7)))                     %! SEGMENT:LAYOUT:LMM3
                             \time 3/8                                                          %! SM1
                             \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \pageBreak                                                         %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
-                            \noBreak                                                           %! SEGMENT:LAYOUT
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
                             s1 * 3/8
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                          %! SM4
-                            \break                                                             %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %! SEGMENT:LAYOUT
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 20) (alignment-distances . (7)))                    %! SEGMENT:LAYOUT:LMM3
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \break                                                             %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -2523,24 +2560,23 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
-                                \set Staff.forceClef = ##t                                     %! EXPLICIT_CLEF
-                                \clef "treble"                                                 %! EXPLICIT_CLEF
-                                \once \override Staff.Clef.color = #(x11-color 'blue)          %! EXPLICIT_CLEF_COLOR
-                                %%% \override Staff.Clef.color = ##f                           %! EXPLICIT_CLEF_UNCOLOR
+                                \set Staff.forceClef = ##t                                     %! EXPLICIT_CLEF:SM8
+                                \clef "treble"                                                 %! EXPLICIT_CLEF:SM8
+                                \once \override Staff.Clef.color = #(x11-color 'blue)          %! EXPLICIT_CLEF_COLOR:SM6
+                                %%% \override Staff.Clef.color = ##f                           %! EXPLICIT_CLEF_UNCOLOR:SM7
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)        %! EXPLICIT_CLEF_COLOR_REDRAW
+                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)        %! EXPLICIT_CLEF_COLOR_REDRAW:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                       %! SM4
-                                \set Staff.forceClef = ##t                                     %! REDUNDANT_CLEF
-                                \clef "treble"                                                 %! REDUNDANT_CLEF
-                                \once \override Staff.Clef.color = #(x11-color 'DeepPink1)     %! REDUNDANT_CLEF_COLOR
-                                %%% \override Staff.Clef.color = ##f                           %! REDUNDANT_CLEF_UNCOLOR
+                                \set Staff.forceClef = ##t                                     %! REDUNDANT_CLEF:SM8
+                                \clef "treble"                                                 %! REDUNDANT_CLEF:SM8
+                                \once \override Staff.Clef.color = #(x11-color 'DeepPink1)     %! REDUNDANT_CLEF_COLOR:SM6
+                                %%% \override Staff.Clef.color = ##f                           %! REDUNDANT_CLEF_UNCOLOR:SM7
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'DeepPink4)           %! REDUNDANT_CLEF_COLOR_REDRAW
+                                \override Staff.Clef.color = #(x11-color 'DeepPink4)           %! REDUNDANT_CLEF_COLOR_REDRAW:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 3]                                       %! SM4
                                 R1 * 3/8
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -2599,22 +2635,28 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                          %! SM4
-                            \pageBreak                                                         %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %! SEGMENT:LAYOUT
-                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT
+                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT:LMM1
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 0) (alignment-distances . (7)))                     %! SEGMENT:LAYOUT:LMM3
                             \time 3/8                                                          %! SM1
                             \mark #1
                             \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \pageBreak                                                         %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
-                            \break                                                             %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %! SEGMENT:LAYOUT
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 20) (alignment-distances . (7)))                    %! SEGMENT:LAYOUT:LMM3
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \break                                                             %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -2623,16 +2665,15 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
-                                \set Staff.forceClef = ##t                                     %! REDUNDANT_CLEF
-                                \clef "treble"                                                 %! REDUNDANT_CLEF
-                                \once \override Staff.Clef.color = #(x11-color 'DeepPink1)     %! REDUNDANT_CLEF_COLOR
-                                %%% \override Staff.Clef.color = ##f                           %! REDUNDANT_CLEF_UNCOLOR
+                                \set Staff.forceClef = ##t                                     %! REDUNDANT_CLEF:SM8
+                                \clef "treble"                                                 %! REDUNDANT_CLEF:SM8
+                                \once \override Staff.Clef.color = #(x11-color 'DeepPink1)     %! REDUNDANT_CLEF_COLOR:SM6
+                                %%% \override Staff.Clef.color = ##f                           %! REDUNDANT_CLEF_UNCOLOR:SM7
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'DeepPink4)           %! REDUNDANT_CLEF_COLOR_REDRAW
+                                \override Staff.Clef.color = #(x11-color 'DeepPink4)           %! REDUNDANT_CLEF_COLOR_REDRAW:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                       %! SM4
                                 R1 * 3/8
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -2696,8 +2737,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                          %! SM4
                             \time 6/16                                                         %! SM1
                             \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 31)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 31)   %! SEGMENT:SPACING:HSS1
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -2710,16 +2751,18 @@ class SegmentMaker(abjad.SegmentMaker):
                                                         #(x11-color 'DarkCyan)                 %! STAGE_NUMBER_MARKUP:SM3
                                                         [1]                                    %! STAGE_NUMBER_MARKUP:SM3
                                             }                                                  %! STAGE_NUMBER_MARKUP:SM3
-                                        \line                                                  %! SEGMENT:SPACING_MARKUP
-                                            {                                                  %! SEGMENT:SPACING_MARKUP
-                                                \with-color                                    %! SEGMENT:SPACING_MARKUP
-                                                    #(x11-color 'DarkCyan)                     %! SEGMENT:SPACING_MARKUP
-                                                    \fontsize                                  %! SEGMENT:SPACING_MARKUP
-                                                        #-3                                    %! SEGMENT:SPACING_MARKUP
-                                                        (1/31)                                 %! SEGMENT:SPACING_MARKUP
-                                            }                                                  %! SEGMENT:SPACING_MARKUP
+                                        \line                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                            {                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                                \with-color                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                                    #(x11-color 'DarkCyan)                     %! SEGMENT:SPACING_MARKUP:HSS2
+                                                    \fontsize                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                                        #-3                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                                        (1/31)                                 %! SEGMENT:SPACING_MARKUP:HSS2
+                                            }                                                  %! SEGMENT:SPACING_MARKUP:HSS2
                                     }
                                 }
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -2732,21 +2775,21 @@ class SegmentMaker(abjad.SegmentMaker):
                                         {
                 <BLANKLINE>
                                             % ViolinMusicVoice [measure 1]                     %! SM4
-                                            \set ViolinMusicStaff.instrumentName = \markup {   %! DEFAULT_INSTRUMENT
-                                                \hcenter-in                                    %! DEFAULT_INSTRUMENT
-                                                    #10                                        %! DEFAULT_INSTRUMENT
-                                                    Violin                                     %! DEFAULT_INSTRUMENT
-                                                }                                              %! DEFAULT_INSTRUMENT
-                                            \set ViolinMusicStaff.shortInstrumentName = \markup { %! DEFAULT_INSTRUMENT
-                                                \hcenter-in                                    %! DEFAULT_INSTRUMENT
-                                                    #10                                        %! DEFAULT_INSTRUMENT
-                                                    Vn.                                        %! DEFAULT_INSTRUMENT
-                                                }                                              %! DEFAULT_INSTRUMENT
-                                            \set ViolinMusicStaff.forceClef = ##t              %! DEFAULT_CLEF
-                                            \clef "treble"                                     %! DEFAULT_CLEF
-                                            \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR
-                                            \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR
-                                            %%% \override ViolinMusicStaff.Clef.color = ##f    %! DEFAULT_CLEF_UNCOLOR
+                                            \set ViolinMusicStaff.instrumentName = \markup {   %! DEFAULT_INSTRUMENT:SM8
+                                                \hcenter-in                                    %! DEFAULT_INSTRUMENT:SM8
+                                                    #10                                        %! DEFAULT_INSTRUMENT:SM8
+                                                    Violin                                     %! DEFAULT_INSTRUMENT:SM8
+                                                }                                              %! DEFAULT_INSTRUMENT:SM8
+                                            \set ViolinMusicStaff.shortInstrumentName = \markup { %! DEFAULT_INSTRUMENT:SM8
+                                                \hcenter-in                                    %! DEFAULT_INSTRUMENT:SM8
+                                                    #10                                        %! DEFAULT_INSTRUMENT:SM8
+                                                    Vn.                                        %! DEFAULT_INSTRUMENT:SM8
+                                                }                                              %! DEFAULT_INSTRUMENT:SM8
+                                            \set ViolinMusicStaff.forceClef = ##t              %! DEFAULT_CLEF:SM8
+                                            \clef "treble"                                     %! DEFAULT_CLEF:SM8
+                                            \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR:SM6
+                                            \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:SM6
+                                            %%% \override ViolinMusicStaff.Clef.color = ##f    %! DEFAULT_CLEF_UNCOLOR:SM7
                                             d'16
                                             ^ \markup {
                                                 \column
@@ -2793,18 +2836,18 @@ class SegmentMaker(abjad.SegmentMaker):
                                                             }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
                                                     }
                                                 }
-                                            \set ViolinMusicStaff.instrumentName = \markup {   %! DEFAULT_REDRAW_INSTRUMENT
-                                                \hcenter-in                                    %! DEFAULT_REDRAW_INSTRUMENT
-                                                    #10                                        %! DEFAULT_REDRAW_INSTRUMENT
-                                                    Violin                                     %! DEFAULT_REDRAW_INSTRUMENT
-                                                }                                              %! DEFAULT_REDRAW_INSTRUMENT
-                                            \set ViolinMusicStaff.shortInstrumentName = \markup { %! DEFAULT_REDRAW_INSTRUMENT
-                                                \hcenter-in                                    %! DEFAULT_REDRAW_INSTRUMENT
-                                                    #10                                        %! DEFAULT_REDRAW_INSTRUMENT
-                                                    Vn.                                        %! DEFAULT_REDRAW_INSTRUMENT
-                                                }                                              %! DEFAULT_REDRAW_INSTRUMENT
-                                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'violet) %! DEFAULT_REDRAW_INSTRUMENT_COLOR
-                                            \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! DEFAULT_CLEF_COLOR_REDRAW
+                                            \set ViolinMusicStaff.instrumentName = \markup {   %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                \hcenter-in                                    %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                    #10                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                    Violin                                     %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                }                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                            \set ViolinMusicStaff.shortInstrumentName = \markup { %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                \hcenter-in                                    %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                    #10                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                    Vn.                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                }                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'violet) %! DEFAULT_REDRAW_INSTRUMENT_COLOR:SM6
+                                            \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! DEFAULT_CLEF_COLOR_REDRAW:SM6
                 <BLANKLINE>
                                             e'16
                 <BLANKLINE>
@@ -2822,7 +2865,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                             a'16
                 <BLANKLINE>
                                             b'16
-                                            \bar "|"
                 <BLANKLINE>
                                         }
                                     }
@@ -2833,21 +2875,21 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \context ViolaMusicVoice = "ViolaMusicVoice" {
                 <BLANKLINE>
                                     % ViolaMusicVoice [measure 1]                              %! SM4
-                                    \set ViolaMusicStaff.instrumentName = \markup {            %! DEFAULT_INSTRUMENT
-                                        \hcenter-in                                            %! DEFAULT_INSTRUMENT
-                                            #10                                                %! DEFAULT_INSTRUMENT
-                                            Viola                                              %! DEFAULT_INSTRUMENT
-                                        }                                                      %! DEFAULT_INSTRUMENT
-                                    \set ViolaMusicStaff.shortInstrumentName = \markup {       %! DEFAULT_INSTRUMENT
-                                        \hcenter-in                                            %! DEFAULT_INSTRUMENT
-                                            #10                                                %! DEFAULT_INSTRUMENT
-                                            Va.                                                %! DEFAULT_INSTRUMENT
-                                        }                                                      %! DEFAULT_INSTRUMENT
-                                    \set ViolaMusicStaff.forceClef = ##t                       %! DEFAULT_CLEF
-                                    \clef "alto"                                               %! DEFAULT_CLEF
-                                    \once \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR
-                                    \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR
-                                    %%% \override ViolaMusicStaff.Clef.color = ##f             %! DEFAULT_CLEF_UNCOLOR
+                                    \set ViolaMusicStaff.instrumentName = \markup {            %! DEFAULT_INSTRUMENT:SM8
+                                        \hcenter-in                                            %! DEFAULT_INSTRUMENT:SM8
+                                            #10                                                %! DEFAULT_INSTRUMENT:SM8
+                                            Viola                                              %! DEFAULT_INSTRUMENT:SM8
+                                        }                                                      %! DEFAULT_INSTRUMENT:SM8
+                                    \set ViolaMusicStaff.shortInstrumentName = \markup {       %! DEFAULT_INSTRUMENT:SM8
+                                        \hcenter-in                                            %! DEFAULT_INSTRUMENT:SM8
+                                            #10                                                %! DEFAULT_INSTRUMENT:SM8
+                                            Va.                                                %! DEFAULT_INSTRUMENT:SM8
+                                        }                                                      %! DEFAULT_INSTRUMENT:SM8
+                                    \set ViolaMusicStaff.forceClef = ##t                       %! DEFAULT_CLEF:SM8
+                                    \clef "alto"                                               %! DEFAULT_CLEF:SM8
+                                    \once \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR:SM6
+                                    \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:SM6
+                                    %%% \override ViolaMusicStaff.Clef.color = ##f             %! DEFAULT_CLEF_UNCOLOR:SM7
                                     R1 * 3/8
                                     ^ \markup {
                                         \column
@@ -2894,19 +2936,18 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     }                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
                                             }
                                         }
-                                    \set ViolaMusicStaff.instrumentName = \markup {            %! DEFAULT_REDRAW_INSTRUMENT
-                                        \hcenter-in                                            %! DEFAULT_REDRAW_INSTRUMENT
-                                            #10                                                %! DEFAULT_REDRAW_INSTRUMENT
-                                            Viola                                              %! DEFAULT_REDRAW_INSTRUMENT
-                                        }                                                      %! DEFAULT_REDRAW_INSTRUMENT
-                                    \set ViolaMusicStaff.shortInstrumentName = \markup {       %! DEFAULT_REDRAW_INSTRUMENT
-                                        \hcenter-in                                            %! DEFAULT_REDRAW_INSTRUMENT
-                                            #10                                                %! DEFAULT_REDRAW_INSTRUMENT
-                                            Va.                                                %! DEFAULT_REDRAW_INSTRUMENT
-                                        }                                                      %! DEFAULT_REDRAW_INSTRUMENT
-                                    \bar "|"
-                                    \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'violet) %! DEFAULT_REDRAW_INSTRUMENT_COLOR
-                                    \override ViolaMusicStaff.Clef.color = #(x11-color 'violet) %! DEFAULT_CLEF_COLOR_REDRAW
+                                    \set ViolaMusicStaff.instrumentName = \markup {            %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                        \hcenter-in                                            %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                            #10                                                %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                            Viola                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                        }                                                      %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                    \set ViolaMusicStaff.shortInstrumentName = \markup {       %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                        \hcenter-in                                            %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                            #10                                                %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                            Va.                                                %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                        }                                                      %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                    \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'violet) %! DEFAULT_REDRAW_INSTRUMENT_COLOR:SM6
+                                    \override ViolaMusicStaff.Clef.color = #(x11-color 'violet) %! DEFAULT_CLEF_COLOR_REDRAW:SM6
                 <BLANKLINE>
                                 }
                             }
@@ -2917,21 +2958,21 @@ class SegmentMaker(abjad.SegmentMaker):
                                         {
                 <BLANKLINE>
                                             % CelloMusicVoice [measure 1]                      %! SM4
-                                            \set CelloMusicStaff.instrumentName = \markup {    %! DEFAULT_INSTRUMENT
-                                                \hcenter-in                                    %! DEFAULT_INSTRUMENT
-                                                    #10                                        %! DEFAULT_INSTRUMENT
-                                                    Cello                                      %! DEFAULT_INSTRUMENT
-                                                }                                              %! DEFAULT_INSTRUMENT
-                                            \set CelloMusicStaff.shortInstrumentName = \markup { %! DEFAULT_INSTRUMENT
-                                                \hcenter-in                                    %! DEFAULT_INSTRUMENT
-                                                    #10                                        %! DEFAULT_INSTRUMENT
-                                                    Vc.                                        %! DEFAULT_INSTRUMENT
-                                                }                                              %! DEFAULT_INSTRUMENT
-                                            \set CelloMusicStaff.forceClef = ##t               %! DEFAULT_CLEF
-                                            \clef "bass"                                       %! DEFAULT_CLEF
-                                            \once \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR
-                                            \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR
-                                            %%% \override CelloMusicStaff.Clef.color = ##f     %! DEFAULT_CLEF_UNCOLOR
+                                            \set CelloMusicStaff.instrumentName = \markup {    %! DEFAULT_INSTRUMENT:SM8
+                                                \hcenter-in                                    %! DEFAULT_INSTRUMENT:SM8
+                                                    #10                                        %! DEFAULT_INSTRUMENT:SM8
+                                                    Cello                                      %! DEFAULT_INSTRUMENT:SM8
+                                                }                                              %! DEFAULT_INSTRUMENT:SM8
+                                            \set CelloMusicStaff.shortInstrumentName = \markup { %! DEFAULT_INSTRUMENT:SM8
+                                                \hcenter-in                                    %! DEFAULT_INSTRUMENT:SM8
+                                                    #10                                        %! DEFAULT_INSTRUMENT:SM8
+                                                    Vc.                                        %! DEFAULT_INSTRUMENT:SM8
+                                                }                                              %! DEFAULT_INSTRUMENT:SM8
+                                            \set CelloMusicStaff.forceClef = ##t               %! DEFAULT_CLEF:SM8
+                                            \clef "bass"                                       %! DEFAULT_CLEF:SM8
+                                            \once \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR:SM6
+                                            \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:SM6
+                                            %%% \override CelloMusicStaff.Clef.color = ##f     %! DEFAULT_CLEF_UNCOLOR:SM7
                                             a16
                                             ^ \markup {
                                                 \column
@@ -2978,18 +3019,18 @@ class SegmentMaker(abjad.SegmentMaker):
                                                             }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
                                                     }
                                                 }
-                                            \set CelloMusicStaff.instrumentName = \markup {    %! DEFAULT_REDRAW_INSTRUMENT
-                                                \hcenter-in                                    %! DEFAULT_REDRAW_INSTRUMENT
-                                                    #10                                        %! DEFAULT_REDRAW_INSTRUMENT
-                                                    Cello                                      %! DEFAULT_REDRAW_INSTRUMENT
-                                                }                                              %! DEFAULT_REDRAW_INSTRUMENT
-                                            \set CelloMusicStaff.shortInstrumentName = \markup { %! DEFAULT_REDRAW_INSTRUMENT
-                                                \hcenter-in                                    %! DEFAULT_REDRAW_INSTRUMENT
-                                                    #10                                        %! DEFAULT_REDRAW_INSTRUMENT
-                                                    Vc.                                        %! DEFAULT_REDRAW_INSTRUMENT
-                                                }                                              %! DEFAULT_REDRAW_INSTRUMENT
-                                            \override CelloMusicStaff.InstrumentName.color = #(x11-color 'violet) %! DEFAULT_REDRAW_INSTRUMENT_COLOR
-                                            \override CelloMusicStaff.Clef.color = #(x11-color 'violet) %! DEFAULT_CLEF_COLOR_REDRAW
+                                            \set CelloMusicStaff.instrumentName = \markup {    %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                \hcenter-in                                    %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                    #10                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                    Cello                                      %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                }                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                            \set CelloMusicStaff.shortInstrumentName = \markup { %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                \hcenter-in                                    %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                    #10                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                    Vc.                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                }                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                            \override CelloMusicStaff.InstrumentName.color = #(x11-color 'violet) %! DEFAULT_REDRAW_INSTRUMENT_COLOR:SM6
+                                            \override CelloMusicStaff.Clef.color = #(x11-color 'violet) %! DEFAULT_CLEF_COLOR_REDRAW:SM6
                 <BLANKLINE>
                                             g16
                 <BLANKLINE>
@@ -3007,7 +3048,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                             d16
                 <BLANKLINE>
                                             c16
-                                            \bar "|"
                 <BLANKLINE>
                                         }
                                     }
@@ -3086,8 +3126,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                          %! SM4
                             \time 1/16                                                         %! SM1
                             \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
                             s1 * 1/16
                             ^ \markup {
                                 \column
@@ -3100,55 +3140,57 @@ class SegmentMaker(abjad.SegmentMaker):
                                                         #(x11-color 'DarkCyan)                 %! STAGE_NUMBER_MARKUP:SM3
                                                         [1]                                    %! STAGE_NUMBER_MARKUP:SM3
                                             }                                                  %! STAGE_NUMBER_MARKUP:SM3
-                                        \line                                                  %! SEGMENT:SPACING_MARKUP
-                                            {                                                  %! SEGMENT:SPACING_MARKUP
-                                                \with-color                                    %! SEGMENT:SPACING_MARKUP
-                                                    #(x11-color 'DarkCyan)                     %! SEGMENT:SPACING_MARKUP
-                                                    \fontsize                                  %! SEGMENT:SPACING_MARKUP
-                                                        #-3                                    %! SEGMENT:SPACING_MARKUP
-                                                        (1/24)                                 %! SEGMENT:SPACING_MARKUP
-                                            }                                                  %! SEGMENT:SPACING_MARKUP
+                                        \line                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                            {                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                                \with-color                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                                    #(x11-color 'DarkCyan)                     %! SEGMENT:SPACING_MARKUP:HSS2
+                                                    \fontsize                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                                        #-3                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                                        (1/24)                                 %! SEGMENT:SPACING_MARKUP:HSS2
+                                            }                                                  %! SEGMENT:SPACING_MARKUP:HSS2
                                     }
                                 }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
                             \time 7/16                                                         %! SM1
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
                             s1 * 7/16
-                            ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP
-                                \with-color                                                    %! SEGMENT:SPACING_MARKUP
-                                    #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP
-                                    \fontsize                                                  %! SEGMENT:SPACING_MARKUP
-                                        #-3                                                    %! SEGMENT:SPACING_MARKUP
-                                        (1/24)                                                 %! SEGMENT:SPACING_MARKUP
-                                }                                                              %! SEGMENT:SPACING_MARKUP
+                            ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                                \with-color                                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP:HSS2
+                                    \fontsize                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                        #-3                                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                        (1/24)                                                 %! SEGMENT:SPACING_MARKUP:HSS2
+                                }                                                              %! SEGMENT:SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                          %! SM4
                             \time 1/16                                                         %! SM1
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
                             s1 * 1/16
-                            ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP
-                                \with-color                                                    %! SEGMENT:SPACING_MARKUP
-                                    #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP
-                                    \fontsize                                                  %! SEGMENT:SPACING_MARKUP
-                                        #-3                                                    %! SEGMENT:SPACING_MARKUP
-                                        (1/24)                                                 %! SEGMENT:SPACING_MARKUP
-                                }                                                              %! SEGMENT:SPACING_MARKUP
+                            ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                                \with-color                                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP:HSS2
+                                    \fontsize                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                        #-3                                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                        (1/24)                                                 %! SEGMENT:SPACING_MARKUP:HSS2
+                                }                                                              %! SEGMENT:SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
                             s1 * 3/8
-                            ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP
-                                \with-color                                                    %! SEGMENT:SPACING_MARKUP
-                                    #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP
-                                    \fontsize                                                  %! SEGMENT:SPACING_MARKUP
-                                        #-3                                                    %! SEGMENT:SPACING_MARKUP
-                                        (1/24)                                                 %! SEGMENT:SPACING_MARKUP
-                                }                                                              %! SEGMENT:SPACING_MARKUP
+                            ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                                \with-color                                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP:HSS2
+                                    \fontsize                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                        #-3                                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                        (1/24)                                                 %! SEGMENT:SPACING_MARKUP:HSS2
+                                }                                                              %! SEGMENT:SPACING_MARKUP:HSS2
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -3210,7 +3252,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                         c'16
                 <BLANKLINE>
                                         f'16
-                                        \bar "|"
                 <BLANKLINE>
                                     }
                                 }
@@ -3288,8 +3329,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                          %! SM4
                             \time 1/16                                                         %! SM1
                             \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
                             s1 * 1/16
                             ^ \markup {
                                 \column
@@ -3302,55 +3343,57 @@ class SegmentMaker(abjad.SegmentMaker):
                                                         #(x11-color 'DarkCyan)                 %! STAGE_NUMBER_MARKUP:SM3
                                                         [1]                                    %! STAGE_NUMBER_MARKUP:SM3
                                             }                                                  %! STAGE_NUMBER_MARKUP:SM3
-                                        \line                                                  %! SEGMENT:SPACING_MARKUP
-                                            {                                                  %! SEGMENT:SPACING_MARKUP
-                                                \with-color                                    %! SEGMENT:SPACING_MARKUP
-                                                    #(x11-color 'DarkCyan)                     %! SEGMENT:SPACING_MARKUP
-                                                    \fontsize                                  %! SEGMENT:SPACING_MARKUP
-                                                        #-3                                    %! SEGMENT:SPACING_MARKUP
-                                                        (1/24)                                 %! SEGMENT:SPACING_MARKUP
-                                            }                                                  %! SEGMENT:SPACING_MARKUP
+                                        \line                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                            {                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                                \with-color                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                                    #(x11-color 'DarkCyan)                     %! SEGMENT:SPACING_MARKUP:HSS2
+                                                    \fontsize                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                                        #-3                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                                        (1/24)                                 %! SEGMENT:SPACING_MARKUP:HSS2
+                                            }                                                  %! SEGMENT:SPACING_MARKUP:HSS2
                                     }
                                 }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
                             \time 7/16                                                         %! SM1
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
                             s1 * 7/16
-                            ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP
-                                \with-color                                                    %! SEGMENT:SPACING_MARKUP
-                                    #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP
-                                    \fontsize                                                  %! SEGMENT:SPACING_MARKUP
-                                        #-3                                                    %! SEGMENT:SPACING_MARKUP
-                                        (1/24)                                                 %! SEGMENT:SPACING_MARKUP
-                                }                                                              %! SEGMENT:SPACING_MARKUP
+                            ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                                \with-color                                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP:HSS2
+                                    \fontsize                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                        #-3                                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                        (1/24)                                                 %! SEGMENT:SPACING_MARKUP:HSS2
+                                }                                                              %! SEGMENT:SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                          %! SM4
                             \time 1/16                                                         %! SM1
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
                             s1 * 1/16
-                            ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP
-                                \with-color                                                    %! SEGMENT:SPACING_MARKUP
-                                    #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP
-                                    \fontsize                                                  %! SEGMENT:SPACING_MARKUP
-                                        #-3                                                    %! SEGMENT:SPACING_MARKUP
-                                        (1/24)                                                 %! SEGMENT:SPACING_MARKUP
-                                }                                                              %! SEGMENT:SPACING_MARKUP
+                            ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                                \with-color                                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP:HSS2
+                                    \fontsize                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                        #-3                                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                        (1/24)                                                 %! SEGMENT:SPACING_MARKUP:HSS2
+                                }                                                              %! SEGMENT:SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
                             s1 * 3/8
-                            ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP
-                                \with-color                                                    %! SEGMENT:SPACING_MARKUP
-                                    #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP
-                                    \fontsize                                                  %! SEGMENT:SPACING_MARKUP
-                                        #-3                                                    %! SEGMENT:SPACING_MARKUP
-                                        (1/24)                                                 %! SEGMENT:SPACING_MARKUP
-                                }                                                              %! SEGMENT:SPACING_MARKUP
+                            ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                                \with-color                                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP:HSS2
+                                    \fontsize                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                        #-3                                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                        (1/24)                                                 %! SEGMENT:SPACING_MARKUP:HSS2
+                                }                                                              %! SEGMENT:SPACING_MARKUP:HSS2
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -3433,7 +3476,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                         ^ \markup { @ }
                 <BLANKLINE>
                                         f'16
-                                        \bar "|"
                 <BLANKLINE>
                                     }
                                 }
@@ -3515,9 +3557,11 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                          %! SM1
                             \mark #1
                             \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -3526,10 +3570,9 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
-                                \once \override Staff.DynamicText.color = #(x11-color 'green4) %! REAPPLIED_DYNAMIC_COLOR
+                                \once \override Staff.DynamicText.color = #(x11-color 'green4) %! REAPPLIED_DYNAMIC_COLOR:SM6
                                 c'4.
-                                \f                                                             %! REAPPLIED_DYNAMIC
-                                \bar "|"
+                                \f                                                             %! REAPPLIED_DYNAMIC:SM8
                 <BLANKLINE>
                             }
                         }
@@ -3603,6 +3646,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -3656,7 +3701,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                     c'8
                                     ]
-                                    \bar "|"
                 <BLANKLINE>
                                 }
                             }
@@ -3711,6 +3755,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "||"                                                          %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -3764,7 +3810,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                     c'8
                                     ]
-                                    \bar "||"
                 <BLANKLINE>
                                 }
                             }
@@ -3821,6 +3866,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|."                                                          %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -3874,7 +3921,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                     c'8
                                     ]
-                                    \bar "|."
                 <BLANKLINE>
                                 }
                             }
@@ -3933,6 +3979,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "||"                                                          %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -3986,7 +4034,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                     c'8
                                     ]
-                                    \bar "||"
                 <BLANKLINE>
                                 }
                             }
@@ -4055,6 +4102,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|."                                                          %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -4126,7 +4175,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                                                 }
                                                         }
                                         }
-                                    \bar "|."
                 <BLANKLINE>
                                 }
                             }
@@ -4228,6 +4276,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -4281,7 +4331,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                     c'8
                                     ]
-                                    \bar "|"
                 <BLANKLINE>
                                 }
                             }
@@ -4336,6 +4385,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -4459,7 +4510,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Stem.color = #blue
                                     c'8
                                     ]
-                                    \bar "|"
                 <BLANKLINE>
                                 }
                             }
@@ -4547,8 +4597,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                          %! SM4
                             \time 3/16                                                         %! SM1
                             \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
                             s1 * 3/16
                             ^ \markup {
                                 \column
@@ -4561,52 +4611,54 @@ class SegmentMaker(abjad.SegmentMaker):
                                                         #(x11-color 'DarkCyan)                 %! STAGE_NUMBER_MARKUP:SM3
                                                         [1]                                    %! STAGE_NUMBER_MARKUP:SM3
                                             }                                                  %! STAGE_NUMBER_MARKUP:SM3
-                                        \line                                                  %! SEGMENT:SPACING_MARKUP
-                                            {                                                  %! SEGMENT:SPACING_MARKUP
-                                                \with-color                                    %! SEGMENT:SPACING_MARKUP
-                                                    #(x11-color 'DarkCyan)                     %! SEGMENT:SPACING_MARKUP
-                                                    \fontsize                                  %! SEGMENT:SPACING_MARKUP
-                                                        #-3                                    %! SEGMENT:SPACING_MARKUP
-                                                        (1/24)                                 %! SEGMENT:SPACING_MARKUP
-                                            }                                                  %! SEGMENT:SPACING_MARKUP
+                                        \line                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                            {                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                                \with-color                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                                    #(x11-color 'DarkCyan)                     %! SEGMENT:SPACING_MARKUP:HSS2
+                                                    \fontsize                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                                        #-3                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                                        (1/24)                                 %! SEGMENT:SPACING_MARKUP:HSS2
+                                            }                                                  %! SEGMENT:SPACING_MARKUP:HSS2
                                     }
                                 }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
                             s1 * 3/16
-                            ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP
-                                \with-color                                                    %! SEGMENT:SPACING_MARKUP
-                                    #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP
-                                    \fontsize                                                  %! SEGMENT:SPACING_MARKUP
-                                        #-3                                                    %! SEGMENT:SPACING_MARKUP
-                                        (1/24)                                                 %! SEGMENT:SPACING_MARKUP
-                                }                                                              %! SEGMENT:SPACING_MARKUP
+                            ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                                \with-color                                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP:HSS2
+                                    \fontsize                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                        #-3                                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                        (1/24)                                                 %! SEGMENT:SPACING_MARKUP:HSS2
+                                }                                                              %! SEGMENT:SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                          %! SM4
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
                             s1 * 3/16
-                            ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP
-                                \with-color                                                    %! SEGMENT:SPACING_MARKUP
-                                    #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP
-                                    \fontsize                                                  %! SEGMENT:SPACING_MARKUP
-                                        #-3                                                    %! SEGMENT:SPACING_MARKUP
-                                        (1/24)                                                 %! SEGMENT:SPACING_MARKUP
-                                }                                                              %! SEGMENT:SPACING_MARKUP
+                            ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                                \with-color                                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP:HSS2
+                                    \fontsize                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                        #-3                                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                        (1/24)                                                 %! SEGMENT:SPACING_MARKUP:HSS2
+                                }                                                              %! SEGMENT:SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                          %! SM4
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
                             s1 * 3/16
-                            ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP
-                                \with-color                                                    %! SEGMENT:SPACING_MARKUP
-                                    #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP
-                                    \fontsize                                                  %! SEGMENT:SPACING_MARKUP
-                                        #-3                                                    %! SEGMENT:SPACING_MARKUP
-                                        (1/24)                                                 %! SEGMENT:SPACING_MARKUP
-                                }                                                              %! SEGMENT:SPACING_MARKUP
+                            ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                                \with-color                                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP:HSS2
+                                    \fontsize                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                        #-3                                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                        (1/24)                                                 %! SEGMENT:SPACING_MARKUP:HSS2
+                                }                                                              %! SEGMENT:SPACING_MARKUP:HSS2
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -4667,7 +4719,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         }
                                         f'8.
-                                        \bar "|"
                 <BLANKLINE>
                                     }
                                 }
@@ -4743,8 +4794,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                          %! SM4
                             \time 3/16                                                         %! SM1
                             \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
                             s1 * 3/16
                             ^ \markup {
                                 \column
@@ -4757,52 +4808,54 @@ class SegmentMaker(abjad.SegmentMaker):
                                                         #(x11-color 'DarkCyan)                 %! STAGE_NUMBER_MARKUP:SM3
                                                         [1]                                    %! STAGE_NUMBER_MARKUP:SM3
                                             }                                                  %! STAGE_NUMBER_MARKUP:SM3
-                                        \line                                                  %! SEGMENT:SPACING_MARKUP
-                                            {                                                  %! SEGMENT:SPACING_MARKUP
-                                                \with-color                                    %! SEGMENT:SPACING_MARKUP
-                                                    #(x11-color 'DarkCyan)                     %! SEGMENT:SPACING_MARKUP
-                                                    \fontsize                                  %! SEGMENT:SPACING_MARKUP
-                                                        #-3                                    %! SEGMENT:SPACING_MARKUP
-                                                        (1/24)                                 %! SEGMENT:SPACING_MARKUP
-                                            }                                                  %! SEGMENT:SPACING_MARKUP
+                                        \line                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                            {                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                                \with-color                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                                    #(x11-color 'DarkCyan)                     %! SEGMENT:SPACING_MARKUP:HSS2
+                                                    \fontsize                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                                        #-3                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                                        (1/24)                                 %! SEGMENT:SPACING_MARKUP:HSS2
+                                            }                                                  %! SEGMENT:SPACING_MARKUP:HSS2
                                     }
                                 }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
                             s1 * 3/16
-                            ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP
-                                \with-color                                                    %! SEGMENT:SPACING_MARKUP
-                                    #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP
-                                    \fontsize                                                  %! SEGMENT:SPACING_MARKUP
-                                        #-3                                                    %! SEGMENT:SPACING_MARKUP
-                                        (1/24)                                                 %! SEGMENT:SPACING_MARKUP
-                                }                                                              %! SEGMENT:SPACING_MARKUP
+                            ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                                \with-color                                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP:HSS2
+                                    \fontsize                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                        #-3                                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                        (1/24)                                                 %! SEGMENT:SPACING_MARKUP:HSS2
+                                }                                                              %! SEGMENT:SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                          %! SM4
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
                             s1 * 3/16
-                            ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP
-                                \with-color                                                    %! SEGMENT:SPACING_MARKUP
-                                    #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP
-                                    \fontsize                                                  %! SEGMENT:SPACING_MARKUP
-                                        #-3                                                    %! SEGMENT:SPACING_MARKUP
-                                        (1/24)                                                 %! SEGMENT:SPACING_MARKUP
-                                }                                                              %! SEGMENT:SPACING_MARKUP
+                            ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                                \with-color                                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP:HSS2
+                                    \fontsize                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                        #-3                                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                        (1/24)                                                 %! SEGMENT:SPACING_MARKUP:HSS2
+                                }                                                              %! SEGMENT:SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                          %! SM4
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
                             s1 * 3/16
-                            ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP
-                                \with-color                                                    %! SEGMENT:SPACING_MARKUP
-                                    #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP
-                                    \fontsize                                                  %! SEGMENT:SPACING_MARKUP
-                                        #-3                                                    %! SEGMENT:SPACING_MARKUP
-                                        (1/24)                                                 %! SEGMENT:SPACING_MARKUP
-                                }                                                              %! SEGMENT:SPACING_MARKUP
+                            ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                                \with-color                                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP:HSS2
+                                    \fontsize                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                        #-3                                                    %! SEGMENT:SPACING_MARKUP:HSS2
+                                        (1/24)                                                 %! SEGMENT:SPACING_MARKUP:HSS2
+                                }                                                              %! SEGMENT:SPACING_MARKUP:HSS2
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -4953,7 +5006,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override NoteHead.color = #magenta
                                         \once \override Stem.color = #magenta
                                         f'8.
-                                        \bar "|"
                 <BLANKLINE>
                                     }
                                 }
@@ -5034,21 +5086,27 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                          %! SM4
-                            \pageBreak                                                         %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT
-                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT
+                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT:LMM1
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 0) (alignment-distances . (11)))                    %! SEGMENT:LAYOUT:LMM3
                             \time 3/8                                                          %! SM1
                             \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \pageBreak                                                         %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
-                            \break                                                             %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %! SEGMENT:LAYOUT
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 20) (alignment-distances . (11)))                   %! SEGMENT:LAYOUT:LMM3
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \break                                                             %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -5057,9 +5115,9 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
-                                \set Staff.instrumentName = \markup { Flute }                  %! DEFAULT_INSTRUMENT
-                                \set Staff.shortInstrumentName = \markup { Fl. }               %! DEFAULT_INSTRUMENT
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR
+                                \set Staff.instrumentName = \markup { Flute }                  %! DEFAULT_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }               %! DEFAULT_INSTRUMENT:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR:SM6
                                 c'4.
                                 ^ \markup {
                                     \column
@@ -5098,13 +5156,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { Flute }                  %! DEFAULT_REDRAW_INSTRUMENT
-                                \set Staff.shortInstrumentName = \markup { Fl. }               %! DEFAULT_REDRAW_INSTRUMENT
-                                \override Staff.InstrumentName.color = #(x11-color 'violet)    %! DEFAULT_REDRAW_INSTRUMENT_COLOR
+                                \set Staff.instrumentName = \markup { Flute }                  %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }               %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'violet)    %! DEFAULT_REDRAW_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                       %! SM4
                                 c'4.
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -5152,21 +5209,27 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                          %! SM4
-                            \pageBreak                                                         %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT
-                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT
+                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT:LMM1
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 0) (alignment-distances . (11)))                    %! SEGMENT:LAYOUT:LMM3
                             \time 3/8                                                          %! SM1
                             \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \pageBreak                                                         %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
-                            \break                                                             %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %! SEGMENT:LAYOUT
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 20) (alignment-distances . (11)))                   %! SEGMENT:LAYOUT:LMM3
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \break                                                             %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -5175,9 +5238,9 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
-                                \set Staff.instrumentName = \markup { Flute }                  %! EXPLICIT_INSTRUMENT
-                                \set Staff.shortInstrumentName = \markup { Fl. }               %! EXPLICIT_INSTRUMENT
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR
+                                \set Staff.instrumentName = \markup { Flute }                  %! EXPLICIT_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }               %! EXPLICIT_INSTRUMENT:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:SM6
                                 c'4.
                                 ^ \markup {
                                     \column
@@ -5216,13 +5279,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                              %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { Flute }                  %! EXPLICIT_REDRAW_INSTRUMENT
-                                \set Staff.shortInstrumentName = \markup { Fl. }               %! EXPLICIT_REDRAW_INSTRUMENT
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR
+                                \set Staff.instrumentName = \markup { Flute }                  %! EXPLICIT_REDRAW_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }               %! EXPLICIT_REDRAW_INSTRUMENT:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                       %! SM4
                                 c'4.
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -5279,22 +5341,28 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                          %! SM4
-                            \pageBreak                                                         %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT
-                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT
+                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT:LMM1
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 0) (alignment-distances . (11)))                    %! SEGMENT:LAYOUT:LMM3
                             \time 3/8                                                          %! SM1
                             \mark #1
                             \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \pageBreak                                                         %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
-                            \break                                                             %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 25) (alignment-distances . (11))) %! SEGMENT:LAYOUT
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 25) (alignment-distances . (11)))                   %! SEGMENT:LAYOUT:LMM3
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \break                                                             %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -5303,9 +5371,9 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
-                                \set Staff.instrumentName = \markup { Flute }                  %! EXPLICIT_INSTRUMENT
-                                \set Staff.shortInstrumentName = \markup { Fl. }               %! EXPLICIT_INSTRUMENT
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR
+                                \set Staff.instrumentName = \markup { Flute }                  %! EXPLICIT_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }               %! EXPLICIT_INSTRUMENT:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:SM6
                                 c'4.
                                 ^ \markup {
                                     \column
@@ -5344,13 +5412,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                              %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { Flute }                  %! EXPLICIT_REDRAW_INSTRUMENT
-                                \set Staff.shortInstrumentName = \markup { Fl. }               %! EXPLICIT_REDRAW_INSTRUMENT
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR
+                                \set Staff.instrumentName = \markup { Flute }                  %! EXPLICIT_REDRAW_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }               %! EXPLICIT_REDRAW_INSTRUMENT:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                       %! SM4
                                 c'4.
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -5402,22 +5469,28 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                          %! SM4
-                            \pageBreak                                                         %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT
-                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT
+                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT:LMM1
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 0) (alignment-distances . (11)))                    %! SEGMENT:LAYOUT:LMM3
                             \time 3/8                                                          %! SM1
                             \mark #1
                             \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \pageBreak                                                         %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
-                            \break                                                             %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 25) (alignment-distances . (11))) %! SEGMENT:LAYOUT
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 25) (alignment-distances . (11)))                   %! SEGMENT:LAYOUT:LMM3
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \break                                                             %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -5426,9 +5499,9 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
-                                \set Staff.instrumentName = \markup { Flute }                  %! REAPPLIED_INSTRUMENT
-                                \set Staff.shortInstrumentName = \markup { Fl. }               %! REAPPLIED_INSTRUMENT
-                                \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! REAPPLIED_INSTRUMENT_COLOR
+                                \set Staff.instrumentName = \markup { Flute }                  %! REAPPLIED_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }               %! REAPPLIED_INSTRUMENT:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! REAPPLIED_INSTRUMENT_COLOR:SM6
                                 c'4.
                                 ^ \markup {
                                     \column
@@ -5467,13 +5540,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                              %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { Flute }                  %! REAPPLIED_REDRAW_INSTRUMENT
-                                \set Staff.shortInstrumentName = \markup { Fl. }               %! REAPPLIED_REDRAW_INSTRUMENT
-                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! REAPPLIED_REDRAW_INSTRUMENT_COLOR
+                                \set Staff.instrumentName = \markup { Flute }                  %! REAPPLIED_REDRAW_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }               %! REAPPLIED_REDRAW_INSTRUMENT:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! REAPPLIED_REDRAW_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                       %! SM4
                                 c'4.
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -5525,27 +5597,33 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                          %! SM4
-                            \pageBreak                                                         %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT
-                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT
+                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT:LMM1
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 0) (alignment-distances . (11)))                    %! SEGMENT:LAYOUT:LMM3
                             \time 4/8                                                          %! SM1
                             \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \pageBreak                                                         %! SEGMENT:LAYOUT:LMM3
                             s1 * 1/2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
-                            \noBreak                                                           %! SEGMENT:LAYOUT
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
                             s1 * 1/2
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                          %! SM4
-                            \break                                                             %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %! SEGMENT:LAYOUT
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 20) (alignment-distances . (11)))                   %! SEGMENT:LAYOUT:LMM3
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \break                                                             %! SEGMENT:LAYOUT:LMM3
                             s1 * 1/2
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -5554,9 +5632,9 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
-                                \set Staff.instrumentName = \markup { Flute }                  %! EXPLICIT_INSTRUMENT
-                                \set Staff.shortInstrumentName = \markup { Fl. }               %! EXPLICIT_INSTRUMENT
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR
+                                \set Staff.instrumentName = \markup { Flute }                  %! EXPLICIT_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }               %! EXPLICIT_INSTRUMENT:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:SM6
                                 c'2
                                 ^ \markup {
                                     \column
@@ -5595,14 +5673,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                              %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { Flute }                  %! EXPLICIT_REDRAW_INSTRUMENT
-                                \set Staff.shortInstrumentName = \markup { Fl. }               %! EXPLICIT_REDRAW_INSTRUMENT
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR
+                                \set Staff.instrumentName = \markup { Flute }                  %! EXPLICIT_REDRAW_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }               %! EXPLICIT_REDRAW_INSTRUMENT:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                       %! SM4
-                                \set Staff.instrumentName = \markup { Flute }                  %! REDUNDANT_INSTRUMENT
-                                \set Staff.shortInstrumentName = \markup { Fl. }               %! REDUNDANT_INSTRUMENT
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_COLOR
+                                \set Staff.instrumentName = \markup { Flute }                  %! REDUNDANT_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }               %! REDUNDANT_INSTRUMENT:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_COLOR:SM6
                                 c'2
                                 ^ \markup {
                                     \column
@@ -5641,13 +5719,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                              %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { Flute }                  %! REDUNDANT_REDRAW_INSTRUMENT
-                                \set Staff.shortInstrumentName = \markup { Fl. }               %! REDUNDANT_REDRAW_INSTRUMENT
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_REDRAW_INSTRUMENT_COLOR
+                                \set Staff.instrumentName = \markup { Flute }                  %! REDUNDANT_REDRAW_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }               %! REDUNDANT_REDRAW_INSTRUMENT:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_REDRAW_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 3]                                       %! SM4
                                 c'2
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -5704,22 +5781,28 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                          %! SM4
-                            \pageBreak                                                         %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT
-                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT
+                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT:LMM1
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 0) (alignment-distances . (11)))                    %! SEGMENT:LAYOUT:LMM3
                             \time 3/8                                                          %! SM1
                             \mark #1
                             \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \pageBreak                                                         %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
-                            \break                                                             %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %! SEGMENT:LAYOUT
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 20) (alignment-distances . (11)))                   %! SEGMENT:LAYOUT:LMM3
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \break                                                             %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -5728,9 +5811,9 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
-                                \set Staff.instrumentName = \markup { Flute }                  %! REDUNDANT_INSTRUMENT
-                                \set Staff.shortInstrumentName = \markup { Fl. }               %! REDUNDANT_INSTRUMENT
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_COLOR
+                                \set Staff.instrumentName = \markup { Flute }                  %! REDUNDANT_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }               %! REDUNDANT_INSTRUMENT:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_COLOR:SM6
                                 c'4.
                                 ^ \markup {
                                     \column
@@ -5769,13 +5852,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                              %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { Flute }                  %! REDUNDANT_REDRAW_INSTRUMENT
-                                \set Staff.shortInstrumentName = \markup { Fl. }               %! REDUNDANT_REDRAW_INSTRUMENT
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_REDRAW_INSTRUMENT_COLOR
+                                \set Staff.instrumentName = \markup { Flute }                  %! REDUNDANT_REDRAW_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }               %! REDUNDANT_REDRAW_INSTRUMENT:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_REDRAW_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                       %! SM4
                                 c'4.
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -5886,21 +5968,27 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                          %! SM4
-                            \pageBreak                                                         %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT
-                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT
+                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT:LMM1
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 0) (alignment-distances . (11)))                    %! SEGMENT:LAYOUT:LMM3
                             \time 3/8                                                          %! SM1
                             \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \pageBreak                                                         %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
-                            \break                                                             %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %! SEGMENT:LAYOUT
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 20) (alignment-distances . (11)))                   %! SEGMENT:LAYOUT:LMM3
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \break                                                             %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -5909,9 +5997,9 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
-                                \set Staff.instrumentName = \markup { I+II }                   %! DEFAULT_MARGIN_MARKUP
-                                \set Staff.shortInstrumentName = \markup { I+II }              %! DEFAULT_MARGIN_MARKUP
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_MARGIN_MARKUP_COLOR
+                                \set Staff.instrumentName = \markup { I+II }                   %! DEFAULT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II }              %! DEFAULT_MARGIN_MARKUP:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_MARGIN_MARKUP_COLOR:SM6
                                 c'4.
                                 ^ \markup {
                                     \column
@@ -5950,13 +6038,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                              %! DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { I+II }                   %! DEFAULT_REDRAW_MARGIN_MARKUP
-                                \set Staff.shortInstrumentName = \markup { I+II }              %! DEFAULT_REDRAW_MARGIN_MARKUP
-                                \override Staff.InstrumentName.color = #(x11-color 'violet)    %! DEFAULT_REDRAW_INSTRUMENT_COLOR
+                                \set Staff.instrumentName = \markup { I+II }                   %! DEFAULT_REDRAW_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II }              %! DEFAULT_REDRAW_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'violet)    %! DEFAULT_REDRAW_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                       %! SM4
                                 c'4.
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -5998,21 +6085,27 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                          %! SM4
-                            \pageBreak                                                         %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT
-                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT
+                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT:LMM1
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 0) (alignment-distances . (11)))                    %! SEGMENT:LAYOUT:LMM3
                             \time 3/8                                                          %! SM1
                             \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \pageBreak                                                         %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
-                            \break                                                             %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %! SEGMENT:LAYOUT
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 20) (alignment-distances . (11)))                   %! SEGMENT:LAYOUT:LMM3
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \break                                                             %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -6021,9 +6114,9 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
-                                \set Staff.instrumentName = \markup { I+II }                   %! EXPLICIT_MARGIN_MARKUP
-                                \set Staff.shortInstrumentName = \markup { I+II }              %! EXPLICIT_MARGIN_MARKUP
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR
+                                \set Staff.instrumentName = \markup { I+II }                   %! EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II }              %! EXPLICIT_MARGIN_MARKUP:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                                 c'4.
                                 ^ \markup {
                                     \column
@@ -6062,13 +6155,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { I+II }                   %! EXPLICIT_REDRAW_MARGIN_MARKUP
-                                \set Staff.shortInstrumentName = \markup { I+II }              %! EXPLICIT_REDRAW_MARGIN_MARKUP
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR
+                                \set Staff.instrumentName = \markup { I+II }                   %! EXPLICIT_REDRAW_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II }              %! EXPLICIT_REDRAW_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                       %! SM4
                                 c'4.
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -6119,22 +6211,28 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                          %! SM4
-                            \pageBreak                                                         %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT
-                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT
+                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT:LMM1
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 0) (alignment-distances . (11)))                    %! SEGMENT:LAYOUT:LMM3
                             \time 3/8                                                          %! SM1
                             \mark #1
                             \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \pageBreak                                                         %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
-                            \break                                                             %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %! SEGMENT:LAYOUT
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 20) (alignment-distances . (11)))                   %! SEGMENT:LAYOUT:LMM3
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \break                                                             %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -6143,9 +6241,9 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
-                                \set Staff.instrumentName = \markup { III+IV }                 %! EXPLICIT_MARGIN_MARKUP
-                                \set Staff.shortInstrumentName = \markup { III+IV }            %! EXPLICIT_MARGIN_MARKUP
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR
+                                \set Staff.instrumentName = \markup { III+IV }                 %! EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { III+IV }            %! EXPLICIT_MARGIN_MARKUP:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                                 c'4.
                                 ^ \markup {
                                     \column
@@ -6184,13 +6282,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { III+IV }                 %! EXPLICIT_REDRAW_MARGIN_MARKUP
-                                \set Staff.shortInstrumentName = \markup { III+IV }            %! EXPLICIT_REDRAW_MARGIN_MARKUP
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR
+                                \set Staff.instrumentName = \markup { III+IV }                 %! EXPLICIT_REDRAW_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { III+IV }            %! EXPLICIT_REDRAW_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                       %! SM4
                                 c'4.
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -6242,22 +6339,28 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                          %! SM4
-                            \pageBreak                                                         %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT
-                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT
+                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT:LMM1
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 0) (alignment-distances . (11)))                    %! SEGMENT:LAYOUT:LMM3
                             \time 3/8                                                          %! SM1
                             \mark #1
                             \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \pageBreak                                                         %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
-                            \break                                                             %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %! SEGMENT:LAYOUT
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 20) (alignment-distances . (11)))                   %! SEGMENT:LAYOUT:LMM3
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \break                                                             %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -6266,9 +6369,9 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
-                                \set Staff.instrumentName = \markup { I+II }                   %! REAPPLIED_MARGIN_MARKUP
-                                \set Staff.shortInstrumentName = \markup { I+II }              %! REAPPLIED_MARGIN_MARKUP
-                                \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! REAPPLIED_MARGIN_MARKUP_COLOR
+                                \set Staff.instrumentName = \markup { I+II }                   %! REAPPLIED_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II }              %! REAPPLIED_MARGIN_MARKUP:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! REAPPLIED_MARGIN_MARKUP_COLOR:SM6
                                 c'4.
                                 ^ \markup {
                                     \column
@@ -6307,13 +6410,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                              %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { I+II }                   %! REAPPLIED_REDRAW_MARGIN_MARKUP
-                                \set Staff.shortInstrumentName = \markup { I+II }              %! REAPPLIED_REDRAW_MARGIN_MARKUP
-                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! REAPPLIED_REDRAW_INSTRUMENT_COLOR
+                                \set Staff.instrumentName = \markup { I+II }                   %! REAPPLIED_REDRAW_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II }              %! REAPPLIED_REDRAW_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! REAPPLIED_REDRAW_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                       %! SM4
                                 c'4.
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -6365,27 +6467,33 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                          %! SM4
-                            \pageBreak                                                         %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT
-                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT
+                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT:LMM1
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 0) (alignment-distances . (11)))                    %! SEGMENT:LAYOUT:LMM3
                             \time 4/8                                                          %! SM1
                             \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \pageBreak                                                         %! SEGMENT:LAYOUT:LMM3
                             s1 * 1/2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
-                            \noBreak                                                           %! SEGMENT:LAYOUT
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
                             s1 * 1/2
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                          %! SM4
-                            \break                                                             %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %! SEGMENT:LAYOUT
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 20) (alignment-distances . (11)))                   %! SEGMENT:LAYOUT:LMM3
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \break                                                             %! SEGMENT:LAYOUT:LMM3
                             s1 * 1/2
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -6394,9 +6502,9 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
-                                \set Staff.instrumentName = \markup { I+II }                   %! EXPLICIT_MARGIN_MARKUP
-                                \set Staff.shortInstrumentName = \markup { I+II }              %! EXPLICIT_MARGIN_MARKUP
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR
+                                \set Staff.instrumentName = \markup { I+II }                   %! EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II }              %! EXPLICIT_MARGIN_MARKUP:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                                 c'2
                                 ^ \markup {
                                     \column
@@ -6435,14 +6543,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { I+II }                   %! EXPLICIT_REDRAW_MARGIN_MARKUP
-                                \set Staff.shortInstrumentName = \markup { I+II }              %! EXPLICIT_REDRAW_MARGIN_MARKUP
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR
+                                \set Staff.instrumentName = \markup { I+II }                   %! EXPLICIT_REDRAW_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II }              %! EXPLICIT_REDRAW_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                       %! SM4
-                                \set Staff.instrumentName = \markup { I+II }                   %! REDUNDANT_MARGIN_MARKUP
-                                \set Staff.shortInstrumentName = \markup { I+II }              %! REDUNDANT_MARGIN_MARKUP
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_COLOR
+                                \set Staff.instrumentName = \markup { I+II }                   %! REDUNDANT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II }              %! REDUNDANT_MARGIN_MARKUP:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_COLOR:SM6
                                 c'2
                                 ^ \markup {
                                     \column
@@ -6481,13 +6589,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                              %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { I+II }                   %! REDUNDANT_REDRAW_MARGIN_MARKUP
-                                \set Staff.shortInstrumentName = \markup { I+II }              %! REDUNDANT_REDRAW_MARGIN_MARKUP
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_REDRAW_INSTRUMENT_COLOR
+                                \set Staff.instrumentName = \markup { I+II }                   %! REDUNDANT_REDRAW_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II }              %! REDUNDANT_REDRAW_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_REDRAW_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 3]                                       %! SM4
                                 c'2
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -6544,22 +6651,28 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                          %! SM4
-                            \pageBreak                                                         %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %! SEGMENT:LAYOUT
-                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT
+                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT:LMM1
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 0) (alignment-distances . (11)))                    %! SEGMENT:LAYOUT:LMM3
                             \time 3/8                                                          %! SM1
                             \mark #1
                             \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \pageBreak                                                         %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
-                            \break                                                             %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %! SEGMENT:LAYOUT
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 20) (alignment-distances . (11)))                   %! SEGMENT:LAYOUT:LMM3
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \break                                                             %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -6568,9 +6681,9 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
-                                \set Staff.instrumentName = \markup { I+II }                   %! REDUNDANT_MARGIN_MARKUP
-                                \set Staff.shortInstrumentName = \markup { I+II }              %! REDUNDANT_MARGIN_MARKUP
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_COLOR
+                                \set Staff.instrumentName = \markup { I+II }                   %! REDUNDANT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II }              %! REDUNDANT_MARGIN_MARKUP:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_COLOR:SM6
                                 c'4.
                                 ^ \markup {
                                     \column
@@ -6609,13 +6722,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                              %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { I+II }                   %! REDUNDANT_REDRAW_MARGIN_MARKUP
-                                \set Staff.shortInstrumentName = \markup { I+II }              %! REDUNDANT_REDRAW_MARGIN_MARKUP
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_REDRAW_INSTRUMENT_COLOR
+                                \set Staff.instrumentName = \markup { I+II }                   %! REDUNDANT_REDRAW_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II }              %! REDUNDANT_REDRAW_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDUNDANT_REDRAW_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                       %! SM4
                                 c'4.
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -6708,6 +6820,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -6716,12 +6830,12 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
-                                \set Staff.forceClef = ##t                                     %! REAPPLIED_CLEF
-                                \clef "alto"                                                   %! REAPPLIED_CLEF
-                                \once \override Staff.Clef.color = #(x11-color 'green4)        %! REAPPLIED_CLEF_COLOR
-                                %%% \override Staff.Clef.color = ##f                           %! REAPPLIED_CLEF_UNCOLOR
+                                \set Staff.forceClef = ##t                                     %! REAPPLIED_CLEF:SM8
+                                \clef "alto"                                                   %! REAPPLIED_CLEF:SM8
+                                \once \override Staff.Clef.color = #(x11-color 'green4)        %! REAPPLIED_CLEF_COLOR:SM6
+                                %%% \override Staff.Clef.color = ##f                           %! REAPPLIED_CLEF_UNCOLOR:SM7
                                 R1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'OliveDrab)           %! REAPPLIED_CLEF_COLOR_REDRAW
+                                \override Staff.Clef.color = #(x11-color 'OliveDrab)           %! REAPPLIED_CLEF_COLOR_REDRAW:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                       %! SM4
                                 R1 * 3/8
@@ -6731,7 +6845,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 % MusicVoice [measure 4]                                       %! SM4
                                 R1 * 3/8
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -6888,6 +7001,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -6941,7 +7056,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                     c'8
                                     ]
-                                    \bar "|"
                 <BLANKLINE>
                                 }
                             }
@@ -7012,12 +7126,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                          %! SM4
-                            \pageBreak                                                         %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (8))) %! SEGMENT:LAYOUT
-                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT
+                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT:LMM1
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 0) (alignment-distances . (8)))                     %! SEGMENT:LAYOUT:LMM3
                             \time 3/8                                                          %! SM1
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \pageBreak                                                         %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             ^ \markup {                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR
                                 \with-color                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR
@@ -7055,6 +7171,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%%             112                                                %! EXPLICIT_METRONOME_MARK
                             %%%         }                                                      %! EXPLICIT_METRONOME_MARK
                             %%%     }                                                          %! EXPLICIT_METRONOME_MARK
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -7064,7 +7182,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
                                 c'4.
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -7118,13 +7235,15 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                          %! SM4
-                            \pageBreak                                                         %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (8))) %! SEGMENT:LAYOUT
-                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT
+                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT:LMM1
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 0) (alignment-distances . (8)))                     %! SEGMENT:LAYOUT:LMM3
                             \time 3/8                                                          %! SM1
                             \mark #1
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \pageBreak                                                         %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             ^ \markup {                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR
                                 \with-color                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR
@@ -7162,6 +7281,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%%             112                                                %! EXPLICIT_METRONOME_MARK
                             %%%         }                                                      %! EXPLICIT_METRONOME_MARK
                             %%%     }                                                          %! EXPLICIT_METRONOME_MARK
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -7171,7 +7292,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
                                 c'4.
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -7223,13 +7343,15 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                          %! SM4
-                            \pageBreak                                                         %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (8))) %! SEGMENT:LAYOUT
-                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT
+                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT:LMM1
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 0) (alignment-distances . (8)))                     %! SEGMENT:LAYOUT:LMM3
                             \time 3/8                                                          %! SM1
                             \mark #1
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \pageBreak                                                         %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             ^ \markup {                                                        %! REAPPLIED_METRONOME_MARK_WITH_COLOR
                                 \with-color                                                    %! REAPPLIED_METRONOME_MARK_WITH_COLOR
@@ -7267,6 +7389,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%%             90                                                 %! REAPPLIED_METRONOME_MARK
                             %%%         }                                                      %! REAPPLIED_METRONOME_MARK
                             %%%     }                                                          %! REAPPLIED_METRONOME_MARK
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -7276,7 +7400,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
                                 c'4.
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -7322,12 +7445,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                          %! SM4
-                            \pageBreak                                                         %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (8))) %! SEGMENT:LAYOUT
-                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT
+                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT:LMM1
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 0) (alignment-distances . (8)))                     %! SEGMENT:LAYOUT:LMM3
                             \time 3/8                                                          %! SM1
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \pageBreak                                                         %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             ^ \markup {                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR
                                 \with-color                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR
@@ -7367,9 +7492,9 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%%     }                                                          %! EXPLICIT_METRONOME_MARK
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
-                            \noBreak                                                           %! SEGMENT:LAYOUT
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
                             s1 * 3/8
                             ^ \markup {                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR
                                 \with-color                                                    %! REDUNDANT_METRONOME_MARK_WITH_COLOR
@@ -7407,6 +7532,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%%             112                                                %! REDUNDANT_METRONOME_MARK
                             %%%         }                                                      %! REDUNDANT_METRONOME_MARK
                             %%%     }                                                          %! REDUNDANT_METRONOME_MARK
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -7419,7 +7546,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                       %! SM4
                                 c'4.
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -7473,13 +7599,15 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                          %! SM4
-                            \pageBreak                                                         %! SEGMENT:LAYOUT
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (8))) %! SEGMENT:LAYOUT
-                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT
+                            \autoPageBreaksOff                                                 %! SEGMENT:LAYOUT:LMM1
+                            \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! SEGMENT:LAYOUT:LMM3
+                            #'((Y-offset . 0) (alignment-distances . (8)))                     %! SEGMENT:LAYOUT:LMM3
                             \time 3/8                                                          %! SM1
                             \mark #1
-                            \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
+                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            \pageBreak                                                         %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             ^ \markup {                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR
                                 \with-color                                                    %! REDUNDANT_METRONOME_MARK_WITH_COLOR
@@ -7517,6 +7645,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%%             112                                                %! REDUNDANT_METRONOME_MARK
                             %%%         }                                                      %! REDUNDANT_METRONOME_MARK
                             %%%     }                                                          %! REDUNDANT_METRONOME_MARK
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -7526,7 +7656,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
                                 c'4.
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -7700,6 +7829,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -7718,7 +7849,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 % MusicVoice [measure 4]                                       %! SM4
                                 R1 * 3/8
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -7768,6 +7898,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -7786,7 +7918,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 % MusicVoice [measure 4]                                       %! SM4
                                 s1 * 3/8
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -7882,6 +8013,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -7935,7 +8068,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                     c'8
                                     ]
-                                    \bar "|"
                 <BLANKLINE>
                                 }
                             }
@@ -8017,6 +8149,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -8026,9 +8160,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % MusicVoice [measure 1]                                   %! SM4
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT
-                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT:SM8
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT:SM8
+                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:SM6
                                     fs'8
                                     [
                                     ^ \markup {
@@ -8068,9 +8202,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     }                                          %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_REDRAW_INSTRUMENT
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_REDRAW_INSTRUMENT
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_REDRAW_INSTRUMENT:SM8
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_REDRAW_INSTRUMENT:SM8
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                     g'8
                 <BLANKLINE>
@@ -8113,7 +8247,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                     g'8
                                     ]
-                                    \bar "|"
                 <BLANKLINE>
                                 }
                             }
@@ -8173,6 +8306,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -8182,9 +8317,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % MusicVoice [measure 1]                                   %! SM4
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT
-                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_INSTRUMENT:SM8
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_INSTRUMENT:SM8
+                                    \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_COLOR:SM6
                                     e'8
                                     [
                                     ^ \markup {
@@ -8224,9 +8359,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     }                                          %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_REDRAW_INSTRUMENT
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_REDRAW_INSTRUMENT
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %! EXPLICIT_REDRAW_INSTRUMENT:SM8
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %! EXPLICIT_REDRAW_INSTRUMENT:SM8
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                     f'8
                 <BLANKLINE>
@@ -8269,7 +8404,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                     f'8
                                     ]
-                                    \bar "|"
                 <BLANKLINE>
                                 }
                             }

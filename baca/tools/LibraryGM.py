@@ -69,6 +69,8 @@ class LibraryGM(abjad.AbjadObject):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -135,7 +137,6 @@ class LibraryGM(abjad.AbjadObject):
                 <BLANKLINE>
                                     d''8
                                     ]
-                                    \bar "|"
                 <BLANKLINE>
                                 }
                             }
@@ -193,6 +194,8 @@ class LibraryGM(abjad.AbjadObject):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -248,7 +251,6 @@ class LibraryGM(abjad.AbjadObject):
                 <BLANKLINE>
                                     d''8
                                     ]
-                                    \bar "|"
                 <BLANKLINE>
                                 }
                             }
@@ -1122,12 +1124,11 @@ class LibraryGM(abjad.AbjadObject):
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
                             [
-                                abjad.PageBreak(
-                                    format_slot='before',
-                                    ),
+                                abjad.LilyPondLiteral('\\pageBreak'),
                                 ]
                             ),
                         selector=baca.skip(0),
+                        site='LMM3',
                         tag='SEGMENT:LAYOUT',
                         ),
                     baca.IndicatorCommand(
@@ -1140,17 +1141,17 @@ class LibraryGM(abjad.AbjadObject):
                                 ]
                             ),
                         selector=baca.skip(0),
+                        site='LMM3',
                         tag='SEGMENT:LAYOUT',
                         ),
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
                             [
-                                abjad.LineBreak(
-                                    format_slot='before',
-                                    ),
+                                abjad.LilyPondLiteral('\\break'),
                                 ]
                             ),
                         selector=baca.skip(12),
+                        site='LMM3',
                         tag='SEGMENT:LAYOUT',
                         ),
                     baca.IndicatorCommand(
@@ -1163,17 +1164,17 @@ class LibraryGM(abjad.AbjadObject):
                                 ]
                             ),
                         selector=baca.skip(12),
+                        site='LMM3',
                         tag='SEGMENT:LAYOUT',
                         ),
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
                             [
-                                abjad.PageBreak(
-                                    format_slot='before',
-                                    ),
+                                abjad.LilyPondLiteral('\\pageBreak'),
                                 ]
                             ),
                         selector=baca.skip(22),
+                        site='LMM3',
                         tag='SEGMENT:LAYOUT',
                         ),
                     baca.IndicatorCommand(
@@ -1186,6 +1187,7 @@ class LibraryGM(abjad.AbjadObject):
                                 ]
                             ),
                         selector=baca.skip(22),
+                        site='LMM3',
                         tag='SEGMENT:LAYOUT',
                         ),
                     ),
@@ -1205,9 +1207,11 @@ class LibraryGM(abjad.AbjadObject):
                 alignment_distances = item[2]
                 selector = baca.skip(skip_index)
                 if i == 0:
-                    break_ = abjad.PageBreak(format_slot='before')
+                    #break_ = abjad.PageBreak(format_slot='before')
+                    break_ = abjad.LilyPondLiteral(r'\pageBreak')
                 else:
-                    break_ = abjad.LineBreak(format_slot='before')
+                    #break_ = abjad.LineBreak(format_slot='before')
+                    break_ = abjad.LilyPondLiteral(r'\break')
                 command = baca.IndicatorCommand(
                     indicators=[break_],
                     selector=selector,
@@ -1362,7 +1366,8 @@ class LibraryGM(abjad.AbjadObject):
 
         '''
         return baca.IndicatorCommand(
-            indicators=[abjad.LineBreak()],
+            #indicators=[abjad.LineBreak()],
+            indicators=[abjad.LilyPondLiteral(r'\break', 'after')],
             selector=selector,
             )
 
@@ -1877,6 +1882,8 @@ class LibraryGM(abjad.AbjadObject):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -1885,9 +1892,9 @@ class LibraryGM(abjad.AbjadObject):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                       %! SM4
-                                \set Staff.instrumentName = \markup { Flute }                  %! EXPLICIT_MARGIN_MARKUP
-                                \set Staff.shortInstrumentName = \markup { Fl. }               %! EXPLICIT_MARGIN_MARKUP
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR
+                                \set Staff.instrumentName = \markup { Flute }                  %! EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }               %! EXPLICIT_MARGIN_MARKUP:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                                 e'2
                                 ^ \markup {
                                     \column
@@ -1926,9 +1933,9 @@ class LibraryGM(abjad.AbjadObject):
                                                 }                                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { Flute }                  %! EXPLICIT_REDRAW_MARGIN_MARKUP
-                                \set Staff.shortInstrumentName = \markup { Fl. }               %! EXPLICIT_REDRAW_MARGIN_MARKUP
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR
+                                \set Staff.instrumentName = \markup { Flute }                  %! EXPLICIT_REDRAW_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }               %! EXPLICIT_REDRAW_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                       %! SM4
                                 f'4.
@@ -1938,7 +1945,6 @@ class LibraryGM(abjad.AbjadObject):
                 <BLANKLINE>
                                 % MusicVoice [measure 4]                                       %! SM4
                                 f'4.
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }

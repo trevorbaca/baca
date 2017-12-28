@@ -30,13 +30,17 @@ class LBSD(abjad.AbjadObject):
     ### PRIVATE METHODS ###
 
     def _get_lilypond_format_bundle(self, component=None):
-        string = self._override
-        string += f" #'((Y-offset . {self.y_offset})"
+        strings = []
+        #string = self._override
+        strings.append(self._override)
+        string = f"#'((Y-offset . {self.y_offset})"
         alignment_distances = [str(_) for _ in self.alignment_distances]
         alignment_distances = ' '.join(alignment_distances)
         string += f' (alignment-distances . ({alignment_distances})))'
+        strings.append(string)
         bundle = abjad.LilyPondFormatBundle()
-        bundle.before.commands.append(string)
+        #bundle.before.commands.append(string)
+        bundle.before.commands.extend(strings)
         return bundle
 
     ### PUBLIC PROPERTIES ###

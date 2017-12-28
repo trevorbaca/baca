@@ -69,6 +69,8 @@ class LibraryTZ(abjad.AbjadObject):
                         % GlobalSkips [measure 4]                                          %! SM4
                         \time 3/8                                                          %! SM1
                         s1 * 3/8
+                        \override Score.BarLine.transparent = ##f                          %! SM5
+                        \bar "|"                                                           %! SM5
             <BLANKLINE>
                     }
                 >>
@@ -92,7 +94,6 @@ class LibraryTZ(abjad.AbjadObject):
             <BLANKLINE>
                                 % MusicVoice [measure 4]                                   %! SM4
                                 f'4.
-                                \bar "|"
             <BLANKLINE>
                             }
                         }
@@ -1947,6 +1948,8 @@ class LibraryTZ(abjad.AbjadObject):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -1994,7 +1997,6 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 g'8
                                 ]
-                                \bar "|"
                                 \revert Score.BarLine.transparent
                 <BLANKLINE>
                             }
@@ -2058,6 +2060,8 @@ class LibraryTZ(abjad.AbjadObject):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -2106,7 +2110,6 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 g'8
                                 ]
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -4097,6 +4100,8 @@ class LibraryTZ(abjad.AbjadObject):
                             % GlobalSkips [measure 4]                                          %! SM4
                             \time 3/8                                                          %! SM1
                             s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -4143,7 +4148,6 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 g'8
                                 ]
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
@@ -4228,6 +4232,8 @@ class LibraryTZ(abjad.AbjadObject):
                                         #(x11-color 'DarkCyan)                                 %! STAGE_NUMBER_MARKUP:SM3
                                         [3]                                                    %! STAGE_NUMBER_MARKUP:SM3
                                 }                                                              %! STAGE_NUMBER_MARKUP:SM3
+                            \override Score.BarLine.transparent = ##f                          %! SM5
+                            \bar "|"                                                           %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -4274,7 +4280,6 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 g'8
                                 ]
-                                \bar "|"
                 <BLANKLINE>
                             }
                         }
