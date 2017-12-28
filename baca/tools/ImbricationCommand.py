@@ -898,58 +898,58 @@ class ImbricationCommand(Command):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]
-                            \time 7/16                                                         %%! SM1
-                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
+                            % GlobalSkips [measure 1]                                          %! SM4
+                            \time 7/16                                                         %! SM1
+                            \bar ""                                                            %! EMPTY_START_BAR:SM2
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
                             s1 * 7/16
                             ^ \markup {
                                 \column
                                     {
-                                        \line                                                  %%! STAGE_NUMBER_MARKUP:SM3
-                                            {                                                  %%! STAGE_NUMBER_MARKUP:SM3
-                                                \fontsize                                      %%! STAGE_NUMBER_MARKUP:SM3
-                                                    #-3                                        %%! STAGE_NUMBER_MARKUP:SM3
-                                                    \with-color                                %%! STAGE_NUMBER_MARKUP:SM3
-                                                        #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP:SM3
-                                                        [1]                                    %%! STAGE_NUMBER_MARKUP:SM3
-                                            }                                                  %%! STAGE_NUMBER_MARKUP:SM3
-                                        \line                                                  %%! SEGMENT:SPACING_MARKUP
-                                            {                                                  %%! SEGMENT:SPACING_MARKUP
-                                                \with-color                                    %%! SEGMENT:SPACING_MARKUP
-                                                    #(x11-color 'DarkCyan)                     %%! SEGMENT:SPACING_MARKUP
-                                                    \fontsize                                  %%! SEGMENT:SPACING_MARKUP
-                                                        #-3                                    %%! SEGMENT:SPACING_MARKUP
-                                                        (1/24)                                 %%! SEGMENT:SPACING_MARKUP
-                                            }                                                  %%! SEGMENT:SPACING_MARKUP
+                                        \line                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                            {                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                                \fontsize                                      %! STAGE_NUMBER_MARKUP:SM3
+                                                    #-3                                        %! STAGE_NUMBER_MARKUP:SM3
+                                                    \with-color                                %! STAGE_NUMBER_MARKUP:SM3
+                                                        #(x11-color 'DarkCyan)                 %! STAGE_NUMBER_MARKUP:SM3
+                                                        [1]                                    %! STAGE_NUMBER_MARKUP:SM3
+                                            }                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                        \line                                                  %! SEGMENT:SPACING_MARKUP
+                                            {                                                  %! SEGMENT:SPACING_MARKUP
+                                                \with-color                                    %! SEGMENT:SPACING_MARKUP
+                                                    #(x11-color 'DarkCyan)                     %! SEGMENT:SPACING_MARKUP
+                                                    \fontsize                                  %! SEGMENT:SPACING_MARKUP
+                                                        #-3                                    %! SEGMENT:SPACING_MARKUP
+                                                        (1/24)                                 %! SEGMENT:SPACING_MARKUP
+                                            }                                                  %! SEGMENT:SPACING_MARKUP
                                     }
                                 }
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]
-                            \time 1/4                                                          %%! SM1
+                            % GlobalSkips [measure 2]                                          %! SM4
+                            \time 1/4                                                          %! SM1
                             \newSpacingSection
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING
                             s1 * 1/4
                             ^ \markup {
                                 \column
                                     {
-                                        \line                                                  %%! STAGE_NUMBER_MARKUP:SM3
-                                            {                                                  %%! STAGE_NUMBER_MARKUP:SM3
-                                                \fontsize                                      %%! STAGE_NUMBER_MARKUP:SM3
-                                                    #-3                                        %%! STAGE_NUMBER_MARKUP:SM3
-                                                    \with-color                                %%! STAGE_NUMBER_MARKUP:SM3
-                                                        #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP:SM3
-                                                        [2]                                    %%! STAGE_NUMBER_MARKUP:SM3
-                                            }                                                  %%! STAGE_NUMBER_MARKUP:SM3
-                                        \line                                                  %%! SEGMENT:SPACING_MARKUP
-                                            {                                                  %%! SEGMENT:SPACING_MARKUP
-                                                \with-color                                    %%! SEGMENT:SPACING_MARKUP
-                                                    #(x11-color 'DarkCyan)                     %%! SEGMENT:SPACING_MARKUP
-                                                    \fontsize                                  %%! SEGMENT:SPACING_MARKUP
-                                                        #-3                                    %%! SEGMENT:SPACING_MARKUP
-                                                        (1/24)                                 %%! SEGMENT:SPACING_MARKUP
-                                            }                                                  %%! SEGMENT:SPACING_MARKUP
+                                        \line                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                            {                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                                \fontsize                                      %! STAGE_NUMBER_MARKUP:SM3
+                                                    #-3                                        %! STAGE_NUMBER_MARKUP:SM3
+                                                    \with-color                                %! STAGE_NUMBER_MARKUP:SM3
+                                                        #(x11-color 'DarkCyan)                 %! STAGE_NUMBER_MARKUP:SM3
+                                                        [2]                                    %! STAGE_NUMBER_MARKUP:SM3
+                                            }                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                        \line                                                  %! SEGMENT:SPACING_MARKUP
+                                            {                                                  %! SEGMENT:SPACING_MARKUP
+                                                \with-color                                    %! SEGMENT:SPACING_MARKUP
+                                                    #(x11-color 'DarkCyan)                     %! SEGMENT:SPACING_MARKUP
+                                                    \fontsize                                  %! SEGMENT:SPACING_MARKUP
+                                                        #-3                                    %! SEGMENT:SPACING_MARKUP
+                                                        (1/24)                                 %! SEGMENT:SPACING_MARKUP
+                                            }                                                  %! SEGMENT:SPACING_MARKUP
                                     }
                                 }
                 <BLANKLINE>
@@ -963,7 +963,7 @@ class ImbricationCommand(Command):
                                     \override TupletNumber.stencil = ##f
                                     {
                 <BLANKLINE>
-                                        % MusicVoiceOne [measure 1]
+                                        % MusicVoiceOne [measure 1]                            %! SM4
                                         s16
                                         [
                 <BLANKLINE>
@@ -995,7 +995,7 @@ class ImbricationCommand(Command):
                                     \override TupletNumber.stencil = ##f
                                     {
                 <BLANKLINE>
-                                        % MusicVoiceOne [measure 2]
+                                        % MusicVoiceOne [measure 2]                            %! SM4
                                         s16
                 <BLANKLINE>
                                         \set stemLeftBeamCount = #2
@@ -1021,7 +1021,7 @@ class ImbricationCommand(Command):
                                 {
                                     {
                 <BLANKLINE>
-                                        % MusicVoiceTwo [measure 1]
+                                        % MusicVoiceTwo [measure 1]                            %! SM4
                                         \set stemLeftBeamCount = #0
                                         \set stemRightBeamCount = #2
                                         c'16
@@ -1058,7 +1058,7 @@ class ImbricationCommand(Command):
                                 {
                                     {
                 <BLANKLINE>
-                                        % MusicVoiceTwo [measure 2]
+                                        % MusicVoiceTwo [measure 2]                            %! SM4
                                         \set stemLeftBeamCount = #0
                                         \set stemRightBeamCount = #2
                                         g''16

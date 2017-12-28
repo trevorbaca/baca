@@ -46,28 +46,28 @@ class LibraryGM(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]
-                            \time 4/8                                                          %%! SM1
-                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
+                            % GlobalSkips [measure 1]                                          %! SM4
+                            \time 4/8                                                          %! SM1
+                            \bar ""                                                            %! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
-                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
-                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
-                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
-                                        [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
-                                }                                                              %%! STAGE_NUMBER_MARKUP:SM3
+                            ^ \markup {                                                        %! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                      %! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                        %! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                %! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                 %! STAGE_NUMBER_MARKUP:SM3
+                                        [1]                                                    %! STAGE_NUMBER_MARKUP:SM3
+                                }                                                              %! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]
-                            \time 3/8                                                          %%! SM1
+                            % GlobalSkips [measure 2]                                          %! SM4
+                            \time 3/8                                                          %! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]
-                            \time 4/8                                                          %%! SM1
+                            % GlobalSkips [measure 3]                                          %! SM4
+                            \time 4/8                                                          %! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]
-                            \time 3/8                                                          %%! SM1
+                            % GlobalSkips [measure 4]                                          %! SM4
+                            \time 3/8                                                          %! SM1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -77,7 +77,7 @@ class LibraryGM(abjad.AbjadObject):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 1]
+                                    % MusicVoice [measure 1]                                   %! SM4
                                     e'8
                                     \glissando
                                     [
@@ -94,7 +94,7 @@ class LibraryGM(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 2]
+                                    % MusicVoice [measure 2]                                   %! SM4
                                     g'8
                                     \glissando
                                     [
@@ -108,7 +108,7 @@ class LibraryGM(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 3]
+                                    % MusicVoice [measure 3]                                   %! SM4
                                     d''8
                                     \glissando
                                     [
@@ -125,7 +125,7 @@ class LibraryGM(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 4]
+                                    % MusicVoice [measure 4]                                   %! SM4
                                     f''8
                                     \glissando
                                     [
@@ -170,28 +170,28 @@ class LibraryGM(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]
-                            \time 4/8                                                          %%! SM1
-                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
+                            % GlobalSkips [measure 1]                                          %! SM4
+                            \time 4/8                                                          %! SM1
+                            \bar ""                                                            %! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
-                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
-                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
-                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
-                                        [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
-                                }                                                              %%! STAGE_NUMBER_MARKUP:SM3
+                            ^ \markup {                                                        %! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                      %! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                        %! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                %! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                 %! STAGE_NUMBER_MARKUP:SM3
+                                        [1]                                                    %! STAGE_NUMBER_MARKUP:SM3
+                                }                                                              %! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]
-                            \time 3/8                                                          %%! SM1
+                            % GlobalSkips [measure 2]                                          %! SM4
+                            \time 3/8                                                          %! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]
-                            \time 4/8                                                          %%! SM1
+                            % GlobalSkips [measure 3]                                          %! SM4
+                            \time 4/8                                                          %! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]
-                            \time 3/8                                                          %%! SM1
+                            % GlobalSkips [measure 4]                                          %! SM4
+                            \time 3/8                                                          %! SM1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -201,7 +201,7 @@ class LibraryGM(abjad.AbjadObject):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 1]
+                                    % MusicVoice [measure 1]                                   %! SM4
                                     e'8
                                     \glissando
                                     [
@@ -215,7 +215,7 @@ class LibraryGM(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 2]
+                                    % MusicVoice [measure 2]                                   %! SM4
                                     g'8
                                     [
                 <BLANKLINE>
@@ -226,7 +226,7 @@ class LibraryGM(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 3]
+                                    % MusicVoice [measure 3]                                   %! SM4
                                     d''8
                                     [
                 <BLANKLINE>
@@ -239,7 +239,7 @@ class LibraryGM(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 4]
+                                    % MusicVoice [measure 4]                                   %! SM4
                                     f''8
                                     [
                 <BLANKLINE>
@@ -1861,21 +1861,21 @@ class LibraryGM(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]
-                            \time 4/8                                                          %%! SM1
-                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
+                            % GlobalSkips [measure 1]                                          %! SM4
+                            \time 4/8                                                          %! SM1
+                            \bar ""                                                            %! EMPTY_START_BAR:SM2
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]
-                            \time 3/8                                                          %%! SM1
+                            % GlobalSkips [measure 2]                                          %! SM4
+                            \time 3/8                                                          %! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]
-                            \time 4/8                                                          %%! SM1
+                            % GlobalSkips [measure 3]                                          %! SM4
+                            \time 4/8                                                          %! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]
-                            \time 3/8                                                          %%! SM1
+                            % GlobalSkips [measure 4]                                          %! SM4
+                            \time 3/8                                                          %! SM1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -1884,59 +1884,59 @@ class LibraryGM(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]
-                                \set Staff.instrumentName = \markup { Flute }                  %%! EXPLICIT_MARGIN_MARKUP
-                                \set Staff.shortInstrumentName = \markup { Fl. }               %%! EXPLICIT_MARGIN_MARKUP
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %%! EXPLICIT_MARGIN_MARKUP_COLOR
+                                % MusicVoice [measure 1]                                       %! SM4
+                                \set Staff.instrumentName = \markup { Flute }                  %! EXPLICIT_MARGIN_MARKUP
+                                \set Staff.shortInstrumentName = \markup { Fl. }               %! EXPLICIT_MARGIN_MARKUP
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR
                                 e'2
                                 ^ \markup {
                                     \column
                                         {
-                                            %%% \line                                          %%! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%     {                                          %%! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%         \vcenter                               %%! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%             [MarginMarkup                      %%! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%         \vcenter                               %%! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%             Flute                              %%! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%         \concat                                %%! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%             {                                  %%! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%                 \vcenter                       %%! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%                     Fl.                        %%! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%                 \vcenter                       %%! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%                     ]                          %%! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%             }                                  %%! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%     }                                          %%! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            \line                                              %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                {                                              %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                    \with-color                                %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                        #(x11-color 'blue)                     %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                        {                                      %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                            \vcenter                           %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                                [MarginMarkup                  %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                            \vcenter                           %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                                Flute                          %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                            \concat                            %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                                {                              %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                                    \vcenter                   %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                                        Fl.                    %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                                    \vcenter                   %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                                        ]                      %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                                }                              %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                        }                                      %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                }                                              %%! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
+                                            %%% \line                                          %! EXPLICIT_MARGIN_MARKUP_ALERT
+                                            %%%     {                                          %! EXPLICIT_MARGIN_MARKUP_ALERT
+                                            %%%         \vcenter                               %! EXPLICIT_MARGIN_MARKUP_ALERT
+                                            %%%             [MarginMarkup                      %! EXPLICIT_MARGIN_MARKUP_ALERT
+                                            %%%         \vcenter                               %! EXPLICIT_MARGIN_MARKUP_ALERT
+                                            %%%             Flute                              %! EXPLICIT_MARGIN_MARKUP_ALERT
+                                            %%%         \concat                                %! EXPLICIT_MARGIN_MARKUP_ALERT
+                                            %%%             {                                  %! EXPLICIT_MARGIN_MARKUP_ALERT
+                                            %%%                 \vcenter                       %! EXPLICIT_MARGIN_MARKUP_ALERT
+                                            %%%                     Fl.                        %! EXPLICIT_MARGIN_MARKUP_ALERT
+                                            %%%                 \vcenter                       %! EXPLICIT_MARGIN_MARKUP_ALERT
+                                            %%%                     ]                          %! EXPLICIT_MARGIN_MARKUP_ALERT
+                                            %%%             }                                  %! EXPLICIT_MARGIN_MARKUP_ALERT
+                                            %%%     }                                          %! EXPLICIT_MARGIN_MARKUP_ALERT
+                                            \line                                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
+                                                {                                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
+                                                    \with-color                                %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
+                                                        #(x11-color 'blue)                     %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
+                                                        {                                      %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
+                                                            \vcenter                           %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
+                                                                [MarginMarkup                  %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
+                                                            \vcenter                           %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
+                                                                Flute                          %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
+                                                            \concat                            %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
+                                                                {                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
+                                                                    \vcenter                   %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
+                                                                        Fl.                    %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
+                                                                    \vcenter                   %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
+                                                                        ]                      %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
+                                                                }                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
+                                                        }                                      %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
+                                                }                                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { Flute }                  %%! EXPLICIT_REDRAW_MARGIN_MARKUP
-                                \set Staff.shortInstrumentName = \markup { Fl. }               %%! EXPLICIT_REDRAW_MARGIN_MARKUP
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %%! EXPLICIT_REDRAW_INSTRUMENT_COLOR
+                                \set Staff.instrumentName = \markup { Flute }                  %! EXPLICIT_REDRAW_MARGIN_MARKUP
+                                \set Staff.shortInstrumentName = \markup { Fl. }               %! EXPLICIT_REDRAW_MARGIN_MARKUP
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR
                 <BLANKLINE>
-                                % MusicVoice [measure 2]
+                                % MusicVoice [measure 2]                                       %! SM4
                                 f'4.
                 <BLANKLINE>
-                                % MusicVoice [measure 3]
+                                % MusicVoice [measure 3]                                       %! SM4
                                 e'2
                 <BLANKLINE>
-                                % MusicVoice [measure 4]
+                                % MusicVoice [measure 4]                                       %! SM4
                                 f'4.
                                 \bar "|"
                 <BLANKLINE>

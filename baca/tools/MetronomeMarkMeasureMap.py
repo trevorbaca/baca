@@ -35,144 +35,144 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        % GlobalSkips [measure 1]
-                        \time 4/8                                                          %%! SM1
-                        \bar ""                                                            %%! EMPTY_START_BAR:SM2
+                        % GlobalSkips [measure 1]                                          %! SM4
+                        \time 4/8                                                          %! SM1
+                        \bar ""                                                            %! EMPTY_START_BAR:SM2
                         s1 * 1/2
                         ^ \markup {
                             \column
                                 {
-                                    \line                                                  %%! STAGE_NUMBER_MARKUP:SM3
-                                        {                                                  %%! STAGE_NUMBER_MARKUP:SM3
-                                            \fontsize                                      %%! STAGE_NUMBER_MARKUP:SM3
-                                                #-3                                        %%! STAGE_NUMBER_MARKUP:SM3
-                                                \with-color                                %%! STAGE_NUMBER_MARKUP:SM3
-                                                    #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP:SM3
-                                                    [1]                                    %%! STAGE_NUMBER_MARKUP:SM3
-                                        }                                                  %%! STAGE_NUMBER_MARKUP:SM3
-                                    \line                                                  %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                        {                                                  %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                            \with-color                                    %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                #(x11-color 'blue)                         %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                {                                          %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                    \fontsize                              %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                        #-6                                %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                        \general-align                     %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                            #Y                             %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                            #DOWN                          %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                            \note-by-number                %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                                #2                         %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                                #0                         %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                                #1                         %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                    \upright                               %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                        {                                  %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                            =                              %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                            90                             %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                        }                                  %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                }                                          %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                        }                                                  %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                    \line                                                  %%! CLOCK_TIME_MARKUP
-                                        {                                                  %%! CLOCK_TIME_MARKUP
-                                            \fontsize                                      %%! CLOCK_TIME_MARKUP
-                                                #-2                                        %%! CLOCK_TIME_MARKUP
-                                                0'00''                                     %%! CLOCK_TIME_MARKUP
-                                        }                                                  %%! CLOCK_TIME_MARKUP
+                                    \line                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                        {                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                            \fontsize                                      %! STAGE_NUMBER_MARKUP:SM3
+                                                #-3                                        %! STAGE_NUMBER_MARKUP:SM3
+                                                \with-color                                %! STAGE_NUMBER_MARKUP:SM3
+                                                    #(x11-color 'DarkCyan)                 %! STAGE_NUMBER_MARKUP:SM3
+                                                    [1]                                    %! STAGE_NUMBER_MARKUP:SM3
+                                        }                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    \line                                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        {                                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            \with-color                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                #(x11-color 'blue)                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                {                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                    \fontsize                              %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                        #-6                                %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                        \general-align                     %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                            #Y                             %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                            #DOWN                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                            \note-by-number                %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                                #2                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                                #0                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                                #1                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                    \upright                               %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                        {                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                            =                              %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                            90                             %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                        }                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                }                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        }                                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    \line                                                  %! CLOCK_TIME_MARKUP
+                                        {                                                  %! CLOCK_TIME_MARKUP
+                                            \fontsize                                      %! CLOCK_TIME_MARKUP
+                                                #-2                                        %! CLOCK_TIME_MARKUP
+                                                0'00''                                     %! CLOCK_TIME_MARKUP
+                                        }                                                  %! CLOCK_TIME_MARKUP
                                 }
                             }
-                        %%% ^ \markup {                                                    %%! EXPLICIT_METRONOME_MARK
-                        %%%     \fontsize                                                  %%! EXPLICIT_METRONOME_MARK
-                        %%%         #-6                                                    %%! EXPLICIT_METRONOME_MARK
-                        %%%         \general-align                                         %%! EXPLICIT_METRONOME_MARK
-                        %%%             #Y                                                 %%! EXPLICIT_METRONOME_MARK
-                        %%%             #DOWN                                              %%! EXPLICIT_METRONOME_MARK
-                        %%%             \note-by-number                                    %%! EXPLICIT_METRONOME_MARK
-                        %%%                 #2                                             %%! EXPLICIT_METRONOME_MARK
-                        %%%                 #0                                             %%! EXPLICIT_METRONOME_MARK
-                        %%%                 #1                                             %%! EXPLICIT_METRONOME_MARK
-                        %%%     \upright                                                   %%! EXPLICIT_METRONOME_MARK
-                        %%%         {                                                      %%! EXPLICIT_METRONOME_MARK
-                        %%%             =                                                  %%! EXPLICIT_METRONOME_MARK
-                        %%%             90                                                 %%! EXPLICIT_METRONOME_MARK
-                        %%%         }                                                      %%! EXPLICIT_METRONOME_MARK
-                        %%%     }                                                          %%! EXPLICIT_METRONOME_MARK
+                        %%% ^ \markup {                                                    %! EXPLICIT_METRONOME_MARK
+                        %%%     \fontsize                                                  %! EXPLICIT_METRONOME_MARK
+                        %%%         #-6                                                    %! EXPLICIT_METRONOME_MARK
+                        %%%         \general-align                                         %! EXPLICIT_METRONOME_MARK
+                        %%%             #Y                                                 %! EXPLICIT_METRONOME_MARK
+                        %%%             #DOWN                                              %! EXPLICIT_METRONOME_MARK
+                        %%%             \note-by-number                                    %! EXPLICIT_METRONOME_MARK
+                        %%%                 #2                                             %! EXPLICIT_METRONOME_MARK
+                        %%%                 #0                                             %! EXPLICIT_METRONOME_MARK
+                        %%%                 #1                                             %! EXPLICIT_METRONOME_MARK
+                        %%%     \upright                                                   %! EXPLICIT_METRONOME_MARK
+                        %%%         {                                                      %! EXPLICIT_METRONOME_MARK
+                        %%%             =                                                  %! EXPLICIT_METRONOME_MARK
+                        %%%             90                                                 %! EXPLICIT_METRONOME_MARK
+                        %%%         }                                                      %! EXPLICIT_METRONOME_MARK
+                        %%%     }                                                          %! EXPLICIT_METRONOME_MARK
             <BLANKLINE>
-                        % GlobalSkips [measure 2]
-                        \time 3/8                                                          %%! SM1
+                        % GlobalSkips [measure 2]                                          %! SM4
+                        \time 3/8                                                          %! SM1
                         s1 * 3/8
-                        ^ \markup {                                                        %%! CLOCK_TIME_MARKUP
-                            \fontsize                                                      %%! CLOCK_TIME_MARKUP
-                                #-2                                                        %%! CLOCK_TIME_MARKUP
-                                0'01''                                                     %%! CLOCK_TIME_MARKUP
-                            }                                                              %%! CLOCK_TIME_MARKUP
+                        ^ \markup {                                                        %! CLOCK_TIME_MARKUP
+                            \fontsize                                                      %! CLOCK_TIME_MARKUP
+                                #-2                                                        %! CLOCK_TIME_MARKUP
+                                0'01''                                                     %! CLOCK_TIME_MARKUP
+                            }                                                              %! CLOCK_TIME_MARKUP
             <BLANKLINE>
-                        % GlobalSkips [measure 3]
-                        \time 4/8                                                          %%! SM1
+                        % GlobalSkips [measure 3]                                          %! SM4
+                        \time 4/8                                                          %! SM1
                         s1 * 1/2
                         ^ \markup {
                             \column
                                 {
-                                    \line                                                  %%! STAGE_NUMBER_MARKUP:SM3
-                                        {                                                  %%! STAGE_NUMBER_MARKUP:SM3
-                                            \fontsize                                      %%! STAGE_NUMBER_MARKUP:SM3
-                                                #-3                                        %%! STAGE_NUMBER_MARKUP:SM3
-                                                \with-color                                %%! STAGE_NUMBER_MARKUP:SM3
-                                                    #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP:SM3
-                                                    [2]                                    %%! STAGE_NUMBER_MARKUP:SM3
-                                        }                                                  %%! STAGE_NUMBER_MARKUP:SM3
-                                    \line                                                  %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                        {                                                  %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                            \with-color                                    %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                #(x11-color 'blue)                         %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                {                                          %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                    \fontsize                              %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                        #-6                                %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                        \general-align                     %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                            #Y                             %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                            #DOWN                          %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                            \note-by-number                %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                                #2                         %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                                #0                         %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                                #1                         %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                    \upright                               %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                        {                                  %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                            =                              %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                            72                             %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                        }                                  %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                                }                                          %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                        }                                                  %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
-                                    \line                                                  %%! CLOCK_TIME_MARKUP
-                                        {                                                  %%! CLOCK_TIME_MARKUP
-                                            \fontsize                                      %%! CLOCK_TIME_MARKUP
-                                                #-2                                        %%! CLOCK_TIME_MARKUP
-                                                0'02''                                     %%! CLOCK_TIME_MARKUP
-                                        }                                                  %%! CLOCK_TIME_MARKUP
+                                    \line                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                        {                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                            \fontsize                                      %! STAGE_NUMBER_MARKUP:SM3
+                                                #-3                                        %! STAGE_NUMBER_MARKUP:SM3
+                                                \with-color                                %! STAGE_NUMBER_MARKUP:SM3
+                                                    #(x11-color 'DarkCyan)                 %! STAGE_NUMBER_MARKUP:SM3
+                                                    [2]                                    %! STAGE_NUMBER_MARKUP:SM3
+                                        }                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    \line                                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        {                                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                            \with-color                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                #(x11-color 'blue)                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                {                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                    \fontsize                              %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                        #-6                                %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                        \general-align                     %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                            #Y                             %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                            #DOWN                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                            \note-by-number                %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                                #2                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                                #0                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                                #1                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                    \upright                               %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                        {                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                            =                              %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                            72                             %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                        }                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                                }                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                        }                                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR
+                                    \line                                                  %! CLOCK_TIME_MARKUP
+                                        {                                                  %! CLOCK_TIME_MARKUP
+                                            \fontsize                                      %! CLOCK_TIME_MARKUP
+                                                #-2                                        %! CLOCK_TIME_MARKUP
+                                                0'02''                                     %! CLOCK_TIME_MARKUP
+                                        }                                                  %! CLOCK_TIME_MARKUP
                                 }
                             }
-                        %%% ^ \markup {                                                    %%! EXPLICIT_METRONOME_MARK
-                        %%%     \fontsize                                                  %%! EXPLICIT_METRONOME_MARK
-                        %%%         #-6                                                    %%! EXPLICIT_METRONOME_MARK
-                        %%%         \general-align                                         %%! EXPLICIT_METRONOME_MARK
-                        %%%             #Y                                                 %%! EXPLICIT_METRONOME_MARK
-                        %%%             #DOWN                                              %%! EXPLICIT_METRONOME_MARK
-                        %%%             \note-by-number                                    %%! EXPLICIT_METRONOME_MARK
-                        %%%                 #2                                             %%! EXPLICIT_METRONOME_MARK
-                        %%%                 #0                                             %%! EXPLICIT_METRONOME_MARK
-                        %%%                 #1                                             %%! EXPLICIT_METRONOME_MARK
-                        %%%     \upright                                                   %%! EXPLICIT_METRONOME_MARK
-                        %%%         {                                                      %%! EXPLICIT_METRONOME_MARK
-                        %%%             =                                                  %%! EXPLICIT_METRONOME_MARK
-                        %%%             72                                                 %%! EXPLICIT_METRONOME_MARK
-                        %%%         }                                                      %%! EXPLICIT_METRONOME_MARK
-                        %%%     }                                                          %%! EXPLICIT_METRONOME_MARK
+                        %%% ^ \markup {                                                    %! EXPLICIT_METRONOME_MARK
+                        %%%     \fontsize                                                  %! EXPLICIT_METRONOME_MARK
+                        %%%         #-6                                                    %! EXPLICIT_METRONOME_MARK
+                        %%%         \general-align                                         %! EXPLICIT_METRONOME_MARK
+                        %%%             #Y                                                 %! EXPLICIT_METRONOME_MARK
+                        %%%             #DOWN                                              %! EXPLICIT_METRONOME_MARK
+                        %%%             \note-by-number                                    %! EXPLICIT_METRONOME_MARK
+                        %%%                 #2                                             %! EXPLICIT_METRONOME_MARK
+                        %%%                 #0                                             %! EXPLICIT_METRONOME_MARK
+                        %%%                 #1                                             %! EXPLICIT_METRONOME_MARK
+                        %%%     \upright                                                   %! EXPLICIT_METRONOME_MARK
+                        %%%         {                                                      %! EXPLICIT_METRONOME_MARK
+                        %%%             =                                                  %! EXPLICIT_METRONOME_MARK
+                        %%%             72                                                 %! EXPLICIT_METRONOME_MARK
+                        %%%         }                                                      %! EXPLICIT_METRONOME_MARK
+                        %%%     }                                                          %! EXPLICIT_METRONOME_MARK
             <BLANKLINE>
-                        % GlobalSkips [measure 4]
-                        \time 3/8                                                          %%! SM1
+                        % GlobalSkips [measure 4]                                          %! SM4
+                        \time 3/8                                                          %! SM1
                         s1 * 3/8
-                        ^ \markup {                                                        %%! CLOCK_TIME_MARKUP
-                            \fontsize                                                      %%! CLOCK_TIME_MARKUP
-                                #-2                                                        %%! CLOCK_TIME_MARKUP
-                                0'04''                                                     %%! CLOCK_TIME_MARKUP
-                            }                                                              %%! CLOCK_TIME_MARKUP
+                        ^ \markup {                                                        %! CLOCK_TIME_MARKUP
+                            \fontsize                                                      %! CLOCK_TIME_MARKUP
+                                #-2                                                        %! CLOCK_TIME_MARKUP
+                                0'04''                                                     %! CLOCK_TIME_MARKUP
+                            }                                                              %! CLOCK_TIME_MARKUP
             <BLANKLINE>
                     }
                 >>
@@ -181,7 +181,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                         \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 1]
+                                % MusicVoice [measure 1]                                   %! SM4
                                 e'8
                                 [
             <BLANKLINE>
@@ -194,7 +194,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 2]
+                                % MusicVoice [measure 2]                                   %! SM4
                                 e'8
                                 [
             <BLANKLINE>
@@ -204,10 +204,10 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                                 ]
                             }
             <BLANKLINE>
-                            % MusicVoice [measure 3]
+                            % MusicVoice [measure 3]                                       %! SM4
                             R1 * 1/2
             <BLANKLINE>
-                            % MusicVoice [measure 4]
+                            % MusicVoice [measure 4]                                       %! SM4
                             R1 * 3/8
                             \bar "|"
             <BLANKLINE>
