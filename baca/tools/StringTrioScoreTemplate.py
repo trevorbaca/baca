@@ -20,7 +20,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=79)
             \context Score = "Score" <<
-                \tag violin.viola.cello
+                \tag violin.viola.cello                                                    %! ST4
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
@@ -54,7 +54,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
                 >>
                 \context MusicContext = "MusicContext" <<
                     \context StringSectionStaffGroup = "String Section Staff Group" <<
-                        \tag violin
+                        \tag violin                                                        %! ST4
                         \context ViolinMusicStaff = "ViolinMusicStaff" {
                             \context ViolinMusicVoice = "ViolinMusicVoice" {
             <BLANKLINE>
@@ -78,46 +78,46 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 ^ \markup {
                                     \column
                                         {
-                                            %%% \line                                      %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%     {                                      %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%         \vcenter                           %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%             (Violin                        %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%         \vcenter                           %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%             \hcenter-in                    %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%                 #10                        %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%                 Violin                     %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%         \concat                            %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%             {                              %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%                 \vcenter                   %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%                     \hcenter-in            %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%                         #10                %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%                         Vn.                %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%                 \vcenter                   %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%                     )                      %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%             }                              %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%     }                                      %! DEFAULT_INSTRUMENT_ALERT
-                                            \line                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                {                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                    \with-color                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                        #(x11-color 'DarkViolet)           %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                        {                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                            \vcenter                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                (Violin                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                            \vcenter                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                \hcenter-in                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    #10                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    Violin                 %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                            \concat                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                {                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        \hcenter-in        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            #10            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            Vn.            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        )                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                }                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                        }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                }                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                            %%% \line                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%     {                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%         \vcenter                           %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%             (Violin                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%         \vcenter                           %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%             \hcenter-in                    %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%                 #10                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%                 Violin                     %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%         \concat                            %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%             {                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%                 \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%                     \hcenter-in            %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%                         #10                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%                         Vn.                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%                 \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%                     )                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%             }                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%     }                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            \line                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                {                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                    \with-color                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                        #(x11-color 'DarkViolet)           %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                        {                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            \vcenter                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                (Violin                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            \vcenter                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                \hcenter-in                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    #10                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    Violin                 %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            \concat                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                {                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \hcenter-in        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            #10            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            Vn.            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        )                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                }                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                        }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                }                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                         }
                                     }
                                 \set ViolinMusicStaff.instrumentName = \markup {           %! DEFAULT_REDRAW_INSTRUMENT:SM8
@@ -144,7 +144,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
             <BLANKLINE>
                             }
                         }
-                        \tag viola
+                        \tag viola                                                         %! ST4
                         \context ViolaMusicStaff = "ViolaMusicStaff" {
                             \context ViolaMusicVoice = "ViolaMusicVoice" {
             <BLANKLINE>
@@ -168,46 +168,46 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 ^ \markup {
                                     \column
                                         {
-                                            %%% \line                                      %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%     {                                      %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%         \vcenter                           %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%             (Viola                         %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%         \vcenter                           %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%             \hcenter-in                    %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%                 #10                        %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%                 Viola                      %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%         \concat                            %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%             {                              %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%                 \vcenter                   %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%                     \hcenter-in            %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%                         #10                %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%                         Va.                %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%                 \vcenter                   %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%                     )                      %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%             }                              %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%     }                                      %! DEFAULT_INSTRUMENT_ALERT
-                                            \line                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                {                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                    \with-color                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                        #(x11-color 'DarkViolet)           %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                        {                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                            \vcenter                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                (Viola                     %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                            \vcenter                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                \hcenter-in                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    #10                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    Viola                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                            \concat                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                {                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        \hcenter-in        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            #10            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            Va.            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        )                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                }                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                        }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                }                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                            %%% \line                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%     {                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%         \vcenter                           %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%             (Viola                         %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%         \vcenter                           %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%             \hcenter-in                    %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%                 #10                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%                 Viola                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%         \concat                            %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%             {                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%                 \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%                     \hcenter-in            %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%                         #10                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%                         Va.                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%                 \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%                     )                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%             }                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%     }                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            \line                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                {                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                    \with-color                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                        #(x11-color 'DarkViolet)           %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                        {                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            \vcenter                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                (Viola                     %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            \vcenter                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                \hcenter-in                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    #10                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    Viola                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            \concat                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                {                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \hcenter-in        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            #10            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            Va.            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        )                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                }                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                        }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                }                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                         }
                                     }
                                 \set ViolaMusicStaff.instrumentName = \markup {            %! DEFAULT_REDRAW_INSTRUMENT:SM8
@@ -234,7 +234,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
             <BLANKLINE>
                             }
                         }
-                        \tag cello
+                        \tag cello                                                         %! ST4
                         \context CelloMusicStaff = "CelloMusicStaff" {
                             \context CelloMusicVoice = "CelloMusicVoice" {
             <BLANKLINE>
@@ -258,46 +258,46 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 ^ \markup {
                                     \column
                                         {
-                                            %%% \line                                      %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%     {                                      %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%         \vcenter                           %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%             (Cello                         %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%         \vcenter                           %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%             \hcenter-in                    %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%                 #10                        %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%                 Cello                      %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%         \concat                            %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%             {                              %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%                 \vcenter                   %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%                     \hcenter-in            %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%                         #10                %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%                         Vc.                %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%                 \vcenter                   %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%                     )                      %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%             }                              %! DEFAULT_INSTRUMENT_ALERT
-                                            %%%     }                                      %! DEFAULT_INSTRUMENT_ALERT
-                                            \line                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                {                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                    \with-color                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                        #(x11-color 'DarkViolet)           %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                        {                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                            \vcenter                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                (Cello                     %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                            \vcenter                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                \hcenter-in                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    #10                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    Cello                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                            \concat                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                {                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        \hcenter-in        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            #10            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            Vc.            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        )                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                }                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                        }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                }                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                            %%% \line                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%     {                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%         \vcenter                           %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%             (Cello                         %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%         \vcenter                           %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%             \hcenter-in                    %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%                 #10                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%                 Cello                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%         \concat                            %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%             {                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%                 \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%                     \hcenter-in            %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%                         #10                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%                         Vc.                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%                 \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%                     )                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%             }                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %%%     }                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            \line                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                {                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                    \with-color                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                        #(x11-color 'DarkViolet)           %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                        {                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            \vcenter                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                (Cello                     %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            \vcenter                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                \hcenter-in                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    #10                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    Cello                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            \concat                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                {                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \hcenter-in        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            #10            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            Vc.            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        )                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                }                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                        }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                }                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                         }
                                     }
                                 \set CelloMusicStaff.instrumentName = \markup {            %! DEFAULT_REDRAW_INSTRUMENT:SM8
@@ -348,12 +348,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
             'cello',
             )
         tag_string = '.'.join(instrument_tags)
-        tag_string = f'tag {tag_string}'
-        tag_command = abjad.LilyPondCommand(
-            tag_string,
-            'before',
-            )
-        abjad.attach(tag_command, global_context)
+        self._attach_tag(tag_string, global_context)
 
         # VIOLIN
         violin_music_voice = abjad.Voice(

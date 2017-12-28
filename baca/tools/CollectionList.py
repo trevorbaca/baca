@@ -430,7 +430,7 @@ class CollectionList(abjad.AbjadValueObject):
                             g''8
                             \stopGroup
                             s8
-                            \bar "|."
+                            \bar "|."                                                          %! SCORE1
                             \override Score.BarLine.transparent = ##f
                         }
                     }

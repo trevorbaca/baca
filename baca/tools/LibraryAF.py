@@ -49,13 +49,13 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\accent
+                                -\accent                                                       %! IC1
                                 [
                                 d'16
-                                -\accent
+                                -\accent                                                       %! IC1
                                 ]
                                 bf'4
-                                -\accent
+                                -\accent                                                       %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -63,26 +63,26 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\accent
+                                -\accent                                                       %! IC1
                                 [
                                 e''16
-                                -\accent
+                                -\accent                                                       %! IC1
                                 ]
                                 ef''4
-                                -\accent
+                                -\accent                                                       %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\accent
+                                -\accent                                                       %! IC1
                                 [
                                 g''16
-                                -\accent
+                                -\accent                                                       %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\accent
+                                -\accent                                                       %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -130,21 +130,21 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\accent
+                                -\accent                                                       %! IC1
                                 [
                                 e''16
-                                -\accent
+                                -\accent                                                       %! IC1
                                 ]
                                 ef''4
-                                -\accent
+                                -\accent                                                       %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\accent
+                                -\accent                                                       %! IC1
                                 [
                                 g''16
-                                -\accent
+                                -\accent                                                       %! IC1
                                 ]
                             }
                             \times 4/5 {
@@ -196,13 +196,13 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 [
                                 d'16
-                                -\upbow
+                                -\upbow                                                        %! IC1
                                 ]
                                 bf'4
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -210,26 +210,26 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\upbow
+                                -\upbow                                                        %! IC1
                                 [
                                 e''16
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 ]
                                 ef''4
-                                -\upbow
+                                -\upbow                                                        %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 [
                                 g''16
-                                -\upbow
+                                -\upbow                                                        %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -266,13 +266,13 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #6
                                 r8
                                 c'16
-                                -\upbow
+                                -\upbow                                                        %! IC1
                                 [
                                 d'16
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 ]
                                 bf'4
-                                -\upbow
+                                -\upbow                                                        %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -280,26 +280,26 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 [
                                 e''16
-                                -\upbow
+                                -\upbow                                                        %! IC1
                                 ]
                                 ef''4
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\upbow
+                                -\upbow                                                        %! IC1
                                 [
                                 g''16
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\upbow
+                                -\upbow                                                        %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -350,21 +350,21 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 [
                                 e''16
-                                -\upbow
+                                -\upbow                                                        %! IC1
                                 ]
                                 ef''4
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\upbow
+                                -\upbow                                                        %! IC1
                                 [
                                 g''16
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 ]
                             }
                             \times 4/5 {
@@ -458,12 +458,12 @@ class LibraryAF(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                _ \markup {
-                                    \dynamic
-                                        ff
-                                    \upright
-                                        ancora
-                                    }
+                                _ \markup {                                                    %! IC1
+                                    \dynamic                                                   %! IC1
+                                        ff                                                     %! IC1
+                                    \upright                                                   %! IC1
+                                        ancora                                                 %! IC1
+                                    }                                                          %! IC1
                                 d'16
                                 ]
                                 bf'4
@@ -539,12 +539,12 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                _ \markup {
-                                    \dynamic
-                                        ff
-                                    \upright
-                                        ancora
-                                    }
+                                _ \markup {                                                    %! IC1
+                                    \dynamic                                                   %! IC1
+                                        ff                                                     %! IC1
+                                    \upright                                                   %! IC1
+                                        ancora                                                 %! IC1
+                                    }                                                          %! IC1
                                 e''16
                                 ]
                                 ef''4
@@ -602,7 +602,7 @@ class LibraryAF(abjad.AbjadObject):
                         {
                             {
                                 <c' d' bf'>8
-                                -\arpeggio
+                                -\arpeggio                                                     %! IC1
                                 ~
                                 [
                                 <c' d' bf'>32
@@ -619,7 +619,7 @@ class LibraryAF(abjad.AbjadObject):
                             }
                             {
                                 <ef'' e'' fs'''>8
-                                -\arpeggio
+                                -\arpeggio                                                     %! IC1
                                 ~
                                 [
                                 <ef'' e'' fs'''>32
@@ -628,7 +628,7 @@ class LibraryAF(abjad.AbjadObject):
                             }
                             {
                                 <g' af''>8
-                                -\arpeggio
+                                -\arpeggio                                                     %! IC1
                                 ~
                                 [
                                 <g' af''>32
@@ -687,7 +687,7 @@ class LibraryAF(abjad.AbjadObject):
                             }
                             {
                                 <ef'' e'' fs'''>8
-                                -\arpeggio
+                                -\arpeggio                                                     %! IC1
                                 ~
                                 [
                                 <ef'' e'' fs'''>32
@@ -696,7 +696,7 @@ class LibraryAF(abjad.AbjadObject):
                             }
                             {
                                 <g' af''>8
-                                -\arpeggio
+                                -\arpeggio                                                     %! IC1
                                 ~
                                 [
                                 <g' af''>32
@@ -2126,7 +2126,7 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #7
-                                \clef "alto"
+                                \clef "alto"                                                   %! IC1
                                 r8
                                 c'16
                                 [
@@ -2203,7 +2203,7 @@ class LibraryAF(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \clef "alto"
+                                \clef "alto"                                                   %! IC1
                                 fs''16
                                 [
                                 e''16
@@ -2794,7 +2794,7 @@ class LibraryAF(abjad.AbjadObject):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \context Score = "Score" <<
-                    \tag violin.viola.cello
+                    \tag violin.viola.cello                                                    %! ST4
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
@@ -2817,7 +2817,7 @@ class LibraryAF(abjad.AbjadObject):
                     >>
                     \context MusicContext = "MusicContext" <<
                         \context StringSectionStaffGroup = "String Section Staff Group" <<
-                            \tag violin
+                            \tag violin                                                        %! ST4
                             \context ViolinMusicStaff = "ViolinMusicStaff" {
                                 \context ViolinMusicVoice = "ViolinMusicVoice" {
                                     {
@@ -2844,46 +2844,46 @@ class LibraryAF(abjad.AbjadObject):
                                             ^ \markup {
                                                 \column
                                                     {
-                                                        %%% \line                              %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%     {                              %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%         \vcenter                   %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%             (Violin                %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%         \vcenter                   %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%             \hcenter-in            %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                 #10                %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                 Violin             %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%         \concat                    %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%             {                      %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                 \vcenter           %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                     \hcenter-in    %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                         #10        %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                         Vn.        %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                 \vcenter           %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                     )              %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%             }                      %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%     }                              %! DEFAULT_INSTRUMENT_ALERT
-                                                        \line                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                            {                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                \with-color                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    #(x11-color 'DarkViolet)   %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    {                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            (Violin            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            \hcenter-in        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                #10            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                Violin         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        \concat                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            {                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                \vcenter       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                    \hcenter-in %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                        #10    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                        Vn.    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                \vcenter       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                    )          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            }                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    }                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                            }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                        %%% \line                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%     {                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%         \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             (Violin                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%         \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             \hcenter-in            %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 #10                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 Violin             %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%         \concat                    %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             {                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 \vcenter           %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                     \hcenter-in    %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                         #10        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                         Vn.        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 \vcenter           %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                     )              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             }                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%     }                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        \line                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            {                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                \with-color                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    #(x11-color 'DarkViolet)   %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    {                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            (Violin            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            \hcenter-in        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                #10            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                Violin         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \concat                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            {                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                \vcenter       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                    \hcenter-in %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                        #10    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                        Vn.    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                \vcenter       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                    )          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            }                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    }                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                                     }
                                                 }
                                             \set ViolinMusicStaff.instrumentName = \markup {   %! DEFAULT_REDRAW_INSTRUMENT:SM8
@@ -2919,7 +2919,7 @@ class LibraryAF(abjad.AbjadObject):
                                     }
                                 }
                             }
-                            \tag viola
+                            \tag viola                                                         %! ST4
                             \context ViolaMusicStaff = "ViolaMusicStaff" {
                                 \context ViolaMusicVoice = "ViolaMusicVoice" {
                                     {
@@ -2939,7 +2939,7 @@ class LibraryAF(abjad.AbjadObject):
                                                 }                                              %! DEFAULT_INSTRUMENT:SM8
                                             \set ViolaMusicStaff.forceClef = ##t               %! DEFAULT_CLEF:SM8
                                             \clef "alto"                                       %! DEFAULT_CLEF:SM8
-                                            \crossStaff
+                                            \crossStaff                                        %! IC1
                                             \once \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR:SM6
                                             \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:SM6
                                             %%% \override ViolaMusicStaff.Clef.color = ##f     %! DEFAULT_CLEF_UNCOLOR:SM7
@@ -2947,46 +2947,46 @@ class LibraryAF(abjad.AbjadObject):
                                             ^ \markup {
                                                 \column
                                                     {
-                                                        %%% \line                              %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%     {                              %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%         \vcenter                   %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%             (Viola                 %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%         \vcenter                   %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%             \hcenter-in            %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                 #10                %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                 Viola              %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%         \concat                    %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%             {                      %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                 \vcenter           %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                     \hcenter-in    %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                         #10        %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                         Va.        %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                 \vcenter           %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                     )              %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%             }                      %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%     }                              %! DEFAULT_INSTRUMENT_ALERT
-                                                        \line                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                            {                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                \with-color                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    #(x11-color 'DarkViolet)   %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    {                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            (Viola             %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            \hcenter-in        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                #10            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                Viola          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        \concat                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            {                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                \vcenter       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                    \hcenter-in %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                        #10    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                        Va.    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                \vcenter       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                    )          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            }                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    }                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                            }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                        %%% \line                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%     {                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%         \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             (Viola                 %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%         \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             \hcenter-in            %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 #10                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 Viola              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%         \concat                    %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             {                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 \vcenter           %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                     \hcenter-in    %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                         #10        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                         Va.        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 \vcenter           %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                     )              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             }                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%     }                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        \line                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            {                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                \with-color                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    #(x11-color 'DarkViolet)   %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    {                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            (Viola             %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            \hcenter-in        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                #10            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                Viola          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \concat                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            {                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                \vcenter       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                    \hcenter-in %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                        #10    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                        Va.    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                \vcenter       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                    )          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            }                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    }                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                                     }
                                                 }
                                             \set ViolaMusicStaff.instrumentName = \markup {    %! DEFAULT_REDRAW_INSTRUMENT:SM8
@@ -3002,16 +3002,16 @@ class LibraryAF(abjad.AbjadObject):
                                             \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'violet) %! DEFAULT_REDRAW_INSTRUMENT_COLOR:SM6
                                             \override ViolaMusicStaff.Clef.color = #(x11-color 'violet) %! DEFAULT_CLEF_COLOR_REDRAW:SM6
                 <BLANKLINE>
-                                            \crossStaff
+                                            \crossStaff                                        %! IC1
                                             d'8
                 <BLANKLINE>
-                                            \crossStaff
+                                            \crossStaff                                        %! IC1
                                             e'8
                 <BLANKLINE>
-                                            \crossStaff
+                                            \crossStaff                                        %! IC1
                                             f'8
                 <BLANKLINE>
-                                            \crossStaff
+                                            \crossStaff                                        %! IC1
                                             g'8
                                             \revert Stem.direction
                                         }
@@ -3022,7 +3022,7 @@ class LibraryAF(abjad.AbjadObject):
                 <BLANKLINE>
                                 }
                             }
-                            \tag cello
+                            \tag cello                                                         %! ST4
                             \context CelloMusicStaff = "CelloMusicStaff" {
                                 \context CelloMusicVoice = "CelloMusicVoice" {
                 <BLANKLINE>
@@ -3046,46 +3046,46 @@ class LibraryAF(abjad.AbjadObject):
                                     ^ \markup {
                                         \column
                                             {
-                                                %%% \line                                      %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%     {                                      %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%         \vcenter                           %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%             (Cello                         %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%         \vcenter                           %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%             \hcenter-in                    %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%                 #10                        %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%                 Cello                      %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%         \concat                            %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%             {                              %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%                 \vcenter                   %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%                     \hcenter-in            %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%                         #10                %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%                         Vc.                %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%                 \vcenter                   %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%                     )                      %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%             }                              %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%     }                                      %! DEFAULT_INSTRUMENT_ALERT
-                                                \line                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                    {                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                        \with-color                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                            #(x11-color 'DarkViolet)           %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                            {                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                \vcenter                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    (Cello                     %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                \vcenter                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    \hcenter-in                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        #10                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        Cello                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                \concat                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    {                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            \hcenter-in        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                #10            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                Vc.            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            )                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    }                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                            }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                    }                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                %%% \line                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%     {                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%         \vcenter                           %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%             (Cello                         %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%         \vcenter                           %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%             \hcenter-in                    %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                 #10                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                 Cello                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%         \concat                            %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%             {                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                 \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                     \hcenter-in            %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                         #10                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                         Vc.                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                 \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                     )                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%             }                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%     }                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                \line                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                    {                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                        \with-color                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            #(x11-color 'DarkViolet)           %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            {                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                \vcenter                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    (Cello                     %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                \vcenter                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    \hcenter-in                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        #10                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        Cello                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                \concat                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    {                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            \hcenter-in        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                #10            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                Vc.            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            )                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    }                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                    }                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                             }
                                         }
                                     \set CelloMusicStaff.instrumentName = \markup {            %! DEFAULT_REDRAW_INSTRUMENT:SM8
@@ -3171,7 +3171,7 @@ class LibraryAF(abjad.AbjadObject):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=79)
                 \context Score = "Score" <<
-                    \tag violin.viola.cello
+                    \tag violin.viola.cello                                                    %! ST4
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
@@ -3194,7 +3194,7 @@ class LibraryAF(abjad.AbjadObject):
                     >>
                     \context MusicContext = "MusicContext" <<
                         \context StringSectionStaffGroup = "String Section Staff Group" <<
-                            \tag violin
+                            \tag violin                                                        %! ST4
                             \context ViolinMusicStaff = "ViolinMusicStaff" {
                                 \context ViolinMusicVoice = "ViolinMusicVoice" {
                                     {
@@ -3221,46 +3221,46 @@ class LibraryAF(abjad.AbjadObject):
                                             ^ \markup {
                                                 \column
                                                     {
-                                                        %%% \line                              %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%     {                              %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%         \vcenter                   %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%             (Violin                %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%         \vcenter                   %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%             \hcenter-in            %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                 #10                %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                 Violin             %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%         \concat                    %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%             {                      %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                 \vcenter           %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                     \hcenter-in    %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                         #10        %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                         Vn.        %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                 \vcenter           %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                     )              %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%             }                      %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%     }                              %! DEFAULT_INSTRUMENT_ALERT
-                                                        \line                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                            {                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                \with-color                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    #(x11-color 'DarkViolet)   %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    {                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            (Violin            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            \hcenter-in        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                #10            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                Violin         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        \concat                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            {                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                \vcenter       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                    \hcenter-in %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                        #10    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                        Vn.    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                \vcenter       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                    )          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            }                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    }                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                            }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                        %%% \line                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%     {                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%         \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             (Violin                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%         \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             \hcenter-in            %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 #10                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 Violin             %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%         \concat                    %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             {                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 \vcenter           %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                     \hcenter-in    %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                         #10        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                         Vn.        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 \vcenter           %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                     )              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             }                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%     }                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        \line                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            {                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                \with-color                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    #(x11-color 'DarkViolet)   %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    {                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            (Violin            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            \hcenter-in        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                #10            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                Violin         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \concat                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            {                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                \vcenter       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                    \hcenter-in %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                        #10    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                        Vn.    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                \vcenter       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                    )          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            }                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    }                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                                     }
                                                 }
                                             \set ViolinMusicStaff.instrumentName = \markup {   %! DEFAULT_REDRAW_INSTRUMENT:SM8
@@ -3296,7 +3296,7 @@ class LibraryAF(abjad.AbjadObject):
                                     }
                                 }
                             }
-                            \tag viola
+                            \tag viola                                                         %! ST4
                             \context ViolaMusicStaff = "ViolaMusicStaff" {
                                 \context ViolaMusicVoice = "ViolaMusicVoice" {
                                     {
@@ -3323,46 +3323,46 @@ class LibraryAF(abjad.AbjadObject):
                                             ^ \markup {
                                                 \column
                                                     {
-                                                        %%% \line                              %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%     {                              %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%         \vcenter                   %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%             (Viola                 %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%         \vcenter                   %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%             \hcenter-in            %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                 #10                %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                 Viola              %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%         \concat                    %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%             {                      %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                 \vcenter           %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                     \hcenter-in    %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                         #10        %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                         Va.        %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                 \vcenter           %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%                     )              %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%             }                      %! DEFAULT_INSTRUMENT_ALERT
-                                                        %%%     }                              %! DEFAULT_INSTRUMENT_ALERT
-                                                        \line                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                            {                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                \with-color                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    #(x11-color 'DarkViolet)   %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    {                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            (Viola             %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            \hcenter-in        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                #10            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                Viola          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        \concat                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            {                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                \vcenter       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                    \hcenter-in %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                        #10    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                        Va.    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                \vcenter       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                    )          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            }                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    }                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                            }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                        %%% \line                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%     {                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%         \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             (Viola                 %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%         \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             \hcenter-in            %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 #10                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 Viola              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%         \concat                    %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             {                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 \vcenter           %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                     \hcenter-in    %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                         #10        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                         Va.        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 \vcenter           %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                     )              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             }                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%     }                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        \line                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            {                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                \with-color                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    #(x11-color 'DarkViolet)   %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    {                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            (Viola             %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            \hcenter-in        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                #10            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                Viola          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \concat                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            {                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                \vcenter       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                    \hcenter-in %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                        #10    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                        Va.    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                \vcenter       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                    )          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            }                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    }                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                                     }
                                                 }
                                             \set ViolaMusicStaff.instrumentName = \markup {    %! DEFAULT_REDRAW_INSTRUMENT:SM8
@@ -3382,10 +3382,10 @@ class LibraryAF(abjad.AbjadObject):
                 <BLANKLINE>
                                             e'8
                 <BLANKLINE>
-                                            \crossStaff
+                                            \crossStaff                                        %! IC1
                                             f'8
                 <BLANKLINE>
-                                            \crossStaff
+                                            \crossStaff                                        %! IC1
                                             g'8
                                             \revert Stem.direction
                                         }
@@ -3396,7 +3396,7 @@ class LibraryAF(abjad.AbjadObject):
                 <BLANKLINE>
                                 }
                             }
-                            \tag cello
+                            \tag cello                                                         %! ST4
                             \context CelloMusicStaff = "CelloMusicStaff" {
                                 \context CelloMusicVoice = "CelloMusicVoice" {
                 <BLANKLINE>
@@ -3420,46 +3420,46 @@ class LibraryAF(abjad.AbjadObject):
                                     ^ \markup {
                                         \column
                                             {
-                                                %%% \line                                      %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%     {                                      %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%         \vcenter                           %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%             (Cello                         %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%         \vcenter                           %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%             \hcenter-in                    %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%                 #10                        %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%                 Cello                      %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%         \concat                            %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%             {                              %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%                 \vcenter                   %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%                     \hcenter-in            %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%                         #10                %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%                         Vc.                %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%                 \vcenter                   %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%                     )                      %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%             }                              %! DEFAULT_INSTRUMENT_ALERT
-                                                %%%     }                                      %! DEFAULT_INSTRUMENT_ALERT
-                                                \line                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                    {                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                        \with-color                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                            #(x11-color 'DarkViolet)           %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                            {                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                \vcenter                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    (Cello                     %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                \vcenter                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    \hcenter-in                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        #10                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        Cello                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                \concat                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    {                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            \hcenter-in        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                #10            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                                Vc.            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                            )                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                                    }                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                            }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
-                                                    }                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR
+                                                %%% \line                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%     {                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%         \vcenter                           %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%             (Cello                         %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%         \vcenter                           %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%             \hcenter-in                    %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                 #10                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                 Cello                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%         \concat                            %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%             {                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                 \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                     \hcenter-in            %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                         #10                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                         Vc.                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                 \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                     )                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%             }                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%     }                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                \line                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                    {                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                        \with-color                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            #(x11-color 'DarkViolet)           %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            {                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                \vcenter                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    (Cello                     %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                \vcenter                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    \hcenter-in                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        #10                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        Cello                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                \concat                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    {                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            \hcenter-in        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                #10            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                Vc.            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            )                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    }                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                    }                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                             }
                                         }
                                     \set CelloMusicStaff.instrumentName = \markup {            %! DEFAULT_REDRAW_INSTRUMENT:SM8
@@ -3743,13 +3743,13 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\tongue #2
+                                -\tongue #2                                                    %! IC1
                                 [
                                 d'16
-                                -\tongue #2
+                                -\tongue #2                                                    %! IC1
                                 ]
                                 bf'4
-                                -\tongue #2
+                                -\tongue #2                                                    %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -3757,26 +3757,26 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\tongue #2
+                                -\tongue #2                                                    %! IC1
                                 [
                                 e''16
-                                -\tongue #2
+                                -\tongue #2                                                    %! IC1
                                 ]
                                 ef''4
-                                -\tongue #2
+                                -\tongue #2                                                    %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\tongue #2
+                                -\tongue #2                                                    %! IC1
                                 [
                                 g''16
-                                -\tongue #2
+                                -\tongue #2                                                    %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\tongue #2
+                                -\tongue #2                                                    %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -3826,21 +3826,21 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\tongue #2
+                                -\tongue #2                                                    %! IC1
                                 [
                                 e''16
-                                -\tongue #2
+                                -\tongue #2                                                    %! IC1
                                 ]
                                 ef''4
-                                -\tongue #2
+                                -\tongue #2                                                    %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\tongue #2
+                                -\tongue #2                                                    %! IC1
                                 [
                                 g''16
-                                -\tongue #2
+                                -\tongue #2                                                    %! IC1
                                 ]
                             }
                             \times 4/5 {
@@ -3885,9 +3885,9 @@ class LibraryAF(abjad.AbjadObject):
                         \voiceOne
                         {
                             {
-                                \arpeggioArrowDown
+                                \arpeggioArrowDown                                             %! IC1
                                 <c' d' bf'>8
-                                \arpeggio
+                                \arpeggio                                                      %! IC1
                                 ~
                                 [
                                 <c' d' bf'>32
@@ -3903,9 +3903,9 @@ class LibraryAF(abjad.AbjadObject):
                                 r16.
                             }
                             {
-                                \arpeggioArrowDown
+                                \arpeggioArrowDown                                             %! IC1
                                 <ef'' e'' fs'''>8
-                                \arpeggio
+                                \arpeggio                                                      %! IC1
                                 ~
                                 [
                                 <ef'' e'' fs'''>32
@@ -3913,9 +3913,9 @@ class LibraryAF(abjad.AbjadObject):
                                 r16.
                             }
                             {
-                                \arpeggioArrowDown
+                                \arpeggioArrowDown                                             %! IC1
                                 <g' af''>8
-                                \arpeggio
+                                \arpeggio                                                      %! IC1
                                 ~
                                 [
                                 <g' af''>32
@@ -3973,9 +3973,9 @@ class LibraryAF(abjad.AbjadObject):
                                 r16.
                             }
                             {
-                                \arpeggioArrowDown
+                                \arpeggioArrowDown                                             %! IC1
                                 <ef'' e'' fs'''>8
-                                \arpeggio
+                                \arpeggio                                                      %! IC1
                                 ~
                                 [
                                 <ef'' e'' fs'''>32
@@ -3983,9 +3983,9 @@ class LibraryAF(abjad.AbjadObject):
                                 r16.
                             }
                             {
-                                \arpeggioArrowDown
+                                \arpeggioArrowDown                                             %! IC1
                                 <g' af''>8
-                                \arpeggio
+                                \arpeggio                                                      %! IC1
                                 ~
                                 [
                                 <g' af''>32
@@ -4043,13 +4043,13 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 [
                                 d'16
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 ]
                                 bf'4
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -4057,26 +4057,26 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 [
                                 e''16
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 ]
                                 ef''4
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 [
                                 g''16
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -4126,21 +4126,21 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 [
                                 e''16
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 ]
                                 ef''4
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 [
                                 g''16
-                                -\downbow
+                                -\downbow                                                      %! IC1
                                 ]
                             }
                             \times 4/5 {
@@ -4191,7 +4191,7 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                \f
+                                \f                                                             %! IC1
                                 [
                                 d'16
                                 ]
@@ -4264,7 +4264,7 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                \f
+                                \f                                                             %! IC1
                                 [
                                 e''16
                                 ]
@@ -4637,7 +4637,7 @@ class LibraryAF(abjad.AbjadObject):
                                 r8
                                 \once \override DynamicText.extra-offset = #'(-3 . 0)
                                 c'16
-                                \p
+                                \p                                                             %! IC1
                                 [
                                 d'16
                                 ]
@@ -4649,7 +4649,7 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                \f
+                                \f                                                             %! IC1
                                 [
                                 e''16
                                 ]
@@ -4706,7 +4706,7 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                \p
+                                \p                                                             %! IC1
                                 [
                                 d'16
                                 ]
@@ -4719,7 +4719,7 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \once \override DynamicText.extra-offset = #'(-3 . 0)
                                 fs''16
-                                \f
+                                \f                                                             %! IC1
                                 [
                                 e''16
                                 ]
@@ -4795,10 +4795,10 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
-                                \dynamicDown
+                                \dynamicDown                                                   %! IC1
                                 r8
                                 c'16
-                                \p
+                                \p                                                             %! IC1
                                 [
                                 d'16
                                 ]
@@ -4810,7 +4810,7 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                \f
+                                \f                                                             %! IC1
                                 [
                                 e''16
                                 ]
@@ -4863,7 +4863,7 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                \p
+                                \p                                                             %! IC1
                                 [
                                 d'16
                                 ]
@@ -4874,9 +4874,9 @@ class LibraryAF(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \dynamicDown
+                                \dynamicDown                                                   %! IC1
                                 fs''16
-                                \f
+                                \f                                                             %! IC1
                                 [
                                 e''16
                                 ]
@@ -4937,10 +4937,10 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
-                                \dynamicUp
+                                \dynamicUp                                                     %! IC1
                                 r8
                                 c'16
-                                \p
+                                \p                                                             %! IC1
                                 [
                                 d'16
                                 ]
@@ -4952,7 +4952,7 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                \f
+                                \f                                                             %! IC1
                                 [
                                 e''16
                                 ]
@@ -5005,7 +5005,7 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                \p
+                                \p                                                             %! IC1
                                 [
                                 d'16
                                 ]
@@ -5016,9 +5016,9 @@ class LibraryAF(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \dynamicUp
+                                \dynamicUp                                                     %! IC1
                                 fs''16
-                                \f
+                                \f                                                             %! IC1
                                 [
                                 e''16
                                 ]
@@ -5084,18 +5084,18 @@ class LibraryAF(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                _ \markup {
-                                    \larger
-                                        \italic
-                                            “
-                                    \dynamic
-                                        \override
-                                            #'(font-name . #f)
-                                            f
-                                    \larger
-                                        \italic
-                                            ”
-                                    }
+                                _ \markup {                                                    %! IC1
+                                    \larger                                                    %! IC1
+                                        \italic                                                %! IC1
+                                            “                                                  %! IC1
+                                    \dynamic                                                   %! IC1
+                                        \override                                              %! IC1
+                                            #'(font-name . #f)                                 %! IC1
+                                            f                                                  %! IC1
+                                    \larger                                                    %! IC1
+                                        \italic                                                %! IC1
+                                            ”                                                  %! IC1
+                                    }                                                          %! IC1
                                 d'16
                                 ]
                                 bf'4
@@ -5171,18 +5171,18 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                _ \markup {
-                                    \larger
-                                        \italic
-                                            “
-                                    \dynamic
-                                        \override
-                                            #'(font-name . #f)
-                                            f
-                                    \larger
-                                        \italic
-                                            ”
-                                    }
+                                _ \markup {                                                    %! IC1
+                                    \larger                                                    %! IC1
+                                        \italic                                                %! IC1
+                                            “                                                  %! IC1
+                                    \dynamic                                                   %! IC1
+                                        \override                                              %! IC1
+                                            #'(font-name . #f)                                 %! IC1
+                                            f                                                  %! IC1
+                                    \larger                                                    %! IC1
+                                        \italic                                                %! IC1
+                                            ”                                                  %! IC1
+                                    }                                                          %! IC1
                                 e''16
                                 ]
                                 ef''4
@@ -5251,7 +5251,7 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                -\fermata
+                                -\fermata                                                      %! IC1
                                 c'16
                                 [
                                 d'16
@@ -5325,7 +5325,7 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\fermata
+                                -\fermata                                                      %! IC1
                                 [
                                 e''16
                                 ]
@@ -5386,13 +5386,13 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\flageolet
+                                -\flageolet                                                    %! IC1
                                 [
                                 d'16
-                                -\flageolet
+                                -\flageolet                                                    %! IC1
                                 ]
                                 bf'4
-                                -\flageolet
+                                -\flageolet                                                    %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -5400,26 +5400,26 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\flageolet
+                                -\flageolet                                                    %! IC1
                                 [
                                 e''16
-                                -\flageolet
+                                -\flageolet                                                    %! IC1
                                 ]
                                 ef''4
-                                -\flageolet
+                                -\flageolet                                                    %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\flageolet
+                                -\flageolet                                                    %! IC1
                                 [
                                 g''16
-                                -\flageolet
+                                -\flageolet                                                    %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\flageolet
+                                -\flageolet                                                    %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -5467,21 +5467,21 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\flageolet
+                                -\flageolet                                                    %! IC1
                                 [
                                 e''16
-                                -\flageolet
+                                -\flageolet                                                    %! IC1
                                 ]
                                 ef''4
-                                -\flageolet
+                                -\flageolet                                                    %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\flageolet
+                                -\flageolet                                                    %! IC1
                                 [
                                 g''16
-                                -\flageolet
+                                -\flageolet                                                    %! IC1
                                 ]
                             }
                             \times 4/5 {

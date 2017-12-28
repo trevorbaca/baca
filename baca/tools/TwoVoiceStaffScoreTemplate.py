@@ -99,42 +99,37 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
 
         Returns score.
         '''
-
+        # GLOBAL CONTEXT
         global_context = self._make_global_context()
 
+        # MUSIC STAFF
         music_voice_1 = abjad.Voice(
-            [],
             context_name='MusicVoiceOne',
             name='MusicVoiceOne',
             )
         music_voice_2 = abjad.Voice(
-            [],
             context_name='MusicVoiceTwo',
             name='MusicVoiceTwo',
             )
-        music_staff = abjad.Staff([
-            music_voice_1,
-            music_voice_2,
-            ],
+        music_staff = abjad.Staff(
+            [music_voice_1, music_voice_2],
             context_name='MusicStaff',
             is_simultaneous=True,
             name='MusicStaff',
             )
 
-        music_context = abjad.Context([
-            music_staff,
-            ],
+        # MUSIC CONTEXT
+        music_context = abjad.Context(
+            [music_staff],
             context_name='MusicContext',
             is_simultaneous=True,
             name='MusicContext',
             )
 
-        score = abjad.Score([
-            global_context,
-            music_context,
-            ],
+        # SCORE
+        score = abjad.Score(
+            [global_context, music_context],
             name='Score',
             )
-
-        abjad.attach('two-voice', score)
+        abjad.attach('two-voice', score, site='')
         return score

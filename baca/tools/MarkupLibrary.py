@@ -53,11 +53,11 @@ class MarkupLibrary(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                ^ \markup {
-                                    \whiteout
-                                        \upright
-                                            "più mosso"
-                                    }
+                                ^ \markup {                                                    %! IC1
+                                    \whiteout                                                  %! IC1
+                                        \upright                                               %! IC1
+                                            "più mosso"                                        %! IC1
+                                    }                                                          %! IC1
                                 d'16
                                 ]
                                 bf'4
@@ -130,11 +130,11 @@ class MarkupLibrary(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                ^ \markup {
-                                    \whiteout
-                                        \upright
-                                            "più mosso"
-                                    }
+                                ^ \markup {                                                    %! IC1
+                                    \whiteout                                                  %! IC1
+                                        \upright                                               %! IC1
+                                            "più mosso"                                        %! IC1
+                                    }                                                          %! IC1
                                 e''16
                                 ]
                                 ef''4
@@ -196,41 +196,41 @@ class MarkupLibrary(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                ^ \markup {
-                                    \whiteout
-                                        \upright
-                                            *
-                                    }
+                                ^ \markup {                                                    %! IC1
+                                    \whiteout                                                  %! IC1
+                                        \upright                                               %! IC1
+                                            *                                                  %! IC1
+                                    }                                                          %! IC1
                                 e''16
                                 ]
-                                ^ \markup {
-                                    \whiteout
-                                        \upright
-                                            *
-                                    }
+                                ^ \markup {                                                    %! IC1
+                                    \whiteout                                                  %! IC1
+                                        \upright                                               %! IC1
+                                            *                                                  %! IC1
+                                    }                                                          %! IC1
                                 ef''4
                                 ~
-                                ^ \markup {
-                                    \whiteout
-                                        \upright
-                                            *
-                                    }
+                                ^ \markup {                                                    %! IC1
+                                    \whiteout                                                  %! IC1
+                                        \upright                                               %! IC1
+                                            *                                                  %! IC1
+                                    }                                                          %! IC1
                                 ef''16
                                 r16
                                 af''16
                                 [
-                                ^ \markup {
-                                    \whiteout
-                                        \upright
-                                            *
-                                    }
+                                ^ \markup {                                                    %! IC1
+                                    \whiteout                                                  %! IC1
+                                        \upright                                               %! IC1
+                                            *                                                  %! IC1
+                                    }                                                          %! IC1
                                 g''16
                                 ]
-                                ^ \markup {
-                                    \whiteout
-                                        \upright
-                                            *
-                                    }
+                                ^ \markup {                                                    %! IC1
+                                    \whiteout                                                  %! IC1
+                                        \upright                                               %! IC1
+                                            *                                                  %! IC1
+                                    }                                                          %! IC1
                             }
                             \times 4/5 {
                                 a'16

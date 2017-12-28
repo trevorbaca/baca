@@ -682,7 +682,11 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             for grace_container, logical_tie in pairs:
                 if grace_container is None:
                     continue
-                abjad.attach(grace_container, logical_tie.head)
+                abjad.attach(
+                    grace_container,
+                    logical_tie.head,
+                    site='PFRM1',
+                    )
         #selection = abjad.Selection([tuplet])
         selection = abjad.select([tuplet])
         return selection

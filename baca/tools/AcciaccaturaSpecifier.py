@@ -144,7 +144,11 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             grace_leaves = maker(grace_token, durations)
             acciaccatura_container = abjad.AcciaccaturaContainer(grace_leaves)
             if 1 < len(acciaccatura_container):
-                abjad.attach(abjad.Beam(), acciaccatura_container[:])
+                abjad.attach(
+                    abjad.Beam(),
+                    acciaccatura_container[:],
+                    site='ACC1',
+                    )
             acciaccatura_containers.append(acciaccatura_container)
         assert len(acciaccatura_containers) == len(collection)
         return acciaccatura_containers, collection

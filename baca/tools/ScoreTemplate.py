@@ -61,7 +61,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
             if self.parts and tag_ not in self.parts:
                 raise Exception(f'not listed in parts manifest: {tag_!r}.')
         literal = abjad.LilyPondLiteral(fr'\tag {tag}', 'before')
-        abjad.attach(literal, context)
+        abjad.attach(literal, context, site='ST4')
 
     def _make_global_context(self):
         global_context_multimeasure_rests = abjad.Context(

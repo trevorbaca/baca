@@ -989,40 +989,40 @@ class LibraryGM(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\laissezVibrer
+                                -\laissezVibrer                                                %! IC1
                                 [
                                 d'16
-                                -\laissezVibrer
+                                -\laissezVibrer                                                %! IC1
                                 ]
                                 bf'4
                                 ~
                                 bf'16
-                                -\laissezVibrer
+                                -\laissezVibrer                                                %! IC1
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\laissezVibrer
+                                -\laissezVibrer                                                %! IC1
                                 [
                                 e''16
-                                -\laissezVibrer
+                                -\laissezVibrer                                                %! IC1
                                 ]
                                 ef''4
                                 ~
                                 ef''16
-                                -\laissezVibrer
+                                -\laissezVibrer                                                %! IC1
                                 r16
                                 af''16
-                                -\laissezVibrer
+                                -\laissezVibrer                                                %! IC1
                                 [
                                 g''16
-                                -\laissezVibrer
+                                -\laissezVibrer                                                %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\laissezVibrer
+                                -\laissezVibrer                                                %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -1070,21 +1070,21 @@ class LibraryGM(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\laissezVibrer
+                                -\laissezVibrer                                                %! IC1
                                 [
                                 e''16
-                                -\laissezVibrer
+                                -\laissezVibrer                                                %! IC1
                                 ]
                                 ef''4
                                 ~
                                 ef''16
-                                -\laissezVibrer
+                                -\laissezVibrer                                                %! IC1
                                 r16
                                 af''16
-                                -\laissezVibrer
+                                -\laissezVibrer                                                %! IC1
                                 [
                                 g''16
-                                -\laissezVibrer
+                                -\laissezVibrer                                                %! IC1
                                 ]
                             }
                             \times 4/5 {
@@ -1295,7 +1295,7 @@ class LibraryGM(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \break
+                                \break                                                         %! IC1
                                 \revert TupletBracket.staff-padding
                             }
                         }
@@ -1353,7 +1353,7 @@ class LibraryGM(abjad.AbjadObject):
                                 [
                                 g''16
                                 ]
-                                \break
+                                \break                                                         %! IC1
                             }
                             \times 4/5 {
                                 a'16
@@ -1413,7 +1413,7 @@ class LibraryGM(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                -\longfermata
+                                -\longfermata                                                  %! IC1
                                 c'16
                                 [
                                 d'16
@@ -1487,7 +1487,7 @@ class LibraryGM(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\longfermata
+                                -\longfermata                                                  %! IC1
                                 [
                                 e''16
                                 ]
@@ -1718,13 +1718,13 @@ class LibraryGM(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\marcato
+                                -\marcato                                                      %! IC1
                                 [
                                 d'16
-                                -\marcato
+                                -\marcato                                                      %! IC1
                                 ]
                                 bf'4
-                                -\marcato
+                                -\marcato                                                      %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -1732,26 +1732,26 @@ class LibraryGM(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\marcato
+                                -\marcato                                                      %! IC1
                                 [
                                 e''16
-                                -\marcato
+                                -\marcato                                                      %! IC1
                                 ]
                                 ef''4
-                                -\marcato
+                                -\marcato                                                      %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\marcato
+                                -\marcato                                                      %! IC1
                                 [
                                 g''16
-                                -\marcato
+                                -\marcato                                                      %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\marcato
+                                -\marcato                                                      %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -1799,21 +1799,21 @@ class LibraryGM(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\marcato
+                                -\marcato                                                      %! IC1
                                 [
                                 e''16
-                                -\marcato
+                                -\marcato                                                      %! IC1
                                 ]
                                 ef''4
-                                -\marcato
+                                -\marcato                                                      %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\marcato
+                                -\marcato                                                      %! IC1
                                 [
                                 g''16
-                                -\marcato
+                                -\marcato                                                      %! IC1
                                 ]
                             }
                             \times 4/5 {
@@ -1899,38 +1899,38 @@ class LibraryGM(abjad.AbjadObject):
                                 ^ \markup {
                                     \column
                                         {
-                                            %%% \line                                          %! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%     {                                          %! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%         \vcenter                               %! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%             [MarginMarkup                      %! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%         \vcenter                               %! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%             Flute                              %! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%         \concat                                %! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%             {                                  %! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%                 \vcenter                       %! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%                     Fl.                        %! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%                 \vcenter                       %! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%                     ]                          %! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%             }                                  %! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            %%%     }                                          %! EXPLICIT_MARGIN_MARKUP_ALERT
-                                            \line                                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                {                                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                    \with-color                                %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                        #(x11-color 'blue)                     %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                        {                                      %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                            \vcenter                           %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                                [MarginMarkup                  %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                            \vcenter                           %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                                Flute                          %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                            \concat                            %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                                {                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                                    \vcenter                   %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                                        Fl.                    %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                                    \vcenter                   %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                                        ]                      %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                                }                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                        }                                      %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
-                                                }                                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR
+                                            %%% \line                                          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%     {                                          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%         \vcenter                               %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%             [MarginMarkup                      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%         \vcenter                               %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%             Flute                              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%         \concat                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%             {                                  %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%                 \vcenter                       %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%                     Fl.                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%                 \vcenter                       %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%                     ]                          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%             }                                  %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%     }                                          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            \line                                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                {                                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                    \with-color                                %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                        #(x11-color 'blue)                     %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                        {                                      %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                            \vcenter                           %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                                [MarginMarkup                  %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                            \vcenter                           %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                                Flute                          %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                            \concat                            %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                                {                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                                    \vcenter                   %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                                        Fl.                    %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                                    \vcenter                   %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                                        ]                      %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                                }                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                        }                                      %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                }                                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
                                         }
                                     }
                                 \set Staff.instrumentName = \markup { Flute }                  %! EXPLICIT_REDRAW_MARGIN_MARKUP:SM8

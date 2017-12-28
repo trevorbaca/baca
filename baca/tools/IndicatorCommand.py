@@ -39,37 +39,37 @@ class IndicatorCommand(Command):
                     {
                         {
                             c'8
-                            \fermata
+                            \fermata                                                       %! IC1
                             ~
                             [
                             c'32
                             d'8
-                            \fermata
+                            \fermata                                                       %! IC1
                             bf'8
-                            \fermata
+                            \fermata                                                       %! IC1
                             ]
                         }
                         {
                             fs''8
-                            \fermata
+                            \fermata                                                       %! IC1
                             ~
                             [
                             fs''32
                             e''8
-                            \fermata
+                            \fermata                                                       %! IC1
                             ef''8
-                            \fermata
+                            \fermata                                                       %! IC1
                             af''8
-                            \fermata
+                            \fermata                                                       %! IC1
                             ~
                             af''32
                             g''8
-                            \fermata
+                            \fermata                                                       %! IC1
                             ]
                         }
                         {
                             a'8
-                            \fermata
+                            \fermata                                                       %! IC1
                             ~
                             [
                             a'32
@@ -140,62 +140,62 @@ class IndicatorCommand(Command):
             <BLANKLINE>
                                 % MusicVoice [measure 1]                                   %! SM4
                                 e'8
-                                \fermata
+                                \fermata                                                   %! IC1
                                 [
             <BLANKLINE>
                                 d''8
-                                \fermata
+                                \fermata                                                   %! IC1
             <BLANKLINE>
                                 f'8
-                                \fermata
+                                \fermata                                                   %! IC1
             <BLANKLINE>
                                 e''8
-                                \fermata
+                                \fermata                                                   %! IC1
                                 ]
                             }
                             {
             <BLANKLINE>
                                 % MusicVoice [measure 2]                                   %! SM4
                                 g'8
-                                \fermata
+                                \fermata                                                   %! IC1
                                 [
             <BLANKLINE>
                                 f''8
-                                \fermata
+                                \fermata                                                   %! IC1
             <BLANKLINE>
                                 e'8
-                                \fermata
+                                \fermata                                                   %! IC1
                                 ]
                             }
                             {
             <BLANKLINE>
                                 % MusicVoice [measure 3]                                   %! SM4
                                 d''8
-                                \fermata
+                                \fermata                                                   %! IC1
                                 [
             <BLANKLINE>
                                 f'8
-                                \fermata
+                                \fermata                                                   %! IC1
             <BLANKLINE>
                                 e''8
-                                \fermata
+                                \fermata                                                   %! IC1
             <BLANKLINE>
                                 g'8
-                                \fermata
+                                \fermata                                                   %! IC1
                                 ]
                             }
                             {
             <BLANKLINE>
                                 % MusicVoice [measure 4]                                   %! SM4
                                 f''8
-                                \fermata
+                                \fermata                                                   %! IC1
                                 [
             <BLANKLINE>
                                 e'8
-                                \fermata
+                                \fermata                                                   %! IC1
             <BLANKLINE>
                                 d''8
-                                \fermata
+                                \fermata                                                   %! IC1
                                 ]
             <BLANKLINE>
                             }
@@ -222,7 +222,8 @@ class IndicatorCommand(Command):
         context=None,
         indicators=None,
         selector='baca.pheads()',
-        site=None,
+        #site=None,
+        site='IC1',
         tag=None,
         ):
         Command.__init__(self, selector=selector)
@@ -326,37 +327,37 @@ class IndicatorCommand(Command):
                         {
                             {
                                 c'8
-                                \fermata
+                                \fermata                                                       %! IC1
                                 ~
                                 [
                                 c'32
                                 d'8
-                                \fermata
+                                \fermata                                                       %! IC1
                                 bf'8
-                                \fermata
+                                \fermata                                                       %! IC1
                                 ]
                             }
                             {
                                 fs''8
-                                \fermata
+                                \fermata                                                       %! IC1
                                 ~
                                 [
                                 fs''32
                                 e''8
-                                \fermata
+                                \fermata                                                       %! IC1
                                 ef''8
-                                \fermata
+                                \fermata                                                       %! IC1
                                 af''8
-                                \fermata
+                                \fermata                                                       %! IC1
                                 ~
                                 af''32
                                 g''8
-                                \fermata
+                                \fermata                                                       %! IC1
                                 ]
                             }
                             {
                                 a'8
-                                \fermata
+                                \fermata                                                       %! IC1
                                 ~
                                 [
                                 a'32
@@ -402,7 +403,7 @@ class IndicatorCommand(Command):
                         {
                             {
                                 c'8
-                                \fermata
+                                \fermata                                                       %! IC1
                                 ~
                                 [
                                 c'32
@@ -412,14 +413,14 @@ class IndicatorCommand(Command):
                             }
                             {
                                 fs''8
-                                \fermata
+                                \fermata                                                       %! IC1
                                 ~
                                 [
                                 fs''32
                                 e''8
                                 ef''8
                                 af''8
-                                \fermata
+                                \fermata                                                       %! IC1
                                 ~
                                 af''32
                                 g''8
@@ -427,7 +428,7 @@ class IndicatorCommand(Command):
                             }
                             {
                                 a'8
-                                \fermata
+                                \fermata                                                       %! IC1
                                 ~
                                 [
                                 a'32

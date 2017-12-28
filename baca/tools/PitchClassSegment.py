@@ -27,7 +27,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     g'8
                     bqf'8
                     g'8
-                    \bar "|."
+                    \bar "|."                                                                  %! SCORE1
                     \override Score.BarLine.transparent = ##f
                 }
 
@@ -48,7 +48,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     g'8
                     bqf'8
                     g'8
-                    \bar "|."
+                    \bar "|."                                                                  %! SCORE1
                     \override Score.BarLine.transparent = ##f
                 }
 
@@ -123,7 +123,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                         fs'8
                         bqs'8
                         fs'8
-                        \bar "|."
+                        \bar "|."                                                                  %! SCORE1
                         \override Score.BarLine.transparent = ##f
                     }
 
@@ -148,7 +148,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                         fs'8
                         bqs'8
                         fs'8
-                        \bar "|."
+                        \bar "|."                                                                  %! SCORE1
                         \override Score.BarLine.transparent = ##f
                     }
 
@@ -175,7 +175,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                         g'8
                         bqf'8
                         g'8
-                        \bar "|."
+                        \bar "|."                                                                  %! SCORE1
                         \override Score.BarLine.transparent = ##f
                     }
 
@@ -223,7 +223,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                         g'8
                         bqf'8
                         g'8
-                        \bar "|."
+                        \bar "|."                                                                  %! SCORE1
                         \override Score.BarLine.transparent = ##f
                     }
 
@@ -865,7 +865,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     bqf'8
                     fs'8
                     g'8
-                    \bar "|."
+                    \bar "|."                                                                  %! SCORE1
                     \override Score.BarLine.transparent = ##f
                 }
 
@@ -889,7 +889,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     g'8
                     bqf'8
                     g'8
-                    \bar "|."
+                    \bar "|."                                                                  %! SCORE1
                     \override Score.BarLine.transparent = ##f
                 }
 
@@ -920,7 +920,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     g'8
                     bqf'8
                     g'8
-                    \bar "|."
+                    \bar "|."                                                                  %! SCORE1
                     \override Score.BarLine.transparent = ##f
                 }
 
@@ -943,7 +943,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     fs'8
                     g'8
                     g'8
-                    \bar "|."
+                    \bar "|."                                                                  %! SCORE1
                     \override Score.BarLine.transparent = ##f
                 }
 
@@ -977,7 +977,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     f'8
                     fs'8
                     g'8
-                    \bar "|."
+                    \bar "|."                                                                  %! SCORE1
                     \override Score.BarLine.transparent = ##f
                 }
 
@@ -1006,7 +1006,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     f'8
                     fs'8
                     g'8
-                    \bar "|."
+                    \bar "|."                                                                  %! SCORE1
                     \override Score.BarLine.transparent = ##f
                 }
 
@@ -1080,7 +1080,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     f'8
                     fs'8
                     g'8
-                    \bar "|."
+                    \bar "|."                                                                  %! SCORE1
                     \override Score.BarLine.transparent = ##f
                 }
 

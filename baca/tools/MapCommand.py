@@ -52,21 +52,21 @@ class MapCommand(Command):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\accent
+                            -\accent                                                       %! IC1
                             [
                             e''16
-                            -\accent
+                            -\accent                                                       %! IC1
                             ]
                             ef''4
-                            -\accent
+                            -\accent                                                       %! IC1
                             ~
                             ef''16
                             r16
                             af''16
-                            -\accent
+                            -\accent                                                       %! IC1
                             [
                             g''16
-                            -\accent
+                            -\accent                                                       %! IC1
                             ]
                         }
                         \times 4/5 {

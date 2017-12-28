@@ -63,7 +63,7 @@ class PitchTree(Tree):
                         f'8
                         \stopGroup
                         s8
-                        \bar "|."
+                        \bar "|."                                                          %! SCORE1
                         \override Score.BarLine.transparent = ##f
                     }
                 }
@@ -133,7 +133,7 @@ class PitchTree(Tree):
                         f'8
                         \stopGroup
                         s8
-                        \bar "|."
+                        \bar "|."                                                          %! SCORE1
                         \override Score.BarLine.transparent = ##f
                     }
                 }
@@ -199,7 +199,7 @@ class PitchTree(Tree):
                         f'8
                         \stopGroup
                         s8
-                        \bar "|."
+                        \bar "|."                                                          %! SCORE1
                         \override Score.BarLine.transparent = ##f
                     }
                 }
@@ -269,7 +269,7 @@ class PitchTree(Tree):
                         f'8
                         \stopGroup
                         s8
-                        \bar "|."
+                        \bar "|."                                                          %! SCORE1
                         \override Score.BarLine.transparent = ##f
                     }
                 }
@@ -335,7 +335,7 @@ class PitchTree(Tree):
                         f'8
                         \stopGroup
                         s8
-                        \bar "|."
+                        \bar "|."                                                          %! SCORE1
                         \override Score.BarLine.transparent = ##f
                     }
                 }
@@ -400,7 +400,7 @@ class PitchTree(Tree):
                         ef'8
                         \stopGroup
                         s8
-                        \bar "|."
+                        \bar "|."                                                          %! SCORE1
                         \override Score.BarLine.transparent = ##f
                     }
                 }
@@ -532,7 +532,7 @@ class PitchTree(Tree):
                         fs'8
                         \stopGroup
                         s8
-                        \bar "|."
+                        \bar "|."                                                          %! SCORE1
                         \override Score.BarLine.transparent = ##f
                     }
                 }
@@ -780,7 +780,7 @@ class PitchTree(Tree):
                             f'8
                             \stopGroup
                             s8
-                            \bar "|."
+                            \bar "|."                                                          %! SCORE1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -870,7 +870,7 @@ class PitchTree(Tree):
                             f'8
                             \stopGroup
                             s8
-                            \bar "|."
+                            \bar "|."                                                          %! SCORE1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -946,7 +946,7 @@ class PitchTree(Tree):
                             fs'8
                             \stopGroup
                             s8
-                            \bar "|."
+                            \bar "|."                                                          %! SCORE1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -1260,7 +1260,7 @@ class PitchTree(Tree):
                             e'8
                             \stopGroup
                             s8
-                            \bar "|."
+                            \bar "|."                                                          %! SCORE1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -1326,7 +1326,7 @@ class PitchTree(Tree):
                             f'8
                             \stopGroup
                             s8
-                            \bar "|."
+                            \bar "|."                                                          %! SCORE1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -1400,7 +1400,7 @@ class PitchTree(Tree):
                             f'8
                             \stopGroup
                             s8
-                            \bar "|."
+                            \bar "|."                                                          %! SCORE1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -1462,7 +1462,7 @@ class PitchTree(Tree):
                             ef'''8
                             \stopGroup
                             s8
-                            \bar "|."
+                            \bar "|."                                                          %! SCORE1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -1524,7 +1524,7 @@ class PitchTree(Tree):
                             g8
                             \stopGroup
                             s8
-                            \bar "|."
+                            \bar "|."                                                          %! SCORE1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -1586,7 +1586,7 @@ class PitchTree(Tree):
                             a''8
                             \stopGroup
                             s8
-                            \bar "|."
+                            \bar "|."                                                          %! SCORE1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -1666,7 +1666,7 @@ class PitchTree(Tree):
                             f'8
                             \stopGroup
                             s8
-                            \bar "|."
+                            \bar "|."                                                          %! SCORE1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -1728,7 +1728,7 @@ class PitchTree(Tree):
                             bf'8
                             \stopGroup
                             s8
-                            \bar "|."
+                            \bar "|."                                                          %! SCORE1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -1807,7 +1807,7 @@ class PitchTree(Tree):
                             f'8
                             \stopGroup
                             s8
-                            \bar "|."
+                            \bar "|."                                                          %! SCORE1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -1869,7 +1869,7 @@ class PitchTree(Tree):
                             cs'8
                             \stopGroup
                             s8
-                            \bar "|."
+                            \bar "|."                                                          %! SCORE1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -1931,7 +1931,7 @@ class PitchTree(Tree):
                             bf'8
                             \stopGroup
                             s8
-                            \bar "|."
+                            \bar "|."                                                          %! SCORE1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -1993,7 +1993,7 @@ class PitchTree(Tree):
                             f'8
                             \stopGroup
                             s8
-                            \bar "|."
+                            \bar "|."                                                          %! SCORE1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -2073,7 +2073,7 @@ class PitchTree(Tree):
                             f'8
                             \stopGroup
                             s8
-                            \bar "|."
+                            \bar "|."                                                          %! SCORE1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -2135,7 +2135,7 @@ class PitchTree(Tree):
                             fs''8
                             \stopGroup
                             s8
-                            \bar "|."
+                            \bar "|."                                                          %! SCORE1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -2197,7 +2197,7 @@ class PitchTree(Tree):
                             e8
                             \stopGroup
                             s8
-                            \bar "|."
+                            \bar "|."                                                          %! SCORE1
                             \override Score.BarLine.transparent = ##f
                         }
                     }
@@ -2259,7 +2259,7 @@ class PitchTree(Tree):
                             f'8
                             \stopGroup
                             s8
-                            \bar "|."
+                            \bar "|."                                                          %! SCORE1
                             \override Score.BarLine.transparent = ##f
                         }
                     }

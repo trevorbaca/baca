@@ -46,7 +46,7 @@ class Sequence(abjad.Sequence):
                     g'8
                     bqf'8
                     g'8
-                    \bar "|."
+                    \bar "|."                                                                  %! SCORE1
                     \override Score.BarLine.transparent = ##f
                 }
 
@@ -96,7 +96,7 @@ class Sequence(abjad.Sequence):
                     af'8
                     bqs'8
                     af'8
-                    \bar "|."
+                    \bar "|."                                                                  %! SCORE1
                     \override Score.BarLine.transparent = ##f
                 }
 
@@ -158,7 +158,7 @@ class Sequence(abjad.Sequence):
                     af'8
                     bqs'8
                     af'8
-                    \bar "|."
+                    \bar "|."                                                                  %! SCORE1
                     \override Score.BarLine.transparent = ##f
                 }
 
