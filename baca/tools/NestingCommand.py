@@ -138,23 +138,23 @@ class NestingCommand(Command):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        %%% GlobalSkips [measure 1] %%%
-                        \time 1/2
-                        \bar ""                                                            %%! EMPTY_START_BAR
+                        % GlobalSkips [measure 1]
+                        \time 1/2                                                          %%! SM1
+                        \bar ""                                                            %%! EMPTY_START_BAR:SM2
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                         s1 * 1/2
                         ^ \markup {
                             \column
                                 {
-                                    \line                                                  %%! STAGE_NUMBER_MARKUP
-                                        {                                                  %%! STAGE_NUMBER_MARKUP
-                                            \fontsize                                      %%! STAGE_NUMBER_MARKUP
-                                                #-3                                        %%! STAGE_NUMBER_MARKUP
-                                                \with-color                                %%! STAGE_NUMBER_MARKUP
-                                                    #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP
-                                                    [1]                                    %%! STAGE_NUMBER_MARKUP
-                                        }                                                  %%! STAGE_NUMBER_MARKUP
+                                    \line                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                        {                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                            \fontsize                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                                #-3                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                                \with-color                                %%! STAGE_NUMBER_MARKUP:SM3
+                                                    #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP:SM3
+                                                    [1]                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                        }                                                  %%! STAGE_NUMBER_MARKUP:SM3
                                     \line                                                  %%! SEGMENT:SPACING_MARKUP
                                         {                                                  %%! SEGMENT:SPACING_MARKUP
                                             \with-color                                    %%! SEGMENT:SPACING_MARKUP
@@ -166,8 +166,8 @@ class NestingCommand(Command):
                                 }
                             }
             <BLANKLINE>
-                        %%% GlobalSkips [measure 2] %%%
-                        \time 1/4
+                        % GlobalSkips [measure 2]
+                        \time 1/4                                                          %%! SM1
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                         s1 * 1/4
@@ -191,7 +191,7 @@ class NestingCommand(Command):
                                 \times 8/7 {
                                     {
             <BLANKLINE>
-                                        %%% MusicVoice [measure 1] %%%
+                                        % MusicVoice [measure 1]
                                         \set stemLeftBeamCount = #0
                                         \set stemRightBeamCount = #2
                                         c'16
@@ -228,7 +228,7 @@ class NestingCommand(Command):
                             {
                                 {
             <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
+                                    % MusicVoice [measure 2]
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #2
                                     g''16

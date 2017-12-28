@@ -18,6 +18,7 @@ class MetronomeMarkCommand(Command):
     __slots__ = (
         '_key',
         '_manifest',
+        '_site',
         '_tag',
         )
 
@@ -27,6 +28,7 @@ class MetronomeMarkCommand(Command):
         self,
         key=None,
         selector='baca.leaf(0)', 
+        site=None,
         tag=None,
         ):
         Command.__init__(self, selector=selector)
@@ -34,6 +36,9 @@ class MetronomeMarkCommand(Command):
             assert isinstance(key, str)
         self._key = key
         self._manifest = 'metronome_marks'
+        if site is not None:
+            assert isinstance(site, str), repr(site)
+        self._site = site
         if tag is not None:
             assert isinstance(tag, str), repr(tag)
         self._tag = tag
@@ -60,7 +65,7 @@ class MetronomeMarkCommand(Command):
         spanner = abjad.inspect(leaf).get_spanner(abjad.MetronomeMarkSpanner)
         if spanner is None:
             raise Exception('can not find metronome mark spanner.')
-        spanner.attach(metronome_mark, leaf, tag=self.tag)
+        spanner.attach(metronome_mark, leaf, site=self.site, tag=self.tag)
 
     ### PUBLIC PROPERTIES ###
 
@@ -81,6 +86,14 @@ class MetronomeMarkCommand(Command):
         Returns ordered dictionary.
         '''
         return self._manifest
+
+    @property
+    def site(self):
+        r'''Gets site.
+
+        Returns string or none.
+        '''
+        return self._site
 
     @property
     def tag(self):

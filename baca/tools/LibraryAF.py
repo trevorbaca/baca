@@ -764,27 +764,27 @@ class LibraryAF(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 4/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)   %%! SEGMENT:SPACING
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 2]
+                            \time 3/8                                                          %%! SM1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)   %%! SEGMENT:SPACING
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 4/8
+                            % GlobalSkips [measure 3]
+                            \time 4/8                                                          %%! SM1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)   %%! SEGMENT:SPACING
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 4]
+                            \time 3/8                                                          %%! SM1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)   %%! SEGMENT:SPACING
                             s1 * 3/8
@@ -796,7 +796,7 @@ class LibraryAF(abjad.AbjadObject):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 1] %%%
+                                    % MusicVoice [measure 1]
                                     e'8
                                     [
                 <BLANKLINE>
@@ -809,7 +809,7 @@ class LibraryAF(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
+                                    % MusicVoice [measure 2]
                                     \override Staff.BarLine.bar-extent = #'(-4 . 4)
                                     g'8
                                     [
@@ -822,7 +822,7 @@ class LibraryAF(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 3] %%%
+                                    % MusicVoice [measure 3]
                                     d''8
                                     [
                 <BLANKLINE>
@@ -835,7 +835,7 @@ class LibraryAF(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 4] %%%
+                                    % MusicVoice [measure 4]
                                     f''8
                                     [
                 <BLANKLINE>
@@ -2797,15 +2797,15 @@ class LibraryAF(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 5/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 5/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)   %%! SEGMENT:SPACING
                             s1 * 5/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 2/16
+                            % GlobalSkips [measure 2]
+                            \time 2/16                                                         %%! SM1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)   %%! SEGMENT:SPACING
                             s1 * 1/8
@@ -2820,7 +2820,7 @@ class LibraryAF(abjad.AbjadObject):
                                     {
                                         {
                 <BLANKLINE>
-                                            %%% ViolinMusicVoice [measure 1] %%%
+                                            % ViolinMusicVoice [measure 1]
                                             \override Stem.direction = #up
                                             \set ViolinMusicStaff.instrumentName = \markup {   %%! DEFAULT_INSTRUMENT
                                                 \hcenter-in                                    %%! DEFAULT_INSTRUMENT
@@ -2909,7 +2909,7 @@ class LibraryAF(abjad.AbjadObject):
                                     {
                                         {
                 <BLANKLINE>
-                                            %%% ViolinMusicVoice [measure 2] %%%
+                                            % ViolinMusicVoice [measure 2]
                                             ef''8
                                             \bar "|"
                 <BLANKLINE>
@@ -2923,7 +2923,7 @@ class LibraryAF(abjad.AbjadObject):
                                     {
                                         {
                 <BLANKLINE>
-                                            %%% ViolaMusicVoice [measure 1] %%%
+                                            % ViolaMusicVoice [measure 1]
                                             \override Stem.direction = #up
                                             \set ViolaMusicStaff.instrumentName = \markup {    %%! DEFAULT_INSTRUMENT
                                                 \hcenter-in                                    %%! DEFAULT_INSTRUMENT
@@ -3015,7 +3015,7 @@ class LibraryAF(abjad.AbjadObject):
                                         }
                                     }
                 <BLANKLINE>
-                                    %%% ViolaMusicVoice [measure 2] %%%
+                                    % ViolaMusicVoice [measure 2]
                                     R1 * 1/8
                                     \bar "|"
                 <BLANKLINE>
@@ -3025,7 +3025,7 @@ class LibraryAF(abjad.AbjadObject):
                             \context CelloMusicStaff = "CelloMusicStaff" {
                                 \context CelloMusicVoice = "CelloMusicVoice" {
                 <BLANKLINE>
-                                    %%% CelloMusicVoice [measure 1] %%%
+                                    % CelloMusicVoice [measure 1]
                                     \set CelloMusicStaff.instrumentName = \markup {            %%! DEFAULT_INSTRUMENT
                                         \hcenter-in                                            %%! DEFAULT_INSTRUMENT
                                             #10                                                %%! DEFAULT_INSTRUMENT
@@ -3100,7 +3100,7 @@ class LibraryAF(abjad.AbjadObject):
                                     \override CelloMusicStaff.InstrumentName.color = #(x11-color 'violet) %%! DEFAULT_REDRAW_INSTRUMENT_COLOR
                                     \override CelloMusicStaff.Clef.color = #(x11-color 'violet) %%! DEFAULT_CLEF_COLOR_REDRAW
                 <BLANKLINE>
-                                    %%% CelloMusicVoice [measure 2] %%%
+                                    % CelloMusicVoice [measure 2]
                                     R1 * 1/8
                                     \bar "|"
                 <BLANKLINE>
@@ -3175,15 +3175,15 @@ class LibraryAF(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 5/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 5/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)   %%! SEGMENT:SPACING
                             s1 * 5/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 2/16
+                            % GlobalSkips [measure 2]
+                            \time 2/16                                                         %%! SM1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)   %%! SEGMENT:SPACING
                             s1 * 1/8
@@ -3198,7 +3198,7 @@ class LibraryAF(abjad.AbjadObject):
                                     {
                                         {
                 <BLANKLINE>
-                                            %%% ViolinMusicVoice [measure 1] %%%
+                                            % ViolinMusicVoice [measure 1]
                                             \override Stem.direction = #up
                                             \set ViolinMusicStaff.instrumentName = \markup {   %%! DEFAULT_INSTRUMENT
                                                 \hcenter-in                                    %%! DEFAULT_INSTRUMENT
@@ -3287,7 +3287,7 @@ class LibraryAF(abjad.AbjadObject):
                                     {
                                         {
                 <BLANKLINE>
-                                            %%% ViolinMusicVoice [measure 2] %%%
+                                            % ViolinMusicVoice [measure 2]
                                             ef''8
                                             \bar "|"
                 <BLANKLINE>
@@ -3301,7 +3301,7 @@ class LibraryAF(abjad.AbjadObject):
                                     {
                                         {
                 <BLANKLINE>
-                                            %%% ViolaMusicVoice [measure 1] %%%
+                                            % ViolaMusicVoice [measure 1]
                                             \override Stem.direction = #up
                                             \set ViolaMusicStaff.instrumentName = \markup {    %%! DEFAULT_INSTRUMENT
                                                 \hcenter-in                                    %%! DEFAULT_INSTRUMENT
@@ -3390,7 +3390,7 @@ class LibraryAF(abjad.AbjadObject):
                                         }
                                     }
                 <BLANKLINE>
-                                    %%% ViolaMusicVoice [measure 2] %%%
+                                    % ViolaMusicVoice [measure 2]
                                     R1 * 1/8
                                     \bar "|"
                 <BLANKLINE>
@@ -3400,7 +3400,7 @@ class LibraryAF(abjad.AbjadObject):
                             \context CelloMusicStaff = "CelloMusicStaff" {
                                 \context CelloMusicVoice = "CelloMusicVoice" {
                 <BLANKLINE>
-                                    %%% CelloMusicVoice [measure 1] %%%
+                                    % CelloMusicVoice [measure 1]
                                     \set CelloMusicStaff.instrumentName = \markup {            %%! DEFAULT_INSTRUMENT
                                         \hcenter-in                                            %%! DEFAULT_INSTRUMENT
                                             #10                                                %%! DEFAULT_INSTRUMENT
@@ -3475,7 +3475,7 @@ class LibraryAF(abjad.AbjadObject):
                                     \override CelloMusicStaff.InstrumentName.color = #(x11-color 'violet) %%! DEFAULT_REDRAW_INSTRUMENT_COLOR
                                     \override CelloMusicStaff.Clef.color = #(x11-color 'violet) %%! DEFAULT_CLEF_COLOR_REDRAW
                 <BLANKLINE>
-                                    %%% CelloMusicVoice [measure 2] %%%
+                                    % CelloMusicVoice [measure 2]
                                     R1 * 1/8
                                     \bar "|"
                 <BLANKLINE>

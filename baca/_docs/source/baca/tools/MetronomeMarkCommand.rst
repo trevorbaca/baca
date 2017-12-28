@@ -26,6 +26,7 @@ Bases
       ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.key
       ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.manifest
       ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.selector
+      ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.site
       ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.tag
       ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.__call__
       ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.__eq__
@@ -45,6 +46,8 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.selector
+
+.. autoattribute:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.site
 
 .. autoattribute:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.tag
 

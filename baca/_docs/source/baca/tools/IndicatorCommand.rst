@@ -26,6 +26,7 @@ Bases
       ~baca.tools.IndicatorCommand.IndicatorCommand.context
       ~baca.tools.IndicatorCommand.IndicatorCommand.indicators
       ~baca.tools.IndicatorCommand.IndicatorCommand.selector
+      ~baca.tools.IndicatorCommand.IndicatorCommand.site
       ~baca.tools.IndicatorCommand.IndicatorCommand.tag
       ~baca.tools.IndicatorCommand.IndicatorCommand.__call__
       ~baca.tools.IndicatorCommand.IndicatorCommand.__eq__
@@ -45,6 +46,8 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.selector
+
+.. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.site
 
 .. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.tag
 

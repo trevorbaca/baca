@@ -34,40 +34,40 @@ class LayoutMeasureMap(abjad.AbjadObject):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        %%% GlobalSkips [measure 1] %%%
+                        % GlobalSkips [measure 1]
                         \autoPageBreaksOff                                                 %%! SEGMENT:LAYOUT
                         \noBreak                                                           %%! SEGMENT:LAYOUT
-                        \time 4/8
-                        \bar ""                                                            %%! EMPTY_START_BAR
+                        \time 4/8                                                          %%! SM1
+                        \bar ""                                                            %%! EMPTY_START_BAR:SM2
                         s1 * 1/2
-                        ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                            \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                    #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                    [1]                                                    %%! STAGE_NUMBER_MARKUP
-                            }                                                              %%! STAGE_NUMBER_MARKUP
+                        ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                            \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                    #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                    [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                            }                                                              %%! STAGE_NUMBER_MARKUP:SM3
                         \break                                                             %%! SEGMENT:LAYOUT
             <BLANKLINE>
-                        %%% GlobalSkips [measure 2] %%%
+                        % GlobalSkips [measure 2]
                         \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 100) (alignment-distances . (30 30))) %%! SEGMENT:LAYOUT
-                        \time 3/8
+                        \time 3/8                                                          %%! SM1
                         s1 * 3/8
                         \break                                                             %%! SEGMENT:LAYOUT
             <BLANKLINE>
-                        %%% GlobalSkips [measure 3] %%%
+                        % GlobalSkips [measure 3]
                         \noBreak                                                           %%! SEGMENT:LAYOUT
-                        \time 4/8
+                        \time 4/8                                                          %%! SM1
                         s1 * 1/2
             <BLANKLINE>
-                        %%% GlobalSkips [measure 4] %%%
+                        % GlobalSkips [measure 4]
                         \noBreak                                                           %%! SEGMENT:LAYOUT
-                        \time 3/8
+                        \time 3/8                                                          %%! SM1
                         s1 * 3/8
             <BLANKLINE>
-                        %%% GlobalSkips [measure 5] %%%
+                        % GlobalSkips [measure 5]
                         \noBreak                                                           %%! SEGMENT:LAYOUT
-                        \time 4/8
+                        \time 4/8                                                          %%! SM1
                         s1 * 1/2
             <BLANKLINE>
                     }
@@ -79,7 +79,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
                             \context ViolinMusicVoice = "ViolinMusicVoice" {
                                 {
             <BLANKLINE>
-                                    %%% ViolinMusicVoice [measure 1] %%%
+                                    % ViolinMusicVoice [measure 1]
                                     \set ViolinMusicStaff.instrumentName = \markup {       %%! DEFAULT_INSTRUMENT
                                         \hcenter-in                                        %%! DEFAULT_INSTRUMENT
                                             #10                                            %%! DEFAULT_INSTRUMENT
@@ -164,7 +164,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                 }
                                 {
             <BLANKLINE>
-                                    %%% ViolinMusicVoice [measure 2] %%%
+                                    % ViolinMusicVoice [measure 2]
                                     e'8
                                     [
             <BLANKLINE>
@@ -175,7 +175,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                 }
                                 {
             <BLANKLINE>
-                                    %%% ViolinMusicVoice [measure 3] %%%
+                                    % ViolinMusicVoice [measure 3]
                                     e'8
                                     [
             <BLANKLINE>
@@ -188,7 +188,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                 }
                                 {
             <BLANKLINE>
-                                    %%% ViolinMusicVoice [measure 4] %%%
+                                    % ViolinMusicVoice [measure 4]
                                     e'8
                                     [
             <BLANKLINE>
@@ -199,7 +199,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                 }
                                 {
             <BLANKLINE>
-                                    %%% ViolinMusicVoice [measure 5] %%%
+                                    % ViolinMusicVoice [measure 5]
                                     e'8
                                     [
             <BLANKLINE>
@@ -218,7 +218,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
                         \context ViolaMusicStaff = "ViolaMusicStaff" {
                             \context ViolaMusicVoice = "ViolaMusicVoice" {
             <BLANKLINE>
-                                %%% ViolaMusicVoice [measure 1] %%%
+                                % ViolaMusicVoice [measure 1]
                                 \set ViolaMusicStaff.instrumentName = \markup {            %%! DEFAULT_INSTRUMENT
                                     \hcenter-in                                            %%! DEFAULT_INSTRUMENT
                                         #10                                                %%! DEFAULT_INSTRUMENT
@@ -293,16 +293,16 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                 \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'violet) %%! DEFAULT_REDRAW_INSTRUMENT_COLOR
                                 \override ViolaMusicStaff.Clef.color = #(x11-color 'violet) %%! DEFAULT_CLEF_COLOR_REDRAW
             <BLANKLINE>
-                                %%% ViolaMusicVoice [measure 2] %%%
+                                % ViolaMusicVoice [measure 2]
                                 R1 * 3/8
             <BLANKLINE>
-                                %%% ViolaMusicVoice [measure 3] %%%
+                                % ViolaMusicVoice [measure 3]
                                 R1 * 1/2
             <BLANKLINE>
-                                %%% ViolaMusicVoice [measure 4] %%%
+                                % ViolaMusicVoice [measure 4]
                                 R1 * 3/8
             <BLANKLINE>
-                                %%% ViolaMusicVoice [measure 5] %%%
+                                % ViolaMusicVoice [measure 5]
                                 R1 * 1/2
                                 \bar "|"
             <BLANKLINE>
@@ -312,7 +312,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
                         \context CelloMusicStaff = "CelloMusicStaff" {
                             \context CelloMusicVoice = "CelloMusicVoice" {
             <BLANKLINE>
-                                %%% CelloMusicVoice [measure 1] %%%
+                                % CelloMusicVoice [measure 1]
                                 \set CelloMusicStaff.instrumentName = \markup {            %%! DEFAULT_INSTRUMENT
                                     \hcenter-in                                            %%! DEFAULT_INSTRUMENT
                                         #10                                                %%! DEFAULT_INSTRUMENT
@@ -387,16 +387,16 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                 \override CelloMusicStaff.InstrumentName.color = #(x11-color 'violet) %%! DEFAULT_REDRAW_INSTRUMENT_COLOR
                                 \override CelloMusicStaff.Clef.color = #(x11-color 'violet) %%! DEFAULT_CLEF_COLOR_REDRAW
             <BLANKLINE>
-                                %%% CelloMusicVoice [measure 2] %%%
+                                % CelloMusicVoice [measure 2]
                                 R1 * 3/8
             <BLANKLINE>
-                                %%% CelloMusicVoice [measure 3] %%%
+                                % CelloMusicVoice [measure 3]
                                 R1 * 1/2
             <BLANKLINE>
-                                %%% CelloMusicVoice [measure 4] %%%
+                                % CelloMusicVoice [measure 4]
                                 R1 * 3/8
             <BLANKLINE>
-                                %%% CelloMusicVoice [measure 5] %%%
+                                % CelloMusicVoice [measure 5]
                                 R1 * 1/2
                                 \bar "|"
             <BLANKLINE>

@@ -22,28 +22,28 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        %%% GlobalSkips [measure 1] %%%
-                        \time 4/8
-                        \bar ""                                                            %%! EMPTY_START_BAR
+                        % GlobalSkips [measure 1]
+                        \time 4/8                                                          %%! SM1
+                        \bar ""                                                            %%! EMPTY_START_BAR:SM2
                         s1 * 1/2
-                        ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                            \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                    #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                    [1]                                                    %%! STAGE_NUMBER_MARKUP
-                            }                                                              %%! STAGE_NUMBER_MARKUP
+                        ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                            \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                    #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                    [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                            }                                                              %%! STAGE_NUMBER_MARKUP:SM3
             <BLANKLINE>
-                        %%% GlobalSkips [measure 2] %%%
-                        \time 3/8
+                        % GlobalSkips [measure 2]
+                        \time 3/8                                                          %%! SM1
                         s1 * 3/8
             <BLANKLINE>
-                        %%% GlobalSkips [measure 3] %%%
-                        \time 4/8
+                        % GlobalSkips [measure 3]
+                        \time 4/8                                                          %%! SM1
                         s1 * 1/2
             <BLANKLINE>
-                        %%% GlobalSkips [measure 4] %%%
-                        \time 3/8
+                        % GlobalSkips [measure 4]
+                        \time 3/8                                                          %%! SM1
                         s1 * 3/8
             <BLANKLINE>
                     }
@@ -52,32 +52,32 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
                     \context MusicStaff = "MusicStaff" <<
                         \context MusicVoiceOne = "MusicVoiceOne" {
             <BLANKLINE>
-                            %%% MusicVoiceOne [measure 1] %%%
+                            % MusicVoiceOne [measure 1]
                             R1 * 1/2
             <BLANKLINE>
-                            %%% MusicVoiceOne [measure 2] %%%
+                            % MusicVoiceOne [measure 2]
                             R1 * 3/8
             <BLANKLINE>
-                            %%% MusicVoiceOne [measure 3] %%%
+                            % MusicVoiceOne [measure 3]
                             R1 * 1/2
             <BLANKLINE>
-                            %%% MusicVoiceOne [measure 4] %%%
+                            % MusicVoiceOne [measure 4]
                             R1 * 3/8
                             \bar "|"
             <BLANKLINE>
                         }
                         \context MusicVoiceTwo = "MusicVoiceTwo" {
             <BLANKLINE>
-                            %%% MusicVoiceTwo [measure 1] %%%
+                            % MusicVoiceTwo [measure 1]
                             R1 * 1/2
             <BLANKLINE>
-                            %%% MusicVoiceTwo [measure 2] %%%
+                            % MusicVoiceTwo [measure 2]
                             R1 * 3/8
             <BLANKLINE>
-                            %%% MusicVoiceTwo [measure 3] %%%
+                            % MusicVoiceTwo [measure 3]
                             R1 * 1/2
             <BLANKLINE>
-                            %%% MusicVoiceTwo [measure 4] %%%
+                            % MusicVoiceTwo [measure 4]
                             R1 * 3/8
                             \bar "|"
             <BLANKLINE>

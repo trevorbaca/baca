@@ -38,21 +38,21 @@ class SegmentMaker(abjad.SegmentMaker):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        %%% GlobalSkips [measure 1] %%%
-                        \time 4/8
-                        \bar ""                                                            %%! EMPTY_START_BAR
+                        % GlobalSkips [measure 1]
+                        \time 4/8                                                          %%! SM1
+                        \bar ""                                                            %%! EMPTY_START_BAR:SM2
                         s1 * 1/2
             <BLANKLINE>
-                        %%% GlobalSkips [measure 2] %%%
-                        \time 3/8
+                        % GlobalSkips [measure 2]
+                        \time 3/8                                                          %%! SM1
                         s1 * 3/8
             <BLANKLINE>
-                        %%% GlobalSkips [measure 3] %%%
-                        \time 4/8
+                        % GlobalSkips [measure 3]
+                        \time 4/8                                                          %%! SM1
                         s1 * 1/2
             <BLANKLINE>
-                        %%% GlobalSkips [measure 4] %%%
-                        \time 3/8
+                        % GlobalSkips [measure 4]
+                        \time 3/8                                                          %%! SM1
                         s1 * 3/8
             <BLANKLINE>
                     }
@@ -62,7 +62,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 c'8
                                 [
             <BLANKLINE>
@@ -75,7 +75,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             }
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 c'8
                                 [
             <BLANKLINE>
@@ -86,7 +86,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             }
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 3] %%%
+                                % MusicVoice [measure 3]
                                 c'8
                                 [
             <BLANKLINE>
@@ -99,7 +99,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             }
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 4] %%%
+                                % MusicVoice [measure 4]
                                 c'8
                                 [
             <BLANKLINE>
@@ -403,28 +403,28 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 4/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                    #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                    \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                        [1]                                                    %%! STAGE_NUMBER_MARKUP
-                                }                                                              %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                        [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                }                                                              %%! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 2]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 4/8
+                            % GlobalSkips [measure 3]
+                            \time 4/8                                                          %%! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 4]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -434,7 +434,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 1] %%%
+                                    % MusicVoice [measure 1]
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -483,7 +483,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
+                                    % MusicVoice [measure 2]
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -521,7 +521,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 3] %%%
+                                    % MusicVoice [measure 3]
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -570,7 +570,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 4] %%%
+                                    % MusicVoice [measure 4]
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -954,7 +954,7 @@ class SegmentMaker(abjad.SegmentMaker):
             left_broken_text=left_broken_text,
             start_with_parenthesized_metronome_mark=False,
             )
-        abjad.attach(spanner, skips)
+        abjad.attach(spanner, skips, site='')
         if not self.metronome_mark_measure_map:
             return
         for stage_number, directive in self.metronome_mark_measure_map:
@@ -1339,9 +1339,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 measure_number = offset_to_measure_number.get(offset, None)
                 if measure_number is None:
                     continue
-                string = f'%%% {context.name} [measure {measure_number}] %%%'
+                string = f'% {context.name} [measure {measure_number}]'
                 literal = abjad.LilyPondLiteral(string, 'absolute_before')
-                abjad.attach(literal, leaf)
+                abjad.attach(literal, leaf, site='SM4')
 
     def _deactivate_tags(self, tags):
         if not tags:
@@ -1669,22 +1669,32 @@ class SegmentMaker(abjad.SegmentMaker):
             markup = markup.fontsize(-3)
             markup = abjad.new(markup, direction=abjad.Up)
             skip = skips[start_measure_index]
-            abjad.attach(markup, skip, tag=baca.Tags.STAGE_NUMBER_MARKUP)
+            abjad.attach(
+                markup,
+                skip,
+                site='SM3',
+                tag=baca.Tags.STAGE_NUMBER_MARKUP,
+                )
 
     def _make_global_skips(self):
         context = self.score['GlobalSkips']
         for time_signature in self.time_signatures:
             skip = abjad.Skip(1)
             multiplier = abjad.Multiplier(time_signature.duration)
-            abjad.attach(multiplier, skip)
-            abjad.attach(time_signature, skip, context='Score')
+            abjad.attach(multiplier, skip, site='')
+            abjad.attach(time_signature, skip, context='Score', site='SM1')
             context.append(skip)
         # empty start bar allows LilyPond to print first bar number
         if self.omit_empty_start_bar:
             return
         first_skip = baca.select(context).skip(0)
         literal = abjad.LilyPondLiteral(r'\bar ""')
-        abjad.attach(literal, first_skip, tag=baca.Tags.EMPTY_START_BAR)
+        abjad.attach(
+            literal,
+            first_skip,
+            site='SM2',
+            tag=baca.Tags.EMPTY_START_BAR,
+            )
 
     def _make_lilypond_file(self):
         includes = self._get_stylesheets()
@@ -2072,9 +2082,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _whitespace_leaves(self):
         for leaf in abjad.iterate(self.score).leaves():
-            abjad.attach(abjad.LilyPondLiteral('', 'absolute_before'), leaf)
+            literal = abjad.LilyPondLiteral('', 'absolute_before')
+            abjad.attach(literal, leaf, site='')
             if abjad.inspect(leaf).get_leaf(1) is None:
-                abjad.attach(abjad.LilyPondLiteral('', 'absolute_after'), leaf)
+                literal = abjad.LilyPondLiteral('', 'absolute_after')
+                abjad.attach(literal, leaf, site='')
 
     ### PUBLIC PROPERTIES ###
 
@@ -2136,17 +2148,17 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
+                            % GlobalSkips [measure 1]
                             \pageBreak                                                         %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %%! SEGMENT:LAYOUT
                             \autoPageBreaksOff                                                 %%! SEGMENT:LAYOUT
-                            \time 3/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            \time 3/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
+                            % GlobalSkips [measure 2]
                             \break                                                             %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %%! SEGMENT:LAYOUT
                             \newSpacingSection
@@ -2159,7 +2171,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 \set Staff.forceClef = ##t                                     %%! DEFAULT_CLEF
                                 \clef "treble"                                                 %%! DEFAULT_CLEF
                                 \once \override Staff.Clef.color = #(x11-color 'DarkViolet)    %%! DEFAULT_CLEF_COLOR
@@ -2167,7 +2179,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'violet)              %%! DEFAULT_CLEF_COLOR_REDRAW
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 R1 * 3/8
                                 \bar "|"
                 <BLANKLINE>
@@ -2217,17 +2229,17 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
+                            % GlobalSkips [measure 1]
                             \pageBreak                                                         %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %%! SEGMENT:LAYOUT
                             \autoPageBreaksOff                                                 %%! SEGMENT:LAYOUT
-                            \time 3/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            \time 3/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
+                            % GlobalSkips [measure 2]
                             \break                                                             %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %%! SEGMENT:LAYOUT
                             \newSpacingSection
@@ -2240,7 +2252,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 \set Staff.forceClef = ##t                                     %%! EXPLICIT_CLEF
                                 \clef "treble"                                                 %%! EXPLICIT_CLEF
                                 \once \override Staff.Clef.color = #(x11-color 'blue)          %%! EXPLICIT_CLEF_COLOR
@@ -2248,7 +2260,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)        %%! EXPLICIT_CLEF_COLOR_REDRAW
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 R1 * 3/8
                                 \bar "|"
                 <BLANKLINE>
@@ -2307,18 +2319,18 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
+                            % GlobalSkips [measure 1]
                             \pageBreak                                                         %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %%! SEGMENT:LAYOUT
                             \autoPageBreaksOff                                                 %%! SEGMENT:LAYOUT
-                            \time 3/8
+                            \time 3/8                                                          %%! SM1
                             \mark #1
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
+                            % GlobalSkips [measure 2]
                             \break                                                             %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %%! SEGMENT:LAYOUT
                             \newSpacingSection
@@ -2331,7 +2343,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 \set Staff.forceClef = ##t                                     %%! EXPLICIT_CLEF
                                 \clef "alto"                                                   %%! EXPLICIT_CLEF
                                 \once \override Staff.Clef.color = #(x11-color 'blue)          %%! EXPLICIT_CLEF_COLOR
@@ -2339,7 +2351,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)        %%! EXPLICIT_CLEF_COLOR_REDRAW
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 R1 * 3/8
                                 \bar "|"
                 <BLANKLINE>
@@ -2397,18 +2409,18 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
+                            % GlobalSkips [measure 1]
                             \pageBreak                                                         %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %%! SEGMENT:LAYOUT
                             \autoPageBreaksOff                                                 %%! SEGMENT:LAYOUT
-                            \time 3/8
+                            \time 3/8                                                          %%! SM1
                             \mark #1
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
+                            % GlobalSkips [measure 2]
                             \break                                                             %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %%! SEGMENT:LAYOUT
                             \newSpacingSection
@@ -2421,7 +2433,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 \set Staff.forceClef = ##t                                     %%! REAPPLIED_CLEF
                                 \clef "treble"                                                 %%! REAPPLIED_CLEF
                                 \once \override Staff.Clef.color = #(x11-color 'green4)        %%! REAPPLIED_CLEF_COLOR
@@ -2429,7 +2441,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'OliveDrab)           %%! REAPPLIED_CLEF_COLOR_REDRAW
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 R1 * 3/8
                                 \bar "|"
                 <BLANKLINE>
@@ -2481,23 +2493,23 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
+                            % GlobalSkips [measure 1]
                             \pageBreak                                                         %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %%! SEGMENT:LAYOUT
                             \autoPageBreaksOff                                                 %%! SEGMENT:LAYOUT
-                            \time 3/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            \time 3/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
+                            % GlobalSkips [measure 2]
                             \noBreak                                                           %%! SEGMENT:LAYOUT
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
+                            % GlobalSkips [measure 3]
                             \break                                                             %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %%! SEGMENT:LAYOUT
                             \newSpacingSection
@@ -2510,7 +2522,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 \set Staff.forceClef = ##t                                     %%! EXPLICIT_CLEF
                                 \clef "treble"                                                 %%! EXPLICIT_CLEF
                                 \once \override Staff.Clef.color = #(x11-color 'blue)          %%! EXPLICIT_CLEF_COLOR
@@ -2518,7 +2530,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)        %%! EXPLICIT_CLEF_COLOR_REDRAW
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 \set Staff.forceClef = ##t                                     %%! REDUNDANT_CLEF
                                 \clef "treble"                                                 %%! REDUNDANT_CLEF
                                 \once \override Staff.Clef.color = #(x11-color 'DeepPink1)     %%! REDUNDANT_CLEF_COLOR
@@ -2526,7 +2538,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepPink4)           %%! REDUNDANT_CLEF_COLOR_REDRAW
                 <BLANKLINE>
-                                %%% MusicVoice [measure 3] %%%
+                                % MusicVoice [measure 3]
                                 R1 * 3/8
                                 \bar "|"
                 <BLANKLINE>
@@ -2586,18 +2598,18 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
+                            % GlobalSkips [measure 1]
                             \pageBreak                                                         %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (7))) %%! SEGMENT:LAYOUT
                             \autoPageBreaksOff                                                 %%! SEGMENT:LAYOUT
-                            \time 3/8
+                            \time 3/8                                                          %%! SM1
                             \mark #1
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
+                            % GlobalSkips [measure 2]
                             \break                                                             %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (7))) %%! SEGMENT:LAYOUT
                             \newSpacingSection
@@ -2610,7 +2622,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 \set Staff.forceClef = ##t                                     %%! REDUNDANT_CLEF
                                 \clef "treble"                                                 %%! REDUNDANT_CLEF
                                 \once \override Staff.Clef.color = #(x11-color 'DeepPink1)     %%! REDUNDANT_CLEF_COLOR
@@ -2618,7 +2630,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 R1 * 3/8
                                 \override Staff.Clef.color = #(x11-color 'DeepPink4)           %%! REDUNDANT_CLEF_COLOR_REDRAW
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 R1 * 3/8
                                 \bar "|"
                 <BLANKLINE>
@@ -2681,23 +2693,23 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 6/16
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 6/16                                                         %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 31)   %%! SEGMENT:SPACING
                             s1 * 3/8
                             ^ \markup {
                                 \column
                                     {
-                                        \line                                                  %%! STAGE_NUMBER_MARKUP
-                                            {                                                  %%! STAGE_NUMBER_MARKUP
-                                                \fontsize                                      %%! STAGE_NUMBER_MARKUP
-                                                    #-3                                        %%! STAGE_NUMBER_MARKUP
-                                                    \with-color                                %%! STAGE_NUMBER_MARKUP
-                                                        #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP
-                                                        [1]                                    %%! STAGE_NUMBER_MARKUP
-                                            }                                                  %%! STAGE_NUMBER_MARKUP
+                                        \line                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                            {                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                                \fontsize                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                                    #-3                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                                    \with-color                                %%! STAGE_NUMBER_MARKUP:SM3
+                                                        #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP:SM3
+                                                        [1]                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                            }                                                  %%! STAGE_NUMBER_MARKUP:SM3
                                         \line                                                  %%! SEGMENT:SPACING_MARKUP
                                             {                                                  %%! SEGMENT:SPACING_MARKUP
                                                 \with-color                                    %%! SEGMENT:SPACING_MARKUP
@@ -2719,7 +2731,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                                         {
                 <BLANKLINE>
-                                            %%% ViolinMusicVoice [measure 1] %%%
+                                            % ViolinMusicVoice [measure 1]
                                             \set ViolinMusicStaff.instrumentName = \markup {   %%! DEFAULT_INSTRUMENT
                                                 \hcenter-in                                    %%! DEFAULT_INSTRUMENT
                                                     #10                                        %%! DEFAULT_INSTRUMENT
@@ -2820,7 +2832,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context ViolaMusicStaff = "ViolaMusicStaff" {
                                 \context ViolaMusicVoice = "ViolaMusicVoice" {
                 <BLANKLINE>
-                                    %%% ViolaMusicVoice [measure 1] %%%
+                                    % ViolaMusicVoice [measure 1]
                                     \set ViolaMusicStaff.instrumentName = \markup {            %%! DEFAULT_INSTRUMENT
                                         \hcenter-in                                            %%! DEFAULT_INSTRUMENT
                                             #10                                                %%! DEFAULT_INSTRUMENT
@@ -2904,7 +2916,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                                         {
                 <BLANKLINE>
-                                            %%% CelloMusicVoice [measure 1] %%%
+                                            % CelloMusicVoice [measure 1]
                                             \set CelloMusicStaff.instrumentName = \markup {    %%! DEFAULT_INSTRUMENT
                                                 \hcenter-in                                    %%! DEFAULT_INSTRUMENT
                                                     #10                                        %%! DEFAULT_INSTRUMENT
@@ -3071,23 +3083,23 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 1/16
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 1/16                                                         %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 1/16
                             ^ \markup {
                                 \column
                                     {
-                                        \line                                                  %%! STAGE_NUMBER_MARKUP
-                                            {                                                  %%! STAGE_NUMBER_MARKUP
-                                                \fontsize                                      %%! STAGE_NUMBER_MARKUP
-                                                    #-3                                        %%! STAGE_NUMBER_MARKUP
-                                                    \with-color                                %%! STAGE_NUMBER_MARKUP
-                                                        #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP
-                                                        [1]                                    %%! STAGE_NUMBER_MARKUP
-                                            }                                                  %%! STAGE_NUMBER_MARKUP
+                                        \line                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                            {                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                                \fontsize                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                                    #-3                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                                    \with-color                                %%! STAGE_NUMBER_MARKUP:SM3
+                                                        #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP:SM3
+                                                        [1]                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                            }                                                  %%! STAGE_NUMBER_MARKUP:SM3
                                         \line                                                  %%! SEGMENT:SPACING_MARKUP
                                             {                                                  %%! SEGMENT:SPACING_MARKUP
                                                 \with-color                                    %%! SEGMENT:SPACING_MARKUP
@@ -3099,8 +3111,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     }
                                 }
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 7/16
+                            % GlobalSkips [measure 2]
+                            \time 7/16                                                         %%! SM1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 7/16
@@ -3112,8 +3124,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                         (1/24)                                                 %%! SEGMENT:SPACING_MARKUP
                                 }                                                              %%! SEGMENT:SPACING_MARKUP
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 1/16
+                            % GlobalSkips [measure 3]
+                            \time 1/16                                                         %%! SM1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 1/16
@@ -3125,8 +3137,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                         (1/24)                                                 %%! SEGMENT:SPACING_MARKUP
                                 }                                                              %%! SEGMENT:SPACING_MARKUP
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 4]
+                            \time 3/8                                                          %%! SM1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/8
@@ -3146,14 +3158,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% MusicVoice [measure 1] %%%
+                                        % MusicVoice [measure 1]
                                         e'16
                                     }
                                 }
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% MusicVoice [measure 2] %%%
+                                        % MusicVoice [measure 2]
                                         \once \override Accidental.color = #red
                                         \once \override Beam.color = #red
                                         \once \override Dots.color = #red
@@ -3179,14 +3191,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% MusicVoice [measure 3] %%%
+                                        % MusicVoice [measure 3]
                                         b'16
                                     }
                                 }
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% MusicVoice [measure 4] %%%
+                                        % MusicVoice [measure 4]
                                         bf'16
                 <BLANKLINE>
                                         g'16
@@ -3273,23 +3285,23 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 1/16
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 1/16                                                         %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 1/16
                             ^ \markup {
                                 \column
                                     {
-                                        \line                                                  %%! STAGE_NUMBER_MARKUP
-                                            {                                                  %%! STAGE_NUMBER_MARKUP
-                                                \fontsize                                      %%! STAGE_NUMBER_MARKUP
-                                                    #-3                                        %%! STAGE_NUMBER_MARKUP
-                                                    \with-color                                %%! STAGE_NUMBER_MARKUP
-                                                        #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP
-                                                        [1]                                    %%! STAGE_NUMBER_MARKUP
-                                            }                                                  %%! STAGE_NUMBER_MARKUP
+                                        \line                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                            {                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                                \fontsize                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                                    #-3                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                                    \with-color                                %%! STAGE_NUMBER_MARKUP:SM3
+                                                        #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP:SM3
+                                                        [1]                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                            }                                                  %%! STAGE_NUMBER_MARKUP:SM3
                                         \line                                                  %%! SEGMENT:SPACING_MARKUP
                                             {                                                  %%! SEGMENT:SPACING_MARKUP
                                                 \with-color                                    %%! SEGMENT:SPACING_MARKUP
@@ -3301,8 +3313,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                     }
                                 }
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 7/16
+                            % GlobalSkips [measure 2]
+                            \time 7/16                                                         %%! SM1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 7/16
@@ -3314,8 +3326,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                         (1/24)                                                 %%! SEGMENT:SPACING_MARKUP
                                 }                                                              %%! SEGMENT:SPACING_MARKUP
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 1/16
+                            % GlobalSkips [measure 3]
+                            \time 1/16                                                         %%! SM1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 1/16
@@ -3327,8 +3339,8 @@ class SegmentMaker(abjad.SegmentMaker):
                                         (1/24)                                                 %%! SEGMENT:SPACING_MARKUP
                                 }                                                              %%! SEGMENT:SPACING_MARKUP
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 4]
+                            \time 3/8                                                          %%! SM1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/8
@@ -3348,14 +3360,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% MusicVoice [measure 1] %%%
+                                        % MusicVoice [measure 1]
                                         e'16
                                     }
                                 }
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% MusicVoice [measure 2] %%%
+                                        % MusicVoice [measure 2]
                                         fs'16
                 <BLANKLINE>
                                         d'16
@@ -3388,14 +3400,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% MusicVoice [measure 3] %%%
+                                        % MusicVoice [measure 3]
                                         b'16
                                     }
                                 }
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% MusicVoice [measure 4] %%%
+                                        % MusicVoice [measure 4]
                                         bf'16
                 <BLANKLINE>
                                         g'16
@@ -3499,10 +3511,10 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 1]
+                            \time 3/8                                                          %%! SM1
                             \mark #1
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/8
@@ -3513,7 +3525,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 \once \override Staff.DynamicText.color = #(x11-color 'green4) %%! REAPPLIED_DYNAMIC_COLOR
                                 c'4.
                                 \f                                                             %%! REAPPLIED_DYNAMIC
@@ -3568,28 +3580,28 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 4/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                    #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                    \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                        [1]                                                    %%! STAGE_NUMBER_MARKUP
-                                }                                                              %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                        [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                }                                                              %%! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 2]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 4/8
+                            % GlobalSkips [measure 3]
+                            \time 4/8                                                          %%! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 4]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -3599,7 +3611,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 1] %%%
+                                    % MusicVoice [measure 1]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3612,7 +3624,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
+                                    % MusicVoice [measure 2]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3623,7 +3635,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 3] %%%
+                                    % MusicVoice [measure 3]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3636,7 +3648,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 4] %%%
+                                    % MusicVoice [measure 4]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3676,28 +3688,28 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 4/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                    #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                    \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                        [1]                                                    %%! STAGE_NUMBER_MARKUP
-                                }                                                              %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                        [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                }                                                              %%! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 2]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 4/8
+                            % GlobalSkips [measure 3]
+                            \time 4/8                                                          %%! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 4]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -3707,7 +3719,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 1] %%%
+                                    % MusicVoice [measure 1]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3720,7 +3732,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
+                                    % MusicVoice [measure 2]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3731,7 +3743,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 3] %%%
+                                    % MusicVoice [measure 3]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3744,7 +3756,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 4] %%%
+                                    % MusicVoice [measure 4]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3786,28 +3798,28 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 4/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                    #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                    \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                        [1]                                                    %%! STAGE_NUMBER_MARKUP
-                                }                                                              %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                        [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                }                                                              %%! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 2]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 4/8
+                            % GlobalSkips [measure 3]
+                            \time 4/8                                                          %%! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 4]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -3817,7 +3829,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 1] %%%
+                                    % MusicVoice [measure 1]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3830,7 +3842,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
+                                    % MusicVoice [measure 2]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3841,7 +3853,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 3] %%%
+                                    % MusicVoice [measure 3]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3854,7 +3866,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 4] %%%
+                                    % MusicVoice [measure 4]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3898,28 +3910,28 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 4/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                    #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                    \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                        [1]                                                    %%! STAGE_NUMBER_MARKUP
-                                }                                                              %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                        [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                }                                                              %%! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 2]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 4/8
+                            % GlobalSkips [measure 3]
+                            \time 4/8                                                          %%! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 4]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -3929,7 +3941,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 1] %%%
+                                    % MusicVoice [measure 1]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3942,7 +3954,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
+                                    % MusicVoice [measure 2]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3953,7 +3965,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 3] %%%
+                                    % MusicVoice [measure 3]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -3966,7 +3978,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 4] %%%
+                                    % MusicVoice [measure 4]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -4020,28 +4032,28 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 4/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                    #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                    \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                        [1]                                                    %%! STAGE_NUMBER_MARKUP
-                                }                                                              %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                        [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                }                                                              %%! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 2]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 4/8
+                            % GlobalSkips [measure 3]
+                            \time 4/8                                                          %%! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 4]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -4051,7 +4063,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 1] %%%
+                                    % MusicVoice [measure 1]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -4064,7 +4076,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
+                                    % MusicVoice [measure 2]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -4075,7 +4087,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 3] %%%
+                                    % MusicVoice [measure 3]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -4088,7 +4100,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 4] %%%
+                                    % MusicVoice [measure 4]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -4193,28 +4205,28 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 4/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                    #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                    \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                        [1]                                                    %%! STAGE_NUMBER_MARKUP
-                                }                                                              %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                        [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                }                                                              %%! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 2]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 4/8
+                            % GlobalSkips [measure 3]
+                            \time 4/8                                                          %%! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 4]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -4224,7 +4236,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 1] %%%
+                                    % MusicVoice [measure 1]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -4237,7 +4249,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
+                                    % MusicVoice [measure 2]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -4248,7 +4260,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 3] %%%
+                                    % MusicVoice [measure 3]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -4261,7 +4273,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 4] %%%
+                                    % MusicVoice [measure 4]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -4301,28 +4313,28 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 4/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                    #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                    \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                        [1]                                                    %%! STAGE_NUMBER_MARKUP
-                                }                                                              %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                        [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                }                                                              %%! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 2]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 4/8
+                            % GlobalSkips [measure 3]
+                            \time 4/8                                                          %%! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 4]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -4332,7 +4344,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 1] %%%
+                                    % MusicVoice [measure 1]
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4365,7 +4377,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
+                                    % MusicVoice [measure 2]
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4391,7 +4403,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 3] %%%
+                                    % MusicVoice [measure 3]
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4424,7 +4436,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 4] %%%
+                                    % MusicVoice [measure 4]
                                     \once \override Beam.color = #blue
                                     \once \override Dots.color = #blue
                                     \once \override Flag.color = #blue
@@ -4532,23 +4544,23 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 3/16
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 3/16                                                         %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/16
                             ^ \markup {
                                 \column
                                     {
-                                        \line                                                  %%! STAGE_NUMBER_MARKUP
-                                            {                                                  %%! STAGE_NUMBER_MARKUP
-                                                \fontsize                                      %%! STAGE_NUMBER_MARKUP
-                                                    #-3                                        %%! STAGE_NUMBER_MARKUP
-                                                    \with-color                                %%! STAGE_NUMBER_MARKUP
-                                                        #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP
-                                                        [1]                                    %%! STAGE_NUMBER_MARKUP
-                                            }                                                  %%! STAGE_NUMBER_MARKUP
+                                        \line                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                            {                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                                \fontsize                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                                    #-3                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                                    \with-color                                %%! STAGE_NUMBER_MARKUP:SM3
+                                                        #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP:SM3
+                                                        [1]                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                            }                                                  %%! STAGE_NUMBER_MARKUP:SM3
                                         \line                                                  %%! SEGMENT:SPACING_MARKUP
                                             {                                                  %%! SEGMENT:SPACING_MARKUP
                                                 \with-color                                    %%! SEGMENT:SPACING_MARKUP
@@ -4560,7 +4572,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     }
                                 }
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
+                            % GlobalSkips [measure 2]
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/16
@@ -4572,7 +4584,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         (1/24)                                                 %%! SEGMENT:SPACING_MARKUP
                                 }                                                              %%! SEGMENT:SPACING_MARKUP
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
+                            % GlobalSkips [measure 3]
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/16
@@ -4584,7 +4596,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         (1/24)                                                 %%! SEGMENT:SPACING_MARKUP
                                 }                                                              %%! SEGMENT:SPACING_MARKUP
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
+                            % GlobalSkips [measure 4]
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/16
@@ -4604,14 +4616,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% MusicVoice [measure 1] %%%
+                                        % MusicVoice [measure 1]
                                         e'8.
                                     }
                                 }
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% MusicVoice [measure 2] %%%
+                                        % MusicVoice [measure 2]
                                         \acciaccatura {
                 <BLANKLINE>
                                             fs'16 [
@@ -4633,14 +4645,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% MusicVoice [measure 3] %%%
+                                        % MusicVoice [measure 3]
                                         b'8.
                                     }
                                 }
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% MusicVoice [measure 4] %%%
+                                        % MusicVoice [measure 4]
                                         \acciaccatura {
                 <BLANKLINE>
                                             bf'16 [
@@ -4728,23 +4740,23 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 3/16
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 3/16                                                         %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/16
                             ^ \markup {
                                 \column
                                     {
-                                        \line                                                  %%! STAGE_NUMBER_MARKUP
-                                            {                                                  %%! STAGE_NUMBER_MARKUP
-                                                \fontsize                                      %%! STAGE_NUMBER_MARKUP
-                                                    #-3                                        %%! STAGE_NUMBER_MARKUP
-                                                    \with-color                                %%! STAGE_NUMBER_MARKUP
-                                                        #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP
-                                                        [1]                                    %%! STAGE_NUMBER_MARKUP
-                                            }                                                  %%! STAGE_NUMBER_MARKUP
+                                        \line                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                            {                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                                \fontsize                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                                    #-3                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                                    \with-color                                %%! STAGE_NUMBER_MARKUP:SM3
+                                                        #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP:SM3
+                                                        [1]                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                            }                                                  %%! STAGE_NUMBER_MARKUP:SM3
                                         \line                                                  %%! SEGMENT:SPACING_MARKUP
                                             {                                                  %%! SEGMENT:SPACING_MARKUP
                                                 \with-color                                    %%! SEGMENT:SPACING_MARKUP
@@ -4756,7 +4768,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     }
                                 }
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
+                            % GlobalSkips [measure 2]
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/16
@@ -4768,7 +4780,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         (1/24)                                                 %%! SEGMENT:SPACING_MARKUP
                                 }                                                              %%! SEGMENT:SPACING_MARKUP
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
+                            % GlobalSkips [measure 3]
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/16
@@ -4780,7 +4792,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         (1/24)                                                 %%! SEGMENT:SPACING_MARKUP
                                 }                                                              %%! SEGMENT:SPACING_MARKUP
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
+                            % GlobalSkips [measure 4]
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/16
@@ -4800,7 +4812,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% MusicVoice [measure 1] %%%
+                                        % MusicVoice [measure 1]
                                         \once \override Accidental.color = #magenta
                                         \once \override Beam.color = #magenta
                                         \once \override Dots.color = #magenta
@@ -4813,7 +4825,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% MusicVoice [measure 2] %%%
+                                        % MusicVoice [measure 2]
                                         \acciaccatura {
                 <BLANKLINE>
                                             \once \override Accidental.color = #magenta
@@ -4877,7 +4889,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% MusicVoice [measure 3] %%%
+                                        % MusicVoice [measure 3]
                                         \once \override Accidental.color = #magenta
                                         \once \override Beam.color = #magenta
                                         \once \override Dots.color = #magenta
@@ -4890,7 +4902,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                                     {
                 <BLANKLINE>
-                                        %%% MusicVoice [measure 4] %%%
+                                        % MusicVoice [measure 4]
                                         \acciaccatura {
                 <BLANKLINE>
                                             \once \override Accidental.color = #magenta
@@ -5021,17 +5033,17 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
+                            % GlobalSkips [measure 1]
                             \pageBreak                                                         %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %%! SEGMENT:LAYOUT
                             \autoPageBreaksOff                                                 %%! SEGMENT:LAYOUT
-                            \time 3/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            \time 3/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
+                            % GlobalSkips [measure 2]
                             \break                                                             %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %%! SEGMENT:LAYOUT
                             \newSpacingSection
@@ -5044,7 +5056,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 \set Staff.instrumentName = \markup { Flute }                  %%! DEFAULT_INSTRUMENT
                                 \set Staff.shortInstrumentName = \markup { Fl. }               %%! DEFAULT_INSTRUMENT
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %%! DEFAULT_INSTRUMENT_COLOR
@@ -5090,7 +5102,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { Fl. }               %%! DEFAULT_REDRAW_INSTRUMENT
                                 \override Staff.InstrumentName.color = #(x11-color 'violet)    %%! DEFAULT_REDRAW_INSTRUMENT_COLOR
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 c'4.
                                 \bar "|"
                 <BLANKLINE>
@@ -5139,17 +5151,17 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
+                            % GlobalSkips [measure 1]
                             \pageBreak                                                         %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %%! SEGMENT:LAYOUT
                             \autoPageBreaksOff                                                 %%! SEGMENT:LAYOUT
-                            \time 3/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            \time 3/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
+                            % GlobalSkips [measure 2]
                             \break                                                             %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %%! SEGMENT:LAYOUT
                             \newSpacingSection
@@ -5162,7 +5174,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 \set Staff.instrumentName = \markup { Flute }                  %%! EXPLICIT_INSTRUMENT
                                 \set Staff.shortInstrumentName = \markup { Fl. }               %%! EXPLICIT_INSTRUMENT
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %%! EXPLICIT_INSTRUMENT_COLOR
@@ -5208,7 +5220,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { Fl. }               %%! EXPLICIT_REDRAW_INSTRUMENT
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %%! EXPLICIT_REDRAW_INSTRUMENT_COLOR
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 c'4.
                                 \bar "|"
                 <BLANKLINE>
@@ -5266,18 +5278,18 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
+                            % GlobalSkips [measure 1]
                             \pageBreak                                                         %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %%! SEGMENT:LAYOUT
                             \autoPageBreaksOff                                                 %%! SEGMENT:LAYOUT
-                            \time 3/8
+                            \time 3/8                                                          %%! SM1
                             \mark #1
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
+                            % GlobalSkips [measure 2]
                             \break                                                             %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 25) (alignment-distances . (11))) %%! SEGMENT:LAYOUT
                             \newSpacingSection
@@ -5290,7 +5302,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 \set Staff.instrumentName = \markup { Flute }                  %%! EXPLICIT_INSTRUMENT
                                 \set Staff.shortInstrumentName = \markup { Fl. }               %%! EXPLICIT_INSTRUMENT
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %%! EXPLICIT_INSTRUMENT_COLOR
@@ -5336,7 +5348,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { Fl. }               %%! EXPLICIT_REDRAW_INSTRUMENT
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %%! EXPLICIT_REDRAW_INSTRUMENT_COLOR
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 c'4.
                                 \bar "|"
                 <BLANKLINE>
@@ -5389,18 +5401,18 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
+                            % GlobalSkips [measure 1]
                             \pageBreak                                                         %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %%! SEGMENT:LAYOUT
                             \autoPageBreaksOff                                                 %%! SEGMENT:LAYOUT
-                            \time 3/8
+                            \time 3/8                                                          %%! SM1
                             \mark #1
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
+                            % GlobalSkips [measure 2]
                             \break                                                             %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 25) (alignment-distances . (11))) %%! SEGMENT:LAYOUT
                             \newSpacingSection
@@ -5413,7 +5425,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 \set Staff.instrumentName = \markup { Flute }                  %%! REAPPLIED_INSTRUMENT
                                 \set Staff.shortInstrumentName = \markup { Fl. }               %%! REAPPLIED_INSTRUMENT
                                 \once \override Staff.InstrumentName.color = #(x11-color 'green4) %%! REAPPLIED_INSTRUMENT_COLOR
@@ -5459,7 +5471,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { Fl. }               %%! REAPPLIED_REDRAW_INSTRUMENT
                                 \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %%! REAPPLIED_REDRAW_INSTRUMENT_COLOR
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 c'4.
                                 \bar "|"
                 <BLANKLINE>
@@ -5512,23 +5524,23 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
+                            % GlobalSkips [measure 1]
                             \pageBreak                                                         %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %%! SEGMENT:LAYOUT
                             \autoPageBreaksOff                                                 %%! SEGMENT:LAYOUT
-                            \time 4/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            \time 4/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
+                            % GlobalSkips [measure 2]
                             \noBreak                                                           %%! SEGMENT:LAYOUT
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
+                            % GlobalSkips [measure 3]
                             \break                                                             %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %%! SEGMENT:LAYOUT
                             \newSpacingSection
@@ -5541,7 +5553,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 \set Staff.instrumentName = \markup { Flute }                  %%! EXPLICIT_INSTRUMENT
                                 \set Staff.shortInstrumentName = \markup { Fl. }               %%! EXPLICIT_INSTRUMENT
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %%! EXPLICIT_INSTRUMENT_COLOR
@@ -5587,7 +5599,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { Fl. }               %%! EXPLICIT_REDRAW_INSTRUMENT
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %%! EXPLICIT_REDRAW_INSTRUMENT_COLOR
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 \set Staff.instrumentName = \markup { Flute }                  %%! REDUNDANT_INSTRUMENT
                                 \set Staff.shortInstrumentName = \markup { Fl. }               %%! REDUNDANT_INSTRUMENT
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %%! REDUNDANT_INSTRUMENT_COLOR
@@ -5633,7 +5645,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { Fl. }               %%! REDUNDANT_REDRAW_INSTRUMENT
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %%! REDUNDANT_REDRAW_INSTRUMENT_COLOR
                 <BLANKLINE>
-                                %%% MusicVoice [measure 3] %%%
+                                % MusicVoice [measure 3]
                                 c'2
                                 \bar "|"
                 <BLANKLINE>
@@ -5691,18 +5703,18 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
+                            % GlobalSkips [measure 1]
                             \pageBreak                                                         %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %%! SEGMENT:LAYOUT
                             \autoPageBreaksOff                                                 %%! SEGMENT:LAYOUT
-                            \time 3/8
+                            \time 3/8                                                          %%! SM1
                             \mark #1
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
+                            % GlobalSkips [measure 2]
                             \break                                                             %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %%! SEGMENT:LAYOUT
                             \newSpacingSection
@@ -5715,7 +5727,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 \set Staff.instrumentName = \markup { Flute }                  %%! REDUNDANT_INSTRUMENT
                                 \set Staff.shortInstrumentName = \markup { Fl. }               %%! REDUNDANT_INSTRUMENT
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %%! REDUNDANT_INSTRUMENT_COLOR
@@ -5761,7 +5773,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { Fl. }               %%! REDUNDANT_REDRAW_INSTRUMENT
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %%! REDUNDANT_REDRAW_INSTRUMENT_COLOR
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 c'4.
                                 \bar "|"
                 <BLANKLINE>
@@ -5873,17 +5885,17 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
+                            % GlobalSkips [measure 1]
                             \pageBreak                                                         %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %%! SEGMENT:LAYOUT
                             \autoPageBreaksOff                                                 %%! SEGMENT:LAYOUT
-                            \time 3/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            \time 3/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
+                            % GlobalSkips [measure 2]
                             \break                                                             %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %%! SEGMENT:LAYOUT
                             \newSpacingSection
@@ -5896,7 +5908,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 \set Staff.instrumentName = \markup { I+II }                   %%! DEFAULT_MARGIN_MARKUP
                                 \set Staff.shortInstrumentName = \markup { I+II }              %%! DEFAULT_MARGIN_MARKUP
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %%! DEFAULT_MARGIN_MARKUP_COLOR
@@ -5942,7 +5954,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { I+II }              %%! DEFAULT_REDRAW_MARGIN_MARKUP
                                 \override Staff.InstrumentName.color = #(x11-color 'violet)    %%! DEFAULT_REDRAW_INSTRUMENT_COLOR
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 c'4.
                                 \bar "|"
                 <BLANKLINE>
@@ -5985,17 +5997,17 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
+                            % GlobalSkips [measure 1]
                             \pageBreak                                                         %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %%! SEGMENT:LAYOUT
                             \autoPageBreaksOff                                                 %%! SEGMENT:LAYOUT
-                            \time 3/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            \time 3/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
+                            % GlobalSkips [measure 2]
                             \break                                                             %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %%! SEGMENT:LAYOUT
                             \newSpacingSection
@@ -6008,7 +6020,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 \set Staff.instrumentName = \markup { I+II }                   %%! EXPLICIT_MARGIN_MARKUP
                                 \set Staff.shortInstrumentName = \markup { I+II }              %%! EXPLICIT_MARGIN_MARKUP
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %%! EXPLICIT_MARGIN_MARKUP_COLOR
@@ -6054,7 +6066,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { I+II }              %%! EXPLICIT_REDRAW_MARGIN_MARKUP
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %%! EXPLICIT_REDRAW_INSTRUMENT_COLOR
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 c'4.
                                 \bar "|"
                 <BLANKLINE>
@@ -6106,18 +6118,18 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
+                            % GlobalSkips [measure 1]
                             \pageBreak                                                         %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %%! SEGMENT:LAYOUT
                             \autoPageBreaksOff                                                 %%! SEGMENT:LAYOUT
-                            \time 3/8
+                            \time 3/8                                                          %%! SM1
                             \mark #1
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
+                            % GlobalSkips [measure 2]
                             \break                                                             %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %%! SEGMENT:LAYOUT
                             \newSpacingSection
@@ -6130,7 +6142,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 \set Staff.instrumentName = \markup { III+IV }                 %%! EXPLICIT_MARGIN_MARKUP
                                 \set Staff.shortInstrumentName = \markup { III+IV }            %%! EXPLICIT_MARGIN_MARKUP
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %%! EXPLICIT_MARGIN_MARKUP_COLOR
@@ -6176,7 +6188,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { III+IV }            %%! EXPLICIT_REDRAW_MARGIN_MARKUP
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %%! EXPLICIT_REDRAW_INSTRUMENT_COLOR
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 c'4.
                                 \bar "|"
                 <BLANKLINE>
@@ -6229,18 +6241,18 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
+                            % GlobalSkips [measure 1]
                             \pageBreak                                                         %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %%! SEGMENT:LAYOUT
                             \autoPageBreaksOff                                                 %%! SEGMENT:LAYOUT
-                            \time 3/8
+                            \time 3/8                                                          %%! SM1
                             \mark #1
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
+                            % GlobalSkips [measure 2]
                             \break                                                             %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %%! SEGMENT:LAYOUT
                             \newSpacingSection
@@ -6253,7 +6265,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 \set Staff.instrumentName = \markup { I+II }                   %%! REAPPLIED_MARGIN_MARKUP
                                 \set Staff.shortInstrumentName = \markup { I+II }              %%! REAPPLIED_MARGIN_MARKUP
                                 \once \override Staff.InstrumentName.color = #(x11-color 'green4) %%! REAPPLIED_MARGIN_MARKUP_COLOR
@@ -6299,7 +6311,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { I+II }              %%! REAPPLIED_REDRAW_MARGIN_MARKUP
                                 \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %%! REAPPLIED_REDRAW_INSTRUMENT_COLOR
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 c'4.
                                 \bar "|"
                 <BLANKLINE>
@@ -6352,23 +6364,23 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
+                            % GlobalSkips [measure 1]
                             \pageBreak                                                         %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %%! SEGMENT:LAYOUT
                             \autoPageBreaksOff                                                 %%! SEGMENT:LAYOUT
-                            \time 4/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            \time 4/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
+                            % GlobalSkips [measure 2]
                             \noBreak                                                           %%! SEGMENT:LAYOUT
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
+                            % GlobalSkips [measure 3]
                             \break                                                             %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %%! SEGMENT:LAYOUT
                             \newSpacingSection
@@ -6381,7 +6393,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 \set Staff.instrumentName = \markup { I+II }                   %%! EXPLICIT_MARGIN_MARKUP
                                 \set Staff.shortInstrumentName = \markup { I+II }              %%! EXPLICIT_MARGIN_MARKUP
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue) %%! EXPLICIT_MARGIN_MARKUP_COLOR
@@ -6427,7 +6439,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { I+II }              %%! EXPLICIT_REDRAW_MARGIN_MARKUP
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %%! EXPLICIT_REDRAW_INSTRUMENT_COLOR
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 \set Staff.instrumentName = \markup { I+II }                   %%! REDUNDANT_MARGIN_MARKUP
                                 \set Staff.shortInstrumentName = \markup { I+II }              %%! REDUNDANT_MARGIN_MARKUP
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %%! REDUNDANT_MARGIN_MARKUP_COLOR
@@ -6473,7 +6485,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { I+II }              %%! REDUNDANT_REDRAW_MARGIN_MARKUP
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %%! REDUNDANT_REDRAW_INSTRUMENT_COLOR
                 <BLANKLINE>
-                                %%% MusicVoice [measure 3] %%%
+                                % MusicVoice [measure 3]
                                 c'2
                                 \bar "|"
                 <BLANKLINE>
@@ -6531,18 +6543,18 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
+                            % GlobalSkips [measure 1]
                             \pageBreak                                                         %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (11))) %%! SEGMENT:LAYOUT
                             \autoPageBreaksOff                                                 %%! SEGMENT:LAYOUT
-                            \time 3/8
+                            \time 3/8                                                          %%! SM1
                             \mark #1
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
+                            % GlobalSkips [measure 2]
                             \break                                                             %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 20) (alignment-distances . (11))) %%! SEGMENT:LAYOUT
                             \newSpacingSection
@@ -6555,7 +6567,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 \set Staff.instrumentName = \markup { I+II }                   %%! REDUNDANT_MARGIN_MARKUP
                                 \set Staff.shortInstrumentName = \markup { I+II }              %%! REDUNDANT_MARGIN_MARKUP
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %%! REDUNDANT_MARGIN_MARKUP_COLOR
@@ -6601,7 +6613,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { I+II }              %%! REDUNDANT_REDRAW_MARGIN_MARKUP
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %%! REDUNDANT_REDRAW_INSTRUMENT_COLOR
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 c'4.
                                 \bar "|"
                 <BLANKLINE>
@@ -6672,29 +6684,29 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
+                            % GlobalSkips [measure 1]
+                            \time 4/8                                                          %%! SM1
                             \mark #1
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                    #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                    \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                        [A.1]                                                  %%! STAGE_NUMBER_MARKUP
-                                }                                                              %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                        [A.1]                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                }                                                              %%! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 2]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 4/8
+                            % GlobalSkips [measure 3]
+                            \time 4/8                                                          %%! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 4]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -6703,7 +6715,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 \set Staff.forceClef = ##t                                     %%! REAPPLIED_CLEF
                                 \clef "alto"                                                   %%! REAPPLIED_CLEF
                                 \once \override Staff.Clef.color = #(x11-color 'green4)        %%! REAPPLIED_CLEF_COLOR
@@ -6711,13 +6723,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                 R1 * 1/2
                                 \override Staff.Clef.color = #(x11-color 'OliveDrab)           %%! REAPPLIED_CLEF_COLOR_REDRAW
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 R1 * 3/8
                 <BLANKLINE>
-                                %%% MusicVoice [measure 3] %%%
+                                % MusicVoice [measure 3]
                                 R1 * 1/2
                 <BLANKLINE>
-                                %%% MusicVoice [measure 4] %%%
+                                % MusicVoice [measure 4]
                                 R1 * 3/8
                                 \bar "|"
                 <BLANKLINE>
@@ -6810,21 +6822,21 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 4/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             s1 * 1/2
                             ^ \markup {
                                 \column
                                     {
-                                        \line                                                  %%! STAGE_NUMBER_MARKUP
-                                            {                                                  %%! STAGE_NUMBER_MARKUP
-                                                \fontsize                                      %%! STAGE_NUMBER_MARKUP
-                                                    #-3                                        %%! STAGE_NUMBER_MARKUP
-                                                    \with-color                                %%! STAGE_NUMBER_MARKUP
-                                                        #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP
-                                                        [1]                                    %%! STAGE_NUMBER_MARKUP
-                                            }                                                  %%! STAGE_NUMBER_MARKUP
+                                        \line                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                            {                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                                \fontsize                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                                    #-3                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                                    \with-color                                %%! STAGE_NUMBER_MARKUP:SM3
+                                                        #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP:SM3
+                                                        [1]                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                            }                                                  %%! STAGE_NUMBER_MARKUP:SM3
                                         \line                                                  %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
                                             {                                                  %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
                                                 \with-color                                    %%! EXPLICIT_METRONOME_MARK_WITH_COLOR
@@ -6865,16 +6877,16 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%%         }                                                      %%! EXPLICIT_METRONOME_MARK
                             %%%     }                                                          %%! EXPLICIT_METRONOME_MARK
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 2]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 4/8
+                            % GlobalSkips [measure 3]
+                            \time 4/8                                                          %%! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 4]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -6884,7 +6896,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 1] %%%
+                                    % MusicVoice [measure 1]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -6897,7 +6909,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
+                                    % MusicVoice [measure 2]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -6908,7 +6920,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 3] %%%
+                                    % MusicVoice [measure 3]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -6921,7 +6933,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 4] %%%
+                                    % MusicVoice [measure 4]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -6999,11 +7011,11 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
+                            % GlobalSkips [measure 1]
                             \pageBreak                                                         %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (8))) %%! SEGMENT:LAYOUT
                             \autoPageBreaksOff                                                 %%! SEGMENT:LAYOUT
-                            \time 3/8
+                            \time 3/8                                                          %%! SM1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/8
@@ -7050,7 +7062,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 c'4.
                                 \bar "|"
                 <BLANKLINE>
@@ -7105,11 +7117,11 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
+                            % GlobalSkips [measure 1]
                             \pageBreak                                                         %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (8))) %%! SEGMENT:LAYOUT
                             \autoPageBreaksOff                                                 %%! SEGMENT:LAYOUT
-                            \time 3/8
+                            \time 3/8                                                          %%! SM1
                             \mark #1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
@@ -7157,7 +7169,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 c'4.
                                 \bar "|"
                 <BLANKLINE>
@@ -7210,11 +7222,11 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
+                            % GlobalSkips [measure 1]
                             \pageBreak                                                         %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (8))) %%! SEGMENT:LAYOUT
                             \autoPageBreaksOff                                                 %%! SEGMENT:LAYOUT
-                            \time 3/8
+                            \time 3/8                                                          %%! SM1
                             \mark #1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
@@ -7262,7 +7274,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 c'4.
                                 \bar "|"
                 <BLANKLINE>
@@ -7309,11 +7321,11 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
+                            % GlobalSkips [measure 1]
                             \pageBreak                                                         %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (8))) %%! SEGMENT:LAYOUT
                             \autoPageBreaksOff                                                 %%! SEGMENT:LAYOUT
-                            \time 3/8
+                            \time 3/8                                                          %%! SM1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
                             s1 * 3/8
@@ -7354,7 +7366,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%%         }                                                      %%! EXPLICIT_METRONOME_MARK
                             %%%     }                                                          %%! EXPLICIT_METRONOME_MARK
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
+                            % GlobalSkips [measure 2]
                             \noBreak                                                           %%! SEGMENT:LAYOUT
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
@@ -7402,10 +7414,10 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 c'4.
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 c'4.
                                 \bar "|"
                 <BLANKLINE>
@@ -7460,11 +7472,11 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
+                            % GlobalSkips [measure 1]
                             \pageBreak                                                         %%! SEGMENT:LAYOUT
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details #'((Y-offset . 0) (alignment-distances . (8))) %%! SEGMENT:LAYOUT
                             \autoPageBreaksOff                                                 %%! SEGMENT:LAYOUT
-                            \time 3/8
+                            \time 3/8                                                          %%! SM1
                             \mark #1
                             \newSpacingSection
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %%! SEGMENT:SPACING
@@ -7512,7 +7524,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 c'4.
                                 \bar "|"
                 <BLANKLINE>
@@ -7665,28 +7677,28 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 4/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                    #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                    \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                        [1]                                                    %%! STAGE_NUMBER_MARKUP
-                                }                                                              %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                        [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                }                                                              %%! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 2]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 4/8
+                            % GlobalSkips [measure 3]
+                            \time 4/8                                                          %%! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 4]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -7695,16 +7707,16 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 R1 * 1/2
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 R1 * 3/8
                 <BLANKLINE>
-                                %%% MusicVoice [measure 3] %%%
+                                % MusicVoice [measure 3]
                                 R1 * 1/2
                 <BLANKLINE>
-                                %%% MusicVoice [measure 4] %%%
+                                % MusicVoice [measure 4]
                                 R1 * 3/8
                                 \bar "|"
                 <BLANKLINE>
@@ -7733,28 +7745,28 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 4/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                    #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                    \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                        [1]                                                    %%! STAGE_NUMBER_MARKUP
-                                }                                                              %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                        [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                }                                                              %%! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 2]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 4/8
+                            % GlobalSkips [measure 3]
+                            \time 4/8                                                          %%! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 4]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -7763,16 +7775,16 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 s1 * 1/2
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 s1 * 3/8
                 <BLANKLINE>
-                                %%% MusicVoice [measure 3] %%%
+                                % MusicVoice [measure 3]
                                 s1 * 1/2
                 <BLANKLINE>
-                                %%% MusicVoice [measure 4] %%%
+                                % MusicVoice [measure 4]
                                 s1 * 3/8
                                 \bar "|"
                 <BLANKLINE>
@@ -7847,28 +7859,28 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 4/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                    #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                    \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                        [intermezzo.1]                                         %%! STAGE_NUMBER_MARKUP
-                                }                                                              %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                        [intermezzo.1]                                         %%! STAGE_NUMBER_MARKUP:SM3
+                                }                                                              %%! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 2]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 4/8
+                            % GlobalSkips [measure 3]
+                            \time 4/8                                                          %%! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 4]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -7878,7 +7890,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 1] %%%
+                                    % MusicVoice [measure 1]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -7891,7 +7903,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
+                                    % MusicVoice [measure 2]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -7902,7 +7914,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 3] %%%
+                                    % MusicVoice [measure 3]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -7915,7 +7927,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 4] %%%
+                                    % MusicVoice [measure 4]
                                     c'8
                                     [
                 <BLANKLINE>
@@ -7982,28 +7994,28 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 4/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                    #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                    \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                        [1]                                                    %%! STAGE_NUMBER_MARKUP
-                                }                                                              %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                        [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                }                                                              %%! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 2]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 4/8
+                            % GlobalSkips [measure 3]
+                            \time 4/8                                                          %%! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 4]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -8013,7 +8025,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 1] %%%
+                                    % MusicVoice [measure 1]
                                     \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %%! EXPLICIT_INSTRUMENT
                                     \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %%! EXPLICIT_INSTRUMENT
                                     \once \override Staff.InstrumentName.color = #(x11-color 'blue) %%! EXPLICIT_INSTRUMENT_COLOR
@@ -8069,7 +8081,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
+                                    % MusicVoice [measure 2]
                                     fs'8
                                     [
                 <BLANKLINE>
@@ -8080,7 +8092,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 3] %%%
+                                    % MusicVoice [measure 3]
                                     g'8
                                     [
                 <BLANKLINE>
@@ -8093,7 +8105,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 4] %%%
+                                    % MusicVoice [measure 4]
                                     g'8
                                     [
                 <BLANKLINE>
@@ -8138,28 +8150,28 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 4/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                    #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                    \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                        [1]                                                    %%! STAGE_NUMBER_MARKUP
-                                }                                                              %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                        [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                }                                                              %%! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 2]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 4/8
+                            % GlobalSkips [measure 3]
+                            \time 4/8                                                          %%! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 4]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -8169,7 +8181,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 1] %%%
+                                    % MusicVoice [measure 1]
                                     \set Staff.instrumentName = \markup { "Clarinet in B-flat" } %%! EXPLICIT_INSTRUMENT
                                     \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" } %%! EXPLICIT_INSTRUMENT
                                     \once \override Staff.InstrumentName.color = #(x11-color 'blue) %%! EXPLICIT_INSTRUMENT_COLOR
@@ -8225,7 +8237,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 2] %%%
+                                    % MusicVoice [measure 2]
                                     e'8
                                     [
                 <BLANKLINE>
@@ -8236,7 +8248,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 3] %%%
+                                    % MusicVoice [measure 3]
                                     f'8
                                     [
                 <BLANKLINE>
@@ -8249,7 +8261,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }
                                 {
                 <BLANKLINE>
-                                    %%% MusicVoice [measure 4] %%%
+                                    % MusicVoice [measure 4]
                                     f'8
                                     [
                 <BLANKLINE>

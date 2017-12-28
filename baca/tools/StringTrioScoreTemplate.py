@@ -24,28 +24,28 @@ class StringTrioScoreTemplate(ScoreTemplate):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        %%% GlobalSkips [measure 1] %%%
-                        \time 4/8
-                        \bar ""                                                            %%! EMPTY_START_BAR
+                        % GlobalSkips [measure 1]
+                        \time 4/8                                                          %%! SM1
+                        \bar ""                                                            %%! EMPTY_START_BAR:SM2
                         s1 * 1/2
-                        ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                            \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                    #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                    [1]                                                    %%! STAGE_NUMBER_MARKUP
-                            }                                                              %%! STAGE_NUMBER_MARKUP
+                        ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                            \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                    #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                    [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                            }                                                              %%! STAGE_NUMBER_MARKUP:SM3
             <BLANKLINE>
-                        %%% GlobalSkips [measure 2] %%%
-                        \time 3/8
+                        % GlobalSkips [measure 2]
+                        \time 3/8                                                          %%! SM1
                         s1 * 3/8
             <BLANKLINE>
-                        %%% GlobalSkips [measure 3] %%%
-                        \time 4/8
+                        % GlobalSkips [measure 3]
+                        \time 4/8                                                          %%! SM1
                         s1 * 1/2
             <BLANKLINE>
-                        %%% GlobalSkips [measure 4] %%%
-                        \time 3/8
+                        % GlobalSkips [measure 4]
+                        \time 3/8                                                          %%! SM1
                         s1 * 3/8
             <BLANKLINE>
                     }
@@ -56,7 +56,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
                         \context ViolinMusicStaff = "ViolinMusicStaff" {
                             \context ViolinMusicVoice = "ViolinMusicVoice" {
             <BLANKLINE>
-                                %%% ViolinMusicVoice [measure 1] %%%
+                                % ViolinMusicVoice [measure 1]
                                 \set ViolinMusicStaff.instrumentName = \markup {           %%! DEFAULT_INSTRUMENT
                                     \hcenter-in                                            %%! DEFAULT_INSTRUMENT
                                         #10                                                %%! DEFAULT_INSTRUMENT
@@ -131,13 +131,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'violet) %%! DEFAULT_REDRAW_INSTRUMENT_COLOR
                                 \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %%! DEFAULT_CLEF_COLOR_REDRAW
             <BLANKLINE>
-                                %%% ViolinMusicVoice [measure 2] %%%
+                                % ViolinMusicVoice [measure 2]
                                 R1 * 3/8
             <BLANKLINE>
-                                %%% ViolinMusicVoice [measure 3] %%%
+                                % ViolinMusicVoice [measure 3]
                                 R1 * 1/2
             <BLANKLINE>
-                                %%% ViolinMusicVoice [measure 4] %%%
+                                % ViolinMusicVoice [measure 4]
                                 R1 * 3/8
                                 \bar "|"
             <BLANKLINE>
@@ -147,7 +147,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
                         \context ViolaMusicStaff = "ViolaMusicStaff" {
                             \context ViolaMusicVoice = "ViolaMusicVoice" {
             <BLANKLINE>
-                                %%% ViolaMusicVoice [measure 1] %%%
+                                % ViolaMusicVoice [measure 1]
                                 \set ViolaMusicStaff.instrumentName = \markup {            %%! DEFAULT_INSTRUMENT
                                     \hcenter-in                                            %%! DEFAULT_INSTRUMENT
                                         #10                                                %%! DEFAULT_INSTRUMENT
@@ -222,13 +222,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'violet) %%! DEFAULT_REDRAW_INSTRUMENT_COLOR
                                 \override ViolaMusicStaff.Clef.color = #(x11-color 'violet) %%! DEFAULT_CLEF_COLOR_REDRAW
             <BLANKLINE>
-                                %%% ViolaMusicVoice [measure 2] %%%
+                                % ViolaMusicVoice [measure 2]
                                 R1 * 3/8
             <BLANKLINE>
-                                %%% ViolaMusicVoice [measure 3] %%%
+                                % ViolaMusicVoice [measure 3]
                                 R1 * 1/2
             <BLANKLINE>
-                                %%% ViolaMusicVoice [measure 4] %%%
+                                % ViolaMusicVoice [measure 4]
                                 R1 * 3/8
                                 \bar "|"
             <BLANKLINE>
@@ -238,7 +238,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
                         \context CelloMusicStaff = "CelloMusicStaff" {
                             \context CelloMusicVoice = "CelloMusicVoice" {
             <BLANKLINE>
-                                %%% CelloMusicVoice [measure 1] %%%
+                                % CelloMusicVoice [measure 1]
                                 \set CelloMusicStaff.instrumentName = \markup {            %%! DEFAULT_INSTRUMENT
                                     \hcenter-in                                            %%! DEFAULT_INSTRUMENT
                                         #10                                                %%! DEFAULT_INSTRUMENT
@@ -313,13 +313,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 \override CelloMusicStaff.InstrumentName.color = #(x11-color 'violet) %%! DEFAULT_REDRAW_INSTRUMENT_COLOR
                                 \override CelloMusicStaff.Clef.color = #(x11-color 'violet) %%! DEFAULT_CLEF_COLOR_REDRAW
             <BLANKLINE>
-                                %%% CelloMusicVoice [measure 2] %%%
+                                % CelloMusicVoice [measure 2]
                                 R1 * 3/8
             <BLANKLINE>
-                                %%% CelloMusicVoice [measure 3] %%%
+                                % CelloMusicVoice [measure 3]
                                 R1 * 1/2
             <BLANKLINE>
-                                %%% CelloMusicVoice [measure 4] %%%
+                                % CelloMusicVoice [measure 4]
                                 R1 * 3/8
                                 \bar "|"
             <BLANKLINE>

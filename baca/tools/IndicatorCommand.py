@@ -105,28 +105,28 @@ class IndicatorCommand(Command):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        %%% GlobalSkips [measure 1] %%%
-                        \time 4/8
-                        \bar ""                                                            %%! EMPTY_START_BAR
+                        % GlobalSkips [measure 1]
+                        \time 4/8                                                          %%! SM1
+                        \bar ""                                                            %%! EMPTY_START_BAR:SM2
                         s1 * 1/2
-                        ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                            \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                    #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                    [1]                                                    %%! STAGE_NUMBER_MARKUP
-                            }                                                              %%! STAGE_NUMBER_MARKUP
+                        ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                            \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                    #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                    [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                            }                                                              %%! STAGE_NUMBER_MARKUP:SM3
             <BLANKLINE>
-                        %%% GlobalSkips [measure 2] %%%
-                        \time 3/8
+                        % GlobalSkips [measure 2]
+                        \time 3/8                                                          %%! SM1
                         s1 * 3/8
             <BLANKLINE>
-                        %%% GlobalSkips [measure 3] %%%
-                        \time 4/8
+                        % GlobalSkips [measure 3]
+                        \time 4/8                                                          %%! SM1
                         s1 * 1/2
             <BLANKLINE>
-                        %%% GlobalSkips [measure 4] %%%
-                        \time 3/8
+                        % GlobalSkips [measure 4]
+                        \time 3/8                                                          %%! SM1
                         s1 * 3/8
             <BLANKLINE>
                     }
@@ -136,7 +136,7 @@ class IndicatorCommand(Command):
                         \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 e'8
                                 \fermata
                                 [
@@ -153,7 +153,7 @@ class IndicatorCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 g'8
                                 \fermata
                                 [
@@ -167,7 +167,7 @@ class IndicatorCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 3] %%%
+                                % MusicVoice [measure 3]
                                 d''8
                                 \fermata
                                 [
@@ -184,7 +184,7 @@ class IndicatorCommand(Command):
                             }
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 4] %%%
+                                % MusicVoice [measure 4]
                                 f''8
                                 \fermata
                                 [
@@ -210,6 +210,7 @@ class IndicatorCommand(Command):
     __slots__ = (
         '_context',
         '_indicators',
+        '_site',
         '_tag',
         )
 
@@ -220,6 +221,7 @@ class IndicatorCommand(Command):
         context=None,
         indicators=None,
         selector='baca.pheads()',
+        site=None,
         tag=None,
         ):
         Command.__init__(self, selector=selector)
@@ -232,6 +234,9 @@ class IndicatorCommand(Command):
             else:
                 indicators = abjad.CyclicTuple([indicators])
         self._indicators = indicators
+        if site is not None:
+            assert isinstance(site, str), repr(site)
+        self._site = site
         if tag is not None:
             assert isinstance(tag, str), repr(tag)
         self._tag = tag
@@ -259,6 +264,7 @@ class IndicatorCommand(Command):
                     indicator,
                     leaf,
                     context=self.context,
+                    site=self.site,
                     tag=self.tag,
                     )
 
@@ -437,6 +443,14 @@ class IndicatorCommand(Command):
         Returns indicators or none.
         '''
         return self._indicators
+
+    @property
+    def site(self):
+        r'''Gets site.
+
+        Returns string or none.
+        '''
+        return self._site
 
     @property
     def tag(self):

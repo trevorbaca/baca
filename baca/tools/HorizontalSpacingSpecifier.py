@@ -34,28 +34,28 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        %%% GlobalSkips [measure 1] %%%
-                        \time 8/16
-                        \bar ""                                                            %%! EMPTY_START_BAR
+                        % GlobalSkips [measure 1]
+                        \time 8/16                                                         %%! SM1
+                        \bar ""                                                            %%! EMPTY_START_BAR:SM2
                         s1 * 1/2
-                        ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                            \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                    #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                    [1]                                                    %%! STAGE_NUMBER_MARKUP
-                            }                                                              %%! STAGE_NUMBER_MARKUP
+                        ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                            \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                    #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                    [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                            }                                                              %%! STAGE_NUMBER_MARKUP:SM3
             <BLANKLINE>
-                        %%% GlobalSkips [measure 2] %%%
-                        \time 4/8
-                        s1 * 1/2
-            <BLANKLINE>
-                        %%% GlobalSkips [measure 3] %%%
-                        \time 2/4
+                        % GlobalSkips [measure 2]
+                        \time 4/8                                                          %%! SM1
                         s1 * 1/2
             <BLANKLINE>
-                        %%% GlobalSkips [measure 4] %%%
-                        \time 1/2
+                        % GlobalSkips [measure 3]
+                        \time 2/4                                                          %%! SM1
+                        s1 * 1/2
+            <BLANKLINE>
+                        % GlobalSkips [measure 4]
+                        \time 1/2                                                          %%! SM1
                         s1 * 1/2
             <BLANKLINE>
                     }
@@ -65,7 +65,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 e'16
                                 [
             <BLANKLINE>
@@ -86,7 +86,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 e'8
                                 [
             <BLANKLINE>
@@ -99,14 +99,14 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 3] %%%
+                                % MusicVoice [measure 3]
                                 e'4
             <BLANKLINE>
                                 f'4
                             }
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 4] %%%
+                                % MusicVoice [measure 4]
                                 e'2
                                 \bar "|"
             <BLANKLINE>
@@ -144,23 +144,23 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        %%% GlobalSkips [measure 1] %%%
-                        \time 8/16
-                        \bar ""                                                            %%! EMPTY_START_BAR
+                        % GlobalSkips [measure 1]
+                        \time 8/16                                                         %%! SM1
+                        \bar ""                                                            %%! EMPTY_START_BAR:SM2
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)   %%! SEGMENT:SPACING
                         s1 * 1/2
                         ^ \markup {
                             \column
                                 {
-                                    \line                                                  %%! STAGE_NUMBER_MARKUP
-                                        {                                                  %%! STAGE_NUMBER_MARKUP
-                                            \fontsize                                      %%! STAGE_NUMBER_MARKUP
-                                                #-3                                        %%! STAGE_NUMBER_MARKUP
-                                                \with-color                                %%! STAGE_NUMBER_MARKUP
-                                                    #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP
-                                                    [1]                                    %%! STAGE_NUMBER_MARKUP
-                                        }                                                  %%! STAGE_NUMBER_MARKUP
+                                    \line                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                        {                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                            \fontsize                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                                #-3                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                                \with-color                                %%! STAGE_NUMBER_MARKUP:SM3
+                                                    #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP:SM3
+                                                    [1]                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                        }                                                  %%! STAGE_NUMBER_MARKUP:SM3
                                     \line                                                  %%! SEGMENT:SPACING_MARKUP
                                         {                                                  %%! SEGMENT:SPACING_MARKUP
                                             \with-color                                    %%! SEGMENT:SPACING_MARKUP
@@ -172,8 +172,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 }
                             }
             <BLANKLINE>
-                        %%% GlobalSkips [measure 2] %%%
-                        \time 4/8
+                        % GlobalSkips [measure 2]
+                        \time 4/8                                                          %%! SM1
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)    %%! SEGMENT:SPACING
                         s1 * 1/2
@@ -185,8 +185,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                     (1/8)                                                  %%! SEGMENT:SPACING_MARKUP
                             }                                                              %%! SEGMENT:SPACING_MARKUP
             <BLANKLINE>
-                        %%% GlobalSkips [measure 3] %%%
-                        \time 2/4
+                        % GlobalSkips [measure 3]
+                        \time 2/4                                                          %%! SM1
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)    %%! SEGMENT:SPACING
                         s1 * 1/2
@@ -198,8 +198,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                     (1/4)                                                  %%! SEGMENT:SPACING_MARKUP
                             }                                                              %%! SEGMENT:SPACING_MARKUP
             <BLANKLINE>
-                        %%% GlobalSkips [measure 4] %%%
-                        \time 1/2
+                        % GlobalSkips [measure 4]
+                        \time 1/2                                                          %%! SM1
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 2)    %%! SEGMENT:SPACING
                         s1 * 1/2
@@ -218,7 +218,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 e'16
                                 [
             <BLANKLINE>
@@ -239,7 +239,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 e'8
                                 [
             <BLANKLINE>
@@ -252,14 +252,14 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 3] %%%
+                                % MusicVoice [measure 3]
                                 e'4
             <BLANKLINE>
                                 f'4
                             }
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 4] %%%
+                                % MusicVoice [measure 4]
                                 e'2
                                 \bar "|"
             <BLANKLINE>
@@ -299,23 +299,23 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        %%% GlobalSkips [measure 1] %%%
-                        \time 8/16
-                        \bar ""                                                            %%! EMPTY_START_BAR
+                        % GlobalSkips [measure 1]
+                        \time 8/16                                                         %%! SM1
+                        \bar ""                                                            %%! EMPTY_START_BAR:SM2
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)   %%! SEGMENT:SPACING
                         s1 * 1/2
                         ^ \markup {
                             \column
                                 {
-                                    \line                                                  %%! STAGE_NUMBER_MARKUP
-                                        {                                                  %%! STAGE_NUMBER_MARKUP
-                                            \fontsize                                      %%! STAGE_NUMBER_MARKUP
-                                                #-3                                        %%! STAGE_NUMBER_MARKUP
-                                                \with-color                                %%! STAGE_NUMBER_MARKUP
-                                                    #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP
-                                                    [1]                                    %%! STAGE_NUMBER_MARKUP
-                                        }                                                  %%! STAGE_NUMBER_MARKUP
+                                    \line                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                        {                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                            \fontsize                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                                #-3                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                                \with-color                                %%! STAGE_NUMBER_MARKUP:SM3
+                                                    #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP:SM3
+                                                    [1]                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                        }                                                  %%! STAGE_NUMBER_MARKUP:SM3
                                     \line                                                  %%! SEGMENT:SPACING_MARKUP
                                         {                                                  %%! SEGMENT:SPACING_MARKUP
                                             \with-color                                    %%! SEGMENT:SPACING_MARKUP
@@ -327,8 +327,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 }
                             }
             <BLANKLINE>
-                        %%% GlobalSkips [measure 2] %%%
-                        \time 4/8
+                        % GlobalSkips [measure 2]
+                        \time 4/8                                                          %%! SM1
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)    %%! SEGMENT:SPACING
                         s1 * 1/2
@@ -340,8 +340,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                     (1/8)                                                  %%! SEGMENT:SPACING_MARKUP
                             }                                                              %%! SEGMENT:SPACING_MARKUP
             <BLANKLINE>
-                        %%% GlobalSkips [measure 3] %%%
-                        \time 2/4
+                        % GlobalSkips [measure 3]
+                        \time 2/4                                                          %%! SM1
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)    %%! SEGMENT:SPACING
                         s1 * 1/2
@@ -353,8 +353,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                     (1/4)                                                  %%! SEGMENT:SPACING_MARKUP
                             }                                                              %%! SEGMENT:SPACING_MARKUP
             <BLANKLINE>
-                        %%% GlobalSkips [measure 4] %%%
-                        \time 1/2
+                        % GlobalSkips [measure 4]
+                        \time 1/2                                                          %%! SM1
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 2)    %%! SEGMENT:SPACING
                         s1 * 1/2
@@ -373,7 +373,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 e'16
                                 [
             <BLANKLINE>
@@ -394,7 +394,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 e'8
                                 [
             <BLANKLINE>
@@ -407,14 +407,14 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 3] %%%
+                                % MusicVoice [measure 3]
                                 e'4
             <BLANKLINE>
                                 f'4
                             }
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 4] %%%
+                                % MusicVoice [measure 4]
                                 e'2
                                 \bar "|"
             <BLANKLINE>
@@ -455,23 +455,23 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        %%% GlobalSkips [measure 1] %%%
-                        \time 8/16
-                        \bar ""                                                            %%! EMPTY_START_BAR
+                        % GlobalSkips [measure 1]
+                        \time 8/16                                                         %%! SM1
+                        \bar ""                                                            %%! EMPTY_START_BAR:SM2
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)   %%! SEGMENT:SPACING
                         s1 * 1/2
                         ^ \markup {
                             \column
                                 {
-                                    \line                                                  %%! STAGE_NUMBER_MARKUP
-                                        {                                                  %%! STAGE_NUMBER_MARKUP
-                                            \fontsize                                      %%! STAGE_NUMBER_MARKUP
-                                                #-3                                        %%! STAGE_NUMBER_MARKUP
-                                                \with-color                                %%! STAGE_NUMBER_MARKUP
-                                                    #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP
-                                                    [1]                                    %%! STAGE_NUMBER_MARKUP
-                                        }                                                  %%! STAGE_NUMBER_MARKUP
+                                    \line                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                        {                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                            \fontsize                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                                #-3                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                                \with-color                                %%! STAGE_NUMBER_MARKUP:SM3
+                                                    #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP:SM3
+                                                    [1]                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                        }                                                  %%! STAGE_NUMBER_MARKUP:SM3
                                     \line                                                  %%! SEGMENT:SPACING_MARKUP
                                         {                                                  %%! SEGMENT:SPACING_MARKUP
                                             \with-color                                    %%! SEGMENT:SPACING_MARKUP
@@ -483,8 +483,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 }
                             }
             <BLANKLINE>
-                        %%% GlobalSkips [measure 2] %%%
-                        \time 4/8
+                        % GlobalSkips [measure 2]
+                        \time 4/8                                                          %%! SM1
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)   %%! SEGMENT:SPACING
                         s1 * 1/2
@@ -496,8 +496,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                     (1/16)                                                 %%! SEGMENT:SPACING_MARKUP
                             }                                                              %%! SEGMENT:SPACING_MARKUP
             <BLANKLINE>
-                        %%% GlobalSkips [measure 3] %%%
-                        \time 2/4
+                        % GlobalSkips [measure 3]
+                        \time 2/4                                                          %%! SM1
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 8)    %%! SEGMENT:SPACING
                         s1 * 1/2
@@ -509,8 +509,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                     (1/8)                                                  %%! SEGMENT:SPACING_MARKUP
                             }                                                              %%! SEGMENT:SPACING_MARKUP
             <BLANKLINE>
-                        %%% GlobalSkips [measure 4] %%%
-                        \time 1/2
+                        % GlobalSkips [measure 4]
+                        \time 1/2                                                          %%! SM1
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 4)    %%! SEGMENT:SPACING
                         s1 * 1/2
@@ -529,7 +529,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 e'16
                                 [
             <BLANKLINE>
@@ -550,7 +550,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 e'8
                                 [
             <BLANKLINE>
@@ -563,14 +563,14 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 3] %%%
+                                % MusicVoice [measure 3]
                                 e'4
             <BLANKLINE>
                                 f'4
                             }
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 4] %%%
+                                % MusicVoice [measure 4]
                                 e'2
                                 \bar "|"
             <BLANKLINE>
@@ -612,23 +612,23 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        %%% GlobalSkips [measure 1] %%%
-                        \time 8/16
-                        \bar ""                                                            %%! EMPTY_START_BAR
+                        % GlobalSkips [measure 1]
+                        \time 8/16                                                         %%! SM1
+                        \bar ""                                                            %%! EMPTY_START_BAR:SM2
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 32)   %%! SEGMENT:SPACING
                         s1 * 1/2
                         ^ \markup {
                             \column
                                 {
-                                    \line                                                  %%! STAGE_NUMBER_MARKUP
-                                        {                                                  %%! STAGE_NUMBER_MARKUP
-                                            \fontsize                                      %%! STAGE_NUMBER_MARKUP
-                                                #-3                                        %%! STAGE_NUMBER_MARKUP
-                                                \with-color                                %%! STAGE_NUMBER_MARKUP
-                                                    #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP
-                                                    [1]                                    %%! STAGE_NUMBER_MARKUP
-                                        }                                                  %%! STAGE_NUMBER_MARKUP
+                                    \line                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                        {                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                            \fontsize                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                                #-3                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                                \with-color                                %%! STAGE_NUMBER_MARKUP:SM3
+                                                    #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP:SM3
+                                                    [1]                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                        }                                                  %%! STAGE_NUMBER_MARKUP:SM3
                                     \line                                                  %%! SEGMENT:SPACING_MARKUP
                                         {                                                  %%! SEGMENT:SPACING_MARKUP
                                             \with-color                                    %%! SEGMENT:SPACING_MARKUP
@@ -640,8 +640,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 }
                             }
             <BLANKLINE>
-                        %%% GlobalSkips [measure 2] %%%
-                        \time 4/8
+                        % GlobalSkips [measure 2]
+                        \time 4/8                                                          %%! SM1
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)   %%! SEGMENT:SPACING
                         s1 * 1/2
@@ -653,8 +653,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                     (1/16)                                                 %%! SEGMENT:SPACING_MARKUP
                             }                                                              %%! SEGMENT:SPACING_MARKUP
             <BLANKLINE>
-                        %%% GlobalSkips [measure 3] %%%
-                        \time 2/4
+                        % GlobalSkips [measure 3]
+                        \time 2/4                                                          %%! SM1
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)   %%! SEGMENT:SPACING
                         s1 * 1/2
@@ -666,8 +666,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                     (1/16)                                                 %%! SEGMENT:SPACING_MARKUP
                             }                                                              %%! SEGMENT:SPACING_MARKUP
             <BLANKLINE>
-                        %%% GlobalSkips [measure 4] %%%
-                        \time 1/2
+                        % GlobalSkips [measure 4]
+                        \time 1/2                                                          %%! SM1
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)   %%! SEGMENT:SPACING
                         s1 * 1/2
@@ -686,7 +686,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \context Voice = "MusicVoice" {
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 e'16
                                 [
             <BLANKLINE>
@@ -707,7 +707,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 e'8
                                 [
             <BLANKLINE>
@@ -720,14 +720,14 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                             }
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 3] %%%
+                                % MusicVoice [measure 3]
                                 e'4
             <BLANKLINE>
                                 f'4
                             }
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 4] %%%
+                                % MusicVoice [measure 4]
                                 e'2
                                 \bar "|"
             <BLANKLINE>
@@ -779,23 +779,23 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        %%% GlobalSkips [measure 1] %%%
-                        \time 4/8
-                        \bar ""                                                            %%! EMPTY_START_BAR
+                        % GlobalSkips [measure 1]
+                        \time 4/8                                                          %%! SM1
+                        \bar ""                                                            %%! EMPTY_START_BAR:SM2
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)   %%! SEGMENT:SPACING
                         s1 * 1/2
                         ^ \markup {
                             \column
                                 {
-                                    \line                                                  %%! STAGE_NUMBER_MARKUP
-                                        {                                                  %%! STAGE_NUMBER_MARKUP
-                                            \fontsize                                      %%! STAGE_NUMBER_MARKUP
-                                                #-3                                        %%! STAGE_NUMBER_MARKUP
-                                                \with-color                                %%! STAGE_NUMBER_MARKUP
-                                                    #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP
-                                                    [1]                                    %%! STAGE_NUMBER_MARKUP
-                                        }                                                  %%! STAGE_NUMBER_MARKUP
+                                    \line                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                        {                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                            \fontsize                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                                #-3                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                                \with-color                                %%! STAGE_NUMBER_MARKUP:SM3
+                                                    #(x11-color 'DarkCyan)                 %%! STAGE_NUMBER_MARKUP:SM3
+                                                    [1]                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                        }                                                  %%! STAGE_NUMBER_MARKUP:SM3
                                     \line                                                  %%! SEGMENT:SPACING_MARKUP
                                         {                                                  %%! SEGMENT:SPACING_MARKUP
                                             \with-color                                    %%! SEGMENT:SPACING_MARKUP
@@ -807,8 +807,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 }
                             }
             <BLANKLINE>
-                        %%% GlobalSkips [measure 2] %%%
-                        \time 3/8
+                        % GlobalSkips [measure 2]
+                        \time 3/8                                                          %%! SM1
                         \newSpacingSection
                         \set Score.proportionalNotationDuration = #(ly:make-moment 1 16)   %%! SEGMENT:SPACING
                         s1 * 3/8
@@ -857,7 +857,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 }
                             \times 1/1 {
             <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 \once \override Beam.grow-direction = #right
                                 e'16 * 63/32
                                 [
@@ -906,7 +906,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 }
                             \times 1/1 {
             <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 \once \override Beam.grow-direction = #right
                                 e'16 * 117/64
                                 [

@@ -46,28 +46,28 @@ class LibraryTZ(abjad.AbjadObject):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        %%% GlobalSkips [measure 1] %%%
-                        \time 4/8
-                        \bar ""                                                            %%! EMPTY_START_BAR
+                        % GlobalSkips [measure 1]
+                        \time 4/8                                                          %%! SM1
+                        \bar ""                                                            %%! EMPTY_START_BAR:SM2
                         s1 * 1/2
-                        ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                            \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                    #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                    [1]                                                    %%! STAGE_NUMBER_MARKUP
-                            }                                                              %%! STAGE_NUMBER_MARKUP
+                        ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                            \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                    #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                    [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                            }                                                              %%! STAGE_NUMBER_MARKUP:SM3
             <BLANKLINE>
-                        %%% GlobalSkips [measure 2] %%%
-                        \time 3/8
+                        % GlobalSkips [measure 2]
+                        \time 3/8                                                          %%! SM1
                         s1 * 3/8
             <BLANKLINE>
-                        %%% GlobalSkips [measure 3] %%%
-                        \time 4/8
+                        % GlobalSkips [measure 3]
+                        \time 4/8                                                          %%! SM1
                         s1 * 1/2
             <BLANKLINE>
-                        %%% GlobalSkips [measure 4] %%%
-                        \time 3/8
+                        % GlobalSkips [measure 4]
+                        \time 3/8                                                          %%! SM1
                         s1 * 3/8
             <BLANKLINE>
                     }
@@ -78,19 +78,19 @@ class LibraryTZ(abjad.AbjadObject):
                             \tag ViolinI
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 e'2
             <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 f'4.
                             }
                             \tag ViolinI.ViolinII
                             {
             <BLANKLINE>
-                                %%% MusicVoice [measure 3] %%%
+                                % MusicVoice [measure 3]
                                 e'2
             <BLANKLINE>
-                                %%% MusicVoice [measure 4] %%%
+                                % MusicVoice [measure 4]
                                 f'4.
                                 \bar "|"
             <BLANKLINE>
@@ -1924,28 +1924,28 @@ class LibraryTZ(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 4/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                    #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                    \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                        [1]                                                    %%! STAGE_NUMBER_MARKUP
-                                }                                                              %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                        [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                }                                                              %%! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 2]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 4/8
+                            % GlobalSkips [measure 3]
+                            \time 4/8                                                          %%! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 4]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -1954,7 +1954,7 @@ class LibraryTZ(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 \override Score.BarLine.transparent = ##t
                                 e'8
                                 [
@@ -1966,7 +1966,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 r8
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 e''8
                                 [
                 <BLANKLINE>
@@ -1975,7 +1975,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 f''8
                                 ]
                 <BLANKLINE>
-                                %%% MusicVoice [measure 3] %%%
+                                % MusicVoice [measure 3]
                                 r8
                 <BLANKLINE>
                                 e'8
@@ -1986,7 +1986,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 f'8
                                 ]
                 <BLANKLINE>
-                                %%% MusicVoice [measure 4] %%%
+                                % MusicVoice [measure 4]
                                 r8
                 <BLANKLINE>
                                 e''8
@@ -2035,28 +2035,28 @@ class LibraryTZ(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 4/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                    #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                    \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                        [1]                                                    %%! STAGE_NUMBER_MARKUP
-                                }                                                              %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                        [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                }                                                              %%! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 2] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 2]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 3] %%%
-                            \time 4/8
+                            % GlobalSkips [measure 3]
+                            \time 4/8                                                          %%! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 4]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -2065,7 +2065,7 @@ class LibraryTZ(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 e'8
                                 [
                 <BLANKLINE>
@@ -2076,7 +2076,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 r8
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 \override Score.BarLine.transparent = ##t
                                 e''8
                                 [
@@ -2087,7 +2087,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 ]
                                 \revert Score.BarLine.transparent
                 <BLANKLINE>
-                                %%% MusicVoice [measure 3] %%%
+                                % MusicVoice [measure 3]
                                 r8
                 <BLANKLINE>
                                 e'8
@@ -2098,7 +2098,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 f'8
                                 ]
                 <BLANKLINE>
-                                %%% MusicVoice [measure 4] %%%
+                                % MusicVoice [measure 4]
                                 r8
                 <BLANKLINE>
                                 e''8
@@ -4071,31 +4071,31 @@ class LibraryTZ(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 4/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                    #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                    \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                        [1]                                                    %%! STAGE_NUMBER_MARKUP
-                                }                                                              %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                        [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                }                                                              %%! STAGE_NUMBER_MARKUP:SM3
                             \repeat volta 2
                             {
                 <BLANKLINE>
-                                %%% GlobalSkips [measure 2] %%%
-                                \time 3/8
+                                % GlobalSkips [measure 2]
+                                \time 3/8                                                      %%! SM1
                                 s1 * 3/8
                 <BLANKLINE>
-                                %%% GlobalSkips [measure 3] %%%
-                                \time 4/8
+                                % GlobalSkips [measure 3]
+                                \time 4/8                                                      %%! SM1
                                 s1 * 1/2
                             }
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 4]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
                 <BLANKLINE>
                         }
@@ -4104,7 +4104,7 @@ class LibraryTZ(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 e'8
                                 [
                 <BLANKLINE>
@@ -4115,7 +4115,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 r8
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 e''8
                                 [
                 <BLANKLINE>
@@ -4124,7 +4124,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 f''8
                                 ]
                 <BLANKLINE>
-                                %%% MusicVoice [measure 3] %%%
+                                % MusicVoice [measure 3]
                                 r8
                 <BLANKLINE>
                                 e'8
@@ -4135,7 +4135,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 f'8
                                 ]
                 <BLANKLINE>
-                                %%% MusicVoice [measure 4] %%%
+                                % MusicVoice [measure 4]
                                 r8
                 <BLANKLINE>
                                 e''8
@@ -4188,46 +4188,46 @@ class LibraryTZ(abjad.AbjadObject):
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 1] %%%
-                            \time 4/8
-                            \bar ""                                                            %%! EMPTY_START_BAR
+                            % GlobalSkips [measure 1]
+                            \time 4/8                                                          %%! SM1
+                            \bar ""                                                            %%! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                    #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                    \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                        [1]                                                    %%! STAGE_NUMBER_MARKUP
-                                }                                                              %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                        [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                }                                                              %%! STAGE_NUMBER_MARKUP:SM3
                             \repeat volta 2
                             {
                 <BLANKLINE>
-                                %%% GlobalSkips [measure 2] %%%
-                                \time 3/8
+                                % GlobalSkips [measure 2]
+                                \time 3/8                                                      %%! SM1
                                 s1 * 3/8
-                                ^ \markup {                                                    %%! STAGE_NUMBER_MARKUP
-                                    \fontsize                                                  %%! STAGE_NUMBER_MARKUP
-                                        #-3                                                    %%! STAGE_NUMBER_MARKUP
-                                        \with-color                                            %%! STAGE_NUMBER_MARKUP
-                                            #(x11-color 'DarkCyan)                             %%! STAGE_NUMBER_MARKUP
-                                            [2]                                                %%! STAGE_NUMBER_MARKUP
-                                    }                                                          %%! STAGE_NUMBER_MARKUP
+                                ^ \markup {                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                    \fontsize                                                  %%! STAGE_NUMBER_MARKUP:SM3
+                                        #-3                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                        \with-color                                            %%! STAGE_NUMBER_MARKUP:SM3
+                                            #(x11-color 'DarkCyan)                             %%! STAGE_NUMBER_MARKUP:SM3
+                                            [2]                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                    }                                                          %%! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
-                                %%% GlobalSkips [measure 3] %%%
-                                \time 4/8
+                                % GlobalSkips [measure 3]
+                                \time 4/8                                                      %%! SM1
                                 s1 * 1/2
                             }
                 <BLANKLINE>
-                            %%% GlobalSkips [measure 4] %%%
-                            \time 3/8
+                            % GlobalSkips [measure 4]
+                            \time 3/8                                                          %%! SM1
                             s1 * 3/8
-                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                    #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                    \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                        [3]                                                    %%! STAGE_NUMBER_MARKUP
-                                }                                                              %%! STAGE_NUMBER_MARKUP
+                            ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                        [3]                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                                }                                                              %%! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
                         }
                     >>
@@ -4235,7 +4235,7 @@ class LibraryTZ(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                %%% MusicVoice [measure 1] %%%
+                                % MusicVoice [measure 1]
                                 e'8
                                 [
                 <BLANKLINE>
@@ -4246,7 +4246,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 r8
                 <BLANKLINE>
-                                %%% MusicVoice [measure 2] %%%
+                                % MusicVoice [measure 2]
                                 e''8
                                 [
                 <BLANKLINE>
@@ -4255,7 +4255,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 f''8
                                 ]
                 <BLANKLINE>
-                                %%% MusicVoice [measure 3] %%%
+                                % MusicVoice [measure 3]
                                 r8
                 <BLANKLINE>
                                 e'8
@@ -4266,7 +4266,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 f'8
                                 ]
                 <BLANKLINE>
-                                %%% MusicVoice [measure 4] %%%
+                                % MusicVoice [measure 4]
                                 r8
                 <BLANKLINE>
                                 e''8

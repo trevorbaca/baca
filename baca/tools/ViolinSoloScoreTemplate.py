@@ -24,28 +24,28 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        %%% GlobalSkips [measure 1] %%%
-                        \time 4/8
-                        \bar ""                                                            %%! EMPTY_START_BAR
+                        % GlobalSkips [measure 1]
+                        \time 4/8                                                          %%! SM1
+                        \bar ""                                                            %%! EMPTY_START_BAR:SM2
                         s1 * 1/2
-                        ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP
-                            \fontsize                                                      %%! STAGE_NUMBER_MARKUP
-                                #-3                                                        %%! STAGE_NUMBER_MARKUP
-                                \with-color                                                %%! STAGE_NUMBER_MARKUP
-                                    #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP
-                                    [1]                                                    %%! STAGE_NUMBER_MARKUP
-                            }                                                              %%! STAGE_NUMBER_MARKUP
+                        ^ \markup {                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                            \fontsize                                                      %%! STAGE_NUMBER_MARKUP:SM3
+                                #-3                                                        %%! STAGE_NUMBER_MARKUP:SM3
+                                \with-color                                                %%! STAGE_NUMBER_MARKUP:SM3
+                                    #(x11-color 'DarkCyan)                                 %%! STAGE_NUMBER_MARKUP:SM3
+                                    [1]                                                    %%! STAGE_NUMBER_MARKUP:SM3
+                            }                                                              %%! STAGE_NUMBER_MARKUP:SM3
             <BLANKLINE>
-                        %%% GlobalSkips [measure 2] %%%
-                        \time 3/8
+                        % GlobalSkips [measure 2]
+                        \time 3/8                                                          %%! SM1
                         s1 * 3/8
             <BLANKLINE>
-                        %%% GlobalSkips [measure 3] %%%
-                        \time 4/8
+                        % GlobalSkips [measure 3]
+                        \time 4/8                                                          %%! SM1
                         s1 * 1/2
             <BLANKLINE>
-                        %%% GlobalSkips [measure 4] %%%
-                        \time 3/8
+                        % GlobalSkips [measure 4]
+                        \time 3/8                                                          %%! SM1
                         s1 * 3/8
             <BLANKLINE>
                     }
@@ -55,7 +55,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                     \context ViolinMusicStaff = "ViolinMusicStaff" {
                         \context ViolinMusicVoice = "ViolinMusicVoice" {
             <BLANKLINE>
-                            %%% ViolinMusicVoice [measure 1] %%%
+                            % ViolinMusicVoice [measure 1]
                             \set ViolinMusicStaff.instrumentName = \markup {               %%! DEFAULT_INSTRUMENT
                                 \hcenter-in                                                %%! DEFAULT_INSTRUMENT
                                     #16                                                    %%! DEFAULT_INSTRUMENT
@@ -130,13 +130,13 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                             \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'violet) %%! DEFAULT_REDRAW_INSTRUMENT_COLOR
                             \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)   %%! DEFAULT_CLEF_COLOR_REDRAW
             <BLANKLINE>
-                            %%% ViolinMusicVoice [measure 2] %%%
+                            % ViolinMusicVoice [measure 2]
                             R1 * 3/8
             <BLANKLINE>
-                            %%% ViolinMusicVoice [measure 3] %%%
+                            % ViolinMusicVoice [measure 3]
                             R1 * 1/2
             <BLANKLINE>
-                            %%% ViolinMusicVoice [measure 4] %%%
+                            % ViolinMusicVoice [measure 4]
                             R1 * 3/8
                             \bar "|"
             <BLANKLINE>
