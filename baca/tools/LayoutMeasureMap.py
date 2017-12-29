@@ -478,6 +478,28 @@ class LayoutMeasureMap(abjad.AbjadObject):
             ...     ])
 
             >>> for command in layout.commands:
+            ...     abjad.f(command)
+            ...
+            baca.IndicatorCommand(
+                indicators=abjad.CyclicTuple(
+                    [
+                        abjad.LilyPondLiteral('\\break', format_slot='after', ),
+                        ]
+                    ),
+                selector=baca.skip(0),
+                site='LMM3',
+                tag='SEGMENT:LAYOUT',
+                )
+            baca.IndicatorCommand(
+                indicators=abjad.CyclicTuple(
+                    [
+                        abjad.LilyPondLiteral('\\pageBreak', format_slot='after', ),
+                        ]
+                    ),
+                selector=baca.skip(1),
+                site='LMM3',
+                tag='SEGMENT:LAYOUT',
+                )
 
         Returns commands.
         '''
