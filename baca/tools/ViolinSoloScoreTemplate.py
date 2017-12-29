@@ -72,7 +72,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                             \clef "treble"                                                           %! DEFAULT_CLEF:SM8
                             \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR:SM6
                             \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet)   %! DEFAULT_CLEF_COLOR:SM6
-                            %%% \override ViolinMusicStaff.Clef.color = ##f                          %! DEFAULT_CLEF_UNCOLOR:SM7
+                            %%% \override ViolinMusicStaff.Clef.color = ##f                          %! DEFAULT_CLEF_COLOR_CANCELLATION:SM7
                             R1 * 1/2
                             ^ \markup {
                                 \column
@@ -119,18 +119,18 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                                             }                                                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                     }
                                 }
-                            \set ViolinMusicStaff.instrumentName = \markup {                         %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                \hcenter-in                                                          %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                    #16                                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                    Violin                                                           %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                }                                                                    %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                            \set ViolinMusicStaff.shortInstrumentName = \markup {                    %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                \hcenter-in                                                          %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                    #10                                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                    Vn.                                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                }                                                                    %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'violet)   %! DEFAULT_REDRAW_INSTRUMENT_COLOR:SM6
-                            \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)             %! DEFAULT_CLEF_COLOR_REDRAW:SM6
+                            \set ViolinMusicStaff.instrumentName = \markup {                         %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                \hcenter-in                                                          %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                    #16                                                              %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                    Violin                                                           %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                }                                                                    %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                            \set ViolinMusicStaff.shortInstrumentName = \markup {                    %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                \hcenter-in                                                          %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                    #10                                                              %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                    Vn.                                                              %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                }                                                                    %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'violet)   %! REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
+                            \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)             %! DEFAULT_CLEF_REDRAW_COLOR:SM6
             <BLANKLINE>
                             % ViolinMusicVoice [measure 2]                                           %! SM4
                             R1 * 3/8

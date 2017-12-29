@@ -1304,18 +1304,29 @@ class SegmentMaker(abjad.SegmentMaker):
             literal = abjad.LilyPondLiteral(string, 'after')
         else:
             literal = abjad.LilyPondLiteral(string)
-        if uncolor:
-            suffix = 'uncolor'
-        elif redraw:
-            suffix = 'color_redraw'
+        if getattr(indicator, 'latent', False):
+            if redraw:
+                prefix = 'redrawn'
+            else:
+                prefix = None
+            if isinstance(indicator, abjad.Instrument):
+                stem = 'INSTRUMENT'
+            else:
+                stem = self._indicator_to_stem(indicator)
+            if uncolor:
+                suffix = 'color_cancellation'
+            else:
+                suffix = 'color'
         else:
-            suffix = 'color'
-        if getattr(indicator, 'latent', False) and redraw:
-            stem = 'REDRAW_INSTRUMENT'
-            suffix = 'COLOR'
-        else:
+            prefix = None
             stem = self._indicator_to_stem(indicator)
-        tag = self._get_tag(status, stem, suffix)
+            if redraw:
+                suffix = 'redraw_color'
+            elif uncolor:
+                suffix = 'color_cancellation'
+            else:
+                suffix = 'color'
+        tag = self._get_tag(status, stem, prefix=prefix, suffix=suffix)
         if uncolor is True:
             abjad.attach(literal, leaf, deactivate=True, site='SM7', tag=tag)
         else:
@@ -1581,13 +1592,15 @@ class SegmentMaker(abjad.SegmentMaker):
         return includes
 
     @staticmethod
-    def _get_tag(status, stem, suffix=None):
+    def _get_tag(status, stem, prefix=None, suffix=None):
         stem = abjad.String(stem).delimit_words()
         stem = '_'.join([_.upper() for _ in stem])
         if suffix is not None:
             name = f'{status.upper()}_{stem}_{suffix.upper()}'
         else:
             name = f'{status.upper()}_{stem}'
+        if prefix is not None:
+            name = f'{prefix.upper()}_{name}'
         tag = getattr(baca.Tags, name)
         return tag
 
@@ -2065,10 +2078,10 @@ class SegmentMaker(abjad.SegmentMaker):
         if redraw is True:
             if (getattr(indicator, 'latent', False) or
                 stem in ('INSTRUMENT', 'MARGIN_MARKUP')):
-                stem = f'REDRAW_{stem}'
-                tag = self._get_tag(status, stem)
+                tag = self._get_tag(status, stem, prefix='redrawn')
             else:
-                tag = self._get_tag(status, stem, 'redraw')
+                #raise Exception('FOO?')
+                tag = self._get_tag(status, stem, prefix='redrawn')
         else:
             tag = self._get_tag(status, stem)
         if spanner is not None:
@@ -2236,9 +2249,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.forceClef = ##t                                               %! DEFAULT_CLEF:SM8
                                 \clef "treble"                                                           %! DEFAULT_CLEF:SM8
                                 \once \override Staff.Clef.color = #(x11-color 'DarkViolet)              %! DEFAULT_CLEF_COLOR:SM6
-                                %%% \override Staff.Clef.color = ##f                                     %! DEFAULT_CLEF_UNCOLOR:SM7
+                                %%% \override Staff.Clef.color = ##f                                     %! DEFAULT_CLEF_COLOR_CANCELLATION:SM7
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'violet)                        %! DEFAULT_CLEF_COLOR_REDRAW:SM6
+                                \override Staff.Clef.color = #(x11-color 'violet)                        %! DEFAULT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 R1 * 3/8
@@ -2322,9 +2335,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:SM8
                                 \clef "treble"                                                           %! EXPLICIT_CLEF:SM8
                                 \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:SM6
-                                %%% \override Staff.Clef.color = ##f                                     %! EXPLICIT_CLEF_UNCOLOR:SM7
+                                %%% \override Staff.Clef.color = ##f                                     %! EXPLICIT_CLEF_COLOR_CANCELLATION:SM7
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_COLOR_REDRAW:SM6
+                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 R1 * 3/8
@@ -2418,9 +2431,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:SM8
                                 \clef "alto"                                                             %! EXPLICIT_CLEF:SM8
                                 \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:SM6
-                                %%% \override Staff.Clef.color = ##f                                     %! EXPLICIT_CLEF_UNCOLOR:SM7
+                                %%% \override Staff.Clef.color = ##f                                     %! EXPLICIT_CLEF_COLOR_CANCELLATION:SM7
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_COLOR_REDRAW:SM6
+                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 R1 * 3/8
@@ -2513,9 +2526,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.forceClef = ##t                                               %! REAPPLIED_CLEF:SM8
                                 \clef "treble"                                                           %! REAPPLIED_CLEF:SM8
                                 \once \override Staff.Clef.color = #(x11-color 'green4)                  %! REAPPLIED_CLEF_COLOR:SM6
-                                %%% \override Staff.Clef.color = ##f                                     %! REAPPLIED_CLEF_UNCOLOR:SM7
+                                %%% \override Staff.Clef.color = ##f                                     %! REAPPLIED_CLEF_COLOR_CANCELLATION:SM7
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'OliveDrab)                     %! REAPPLIED_CLEF_COLOR_REDRAW:SM6
+                                \override Staff.Clef.color = #(x11-color 'OliveDrab)                     %! REAPPLIED_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 R1 * 3/8
@@ -2559,7 +2572,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file.items.insert(0, block)
 
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
 
             ..  docs::
 
@@ -2607,17 +2619,17 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:SM8
                                 \clef "treble"                                                           %! EXPLICIT_CLEF:SM8
                                 \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:SM6
-                                %%% \override Staff.Clef.color = ##f                                     %! EXPLICIT_CLEF_UNCOLOR:SM7
+                                %%% \override Staff.Clef.color = ##f                                     %! EXPLICIT_CLEF_COLOR_CANCELLATION:SM7
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_COLOR_REDRAW:SM6
+                                \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 \set Staff.forceClef = ##t                                               %! REDUNDANT_CLEF:SM8
                                 \clef "treble"                                                           %! REDUNDANT_CLEF:SM8
                                 \once \override Staff.Clef.color = #(x11-color 'DeepPink1)               %! REDUNDANT_CLEF_COLOR:SM6
-                                %%% \override Staff.Clef.color = ##f                                     %! REDUNDANT_CLEF_UNCOLOR:SM7
+                                %%% \override Staff.Clef.color = ##f                                     %! REDUNDANT_CLEF_COLOR_CANCELLATION:SM7
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'DeepPink4)                     %! REDUNDANT_CLEF_COLOR_REDRAW:SM6
+                                \override Staff.Clef.color = #(x11-color 'DeepPink4)                     %! REDUNDANT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 3]                                                 %! SM4
                                 R1 * 3/8
@@ -2712,9 +2724,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.forceClef = ##t                                               %! REDUNDANT_CLEF:SM8
                                 \clef "treble"                                                           %! REDUNDANT_CLEF:SM8
                                 \once \override Staff.Clef.color = #(x11-color 'DeepPink1)               %! REDUNDANT_CLEF_COLOR:SM6
-                                %%% \override Staff.Clef.color = ##f                                     %! REDUNDANT_CLEF_UNCOLOR:SM7
+                                %%% \override Staff.Clef.color = ##f                                     %! REDUNDANT_CLEF_COLOR_CANCELLATION:SM7
                                 R1 * 3/8
-                                \override Staff.Clef.color = #(x11-color 'DeepPink4)                     %! REDUNDANT_CLEF_COLOR_REDRAW:SM6
+                                \override Staff.Clef.color = #(x11-color 'DeepPink4)                     %! REDUNDANT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 R1 * 3/8
@@ -2833,7 +2845,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \clef "treble"                                               %! DEFAULT_CLEF:SM8
                                             \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR:SM6
                                             \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:SM6
-                                            %%% \override ViolinMusicStaff.Clef.color = ##f              %! DEFAULT_CLEF_UNCOLOR:SM7
+                                            %%% \override ViolinMusicStaff.Clef.color = ##f              %! DEFAULT_CLEF_COLOR_CANCELLATION:SM7
                                             d'16
                                             ^ \markup {
                                                 \column
@@ -2880,18 +2892,18 @@ class SegmentMaker(abjad.SegmentMaker):
                                                             }                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                                     }
                                                 }
-                                            \set ViolinMusicStaff.instrumentName = \markup {             %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                \hcenter-in                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                    #10                                                  %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                    Violin                                               %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                }                                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                            \set ViolinMusicStaff.shortInstrumentName = \markup {        %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                \hcenter-in                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                    #10                                                  %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                    Vn.                                                  %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                }                                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'violet) %! DEFAULT_REDRAW_INSTRUMENT_COLOR:SM6
-                                            \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! DEFAULT_CLEF_COLOR_REDRAW:SM6
+                                            \set ViolinMusicStaff.instrumentName = \markup {             %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                                \hcenter-in                                              %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                                    #10                                                  %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                                    Violin                                               %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                                }                                                        %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                            \set ViolinMusicStaff.shortInstrumentName = \markup {        %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                                \hcenter-in                                              %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                                    #10                                                  %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                                    Vn.                                                  %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                                }                                                        %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                            \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'violet) %! REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
+                                            \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! DEFAULT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
                                             e'16
                 <BLANKLINE>
@@ -2933,7 +2945,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \clef "alto"                                                         %! DEFAULT_CLEF:SM8
                                     \once \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR:SM6
                                     \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:SM6
-                                    %%% \override ViolaMusicStaff.Clef.color = ##f                       %! DEFAULT_CLEF_UNCOLOR:SM7
+                                    %%% \override ViolaMusicStaff.Clef.color = ##f                       %! DEFAULT_CLEF_COLOR_CANCELLATION:SM7
                                     R1 * 3/8
                                     ^ \markup {
                                         \column
@@ -2980,18 +2992,18 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     }                                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                             }
                                         }
-                                    \set ViolaMusicStaff.instrumentName = \markup {                      %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                        \hcenter-in                                                      %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                            #10                                                          %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                            Viola                                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                        }                                                                %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                    \set ViolaMusicStaff.shortInstrumentName = \markup {                 %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                        \hcenter-in                                                      %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                            #10                                                          %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                            Va.                                                          %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                        }                                                                %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                    \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'violet) %! DEFAULT_REDRAW_INSTRUMENT_COLOR:SM6
-                                    \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_COLOR_REDRAW:SM6
+                                    \set ViolaMusicStaff.instrumentName = \markup {                      %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                        \hcenter-in                                                      %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                            #10                                                          %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                            Viola                                                        %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                        }                                                                %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                    \set ViolaMusicStaff.shortInstrumentName = \markup {                 %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                        \hcenter-in                                                      %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                            #10                                                          %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                            Va.                                                          %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                        }                                                                %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                    \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'violet) %! REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
+                                    \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
                                 }
                             }
@@ -3016,7 +3028,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \clef "bass"                                                 %! DEFAULT_CLEF:SM8
                                             \once \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR:SM6
                                             \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:SM6
-                                            %%% \override CelloMusicStaff.Clef.color = ##f               %! DEFAULT_CLEF_UNCOLOR:SM7
+                                            %%% \override CelloMusicStaff.Clef.color = ##f               %! DEFAULT_CLEF_COLOR_CANCELLATION:SM7
                                             a16
                                             ^ \markup {
                                                 \column
@@ -3063,18 +3075,18 @@ class SegmentMaker(abjad.SegmentMaker):
                                                             }                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                                     }
                                                 }
-                                            \set CelloMusicStaff.instrumentName = \markup {              %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                \hcenter-in                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                    #10                                                  %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                    Cello                                                %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                }                                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                            \set CelloMusicStaff.shortInstrumentName = \markup {         %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                \hcenter-in                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                    #10                                                  %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                    Vc.                                                  %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                }                                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                            \override CelloMusicStaff.InstrumentName.color = #(x11-color 'violet) %! DEFAULT_REDRAW_INSTRUMENT_COLOR:SM6
-                                            \override CelloMusicStaff.Clef.color = #(x11-color 'violet)  %! DEFAULT_CLEF_COLOR_REDRAW:SM6
+                                            \set CelloMusicStaff.instrumentName = \markup {              %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                                \hcenter-in                                              %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                                    #10                                                  %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                                    Cello                                                %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                                }                                                        %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                            \set CelloMusicStaff.shortInstrumentName = \markup {         %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                                \hcenter-in                                              %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                                    #10                                                  %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                                    Vc.                                                  %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                                }                                                        %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                            \override CelloMusicStaff.InstrumentName.color = #(x11-color 'violet) %! REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
+                                            \override CelloMusicStaff.Clef.color = #(x11-color 'violet)  %! DEFAULT_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
                                             g16
                 <BLANKLINE>
@@ -5214,9 +5226,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { Flute }                            %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                \override Staff.InstrumentName.color = #(x11-color 'violet)              %! DEFAULT_REDRAW_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_DEFAULT_INSTRUMENT:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'violet)              %! REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 c'4.
@@ -5337,9 +5349,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { Flute }                            %! EXPLICIT_REDRAW_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! EXPLICIT_REDRAW_INSTRUMENT:SM8
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 c'4.
@@ -5470,9 +5482,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { Flute }                            %! EXPLICIT_REDRAW_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! EXPLICIT_REDRAW_INSTRUMENT:SM8
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 c'4.
@@ -5598,9 +5610,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                                        %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { Flute }                            %! REAPPLIED_REDRAW_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! REAPPLIED_REDRAW_INSTRUMENT:SM8
-                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)           %! REAPPLIED_REDRAW_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_REAPPLIED_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_REAPPLIED_INSTRUMENT:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)           %! REDRAWN_REAPPLIED_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 c'4.
@@ -5731,9 +5743,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { Flute }                            %! EXPLICIT_REDRAW_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! EXPLICIT_REDRAW_INSTRUMENT:SM8
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { Flute }                            %! REDUNDANT_INSTRUMENT:SM8
@@ -5777,9 +5789,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                                        %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { Flute }                            %! REDUNDANT_REDRAW_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDUNDANT_REDRAW_INSTRUMENT:SM8
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDUNDANT_REDRAW_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 3]                                                 %! SM4
                                 c'2
@@ -5910,9 +5922,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                                        %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { Flute }                            %! REDUNDANT_REDRAW_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDUNDANT_REDRAW_INSTRUMENT:SM8
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDUNDANT_REDRAW_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 c'4.
@@ -6096,9 +6108,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                                        %! DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { I+II }                             %! DEFAULT_REDRAW_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II }                        %! DEFAULT_REDRAW_MARGIN_MARKUP:SM8
-                                \override Staff.InstrumentName.color = #(x11-color 'violet)              %! DEFAULT_REDRAW_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }                             %! REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'violet)              %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 c'4.
@@ -6213,9 +6225,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { I+II }                             %! EXPLICIT_REDRAW_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II }                        %! EXPLICIT_REDRAW_MARGIN_MARKUP:SM8
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }                             %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 c'4.
@@ -6340,9 +6352,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { III+IV }                           %! EXPLICIT_REDRAW_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { III+IV }                      %! EXPLICIT_REDRAW_MARGIN_MARKUP:SM8
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { III+IV }                           %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { III+IV }                      %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 c'4.
@@ -6468,9 +6480,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                                        %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { I+II }                             %! REAPPLIED_REDRAW_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II }                        %! REAPPLIED_REDRAW_MARGIN_MARKUP:SM8
-                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)           %! REAPPLIED_REDRAW_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }                             %! REDRAWN_REAPPLIED_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_REAPPLIED_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)           %! REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 c'4.
@@ -6601,9 +6613,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { I+II }                             %! EXPLICIT_REDRAW_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II }                        %! EXPLICIT_REDRAW_MARGIN_MARKUP:SM8
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }                             %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 \set Staff.instrumentName = \markup { I+II }                             %! REDUNDANT_MARGIN_MARKUP:SM8
@@ -6647,9 +6659,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                                        %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { I+II }                             %! REDUNDANT_REDRAW_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II }                        %! REDUNDANT_REDRAW_MARGIN_MARKUP:SM8
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDUNDANT_REDRAW_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }                             %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 3]                                                 %! SM4
                                 c'2
@@ -6780,9 +6792,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 }                                                        %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { I+II }                             %! REDUNDANT_REDRAW_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { I+II }                        %! REDUNDANT_REDRAW_MARGIN_MARKUP:SM8
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDUNDANT_REDRAW_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { I+II }                             %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 c'4.
@@ -6891,9 +6903,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.forceClef = ##t                                               %! REAPPLIED_CLEF:SM8
                                 \clef "alto"                                                             %! REAPPLIED_CLEF:SM8
                                 \once \override Staff.Clef.color = #(x11-color 'green4)                  %! REAPPLIED_CLEF_COLOR:SM6
-                                %%% \override Staff.Clef.color = ##f                                     %! REAPPLIED_CLEF_UNCOLOR:SM7
+                                %%% \override Staff.Clef.color = ##f                                     %! REAPPLIED_CLEF_COLOR_CANCELLATION:SM7
                                 R1 * 1/2
-                                \override Staff.Clef.color = #(x11-color 'OliveDrab)                     %! REAPPLIED_CLEF_COLOR_REDRAW:SM6
+                                \override Staff.Clef.color = #(x11-color 'OliveDrab)                     %! REAPPLIED_CLEF_REDRAW_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 R1 * 3/8
@@ -8260,9 +8272,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     }                                                    %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! EXPLICIT_REDRAW_INSTRUMENT:SM8
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! EXPLICIT_REDRAW_INSTRUMENT:SM8
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)    %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:SM6
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)    %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                     g'8
                 <BLANKLINE>
@@ -8417,9 +8429,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                                     }                                                    %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                             }
                                         }
-                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! EXPLICIT_REDRAW_INSTRUMENT:SM8
-                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! EXPLICIT_REDRAW_INSTRUMENT:SM8
-                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)    %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:SM6
+                                    \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                                    \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
+                                    \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)    %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                     f'8
                 <BLANKLINE>
