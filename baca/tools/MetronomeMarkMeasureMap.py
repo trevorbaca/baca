@@ -71,39 +71,39 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                                                         }                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                                 }                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                         }                                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                    \line                                                  %! CLOCK_TIME_MARKUP
-                                        {                                                  %! CLOCK_TIME_MARKUP
-                                            \fontsize                                      %! CLOCK_TIME_MARKUP
-                                                #-2                                        %! CLOCK_TIME_MARKUP
-                                                0'00''                                     %! CLOCK_TIME_MARKUP
-                                        }                                                  %! CLOCK_TIME_MARKUP
+                                    \line                                                  %! CLOCK_TIME_MARKUP:SM28
+                                        {                                                  %! CLOCK_TIME_MARKUP:SM28
+                                            \fontsize                                      %! CLOCK_TIME_MARKUP:SM28
+                                                #-2                                        %! CLOCK_TIME_MARKUP:SM28
+                                                0'00''                                     %! CLOCK_TIME_MARKUP:SM28
+                                        }                                                  %! CLOCK_TIME_MARKUP:SM28
                                 }
                             }
-                        %%% ^ \markup {                                                    %! EXPLICIT_METRONOME_MARK
-                        %%%     \fontsize                                                  %! EXPLICIT_METRONOME_MARK
-                        %%%         #-6                                                    %! EXPLICIT_METRONOME_MARK
-                        %%%         \general-align                                         %! EXPLICIT_METRONOME_MARK
-                        %%%             #Y                                                 %! EXPLICIT_METRONOME_MARK
-                        %%%             #DOWN                                              %! EXPLICIT_METRONOME_MARK
-                        %%%             \note-by-number                                    %! EXPLICIT_METRONOME_MARK
-                        %%%                 #2                                             %! EXPLICIT_METRONOME_MARK
-                        %%%                 #0                                             %! EXPLICIT_METRONOME_MARK
-                        %%%                 #1                                             %! EXPLICIT_METRONOME_MARK
-                        %%%     \upright                                                   %! EXPLICIT_METRONOME_MARK
-                        %%%         {                                                      %! EXPLICIT_METRONOME_MARK
-                        %%%             =                                                  %! EXPLICIT_METRONOME_MARK
-                        %%%             90                                                 %! EXPLICIT_METRONOME_MARK
-                        %%%         }                                                      %! EXPLICIT_METRONOME_MARK
-                        %%%     }                                                          %! EXPLICIT_METRONOME_MARK
+                        %%% ^ \markup {                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%     \fontsize                                                  %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%         #-6                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%         \general-align                                         %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%             #Y                                                 %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%             #DOWN                                              %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%             \note-by-number                                    %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%                 #2                                             %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%                 #0                                             %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%                 #1                                             %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%     \upright                                                   %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%         {                                                      %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%             =                                                  %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%             90                                                 %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%         }                                                      %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%     }                                                          %! EXPLICIT_METRONOME_MARK:SM27
             <BLANKLINE>
                         % GlobalSkips [measure 2]                                          %! SM4
                         \time 3/8                                                          %! SM1
                         s1 * 3/8
-                        ^ \markup {                                                        %! CLOCK_TIME_MARKUP
-                            \fontsize                                                      %! CLOCK_TIME_MARKUP
-                                #-2                                                        %! CLOCK_TIME_MARKUP
-                                0'01''                                                     %! CLOCK_TIME_MARKUP
-                            }                                                              %! CLOCK_TIME_MARKUP
+                        ^ \markup {                                                        %! CLOCK_TIME_MARKUP:SM28
+                            \fontsize                                                      %! CLOCK_TIME_MARKUP:SM28
+                                #-2                                                        %! CLOCK_TIME_MARKUP:SM28
+                                0'01''                                                     %! CLOCK_TIME_MARKUP:SM28
+                            }                                                              %! CLOCK_TIME_MARKUP:SM28
             <BLANKLINE>
                         % GlobalSkips [measure 3]                                          %! SM4
                         \time 4/8                                                          %! SM1
@@ -140,39 +140,39 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                                                         }                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                                 }                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                         }                                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                    \line                                                  %! CLOCK_TIME_MARKUP
-                                        {                                                  %! CLOCK_TIME_MARKUP
-                                            \fontsize                                      %! CLOCK_TIME_MARKUP
-                                                #-2                                        %! CLOCK_TIME_MARKUP
-                                                0'02''                                     %! CLOCK_TIME_MARKUP
-                                        }                                                  %! CLOCK_TIME_MARKUP
+                                    \line                                                  %! CLOCK_TIME_MARKUP:SM28
+                                        {                                                  %! CLOCK_TIME_MARKUP:SM28
+                                            \fontsize                                      %! CLOCK_TIME_MARKUP:SM28
+                                                #-2                                        %! CLOCK_TIME_MARKUP:SM28
+                                                0'02''                                     %! CLOCK_TIME_MARKUP:SM28
+                                        }                                                  %! CLOCK_TIME_MARKUP:SM28
                                 }
                             }
-                        %%% ^ \markup {                                                    %! EXPLICIT_METRONOME_MARK
-                        %%%     \fontsize                                                  %! EXPLICIT_METRONOME_MARK
-                        %%%         #-6                                                    %! EXPLICIT_METRONOME_MARK
-                        %%%         \general-align                                         %! EXPLICIT_METRONOME_MARK
-                        %%%             #Y                                                 %! EXPLICIT_METRONOME_MARK
-                        %%%             #DOWN                                              %! EXPLICIT_METRONOME_MARK
-                        %%%             \note-by-number                                    %! EXPLICIT_METRONOME_MARK
-                        %%%                 #2                                             %! EXPLICIT_METRONOME_MARK
-                        %%%                 #0                                             %! EXPLICIT_METRONOME_MARK
-                        %%%                 #1                                             %! EXPLICIT_METRONOME_MARK
-                        %%%     \upright                                                   %! EXPLICIT_METRONOME_MARK
-                        %%%         {                                                      %! EXPLICIT_METRONOME_MARK
-                        %%%             =                                                  %! EXPLICIT_METRONOME_MARK
-                        %%%             72                                                 %! EXPLICIT_METRONOME_MARK
-                        %%%         }                                                      %! EXPLICIT_METRONOME_MARK
-                        %%%     }                                                          %! EXPLICIT_METRONOME_MARK
+                        %%% ^ \markup {                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%     \fontsize                                                  %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%         #-6                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%         \general-align                                         %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%             #Y                                                 %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%             #DOWN                                              %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%             \note-by-number                                    %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%                 #2                                             %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%                 #0                                             %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%                 #1                                             %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%     \upright                                                   %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%         {                                                      %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%             =                                                  %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%             72                                                 %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%         }                                                      %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%     }                                                          %! EXPLICIT_METRONOME_MARK:SM27
             <BLANKLINE>
                         % GlobalSkips [measure 4]                                          %! SM4
                         \time 3/8                                                          %! SM1
                         s1 * 3/8
-                        ^ \markup {                                                        %! CLOCK_TIME_MARKUP
-                            \fontsize                                                      %! CLOCK_TIME_MARKUP
-                                #-2                                                        %! CLOCK_TIME_MARKUP
-                                0'04''                                                     %! CLOCK_TIME_MARKUP
-                            }                                                              %! CLOCK_TIME_MARKUP
+                        ^ \markup {                                                        %! CLOCK_TIME_MARKUP:SM28
+                            \fontsize                                                      %! CLOCK_TIME_MARKUP:SM28
+                                #-2                                                        %! CLOCK_TIME_MARKUP:SM28
+                                0'04''                                                     %! CLOCK_TIME_MARKUP:SM28
+                            }                                                              %! CLOCK_TIME_MARKUP:SM28
                         \override Score.BarLine.transparent = ##f                          %! SM5
                         \bar "|"                                                           %! SM5
             <BLANKLINE>

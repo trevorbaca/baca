@@ -438,11 +438,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % MusicVoice [measure 1]                                   %! SM4
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                                     [
                                     ^ \markup {
@@ -450,33 +451,36 @@ class SegmentMaker(abjad.SegmentMaker):
                                             0
                                         }
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                                     ^ \markup {
                                         \small
                                             1
                                         }
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                                     ^ \markup {
                                         \small
                                             2
                                         }
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                                     ]
                                     ^ \markup {
@@ -487,11 +491,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % MusicVoice [measure 2]                                   %! SM4
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                                     [
                                     ^ \markup {
@@ -499,22 +504,24 @@ class SegmentMaker(abjad.SegmentMaker):
                                             4
                                         }
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                                     ^ \markup {
                                         \small
                                             5
                                         }
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                                     ]
                                     ^ \markup {
@@ -525,11 +532,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % MusicVoice [measure 3]                                   %! SM4
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                                     [
                                     ^ \markup {
@@ -537,33 +545,36 @@ class SegmentMaker(abjad.SegmentMaker):
                                             7
                                         }
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                                     ^ \markup {
                                         \small
                                             8
                                         }
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                                     ^ \markup {
                                         \small
                                             9
                                         }
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                                     ]
                                     ^ \markup {
@@ -574,11 +585,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % MusicVoice [measure 4]                                   %! SM4
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                                     [
                                     ^ \markup {
@@ -586,22 +598,24 @@ class SegmentMaker(abjad.SegmentMaker):
                                             11
                                         }
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                                     ^ \markup {
                                         \small
                                             12
                                         }
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                                     ]
                                     ^ \markup {
@@ -719,11 +733,10 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.detach(abjad.Tie, previous_leaf)
                         abjad.detach(abjad.Tie, current_leaf)
                         inspector = abjad.inspect(current_leaf)
-                        repeat_ties = inspector.has_indicator(
-                            'use messiaen style ties')
-                        tie = abjad.Tie(
-                            repeat_ties=repeat_ties)
-                        abjad.attach(tie, leaves)
+                        string = 'use messiaen style ties'
+                        repeat_ties = inspector.has_indicator(string)
+                        tie = abjad.Tie(repeat_ties=repeat_ties)
+                        abjad.attach(tie, leaves, site='SM16')
                 abjad.detach('tie to me', current_leaf)
             if abjad.inspect(current_leaf).has_indicator('tie from me'):
                 next_leaf = abjad.inspect(current_leaf).get_leaf(1)
@@ -737,11 +750,10 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.detach(abjad.Tie, current_leaf)
                         abjad.detach(abjad.Tie, next_leaf)
                         inspector = abjad.inspect(current_leaf)
-                        repeat_ties = inspector.has_indicator(
-                            'use messiaen style ties')
-                        tie = abjad.Tie(
-                            repeat_ties=repeat_ties)
-                        abjad.attach(tie, leaves)
+                        string = 'use messiaen style ties'
+                        repeat_ties = inspector.has_indicator(string)
+                        tie = abjad.Tie(repeat_ties=repeat_ties)
+                        abjad.attach(tie, leaves, site='SM17')
                 abjad.detach('tie from me', current_leaf)
 
     def _apply_layout_measure_map(self):
@@ -794,32 +806,41 @@ class SegmentMaker(abjad.SegmentMaker):
                 if next_leaf is not None:
                     after = abjad.inspect(next_leaf).get_effective(prototype)
                 if before != staff_lines:
+                    strings = []
                     if build is None:
-                        abjad.attach(staff_lines, leaf)
+                        strings_ = staff_lines._get_lilypond_format(
+                            context=staff,
+                            )
+                        strings.extend(strings_)
                     if getattr(before, 'line_count', 5) == 5:
-                        pair = (-2, 2)
-                        abjad.override(leaf).staff.bar_line.bar_extent = pair
+                        string = rf'\once \override {staff.name}.BarLine'
+                        string += f".bar-extent = #'(-2 . 2)"
+                        strings.append(string)
+                    if strings:
+                        literal = abjad.LilyPondLiteral(strings)
+                        abjad.attach(literal, leaf, site='SM20')
                 if next_leaf is not None and staff_lines != after:
-                    abjad.attach(after, next_leaf)
+                    strings = after._get_lilypond_format(context=staff)
+                    literal = abjad.LilyPondLiteral(strings)
+                    abjad.attach(literal, next_leaf, site='SM21')
                 if ends_at_break and leaf_stop not in breaks_already_treated:
-                    literal = None
+                    strings = []
                     if staff_lines.line_count == 0:
-                        strings = []
                         string = r'\override Score.BarLine.transparent = ##t'
                         string = r'\once ' + string
                         strings.append(string)
                         string = r'\override Score.SpanBar.transparent = ##t'
                         string = r'\once ' + string
                         strings.append(string)
-                        literal = abjad.LilyPondLiteral(strings, 'after')
                     elif staff_lines.line_count == 1:
                         string = "Score.BarLine.bar-extent = #'(-2 . 2)"
                         string = r'\once \override ' + string
-                        literal = abjad.LilyPondLiteral(string, 'after')
-                    if literal is not None:
+                        strings.append(string)
+                    if strings:
+                        literal = abjad.LilyPondLiteral(strings, 'after')
                         tag = baca.Tags.FERMATA_BAR_LINE
                         tag = baca.Tags.build(tag, build)
-                        abjad.attach(literal, leaf, tag=tag)
+                        abjad.attach(literal, leaf, site='SM22', tag=tag)
                     breaks_already_treated.append(leaf_stop)
                 if (build is None and
                     next_leaf is None and
@@ -832,6 +853,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(
                         before_staff_lines,
                         leaf,
+                        site='SM23',
                         synthetic_offset=1_000_000,
                         )
 
@@ -878,16 +900,23 @@ class SegmentMaker(abjad.SegmentMaker):
                 else:
                     raise Exception(f'unknown fermata: {directive.command!r}.')
                 directive = abjad.Markup.musicglyph(string)
+                directive = abjad.new(directive, direction=abjad.Up)
             else:
                 directive = abjad.new(directive)
-            abjad.attach(directive, rest)
+            abjad.attach(directive, rest, site='SM18')
+            strings = []
             if fermata_y_offset is not None:
-                proxy = abjad.override(rest).multi_measure_rest_text
-                proxy.extra_offset = (0, fermata_y_offset)
-            proxy = abjad.override(rest)
-            proxy.score.multi_measure_rest.transparent = True
-            abjad.override(rest).score.time_signature.stencil = False
-            abjad.attach('fermata measure', rest)
+                string = r'\once \override MultiMeasureRestText.extra-offset'
+                string += f" = #'(0 . {fermata_y_offset})"
+                strings.append(string)
+            string = r'\once \override'
+            string += ' Score.MultiMeasureRest.transparent = ##t'
+            strings.append(string)
+            string = r'\once \override Score.TimeSignature.stencil = ##f'
+            strings.append(string)
+            literal = abjad.LilyPondLiteral(strings)
+            abjad.attach(literal, rest, site='SM19')
+            abjad.attach('fermata measure', rest, site='')
             start_offset = abjad.inspect(rest).get_timespan().start_offset
             self._fermata_start_offsets.append(start_offset)
 
@@ -1044,7 +1073,6 @@ class SegmentMaker(abjad.SegmentMaker):
         abjad.attach(rehearsal_mark, skip, site='SM9')
 
     def _cache_break_offsets(self):
-        #prototype = (abjad.LineBreak, abjad.PageBreak)
         prototype = abjad.LilyPondLiteral
         for skip in baca.select(self.score['GlobalSkips']).skips():
             literals = abjad.inspect(skip).get_indicators(prototype)
@@ -1308,25 +1336,36 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         color = 'blue'
         for pleaf in abjad.iterate(self.score).leaves(pitched=True):
-            if abjad.inspect(pleaf).has_indicator('not yet pitched'):
-                abjad.override(pleaf).beam.color = color
-                abjad.override(pleaf).dots.color = color
-                abjad.override(pleaf).flag.color = color
-                abjad.override(pleaf).note_head.color = color
-                abjad.override(pleaf).stem.color = color
+            if not abjad.inspect(pleaf).has_indicator('not yet pitched'):
+                continue
+            strings = [
+                rf'\once \override Accidental.color = #{color}',
+                rf'\once \override Beam.color = #{color}',
+                rf'\once \override Dots.color = #{color}',
+                rf'\once \override Flag.color = #{color}',
+                rf'\once \override NoteHead.color = #{color}',
+                rf'\once \override Stem.color = #{color}',
+                ]
+            literal = abjad.LilyPondLiteral(strings)
+            abjad.attach(literal, pleaf, site='SM24')
 
     def _color_unregistered_pitches(self):
         if self.ignore_unregistered_pitches:
             return
         color = 'magenta'
         for pleaf in abjad.iterate(self.score).leaves(pitched=True):
-            if abjad.inspect(pleaf).has_indicator('not yet registered'):
-                abjad.override(pleaf).accidental.color = color
-                abjad.override(pleaf).beam.color = color
-                abjad.override(pleaf).dots.color = color
-                abjad.override(pleaf).flag.color = color
-                abjad.override(pleaf).note_head.color = color
-                abjad.override(pleaf).stem.color = color
+            if not abjad.inspect(pleaf).has_indicator('not yet registered'):
+                continue
+            strings = [
+                rf'\once \override Accidental.color = #{color}',
+                rf'\once \override Beam.color = #{color}',
+                rf'\once \override Dots.color = #{color}',
+                rf'\once \override Flag.color = #{color}',
+                rf'\once \override NoteHead.color = #{color}',
+                rf'\once \override Stem.color = #{color}',
+                ]
+            literal = abjad.LilyPondLiteral(strings)
+            abjad.attach(literal, pleaf, site='SM25')
 
     def _comment_measure_numbers(self):
         offset_to_measure_number = {}
@@ -1408,7 +1447,7 @@ class SegmentMaker(abjad.SegmentMaker):
         all_leaves = abjad.select(all_leaves)
         assert abjad.inspect(all_leaves).get_duration() == sum(durations)
         beam = abjad.DuratedComplexBeam(beam_rests=True, durations=durations)
-        abjad.attach(beam, all_leaves)
+        abjad.attach(beam, all_leaves, site='')
 
     def _extend_beams(self):
         for leaf in abjad.iterate(self.score).leaves():
@@ -1739,7 +1778,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 silence = abjad.Skip(1)
             else:
                 silence = abjad.MultimeasureRest(1)
-            abjad.attach(multiplier, silence)
+            abjad.attach(multiplier, silence, site='')
             silences.append(silence)
         return silences
 
@@ -1748,7 +1787,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for time_signature in self.time_signatures:
             rest = abjad.MultimeasureRest(abjad.Duration(1))
             multiplier = abjad.Multiplier(time_signature.duration)
-            abjad.attach(multiplier, rest)
+            abjad.attach(multiplier, rest, site='')
             rests.append(rest)
         return rests
 
@@ -1957,7 +1996,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 string = r"\shape #'((2 . 0) (1 . 0) (0.5 . 0) (0 . 0))"
                 string += " RepeatTie"
                 literal = abjad.LilyPondLiteral(string)
-                abjad.attach(command, leaf)
+                abjad.attach(literal, leaf, site='SM26')
 
     def _stage_number_to_measure_indices(self, stage_number):
         if stage_number is abjad.Infinity or stage_number == abjad.Infinity:
@@ -1998,7 +2037,7 @@ class SegmentMaker(abjad.SegmentMaker):
         seconds = 60 * minutes + seconds
         segment_start_offset = abjad.Duration(seconds)
         tag = baca.Tags.CLOCK_TIME_MARKUP
-        label = abjad.label(skips_, tag=tag)
+        label = abjad.label(skips_, site='SM28', tag=tag)
         segment_stop_duration = label.with_start_offsets(
             clock_time=True,
             font_size=-2,
@@ -2033,14 +2072,19 @@ class SegmentMaker(abjad.SegmentMaker):
         else:
             tag = self._get_tag(status, stem)
         if spanner is not None:
-            spanner.attach(indicator, leaf, deactivate=True, tag=tag)
-        elif context is None:
-            abjad.attach(indicator, leaf, tag=tag)
+            spanner.attach(
+                indicator,
+                leaf,
+                deactivate=True,
+                site='SM27',
+                tag=tag,
+                )
         else:
+            headword = getattr(context, 'headword', None)
             abjad.attach(
                 indicator,
                 leaf,
-                context=context.headword,
+                context=headword,
                 site='SM8',
                 tag=tag,
                 )
@@ -4396,118 +4440,132 @@ class SegmentMaker(abjad.SegmentMaker):
                                 {
                 <BLANKLINE>
                                     % MusicVoice [measure 1]                                   %! SM4
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                                     [
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                                     ]
                                 }
                                 {
                 <BLANKLINE>
                                     % MusicVoice [measure 2]                                   %! SM4
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                                     [
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                                     ]
                                 }
                                 {
                 <BLANKLINE>
                                     % MusicVoice [measure 3]                                   %! SM4
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                                     [
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                                     ]
                                 }
                                 {
                 <BLANKLINE>
                                     % MusicVoice [measure 4]                                   %! SM4
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                                     [
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                 <BLANKLINE>
-                                    \once \override Beam.color = #blue
-                                    \once \override Dots.color = #blue
-                                    \once \override Flag.color = #blue
-                                    \once \override NoteHead.color = #blue
-                                    \once \override Stem.color = #blue
+                                    \once \override Accidental.color = #blue                   %! SM24
+                                    \once \override Beam.color = #blue                         %! SM24
+                                    \once \override Dots.color = #blue                         %! SM24
+                                    \once \override Flag.color = #blue                         %! SM24
+                                    \once \override NoteHead.color = #blue                     %! SM24
+                                    \once \override Stem.color = #blue                         %! SM24
                                     c'8
                                     ]
                 <BLANKLINE>
@@ -4866,12 +4924,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                 <BLANKLINE>
                                         % MusicVoice [measure 1]                               %! SM4
-                                        \once \override Accidental.color = #magenta
-                                        \once \override Beam.color = #magenta
-                                        \once \override Dots.color = #magenta
-                                        \once \override Flag.color = #magenta
-                                        \once \override NoteHead.color = #magenta
-                                        \once \override Stem.color = #magenta
+                                        \once \override Accidental.color = #magenta            %! SM25
+                                        \once \override Beam.color = #magenta                  %! SM25
+                                        \once \override Dots.color = #magenta                  %! SM25
+                                        \once \override Flag.color = #magenta                  %! SM25
+                                        \once \override NoteHead.color = #magenta              %! SM25
+                                        \once \override Stem.color = #magenta                  %! SM25
                                         e'8.
                                     }
                                 }
@@ -4881,61 +4939,61 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % MusicVoice [measure 2]                               %! SM4
                                         \acciaccatura {
                 <BLANKLINE>
-                                            \once \override Accidental.color = #magenta
-                                            \once \override Beam.color = #magenta
-                                            \once \override Dots.color = #magenta
-                                            \once \override Flag.color = #magenta
-                                            \once \override NoteHead.color = #magenta
-                                            \once \override Stem.color = #magenta
+                                            \once \override Accidental.color = #magenta        %! SM25
+                                            \once \override Beam.color = #magenta              %! SM25
+                                            \once \override Dots.color = #magenta              %! SM25
+                                            \once \override Flag.color = #magenta              %! SM25
+                                            \once \override NoteHead.color = #magenta          %! SM25
+                                            \once \override Stem.color = #magenta              %! SM25
                                             fs'16 [
                 <BLANKLINE>
-                                            \once \override Accidental.color = #magenta
-                                            \once \override Beam.color = #magenta
-                                            \once \override Dots.color = #magenta
-                                            \once \override Flag.color = #magenta
-                                            \once \override NoteHead.color = #magenta
-                                            \once \override Stem.color = #magenta
+                                            \once \override Accidental.color = #magenta        %! SM25
+                                            \once \override Beam.color = #magenta              %! SM25
+                                            \once \override Dots.color = #magenta              %! SM25
+                                            \once \override Flag.color = #magenta              %! SM25
+                                            \once \override NoteHead.color = #magenta          %! SM25
+                                            \once \override Stem.color = #magenta              %! SM25
                                             d'16
                 <BLANKLINE>
-                                            \once \override Accidental.color = #magenta
-                                            \once \override Beam.color = #magenta
-                                            \once \override Dots.color = #magenta
-                                            \once \override Flag.color = #magenta
-                                            \once \override NoteHead.color = #magenta
-                                            \once \override Stem.color = #magenta
+                                            \once \override Accidental.color = #magenta        %! SM25
+                                            \once \override Beam.color = #magenta              %! SM25
+                                            \once \override Dots.color = #magenta              %! SM25
+                                            \once \override Flag.color = #magenta              %! SM25
+                                            \once \override NoteHead.color = #magenta          %! SM25
+                                            \once \override Stem.color = #magenta              %! SM25
                                             ef'16
                 <BLANKLINE>
-                                            \once \override Accidental.color = #magenta
-                                            \once \override Beam.color = #magenta
-                                            \once \override Dots.color = #magenta
-                                            \once \override Flag.color = #magenta
-                                            \once \override NoteHead.color = #magenta
-                                            \once \override Stem.color = #magenta
+                                            \once \override Accidental.color = #magenta        %! SM25
+                                            \once \override Beam.color = #magenta              %! SM25
+                                            \once \override Dots.color = #magenta              %! SM25
+                                            \once \override Flag.color = #magenta              %! SM25
+                                            \once \override NoteHead.color = #magenta          %! SM25
+                                            \once \override Stem.color = #magenta              %! SM25
                                             f'16
                 <BLANKLINE>
-                                            \once \override Accidental.color = #magenta
-                                            \once \override Beam.color = #magenta
-                                            \once \override Dots.color = #magenta
-                                            \once \override Flag.color = #magenta
-                                            \once \override NoteHead.color = #magenta
-                                            \once \override Stem.color = #magenta
+                                            \once \override Accidental.color = #magenta        %! SM25
+                                            \once \override Beam.color = #magenta              %! SM25
+                                            \once \override Dots.color = #magenta              %! SM25
+                                            \once \override Flag.color = #magenta              %! SM25
+                                            \once \override NoteHead.color = #magenta          %! SM25
+                                            \once \override Stem.color = #magenta              %! SM25
                                             a'16
                 <BLANKLINE>
-                                            \once \override Accidental.color = #magenta
-                                            \once \override Beam.color = #magenta
-                                            \once \override Dots.color = #magenta
-                                            \once \override Flag.color = #magenta
-                                            \once \override NoteHead.color = #magenta
-                                            \once \override Stem.color = #magenta
+                                            \once \override Accidental.color = #magenta        %! SM25
+                                            \once \override Beam.color = #magenta              %! SM25
+                                            \once \override Dots.color = #magenta              %! SM25
+                                            \once \override Flag.color = #magenta              %! SM25
+                                            \once \override NoteHead.color = #magenta          %! SM25
+                                            \once \override Stem.color = #magenta              %! SM25
                                             af'16 ]
                 <BLANKLINE>
                                         }
-                                        \once \override Accidental.color = #magenta
-                                        \once \override Beam.color = #magenta
-                                        \once \override Dots.color = #magenta
-                                        \once \override Flag.color = #magenta
-                                        \once \override NoteHead.color = #magenta
-                                        \once \override Stem.color = #magenta
+                                        \once \override Accidental.color = #magenta            %! SM25
+                                        \once \override Beam.color = #magenta                  %! SM25
+                                        \once \override Dots.color = #magenta                  %! SM25
+                                        \once \override Flag.color = #magenta                  %! SM25
+                                        \once \override NoteHead.color = #magenta              %! SM25
+                                        \once \override Stem.color = #magenta                  %! SM25
                                         c'8.
                                     }
                                 }
@@ -4943,12 +5001,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                     {
                 <BLANKLINE>
                                         % MusicVoice [measure 3]                               %! SM4
-                                        \once \override Accidental.color = #magenta
-                                        \once \override Beam.color = #magenta
-                                        \once \override Dots.color = #magenta
-                                        \once \override Flag.color = #magenta
-                                        \once \override NoteHead.color = #magenta
-                                        \once \override Stem.color = #magenta
+                                        \once \override Accidental.color = #magenta            %! SM25
+                                        \once \override Beam.color = #magenta                  %! SM25
+                                        \once \override Dots.color = #magenta                  %! SM25
+                                        \once \override Flag.color = #magenta                  %! SM25
+                                        \once \override NoteHead.color = #magenta              %! SM25
+                                        \once \override Stem.color = #magenta                  %! SM25
                                         b'8.
                                     }
                                 }
@@ -4958,53 +5016,53 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % MusicVoice [measure 4]                               %! SM4
                                         \acciaccatura {
                 <BLANKLINE>
-                                            \once \override Accidental.color = #magenta
-                                            \once \override Beam.color = #magenta
-                                            \once \override Dots.color = #magenta
-                                            \once \override Flag.color = #magenta
-                                            \once \override NoteHead.color = #magenta
-                                            \once \override Stem.color = #magenta
+                                            \once \override Accidental.color = #magenta        %! SM25
+                                            \once \override Beam.color = #magenta              %! SM25
+                                            \once \override Dots.color = #magenta              %! SM25
+                                            \once \override Flag.color = #magenta              %! SM25
+                                            \once \override NoteHead.color = #magenta          %! SM25
+                                            \once \override Stem.color = #magenta              %! SM25
                                             bf'16 [
                 <BLANKLINE>
-                                            \once \override Accidental.color = #magenta
-                                            \once \override Beam.color = #magenta
-                                            \once \override Dots.color = #magenta
-                                            \once \override Flag.color = #magenta
-                                            \once \override NoteHead.color = #magenta
-                                            \once \override Stem.color = #magenta
+                                            \once \override Accidental.color = #magenta        %! SM25
+                                            \once \override Beam.color = #magenta              %! SM25
+                                            \once \override Dots.color = #magenta              %! SM25
+                                            \once \override Flag.color = #magenta              %! SM25
+                                            \once \override NoteHead.color = #magenta          %! SM25
+                                            \once \override Stem.color = #magenta              %! SM25
                                             g'16
                 <BLANKLINE>
-                                            \once \override Accidental.color = #magenta
-                                            \once \override Beam.color = #magenta
-                                            \once \override Dots.color = #magenta
-                                            \once \override Flag.color = #magenta
-                                            \once \override NoteHead.color = #magenta
-                                            \once \override Stem.color = #magenta
+                                            \once \override Accidental.color = #magenta        %! SM25
+                                            \once \override Beam.color = #magenta              %! SM25
+                                            \once \override Dots.color = #magenta              %! SM25
+                                            \once \override Flag.color = #magenta              %! SM25
+                                            \once \override NoteHead.color = #magenta          %! SM25
+                                            \once \override Stem.color = #magenta              %! SM25
                                             a'16
                 <BLANKLINE>
-                                            \once \override Accidental.color = #magenta
-                                            \once \override Beam.color = #magenta
-                                            \once \override Dots.color = #magenta
-                                            \once \override Flag.color = #magenta
-                                            \once \override NoteHead.color = #magenta
-                                            \once \override Stem.color = #magenta
+                                            \once \override Accidental.color = #magenta        %! SM25
+                                            \once \override Beam.color = #magenta              %! SM25
+                                            \once \override Dots.color = #magenta              %! SM25
+                                            \once \override Flag.color = #magenta              %! SM25
+                                            \once \override NoteHead.color = #magenta          %! SM25
+                                            \once \override Stem.color = #magenta              %! SM25
                                             af'16
                 <BLANKLINE>
-                                            \once \override Accidental.color = #magenta
-                                            \once \override Beam.color = #magenta
-                                            \once \override Dots.color = #magenta
-                                            \once \override Flag.color = #magenta
-                                            \once \override NoteHead.color = #magenta
-                                            \once \override Stem.color = #magenta
+                                            \once \override Accidental.color = #magenta        %! SM25
+                                            \once \override Beam.color = #magenta              %! SM25
+                                            \once \override Dots.color = #magenta              %! SM25
+                                            \once \override Flag.color = #magenta              %! SM25
+                                            \once \override NoteHead.color = #magenta          %! SM25
+                                            \once \override Stem.color = #magenta              %! SM25
                                             c'16 ]
                 <BLANKLINE>
                                         }
-                                        \once \override Accidental.color = #magenta
-                                        \once \override Beam.color = #magenta
-                                        \once \override Dots.color = #magenta
-                                        \once \override Flag.color = #magenta
-                                        \once \override NoteHead.color = #magenta
-                                        \once \override Stem.color = #magenta
+                                        \once \override Accidental.color = #magenta            %! SM25
+                                        \once \override Beam.color = #magenta                  %! SM25
+                                        \once \override Dots.color = #magenta                  %! SM25
+                                        \once \override Flag.color = #magenta                  %! SM25
+                                        \once \override NoteHead.color = #magenta              %! SM25
+                                        \once \override Stem.color = #magenta                  %! SM25
                                         f'8.
                 <BLANKLINE>
                                     }
@@ -6973,22 +7031,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                             }                                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                     }
                                 }
-                            %%% ^ \markup {                                                    %! EXPLICIT_METRONOME_MARK
-                            %%%     \fontsize                                                  %! EXPLICIT_METRONOME_MARK
-                            %%%         #-6                                                    %! EXPLICIT_METRONOME_MARK
-                            %%%         \general-align                                         %! EXPLICIT_METRONOME_MARK
-                            %%%             #Y                                                 %! EXPLICIT_METRONOME_MARK
-                            %%%             #DOWN                                              %! EXPLICIT_METRONOME_MARK
-                            %%%             \note-by-number                                    %! EXPLICIT_METRONOME_MARK
-                            %%%                 #2                                             %! EXPLICIT_METRONOME_MARK
-                            %%%                 #0                                             %! EXPLICIT_METRONOME_MARK
-                            %%%                 #1                                             %! EXPLICIT_METRONOME_MARK
-                            %%%     \upright                                                   %! EXPLICIT_METRONOME_MARK
-                            %%%         {                                                      %! EXPLICIT_METRONOME_MARK
-                            %%%             =                                                  %! EXPLICIT_METRONOME_MARK
-                            %%%             90                                                 %! EXPLICIT_METRONOME_MARK
-                            %%%         }                                                      %! EXPLICIT_METRONOME_MARK
-                            %%%     }                                                          %! EXPLICIT_METRONOME_MARK
+                            %%% ^ \markup {                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%     \fontsize                                                  %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%         #-6                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%         \general-align                                         %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%             #Y                                                 %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%             #DOWN                                              %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%             \note-by-number                                    %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%                 #2                                             %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%                 #0                                             %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%                 #1                                             %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%     \upright                                                   %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%         {                                                      %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%             =                                                  %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%             90                                                 %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%         }                                                      %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%     }                                                          %! EXPLICIT_METRONOME_MARK:SM27
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
                             \time 3/8                                                          %! SM1
@@ -7155,22 +7213,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                             }                                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                     }                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                 }                                                              %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                            %%% ^ \markup {                                                    %! EXPLICIT_METRONOME_MARK
-                            %%%     \fontsize                                                  %! EXPLICIT_METRONOME_MARK
-                            %%%         #-6                                                    %! EXPLICIT_METRONOME_MARK
-                            %%%         \general-align                                         %! EXPLICIT_METRONOME_MARK
-                            %%%             #Y                                                 %! EXPLICIT_METRONOME_MARK
-                            %%%             #DOWN                                              %! EXPLICIT_METRONOME_MARK
-                            %%%             \note-by-number                                    %! EXPLICIT_METRONOME_MARK
-                            %%%                 #2                                             %! EXPLICIT_METRONOME_MARK
-                            %%%                 #0                                             %! EXPLICIT_METRONOME_MARK
-                            %%%                 #1                                             %! EXPLICIT_METRONOME_MARK
-                            %%%     \upright                                                   %! EXPLICIT_METRONOME_MARK
-                            %%%         {                                                      %! EXPLICIT_METRONOME_MARK
-                            %%%             =                                                  %! EXPLICIT_METRONOME_MARK
-                            %%%             112                                                %! EXPLICIT_METRONOME_MARK
-                            %%%         }                                                      %! EXPLICIT_METRONOME_MARK
-                            %%%     }                                                          %! EXPLICIT_METRONOME_MARK
+                            %%% ^ \markup {                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%     \fontsize                                                  %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%         #-6                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%         \general-align                                         %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%             #Y                                                 %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%             #DOWN                                              %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%             \note-by-number                                    %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%                 #2                                             %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%                 #0                                             %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%                 #1                                             %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%     \upright                                                   %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%         {                                                      %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%             =                                                  %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%             112                                                %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%         }                                                      %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%     }                                                          %! EXPLICIT_METRONOME_MARK:SM27
                             \override Score.BarLine.transparent = ##f                          %! SM5
                             \bar "|"                                                           %! SM5
                 <BLANKLINE>
@@ -7265,22 +7323,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                             }                                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                     }                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                 }                                                              %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                            %%% ^ \markup {                                                    %! EXPLICIT_METRONOME_MARK
-                            %%%     \fontsize                                                  %! EXPLICIT_METRONOME_MARK
-                            %%%         #-6                                                    %! EXPLICIT_METRONOME_MARK
-                            %%%         \general-align                                         %! EXPLICIT_METRONOME_MARK
-                            %%%             #Y                                                 %! EXPLICIT_METRONOME_MARK
-                            %%%             #DOWN                                              %! EXPLICIT_METRONOME_MARK
-                            %%%             \note-by-number                                    %! EXPLICIT_METRONOME_MARK
-                            %%%                 #2                                             %! EXPLICIT_METRONOME_MARK
-                            %%%                 #0                                             %! EXPLICIT_METRONOME_MARK
-                            %%%                 #1                                             %! EXPLICIT_METRONOME_MARK
-                            %%%     \upright                                                   %! EXPLICIT_METRONOME_MARK
-                            %%%         {                                                      %! EXPLICIT_METRONOME_MARK
-                            %%%             =                                                  %! EXPLICIT_METRONOME_MARK
-                            %%%             112                                                %! EXPLICIT_METRONOME_MARK
-                            %%%         }                                                      %! EXPLICIT_METRONOME_MARK
-                            %%%     }                                                          %! EXPLICIT_METRONOME_MARK
+                            %%% ^ \markup {                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%     \fontsize                                                  %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%         #-6                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%         \general-align                                         %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%             #Y                                                 %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%             #DOWN                                              %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%             \note-by-number                                    %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%                 #2                                             %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%                 #0                                             %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%                 #1                                             %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%     \upright                                                   %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%         {                                                      %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%             =                                                  %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%             112                                                %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%         }                                                      %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%     }                                                          %! EXPLICIT_METRONOME_MARK:SM27
                             \override Score.BarLine.transparent = ##f                          %! SM5
                             \bar "|"                                                           %! SM5
                 <BLANKLINE>
@@ -7373,22 +7431,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                             }                                                  %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
                                     }                                                          %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
                                 }                                                              %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
-                            %%% ^ \markup {                                                    %! REAPPLIED_METRONOME_MARK
-                            %%%     \fontsize                                                  %! REAPPLIED_METRONOME_MARK
-                            %%%         #-6                                                    %! REAPPLIED_METRONOME_MARK
-                            %%%         \general-align                                         %! REAPPLIED_METRONOME_MARK
-                            %%%             #Y                                                 %! REAPPLIED_METRONOME_MARK
-                            %%%             #DOWN                                              %! REAPPLIED_METRONOME_MARK
-                            %%%             \note-by-number                                    %! REAPPLIED_METRONOME_MARK
-                            %%%                 #2                                             %! REAPPLIED_METRONOME_MARK
-                            %%%                 #0                                             %! REAPPLIED_METRONOME_MARK
-                            %%%                 #1                                             %! REAPPLIED_METRONOME_MARK
-                            %%%     \upright                                                   %! REAPPLIED_METRONOME_MARK
-                            %%%         {                                                      %! REAPPLIED_METRONOME_MARK
-                            %%%             =                                                  %! REAPPLIED_METRONOME_MARK
-                            %%%             90                                                 %! REAPPLIED_METRONOME_MARK
-                            %%%         }                                                      %! REAPPLIED_METRONOME_MARK
-                            %%%     }                                                          %! REAPPLIED_METRONOME_MARK
+                            %%% ^ \markup {                                                    %! REAPPLIED_METRONOME_MARK:SM27
+                            %%%     \fontsize                                                  %! REAPPLIED_METRONOME_MARK:SM27
+                            %%%         #-6                                                    %! REAPPLIED_METRONOME_MARK:SM27
+                            %%%         \general-align                                         %! REAPPLIED_METRONOME_MARK:SM27
+                            %%%             #Y                                                 %! REAPPLIED_METRONOME_MARK:SM27
+                            %%%             #DOWN                                              %! REAPPLIED_METRONOME_MARK:SM27
+                            %%%             \note-by-number                                    %! REAPPLIED_METRONOME_MARK:SM27
+                            %%%                 #2                                             %! REAPPLIED_METRONOME_MARK:SM27
+                            %%%                 #0                                             %! REAPPLIED_METRONOME_MARK:SM27
+                            %%%                 #1                                             %! REAPPLIED_METRONOME_MARK:SM27
+                            %%%     \upright                                                   %! REAPPLIED_METRONOME_MARK:SM27
+                            %%%         {                                                      %! REAPPLIED_METRONOME_MARK:SM27
+                            %%%             =                                                  %! REAPPLIED_METRONOME_MARK:SM27
+                            %%%             90                                                 %! REAPPLIED_METRONOME_MARK:SM27
+                            %%%         }                                                      %! REAPPLIED_METRONOME_MARK:SM27
+                            %%%     }                                                          %! REAPPLIED_METRONOME_MARK:SM27
                             \override Score.BarLine.transparent = ##f                          %! SM5
                             \bar "|"                                                           %! SM5
                 <BLANKLINE>
@@ -7474,22 +7532,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                             }                                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                     }                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                 }                                                              %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                            %%% ^ \markup {                                                    %! EXPLICIT_METRONOME_MARK
-                            %%%     \fontsize                                                  %! EXPLICIT_METRONOME_MARK
-                            %%%         #-6                                                    %! EXPLICIT_METRONOME_MARK
-                            %%%         \general-align                                         %! EXPLICIT_METRONOME_MARK
-                            %%%             #Y                                                 %! EXPLICIT_METRONOME_MARK
-                            %%%             #DOWN                                              %! EXPLICIT_METRONOME_MARK
-                            %%%             \note-by-number                                    %! EXPLICIT_METRONOME_MARK
-                            %%%                 #2                                             %! EXPLICIT_METRONOME_MARK
-                            %%%                 #0                                             %! EXPLICIT_METRONOME_MARK
-                            %%%                 #1                                             %! EXPLICIT_METRONOME_MARK
-                            %%%     \upright                                                   %! EXPLICIT_METRONOME_MARK
-                            %%%         {                                                      %! EXPLICIT_METRONOME_MARK
-                            %%%             =                                                  %! EXPLICIT_METRONOME_MARK
-                            %%%             112                                                %! EXPLICIT_METRONOME_MARK
-                            %%%         }                                                      %! EXPLICIT_METRONOME_MARK
-                            %%%     }                                                          %! EXPLICIT_METRONOME_MARK
+                            %%% ^ \markup {                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%     \fontsize                                                  %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%         #-6                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%         \general-align                                         %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%             #Y                                                 %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%             #DOWN                                              %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%             \note-by-number                                    %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%                 #2                                             %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%                 #0                                             %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%                 #1                                             %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%     \upright                                                   %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%         {                                                      %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%             =                                                  %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%             112                                                %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%         }                                                      %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%     }                                                          %! EXPLICIT_METRONOME_MARK:SM27
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                          %! SM4
                             \noBreak                                                           %! SEGMENT:LAYOUT:LMM2
@@ -7516,22 +7574,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                             }                                                  %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
                                     }                                                          %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
                                 }                                                              %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                            %%% ^ \markup {                                                    %! REDUNDANT_METRONOME_MARK
-                            %%%     \fontsize                                                  %! REDUNDANT_METRONOME_MARK
-                            %%%         #-6                                                    %! REDUNDANT_METRONOME_MARK
-                            %%%         \general-align                                         %! REDUNDANT_METRONOME_MARK
-                            %%%             #Y                                                 %! REDUNDANT_METRONOME_MARK
-                            %%%             #DOWN                                              %! REDUNDANT_METRONOME_MARK
-                            %%%             \note-by-number                                    %! REDUNDANT_METRONOME_MARK
-                            %%%                 #2                                             %! REDUNDANT_METRONOME_MARK
-                            %%%                 #0                                             %! REDUNDANT_METRONOME_MARK
-                            %%%                 #1                                             %! REDUNDANT_METRONOME_MARK
-                            %%%     \upright                                                   %! REDUNDANT_METRONOME_MARK
-                            %%%         {                                                      %! REDUNDANT_METRONOME_MARK
-                            %%%             =                                                  %! REDUNDANT_METRONOME_MARK
-                            %%%             112                                                %! REDUNDANT_METRONOME_MARK
-                            %%%         }                                                      %! REDUNDANT_METRONOME_MARK
-                            %%%     }                                                          %! REDUNDANT_METRONOME_MARK
+                            %%% ^ \markup {                                                    %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%     \fontsize                                                  %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%         #-6                                                    %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%         \general-align                                         %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%             #Y                                                 %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%             #DOWN                                              %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%             \note-by-number                                    %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%                 #2                                             %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%                 #0                                             %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%                 #1                                             %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%     \upright                                                   %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%         {                                                      %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%             =                                                  %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%             112                                                %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%         }                                                      %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%     }                                                          %! REDUNDANT_METRONOME_MARK:SM27
                             \override Score.BarLine.transparent = ##f                          %! SM5
                             \bar "|"                                                           %! SM5
                 <BLANKLINE>
@@ -7629,22 +7687,22 @@ class SegmentMaker(abjad.SegmentMaker):
                                             }                                                  %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
                                     }                                                          %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
                                 }                                                              %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                            %%% ^ \markup {                                                    %! REDUNDANT_METRONOME_MARK
-                            %%%     \fontsize                                                  %! REDUNDANT_METRONOME_MARK
-                            %%%         #-6                                                    %! REDUNDANT_METRONOME_MARK
-                            %%%         \general-align                                         %! REDUNDANT_METRONOME_MARK
-                            %%%             #Y                                                 %! REDUNDANT_METRONOME_MARK
-                            %%%             #DOWN                                              %! REDUNDANT_METRONOME_MARK
-                            %%%             \note-by-number                                    %! REDUNDANT_METRONOME_MARK
-                            %%%                 #2                                             %! REDUNDANT_METRONOME_MARK
-                            %%%                 #0                                             %! REDUNDANT_METRONOME_MARK
-                            %%%                 #1                                             %! REDUNDANT_METRONOME_MARK
-                            %%%     \upright                                                   %! REDUNDANT_METRONOME_MARK
-                            %%%         {                                                      %! REDUNDANT_METRONOME_MARK
-                            %%%             =                                                  %! REDUNDANT_METRONOME_MARK
-                            %%%             112                                                %! REDUNDANT_METRONOME_MARK
-                            %%%         }                                                      %! REDUNDANT_METRONOME_MARK
-                            %%%     }                                                          %! REDUNDANT_METRONOME_MARK
+                            %%% ^ \markup {                                                    %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%     \fontsize                                                  %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%         #-6                                                    %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%         \general-align                                         %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%             #Y                                                 %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%             #DOWN                                              %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%             \note-by-number                                    %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%                 #2                                             %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%                 #0                                             %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%                 #1                                             %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%     \upright                                                   %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%         {                                                      %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%             =                                                  %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%             112                                                %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%         }                                                      %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%     }                                                          %! REDUNDANT_METRONOME_MARK:SM27
                             \override Score.BarLine.transparent = ##f                          %! SM5
                             \bar "|"                                                           %! SM5
                 <BLANKLINE>
