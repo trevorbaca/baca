@@ -983,10 +983,10 @@ class PitchTree(Tree):
         abjad.override(score).stem.stencil = False
         abjad.override(score).text_script.staff_padding = 2
         abjad.override(score).time_signature.stencil = False
-        string = 'override Score.BarLine.transparent = ##f'
-        command = abjad.LilyPondCommand(string, format_slot='after')
-        last_leaf = abjad.select(score).leaves()[-1]
-        abjad.attach(command, last_leaf)
+        last_leaf = abjad.inspect(score).get_leaf(-1)
+        string = r'\override Score.BarLine.transparent = ##f'
+        literal = abjad.LilyPondLiteral(string, 'after')
+        abjad.attach(literal, last_leaf)
         moment = abjad.SchemeMoment((1, 16))
         abjad.setting(score).proportional_notation_duration = moment
         lilypond_file = abjad.LilyPondFile.new(
@@ -1006,21 +1006,21 @@ class PitchTree(Tree):
         if 'subtitle' in keywords:
             markup = abjad.Markup(keywords.get('subtitle'))
             lilypond_file.header_block.subtitle = markup
-        string = 'accidentalStyle dodecaphonic'
-        command = abjad.LilyPondCommand(string)
-        lilypond_file.layout_block.items.append(command)
+        string = r'\accidentalStyle dodecaphonic'
+        literal = abjad.LilyPondLiteral(string)
+        lilypond_file.layout_block.items.append(literal)
         lilypond_file.layout_block.indent = 0
         lilypond_file.layout_block.line_width = 287.5
         lilypond_file.layout_block.ragged_right = True
         string = 'markup-system-spacing.padding = 8'
-        command = abjad.LilyPondCommand(string, prefix='')
-        lilypond_file.paper_block.items.append(command)
+        literal = abjad.LilyPondLiteral(string)
+        lilypond_file.paper_block.items.append(literal)
         string = 'system-system-spacing.padding = 10'
-        command = abjad.LilyPondCommand(string, prefix='')
-        lilypond_file.paper_block.items.append(command)
+        literal = abjad.LilyPondLiteral(string)
+        lilypond_file.paper_block.items.append(literal)
         string = 'top-markup-spacing.padding = 4'
-        command = abjad.LilyPondCommand(string, prefix='')
-        lilypond_file.paper_block.items.append(command)
+        literal = abjad.LilyPondLiteral(string)
+        lilypond_file.paper_block.items.append(literal)
         return lilypond_file
 
     ### PRIVATE METHODS ###
@@ -1092,8 +1092,8 @@ class PitchTree(Tree):
                 transposition_only=True,
                 )
             string = str(set_class)
-            command = abjad.MarkupCommand('line', [string])
-            label = abjad.Markup(command, direction=abjad.Up)
+            markup = abjad.Markup.from_literal(string)
+            label = abjad.Markup.line([markup], direction=abjad.Up)
             if label is not None:
                 label = label.small()
                 first_leaf = leaves[0]

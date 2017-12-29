@@ -1954,9 +1954,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             minimum_duration = abjad.Duration(1, 8)
             if abjad.inspect(previous_leaf).get_duration() < minimum_duration:
-                string = r"shape #'((2 . 0) (1 . 0) (0.5 . 0) (0 . 0))"
+                string = r"\shape #'((2 . 0) (1 . 0) (0.5 . 0) (0 . 0))"
                 string += " RepeatTie"
-                command = abjad.LilyPondCommand(string)
+                literal = abjad.LilyPondLiteral(string)
                 abjad.attach(command, leaf)
 
     def _stage_number_to_measure_indices(self, stage_number):

@@ -1004,15 +1004,6 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         duration = self.minimum_width
                 if self.multiplier is not None:
                     duration = duration / self.multiplier
-
-#            command = abjad.LilyPondCommand('newSpacingSection')
-#            abjad.attach(command, skip)
-#            moment = abjad.SchemeMoment(duration)
-#            string = r'\set Score.proportionalNotationDuration = #'
-#            string += str(moment)
-#            literal = abjad.LilyPondLiteral(string)
-#            abjad.attach(literal, skip, tag=command_tag)
-
             strings = [r'\newSpacingSection']
             string = r'\set Score.proportionalNotationDuration = #'
             moment = abjad.SchemeMoment(duration)
@@ -1021,7 +1012,6 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             literal = abjad.LilyPondLiteral(strings)
             tag = baca.Tags.build(baca.Tags.SPACING)
             abjad.attach(literal, skip, site='HSS1', tag=tag)
-
             markup = abjad.Markup(f'({duration!s})').fontsize(-3)
             markup = markup.with_color(abjad.SchemeColor('DarkCyan'))
             markup = abjad.new(markup, direction=abjad.Up)

@@ -248,12 +248,11 @@ class OverrideCommand(Command):
             context=context,
             once=once,
             )
-        string = string[1:]
         format_slot = 'before'
         if self.after is True:
             format_slot = 'after'
-        override = abjad.LilyPondCommand(string, format_slot=format_slot)
-        abjad.attach(override, leaves[0], tag=self.tag)
+        literal = abjad.LilyPondLiteral(string, format_slot)
+        abjad.attach(literal, leaves[0], tag=self.tag)
         if once:
             return
         string = abjad.LilyPondFormatManager.make_lilypond_revert_string(
@@ -261,9 +260,8 @@ class OverrideCommand(Command):
             attribute,
             context=context,
             )
-        string = string[1:]
-        revert = abjad.LilyPondCommand(string, format_slot='after')
-        abjad.attach(revert, leaves[-1], tag=self.tag)
+        literal = abjad.LilyPondLiteral(string, 'after')
+        abjad.attach(literal, leaves[-1], tag=self.tag)
 
     ### PUBLIC PROPERTIES ###
 

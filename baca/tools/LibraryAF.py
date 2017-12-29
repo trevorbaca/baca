@@ -3486,7 +3486,7 @@ class LibraryAF(abjad.AbjadObject):
 
         '''
         return baca.IndicatorCommand(
-            indicators=[abjad.LilyPondCommand(r'\crossStaff')],
+            indicators=[abjad.LilyPondLiteral(r'\crossStaff')],
             selector=selector,
             )
 
@@ -4900,7 +4900,7 @@ class LibraryAF(abjad.AbjadObject):
 
         '''
         return baca.IndicatorCommand(
-            indicators=[abjad.LilyPondCommand('dynamicDown')],
+            indicators=[abjad.LilyPondLiteral(r'\dynamicDown')],
             selector=selector,
             )
 
@@ -5042,7 +5042,7 @@ class LibraryAF(abjad.AbjadObject):
 
         '''
         return baca.IndicatorCommand(
-            indicators=[abjad.LilyPondCommand('dynamicUp')],
+            indicators=[abjad.LilyPondLiteral(r'\dynamicUp')],
             selector=selector,
             )
 
