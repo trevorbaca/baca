@@ -1898,43 +1898,43 @@ class MusicMaker(abjad.AbjadObject):
                         \voiceOne
                         {
                             {
-                                \set stemLeftBeamCount = #0
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 0
+                                \set stemRightBeamCount = 2
                                 c'16
                                 [
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 d'16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 bf'16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #1
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 1
                                 fs''16
                             }
                             {
-                                \set stemLeftBeamCount = #1
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 2
                                 e''16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 ef''16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #1
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 1
                                 b''16
                             }
                             {
-                                \set stemLeftBeamCount = #1
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 2
                                 g''16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 cs''16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 a'16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #0
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 0
                                 af'16
                                 ]
                             }
@@ -2025,43 +2025,43 @@ class MusicMaker(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 12/11 {
                                 {
-                                    \set stemLeftBeamCount = #0
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 0
+                                    \set stemRightBeamCount = 2
                                     c'16
                                     [
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     d'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     bf'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
                                     fs''16
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
                                     e''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     ef''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
                                     b''16
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
                                     g''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     cs''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     a'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #0
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 0
                                     af'16
                                     ]
                                 }
@@ -2109,44 +2109,44 @@ class MusicMaker(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 8/7 {
                                 {
-                                    \set stemLeftBeamCount = #0
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 0
+                                    \set stemRightBeamCount = 2
                                     c'16
                                     [
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     d'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     bf'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
                                     fs''16
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
                                     e''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     ef''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
                                     b''16
                                 }
                             }
                             {
-                                \set stemLeftBeamCount = #1
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 2
                                 g''16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 cs''16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 a'16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #0
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 0
                                 af'16
                                 ]
                             }

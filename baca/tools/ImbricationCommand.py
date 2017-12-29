@@ -85,55 +85,55 @@ class ImbricationCommand(Command):
                         \voiceTwo
                         {
                             {
-                                \set stemLeftBeamCount = #0
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 0
+                                \set stemRightBeamCount = 2
                                 c'16
                                 [
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 d'16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 bf'16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 fs''16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #1
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 1
                                 e''16
                             }
                             {
-                                \set stemLeftBeamCount = #1
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 2
                                 ef''16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 af''16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 g''16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 a'16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #1
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 1
                                 c'16
                             }
                             {
-                                \set stemLeftBeamCount = #1
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 2
                                 d'16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 bf'16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 fs''16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 e''16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #0
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 0
                                 ef''16
                                 ]
                             }
@@ -195,8 +195,8 @@ class ImbricationCommand(Command):
                             {
                                 s16
                                 [
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 d'16
                                 -\staccato                                                           %! IC
                                 s16
@@ -206,12 +206,12 @@ class ImbricationCommand(Command):
                             {
                                 s16
                                 s16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 g''16
                                 -\staccato                                                           %! IC
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 a'16
                                 -\staccato                                                           %! IC
                                 s16
@@ -232,55 +232,55 @@ class ImbricationCommand(Command):
                         \voiceTwo
                         {
                             {
-                                \set stemLeftBeamCount = #0
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 0
+                                \set stemRightBeamCount = 2
                                 c'16
                                 [
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 d'16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 bf'16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 fs''16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #1
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 1
                                 e''16
                             }
                             {
-                                \set stemLeftBeamCount = #1
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 2
                                 ef''16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 af''16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 g''16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 a'16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #1
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 1
                                 c'16
                             }
                             {
-                                \set stemLeftBeamCount = #1
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 2
                                 d'16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 bf'16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 fs''16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 e''16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #0
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 0
                                 ef''16
                                 ]
                             }
@@ -297,8 +297,8 @@ class ImbricationCommand(Command):
                                 s16
                                 s16
                                 s16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #1
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 1
                                 e''16
                                 -\accent                                                             %! IC
                             }
@@ -311,12 +311,12 @@ class ImbricationCommand(Command):
                             }
                             {
                                 s16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 bf'16
                                 -\accent                                                             %! IC
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 fs''16
                                 -\accent                                                             %! IC
                                 s16
@@ -389,8 +389,8 @@ class ImbricationCommand(Command):
                             \times 6/5 {
                                 s16
                                 [
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 d'16
                                 -\accent                                                             %! IC
                                 s16
@@ -401,12 +401,12 @@ class ImbricationCommand(Command):
                             \times 6/5 {
                                 s16
                                 s16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 g''16
                                 -\accent                                                             %! IC
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 a'16
                                 -\accent                                                             %! IC
                                 s16
@@ -415,12 +415,12 @@ class ImbricationCommand(Command):
                             \times 6/5 {
                                 s16
                                 s16
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 fs''16
                                 -\accent                                                             %! IC
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 e''16
                                 -\accent                                                             %! IC
                                 s16
@@ -435,71 +435,71 @@ class ImbricationCommand(Command):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 6/5 {
-                                \set stemLeftBeamCount = #0
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 0
+                                \set stemRightBeamCount = 2
                                 c'16
                                 -\staccato                                                           %! IC
                                 [
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 d'16
                                 -\staccato                                                           %! IC
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 bf'16
                                 -\staccato                                                           %! IC
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 fs''16
                                 -\staccato                                                           %! IC
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #1
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 1
                                 e''16
                                 -\staccato                                                           %! IC
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 6/5 {
-                                \set stemLeftBeamCount = #1
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 2
                                 ef''16
                                 -\staccato                                                           %! IC
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 af''16
                                 -\staccato                                                           %! IC
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 g''16
                                 -\staccato                                                           %! IC
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 a'16
                                 -\staccato                                                           %! IC
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #1
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 1
                                 c'16
                                 -\staccato                                                           %! IC
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 6/5 {
-                                \set stemLeftBeamCount = #1
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 1
+                                \set stemRightBeamCount = 2
                                 d'16
                                 -\staccato                                                           %! IC
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 bf'16
                                 -\staccato                                                           %! IC
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 fs''16
                                 -\staccato                                                           %! IC
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #2
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 2
                                 e''16
                                 -\staccato                                                           %! IC
-                                \set stemLeftBeamCount = #2
-                                \set stemRightBeamCount = #0
+                                \set stemLeftBeamCount = 2
+                                \set stemRightBeamCount = 0
                                 ef''16
                                 -\staccato                                                           %! IC
                                 ]
@@ -626,22 +626,22 @@ class ImbricationCommand(Command):
                                     s8.
                                     [
                                     s8.
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 1
                                     bf'8.
                                     -\accent                                                             %! IC
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 1
                                     fs''8.
                                     -\accent                                                             %! IC
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 1
                                     e''8.
                                     -\accent                                                             %! IC
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 1
                                     ef''8.
                                     -\accent                                                             %! IC
                                     s8.
@@ -728,8 +728,8 @@ class ImbricationCommand(Command):
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
                                 {
-                                    \set stemLeftBeamCount = #0
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 0
+                                    \set stemRightBeamCount = 2
                                     c'16
                                     -\accent                                                             %! IC
                                     [
@@ -747,12 +747,12 @@ class ImbricationCommand(Command):
                                 {
                                     s16
                                     s16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     bf'16
                                     -\accent                                                             %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     fs''16
                                     -\accent                                                             %! IC
                                     s16
@@ -971,13 +971,13 @@ class ImbricationCommand(Command):
                                         s16
                                         [
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = #2
-                                        \set stemRightBeamCount = #2
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
                                         d'16
                                         -\staccato                                                       %! IC
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = #2
-                                        \set stemRightBeamCount = #2
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
                                         bf'16
                                         -\staccato                                                       %! IC
                 <BLANKLINE>
@@ -1002,13 +1002,13 @@ class ImbricationCommand(Command):
                                         % MusicVoiceOne [measure 2]                                      %! SM4
                                         s16
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = #2
-                                        \set stemRightBeamCount = #2
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
                                         cs''16
                                         -\staccato                                                       %! IC
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = #2
-                                        \set stemRightBeamCount = #2
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
                                         a'16
                                         -\staccato                                                       %! IC
                 <BLANKLINE>
@@ -1025,35 +1025,35 @@ class ImbricationCommand(Command):
                                     {
                 <BLANKLINE>
                                         % MusicVoiceTwo [measure 1]                                      %! SM4
-                                        \set stemLeftBeamCount = #0
-                                        \set stemRightBeamCount = #2
+                                        \set stemLeftBeamCount = 0
+                                        \set stemRightBeamCount = 2
                                         c'16
                                         [
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = #2
-                                        \set stemRightBeamCount = #2
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
                                         d'16
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = #2
-                                        \set stemRightBeamCount = #2
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
                                         bf'16
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = #2
-                                        \set stemRightBeamCount = #1
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 1
                                         fs''16
                                     }
                                     {
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = #1
-                                        \set stemRightBeamCount = #2
+                                        \set stemLeftBeamCount = 1
+                                        \set stemRightBeamCount = 2
                                         e''16
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = #2
-                                        \set stemRightBeamCount = #2
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
                                         ef''16
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = #2
-                                        \set stemRightBeamCount = #0
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 0
                                         b''16
                                         ]
                                     }
@@ -1062,21 +1062,21 @@ class ImbricationCommand(Command):
                                     {
                 <BLANKLINE>
                                         % MusicVoiceTwo [measure 2]                                      %! SM4
-                                        \set stemLeftBeamCount = #0
-                                        \set stemRightBeamCount = #2
+                                        \set stemLeftBeamCount = 0
+                                        \set stemRightBeamCount = 2
                                         g''16
                                         [
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = #2
-                                        \set stemRightBeamCount = #2
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
                                         cs''16
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = #2
-                                        \set stemRightBeamCount = #2
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 2
                                         a'16
                 <BLANKLINE>
-                                        \set stemLeftBeamCount = #2
-                                        \set stemRightBeamCount = #0
+                                        \set stemLeftBeamCount = 2
+                                        \set stemRightBeamCount = 0
                                         af'16
                                         ]
                 <BLANKLINE>
@@ -1158,43 +1158,43 @@ class ImbricationCommand(Command):
                             \voiceTwo
                             {
                                 {
-                                    \set stemLeftBeamCount = #0
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 0
+                                    \set stemRightBeamCount = 2
                                     <c' d' bf' e'' fs''>16
                                     [
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
                                     ef''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     af''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     g''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     a'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
                                     c'16
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
                                     d'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     bf'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     fs''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     e''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #0
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 0
                                     ef''16
                                     ]
                                 }
@@ -1282,55 +1282,55 @@ class ImbricationCommand(Command):
                             {
                                 {
                                     r8
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     c'16
                                     [
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     d'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     bf'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     fs''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
                                     e''16
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
                                     ef''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     af''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     g''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     a'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
                                     c'16
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
                                     d'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     bf'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     fs''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     e''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     ef''16
                                     ]
                                     r8
@@ -1537,8 +1537,8 @@ class ImbricationCommand(Command):
                                 {
                                     s16
                                     [
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     d'16
                                     -\accent                                                             %! IC
                                     s16
@@ -1548,12 +1548,12 @@ class ImbricationCommand(Command):
                                 {
                                     s16
                                     s16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     g''16
                                     -\accent                                                             %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     a'16
                                     -\accent                                                             %! IC
                                     s16
@@ -1567,47 +1567,47 @@ class ImbricationCommand(Command):
                             \voiceTwo
                             {
                                 {
-                                    \set stemLeftBeamCount = #0
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 0
+                                    \set stemRightBeamCount = 2
                                     c'16
                                     -\staccato                                                           %! IC
                                     [
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     d'16
                                     -\staccato                                                           %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     bf'16
                                     -\staccato                                                           %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     fs''16
                                     -\staccato                                                           %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
                                     e''16
                                     -\staccato                                                           %! IC
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
                                     ef''16
                                     -\staccato                                                           %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     af''16
                                     -\staccato                                                           %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     g''16
                                     -\staccato                                                           %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     a'16
                                     -\staccato                                                           %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #0
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 0
                                     c'16
                                     -\staccato                                                           %! IC
                                     ]
@@ -1739,8 +1739,8 @@ class ImbricationCommand(Command):
                                 {
                                     s16
                                     [
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     d'16
                                     -\accent                                                             %! IC
                                     s16
@@ -1750,12 +1750,12 @@ class ImbricationCommand(Command):
                                 {
                                     s16
                                     s16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     g''16
                                     -\accent                                                             %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     a'16
                                     -\accent                                                             %! IC
                                     s16
@@ -1763,12 +1763,12 @@ class ImbricationCommand(Command):
                                 {
                                     s16
                                     s16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     fs''16
                                     -\accent                                                             %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     e''16
                                     -\accent                                                             %! IC
                                     s16
@@ -1782,54 +1782,54 @@ class ImbricationCommand(Command):
                             \voiceTwo
                             {
                                 {
-                                    \set stemLeftBeamCount = #0
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 0
+                                    \set stemRightBeamCount = 2
                                     c'16
                                     -\staccato                                                           %! IC
                                     [
                                     s16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     bf'16
                                     -\staccato                                                           %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     fs''16
                                     -\staccato                                                           %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
                                     e''16
                                     -\staccato                                                           %! IC
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
                                     ef''16
                                     -\staccato                                                           %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     af''16
                                     -\staccato                                                           %! IC
                                     s16
                                     s16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
                                     c'16
                                     -\staccato                                                           %! IC
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
                                     d'16
                                     -\staccato                                                           %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     bf'16
                                     -\staccato                                                           %! IC
                                     s16
                                     s16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #0
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 0
                                     ef''16
                                     -\staccato                                                           %! IC
                                     ]
@@ -1927,23 +1927,23 @@ class ImbricationCommand(Command):
                                 }
                                 {
                                     s16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     d'16
                                     -\accent                                                             %! IC
                                     s16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     fs''16
                                     -\accent                                                             %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
                                     e''16
                                     -\accent                                                             %! IC
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
                                     ef''16
                                     -\accent                                                             %! IC
                                     s16
@@ -1959,83 +1959,83 @@ class ImbricationCommand(Command):
                             \voiceTwo
                             {
                                 {
-                                    \set stemLeftBeamCount = #0
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 0
+                                    \set stemRightBeamCount = 2
                                     c'16
                                     -\staccato                                                           %! IC
                                     [
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     d'16
                                     -\staccato                                                           %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     bf'16
                                     -\staccato                                                           %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     fs''16
                                     -\staccato                                                           %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
                                     e''16
                                     -\staccato                                                           %! IC
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
                                     ef''16
                                     -\staccato                                                           %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     af''16
                                     -\staccato                                                           %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     g''16
                                     -\staccato                                                           %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
                                     a'16
                                     -\staccato                                                           %! IC
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
                                     c'16
                                     -\staccato                                                           %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     d'16
                                     -\staccato                                                           %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     bf'16
                                     -\staccato                                                           %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     fs''16
                                     -\staccato                                                           %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
                                     e''16
                                     -\staccato                                                           %! IC
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
                                     ef''16
                                     -\staccato                                                           %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     af''16
                                     -\staccato                                                           %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     g''16
                                     -\staccato                                                           %! IC
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #0
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 0
                                     a'16
                                     -\staccato                                                           %! IC
                                     ]
@@ -2137,55 +2137,55 @@ class ImbricationCommand(Command):
                             \voiceTwo
                             {
                                 {
-                                    \set stemLeftBeamCount = #0
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 0
+                                    \set stemRightBeamCount = 2
                                     c'16
                                     [
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     d'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     bf'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     fs''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
                                     e''16
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
                                     ef''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     af''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     g''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     a'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
                                     c'16
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
                                     d'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     bf'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     fs''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     e''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #0
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 0
                                     ef''16
                                     ]
                                 }
@@ -2241,8 +2241,8 @@ class ImbricationCommand(Command):
                                 \override TupletNumber.stencil = ##f
                                 {
                                     s16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     d'16
                                     [
                                     ]
@@ -2253,12 +2253,12 @@ class ImbricationCommand(Command):
                                 {
                                     s16
                                     s16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     g''16
                                     [
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     a'16
                                     ]
                                     s16
@@ -2266,12 +2266,12 @@ class ImbricationCommand(Command):
                                 {
                                     s16
                                     s16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     fs''16
                                     [
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     e''16
                                     ]
                                     s16
@@ -2284,55 +2284,55 @@ class ImbricationCommand(Command):
                             \voiceTwo
                             {
                                 {
-                                    \set stemLeftBeamCount = #0
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 0
+                                    \set stemRightBeamCount = 2
                                     c'16
                                     [
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     d'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     bf'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     fs''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
                                     e''16
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
                                     ef''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     af''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     g''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     a'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
                                     c'16
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
                                     d'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     bf'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     fs''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     e''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #0
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 0
                                     ef''16
                                     ]
                                 }
@@ -2387,8 +2387,8 @@ class ImbricationCommand(Command):
                                 {
                                     s16
                                     [
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     d'16
                                     s16
                                     s16
@@ -2397,22 +2397,22 @@ class ImbricationCommand(Command):
                                 {
                                     s16
                                     s16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     g''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     a'16
                                     s16
                                 }
                                 {
                                     s16
                                     s16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     fs''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     e''16
                                     s16
                                     ]
@@ -2425,55 +2425,55 @@ class ImbricationCommand(Command):
                             \voiceTwo
                             {
                                 {
-                                    \set stemLeftBeamCount = #0
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 0
+                                    \set stemRightBeamCount = 2
                                     c'16
                                     [
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     d'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     bf'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     fs''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
                                     e''16
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
                                     ef''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     af''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     g''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     a'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
                                     c'16
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
                                     d'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     bf'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     fs''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     e''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #0
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 0
                                     ef''16
                                     ]
                                 }
@@ -2562,55 +2562,55 @@ class ImbricationCommand(Command):
                             \voiceTwo
                             {
                                 {
-                                    \set stemLeftBeamCount = #0
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 0
+                                    \set stemRightBeamCount = 2
                                     c'16
                                     [
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     d'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     bf'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     fs''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
                                     e''16
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
                                     ef''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     af''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     g''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     a'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
                                     c'16
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
                                     d'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     bf'16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     fs''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #2
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
                                     e''16
-                                    \set stemLeftBeamCount = #2
-                                    \set stemRightBeamCount = #0
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 0
                                     ef''16
                                     ]
                                 }
@@ -2676,18 +2676,18 @@ class ImbricationCommand(Command):
                                     s8
                                     [
                                     s32
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 1
                                     d'8
                                     s32
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 1
                                     bf'8
                                     s32
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 1
                                     fs''8
                                     s32
                                     s8
@@ -2696,14 +2696,14 @@ class ImbricationCommand(Command):
                                     s32
                                     s8
                                     s32
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 1
                                     g''8
                                     s32
                                 }
                                 {
-                                    \set stemLeftBeamCount = #1
-                                    \set stemRightBeamCount = #1
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 1
                                     a'8
                                     s32
                                     ]
