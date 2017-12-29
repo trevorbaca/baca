@@ -49,15 +49,15 @@ class MarkupLibrary(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
+                                \override TupletBracket.staff-padding = #5                               %! OC
                                 r8
                                 c'16
                                 [
-                                ^ \markup {                                                              %! IC1
-                                    \whiteout                                                            %! IC1
-                                        \upright                                                         %! IC1
-                                            "più mosso"                                                  %! IC1
-                                    }                                                                    %! IC1
+                                ^ \markup {                                                              %! IC
+                                    \whiteout                                                            %! IC
+                                        \upright                                                         %! IC
+                                            "più mosso"                                                  %! IC
+                                    }                                                                    %! IC
                                 d'16
                                 ]
                                 bf'4
@@ -83,7 +83,7 @@ class MarkupLibrary(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding
+                                \revert TupletBracket.staff-padding                                      %! OC
                             }
                         }
                     }
@@ -115,7 +115,7 @@ class MarkupLibrary(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
+                                \override TupletBracket.staff-padding = #5                               %! OC
                                 r8
                                 c'16
                                 [
@@ -130,11 +130,11 @@ class MarkupLibrary(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                ^ \markup {                                                              %! IC1
-                                    \whiteout                                                            %! IC1
-                                        \upright                                                         %! IC1
-                                            "più mosso"                                                  %! IC1
-                                    }                                                                    %! IC1
+                                ^ \markup {                                                              %! IC
+                                    \whiteout                                                            %! IC
+                                        \upright                                                         %! IC
+                                            "più mosso"                                                  %! IC
+                                    }                                                                    %! IC
                                 e''16
                                 ]
                                 ef''4
@@ -149,7 +149,7 @@ class MarkupLibrary(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding
+                                \revert TupletBracket.staff-padding                                      %! OC
                             }
                         }
                     }
@@ -181,7 +181,7 @@ class MarkupLibrary(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5
+                                \override TupletBracket.staff-padding = #5                               %! OC
                                 r8
                                 c'16
                                 [
@@ -196,46 +196,46 @@ class MarkupLibrary(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                ^ \markup {                                                              %! IC1
-                                    \whiteout                                                            %! IC1
-                                        \upright                                                         %! IC1
-                                            *                                                            %! IC1
-                                    }                                                                    %! IC1
+                                ^ \markup {                                                              %! IC
+                                    \whiteout                                                            %! IC
+                                        \upright                                                         %! IC
+                                            *                                                            %! IC
+                                    }                                                                    %! IC
                                 e''16
                                 ]
-                                ^ \markup {                                                              %! IC1
-                                    \whiteout                                                            %! IC1
-                                        \upright                                                         %! IC1
-                                            *                                                            %! IC1
-                                    }                                                                    %! IC1
+                                ^ \markup {                                                              %! IC
+                                    \whiteout                                                            %! IC
+                                        \upright                                                         %! IC
+                                            *                                                            %! IC
+                                    }                                                                    %! IC
                                 ef''4
                                 ~
-                                ^ \markup {                                                              %! IC1
-                                    \whiteout                                                            %! IC1
-                                        \upright                                                         %! IC1
-                                            *                                                            %! IC1
-                                    }                                                                    %! IC1
+                                ^ \markup {                                                              %! IC
+                                    \whiteout                                                            %! IC
+                                        \upright                                                         %! IC
+                                            *                                                            %! IC
+                                    }                                                                    %! IC
                                 ef''16
                                 r16
                                 af''16
                                 [
-                                ^ \markup {                                                              %! IC1
-                                    \whiteout                                                            %! IC1
-                                        \upright                                                         %! IC1
-                                            *                                                            %! IC1
-                                    }                                                                    %! IC1
+                                ^ \markup {                                                              %! IC
+                                    \whiteout                                                            %! IC
+                                        \upright                                                         %! IC
+                                            *                                                            %! IC
+                                    }                                                                    %! IC
                                 g''16
                                 ]
-                                ^ \markup {                                                              %! IC1
-                                    \whiteout                                                            %! IC1
-                                        \upright                                                         %! IC1
-                                            *                                                            %! IC1
-                                    }                                                                    %! IC1
+                                ^ \markup {                                                              %! IC
+                                    \whiteout                                                            %! IC
+                                        \upright                                                         %! IC
+                                            *                                                            %! IC
+                                    }                                                                    %! IC
                             }
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding
+                                \revert TupletBracket.staff-padding                                      %! OC
                             }
                         }
                     }

@@ -38,7 +38,7 @@ class MapCommand(Command):
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5
+                            \override TupletBracket.staff-padding = #5                               %! OC
                             r8
                             c'16
                             [
@@ -52,27 +52,27 @@ class MapCommand(Command):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\accent                                                                 %! IC1
+                            -\accent                                                                 %! IC
                             [
                             e''16
-                            -\accent                                                                 %! IC1
+                            -\accent                                                                 %! IC
                             ]
                             ef''4
-                            -\accent                                                                 %! IC1
+                            -\accent                                                                 %! IC
                             ~
                             ef''16
                             r16
                             af''16
-                            -\accent                                                                 %! IC1
+                            -\accent                                                                 %! IC
                             [
                             g''16
-                            -\accent                                                                 %! IC1
+                            -\accent                                                                 %! IC
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding
+                            \revert TupletBracket.staff-padding                                      %! OC
                         }
                     }
                 }

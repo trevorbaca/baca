@@ -30,8 +30,8 @@ class OverrideCommand(Command):
                     \voiceOne
                     {
                         {
-                            \override Beam.positions = #'(6 . 6)
-                            \override Stem.direction = #up
+                            \override Beam.positions = #'(6 . 6)                                     %! OC
+                            \override Stem.direction = #up                                           %! OC
                             c'16
                             [
                             d'16
@@ -49,8 +49,8 @@ class OverrideCommand(Command):
                         }
                         {
                             a'16
-                            \revert Beam.positions
-                            \revert Stem.direction
+                            \revert Beam.positions                                                   %! OC
+                            \revert Stem.direction                                                   %! OC
                         }
                     }
                 }
@@ -124,8 +124,8 @@ class OverrideCommand(Command):
                         \context Voice = "MusicVoice" {
             <BLANKLINE>
                             % MusicVoice [measure 1]                                                 %! SM4
-                            \override Beam.positions = #'(6 . 6)
-                            \override Stem.direction = #up
+                            \override Beam.positions = #'(6 . 6)                                     %! OC
+                            \override Stem.direction = #up                                           %! OC
                             e'8
                             [
             <BLANKLINE>
@@ -134,7 +134,7 @@ class OverrideCommand(Command):
                             f'8
                             ]
             <BLANKLINE>
-                            \override Rest.direction = #up
+                            \override Rest.direction = #up                                           %! OC
                             r8
             <BLANKLINE>
                             % MusicVoice [measure 2]                                                 %! SM4
@@ -159,15 +159,15 @@ class OverrideCommand(Command):
             <BLANKLINE>
                             % MusicVoice [measure 4]                                                 %! SM4
                             r8
-                            \revert Rest.direction
+                            \revert Rest.direction                                                   %! OC
             <BLANKLINE>
                             e''8
                             [
             <BLANKLINE>
                             g'8
                             ]
-                            \revert Beam.positions
-                            \revert Stem.direction
+                            \revert Beam.positions                                                   %! OC
+                            \revert Stem.direction                                                   %! OC
             <BLANKLINE>
                         }
                     }
@@ -177,7 +177,7 @@ class OverrideCommand(Command):
     ..  container:: example
 
         >>> baca.OverrideCommand()
-        OverrideCommand(selector=baca.leaves())
+        OverrideCommand(selector=baca.leaves(), site='OC')
 
     '''
 
@@ -188,6 +188,7 @@ class OverrideCommand(Command):
         '_attribute',
         '_context',
         '_grob',
+        '_site',
         '_tag',
         '_value',
         )
@@ -201,6 +202,7 @@ class OverrideCommand(Command):
         context=None,
         grob=None,
         selector='baca.leaves()',
+        site='OC',
         tag=None,
         value=None,
         ):
@@ -217,6 +219,9 @@ class OverrideCommand(Command):
         if grob is not None:
             assert isinstance(grob, str), repr(grob)
         self._grob = grob
+        if site is not None:
+            assert isinstance(site, str), repr(site)
+        self._site = site
         if tag is not None:
             assert isinstance(tag, str), repr(tag)
         self._tag = tag
@@ -237,6 +242,14 @@ class OverrideCommand(Command):
             return
         leaves = abjad.select(argument).leaves(grace_notes=False)
         context = self.context
+        assert isinstance(context, (str, type(None))), repr(context)
+        if context in dir(abjad):
+            context = getattr(abjad, context)
+            assert issubclass(context, abjad.Context), repr(context)
+            parentage = abjad.inspect(leaves[0]).get_parentage()
+            context = parentage.get_first(context) or context()
+            context = context.headword
+            assert isinstance(context, str), repr(context)
         grob = self.grob
         attribute = self.attribute
         value = self.value
@@ -252,7 +265,7 @@ class OverrideCommand(Command):
         if self.after is True:
             format_slot = 'after'
         literal = abjad.LilyPondLiteral(string, format_slot)
-        abjad.attach(literal, leaves[0], tag=self.tag)
+        abjad.attach(literal, leaves[0], site=self.site, tag=self.tag)
         if once:
             return
         string = abjad.LilyPondFormatManager.make_lilypond_revert_string(
@@ -261,7 +274,7 @@ class OverrideCommand(Command):
             context=context,
             )
         literal = abjad.LilyPondLiteral(string, 'after')
-        abjad.attach(literal, leaves[-1], tag=self.tag)
+        abjad.attach(literal, leaves[-1], site=self.site, tag=self.tag)
 
     ### PUBLIC PROPERTIES ###
 
@@ -298,6 +311,14 @@ class OverrideCommand(Command):
         Set to string or none.
         '''
         return self._grob
+
+    @property
+    def site(self):
+        r'''Gets site.
+
+        Set to string or none.
+        '''
+        return self._site
 
     @property
     def tag(self):
