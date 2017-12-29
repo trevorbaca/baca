@@ -25,11 +25,11 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
         >>> lilypond_file = music_maker.show(contribution)
         >>> staff = lilypond_file[abjad.Staff]
         >>> abjad.override(staff).tuplet_bracket.staff_padding = 4
-        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff \with {
                 \override TupletBracket.staff-padding = #4
             } <<
@@ -83,11 +83,11 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
         >>> lilypond_file = music_maker.show(contribution)
         >>> staff = lilypond_file[abjad.Staff]
         >>> abjad.override(staff).tuplet_bracket.staff_padding = 4
-        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff \with {
                 \override TupletBracket.staff-padding = #4
             } <<
@@ -189,11 +189,11 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -260,11 +260,11 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
             ...     time_treatments=[1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -314,11 +314,11 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
             ...     time_treatments=[1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -357,11 +357,11 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
             ...     time_treatments=[1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -414,11 +414,11 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
             ...     time_treatments=[1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -478,11 +478,11 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
             ...     baca.RestAffixSpecifier(prefix=[3]),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -546,11 +546,11 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
             ...     baca.RestAffixSpecifier(suffix=[3]),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne

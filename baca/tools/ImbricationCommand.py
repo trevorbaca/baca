@@ -34,11 +34,11 @@ class ImbricationCommand(Command):
         ...         ),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             \new Score <<
                 \new GlobalContext {
                     { % measure
@@ -174,11 +174,11 @@ class ImbricationCommand(Command):
         ...         ),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             \new Score <<
                 \new GlobalContext {
                     { % measure
@@ -198,7 +198,7 @@ class ImbricationCommand(Command):
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
                                 d'16
-                                -\staccato                                                 %! IC1
+                                -\staccato                                                           %! IC1
                                 s16
                                 s16
                                 s16
@@ -209,11 +209,11 @@ class ImbricationCommand(Command):
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
                                 g''16
-                                -\staccato                                                 %! IC1
+                                -\staccato                                                           %! IC1
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
                                 a'16
-                                -\staccato                                                 %! IC1
+                                -\staccato                                                           %! IC1
                                 s16
                             }
                             {
@@ -300,7 +300,7 @@ class ImbricationCommand(Command):
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #1
                                 e''16
-                                -\accent                                                   %! IC1
+                                -\accent                                                             %! IC1
                             }
                             {
                                 s16
@@ -314,11 +314,11 @@ class ImbricationCommand(Command):
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
                                 bf'16
-                                -\accent                                                   %! IC1
+                                -\accent                                                             %! IC1
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
                                 fs''16
-                                -\accent                                                   %! IC1
+                                -\accent                                                             %! IC1
                                 s16
                                 s16
                                 ]
@@ -367,11 +367,11 @@ class ImbricationCommand(Command):
         ...         ),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             \new Score <<
                 \new GlobalContext {
                     { % measure
@@ -392,7 +392,7 @@ class ImbricationCommand(Command):
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
                                 d'16
-                                -\accent                                                   %! IC1
+                                -\accent                                                             %! IC1
                                 s16
                                 s16
                                 s16
@@ -404,11 +404,11 @@ class ImbricationCommand(Command):
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
                                 g''16
-                                -\accent                                                   %! IC1
+                                -\accent                                                             %! IC1
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
                                 a'16
-                                -\accent                                                   %! IC1
+                                -\accent                                                             %! IC1
                                 s16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
@@ -418,11 +418,11 @@ class ImbricationCommand(Command):
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
                                 fs''16
-                                -\accent                                                   %! IC1
+                                -\accent                                                             %! IC1
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
                                 e''16
-                                -\accent                                                   %! IC1
+                                -\accent                                                             %! IC1
                                 s16
                                 ]
                             }
@@ -438,70 +438,70 @@ class ImbricationCommand(Command):
                                 \set stemLeftBeamCount = #0
                                 \set stemRightBeamCount = #2
                                 c'16
-                                -\staccato                                                 %! IC1
+                                -\staccato                                                           %! IC1
                                 [
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
                                 d'16
-                                -\staccato                                                 %! IC1
+                                -\staccato                                                           %! IC1
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
                                 bf'16
-                                -\staccato                                                 %! IC1
+                                -\staccato                                                           %! IC1
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
                                 fs''16
-                                -\staccato                                                 %! IC1
+                                -\staccato                                                           %! IC1
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #1
                                 e''16
-                                -\staccato                                                 %! IC1
+                                -\staccato                                                           %! IC1
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 6/5 {
                                 \set stemLeftBeamCount = #1
                                 \set stemRightBeamCount = #2
                                 ef''16
-                                -\staccato                                                 %! IC1
+                                -\staccato                                                           %! IC1
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
                                 af''16
-                                -\staccato                                                 %! IC1
+                                -\staccato                                                           %! IC1
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
                                 g''16
-                                -\staccato                                                 %! IC1
+                                -\staccato                                                           %! IC1
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
                                 a'16
-                                -\staccato                                                 %! IC1
+                                -\staccato                                                           %! IC1
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #1
                                 c'16
-                                -\staccato                                                 %! IC1
+                                -\staccato                                                           %! IC1
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 6/5 {
                                 \set stemLeftBeamCount = #1
                                 \set stemRightBeamCount = #2
                                 d'16
-                                -\staccato                                                 %! IC1
+                                -\staccato                                                           %! IC1
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
                                 bf'16
-                                -\staccato                                                 %! IC1
+                                -\staccato                                                           %! IC1
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
                                 fs''16
-                                -\staccato                                                 %! IC1
+                                -\staccato                                                           %! IC1
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #2
                                 e''16
-                                -\staccato                                                 %! IC1
+                                -\staccato                                                           %! IC1
                                 \set stemLeftBeamCount = #2
                                 \set stemRightBeamCount = #0
                                 ef''16
-                                -\staccato                                                 %! IC1
+                                -\staccato                                                           %! IC1
                                 ]
                             }
                         }
@@ -604,11 +604,11 @@ class ImbricationCommand(Command):
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \new Score <<
                     \new GlobalContext {
                         { % measure
@@ -629,21 +629,21 @@ class ImbricationCommand(Command):
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #1
                                     bf'8.
-                                    -\accent                                                   %! IC1
+                                    -\accent                                                             %! IC1
                                 }
                                 {
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #1
                                     fs''8.
-                                    -\accent                                                   %! IC1
+                                    -\accent                                                             %! IC1
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #1
                                     e''8.
-                                    -\accent                                                   %! IC1
+                                    -\accent                                                             %! IC1
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #1
                                     ef''8.
-                                    -\accent                                                   %! IC1
+                                    -\accent                                                             %! IC1
                                     s8.
                                     s8.
                                 }
@@ -709,11 +709,11 @@ class ImbricationCommand(Command):
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \new Score <<
                     \new GlobalContext {
                         { % measure
@@ -731,7 +731,7 @@ class ImbricationCommand(Command):
                                     \set stemLeftBeamCount = #0
                                     \set stemRightBeamCount = #2
                                     c'16
-                                    -\accent                                                   %! IC1
+                                    -\accent                                                             %! IC1
                                     [
                                     s16
                                     s16
@@ -750,11 +750,11 @@ class ImbricationCommand(Command):
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     bf'16
-                                    -\accent                                                   %! IC1
+                                    -\accent                                                             %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     fs''16
-                                    -\accent                                                   %! IC1
+                                    -\accent                                                             %! IC1
                                     s16
                                 }
                                 {
@@ -893,67 +893,67 @@ class ImbricationCommand(Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                          %! SM4
-                            \time 7/16                                                         %! SM1
-                            \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            % GlobalSkips [measure 1]                                                    %! SM4
+                            \time 7/16                                                                   %! SM1
+                            \bar ""                                                                      %! EMPTY_START_BAR:SM2
+                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
                             s1 * 7/16
                             ^ \markup {
                                 \column
                                     {
-                                        \line                                                  %! STAGE_NUMBER_MARKUP:SM3
-                                            {                                                  %! STAGE_NUMBER_MARKUP:SM3
-                                                \fontsize                                      %! STAGE_NUMBER_MARKUP:SM3
-                                                    #-3                                        %! STAGE_NUMBER_MARKUP:SM3
-                                                    \with-color                                %! STAGE_NUMBER_MARKUP:SM3
-                                                        #(x11-color 'DarkCyan)                 %! STAGE_NUMBER_MARKUP:SM3
-                                                        [1]                                    %! STAGE_NUMBER_MARKUP:SM3
-                                            }                                                  %! STAGE_NUMBER_MARKUP:SM3
-                                        \line                                                  %! SEGMENT:SPACING_MARKUP:HSS2
-                                            {                                                  %! SEGMENT:SPACING_MARKUP:HSS2
-                                                \with-color                                    %! SEGMENT:SPACING_MARKUP:HSS2
-                                                    #(x11-color 'DarkCyan)                     %! SEGMENT:SPACING_MARKUP:HSS2
-                                                    \fontsize                                  %! SEGMENT:SPACING_MARKUP:HSS2
-                                                        #-3                                    %! SEGMENT:SPACING_MARKUP:HSS2
-                                                        (1/24)                                 %! SEGMENT:SPACING_MARKUP:HSS2
-                                            }                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                        \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                            {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                                \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                                    #-3                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                                    \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                                        #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                                        [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                            }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                        \line                                                            %! SEGMENT:SPACING_MARKUP:HSS2
+                                            {                                                            %! SEGMENT:SPACING_MARKUP:HSS2
+                                                \with-color                                              %! SEGMENT:SPACING_MARKUP:HSS2
+                                                    #(x11-color 'DarkCyan)                               %! SEGMENT:SPACING_MARKUP:HSS2
+                                                    \fontsize                                            %! SEGMENT:SPACING_MARKUP:HSS2
+                                                        #-3                                              %! SEGMENT:SPACING_MARKUP:HSS2
+                                                        (1/24)                                           %! SEGMENT:SPACING_MARKUP:HSS2
+                                            }                                                            %! SEGMENT:SPACING_MARKUP:HSS2
                                     }
                                 }
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                          %! SM4
-                            \time 1/4                                                          %! SM1
-                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                            % GlobalSkips [measure 2]                                                    %! SM4
+                            \time 1/4                                                                    %! SM1
+                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
                             s1 * 1/4
                             ^ \markup {
                                 \column
                                     {
-                                        \line                                                  %! STAGE_NUMBER_MARKUP:SM3
-                                            {                                                  %! STAGE_NUMBER_MARKUP:SM3
-                                                \fontsize                                      %! STAGE_NUMBER_MARKUP:SM3
-                                                    #-3                                        %! STAGE_NUMBER_MARKUP:SM3
-                                                    \with-color                                %! STAGE_NUMBER_MARKUP:SM3
-                                                        #(x11-color 'DarkCyan)                 %! STAGE_NUMBER_MARKUP:SM3
-                                                        [2]                                    %! STAGE_NUMBER_MARKUP:SM3
-                                            }                                                  %! STAGE_NUMBER_MARKUP:SM3
-                                        \line                                                  %! SEGMENT:SPACING_MARKUP:HSS2
-                                            {                                                  %! SEGMENT:SPACING_MARKUP:HSS2
-                                                \with-color                                    %! SEGMENT:SPACING_MARKUP:HSS2
-                                                    #(x11-color 'DarkCyan)                     %! SEGMENT:SPACING_MARKUP:HSS2
-                                                    \fontsize                                  %! SEGMENT:SPACING_MARKUP:HSS2
-                                                        #-3                                    %! SEGMENT:SPACING_MARKUP:HSS2
-                                                        (1/24)                                 %! SEGMENT:SPACING_MARKUP:HSS2
-                                            }                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                        \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                            {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                                \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                                    #-3                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                                    \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                                        #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                                        [2]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                            }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                        \line                                                            %! SEGMENT:SPACING_MARKUP:HSS2
+                                            {                                                            %! SEGMENT:SPACING_MARKUP:HSS2
+                                                \with-color                                              %! SEGMENT:SPACING_MARKUP:HSS2
+                                                    #(x11-color 'DarkCyan)                               %! SEGMENT:SPACING_MARKUP:HSS2
+                                                    \fontsize                                            %! SEGMENT:SPACING_MARKUP:HSS2
+                                                        #-3                                              %! SEGMENT:SPACING_MARKUP:HSS2
+                                                        (1/24)                                           %! SEGMENT:SPACING_MARKUP:HSS2
+                                            }                                                            %! SEGMENT:SPACING_MARKUP:HSS2
                                     }
                                 }
-                            \override Score.BarLine.transparent = ##f                          %! SM5
-                            \bar "|"                                                           %! SM5
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -965,19 +965,19 @@ class ImbricationCommand(Command):
                                     \override TupletNumber.stencil = ##f
                                     {
                 <BLANKLINE>
-                                        % MusicVoiceOne [measure 1]                            %! SM4
+                                        % MusicVoiceOne [measure 1]                                      %! SM4
                                         s16
                                         [
                 <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
                                         d'16
-                                        -\staccato                                             %! IC1
+                                        -\staccato                                                       %! IC1
                 <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
                                         bf'16
-                                        -\staccato                                             %! IC1
+                                        -\staccato                                                       %! IC1
                 <BLANKLINE>
                                         s16
                                     }
@@ -997,18 +997,18 @@ class ImbricationCommand(Command):
                                     \override TupletNumber.stencil = ##f
                                     {
                 <BLANKLINE>
-                                        % MusicVoiceOne [measure 2]                            %! SM4
+                                        % MusicVoiceOne [measure 2]                                      %! SM4
                                         s16
                 <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
                                         cs''16
-                                        -\staccato                                             %! IC1
+                                        -\staccato                                                       %! IC1
                 <BLANKLINE>
                                         \set stemLeftBeamCount = #2
                                         \set stemRightBeamCount = #2
                                         a'16
-                                        -\staccato                                             %! IC1
+                                        -\staccato                                                       %! IC1
                 <BLANKLINE>
                                         s16
                                         ]
@@ -1022,7 +1022,7 @@ class ImbricationCommand(Command):
                                 {
                                     {
                 <BLANKLINE>
-                                        % MusicVoiceTwo [measure 1]                            %! SM4
+                                        % MusicVoiceTwo [measure 1]                                      %! SM4
                                         \set stemLeftBeamCount = #0
                                         \set stemRightBeamCount = #2
                                         c'16
@@ -1059,7 +1059,7 @@ class ImbricationCommand(Command):
                                 {
                                     {
                 <BLANKLINE>
-                                        % MusicVoiceTwo [measure 2]                            %! SM4
+                                        % MusicVoiceTwo [measure 2]                                      %! SM4
                                         \set stemLeftBeamCount = #0
                                         \set stemRightBeamCount = #2
                                         g''16
@@ -1109,11 +1109,11 @@ class ImbricationCommand(Command):
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \new Score <<
                     \new GlobalContext {
                         { % measure
@@ -1226,11 +1226,11 @@ class ImbricationCommand(Command):
             ...     baca.rests_around([2], [2]),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \new Score <<
                     \new GlobalContext {
                         { % measure
@@ -1514,11 +1514,11 @@ class ImbricationCommand(Command):
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \new Score <<
                     \new GlobalContext {
                         { % measure
@@ -1538,7 +1538,7 @@ class ImbricationCommand(Command):
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     d'16
-                                    -\accent                                                   %! IC1
+                                    -\accent                                                             %! IC1
                                     s16
                                     s16
                                     s16
@@ -1549,11 +1549,11 @@ class ImbricationCommand(Command):
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     g''16
-                                    -\accent                                                   %! IC1
+                                    -\accent                                                             %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     a'16
-                                    -\accent                                                   %! IC1
+                                    -\accent                                                             %! IC1
                                     s16
                                     ]
                                 }
@@ -1568,46 +1568,46 @@ class ImbricationCommand(Command):
                                     \set stemLeftBeamCount = #0
                                     \set stemRightBeamCount = #2
                                     c'16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     [
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     d'16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     bf'16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     fs''16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #1
                                     e''16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                 }
                                 {
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #2
                                     ef''16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     af''16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     g''16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     a'16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #0
                                     c'16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     ]
                                 }
                             }
@@ -1716,11 +1716,11 @@ class ImbricationCommand(Command):
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \new Score <<
                     \new GlobalContext {
                         { % measure
@@ -1740,7 +1740,7 @@ class ImbricationCommand(Command):
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     d'16
-                                    -\accent                                                   %! IC1
+                                    -\accent                                                             %! IC1
                                     s16
                                     s16
                                     s16
@@ -1751,11 +1751,11 @@ class ImbricationCommand(Command):
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     g''16
-                                    -\accent                                                   %! IC1
+                                    -\accent                                                             %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     a'16
-                                    -\accent                                                   %! IC1
+                                    -\accent                                                             %! IC1
                                     s16
                                 }
                                 {
@@ -1764,11 +1764,11 @@ class ImbricationCommand(Command):
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     fs''16
-                                    -\accent                                                   %! IC1
+                                    -\accent                                                             %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     e''16
-                                    -\accent                                                   %! IC1
+                                    -\accent                                                             %! IC1
                                     s16
                                     ]
                                 }
@@ -1783,53 +1783,53 @@ class ImbricationCommand(Command):
                                     \set stemLeftBeamCount = #0
                                     \set stemRightBeamCount = #2
                                     c'16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     [
                                     s16
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     bf'16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     fs''16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #1
                                     e''16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                 }
                                 {
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #2
                                     ef''16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     af''16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     s16
                                     s16
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #1
                                     c'16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                 }
                                 {
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #2
                                     d'16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     bf'16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     s16
                                     s16
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #0
                                     ef''16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     ]
                                 }
                             }
@@ -1891,11 +1891,11 @@ class ImbricationCommand(Command):
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \new Score <<
                     \new GlobalContext {
                         { % measure
@@ -1928,22 +1928,22 @@ class ImbricationCommand(Command):
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     d'16
-                                    -\accent                                                   %! IC1
+                                    -\accent                                                             %! IC1
                                     s16
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     fs''16
-                                    -\accent                                                   %! IC1
+                                    -\accent                                                             %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #1
                                     e''16
-                                    -\accent                                                   %! IC1
+                                    -\accent                                                             %! IC1
                                 }
                                 {
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #2
                                     ef''16
-                                    -\accent                                                   %! IC1
+                                    -\accent                                                             %! IC1
                                     s16
                                     s16
                                     s16
@@ -1960,82 +1960,82 @@ class ImbricationCommand(Command):
                                     \set stemLeftBeamCount = #0
                                     \set stemRightBeamCount = #2
                                     c'16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     [
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     d'16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     bf'16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     fs''16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #1
                                     e''16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                 }
                                 {
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #2
                                     ef''16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     af''16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     g''16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #1
                                     a'16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                 }
                                 {
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #2
                                     c'16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     d'16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     bf'16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     fs''16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #1
                                     e''16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                 }
                                 {
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #2
                                     ef''16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     af''16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #2
                                     g''16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     \set stemLeftBeamCount = #2
                                     \set stemRightBeamCount = #0
                                     a'16
-                                    -\staccato                                                 %! IC1
+                                    -\staccato                                                           %! IC1
                                     ]
                                 }
                             }
@@ -2088,11 +2088,11 @@ class ImbricationCommand(Command):
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \new Score <<
                     \new GlobalContext {
                         { % measure
@@ -2219,11 +2219,11 @@ class ImbricationCommand(Command):
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \new Score <<
                     \new GlobalContext {
                         { % measure
@@ -2364,11 +2364,11 @@ class ImbricationCommand(Command):
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \new Score <<
                     \new GlobalContext {
                         { % measure
@@ -2507,11 +2507,11 @@ class ImbricationCommand(Command):
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \new Score <<
                     \new GlobalContext {
                         { % measure
@@ -2652,11 +2652,11 @@ class ImbricationCommand(Command):
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \new Score <<
                     \new GlobalContext {
                         { % measure

@@ -20,11 +20,11 @@ class OverrideCommand(Command):
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> contribution = music_maker('Voice 1', collections)
         >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -82,40 +82,40 @@ class OverrideCommand(Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             \context Score = "Score" <<
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        % GlobalSkips [measure 1]                                          %! SM4
-                        \time 4/8                                                          %! SM1
-                        \bar ""                                                            %! EMPTY_START_BAR:SM2
+                        % GlobalSkips [measure 1]                                                    %! SM4
+                        \time 4/8                                                                    %! SM1
+                        \bar ""                                                                      %! EMPTY_START_BAR:SM2
                         s1 * 1/2
-                        ^ \markup {                                                        %! STAGE_NUMBER_MARKUP:SM3
-                            \fontsize                                                      %! STAGE_NUMBER_MARKUP:SM3
-                                #-3                                                        %! STAGE_NUMBER_MARKUP:SM3
-                                \with-color                                                %! STAGE_NUMBER_MARKUP:SM3
-                                    #(x11-color 'DarkCyan)                                 %! STAGE_NUMBER_MARKUP:SM3
-                                    [1]                                                    %! STAGE_NUMBER_MARKUP:SM3
-                            }                                                              %! STAGE_NUMBER_MARKUP:SM3
+                        ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                            \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
+                                #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
+                                    [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
+                            }                                                                        %! STAGE_NUMBER_MARKUP:SM3
             <BLANKLINE>
-                        % GlobalSkips [measure 2]                                          %! SM4
-                        \time 3/8                                                          %! SM1
+                        % GlobalSkips [measure 2]                                                    %! SM4
+                        \time 3/8                                                                    %! SM1
                         s1 * 3/8
             <BLANKLINE>
-                        % GlobalSkips [measure 3]                                          %! SM4
-                        \time 4/8                                                          %! SM1
+                        % GlobalSkips [measure 3]                                                    %! SM4
+                        \time 4/8                                                                    %! SM1
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 4]                                          %! SM4
-                        \time 3/8                                                          %! SM1
+                        % GlobalSkips [measure 4]                                                    %! SM4
+                        \time 3/8                                                                    %! SM1
                         s1 * 3/8
-                        \override Score.BarLine.transparent = ##f                          %! SM5
-                        \bar "|"                                                           %! SM5
+                        \override Score.BarLine.transparent = ##f                                    %! SM5
+                        \bar "|"                                                                     %! SM5
             <BLANKLINE>
                     }
                 >>
@@ -123,7 +123,7 @@ class OverrideCommand(Command):
                     \context Staff = "MusicStaff" {
                         \context Voice = "MusicVoice" {
             <BLANKLINE>
-                            % MusicVoice [measure 1]                                       %! SM4
+                            % MusicVoice [measure 1]                                                 %! SM4
                             \override Beam.positions = #'(6 . 6)
                             \override Stem.direction = #up
                             e'8
@@ -137,7 +137,7 @@ class OverrideCommand(Command):
                             \override Rest.direction = #up
                             r8
             <BLANKLINE>
-                            % MusicVoice [measure 2]                                       %! SM4
+                            % MusicVoice [measure 2]                                                 %! SM4
                             e''8
                             [
             <BLANKLINE>
@@ -146,7 +146,7 @@ class OverrideCommand(Command):
                             f''8
                             ]
             <BLANKLINE>
-                            % MusicVoice [measure 3]                                       %! SM4
+                            % MusicVoice [measure 3]                                                 %! SM4
                             r8
             <BLANKLINE>
                             e'8
@@ -157,7 +157,7 @@ class OverrideCommand(Command):
                             f'8
                             ]
             <BLANKLINE>
-                            % MusicVoice [measure 4]                                       %! SM4
+                            % MusicVoice [measure 4]                                                 %! SM4
                             r8
                             \revert Rest.direction
             <BLANKLINE>

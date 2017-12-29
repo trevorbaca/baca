@@ -15,7 +15,7 @@ class RangeDictionary(TypedOrderedDict):
         ...     ('soprano', '[C4, C6]'),
         ...     ])
 
-        >>> abjad.f(ranges, strict=79)
+        >>> abjad.f(ranges, strict=89)
         baca.RangeDictionary(
             [
                 (
@@ -29,12 +29,12 @@ class RangeDictionary(TypedOrderedDict):
                 ]
             )
 
-        >>> abjad.show(ranges, strict=79) # doctest: +SKIP
+        >>> abjad.show(ranges, strict=89) # doctest: +SKIP
 
         ..  docs::
 
             >>> lilypond_file = ranges.__illustrate__()
-            >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             \new Score \with {
                 \override BarLine.stencil = ##f
                 \override Glissando.thickness = #2
@@ -82,12 +82,12 @@ class RangeDictionary(TypedOrderedDict):
             ...     ('soprano', '[C4, C6]'),
             ...     ])
 
-            >>> abjad.show(ranges, strict=79) # doctest: +SKIP
+            >>> abjad.show(ranges, strict=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = ranges.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \new Score \with {
                     \override BarLine.stencil = ##f
                     \override Glissando.thickness = #2

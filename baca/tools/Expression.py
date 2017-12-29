@@ -43,7 +43,7 @@ class Expression(abjad.Expression):
             PitchClassSegment([10, 10.5, 6, 7, 10.5, 7])
 
             >>> segment = baca.PitchClassSegment([-2, -1.5, 6, 7, -1.5, 7])
-            >>> abjad.show(segment, strict=79) # doctest: +SKIP
+            >>> abjad.show(segment, strict=89) # doctest: +SKIP
 
             ..  container:: example expression
 
@@ -97,11 +97,11 @@ class Expression(abjad.Expression):
                 >>> staff.append(abjad.Measure((2, 8), "<c' bf'>8 <g' a'>8"))
                 >>> staff.append(abjad.Measure((2, 8), "af'8 r8"))
                 >>> staff.append(abjad.Measure((2, 8), "r8 gf'8"))
-                >>> abjad.show(staff, strict=79) # doctest: +SKIP
+                >>> abjad.show(staff, strict=89) # doctest: +SKIP
 
                 ..  docs::
 
-                    >>> abjad.f(staff, strict=79)
+                    >>> abjad.f(staff, strict=89)
                     \new Staff {
                         { % measure
                             \time 2/8

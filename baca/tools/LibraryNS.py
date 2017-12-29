@@ -47,11 +47,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -110,11 +110,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -183,11 +183,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -259,11 +259,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -332,11 +332,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -411,11 +411,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -451,7 +451,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \pageBreak                                                     %! IC1
+                                \pageBreak                                                               %! IC1
                                 \revert TupletBracket.staff-padding
                             }
                         }
@@ -515,11 +515,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -530,12 +530,12 @@ class LibraryNS(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                _ \markup {                                                    %! IC1
-                                    \dynamic                                                   %! IC1
-                                        ff                                                     %! IC1
-                                    \upright                                                   %! IC1
-                                        possibile                                              %! IC1
-                                    }                                                          %! IC1
+                                _ \markup {                                                              %! IC1
+                                    \dynamic                                                             %! IC1
+                                        ff                                                               %! IC1
+                                    \upright                                                             %! IC1
+                                        possibile                                                        %! IC1
+                                    }                                                                    %! IC1
                                 d'16
                                 ]
                                 bf'4
@@ -585,11 +585,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -611,12 +611,12 @@ class LibraryNS(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                _ \markup {                                                    %! IC1
-                                    \dynamic                                                   %! IC1
-                                        ff                                                     %! IC1
-                                    \upright                                                   %! IC1
-                                        possibile                                              %! IC1
-                                    }                                                          %! IC1
+                                _ \markup {                                                              %! IC1
+                                    \dynamic                                                             %! IC1
+                                        ff                                                               %! IC1
+                                    \upright                                                             %! IC1
+                                        possibile                                                        %! IC1
+                                    }                                                                    %! IC1
                                 e''16
                                 ]
                                 ef''4
@@ -665,11 +665,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -723,11 +723,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -781,11 +781,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -858,11 +858,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -918,11 +918,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1011,11 +1011,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1072,11 +1072,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1181,11 +1181,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1195,13 +1195,13 @@ class LibraryNS(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\f                                                            %! IC1
+                                -\f                                                                      %! IC1
                                 [
                                 d'16
-                                -\f                                                            %! IC1
+                                -\f                                                                      %! IC1
                                 ]
                                 bf'4
-                                -\f                                                            %! IC1
+                                -\f                                                                      %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -1209,26 +1209,26 @@ class LibraryNS(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\f                                                            %! IC1
+                                -\f                                                                      %! IC1
                                 [
                                 e''16
-                                -\f                                                            %! IC1
+                                -\f                                                                      %! IC1
                                 ]
                                 ef''4
-                                -\f                                                            %! IC1
+                                -\f                                                                      %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\f                                                            %! IC1
+                                -\f                                                                      %! IC1
                                 [
                                 g''16
-                                -\f                                                            %! IC1
+                                -\f                                                                      %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\f                                                            %! IC1
+                                -\f                                                                      %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -1254,11 +1254,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1279,21 +1279,21 @@ class LibraryNS(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\f                                                            %! IC1
+                                -\f                                                                      %! IC1
                                 [
                                 e''16
-                                -\f                                                            %! IC1
+                                -\f                                                                      %! IC1
                                 ]
                                 ef''4
-                                -\f                                                            %! IC1
+                                -\f                                                                      %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\f                                                            %! IC1
+                                -\f                                                                      %! IC1
                                 [
                                 g''16
-                                -\f                                                            %! IC1
+                                -\f                                                                      %! IC1
                                 ]
                             }
                             \times 4/5 {
@@ -1332,11 +1332,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1398,11 +1398,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1476,11 +1476,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1542,11 +1542,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1618,11 +1618,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1681,11 +1681,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1752,11 +1752,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1818,11 +1818,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1886,11 +1886,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1955,11 +1955,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2018,11 +2018,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2092,11 +2092,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2155,11 +2155,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2285,11 +2285,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2300,13 +2300,13 @@ class LibraryNS(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 d'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                                 bf'4
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -2314,26 +2314,26 @@ class LibraryNS(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 e''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                                 ef''4
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 g''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 r4
                                 \revert Script.color
                                 \revert TupletBracket.staff-padding
@@ -2358,11 +2358,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2372,13 +2372,13 @@ class LibraryNS(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 d'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                                 bf'4
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -2387,27 +2387,27 @@ class LibraryNS(abjad.AbjadObject):
                             \times 9/10 {
                                 \override Script.color = #red
                                 fs''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 e''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                                 ef''4
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 g''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                                 \revert Script.color
                             }
                             \times 4/5 {
                                 a'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -2443,11 +2443,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2458,13 +2458,13 @@ class LibraryNS(abjad.AbjadObject):
                                 r8
                                 \once \override Script.extra-offset = #'(-1.5 . 0)
                                 c'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 d'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                                 bf'4
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -2472,26 +2472,26 @@ class LibraryNS(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 e''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                                 ef''4
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 g''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -2518,11 +2518,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2532,13 +2532,13 @@ class LibraryNS(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 d'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                                 bf'4
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -2547,26 +2547,26 @@ class LibraryNS(abjad.AbjadObject):
                             \times 9/10 {
                                 \once \override Script.extra-offset = #'(-1.5 . 0)
                                 fs''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 e''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                                 ef''4
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 g''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -2602,11 +2602,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2617,13 +2617,13 @@ class LibraryNS(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 d'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                                 bf'4
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -2631,26 +2631,26 @@ class LibraryNS(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 e''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                                 ef''4
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 g''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 r4
                                 \revert Script.direction
                                 \revert TupletBracket.staff-padding
@@ -2675,11 +2675,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2689,13 +2689,13 @@ class LibraryNS(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 d'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                                 bf'4
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -2704,27 +2704,27 @@ class LibraryNS(abjad.AbjadObject):
                             \times 9/10 {
                                 \override Script.direction = #down
                                 fs''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 e''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                                 ef''4
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 g''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                                 \revert Script.direction
                             }
                             \times 4/5 {
                                 a'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -2760,11 +2760,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2775,13 +2775,13 @@ class LibraryNS(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 d'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                                 bf'4
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -2789,26 +2789,26 @@ class LibraryNS(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 e''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                                 ef''4
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 g''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 r4
                                 \revert Script.direction
                                 \revert TupletBracket.staff-padding
@@ -2833,11 +2833,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2847,13 +2847,13 @@ class LibraryNS(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 d'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                                 bf'4
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -2862,27 +2862,27 @@ class LibraryNS(abjad.AbjadObject):
                             \times 9/10 {
                                 \override Script.direction = #up
                                 fs''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 e''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                                 ef''4
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 g''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                                 \revert Script.direction
                             }
                             \times 4/5 {
                                 a'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -2917,11 +2917,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2930,7 +2930,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                -\shortfermata                                                 %! IC1
+                                -\shortfermata                                                           %! IC1
                                 c'16
                                 [
                                 d'16
@@ -2981,11 +2981,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3006,7 +3006,7 @@ class LibraryNS(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\shortfermata                                                 %! IC1
+                                -\shortfermata                                                           %! IC1
                                 [
                                 e''16
                                 ]
@@ -3062,11 +3062,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3160,11 +3160,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3270,11 +3270,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3337,11 +3337,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3406,11 +3406,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3477,11 +3477,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3543,11 +3543,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3622,11 +3622,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3693,11 +3693,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3778,11 +3778,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3855,11 +3855,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3938,11 +3938,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4056,11 +4056,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4174,11 +4174,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4313,11 +4313,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4327,13 +4327,13 @@ class LibraryNS(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\staccato                                                     %! IC1
+                                -\staccato                                                               %! IC1
                                 [
                                 d'16
-                                -\staccato                                                     %! IC1
+                                -\staccato                                                               %! IC1
                                 ]
                                 bf'4
-                                -\staccato                                                     %! IC1
+                                -\staccato                                                               %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -4341,26 +4341,26 @@ class LibraryNS(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\staccato                                                     %! IC1
+                                -\staccato                                                               %! IC1
                                 [
                                 e''16
-                                -\staccato                                                     %! IC1
+                                -\staccato                                                               %! IC1
                                 ]
                                 ef''4
-                                -\staccato                                                     %! IC1
+                                -\staccato                                                               %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\staccato                                                     %! IC1
+                                -\staccato                                                               %! IC1
                                 [
                                 g''16
-                                -\staccato                                                     %! IC1
+                                -\staccato                                                               %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\staccato                                                     %! IC1
+                                -\staccato                                                               %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -4383,11 +4383,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4408,21 +4408,21 @@ class LibraryNS(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\staccato                                                     %! IC1
+                                -\staccato                                                               %! IC1
                                 [
                                 e''16
-                                -\staccato                                                     %! IC1
+                                -\staccato                                                               %! IC1
                                 ]
                                 ef''4
-                                -\staccato                                                     %! IC1
+                                -\staccato                                                               %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\staccato                                                     %! IC1
+                                -\staccato                                                               %! IC1
                                 [
                                 g''16
-                                -\staccato                                                     %! IC1
+                                -\staccato                                                               %! IC1
                                 ]
                             }
                             \times 4/5 {
@@ -4459,11 +4459,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4473,13 +4473,13 @@ class LibraryNS(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\staccatissimo                                                %! IC1
+                                -\staccatissimo                                                          %! IC1
                                 [
                                 d'16
-                                -\staccatissimo                                                %! IC1
+                                -\staccatissimo                                                          %! IC1
                                 ]
                                 bf'4
-                                -\staccatissimo                                                %! IC1
+                                -\staccatissimo                                                          %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -4487,26 +4487,26 @@ class LibraryNS(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\staccatissimo                                                %! IC1
+                                -\staccatissimo                                                          %! IC1
                                 [
                                 e''16
-                                -\staccatissimo                                                %! IC1
+                                -\staccatissimo                                                          %! IC1
                                 ]
                                 ef''4
-                                -\staccatissimo                                                %! IC1
+                                -\staccatissimo                                                          %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\staccatissimo                                                %! IC1
+                                -\staccatissimo                                                          %! IC1
                                 [
                                 g''16
-                                -\staccatissimo                                                %! IC1
+                                -\staccatissimo                                                          %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\staccatissimo                                                %! IC1
+                                -\staccatissimo                                                          %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -4529,11 +4529,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4554,21 +4554,21 @@ class LibraryNS(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\staccatissimo                                                %! IC1
+                                -\staccatissimo                                                          %! IC1
                                 [
                                 e''16
-                                -\staccatissimo                                                %! IC1
+                                -\staccatissimo                                                          %! IC1
                                 ]
                                 ef''4
-                                -\staccatissimo                                                %! IC1
+                                -\staccatissimo                                                          %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\staccatissimo                                                %! IC1
+                                -\staccatissimo                                                          %! IC1
                                 [
                                 g''16
-                                -\staccatissimo                                                %! IC1
+                                -\staccatissimo                                                          %! IC1
                                 ]
                             }
                             \times 4/5 {
@@ -4647,11 +4647,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4710,11 +4710,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4786,11 +4786,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4800,42 +4800,42 @@ class LibraryNS(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                :32                                                            %! IC1
+                                :32                                                                      %! IC1
                                 [
                                 d'16
-                                :32                                                            %! IC1
+                                :32                                                                      %! IC1
                                 ]
                                 bf'4
-                                :32                                                            %! IC1
+                                :32                                                                      %! IC1
                                 ~
                                 bf'16
-                                :32                                                            %! IC1
+                                :32                                                                      %! IC1
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                :32                                                            %! IC1
+                                :32                                                                      %! IC1
                                 [
                                 e''16
-                                :32                                                            %! IC1
+                                :32                                                                      %! IC1
                                 ]
                                 ef''4
-                                :32                                                            %! IC1
+                                :32                                                                      %! IC1
                                 ~
                                 ef''16
-                                :32                                                            %! IC1
+                                :32                                                                      %! IC1
                                 r16
                                 af''16
-                                :32                                                            %! IC1
+                                :32                                                                      %! IC1
                                 [
                                 g''16
-                                :32                                                            %! IC1
+                                :32                                                                      %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                :32                                                            %! IC1
+                                :32                                                                      %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -4858,11 +4858,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4883,22 +4883,22 @@ class LibraryNS(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                :32                                                            %! IC1
+                                :32                                                                      %! IC1
                                 [
                                 e''16
-                                :32                                                            %! IC1
+                                :32                                                                      %! IC1
                                 ]
                                 ef''4
-                                :32                                                            %! IC1
+                                :32                                                                      %! IC1
                                 ~
                                 ef''16
-                                :32                                                            %! IC1
+                                :32                                                                      %! IC1
                                 r16
                                 af''16
-                                :32                                                            %! IC1
+                                :32                                                                      %! IC1
                                 [
                                 g''16
-                                :32                                                            %! IC1
+                                :32                                                                      %! IC1
                                 ]
                             }
                             \times 4/5 {
@@ -4935,11 +4935,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4999,11 +4999,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5076,11 +5076,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 2" {
                         \voiceTwo
@@ -5140,11 +5140,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 2" {
                         \voiceTwo
@@ -5217,11 +5217,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5330,11 +5330,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5397,11 +5397,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5467,11 +5467,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5537,11 +5537,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5607,11 +5607,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5674,11 +5674,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5750,11 +5750,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5826,11 +5826,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5916,11 +5916,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5992,11 +5992,11 @@ class LibraryNS(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne

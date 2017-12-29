@@ -12,7 +12,7 @@ class Registration(abjad.AbjadValueObject):
         >>> components = [('[A0, C4)', 15), ('[C4, C8)', 27)]
         >>> registration = baca.Registration(components)
 
-        >>> abjad.f(registration, strict=79)
+        >>> abjad.f(registration, strict=89)
         baca.Registration(
             components=[
                 baca.RegistrationComponent(

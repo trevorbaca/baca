@@ -29,11 +29,11 @@ class ExpressionGallery(abjad.AbjadObject):
         'T3(X) /@ J'
 
         >>> markup = expression.get_markup()
-        >>> abjad.show(markup, strict=79) # doctest: +SKIP
+        >>> abjad.show(markup, strict=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(markup, strict=79)
+            >>> abjad.f(markup, strict=89)
             \markup {
                 \line
                     {
@@ -74,11 +74,11 @@ class ExpressionGallery(abjad.AbjadObject):
         'join(T3(X) /@ J)'
 
         >>> markup = expression.get_markup()
-        >>> abjad.show(markup, strict=79) # doctest: +SKIP
+        >>> abjad.show(markup, strict=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(markup, strict=79)
+            >>> abjad.f(markup, strict=89)
             \markup {
                 \concat
                     {
@@ -133,11 +133,11 @@ class ExpressionGallery(abjad.AbjadObject):
         'flatten(T3(X) /@ J, depth=-1)'
 
         >>> markup = expression.get_markup()
-        >>> abjad.show(markup, strict=79) # doctest: +SKIP
+        >>> abjad.show(markup, strict=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(markup, strict=79)
+            >>> abjad.f(markup, strict=89)
             \markup {
                 \concat
                     {
@@ -185,11 +185,11 @@ class ExpressionGallery(abjad.AbjadObject):
         'X /@ P[3](flatten(T3(X) /@ J, depth=-1))'
 
         >>> markup = expression.get_markup()
-        >>> abjad.show(markup, strict=79) # doctest: +SKIP
+        >>> abjad.show(markup, strict=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(markup, strict=79)
+            >>> abjad.f(markup, strict=89)
             \markup {
                 \line
                     {
@@ -253,11 +253,11 @@ class ExpressionGallery(abjad.AbjadObject):
         'β2(X /@ P[3](flatten(T3(X) /@ J, depth=-1)))'
 
         >>> markup = expression.get_markup()
-        >>> abjad.show(markup, strict=79) # doctest: +SKIP
+        >>> abjad.show(markup, strict=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(markup, strict=79)
+            >>> abjad.f(markup, strict=89)
             \markup {
                 \concat
                     {

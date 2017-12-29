@@ -120,11 +120,11 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
             ...     baca.bass_to_octave(2),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -166,11 +166,11 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
             ...     baca.bass_to_octave(2),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne

@@ -19,11 +19,11 @@ class MusicMaker(abjad.AbjadObject):
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> contribution = music_maker('Voice 1', collections)
         >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -151,11 +151,11 @@ class MusicMaker(abjad.AbjadObject):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker('Voice 1', collections)
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -196,11 +196,11 @@ class MusicMaker(abjad.AbjadObject):
             ...     counts=[1, 2],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -241,11 +241,11 @@ class MusicMaker(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -286,11 +286,11 @@ class MusicMaker(abjad.AbjadObject):
             ...     time_treatments=[1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -333,11 +333,11 @@ class MusicMaker(abjad.AbjadObject):
             ...     baca.nest('+1/8'),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -365,11 +365,11 @@ class MusicMaker(abjad.AbjadObject):
             ...     counts=[2, -1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -396,11 +396,11 @@ class MusicMaker(abjad.AbjadObject):
             ...     counts=[2, -1, -1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -432,11 +432,11 @@ class MusicMaker(abjad.AbjadObject):
             ...     counts=[-1, 2],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -463,11 +463,11 @@ class MusicMaker(abjad.AbjadObject):
             ...     counts=[-1, -1, 2],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -499,11 +499,11 @@ class MusicMaker(abjad.AbjadObject):
             ...     counts=[-1, -1, 2, -2, -2],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -555,11 +555,11 @@ class MusicMaker(abjad.AbjadObject):
             ...     ]
             >>> contribution = music_maker('Voice 1', collections)
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1082,11 +1082,11 @@ class MusicMaker(abjad.AbjadObject):
             ...     ]
             >>> contribution = music_maker('Voice 1', collections)
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1137,11 +1137,11 @@ class MusicMaker(abjad.AbjadObject):
             ...     contribution,
             ...     time_signatures=[contribution.time_signature],
             ...     )
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1194,11 +1194,11 @@ class MusicMaker(abjad.AbjadObject):
             ...     contribution,
             ...     time_signatures=[contribution.time_signature],
             ...     )
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1254,11 +1254,11 @@ class MusicMaker(abjad.AbjadObject):
             ...     contribution,
             ...     time_signatures=[contribution.time_signature],
             ...     )
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1312,11 +1312,11 @@ class MusicMaker(abjad.AbjadObject):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker('Voice 1', collections)
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1353,11 +1353,11 @@ class MusicMaker(abjad.AbjadObject):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker('Voice 1', collections)
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1402,11 +1402,11 @@ class MusicMaker(abjad.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff \with {
                     \override DynamicLineSpanner.staff-padding = #4.5
                 } <<
@@ -1463,11 +1463,11 @@ class MusicMaker(abjad.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff \with {
                     \override DynamicLineSpanner.staff-padding = #4.5
                 } <<
@@ -1521,11 +1521,11 @@ class MusicMaker(abjad.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff \with {
                     \override DynamicLineSpanner.staff-padding = #4.5
                 } <<
@@ -1579,11 +1579,11 @@ class MusicMaker(abjad.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 6
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff \with {
                     \override DynamicLineSpanner.staff-padding = #6
                 } <<
@@ -1640,11 +1640,11 @@ class MusicMaker(abjad.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).stem.direction = Down
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff \with {
                     \override Stem.direction = #down
                 } <<
@@ -1697,11 +1697,11 @@ class MusicMaker(abjad.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).stem.direction = Down
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff \with {
                     \override Stem.direction = #down
                 } <<
@@ -1760,11 +1760,11 @@ class MusicMaker(abjad.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).stem.direction = Down
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff \with {
                     \override Stem.direction = #down
                 } <<
@@ -1823,11 +1823,11 @@ class MusicMaker(abjad.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).stem.direction = Down
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff \with {
                     \override Stem.direction = #down
                 } <<
@@ -1886,11 +1886,11 @@ class MusicMaker(abjad.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).beam.positions = (-6, -6)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff \with {
                     \override Beam.positions = #'(-6 . -6)
                 } <<
@@ -1959,11 +1959,11 @@ class MusicMaker(abjad.AbjadObject):
             ...     ]
             >>> contribution = music_maker('Voice 1', collections)
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2011,11 +2011,11 @@ class MusicMaker(abjad.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff \with {
                     \override Beam.positions = #'(-5.5 . -5.5)
                 } <<
@@ -2095,11 +2095,11 @@ class MusicMaker(abjad.AbjadObject):
             >>> lilypond_file = music_maker.show(contribution)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff \with {
                     \override Beam.positions = #'(-5.5 . -5.5)
                 } <<
@@ -2181,11 +2181,11 @@ class MusicMaker(abjad.AbjadObject):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker('Voice 1', collections)
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2240,11 +2240,11 @@ class MusicMaker(abjad.AbjadObject):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker('Voice 1', collections)
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2300,11 +2300,11 @@ class MusicMaker(abjad.AbjadObject):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker('Voice 1', collections)
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2361,11 +2361,11 @@ class MusicMaker(abjad.AbjadObject):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker('Voice 1', collections)
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2422,11 +2422,11 @@ class MusicMaker(abjad.AbjadObject):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker('Voice 1', collections)
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2479,11 +2479,11 @@ class MusicMaker(abjad.AbjadObject):
             ...     counts=[1, 2, 3],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2521,11 +2521,11 @@ class MusicMaker(abjad.AbjadObject):
             ...     thread=True,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne

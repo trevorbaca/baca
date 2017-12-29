@@ -234,11 +234,11 @@ class ConstellationCircuit(abjad.AbjadObject):
         ..  container:: example
 
             >>> lilypond_file = constellation_circuit.illustrate_colored_generator_chords()
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \new Score \with {
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
@@ -482,11 +482,11 @@ class ConstellationCircuit(abjad.AbjadObject):
         ..  container:: example
 
             >>> lilypond_file = constellation_circuit.illustrate_colored_generator_chords_and_pivot_chords()
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \new Score \with {
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
@@ -748,11 +748,11 @@ class ConstellationCircuit(abjad.AbjadObject):
         ..  container:: example
 
             >>> lilypond_file = constellation_circuit.illustrate_generator_chords()
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \new Score \with {
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
@@ -797,11 +797,11 @@ class ConstellationCircuit(abjad.AbjadObject):
         ..  container:: example
 
             >>> lilypond_file = constellation_circuit.illustrate_generator_chords_and_pivot_chords()
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \new Score \with {
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
@@ -864,11 +864,11 @@ class ConstellationCircuit(abjad.AbjadObject):
         ..  container:: example
 
             >>> lilypond_file = constellation_circuit.illustrate_pivot_chords()
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \new Score \with {
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t

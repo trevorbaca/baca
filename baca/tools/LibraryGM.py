@@ -37,40 +37,40 @@ class LibraryGM(abjad.AbjadObject):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                          %! SM4
-                            \time 4/8                                                          %! SM1
-                            \bar ""                                                            %! EMPTY_START_BAR:SM2
+                            % GlobalSkips [measure 1]                                                    %! SM4
+                            \time 4/8                                                                    %! SM1
+                            \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %! STAGE_NUMBER_MARKUP:SM3
-                                \fontsize                                                      %! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                        %! STAGE_NUMBER_MARKUP:SM3
-                                    \with-color                                                %! STAGE_NUMBER_MARKUP:SM3
-                                        #(x11-color 'DarkCyan)                                 %! STAGE_NUMBER_MARKUP:SM3
-                                        [1]                                                    %! STAGE_NUMBER_MARKUP:SM3
-                                }                                                              %! STAGE_NUMBER_MARKUP:SM3
+                            ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
+                                        [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
+                                }                                                                        %! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                          %! SM4
-                            \time 3/8                                                          %! SM1
+                            % GlobalSkips [measure 2]                                                    %! SM4
+                            \time 3/8                                                                    %! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                          %! SM4
-                            \time 4/8                                                          %! SM1
+                            % GlobalSkips [measure 3]                                                    %! SM4
+                            \time 4/8                                                                    %! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                          %! SM4
-                            \time 3/8                                                          %! SM1
+                            % GlobalSkips [measure 4]                                                    %! SM4
+                            \time 3/8                                                                    %! SM1
                             s1 * 3/8
-                            \override Score.BarLine.transparent = ##f                          %! SM5
-                            \bar "|"                                                           %! SM5
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -79,7 +79,7 @@ class LibraryGM(abjad.AbjadObject):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 1]                                   %! SM4
+                                    % MusicVoice [measure 1]                                             %! SM4
                                     e'8
                                     \glissando
                                     [
@@ -96,7 +96,7 @@ class LibraryGM(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 2]                                   %! SM4
+                                    % MusicVoice [measure 2]                                             %! SM4
                                     g'8
                                     \glissando
                                     [
@@ -110,7 +110,7 @@ class LibraryGM(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 3]                                   %! SM4
+                                    % MusicVoice [measure 3]                                             %! SM4
                                     d''8
                                     \glissando
                                     [
@@ -127,7 +127,7 @@ class LibraryGM(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 4]                                   %! SM4
+                                    % MusicVoice [measure 4]                                             %! SM4
                                     f''8
                                     \glissando
                                     [
@@ -162,40 +162,40 @@ class LibraryGM(abjad.AbjadObject):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                          %! SM4
-                            \time 4/8                                                          %! SM1
-                            \bar ""                                                            %! EMPTY_START_BAR:SM2
+                            % GlobalSkips [measure 1]                                                    %! SM4
+                            \time 4/8                                                                    %! SM1
+                            \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %! STAGE_NUMBER_MARKUP:SM3
-                                \fontsize                                                      %! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                        %! STAGE_NUMBER_MARKUP:SM3
-                                    \with-color                                                %! STAGE_NUMBER_MARKUP:SM3
-                                        #(x11-color 'DarkCyan)                                 %! STAGE_NUMBER_MARKUP:SM3
-                                        [1]                                                    %! STAGE_NUMBER_MARKUP:SM3
-                                }                                                              %! STAGE_NUMBER_MARKUP:SM3
+                            ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
+                                        [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
+                                }                                                                        %! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                          %! SM4
-                            \time 3/8                                                          %! SM1
+                            % GlobalSkips [measure 2]                                                    %! SM4
+                            \time 3/8                                                                    %! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                          %! SM4
-                            \time 4/8                                                          %! SM1
+                            % GlobalSkips [measure 3]                                                    %! SM4
+                            \time 4/8                                                                    %! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                          %! SM4
-                            \time 3/8                                                          %! SM1
+                            % GlobalSkips [measure 4]                                                    %! SM4
+                            \time 3/8                                                                    %! SM1
                             s1 * 3/8
-                            \override Score.BarLine.transparent = ##f                          %! SM5
-                            \bar "|"                                                           %! SM5
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -204,7 +204,7 @@ class LibraryGM(abjad.AbjadObject):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 1]                                   %! SM4
+                                    % MusicVoice [measure 1]                                             %! SM4
                                     e'8
                                     \glissando
                                     [
@@ -218,7 +218,7 @@ class LibraryGM(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 2]                                   %! SM4
+                                    % MusicVoice [measure 2]                                             %! SM4
                                     g'8
                                     [
                 <BLANKLINE>
@@ -229,7 +229,7 @@ class LibraryGM(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 3]                                   %! SM4
+                                    % MusicVoice [measure 3]                                             %! SM4
                                     d''8
                                     [
                 <BLANKLINE>
@@ -242,7 +242,7 @@ class LibraryGM(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 4]                                   %! SM4
+                                    % MusicVoice [measure 4]                                             %! SM4
                                     f''8
                                     [
                 <BLANKLINE>
@@ -276,11 +276,11 @@ class LibraryGM(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -350,11 +350,11 @@ class LibraryGM(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -414,11 +414,11 @@ class LibraryGM(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -478,11 +478,11 @@ class LibraryGM(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -664,11 +664,11 @@ class LibraryGM(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -787,11 +787,11 @@ class LibraryGM(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -887,11 +887,11 @@ class LibraryGM(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -975,11 +975,11 @@ class LibraryGM(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs:: 
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -989,40 +989,40 @@ class LibraryGM(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\laissezVibrer                                                %! IC1
+                                -\laissezVibrer                                                          %! IC1
                                 [
                                 d'16
-                                -\laissezVibrer                                                %! IC1
+                                -\laissezVibrer                                                          %! IC1
                                 ]
                                 bf'4
                                 ~
                                 bf'16
-                                -\laissezVibrer                                                %! IC1
+                                -\laissezVibrer                                                          %! IC1
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\laissezVibrer                                                %! IC1
+                                -\laissezVibrer                                                          %! IC1
                                 [
                                 e''16
-                                -\laissezVibrer                                                %! IC1
+                                -\laissezVibrer                                                          %! IC1
                                 ]
                                 ef''4
                                 ~
                                 ef''16
-                                -\laissezVibrer                                                %! IC1
+                                -\laissezVibrer                                                          %! IC1
                                 r16
                                 af''16
-                                -\laissezVibrer                                                %! IC1
+                                -\laissezVibrer                                                          %! IC1
                                 [
                                 g''16
-                                -\laissezVibrer                                                %! IC1
+                                -\laissezVibrer                                                          %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\laissezVibrer                                                %! IC1
+                                -\laissezVibrer                                                          %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -1045,11 +1045,11 @@ class LibraryGM(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1070,21 +1070,21 @@ class LibraryGM(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\laissezVibrer                                                %! IC1
+                                -\laissezVibrer                                                          %! IC1
                                 [
                                 e''16
-                                -\laissezVibrer                                                %! IC1
+                                -\laissezVibrer                                                          %! IC1
                                 ]
                                 ef''4
                                 ~
                                 ef''16
-                                -\laissezVibrer                                                %! IC1
+                                -\laissezVibrer                                                          %! IC1
                                 r16
                                 af''16
-                                -\laissezVibrer                                                %! IC1
+                                -\laissezVibrer                                                          %! IC1
                                 [
                                 g''16
-                                -\laissezVibrer                                                %! IC1
+                                -\laissezVibrer                                                          %! IC1
                                 ]
                             }
                             \times 4/5 {
@@ -1118,7 +1118,7 @@ class LibraryGM(abjad.AbjadObject):
             ...         ),
             ...     )
 
-            >>> abjad.f(layout, strict=79)
+            >>> abjad.f(layout, strict=89)
             baca.LayoutMeasureMap(
                 commands=(
                     baca.IndicatorCommand(
@@ -1255,11 +1255,11 @@ class LibraryGM(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1295,7 +1295,7 @@ class LibraryGM(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \break                                                         %! IC1
+                                \break                                                                   %! IC1
                                 \revert TupletBracket.staff-padding
                             }
                         }
@@ -1317,11 +1317,11 @@ class LibraryGM(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1353,7 +1353,7 @@ class LibraryGM(abjad.AbjadObject):
                                 [
                                 g''16
                                 ]
-                                \break                                                         %! IC1
+                                \break                                                                   %! IC1
                             }
                             \times 4/5 {
                                 a'16
@@ -1400,11 +1400,11 @@ class LibraryGM(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1413,7 +1413,7 @@ class LibraryGM(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                -\longfermata                                                  %! IC1
+                                -\longfermata                                                            %! IC1
                                 c'16
                                 [
                                 d'16
@@ -1462,11 +1462,11 @@ class LibraryGM(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1487,7 +1487,7 @@ class LibraryGM(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\longfermata                                                  %! IC1
+                                -\longfermata                                                            %! IC1
                                 [
                                 e''16
                                 ]
@@ -1704,11 +1704,11 @@ class LibraryGM(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1718,13 +1718,13 @@ class LibraryGM(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\marcato                                                      %! IC1
+                                -\marcato                                                                %! IC1
                                 [
                                 d'16
-                                -\marcato                                                      %! IC1
+                                -\marcato                                                                %! IC1
                                 ]
                                 bf'4
-                                -\marcato                                                      %! IC1
+                                -\marcato                                                                %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -1732,26 +1732,26 @@ class LibraryGM(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\marcato                                                      %! IC1
+                                -\marcato                                                                %! IC1
                                 [
                                 e''16
-                                -\marcato                                                      %! IC1
+                                -\marcato                                                                %! IC1
                                 ]
                                 ef''4
-                                -\marcato                                                      %! IC1
+                                -\marcato                                                                %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\marcato                                                      %! IC1
+                                -\marcato                                                                %! IC1
                                 [
                                 g''16
-                                -\marcato                                                      %! IC1
+                                -\marcato                                                                %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\marcato                                                      %! IC1
+                                -\marcato                                                                %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -1774,11 +1774,11 @@ class LibraryGM(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1799,21 +1799,21 @@ class LibraryGM(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\marcato                                                      %! IC1
+                                -\marcato                                                                %! IC1
                                 [
                                 e''16
-                                -\marcato                                                      %! IC1
+                                -\marcato                                                                %! IC1
                                 ]
                                 ef''4
-                                -\marcato                                                      %! IC1
+                                -\marcato                                                                %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\marcato                                                      %! IC1
+                                -\marcato                                                                %! IC1
                                 [
                                 g''16
-                                -\marcato                                                      %! IC1
+                                -\marcato                                                                %! IC1
                                 ]
                             }
                             \times 4/5 {
@@ -1857,33 +1857,33 @@ class LibraryGM(abjad.AbjadObject):
             ...     environment='docs',
             ...     remove=[baca.Tags.STAGE_NUMBER_MARKUP],
             ...     )
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                          %! SM4
-                            \time 4/8                                                          %! SM1
-                            \bar ""                                                            %! EMPTY_START_BAR:SM2
+                            % GlobalSkips [measure 1]                                                    %! SM4
+                            \time 4/8                                                                    %! SM1
+                            \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                          %! SM4
-                            \time 3/8                                                          %! SM1
+                            % GlobalSkips [measure 2]                                                    %! SM4
+                            \time 3/8                                                                    %! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                          %! SM4
-                            \time 4/8                                                          %! SM1
+                            % GlobalSkips [measure 3]                                                    %! SM4
+                            \time 4/8                                                                    %! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                          %! SM4
-                            \time 3/8                                                          %! SM1
+                            % GlobalSkips [measure 4]                                                    %! SM4
+                            \time 3/8                                                                    %! SM1
                             s1 * 3/8
-                            \override Score.BarLine.transparent = ##f                          %! SM5
-                            \bar "|"                                                           %! SM5
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -1891,59 +1891,59 @@ class LibraryGM(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                       %! SM4
-                                \set Staff.instrumentName = \markup { Flute }                  %! EXPLICIT_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }               %! EXPLICIT_MARGIN_MARKUP:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                                % MusicVoice [measure 1]                                                 %! SM4
+                                \set Staff.instrumentName = \markup { Flute }                            %! EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! EXPLICIT_MARGIN_MARKUP:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                                 e'2
                                 ^ \markup {
                                     \column
                                         {
-                                            %%% \line                                          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%     {                                          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%         \vcenter                               %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%             [MarginMarkup                      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%         \vcenter                               %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%             Flute                              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%         \concat                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%             {                                  %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%                 \vcenter                       %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%                     Fl.                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%                 \vcenter                       %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%                     ]                          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%             }                                  %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%     }                                          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            \line                                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                {                                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                    \with-color                                %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                        #(x11-color 'blue)                     %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                        {                                      %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                           %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                [MarginMarkup                  %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                           %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                Flute                          %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                            \concat                            %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                {                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                   %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                        Fl.                    %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                   %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                        ]                      %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                }                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                        }                                      %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                }                                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                            %%% \line                                                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%     {                                                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%         \vcenter                                         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%             [MarginMarkup                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%         \vcenter                                         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%             Flute                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%         \concat                                          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%             {                                            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%                 \vcenter                                 %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%                     Fl.                                  %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%                 \vcenter                                 %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%                     ]                                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%             }                                            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            %%%     }                                                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                            \line                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                {                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                    \with-color                                          %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                        #(x11-color 'blue)                               %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                        {                                                %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                            \vcenter                                     %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                                [MarginMarkup                            %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                            \vcenter                                     %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                                Flute                                    %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                            \concat                                      %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                                {                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                                    \vcenter                             %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                                        Fl.                              %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                                    \vcenter                             %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                                        ]                                %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                                }                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                        }                                                %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
+                                                }                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { Flute }                  %! EXPLICIT_REDRAW_MARGIN_MARKUP:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }               %! EXPLICIT_REDRAW_MARGIN_MARKUP:SM8
-                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:SM6
+                                \set Staff.instrumentName = \markup { Flute }                            %! EXPLICIT_REDRAW_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! EXPLICIT_REDRAW_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! EXPLICIT_REDRAW_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                       %! SM4
+                                % MusicVoice [measure 2]                                                 %! SM4
                                 f'4.
                 <BLANKLINE>
-                                % MusicVoice [measure 3]                                       %! SM4
+                                % MusicVoice [measure 3]                                                 %! SM4
                                 e'2
                 <BLANKLINE>
-                                % MusicVoice [measure 4]                                       %! SM4
+                                % MusicVoice [measure 4]                                                 %! SM4
                                 f'4.
                 <BLANKLINE>
                             }

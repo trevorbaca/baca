@@ -27,11 +27,11 @@ class MapCommand(Command):
         ...     time_treatments=[-1],
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -52,21 +52,21 @@ class MapCommand(Command):
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            -\accent                                                       %! IC1
+                            -\accent                                                                 %! IC1
                             [
                             e''16
-                            -\accent                                                       %! IC1
+                            -\accent                                                                 %! IC1
                             ]
                             ef''4
-                            -\accent                                                       %! IC1
+                            -\accent                                                                 %! IC1
                             ~
                             ef''16
                             r16
                             af''16
-                            -\accent                                                       %! IC1
+                            -\accent                                                                 %! IC1
                             [
                             g''16
-                            -\accent                                                       %! IC1
+                            -\accent                                                                 %! IC1
                             ]
                         }
                         \times 4/5 {

@@ -14,7 +14,7 @@ class PitchArray(abjad.AbjadObject):
         [ ] [     ] [ ]
         [     ] [ ] [ ]
 
-        >>> abjad.f(pitch_array, strict=79)
+        >>> abjad.f(pitch_array, strict=89)
         baca.PitchArray(
             rows=(
                 baca.PitchArrayRow(
@@ -564,7 +564,7 @@ class PitchArray(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(score, strict=79)
+                >>> abjad.f(score, strict=89)
                 \new Score <<
                     \new Staff {
                         c'8
@@ -590,7 +590,7 @@ class PitchArray(abjad.AbjadObject):
                     }
                 >>
 
-            >>> abjad.show(score, strict=79) # doctest: +SKIP
+            >>> abjad.show(score, strict=89) # doctest: +SKIP
 
             >>> array = baca.PitchArray.from_score(
             ...     score, populate=False)
@@ -612,7 +612,7 @@ class PitchArray(abjad.AbjadObject):
 
             ..  docs::
 
-                >>> abjad.f(score, strict=79)
+                >>> abjad.f(score, strict=89)
                 \new Score <<
                     \new Staff {
                         c'8
@@ -638,7 +638,7 @@ class PitchArray(abjad.AbjadObject):
                     }
                 >>
 
-            >>> abjad.show(score, strict=79) # doctest: +SKIP
+            >>> abjad.show(score, strict=89) # doctest: +SKIP
 
             >>> array = baca.PitchArray.from_score(
             ...     score, populate=True)
@@ -822,11 +822,11 @@ class PitchArray(abjad.AbjadObject):
 
             >>> measures = array.to_measures()
             >>> staff = abjad.Staff(measures)
-            >>> abjad.show(staff, strict=79) # doctest: +SKIP
+            >>> abjad.show(staff, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=79)
+                >>> abjad.f(staff, strict=89)
                 \new Staff {
                     { % measure
                         \time 4/8

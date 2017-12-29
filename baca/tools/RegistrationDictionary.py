@@ -19,7 +19,7 @@ class RegistrationDictionary(abjad.TypedOrderedDict):
         ...     ('high', registration_2),
         ...     ])
 
-        >>> abjad.f(registrations, strict=79)
+        >>> abjad.f(registrations, strict=89)
         baca.RegistrationDictionary(
             [
                 (

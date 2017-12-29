@@ -19,7 +19,7 @@ class PitchArrayList(abjad.TypedList):
         >>> arrays = [array_1, array_2]
         >>> arrays = baca.PitchArrayList(arrays)
 
-        >>> abjad.f(arrays, strict=79)
+        >>> abjad.f(arrays, strict=89)
         baca.PitchArrayList(
             [
                 baca.PitchArray(
@@ -128,11 +128,11 @@ class PitchArrayList(abjad.TypedList):
             >>> arrays = baca.PitchArrayList(arrays)
 
             >>> score = arrays.to_score()
-            >>> abjad.show(score, strict=79) # doctest: +SKIP
+            >>> abjad.show(score, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(score, strict=79)
+                >>> abjad.f(score, strict=89)
                 \new Score <<
                     \new StaffGroup <<
                         \new Staff {

@@ -28,11 +28,11 @@ class NestingCommand(Command):
         ...     ]
         >>> contribution = music_maker('Voice 1', collections)
         >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
             \new Staff <<
                 \context Voice = "Voice 1" {
                     \voiceOne
@@ -129,57 +129,57 @@ class NestingCommand(Command):
         >>> lilypond_file = maker.run(environment='docs')
         >>> staff = lilypond_file[abjad.Staff]
         >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
-        >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             \context Score = "Score" <<
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        % GlobalSkips [measure 1]                                          %! SM4
-                        \time 1/2                                                          %! SM1
-                        \bar ""                                                            %! EMPTY_START_BAR:SM2
-                        \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                        % GlobalSkips [measure 1]                                                    %! SM4
+                        \time 1/2                                                                    %! SM1
+                        \bar ""                                                                      %! EMPTY_START_BAR:SM2
+                        \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
                         s1 * 1/2
                         ^ \markup {
                             \column
                                 {
-                                    \line                                                  %! STAGE_NUMBER_MARKUP:SM3
-                                        {                                                  %! STAGE_NUMBER_MARKUP:SM3
-                                            \fontsize                                      %! STAGE_NUMBER_MARKUP:SM3
-                                                #-3                                        %! STAGE_NUMBER_MARKUP:SM3
-                                                \with-color                                %! STAGE_NUMBER_MARKUP:SM3
-                                                    #(x11-color 'DarkCyan)                 %! STAGE_NUMBER_MARKUP:SM3
-                                                    [1]                                    %! STAGE_NUMBER_MARKUP:SM3
-                                        }                                                  %! STAGE_NUMBER_MARKUP:SM3
-                                    \line                                                  %! SEGMENT:SPACING_MARKUP:HSS2
-                                        {                                                  %! SEGMENT:SPACING_MARKUP:HSS2
-                                            \with-color                                    %! SEGMENT:SPACING_MARKUP:HSS2
-                                                #(x11-color 'DarkCyan)                     %! SEGMENT:SPACING_MARKUP:HSS2
-                                                \fontsize                                  %! SEGMENT:SPACING_MARKUP:HSS2
-                                                    #-3                                    %! SEGMENT:SPACING_MARKUP:HSS2
-                                                    (1/24)                                 %! SEGMENT:SPACING_MARKUP:HSS2
-                                        }                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                                    \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                        {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                            \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                                #-3                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                                \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                                    #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                                    [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                        }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    \line                                                            %! SEGMENT:SPACING_MARKUP:HSS2
+                                        {                                                            %! SEGMENT:SPACING_MARKUP:HSS2
+                                            \with-color                                              %! SEGMENT:SPACING_MARKUP:HSS2
+                                                #(x11-color 'DarkCyan)                               %! SEGMENT:SPACING_MARKUP:HSS2
+                                                \fontsize                                            %! SEGMENT:SPACING_MARKUP:HSS2
+                                                    #-3                                              %! SEGMENT:SPACING_MARKUP:HSS2
+                                                    (1/24)                                           %! SEGMENT:SPACING_MARKUP:HSS2
+                                        }                                                            %! SEGMENT:SPACING_MARKUP:HSS2
                                 }
                             }
             <BLANKLINE>
-                        % GlobalSkips [measure 2]                                          %! SM4
-                        \time 1/4                                                          %! SM1
-                        \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
-                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)   %! SEGMENT:SPACING:HSS1
+                        % GlobalSkips [measure 2]                                                    %! SM4
+                        \time 1/4                                                                    %! SM1
+                        \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
+                        \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
                         s1 * 1/4
-                        ^ \markup {                                                        %! SEGMENT:SPACING_MARKUP:HSS2
-                            \with-color                                                    %! SEGMENT:SPACING_MARKUP:HSS2
-                                #(x11-color 'DarkCyan)                                     %! SEGMENT:SPACING_MARKUP:HSS2
-                                \fontsize                                                  %! SEGMENT:SPACING_MARKUP:HSS2
-                                    #-3                                                    %! SEGMENT:SPACING_MARKUP:HSS2
-                                    (1/24)                                                 %! SEGMENT:SPACING_MARKUP:HSS2
-                            }                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                        \override Score.BarLine.transparent = ##f                          %! SM5
-                        \bar "|"                                                           %! SM5
+                        ^ \markup {                                                                  %! SEGMENT:SPACING_MARKUP:HSS2
+                            \with-color                                                              %! SEGMENT:SPACING_MARKUP:HSS2
+                                #(x11-color 'DarkCyan)                                               %! SEGMENT:SPACING_MARKUP:HSS2
+                                \fontsize                                                            %! SEGMENT:SPACING_MARKUP:HSS2
+                                    #-3                                                              %! SEGMENT:SPACING_MARKUP:HSS2
+                                    (1/24)                                                           %! SEGMENT:SPACING_MARKUP:HSS2
+                            }                                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                        \override Score.BarLine.transparent = ##f                                    %! SM5
+                        \bar "|"                                                                     %! SM5
             <BLANKLINE>
                     }
                 >>
@@ -193,7 +193,7 @@ class NestingCommand(Command):
                                 \times 8/7 {
                                     {
             <BLANKLINE>
-                                        % MusicVoice [measure 1]                           %! SM4
+                                        % MusicVoice [measure 1]                                     %! SM4
                                         \set stemLeftBeamCount = #0
                                         \set stemRightBeamCount = #2
                                         c'16
@@ -230,7 +230,7 @@ class NestingCommand(Command):
                             {
                                 {
             <BLANKLINE>
-                                    % MusicVoice [measure 2]                               %! SM4
+                                    % MusicVoice [measure 2]                                         %! SM4
                                     \set stemLeftBeamCount = #1
                                     \set stemRightBeamCount = #2
                                     g''16
@@ -309,11 +309,11 @@ class NestingCommand(Command):
             ...     ]
             >>> contribution = music_maker('Voice 1', collections)
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne

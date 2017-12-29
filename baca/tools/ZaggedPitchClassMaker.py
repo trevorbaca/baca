@@ -20,7 +20,7 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
         ...         grouping_counts=[1, 1, 1, 2, 3],
         ...     )
         >>> pitch_class_tree = maker()
-        >>> abjad.show(pitch_class_tree, strict=79) # doctest: +SKIP
+        >>> abjad.show(pitch_class_tree, strict=89) # doctest: +SKIP
 
         >>> for tree in pitch_class_tree:
         ...     tree.get_payload(nested=True)
@@ -172,7 +172,7 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
             ...     grouping_counts=None,
             ...     )
             >>> pitch_class_tree = maker()
-            >>> abjad.show(pitch_class_tree, strict=79) # doctest: +SKIP
+            >>> abjad.show(pitch_class_tree, strict=89) # doctest: +SKIP
 
             >>> for tree in pitch_class_tree:
             ...     tree.get_payload(nested=True)
@@ -199,7 +199,7 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
             ...     grouping_counts=None,
             ...     )
             >>> pitch_class_tree = maker()
-            >>> abjad.show(pitch_class_tree, strict=79) # doctest: +SKIP
+            >>> abjad.show(pitch_class_tree, strict=89) # doctest: +SKIP
 
             >>> for tree in pitch_class_tree:
             ...     tree.get_payload(nested=True)
@@ -238,7 +238,7 @@ class ZaggedPitchClassMaker(abjad.AbjadObject):
             ...     grouping_counts=[1, 2],
             ...     )
             >>> pitch_class_tree = maker()
-            >>> abjad.show(pitch_class_tree, strict=79) # doctest: +SKIP
+            >>> abjad.show(pitch_class_tree, strict=89) # doctest: +SKIP
 
             >>> for tree in pitch_class_tree:
             ...     tree.get_payload(nested=True)

@@ -15,7 +15,7 @@ class TimelineScope(abjad.AbjadObject):
         ...     ('OboeMusicVoice', 9, 12),
         ...     ])
 
-        >>> abjad.f(scope, strict=79)
+        >>> abjad.f(scope, strict=89)
         baca.TimelineScope(
             scopes=(
                 baca.Scope(

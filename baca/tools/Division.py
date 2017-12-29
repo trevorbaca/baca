@@ -25,7 +25,7 @@ class Division(abjad.NonreducedFraction):
         ...     start_offset=abjad.Offset((5, 4)),
         ...     )
 
-        >>> abjad.f(division, strict=79)
+        >>> abjad.f(division, strict=89)
         baca.Division(
             (3, 8),
             start_offset=abjad.Offset(5, 4),
@@ -37,7 +37,7 @@ class Division(abjad.NonreducedFraction):
 
         >>> division = baca.Division((3, 8))
 
-        >>> abjad.f(division, strict=79)
+        >>> abjad.f(division, strict=89)
         baca.Division(
             (3, 8)
             )
@@ -75,7 +75,7 @@ class Division(abjad.NonreducedFraction):
 
         >>> division = baca.Division()
 
-        >>> abjad.f(division, strict=79)
+        >>> abjad.f(division, strict=89)
         baca.Division(
             (0, 1)
             )

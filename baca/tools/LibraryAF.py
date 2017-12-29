@@ -35,11 +35,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -49,13 +49,13 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 d'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                                 bf'4
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -63,26 +63,26 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 e''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                                 ef''4
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 g''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -105,11 +105,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -130,21 +130,21 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 e''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                                 ef''4
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 [
                                 g''16
-                                -\accent                                                       %! IC1
+                                -\accent                                                                 %! IC1
                                 ]
                             }
                             \times 4/5 {
@@ -182,11 +182,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -196,13 +196,13 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 [
                                 d'16
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 ]
                                 bf'4
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -210,26 +210,26 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 [
                                 e''16
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 ]
                                 ef''4
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 [
                                 g''16
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -252,11 +252,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -266,13 +266,13 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #6
                                 r8
                                 c'16
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 [
                                 d'16
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 ]
                                 bf'4
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -280,26 +280,26 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 [
                                 e''16
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 ]
                                 ef''4
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 [
                                 g''16
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -325,11 +325,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -350,21 +350,21 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 [
                                 e''16
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 ]
                                 ef''4
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 [
                                 g''16
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 ]
                             }
                             \times 4/5 {
@@ -443,11 +443,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -458,12 +458,12 @@ class LibraryAF(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                _ \markup {                                                    %! IC1
-                                    \dynamic                                                   %! IC1
-                                        ff                                                     %! IC1
-                                    \upright                                                   %! IC1
-                                        ancora                                                 %! IC1
-                                    }                                                          %! IC1
+                                _ \markup {                                                              %! IC1
+                                    \dynamic                                                             %! IC1
+                                        ff                                                               %! IC1
+                                    \upright                                                             %! IC1
+                                        ancora                                                           %! IC1
+                                    }                                                                    %! IC1
                                 d'16
                                 ]
                                 bf'4
@@ -513,11 +513,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -539,12 +539,12 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                _ \markup {                                                    %! IC1
-                                    \dynamic                                                   %! IC1
-                                        ff                                                     %! IC1
-                                    \upright                                                   %! IC1
-                                        ancora                                                 %! IC1
-                                    }                                                          %! IC1
+                                _ \markup {                                                              %! IC1
+                                    \dynamic                                                             %! IC1
+                                        ff                                                               %! IC1
+                                    \upright                                                             %! IC1
+                                        ancora                                                           %! IC1
+                                    }                                                                    %! IC1
                                 e''16
                                 ]
                                 ef''4
@@ -591,18 +591,18 @@ class LibraryAF(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
                             {
                                 <c' d' bf'>8
-                                -\arpeggio                                                     %! IC1
+                                -\arpeggio                                                               %! IC1
                                 ~
                                 [
                                 <c' d' bf'>32
@@ -619,7 +619,7 @@ class LibraryAF(abjad.AbjadObject):
                             }
                             {
                                 <ef'' e'' fs'''>8
-                                -\arpeggio                                                     %! IC1
+                                -\arpeggio                                                               %! IC1
                                 ~
                                 [
                                 <ef'' e'' fs'''>32
@@ -628,7 +628,7 @@ class LibraryAF(abjad.AbjadObject):
                             }
                             {
                                 <g' af''>8
-                                -\arpeggio                                                     %! IC1
+                                -\arpeggio                                                               %! IC1
                                 ~
                                 [
                                 <g' af''>32
@@ -660,11 +660,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -687,7 +687,7 @@ class LibraryAF(abjad.AbjadObject):
                             }
                             {
                                 <ef'' e'' fs'''>8
-                                -\arpeggio                                                     %! IC1
+                                -\arpeggio                                                               %! IC1
                                 ~
                                 [
                                 <ef'' e'' fs'''>32
@@ -696,7 +696,7 @@ class LibraryAF(abjad.AbjadObject):
                             }
                             {
                                 <g' af''>8
-                                -\arpeggio                                                     %! IC1
+                                -\arpeggio                                                               %! IC1
                                 ~
                                 [
                                 <g' af''>32
@@ -755,41 +755,41 @@ class LibraryAF(abjad.AbjadObject):
             ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
             ...         ],
             ...     )
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                          %! SM4
-                            \time 4/8                                                          %! SM1
-                            \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)   %! SEGMENT:SPACING:HSS1
+                            % GlobalSkips [measure 1]                                                    %! SM4
+                            \time 4/8                                                                    %! SM1
+                            \bar ""                                                                      %! EMPTY_START_BAR:SM2
+                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SEGMENT:SPACING:HSS1
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                          %! SM4
-                            \time 3/8                                                          %! SM1
-                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)   %! SEGMENT:SPACING:HSS1
+                            % GlobalSkips [measure 2]                                                    %! SM4
+                            \time 3/8                                                                    %! SM1
+                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SEGMENT:SPACING:HSS1
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                          %! SM4
-                            \time 4/8                                                          %! SM1
-                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)   %! SEGMENT:SPACING:HSS1
+                            % GlobalSkips [measure 3]                                                    %! SM4
+                            \time 4/8                                                                    %! SM1
+                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SEGMENT:SPACING:HSS1
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                          %! SM4
-                            \time 3/8                                                          %! SM1
-                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)   %! SEGMENT:SPACING:HSS1
+                            % GlobalSkips [measure 4]                                                    %! SM4
+                            \time 3/8                                                                    %! SM1
+                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SEGMENT:SPACING:HSS1
                             s1 * 3/8
-                            \override Score.BarLine.transparent = ##f                          %! SM5
-                            \bar "|"                                                           %! SM5
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -798,7 +798,7 @@ class LibraryAF(abjad.AbjadObject):
                             \context Voice = "MusicVoice" {
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 1]                                   %! SM4
+                                    % MusicVoice [measure 1]                                             %! SM4
                                     e'8
                                     [
                 <BLANKLINE>
@@ -811,7 +811,7 @@ class LibraryAF(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 2]                                   %! SM4
+                                    % MusicVoice [measure 2]                                             %! SM4
                                     \override Staff.BarLine.bar-extent = #'(-4 . 4)
                                     g'8
                                     [
@@ -824,7 +824,7 @@ class LibraryAF(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 3]                                   %! SM4
+                                    % MusicVoice [measure 3]                                             %! SM4
                                     d''8
                                     [
                 <BLANKLINE>
@@ -837,7 +837,7 @@ class LibraryAF(abjad.AbjadObject):
                                 }
                                 {
                 <BLANKLINE>
-                                    % MusicVoice [measure 4]                                   %! SM4
+                                    % MusicVoice [measure 4]                                             %! SM4
                                     f''8
                                     [
                 <BLANKLINE>
@@ -883,11 +883,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1001,11 +1001,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1119,11 +1119,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1215,11 +1215,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.rests_around([2], [2]),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1261,11 +1261,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.rests_around([2], [2]),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1326,11 +1326,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.rests_around([2], [2]),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1388,11 +1388,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.rests_around([2], [2]),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1452,11 +1452,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.rests_around([2], [2]),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1510,11 +1510,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1559,11 +1559,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1623,11 +1623,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1706,11 +1706,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1779,11 +1779,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1897,11 +1897,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2015,11 +2015,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2114,11 +2114,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2126,7 +2126,7 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #7
-                                \clef "alto"                                                   %! IC1
+                                \clef "alto"                                                             %! IC1
                                 r8
                                 c'16
                                 [
@@ -2179,11 +2179,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2203,7 +2203,7 @@ class LibraryAF(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \clef "alto"                                                   %! IC1
+                                \clef "alto"                                                             %! IC1
                                 fs''16
                                 [
                                 e''16
@@ -2286,11 +2286,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2375,11 +2375,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2494,11 +2494,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2610,11 +2610,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2673,11 +2673,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2788,114 +2788,114 @@ class LibraryAF(abjad.AbjadObject):
             ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
             ...         ],
             ...     )
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \context Score = "Score" <<
-                    \tag violin.viola.cello                                                    %! ST4
+                    \tag violin.viola.cello                                                              %! ST4
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                          %! SM4
-                            \time 5/8                                                          %! SM1
-                            \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)   %! SEGMENT:SPACING:HSS1
+                            % GlobalSkips [measure 1]                                                    %! SM4
+                            \time 5/8                                                                    %! SM1
+                            \bar ""                                                                      %! EMPTY_START_BAR:SM2
+                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SEGMENT:SPACING:HSS1
                             s1 * 5/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                          %! SM4
-                            \time 2/16                                                         %! SM1
-                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)   %! SEGMENT:SPACING:HSS1
+                            % GlobalSkips [measure 2]                                                    %! SM4
+                            \time 2/16                                                                   %! SM1
+                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SEGMENT:SPACING:HSS1
                             s1 * 1/8
-                            \override Score.BarLine.transparent = ##f                          %! SM5
-                            \bar "|"                                                           %! SM5
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
                 <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "MusicContext" <<
                         \context StringSectionStaffGroup = "String Section Staff Group" <<
-                            \tag violin                                                        %! ST4
+                            \tag violin                                                                  %! ST4
                             \context ViolinMusicStaff = "ViolinMusicStaff" {
                                 \context ViolinMusicVoice = "ViolinMusicVoice" {
                                     {
                                         {
                 <BLANKLINE>
-                                            % ViolinMusicVoice [measure 1]                     %! SM4
+                                            % ViolinMusicVoice [measure 1]                               %! SM4
                                             \override Stem.direction = #up
-                                            \set ViolinMusicStaff.instrumentName = \markup {   %! DEFAULT_INSTRUMENT:SM8
-                                                \hcenter-in                                    %! DEFAULT_INSTRUMENT:SM8
-                                                    #10                                        %! DEFAULT_INSTRUMENT:SM8
-                                                    Violin                                     %! DEFAULT_INSTRUMENT:SM8
-                                                }                                              %! DEFAULT_INSTRUMENT:SM8
-                                            \set ViolinMusicStaff.shortInstrumentName = \markup { %! DEFAULT_INSTRUMENT:SM8
-                                                \hcenter-in                                    %! DEFAULT_INSTRUMENT:SM8
-                                                    #10                                        %! DEFAULT_INSTRUMENT:SM8
-                                                    Vn.                                        %! DEFAULT_INSTRUMENT:SM8
-                                                }                                              %! DEFAULT_INSTRUMENT:SM8
-                                            \set ViolinMusicStaff.forceClef = ##t              %! DEFAULT_CLEF:SM8
-                                            \clef "treble"                                     %! DEFAULT_CLEF:SM8
+                                            \set ViolinMusicStaff.instrumentName = \markup {             %! DEFAULT_INSTRUMENT:SM8
+                                                \hcenter-in                                              %! DEFAULT_INSTRUMENT:SM8
+                                                    #10                                                  %! DEFAULT_INSTRUMENT:SM8
+                                                    Violin                                               %! DEFAULT_INSTRUMENT:SM8
+                                                }                                                        %! DEFAULT_INSTRUMENT:SM8
+                                            \set ViolinMusicStaff.shortInstrumentName = \markup {        %! DEFAULT_INSTRUMENT:SM8
+                                                \hcenter-in                                              %! DEFAULT_INSTRUMENT:SM8
+                                                    #10                                                  %! DEFAULT_INSTRUMENT:SM8
+                                                    Vn.                                                  %! DEFAULT_INSTRUMENT:SM8
+                                                }                                                        %! DEFAULT_INSTRUMENT:SM8
+                                            \set ViolinMusicStaff.forceClef = ##t                        %! DEFAULT_CLEF:SM8
+                                            \clef "treble"                                               %! DEFAULT_CLEF:SM8
                                             \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR:SM6
                                             \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:SM6
-                                            %%% \override ViolinMusicStaff.Clef.color = ##f    %! DEFAULT_CLEF_UNCOLOR:SM7
+                                            %%% \override ViolinMusicStaff.Clef.color = ##f              %! DEFAULT_CLEF_UNCOLOR:SM7
                                             a'8
                                             ^ \markup {
                                                 \column
                                                     {
-                                                        %%% \line                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%     {                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%         \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%             (Violin                %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%         \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%             \hcenter-in            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                 #10                %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                 Violin             %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%         \concat                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%             {                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                 \vcenter           %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                     \hcenter-in    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                         #10        %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                         Vn.        %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                 \vcenter           %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                     )              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%             }                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%     }                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        \line                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            {                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                \with-color                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    #(x11-color 'DarkViolet)   %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    {                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            (Violin            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            \hcenter-in        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                #10            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                Violin         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \concat                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            {                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                \vcenter       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                    \hcenter-in %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                        #10    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                        Vn.    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                \vcenter       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                    )          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            }                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    }                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                        %%% \line                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%     {                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%         \vcenter                             %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             (Violin                          %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%         \vcenter                             %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             \hcenter-in                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 #10                          %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 Violin                       %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%         \concat                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             {                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 \vcenter                     %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                     \hcenter-in              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                         #10                  %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                         Vn.                  %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 \vcenter                     %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                     )                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             }                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%     }                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        \line                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            {                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                \with-color                              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    #(x11-color 'DarkViolet)             %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    {                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \vcenter                         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            (Violin                      %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \vcenter                         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            \hcenter-in                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                #10                      %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                Violin                   %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \concat                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            {                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                \vcenter                 %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                    \hcenter-in          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                        #10              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                        Vn.              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                \vcenter                 %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                    )                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            }                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    }                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            }                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                                     }
                                                 }
-                                            \set ViolinMusicStaff.instrumentName = \markup {   %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                \hcenter-in                                    %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                    #10                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                    Violin                                     %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                }                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                            \set ViolinMusicStaff.shortInstrumentName = \markup { %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                \hcenter-in                                    %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                    #10                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                    Vn.                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                }                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                            \set ViolinMusicStaff.instrumentName = \markup {             %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                \hcenter-in                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                    #10                                                  %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                    Violin                                               %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                }                                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                            \set ViolinMusicStaff.shortInstrumentName = \markup {        %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                \hcenter-in                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                    #10                                                  %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                    Vn.                                                  %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                }                                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
                                             \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'violet) %! DEFAULT_REDRAW_INSTRUMENT_COLOR:SM6
                                             \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! DEFAULT_CLEF_COLOR_REDRAW:SM6
                 <BLANKLINE>
@@ -2912,196 +2912,196 @@ class LibraryAF(abjad.AbjadObject):
                                     {
                                         {
                 <BLANKLINE>
-                                            % ViolinMusicVoice [measure 2]                     %! SM4
+                                            % ViolinMusicVoice [measure 2]                               %! SM4
                                             ef''8
                 <BLANKLINE>
                                         }
                                     }
                                 }
                             }
-                            \tag viola                                                         %! ST4
+                            \tag viola                                                                   %! ST4
                             \context ViolaMusicStaff = "ViolaMusicStaff" {
                                 \context ViolaMusicVoice = "ViolaMusicVoice" {
                                     {
                                         {
                 <BLANKLINE>
-                                            % ViolaMusicVoice [measure 1]                      %! SM4
+                                            % ViolaMusicVoice [measure 1]                                %! SM4
                                             \override Stem.direction = #up
-                                            \set ViolaMusicStaff.instrumentName = \markup {    %! DEFAULT_INSTRUMENT:SM8
-                                                \hcenter-in                                    %! DEFAULT_INSTRUMENT:SM8
-                                                    #10                                        %! DEFAULT_INSTRUMENT:SM8
-                                                    Viola                                      %! DEFAULT_INSTRUMENT:SM8
-                                                }                                              %! DEFAULT_INSTRUMENT:SM8
-                                            \set ViolaMusicStaff.shortInstrumentName = \markup { %! DEFAULT_INSTRUMENT:SM8
-                                                \hcenter-in                                    %! DEFAULT_INSTRUMENT:SM8
-                                                    #10                                        %! DEFAULT_INSTRUMENT:SM8
-                                                    Va.                                        %! DEFAULT_INSTRUMENT:SM8
-                                                }                                              %! DEFAULT_INSTRUMENT:SM8
-                                            \set ViolaMusicStaff.forceClef = ##t               %! DEFAULT_CLEF:SM8
-                                            \clef "alto"                                       %! DEFAULT_CLEF:SM8
-                                            \crossStaff                                        %! IC1
+                                            \set ViolaMusicStaff.instrumentName = \markup {              %! DEFAULT_INSTRUMENT:SM8
+                                                \hcenter-in                                              %! DEFAULT_INSTRUMENT:SM8
+                                                    #10                                                  %! DEFAULT_INSTRUMENT:SM8
+                                                    Viola                                                %! DEFAULT_INSTRUMENT:SM8
+                                                }                                                        %! DEFAULT_INSTRUMENT:SM8
+                                            \set ViolaMusicStaff.shortInstrumentName = \markup {         %! DEFAULT_INSTRUMENT:SM8
+                                                \hcenter-in                                              %! DEFAULT_INSTRUMENT:SM8
+                                                    #10                                                  %! DEFAULT_INSTRUMENT:SM8
+                                                    Va.                                                  %! DEFAULT_INSTRUMENT:SM8
+                                                }                                                        %! DEFAULT_INSTRUMENT:SM8
+                                            \set ViolaMusicStaff.forceClef = ##t                         %! DEFAULT_CLEF:SM8
+                                            \clef "alto"                                                 %! DEFAULT_CLEF:SM8
+                                            \crossStaff                                                  %! IC1
                                             \once \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR:SM6
                                             \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:SM6
-                                            %%% \override ViolaMusicStaff.Clef.color = ##f     %! DEFAULT_CLEF_UNCOLOR:SM7
+                                            %%% \override ViolaMusicStaff.Clef.color = ##f               %! DEFAULT_CLEF_UNCOLOR:SM7
                                             c'8
                                             ^ \markup {
                                                 \column
                                                     {
-                                                        %%% \line                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%     {                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%         \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%             (Viola                 %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%         \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%             \hcenter-in            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                 #10                %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                 Viola              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%         \concat                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%             {                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                 \vcenter           %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                     \hcenter-in    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                         #10        %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                         Va.        %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                 \vcenter           %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                     )              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%             }                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%     }                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        \line                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            {                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                \with-color                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    #(x11-color 'DarkViolet)   %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    {                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            (Viola             %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            \hcenter-in        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                #10            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                Viola          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \concat                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            {                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                \vcenter       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                    \hcenter-in %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                        #10    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                        Va.    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                \vcenter       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                    )          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            }                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    }                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                        %%% \line                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%     {                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%         \vcenter                             %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             (Viola                           %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%         \vcenter                             %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             \hcenter-in                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 #10                          %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 Viola                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%         \concat                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             {                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 \vcenter                     %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                     \hcenter-in              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                         #10                  %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                         Va.                  %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 \vcenter                     %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                     )                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             }                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%     }                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        \line                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            {                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                \with-color                              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    #(x11-color 'DarkViolet)             %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    {                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \vcenter                         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            (Viola                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \vcenter                         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            \hcenter-in                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                #10                      %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                Viola                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \concat                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            {                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                \vcenter                 %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                    \hcenter-in          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                        #10              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                        Va.              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                \vcenter                 %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                    )                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            }                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    }                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            }                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                                     }
                                                 }
-                                            \set ViolaMusicStaff.instrumentName = \markup {    %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                \hcenter-in                                    %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                    #10                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                    Viola                                      %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                }                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                            \set ViolaMusicStaff.shortInstrumentName = \markup { %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                \hcenter-in                                    %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                    #10                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                    Va.                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                }                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                            \set ViolaMusicStaff.instrumentName = \markup {              %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                \hcenter-in                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                    #10                                                  %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                    Viola                                                %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                }                                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                            \set ViolaMusicStaff.shortInstrumentName = \markup {         %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                \hcenter-in                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                    #10                                                  %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                    Va.                                                  %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                }                                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
                                             \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'violet) %! DEFAULT_REDRAW_INSTRUMENT_COLOR:SM6
-                                            \override ViolaMusicStaff.Clef.color = #(x11-color 'violet) %! DEFAULT_CLEF_COLOR_REDRAW:SM6
+                                            \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)  %! DEFAULT_CLEF_COLOR_REDRAW:SM6
                 <BLANKLINE>
-                                            \crossStaff                                        %! IC1
+                                            \crossStaff                                                  %! IC1
                                             d'8
                 <BLANKLINE>
-                                            \crossStaff                                        %! IC1
+                                            \crossStaff                                                  %! IC1
                                             e'8
                 <BLANKLINE>
-                                            \crossStaff                                        %! IC1
+                                            \crossStaff                                                  %! IC1
                                             f'8
                 <BLANKLINE>
-                                            \crossStaff                                        %! IC1
+                                            \crossStaff                                                  %! IC1
                                             g'8
                                             \revert Stem.direction
                                         }
                                     }
                 <BLANKLINE>
-                                    % ViolaMusicVoice [measure 2]                              %! SM4
+                                    % ViolaMusicVoice [measure 2]                                        %! SM4
                                     R1 * 1/8
                 <BLANKLINE>
                                 }
                             }
-                            \tag cello                                                         %! ST4
+                            \tag cello                                                                   %! ST4
                             \context CelloMusicStaff = "CelloMusicStaff" {
                                 \context CelloMusicVoice = "CelloMusicVoice" {
                 <BLANKLINE>
-                                    % CelloMusicVoice [measure 1]                              %! SM4
-                                    \set CelloMusicStaff.instrumentName = \markup {            %! DEFAULT_INSTRUMENT:SM8
-                                        \hcenter-in                                            %! DEFAULT_INSTRUMENT:SM8
-                                            #10                                                %! DEFAULT_INSTRUMENT:SM8
-                                            Cello                                              %! DEFAULT_INSTRUMENT:SM8
-                                        }                                                      %! DEFAULT_INSTRUMENT:SM8
-                                    \set CelloMusicStaff.shortInstrumentName = \markup {       %! DEFAULT_INSTRUMENT:SM8
-                                        \hcenter-in                                            %! DEFAULT_INSTRUMENT:SM8
-                                            #10                                                %! DEFAULT_INSTRUMENT:SM8
-                                            Vc.                                                %! DEFAULT_INSTRUMENT:SM8
-                                        }                                                      %! DEFAULT_INSTRUMENT:SM8
-                                    \set CelloMusicStaff.forceClef = ##t                       %! DEFAULT_CLEF:SM8
-                                    \clef "bass"                                               %! DEFAULT_CLEF:SM8
+                                    % CelloMusicVoice [measure 1]                                        %! SM4
+                                    \set CelloMusicStaff.instrumentName = \markup {                      %! DEFAULT_INSTRUMENT:SM8
+                                        \hcenter-in                                                      %! DEFAULT_INSTRUMENT:SM8
+                                            #10                                                          %! DEFAULT_INSTRUMENT:SM8
+                                            Cello                                                        %! DEFAULT_INSTRUMENT:SM8
+                                        }                                                                %! DEFAULT_INSTRUMENT:SM8
+                                    \set CelloMusicStaff.shortInstrumentName = \markup {                 %! DEFAULT_INSTRUMENT:SM8
+                                        \hcenter-in                                                      %! DEFAULT_INSTRUMENT:SM8
+                                            #10                                                          %! DEFAULT_INSTRUMENT:SM8
+                                            Vc.                                                          %! DEFAULT_INSTRUMENT:SM8
+                                        }                                                                %! DEFAULT_INSTRUMENT:SM8
+                                    \set CelloMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:SM8
+                                    \clef "bass"                                                         %! DEFAULT_CLEF:SM8
                                     \once \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR:SM6
                                     \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:SM6
-                                    %%% \override CelloMusicStaff.Clef.color = ##f             %! DEFAULT_CLEF_UNCOLOR:SM7
+                                    %%% \override CelloMusicStaff.Clef.color = ##f                       %! DEFAULT_CLEF_UNCOLOR:SM7
                                     R1 * 5/8
                                     ^ \markup {
                                         \column
                                             {
-                                                %%% \line                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%     {                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%         \vcenter                           %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%             (Cello                         %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%         \vcenter                           %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%             \hcenter-in                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%                 #10                        %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%                 Cello                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%         \concat                            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%             {                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%                 \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%                     \hcenter-in            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%                         #10                %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%                         Vc.                %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%                 \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%                     )                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%             }                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%     }                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                \line                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    {                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        \with-color                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            #(x11-color 'DarkViolet)           %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            {                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                \vcenter                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    (Cello                     %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                \vcenter                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    \hcenter-in                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        #10                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        Cello                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                \concat                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    {                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            \hcenter-in        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                #10            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                Vc.            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            )                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    }                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    }                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                %%% \line                                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%     {                                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%         \vcenter                                     %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%             (Cello                                   %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%         \vcenter                                     %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%             \hcenter-in                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                 #10                                  %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                 Cello                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%         \concat                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%             {                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                 \vcenter                             %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                     \hcenter-in                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                         #10                          %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                         Vc.                          %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                 \vcenter                             %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                     )                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%             }                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%     }                                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                \line                                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                    {                                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                        \with-color                                      %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            #(x11-color 'DarkViolet)                     %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            {                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    (Cello                               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    \hcenter-in                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        #10                              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        Cello                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                \concat                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    {                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \vcenter                         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            \hcenter-in                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                #10                      %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                Vc.                      %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \vcenter                         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            )                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    }                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            }                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                    }                                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                             }
                                         }
-                                    \set CelloMusicStaff.instrumentName = \markup {            %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                        \hcenter-in                                            %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                            #10                                                %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                            Cello                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                        }                                                      %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                    \set CelloMusicStaff.shortInstrumentName = \markup {       %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                        \hcenter-in                                            %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                            #10                                                %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                            Vc.                                                %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                        }                                                      %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                    \set CelloMusicStaff.instrumentName = \markup {                      %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                        \hcenter-in                                                      %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                            #10                                                          %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                            Cello                                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                        }                                                                %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                    \set CelloMusicStaff.shortInstrumentName = \markup {                 %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                        \hcenter-in                                                      %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                            #10                                                          %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                            Vc.                                                          %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                        }                                                                %! DEFAULT_REDRAW_INSTRUMENT:SM8
                                     \override CelloMusicStaff.InstrumentName.color = #(x11-color 'violet) %! DEFAULT_REDRAW_INSTRUMENT_COLOR:SM6
-                                    \override CelloMusicStaff.Clef.color = #(x11-color 'violet) %! DEFAULT_CLEF_COLOR_REDRAW:SM6
+                                    \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_COLOR_REDRAW:SM6
                 <BLANKLINE>
-                                    % CelloMusicVoice [measure 2]                              %! SM4
+                                    % CelloMusicVoice [measure 2]                                        %! SM4
                                     R1 * 1/8
                 <BLANKLINE>
                                 }
@@ -3165,114 +3165,114 @@ class LibraryAF(abjad.AbjadObject):
             ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
             ...         ],
             ...     )
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \context Score = "Score" <<
-                    \tag violin.viola.cello                                                    %! ST4
+                    \tag violin.viola.cello                                                              %! ST4
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                          %! SM4
-                            \time 5/8                                                          %! SM1
-                            \bar ""                                                            %! EMPTY_START_BAR:SM2
-                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)   %! SEGMENT:SPACING:HSS1
+                            % GlobalSkips [measure 1]                                                    %! SM4
+                            \time 5/8                                                                    %! SM1
+                            \bar ""                                                                      %! EMPTY_START_BAR:SM2
+                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SEGMENT:SPACING:HSS1
                             s1 * 5/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                          %! SM4
-                            \time 2/16                                                         %! SM1
-                            \newSpacingSection                                                 %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)   %! SEGMENT:SPACING:HSS1
+                            % GlobalSkips [measure 2]                                                    %! SM4
+                            \time 2/16                                                                   %! SM1
+                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SEGMENT:SPACING:HSS1
                             s1 * 1/8
-                            \override Score.BarLine.transparent = ##f                          %! SM5
-                            \bar "|"                                                           %! SM5
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
                 <BLANKLINE>
                         }
                     >>
                     \context MusicContext = "MusicContext" <<
                         \context StringSectionStaffGroup = "String Section Staff Group" <<
-                            \tag violin                                                        %! ST4
+                            \tag violin                                                                  %! ST4
                             \context ViolinMusicStaff = "ViolinMusicStaff" {
                                 \context ViolinMusicVoice = "ViolinMusicVoice" {
                                     {
                                         {
                 <BLANKLINE>
-                                            % ViolinMusicVoice [measure 1]                     %! SM4
+                                            % ViolinMusicVoice [measure 1]                               %! SM4
                                             \override Stem.direction = #up
-                                            \set ViolinMusicStaff.instrumentName = \markup {   %! DEFAULT_INSTRUMENT:SM8
-                                                \hcenter-in                                    %! DEFAULT_INSTRUMENT:SM8
-                                                    #10                                        %! DEFAULT_INSTRUMENT:SM8
-                                                    Violin                                     %! DEFAULT_INSTRUMENT:SM8
-                                                }                                              %! DEFAULT_INSTRUMENT:SM8
-                                            \set ViolinMusicStaff.shortInstrumentName = \markup { %! DEFAULT_INSTRUMENT:SM8
-                                                \hcenter-in                                    %! DEFAULT_INSTRUMENT:SM8
-                                                    #10                                        %! DEFAULT_INSTRUMENT:SM8
-                                                    Vn.                                        %! DEFAULT_INSTRUMENT:SM8
-                                                }                                              %! DEFAULT_INSTRUMENT:SM8
-                                            \set ViolinMusicStaff.forceClef = ##t              %! DEFAULT_CLEF:SM8
-                                            \clef "treble"                                     %! DEFAULT_CLEF:SM8
+                                            \set ViolinMusicStaff.instrumentName = \markup {             %! DEFAULT_INSTRUMENT:SM8
+                                                \hcenter-in                                              %! DEFAULT_INSTRUMENT:SM8
+                                                    #10                                                  %! DEFAULT_INSTRUMENT:SM8
+                                                    Violin                                               %! DEFAULT_INSTRUMENT:SM8
+                                                }                                                        %! DEFAULT_INSTRUMENT:SM8
+                                            \set ViolinMusicStaff.shortInstrumentName = \markup {        %! DEFAULT_INSTRUMENT:SM8
+                                                \hcenter-in                                              %! DEFAULT_INSTRUMENT:SM8
+                                                    #10                                                  %! DEFAULT_INSTRUMENT:SM8
+                                                    Vn.                                                  %! DEFAULT_INSTRUMENT:SM8
+                                                }                                                        %! DEFAULT_INSTRUMENT:SM8
+                                            \set ViolinMusicStaff.forceClef = ##t                        %! DEFAULT_CLEF:SM8
+                                            \clef "treble"                                               %! DEFAULT_CLEF:SM8
                                             \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR:SM6
                                             \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:SM6
-                                            %%% \override ViolinMusicStaff.Clef.color = ##f    %! DEFAULT_CLEF_UNCOLOR:SM7
+                                            %%% \override ViolinMusicStaff.Clef.color = ##f              %! DEFAULT_CLEF_UNCOLOR:SM7
                                             a'8
                                             ^ \markup {
                                                 \column
                                                     {
-                                                        %%% \line                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%     {                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%         \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%             (Violin                %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%         \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%             \hcenter-in            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                 #10                %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                 Violin             %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%         \concat                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%             {                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                 \vcenter           %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                     \hcenter-in    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                         #10        %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                         Vn.        %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                 \vcenter           %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                     )              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%             }                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%     }                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        \line                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            {                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                \with-color                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    #(x11-color 'DarkViolet)   %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    {                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            (Violin            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            \hcenter-in        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                #10            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                Violin         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \concat                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            {                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                \vcenter       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                    \hcenter-in %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                        #10    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                        Vn.    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                \vcenter       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                    )          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            }                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    }                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                        %%% \line                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%     {                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%         \vcenter                             %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             (Violin                          %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%         \vcenter                             %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             \hcenter-in                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 #10                          %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 Violin                       %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%         \concat                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             {                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 \vcenter                     %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                     \hcenter-in              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                         #10                  %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                         Vn.                  %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 \vcenter                     %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                     )                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             }                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%     }                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        \line                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            {                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                \with-color                              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    #(x11-color 'DarkViolet)             %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    {                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \vcenter                         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            (Violin                      %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \vcenter                         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            \hcenter-in                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                #10                      %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                Violin                   %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \concat                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            {                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                \vcenter                 %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                    \hcenter-in          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                        #10              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                        Vn.              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                \vcenter                 %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                    )                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            }                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    }                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            }                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                                     }
                                                 }
-                                            \set ViolinMusicStaff.instrumentName = \markup {   %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                \hcenter-in                                    %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                    #10                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                    Violin                                     %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                }                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                            \set ViolinMusicStaff.shortInstrumentName = \markup { %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                \hcenter-in                                    %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                    #10                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                    Vn.                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                }                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                            \set ViolinMusicStaff.instrumentName = \markup {             %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                \hcenter-in                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                    #10                                                  %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                    Violin                                               %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                }                                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                            \set ViolinMusicStaff.shortInstrumentName = \markup {        %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                \hcenter-in                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                    #10                                                  %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                    Vn.                                                  %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                }                                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
                                             \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'violet) %! DEFAULT_REDRAW_INSTRUMENT_COLOR:SM6
                                             \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! DEFAULT_CLEF_COLOR_REDRAW:SM6
                 <BLANKLINE>
@@ -3289,193 +3289,193 @@ class LibraryAF(abjad.AbjadObject):
                                     {
                                         {
                 <BLANKLINE>
-                                            % ViolinMusicVoice [measure 2]                     %! SM4
+                                            % ViolinMusicVoice [measure 2]                               %! SM4
                                             ef''8
                 <BLANKLINE>
                                         }
                                     }
                                 }
                             }
-                            \tag viola                                                         %! ST4
+                            \tag viola                                                                   %! ST4
                             \context ViolaMusicStaff = "ViolaMusicStaff" {
                                 \context ViolaMusicVoice = "ViolaMusicVoice" {
                                     {
                                         {
                 <BLANKLINE>
-                                            % ViolaMusicVoice [measure 1]                      %! SM4
+                                            % ViolaMusicVoice [measure 1]                                %! SM4
                                             \override Stem.direction = #up
-                                            \set ViolaMusicStaff.instrumentName = \markup {    %! DEFAULT_INSTRUMENT:SM8
-                                                \hcenter-in                                    %! DEFAULT_INSTRUMENT:SM8
-                                                    #10                                        %! DEFAULT_INSTRUMENT:SM8
-                                                    Viola                                      %! DEFAULT_INSTRUMENT:SM8
-                                                }                                              %! DEFAULT_INSTRUMENT:SM8
-                                            \set ViolaMusicStaff.shortInstrumentName = \markup { %! DEFAULT_INSTRUMENT:SM8
-                                                \hcenter-in                                    %! DEFAULT_INSTRUMENT:SM8
-                                                    #10                                        %! DEFAULT_INSTRUMENT:SM8
-                                                    Va.                                        %! DEFAULT_INSTRUMENT:SM8
-                                                }                                              %! DEFAULT_INSTRUMENT:SM8
-                                            \set ViolaMusicStaff.forceClef = ##t               %! DEFAULT_CLEF:SM8
-                                            \clef "alto"                                       %! DEFAULT_CLEF:SM8
+                                            \set ViolaMusicStaff.instrumentName = \markup {              %! DEFAULT_INSTRUMENT:SM8
+                                                \hcenter-in                                              %! DEFAULT_INSTRUMENT:SM8
+                                                    #10                                                  %! DEFAULT_INSTRUMENT:SM8
+                                                    Viola                                                %! DEFAULT_INSTRUMENT:SM8
+                                                }                                                        %! DEFAULT_INSTRUMENT:SM8
+                                            \set ViolaMusicStaff.shortInstrumentName = \markup {         %! DEFAULT_INSTRUMENT:SM8
+                                                \hcenter-in                                              %! DEFAULT_INSTRUMENT:SM8
+                                                    #10                                                  %! DEFAULT_INSTRUMENT:SM8
+                                                    Va.                                                  %! DEFAULT_INSTRUMENT:SM8
+                                                }                                                        %! DEFAULT_INSTRUMENT:SM8
+                                            \set ViolaMusicStaff.forceClef = ##t                         %! DEFAULT_CLEF:SM8
+                                            \clef "alto"                                                 %! DEFAULT_CLEF:SM8
                                             \once \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR:SM6
                                             \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:SM6
-                                            %%% \override ViolaMusicStaff.Clef.color = ##f     %! DEFAULT_CLEF_UNCOLOR:SM7
+                                            %%% \override ViolaMusicStaff.Clef.color = ##f               %! DEFAULT_CLEF_UNCOLOR:SM7
                                             c'8
                                             ^ \markup {
                                                 \column
                                                     {
-                                                        %%% \line                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%     {                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%         \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%             (Viola                 %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%         \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%             \hcenter-in            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                 #10                %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                 Viola              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%         \concat                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%             {                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                 \vcenter           %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                     \hcenter-in    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                         #10        %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                         Va.        %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                 \vcenter           %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%                     )              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%             }                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        %%%     }                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        \line                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            {                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                \with-color                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    #(x11-color 'DarkViolet)   %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    {                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            (Viola             %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            \hcenter-in        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                #10            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                Viola          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \concat                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            {                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                \vcenter       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                    \hcenter-in %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                        #10    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                        Va.    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                \vcenter       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                    )          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            }                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    }                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                        %%% \line                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%     {                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%         \vcenter                             %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             (Viola                           %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%         \vcenter                             %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             \hcenter-in                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 #10                          %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 Viola                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%         \concat                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             {                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 \vcenter                     %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                     \hcenter-in              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                         #10                  %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                         Va.                  %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                 \vcenter                     %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%                     )                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%             }                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        %%%     }                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                        \line                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            {                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                \with-color                              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    #(x11-color 'DarkViolet)             %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    {                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \vcenter                         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            (Viola                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \vcenter                         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            \hcenter-in                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                #10                      %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                Viola                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \concat                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            {                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                \vcenter                 %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                    \hcenter-in          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                        #10              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                        Va.              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                \vcenter                 %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                    )                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            }                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    }                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            }                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                                     }
                                                 }
-                                            \set ViolaMusicStaff.instrumentName = \markup {    %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                \hcenter-in                                    %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                    #10                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                    Viola                                      %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                }                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                            \set ViolaMusicStaff.shortInstrumentName = \markup { %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                \hcenter-in                                    %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                    #10                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                    Va.                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                                }                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                            \set ViolaMusicStaff.instrumentName = \markup {              %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                \hcenter-in                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                    #10                                                  %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                    Viola                                                %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                }                                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                            \set ViolaMusicStaff.shortInstrumentName = \markup {         %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                \hcenter-in                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                    #10                                                  %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                    Va.                                                  %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                                }                                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
                                             \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'violet) %! DEFAULT_REDRAW_INSTRUMENT_COLOR:SM6
-                                            \override ViolaMusicStaff.Clef.color = #(x11-color 'violet) %! DEFAULT_CLEF_COLOR_REDRAW:SM6
+                                            \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)  %! DEFAULT_CLEF_COLOR_REDRAW:SM6
                 <BLANKLINE>
                                             d'8
                 <BLANKLINE>
                                             e'8
                 <BLANKLINE>
-                                            \crossStaff                                        %! IC1
+                                            \crossStaff                                                  %! IC1
                                             f'8
                 <BLANKLINE>
-                                            \crossStaff                                        %! IC1
+                                            \crossStaff                                                  %! IC1
                                             g'8
                                             \revert Stem.direction
                                         }
                                     }
                 <BLANKLINE>
-                                    % ViolaMusicVoice [measure 2]                              %! SM4
+                                    % ViolaMusicVoice [measure 2]                                        %! SM4
                                     R1 * 1/8
                 <BLANKLINE>
                                 }
                             }
-                            \tag cello                                                         %! ST4
+                            \tag cello                                                                   %! ST4
                             \context CelloMusicStaff = "CelloMusicStaff" {
                                 \context CelloMusicVoice = "CelloMusicVoice" {
                 <BLANKLINE>
-                                    % CelloMusicVoice [measure 1]                              %! SM4
-                                    \set CelloMusicStaff.instrumentName = \markup {            %! DEFAULT_INSTRUMENT:SM8
-                                        \hcenter-in                                            %! DEFAULT_INSTRUMENT:SM8
-                                            #10                                                %! DEFAULT_INSTRUMENT:SM8
-                                            Cello                                              %! DEFAULT_INSTRUMENT:SM8
-                                        }                                                      %! DEFAULT_INSTRUMENT:SM8
-                                    \set CelloMusicStaff.shortInstrumentName = \markup {       %! DEFAULT_INSTRUMENT:SM8
-                                        \hcenter-in                                            %! DEFAULT_INSTRUMENT:SM8
-                                            #10                                                %! DEFAULT_INSTRUMENT:SM8
-                                            Vc.                                                %! DEFAULT_INSTRUMENT:SM8
-                                        }                                                      %! DEFAULT_INSTRUMENT:SM8
-                                    \set CelloMusicStaff.forceClef = ##t                       %! DEFAULT_CLEF:SM8
-                                    \clef "bass"                                               %! DEFAULT_CLEF:SM8
+                                    % CelloMusicVoice [measure 1]                                        %! SM4
+                                    \set CelloMusicStaff.instrumentName = \markup {                      %! DEFAULT_INSTRUMENT:SM8
+                                        \hcenter-in                                                      %! DEFAULT_INSTRUMENT:SM8
+                                            #10                                                          %! DEFAULT_INSTRUMENT:SM8
+                                            Cello                                                        %! DEFAULT_INSTRUMENT:SM8
+                                        }                                                                %! DEFAULT_INSTRUMENT:SM8
+                                    \set CelloMusicStaff.shortInstrumentName = \markup {                 %! DEFAULT_INSTRUMENT:SM8
+                                        \hcenter-in                                                      %! DEFAULT_INSTRUMENT:SM8
+                                            #10                                                          %! DEFAULT_INSTRUMENT:SM8
+                                            Vc.                                                          %! DEFAULT_INSTRUMENT:SM8
+                                        }                                                                %! DEFAULT_INSTRUMENT:SM8
+                                    \set CelloMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:SM8
+                                    \clef "bass"                                                         %! DEFAULT_CLEF:SM8
                                     \once \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR:SM6
                                     \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:SM6
-                                    %%% \override CelloMusicStaff.Clef.color = ##f             %! DEFAULT_CLEF_UNCOLOR:SM7
+                                    %%% \override CelloMusicStaff.Clef.color = ##f                       %! DEFAULT_CLEF_UNCOLOR:SM7
                                     R1 * 5/8
                                     ^ \markup {
                                         \column
                                             {
-                                                %%% \line                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%     {                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%         \vcenter                           %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%             (Cello                         %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%         \vcenter                           %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%             \hcenter-in                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%                 #10                        %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%                 Cello                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%         \concat                            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%             {                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%                 \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%                     \hcenter-in            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%                         #10                %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%                         Vc.                %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%                 \vcenter                   %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%                     )                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%             }                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                %%%     }                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                \line                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    {                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        \with-color                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            #(x11-color 'DarkViolet)           %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            {                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                \vcenter                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    (Cello                     %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                \vcenter                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    \hcenter-in                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        #10                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        Cello                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                \concat                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    {                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            \hcenter-in        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                #10            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                Vc.            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \vcenter               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            )                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    }                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            }                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    }                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                %%% \line                                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%     {                                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%         \vcenter                                     %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%             (Cello                                   %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%         \vcenter                                     %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%             \hcenter-in                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                 #10                                  %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                 Cello                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%         \concat                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%             {                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                 \vcenter                             %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                     \hcenter-in                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                         #10                          %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                         Vc.                          %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                 \vcenter                             %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%                     )                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%             }                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                %%%     }                                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                                \line                                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                    {                                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                        \with-color                                      %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            #(x11-color 'DarkViolet)                     %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            {                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    (Cello                               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    \hcenter-in                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        #10                              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        Cello                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                \concat                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    {                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \vcenter                         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            \hcenter-in                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                #10                      %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                                Vc.                      %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                        \vcenter                         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                            )                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                                    }                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                            }                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                    }                                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                             }
                                         }
-                                    \set CelloMusicStaff.instrumentName = \markup {            %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                        \hcenter-in                                            %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                            #10                                                %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                            Cello                                              %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                        }                                                      %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                    \set CelloMusicStaff.shortInstrumentName = \markup {       %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                        \hcenter-in                                            %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                            #10                                                %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                            Vc.                                                %! DEFAULT_REDRAW_INSTRUMENT:SM8
-                                        }                                                      %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                    \set CelloMusicStaff.instrumentName = \markup {                      %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                        \hcenter-in                                                      %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                            #10                                                          %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                            Cello                                                        %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                        }                                                                %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                    \set CelloMusicStaff.shortInstrumentName = \markup {                 %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                        \hcenter-in                                                      %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                            #10                                                          %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                            Vc.                                                          %! DEFAULT_REDRAW_INSTRUMENT:SM8
+                                        }                                                                %! DEFAULT_REDRAW_INSTRUMENT:SM8
                                     \override CelloMusicStaff.InstrumentName.color = #(x11-color 'violet) %! DEFAULT_REDRAW_INSTRUMENT_COLOR:SM6
-                                    \override CelloMusicStaff.Clef.color = #(x11-color 'violet) %! DEFAULT_CLEF_COLOR_REDRAW:SM6
+                                    \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_COLOR_REDRAW:SM6
                 <BLANKLINE>
-                                    % CelloMusicVoice [measure 2]                              %! SM4
+                                    % CelloMusicVoice [measure 2]                                        %! SM4
                                     R1 * 1/8
                 <BLANKLINE>
                                 }
@@ -3543,11 +3543,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3606,11 +3606,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     counts=[4],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3654,11 +3654,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3729,11 +3729,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3743,13 +3743,13 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\tongue #2                                                    %! IC1
+                                -\tongue #2                                                              %! IC1
                                 [
                                 d'16
-                                -\tongue #2                                                    %! IC1
+                                -\tongue #2                                                              %! IC1
                                 ]
                                 bf'4
-                                -\tongue #2                                                    %! IC1
+                                -\tongue #2                                                              %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -3757,26 +3757,26 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\tongue #2                                                    %! IC1
+                                -\tongue #2                                                              %! IC1
                                 [
                                 e''16
-                                -\tongue #2                                                    %! IC1
+                                -\tongue #2                                                              %! IC1
                                 ]
                                 ef''4
-                                -\tongue #2                                                    %! IC1
+                                -\tongue #2                                                              %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\tongue #2                                                    %! IC1
+                                -\tongue #2                                                              %! IC1
                                 [
                                 g''16
-                                -\tongue #2                                                    %! IC1
+                                -\tongue #2                                                              %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\tongue #2                                                    %! IC1
+                                -\tongue #2                                                              %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -3801,11 +3801,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3826,21 +3826,21 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\tongue #2                                                    %! IC1
+                                -\tongue #2                                                              %! IC1
                                 [
                                 e''16
-                                -\tongue #2                                                    %! IC1
+                                -\tongue #2                                                              %! IC1
                                 ]
                                 ef''4
-                                -\tongue #2                                                    %! IC1
+                                -\tongue #2                                                              %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\tongue #2                                                    %! IC1
+                                -\tongue #2                                                              %! IC1
                                 [
                                 g''16
-                                -\tongue #2                                                    %! IC1
+                                -\tongue #2                                                              %! IC1
                                 ]
                             }
                             \times 4/5 {
@@ -3875,19 +3875,19 @@ class LibraryAF(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
                             {
-                                \arpeggioArrowDown                                             %! IC1
+                                \arpeggioArrowDown                                                       %! IC1
                                 <c' d' bf'>8
-                                \arpeggio                                                      %! IC1
+                                \arpeggio                                                                %! IC1
                                 ~
                                 [
                                 <c' d' bf'>32
@@ -3903,9 +3903,9 @@ class LibraryAF(abjad.AbjadObject):
                                 r16.
                             }
                             {
-                                \arpeggioArrowDown                                             %! IC1
+                                \arpeggioArrowDown                                                       %! IC1
                                 <ef'' e'' fs'''>8
-                                \arpeggio                                                      %! IC1
+                                \arpeggio                                                                %! IC1
                                 ~
                                 [
                                 <ef'' e'' fs'''>32
@@ -3913,9 +3913,9 @@ class LibraryAF(abjad.AbjadObject):
                                 r16.
                             }
                             {
-                                \arpeggioArrowDown                                             %! IC1
+                                \arpeggioArrowDown                                                       %! IC1
                                 <g' af''>8
-                                \arpeggio                                                      %! IC1
+                                \arpeggio                                                                %! IC1
                                 ~
                                 [
                                 <g' af''>32
@@ -3947,11 +3947,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3973,9 +3973,9 @@ class LibraryAF(abjad.AbjadObject):
                                 r16.
                             }
                             {
-                                \arpeggioArrowDown                                             %! IC1
+                                \arpeggioArrowDown                                                       %! IC1
                                 <ef'' e'' fs'''>8
-                                \arpeggio                                                      %! IC1
+                                \arpeggio                                                                %! IC1
                                 ~
                                 [
                                 <ef'' e'' fs'''>32
@@ -3983,9 +3983,9 @@ class LibraryAF(abjad.AbjadObject):
                                 r16.
                             }
                             {
-                                \arpeggioArrowDown                                             %! IC1
+                                \arpeggioArrowDown                                                       %! IC1
                                 <g' af''>8
-                                \arpeggio                                                      %! IC1
+                                \arpeggio                                                                %! IC1
                                 ~
                                 [
                                 <g' af''>32
@@ -4029,11 +4029,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4043,13 +4043,13 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 [
                                 d'16
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 ]
                                 bf'4
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -4057,26 +4057,26 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 [
                                 e''16
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 ]
                                 ef''4
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 [
                                 g''16
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -4101,11 +4101,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4126,21 +4126,21 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 [
                                 e''16
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 ]
                                 ef''4
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 [
                                 g''16
-                                -\downbow                                                      %! IC1
+                                -\downbow                                                                %! IC1
                                 ]
                             }
                             \times 4/5 {
@@ -4177,11 +4177,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4191,7 +4191,7 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                \f                                                             %! IC1
+                                \f                                                                       %! IC1
                                 [
                                 d'16
                                 ]
@@ -4239,11 +4239,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4264,7 +4264,7 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                \f                                                             %! IC1
+                                \f                                                                       %! IC1
                                 [
                                 e''16
                                 ]
@@ -4313,11 +4313,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4384,11 +4384,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4467,11 +4467,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4538,11 +4538,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4622,11 +4622,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4637,7 +4637,7 @@ class LibraryAF(abjad.AbjadObject):
                                 r8
                                 \once \override DynamicText.extra-offset = #'(-3 . 0)
                                 c'16
-                                \p                                                             %! IC1
+                                \p                                                                       %! IC1
                                 [
                                 d'16
                                 ]
@@ -4649,7 +4649,7 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                \f                                                             %! IC1
+                                \f                                                                       %! IC1
                                 [
                                 e''16
                                 ]
@@ -4691,12 +4691,12 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4706,7 +4706,7 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                \p                                                             %! IC1
+                                \p                                                                       %! IC1
                                 [
                                 d'16
                                 ]
@@ -4719,7 +4719,7 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \once \override DynamicText.extra-offset = #'(-3 . 0)
                                 fs''16
-                                \f                                                             %! IC1
+                                \f                                                                       %! IC1
                                 [
                                 e''16
                                 ]
@@ -4783,11 +4783,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4795,10 +4795,10 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
-                                \dynamicDown                                                   %! IC1
+                                \dynamicDown                                                             %! IC1
                                 r8
                                 c'16
-                                \p                                                             %! IC1
+                                \p                                                                       %! IC1
                                 [
                                 d'16
                                 ]
@@ -4810,7 +4810,7 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                \f                                                             %! IC1
+                                \f                                                                       %! IC1
                                 [
                                 e''16
                                 ]
@@ -4849,11 +4849,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4863,7 +4863,7 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                \p                                                             %! IC1
+                                \p                                                                       %! IC1
                                 [
                                 d'16
                                 ]
@@ -4874,9 +4874,9 @@ class LibraryAF(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \dynamicDown                                                   %! IC1
+                                \dynamicDown                                                             %! IC1
                                 fs''16
-                                \f                                                             %! IC1
+                                \f                                                                       %! IC1
                                 [
                                 e''16
                                 ]
@@ -4925,11 +4925,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4937,10 +4937,10 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
-                                \dynamicUp                                                     %! IC1
+                                \dynamicUp                                                               %! IC1
                                 r8
                                 c'16
-                                \p                                                             %! IC1
+                                \p                                                                       %! IC1
                                 [
                                 d'16
                                 ]
@@ -4952,7 +4952,7 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                \f                                                             %! IC1
+                                \f                                                                       %! IC1
                                 [
                                 e''16
                                 ]
@@ -4991,11 +4991,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5005,7 +5005,7 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                \p                                                             %! IC1
+                                \p                                                                       %! IC1
                                 [
                                 d'16
                                 ]
@@ -5016,9 +5016,9 @@ class LibraryAF(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \dynamicUp                                                     %! IC1
+                                \dynamicUp                                                               %! IC1
                                 fs''16
-                                \f                                                             %! IC1
+                                \f                                                                       %! IC1
                                 [
                                 e''16
                                 ]
@@ -5069,11 +5069,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5084,18 +5084,18 @@ class LibraryAF(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                _ \markup {                                                    %! IC1
-                                    \larger                                                    %! IC1
-                                        \italic                                                %! IC1
-                                            “                                                  %! IC1
-                                    \dynamic                                                   %! IC1
-                                        \override                                              %! IC1
-                                            #'(font-name . #f)                                 %! IC1
-                                            f                                                  %! IC1
-                                    \larger                                                    %! IC1
-                                        \italic                                                %! IC1
-                                            ”                                                  %! IC1
-                                    }                                                          %! IC1
+                                _ \markup {                                                              %! IC1
+                                    \larger                                                              %! IC1
+                                        \italic                                                          %! IC1
+                                            “                                                            %! IC1
+                                    \dynamic                                                             %! IC1
+                                        \override                                                        %! IC1
+                                            #'(font-name . #f)                                           %! IC1
+                                            f                                                            %! IC1
+                                    \larger                                                              %! IC1
+                                        \italic                                                          %! IC1
+                                            ”                                                            %! IC1
+                                    }                                                                    %! IC1
                                 d'16
                                 ]
                                 bf'4
@@ -5145,11 +5145,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5171,18 +5171,18 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                _ \markup {                                                    %! IC1
-                                    \larger                                                    %! IC1
-                                        \italic                                                %! IC1
-                                            “                                                  %! IC1
-                                    \dynamic                                                   %! IC1
-                                        \override                                              %! IC1
-                                            #'(font-name . #f)                                 %! IC1
-                                            f                                                  %! IC1
-                                    \larger                                                    %! IC1
-                                        \italic                                                %! IC1
-                                            ”                                                  %! IC1
-                                    }                                                          %! IC1
+                                _ \markup {                                                              %! IC1
+                                    \larger                                                              %! IC1
+                                        \italic                                                          %! IC1
+                                            “                                                            %! IC1
+                                    \dynamic                                                             %! IC1
+                                        \override                                                        %! IC1
+                                            #'(font-name . #f)                                           %! IC1
+                                            f                                                            %! IC1
+                                    \larger                                                              %! IC1
+                                        \italic                                                          %! IC1
+                                            ”                                                            %! IC1
+                                    }                                                                    %! IC1
                                 e''16
                                 ]
                                 ef''4
@@ -5238,11 +5238,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5251,7 +5251,7 @@ class LibraryAF(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                -\fermata                                                      %! IC1
+                                -\fermata                                                                %! IC1
                                 c'16
                                 [
                                 d'16
@@ -5300,11 +5300,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5325,7 +5325,7 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\fermata                                                      %! IC1
+                                -\fermata                                                                %! IC1
                                 [
                                 e''16
                                 ]
@@ -5372,11 +5372,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5386,13 +5386,13 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\flageolet                                                    %! IC1
+                                -\flageolet                                                              %! IC1
                                 [
                                 d'16
-                                -\flageolet                                                    %! IC1
+                                -\flageolet                                                              %! IC1
                                 ]
                                 bf'4
-                                -\flageolet                                                    %! IC1
+                                -\flageolet                                                              %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -5400,26 +5400,26 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\flageolet                                                    %! IC1
+                                -\flageolet                                                              %! IC1
                                 [
                                 e''16
-                                -\flageolet                                                    %! IC1
+                                -\flageolet                                                              %! IC1
                                 ]
                                 ef''4
-                                -\flageolet                                                    %! IC1
+                                -\flageolet                                                              %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\flageolet                                                    %! IC1
+                                -\flageolet                                                              %! IC1
                                 [
                                 g''16
-                                -\flageolet                                                    %! IC1
+                                -\flageolet                                                              %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\flageolet                                                    %! IC1
+                                -\flageolet                                                              %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -5442,11 +5442,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -5467,21 +5467,21 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\flageolet                                                    %! IC1
+                                -\flageolet                                                              %! IC1
                                 [
                                 e''16
-                                -\flageolet                                                    %! IC1
+                                -\flageolet                                                              %! IC1
                                 ]
                                 ef''4
-                                -\flageolet                                                    %! IC1
+                                -\flageolet                                                              %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\flageolet                                                    %! IC1
+                                -\flageolet                                                              %! IC1
                                 [
                                 g''16
-                                -\flageolet                                                    %! IC1
+                                -\flageolet                                                              %! IC1
                                 ]
                             }
                             \times 4/5 {
@@ -5518,11 +5518,11 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne

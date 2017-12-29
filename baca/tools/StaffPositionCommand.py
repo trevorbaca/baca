@@ -12,11 +12,11 @@ class StaffPositionCommand(Command):
         >>> abjad.attach(abjad.Clef('treble'), staff[0])
         >>> command = baca.staff_positions([0, 2])
         >>> command(staff)
-        >>> abjad.show(staff, strict=79) # doctest: +SKIP
+        >>> abjad.show(staff, strict=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(staff, strict=79)
+            >>> abjad.f(staff, strict=89)
             \new Staff {
                 \clef "treble"
                 b'4
@@ -31,11 +31,11 @@ class StaffPositionCommand(Command):
         >>> abjad.attach(abjad.Clef('percussion'), staff[0])
         >>> command = baca.staff_positions([0, 2])
         >>> command(staff)
-        >>> abjad.show(staff, strict=79) # doctest: +SKIP
+        >>> abjad.show(staff, strict=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(staff, strict=79)
+            >>> abjad.f(staff, strict=89)
             \new Staff {
                 \clef "percussion"
                 c'4

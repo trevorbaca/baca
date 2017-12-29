@@ -38,11 +38,11 @@ class MarkupLibrary(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -53,11 +53,11 @@ class MarkupLibrary(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            "più mosso"                                        %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            "più mosso"                                                  %! IC1
+                                    }                                                                    %! IC1
                                 d'16
                                 ]
                                 bf'4
@@ -104,11 +104,11 @@ class MarkupLibrary(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -130,11 +130,11 @@ class MarkupLibrary(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            "più mosso"                                        %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            "più mosso"                                                  %! IC1
+                                    }                                                                    %! IC1
                                 e''16
                                 ]
                                 ef''4
@@ -170,11 +170,11 @@ class MarkupLibrary(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -196,41 +196,41 @@ class MarkupLibrary(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            *                                                  %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            *                                                            %! IC1
+                                    }                                                                    %! IC1
                                 e''16
                                 ]
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            *                                                  %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            *                                                            %! IC1
+                                    }                                                                    %! IC1
                                 ef''4
                                 ~
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            *                                                  %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            *                                                            %! IC1
+                                    }                                                                    %! IC1
                                 ef''16
                                 r16
                                 af''16
                                 [
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            *                                                  %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            *                                                            %! IC1
+                                    }                                                                    %! IC1
                                 g''16
                                 ]
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            *                                                  %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            *                                                            %! IC1
+                                    }                                                                    %! IC1
                             }
                             \times 4/5 {
                                 a'16
@@ -508,11 +508,11 @@ class MarkupLibrary(abjad.AbjadObject):
 
             >>> markup = baca.markup.instrument('Eng. horn')
 
-            >>> abjad.show(markup, strict=79) # doctest: +SKIP
+            >>> abjad.show(markup, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(markup, strict=79)
+                >>> abjad.f(markup, strict=89)
                 \markup {
                     \hcenter-in
                         #16
@@ -532,11 +532,11 @@ class MarkupLibrary(abjad.AbjadObject):
             ...     column=False,
             ...     )
 
-            >>> abjad.show(markup, strict=79) # doctest: +SKIP
+            >>> abjad.show(markup, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(markup, strict=79)
+                >>> abjad.f(markup, strict=89)
                 \markup {
                     \hcenter-in
                         #16
@@ -1109,11 +1109,11 @@ class MarkupLibrary(abjad.AbjadObject):
 
             >>> markup = baca.markup.short_instrument('Eng. hn.')
 
-            >>> abjad.show(markup, strict=79) # doctest: +SKIP
+            >>> abjad.show(markup, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(markup, strict=79)
+                >>> abjad.f(markup, strict=89)
                 \markup {
                     \hcenter-in
                         #10
@@ -1133,11 +1133,11 @@ class MarkupLibrary(abjad.AbjadObject):
             ...     column=False,
             ...     )
 
-            >>> abjad.show(markup, strict=79) # doctest: +SKIP
+            >>> abjad.show(markup, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(markup, strict=79)
+                >>> abjad.f(markup, strict=89)
                 \markup {
                     \hcenter-in
                         #10

@@ -41,36 +41,36 @@ class LibraryTZ(abjad.AbjadObject):
 
             >>> lilypond_file = maker.run(environment='docs')
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             \context Score = "Score" <<
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
-                        % GlobalSkips [measure 1]                                          %! SM4
-                        \time 4/8                                                          %! SM1
-                        \bar ""                                                            %! EMPTY_START_BAR:SM2
+                        % GlobalSkips [measure 1]                                                    %! SM4
+                        \time 4/8                                                                    %! SM1
+                        \bar ""                                                                      %! EMPTY_START_BAR:SM2
                         s1 * 1/2
-                        ^ \markup {                                                        %! STAGE_NUMBER_MARKUP:SM3
-                            \fontsize                                                      %! STAGE_NUMBER_MARKUP:SM3
-                                #-3                                                        %! STAGE_NUMBER_MARKUP:SM3
-                                \with-color                                                %! STAGE_NUMBER_MARKUP:SM3
-                                    #(x11-color 'DarkCyan)                                 %! STAGE_NUMBER_MARKUP:SM3
-                                    [1]                                                    %! STAGE_NUMBER_MARKUP:SM3
-                            }                                                              %! STAGE_NUMBER_MARKUP:SM3
+                        ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                            \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
+                                #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
+                                    [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
+                            }                                                                        %! STAGE_NUMBER_MARKUP:SM3
             <BLANKLINE>
-                        % GlobalSkips [measure 2]                                          %! SM4
-                        \time 3/8                                                          %! SM1
+                        % GlobalSkips [measure 2]                                                    %! SM4
+                        \time 3/8                                                                    %! SM1
                         s1 * 3/8
             <BLANKLINE>
-                        % GlobalSkips [measure 3]                                          %! SM4
-                        \time 4/8                                                          %! SM1
+                        % GlobalSkips [measure 3]                                                    %! SM4
+                        \time 4/8                                                                    %! SM1
                         s1 * 1/2
             <BLANKLINE>
-                        % GlobalSkips [measure 4]                                          %! SM4
-                        \time 3/8                                                          %! SM1
+                        % GlobalSkips [measure 4]                                                    %! SM4
+                        \time 3/8                                                                    %! SM1
                         s1 * 3/8
-                        \override Score.BarLine.transparent = ##f                          %! SM5
-                        \bar "|"                                                           %! SM5
+                        \override Score.BarLine.transparent = ##f                                    %! SM5
+                        \bar "|"                                                                     %! SM5
             <BLANKLINE>
                     }
                 >>
@@ -80,19 +80,19 @@ class LibraryTZ(abjad.AbjadObject):
                             \tag ViolinI
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 1]                                   %! SM4
+                                % MusicVoice [measure 1]                                             %! SM4
                                 e'2
             <BLANKLINE>
-                                % MusicVoice [measure 2]                                   %! SM4
+                                % MusicVoice [measure 2]                                             %! SM4
                                 f'4.
                             }
                             \tag ViolinI.ViolinII
                             {
             <BLANKLINE>
-                                % MusicVoice [measure 3]                                   %! SM4
+                                % MusicVoice [measure 3]                                             %! SM4
                                 e'2
             <BLANKLINE>
-                                % MusicVoice [measure 4]                                   %! SM4
+                                % MusicVoice [measure 4]                                             %! SM4
                                 f'4.
             <BLANKLINE>
                             }
@@ -124,11 +124,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -138,13 +138,13 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\tenuto                                                       %! IC1
+                                -\tenuto                                                                 %! IC1
                                 [
                                 d'16
-                                -\tenuto                                                       %! IC1
+                                -\tenuto                                                                 %! IC1
                                 ]
                                 bf'4
-                                -\tenuto                                                       %! IC1
+                                -\tenuto                                                                 %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -152,26 +152,26 @@ class LibraryTZ(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\tenuto                                                       %! IC1
+                                -\tenuto                                                                 %! IC1
                                 [
                                 e''16
-                                -\tenuto                                                       %! IC1
+                                -\tenuto                                                                 %! IC1
                                 ]
                                 ef''4
-                                -\tenuto                                                       %! IC1
+                                -\tenuto                                                                 %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\tenuto                                                       %! IC1
+                                -\tenuto                                                                 %! IC1
                                 [
                                 g''16
-                                -\tenuto                                                       %! IC1
+                                -\tenuto                                                                 %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\tenuto                                                       %! IC1
+                                -\tenuto                                                                 %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -194,11 +194,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -219,21 +219,21 @@ class LibraryTZ(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\tenuto                                                       %! IC1
+                                -\tenuto                                                                 %! IC1
                                 [
                                 e''16
-                                -\tenuto                                                       %! IC1
+                                -\tenuto                                                                 %! IC1
                                 ]
                                 ef''4
-                                -\tenuto                                                       %! IC1
+                                -\tenuto                                                                 %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\tenuto                                                       %! IC1
+                                -\tenuto                                                                 %! IC1
                                 [
                                 g''16
-                                -\tenuto                                                       %! IC1
+                                -\tenuto                                                                 %! IC1
                                 ]
                             }
                             \times 4/5 {
@@ -275,11 +275,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -291,11 +291,11 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            "più mosso"                                        %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            "più mosso"                                                  %! IC1
+                                    }                                                                    %! IC1
                                 d'16
                                 ]
                                 bf'4
@@ -307,11 +307,11 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            "lo stesso tempo"                                  %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            "lo stesso tempo"                                            %! IC1
+                                    }                                                                    %! IC1
                                 e''16
                                 ]
                                 ef''4
@@ -353,11 +353,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -368,11 +368,11 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            "più mosso"                                        %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            "più mosso"                                                  %! IC1
+                                    }                                                                    %! IC1
                                 d'16
                                 ]
                                 bf'4
@@ -385,11 +385,11 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextScript.color = #red
                                 fs''16
                                 [
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            "lo stesso tempo"                                  %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            "lo stesso tempo"                                            %! IC1
+                                    }                                                                    %! IC1
                                 e''16
                                 ]
                                 ef''4
@@ -444,11 +444,11 @@ class LibraryTZ(abjad.AbjadObject):
                 ...     time_treatments=[-1],
                 ...     )
                 >>> lilypond_file = music_maker.show(contribution)
-                >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -460,11 +460,11 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            "più mosso"                                        %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            "più mosso"                                                  %! IC1
+                                    }                                                                    %! IC1
                                 d'16
                                 ]
                                 bf'4
@@ -476,11 +476,11 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            "lo stesso tempo"                                  %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            "lo stesso tempo"                                            %! IC1
+                                    }                                                                    %! IC1
                                 e''16
                                 ]
                                 ef''4
@@ -522,11 +522,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -537,11 +537,11 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            "più mosso"                                        %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            "più mosso"                                                  %! IC1
+                                    }                                                                    %! IC1
                                 d'16
                                 ]
                                 bf'4
@@ -554,11 +554,11 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextScript.padding = #4
                                 fs''16
                                 [
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            "lo stesso tempo"                                  %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            "lo stesso tempo"                                            %! IC1
+                                    }                                                                    %! IC1
                                 e''16
                                 ]
                                 ef''4
@@ -612,11 +612,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -628,11 +628,11 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            "più mosso"                                        %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            "più mosso"                                                  %! IC1
+                                    }                                                                    %! IC1
                                 d'16
                                 ]
                                 bf'4
@@ -644,11 +644,11 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            "lo stesso tempo"                                  %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            "lo stesso tempo"                                            %! IC1
+                                    }                                                                    %! IC1
                                 e''16
                                 ]
                                 ef''4
@@ -693,11 +693,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -708,11 +708,11 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            "più mosso"                                        %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            "più mosso"                                                  %! IC1
+                                    }                                                                    %! IC1
                                 d'16
                                 ]
                                 bf'4
@@ -725,11 +725,11 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextScript.staff-padding = #4
                                 fs''16
                                 [
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            "lo stesso tempo"                                  %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            "lo stesso tempo"                                            %! IC1
+                                    }                                                                    %! IC1
                                 e''16
                                 ]
                                 ef''4
@@ -783,11 +783,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -799,11 +799,11 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            "più mosso"                                        %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            "più mosso"                                                  %! IC1
+                                    }                                                                    %! IC1
                                 d'16
                                 ]
                                 bf'4
@@ -815,11 +815,11 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            "lo stesso tempo"                                  %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            "lo stesso tempo"                                            %! IC1
+                                    }                                                                    %! IC1
                                 e''16
                                 ]
                                 ef''4
@@ -861,11 +861,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -876,11 +876,11 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            "più mosso"                                        %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            "più mosso"                                                  %! IC1
+                                    }                                                                    %! IC1
                                 d'16
                                 ]
                                 bf'4
@@ -893,11 +893,11 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextScript.direction = #down
                                 fs''16
                                 [
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            "lo stesso tempo"                                  %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            "lo stesso tempo"                                            %! IC1
+                                    }                                                                    %! IC1
                                 e''16
                                 ]
                                 ef''4
@@ -951,11 +951,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -967,11 +967,11 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            "più mosso"                                        %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            "più mosso"                                                  %! IC1
+                                    }                                                                    %! IC1
                                 d'16
                                 ]
                                 bf'4
@@ -983,11 +983,11 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            "lo stesso tempo"                                  %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            "lo stesso tempo"                                            %! IC1
+                                    }                                                                    %! IC1
                                 e''16
                                 ]
                                 ef''4
@@ -1029,11 +1029,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1044,11 +1044,11 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            "più mosso"                                        %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            "più mosso"                                                  %! IC1
+                                    }                                                                    %! IC1
                                 d'16
                                 ]
                                 bf'4
@@ -1061,11 +1061,11 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextScript.direction = #up
                                 fs''16
                                 [
-                                ^ \markup {                                                    %! IC1
-                                    \whiteout                                                  %! IC1
-                                        \upright                                               %! IC1
-                                            "lo stesso tempo"                                  %! IC1
-                                    }                                                          %! IC1
+                                ^ \markup {                                                              %! IC1
+                                    \whiteout                                                            %! IC1
+                                        \upright                                                         %! IC1
+                                            "lo stesso tempo"                                            %! IC1
+                                    }                                                                    %! IC1
                                 e''16
                                 ]
                                 ef''4
@@ -1131,11 +1131,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1232,11 +1232,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1336,11 +1336,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1399,11 +1399,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1461,11 +1461,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1536,11 +1536,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1602,11 +1602,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1680,11 +1680,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1746,11 +1746,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1822,11 +1822,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -1916,40 +1916,40 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                          %! SM4
-                            \time 4/8                                                          %! SM1
-                            \bar ""                                                            %! EMPTY_START_BAR:SM2
+                            % GlobalSkips [measure 1]                                                    %! SM4
+                            \time 4/8                                                                    %! SM1
+                            \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %! STAGE_NUMBER_MARKUP:SM3
-                                \fontsize                                                      %! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                        %! STAGE_NUMBER_MARKUP:SM3
-                                    \with-color                                                %! STAGE_NUMBER_MARKUP:SM3
-                                        #(x11-color 'DarkCyan)                                 %! STAGE_NUMBER_MARKUP:SM3
-                                        [1]                                                    %! STAGE_NUMBER_MARKUP:SM3
-                                }                                                              %! STAGE_NUMBER_MARKUP:SM3
+                            ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
+                                        [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
+                                }                                                                        %! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                          %! SM4
-                            \time 3/8                                                          %! SM1
+                            % GlobalSkips [measure 2]                                                    %! SM4
+                            \time 3/8                                                                    %! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                          %! SM4
-                            \time 4/8                                                          %! SM1
+                            % GlobalSkips [measure 3]                                                    %! SM4
+                            \time 4/8                                                                    %! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                          %! SM4
-                            \time 3/8                                                          %! SM1
+                            % GlobalSkips [measure 4]                                                    %! SM4
+                            \time 3/8                                                                    %! SM1
                             s1 * 3/8
-                            \override Score.BarLine.transparent = ##f                          %! SM5
-                            \bar "|"                                                           %! SM5
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -1957,7 +1957,7 @@ class LibraryTZ(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                       %! SM4
+                                % MusicVoice [measure 1]                                                 %! SM4
                                 \override Score.BarLine.transparent = ##t
                                 e'8
                                 [
@@ -1969,7 +1969,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 r8
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                       %! SM4
+                                % MusicVoice [measure 2]                                                 %! SM4
                                 e''8
                                 [
                 <BLANKLINE>
@@ -1978,7 +1978,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 f''8
                                 ]
                 <BLANKLINE>
-                                % MusicVoice [measure 3]                                       %! SM4
+                                % MusicVoice [measure 3]                                                 %! SM4
                                 r8
                 <BLANKLINE>
                                 e'8
@@ -1989,7 +1989,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 f'8
                                 ]
                 <BLANKLINE>
-                                % MusicVoice [measure 4]                                       %! SM4
+                                % MusicVoice [measure 4]                                                 %! SM4
                                 r8
                 <BLANKLINE>
                                 e''8
@@ -2028,40 +2028,40 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                          %! SM4
-                            \time 4/8                                                          %! SM1
-                            \bar ""                                                            %! EMPTY_START_BAR:SM2
+                            % GlobalSkips [measure 1]                                                    %! SM4
+                            \time 4/8                                                                    %! SM1
+                            \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %! STAGE_NUMBER_MARKUP:SM3
-                                \fontsize                                                      %! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                        %! STAGE_NUMBER_MARKUP:SM3
-                                    \with-color                                                %! STAGE_NUMBER_MARKUP:SM3
-                                        #(x11-color 'DarkCyan)                                 %! STAGE_NUMBER_MARKUP:SM3
-                                        [1]                                                    %! STAGE_NUMBER_MARKUP:SM3
-                                }                                                              %! STAGE_NUMBER_MARKUP:SM3
+                            ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
+                                        [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
+                                }                                                                        %! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
-                            % GlobalSkips [measure 2]                                          %! SM4
-                            \time 3/8                                                          %! SM1
+                            % GlobalSkips [measure 2]                                                    %! SM4
+                            \time 3/8                                                                    %! SM1
                             s1 * 3/8
                 <BLANKLINE>
-                            % GlobalSkips [measure 3]                                          %! SM4
-                            \time 4/8                                                          %! SM1
+                            % GlobalSkips [measure 3]                                                    %! SM4
+                            \time 4/8                                                                    %! SM1
                             s1 * 1/2
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                          %! SM4
-                            \time 3/8                                                          %! SM1
+                            % GlobalSkips [measure 4]                                                    %! SM4
+                            \time 3/8                                                                    %! SM1
                             s1 * 3/8
-                            \override Score.BarLine.transparent = ##f                          %! SM5
-                            \bar "|"                                                           %! SM5
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -2069,7 +2069,7 @@ class LibraryTZ(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                       %! SM4
+                                % MusicVoice [measure 1]                                                 %! SM4
                                 e'8
                                 [
                 <BLANKLINE>
@@ -2080,7 +2080,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 r8
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                       %! SM4
+                                % MusicVoice [measure 2]                                                 %! SM4
                                 \override Score.BarLine.transparent = ##t
                                 e''8
                                 [
@@ -2091,7 +2091,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 ]
                                 \revert Score.BarLine.transparent
                 <BLANKLINE>
-                                % MusicVoice [measure 3]                                       %! SM4
+                                % MusicVoice [measure 3]                                                 %! SM4
                                 r8
                 <BLANKLINE>
                                 e'8
@@ -2102,7 +2102,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 f'8
                                 ]
                 <BLANKLINE>
-                                % MusicVoice [measure 4]                                       %! SM4
+                                % MusicVoice [measure 4]                                                 %! SM4
                                 r8
                 <BLANKLINE>
                                 e''8
@@ -2144,11 +2144,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2207,11 +2207,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2281,11 +2281,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2356,11 +2356,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2448,11 +2448,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2512,11 +2512,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2592,11 +2592,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2660,11 +2660,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2725,11 +2725,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2814,11 +2814,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2925,11 +2925,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -2990,11 +2990,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3063,11 +3063,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3126,11 +3126,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3199,11 +3199,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3262,11 +3262,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3337,11 +3337,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3400,11 +3400,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3475,11 +3475,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3540,11 +3540,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3612,21 +3612,21 @@ class LibraryTZ(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
                             {
-                                \arpeggioArrowUp                                               %! IC1
+                                \arpeggioArrowUp                                                         %! IC1
                                 <c' d' bf'>8
-                                \arpeggio                                                      %! IC1
+                                \arpeggio                                                                %! IC1
                                 ~
                                 [
                                 <c' d' bf'>32
@@ -3642,9 +3642,9 @@ class LibraryTZ(abjad.AbjadObject):
                                 r16.
                             }
                             {
-                                \arpeggioArrowUp                                               %! IC1
+                                \arpeggioArrowUp                                                         %! IC1
                                 <ef'' e'' fs'''>8
-                                \arpeggio                                                      %! IC1
+                                \arpeggio                                                                %! IC1
                                 ~
                                 [
                                 <ef'' e'' fs'''>32
@@ -3652,9 +3652,9 @@ class LibraryTZ(abjad.AbjadObject):
                                 r16.
                             }
                             {
-                                \arpeggioArrowUp                                               %! IC1
+                                \arpeggioArrowUp                                                         %! IC1
                                 <g' af''>8
-                                \arpeggio                                                      %! IC1
+                                \arpeggio                                                                %! IC1
                                 ~
                                 [
                                 <g' af''>32
@@ -3686,11 +3686,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     talea_denominator=32,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3712,9 +3712,9 @@ class LibraryTZ(abjad.AbjadObject):
                                 r16.
                             }
                             {
-                                \arpeggioArrowUp                                               %! IC1
+                                \arpeggioArrowUp                                                         %! IC1
                                 <ef'' e'' fs'''>8
-                                \arpeggio                                                      %! IC1
+                                \arpeggio                                                                %! IC1
                                 ~
                                 [
                                 <ef'' e'' fs'''>32
@@ -3722,9 +3722,9 @@ class LibraryTZ(abjad.AbjadObject):
                                 r16.
                             }
                             {
-                                \arpeggioArrowUp                                               %! IC1
+                                \arpeggioArrowUp                                                         %! IC1
                                 <g' af''>8
-                                \arpeggio                                                      %! IC1
+                                \arpeggio                                                                %! IC1
                                 ~
                                 [
                                 <g' af''>32
@@ -3768,11 +3768,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3782,13 +3782,13 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5
                                 r8
                                 c'16
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 [
                                 d'16
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 ]
                                 bf'4
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 ~
                                 bf'16
                                 r16
@@ -3796,26 +3796,26 @@ class LibraryTZ(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 [
                                 e''16
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 ]
                                 ef''4
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 [
                                 g''16
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 r4
                                 \revert TupletBracket.staff-padding
                             }
@@ -3840,11 +3840,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3865,21 +3865,21 @@ class LibraryTZ(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 [
                                 e''16
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 ]
                                 ef''4
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 [
                                 g''16
-                                -\upbow                                                        %! IC1
+                                -\upbow                                                                  %! IC1
                                 ]
                             }
                             \times 4/5 {
@@ -3916,11 +3916,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -3929,7 +3929,7 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5
                                 r8
-                                -\verylongfermata                                              %! IC1
+                                -\verylongfermata                                                        %! IC1
                                 c'16
                                 [
                                 d'16
@@ -3980,11 +3980,11 @@ class LibraryTZ(abjad.AbjadObject):
             ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
                 \new Staff <<
                     \context Voice = "Voice 1" {
                         \voiceOne
@@ -4005,7 +4005,7 @@ class LibraryTZ(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\verylongfermata                                              %! IC1
+                                -\verylongfermata                                                        %! IC1
                                 [
                                 e''16
                                 ]
@@ -4065,43 +4065,43 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                          %! SM4
-                            \time 4/8                                                          %! SM1
-                            \bar ""                                                            %! EMPTY_START_BAR:SM2
+                            % GlobalSkips [measure 1]                                                    %! SM4
+                            \time 4/8                                                                    %! SM1
+                            \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %! STAGE_NUMBER_MARKUP:SM3
-                                \fontsize                                                      %! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                        %! STAGE_NUMBER_MARKUP:SM3
-                                    \with-color                                                %! STAGE_NUMBER_MARKUP:SM3
-                                        #(x11-color 'DarkCyan)                                 %! STAGE_NUMBER_MARKUP:SM3
-                                        [1]                                                    %! STAGE_NUMBER_MARKUP:SM3
-                                }                                                              %! STAGE_NUMBER_MARKUP:SM3
+                            ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
+                                        [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
+                                }                                                                        %! STAGE_NUMBER_MARKUP:SM3
                             \repeat volta 2
                             {
                 <BLANKLINE>
-                                % GlobalSkips [measure 2]                                      %! SM4
-                                \time 3/8                                                      %! SM1
+                                % GlobalSkips [measure 2]                                                %! SM4
+                                \time 3/8                                                                %! SM1
                                 s1 * 3/8
                 <BLANKLINE>
-                                % GlobalSkips [measure 3]                                      %! SM4
-                                \time 4/8                                                      %! SM1
+                                % GlobalSkips [measure 3]                                                %! SM4
+                                \time 4/8                                                                %! SM1
                                 s1 * 1/2
                             }
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                          %! SM4
-                            \time 3/8                                                          %! SM1
+                            % GlobalSkips [measure 4]                                                    %! SM4
+                            \time 3/8                                                                    %! SM1
                             s1 * 3/8
-                            \override Score.BarLine.transparent = ##f                          %! SM5
-                            \bar "|"                                                           %! SM5
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -4109,7 +4109,7 @@ class LibraryTZ(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                       %! SM4
+                                % MusicVoice [measure 1]                                                 %! SM4
                                 e'8
                                 [
                 <BLANKLINE>
@@ -4120,7 +4120,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 r8
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                       %! SM4
+                                % MusicVoice [measure 2]                                                 %! SM4
                                 e''8
                                 [
                 <BLANKLINE>
@@ -4129,7 +4129,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 f''8
                                 ]
                 <BLANKLINE>
-                                % MusicVoice [measure 3]                                       %! SM4
+                                % MusicVoice [measure 3]                                                 %! SM4
                                 r8
                 <BLANKLINE>
                                 e'8
@@ -4140,7 +4140,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 f'8
                                 ]
                 <BLANKLINE>
-                                % MusicVoice [measure 4]                                       %! SM4
+                                % MusicVoice [measure 4]                                                 %! SM4
                                 r8
                 <BLANKLINE>
                                 e''8
@@ -4183,57 +4183,57 @@ class LibraryTZ(abjad.AbjadObject):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=79) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \context Score = "Score" <<
                     \context GlobalContext = "GlobalContext" <<
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
-                            % GlobalSkips [measure 1]                                          %! SM4
-                            \time 4/8                                                          %! SM1
-                            \bar ""                                                            %! EMPTY_START_BAR:SM2
+                            % GlobalSkips [measure 1]                                                    %! SM4
+                            \time 4/8                                                                    %! SM1
+                            \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             s1 * 1/2
-                            ^ \markup {                                                        %! STAGE_NUMBER_MARKUP:SM3
-                                \fontsize                                                      %! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                        %! STAGE_NUMBER_MARKUP:SM3
-                                    \with-color                                                %! STAGE_NUMBER_MARKUP:SM3
-                                        #(x11-color 'DarkCyan)                                 %! STAGE_NUMBER_MARKUP:SM3
-                                        [1]                                                    %! STAGE_NUMBER_MARKUP:SM3
-                                }                                                              %! STAGE_NUMBER_MARKUP:SM3
+                            ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
+                                        [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
+                                }                                                                        %! STAGE_NUMBER_MARKUP:SM3
                             \repeat volta 2
                             {
                 <BLANKLINE>
-                                % GlobalSkips [measure 2]                                      %! SM4
-                                \time 3/8                                                      %! SM1
+                                % GlobalSkips [measure 2]                                                %! SM4
+                                \time 3/8                                                                %! SM1
                                 s1 * 3/8
-                                ^ \markup {                                                    %! STAGE_NUMBER_MARKUP:SM3
-                                    \fontsize                                                  %! STAGE_NUMBER_MARKUP:SM3
-                                        #-3                                                    %! STAGE_NUMBER_MARKUP:SM3
-                                        \with-color                                            %! STAGE_NUMBER_MARKUP:SM3
-                                            #(x11-color 'DarkCyan)                             %! STAGE_NUMBER_MARKUP:SM3
-                                            [2]                                                %! STAGE_NUMBER_MARKUP:SM3
-                                    }                                                          %! STAGE_NUMBER_MARKUP:SM3
+                                ^ \markup {                                                              %! STAGE_NUMBER_MARKUP:SM3
+                                    \fontsize                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                        #-3                                                              %! STAGE_NUMBER_MARKUP:SM3
+                                        \with-color                                                      %! STAGE_NUMBER_MARKUP:SM3
+                                            #(x11-color 'DarkCyan)                                       %! STAGE_NUMBER_MARKUP:SM3
+                                            [2]                                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    }                                                                    %! STAGE_NUMBER_MARKUP:SM3
                 <BLANKLINE>
-                                % GlobalSkips [measure 3]                                      %! SM4
-                                \time 4/8                                                      %! SM1
+                                % GlobalSkips [measure 3]                                                %! SM4
+                                \time 4/8                                                                %! SM1
                                 s1 * 1/2
                             }
                 <BLANKLINE>
-                            % GlobalSkips [measure 4]                                          %! SM4
-                            \time 3/8                                                          %! SM1
+                            % GlobalSkips [measure 4]                                                    %! SM4
+                            \time 3/8                                                                    %! SM1
                             s1 * 3/8
-                            ^ \markup {                                                        %! STAGE_NUMBER_MARKUP:SM3
-                                \fontsize                                                      %! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                        %! STAGE_NUMBER_MARKUP:SM3
-                                    \with-color                                                %! STAGE_NUMBER_MARKUP:SM3
-                                        #(x11-color 'DarkCyan)                                 %! STAGE_NUMBER_MARKUP:SM3
-                                        [3]                                                    %! STAGE_NUMBER_MARKUP:SM3
-                                }                                                              %! STAGE_NUMBER_MARKUP:SM3
-                            \override Score.BarLine.transparent = ##f                          %! SM5
-                            \bar "|"                                                           %! SM5
+                            ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
+                                        #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
+                                        [3]                                                              %! STAGE_NUMBER_MARKUP:SM3
+                                }                                                                        %! STAGE_NUMBER_MARKUP:SM3
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
                 <BLANKLINE>
                         }
                     >>
@@ -4241,7 +4241,7 @@ class LibraryTZ(abjad.AbjadObject):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
-                                % MusicVoice [measure 1]                                       %! SM4
+                                % MusicVoice [measure 1]                                                 %! SM4
                                 e'8
                                 [
                 <BLANKLINE>
@@ -4252,7 +4252,7 @@ class LibraryTZ(abjad.AbjadObject):
                 <BLANKLINE>
                                 r8
                 <BLANKLINE>
-                                % MusicVoice [measure 2]                                       %! SM4
+                                % MusicVoice [measure 2]                                                 %! SM4
                                 e''8
                                 [
                 <BLANKLINE>
@@ -4261,7 +4261,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 f''8
                                 ]
                 <BLANKLINE>
-                                % MusicVoice [measure 3]                                       %! SM4
+                                % MusicVoice [measure 3]                                                 %! SM4
                                 r8
                 <BLANKLINE>
                                 e'8
@@ -4272,7 +4272,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 f'8
                                 ]
                 <BLANKLINE>
-                                % MusicVoice [measure 4]                                       %! SM4
+                                % MusicVoice [measure 4]                                                 %! SM4
                                 r8
                 <BLANKLINE>
                                 e''8

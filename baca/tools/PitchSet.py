@@ -12,12 +12,12 @@ class PitchSet(abjad.PitchSet):
         ..  container:: example
 
             >>> setting = baca.pitch_set([-2, -1.5, 6, 7, -1.5, 7])
-            >>> abjad.show(setting, strict=79) # doctest: +SKIP
+            >>> abjad.show(setting, strict=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = setting.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=79)
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 \new Score <<
                     \new PianoStaff <<
                         \new Staff {
@@ -79,12 +79,12 @@ class PitchSet(abjad.PitchSet):
         ..  container:: example
 
             >>> setting = baca.pitch_set([12, 14, 21, 22])
-            >>> abjad.show(setting, strict=79) # doctest: +SKIP
+            >>> abjad.show(setting, strict=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = setting.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=79)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
                 \new PianoStaff <<
                     \new Staff {
                         \new Voice {
@@ -102,12 +102,12 @@ class PitchSet(abjad.PitchSet):
             PitchSet([0, 9, 10, 14])
 
             >>> setting = setting.space_down(bass=0)
-            >>> abjad.show(setting, strict=79) # doctest: +SKIP
+            >>> abjad.show(setting, strict=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = setting.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=79)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
                 \new PianoStaff <<
                     \new Staff {
                         \new Voice {
@@ -126,12 +126,12 @@ class PitchSet(abjad.PitchSet):
             With 2 in bass:
 
             >>> setting = baca.pitch_set([12, 14, 21, 22])
-            >>> abjad.show(setting, strict=79) # doctest: +SKIP
+            >>> abjad.show(setting, strict=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = setting.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=79)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
                 \new PianoStaff <<
                     \new Staff {
                         \new Voice {
@@ -149,12 +149,12 @@ class PitchSet(abjad.PitchSet):
             PitchSet([2, 9, 10, 12])
 
             >>> setting = setting.space_down(bass=2)
-            >>> abjad.show(setting, strict=79) # doctest: +SKIP
+            >>> abjad.show(setting, strict=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = setting.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=79)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
                 \new PianoStaff <<
                     \new Staff {
                         \new Voice {
@@ -193,12 +193,12 @@ class PitchSet(abjad.PitchSet):
         ..  container:: example
 
             >>> setting = baca.pitch_set([12, 14, 21, 22])
-            >>> abjad.show(setting, strict=79) # doctest: +SKIP
+            >>> abjad.show(setting, strict=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = setting.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=79)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
                 \new PianoStaff <<
                     \new Staff {
                         \new Voice {
@@ -216,12 +216,12 @@ class PitchSet(abjad.PitchSet):
             PitchSet([0, 2, 9, 10])
 
             >>> setting = setting.space_up(bass=0)
-            >>> abjad.show(setting, strict=79) # doctest: +SKIP
+            >>> abjad.show(setting, strict=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = setting.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=79)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
                 \new PianoStaff <<
                     \new Staff {
                         \new Voice {
@@ -240,12 +240,12 @@ class PitchSet(abjad.PitchSet):
             With 2 in bass:
 
             >>> setting = baca.pitch_set([12, 14, 21, 22])
-            >>> abjad.show(setting, strict=79) # doctest: +SKIP
+            >>> abjad.show(setting, strict=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = setting.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=79)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
                 \new PianoStaff <<
                     \new Staff {
                         \new Voice {
@@ -263,12 +263,12 @@ class PitchSet(abjad.PitchSet):
             PitchSet([2, 9, 10, 12])
 
             >>> setting = setting.space_up(bass=2)
-            >>> abjad.show(setting, strict=79) # doctest: +SKIP
+            >>> abjad.show(setting, strict=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = setting.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=79)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
                 \new PianoStaff <<
                     \new Staff {
                         \new Voice {
