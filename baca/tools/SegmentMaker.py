@@ -1283,14 +1283,15 @@ class SegmentMaker(abjad.SegmentMaker):
         ):
         if context is not None:
             assert isinstance(context, abjad.Context), repr(context)
-        if isinstance(indicator, abjad.MetronomeMark):
+        stem = self._indicator_to_stem(indicator)
+        if stem == 'METRONOME_MARK':
             context = None
-            markup = indicator._to_markup()
+            markup = indicator._get_markup()
             color = self._status_to_color[status]
             color = abjad.SchemeColor(color)
             markup = markup.with_color(color)
             markup = abjad.new(markup, direction=abjad.Up)
-            tag = f'{status.upper()}_METRONOME_MARK_WITH_COLOR'
+            tag = f'{status.upper()}_{stem}_WITH_COLOR'
             tag = getattr(baca.Tags, tag)
             abjad.attach(markup, leaf, site='SM15', tag=tag)
             return
@@ -1317,17 +1318,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 prefix = 'redrawn'
             else:
                 prefix = None
-            if isinstance(indicator, abjad.Instrument):
-                stem = 'INSTRUMENT'
-            else:
-                stem = self._indicator_to_stem(indicator)
             if uncolor:
                 suffix = 'color_cancellation'
             else:
                 suffix = 'color'
         else:
             prefix = None
-            stem = self._indicator_to_stem(indicator)
             if redraw:
                 suffix = 'redraw_color'
             elif uncolor:
@@ -1646,9 +1642,11 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @staticmethod
     def _indicator_to_stem(indicator):
-        if isinstance(indicator, abjad.Instrument):
-            return 'INSTRUMENT'
-        stem = type(indicator).__name__
+        if isinstance(indicator.persistent, str):
+            stem = indicator.persistent
+            stem = stem.lstrip('abjad.')
+        else:
+            stem = type(indicator).__name__
         stem = abjad.String(stem).delimit_words()
         stem = '_'.join([_.upper() for _ in stem])
         return stem
@@ -2111,37 +2109,27 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
 
     def _categorize_uncategorized_persistent_indicators(self):
-        # TODO: remove tuple and iterate over all persistent indicators:
-        for prototype in (
-            abjad.Clef,
-            abjad.Instrument,
-            abjad.MetronomeMark,
-            abjad.TimeSignature,
-            baca.MarginMarkup,
-            ):
-            for leaf in abjad.iterate(self.score).leaves():
-                wrapper = abjad.inspect(leaf).wrapper(prototype)
-                if wrapper is None:
+        for leaf in abjad.iterate(self.score).leaves():
+            for wrapper in  abjad.inspect(leaf).wrappers():
+                if not getattr(wrapper.indicator, 'persistent', False):
                     continue
                 if wrapper.tag is not None:
                     continue
-                indicator = wrapper.indicator
-                context = wrapper._find_correct_effective_context()
                 previous_indicator = abjad.inspect(leaf).get_effective(
-                    prototype,
+                    type(wrapper.indicator),
                     n=-1,
                     )
-                if previous_indicator == indicator:
+                if previous_indicator == wrapper.indicator:
                     status = 'redundant'
                 else:
                     status = 'explicit'
-                spanner = wrapper.piecewise_spanner
+                context = wrapper._find_correct_effective_context()
                 self._categorize_persistent_indicator(
                     context,
                     leaf,
-                    indicator,
+                    wrapper.indicator,
                     status,
-                    spanner=spanner,
+                    spanner=wrapper.piecewise_spanner,
                     )
 
     def _transpose_score_(self):
