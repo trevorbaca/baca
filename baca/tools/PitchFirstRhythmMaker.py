@@ -1251,7 +1251,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         \time 15/16
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 5/4 {
-                            \override Staff.Stem.stemlet-length = #0.75
+                            \override Staff.Stem.stemlet-length = 0.75
                             r16
                             [
                             d'16
@@ -1261,7 +1261,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/6 {
-                            \override Staff.Stem.stemlet-length = #0.75
+                            \override Staff.Stem.stemlet-length = 0.75
                             fs''16
                             [
                             e''16
@@ -1273,8 +1273,8 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 3/2 {
+                            \override Staff.Stem.stemlet-length = 0.75
                             \revert Staff.Stem.stemlet-length
-                            \override Staff.Stem.stemlet-length = #0.75
                             a'8
                         }
                     } % measure
@@ -1707,7 +1707,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                     { % measure
                         \time 3/2
                         {
-                            \override Staff.Stem.stemlet-length = #1.5
+                            \override Staff.Stem.stemlet-length = 1.5
                             c'8.
                             [
                             r16
@@ -1717,7 +1717,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             ]
                         }
                         {
-                            \override Staff.Stem.stemlet-length = #1.5
+                            \override Staff.Stem.stemlet-length = 1.5
                             fs''8.
                             [
                             r16
@@ -1730,8 +1730,8 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                             ]
                         }
                         {
+                            \override Staff.Stem.stemlet-length = 1.5
                             \revert Staff.Stem.stemlet-length
-                            \override Staff.Stem.stemlet-length = #1.5
                             a'8
                         }
                     } % measure

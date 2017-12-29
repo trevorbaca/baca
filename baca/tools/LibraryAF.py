@@ -1271,7 +1271,7 @@ class LibraryAF(abjad.AbjadObject):
                         \voiceOne
                         {
                             {
-                                \override Staff.Stem.stemlet-length = #2
+                                \override Staff.Stem.stemlet-length = 2
                                 r8
                                 [
                                 c'16
@@ -1281,7 +1281,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                             }
                             {
-                                \override Staff.Stem.stemlet-length = #2
+                                \override Staff.Stem.stemlet-length = 2
                                 fs''16
                                 [
                                 e''16
@@ -1292,7 +1292,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                             }
                             {
-                                \override Staff.Stem.stemlet-length = #2
+                                \override Staff.Stem.stemlet-length = 2
                                 a'16
                                 [
                                 \revert Staff.Stem.stemlet-length
@@ -1398,7 +1398,7 @@ class LibraryAF(abjad.AbjadObject):
                         \voiceOne
                         {
                             {
-                                \override Staff.Stem.stemlet-length = #2
+                                \override Staff.Stem.stemlet-length = 2
                                 r8
                                 [
                                 \set stemLeftBeamCount = #2
