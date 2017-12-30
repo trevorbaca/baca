@@ -308,7 +308,8 @@ class IndicatorCommand(Command):
         wrapper = wrappers[0]
         if not wrapper.tag:
             return
-        if not wrapper.tag.startswith('REAPPLIED'):
+        if not (wrapper.tag.startswith('REAPPLIED') or
+            wrapper.tag.startswith('DEFAULT')):
             return
         reapplied_indicator = wrapper.indicator
         reapplied_substring = '_'.join(wrapper.tag.split('_')[:2])
