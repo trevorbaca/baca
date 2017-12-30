@@ -938,17 +938,19 @@ class SegmentMaker(abjad.SegmentMaker):
             assert getattr(wrapper.indicator, 'persistent', False)
             context = wrapper._find_correct_effective_context()
             self._categorize_persistent_indicator(
+                self.manifests,
                 context,
                 leaf, 
                 wrapper.indicator,
                 'default',
                 )
 
-    def _attach_latent_indicator_alert(self, leaf, indicator, status):
+    @staticmethod
+    def _attach_latent_indicator_alert(leaf, indicator, status, manifests):
         assert indicator.latent, repr(indicator)
         if isinstance(indicator, abjad.Clef):
             return
-        key = self._indicator_to_key(indicator)
+        key = SegmentMaker._indicator_to_key(indicator, manifests)
         if key is not None:
             key = f'“{key}”'
         else:
@@ -969,11 +971,11 @@ class SegmentMaker(abjad.SegmentMaker):
             items.append(item)
             markup = abjad.Markup(items)
         markup = abjad.new(markup, direction=abjad.Up)
-        stem = self._indicator_to_stem(indicator)
+        stem = SegmentMaker._indicator_to_stem(indicator)
         tag = f'{status.upper()}_{stem}_ALERT'
         tag = getattr(baca.Tags, tag)
         abjad.attach(markup, leaf, deactivate=True, site='SM10', tag=tag)
-        color = self._status_to_color[status]
+        color = SegmentMaker._status_to_color[status]
         color = abjad.SchemeColor(color)
         markup = markup.with_color(color)
         tag = f'{status.upper()}_{stem}_ALERT_WITH_COLOR'
@@ -998,8 +1000,9 @@ class SegmentMaker(abjad.SegmentMaker):
             skip = skips[start]
             spanner.attach(directive, skip)
 
+    @staticmethod
     def _categorize_persistent_indicator(
-        self,
+        manifests,
         context,
         leaf,
         indicator,
@@ -1009,12 +1012,22 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(context, abjad.Context), repr(context)
         if status is None:
             return
-        self._color_persistent_indicator(context, leaf, indicator, status)
+        SegmentMaker._color_persistent_indicator(
+            context,
+            leaf,
+            indicator,
+            status,
+            )
         if getattr(indicator, 'latent', False):
-            self._attach_latent_indicator_alert(leaf, indicator, status)
+            SegmentMaker._attach_latent_indicator_alert(
+                leaf,
+                indicator,
+                status,
+                manifests,
+                )
         elif (getattr(indicator, 'redraw', False)
             and not getattr(indicator, 'hide', False)):
-            self._color_persistent_indicator(
+            SegmentMaker._color_persistent_indicator(
                 context,
                 leaf,
                 indicator,
@@ -1024,7 +1037,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if isinstance(indicator, abjad.Clef):
             string = rf'\set {context.headword}.forceClef = ##t'
             literal = abjad.LilyPondLiteral(string)
-            self._tag_persistent_indicator(
+            SegmentMaker._tag_persistent_indicator(
                 context,
                 leaf,
                 literal,
@@ -1032,7 +1045,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 stem='CLEF',
                 )
         abjad.detach(indicator, leaf)
-        self._tag_persistent_indicator(
+        SegmentMaker._tag_persistent_indicator(
             context,
             leaf,
             indicator,
@@ -1041,7 +1054,7 @@ class SegmentMaker(abjad.SegmentMaker):
             )
         if (getattr(indicator, 'redraw', False)
             and not getattr(indicator, 'hide', False)):
-            self._color_persistent_indicator(
+            SegmentMaker._color_persistent_indicator(
                 context,
                 leaf,
                 indicator,
@@ -1051,8 +1064,8 @@ class SegmentMaker(abjad.SegmentMaker):
             if isinstance(indicator, (abjad.Instrument, baca.MarginMarkup)):
                 strings = indicator._get_lilypond_format(context=context)
                 literal = abjad.LilyPondLiteral(strings, 'after')
-                stem = self._indicator_to_stem(indicator)
-                self._tag_persistent_indicator(
+                stem = SegmentMaker._indicator_to_stem(indicator)
+                SegmentMaker._tag_persistent_indicator(
                     context,
                     leaf,
                     literal,
@@ -1126,6 +1139,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if isinstance(wrapper.command, baca.RhythmCommand):
                 continue
             selection = self._scope_to_leaf_selection(wrapper)
+            wrapper.command._manifests = self.manifests
             try:
                 wrapper.command(selection)
             except:
@@ -1231,7 +1245,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 parentage = abjad.inspect(leaf).get_parentage()
                 first_context = parentage.get_first(abjad.Context)
                 indicator = wrapper.indicator
-                value = self._indicator_to_key(indicator)
+                value = self._indicator_to_key(indicator, self.manifests)
                 if isinstance(indicator.persistent, str):
                     prototype = indicator.persistent
                 else:
@@ -1272,8 +1286,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 for leaf in notes_and_chords:
                     abjad.attach(markup, leaf, site='SM12')
 
+    @staticmethod
     def _color_persistent_indicator(
-        self,
+        #self,
         context,
         leaf,
         indicator,
@@ -1283,11 +1298,11 @@ class SegmentMaker(abjad.SegmentMaker):
         ):
         if context is not None:
             assert isinstance(context, abjad.Context), repr(context)
-        stem = self._indicator_to_stem(indicator)
+        stem = SegmentMaker._indicator_to_stem(indicator)
         if stem == 'METRONOME_MARK':
             context = None
             markup = indicator._get_markup()
-            color = self._status_to_color[status]
+            color = SegmentMaker._status_to_color[status]
             color = abjad.SchemeColor(color)
             markup = markup.with_color(color)
             markup = abjad.new(markup, direction=abjad.Up)
@@ -1295,7 +1310,7 @@ class SegmentMaker(abjad.SegmentMaker):
             tag = getattr(baca.Tags, tag)
             abjad.attach(markup, leaf, site='SM15', tag=tag)
             return
-        grob = self._indicator_to_grob(indicator)
+        grob = SegmentMaker._indicator_to_grob(indicator)
         if context is not None:
             string = rf'\override {context.headword}.{grob}.color ='
         else:
@@ -1303,11 +1318,11 @@ class SegmentMaker(abjad.SegmentMaker):
         if uncolor is True:
             string += ' ##f'
         elif redraw is True:
-            color = self._status_to_redraw_color[status]
+            color = SegmentMaker._status_to_redraw_color[status]
             string += f" #(x11-color '{color})"
         else:
             string = rf'\once {string}'
-            color = self._status_to_color[status]
+            color = SegmentMaker._status_to_color[status]
             string += f" #(x11-color '{color})"
         if redraw:
             literal = abjad.LilyPondLiteral(string, 'after')
@@ -1330,7 +1345,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 suffix = 'color_cancellation'
             else:
                 suffix = 'color'
-        tag = self._get_tag(status, stem, prefix=prefix, suffix=suffix)
+        tag = SegmentMaker._get_tag(status, stem, prefix=prefix, suffix=suffix)
         if uncolor is True:
             abjad.attach(literal, leaf, deactivate=True, site='SM7', tag=tag)
         else:
@@ -1627,15 +1642,25 @@ class SegmentMaker(abjad.SegmentMaker):
             return 'StaffSymbol'
         return type(indicator).__name__
 
-    def _indicator_to_key(self, indicator):
+    @staticmethod
+    def _indicator_to_key(indicator, manifests):
         if isinstance(indicator, (abjad.Clef, abjad.Dynamic)):
             return indicator.name
         if isinstance(indicator, abjad.Instrument):
-            return self._get_key(self.instruments, indicator)
+            return SegmentMaker._get_key(
+                manifests['abjad.Instrument'],
+                indicator,
+                )
         elif isinstance(indicator, abjad.MetronomeMark):
-            return self._get_key(self.metronome_marks, indicator)
+            return SegmentMaker._get_key(
+                manifests['abjad.MetronomeMark'],
+                indicator,
+                )
         elif isinstance(indicator, baca.MarginMarkup):
-            return self._get_key(self.margin_markup, indicator)
+            return SegmentMaker._get_key(
+                manifests['baca.MarginMarkup'],
+                indicator,
+                )
         elif isinstance(indicator, baca.StaffLines):
             return indicator.line_count
         return str(indicator)
@@ -1916,6 +1941,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 else:
                     spanner = None
                 self._categorize_persistent_indicator(
+                    self.manifests,
                     context,
                     leaf,
                     previous_indicator,
@@ -2068,8 +2094,9 @@ class SegmentMaker(abjad.SegmentMaker):
         segment_duration = segment_duration.to_clock_string()
         self._duration = segment_duration
 
+    @staticmethod
     def _tag_persistent_indicator(
-        self,
+        #self,
         context,
         leaf,
         indicator,
@@ -2080,16 +2107,16 @@ class SegmentMaker(abjad.SegmentMaker):
         ):
         if context is not None:
             assert isinstance(context, abjad.Context), repr(context)
-        stem = stem or self._indicator_to_stem(indicator)
+        stem = stem or SegmentMaker._indicator_to_stem(indicator)
         if redraw is True:
             if (getattr(indicator, 'latent', False) or
                 stem in ('INSTRUMENT', 'MARGIN_MARKUP')):
-                tag = self._get_tag(status, stem, prefix='redrawn')
+                tag = SegmentMaker._get_tag(status, stem, prefix='redrawn')
             else:
                 #raise Exception('FOO?')
-                tag = self._get_tag(status, stem, prefix='redrawn')
+                tag = SegmentMaker._get_tag(status, stem, prefix='redrawn')
         else:
-            tag = self._get_tag(status, stem)
+            tag = SegmentMaker._get_tag(status, stem)
         if spanner is not None:
             spanner.attach(
                 indicator,
@@ -2125,6 +2152,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     status = 'explicit'
                 context = wrapper._find_correct_effective_context()
                 self._categorize_persistent_indicator(
+                    self.manifests,
                     context,
                     leaf,
                     wrapper.indicator,
@@ -6043,6 +6071,7 @@ class SegmentMaker(abjad.SegmentMaker):
         manifests['abjad.Instrument'] = self.instruments
         manifests['abjad.MetronomeMark'] = self.metronome_marks
         manifests['baca.MarginMarkup'] = self.margin_markup
+        return manifests
 
     @property
     def margin_markup(self):
@@ -8682,10 +8711,11 @@ class SegmentMaker(abjad.SegmentMaker):
         self._label_stage_numbers()
         self._call_rhythm_commands()
         self._extend_beams()
+        self._reapply_persistent_indicators()
         self._call_commands()
         self._shorten_long_repeat_ties()
         self._attach_score_template_defaults()
-        self._reapply_persistent_indicators()
+        #self._reapply_persistent_indicators()
         self._categorize_uncategorized_persistent_indicators()
         self._tag_clock_time()
         self._apply_spacing_specifier()

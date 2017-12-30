@@ -265,6 +265,10 @@ class IndicatorCommand(Command):
             indicators = self.indicators[i]
             indicators = self._token_to_indicators(indicators)
             for indicator in indicators:
+                reapplied_indicator = self._remove_reapplied_indicator(
+                    leaf,
+                    indicator,
+                    )
                 abjad.attach(
                     indicator,
                     leaf,
@@ -272,8 +276,46 @@ class IndicatorCommand(Command):
                     site=self.site,
                     tag=self.tag,
                     )
+                if indicator == reapplied_indicator:
+                    wrapper = abjad.inspect(leaf).wrapper(type(indicator))
+                    context = wrapper._find_correct_effective_context()
+                    baca.SegmentMaker._categorize_persistent_indicator(
+                        self._manifests,
+                        context,
+                        leaf,
+                        indicator,
+                        'redundant',
+                        )
 
     ### PRIVATE METHODS ###
+
+    @staticmethod
+    def _remove_reapplied_indicator(leaf, indicator):
+        if not getattr(indicator, 'persistent', False):
+            return
+        if abjad.inspect(leaf).get_timespan().start_offset != 0:
+            return
+        tags_to_remove = []
+        if isinstance(indicator, abjad.Instrument):
+            prototype = abjad.Instrument
+        else:
+            prototype = type(indicator)
+        wrappers = abjad.inspect(leaf).wrappers(prototype)
+        if not wrappers:
+            return
+        if wrappers:
+            assert len(wrappers) == 1, repr(wrappers)
+        wrapper = wrappers[0]
+        if not wrapper.tag:
+            return
+        if not wrapper.tag.startswith('REAPPLIED'):
+            return
+        reapplied_indicator = wrapper.indicator
+        reapplied_substring = '_'.join(wrapper.tag.split('_')[:2])
+        for wrapper in abjad.inspect(leaf).wrappers():
+            if wrapper.tag and reapplied_substring in wrapper.tag:
+                abjad.detach(wrapper.indicator, leaf)
+        return reapplied_indicator
 
     @staticmethod
     def _token_to_indicators(token):

@@ -4758,6 +4758,17 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
+    def dynamic_text_x_extent_false(selector='baca.pleaf(0)'):
+        r'''Overrides dynamic text X-extent.
+        '''
+        return baca.OverrideCommand(
+            attribute='X_extent',
+            value=False,
+            grob='dynamic_text',
+            selector=selector,
+            )
+
+    @staticmethod
     def dynamics(string):
         r'''Makes dynamics from `string`.
 
@@ -5093,6 +5104,7 @@ class LibraryAF(abjad.AbjadObject):
                                 c'16
                                 _ #(make-dynamic-script
                                     (markup
+                                        #:whiteout
                                         #:line (
                                             #:general-align Y -2 #:normal-text #:larger "“"
                                             #:hspace -0.4
@@ -5179,6 +5191,7 @@ class LibraryAF(abjad.AbjadObject):
                                 fs''16
                                 _ #(make-dynamic-script
                                     (markup
+                                        #:whiteout
                                         #:line (
                                             #:general-align Y -2 #:normal-text #:larger "“"
                                             #:hspace -0.4
