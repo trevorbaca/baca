@@ -5091,19 +5091,29 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC
                                 r8
                                 c'16
-                                [
-                                _ \markup {                                                              %! IC
-                                    \larger                                                              %! IC
-                                        \italic                                                          %! IC
-                                            “                                                            %! IC
-                                    \dynamic                                                             %! IC
-                                        \override                                                        %! IC
-                                            #'(font-name . #f)                                           %! IC
-                                            f                                                            %! IC
-                                    \larger                                                              %! IC
-                                        \italic                                                          %! IC
-                                            ”                                                            %! IC
+                                _ \markup {
+                                    \concat
+                                        {
+                                            \vcenter
+                                                \larger
+                                                    \italic
+                                                        “
+                                            \hspace
+                                                #0.2
+                                            \vcenter
+                                                \dynamic
+                                                    \override
+                                                        #'(font-name . #f)
+                                                        f
+                                            \hspace
+                                                #0.1
+                                            \vcenter
+                                                \larger
+                                                    \italic
+                                                        ”
+                                        }
                                     }                                                                    %! IC
+                                [
                                 d'16
                                 ]
                                 bf'4
@@ -5178,19 +5188,29 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                [
-                                _ \markup {                                                              %! IC
-                                    \larger                                                              %! IC
-                                        \italic                                                          %! IC
-                                            “                                                            %! IC
-                                    \dynamic                                                             %! IC
-                                        \override                                                        %! IC
-                                            #'(font-name . #f)                                           %! IC
-                                            f                                                            %! IC
-                                    \larger                                                              %! IC
-                                        \italic                                                          %! IC
-                                            ”                                                            %! IC
+                                _ \markup {
+                                    \concat
+                                        {
+                                            \vcenter
+                                                \larger
+                                                    \italic
+                                                        “
+                                            \hspace
+                                                #0.2
+                                            \vcenter
+                                                \dynamic
+                                                    \override
+                                                        #'(font-name . #f)
+                                                        f
+                                            \hspace
+                                                #0.1
+                                            \vcenter
+                                                \larger
+                                                    \italic
+                                                        ”
+                                        }
                                     }                                                                    %! IC
+                                [
                                 e''16
                                 ]
                                 ef''4
@@ -5212,18 +5232,10 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        # overriding font-name to false makes sure that
-        # the LilyPond \dynamic command works correctly
-        # in the case that TextScript.font-name is overridden score-globally
-        left_quotes = abjad.Markup('“').italic().larger()
-        dynamic_markup = abjad.Markup(dynamic)
-        dynamic_markup = dynamic_markup.override(('font-name', False))
-        dynamic_markup = dynamic_markup.dynamic()
-        right_quotes = abjad.Markup('”').italic().larger()
-        markup = left_quotes + dynamic_markup + right_quotes
-        markup = abjad.new(markup, direction=direction)
+        assert isinstance(dynamic, str), repr(dynamic)
+        dynamic = abjad.Dynamic(f'"{dynamic}"')
         return baca.IndicatorCommand(
-            indicators=[markup],
+            indicators=[dynamic],
             selector=selector,
             )
 
