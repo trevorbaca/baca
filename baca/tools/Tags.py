@@ -154,7 +154,7 @@ class Tags(abjad.Enumeration):
     REDUNDANT_TIME_SIGNATURE = enum.auto()
     REDUNDANT_TIME_SIGNATURE_COLOR = enum.auto()
 
-    ### OTHER ###
+    ### OTHER BUILD TAGS ###
 
     CLOCK_TIME_MARKUP = enum.auto()
     EMPTY_START_BAR = enum.auto()
@@ -163,6 +163,10 @@ class Tags(abjad.Enumeration):
     SPACING = enum.auto()
     SPACING_MARKUP = enum.auto()
     STAGE_NUMBER_MARKUP = enum.auto()
+
+    ### SYSTEM TAGS ###
+
+    DO_NOT_TRANSPOSE = enum.auto()
 
     ### PUBLIC METHODS ###
 

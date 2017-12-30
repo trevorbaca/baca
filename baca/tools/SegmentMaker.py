@@ -2133,8 +2133,12 @@ class SegmentMaker(abjad.SegmentMaker):
                     )
 
     def _transpose_score_(self):
-        if self.transpose_score:
-            abjad.Instrument.transpose_from_sounding_pitch(self.score)
+        if not self.transpose_score:
+            return
+        for pleaf in baca.select(self.score).pleaves():
+            if abjad.inspect(pleaf).has_indicator(baca.Tags.DO_NOT_TRANSPOSE):
+                continue
+            abjad.Instrument.transpose_from_sounding_pitch(pleaf)
 
     def _voice_to_rhythm_wrappers(self, voice):
         wrappers = []

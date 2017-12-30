@@ -88,6 +88,7 @@ class StaffPositionCommand(Command):
             if self.repeats:
                 for pleaf in plt:
                     abjad.attach('repeat pitch allowed', pleaf)
+                    abjad.attach(baca.Tags.DO_NOT_TRANSPOSE, pleaf)
 
     ### PUBLIC PROPERTIES ###
 
