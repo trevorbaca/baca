@@ -80,6 +80,7 @@ class StaffPositionCommand(Command):
             argument = self.selector(argument)
         for i, plt in enumerate(baca.select(argument).plts()):
             clef = abjad.inspect(plt.head).get_effective(abjad.Clef)
+            clef = clef or abjad.Clef('treble')
             number = self.numbers[i]
             position = abjad.StaffPosition(number)
             pitch = position.to_pitch(clef)
