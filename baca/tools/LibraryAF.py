@@ -5091,28 +5091,17 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC
                                 r8
                                 c'16
-                                _ \markup {
-                                    \concat
-                                        {
-                                            \vcenter
-                                                \larger
-                                                    \italic
-                                                        “
-                                            \hspace
-                                                #0.2
-                                            \vcenter
-                                                \dynamic
-                                                    \override
-                                                        #'(font-name . #f)
-                                                        f
-                                            \hspace
-                                                #0.1
-                                            \vcenter
-                                                \larger
-                                                    \italic
-                                                        ”
-                                        }
-                                    }                                                                    %! IC
+                                _ #(make-dynamic-script
+                                    (markup
+                                        #:line (
+                                            #:general-align Y -2 #:normal-text #:larger "“"
+                                            #:hspace -0.4
+                                            #:dynamic "f"
+                                            #:hspace -0.2
+                                            #:general-align Y -2 #:normal-text #:larger "”"
+                                            )
+                                        )
+                                    )                                                                    %! IC
                                 [
                                 d'16
                                 ]
@@ -5188,28 +5177,17 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                _ \markup {
-                                    \concat
-                                        {
-                                            \vcenter
-                                                \larger
-                                                    \italic
-                                                        “
-                                            \hspace
-                                                #0.2
-                                            \vcenter
-                                                \dynamic
-                                                    \override
-                                                        #'(font-name . #f)
-                                                        f
-                                            \hspace
-                                                #0.1
-                                            \vcenter
-                                                \larger
-                                                    \italic
-                                                        ”
-                                        }
-                                    }                                                                    %! IC
+                                _ #(make-dynamic-script
+                                    (markup
+                                        #:line (
+                                            #:general-align Y -2 #:normal-text #:larger "“"
+                                            #:hspace -0.4
+                                            #:dynamic "f"
+                                            #:hspace -0.2
+                                            #:general-align Y -2 #:normal-text #:larger "”"
+                                            )
+                                        )
+                                    )                                                                    %! IC
                                 [
                                 e''16
                                 ]
