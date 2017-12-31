@@ -1012,6 +1012,8 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(context, abjad.Context), repr(context)
         if status is None:
             return
+        if isinstance(spanner, abjad.Hairpin) and leaf in spanner:
+            status = 'explicit'
         SegmentMaker._color_persistent_indicator(
             context,
             leaf,
@@ -1288,7 +1290,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @staticmethod
     def _color_persistent_indicator(
-        #self,
         context,
         leaf,
         indicator,
@@ -2096,7 +2097,6 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @staticmethod
     def _tag_persistent_indicator(
-        #self,
         context,
         leaf,
         indicator,
@@ -2146,10 +2146,10 @@ class SegmentMaker(abjad.SegmentMaker):
                     type(wrapper.indicator),
                     n=-1,
                     )
-                if previous_indicator == wrapper.indicator:
-                    status = 'redundant'
-                else:
+                if previous_indicator != wrapper.indicator:
                     status = 'explicit'
+                else:
+                    status = 'redundant'
                 context = wrapper._find_correct_effective_context()
                 self._categorize_persistent_indicator(
                     self.manifests,
