@@ -501,7 +501,6 @@ class PitchCommand(Command):
 
     @staticmethod
     def _set_lt_pitch(lt, pitch):
-        #mutated_score = False
         new_lt = None
         string = 'not yet pitched'
         for leaf in lt:
@@ -512,9 +511,10 @@ class PitchCommand(Command):
             else:
                 for leaf in lt:
                     rest = abjad.Rest(leaf.written_duration)
-                    # TODO: overrides and indicators are lost!
+                    wrappers = abjad.inspect(leaf).wrappers()
                     abjad.mutate(leaf).replace(rest)
-                    #mutated_score = True
+                    for wrapper in wrappers:
+                        abjad.attach(wrapper, rest)
                 new_lt = abjad.inspect(rest).get_logical_tie()
         elif isinstance(pitch, collections.Iterable):
             if isinstance(lt.head, abjad.Chord):
@@ -524,9 +524,10 @@ class PitchCommand(Command):
                 assert isinstance(lt.head, (abjad.Note, abjad.Rest))
                 for leaf in lt:
                     chord = abjad.Chord(pitch, leaf.written_duration)
-                    # TODO: overrides and indicators are lost!
+                    wrappers = abjad.inspect(leaf).wrappers()
                     abjad.mutate(leaf).replace(chord)
-                    #mutated_score = True
+                    for wrapper in wrappers:
+                        abjad.attach(wrapper, chord)
                 new_lt = abjad.inspect(chord).get_logical_tie()
         else:
             if isinstance(lt.head, abjad.Note):
@@ -536,11 +537,11 @@ class PitchCommand(Command):
                 assert isinstance(lt.head, (abjad.Chord, abjad.Rest))
                 for leaf in lt:
                     note = abjad.Note(pitch, leaf.written_duration)
-                    # TODO: overrides and indicators are lost!
+                    wrappers = abjad.inspect(leaf).wrappers()
                     abjad.mutate(leaf).replace(note)
-                    #mutated_score = True
+                    for wrapper in wrappers:
+                        abjad.attach(wrapper, note)
                 new_lt = abjad.inspect(note).get_logical_tie()
-        #return mutated_score
         return new_lt
 
     ### PUBLIC PROPERTIES ###
