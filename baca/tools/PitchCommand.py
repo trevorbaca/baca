@@ -511,10 +511,7 @@ class PitchCommand(Command):
             else:
                 for leaf in lt:
                     rest = abjad.Rest(leaf.written_duration)
-                    wrappers = abjad.inspect(leaf).wrappers()
-                    abjad.mutate(leaf).replace(rest)
-                    for wrapper in wrappers:
-                        abjad.attach(wrapper, rest)
+                    abjad.mutate(leaf).replace(rest, wrappers=True)
                 new_lt = abjad.inspect(rest).get_logical_tie()
         elif isinstance(pitch, collections.Iterable):
             if isinstance(lt.head, abjad.Chord):
@@ -524,10 +521,7 @@ class PitchCommand(Command):
                 assert isinstance(lt.head, (abjad.Note, abjad.Rest))
                 for leaf in lt:
                     chord = abjad.Chord(pitch, leaf.written_duration)
-                    wrappers = abjad.inspect(leaf).wrappers()
-                    abjad.mutate(leaf).replace(chord)
-                    for wrapper in wrappers:
-                        abjad.attach(wrapper, chord)
+                    abjad.mutate(leaf).replace(chord, wrappers=True)
                 new_lt = abjad.inspect(chord).get_logical_tie()
         else:
             if isinstance(lt.head, abjad.Note):
@@ -537,10 +531,7 @@ class PitchCommand(Command):
                 assert isinstance(lt.head, (abjad.Chord, abjad.Rest))
                 for leaf in lt:
                     note = abjad.Note(pitch, leaf.written_duration)
-                    wrappers = abjad.inspect(leaf).wrappers()
-                    abjad.mutate(leaf).replace(note)
-                    for wrapper in wrappers:
-                        abjad.attach(wrapper, note)
+                    abjad.mutate(leaf).replace(note, wrappers=True)
                 new_lt = abjad.inspect(note).get_logical_tie()
         return new_lt
 

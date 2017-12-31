@@ -1195,13 +1195,13 @@ class LibraryNS(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC
                                 r8
                                 c'16
-                                -\f                                                                      %! IC
+                                \f                                                                       %! IC
                                 [
                                 d'16
-                                -\f                                                                      %! IC
+                                \f                                                                       %! IC
                                 ]
                                 bf'4
-                                -\f                                                                      %! IC
+                                \f                                                                       %! IC
                                 ~
                                 bf'16
                                 r16
@@ -1209,26 +1209,26 @@ class LibraryNS(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\f                                                                      %! IC
+                                \f                                                                       %! IC
                                 [
                                 e''16
-                                -\f                                                                      %! IC
+                                \f                                                                       %! IC
                                 ]
                                 ef''4
-                                -\f                                                                      %! IC
+                                \f                                                                       %! IC
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\f                                                                      %! IC
+                                \f                                                                       %! IC
                                 [
                                 g''16
-                                -\f                                                                      %! IC
+                                \f                                                                       %! IC
                                 ]
                             }
                             \times 4/5 {
                                 a'16
-                                -\f                                                                      %! IC
+                                \f                                                                       %! IC
                                 r4
                                 \revert TupletBracket.staff-padding                                      %! OC
                             }
@@ -1279,21 +1279,21 @@ class LibraryNS(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                -\f                                                                      %! IC
+                                \f                                                                       %! IC
                                 [
                                 e''16
-                                -\f                                                                      %! IC
+                                \f                                                                       %! IC
                                 ]
                                 ef''4
-                                -\f                                                                      %! IC
+                                \f                                                                       %! IC
                                 ~
                                 ef''16
                                 r16
                                 af''16
-                                -\f                                                                      %! IC
+                                \f                                                                       %! IC
                                 [
                                 g''16
-                                -\f                                                                      %! IC
+                                \f                                                                       %! IC
                                 ]
                             }
                             \times 4/5 {
