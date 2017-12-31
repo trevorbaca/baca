@@ -35,6 +35,7 @@ class MetronomeMarkCommand(Command):
         if key is not None:
             assert isinstance(key, str)
         self._key = key
+        # TODO: set to none instead?
         self._manifest = 'metronome_marks'
         if site is not None:
             assert isinstance(site, str), repr(site)

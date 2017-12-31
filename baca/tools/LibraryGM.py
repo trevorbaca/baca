@@ -540,10 +540,11 @@ class LibraryGM(abjad.AbjadObject):
                 >>
 
         '''
-        hairpin = abjad.Hairpin(hairpin, context='Voice')
-        return baca.SpannerCommand(
+        hairpin = abjad.Hairpin(hairpin)
+        return baca.HairpinCommand(
             selector=selector,
-            spanner=hairpin,
+            start=hairpin.start_dynamic,
+            stop=hairpin.stop_dynamic,
             )
 
     @staticmethod

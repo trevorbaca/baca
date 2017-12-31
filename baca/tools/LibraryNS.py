@@ -1307,7 +1307,7 @@ class LibraryNS(abjad.AbjadObject):
 
         '''
         return baca.IndicatorCommand(
-            indicators=[abjad.Articulation(dynamic)],
+            indicators=[abjad.Dynamic(dynamic)],
             selector=selector,
             )
 

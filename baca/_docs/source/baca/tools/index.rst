@@ -92,6 +92,7 @@ baca.tools
    Command
    CommandWrapper
    DiatonicClusterCommand
+   HairpinCommand
    ImbricationCommand
    IndicatorCommand
    LabelCommand
@@ -124,6 +125,7 @@ baca.tools
    Command
    CommandWrapper
    DiatonicClusterCommand
+   HairpinCommand
    ImbricationCommand
    IndicatorCommand
    LabelCommand
