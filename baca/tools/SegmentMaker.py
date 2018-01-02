@@ -1728,7 +1728,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if isinstance(spanner, abjad.Hairpin):
             return True
         if isinstance(spanner, abjad.MetronomeMarkSpanner):
-            #raise Exception(spanner._indicator_wrappers, 'WWW')
+            #raise Exception(spanner._wrappers, 'WWW')
             prototype = (abjad.Accelerando, abjad.Ritardando)
             trend = abjad.inspect(leaf).get_effective(prototype)
         return False
