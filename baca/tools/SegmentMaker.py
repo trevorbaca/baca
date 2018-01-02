@@ -1012,7 +1012,7 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(context, abjad.Context), repr(context)
         if status is None:
             return
-        if isinstance(spanner, abjad.Hairpin) and leaf in spanner:
+        if SegmentMaker._is_trending(spanner, leaf):
             status = 'explicit'
         SegmentMaker._color_persistent_indicator(
             context,
@@ -1719,6 +1719,20 @@ class SegmentMaker(abjad.SegmentMaker):
             result.extend(silences)
         return result
 
+    @staticmethod
+    def _is_trending(spanner, leaf):
+        if spanner is None:
+            return False
+        if leaf not in spanner:
+            return False
+        if isinstance(spanner, abjad.Hairpin):
+            return True
+        if isinstance(spanner, abjad.MetronomeMarkSpanner):
+            #raise Exception(spanner._indicator_wrappers, 'WWW')
+            prototype = (abjad.Accelerando, abjad.Ritardando)
+            trend = abjad.inspect(leaf).get_effective(prototype)
+        return False
+
     def _key_to_indicator(self, key, prototype):
         assert isinstance(key, (int, str)), repr(key)
         if key is None:
@@ -2157,7 +2171,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     leaf,
                     wrapper.indicator,
                     status,
-                    spanner=wrapper.piecewise_spanner,
+                    spanner=wrapper.spanner,
                     )
 
     def _transpose_score_(self):
