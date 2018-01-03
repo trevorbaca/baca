@@ -95,7 +95,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                         %%%             =                                                            %! EXPLICIT_METRONOME_MARK:SM27
                         %%%             90                                                           %! EXPLICIT_METRONOME_MARK:SM27
                         %%%         }                                                                %! EXPLICIT_METRONOME_MARK:SM27
-                        %%%     }                                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%     }                                                                    %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
             <BLANKLINE>
                         % GlobalSkips [measure 2]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -166,7 +166,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                         %%%             =                                                            %! EXPLICIT_METRONOME_MARK:SM27
                         %%%             72                                                           %! EXPLICIT_METRONOME_MARK:SM27
                         %%%         }                                                                %! EXPLICIT_METRONOME_MARK:SM27
-                        %%%     }                                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                        %%%     }                                                                    %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
             <BLANKLINE>
                         % GlobalSkips [measure 4]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8

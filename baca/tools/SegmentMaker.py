@@ -991,14 +991,14 @@ class SegmentMaker(abjad.SegmentMaker):
             left_broken_text=left_broken_text,
             start_with_parenthesized_metronome_mark=False,
             )
-        abjad.attach(spanner, skips, site='')
+        abjad.attach(spanner, skips, site='SM29')
         if not self.metronome_mark_measure_map:
             return
         for stage_number, directive in self.metronome_mark_measure_map:
             self._assert_valid_stage_number(stage_number)
             start, _ = self._stage_number_to_measure_indices(stage_number)
             skip = skips[start]
-            spanner.attach(directive, skip)
+            spanner.attach(directive, skip, site='SM30')
 
     @staticmethod
     def _categorize_persistent_indicator(
@@ -7202,7 +7202,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%%             =                                                            %! EXPLICIT_METRONOME_MARK:SM27
                             %%%             90                                                           %! EXPLICIT_METRONOME_MARK:SM27
                             %%%         }                                                                %! EXPLICIT_METRONOME_MARK:SM27
-                            %%%     }                                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%     }                                                                    %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -7388,7 +7388,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%%             =                                                            %! EXPLICIT_METRONOME_MARK:SM27
                             %%%             112                                                          %! EXPLICIT_METRONOME_MARK:SM27
                             %%%         }                                                                %! EXPLICIT_METRONOME_MARK:SM27
-                            %%%     }                                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%     }                                                                    %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7499,7 +7499,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%%             =                                                            %! EXPLICIT_METRONOME_MARK:SM27
                             %%%             112                                                          %! EXPLICIT_METRONOME_MARK:SM27
                             %%%         }                                                                %! EXPLICIT_METRONOME_MARK:SM27
-                            %%%     }                                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%     }                                                                    %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7608,7 +7608,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%%             =                                                            %! REAPPLIED_METRONOME_MARK:SM27
                             %%%             90                                                           %! REAPPLIED_METRONOME_MARK:SM27
                             %%%         }                                                                %! REAPPLIED_METRONOME_MARK:SM27
-                            %%%     }                                                                    %! REAPPLIED_METRONOME_MARK:SM27
+                            %%%     }                                                                    %! REAPPLIED_METRONOME_MARK:SM27 %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7710,7 +7710,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%%             =                                                            %! EXPLICIT_METRONOME_MARK:SM27
                             %%%             112                                                          %! EXPLICIT_METRONOME_MARK:SM27
                             %%%         }                                                                %! EXPLICIT_METRONOME_MARK:SM27
-                            %%%     }                                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                            %%%     }                                                                    %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \noBreak                                                                     %! SEGMENT:LAYOUT:LMM2
@@ -7753,7 +7753,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%%             =                                                            %! REDUNDANT_METRONOME_MARK:SM27
                             %%%             112                                                          %! REDUNDANT_METRONOME_MARK:SM27
                             %%%         }                                                                %! REDUNDANT_METRONOME_MARK:SM27
-                            %%%     }                                                                    %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%     }                                                                    %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7867,7 +7867,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             %%%             =                                                            %! REDUNDANT_METRONOME_MARK:SM27
                             %%%             112                                                          %! REDUNDANT_METRONOME_MARK:SM27
                             %%%         }                                                                %! REDUNDANT_METRONOME_MARK:SM27
-                            %%%     }                                                                    %! REDUNDANT_METRONOME_MARK:SM27
+                            %%%     }                                                                    %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
