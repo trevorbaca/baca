@@ -76,29 +76,29 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                             \clef "treble"                                                           %! DEFAULT_CLEF:SM8
                             \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR:SM6
                             \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet)   %! DEFAULT_CLEF_COLOR:SM6
-                            %%% \override ViolinMusicStaff.Clef.color = ##f                          %! DEFAULT_CLEF_COLOR_CANCELLATION:SM7
+                        %F% \override ViolinMusicStaff.Clef.color = ##f                              %! DEFAULT_CLEF_COLOR_CANCELLATION:SM7
                             R1 * 1/2
                             ^ \markup {
                                 \column
                                     {
-                                        %%% \line                                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %%%     {                                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %%%         \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %%%             (Violin                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %%%         \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %%%             \hcenter-in                                  %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %%%                 #16                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %%%                 Violin                                   %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %%%         \concat                                          %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %%%             {                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %%%                 \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %%%                     \hcenter-in                          %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %%%                         #10                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %%%                         Vn.                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %%%                 \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %%%                     )                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %%%             }                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %%%     }                                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %F% \line                                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %F%     {                                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %F%         \vcenter                                             %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %F%             (Violin                                          %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %F%         \vcenter                                             %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %F%             \hcenter-in                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %F%                 #16                                          %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %F%                 Violin                                       %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %F%         \concat                                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %F%             {                                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %F%                 \vcenter                                     %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %F%                     \hcenter-in                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %F%                         #10                                  %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %F%                         Vn.                                  %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %F%                 \vcenter                                     %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %F%                     )                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %F%             }                                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %F%     }                                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
                                         \line                                                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                             {                                                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                                 \with-color                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11

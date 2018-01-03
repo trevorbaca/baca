@@ -1912,20 +1912,20 @@ class LibraryGM(abjad.AbjadObject):
                                 ^ \markup {
                                     \column
                                         {
-                                            %%% \line                                                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%     {                                                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%         \vcenter                                         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%             [MarginMarkup                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%         \vcenter                                         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%             Flute                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%         \concat                                          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%             {                                            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%                 \vcenter                                 %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%                     Fl.                                  %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%                 \vcenter                                 %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%                     ]                                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%             }                                            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            %%%     }                                                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                        %F% \line                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                        %F%     {                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                        %F%         \vcenter                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                        %F%             [MarginMarkup                                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                        %F%         \vcenter                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                        %F%             Flute                                            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                        %F%         \concat                                              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                        %F%             {                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                        %F%                 \vcenter                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                        %F%                     Fl.                                      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                        %F%                 \vcenter                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                        %F%                     ]                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                        %F%             }                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
+                                        %F%     }                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
                                             \line                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
                                                 {                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
                                                     \with-color                                          %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
