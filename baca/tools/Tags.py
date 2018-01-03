@@ -172,10 +172,11 @@ class Tags(abjad.Enumeration):
 
     @staticmethod
     def build(tag, build=None):
-        r'''Tags `tag` with `build` name or with SEGMENT.
+        r'''Tags `tag` with `build` name or ``'SEGMENT'``..
 
         Returns string.
         '''
         if build is not None:
-            return f'BUILD:{build.upper()}:{tag.name}'
-        return f'SEGMENT:{tag.name}'
+            return f'{build.upper()}_{tag.name}'
+        else:
+            return f'SEGMENT_{tag.name}'

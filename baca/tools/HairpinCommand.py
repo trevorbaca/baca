@@ -134,14 +134,6 @@ class HairpinCommand(Command):
         return self._stop
 
     @property
-    def site(self):
-        r'''Gets site.
-
-        Returns string or none.
-        '''
-        return self._site
-
-    @property
     def tag(self):
         r'''Gets tag.
 

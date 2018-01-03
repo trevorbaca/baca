@@ -928,23 +928,6 @@ class SegmentMaker(abjad.SegmentMaker):
             start_offset = abjad.inspect(rest).get_timespan().start_offset
             self._fermata_start_offsets.append(start_offset)
 
-    def _attach_score_template_defaults(self):
-        if not self.first_segment:
-            return
-        pairs = self.score_template.attach_defaults(self.score)
-        for leaf, indicator in pairs:
-            wrapper = abjad.inspect(leaf).wrapper(indicator)
-            assert wrapper is not None
-            assert getattr(wrapper.indicator, 'persistent', False)
-            context = wrapper._find_correct_effective_context()
-            self._categorize_persistent_indicator(
-                self.manifests,
-                context,
-                leaf, 
-                wrapper.indicator,
-                'default',
-                )
-
     @staticmethod
     def _attach_latent_indicator_alert(leaf, indicator, status, manifests):
         assert indicator.latent, repr(indicator)
@@ -1000,82 +983,6 @@ class SegmentMaker(abjad.SegmentMaker):
             skip = skips[start]
             spanner.attach(directive, skip, site='SM30')
 
-    @staticmethod
-    def _categorize_persistent_indicator(
-        manifests,
-        context,
-        leaf,
-        indicator,
-        status,
-        spanner=None,
-        ):
-        assert isinstance(context, abjad.Context), repr(context)
-        if status is None:
-            return
-        if SegmentMaker._is_trending(spanner, leaf):
-            status = 'explicit'
-        SegmentMaker._color_persistent_indicator(
-            context,
-            leaf,
-            indicator,
-            status,
-            )
-        if getattr(indicator, 'latent', False):
-            SegmentMaker._attach_latent_indicator_alert(
-                leaf,
-                indicator,
-                status,
-                manifests,
-                )
-        elif (getattr(indicator, 'redraw', False)
-            and not getattr(indicator, 'hide', False)):
-            SegmentMaker._color_persistent_indicator(
-                context,
-                leaf,
-                indicator,
-                status,
-                uncolor=True,
-                )
-        if isinstance(indicator, abjad.Clef):
-            string = rf'\set {context.headword}.forceClef = ##t'
-            literal = abjad.LilyPondLiteral(string)
-            SegmentMaker._tag_persistent_indicator(
-                context,
-                leaf,
-                literal,
-                status,
-                stem='CLEF',
-                )
-        abjad.detach(indicator, leaf)
-        SegmentMaker._tag_persistent_indicator(
-            context,
-            leaf,
-            indicator,
-            status,
-            spanner=spanner,
-            )
-        if (getattr(indicator, 'redraw', False)
-            and not getattr(indicator, 'hide', False)):
-            SegmentMaker._color_persistent_indicator(
-                context,
-                leaf,
-                indicator,
-                status,
-                redraw=True,
-                )
-            if isinstance(indicator, (abjad.Instrument, baca.MarginMarkup)):
-                strings = indicator._get_lilypond_format(context=context)
-                literal = abjad.LilyPondLiteral(strings, 'after')
-                stem = SegmentMaker._indicator_to_stem(indicator)
-                SegmentMaker._tag_persistent_indicator(
-                    context,
-                    leaf,
-                    literal,
-                    status,
-                    redraw=True,
-                    stem=stem,
-                    )
-
     def _attach_rehearsal_mark(self):
         if self.rehearsal_letter == '':
             return
@@ -1094,6 +1001,23 @@ class SegmentMaker(abjad.SegmentMaker):
             )
         skip = baca.select(self.score['GlobalSkips']).skip(0)
         abjad.attach(rehearsal_mark, skip, site='SM9')
+
+    def _attach_score_template_defaults(self):
+        if not self.first_segment:
+            return
+        pairs = self.score_template.attach_defaults(self.score)
+        for leaf, indicator in pairs:
+            wrapper = abjad.inspect(leaf).wrapper(indicator)
+            assert wrapper is not None
+            assert getattr(wrapper.indicator, 'persistent', False)
+            context = wrapper._find_correct_effective_context()
+            self._categorize_persistent_indicator(
+                self.manifests,
+                context,
+                leaf, 
+                wrapper.indicator,
+                'default',
+                )
 
     def _cache_break_offsets(self):
         prototype = abjad.LilyPondLiteral
@@ -1186,6 +1110,107 @@ class SegmentMaker(abjad.SegmentMaker):
             rhythms = self._intercalate_silences(rhythms)
             voice.extend(rhythms)
             self._apply_first_and_last_ties(voice)
+
+    @staticmethod
+    def _categorize_persistent_indicator(
+        manifests,
+        context,
+        leaf,
+        indicator,
+        status,
+        spanner=None,
+        ):
+        assert isinstance(context, abjad.Context), repr(context)
+        if status is None:
+            return
+        if SegmentMaker._is_trending(spanner, leaf):
+            status = 'explicit'
+        SegmentMaker._color_persistent_indicator(
+            context,
+            leaf,
+            indicator,
+            status,
+            )
+        if getattr(indicator, 'latent', False):
+            SegmentMaker._attach_latent_indicator_alert(
+                leaf,
+                indicator,
+                status,
+                manifests,
+                )
+        elif (getattr(indicator, 'redraw', False)
+            and not getattr(indicator, 'hide', False)):
+            SegmentMaker._color_persistent_indicator(
+                context,
+                leaf,
+                indicator,
+                status,
+                uncolor=True,
+                )
+        if isinstance(indicator, abjad.Clef):
+            string = rf'\set {context.headword}.forceClef = ##t'
+            literal = abjad.LilyPondLiteral(string)
+            SegmentMaker._tag_persistent_indicator(
+                context,
+                leaf,
+                literal,
+                status,
+                stem='CLEF',
+                )
+        abjad.detach(indicator, leaf)
+        SegmentMaker._tag_persistent_indicator(
+            context,
+            leaf,
+            indicator,
+            status,
+            spanner=spanner,
+            )
+        if (getattr(indicator, 'redraw', False)
+            and not getattr(indicator, 'hide', False)):
+            SegmentMaker._color_persistent_indicator(
+                context,
+                leaf,
+                indicator,
+                status,
+                redraw=True,
+                )
+            if isinstance(indicator, (abjad.Instrument, baca.MarginMarkup)):
+                strings = indicator._get_lilypond_format(context=context)
+                literal = abjad.LilyPondLiteral(strings, 'after')
+                stem = SegmentMaker._indicator_to_stem(indicator)
+                SegmentMaker._tag_persistent_indicator(
+                    context,
+                    leaf,
+                    literal,
+                    status,
+                    redraw=True,
+                    stem=stem,
+                    )
+
+    def _categorize_uncategorized_persistent_indicators(self):
+        for leaf in abjad.iterate(self.score).leaves():
+            for wrapper in  abjad.inspect(leaf).wrappers():
+                if not getattr(wrapper.indicator, 'persistent', False):
+                    continue
+                if wrapper.tag is not None:
+                    continue
+                previous_indicator = abjad.inspect(leaf).get_effective(
+                    type(wrapper.indicator),
+                    n=-1,
+                    )
+                if previous_indicator != wrapper.indicator:
+                    status = 'explicit'
+                else:
+                    status = 'redundant'
+                context = wrapper._find_correct_effective_context()
+                self._categorize_persistent_indicator(
+                    self.manifests,
+                    context,
+                    leaf,
+                    wrapper.indicator,
+                    status,
+                    spanner=wrapper.spanner,
+                    )
 
     def _check_design(self):
         if self.design_checker is None:
@@ -2164,31 +2189,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 tag=tag,
                 )
 
-    def _categorize_uncategorized_persistent_indicators(self):
-        for leaf in abjad.iterate(self.score).leaves():
-            for wrapper in  abjad.inspect(leaf).wrappers():
-                if not getattr(wrapper.indicator, 'persistent', False):
-                    continue
-                if wrapper.tag is not None:
-                    continue
-                previous_indicator = abjad.inspect(leaf).get_effective(
-                    type(wrapper.indicator),
-                    n=-1,
-                    )
-                if previous_indicator != wrapper.indicator:
-                    status = 'explicit'
-                else:
-                    status = 'redundant'
-                context = wrapper._find_correct_effective_context()
-                self._categorize_persistent_indicator(
-                    self.manifests,
-                    context,
-                    leaf,
-                    wrapper.indicator,
-                    status,
-                    spanner=wrapper.spanner,
-                    )
-
     def _transpose_score_(self):
         if not self.transpose_score:
             return
@@ -2282,8 +2282,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
@@ -2292,8 +2292,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT:LAYOUT:LMM3
                             #'((Y-offset . 20) (alignment-distances . (7)))                              %! SEGMENT:LAYOUT:LMM3
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -2370,8 +2370,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
@@ -2380,8 +2380,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT:LAYOUT:LMM3
                             #'((Y-offset . 20) (alignment-distances . (7)))                              %! SEGMENT:LAYOUT:LMM3
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -2468,8 +2468,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
@@ -2478,8 +2478,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT:LAYOUT:LMM3
                             #'((Y-offset . 20) (alignment-distances . (7)))                              %! SEGMENT:LAYOUT:LMM3
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -2565,8 +2565,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
@@ -2575,8 +2575,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT:LAYOUT:LMM3
                             #'((Y-offset . 20) (alignment-distances . (7)))                              %! SEGMENT:LAYOUT:LMM3
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -2654,16 +2654,16 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \noBreak                                                                     %! SEGMENT:LAYOUT:LMM2
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 3/8
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
@@ -2671,8 +2671,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT:LAYOUT:LMM3
                             #'((Y-offset . 20) (alignment-distances . (7)))                              %! SEGMENT:LAYOUT:LMM3
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -2768,8 +2768,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
@@ -2778,8 +2778,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT:LAYOUT:LMM3
                             #'((Y-offset . 20) (alignment-distances . (7)))                              %! SEGMENT:LAYOUT:LMM3
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -2865,8 +2865,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 6/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 31)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 31)             %! SEGMENT_SPACING:HSS1
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -2879,14 +2879,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                                         #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
                                                         [1]                                              %! STAGE_NUMBER_MARKUP:SM3
                                             }                                                            %! STAGE_NUMBER_MARKUP:SM3
-                                        \line                                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                            {                                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                                \with-color                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                                    #(x11-color 'DarkCyan)                               %! SEGMENT:SPACING_MARKUP:HSS2
-                                                    \fontsize                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                                        #-3                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                                        (1/31)                                           %! SEGMENT:SPACING_MARKUP:HSS2
-                                            }                                                            %! SEGMENT:SPACING_MARKUP:HSS2
+                                        \line                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                            {                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                                \with-color                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                                    #(x11-color 'DarkCyan)                               %! SEGMENT_SPACING_MARKUP:HSS2
+                                                    \fontsize                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                                        #-3                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                                        (1/31)                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                            }                                                            %! SEGMENT_SPACING_MARKUP:HSS2
                                     }
                                 }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -3255,8 +3255,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 1/16
                             ^ \markup {
                                 \column
@@ -3269,58 +3269,58 @@ class SegmentMaker(abjad.SegmentMaker):
                                                         #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
                                                         [1]                                              %! STAGE_NUMBER_MARKUP:SM3
                                             }                                                            %! STAGE_NUMBER_MARKUP:SM3
-                                        \line                                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                            {                                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                                \with-color                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                                    #(x11-color 'DarkCyan)                               %! SEGMENT:SPACING_MARKUP:HSS2
-                                                    \fontsize                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                                        #-3                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                                        (1/24)                                           %! SEGMENT:SPACING_MARKUP:HSS2
-                                            }                                                            %! SEGMENT:SPACING_MARKUP:HSS2
+                                        \line                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                            {                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                                \with-color                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                                    #(x11-color 'DarkCyan)                               %! SEGMENT_SPACING_MARKUP:HSS2
+                                                    \fontsize                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                                        #-3                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                                        (1/24)                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                            }                                                            %! SEGMENT_SPACING_MARKUP:HSS2
                                     }
                                 }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \time 7/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 7/16
-                            ^ \markup {                                                                  %! SEGMENT:SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SEGMENT:SPACING_MARKUP:HSS2
-                                    \fontsize                                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                        #-3                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                        (1/24)                                                           %! SEGMENT:SPACING_MARKUP:HSS2
-                                }                                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                            ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
+                                \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/24)                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
                             \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 1/16
-                            ^ \markup {                                                                  %! SEGMENT:SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SEGMENT:SPACING_MARKUP:HSS2
-                                    \fontsize                                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                        #-3                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                        (1/24)                                                           %! SEGMENT:SPACING_MARKUP:HSS2
-                                }                                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                            ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
+                                \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/24)                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 3/8
-                            ^ \markup {                                                                  %! SEGMENT:SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SEGMENT:SPACING_MARKUP:HSS2
-                                    \fontsize                                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                        #-3                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                        (1/24)                                                           %! SEGMENT:SPACING_MARKUP:HSS2
-                                }                                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                            ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
+                                \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/24)                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -3462,8 +3462,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 1/16
                             ^ \markup {
                                 \column
@@ -3476,58 +3476,58 @@ class SegmentMaker(abjad.SegmentMaker):
                                                         #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
                                                         [1]                                              %! STAGE_NUMBER_MARKUP:SM3
                                             }                                                            %! STAGE_NUMBER_MARKUP:SM3
-                                        \line                                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                            {                                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                                \with-color                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                                    #(x11-color 'DarkCyan)                               %! SEGMENT:SPACING_MARKUP:HSS2
-                                                    \fontsize                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                                        #-3                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                                        (1/24)                                           %! SEGMENT:SPACING_MARKUP:HSS2
-                                            }                                                            %! SEGMENT:SPACING_MARKUP:HSS2
+                                        \line                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                            {                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                                \with-color                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                                    #(x11-color 'DarkCyan)                               %! SEGMENT_SPACING_MARKUP:HSS2
+                                                    \fontsize                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                                        #-3                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                                        (1/24)                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                            }                                                            %! SEGMENT_SPACING_MARKUP:HSS2
                                     }
                                 }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \time 7/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 7/16
-                            ^ \markup {                                                                  %! SEGMENT:SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SEGMENT:SPACING_MARKUP:HSS2
-                                    \fontsize                                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                        #-3                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                        (1/24)                                                           %! SEGMENT:SPACING_MARKUP:HSS2
-                                }                                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                            ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
+                                \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/24)                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
                             \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 1/16
-                            ^ \markup {                                                                  %! SEGMENT:SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SEGMENT:SPACING_MARKUP:HSS2
-                                    \fontsize                                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                        #-3                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                        (1/24)                                                           %! SEGMENT:SPACING_MARKUP:HSS2
-                                }                                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                            ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
+                                \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/24)                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 3/8
-                            ^ \markup {                                                                  %! SEGMENT:SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SEGMENT:SPACING_MARKUP:HSS2
-                                    \fontsize                                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                        #-3                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                        (1/24)                                                           %! SEGMENT:SPACING_MARKUP:HSS2
-                                }                                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                            ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
+                                \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/24)                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -3694,8 +3694,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -4777,8 +4777,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 3/16
                             ^ \markup {
                                 \column
@@ -4791,55 +4791,55 @@ class SegmentMaker(abjad.SegmentMaker):
                                                         #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
                                                         [1]                                              %! STAGE_NUMBER_MARKUP:SM3
                                             }                                                            %! STAGE_NUMBER_MARKUP:SM3
-                                        \line                                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                            {                                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                                \with-color                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                                    #(x11-color 'DarkCyan)                               %! SEGMENT:SPACING_MARKUP:HSS2
-                                                    \fontsize                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                                        #-3                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                                        (1/24)                                           %! SEGMENT:SPACING_MARKUP:HSS2
-                                            }                                                            %! SEGMENT:SPACING_MARKUP:HSS2
+                                        \line                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                            {                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                                \with-color                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                                    #(x11-color 'DarkCyan)                               %! SEGMENT_SPACING_MARKUP:HSS2
+                                                    \fontsize                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                                        #-3                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                                        (1/24)                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                            }                                                            %! SEGMENT_SPACING_MARKUP:HSS2
                                     }
                                 }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 3/16
-                            ^ \markup {                                                                  %! SEGMENT:SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SEGMENT:SPACING_MARKUP:HSS2
-                                    \fontsize                                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                        #-3                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                        (1/24)                                                           %! SEGMENT:SPACING_MARKUP:HSS2
-                                }                                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                            ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
+                                \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/24)                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 3/16
-                            ^ \markup {                                                                  %! SEGMENT:SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SEGMENT:SPACING_MARKUP:HSS2
-                                    \fontsize                                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                        #-3                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                        (1/24)                                                           %! SEGMENT:SPACING_MARKUP:HSS2
-                                }                                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                            ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
+                                \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/24)                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                                    %! SM4
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 3/16
-                            ^ \markup {                                                                  %! SEGMENT:SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SEGMENT:SPACING_MARKUP:HSS2
-                                    \fontsize                                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                        #-3                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                        (1/24)                                                           %! SEGMENT:SPACING_MARKUP:HSS2
-                                }                                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                            ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
+                                \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/24)                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -4978,8 +4978,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 3/16
                             ^ \markup {
                                 \column
@@ -4992,55 +4992,55 @@ class SegmentMaker(abjad.SegmentMaker):
                                                         #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
                                                         [1]                                              %! STAGE_NUMBER_MARKUP:SM3
                                             }                                                            %! STAGE_NUMBER_MARKUP:SM3
-                                        \line                                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                            {                                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                                \with-color                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                                    #(x11-color 'DarkCyan)                               %! SEGMENT:SPACING_MARKUP:HSS2
-                                                    \fontsize                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                                        #-3                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                                        (1/24)                                           %! SEGMENT:SPACING_MARKUP:HSS2
-                                            }                                                            %! SEGMENT:SPACING_MARKUP:HSS2
+                                        \line                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                            {                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                                \with-color                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                                    #(x11-color 'DarkCyan)                               %! SEGMENT_SPACING_MARKUP:HSS2
+                                                    \fontsize                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                                        #-3                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                                        (1/24)                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                            }                                                            %! SEGMENT_SPACING_MARKUP:HSS2
                                     }
                                 }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 3/16
-                            ^ \markup {                                                                  %! SEGMENT:SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SEGMENT:SPACING_MARKUP:HSS2
-                                    \fontsize                                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                        #-3                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                        (1/24)                                                           %! SEGMENT:SPACING_MARKUP:HSS2
-                                }                                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                            ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
+                                \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/24)                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 3/16
-                            ^ \markup {                                                                  %! SEGMENT:SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SEGMENT:SPACING_MARKUP:HSS2
-                                    \fontsize                                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                        #-3                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                        (1/24)                                                           %! SEGMENT:SPACING_MARKUP:HSS2
-                                }                                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                            ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
+                                \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/24)                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                                    %! SM4
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 3/16
-                            ^ \markup {                                                                  %! SEGMENT:SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SEGMENT:SPACING_MARKUP:HSS2
-                                    \fontsize                                                            %! SEGMENT:SPACING_MARKUP:HSS2
-                                        #-3                                                              %! SEGMENT:SPACING_MARKUP:HSS2
-                                        (1/24)                                                           %! SEGMENT:SPACING_MARKUP:HSS2
-                                }                                                                        %! SEGMENT:SPACING_MARKUP:HSS2
+                            ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
+                                \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/24)                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -5280,8 +5280,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
@@ -5290,8 +5290,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT:LAYOUT:LMM3
                             #'((Y-offset . 20) (alignment-distances . (11)))                             %! SEGMENT:LAYOUT:LMM3
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -5405,8 +5405,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
@@ -5415,8 +5415,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT:LAYOUT:LMM3
                             #'((Y-offset . 20) (alignment-distances . (11)))                             %! SEGMENT:LAYOUT:LMM3
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -5540,8 +5540,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
@@ -5550,8 +5550,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT:LAYOUT:LMM3
                             #'((Y-offset . 25) (alignment-distances . (11)))                             %! SEGMENT:LAYOUT:LMM3
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -5670,8 +5670,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
@@ -5680,8 +5680,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT:LAYOUT:LMM3
                             #'((Y-offset . 25) (alignment-distances . (11)))                             %! SEGMENT:LAYOUT:LMM3
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -5799,16 +5799,16 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT:LAYOUT:LMM3
                             s1 * 1/2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \noBreak                                                                     %! SEGMENT:LAYOUT:LMM2
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 1/2
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
@@ -5816,8 +5816,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT:LAYOUT:LMM3
                             #'((Y-offset . 20) (alignment-distances . (11)))                             %! SEGMENT:LAYOUT:LMM3
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT:LAYOUT:LMM3
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -5987,8 +5987,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
@@ -5997,8 +5997,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT:LAYOUT:LMM3
                             #'((Y-offset . 20) (alignment-distances . (11)))                             %! SEGMENT:LAYOUT:LMM3
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -6176,8 +6176,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
@@ -6186,8 +6186,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT:LAYOUT:LMM3
                             #'((Y-offset . 20) (alignment-distances . (11)))                             %! SEGMENT:LAYOUT:LMM3
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -6295,8 +6295,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
@@ -6305,8 +6305,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT:LAYOUT:LMM3
                             #'((Y-offset . 20) (alignment-distances . (11)))                             %! SEGMENT:LAYOUT:LMM3
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -6424,8 +6424,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
@@ -6434,8 +6434,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT:LAYOUT:LMM3
                             #'((Y-offset . 20) (alignment-distances . (11)))                             %! SEGMENT:LAYOUT:LMM3
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -6554,8 +6554,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
@@ -6564,8 +6564,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT:LAYOUT:LMM3
                             #'((Y-offset . 20) (alignment-distances . (11)))                             %! SEGMENT:LAYOUT:LMM3
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -6683,16 +6683,16 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT:LAYOUT:LMM3
                             s1 * 1/2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \noBreak                                                                     %! SEGMENT:LAYOUT:LMM2
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 1/2
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
@@ -6700,8 +6700,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT:LAYOUT:LMM3
                             #'((Y-offset . 20) (alignment-distances . (11)))                             %! SEGMENT:LAYOUT:LMM3
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT:LAYOUT:LMM3
                             s1 * 1/2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -6871,8 +6871,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                 <BLANKLINE>
@@ -6881,8 +6881,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT:LAYOUT:LMM3
                             #'((Y-offset . 20) (alignment-distances . (11)))                             %! SEGMENT:LAYOUT:LMM3
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -7347,8 +7347,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             #'((Y-offset . 0) (alignment-distances . (8)))                               %! SEGMENT:LAYOUT:LMM3
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                         %F% ^ \markup {                                                                  %! EXPLICIT_METRONOME_MARK:SM27                %! SM29
@@ -7458,8 +7458,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                         %F% ^ \markup {                                                                  %! EXPLICIT_METRONOME_MARK:SM27                %! SM29
@@ -7567,8 +7567,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                         %F% ^ \markup {                                                                  %! REAPPLIED_METRONOME_MARK:SM27                %! SM29
@@ -7669,8 +7669,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             #'((Y-offset . 0) (alignment-distances . (8)))                               %! SEGMENT:LAYOUT:LMM3
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                         %F% ^ \markup {                                                                  %! EXPLICIT_METRONOME_MARK:SM27                %! SM29
@@ -7713,8 +7713,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \noBreak                                                                     %! SEGMENT:LAYOUT:LMM2
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 3/8
                         %F% ^ \markup {                                                                  %! REDUNDANT_METRONOME_MARK:SM27                %! SM29
                         %F%     \fontsize                                                                %! REDUNDANT_METRONOME_MARK:SM27                %! SM29
@@ -7826,8 +7826,8 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                         %F% ^ \markup {                                                                  %! REDUNDANT_METRONOME_MARK:SM27                %! SM29
