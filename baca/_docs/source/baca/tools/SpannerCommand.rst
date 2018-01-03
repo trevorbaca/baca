@@ -24,7 +24,9 @@ Bases
    .. autosummary::
 
       ~baca.tools.SpannerCommand.SpannerCommand.selector
+      ~baca.tools.SpannerCommand.SpannerCommand.site
       ~baca.tools.SpannerCommand.SpannerCommand.spanner
+      ~baca.tools.SpannerCommand.SpannerCommand.tag
       ~baca.tools.SpannerCommand.SpannerCommand.__call__
       ~baca.tools.SpannerCommand.SpannerCommand.__eq__
       ~baca.tools.SpannerCommand.SpannerCommand.__format__
@@ -36,7 +38,11 @@ Read-only properties
 
 .. autoattribute:: baca.tools.SpannerCommand.SpannerCommand.selector
 
+.. autoattribute:: baca.tools.SpannerCommand.SpannerCommand.site
+
 .. autoattribute:: baca.tools.SpannerCommand.SpannerCommand.spanner
+
+.. autoattribute:: baca.tools.SpannerCommand.SpannerCommand.tag
 
 Special methods
 ---------------

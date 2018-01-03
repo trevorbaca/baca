@@ -4856,7 +4856,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % MusicVoice [measure 2]                                         %! SM4
                                         \acciaccatura {
                 <BLANKLINE>
-                                            fs'16 [
+                                            fs'16 [                                                      %! ACC1
                 <BLANKLINE>
                                             d'16
                 <BLANKLINE>
@@ -4866,7 +4866,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                             a'16
                 <BLANKLINE>
-                                            af'16 ]
+                                            af'16 ]                                                      %! ACC1
                 <BLANKLINE>
                                         }
                                         c'8.
@@ -4885,7 +4885,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % MusicVoice [measure 4]                                         %! SM4
                                         \acciaccatura {
                 <BLANKLINE>
-                                            bf'16 [
+                                            bf'16 [                                                      %! ACC1
                 <BLANKLINE>
                                             g'16
                 <BLANKLINE>
@@ -4893,7 +4893,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                             af'16
                 <BLANKLINE>
-                                            c'16 ]
+                                            c'16 ]                                                       %! ACC1
                 <BLANKLINE>
                                         }
                                         f'8.
@@ -5069,7 +5069,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \once \override Flag.color = #magenta                        %! SM25
                                             \once \override NoteHead.color = #magenta                    %! SM25
                                             \once \override Stem.color = #magenta                        %! SM25
-                                            fs'16 [
+                                            fs'16 [                                                      %! ACC1
                 <BLANKLINE>
                                             \once \override Accidental.color = #magenta                  %! SM25
                                             \once \override Beam.color = #magenta                        %! SM25
@@ -5109,7 +5109,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \once \override Flag.color = #magenta                        %! SM25
                                             \once \override NoteHead.color = #magenta                    %! SM25
                                             \once \override Stem.color = #magenta                        %! SM25
-                                            af'16 ]
+                                            af'16 ]                                                      %! ACC1
                 <BLANKLINE>
                                         }
                                         \once \override Accidental.color = #magenta                      %! SM25
@@ -5146,7 +5146,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \once \override Flag.color = #magenta                        %! SM25
                                             \once \override NoteHead.color = #magenta                    %! SM25
                                             \once \override Stem.color = #magenta                        %! SM25
-                                            bf'16 [
+                                            bf'16 [                                                      %! ACC1
                 <BLANKLINE>
                                             \once \override Accidental.color = #magenta                  %! SM25
                                             \once \override Beam.color = #magenta                        %! SM25
@@ -5178,7 +5178,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \once \override Flag.color = #magenta                        %! SM25
                                             \once \override NoteHead.color = #magenta                    %! SM25
                                             \once \override Stem.color = #magenta                        %! SM25
-                                            c'16 ]
+                                            c'16 ]                                                       %! ACC1
                 <BLANKLINE>
                                         }
                                         \once \override Accidental.color = #magenta                      %! SM25

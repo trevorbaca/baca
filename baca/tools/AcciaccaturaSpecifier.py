@@ -53,35 +53,35 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                     }
                     {
                         \acciaccatura {
-                            fs''16 [
-                            e''16 ]
+                            fs''16 [                                                                 %! ACC1
+                            e''16 ]                                                                  %! ACC1
                         }
                         ef''8
                     }
                     {
                         \acciaccatura {
-                            af''16 [
+                            af''16 [                                                                 %! ACC1
                             g''16
-                            a'16 ]
+                            a'16 ]                                                                   %! ACC1
                         }
                         c'8
                     }
                     {
                         \acciaccatura {
-                            d'16 [
+                            d'16 [                                                                   %! ACC1
                             bf'16
                             fs''16
-                            e''16 ]
+                            e''16 ]                                                                  %! ACC1
                         }
                         ef''8
                     }
                     {
                         \acciaccatura {
-                            af''16 [
+                            af''16 [                                                                 %! ACC1
                             g''16
                             a'16
                             c'16
-                            d'16 ]
+                            d'16 ]                                                                   %! ACC1
                         }
                         bf'8
                     }
@@ -218,35 +218,35 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         {
                             \acciaccatura {
-                                fs''16 [
-                                e''16 ]
+                                fs''16 [                                                                 %! ACC1
+                                e''16 ]                                                                  %! ACC1
                             }
                             ef''8
                         }
                         {
                             \acciaccatura {
-                                af''16 [
+                                af''16 [                                                                 %! ACC1
                                 g''16
-                                a'16 ]
+                                a'16 ]                                                                   %! ACC1
                             }
                             c'8
                         }
                         {
                             \acciaccatura {
-                                d'16 [
+                                d'16 [                                                                   %! ACC1
                                 bf'16
                                 fs''16
-                                e''16 ]
+                                e''16 ]                                                                  %! ACC1
                             }
                             ef''8
                         }
                         {
                             \acciaccatura {
-                                af''16 [
+                                af''16 [                                                                 %! ACC1
                                 g''16
                                 a'16
                                 c'16
-                                d'16 ]
+                                d'16 ]                                                                   %! ACC1
                             }
                             bf'8
                         }
@@ -301,35 +301,35 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         {
                             \acciaccatura {
-                                fs''8 [
-                                e''8 ]
+                                fs''8 [                                                                  %! ACC1
+                                e''8 ]                                                                   %! ACC1
                             }
                             ef''8
                         }
                         {
                             \acciaccatura {
-                                af''8 [
+                                af''8 [                                                                  %! ACC1
                                 g''8
-                                a'8 ]
+                                a'8 ]                                                                    %! ACC1
                             }
                             c'8
                         }
                         {
                             \acciaccatura {
-                                d'8 [
+                                d'8 [                                                                    %! ACC1
                                 bf'8
                                 fs''8
-                                e''8 ]
+                                e''8 ]                                                                   %! ACC1
                             }
                             ef''8
                         }
                         {
                             \acciaccatura {
-                                af''8 [
+                                af''8 [                                                                  %! ACC1
                                 g''8
                                 a'8
                                 c'8
-                                d'8 ]
+                                d'8 ]                                                                    %! ACC1
                             }
                             bf'8
                         }
@@ -394,35 +394,35 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         {
                             \acciaccatura {
-                                fs''16 [
-                                e''16 ]
+                                fs''16 [                                                                 %! ACC1
+                                e''16 ]                                                                  %! ACC1
                             }
                             ef''8
                         }
                         {
                             \acciaccatura {
-                                af''16 [
+                                af''16 [                                                                 %! ACC1
                                 g''16
-                                a'16 ]
+                                a'16 ]                                                                   %! ACC1
                             }
                             c'8
                         }
                         {
                             \acciaccatura {
-                                d'16 [
+                                d'16 [                                                                   %! ACC1
                                 bf'16
                                 fs''16
-                                e''16 ]
+                                e''16 ]                                                                  %! ACC1
                             }
                             ef''8
                         }
                         {
                             \acciaccatura {
-                                af''16 [
+                                af''16 [                                                                 %! ACC1
                                 g''16
                                 a'16
                                 c'16
-                                d'16 ]
+                                d'16 ]                                                                   %! ACC1
                             }
                             bf'8
                         }
@@ -482,15 +482,15 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         {
                             \acciaccatura {
-                                fs''16 [
-                                e''16 ]
+                                fs''16 [                                                                 %! ACC1
+                                e''16 ]                                                                  %! ACC1
                             }
                             ef''8
                         }
                         {
                             \acciaccatura {
-                                af''16 [
-                                g''16 ]
+                                af''16 [                                                                 %! ACC1
+                                g''16 ]                                                                  %! ACC1
                             }
                             a'8
                             [
@@ -499,8 +499,8 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         {
                             \acciaccatura {
-                                d'16 [
-                                bf'16 ]
+                                d'16 [                                                                   %! ACC1
+                                bf'16 ]                                                                  %! ACC1
                             }
                             fs''8
                             [
@@ -510,8 +510,8 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         {
                             \acciaccatura {
-                                af''16 [
-                                g''16 ]
+                                af''16 [                                                                 %! ACC1
+                                g''16 ]                                                                  %! ACC1
                             }
                             a'8
                             [
@@ -575,8 +575,8 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         {
                             \acciaccatura {
-                                fs''16 [
-                                e''16 ]
+                                fs''16 [                                                                 %! ACC1
+                                e''16 ]                                                                  %! ACC1
                             }
                             ef''8
                         }
@@ -584,8 +584,8 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             af''8
                             [
                             \acciaccatura {
-                                g''16 [
-                                a'16 ]
+                                g''16 [                                                                  %! ACC1
+                                a'16 ]                                                                   %! ACC1
                             }
                             c'8
                             ]
@@ -595,8 +595,8 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             [
                             bf'8
                             \acciaccatura {
-                                fs''16 [
-                                e''16 ]
+                                fs''16 [                                                                 %! ACC1
+                                e''16 ]                                                                  %! ACC1
                             }
                             ef''8
                             ]
@@ -607,8 +607,8 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             g''8
                             a'8
                             \acciaccatura {
-                                c'16 [
-                                d'16 ]
+                                c'16 [                                                                   %! ACC1
+                                d'16 ]                                                                   %! ACC1
                             }
                             bf'8
                             ]
@@ -670,15 +670,15 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         {
                             \acciaccatura {
-                                fs''16 [
-                                e''16 ]
+                                fs''16 [                                                                 %! ACC1
+                                e''16 ]                                                                  %! ACC1
                             }
                             ef''8
                         }
                         {
                             \acciaccatura {
-                                af''16 [
-                                g''16 ]
+                                af''16 [                                                                 %! ACC1
+                                g''16 ]                                                                  %! ACC1
                             }
                             a'8
                             [
@@ -687,8 +687,8 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         {
                             \acciaccatura {
-                                d'16 [
-                                bf'16 ]
+                                d'16 [                                                                   %! ACC1
+                                bf'16 ]                                                                  %! ACC1
                             }
                             fs''8
                             [
@@ -700,14 +700,14 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         {
                             \acciaccatura {
-                                af''16 [
-                                g''16 ]
+                                af''16 [                                                                 %! ACC1
+                                g''16 ]                                                                  %! ACC1
                             }
                             a'8
                             [
                             \acciaccatura {
-                                c'16 [
-                                d'16 ]
+                                c'16 [                                                                   %! ACC1
+                                d'16 ]                                                                   %! ACC1
                             }
                             bf'8
                             ]
@@ -776,8 +776,8 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             af''8
                             [
                             \acciaccatura {
-                                g''16 [
-                                a'16 ]
+                                g''16 [                                                                  %! ACC1
+                                a'16 ]                                                                   %! ACC1
                             }
                             c'8
                             ]
@@ -786,9 +786,9 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             d'8
                             [
                             \acciaccatura {
-                                bf'16 [
+                                bf'16 [                                                                  %! ACC1
                                 fs''16
-                                e''16 ]
+                                e''16 ]                                                                  %! ACC1
                             }
                             ef''8
                             ]
@@ -797,10 +797,10 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             af''8
                             [
                             \acciaccatura {
-                                g''16 [
+                                g''16 [                                                                  %! ACC1
                                 a'16
                                 c'16
-                                d'16 ]
+                                d'16 ]                                                                   %! ACC1
                             }
                             bf'8
                             ]
@@ -866,35 +866,35 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         {
                             \acciaccatura {
-                                fs''16 [
-                                e''16 ]
+                                fs''16 [                                                                 %! ACC1
+                                e''16 ]                                                                  %! ACC1
                             }
                             ef''8
                         }
                         {
                             \acciaccatura {
-                                af''16 [
+                                af''16 [                                                                 %! ACC1
                                 g''16
-                                a'16 ]
+                                a'16 ]                                                                   %! ACC1
                             }
                             c'8
                         }
                         {
                             \acciaccatura {
-                                d'16 [
+                                d'16 [                                                                   %! ACC1
                                 bf'16
                                 fs''16
-                                e''16 ]
+                                e''16 ]                                                                  %! ACC1
                             }
                             ef''8
                         }
                         {
                             \acciaccatura {
-                                af''16 [
+                                af''16 [                                                                 %! ACC1
                                 g''16
                                 a'16
                                 c'16
-                                d'16 ]
+                                d'16 ]                                                                   %! ACC1
                             }
                             bf'8
                         }
@@ -973,11 +973,11 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         {
                             \acciaccatura {
-                                af''16 [
+                                af''16 [                                                                 %! ACC1
                                 g''16
                                 a'16
                                 c'16
-                                d'16 ]
+                                d'16 ]                                                                   %! ACC1
                             }
                             bf'8
                         }
@@ -1039,9 +1039,9 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         {
                             \acciaccatura {
-                                af''16 [
+                                af''16 [                                                                 %! ACC1
                                 g''16
-                                a'16 ]
+                                a'16 ]                                                                   %! ACC1
                             }
                             c'8
                         }
@@ -1056,11 +1056,11 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         {
                             \acciaccatura {
-                                af''16 [
+                                af''16 [                                                                 %! ACC1
                                 g''16
                                 a'16
                                 c'16
-                                d'16 ]
+                                d'16 ]                                                                   %! ACC1
                             }
                             bf'8
                         }

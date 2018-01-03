@@ -272,7 +272,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5                               %! OC
                                 r8
-                                \ottava #1
+                                \ottava #1                                                               %! SC
                                 c'16
                                 [
                                 d'16
@@ -299,7 +299,7 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \times 4/5 {
                                 a'16
-                                \ottava #0
+                                \ottava #0                                                               %! SC
                                 r4
                                 \revert TupletBracket.staff-padding                                      %! OC
                             }
@@ -345,7 +345,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5                               %! OC
                                 r8
-                                \ottava #-1
+                                \ottava #-1                                                              %! SC
                                 c'16
                                 [
                                 d'16
@@ -372,7 +372,7 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \times 4/5 {
                                 a'16
-                                \ottava #0
+                                \ottava #0                                                               %! SC
                                 r4
                                 \revert TupletBracket.staff-padding                                      %! OC
                             }
@@ -1350,11 +1350,11 @@ class LibraryNS(abjad.AbjadObject):
                                 b'16
                                 [
                                 b'16
-                                \repeatTie
+                                \repeatTie                                                               %! SC
                                 ]
                                 c''4
                                 c''16
-                                \repeatTie
+                                \repeatTie                                                               %! SC
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
@@ -1362,12 +1362,12 @@ class LibraryNS(abjad.AbjadObject):
                                 b'16
                                 [
                                 b'16
-                                \repeatTie
+                                \repeatTie                                                               %! SC
                                 ]
                                 b'4
-                                \repeatTie
+                                \repeatTie                                                               %! SC
                                 b'16
-                                \repeatTie
+                                \repeatTie                                                               %! SC
                                 r16
                             }
                             \times 4/5 {
@@ -1415,11 +1415,11 @@ class LibraryNS(abjad.AbjadObject):
                                 b'16
                                 [
                                 b'16
-                                \repeatTie
+                                \repeatTie                                                               %! SC
                                 ]
                                 c''4
                                 c''16
-                                \repeatTie
+                                \repeatTie                                                               %! SC
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
@@ -1428,12 +1428,12 @@ class LibraryNS(abjad.AbjadObject):
                                 b'16
                                 [
                                 b'16
-                                \repeatTie
+                                \repeatTie                                                               %! SC
                                 ]
                                 b'4
-                                \repeatTie
+                                \repeatTie                                                               %! SC
                                 b'16
-                                \repeatTie
+                                \repeatTie                                                               %! SC
                                 \revert RepeatTie.direction                                              %! OC
                                 r16
                             }
@@ -1494,11 +1494,11 @@ class LibraryNS(abjad.AbjadObject):
                                 b'16
                                 [
                                 b'16
-                                \repeatTie
+                                \repeatTie                                                               %! SC
                                 ]
                                 c''4
                                 c''16
-                                \repeatTie
+                                \repeatTie                                                               %! SC
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
@@ -1506,12 +1506,12 @@ class LibraryNS(abjad.AbjadObject):
                                 b'16
                                 [
                                 b'16
-                                \repeatTie
+                                \repeatTie                                                               %! SC
                                 ]
                                 b'4
-                                \repeatTie
+                                \repeatTie                                                               %! SC
                                 b'16
-                                \repeatTie
+                                \repeatTie                                                               %! SC
                                 r16
                             }
                             \times 4/5 {
@@ -1559,11 +1559,11 @@ class LibraryNS(abjad.AbjadObject):
                                 b'16
                                 [
                                 b'16
-                                \repeatTie
+                                \repeatTie                                                               %! SC
                                 ]
                                 c''4
                                 c''16
-                                \repeatTie
+                                \repeatTie                                                               %! SC
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
@@ -1572,12 +1572,12 @@ class LibraryNS(abjad.AbjadObject):
                                 b'16
                                 [
                                 b'16
-                                \repeatTie
+                                \repeatTie                                                               %! SC
                                 ]
                                 b'4
-                                \repeatTie
+                                \repeatTie                                                               %! SC
                                 b'16
-                                \repeatTie
+                                \repeatTie                                                               %! SC
                                 \revert RepeatTie.direction                                              %! OC
                                 r16
                             }
@@ -3493,7 +3493,7 @@ class LibraryNS(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                (
+                                (                                                                        %! SC
                                 d'16
                                 ]
                                 bf'4
@@ -3518,7 +3518,7 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \times 4/5 {
                                 a'16
-                                )
+                                )                                                                        %! SC
                                 r4
                                 \revert Slur.direction                                                   %! OC
                                 \revert TupletBracket.staff-padding                                      %! OC
@@ -3570,7 +3570,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 9/10 {
                                 fs''16
                                 [
-                                (
+                                (                                                                        %! SC
                                 e''16
                                 ]
                                 ef''4
@@ -3581,7 +3581,7 @@ class LibraryNS(abjad.AbjadObject):
                                 [
                                 g''16
                                 ]
-                                )
+                                )                                                                        %! SC
                             }
                             \times 4/5 {
                                 a'16
@@ -3638,20 +3638,20 @@ class LibraryNS(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                (
+                                (                                                                        %! SC
                                 d'16
                                 ]
                                 bf'4
                                 ~
                                 bf'16
-                                )
+                                )                                                                        %! SC
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
                                 [
-                                (
+                                (                                                                        %! SC
                                 e''16
                                 ]
                                 ef''4
@@ -3662,7 +3662,7 @@ class LibraryNS(abjad.AbjadObject):
                                 [
                                 g''16
                                 ]
-                                )
+                                )                                                                        %! SC
                             }
                             \times 4/5 {
                                 a'16
@@ -3708,13 +3708,13 @@ class LibraryNS(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                (
+                                (                                                                        %! SC
                                 d'16
                                 ]
                                 bf'4
                                 ~
                                 bf'16
-                                )
+                                )                                                                        %! SC
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
@@ -3722,7 +3722,7 @@ class LibraryNS(abjad.AbjadObject):
                                 \override Slur.direction = #down                                         %! OC
                                 fs''16
                                 [
-                                (
+                                (                                                                        %! SC
                                 e''16
                                 ]
                                 ef''4
@@ -3733,7 +3733,7 @@ class LibraryNS(abjad.AbjadObject):
                                 [
                                 g''16
                                 ]
-                                )
+                                )                                                                        %! SC
                                 \revert Slur.direction                                                   %! OC
                             }
                             \times 4/5 {
@@ -3796,20 +3796,20 @@ class LibraryNS(abjad.AbjadObject):
                                 \override Stem.direction = #down                                         %! OC
                                 c'16
                                 [
-                                (
+                                (                                                                        %! SC
                                 d'16
                                 ]
                                 bf'4
                                 ~
                                 bf'16
-                                )
+                                )                                                                        %! SC
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
                                 [
-                                (
+                                (                                                                        %! SC
                                 e''16
                                 ]
                                 ef''4
@@ -3820,7 +3820,7 @@ class LibraryNS(abjad.AbjadObject):
                                 [
                                 g''16
                                 ]
-                                )
+                                )                                                                        %! SC
                             }
                             \times 4/5 {
                                 a'16
@@ -3872,13 +3872,13 @@ class LibraryNS(abjad.AbjadObject):
                                 \override Stem.direction = #down                                         %! OC
                                 c'16
                                 [
-                                (
+                                (                                                                        %! SC
                                 d'16
                                 ]
                                 bf'4
                                 ~
                                 bf'16
-                                )
+                                )                                                                        %! SC
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
@@ -3886,7 +3886,7 @@ class LibraryNS(abjad.AbjadObject):
                                 \override Slur.direction = #up                                           %! OC
                                 fs''16
                                 [
-                                (
+                                (                                                                        %! SC
                                 e''16
                                 ]
                                 ef''4
@@ -3897,7 +3897,7 @@ class LibraryNS(abjad.AbjadObject):
                                 [
                                 g''16
                                 ]
-                                )
+                                )                                                                        %! SC
                                 \revert Slur.direction                                                   %! OC
                             }
                             \times 4/5 {
@@ -5343,9 +5343,9 @@ class LibraryNS(abjad.AbjadObject):
                             \times 9/10 {
                                 \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC
                                 \override TupletBracket.staff-padding = #5                               %! OC
-                                \set Staff.pedalSustainStyle = #'bracket
+                                \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 r8
-                                \sustainOn
+                                \sustainOn                                                               %! SC
                                 c'16
                                 [
                                 d'16
@@ -5373,7 +5373,7 @@ class LibraryNS(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \sustainOff
+                                \sustainOff                                                              %! SC
                                 \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC
                                 \revert TupletBracket.staff-padding                                      %! OC
                             }
@@ -5422,10 +5422,10 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \set Staff.pedalSustainStyle = #'bracket
+                                \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 fs''16
                                 [
-                                \sustainOn
+                                \sustainOn                                                               %! SC
                                 e''16
                                 ]
                                 ef''4
@@ -5436,7 +5436,7 @@ class LibraryNS(abjad.AbjadObject):
                                 [
                                 g''16
                                 ]
-                                \sustainOff
+                                \sustainOff                                                              %! SC
                             }
                             \times 4/5 {
                                 a'16
@@ -5488,9 +5488,9 @@ class LibraryNS(abjad.AbjadObject):
                                 bf'4
                                 ~
                                 bf'16
-                                \set Staff.pedalSustainStyle = #'bracket
+                                \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 r16
-                                \sustainOn
+                                \sustainOn                                                               %! SC
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
@@ -5506,7 +5506,7 @@ class LibraryNS(abjad.AbjadObject):
                                 [
                                 g''16
                                 ]
-                                \sustainOff
+                                \sustainOff                                                              %! SC
                             }
                             \times 4/5 {
                                 a'16
@@ -5562,10 +5562,10 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \set Staff.pedalSustainStyle = #'bracket
+                                \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 fs''16
                                 [
-                                \sustainOn
+                                \sustainOn                                                               %! SC
                                 e''16
                                 ]
                                 ef''4
@@ -5579,7 +5579,7 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \times 4/5 {
                                 a'16
-                                \sustainOff
+                                \sustainOff                                                              %! SC
                                 r4
                                 \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC
                                 \revert TupletBracket.staff-padding                                      %! OC
@@ -5628,9 +5628,9 @@ class LibraryNS(abjad.AbjadObject):
                                 bf'4
                                 ~
                                 bf'16
-                                \set Staff.pedalSustainStyle = #'bracket
+                                \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 r16
-                                \sustainOn
+                                \sustainOn                                                               %! SC
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
@@ -5649,7 +5649,7 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \times 4/5 {
                                 a'16
-                                \sustainOff
+                                \sustainOff                                                              %! SC
                                 r4
                                 \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC
                                 \revert TupletBracket.staff-padding                                      %! OC
@@ -5687,9 +5687,9 @@ class LibraryNS(abjad.AbjadObject):
                             \times 9/10 {
                                 \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC
                                 \override TupletBracket.staff-padding = #5                               %! OC
-                                \set Staff.pedalSustainStyle = #'bracket
+                                \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 r8
-                                \sustainOn
+                                \sustainOn                                                               %! SC
                                 c'16
                                 [
                                 d'16
@@ -5698,14 +5698,14 @@ class LibraryNS(abjad.AbjadObject):
                                 ~
                                 bf'16
                                 r16
-                                \sustainOff
+                                \sustainOff                                                              %! SC
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \set Staff.pedalSustainStyle = #'bracket
+                                \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 fs''16
                                 [
-                                \sustainOn
+                                \sustainOn                                                               %! SC
                                 e''16
                                 ]
                                 ef''4
@@ -5716,14 +5716,14 @@ class LibraryNS(abjad.AbjadObject):
                                 [
                                 g''16
                                 ]
-                                \sustainOff
+                                \sustainOff                                                              %! SC
                             }
                             \times 4/5 {
-                                \set Staff.pedalSustainStyle = #'bracket
+                                \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 a'16
-                                \sustainOn
+                                \sustainOn                                                               %! SC
                                 r4
-                                \sustainOff
+                                \sustainOff                                                              %! SC
                                 \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC
                                 \revert TupletBracket.staff-padding                                      %! OC
                             }
@@ -5763,9 +5763,9 @@ class LibraryNS(abjad.AbjadObject):
                             \times 9/10 {
                                 \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC
                                 \override TupletBracket.staff-padding = #5                               %! OC
-                                \set Staff.pedalSustainStyle = #'bracket
+                                \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 r8
-                                \sustainOn
+                                \sustainOn                                                               %! SC
                                 c'16
                                 [
                                 d'16
@@ -5773,10 +5773,10 @@ class LibraryNS(abjad.AbjadObject):
                                 bf'4
                                 ~
                                 bf'16
-                                \set Staff.pedalSustainStyle = #'bracket
+                                \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 r16
-                                \sustainOff
-                                \sustainOn
+                                \sustainOff                                                              %! SC
+                                \sustainOn                                                               %! SC
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
@@ -5790,16 +5790,16 @@ class LibraryNS(abjad.AbjadObject):
                                 r16
                                 af''16
                                 [
-                                \set Staff.pedalSustainStyle = #'bracket
+                                \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 g''16
                                 ]
-                                \sustainOff
-                                \sustainOn
+                                \sustainOff                                                              %! SC
+                                \sustainOn                                                               %! SC
                             }
                             \times 4/5 {
                                 a'16
                                 r4
-                                \sustainOff
+                                \sustainOff                                                              %! SC
                                 \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC
                                 \revert TupletBracket.staff-padding                                      %! OC
                             }
@@ -5839,9 +5839,9 @@ class LibraryNS(abjad.AbjadObject):
                             \times 9/10 {
                                 \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC
                                 \override TupletBracket.staff-padding = #5                               %! OC
-                                \set Staff.pedalSustainStyle = #'bracket
+                                \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 r8
-                                \sustainOn
+                                \sustainOn                                                               %! SC
                                 c'16
                                 [
                                 d'16
@@ -5853,11 +5853,11 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \set Staff.pedalSustainStyle = #'bracket
+                                \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 fs''16
-                                \sustainOff
+                                \sustainOff                                                              %! SC
                                 [
-                                \sustainOn
+                                \sustainOn                                                               %! SC
                                 e''16
                                 ]
                                 ef''4
@@ -5870,12 +5870,12 @@ class LibraryNS(abjad.AbjadObject):
                                 ]
                             }
                             \times 4/5 {
-                                \set Staff.pedalSustainStyle = #'bracket
+                                \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 a'16
-                                \sustainOff
-                                \sustainOn
+                                \sustainOff                                                              %! SC
+                                \sustainOn                                                               %! SC
                                 r4
-                                \sustainOff
+                                \sustainOff                                                              %! SC
                                 \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC
                                 \revert TupletBracket.staff-padding                                      %! OC
                             }
@@ -5929,9 +5929,9 @@ class LibraryNS(abjad.AbjadObject):
                             \times 9/10 {
                                 \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC
                                 \override TupletBracket.staff-padding = #5                               %! OC
-                                \set Staff.pedalSustainStyle = #'bracket
+                                \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 r8
-                                \sustainOn
+                                \sustainOn                                                               %! SC
                                 c'16
                                 [
                                 d'16
@@ -5943,11 +5943,11 @@ class LibraryNS(abjad.AbjadObject):
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \set Staff.pedalSustainStyle = #'bracket
+                                \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 fs''16
-                                \sustainOff
+                                \sustainOff                                                              %! SC
                                 [
-                                \sustainOn
+                                \sustainOn                                                               %! SC
                                 e''16
                                 ]
                                 ef''4
@@ -5960,12 +5960,12 @@ class LibraryNS(abjad.AbjadObject):
                                 ]
                             }
                             \times 4/5 {
-                                \set Staff.pedalSustainStyle = #'bracket
+                                \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 a'16
-                                \sustainOff
-                                \sustainOn
+                                \sustainOff                                                              %! SC
+                                \sustainOn                                                               %! SC
                                 r4
-                                \sustainOff
+                                \sustainOff                                                              %! SC
                                 \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC
                                 \revert TupletBracket.staff-padding                                      %! OC
                             }
@@ -6004,9 +6004,9 @@ class LibraryNS(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5                               %! OC
-                                \set Staff.pedalSustainStyle = #'bracket
+                                \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 r8
-                                \sustainOn
+                                \sustainOn                                                               %! SC
                                 c'16
                                 [
                                 d'16
@@ -6015,15 +6015,15 @@ class LibraryNS(abjad.AbjadObject):
                                 ~
                                 bf'16
                                 r16
-                                \sustainOff
+                                \sustainOff                                                              %! SC
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! OC
-                                \set Staff.pedalSustainStyle = #'bracket
+                                \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 fs''16
                                 [
-                                \sustainOn
+                                \sustainOn                                                               %! SC
                                 e''16
                                 ]
                                 ef''4
@@ -6034,15 +6034,15 @@ class LibraryNS(abjad.AbjadObject):
                                 [
                                 g''16
                                 ]
-                                \sustainOff
+                                \sustainOff                                                              %! SC
                                 \revert Staff.SustainPedalLineSpanner.staff-padding                      %! OC
                             }
                             \times 4/5 {
-                                \set Staff.pedalSustainStyle = #'bracket
+                                \set Staff.pedalSustainStyle = #'bracket                                 %! SC
                                 a'16
-                                \sustainOn
+                                \sustainOn                                                               %! SC
                                 r4
-                                \sustainOff
+                                \sustainOff                                                              %! SC
                                 \revert TupletBracket.staff-padding                                      %! OC
                             }
                         }

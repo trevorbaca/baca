@@ -39,13 +39,13 @@ class SpannerCommand(Command):
                         {
                             fs''16
                             [
-                            (
+                            (                                                                        %! SC
                             e''16
                             ef''16
                             af''16
                             g''16
                             ]
-                            )
+                            )                                                                        %! SC
                         }
                         {
                             a'16
@@ -136,13 +136,13 @@ class SpannerCommand(Command):
                                 % MusicVoice [measure 2]                                             %! SM4
                                 g'8
                                 [
-                                (
+                                (                                                                    %! SC
             <BLANKLINE>
                                 f''8
             <BLANKLINE>
                                 e'8
                                 ]
-                                )
+                                )                                                                    %! SC
                             }
                             {
             <BLANKLINE>
@@ -177,25 +177,36 @@ class SpannerCommand(Command):
     ..  container:: example
 
         >>> baca.SpannerCommand()
-        SpannerCommand(selector=baca.tleaves())
+        SpannerCommand(selector=baca.tleaves(), site='SC')
 
     '''
 
     ### CLASS VARIABLES ###
 
     __slots__ = (
+        # TODO: remove annotation?
         '_annotation',
+        '_site',
         '_spanner',
+        '_tag',
         )
 
     ### INITIALIZER ###
 
-    def __init__(self, selector='baca.tleaves()', spanner=None):
+    def __init__(
+        self,
+        selector='baca.tleaves()',
+        spanner=None,
+        site='SC',
+        tag=None,
+        ):
         Command.__init__(self, selector=selector)
+        self._annotation = None
         if spanner is not None:
             assert isinstance(spanner, abjad.Spanner)
         self._spanner = spanner
-        self._annotation = None
+        self._site = site
+        self._tag = tag
 
     ### SPECIAL METHODS ###
 
@@ -212,7 +223,12 @@ class SpannerCommand(Command):
             argument = self.selector(argument)
         leaves = abjad.select(argument).leaves()
         spanner = abjad.new(self.spanner)
-        abjad.attach(spanner, leaves)
+        abjad.attach(
+            spanner,
+            leaves,
+            site=self.site,
+            tag=self.tag,
+            )
         return spanner
 
     ### PUBLIC PROPERTIES ###
@@ -242,7 +258,7 @@ class SpannerCommand(Command):
                             {
                                 c'16
                                 [
-                                (
+                                (                                                                        %! SC
                                 d'16
                                 bf'16
                                 ]
@@ -258,7 +274,7 @@ class SpannerCommand(Command):
                             }
                             {
                                 a'16
-                                )
+                                )                                                                        %! SC
                             }
                         }
                     }
@@ -269,6 +285,14 @@ class SpannerCommand(Command):
         Returns selector or none.
         '''
         return self._selector
+
+    @property
+    def site(self):
+        r'''Gets site.
+
+        Set to string or none.
+        '''
+        return self._site
 
     @property
     def spanner(self):
@@ -328,15 +352,15 @@ class SpannerCommand(Command):
                         {
                             {
                                 d''4
-                                ~
+                                ~                                                                        %! SC
                                 d''16
-                                ~
+                                ~                                                                        %! SC
                                 d''4
-                                ~
+                                ~                                                                        %! SC
                                 d''16
-                                ~
+                                ~                                                                        %! SC
                                 d''4
-                                ~
+                                ~                                                                        %! SC
                                 d''16
                             }
                         }
@@ -348,3 +372,11 @@ class SpannerCommand(Command):
         Returns spanner or none.
         '''
         return self._spanner
+
+    @property
+    def tag(self):
+        r'''Gets tag.
+
+        Set to string or none.
+        '''
+        return self._tag

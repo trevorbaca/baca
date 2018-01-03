@@ -1354,12 +1354,12 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC
                                 r8
                                 c'16
-                                ~
+                                ~                                                                        %! SC
                                 [
                                 c'16
                                 ]
                                 bf'4
-                                ~
+                                ~                                                                        %! SC
                                 bf'16
                                 r16
                             }
@@ -1368,10 +1368,10 @@ class LibraryTZ(abjad.AbjadObject):
                                 bf'16
                                 [
                                 e''16
-                                ~
+                                ~                                                                        %! SC
                                 ]
                                 e''4
-                                ~
+                                ~                                                                        %! SC
                                 e''16
                                 r16
                                 fs''16
@@ -1417,7 +1417,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC
                                 r8
                                 c'16
-                                ~
+                                ~                                                                        %! SC
                                 [
                                 c'16
                                 ]
@@ -1481,11 +1481,11 @@ class LibraryTZ(abjad.AbjadObject):
                                 c'16
                                 [
                                 c'16
-                                \repeatTie
+                                \repeatTie                                                               %! SC
                                 ]
                                 bf'4
                                 bf'16
-                                \repeatTie
+                                \repeatTie                                                               %! SC
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
@@ -1495,9 +1495,9 @@ class LibraryTZ(abjad.AbjadObject):
                                 e''16
                                 ]
                                 e''4
-                                \repeatTie
+                                \repeatTie                                                               %! SC
                                 e''16
-                                \repeatTie
+                                \repeatTie                                                               %! SC
                                 r16
                                 fs''16
                                 [
@@ -1556,25 +1556,25 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override Stem.direction = #up                                           %! OC
                                 \override Tie.direction = #down                                          %! OC
                                 b'16
-                                ~
+                                ~                                                                        %! SC
                                 [
                                 b'16
                                 ]
                                 c''4
-                                ~
+                                ~                                                                        %! SC
                                 c''16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 7/8 {
                                 b'16
-                                ~
+                                ~                                                                        %! SC
                                 [
                                 b'16
-                                ~
+                                ~                                                                        %! SC
                                 ]
                                 b'4
-                                ~
+                                ~                                                                        %! SC
                                 b'16
                                 r16
                             }
@@ -1621,12 +1621,12 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 \override Stem.direction = #up                                           %! OC
                                 b'16
-                                ~
+                                ~                                                                        %! SC
                                 [
                                 b'16
                                 ]
                                 c''4
-                                ~
+                                ~                                                                        %! SC
                                 c''16
                                 r16
                             }
@@ -1634,13 +1634,13 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 7/8 {
                                 \override Tie.direction = #down                                          %! OC
                                 b'16
-                                ~
+                                ~                                                                        %! SC
                                 [
                                 b'16
-                                ~
+                                ~                                                                        %! SC
                                 ]
                                 b'4
-                                ~
+                                ~                                                                        %! SC
                                 b'16
                                 \revert Tie.direction                                                    %! OC
                                 r16
@@ -1700,25 +1700,25 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override Stem.direction = #down                                         %! OC
                                 \override Tie.direction = #up                                            %! OC
                                 b'16
-                                ~
+                                ~                                                                        %! SC
                                 [
                                 b'16
                                 ]
                                 c''4
-                                ~
+                                ~                                                                        %! SC
                                 c''16
                                 r16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 7/8 {
                                 b'16
-                                ~
+                                ~                                                                        %! SC
                                 [
                                 b'16
-                                ~
+                                ~                                                                        %! SC
                                 ]
                                 b'4
-                                ~
+                                ~                                                                        %! SC
                                 b'16
                                 r16
                             }
@@ -1765,12 +1765,12 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 \override Stem.direction = #down                                         %! OC
                                 b'16
-                                ~
+                                ~                                                                        %! SC
                                 [
                                 b'16
                                 ]
                                 c''4
-                                ~
+                                ~                                                                        %! SC
                                 c''16
                                 r16
                             }
@@ -1778,13 +1778,13 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 7/8 {
                                 \override Tie.direction = #up                                            %! OC
                                 b'16
-                                ~
+                                ~                                                                        %! SC
                                 [
                                 b'16
-                                ~
+                                ~                                                                        %! SC
                                 ]
                                 b'4
-                                ~
+                                ~                                                                        %! SC
                                 b'16
                                 \revert Tie.direction                                                    %! OC
                                 r16
@@ -2475,7 +2475,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                \startTrillSpan
+                                \startTrillSpan                                                          %! SC
                                 d'16
                                 ]
                                 bf'4
@@ -2501,7 +2501,7 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 r4
-                                \stopTrillSpan
+                                \stopTrillSpan                                                           %! SC
                                 \revert TupletBracket.staff-padding                                      %! OC
                             }
                         }
@@ -2539,49 +2539,49 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                \startTrillSpan
+                                \startTrillSpan                                                          %! SC
                                 d'16
                                 ]
-                                \stopTrillSpan
-                                \startTrillSpan
+                                \stopTrillSpan                                                           %! SC
+                                \startTrillSpan                                                          %! SC
                                 bf'4
                                 ~
-                                \stopTrillSpan
-                                \startTrillSpan
+                                \stopTrillSpan                                                           %! SC
+                                \startTrillSpan                                                          %! SC
                                 bf'16
                                 r16
-                                \stopTrillSpan
+                                \stopTrillSpan                                                           %! SC
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
                                 [
-                                \startTrillSpan
+                                \startTrillSpan                                                          %! SC
                                 e''16
                                 ]
-                                \stopTrillSpan
-                                \startTrillSpan
+                                \stopTrillSpan                                                           %! SC
+                                \startTrillSpan                                                          %! SC
                                 ef''4
                                 ~
-                                \stopTrillSpan
-                                \startTrillSpan
+                                \stopTrillSpan                                                           %! SC
+                                \startTrillSpan                                                          %! SC
                                 ef''16
                                 r16
-                                \stopTrillSpan
+                                \stopTrillSpan                                                           %! SC
                                 af''16
                                 [
-                                \startTrillSpan
+                                \startTrillSpan                                                          %! SC
                                 g''16
                                 ]
-                                \stopTrillSpan
-                                \startTrillSpan
+                                \stopTrillSpan                                                           %! SC
+                                \startTrillSpan                                                          %! SC
                             }
                             \times 4/5 {
                                 a'16
-                                \stopTrillSpan
-                                \startTrillSpan
+                                \stopTrillSpan                                                           %! SC
+                                \startTrillSpan                                                          %! SC
                                 r4
-                                \stopTrillSpan
+                                \stopTrillSpan                                                           %! SC
                                 \revert TupletBracket.staff-padding                                      %! OC
                             }
                         }
@@ -2619,37 +2619,37 @@ class LibraryTZ(abjad.AbjadObject):
                                 r8
                                 c'16
                                 [
-                                \startTrillSpan
+                                \startTrillSpan                                                          %! SC
                                 d'16
                                 ]
                                 bf'4
                                 ~
                                 bf'16
                                 r16
-                                \stopTrillSpan
+                                \stopTrillSpan                                                           %! SC
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
                                 [
-                                \startTrillSpan
+                                \startTrillSpan                                                          %! SC
                                 e''16
                                 ]
                                 ef''4
                                 ~
                                 ef''16
                                 r16
-                                \stopTrillSpan
+                                \stopTrillSpan                                                           %! SC
                                 af''16
                                 [
-                                \startTrillSpan
+                                \startTrillSpan                                                          %! SC
                                 g''16
                                 ]
                             }
                             \times 4/5 {
                                 a'16
                                 r4
-                                \stopTrillSpan
+                                \stopTrillSpan                                                           %! SC
                                 \revert TupletBracket.staff-padding                                      %! OC
                             }
                         }
@@ -2685,13 +2685,13 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5                               %! OC
                                 r8
-                                \pitchedTrill
+                                \pitchedTrill                                                            %! SC
                                 c'16
                                 [
-                                \startTrillSpan ef'
+                                \startTrillSpan ef'                                                      %! SC
                                 d'16
                                 ]
-                                \stopTrillSpan
+                                \stopTrillSpan                                                           %! SC
                                 bf'4
                                 ~
                                 bf'16
@@ -2750,60 +2750,60 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5                               %! OC
                                 r8
-                                \pitchedTrill
+                                \pitchedTrill                                                            %! SC
                                 c'16
                                 [
-                                \startTrillSpan ef'
-                                \pitchedTrill
+                                \startTrillSpan ef'                                                      %! SC
+                                \pitchedTrill                                                            %! SC
                                 d'16
                                 ]
-                                \stopTrillSpan
-                                \startTrillSpan ef'
-                                \pitchedTrill
+                                \stopTrillSpan                                                           %! SC
+                                \startTrillSpan ef'                                                      %! SC
+                                \pitchedTrill                                                            %! SC
                                 bf'4
                                 ~
-                                \stopTrillSpan
-                                \startTrillSpan ef'
+                                \stopTrillSpan                                                           %! SC
+                                \startTrillSpan ef'                                                      %! SC
                                 bf'16
                                 r16
-                                \stopTrillSpan
+                                \stopTrillSpan                                                           %! SC
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \pitchedTrill
+                                \pitchedTrill                                                            %! SC
                                 fs''16
                                 [
-                                \startTrillSpan ef'
-                                \pitchedTrill
+                                \startTrillSpan ef'                                                      %! SC
+                                \pitchedTrill                                                            %! SC
                                 e''16
                                 ]
-                                \stopTrillSpan
-                                \startTrillSpan ef'
-                                \pitchedTrill
+                                \stopTrillSpan                                                           %! SC
+                                \startTrillSpan ef'                                                      %! SC
+                                \pitchedTrill                                                            %! SC
                                 ef''4
                                 ~
-                                \stopTrillSpan
-                                \startTrillSpan ef'
+                                \stopTrillSpan                                                           %! SC
+                                \startTrillSpan ef'                                                      %! SC
                                 ef''16
                                 r16
-                                \stopTrillSpan
-                                \pitchedTrill
+                                \stopTrillSpan                                                           %! SC
+                                \pitchedTrill                                                            %! SC
                                 af''16
                                 [
-                                \startTrillSpan ef'
-                                \pitchedTrill
+                                \startTrillSpan ef'                                                      %! SC
+                                \pitchedTrill                                                            %! SC
                                 g''16
                                 ]
-                                \stopTrillSpan
-                                \startTrillSpan ef'
+                                \stopTrillSpan                                                           %! SC
+                                \startTrillSpan ef'                                                      %! SC
                             }
                             \times 4/5 {
-                                \pitchedTrill
+                                \pitchedTrill                                                            %! SC
                                 a'16
-                                \stopTrillSpan
-                                \startTrillSpan ef'
+                                \stopTrillSpan                                                           %! SC
+                                \startTrillSpan ef'                                                      %! SC
                                 r4
-                                \stopTrillSpan
+                                \stopTrillSpan                                                           %! SC
                                 \revert TupletBracket.staff-padding                                      %! OC
                             }
                         }
@@ -2839,60 +2839,60 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 9/10 {
                                 \override TupletBracket.staff-padding = #5                               %! OC
                                 r8
-                                \pitchedTrill
+                                \pitchedTrill                                                            %! SC
                                 c'16
                                 [
-                                \startTrillSpan d'
-                                \pitchedTrill
+                                \startTrillSpan d'                                                       %! SC
+                                \pitchedTrill                                                            %! SC
                                 d'16
                                 ]
-                                \stopTrillSpan
-                                \startTrillSpan e'
-                                \pitchedTrill
+                                \stopTrillSpan                                                           %! SC
+                                \startTrillSpan e'                                                       %! SC
+                                \pitchedTrill                                                            %! SC
                                 bf'4
                                 ~
-                                \stopTrillSpan
-                                \startTrillSpan c''
+                                \stopTrillSpan                                                           %! SC
+                                \startTrillSpan c''                                                      %! SC
                                 bf'16
                                 r16
-                                \stopTrillSpan
+                                \stopTrillSpan                                                           %! SC
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \pitchedTrill
+                                \pitchedTrill                                                            %! SC
                                 fs''16
                                 [
-                                \startTrillSpan gs''
-                                \pitchedTrill
+                                \startTrillSpan gs''                                                     %! SC
+                                \pitchedTrill                                                            %! SC
                                 e''16
                                 ]
-                                \stopTrillSpan
-                                \startTrillSpan fs''
-                                \pitchedTrill
+                                \stopTrillSpan                                                           %! SC
+                                \startTrillSpan fs''                                                     %! SC
+                                \pitchedTrill                                                            %! SC
                                 ef''4
                                 ~
-                                \stopTrillSpan
-                                \startTrillSpan f''
+                                \stopTrillSpan                                                           %! SC
+                                \startTrillSpan f''                                                      %! SC
                                 ef''16
                                 r16
-                                \stopTrillSpan
-                                \pitchedTrill
+                                \stopTrillSpan                                                           %! SC
+                                \pitchedTrill                                                            %! SC
                                 af''16
                                 [
-                                \startTrillSpan bf''
-                                \pitchedTrill
+                                \startTrillSpan bf''                                                     %! SC
+                                \pitchedTrill                                                            %! SC
                                 g''16
                                 ]
-                                \stopTrillSpan
-                                \startTrillSpan a''
+                                \stopTrillSpan                                                           %! SC
+                                \startTrillSpan a''                                                      %! SC
                             }
                             \times 4/5 {
-                                \pitchedTrill
+                                \pitchedTrill                                                            %! SC
                                 a'16
-                                \stopTrillSpan
-                                \startTrillSpan b'
+                                \stopTrillSpan                                                           %! SC
+                                \startTrillSpan b'                                                       %! SC
                                 r4
-                                \stopTrillSpan
+                                \stopTrillSpan                                                           %! SC
                                 \revert TupletBracket.staff-padding                                      %! OC
                             }
                         }

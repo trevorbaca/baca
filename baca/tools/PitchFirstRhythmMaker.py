@@ -793,35 +793,35 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         }
                         {
                             \acciaccatura {
-                                fs''16 [
-                                e''16 ]
+                                fs''16 [                                                                 %! ACC1
+                                e''16 ]                                                                  %! ACC1
                             }
                             ef''4
                         }
                         {
                             \acciaccatura {
-                                af''16 [
+                                af''16 [                                                                 %! ACC1
                                 g''16
-                                a'16 ]
+                                a'16 ]                                                                   %! ACC1
                             }
                             c'4
                         }
                         {
                             \acciaccatura {
-                                d'16 [
+                                d'16 [                                                                   %! ACC1
                                 bf'16
                                 fs''16
-                                e''16 ]
+                                e''16 ]                                                                  %! ACC1
                             }
                             ef''4
                         }
                         {
                             \acciaccatura {
-                                af''16 [
+                                af''16 [                                                                 %! ACC1
                                 g''16
                                 a'16
                                 c'16
-                                d'16 ]
+                                d'16 ]                                                                   %! ACC1
                             }
                             bf'4
                         }
@@ -877,46 +877,46 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                         }
                         {
                             \acciaccatura {
-                                d'16 [
-                                bf'16 ]
+                                d'16 [                                                                   %! ACC1
+                                bf'16 ]                                                                  %! ACC1
                             }
                             r4
                         }
                         {
                             \acciaccatura {
-                                fs''16 [
+                                fs''16 [                                                                 %! ACC1
                                 e''16
-                                ef''16 ]
+                                ef''16 ]                                                                 %! ACC1
                             }
                             r4
                         }
                         {
                             \acciaccatura {
-                                af''16 [
+                                af''16 [                                                                 %! ACC1
                                 g''16
                                 a'16
-                                c'16 ]
+                                c'16 ]                                                                   %! ACC1
                             }
                             r4
                         }
                         {
                             \acciaccatura {
-                                d'16 [
+                                d'16 [                                                                   %! ACC1
                                 bf'16
                                 fs''16
                                 e''16
-                                ef''16 ]
+                                ef''16 ]                                                                 %! ACC1
                             }
                             r4
                         }
                         {
                             \acciaccatura {
-                                af''16 [
+                                af''16 [                                                                 %! ACC1
                                 g''16
                                 a'16
                                 c'16
                                 d'16
-                                bf'16 ]
+                                bf'16 ]                                                                  %! ACC1
                             }
                             r4
                         }

@@ -1654,7 +1654,7 @@ class MusicMaker(abjad.AbjadObject):
                             {
                                 c'16
                                 [
-                                (
+                                (                                                                        %! SC
                                 d'16
                                 bf'16
                                 fs''16
@@ -1674,7 +1674,7 @@ class MusicMaker(abjad.AbjadObject):
                                 a'16
                                 af'16
                                 ]
-                                )
+                                )                                                                        %! SC
                             }
                         }
                     }
@@ -1711,31 +1711,31 @@ class MusicMaker(abjad.AbjadObject):
                             {
                                 c'16
                                 [
-                                (
+                                (                                                                        %! SC
                                 d'16
                                 bf'16
                                 fs''16
                                 ]
-                                )
+                                )                                                                        %! SC
                             }
                             {
                                 e''16
                                 [
-                                (
+                                (                                                                        %! SC
                                 ef''16
                                 b''16
                                 ]
-                                )
+                                )                                                                        %! SC
                             }
                             {
                                 g''16
                                 [
-                                (
+                                (                                                                        %! SC
                                 cs''16
                                 a'16
                                 af'16
                                 ]
-                                )
+                                )                                                                        %! SC
                             }
                         }
                     }
@@ -1774,9 +1774,9 @@ class MusicMaker(abjad.AbjadObject):
                             {
                                 c'16
                                 [
-                                (
+                                (                                                                        %! SC
                                 d'16
-                                )
+                                )                                                                        %! SC
                                 bf'16
                                 fs''16
                                 ]
@@ -1784,18 +1784,18 @@ class MusicMaker(abjad.AbjadObject):
                             {
                                 e''16
                                 [
-                                (
+                                (                                                                        %! SC
                                 ef''16
-                                )
+                                )                                                                        %! SC
                                 b''16
                                 ]
                             }
                             {
                                 g''16
                                 [
-                                (
+                                (                                                                        %! SC
                                 cs''16
-                                )
+                                )                                                                        %! SC
                                 a'16
                                 af'16
                                 ]
@@ -1839,29 +1839,29 @@ class MusicMaker(abjad.AbjadObject):
                                 [
                                 d'16
                                 bf'16
-                                (
+                                (                                                                        %! SC
                                 fs''16
                                 ]
-                                )
+                                )                                                                        %! SC
                             }
                             {
                                 e''16
                                 [
                                 ef''16
-                                (
+                                (                                                                        %! SC
                                 b''16
                                 ]
-                                )
+                                )                                                                        %! SC
                             }
                             {
                                 g''16
                                 [
                                 cs''16
                                 a'16
-                                (
+                                (                                                                        %! SC
                                 af'16
                                 ]
-                                )
+                                )                                                                        %! SC
                             }
                         }
                     }
