@@ -802,6 +802,10 @@ class SegmentMaker(abjad.SegmentMaker):
         prototype = baca.StaffLines
         staff_lines = baca.StaffLines(self.fermata_measure_staff_line_count)
         breaks_already_treated = []
+        if build is None:
+            deactivate = False
+        else:
+            deactivate = True
         for staff in abjad.iterate(self.score).components(abjad.Staff):
             for leaf in abjad.iterate(staff).leaves():
                 start_offset = abjad.inspect(leaf).get_timespan().start_offset
@@ -848,7 +852,13 @@ class SegmentMaker(abjad.SegmentMaker):
                         literal = abjad.LilyPondLiteral(strings, 'after')
                         tag = baca.Tags.FERMATA_BAR_LINE
                         tag = baca.Tags.build(tag, build)
-                        abjad.attach(literal, leaf, site='SM22', tag=tag)
+                        abjad.attach(
+                            literal,
+                            leaf,
+                            deactivate=deactivate,
+                            site='SM22',
+                            tag=tag,
+                            )
                     breaks_already_treated.append(leaf_stop)
                 if (build is None and
                     next_leaf is None and
