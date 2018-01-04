@@ -3,6 +3,6 @@
 # Uncomment when the Travis config file no longer clones Abjad:
 #-e git://github.com/Abjad/abjad.git#egg=abjad [development]
 
-funcsigs
-inflect
+#funcsigs
+#inflect
 roman

@@ -35,8 +35,8 @@ class LayoutMeasureMap(abjad.AbjadObject):
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
                         % GlobalSkips [measure 1]                                                    %! SM4
-                        \autoPageBreaksOff                                                           %! SEGMENT:LAYOUT:LMM1
-                        \noBreak                                                                     %! SEGMENT:LAYOUT:LMM2
+                        \autoPageBreaksOff                                                           %! SEGMENT_LAYOUT:LMM1
+                        \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \bar ""                                                                      %! EMPTY_START_BAR:SM2
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
@@ -48,31 +48,31 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                     #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
                                     [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
                             }                                                                        %! STAGE_NUMBER_MARKUP:SM3
-                        \break                                                                       %! SEGMENT:LAYOUT:LMM3
+                        \break                                                                       %! SEGMENT_LAYOUT:LMM3
             <BLANKLINE>
                         % GlobalSkips [measure 2]                                                    %! SM4
-                        \noBreak                                                                     %! SEGMENT:LAYOUT:LMM2
-                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT:LAYOUT:LMM3
-                        #'((Y-offset . 100) (alignment-distances . (30 30)))                         %! SEGMENT:LAYOUT:LMM3
+                        \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
+                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
+                        #'((Y-offset . 100) (alignment-distances . (30 30)))                         %! SEGMENT_LAYOUT:LMM3
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
-                        \break                                                                       %! SEGMENT:LAYOUT:LMM3
+                        \break                                                                       %! SEGMENT_LAYOUT:LMM3
             <BLANKLINE>
                         % GlobalSkips [measure 3]                                                    %! SM4
-                        \noBreak                                                                     %! SEGMENT:LAYOUT:LMM2
+                        \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
                         % GlobalSkips [measure 4]                                                    %! SM4
-                        \noBreak                                                                     %! SEGMENT:LAYOUT:LMM2
+                        \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
                         % GlobalSkips [measure 5]                                                    %! SM4
-                        \noBreak                                                                     %! SEGMENT:LAYOUT:LMM2
+                        \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
@@ -430,10 +430,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
 
     def __init__(self, commands=None, build=None):
         self._build = build
-        if build is None:
-            tag = 'SEGMENT:LAYOUT'
-        else:
-            tag = 'BUILD:{build.upper()}:LAYOUT'
+        tag = baca.Tags.build(baca.Tags.LAYOUT, build=build)
         self._tag = tag
         if commands is not None:
             commands_ = []
@@ -493,7 +490,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
                     ),
                 selector=baca.skip(0),
                 site='LMM3',
-                tag='SEGMENT:LAYOUT',
+                tag='SEGMENT_LAYOUT',
                 )
             baca.IndicatorCommand(
                 indicators=abjad.CyclicTuple(
@@ -503,7 +500,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
                     ),
                 selector=baca.skip(1),
                 site='LMM3',
-                tag='SEGMENT:LAYOUT',
+                tag='SEGMENT_LAYOUT',
                 )
 
         Returns commands.
