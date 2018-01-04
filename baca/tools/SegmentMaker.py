@@ -982,7 +982,7 @@ class SegmentMaker(abjad.SegmentMaker):
         spanner = abjad.MetronomeMarkSpanner(
             left_broken_padding=0,
             left_broken_text=left_broken_text,
-            start_with_parenthesized_metronome_mark=False,
+            parenthesize=False,
             )
         abjad.attach(spanner, skips, site='SM29')
         if not self.metronome_mark_measure_map:
