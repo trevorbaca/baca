@@ -287,6 +287,11 @@ class IndicatorCommand(Command):
                     tag=self.tag,
                     )
                 if indicator == reapplied_indicator:
+                    if (isinstance(indicator, abjad.Dynamic) and
+                        indicator.sforzando):
+                        status = 'explicit'
+                    else:
+                        status = 'redundant'
                     wrapper = abjad.inspect(leaf).wrapper(type(indicator))
                     context = wrapper._find_correct_effective_context()
                     baca.SegmentMaker._categorize_persistent_indicator(
@@ -294,7 +299,7 @@ class IndicatorCommand(Command):
                         context,
                         leaf,
                         indicator,
-                        'redundant',
+                        status,
                         )
 
     ### PRIVATE METHODS ###

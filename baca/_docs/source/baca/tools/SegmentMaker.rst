@@ -62,6 +62,7 @@ Bases
       ~baca.tools.SegmentMaker.SegmentMaker.skip_wellformedness_checks
       ~baca.tools.SegmentMaker.SegmentMaker.skips_instead_of_rests
       ~baca.tools.SegmentMaker.SegmentMaker.spacing_specifier
+      ~baca.tools.SegmentMaker.SegmentMaker.staff_lines
       ~baca.tools.SegmentMaker.SegmentMaker.stage_count
       ~baca.tools.SegmentMaker.SegmentMaker.stage_label_base_string
       ~baca.tools.SegmentMaker.SegmentMaker.time_signatures
@@ -153,6 +154,8 @@ Read-only properties
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.skips_instead_of_rests
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.spacing_specifier
+
+.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.staff_lines
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.stage_count
 
