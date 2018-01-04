@@ -53,7 +53,6 @@
         \consists Time_signature_engraver
         \accepts GlobalRests
         \accepts GlobalSkips
-        \override BarNumber.color = #red
         %\override MetronomeMark.X-extent = #'(0 . 0)
         %\override MetronomeMark.Y-extent = #'(0 . 0)
         %\override MetronomeMark.break-align-symbols = #'(left-edge)

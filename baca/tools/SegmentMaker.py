@@ -39,10 +39,19 @@ class SegmentMaker(abjad.SegmentMaker):
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
                         % GlobalSkips [measure 1]                                                    %! SM4
+                        \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                        \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                        \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                        \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                        \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                        \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                        \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                        \once \override TextSpanner.dash-period = 0                                  %! SM29
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \bar ""                                                                      %! EMPTY_START_BAR:SM2
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
+                        \startTextSpan                                                               %! SM29
             <BLANKLINE>
                         % GlobalSkips [measure 2]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -58,6 +67,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
+                        \stopTextSpan                                                                %! SM29
                         \override Score.BarLine.transparent = ##f                                    %! SM5
                         \bar "|"                                                                     %! SM5
             <BLANKLINE>
@@ -409,10 +419,19 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
                                     #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
@@ -435,6 +454,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -2289,6 +2309,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
                             #'((Y-offset . 0) (alignment-distances . (7)))                               %! SEGMENT_LAYOUT:LMM3
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
@@ -2296,6 +2324,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
@@ -2306,6 +2335,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -2377,6 +2407,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
                             #'((Y-offset . 0) (alignment-distances . (7)))                               %! SEGMENT_LAYOUT:LMM3
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
@@ -2384,6 +2422,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
@@ -2394,6 +2433,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -2474,6 +2514,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
                             #'((Y-offset . 0) (alignment-distances . (7)))                               %! SEGMENT_LAYOUT:LMM3
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
@@ -2482,6 +2530,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
@@ -2492,6 +2541,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -2571,6 +2621,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
                             #'((Y-offset . 0) (alignment-distances . (7)))                               %! SEGMENT_LAYOUT:LMM3
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
@@ -2579,6 +2637,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
@@ -2589,6 +2648,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -2661,6 +2721,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
                             #'((Y-offset . 0) (alignment-distances . (7)))                               %! SEGMENT_LAYOUT:LMM3
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
@@ -2668,6 +2736,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
@@ -2685,6 +2754,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -2774,6 +2844,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
                             #'((Y-offset . 0) (alignment-distances . (7)))                               %! SEGMENT_LAYOUT:LMM3
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
@@ -2782,6 +2860,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
@@ -2792,6 +2871,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -2833,7 +2913,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     color_octaves=True,
             ...     score_template=baca.StringTrioScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 31)),
-            ...     time_signatures=[(6, 16)],
+            ...     time_signatures=[(6, 16), (6, 16)],
             ...     )
 
             >>> music_maker = baca.MusicMaker()
@@ -2872,12 +2952,21 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 6/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 31)             %! SEGMENT_SPACING:HSS1
                             s1 * 3/8
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {
                                 \column
                                     {
@@ -2899,6 +2988,20 @@ class SegmentMaker(abjad.SegmentMaker):
                                             }                                                            %! SEGMENT_SPACING_MARKUP:HSS2
                                     }
                                 }
+                <BLANKLINE>
+                            % GlobalSkips [measure 2]                                                    %! SM4
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 31)             %! SEGMENT_SPACING:HSS1
+                            s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
+                            ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
+                                \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                    #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/31)                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -3003,9 +3106,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                             a'16
                 <BLANKLINE>
                                             b'16
-                <BLANKLINE>
                                         }
                                     }
+                <BLANKLINE>
+                                    % ViolinMusicVoice [measure 2]                                       %! SM4
+                                    R1 * 3/8
+                <BLANKLINE>
                                 }
                             }
                             \tag viola                                                                   %! ST4
@@ -3086,6 +3192,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                         }                                                                %! REDRAWN_DEFAULT_INSTRUMENT:SM8
                                     \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'violet) %! REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
                                     \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:SM6
+                <BLANKLINE>
+                                    % ViolaMusicVoice [measure 2]                                        %! SM4
+                                    R1 * 3/8
                 <BLANKLINE>
                                 }
                             }
@@ -3186,9 +3295,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                             d16
                 <BLANKLINE>
                                             c16
-                <BLANKLINE>
                                         }
                                     }
+                <BLANKLINE>
+                                    % CelloMusicVoice [measure 2]                                        %! SM4
+                                    R1 * 3/8
+                <BLANKLINE>
                                 }
                             }
                         >>
@@ -3262,12 +3374,21 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 1/16
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {
                                 \column
                                     {
@@ -3324,6 +3445,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
                                 \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
                                     #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
@@ -3469,12 +3591,21 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 1/16
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {
                                 \column
                                     {
@@ -3531,6 +3662,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
                                 \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
                                     #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
@@ -3662,7 +3794,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
-            ...     time_signatures=[(3, 8)],
+            ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
@@ -3700,6 +3832,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
@@ -3707,6 +3847,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 3/8
+                            \startTextSpan                                                               %! SM29
+                <BLANKLINE>
+                            % GlobalSkips [measure 2]                                                    %! SM4
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
+                            s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -3720,6 +3868,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \once \override Staff.DynamicText.color = #(x11-color 'green4)           %! REAPPLIED_DYNAMIC_COLOR:SM6
                                 c'4.
                                 \f                                                                       %! REAPPLIED_DYNAMIC:SM8
+                <BLANKLINE>
+                                % MusicVoice [measure 2]                                                 %! SM4
+                                c'4.
                 <BLANKLINE>
                             }
                         }
@@ -3771,10 +3922,19 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
                                     #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
@@ -3797,6 +3957,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -3884,10 +4045,19 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
                                     #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
@@ -3910,6 +4080,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "||"                                                                    %! SM5
                 <BLANKLINE>
@@ -3999,10 +4170,19 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
                                     #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
@@ -4025,6 +4205,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|."                                                                    %! SM5
                 <BLANKLINE>
@@ -4116,10 +4297,19 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
                                     #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
@@ -4142,6 +4332,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "||"                                                                    %! SM5
                 <BLANKLINE>
@@ -4243,10 +4434,19 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
                                     #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
@@ -4269,6 +4469,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|."                                                                    %! SM5
                 <BLANKLINE>
@@ -4421,10 +4622,19 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
                                     #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
@@ -4447,6 +4657,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -4534,10 +4745,19 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
                                     #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
@@ -4560,6 +4780,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -4784,12 +5005,21 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 3/16
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {
                                 \column
                                     {
@@ -4843,6 +5073,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 3/16
+                            \stopTextSpan                                                                %! SM29
                             ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
                                 \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
                                     #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
@@ -4985,12 +5216,21 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 3/16
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {
                                 \column
                                     {
@@ -5044,6 +5284,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 3/16
+                            \stopTextSpan                                                                %! SM29
                             ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
                                 \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
                                     #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
@@ -5287,6 +5528,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! SEGMENT_LAYOUT:LMM3
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
@@ -5294,6 +5543,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
@@ -5304,6 +5554,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -5412,6 +5663,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! SEGMENT_LAYOUT:LMM3
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
@@ -5419,6 +5678,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
@@ -5429,6 +5689,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -5546,6 +5807,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! SEGMENT_LAYOUT:LMM3
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
@@ -5554,6 +5823,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
@@ -5564,6 +5834,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -5676,6 +5947,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! SEGMENT_LAYOUT:LMM3
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
@@ -5684,6 +5963,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
@@ -5694,6 +5974,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -5806,6 +6087,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! SEGMENT_LAYOUT:LMM3
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
@@ -5813,6 +6102,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT_LAYOUT:LMM3
                             s1 * 1/2
+                            \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
@@ -5830,6 +6120,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT_LAYOUT:LMM3
                             s1 * 1/2
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -5993,6 +6284,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! SEGMENT_LAYOUT:LMM3
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
@@ -6001,6 +6300,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
@@ -6011,6 +6311,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -6183,6 +6484,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! SEGMENT_LAYOUT:LMM3
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
@@ -6190,6 +6499,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
@@ -6200,6 +6510,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -6302,6 +6613,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! SEGMENT_LAYOUT:LMM3
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
@@ -6309,6 +6628,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
@@ -6319,6 +6639,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -6430,6 +6751,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! SEGMENT_LAYOUT:LMM3
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
@@ -6438,6 +6767,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
@@ -6448,6 +6778,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -6560,6 +6891,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! SEGMENT_LAYOUT:LMM3
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
@@ -6568,6 +6907,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
@@ -6578,6 +6918,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -6690,6 +7031,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! SEGMENT_LAYOUT:LMM3
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
@@ -6697,6 +7046,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT_LAYOUT:LMM3
                             s1 * 1/2
+                            \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
@@ -6714,6 +7064,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT_LAYOUT:LMM3
                             s1 * 1/2
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -6877,6 +7228,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! SEGMENT_LAYOUT:LMM3
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
@@ -6885,6 +7244,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
@@ -6895,6 +7255,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \break                                                                       %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7021,11 +7382,20 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
                                     #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
@@ -7048,6 +7418,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7164,10 +7535,64 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                        %F% \once \override TextSpanner.bound-details.left.text =                        %! EXPLICIT_METRONOME_MARK:SM27
+                        %F% \markup {                                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%     \fontsize                                                                %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%         #-6                                                                  %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%         \general-align                                                       %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%             #Y                                                               %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%             #DOWN                                                            %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%             \note-by-number                                                  %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%                 #2                                                           %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%                 #0                                                           %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%                 #1                                                           %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%     \upright                                                                 %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%         {                                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%             =                                                                %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%             90                                                               %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%         }                                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%     \hspace                                                                  %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%         #1                                                                   %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%     }                                                                        %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = \markup {
+                                \null
+                                }                                                                        %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.left.text =                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                            \markup {                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                \with-color                                                              %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                    #(x11-color 'blue)                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                    {                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                        \fontsize                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                            #-6                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                            \general-align                                               %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                #Y                                                       %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                #DOWN                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                \note-by-number                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                    #2                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                    #0                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                    #1                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                        \upright                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                            {                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                =                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                90                                                       %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                            }                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                        \hspace                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                            #1                                                           %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                    }                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                }                                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
                                     #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
@@ -7175,42 +7600,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                         #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
                                         [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
                                 }                                                                        %! STAGE_NUMBER_MARKUP:SM3
-                        %F% ^ \markup {                                                                  %! EXPLICIT_METRONOME_MARK:SM27                %! SM29
-                        %F%     \fontsize                                                                %! EXPLICIT_METRONOME_MARK:SM27                %! SM29
-                        %F%         #-6                                                                  %! EXPLICIT_METRONOME_MARK:SM27                %! SM29
-                        %F%         \general-align                                                       %! EXPLICIT_METRONOME_MARK:SM27                %! SM29
-                        %F%             #Y                                                               %! EXPLICIT_METRONOME_MARK:SM27                %! SM29
-                        %F%             #DOWN                                                            %! EXPLICIT_METRONOME_MARK:SM27                %! SM29
-                        %F%             \note-by-number                                                  %! EXPLICIT_METRONOME_MARK:SM27                %! SM29
-                        %F%                 #2                                                           %! EXPLICIT_METRONOME_MARK:SM27                %! SM29
-                        %F%                 #0                                                           %! EXPLICIT_METRONOME_MARK:SM27                %! SM29
-                        %F%                 #1                                                           %! EXPLICIT_METRONOME_MARK:SM27                %! SM29
-                        %F%     \upright                                                                 %! EXPLICIT_METRONOME_MARK:SM27                %! SM29
-                        %F%         {                                                                    %! EXPLICIT_METRONOME_MARK:SM27                %! SM29
-                        %F%             =                                                                %! EXPLICIT_METRONOME_MARK:SM27                %! SM29
-                        %F%             90                                                               %! EXPLICIT_METRONOME_MARK:SM27                %! SM29
-                        %F%         }                                                                    %! EXPLICIT_METRONOME_MARK:SM27                %! SM29
-                        %F%     }                                                                        %! EXPLICIT_METRONOME_MARK:SM27                %! SM29
-                            ^ \markup {                                                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                \with-color                                                              %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                    #(x11-color 'blue)                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                    {                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                        \fontsize                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            #-6                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            \general-align                                               %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                #Y                                                       %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                #DOWN                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                \note-by-number                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                    #2                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                    #0                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                    #1                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                        \upright                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            {                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                =                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                90                                                       %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            }                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                    }                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                }                                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -7226,6 +7615,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7322,8 +7712,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     layout_measure_map=layout,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
-            ...     time_signatures=[(3, 8)],
+            ...     spacing_specifier=baca.minimum_width((1, 25)),
+            ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
             ...     baca.scope('GlobalSkips', 1),
@@ -7355,48 +7745,74 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
                             #'((Y-offset . 0) (alignment-distances . (8)))                               %! SEGMENT_LAYOUT:LMM3
+                        %F% \once \override TextSpanner.bound-details.left.text =                        %! EXPLICIT_METRONOME_MARK:SM27
+                        %F% \markup {                                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%     \fontsize                                                                %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%         #-6                                                                  %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%         \general-align                                                       %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%             #Y                                                               %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%             #DOWN                                                            %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%             \note-by-number                                                  %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%                 #2                                                           %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%                 #0                                                           %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%                 #1                                                           %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%     \upright                                                                 %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%         {                                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%             =                                                                %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%             112                                                              %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%         }                                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%     \hspace                                                                  %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%         #1                                                                   %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%     }                                                                        %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = \markup {
+                                \null
+                                }                                                                        %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.left.text =                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                            \markup {                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                \with-color                                                              %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                    #(x11-color 'blue)                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                    {                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                        \fontsize                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                            #-6                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                            \general-align                                               %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                #Y                                                       %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                #DOWN                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                \note-by-number                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                    #2                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                    #0                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                    #1                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                        \upright                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                            {                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                =                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                112                                                      %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                            }                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                        \hspace                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                            #1                                                           %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                    }                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                }                                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 25)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
-                        %F% ^ \markup {                                                                  %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%     \fontsize                                                                %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%         #-6                                                                  %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%         \general-align                                                       %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%             #Y                                                               %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%             #DOWN                                                            %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%             \note-by-number                                                  %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%                 #2                                                           %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%                 #0                                                           %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%                 #1                                                           %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%     \upright                                                                 %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%         {                                                                    %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%             =                                                                %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%             112                                                              %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%         }                                                                    %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%     }                                                                        %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                            ^ \markup {                                                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                \with-color                                                              %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                    #(x11-color 'blue)                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                    {                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                        \fontsize                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            #-6                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            \general-align                                               %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                #Y                                                       %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                #DOWN                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                \note-by-number                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                    #2                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                    #0                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                    #1                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                        \upright                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            {                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                =                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                112                                                      %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            }                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                    }                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                }                                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
+                            \startTextSpan                                                               %! SM29
+                <BLANKLINE>
+                            % GlobalSkips [measure 2]                                                    %! SM4
+                            \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 25)             %! SEGMENT_SPACING:HSS1
+                            s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7407,6 +7823,9 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                                 %! SM4
+                                c'4.
+                <BLANKLINE>
+                                % MusicVoice [measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -7422,11 +7841,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
-            ...     time_signatures=[(3, 8)],
+            ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
             ...     baca.scope('GlobalSkips', 1),
             ...     baca.metronome_mark('112'),
+            ...     baca.text_spanner_staff_padding(4),
             ...     )
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
@@ -7461,10 +7881,64 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \override TextSpanner.staff-padding = #4                                     %! OC
                             \autoPageBreaksOff                                                           %! SEGMENT_LAYOUT:LMM1
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
                             #'((Y-offset . 0) (alignment-distances . (8)))                               %! SEGMENT_LAYOUT:LMM3
+                        %F% \once \override TextSpanner.bound-details.left.text =                        %! EXPLICIT_METRONOME_MARK:SM27
+                        %F% \markup {                                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%     \fontsize                                                                %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%         #-6                                                                  %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%         \general-align                                                       %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%             #Y                                                               %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%             #DOWN                                                            %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%             \note-by-number                                                  %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%                 #2                                                           %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%                 #0                                                           %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%                 #1                                                           %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%     \upright                                                                 %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%         {                                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%             =                                                                %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%             112                                                              %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%         }                                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%     \hspace                                                                  %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%         #1                                                                   %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%     }                                                                        %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = \markup {
+                                \null
+                                }                                                                        %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.left.text =                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                            \markup {                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                \with-color                                                              %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                    #(x11-color 'blue)                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                    {                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                        \fontsize                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                            #-6                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                            \general-align                                               %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                #Y                                                       %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                #DOWN                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                \note-by-number                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                    #2                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                    #0                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                    #1                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                        \upright                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                            {                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                =                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                112                                                      %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                            }                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                        \hspace                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                            #1                                                           %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                    }                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                }                                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
@@ -7472,42 +7946,16 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
-                        %F% ^ \markup {                                                                  %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%     \fontsize                                                                %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%         #-6                                                                  %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%         \general-align                                                       %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%             #Y                                                               %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%             #DOWN                                                            %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%             \note-by-number                                                  %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%                 #2                                                           %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%                 #0                                                           %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%                 #1                                                           %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%     \upright                                                                 %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%         {                                                                    %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%             =                                                                %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%             112                                                              %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%         }                                                                    %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%     }                                                                        %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                            ^ \markup {                                                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                \with-color                                                              %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                    #(x11-color 'blue)                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                    {                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                        \fontsize                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            #-6                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            \general-align                                               %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                #Y                                                       %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                #DOWN                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                \note-by-number                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                    #2                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                    #0                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                    #1                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                        \upright                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            {                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                =                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                112                                                      %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            }                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                    }                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                }                                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
+                            \startTextSpan                                                               %! SM29
+                <BLANKLINE>
+                            % GlobalSkips [measure 2]                                                    %! SM4
+                            \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
+                            s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
+                            \revert TextSpanner.staff-padding                                            %! OC
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7518,6 +7966,9 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                                 %! SM4
+                                c'4.
+                <BLANKLINE>
+                                % MusicVoice [measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -7535,11 +7986,15 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
-            ...     time_signatures=[(3, 8)],
+            ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
             ...     baca.make_notes(),
+            ...     )
+            >>> maker(
+            ...     baca.scope('GlobalSkips', 1),
+            ...     baca.text_spanner_staff_padding(4),
             ...     )
 
             >>> metadata = {}
@@ -7570,10 +8025,64 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \override TextSpanner.staff-padding = #4                                     %! OC
                             \autoPageBreaksOff                                                           %! SEGMENT_LAYOUT:LMM1
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
                             #'((Y-offset . 0) (alignment-distances . (8)))                               %! SEGMENT_LAYOUT:LMM3
+                        %F% \once \override TextSpanner.bound-details.left.text =                        %! REAPPLIED_METRONOME_MARK:SM27
+                        %F% \markup {                                                                    %! REAPPLIED_METRONOME_MARK:SM27
+                        %F%     \fontsize                                                                %! REAPPLIED_METRONOME_MARK:SM27
+                        %F%         #-6                                                                  %! REAPPLIED_METRONOME_MARK:SM27
+                        %F%         \general-align                                                       %! REAPPLIED_METRONOME_MARK:SM27
+                        %F%             #Y                                                               %! REAPPLIED_METRONOME_MARK:SM27
+                        %F%             #DOWN                                                            %! REAPPLIED_METRONOME_MARK:SM27
+                        %F%             \note-by-number                                                  %! REAPPLIED_METRONOME_MARK:SM27
+                        %F%                 #2                                                           %! REAPPLIED_METRONOME_MARK:SM27
+                        %F%                 #0                                                           %! REAPPLIED_METRONOME_MARK:SM27
+                        %F%                 #1                                                           %! REAPPLIED_METRONOME_MARK:SM27
+                        %F%     \upright                                                                 %! REAPPLIED_METRONOME_MARK:SM27
+                        %F%         {                                                                    %! REAPPLIED_METRONOME_MARK:SM27
+                        %F%             =                                                                %! REAPPLIED_METRONOME_MARK:SM27
+                        %F%             90                                                               %! REAPPLIED_METRONOME_MARK:SM27
+                        %F%         }                                                                    %! REAPPLIED_METRONOME_MARK:SM27
+                        %F%     \hspace                                                                  %! REAPPLIED_METRONOME_MARK:SM27
+                        %F%         #1                                                                   %! REAPPLIED_METRONOME_MARK:SM27
+                        %F%     }                                                                        %! REAPPLIED_METRONOME_MARK:SM27 %! SM29
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = \markup {
+                                \null
+                                }                                                                        %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.left.text =                        %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
+                            \markup {                                                                    %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
+                                \with-color                                                              %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
+                                    #(x11-color 'green4)                                                 %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
+                                    {                                                                    %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
+                                        \fontsize                                                        %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
+                                            #-6                                                          %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
+                                            \general-align                                               %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
+                                                #Y                                                       %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
+                                                #DOWN                                                    %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
+                                                \note-by-number                                          %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
+                                                    #2                                                   %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
+                                                    #0                                                   %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
+                                                    #1                                                   %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
+                                        \upright                                                         %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
+                                            {                                                            %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
+                                                =                                                        %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
+                                                90                                                       %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
+                                            }                                                            %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
+                                        \hspace                                                          %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
+                                            #1                                                           %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
+                                    }                                                                    %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
+                                }                                                                        %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
@@ -7581,42 +8090,16 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
-                        %F% ^ \markup {                                                                  %! REAPPLIED_METRONOME_MARK:SM27 %! SM29
-                        %F%     \fontsize                                                                %! REAPPLIED_METRONOME_MARK:SM27 %! SM29
-                        %F%         #-6                                                                  %! REAPPLIED_METRONOME_MARK:SM27 %! SM29
-                        %F%         \general-align                                                       %! REAPPLIED_METRONOME_MARK:SM27 %! SM29
-                        %F%             #Y                                                               %! REAPPLIED_METRONOME_MARK:SM27 %! SM29
-                        %F%             #DOWN                                                            %! REAPPLIED_METRONOME_MARK:SM27 %! SM29
-                        %F%             \note-by-number                                                  %! REAPPLIED_METRONOME_MARK:SM27 %! SM29
-                        %F%                 #2                                                           %! REAPPLIED_METRONOME_MARK:SM27 %! SM29
-                        %F%                 #0                                                           %! REAPPLIED_METRONOME_MARK:SM27 %! SM29
-                        %F%                 #1                                                           %! REAPPLIED_METRONOME_MARK:SM27 %! SM29
-                        %F%     \upright                                                                 %! REAPPLIED_METRONOME_MARK:SM27 %! SM29
-                        %F%         {                                                                    %! REAPPLIED_METRONOME_MARK:SM27 %! SM29
-                        %F%             =                                                                %! REAPPLIED_METRONOME_MARK:SM27 %! SM29
-                        %F%             90                                                               %! REAPPLIED_METRONOME_MARK:SM27 %! SM29
-                        %F%         }                                                                    %! REAPPLIED_METRONOME_MARK:SM27 %! SM29
-                        %F%     }                                                                        %! REAPPLIED_METRONOME_MARK:SM27 %! SM29
-                            ^ \markup {                                                                  %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                \with-color                                                              %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                    #(x11-color 'green4)                                                 %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                    {                                                                    %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                        \fontsize                                                        %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            #-6                                                          %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            \general-align                                               %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                #Y                                                       %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                #DOWN                                                    %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                \note-by-number                                          %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                    #2                                                   %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                    #0                                                   %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                    #1                                                   %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                        \upright                                                         %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            {                                                            %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                =                                                        %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                90                                                       %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            }                                                            %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                    }                                                                    %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                }                                                                        %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
+                            \startTextSpan                                                               %! SM29
+                <BLANKLINE>
+                            % GlobalSkips [measure 2]                                                    %! SM4
+                            \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
+                            s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
+                            \revert TextSpanner.staff-padding                                            %! OC
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7627,6 +8110,9 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                                 %! SM4
+                                c'4.
+                <BLANKLINE>
+                                % MusicVoice [measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -7677,91 +8163,129 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
                             #'((Y-offset . 0) (alignment-distances . (8)))                               %! SEGMENT_LAYOUT:LMM3
+                        %F% \once \override TextSpanner.bound-details.left.text =                        %! EXPLICIT_METRONOME_MARK:SM27
+                        %F% \markup {                                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%     \fontsize                                                                %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%         #-6                                                                  %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%         \general-align                                                       %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%             #Y                                                               %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%             #DOWN                                                            %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%             \note-by-number                                                  %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%                 #2                                                           %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%                 #0                                                           %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%                 #1                                                           %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%     \upright                                                                 %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%         {                                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%             =                                                                %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%             112                                                              %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%         }                                                                    %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%     \hspace                                                                  %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%         #1                                                                   %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%     }                                                                        %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
+                        %F% \once \override TextSpanner.bound-details.right.text =                       %! REDUNDANT_METRONOME_MARK:SM27
+                        %F% \markup {                                                                    %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%     \concat                                                                  %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%         {                                                                    %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%             \hspace                                                          %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%                 #0.5                                                         %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%             \line                                                            %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%                 {                                                            %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%                     \fontsize                                                %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%                         #-6                                                  %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%                         \general-align                                       %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%                             #Y                                               %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%                             #DOWN                                            %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%                             \note-by-number                                  %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%                                 #2                                           %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%                                 #0                                           %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%                                 #1                                           %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%                     \upright                                                 %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%                         {                                                    %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%                             =                                                %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%                             112                                              %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%                         }                                                    %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%                 }                                                            %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%         }                                                                    %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%     }                                                                        %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = \markup {
+                                \null
+                                }                                                                        %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.left.text =                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                            \markup {                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                \with-color                                                              %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                    #(x11-color 'blue)                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                    {                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                        \fontsize                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                            #-6                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                            \general-align                                               %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                #Y                                                       %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                #DOWN                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                \note-by-number                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                    #2                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                    #0                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                    #1                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                        \upright                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                            {                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                =                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                112                                                      %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                            }                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                        \hspace                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                            #1                                                           %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                    }                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                }                                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right.text =                       %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                            \markup {                                                                    %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                \with-color                                                              %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                    #(x11-color 'DeepPink1)                                              %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                    \concat                                                              %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                        {                                                                %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                            \hspace                                                      %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                #0.5                                                     %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                            \line                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                {                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                    \fontsize                                            %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                        #-6                                              %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                        \general-align                                   %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                            #Y                                           %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                            #DOWN                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                            \note-by-number                              %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                                #2                                       %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                                #0                                       %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                                #1                                       %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                    \upright                                             %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                        {                                                %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                            =                                            %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                            112                                          %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                        }                                                %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                }                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                        }                                                                %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                }                                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
-                        %F% ^ \markup {                                                                  %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%     \fontsize                                                                %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%         #-6                                                                  %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%         \general-align                                                       %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%             #Y                                                               %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%             #DOWN                                                            %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%             \note-by-number                                                  %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%                 #2                                                           %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%                 #0                                                           %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%                 #1                                                           %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%     \upright                                                                 %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%         {                                                                    %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%             =                                                                %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%             112                                                              %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%         }                                                                    %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                        %F%     }                                                                        %! EXPLICIT_METRONOME_MARK:SM27 %! SM29
-                            ^ \markup {                                                                  %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                \with-color                                                              %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                    #(x11-color 'blue)                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                    {                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                        \fontsize                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            #-6                                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            \general-align                                               %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                #Y                                                       %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                #DOWN                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                \note-by-number                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                    #2                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                    #0                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                    #1                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                        \upright                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            {                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                =                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                112                                                      %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            }                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                    }                                                                    %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                }                                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
+                            \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
+                            \once \override TextSpanner.bound-details.left-broken.text = \markup {
+                                \null
+                                }                                                                        %! SM29
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 3/8
-                        %F% ^ \markup {                                                                  %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%     \fontsize                                                                %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%         #-6                                                                  %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%         \general-align                                                       %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%             #Y                                                               %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%             #DOWN                                                            %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%             \note-by-number                                                  %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%                 #2                                                           %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%                 #0                                                           %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%                 #1                                                           %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%     \upright                                                                 %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%         {                                                                    %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%             =                                                                %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%             112                                                              %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%         }                                                                    %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%     }                                                                        %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                            ^ \markup {                                                                  %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                \with-color                                                              %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                    #(x11-color 'DeepPink1)                                              %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                    {                                                                    %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                        \fontsize                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            #-6                                                          %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            \general-align                                               %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                #Y                                                       %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                #DOWN                                                    %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                \note-by-number                                          %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                    #2                                                   %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                    #0                                                   %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                    #1                                                   %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                        \upright                                                         %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            {                                                            %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                =                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                112                                                      %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            }                                                            %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                    }                                                                    %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                }                                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7790,11 +8314,12 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
-            ...     time_signatures=[(3, 8)],
+            ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
             ...     baca.scope('GlobalSkips', 1),
             ...     baca.metronome_mark('112'),
+            ...     baca.text_spanner_staff_padding(4),
             ...     )
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
@@ -7829,10 +8354,64 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \override TextSpanner.staff-padding = #4                                     %! OC
                             \autoPageBreaksOff                                                           %! SEGMENT_LAYOUT:LMM1
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
                             #'((Y-offset . 0) (alignment-distances . (8)))                               %! SEGMENT_LAYOUT:LMM3
+                        %F% \once \override TextSpanner.bound-details.left.text =                        %! REDUNDANT_METRONOME_MARK:SM27
+                        %F% \markup {                                                                    %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%     \fontsize                                                                %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%         #-6                                                                  %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%         \general-align                                                       %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%             #Y                                                               %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%             #DOWN                                                            %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%             \note-by-number                                                  %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%                 #2                                                           %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%                 #0                                                           %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%                 #1                                                           %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%     \upright                                                                 %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%         {                                                                    %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%             =                                                                %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%             112                                                              %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%         }                                                                    %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%     \hspace                                                                  %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%         #1                                                                   %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%     }                                                                        %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = \markup {
+                                \null
+                                }                                                                        %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.left.text =                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                            \markup {                                                                    %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                \with-color                                                              %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                    #(x11-color 'DeepPink1)                                              %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                    {                                                                    %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                        \fontsize                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                            #-6                                                          %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                            \general-align                                               %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                #Y                                                       %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                #DOWN                                                    %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                \note-by-number                                          %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                    #2                                                   %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                    #0                                                   %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                    #1                                                   %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                        \upright                                                         %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                            {                                                            %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                =                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                112                                                      %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                            }                                                            %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                        \hspace                                                          %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                            #1                                                           %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                    }                                                                    %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                }                                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
@@ -7840,42 +8419,16 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \pageBreak                                                                   %! SEGMENT_LAYOUT:LMM3
                             s1 * 3/8
-                        %F% ^ \markup {                                                                  %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%     \fontsize                                                                %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%         #-6                                                                  %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%         \general-align                                                       %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%             #Y                                                               %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%             #DOWN                                                            %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%             \note-by-number                                                  %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%                 #2                                                           %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%                 #0                                                           %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%                 #1                                                           %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%     \upright                                                                 %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%         {                                                                    %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%             =                                                                %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%             112                                                              %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%         }                                                                    %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                        %F%     }                                                                        %! REDUNDANT_METRONOME_MARK:SM27 %! SM29
-                            ^ \markup {                                                                  %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                \with-color                                                              %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                    #(x11-color 'DeepPink1)                                              %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                    {                                                                    %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                        \fontsize                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            #-6                                                          %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            \general-align                                               %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                #Y                                                       %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                #DOWN                                                    %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                \note-by-number                                          %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                    #2                                                   %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                    #0                                                   %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                    #1                                                   %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                        \upright                                                         %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            {                                                            %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                =                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                                112                                                      %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                            }                                                            %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                    }                                                                    %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
-                                }                                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
+                            \startTextSpan                                                               %! SM29
+                <BLANKLINE>
+                            % GlobalSkips [measure 2]                                                    %! SM4
+                            \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
+                            s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
+                            \revert TextSpanner.staff-padding                                            %! OC
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7886,6 +8439,9 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                                 %! SM4
+                                c'4.
+                <BLANKLINE>
+                                % MusicVoice [measure 2]                                                 %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -8038,10 +8594,19 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
                                     #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
@@ -8064,6 +8629,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -8111,10 +8677,19 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
                                     #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
@@ -8137,6 +8712,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -8230,10 +8806,19 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
                                     #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
@@ -8256,6 +8841,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -8361,6 +8947,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
@@ -8370,10 +8957,19 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
                                     #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
@@ -8396,6 +8992,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -8522,6 +9119,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
@@ -8531,10 +9129,19 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
                                     #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
@@ -8557,6 +9164,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>

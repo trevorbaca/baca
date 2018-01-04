@@ -387,10 +387,19 @@ class ClusterCommand(Command):
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
                         % GlobalSkips [measure 1]                                                    %! SM4
+                        \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                        \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                        \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                        \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                        \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                        \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                        \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                        \once \override TextSpanner.dash-period = 0                                  %! SM29
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \bar ""                                                                      %! EMPTY_START_BAR:SM2
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
+                        \startTextSpan                                                               %! SM29
                         ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                             \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
                                 #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
@@ -413,6 +422,7 @@ class ClusterCommand(Command):
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
+                        \stopTextSpan                                                                %! SM29
                         \override Score.BarLine.transparent = ##f                                    %! SM5
                         \bar "|"                                                                     %! SM5
             <BLANKLINE>
@@ -615,10 +625,19 @@ class ClusterCommand(Command):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
                                     #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
@@ -641,6 +660,7 @@ class ClusterCommand(Command):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -761,10 +781,19 @@ class ClusterCommand(Command):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
                                     #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
@@ -787,6 +816,7 @@ class ClusterCommand(Command):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -899,10 +929,19 @@ class ClusterCommand(Command):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
                                     #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
@@ -925,6 +964,7 @@ class ClusterCommand(Command):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -1047,10 +1087,19 @@ class ClusterCommand(Command):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
                                     #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
@@ -1073,6 +1122,7 @@ class ClusterCommand(Command):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -1185,10 +1235,19 @@ class ClusterCommand(Command):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
                                     #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
@@ -1211,6 +1270,7 @@ class ClusterCommand(Command):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -1324,10 +1384,19 @@ class ClusterCommand(Command):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \once \override TextSpanner.Y-extent = ##f                                   %! SM29
+                            \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
+                            \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
+                            \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
+                            \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \bar ""                                                                      %! EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
+                            \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
                                     #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
@@ -1350,6 +1419,7 @@ class ClusterCommand(Command):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
+                            \stopTextSpan                                                                %! SM29
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
