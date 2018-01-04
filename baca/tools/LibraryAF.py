@@ -3511,7 +3511,8 @@ class LibraryAF(abjad.AbjadObject):
             left_hspace=0.5,
             right_broken_arrow=False,
             right_broken_padding=0,
-            right_padding=1.75,
+            right_broken_text=False,
+            right_padding=0.5,
             )
 
     @staticmethod

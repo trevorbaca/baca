@@ -1150,6 +1150,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 \override TextScript.staff-padding = #6                                  %! OC
                                 \override TupletBracket.staff-padding = #5                               %! OC
                                 r8
+                                \once \override TextSpanner.Y-extent = ##f
                                 \once \override TextSpanner.arrow-width = 0.25
                                 \once \override TextSpanner.bound-details.left-broken.text = ##f
                                 \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center
@@ -1165,9 +1166,20 @@ class LibraryTZ(abjad.AbjadObject):
                                     }
                                 \once \override TextSpanner.bound-details.right-broken.arrow = ##f
                                 \once \override TextSpanner.bound-details.right-broken.padding = 0
+                                \once \override TextSpanner.bound-details.right-broken.text = ##f
                                 \once \override TextSpanner.bound-details.right.arrow = ##t
-                                \once \override TextSpanner.bound-details.right.padding = 1.75
+                                \once \override TextSpanner.bound-details.right.padding = 0.5
                                 \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center
+                                \once \override TextSpanner.bound-details.right.text = \markup {
+                                    \concat
+                                        {
+                                            \hspace
+                                                #0.0
+                                            \whiteout
+                                                \upright
+                                                    ord.
+                                        }
+                                    }
                                 \once \override TextSpanner.dash-fraction = 0.25
                                 \once \override TextSpanner.dash-period = 1.5
                                 c'16
@@ -1198,11 +1210,6 @@ class LibraryTZ(abjad.AbjadObject):
                             \times 4/5 {
                                 a'16
                                 \stopTextSpan
-                                ^ \markup {
-                                    \whiteout
-                                        \upright
-                                            ord.
-                                    }
                                 r4
                                 \revert TextSpanner.staff-padding                                        %! OC
                                 \revert TextScript.staff-padding                                         %! OC
@@ -1262,6 +1269,7 @@ class LibraryTZ(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 \override TextSpanner.staff-padding = #6                                 %! OC
+                                \once \override TextSpanner.Y-extent = ##f
                                 \once \override TextSpanner.arrow-width = 0.25
                                 \once \override TextSpanner.bound-details.left-broken.text = ##f
                                 \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center
@@ -1277,9 +1285,20 @@ class LibraryTZ(abjad.AbjadObject):
                                     }
                                 \once \override TextSpanner.bound-details.right-broken.arrow = ##f
                                 \once \override TextSpanner.bound-details.right-broken.padding = 0
+                                \once \override TextSpanner.bound-details.right-broken.text = ##f
                                 \once \override TextSpanner.bound-details.right.arrow = ##t
-                                \once \override TextSpanner.bound-details.right.padding = 1.75
+                                \once \override TextSpanner.bound-details.right.padding = 0.5
                                 \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center
+                                \once \override TextSpanner.bound-details.right.text = \markup {
+                                    \concat
+                                        {
+                                            \hspace
+                                                #0.0
+                                            \whiteout
+                                                \upright
+                                                    ord.
+                                        }
+                                    }
                                 \once \override TextSpanner.dash-fraction = 0.25
                                 \once \override TextSpanner.dash-period = 1.5
                                 fs''16
@@ -1296,11 +1315,6 @@ class LibraryTZ(abjad.AbjadObject):
                                 g''16
                                 ]
                                 \stopTextSpan
-                                ^ \markup {
-                                    \whiteout
-                                        \upright
-                                            ord.
-                                    }
                                 \revert TextSpanner.staff-padding                                        %! OC
                             }
                             \times 4/5 {
