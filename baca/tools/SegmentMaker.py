@@ -44,7 +44,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                         \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                         \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                        \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                        \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                         \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                         \once \override TextSpanner.dash-period = 0                                  %! SM29
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -162,6 +162,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_margin_markup',
         '_measures_per_stage',
         '_metronome_mark_measure_map',
+        '_metronome_mark_stem_height',
         '_metronome_marks',
         '_midi',
         '_omit_empty_start_bar',
@@ -280,6 +281,7 @@ class SegmentMaker(abjad.SegmentMaker):
         margin_markup=None,
         measures_per_stage=None,
         metronome_mark_measure_map=None,
+        metronome_mark_stem_height=1.5,
         metronome_marks=None,
         omit_empty_start_bar=None,
         omit_stage_number_markup=None,
@@ -352,6 +354,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._margin_markup = margin_markup
         self._measures_per_stage = measures_per_stage
         self._metronome_mark_measure_map = metronome_mark_measure_map
+        self._metronome_mark_stem_height = metronome_mark_stem_height
         if metronome_marks is not None:
             assert isinstance(metronome_marks, abjad.TypedOrderedDict)
         self._metronome_marks = metronome_marks
@@ -424,7 +427,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -1015,6 +1018,8 @@ class SegmentMaker(abjad.SegmentMaker):
             left_broken_padding=0,
             left_broken_text=left_broken_text,
             parenthesize=False,
+            right_padding=0,
+            stem_height=self.metronome_mark_stem_height,
             )
         abjad.attach(spanner, skips, site='SM29')
         if not self.metronome_mark_measure_map:
@@ -2329,7 +2334,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -2427,7 +2432,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -2534,7 +2539,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -2641,7 +2646,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -2741,7 +2746,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -2864,7 +2869,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -2972,7 +2977,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 6/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -3394,7 +3399,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -3611,7 +3616,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -3842,7 +3847,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -3931,7 +3936,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -4022,7 +4027,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -4104,7 +4109,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -4195,7 +4200,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -4275,7 +4280,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -4366,7 +4371,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -4456,7 +4461,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -4579,7 +4584,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -4704,7 +4709,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -4831,7 +4836,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -4968,7 +4973,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -5156,7 +5161,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -5279,7 +5284,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -5539,7 +5544,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -5750,7 +5755,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -6062,7 +6067,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -6197,7 +6202,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -6341,7 +6346,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -6481,7 +6486,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -6621,7 +6626,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -6818,7 +6823,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -7018,7 +7023,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -7147,7 +7152,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -7285,7 +7290,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -7425,7 +7430,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -7565,7 +7570,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -7762,7 +7767,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -7916,7 +7921,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -8074,7 +8079,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %F%             \note-by-number                                                  %! EXPLICIT_METRONOME_MARK:SM27
                         %F%                 #2                                                           %! EXPLICIT_METRONOME_MARK:SM27
                         %F%                 #0                                                           %! EXPLICIT_METRONOME_MARK:SM27
-                        %F%                 #1                                                           %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%                 #1.5                                                         %! EXPLICIT_METRONOME_MARK:SM27
                         %F%     \upright                                                                 %! EXPLICIT_METRONOME_MARK:SM27
                         %F%         {                                                                    %! EXPLICIT_METRONOME_MARK:SM27
                         %F%             =                                                                %! EXPLICIT_METRONOME_MARK:SM27
@@ -8102,7 +8107,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 \note-by-number                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                                     #2                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                                     #0                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                    #1                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                    #1.5                                                 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                         \upright                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                             {                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                                 =                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
@@ -8114,7 +8119,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }                                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -8216,6 +8221,14 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._metronome_mark_measure_map
 
     @property
+    def metronome_mark_stem_height(self):
+        r'''Gets metronome mark stem height.
+
+        Set to number or none.
+        '''
+        return self._metronome_mark_stem_height
+
+    @property
     def metronome_marks(self):
         r'''Gets metronome marks.
 
@@ -8284,7 +8297,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %F%             \note-by-number                                                  %! EXPLICIT_METRONOME_MARK:SM27
                         %F%                 #2                                                           %! EXPLICIT_METRONOME_MARK:SM27
                         %F%                 #0                                                           %! EXPLICIT_METRONOME_MARK:SM27
-                        %F%                 #1                                                           %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%                 #1.5                                                         %! EXPLICIT_METRONOME_MARK:SM27
                         %F%     \upright                                                                 %! EXPLICIT_METRONOME_MARK:SM27
                         %F%         {                                                                    %! EXPLICIT_METRONOME_MARK:SM27
                         %F%             =                                                                %! EXPLICIT_METRONOME_MARK:SM27
@@ -8312,7 +8325,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 \note-by-number                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                                     #2                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                                     #0                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                    #1                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                    #1.5                                                 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                         \upright                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                             {                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                                 =                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
@@ -8324,7 +8337,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }                                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -8425,7 +8438,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %F%             \note-by-number                                                  %! EXPLICIT_METRONOME_MARK:SM27
                         %F%                 #2                                                           %! EXPLICIT_METRONOME_MARK:SM27
                         %F%                 #0                                                           %! EXPLICIT_METRONOME_MARK:SM27
-                        %F%                 #1                                                           %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%                 #1.5                                                         %! EXPLICIT_METRONOME_MARK:SM27
                         %F%     \upright                                                                 %! EXPLICIT_METRONOME_MARK:SM27
                         %F%         {                                                                    %! EXPLICIT_METRONOME_MARK:SM27
                         %F%             =                                                                %! EXPLICIT_METRONOME_MARK:SM27
@@ -8453,7 +8466,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 \note-by-number                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                                     #2                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                                     #0                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                    #1                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                    #1.5                                                 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                         \upright                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                             {                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                                 =                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
@@ -8465,7 +8478,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }                                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -8569,7 +8582,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %F%             \note-by-number                                                  %! REAPPLIED_METRONOME_MARK:SM27
                         %F%                 #2                                                           %! REAPPLIED_METRONOME_MARK:SM27
                         %F%                 #0                                                           %! REAPPLIED_METRONOME_MARK:SM27
-                        %F%                 #1                                                           %! REAPPLIED_METRONOME_MARK:SM27
+                        %F%                 #1.5                                                         %! REAPPLIED_METRONOME_MARK:SM27
                         %F%     \upright                                                                 %! REAPPLIED_METRONOME_MARK:SM27
                         %F%         {                                                                    %! REAPPLIED_METRONOME_MARK:SM27
                         %F%             =                                                                %! REAPPLIED_METRONOME_MARK:SM27
@@ -8597,7 +8610,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 \note-by-number                                          %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
                                                     #2                                                   %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
                                                     #0                                                   %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
-                                                    #1                                                   %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
+                                                    #1.5                                                 %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
                                         \upright                                                         %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
                                             {                                                            %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
                                                 =                                                        %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15
@@ -8609,7 +8622,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }                                                                        %! REAPPLIED_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -8702,7 +8715,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %F%             \note-by-number                                                  %! EXPLICIT_METRONOME_MARK:SM27
                         %F%                 #2                                                           %! EXPLICIT_METRONOME_MARK:SM27
                         %F%                 #0                                                           %! EXPLICIT_METRONOME_MARK:SM27
-                        %F%                 #1                                                           %! EXPLICIT_METRONOME_MARK:SM27
+                        %F%                 #1.5                                                         %! EXPLICIT_METRONOME_MARK:SM27
                         %F%     \upright                                                                 %! EXPLICIT_METRONOME_MARK:SM27
                         %F%         {                                                                    %! EXPLICIT_METRONOME_MARK:SM27
                         %F%             =                                                                %! EXPLICIT_METRONOME_MARK:SM27
@@ -8716,7 +8729,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %F%     \concat                                                                  %! REDUNDANT_METRONOME_MARK:SM27
                         %F%         {                                                                    %! REDUNDANT_METRONOME_MARK:SM27
                         %F%             \hspace                                                          %! REDUNDANT_METRONOME_MARK:SM27
-                        %F%                 #0.5                                                         %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%                 #-0.5                                                        %! REDUNDANT_METRONOME_MARK:SM27
                         %F%             \line                                                            %! REDUNDANT_METRONOME_MARK:SM27
                         %F%                 {                                                            %! REDUNDANT_METRONOME_MARK:SM27
                         %F%                     \fontsize                                                %! REDUNDANT_METRONOME_MARK:SM27
@@ -8727,7 +8740,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %F%                             \note-by-number                                  %! REDUNDANT_METRONOME_MARK:SM27
                         %F%                                 #2                                           %! REDUNDANT_METRONOME_MARK:SM27
                         %F%                                 #0                                           %! REDUNDANT_METRONOME_MARK:SM27
-                        %F%                                 #1                                           %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%                                 #1.5                                         %! REDUNDANT_METRONOME_MARK:SM27
                         %F%                     \upright                                                 %! REDUNDANT_METRONOME_MARK:SM27
                         %F%                         {                                                    %! REDUNDANT_METRONOME_MARK:SM27
                         %F%                             =                                                %! REDUNDANT_METRONOME_MARK:SM27
@@ -8755,7 +8768,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 \note-by-number                                          %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                                     #2                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                                     #0                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
-                                                    #1                                                   %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
+                                                    #1.5                                                 %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                         \upright                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                             {                                                            %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
                                                 =                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15
@@ -8767,7 +8780,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }                                                                        %! EXPLICIT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right.text =                       %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
                             \markup {                                                                    %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
@@ -8776,7 +8789,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \concat                                                              %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
                                         {                                                                %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
                                             \hspace                                                      %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                #0.5                                                     %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                #-0.5                                                    %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
                                             \line                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
                                                 {                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
                                                     \fontsize                                            %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
@@ -8787,7 +8800,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                                             \note-by-number                              %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
                                                                 #2                                       %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
                                                                 #0                                       %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                                #1                                       %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                                #1.5                                     %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
                                                     \upright                                             %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
                                                         {                                                %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
                                                             =                                            %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
@@ -8898,7 +8911,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %F%             \note-by-number                                                  %! REDUNDANT_METRONOME_MARK:SM27
                         %F%                 #2                                                           %! REDUNDANT_METRONOME_MARK:SM27
                         %F%                 #0                                                           %! REDUNDANT_METRONOME_MARK:SM27
-                        %F%                 #1                                                           %! REDUNDANT_METRONOME_MARK:SM27
+                        %F%                 #1.5                                                         %! REDUNDANT_METRONOME_MARK:SM27
                         %F%     \upright                                                                 %! REDUNDANT_METRONOME_MARK:SM27
                         %F%         {                                                                    %! REDUNDANT_METRONOME_MARK:SM27
                         %F%             =                                                                %! REDUNDANT_METRONOME_MARK:SM27
@@ -8926,7 +8939,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                                 \note-by-number                                          %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
                                                     #2                                                   %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
                                                     #0                                                   %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
-                                                    #1                                                   %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
+                                                    #1.5                                                 %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
                                         \upright                                                         %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
                                             {                                                            %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
                                                 =                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15
@@ -8938,7 +8951,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 }                                                                        %! REDUNDANT_METRONOME_MARK_WITH_COLOR:SM15 %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -9128,7 +9141,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -9211,7 +9224,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -9333,7 +9346,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -9424,7 +9437,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -9517,7 +9530,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -9601,7 +9614,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -9696,7 +9709,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -9793,7 +9806,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -9944,7 +9957,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -10116,7 +10129,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.bound-details.right-broken.padding = 0           %! SM29
                             \once \override TextSpanner.bound-details.right-broken.text = ##f            %! SM29
-                            \once \override TextSpanner.bound-details.right.padding = 1                  %! SM29
+                            \once \override TextSpanner.bound-details.right.padding = 0                  %! SM29
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8

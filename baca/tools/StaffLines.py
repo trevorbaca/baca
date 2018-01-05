@@ -23,7 +23,7 @@ class StaffLines(abjad.AbjadObject):
     def __init__(self, line_count=None, hide=None):
         if line_count is not None:
             assert isinstance(line_count, int), repr(line_count)
-            assert 0 < line_count, repr(line_count)
+            assert 0 <= line_count, repr(line_count)
         self._line_count = line_count
         if hide is not None:
             hide = bool(hide)
