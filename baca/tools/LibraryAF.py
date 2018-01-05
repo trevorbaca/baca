@@ -4789,12 +4789,12 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def dynamic_text_x_extent_false(selector='baca.pleaf(0)'):
+    def dynamic_text_x_extent_zero(selector='baca.pleaf(0)'):
         r'''Overrides dynamic text X-extent.
         '''
         return baca.OverrideCommand(
             attribute='X_extent',
-            value=False,
+            value=(0, 0),
             grob='dynamic_text',
             selector=selector,
             )
