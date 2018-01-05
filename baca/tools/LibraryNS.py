@@ -387,6 +387,18 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
+    def ottava_bracket_staff_padding(n, selector='baca.leaves()'):
+        r'''Overrides ottava bracket staff padding.
+        '''
+        return baca.OverrideCommand(
+            attribute='staff_padding',
+            context='Staff',
+            value=n,
+            grob='ottava_bracket',
+            selector=selector,
+            )
+
+    @staticmethod
     def page(*arguments):
         r'''Makes page specifier.
         '''

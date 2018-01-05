@@ -24,6 +24,7 @@ Bases
       ~baca.tools.LibraryTZ.LibraryTZ.tag
       ~baca.tools.LibraryTZ.LibraryTZ.tenuti
       ~baca.tools.LibraryTZ.LibraryTZ.text_script_color
+      ~baca.tools.LibraryTZ.LibraryTZ.text_script_extra_offset
       ~baca.tools.LibraryTZ.LibraryTZ.text_script_padding
       ~baca.tools.LibraryTZ.LibraryTZ.text_script_staff_padding
       ~baca.tools.LibraryTZ.LibraryTZ.text_scripts_down
@@ -31,6 +32,7 @@ Bases
       ~baca.tools.LibraryTZ.LibraryTZ.text_spanner
       ~baca.tools.LibraryTZ.LibraryTZ.text_spanner_staff_padding
       ~baca.tools.LibraryTZ.LibraryTZ.tie
+      ~baca.tools.LibraryTZ.LibraryTZ.tie_next
       ~baca.tools.LibraryTZ.LibraryTZ.ties_down
       ~baca.tools.LibraryTZ.LibraryTZ.ties_up
       ~baca.tools.LibraryTZ.LibraryTZ.time_signature_extra_offset
@@ -64,6 +66,8 @@ Class & static methods
 
 .. automethod:: baca.tools.LibraryTZ.LibraryTZ.text_script_color
 
+.. automethod:: baca.tools.LibraryTZ.LibraryTZ.text_script_extra_offset
+
 .. automethod:: baca.tools.LibraryTZ.LibraryTZ.text_script_padding
 
 .. automethod:: baca.tools.LibraryTZ.LibraryTZ.text_script_staff_padding
@@ -77,6 +81,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryTZ.LibraryTZ.text_spanner_staff_padding
 
 .. automethod:: baca.tools.LibraryTZ.LibraryTZ.tie
+
+.. automethod:: baca.tools.LibraryTZ.LibraryTZ.tie_next
 
 .. automethod:: baca.tools.LibraryTZ.LibraryTZ.ties_down
 

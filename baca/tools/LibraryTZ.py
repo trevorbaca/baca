@@ -434,6 +434,17 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
+    def text_script_extra_offset(pair, selector='baca.leaves()'):
+        r'''Overrides text script extra offset.
+        '''
+        return baca.OverrideCommand(
+            attribute='extra_offset',
+            value=pair,
+            grob='text_script',
+            selector=selector,
+            )
+
+    @staticmethod
     def text_script_padding(n, selector='baca.leaves()'):
         r'''Overrides text script padding.
 
@@ -1541,6 +1552,16 @@ class LibraryTZ(abjad.AbjadObject):
         return baca.SpannerCommand(
             selector=selector,
             spanner=abjad.Tie(repeat_ties=repeat),
+            )
+
+    # TODO: make this work
+    @staticmethod
+    def tie_next(selector='baca.leaf(-1)'):
+        r'''Ties to next leaf.
+        '''
+        return baca.IndicatorCommand(
+            indicators=['tie from me'],
+            selector=selector,
             )
 
     @staticmethod
