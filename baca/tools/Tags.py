@@ -157,7 +157,7 @@ class Tags(abjad.Enumeration):
     ### OTHER BUILD TAGS ###
 
     CLOCK_TIME_MARKUP = enum.auto()
-    EMPTY_START_BAR = enum.auto()
+    SEGMENT_EMPTY_START_BAR = enum.auto()
     FERMATA_BAR_LINE = enum.auto()
     FIGURE_NAME_MARKUP = enum.auto()
     LAYOUT = enum.auto()
@@ -178,6 +178,9 @@ class Tags(abjad.Enumeration):
         Returns string.
         '''
         if build is not None:
-            return f'{build.upper()}_{tag.name}'
+            words = abjad.String(build).delimit_words()
+            build = '_'.join(words)
+            build = build.upper()
+            return f'{build}_{tag.name}'
         else:
             return f'SEGMENT_{tag.name}'
