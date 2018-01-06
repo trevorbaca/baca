@@ -114,6 +114,7 @@ baca.tools
    StaffPositionCommand
    SuiteCommand
    TagCommand
+   TieCorrectionCommand
    VoltaCommand
 
 .. autosummary::
@@ -147,6 +148,7 @@ baca.tools
    StaffPositionCommand
    SuiteCommand
    TagCommand
+   TieCorrectionCommand
    VoltaCommand
 
 --------

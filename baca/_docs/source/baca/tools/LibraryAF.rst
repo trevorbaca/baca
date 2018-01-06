@@ -57,7 +57,7 @@ Bases
       ~baca.tools.LibraryAF.LibraryAF.dynamic_line_spanner_staff_padding
       ~baca.tools.LibraryAF.LibraryAF.dynamic_line_spanner_up
       ~baca.tools.LibraryAF.LibraryAF.dynamic_text_extra_offset
-      ~baca.tools.LibraryAF.LibraryAF.dynamic_text_x_extent_false
+      ~baca.tools.LibraryAF.LibraryAF.dynamic_text_x_extent_zero
       ~baca.tools.LibraryAF.LibraryAF.dynamics
       ~baca.tools.LibraryAF.LibraryAF.dynamics_down
       ~baca.tools.LibraryAF.LibraryAF.dynamics_up
@@ -146,7 +146,7 @@ Class & static methods
 
 .. automethod:: baca.tools.LibraryAF.LibraryAF.dynamic_text_extra_offset
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.dynamic_text_x_extent_false
+.. automethod:: baca.tools.LibraryAF.LibraryAF.dynamic_text_x_extent_zero
 
 .. automethod:: baca.tools.LibraryAF.LibraryAF.dynamics
 
