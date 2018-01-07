@@ -1552,7 +1552,7 @@ class LibraryTZ(abjad.AbjadObject):
         assert isinstance(repeat, bool), repr(repeat)
         return baca.SpannerCommand(
             selector=selector,
-            spanner=abjad.Tie(repeat_ties=repeat),
+            spanner=abjad.Tie(repeat=repeat),
             )
 
     @staticmethod

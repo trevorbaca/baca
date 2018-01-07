@@ -74,11 +74,11 @@ class TieCorrectionCommand(Command):
                 new_tie = abjad.new(current_tie)
             elif current_tie is None and next_tie is not None:
                 new_leaves = [current_leaf] + list(next_tie)
-                new_tie = abjad.Tie(repeat_ties=self.repeat)
+                new_tie = abjad.Tie(repeat=self.repeat)
             else:
                 assert current_tie is None and next_tie is None
                 new_leaves = [current_leaf, next_leaf]
-                new_tie = abjad.Tie(repeat_ties=self.repeat)
+                new_tie = abjad.Tie(repeat=self.repeat)
         else:
             previous_leaf = abjad.inspect(current_leaf).get_leaf(-1)
             if previous_leaf is None:
@@ -95,11 +95,11 @@ class TieCorrectionCommand(Command):
                 new_tie = abjad.new(previous_tie)
             elif previous_tie is None and current_tie is not None:
                 new_leaves = [previous_leaf] + list(current_tie)
-                new_tie = abjad.Tie(repeat_ties=self.repeat)
+                new_tie = abjad.Tie(repeat=self.repeat)
             else:
                 assert previous_tie is None and current_tie is None
                 new_leaves = [previous_leaf, current_leaf]
-                new_tie = abjad.Tie(repeat_ties=self.repeat)
+                new_tie = abjad.Tie(repeat=self.repeat)
         new_leaves = abjad.select(new_leaves)
         for leaf in new_leaves:
             abjad.detach(abjad.Tie, leaf)
