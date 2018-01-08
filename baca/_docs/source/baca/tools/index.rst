@@ -292,3 +292,18 @@ baca.tools
    PartitionDivisionCallback
    SplitByDurationsDivisionCallback
    SplitByRoundedRatiosDivisionCallback
+
+--------
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   PitchTreeSpanner
+
+.. autosummary::
+   :nosignatures:
+
+   PitchTreeSpanner

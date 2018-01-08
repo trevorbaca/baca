@@ -1038,7 +1038,8 @@ class PitchTree(Tree):
             direction = cell_indices
         cell_index = 0
         for cell_spanner in cell_spanners:
-            negative_level = abjad.inspect(cell_spanner).get_indicator(int)
+            #negative_level = abjad.inspect(cell_spanner).get_indicator(int)
+            negative_level = cell_spanner.level
             if negative_level != -2:
                 continue
             markup = abjad.Markup(cell_index, direction=direction)
@@ -1065,12 +1066,12 @@ class PitchTree(Tree):
                 current_color = 'red'
 
     def _get_cell_spanners(self, voice):
-        spanners = set()
+        spanners = []
+        prototype = baca.PitchTreeSpanner
         for leaf in abjad.iterate(voice).leaves():
-            spanners_ = abjad.inspect(leaf).get_spanners()
-            spanners.update(spanners_)
-        class_ = abjad.Spanner
-        spanners = [_ for _ in spanners if _.__class__ is class_]
+            for spanner in abjad.inspect(leaf).get_spanners(prototype):
+                if spanner not in spanners:
+                    spanners.append(spanner)
         return spanners
 
     def _label_set_classes(
@@ -1129,9 +1130,10 @@ class PitchTree(Tree):
                     leaves_with_skips.append(leaf)
                     leaf = abjad.inspect(leaf).get_leaf(n=1)
                 leaves_with_skips.append(leaf)
-                spanner = abjad.Spanner()
+                #spanner = abjad.Spanner()
                 negative_level = node._get_level(negative=True)
-                abjad.attach(negative_level, spanner)
+                #abjad.attach(negative_level, spanner)
+                spanner = baca.PitchTreeSpanner(level=negative_level)
                 leaves_with_skips = abjad.select(leaves_with_skips)
                 abjad.attach(spanner, leaves_with_skips)
                 if brackets:
@@ -1146,9 +1148,6 @@ class PitchTree(Tree):
                 )
             if node._is_leftmost_leaf():
                 for parent in node._get_parentage(include_self=True):
-                    #node_markup = parent._get_node_markup(
-                    #    direction=markup_direction,
-                    #    )
                     if parent._expression is not None:
                         node_markup = parent._expression.get_markup()
                         if node_markup is not None:
