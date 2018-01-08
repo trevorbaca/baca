@@ -59,6 +59,19 @@ sfpp = #(make-dynamic-script "sfpp")
 sffz = #(make-dynamic-script "sffz")
 sfffz = #(make-dynamic-script "sfffz")
 
+ffp = #(make-dynamic-script "ffp")
+fffp = #(make-dynamic-script "fffp")
+mf_sub = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:dynamic "mf"
+            #:hspace -0.25
+            #:normal-text #:italic "sub."
+            )
+        )
+    )
+
 %%% SHAPE NOTE HEADS %%%
 
 blackDiamondNoteHead = #(
