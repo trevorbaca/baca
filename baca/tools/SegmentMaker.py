@@ -2198,16 +2198,10 @@ class SegmentMaker(abjad.SegmentMaker):
         if context is not None:
             assert isinstance(context, abjad.Context), repr(context)
         stem = stem or SegmentMaker._indicator_to_stem(indicator)
+        prefix = None
         if redraw is True:
-             # TODO: collapse these two branches?
-            if (getattr(indicator, 'latent', False) or
-                stem in ('INSTRUMENT', 'MARGIN_MARKUP')):
-                tag = SegmentMaker._get_tag(status, stem, prefix='redrawn')
-            else:
-                #raise Exception('FOO?')
-                tag = SegmentMaker._get_tag(status, stem, prefix='redrawn')
-        else:
-            tag = SegmentMaker._get_tag(status, stem)
+            prefix = 'redrawn'
+        tag = SegmentMaker._get_tag(status, stem, prefix=prefix)
         if spanner is not None:
             spanner.attach(
                 indicator,
