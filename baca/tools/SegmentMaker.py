@@ -2218,6 +2218,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 found_wrapper = False
                 for wrapper in abjad.inspect(leaf).wrappers():
                     if wrapper.indicator is indicator:
+                        assert wrapper.spanner is spanner
                         wrapper._alternate = alternate
                         found_wrapper = True
                         break
