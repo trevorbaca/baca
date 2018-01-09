@@ -56,7 +56,6 @@ class LibraryTZ(abjad.AbjadObject):
                         \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                         \once \override TextSpanner.dash-period = 0                                  %! SM29
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                        \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
                         \startTextSpan                                                               %! SM29
@@ -1595,7 +1594,6 @@ class LibraryTZ(abjad.AbjadObject):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
@@ -1698,7 +1696,6 @@ class LibraryTZ(abjad.AbjadObject):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
@@ -2182,7 +2179,6 @@ class LibraryTZ(abjad.AbjadObject):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
@@ -2308,7 +2304,6 @@ class LibraryTZ(abjad.AbjadObject):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
@@ -4359,7 +4354,6 @@ class LibraryTZ(abjad.AbjadObject):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
@@ -4491,7 +4485,6 @@ class LibraryTZ(abjad.AbjadObject):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29

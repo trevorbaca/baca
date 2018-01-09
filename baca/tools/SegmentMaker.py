@@ -48,7 +48,6 @@ class SegmentMaker(abjad.SegmentMaker):
                         \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                         \once \override TextSpanner.dash-period = 0                                  %! SM29
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                        \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
                         \startTextSpan                                                               %! SM29
@@ -165,7 +164,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_metronome_mark_stem_height',
         '_metronome_marks',
         '_midi',
-        '_omit_empty_start_bar',
         '_omit_stage_number_markup',
         '_print_segment_duration',
         '_print_timings',
@@ -283,7 +281,6 @@ class SegmentMaker(abjad.SegmentMaker):
         metronome_mark_measure_map=None,
         metronome_mark_stem_height=1.5,
         metronome_marks=None,
-        omit_empty_start_bar=None,
         omit_stage_number_markup=None,
         print_segment_duration=None,
         print_timings=None,
@@ -359,9 +356,6 @@ class SegmentMaker(abjad.SegmentMaker):
             assert isinstance(metronome_marks, abjad.TypedOrderedDict)
         self._metronome_marks = metronome_marks
         self._midi = None
-        if omit_empty_start_bar is not None:
-            omit_empty_start_bar = bool(omit_empty_start_bar)
-        self._omit_empty_start_bar = omit_empty_start_bar
         if omit_stage_number_markup is not None:
             omit_stage_number_markup = bool(omit_stage_number_markup)
         self._omit_stage_number_markup = omit_stage_number_markup
@@ -431,7 +425,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
@@ -1863,9 +1856,10 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.attach(multiplier, skip, site='')
             abjad.attach(time_signature, skip, context='Score', site='SM1')
             context.append(skip)
-        # empty start bar allows LilyPond to print first bar number
-        if self.omit_empty_start_bar:
+        if self.first_segment:
             return
+        # empty start bar allows LilyPond to print bar numbers
+        # at start of nonfirst segments
         first_skip = baca.select(context).skip(0)
         literal = abjad.LilyPondLiteral(r'\bar ""')
         abjad.attach(
@@ -2333,7 +2327,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
@@ -2431,7 +2424,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
@@ -2745,7 +2737,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
@@ -2976,7 +2967,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 6/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 31)             %! SEGMENT_SPACING:HSS1
@@ -3400,7 +3390,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
@@ -3621,7 +3610,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
@@ -3856,7 +3844,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
@@ -4118,7 +4105,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
@@ -4289,7 +4275,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
@@ -4470,7 +4455,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
@@ -4593,7 +4577,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
@@ -4718,7 +4701,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
@@ -4845,7 +4827,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
@@ -4982,7 +4963,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
@@ -5170,7 +5150,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
@@ -5293,7 +5272,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
@@ -5553,7 +5531,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
@@ -5768,7 +5745,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
@@ -6084,7 +6060,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
@@ -6219,7 +6194,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
@@ -6643,7 +6617,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
@@ -7040,7 +7013,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
@@ -7169,7 +7141,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
@@ -7587,7 +7558,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
@@ -8136,7 +8106,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
@@ -9017,14 +8986,6 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._midi
 
     @property
-    def omit_empty_start_bar(self):
-        r'''Is true when segment-mark omits empty start bar.
-
-        Returns true, false or none.
-        '''
-        return self._omit_empty_start_bar
-
-    @property
     def omit_stage_number_markup(self):
         r'''Is true when segment-mark omits stage number markup.
 
@@ -9158,7 +9119,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
@@ -9241,7 +9201,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
@@ -9363,7 +9322,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
@@ -9631,7 +9589,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
@@ -9823,7 +9780,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
@@ -9974,7 +9930,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
@@ -10146,7 +10101,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29

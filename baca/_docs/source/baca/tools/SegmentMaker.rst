@@ -51,7 +51,6 @@ Bases
       ~baca.tools.SegmentMaker.SegmentMaker.metronome_mark_stem_height
       ~baca.tools.SegmentMaker.SegmentMaker.metronome_marks
       ~baca.tools.SegmentMaker.SegmentMaker.midi
-      ~baca.tools.SegmentMaker.SegmentMaker.omit_empty_start_bar
       ~baca.tools.SegmentMaker.SegmentMaker.omit_stage_number_markup
       ~baca.tools.SegmentMaker.SegmentMaker.print_segment_duration
       ~baca.tools.SegmentMaker.SegmentMaker.print_timings
@@ -135,8 +134,6 @@ Read-only properties
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.metronome_marks
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.midi
-
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.omit_empty_start_bar
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.omit_stage_number_markup
 

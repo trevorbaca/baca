@@ -908,7 +908,6 @@ class ImbricationCommand(Command):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 7/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \bar ""                                                                      %! SEGMENT_EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
