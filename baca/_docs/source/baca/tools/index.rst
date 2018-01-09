@@ -110,6 +110,7 @@ baca.tools
    RegisterToOctaveCommand
    RhythmCommand
    SettingCommand
+   SpacingOverrideCommand
    SpannerCommand
    StaffPositionCommand
    SuiteCommand
@@ -144,6 +145,7 @@ baca.tools
    RegisterToOctaveCommand
    RhythmCommand
    SettingCommand
+   SpacingOverrideCommand
    SpannerCommand
    StaffPositionCommand
    SuiteCommand
@@ -302,8 +304,10 @@ Classes
    :hidden:
 
    PitchTreeSpanner
+   SpacingSection
 
 .. autosummary::
    :nosignatures:
 
    PitchTreeSpanner
+   SpacingSection

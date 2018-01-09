@@ -190,9 +190,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                         {                                                            %! SEGMENT_SPACING_MARKUP:HSS2
                                             \with-color                                              %! SEGMENT_SPACING_MARKUP:HSS2
                                                 #(x11-color 'DarkCyan)                               %! SEGMENT_SPACING_MARKUP:HSS2
-                                                \fontsize                                            %! SEGMENT_SPACING_MARKUP:HSS2
-                                                    #-3                                              %! SEGMENT_SPACING_MARKUP:HSS2
-                                                    (1/16)                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                                \bold                                                %! SEGMENT_SPACING_MARKUP:HSS2
+                                                    \fontsize                                        %! SEGMENT_SPACING_MARKUP:HSS2
+                                                        #3                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                                        (1/16)                                       %! SEGMENT_SPACING_MARKUP:HSS2
                                         }                                                            %! SEGMENT_SPACING_MARKUP:HSS2
                                 }
                             }
@@ -206,9 +207,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
                             \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
                                 #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
-                                \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
-                                    #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
-                                    (1/8)                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                \bold                                                                %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                        %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #3                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/8)                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                             }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
             <BLANKLINE>
                         % GlobalSkips [measure 3]                                                    %! SM4
@@ -220,9 +222,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
                             \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
                                 #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
-                                \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
-                                    #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
-                                    (1/4)                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                \bold                                                                %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                        %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #3                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/4)                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                             }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
             <BLANKLINE>
                         % GlobalSkips [measure 4]                                                    %! SM4
@@ -235,9 +238,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
                             \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
                                 #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
-                                \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
-                                    #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
-                                    (1/2)                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                \bold                                                                %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                        %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #3                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/2)                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                             }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                         \override Score.BarLine.transparent = ##f                                    %! SM5
                         \bar "|"                                                                     %! SM5
@@ -360,9 +364,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                         {                                                            %! SEGMENT_SPACING_MARKUP:HSS2
                                             \with-color                                              %! SEGMENT_SPACING_MARKUP:HSS2
                                                 #(x11-color 'DarkCyan)                               %! SEGMENT_SPACING_MARKUP:HSS2
-                                                \fontsize                                            %! SEGMENT_SPACING_MARKUP:HSS2
-                                                    #-3                                              %! SEGMENT_SPACING_MARKUP:HSS2
-                                                    (1/16)                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                                \bold                                                %! SEGMENT_SPACING_MARKUP:HSS2
+                                                    \fontsize                                        %! SEGMENT_SPACING_MARKUP:HSS2
+                                                        #3                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                                        (1/16)                                       %! SEGMENT_SPACING_MARKUP:HSS2
                                         }                                                            %! SEGMENT_SPACING_MARKUP:HSS2
                                 }
                             }
@@ -376,9 +381,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
                             \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
                                 #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
-                                \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
-                                    #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
-                                    (1/8)                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                \bold                                                                %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                        %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #3                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/8)                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                             }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
             <BLANKLINE>
                         % GlobalSkips [measure 3]                                                    %! SM4
@@ -390,9 +396,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
                             \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
                                 #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
-                                \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
-                                    #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
-                                    (1/4)                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                \bold                                                                %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                        %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #3                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/4)                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                             }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
             <BLANKLINE>
                         % GlobalSkips [measure 4]                                                    %! SM4
@@ -405,9 +412,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
                             \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
                                 #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
-                                \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
-                                    #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
-                                    (1/2)                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                \bold                                                                %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                        %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #3                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/2)                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                             }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                         \override Score.BarLine.transparent = ##f                                    %! SM5
                         \bar "|"                                                                     %! SM5
@@ -531,9 +539,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                         {                                                            %! SEGMENT_SPACING_MARKUP:HSS2
                                             \with-color                                              %! SEGMENT_SPACING_MARKUP:HSS2
                                                 #(x11-color 'DarkCyan)                               %! SEGMENT_SPACING_MARKUP:HSS2
-                                                \fontsize                                            %! SEGMENT_SPACING_MARKUP:HSS2
-                                                    #-3                                              %! SEGMENT_SPACING_MARKUP:HSS2
-                                                    (1/32)                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                                \bold                                                %! SEGMENT_SPACING_MARKUP:HSS2
+                                                    \fontsize                                        %! SEGMENT_SPACING_MARKUP:HSS2
+                                                        #3                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                                        (1/32)                                       %! SEGMENT_SPACING_MARKUP:HSS2
                                         }                                                            %! SEGMENT_SPACING_MARKUP:HSS2
                                 }
                             }
@@ -547,9 +556,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
                             \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
                                 #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
-                                \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
-                                    #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
-                                    (1/16)                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                \bold                                                                %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                        %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #3                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/16)                                                       %! SEGMENT_SPACING_MARKUP:HSS2
                             }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
             <BLANKLINE>
                         % GlobalSkips [measure 3]                                                    %! SM4
@@ -561,9 +571,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
                             \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
                                 #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
-                                \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
-                                    #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
-                                    (1/8)                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                \bold                                                                %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                        %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #3                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/8)                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                             }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
             <BLANKLINE>
                         % GlobalSkips [measure 4]                                                    %! SM4
@@ -576,9 +587,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
                             \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
                                 #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
-                                \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
-                                    #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
-                                    (1/4)                                                            %! SEGMENT_SPACING_MARKUP:HSS2
+                                \bold                                                                %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                        %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #3                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/4)                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                             }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                         \override Score.BarLine.transparent = ##f                                    %! SM5
                         \bar "|"                                                                     %! SM5
@@ -703,9 +715,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                         {                                                            %! SEGMENT_SPACING_MARKUP:HSS2
                                             \with-color                                              %! SEGMENT_SPACING_MARKUP:HSS2
                                                 #(x11-color 'DarkCyan)                               %! SEGMENT_SPACING_MARKUP:HSS2
-                                                \fontsize                                            %! SEGMENT_SPACING_MARKUP:HSS2
-                                                    #-3                                              %! SEGMENT_SPACING_MARKUP:HSS2
-                                                    (1/32)                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                                \bold                                                %! SEGMENT_SPACING_MARKUP:HSS2
+                                                    \fontsize                                        %! SEGMENT_SPACING_MARKUP:HSS2
+                                                        #3                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                                        (1/32)                                       %! SEGMENT_SPACING_MARKUP:HSS2
                                         }                                                            %! SEGMENT_SPACING_MARKUP:HSS2
                                 }
                             }
@@ -719,9 +732,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
                             \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
                                 #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
-                                \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
-                                    #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
-                                    (1/16)                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                \bold                                                                %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                        %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #3                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/16)                                                       %! SEGMENT_SPACING_MARKUP:HSS2
                             }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
             <BLANKLINE>
                         % GlobalSkips [measure 3]                                                    %! SM4
@@ -733,9 +747,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
                             \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
                                 #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
-                                \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
-                                    #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
-                                    (1/16)                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                \bold                                                                %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                        %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #3                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/16)                                                       %! SEGMENT_SPACING_MARKUP:HSS2
                             }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
             <BLANKLINE>
                         % GlobalSkips [measure 4]                                                    %! SM4
@@ -748,9 +763,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
                             \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
                                 #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
-                                \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
-                                    #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
-                                    (1/16)                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                \bold                                                                %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                        %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #3                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/16)                                                       %! SEGMENT_SPACING_MARKUP:HSS2
                             }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                         \override Score.BarLine.transparent = ##f                                    %! SM5
                         \bar "|"                                                                     %! SM5
@@ -885,9 +901,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                         {                                                            %! SEGMENT_SPACING_MARKUP:HSS2
                                             \with-color                                              %! SEGMENT_SPACING_MARKUP:HSS2
                                                 #(x11-color 'DarkCyan)                               %! SEGMENT_SPACING_MARKUP:HSS2
-                                                \fontsize                                            %! SEGMENT_SPACING_MARKUP:HSS2
-                                                    #-3                                              %! SEGMENT_SPACING_MARKUP:HSS2
-                                                    (1/16)                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                                \bold                                                %! SEGMENT_SPACING_MARKUP:HSS2
+                                                    \fontsize                                        %! SEGMENT_SPACING_MARKUP:HSS2
+                                                        #3                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                                        (1/16)                                       %! SEGMENT_SPACING_MARKUP:HSS2
                                         }                                                            %! SEGMENT_SPACING_MARKUP:HSS2
                                 }
                             }
@@ -902,9 +919,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         ^ \markup {                                                                  %! SEGMENT_SPACING_MARKUP:HSS2
                             \with-color                                                              %! SEGMENT_SPACING_MARKUP:HSS2
                                 #(x11-color 'DarkCyan)                                               %! SEGMENT_SPACING_MARKUP:HSS2
-                                \fontsize                                                            %! SEGMENT_SPACING_MARKUP:HSS2
-                                    #-3                                                              %! SEGMENT_SPACING_MARKUP:HSS2
-                                    (1/16)                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                \bold                                                                %! SEGMENT_SPACING_MARKUP:HSS2
+                                    \fontsize                                                        %! SEGMENT_SPACING_MARKUP:HSS2
+                                        #3                                                           %! SEGMENT_SPACING_MARKUP:HSS2
+                                        (1/16)                                                       %! SEGMENT_SPACING_MARKUP:HSS2
                             }                                                                        %! SEGMENT_SPACING_MARKUP:HSS2
                         \override Score.BarLine.transparent = ##f                                    %! SM5
                         \bar "|"                                                                     %! SM5
@@ -1094,7 +1112,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             literal = abjad.LilyPondLiteral(strings)
             tag = baca.Tags.build(baca.Tags.SPACING)
             abjad.attach(literal, skip, site='HSS1', tag=tag)
-            markup = abjad.Markup(f'({duration!s})').fontsize(-3)
+            markup = abjad.Markup(f'({duration!s})').fontsize(3).bold()
             markup = markup.with_color(abjad.SchemeColor('DarkCyan'))
             markup = abjad.new(markup, direction=abjad.Up)
             tag = baca.Tags.build(baca.Tags.SPACING_MARKUP)

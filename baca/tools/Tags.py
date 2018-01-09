@@ -163,6 +163,8 @@ class Tags(abjad.Enumeration):
     LAYOUT = enum.auto()
     SPACING = enum.auto()
     SPACING_MARKUP = enum.auto()
+    SPACING_OVERRIDE = enum.auto()
+    SPACING_OVERRIDE_MARKUP = enum.auto()
     STAGE_NUMBER_MARKUP = enum.auto()
 
     ### SYSTEM TAGS ###
