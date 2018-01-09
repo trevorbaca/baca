@@ -899,6 +899,8 @@ class ImbricationCommand(Command):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             \once \override TextSpanner.Y-extent = ##f                                   %! SM29
                             \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
@@ -909,8 +911,6 @@ class ImbricationCommand(Command):
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 7/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
                             s1 * 7/16
                             \startTextSpan                                                               %! SM29
                             ^ \markup {
@@ -937,10 +937,10 @@ class ImbricationCommand(Command):
                                 }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \time 1/4                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
+                            \time 1/4                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/4
                             \stopTextSpan                                                                %! SM29
                             ^ \markup {

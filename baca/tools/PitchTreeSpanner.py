@@ -7,6 +7,8 @@ class PitchTreeSpanner(abjad.Spanner):
 
     ### CLASS VARIABLES ###
 
+    __documentation_section__ = '(5) Utilities'
+
     __slots__ = (
         '_level',
         )

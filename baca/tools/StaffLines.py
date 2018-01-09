@@ -95,14 +95,12 @@ class StaffLines(abjad.AbjadObject):
 
     @property
     def context(self):
-        r'''Returns ``'Staff'``.
+        r'''Returns class constant ``'Staff'``.
 
         ..  container:: example
 
             >>> baca.StaffLines(1).context
             'Staff'
-
-        Class constant.
 
         Returns ``'Staff'``.
         '''
@@ -138,14 +136,12 @@ class StaffLines(abjad.AbjadObject):
 
     @property
     def persistent(self):
-        r'''Is true.
+        r'''Is class constant true.
 
         ..  container:: example
 
             >>> baca.StaffLines(1).persistent
             True
-
-        Class constant.
 
         Returns true.
         '''

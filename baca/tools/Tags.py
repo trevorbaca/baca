@@ -132,6 +132,17 @@ class Tags(abjad.Enumeration):
     REDUNDANT_METRONOME_MARK = enum.auto()
     REDUNDANT_METRONOME_MARK_WITH_COLOR = enum.auto()
 
+    ### SPACING SECTION ###
+
+    EXPLICIT_SPACING_SECTION = enum.auto()
+    EXPLICIT_SPACING_SECTION_COLOR = enum.auto()
+
+    REAPPLIED_SPACING_SECTION = enum.auto()
+    REAPPLIED_SPACING_SECTION_COLOR = enum.auto() 
+
+    REDUNDANT_SPACING_SECTION = enum.auto()
+    REDUNDANT_SPACING_SECTION_COLOR = enum.auto()
+
     ### STAFF LINES ###
 
     EXPLICIT_STAFF_LINES = enum.auto()

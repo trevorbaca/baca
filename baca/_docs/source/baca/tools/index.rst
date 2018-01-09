@@ -189,6 +189,7 @@ baca.tools
    PitchSegment
    PitchSet
    PitchTree
+   PitchTreeSpanner
    RangeDictionary
    Registration
    RegistrationComponent
@@ -199,6 +200,7 @@ baca.tools
    Sequence
    SingleStaffScoreTemplate
    SpacingIndication
+   SpacingSection
    StaffLines
    StageMeasureMap
    StringTrioScoreTemplate
@@ -243,6 +245,7 @@ baca.tools
    PitchSegment
    PitchSet
    PitchTree
+   PitchTreeSpanner
    RangeDictionary
    Registration
    RegistrationComponent
@@ -253,6 +256,7 @@ baca.tools
    Sequence
    SingleStaffScoreTemplate
    SpacingIndication
+   SpacingSection
    StaffLines
    StageMeasureMap
    StringTrioScoreTemplate
@@ -294,20 +298,3 @@ baca.tools
    PartitionDivisionCallback
    SplitByDurationsDivisionCallback
    SplitByRoundedRatiosDivisionCallback
-
---------
-
-Classes
--------
-
-.. toctree::
-   :hidden:
-
-   PitchTreeSpanner
-   SpacingSection
-
-.. autosummary::
-   :nosignatures:
-
-   PitchTreeSpanner
-   SpacingSection
