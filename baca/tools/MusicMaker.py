@@ -2,7 +2,6 @@ import abjad
 import baca
 import copy
 from abjad import rhythmmakertools as rhythmos
-from .Tags import Tags as tags
 
 
 class MusicMaker(abjad.AbjadObject):
@@ -990,7 +989,7 @@ class MusicMaker(abjad.AbjadObject):
         abjad.attach(
             figure_name_markup,
             leaves[0],
-            tag=tags.FIGURE_NAME_MARKUP,
+            tag=abjad.Tags.FIGURE_NAME_MARKUP,
             )
 
     @staticmethod

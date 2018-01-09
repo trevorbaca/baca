@@ -165,23 +165,6 @@ class Tags(abjad.Enumeration):
     REDUNDANT_TIME_SIGNATURE = enum.auto()
     REDUNDANT_TIME_SIGNATURE_COLOR = enum.auto()
 
-    ### OTHER BUILD TAGS ###
-
-    CLOCK_TIME_MARKUP = enum.auto()
-    SEGMENT_EMPTY_START_BAR = enum.auto()
-    FERMATA_BAR_LINE = enum.auto()
-    FIGURE_NAME_MARKUP = enum.auto()
-    LAYOUT = enum.auto()
-    SPACING = enum.auto()
-    SPACING_MARKUP = enum.auto()
-    SPACING_OVERRIDE = enum.auto()
-    SPACING_OVERRIDE_MARKUP = enum.auto()
-    STAGE_NUMBER_MARKUP = enum.auto()
-
-    ### SYSTEM TAGS ###
-
-    DO_NOT_TRANSPOSE = enum.auto()
-
     ### PUBLIC METHODS ###
 
     @staticmethod

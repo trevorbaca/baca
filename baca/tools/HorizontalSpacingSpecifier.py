@@ -49,7 +49,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         \startTextSpan                                                               %! SM29
                         ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                             \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
-                                #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                #3                                                                   %! STAGE_NUMBER_MARKUP:SM3
                                 \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
                                     #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
                                     [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -179,7 +179,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                     \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                         {                                                            %! STAGE_NUMBER_MARKUP:SM3
                                             \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
-                                                #-3                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                                #3                                                   %! STAGE_NUMBER_MARKUP:SM3
                                                 \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
                                                     #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
                                                     [1]                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -352,7 +352,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                     \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                         {                                                            %! STAGE_NUMBER_MARKUP:SM3
                                             \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
-                                                #-3                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                                #3                                                   %! STAGE_NUMBER_MARKUP:SM3
                                                 \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
                                                     #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
                                                     [1]                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -526,7 +526,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                     \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                         {                                                            %! STAGE_NUMBER_MARKUP:SM3
                                             \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
-                                                #-3                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                                #3                                                   %! STAGE_NUMBER_MARKUP:SM3
                                                 \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
                                                     #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
                                                     [1]                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -701,7 +701,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                     \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                         {                                                            %! STAGE_NUMBER_MARKUP:SM3
                                             \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
-                                                #-3                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                                #3                                                   %! STAGE_NUMBER_MARKUP:SM3
                                                 \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
                                                     #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
                                                     [1]                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -886,7 +886,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                     \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                         {                                                            %! STAGE_NUMBER_MARKUP:SM3
                                             \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
-                                                #-3                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                                #3                                                   %! STAGE_NUMBER_MARKUP:SM3
                                                 \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
                                                     #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
                                                     [1]                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -1099,12 +1099,12 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 if self.multiplier is not None:
                     duration = duration / self.multiplier
             spacing_section = baca.SpacingSection(duration)
-            tag = baca.Tags.build(baca.Tags.SPACING)
+            tag = abjad.Tags.build(abjad.Tags.SPACING)
             abjad.attach(spacing_section, skip, site='HSS1', tag=tag)
             markup = abjad.Markup(f'({duration!s})').fontsize(3).bold()
             markup = markup.with_color(abjad.SchemeColor('DarkCyan'))
             markup = abjad.new(markup, direction=abjad.Up)
-            tag = baca.Tags.build(baca.Tags.SPACING_MARKUP)
+            tag = abjad.Tags.build(abjad.Tags.SPACING_MARKUP)
             abjad.attach(markup, skip, site='HSS2', tag=tag)
 
     ### PRIVATE METHODS ###

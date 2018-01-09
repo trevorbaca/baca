@@ -27,7 +27,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         >>> lilypond_file = maker.run(
         ...     environment='docs',
-        ...     remove=[baca.Tags.STAGE_NUMBER_MARKUP],
+        ...     remove=[abjad.Tags.STAGE_NUMBER_MARKUP],
         ...     )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -164,7 +164,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_metronome_mark_stem_height',
         '_metronome_marks',
         '_midi',
-        '_omit_stage_number_markup',
         '_print_segment_duration',
         '_print_timings',
         '_range_checker',
@@ -281,7 +280,6 @@ class SegmentMaker(abjad.SegmentMaker):
         metronome_mark_measure_map=None,
         metronome_mark_stem_height=1.5,
         metronome_marks=None,
-        omit_stage_number_markup=None,
         print_segment_duration=None,
         print_timings=None,
         range_checker=None,
@@ -356,9 +354,6 @@ class SegmentMaker(abjad.SegmentMaker):
             assert isinstance(metronome_marks, abjad.TypedOrderedDict)
         self._metronome_marks = metronome_marks
         self._midi = None
-        if omit_stage_number_markup is not None:
-            omit_stage_number_markup = bool(omit_stage_number_markup)
-        self._omit_stage_number_markup = omit_stage_number_markup
         self._print_segment_duration = print_segment_duration
         self._print_timings = print_timings
         self._range_checker = range_checker
@@ -375,7 +370,8 @@ class SegmentMaker(abjad.SegmentMaker):
             skips_instead_of_rests = bool(skips_instead_of_rests)
         self._skips_instead_of_rests = skips_instead_of_rests
         if spacing_specifier is not None:
-            assert isinstance(spacing_specifier, baca.HorizontalSpacingSpecifier)
+            prototype = baca.HorizontalSpacingSpecifier
+            assert isinstance(spacing_specifier, prototype)
         self._spacing_specifier = spacing_specifier
         if stage_label_base_string is not None:
             assert isinstance(stage_label_base_string, str)
@@ -430,7 +426,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    #3                                                                   %! STAGE_NUMBER_MARKUP:SM3
                                     \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
                                         #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
                                         [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -871,8 +867,8 @@ class SegmentMaker(abjad.SegmentMaker):
                         strings.append(string)
                     if strings:
                         literal = abjad.LilyPondLiteral(strings, 'after')
-                        tag = baca.Tags.FERMATA_BAR_LINE
-                        tag = baca.Tags.build(tag, build)
+                        tag = abjad.Tags.FERMATA_BAR_LINE
+                        tag = abjad.Tags.build(tag, build)
                         abjad.attach(
                             literal,
                             leaf,
@@ -1816,8 +1812,6 @@ class SegmentMaker(abjad.SegmentMaker):
         return indicator
 
     def _label_stage_numbers(self):
-        if self.omit_stage_number_markup:
-            return
         skips = baca.select(self.score['GlobalSkips']).skips()
         for stage_index in range(self.stage_count):
             stage_number = stage_index + 1
@@ -1831,14 +1825,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 string = f'[{stage_number}]'
             markup = abjad.Markup(string)
             markup = markup.with_color(abjad.SchemeColor('DarkCyan'))
-            markup = markup.fontsize(-3)
+            markup = markup.fontsize(3)
             markup = abjad.new(markup, direction=abjad.Up)
             skip = skips[start_measure_index]
             abjad.attach(
                 markup,
                 skip,
                 site='SM3',
-                tag=baca.Tags.STAGE_NUMBER_MARKUP,
+                tag=abjad.Tags.STAGE_NUMBER_MARKUP,
                 )
 
     def _make_global_skips(self):
@@ -1859,7 +1853,7 @@ class SegmentMaker(abjad.SegmentMaker):
             literal,
             first_skip,
             site='SM2',
-            tag=baca.Tags.SEGMENT_EMPTY_START_BAR,
+            tag=abjad.Tags.SEGMENT_EMPTY_START_BAR,
             )
 
     def _make_lilypond_file(self):
@@ -2159,7 +2153,7 @@ class SegmentMaker(abjad.SegmentMaker):
         seconds = int(seconds)
         seconds = 60 * minutes + seconds
         segment_start_offset = abjad.Duration(seconds)
-        tag = baca.Tags.CLOCK_TIME_MARKUP
+        tag = abjad.Tags.CLOCK_TIME_MARKUP
         label = abjad.label(skips_, site='SM28', tag=tag)
         segment_stop_duration = label.with_start_offsets(
             clock_time=True,
@@ -2225,7 +2219,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if not self.transpose_score:
             return
         for pleaf in baca.select(self.score).pleaves():
-            if abjad.inspect(pleaf).has_indicator(baca.Tags.DO_NOT_TRANSPOSE):
+            if abjad.inspect(pleaf).has_indicator(abjad.Tags.DO_NOT_TRANSPOSE):
                 continue
             abjad.Instrument.transpose_from_sounding_pitch(pleaf)
 
@@ -2290,8 +2284,8 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=[
-            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -2387,8 +2381,8 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=[
-            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -2493,8 +2487,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -2599,8 +2593,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -2699,8 +2693,8 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=(
-            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ),
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -2821,8 +2815,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=(
-            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ),
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -2971,7 +2965,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                             {                                                            %! STAGE_NUMBER_MARKUP:SM3
                                                 \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
-                                                    #-3                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                                    #3                                                   %! STAGE_NUMBER_MARKUP:SM3
                                                     \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
                                                         #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
                                                         [1]                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -3394,7 +3388,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                             {                                                            %! STAGE_NUMBER_MARKUP:SM3
                                                 \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
-                                                    #-3                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                                    #3                                                   %! STAGE_NUMBER_MARKUP:SM3
                                                     \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
                                                         #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
                                                         [1]                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -3614,7 +3608,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                             {                                                            %! STAGE_NUMBER_MARKUP:SM3
                                                 \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
-                                                    #-3                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                                    #3                                                   %! STAGE_NUMBER_MARKUP:SM3
                                                     \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
                                                         #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
                                                         [1]                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -3811,8 +3805,8 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=[
-            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -3899,8 +3893,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -3990,8 +3984,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -4072,8 +4066,8 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=[
-            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -4162,8 +4156,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -4242,8 +4236,8 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=[
-            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -4332,8 +4326,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -4453,7 +4447,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    #3                                                                   %! STAGE_NUMBER_MARKUP:SM3
                                     \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
                                         #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
                                         [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -4575,7 +4569,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    #3                                                                   %! STAGE_NUMBER_MARKUP:SM3
                                     \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
                                         #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
                                         [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -4699,7 +4693,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    #3                                                                   %! STAGE_NUMBER_MARKUP:SM3
                                     \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
                                         #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
                                         [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -4825,7 +4819,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    #3                                                                   %! STAGE_NUMBER_MARKUP:SM3
                                     \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
                                         #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
                                         [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -4961,7 +4955,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    #3                                                                   %! STAGE_NUMBER_MARKUP:SM3
                                     \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
                                         #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
                                         [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -5148,7 +5142,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    #3                                                                   %! STAGE_NUMBER_MARKUP:SM3
                                     \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
                                         #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
                                         [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -5270,7 +5264,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    #3                                                                   %! STAGE_NUMBER_MARKUP:SM3
                                     \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
                                         #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
                                         [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -5535,7 +5529,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                             {                                                            %! STAGE_NUMBER_MARKUP:SM3
                                                 \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
-                                                    #-3                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                                    #3                                                   %! STAGE_NUMBER_MARKUP:SM3
                                                     \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
                                                         #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
                                                         [1]                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -5749,7 +5743,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                             {                                                            %! STAGE_NUMBER_MARKUP:SM3
                                                 \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
-                                                    #-3                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                                    #3                                                   %! STAGE_NUMBER_MARKUP:SM3
                                                     \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
                                                         #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
                                                         [1]                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -5993,8 +5987,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     )
             >>> remove = [
-            ...     baca.Tags.build(baca.Tags.SPACING_MARKUP),
-            ...     baca.Tags.STAGE_NUMBER_MARKUP,
+            ...     abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...     abjad.Tags.STAGE_NUMBER_MARKUP,
             ...     ]
 
         ..  container:: example
@@ -6948,8 +6942,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     )
             >>> remove = [
-            ...     baca.Tags.build(baca.Tags.SPACING_MARKUP),
-            ...     baca.Tags.STAGE_NUMBER_MARKUP,
+            ...     abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...     abjad.Tags.STAGE_NUMBER_MARKUP,
             ...     ]
 
         ..  container:: example
@@ -7908,7 +7902,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    #3                                                                   %! STAGE_NUMBER_MARKUP:SM3
                                     \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
                                         #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
                                         [A.1]                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -8033,7 +8027,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> lilypond_file = maker.run(
             ...     environment='docs',
-            ...     remove=[baca.Tags.CLOCK_TIME_MARKUP],
+            ...     remove=[abjad.Tags.CLOCK_TIME_MARKUP],
             ...     )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -8104,7 +8098,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    #3                                                                   %! STAGE_NUMBER_MARKUP:SM3
                                     \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
                                         #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
                                         [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -8214,10 +8208,10 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
             >>> metronome_marks['112'] = abjad.MetronomeMark((1, 4), 112)
             >>> remove = [
-            ...     baca.Tags.build(baca.Tags.SPACING_MARKUP),
-            ...     baca.Tags.CLOCK_TIME_MARKUP,
-            ...     baca.Tags.SEGMENT_EMPTY_START_BAR,
-            ...     baca.Tags.STAGE_NUMBER_MARKUP,
+            ...     abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...     abjad.Tags.CLOCK_TIME_MARKUP,
+            ...     abjad.Tags.SEGMENT_EMPTY_START_BAR,
+            ...     abjad.Tags.STAGE_NUMBER_MARKUP,
             ...     ]
 
         ..  container:: example
@@ -8979,14 +8973,6 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._midi
 
     @property
-    def omit_stage_number_markup(self):
-        r'''Is true when segment-mark omits stage number markup.
-
-        Returns true, false or none.
-        '''
-        return self._omit_stage_number_markup
-
-    @property
     def print_segment_duration(self):
         r'''Is true when segment prints duration in seconds.
 
@@ -9117,7 +9103,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    #3                                                                   %! STAGE_NUMBER_MARKUP:SM3
                                     \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
                                         #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
                                         [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -9199,7 +9185,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    #3                                                                   %! STAGE_NUMBER_MARKUP:SM3
                                     \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
                                         #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
                                         [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -9289,8 +9275,8 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=[
-            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -9379,8 +9365,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -9472,8 +9458,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -9556,8 +9542,8 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=[
-            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -9650,8 +9636,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -9778,7 +9764,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    #3                                                                   %! STAGE_NUMBER_MARKUP:SM3
                                     \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
                                         #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
                                         [intermezzo.1]                                                   %! STAGE_NUMBER_MARKUP:SM3
@@ -9928,7 +9914,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    #3                                                                   %! STAGE_NUMBER_MARKUP:SM3
                                     \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
                                         #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
                                         [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -10099,7 +10085,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    #3                                                                   %! STAGE_NUMBER_MARKUP:SM3
                                     \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
                                         #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
                                         [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -10308,11 +10294,11 @@ class SegmentMaker(abjad.SegmentMaker):
         self._extend_beams()
         self._attach_score_template_defaults()
         self._reapply_persistent_indicators()
+        self._apply_spacing_specifier()
         self._call_commands()
         self._shorten_long_repeat_ties()
         self._categorize_uncategorized_persistent_indicators()
         self._tag_clock_time()
-        self._apply_spacing_specifier()
         self._transpose_score_()
         self._attach_rehearsal_mark()
         self._add_final_bar_line()

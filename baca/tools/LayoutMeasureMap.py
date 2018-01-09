@@ -51,7 +51,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
                         \startTextSpan                                                               %! SM29
                         ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                             \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
-                                #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                #3                                                                   %! STAGE_NUMBER_MARKUP:SM3
                                 \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
                                     #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
                                     [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -439,7 +439,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
 
     def __init__(self, commands=None, build=None):
         self._build = build
-        tag = baca.Tags.build(baca.Tags.LAYOUT, build=build)
+        tag = abjad.Tags.build(abjad.Tags.LAYOUT, build=build)
         self._tag = tag
         if commands is not None:
             commands_ = []

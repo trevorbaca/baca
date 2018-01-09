@@ -61,7 +61,7 @@ class LibraryGM(abjad.AbjadObject):
                             \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    #3                                                                   %! STAGE_NUMBER_MARKUP:SM3
                                     \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
                                         #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
                                         [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -199,7 +199,7 @@ class LibraryGM(abjad.AbjadObject):
                             \startTextSpan                                                               %! SM29
                             ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
                                 \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
-                                    #-3                                                                  %! STAGE_NUMBER_MARKUP:SM3
+                                    #3                                                                   %! STAGE_NUMBER_MARKUP:SM3
                                     \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
                                         #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
                                         [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
@@ -1882,7 +1882,7 @@ class LibraryGM(abjad.AbjadObject):
 
             >>> lilypond_file = maker.run(
             ...     environment='docs',
-            ...     remove=[baca.Tags.STAGE_NUMBER_MARKUP],
+            ...     remove=[abjad.Tags.STAGE_NUMBER_MARKUP],
             ...     )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
