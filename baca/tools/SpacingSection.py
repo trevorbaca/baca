@@ -114,18 +114,18 @@ class SpacingSection(abjad.AbjadObject):
 
     ### PUBLIC PROPERTIES ###
 
-#    @property
-#    def context(self):
-#        r'''Gets class constant ``'Score'``.
-#
-#        ..  container:: example
-#
-#            >>> baca.SpacingSection((2, 24)).context
-#            'Score'
-#
-#        Returns ``'Score'``.
-#        '''
-#        return self._context
+    @property
+    def context(self):
+        r'''Gets class constant ``'Score'``.
+
+        ..  container:: example
+
+            >>> baca.SpacingSection((2, 24)).context
+            'Score'
+
+        Returns ``'Score'``.
+        '''
+        return self._context
 
     @property
     def duration(self):
@@ -140,18 +140,18 @@ class SpacingSection(abjad.AbjadObject):
         '''
         return self._duration
 
-#    @property
-#    def persistent(self):
-#        r'''Is class constant true.
-#
-#        ..  container:: example
-#
-#            >>> baca.SpacingSection((2, 24)).persistent
-#            True
-#
-#        Returns true.
-#        '''
-#        return self._persistent
+    @property
+    def persistent(self):
+        r'''Is class constant true.
+
+        ..  container:: example
+
+            >>> baca.SpacingSection((2, 24)).persistent
+            True
+
+        Returns true.
+        '''
+        return self._persistent
 
     ### PUBLIC METHODS ###
 

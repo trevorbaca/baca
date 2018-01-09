@@ -702,6 +702,8 @@ class SegmentMaker(abjad.SegmentMaker):
         previous_indicator = self._momento_to_indicator(momento)
         if previous_indicator is None:
             return
+        if isinstance(previous_indicator, baca.SpacingSection):
+            return
         momento_context = self.score[momento.context]
         leaf = abjad.inspect(momento_context).get_leaf(0)
         if isinstance(previous_indicator, abjad.Instrument):
@@ -709,15 +711,6 @@ class SegmentMaker(abjad.SegmentMaker):
         else:
             prototype = type(previous_indicator)
         indicator = abjad.inspect(leaf).get_indicator(prototype)
-#        if momento.value == 'sfz':
-#            raise Exception(
-#                momento,
-#                previous_indicator,
-#                momento_context,
-#                leaf,
-#                prototype,
-#                indicator,
-#                )
         status = None
         if indicator is None:
             status = 'reapplied'
@@ -8405,9 +8398,9 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
-                            \override TextSpanner.staff-padding = #4                                     %! OC
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
+                            \override TextSpanner.staff-padding = #4                                     %! OC
                             \autoPageBreaksOff                                                           %! SEGMENT_LAYOUT:LMM1
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
@@ -8549,9 +8542,9 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
-                            \override TextSpanner.staff-padding = #4                                     %! OC
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
+                            \override TextSpanner.staff-padding = #4                                     %! OC
                             \autoPageBreaksOff                                                           %! SEGMENT_LAYOUT:LMM1
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
@@ -8878,9 +8871,9 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
-                            \override TextSpanner.staff-padding = #4                                     %! OC
                             \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SEGMENT_SPACING:HSS1
+                            \override TextSpanner.staff-padding = #4                                     %! OC
                             \autoPageBreaksOff                                                           %! SEGMENT_LAYOUT:LMM1
                             \noBreak                                                                     %! SEGMENT_LAYOUT:LMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT_LAYOUT:LMM3
