@@ -35,6 +35,7 @@ Bases
       ~baca.tools.LibraryAF.LibraryAF.beam_everything
       ~baca.tools.LibraryAF.LibraryAF.beam_positions
       ~baca.tools.LibraryAF.LibraryAF.beam_runs
+      ~baca.tools.LibraryAF.LibraryAF.build
       ~baca.tools.LibraryAF.LibraryAF.center_to_octave
       ~baca.tools.LibraryAF.LibraryAF.clef
       ~baca.tools.LibraryAF.LibraryAF.clef_extra_offset
@@ -103,6 +104,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAF.LibraryAF.beam_positions
 
 .. automethod:: baca.tools.LibraryAF.LibraryAF.beam_runs
+
+.. automethod:: baca.tools.LibraryAF.LibraryAF.build
 
 .. automethod:: baca.tools.LibraryAF.LibraryAF.center_to_octave
 
