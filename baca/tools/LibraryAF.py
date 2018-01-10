@@ -765,8 +765,8 @@ class LibraryAF(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SEGMENT_SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT+SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SEGMENT+SPACING:HSS1
                             \once \override TextSpanner.Y-extent = ##f                                   %! SM29
                             \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
@@ -781,22 +781,22 @@ class LibraryAF(abjad.AbjadObject):
                             \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SEGMENT_SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT+SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SEGMENT+SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
-                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SEGMENT_SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT+SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SEGMENT+SPACING:HSS1
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                                    %! SM4
-                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SEGMENT_SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT+SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SEGMENT+SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -1774,15 +1774,20 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def build(tag, command):
-        r'''Build-tags `command` with build `tag`.
+    def build(tag:str, command):
+        r'''Sets `command` build tag private property to `tag`.
 
         Returns build tag closure.
         '''
-        return baca.BuildTagClosure(
-            build_tag=tag,
-            command=command,
-            )
+        assert isinstance(tag, str), repr(tag)
+        assert isinstance(command, baca.Command), repr(command)
+        assert command._build_prefix is None, repr(command)
+        command._build_prefix = tag
+        if isinstance(command, baca.SuiteCommand):
+            for command_ in command.commands:
+                assert command_._build_prefix is None, repr(command_)
+                command_._build_prefix = tag
+        return command
 
     @staticmethod
     def center_to_octave(n, selector='baca.plts()'):
@@ -2832,8 +2837,8 @@ class LibraryAF(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SEGMENT_SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT+SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SEGMENT+SPACING:HSS1
                             \once \override TextSpanner.Y-extent = ##f                                   %! SM29
                             \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
@@ -2848,8 +2853,8 @@ class LibraryAF(abjad.AbjadObject):
                             \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SEGMENT_SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT+SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SEGMENT+SPACING:HSS1
                             \time 2/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/8
@@ -3220,8 +3225,8 @@ class LibraryAF(abjad.AbjadObject):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SEGMENT_SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT+SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SEGMENT+SPACING:HSS1
                             \once \override TextSpanner.Y-extent = ##f                                   %! SM29
                             \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
                             \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
@@ -3236,8 +3241,8 @@ class LibraryAF(abjad.AbjadObject):
                             \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! SEGMENT_SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SEGMENT_SPACING:HSS1
+                            \newSpacingSection                                                           %! SEGMENT+SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 12)             %! SEGMENT+SPACING:HSS1
                             \time 2/16                                                                   %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/8

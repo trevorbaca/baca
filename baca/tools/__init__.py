@@ -1,7 +1,6 @@
 from .AcciaccaturaSpecifier import AcciaccaturaSpecifier
 from .AnchorSpecifier import AnchorSpecifier
 from .ArpeggiationSpacingSpecifier import ArpeggiationSpacingSpecifier
-from .BuildTagClosure import BuildTagClosure
 from .ChordalSpacingSpecifier import ChordalSpacingSpecifier
 from .ClusterCommand import ClusterCommand
 from .Coat import Coat

@@ -1200,7 +1200,7 @@ class LibraryGM(abjad.AbjadObject):
                             ),
                         selector=baca.skip(0),
                         site='LMM3',
-                        tag='SEGMENT_LAYOUT',
+                        tag='SEGMENT+LAYOUT',
                         ),
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
@@ -1213,7 +1213,7 @@ class LibraryGM(abjad.AbjadObject):
                             ),
                         selector=baca.skip(0),
                         site='LMM3',
-                        tag='SEGMENT_LAYOUT',
+                        tag='SEGMENT+LAYOUT',
                         ),
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
@@ -1223,7 +1223,7 @@ class LibraryGM(abjad.AbjadObject):
                             ),
                         selector=baca.skip(12),
                         site='LMM3',
-                        tag='SEGMENT_LAYOUT',
+                        tag='SEGMENT+LAYOUT',
                         ),
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
@@ -1236,7 +1236,7 @@ class LibraryGM(abjad.AbjadObject):
                             ),
                         selector=baca.skip(12),
                         site='LMM3',
-                        tag='SEGMENT_LAYOUT',
+                        tag='SEGMENT+LAYOUT',
                         ),
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
@@ -1246,7 +1246,7 @@ class LibraryGM(abjad.AbjadObject):
                             ),
                         selector=baca.skip(22),
                         site='LMM3',
-                        tag='SEGMENT_LAYOUT',
+                        tag='SEGMENT+LAYOUT',
                         ),
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
@@ -1259,7 +1259,7 @@ class LibraryGM(abjad.AbjadObject):
                             ),
                         selector=baca.skip(22),
                         site='LMM3',
-                        tag='SEGMENT_LAYOUT',
+                        tag='SEGMENT+LAYOUT',
                         ),
                     ),
                 )

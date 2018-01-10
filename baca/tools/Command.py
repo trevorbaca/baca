@@ -12,6 +12,7 @@ class Command(abjad.AbjadObject):
     __documentation_section__ = '(4) Commands'
 
     __slots__ = (
+        '_build_prefix',
         '_manifests',
         '_selector',
         )
@@ -21,6 +22,7 @@ class Command(abjad.AbjadObject):
     ### INITIALIZER ###
 
     def __init__(self, selector=None):
+        self._build_prefix = None
         self._manifests = None
         if isinstance(selector, str):
             selector = eval(selector)

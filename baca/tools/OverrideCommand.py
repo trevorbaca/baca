@@ -278,7 +278,16 @@ class OverrideCommand(Command):
         if self.after is True:
             format_slot = 'after'
         literal = abjad.LilyPondLiteral(string, format_slot)
-        abjad.attach(literal, leaves[0], site=self.site, tag=self.tag)
+        deactivate = None
+        if self._build_prefix is not None:
+            deactivate = True
+        abjad.attach(
+            literal,
+            leaves[0],
+            deactivate=deactivate,
+            site=self.site,
+            tag=self.tag,
+            )
         if once:
             return
         string = abjad.LilyPondFormatManager.make_lilypond_revert_string(
@@ -287,7 +296,13 @@ class OverrideCommand(Command):
             context=context,
             )
         literal = abjad.LilyPondLiteral(string, 'after')
-        abjad.attach(literal, leaves[-1], site=self.site, tag=self.tag)
+        abjad.attach(
+            literal,
+            leaves[-1],
+            deactivate=deactivate,
+            site=self.site,
+            tag=self.tag,
+            )
 
     ### PUBLIC PROPERTIES ###
 
@@ -339,7 +354,13 @@ class OverrideCommand(Command):
 
         Set to string or none.
         '''
-        return self._tag
+        parts = []
+        if self._build_prefix is not None:
+            parts.append(self._build_prefix)
+        if self._tag is not None:
+            parts.append(self._tag)
+        if parts:
+            return '+'.join(parts)
 
     @property
     def value(self):

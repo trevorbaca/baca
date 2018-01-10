@@ -298,18 +298,3 @@ baca.tools
    PartitionDivisionCallback
    SplitByDurationsDivisionCallback
    SplitByRoundedRatiosDivisionCallback
-
---------
-
-Classes
--------
-
-.. toctree::
-   :hidden:
-
-   BuildTagClosure
-
-.. autosummary::
-   :nosignatures:
-
-   BuildTagClosure
