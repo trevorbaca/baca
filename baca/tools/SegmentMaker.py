@@ -855,12 +855,15 @@ class SegmentMaker(abjad.SegmentMaker):
                 if ends_at_break and leaf_stop not in breaks_already_treated:
                     strings = []
                     if staff_lines.line_count == 0:
-                        string = r'\override Score.BarLine.transparent = ##t'
-                        string = r'\once ' + string
-                        strings.append(string)
-                        string = r'\override Score.SpanBar.transparent = ##t'
-                        string = r'\once ' + string
-                        strings.append(string)
+                        if next_leaf is None and self.last_segment:
+                            pass
+                        else:
+                            string = r'\override Score.BarLine.transparent = ##t'
+                            string = r'\once ' + string
+                            strings.append(string)
+                            string = r'\override Score.SpanBar.transparent = ##t'
+                            string = r'\once ' + string
+                            strings.append(string)
                     elif staff_lines.line_count == 1:
                         string = "Score.BarLine.bar-extent = #'(-2 . 2)"
                         string = r'\once \override ' + string
