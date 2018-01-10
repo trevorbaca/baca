@@ -613,6 +613,17 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
+    def text_script_parent_center(selector='baca.leaves()'):
+        r'''Overrides text script parent alignment X to center.
+        '''
+        return baca.OverrideCommand(
+            attribute='parent_alignment_X',
+            value=0,
+            grob='text_script',
+            selector=selector,
+            )
+
+    @staticmethod
     def text_script_staff_padding(n, selector='baca.leaves()'):
         r'''Overrides text script staff padding.
 
@@ -779,17 +790,6 @@ class LibraryTZ(abjad.AbjadObject):
         return baca.OverrideCommand(
             attribute='staff_padding',
             value=n,
-            grob='text_script',
-            selector=selector,
-            )
-
-    @staticmethod
-    def text_script_parent_alignment_center(selector='baca.leaves()'):
-        r'''Overrides text script parent alignment X to center.
-        '''
-        return baca.OverrideCommand(
-            attribute='parent_alignment_X',
-            value=0,
             grob='text_script',
             selector=selector,
             )

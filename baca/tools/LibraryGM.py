@@ -566,6 +566,19 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
+    def hairpin_shorten_pair(pair:tuple, selector='baca.leaf(0)'):
+        r'''Overrides hairpin shorten pair.
+
+        Returns override command.
+        '''
+        return baca.OverrideCommand(
+            attribute='shorten_pair',
+            value=pair,
+            grob='hairpin',
+            selector=selector,
+            )
+
+    @staticmethod
     def helianthate(sequence, n=0, m=0):
         '''Helianthates `sequence` by outer index of rotation `n` and inner
         index of rotation `m`.

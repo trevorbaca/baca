@@ -23,6 +23,7 @@ Bases
 
       ~baca.tools.LibraryGM.LibraryGM.glissando
       ~baca.tools.LibraryGM.LibraryGM.hairpin
+      ~baca.tools.LibraryGM.LibraryGM.hairpin_shorten_pair
       ~baca.tools.LibraryGM.LibraryGM.helianthate
       ~baca.tools.LibraryGM.LibraryGM.imbricate
       ~baca.tools.LibraryGM.LibraryGM.instrument
@@ -61,6 +62,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryGM.LibraryGM.glissando
 
 .. automethod:: baca.tools.LibraryGM.LibraryGM.hairpin
+
+.. automethod:: baca.tools.LibraryGM.LibraryGM.hairpin_shorten_pair
 
 .. automethod:: baca.tools.LibraryGM.LibraryGM.helianthate
 

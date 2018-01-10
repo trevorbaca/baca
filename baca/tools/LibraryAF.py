@@ -2109,7 +2109,7 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def clef(clef='treble', selector='baca.leaf(0)'):
+    def clef(clef='treble', selector='baca.leaf(0)', shift=False):
         r'''Attaches clef to leaf 0.
 
         ..  container:: example
@@ -2240,10 +2240,19 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.IndicatorCommand(
-            indicators=[abjad.Clef(clef)],
-            selector=selector,
-            )
+        clef = abjad.Clef(clef)
+        if shift is False:
+            return baca.IndicatorCommand(
+                indicators=[clef],
+                selector=selector,
+                )
+        if shift is True:
+            shift = clef._to_width[clef.name]
+        return baca.SuiteCommand([
+            baca.clef(clef, selector=selector),
+            baca.clef_x_extent_false(),
+            baca.clef_extra_offset((-shift, 0)),
+            ])
 
     @staticmethod
     def clef_extra_offset(pair, selector='baca.leaf(0)'):
@@ -4195,6 +4204,14 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
+    def dls_sp(n, selector='baca.leaves()'):
+        r'''Overrides dynamic line spanner staff padding.
+        
+        Returns override command.
+        '''
+        return baca.dynamic_line_spanner_staff_padding(n, selector=selector)
+
+    @staticmethod
     def dynamic(dynamic=None, selector='baca.phead(0)'):
         r'''Attaches dynamic to pitched head 0.
 
@@ -4797,6 +4814,17 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
+    def dynamic_text_x_offset(n, selector='baca.pleaf(0)'):
+        r'''Overrides dynamic text X-extent.
+        '''
+        return baca.OverrideCommand(
+            attribute='X_offset',
+            value=n,
+            grob='dynamic_text',
+            selector=selector,
+            )
+
+    @staticmethod
     def dynamics(string):
         r'''Makes dynamics from `string`.
 
@@ -5094,11 +5122,7 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def effort_dynamic(
-        dynamic=None,
-        selector='baca.phead(0)',
-        direction=abjad.Down,
-        ):
+    def effort_dynamic(dynamic:str, selector='baca.phead(0)', shift=False):
         r'''Attaches effort dynamic to pitched head 0.
 
         ..  container:: example
@@ -5253,10 +5277,17 @@ class LibraryAF(abjad.AbjadObject):
         '''
         assert isinstance(dynamic, str), repr(dynamic)
         dynamic = abjad.Dynamic(f'"{dynamic}"')
-        return baca.IndicatorCommand(
-            indicators=[dynamic],
-            selector=selector,
-            )
+        if shift is False:
+            return baca.IndicatorCommand(
+                indicators=[dynamic],
+                selector=selector,
+                )
+        width = dynamic._to_width[dynamic.name]
+        return baca.SuiteCommand([
+            baca.effort_dynamic(dynamic.name),
+            baca.dynamic_text_x_extent_zero(),
+            baca.dynamic_text_extra_offset((-width, 0)),
+            ])
 
     @staticmethod
     def fermata(selector='baca.leaf(0)'):

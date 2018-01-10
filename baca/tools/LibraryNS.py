@@ -2,6 +2,7 @@ import abjad
 import baca
 import collections
 from abjad import rhythmmakertools as rhythmos
+from typing import Union
 
 
 class LibraryNS(abjad.AbjadObject):
@@ -2594,6 +2595,18 @@ class LibraryNS(abjad.AbjadObject):
             selector=selector,
             )
 
+    def script_staff_padding(n:Union[int, float], selector='baca.leaf(0)'):
+        r'''Overrides script staff padding.
+
+        Returns override command.
+        '''
+        return baca.OverrideCommand(
+            attribute='staff_padding',
+            value=n,
+            grob='script',
+            selector=selector,
+            )
+
     @staticmethod
     def scripts_down(selector='baca.leaves()'):
         r'''Down-overrides script direction on leaves.
@@ -2909,6 +2922,22 @@ class LibraryNS(abjad.AbjadObject):
             grob='script',
             selector=selector,
             )
+
+    @staticmethod
+    def shift_hairpin_start(dynamic, selector='baca.leaf(0)'):
+        r'''Shifts hairpin start dynamic to left by width of dynamic.
+
+        Returns suite command.
+        '''
+        dynamic = abjad.Dynamic(dynamic)
+        width = dynamic._to_width[dynamic.name]
+        extra_offset_x = -width
+        hairpin_shorten_left = width - 1.25
+        return baca.suite([
+            baca.dynamic_text_extra_offset((extra_offset_x, 0)),
+            baca.dynamic_text_x_extent_zero(),
+            baca.hairpin_shorten_pair((hairpin_shorten_left, 0)),
+            ])
 
     @staticmethod
     def short_fermata(selector='baca.leaf(0)'):

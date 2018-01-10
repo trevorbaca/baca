@@ -50,6 +50,7 @@ Bases
       ~baca.tools.LibraryAF.LibraryAF.deviation
       ~baca.tools.LibraryAF.LibraryAF.diatonic_clusters
       ~baca.tools.LibraryAF.LibraryAF.displacement
+      ~baca.tools.LibraryAF.LibraryAF.dls_sp
       ~baca.tools.LibraryAF.LibraryAF.double_tonguing
       ~baca.tools.LibraryAF.LibraryAF.down_arpeggios
       ~baca.tools.LibraryAF.LibraryAF.down_bows
@@ -58,6 +59,7 @@ Bases
       ~baca.tools.LibraryAF.LibraryAF.dynamic_line_spanner_up
       ~baca.tools.LibraryAF.LibraryAF.dynamic_text_extra_offset
       ~baca.tools.LibraryAF.LibraryAF.dynamic_text_x_extent_zero
+      ~baca.tools.LibraryAF.LibraryAF.dynamic_text_x_offset
       ~baca.tools.LibraryAF.LibraryAF.dynamics
       ~baca.tools.LibraryAF.LibraryAF.dynamics_down
       ~baca.tools.LibraryAF.LibraryAF.dynamics_up
@@ -132,6 +134,8 @@ Class & static methods
 
 .. automethod:: baca.tools.LibraryAF.LibraryAF.displacement
 
+.. automethod:: baca.tools.LibraryAF.LibraryAF.dls_sp
+
 .. automethod:: baca.tools.LibraryAF.LibraryAF.double_tonguing
 
 .. automethod:: baca.tools.LibraryAF.LibraryAF.down_arpeggios
@@ -147,6 +151,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAF.LibraryAF.dynamic_text_extra_offset
 
 .. automethod:: baca.tools.LibraryAF.LibraryAF.dynamic_text_x_extent_zero
+
+.. automethod:: baca.tools.LibraryAF.LibraryAF.dynamic_text_x_offset
 
 .. automethod:: baca.tools.LibraryAF.LibraryAF.dynamics
 

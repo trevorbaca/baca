@@ -50,8 +50,10 @@ Bases
       ~baca.tools.LibraryNS.LibraryNS.scopes
       ~baca.tools.LibraryNS.LibraryNS.script_color
       ~baca.tools.LibraryNS.LibraryNS.script_extra_offset
+      ~baca.tools.LibraryNS.LibraryNS.script_staff_padding
       ~baca.tools.LibraryNS.LibraryNS.scripts_down
       ~baca.tools.LibraryNS.LibraryNS.scripts_up
+      ~baca.tools.LibraryNS.LibraryNS.shift_hairpin_start
       ~baca.tools.LibraryNS.LibraryNS.short_fermata
       ~baca.tools.LibraryNS.LibraryNS.single_segment_transition
       ~baca.tools.LibraryNS.LibraryNS.skips_after
@@ -84,6 +86,8 @@ Bases
 
 Methods
 -------
+
+.. automethod:: baca.tools.LibraryNS.LibraryNS.script_staff_padding
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.single_segment_transition
 
@@ -151,6 +155,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNS.LibraryNS.scripts_down
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.scripts_up
+
+.. automethod:: baca.tools.LibraryNS.LibraryNS.shift_hairpin_start
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.short_fermata
 
