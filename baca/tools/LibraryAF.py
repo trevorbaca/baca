@@ -1774,6 +1774,17 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
+    def build(tag, command):
+        r'''Build-tags `command` with build `tag`.
+
+        Returns build tag closure.
+        '''
+        return baca.BuildTagClosure(
+            build_tag=tag,
+            command=command,
+            )
+
+    @staticmethod
     def center_to_octave(n, selector='baca.plts()'):
         r"""Octave-transposes music.
 

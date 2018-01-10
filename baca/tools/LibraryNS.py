@@ -2924,6 +2924,20 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
+    def shift_clef(clef, selector='baca.leaf(0)'):
+        r'''Shifts clef to left by width of clef.
+
+        Returns suite command.
+        '''
+        clef = abjad.Clef(clef)
+        width = clef._to_width[clef.name]
+        extra_offset_x = -width
+        return baca.suite([
+            baca.clef_x_extent_false(),
+            baca.clef_extra_offset((extra_offset_x, 0)),
+            ])
+
+    @staticmethod
     def shift_hairpin_start(dynamic, selector='baca.leaf(0)'):
         r'''Shifts hairpin start dynamic to left by width of dynamic.
 
