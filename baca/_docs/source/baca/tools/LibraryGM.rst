@@ -26,6 +26,7 @@ Bases
       ~baca.tools.LibraryGM.LibraryGM.helianthate
       ~baca.tools.LibraryGM.LibraryGM.imbricate
       ~baca.tools.LibraryGM.LibraryGM.instrument
+      ~baca.tools.LibraryGM.LibraryGM.invisible_line_segment
       ~baca.tools.LibraryGM.LibraryGM.label
       ~baca.tools.LibraryGM.LibraryGM.laissez_vibrer
       ~baca.tools.LibraryGM.LibraryGM.layout
@@ -66,6 +67,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryGM.LibraryGM.imbricate
 
 .. automethod:: baca.tools.LibraryGM.LibraryGM.instrument
+
+.. automethod:: baca.tools.LibraryGM.LibraryGM.invisible_line_segment
 
 .. automethod:: baca.tools.LibraryGM.LibraryGM.label
 

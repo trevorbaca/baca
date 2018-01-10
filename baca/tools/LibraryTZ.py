@@ -784,6 +784,17 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
+    def text_script_parent_alignment_center(selector='baca.leaves()'):
+        r'''Overrides text script parent alignment X to center.
+        '''
+        return baca.OverrideCommand(
+            attribute='parent_alignment_X',
+            value=0,
+            grob='text_script',
+            selector=selector,
+            )
+
+    @staticmethod
     def text_scripts_down(selector='baca.leaves()'):
         r'''Down-overrides text script.
 

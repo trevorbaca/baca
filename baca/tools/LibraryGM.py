@@ -796,6 +796,37 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
+    def invisible_line_segment():
+        r'''Makes invisible line segment.
+
+        ..  container:: example
+
+            >>> abjad.f(baca.invisible_line_segment())
+            abjad.LineSegment(
+                dash_period=0,
+                left_broken_text=False,
+                left_hspace=0.25,
+                left_stencil_align_direction_y=Center,
+                right_broken_padding=0,
+                right_broken_text=False,
+                right_padding=1.5,
+                right_stencil_align_direction_y=Center,
+                )
+
+        Returns line segment.
+        '''
+        return abjad.LineSegment(
+            dash_period=0,
+            left_broken_text=False,
+            left_hspace=0.25,
+            left_stencil_align_direction_y=abjad.Center,
+            right_broken_padding=0,
+            right_broken_text=False,
+            right_padding=1.5,
+            right_stencil_align_direction_y=abjad.Center,
+            )
+
+    @staticmethod
     def label(expression, selector='baca.leaves()'):
         r'''Labels selections with label `expression`.
 

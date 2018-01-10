@@ -26,6 +26,7 @@ Bases
       ~baca.tools.LibraryTZ.LibraryTZ.text_script_color
       ~baca.tools.LibraryTZ.LibraryTZ.text_script_extra_offset
       ~baca.tools.LibraryTZ.LibraryTZ.text_script_padding
+      ~baca.tools.LibraryTZ.LibraryTZ.text_script_parent_alignment_center
       ~baca.tools.LibraryTZ.LibraryTZ.text_script_staff_padding
       ~baca.tools.LibraryTZ.LibraryTZ.text_scripts_down
       ~baca.tools.LibraryTZ.LibraryTZ.text_scripts_up
@@ -70,6 +71,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryTZ.LibraryTZ.text_script_extra_offset
 
 .. automethod:: baca.tools.LibraryTZ.LibraryTZ.text_script_padding
+
+.. automethod:: baca.tools.LibraryTZ.LibraryTZ.text_script_parent_alignment_center
 
 .. automethod:: baca.tools.LibraryTZ.LibraryTZ.text_script_staff_padding
 
