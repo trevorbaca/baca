@@ -23,7 +23,6 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.build_prefix
       ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.direction
       ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.repeat
       ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.selector
@@ -37,12 +36,6 @@ Bases
 
 Read-only properties
 --------------------
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.build_prefix
 
 .. autoattribute:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.direction
 

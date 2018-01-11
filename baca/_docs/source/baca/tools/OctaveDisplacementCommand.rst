@@ -23,7 +23,6 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.build_prefix
       ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.displacements
       ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.selector
       ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.site
@@ -36,12 +35,6 @@ Bases
 
 Read-only properties
 --------------------
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.build_prefix
 
 .. autoattribute:: baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.displacements
 

@@ -23,7 +23,6 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.TagCommand.TagCommand.build_prefix
       ~baca.tools.TagCommand.TagCommand.selector
       ~baca.tools.TagCommand.TagCommand.site
       ~baca.tools.TagCommand.TagCommand.tag
@@ -35,12 +34,6 @@ Bases
 
 Read-only properties
 --------------------
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.TagCommand.TagCommand.build_prefix
 
 .. only:: html
 

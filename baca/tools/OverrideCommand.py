@@ -199,6 +199,7 @@ class OverrideCommand(Command):
     __slots__ = (
         '_after',
         '_attribute',
+        '_build_prefix',
         '_context',
         '_grob',
         '_site',
@@ -226,6 +227,7 @@ class OverrideCommand(Command):
         if attribute is not None:
             assert isinstance(attribute, str), repr(attribute)
         self._attribute = attribute
+        self._build_prefix = None
         if context is not None:
             assert isinstance(context, str), repr(context)
         self._context = context
@@ -309,6 +311,8 @@ class OverrideCommand(Command):
     @property
     def after(self):
         r'''Is true if command positions LilyPond command after selection.
+
+        Returns true, false or none.
         '''
         return self._after 
 
@@ -319,6 +323,18 @@ class OverrideCommand(Command):
         Set to string or none.
         '''
         return self._attribute
+
+    @property
+    def build_prefix(self):
+        r'''Gets build prefix.
+
+        Set to tag, string or none.
+
+        Returns string or none
+        '''
+        if self._build_prefix is not None:
+            assert isinstance(self._build_prefix, str)
+        return self._build_prefix
 
     @property
     def context(self):
@@ -340,6 +356,7 @@ class OverrideCommand(Command):
         '''
         return self._grob
 
+    # TODO: change this back to return tag without build prefix
     @property
     def tag(self):
         r'''Gets tag.

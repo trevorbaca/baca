@@ -23,7 +23,6 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.SpannerCommand.SpannerCommand.build_prefix
       ~baca.tools.SpannerCommand.SpannerCommand.selector
       ~baca.tools.SpannerCommand.SpannerCommand.site
       ~baca.tools.SpannerCommand.SpannerCommand.spanner
@@ -36,12 +35,6 @@ Bases
 
 Read-only properties
 --------------------
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.SpannerCommand.SpannerCommand.build_prefix
 
 .. autoattribute:: baca.tools.SpannerCommand.SpannerCommand.selector
 

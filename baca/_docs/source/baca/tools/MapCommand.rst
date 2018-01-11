@@ -23,7 +23,6 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.MapCommand.MapCommand.build_prefix
       ~baca.tools.MapCommand.MapCommand.commands
       ~baca.tools.MapCommand.MapCommand.selector
       ~baca.tools.MapCommand.MapCommand.site
@@ -36,12 +35,6 @@ Bases
 
 Read-only properties
 --------------------
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.MapCommand.MapCommand.build_prefix
 
 .. autoattribute:: baca.tools.MapCommand.MapCommand.commands
 

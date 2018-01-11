@@ -16,6 +16,7 @@ class SpacingOverrideCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
+        '_build_prefix',
         '_duration',
         )
 
@@ -30,6 +31,7 @@ class SpacingOverrideCommand(Command):
         Command.__init__(self, selector=selector)
         if duration is not None:
             duration = abjad.NonreducedFraction(duration)
+        self._build_prefix = None
         self._duration = duration
         self._tag = tag
 
@@ -103,6 +105,18 @@ class SpacingOverrideCommand(Command):
                 wrapper._tag = tag
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def build_prefix(self):
+        r'''Gets build prefix.
+
+        Set to tag, string or none.
+
+        Returns string or none.
+        '''
+        if self._build_prefix is not None:
+            assert isinstance(self._build_prefix, str)
+        return self._build_prefix
 
     @property
     def duration(self):

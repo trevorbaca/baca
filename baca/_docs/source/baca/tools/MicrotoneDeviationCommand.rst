@@ -23,7 +23,6 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.build_prefix
       ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.deviations
       ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.selector
       ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.site
@@ -36,12 +35,6 @@ Bases
 
 Read-only properties
 --------------------
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.build_prefix
 
 .. autoattribute:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.deviations
 

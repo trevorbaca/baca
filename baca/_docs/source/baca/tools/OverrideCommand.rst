@@ -45,11 +45,7 @@ Read-only properties
 
 .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.attribute
 
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.build_prefix
+.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.build_prefix
 
 .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.context
 

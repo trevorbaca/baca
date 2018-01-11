@@ -24,7 +24,6 @@ Bases
    .. autosummary::
 
       ~baca.tools.PitchCommand.PitchCommand.allow_repeat_pitches
-      ~baca.tools.PitchCommand.PitchCommand.build_prefix
       ~baca.tools.PitchCommand.PitchCommand.cyclic
       ~baca.tools.PitchCommand.PitchCommand.pitches
       ~baca.tools.PitchCommand.PitchCommand.selector
@@ -40,12 +39,6 @@ Read-only properties
 --------------------
 
 .. autoattribute:: baca.tools.PitchCommand.PitchCommand.allow_repeat_pitches
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.PitchCommand.PitchCommand.build_prefix
 
 .. autoattribute:: baca.tools.PitchCommand.PitchCommand.cyclic
 

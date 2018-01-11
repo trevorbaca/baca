@@ -23,7 +23,6 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.build_prefix
       ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.pattern
       ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.rhythm_maker
       ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.selector
@@ -37,12 +36,6 @@ Bases
 
 Read-only properties
 --------------------
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.build_prefix
 
 .. autoattribute:: baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.pattern
 

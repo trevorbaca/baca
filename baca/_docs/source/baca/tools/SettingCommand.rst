@@ -23,7 +23,6 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.SettingCommand.SettingCommand.build_prefix
       ~baca.tools.SettingCommand.SettingCommand.context
       ~baca.tools.SettingCommand.SettingCommand.selector
       ~baca.tools.SettingCommand.SettingCommand.setting
@@ -38,12 +37,6 @@ Bases
 
 Read-only properties
 --------------------
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.SettingCommand.SettingCommand.build_prefix
 
 .. autoattribute:: baca.tools.SettingCommand.SettingCommand.context
 

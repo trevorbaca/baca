@@ -21,7 +21,6 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.Command.Command.build_prefix
       ~baca.tools.Command.Command.selector
       ~baca.tools.Command.Command.site
       ~baca.tools.Command.Command.tag
@@ -33,8 +32,6 @@ Bases
 
 Read-only properties
 --------------------
-
-.. autoattribute:: baca.tools.Command.Command.build_prefix
 
 .. autoattribute:: baca.tools.Command.Command.selector
 

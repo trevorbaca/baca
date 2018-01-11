@@ -23,7 +23,6 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.ColorCommand.ColorCommand.build_prefix
       ~baca.tools.ColorCommand.ColorCommand.selector
       ~baca.tools.ColorCommand.ColorCommand.site
       ~baca.tools.ColorCommand.ColorCommand.tag
@@ -35,12 +34,6 @@ Bases
 
 Read-only properties
 --------------------
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.ColorCommand.ColorCommand.build_prefix
 
 .. only:: html
 

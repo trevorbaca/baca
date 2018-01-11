@@ -37,11 +37,7 @@ Bases
 Read-only properties
 --------------------
 
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.SuiteCommand.SuiteCommand.build_prefix
+.. autoattribute:: baca.tools.SuiteCommand.SuiteCommand.build_prefix
 
 .. autoattribute:: baca.tools.SuiteCommand.SuiteCommand.commands
 

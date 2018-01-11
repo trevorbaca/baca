@@ -23,7 +23,6 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.NestingCommand.NestingCommand.build_prefix
       ~baca.tools.NestingCommand.NestingCommand.lmr_specifier
       ~baca.tools.NestingCommand.NestingCommand.selector
       ~baca.tools.NestingCommand.NestingCommand.site
@@ -37,12 +36,6 @@ Bases
 
 Read-only properties
 --------------------
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.NestingCommand.NestingCommand.build_prefix
 
 .. autoattribute:: baca.tools.NestingCommand.NestingCommand.lmr_specifier
 

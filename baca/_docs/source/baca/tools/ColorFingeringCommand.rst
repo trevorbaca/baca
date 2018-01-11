@@ -23,7 +23,6 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.build_prefix
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.numbers
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.selector
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.site
@@ -36,12 +35,6 @@ Bases
 
 Read-only properties
 --------------------
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.build_prefix
 
 .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.numbers
 

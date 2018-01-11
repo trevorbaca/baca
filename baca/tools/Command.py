@@ -12,7 +12,6 @@ class Command(abjad.AbjadObject):
     __documentation_section__ = '(4) Commands'
 
     __slots__ = (
-        '_build_prefix',
         '_manifests',
         '_selector',
         '_site',
@@ -24,7 +23,6 @@ class Command(abjad.AbjadObject):
     ### INITIALIZER ###
 
     def __init__(self, selector=None, site:str=None, tag=None):
-        self._build_prefix = None
         self._manifests = None
         if isinstance(selector, str):
             selector = eval(selector)
@@ -51,16 +49,6 @@ class Command(abjad.AbjadObject):
 
     ### PUBLIC PROPERTIES ###
 
-    @property
-    def build_prefix(self):
-        r'''Gets build prefix.
-
-        Defaults to none.
-
-        Returns string or none.
-        '''
-        return self._build_prefix
-        
     @property
     def selector(self):
         r'''Gets selector.

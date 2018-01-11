@@ -23,7 +23,6 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.build_prefix
       ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.key
       ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.manifest
       ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.selector
@@ -37,12 +36,6 @@ Bases
 
 Read-only properties
 --------------------
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.build_prefix
 
 .. autoattribute:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.key
 

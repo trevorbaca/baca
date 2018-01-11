@@ -37,11 +37,7 @@ Bases
 Read-only properties
 --------------------
 
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.build_prefix
+.. autoattribute:: baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.build_prefix
 
 .. autoattribute:: baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.duration
 

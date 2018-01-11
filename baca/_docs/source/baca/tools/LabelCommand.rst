@@ -23,7 +23,6 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.LabelCommand.LabelCommand.build_prefix
       ~baca.tools.LabelCommand.LabelCommand.expression
       ~baca.tools.LabelCommand.LabelCommand.selector
       ~baca.tools.LabelCommand.LabelCommand.site
@@ -36,12 +35,6 @@ Bases
 
 Read-only properties
 --------------------
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.LabelCommand.LabelCommand.build_prefix
 
 .. autoattribute:: baca.tools.LabelCommand.LabelCommand.expression
 

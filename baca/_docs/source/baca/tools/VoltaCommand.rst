@@ -23,7 +23,6 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.VoltaCommand.VoltaCommand.build_prefix
       ~baca.tools.VoltaCommand.VoltaCommand.selector
       ~baca.tools.VoltaCommand.VoltaCommand.site
       ~baca.tools.VoltaCommand.VoltaCommand.tag
@@ -35,12 +34,6 @@ Bases
 
 Read-only properties
 --------------------
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.VoltaCommand.VoltaCommand.build_prefix
 
 .. only:: html
 
