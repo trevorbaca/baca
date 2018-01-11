@@ -989,7 +989,7 @@ class MusicMaker(abjad.AbjadObject):
         abjad.attach(
             figure_name_markup,
             leaves[0],
-            tag=abjad.Tags.FIGURE_NAME_MARKUP,
+            tag=baca.Tags.FIGURE_NAME_MARKUP,
             )
 
     @staticmethod

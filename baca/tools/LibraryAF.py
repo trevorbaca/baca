@@ -750,9 +750,9 @@ class LibraryAF(abjad.AbjadObject):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=[
-            ...         abjad.Tags.FIGURE_NAME_MARKUP,
-            ...         abjad.Tags.STAGE_NUMBER_MARKUP,
-            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         baca.Tags.FIGURE_NAME_MARKUP,
+            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
             ...         ],
             ...     )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -2853,9 +2853,9 @@ class LibraryAF(abjad.AbjadObject):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=[
-            ...         abjad.Tags.FIGURE_NAME_MARKUP,
-            ...         abjad.Tags.STAGE_NUMBER_MARKUP,
-            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         baca.Tags.FIGURE_NAME_MARKUP,
+            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
             ...         ],
             ...     )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -3257,9 +3257,9 @@ class LibraryAF(abjad.AbjadObject):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=[
-            ...         abjad.Tags.FIGURE_NAME_MARKUP,
-            ...         abjad.Tags.STAGE_NUMBER_MARKUP,
-            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         baca.Tags.FIGURE_NAME_MARKUP,
+            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         baca.Tags.build(baca.Tags.SPACING_MARKUP),
             ...         ],
             ...     )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP

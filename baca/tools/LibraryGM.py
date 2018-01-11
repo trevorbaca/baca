@@ -1926,7 +1926,7 @@ class LibraryGM(abjad.AbjadObject):
 
             >>> lilypond_file = maker.run(
             ...     environment='docs',
-            ...     remove=[abjad.Tags.STAGE_NUMBER_MARKUP],
+            ...     remove=[baca.Tags.STAGE_NUMBER_MARKUP],
             ...     )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
