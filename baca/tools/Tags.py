@@ -6,17 +6,17 @@ class Tags(Tags):
 
     ..  container:: example
 
-        >>> baca.Tags
+        >>> baca.tags
         Tags()
 
     ..  container::
 
         All attributes return strings:
 
-        >>> baca.Tags.EXPLICIT_CLEF
+        >>> baca.tags.EXPLICIT_CLEF
         'EXPLICIT_CLEF'
 
-        >>> baca.Tags.REDUNDANT_CLEF
+        >>> baca.tags.REDUNDANT_CLEF
         'REDUNDANT_CLEF'
 
     '''

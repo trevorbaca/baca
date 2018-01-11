@@ -107,7 +107,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                                     \line                                                            %! CLOCK_TIME_MARKUP:SM28
                                         {                                                            %! CLOCK_TIME_MARKUP:SM28
                                             \fontsize                                                %! CLOCK_TIME_MARKUP:SM28
-                                                #-2                                                  %! CLOCK_TIME_MARKUP:SM28
+                                                #3                                                   %! CLOCK_TIME_MARKUP:SM28
                                                 0'00''                                               %! CLOCK_TIME_MARKUP:SM28
                                         }                                                            %! CLOCK_TIME_MARKUP:SM28
                                 }
@@ -119,7 +119,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                         s1 * 3/8
                         ^ \markup {                                                                  %! CLOCK_TIME_MARKUP:SM28
                             \fontsize                                                                %! CLOCK_TIME_MARKUP:SM28
-                                #-2                                                                  %! CLOCK_TIME_MARKUP:SM28
+                                #3                                                                   %! CLOCK_TIME_MARKUP:SM28
                                 0'01''                                                               %! CLOCK_TIME_MARKUP:SM28
                             }                                                                        %! CLOCK_TIME_MARKUP:SM28
             <BLANKLINE>
@@ -196,7 +196,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                                     \line                                                            %! CLOCK_TIME_MARKUP:SM28
                                         {                                                            %! CLOCK_TIME_MARKUP:SM28
                                             \fontsize                                                %! CLOCK_TIME_MARKUP:SM28
-                                                #-2                                                  %! CLOCK_TIME_MARKUP:SM28
+                                                #3                                                   %! CLOCK_TIME_MARKUP:SM28
                                                 0'02''                                               %! CLOCK_TIME_MARKUP:SM28
                                         }                                                            %! CLOCK_TIME_MARKUP:SM28
                                 }
@@ -209,7 +209,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                         \stopTextSpan                                                                %! SM29
                         ^ \markup {                                                                  %! CLOCK_TIME_MARKUP:SM28
                             \fontsize                                                                %! CLOCK_TIME_MARKUP:SM28
-                                #-2                                                                  %! CLOCK_TIME_MARKUP:SM28
+                                #3                                                                   %! CLOCK_TIME_MARKUP:SM28
                                 0'04''                                                               %! CLOCK_TIME_MARKUP:SM28
                             }                                                                        %! CLOCK_TIME_MARKUP:SM28
                         \override Score.BarLine.transparent = ##f                                    %! SM5

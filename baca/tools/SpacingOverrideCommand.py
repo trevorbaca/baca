@@ -42,31 +42,31 @@ class SpacingOverrideCommand(Command):
             argument = self.selector(argument)
         leaf = baca.select(argument).leaf(0)
         assert isinstance(leaf, abjad.Skip), repr(leaf)
-        tag = baca.Tags.SPACING
+        tag = baca.tags.SPACING
         for wrapper in abjad.inspect(leaf).wrappers(baca.SpacingSection):
             if wrapper.tag == tag:
                 abjad.detach(wrapper, leaf)
-        tag = baca.Tags.SPACING_MARKUP
+        tag = baca.tags.SPACING_MARKUP
         for wrapper in abjad.inspect(leaf).wrappers(abjad.Markup):
             if wrapper.tag == tag:
                 abjad.detach(wrapper, leaf)
         if self.build_prefix:
-            tag = baca.Tags.only(self.build_prefix, baca.Tags.SPACING_OVERRIDE)
+            tag = baca.tags.only(self.build_prefix, baca.tags.SPACING_OVERRIDE)
             for wrapper in abjad.inspect(leaf).wrappers(baca.SpacingSection):
                 if wrapper.tag == tag:
                     raise Exception(f'already have {tag} spacing override.')
-            tag = baca.Tags.only(
+            tag = baca.tags.only(
                 self.build_prefix,
-                baca.Tags.SPACING_OVERRIDE_MARKUP,
+                baca.tags.SPACING_OVERRIDE_MARKUP,
                 )
             for wrapper in abjad.inspect(leaf).wrappers(abjad.Markup):
                 if wrapper.tag == tag:
                     message = f'already have {tag} spacing override markup.'
                     raise Exception(message)
         spacing_section = baca.SpacingSection(duration=self.duration)
-        tag, deactivate = baca.Tags.SPACING_OVERRIDE, None
+        tag, deactivate = baca.tags.SPACING_OVERRIDE, None
         if self.build_prefix:
-            tag = baca.Tags.only(self.build_prefix, tag)
+            tag = baca.tags.only(self.build_prefix, tag)
             deactivate = True
         abjad.attach(
             spacing_section,
@@ -82,9 +82,9 @@ class SpacingOverrideCommand(Command):
             color = 'DarkOrange'
         markup = markup.with_color(abjad.SchemeColor(color))
         markup = abjad.new(markup, direction=abjad.Up)
-        tag, deactivate = baca.Tags.SPACING_OVERRIDE_MARKUP, None
+        tag, deactivate = baca.tags.SPACING_OVERRIDE_MARKUP, None
         if self.build_prefix:
-            tag = baca.Tags.only(self.build_prefix, tag)
+            tag = baca.tags.only(self.build_prefix, tag)
             deactivate = True
         abjad.attach(
             markup,
@@ -100,22 +100,22 @@ class SpacingOverrideCommand(Command):
     def _add_negation_to_other_wrappers(self, build, leaf):
         if build is None:
             return
-        tag = baca.Tags.SPACING_OVERRIDE
+        tag = baca.tags.SPACING_OVERRIDE
         for wrapper in abjad.inspect(leaf).wrappers(baca.SpacingSection):
             words = wrapper.tag.split(':')
             if (not wrapper.tag or
                 tag not in words or
                 any(_.startswith('+') for _ in words)):
                 continue
-            wrapper._tag = baca.Tags.forbid(build, wrapper.tag)
-        tag = baca.Tags.SPACING_OVERRIDE_MARKUP
+            wrapper._tag = baca.tags.forbid(build, wrapper.tag)
+        tag = baca.tags.SPACING_OVERRIDE_MARKUP
         for wrapper in abjad.inspect(leaf).wrappers(abjad.Markup):
             words = wrapper.tag.split(':')
             if (not wrapper.tag or
                 tag not in words or
                 any(_.startswith('+') for _ in words)):
                 continue
-            wrapper._tag = baca.Tags.forbid(build, wrapper.tag)
+            wrapper._tag = baca.tags.forbid(build, wrapper.tag)
 
     ### PUBLIC PROPERTIES ###
 

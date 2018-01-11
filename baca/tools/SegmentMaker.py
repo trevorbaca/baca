@@ -27,7 +27,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         >>> lilypond_file = maker.run(
         ...     environment='docs',
-        ...     remove=[baca.Tags.STAGE_NUMBER_MARKUP],
+        ...     remove=[baca.tags.STAGE_NUMBER_MARKUP],
         ...     )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -729,7 +729,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         self._attach_fermata_measure_adjustments(
             self._break_offsets,
-            baca.Tags.SEGMENT,
+            baca.tags.SEGMENT,
             )
         for build_name, build_metadata in self._builds_metadata.items():
             break_measure_numbers = build_metadata.get('break_measures')
@@ -823,7 +823,7 @@ class SegmentMaker(abjad.SegmentMaker):
         staff_lines = baca.StaffLines(self.fermata_measure_staff_line_count)
         breaks_already_treated = []
         deactivate = None
-        if build != baca.Tags.SEGMENT:
+        if build != baca.tags.SEGMENT:
             deactivate = True
         for staff in abjad.iterate(self.score).components(abjad.Staff):
             for leaf in abjad.iterate(staff).leaves():
@@ -838,7 +838,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     after = abjad.inspect(next_leaf).get_effective(prototype)
                 if before != staff_lines:
                     strings = []
-                    if build == baca.Tags.SEGMENT:
+                    if build == baca.tags.SEGMENT:
                         strings_ = staff_lines._get_lilypond_format(
                             context=staff,
                             )
@@ -872,8 +872,8 @@ class SegmentMaker(abjad.SegmentMaker):
                         strings.append(string)
                     if strings:
                         literal = abjad.LilyPondLiteral(strings, 'after')
-                        tag = baca.Tags.FERMATA_BAR_LINE
-                        tag = baca.Tags.only(build, tag)
+                        tag = baca.tags.FERMATA_BAR_LINE
+                        tag = baca.tags.only(build, tag)
                         abjad.attach(
                             literal,
                             leaf,
@@ -882,7 +882,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             tag=tag,
                             )
                     breaks_already_treated.append(leaf_stop)
-                if (build == baca.Tags.SEGMENT and
+                if (build == baca.tags.SEGMENT and
                     next_leaf is None and
                     before != staff_lines):
                     before_line_count = getattr(before, 'line_count', 5)
@@ -988,13 +988,13 @@ class SegmentMaker(abjad.SegmentMaker):
         markup = abjad.new(markup, direction=abjad.Up)
         stem = SegmentMaker._indicator_to_stem(indicator)
         tag = f'{status.upper()}_{stem}_ALERT'
-        tag = getattr(baca.Tags, tag)
+        tag = getattr(baca.tags, tag)
         abjad.attach(markup, leaf, deactivate=True, site='SM10', tag=tag)
         color = SegmentMaker._status_to_color[status]
         color = abjad.SchemeColor(color)
         markup = markup.with_color(color)
         tag = f'{status.upper()}_{stem}_ALERT_WITH_COLOR'
-        tag = getattr(baca.Tags, tag)
+        tag = getattr(baca.tags, tag)
         abjad.attach(markup, leaf, site='SM11', tag=tag)
 
     def _attach_metronome_marks(self):
@@ -1674,7 +1674,7 @@ class SegmentMaker(abjad.SegmentMaker):
             name = f'{status.upper()}_{stem}'
         if prefix is not None:
             name = f'{prefix.upper()}_{name}'
-        tag = getattr(baca.Tags, name)
+        tag = getattr(baca.tags, name)
         return tag
 
     def _handle_mutator(self, command):
@@ -1816,6 +1816,41 @@ class SegmentMaker(abjad.SegmentMaker):
             raise Exception(prototype)
         return indicator
 
+    def _label_clock_time(self):
+        skips = baca.select(self.score['GlobalSkips']).skips()
+        if abjad.inspect(skips[0]).get_effective(abjad.MetronomeMark) is None:
+            return
+        skips_ = []
+        for skip in skips:
+            start_offset = abjad.inspect(skip).get_timespan().start_offset
+            if start_offset in self._fermata_start_offsets:
+                continue
+            skips_.append(skip)
+        start_clock_time = self._get_previous_stop_clock_time()
+        start_clock_time = start_clock_time or "0'00''"
+        self._start_clock_time = start_clock_time 
+        minutes = 0
+        if "'" in self._start_clock_time:
+            tick_index = self._start_clock_time.find("'")
+            minutes = self._start_clock_time[:tick_index]
+            minutes = int(minutes)
+        seconds = self._start_clock_time[-4:-2]
+        seconds = int(seconds)
+        seconds = 60 * minutes + seconds
+        segment_start_offset = abjad.Duration(seconds)
+        tag = baca.tags.CLOCK_TIME_MARKUP
+        label = abjad.label(skips_, site='SM28', tag=tag)
+        segment_stop_duration = label.with_start_offsets(
+            clock_time=True,
+            font_size=3,
+            global_offset=segment_start_offset,
+            )
+        segment_stop_offset = abjad.Offset(segment_stop_duration)
+        self._stop_clock_time = segment_stop_offset.to_clock_string()
+        segment_duration = segment_stop_offset - segment_start_offset
+        segment_duration = segment_duration.to_clock_string()
+        self._duration = segment_duration
+
     def _label_stage_numbers(self):
         skips = baca.select(self.score['GlobalSkips']).skips()
         for stage_index in range(self.stage_count):
@@ -1837,7 +1872,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 markup,
                 skip,
                 site='SM3',
-                tag=baca.Tags.STAGE_NUMBER_MARKUP,
+                tag=baca.tags.STAGE_NUMBER_MARKUP,
                 )
 
     def _make_global_skips(self):
@@ -1858,7 +1893,7 @@ class SegmentMaker(abjad.SegmentMaker):
             literal,
             first_skip,
             site='SM2',
-            tag=baca.Tags.only(baca.Tags.SEGMENT, baca.Tags.EMPTY_START_BAR),
+            tag=baca.tags.only(baca.tags.SEGMENT, baca.tags.EMPTY_START_BAR),
             )
 
     def _make_lilypond_file(self):
@@ -2133,41 +2168,6 @@ class SegmentMaker(abjad.SegmentMaker):
         stop_measure_index = measure_indices[stage_number] - 1
         return start_measure_index, stop_measure_index
 
-    def _tag_clock_time(self):
-        skips = baca.select(self.score['GlobalSkips']).skips()
-        if abjad.inspect(skips[0]).get_effective(abjad.MetronomeMark) is None:
-            return
-        skips_ = []
-        for skip in skips:
-            start_offset = abjad.inspect(skip).get_timespan().start_offset
-            if start_offset in self._fermata_start_offsets:
-                continue
-            skips_.append(skip)
-        start_clock_time = self._get_previous_stop_clock_time()
-        start_clock_time = start_clock_time or "0'00''"
-        self._start_clock_time = start_clock_time 
-        minutes = 0
-        if "'" in self._start_clock_time:
-            tick_index = self._start_clock_time.find("'")
-            minutes = self._start_clock_time[:tick_index]
-            minutes = int(minutes)
-        seconds = self._start_clock_time[-4:-2]
-        seconds = int(seconds)
-        seconds = 60 * minutes + seconds
-        segment_start_offset = abjad.Duration(seconds)
-        tag = baca.Tags.CLOCK_TIME_MARKUP
-        label = abjad.label(skips_, site='SM28', tag=tag)
-        segment_stop_duration = label.with_start_offsets(
-            clock_time=True,
-            font_size=-2,
-            global_offset=segment_start_offset,
-            )
-        segment_stop_offset = abjad.Offset(segment_stop_duration)
-        self._stop_clock_time = segment_stop_offset.to_clock_string()
-        segment_duration = segment_stop_offset - segment_start_offset
-        segment_duration = segment_duration.to_clock_string()
-        self._duration = segment_duration
-
     @staticmethod
     def _tag_persistent_indicator(
         context,
@@ -2196,7 +2196,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if isinstance(spanner, abjad.MetronomeMarkSpanner):
                 color = SegmentMaker._status_to_color[status]
                 tag = f'{status.upper()}_{stem}_WITH_COLOR'
-                tag = getattr(baca.Tags, tag)
+                tag = getattr(baca.tags, tag)
                 alternate = (color, 'SM15', tag)
                 found_wrapper = False
                 for wrapper in abjad.inspect(leaf).wrappers():
@@ -2221,7 +2221,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if not self.transpose_score:
             return
         for pleaf in baca.select(self.score).pleaves():
-            if abjad.inspect(pleaf).has_indicator(baca.Tags.DO_NOT_TRANSPOSE):
+            if abjad.inspect(pleaf).has_indicator(baca.tags.DO_NOT_TRANSPOSE):
                 continue
             abjad.Instrument.transpose_from_sounding_pitch(pleaf)
 
@@ -2286,8 +2286,8 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=[
-            ...         baca.Tags.SPACING_MARKUP,
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         baca.tags.SPACING_MARKUP,
+            ...         baca.tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -2383,8 +2383,8 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=[
-            ...         baca.Tags.SPACING_MARKUP,
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         baca.tags.SPACING_MARKUP,
+            ...         baca.tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -2489,8 +2489,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         baca.Tags.SPACING_MARKUP,
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         baca.tags.SPACING_MARKUP,
+            ...         baca.tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -2595,8 +2595,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         baca.Tags.SPACING_MARKUP,
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         baca.tags.SPACING_MARKUP,
+            ...         baca.tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -2695,8 +2695,8 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=(
-            ...         baca.Tags.SPACING_MARKUP,
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         baca.tags.SPACING_MARKUP,
+            ...         baca.tags.STAGE_NUMBER_MARKUP,
             ...         ),
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -2817,8 +2817,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=(
-            ...         baca.Tags.SPACING_MARKUP,
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         baca.tags.SPACING_MARKUP,
+            ...         baca.tags.STAGE_NUMBER_MARKUP,
             ...         ),
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -3807,8 +3807,8 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=[
-            ...         baca.Tags.SPACING_MARKUP,
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         baca.tags.SPACING_MARKUP,
+            ...         baca.tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -3895,8 +3895,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         baca.Tags.SPACING_MARKUP,
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         baca.tags.SPACING_MARKUP,
+            ...         baca.tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -3986,8 +3986,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         baca.Tags.SPACING_MARKUP,
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         baca.tags.SPACING_MARKUP,
+            ...         baca.tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -4068,8 +4068,8 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=[
-            ...         baca.Tags.SPACING_MARKUP,
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         baca.tags.SPACING_MARKUP,
+            ...         baca.tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -4158,8 +4158,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         baca.Tags.SPACING_MARKUP,
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         baca.tags.SPACING_MARKUP,
+            ...         baca.tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -4238,8 +4238,8 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=[
-            ...         baca.Tags.SPACING_MARKUP,
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         baca.tags.SPACING_MARKUP,
+            ...         baca.tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -4328,8 +4328,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         baca.Tags.SPACING_MARKUP,
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         baca.tags.SPACING_MARKUP,
+            ...         baca.tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -5989,8 +5989,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     )
             >>> remove = [
-            ...     baca.Tags.SPACING_MARKUP,
-            ...     baca.Tags.STAGE_NUMBER_MARKUP,
+            ...     baca.tags.SPACING_MARKUP,
+            ...     baca.tags.STAGE_NUMBER_MARKUP,
             ...     ]
 
         ..  container:: example
@@ -6944,8 +6944,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     )
             >>> remove = [
-            ...     baca.Tags.SPACING_MARKUP,
-            ...     baca.Tags.STAGE_NUMBER_MARKUP,
+            ...     baca.tags.SPACING_MARKUP,
+            ...     baca.tags.STAGE_NUMBER_MARKUP,
             ...     ]
 
         ..  container:: example
@@ -8029,7 +8029,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> lilypond_file = maker.run(
             ...     environment='docs',
-            ...     remove=[baca.Tags.CLOCK_TIME_MARKUP],
+            ...     remove=[baca.tags.CLOCK_TIME_MARKUP],
             ...     )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -8210,10 +8210,10 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
             >>> metronome_marks['112'] = abjad.MetronomeMark((1, 4), 112)
             >>> remove = [
-            ...     baca.Tags.CLOCK_TIME_MARKUP,
-            ...     baca.Tags.EMPTY_START_BAR,
-            ...     baca.Tags.SPACING_MARKUP,
-            ...     baca.Tags.STAGE_NUMBER_MARKUP,
+            ...     baca.tags.CLOCK_TIME_MARKUP,
+            ...     baca.tags.EMPTY_START_BAR,
+            ...     baca.tags.SPACING_MARKUP,
+            ...     baca.tags.STAGE_NUMBER_MARKUP,
             ...     ]
 
         ..  container:: example
@@ -9280,8 +9280,8 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=[
-            ...         baca.Tags.SPACING_MARKUP,
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         baca.tags.SPACING_MARKUP,
+            ...         baca.tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -9370,8 +9370,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         baca.Tags.SPACING_MARKUP,
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         baca.tags.SPACING_MARKUP,
+            ...         baca.tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -9463,8 +9463,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         baca.Tags.SPACING_MARKUP,
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         baca.tags.SPACING_MARKUP,
+            ...         baca.tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -9547,8 +9547,8 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=[
-            ...         baca.Tags.SPACING_MARKUP,
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         baca.tags.SPACING_MARKUP,
+            ...         baca.tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -9641,8 +9641,8 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         baca.Tags.SPACING_MARKUP,
-            ...         baca.Tags.STAGE_NUMBER_MARKUP,
+            ...         baca.tags.SPACING_MARKUP,
+            ...         baca.tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
@@ -10303,7 +10303,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._call_commands()
         self._shorten_long_repeat_ties()
         self._categorize_uncategorized_persistent_indicators()
-        self._tag_clock_time()
+        self._label_clock_time()
         self._transpose_score_()
         self._attach_rehearsal_mark()
         self._add_final_bar_line()

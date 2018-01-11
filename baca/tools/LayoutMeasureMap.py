@@ -438,9 +438,9 @@ class LayoutMeasureMap(abjad.AbjadObject):
     ### INITIALIZER ###
 
     def __init__(self, commands=None, build=None):
-        build = build or baca.Tags.SEGMENT
+        build = build or baca.tags.SEGMENT
         self._build = build
-        tag = baca.Tags.only(build, baca.Tags.LAYOUT)
+        tag = baca.tags.only(build, baca.tags.LAYOUT)
         self._tag = tag
         if commands is not None:
             commands_ = []

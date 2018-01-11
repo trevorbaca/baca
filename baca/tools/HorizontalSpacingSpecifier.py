@@ -1099,13 +1099,13 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 if self.multiplier is not None:
                     duration = duration / self.multiplier
             spacing_section = baca.SpacingSection(duration)
-            tag = baca.Tags.SPACING
+            tag = baca.tags.SPACING
             abjad.attach(spacing_section, skip, site='HSS1', tag=tag)
             markup = abjad.Markup(f'({duration!s})')
             markup = markup.fontsize(3).bold()
             markup = markup.with_color(abjad.SchemeColor('DarkCyan'))
             markup = abjad.new(markup, direction=abjad.Up)
-            tag = baca.Tags.SPACING_MARKUP
+            tag = baca.tags.SPACING_MARKUP
             abjad.attach(markup, skip, site='HSS2', tag=tag)
 
     ### PRIVATE METHODS ###

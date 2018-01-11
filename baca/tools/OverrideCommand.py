@@ -282,7 +282,7 @@ class OverrideCommand(Command):
         literal = abjad.LilyPondLiteral(string, format_slot)
         tag, deactivate = self.tag, None
         if self.build_prefix is not None:
-            tag = baca.Tags.only(self.build_prefix, tag)
+            tag = baca.tags.only(self.build_prefix, tag)
             deactivate = True
         abjad.attach(
             literal,
