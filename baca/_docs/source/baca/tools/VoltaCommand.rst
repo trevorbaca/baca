@@ -23,7 +23,10 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.VoltaCommand.VoltaCommand.build_prefix
       ~baca.tools.VoltaCommand.VoltaCommand.selector
+      ~baca.tools.VoltaCommand.VoltaCommand.site
+      ~baca.tools.VoltaCommand.VoltaCommand.tag
       ~baca.tools.VoltaCommand.VoltaCommand.__call__
       ~baca.tools.VoltaCommand.VoltaCommand.__eq__
       ~baca.tools.VoltaCommand.VoltaCommand.__format__
@@ -37,7 +40,25 @@ Read-only properties
 
    .. container:: inherited
 
+      .. autoattribute:: baca.tools.VoltaCommand.VoltaCommand.build_prefix
+
+.. only:: html
+
+   .. container:: inherited
+
       .. autoattribute:: baca.tools.VoltaCommand.VoltaCommand.selector
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.VoltaCommand.VoltaCommand.site
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.VoltaCommand.VoltaCommand.tag
 
 Special methods
 ---------------

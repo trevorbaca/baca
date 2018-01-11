@@ -21,10 +21,8 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.SpacingSection.SpacingSection.context
       ~baca.tools.SpacingSection.SpacingSection.duration
       ~baca.tools.SpacingSection.SpacingSection.from_string
-      ~baca.tools.SpacingSection.SpacingSection.persistent
       ~baca.tools.SpacingSection.SpacingSection.__eq__
       ~baca.tools.SpacingSection.SpacingSection.__format__
       ~baca.tools.SpacingSection.SpacingSection.__hash__
@@ -34,11 +32,7 @@ Bases
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.SpacingSection.SpacingSection.context
-
 .. autoattribute:: baca.tools.SpacingSection.SpacingSection.duration
-
-.. autoattribute:: baca.tools.SpacingSection.SpacingSection.persistent
 
 Class & static methods
 ----------------------

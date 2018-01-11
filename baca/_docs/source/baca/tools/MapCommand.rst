@@ -23,8 +23,11 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.MapCommand.MapCommand.build_prefix
       ~baca.tools.MapCommand.MapCommand.commands
       ~baca.tools.MapCommand.MapCommand.selector
+      ~baca.tools.MapCommand.MapCommand.site
+      ~baca.tools.MapCommand.MapCommand.tag
       ~baca.tools.MapCommand.MapCommand.__call__
       ~baca.tools.MapCommand.MapCommand.__eq__
       ~baca.tools.MapCommand.MapCommand.__format__
@@ -34,6 +37,12 @@ Bases
 Read-only properties
 --------------------
 
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.MapCommand.MapCommand.build_prefix
+
 .. autoattribute:: baca.tools.MapCommand.MapCommand.commands
 
 .. only:: html
@@ -41,6 +50,18 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.MapCommand.MapCommand.selector
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.MapCommand.MapCommand.site
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.MapCommand.MapCommand.tag
 
 Special methods
 ---------------

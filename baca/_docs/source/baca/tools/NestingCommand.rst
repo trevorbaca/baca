@@ -23,8 +23,11 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.NestingCommand.NestingCommand.build_prefix
       ~baca.tools.NestingCommand.NestingCommand.lmr_specifier
       ~baca.tools.NestingCommand.NestingCommand.selector
+      ~baca.tools.NestingCommand.NestingCommand.site
+      ~baca.tools.NestingCommand.NestingCommand.tag
       ~baca.tools.NestingCommand.NestingCommand.time_treatments
       ~baca.tools.NestingCommand.NestingCommand.__call__
       ~baca.tools.NestingCommand.NestingCommand.__eq__
@@ -35,6 +38,12 @@ Bases
 Read-only properties
 --------------------
 
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.NestingCommand.NestingCommand.build_prefix
+
 .. autoattribute:: baca.tools.NestingCommand.NestingCommand.lmr_specifier
 
 .. only:: html
@@ -42,6 +51,18 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.NestingCommand.NestingCommand.selector
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.NestingCommand.NestingCommand.site
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.NestingCommand.NestingCommand.tag
 
 .. autoattribute:: baca.tools.NestingCommand.NestingCommand.time_treatments
 

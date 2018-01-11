@@ -23,8 +23,11 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.build_prefix
       ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.deviations
       ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.selector
+      ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.site
+      ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.tag
       ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.__call__
       ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.__eq__
       ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.__format__
@@ -34,6 +37,12 @@ Bases
 Read-only properties
 --------------------
 
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.build_prefix
+
 .. autoattribute:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.deviations
 
 .. only:: html
@@ -41,6 +50,18 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.selector
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.site
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.tag
 
 Special methods
 ---------------

@@ -21,7 +21,10 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.Command.Command.build_prefix
       ~baca.tools.Command.Command.selector
+      ~baca.tools.Command.Command.site
+      ~baca.tools.Command.Command.tag
       ~baca.tools.Command.Command.__call__
       ~baca.tools.Command.Command.__eq__
       ~baca.tools.Command.Command.__format__
@@ -31,7 +34,13 @@ Bases
 Read-only properties
 --------------------
 
+.. autoattribute:: baca.tools.Command.Command.build_prefix
+
 .. autoattribute:: baca.tools.Command.Command.selector
+
+.. autoattribute:: baca.tools.Command.Command.site
+
+.. autoattribute:: baca.tools.Command.Command.tag
 
 Special methods
 ---------------

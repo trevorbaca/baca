@@ -23,9 +23,12 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.StaffPositionCommand.StaffPositionCommand.build_prefix
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.numbers
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.repeats
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.selector
+      ~baca.tools.StaffPositionCommand.StaffPositionCommand.site
+      ~baca.tools.StaffPositionCommand.StaffPositionCommand.tag
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.__call__
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.__eq__
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.__format__
@@ -34,6 +37,12 @@ Bases
 
 Read-only properties
 --------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.StaffPositionCommand.StaffPositionCommand.build_prefix
 
 .. autoattribute:: baca.tools.StaffPositionCommand.StaffPositionCommand.numbers
 
@@ -44,6 +53,18 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.StaffPositionCommand.StaffPositionCommand.selector
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.StaffPositionCommand.StaffPositionCommand.site
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.StaffPositionCommand.StaffPositionCommand.tag
 
 Special methods
 ---------------

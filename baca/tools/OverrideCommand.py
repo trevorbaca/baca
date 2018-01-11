@@ -341,18 +341,14 @@ class OverrideCommand(Command):
         return self._grob
 
     @property
-    def site(self):
-        r'''Gets site.
-
-        Set to string or none.
-        '''
-        return self._site
-
-    @property
     def tag(self):
         r'''Gets tag.
 
+        Defaults to none.
+
         Set to string or none.
+
+        Returns string or none.
         '''
         parts = []
         if self._build_prefix is not None:

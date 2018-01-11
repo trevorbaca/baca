@@ -24,10 +24,13 @@ Bases
    .. autosummary::
 
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.bookend
+      ~baca.tools.PiecewiseCommand.PiecewiseCommand.build_prefix
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.indicators
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.preamble
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.selector
+      ~baca.tools.PiecewiseCommand.PiecewiseCommand.site
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.spanner
+      ~baca.tools.PiecewiseCommand.PiecewiseCommand.tag
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.__call__
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.__eq__
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.__format__
@@ -39,13 +42,31 @@ Read-only properties
 
 .. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.bookend
 
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.build_prefix
+
 .. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.indicators
 
 .. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.preamble
 
 .. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.selector
 
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.site
+
 .. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.spanner
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.tag
 
 Special methods
 ---------------

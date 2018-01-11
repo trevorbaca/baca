@@ -23,9 +23,12 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.build_prefix
       ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.direction
       ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.repeat
       ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.selector
+      ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.site
+      ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.tag
       ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.__call__
       ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.__eq__
       ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.__format__
@@ -34,6 +37,12 @@ Bases
 
 Read-only properties
 --------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.build_prefix
 
 .. autoattribute:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.direction
 
@@ -44,6 +53,18 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.selector
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.site
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.tag
 
 Special methods
 ---------------

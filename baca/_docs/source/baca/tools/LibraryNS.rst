@@ -54,6 +54,7 @@ Bases
       ~baca.tools.LibraryNS.LibraryNS.scripts_down
       ~baca.tools.LibraryNS.LibraryNS.scripts_up
       ~baca.tools.LibraryNS.LibraryNS.shift_clef
+      ~baca.tools.LibraryNS.LibraryNS.shift_dynamic
       ~baca.tools.LibraryNS.LibraryNS.shift_hairpin_start
       ~baca.tools.LibraryNS.LibraryNS.short_fermata
       ~baca.tools.LibraryNS.LibraryNS.single_segment_transition
@@ -158,6 +159,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNS.LibraryNS.scripts_up
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.shift_clef
+
+.. automethod:: baca.tools.LibraryNS.LibraryNS.shift_dynamic
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.shift_hairpin_start
 

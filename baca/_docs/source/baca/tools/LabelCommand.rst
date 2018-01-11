@@ -23,8 +23,11 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.LabelCommand.LabelCommand.build_prefix
       ~baca.tools.LabelCommand.LabelCommand.expression
       ~baca.tools.LabelCommand.LabelCommand.selector
+      ~baca.tools.LabelCommand.LabelCommand.site
+      ~baca.tools.LabelCommand.LabelCommand.tag
       ~baca.tools.LabelCommand.LabelCommand.__call__
       ~baca.tools.LabelCommand.LabelCommand.__eq__
       ~baca.tools.LabelCommand.LabelCommand.__format__
@@ -34,6 +37,12 @@ Bases
 Read-only properties
 --------------------
 
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.LabelCommand.LabelCommand.build_prefix
+
 .. autoattribute:: baca.tools.LabelCommand.LabelCommand.expression
 
 .. only:: html
@@ -41,6 +50,18 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.LabelCommand.LabelCommand.selector
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.LabelCommand.LabelCommand.site
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.LabelCommand.LabelCommand.tag
 
 Special methods
 ---------------

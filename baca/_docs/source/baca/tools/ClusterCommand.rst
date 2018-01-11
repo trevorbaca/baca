@@ -23,9 +23,12 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.ClusterCommand.ClusterCommand.build_prefix
       ~baca.tools.ClusterCommand.ClusterCommand.hide_flat_markup
       ~baca.tools.ClusterCommand.ClusterCommand.selector
+      ~baca.tools.ClusterCommand.ClusterCommand.site
       ~baca.tools.ClusterCommand.ClusterCommand.start_pitch
+      ~baca.tools.ClusterCommand.ClusterCommand.tag
       ~baca.tools.ClusterCommand.ClusterCommand.widths
       ~baca.tools.ClusterCommand.ClusterCommand.__call__
       ~baca.tools.ClusterCommand.ClusterCommand.__eq__
@@ -36,11 +39,29 @@ Bases
 Read-only properties
 --------------------
 
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.build_prefix
+
 .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.hide_flat_markup
 
 .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.selector
 
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.site
+
 .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.start_pitch
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.tag
 
 .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.widths
 

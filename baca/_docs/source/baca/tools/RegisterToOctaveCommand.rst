@@ -24,8 +24,11 @@ Bases
    .. autosummary::
 
       ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.anchor
+      ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.build_prefix
       ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.octave_number
       ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.selector
+      ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.site
+      ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.tag
       ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.__call__
       ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.__eq__
       ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.__format__
@@ -37,6 +40,12 @@ Read-only properties
 
 .. autoattribute:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.anchor
 
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.build_prefix
+
 .. autoattribute:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.octave_number
 
 .. only:: html
@@ -44,6 +53,18 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.selector
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.site
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.tag
 
 Special methods
 ---------------

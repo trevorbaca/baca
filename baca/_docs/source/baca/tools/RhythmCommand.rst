@@ -23,6 +23,7 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.RhythmCommand.RhythmCommand.build_prefix
       ~baca.tools.RhythmCommand.RhythmCommand.division_expression
       ~baca.tools.RhythmCommand.RhythmCommand.division_maker
       ~baca.tools.RhythmCommand.RhythmCommand.reference_meters
@@ -31,10 +32,12 @@ Bases
       ~baca.tools.RhythmCommand.RhythmCommand.rhythm_maker
       ~baca.tools.RhythmCommand.RhythmCommand.rhythm_overwrites
       ~baca.tools.RhythmCommand.RhythmCommand.selector
+      ~baca.tools.RhythmCommand.RhythmCommand.site
       ~baca.tools.RhythmCommand.RhythmCommand.split_at_measure_boundaries
       ~baca.tools.RhythmCommand.RhythmCommand.stages
       ~baca.tools.RhythmCommand.RhythmCommand.start_stage
       ~baca.tools.RhythmCommand.RhythmCommand.stop_stage
+      ~baca.tools.RhythmCommand.RhythmCommand.tag
       ~baca.tools.RhythmCommand.RhythmCommand.tie_first
       ~baca.tools.RhythmCommand.RhythmCommand.tie_last
       ~baca.tools.RhythmCommand.RhythmCommand.__call__
@@ -45,6 +48,12 @@ Bases
 
 Read-only properties
 --------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.build_prefix
 
 .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.division_expression
 
@@ -66,6 +75,12 @@ Read-only properties
 
       .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.selector
 
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.site
+
 .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.split_at_measure_boundaries
 
 .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.stages
@@ -73,6 +88,12 @@ Read-only properties
 .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.start_stage
 
 .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.stop_stage
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.tag
 
 .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.tie_first
 

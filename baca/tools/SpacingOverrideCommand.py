@@ -9,7 +9,7 @@ class SpacingOverrideCommand(Command):
     ..  container:: example
 
         >>> baca.SpacingOverrideCommand()
-        SpacingOverrideCommand(selector=baca.leaf(0))
+        SpacingOverrideCommand(selector=baca.leaf(0), tag='SPACING_OVERRIDE')
 
     '''
 
@@ -25,11 +25,13 @@ class SpacingOverrideCommand(Command):
         self,
         duration=None,
         selector='baca.leaf(0)',
+        tag=abjad.Tags.SPACING_OVERRIDE.name,
         ):
         Command.__init__(self, selector=selector)
         if duration is not None:
             duration = abjad.NonreducedFraction(duration)
         self._duration = duration
+        self._tag = tag
 
     ### SPECIAL METHODS ###
 
@@ -44,19 +46,61 @@ class SpacingOverrideCommand(Command):
             argument = self.selector(argument)
         leaf = baca.select(argument).leaf(0)
         assert isinstance(leaf, abjad.Skip), repr(leaf)
-        abjad.detach(baca.SpacingSection, leaf)
-        tag = abjad.Tags.build(abjad.Tags.SPACING_MARKUP)
+        for wrapper in abjad.inspect(leaf).wrappers(baca.SpacingSection):
+            if wrapper.tag == abjad.Tags.SPACING.name:
+                abjad.detach(wrapper, leaf)
+        for wrapper in abjad.inspect(leaf).wrappers(abjad.Markup):
+            if wrapper.tag == abjad.Tags.SPACING_MARKUP.name:
+                abjad.detach(wrapper, leaf)
+        if self._build_prefix is not None:
+            tag = abjad.Tags.build(self.tag, build=self._build_prefix)
+            deactivate = True
+        else:
+            tag = self.tag
+            deactivate = None
         for wrapper in abjad.inspect(leaf).wrappers(abjad.Markup):
             if wrapper.tag == tag:
                 abjad.detach(wrapper, leaf)
         spacing_section = baca.SpacingSection(duration=self.duration)
-        tag = abjad.Tags.build(abjad.Tags.SPACING_OVERRIDE)
-        abjad.attach(spacing_section, leaf, site='SOC1', tag=tag)
+        abjad.attach(
+            spacing_section,
+            leaf,
+            deactivate=deactivate,
+            site='SOC1',
+            tag=tag,
+            )
         markup = abjad.Markup(f'({self.duration!s})').fontsize(3).bold()
         markup = markup.with_color(abjad.SchemeColor('DeepPink1'))
         markup = abjad.new(markup, direction=abjad.Up)
-        tag = abjad.Tags.build(abjad.Tags.SPACING_OVERRIDE_MARKUP)
-        abjad.attach(markup, leaf, site='SOC2', tag=tag)
+
+        tag = abjad.Tags.SPACING_OVERRIDE_MARKUP
+        if self._build_prefix is not None:
+            tag = abjad.Tags.build(tag, build=self._build_prefix)
+        abjad.attach(
+            markup,
+            leaf,
+            deactivate=True,
+            site='SOC2',
+            tag=tag,
+            )
+        if self._build_prefix is not None:
+            self._mark_segment_wrappers_as_segment_only(leaf)
+
+    ### PRIVATE METHODS ###
+
+    def _mark_segment_wrappers_as_segment_only(self, leaf):
+        tag = abjad.Tags.SPACING_OVERRIDE
+        tag = getattr(tag, 'name', tag)
+        for wrapper in abjad.inspect(leaf).wrappers(baca.SpacingSection):
+            if wrapper.tag == tag:
+                tag = abjad.Tags.build(tag)
+                wrapper._tag = tag
+        tag = abjad.Tags.SPACING_OVERRIDE_MARKUP
+        tag = getattr(tag, 'name', tag)
+        for wrapper in abjad.inspect(leaf).wrappers(abjad.Markup):
+            if wrapper.tag == tag:
+                tag = abjad.Tags.build(tag)
+                wrapper._tag = tag
 
     ### PUBLIC PROPERTIES ###
 

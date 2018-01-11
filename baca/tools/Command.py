@@ -15,13 +15,15 @@ class Command(abjad.AbjadObject):
         '_build_prefix',
         '_manifests',
         '_selector',
+        '_site',
+        '_tag',
         )
 
     _publish_storage_format = True
 
     ### INITIALIZER ###
 
-    def __init__(self, selector=None):
+    def __init__(self, selector=None, site:str=None, tag=None):
         self._build_prefix = None
         self._manifests = None
         if isinstance(selector, str):
@@ -30,6 +32,12 @@ class Command(abjad.AbjadObject):
             prototype = (abjad.Expression, baca.MapCommand)
             assert isinstance(selector, prototype), repr(selector)
         self._selector = selector
+        if site is not None:
+            assert isinstance(site, str)
+        self._site = site
+        if tag is not None:
+            assert isinstance(tag, str)
+        self._tag = tag
 
     ### SPECIAL METHODS ###
 
@@ -44,6 +52,16 @@ class Command(abjad.AbjadObject):
     ### PUBLIC PROPERTIES ###
 
     @property
+    def build_prefix(self):
+        r'''Gets build prefix.
+
+        Defaults to none.
+
+        Returns string or none.
+        '''
+        return self._build_prefix
+        
+    @property
     def selector(self):
         r'''Gets selector.
 
@@ -54,3 +72,27 @@ class Command(abjad.AbjadObject):
         Returns selector or none.
         '''
         return self._selector
+
+    @property
+    def site(self):
+        r'''Gets site.
+
+        Defaults to none.
+
+        Set to string or none.
+
+        Returns string or none.
+        '''
+        return self._site
+
+    @property
+    def tag(self):
+        r'''Gets tag.
+
+        Defaults to none.
+
+        Set to string or none.
+
+        Returns string or none.
+        '''
+        return self._tag

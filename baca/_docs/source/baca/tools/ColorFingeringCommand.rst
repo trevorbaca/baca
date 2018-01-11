@@ -23,8 +23,11 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.build_prefix
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.numbers
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.selector
+      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.site
+      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.tag
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.__call__
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.__eq__
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.__format__
@@ -34,6 +37,12 @@ Bases
 Read-only properties
 --------------------
 
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.build_prefix
+
 .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.numbers
 
 .. only:: html
@@ -41,6 +50,18 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.selector
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.site
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.tag
 
 Special methods
 ---------------

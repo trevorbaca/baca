@@ -24,12 +24,15 @@ Bases
    .. autosummary::
 
       ~baca.tools.ImbricationCommand.ImbricationCommand.allow_unused_pitches
+      ~baca.tools.ImbricationCommand.ImbricationCommand.build_prefix
       ~baca.tools.ImbricationCommand.ImbricationCommand.by_pitch_class
       ~baca.tools.ImbricationCommand.ImbricationCommand.extend_beam
       ~baca.tools.ImbricationCommand.ImbricationCommand.hocket
       ~baca.tools.ImbricationCommand.ImbricationCommand.segment
       ~baca.tools.ImbricationCommand.ImbricationCommand.selector
+      ~baca.tools.ImbricationCommand.ImbricationCommand.site
       ~baca.tools.ImbricationCommand.ImbricationCommand.specifiers
+      ~baca.tools.ImbricationCommand.ImbricationCommand.tag
       ~baca.tools.ImbricationCommand.ImbricationCommand.truncate_ties
       ~baca.tools.ImbricationCommand.ImbricationCommand.voice_name
       ~baca.tools.ImbricationCommand.ImbricationCommand.__call__
@@ -43,6 +46,12 @@ Read-only properties
 
 .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.allow_unused_pitches
 
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.build_prefix
+
 .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.by_pitch_class
 
 .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.extend_beam
@@ -53,7 +62,19 @@ Read-only properties
 
 .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.selector
 
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.site
+
 .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.specifiers
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.tag
 
 .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.truncate_ties
 

@@ -23,8 +23,11 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.build_prefix
       ~baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.duration
       ~baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.selector
+      ~baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.site
+      ~baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.tag
       ~baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.__call__
       ~baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.__eq__
       ~baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.__format__
@@ -34,6 +37,12 @@ Bases
 Read-only properties
 --------------------
 
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.build_prefix
+
 .. autoattribute:: baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.duration
 
 .. only:: html
@@ -41,6 +50,18 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.selector
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.site
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.tag
 
 Special methods
 ---------------

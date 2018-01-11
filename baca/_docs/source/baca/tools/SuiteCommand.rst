@@ -23,8 +23,11 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.SuiteCommand.SuiteCommand.build_prefix
       ~baca.tools.SuiteCommand.SuiteCommand.commands
       ~baca.tools.SuiteCommand.SuiteCommand.selector
+      ~baca.tools.SuiteCommand.SuiteCommand.site
+      ~baca.tools.SuiteCommand.SuiteCommand.tag
       ~baca.tools.SuiteCommand.SuiteCommand.__call__
       ~baca.tools.SuiteCommand.SuiteCommand.__eq__
       ~baca.tools.SuiteCommand.SuiteCommand.__format__
@@ -34,6 +37,12 @@ Bases
 Read-only properties
 --------------------
 
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.SuiteCommand.SuiteCommand.build_prefix
+
 .. autoattribute:: baca.tools.SuiteCommand.SuiteCommand.commands
 
 .. only:: html
@@ -41,6 +50,18 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.SuiteCommand.SuiteCommand.selector
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.SuiteCommand.SuiteCommand.site
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.SuiteCommand.SuiteCommand.tag
 
 Special methods
 ---------------
