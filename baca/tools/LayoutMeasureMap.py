@@ -35,8 +35,8 @@ class LayoutMeasureMap(abjad.AbjadObject):
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
                         % GlobalSkips [measure 1]                                                    %! SM4
-                        \autoPageBreaksOff                                                           %! SEGMENT+LAYOUT:LMM1
-                        \noBreak                                                                     %! SEGMENT+LAYOUT:LMM2
+                        \autoPageBreaksOff                                                           %! +SEGMENT:LAYOUT:LMM1
+                        \noBreak                                                                     %! +SEGMENT:LAYOUT:LMM2
                         \once \override TextSpanner.Y-extent = ##f                                   %! SM29
                         \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
                         \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
@@ -56,31 +56,31 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                     #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
                                     [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
                             }                                                                        %! STAGE_NUMBER_MARKUP:SM3
-                        \break                                                                       %! SEGMENT+LAYOUT:LMM3
+                        \break                                                                       %! +SEGMENT:LAYOUT:LMM3
             <BLANKLINE>
                         % GlobalSkips [measure 2]                                                    %! SM4
-                        \noBreak                                                                     %! SEGMENT+LAYOUT:LMM2
-                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! SEGMENT+LAYOUT:LMM3
-                        #'((Y-offset . 100) (alignment-distances . (30 30)))                         %! SEGMENT+LAYOUT:LMM3
+                        \noBreak                                                                     %! +SEGMENT:LAYOUT:LMM2
+                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! +SEGMENT:LAYOUT:LMM3
+                        #'((Y-offset . 100) (alignment-distances . (30 30)))                         %! +SEGMENT:LAYOUT:LMM3
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
-                        \break                                                                       %! SEGMENT+LAYOUT:LMM3
+                        \break                                                                       %! +SEGMENT:LAYOUT:LMM3
             <BLANKLINE>
                         % GlobalSkips [measure 3]                                                    %! SM4
-                        \noBreak                                                                     %! SEGMENT+LAYOUT:LMM2
+                        \noBreak                                                                     %! +SEGMENT:LAYOUT:LMM2
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
                         % GlobalSkips [measure 4]                                                    %! SM4
-                        \noBreak                                                                     %! SEGMENT+LAYOUT:LMM2
+                        \noBreak                                                                     %! +SEGMENT:LAYOUT:LMM2
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
                         % GlobalSkips [measure 5]                                                    %! SM4
-                        \noBreak                                                                     %! SEGMENT+LAYOUT:LMM2
+                        \noBreak                                                                     %! +SEGMENT:LAYOUT:LMM2
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
@@ -440,7 +440,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
     def __init__(self, commands=None, build=None):
         build = build or baca.Tags.SEGMENT
         self._build = build
-        tag = baca.Tags.build(build, baca.Tags.LAYOUT)
+        tag = baca.Tags.only(build, baca.Tags.LAYOUT)
         self._tag = tag
         if commands is not None:
             commands_ = []
@@ -500,7 +500,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
                     ),
                 selector=baca.skip(0),
                 site='LMM3',
-                tag='SEGMENT+LAYOUT',
+                tag='+SEGMENT:LAYOUT',
                 )
             baca.IndicatorCommand(
                 indicators=abjad.CyclicTuple(
@@ -510,7 +510,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
                     ),
                 selector=baca.skip(1),
                 site='LMM3',
-                tag='SEGMENT+LAYOUT',
+                tag='+SEGMENT:LAYOUT',
                 )
 
         Returns commands.

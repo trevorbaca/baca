@@ -50,21 +50,23 @@ class SpacingOverrideCommand(Command):
         for wrapper in abjad.inspect(leaf).wrappers(abjad.Markup):
             if wrapper.tag == tag:
                 abjad.detach(wrapper, leaf)
-        tag = baca.Tags.build(self.build_prefix, baca.Tags.SPACING_OVERRIDE)
-        for wrapper in abjad.inspect(leaf).wrappers(baca.SpacingSection):
-            if wrapper.tag == tag:
-                raise Exception(f'already have {tag} spacing section.')
-        tag = baca.Tags.build(
-            self.build_prefix,
-            baca.Tags.SPACING_OVERRIDE_MARKUP,
-            )
-        for wrapper in abjad.inspect(leaf).wrappers(abjad.Markup):
-            if wrapper.tag == tag:
-                raise Exception(f'already have {tag} spacing override markup.')
+        if self.build_prefix:
+            tag = baca.Tags.only(self.build_prefix, baca.Tags.SPACING_OVERRIDE)
+            for wrapper in abjad.inspect(leaf).wrappers(baca.SpacingSection):
+                if wrapper.tag == tag:
+                    raise Exception(f'already have {tag} spacing override.')
+            tag = baca.Tags.only(
+                self.build_prefix,
+                baca.Tags.SPACING_OVERRIDE_MARKUP,
+                )
+            for wrapper in abjad.inspect(leaf).wrappers(abjad.Markup):
+                if wrapper.tag == tag:
+                    message = f'already have {tag} spacing override markup.'
+                    raise Exception(message)
         spacing_section = baca.SpacingSection(duration=self.duration)
         tag, deactivate = baca.Tags.SPACING_OVERRIDE, None
         if self.build_prefix:
-            tag = baca.Tags.build(self.build_prefix, tag)
+            tag = baca.Tags.only(self.build_prefix, tag)
             deactivate = True
         abjad.attach(
             spacing_section,
@@ -82,7 +84,7 @@ class SpacingOverrideCommand(Command):
         markup = abjad.new(markup, direction=abjad.Up)
         tag, deactivate = baca.Tags.SPACING_OVERRIDE_MARKUP, None
         if self.build_prefix:
-            tag = baca.Tags.build(self.build_prefix, tag)
+            tag = baca.Tags.only(self.build_prefix, tag)
             deactivate = True
         abjad.attach(
             markup,
@@ -91,33 +93,29 @@ class SpacingOverrideCommand(Command):
             site='SOC2',
             tag=tag,
             )
-        self._negate_nonbuild_wrappers(self.build_prefix, leaf)
+        self._add_negation_to_other_wrappers(self.build_prefix, leaf)
 
     ### PRIVATE METHODS ###
 
-    def _negate_nonbuild_wrappers(self, build, leaf):
+    def _add_negation_to_other_wrappers(self, build, leaf):
         if build is None:
             return
         tag = baca.Tags.SPACING_OVERRIDE
         for wrapper in abjad.inspect(leaf).wrappers(baca.SpacingSection):
-            words = wrapper.tag.split('+')
+            words = wrapper.tag.split(':')
             if (not wrapper.tag or
                 tag not in words or
-                wrapper.tag == baca.Tags.build(build, tag)):
+                any(_.startswith('+') for _ in words)):
                 continue
-            assert build not in words, repr(wrapper.tag)
-            inverted_tag = f'-{baca.Tags.build(build)}+{wrapper.tag}'
-            wrapper._tag = inverted_tag
+            wrapper._tag = baca.Tags.forbid(build, wrapper.tag)
         tag = baca.Tags.SPACING_OVERRIDE_MARKUP
         for wrapper in abjad.inspect(leaf).wrappers(abjad.Markup):
-            words = wrapper.tag.split('+')
+            words = wrapper.tag.split(':')
             if (not wrapper.tag or
                 tag not in words or
-                wrapper.tag == baca.Tags.build(build, tag)):
+                any(_.startswith('+') for _ in words)):
                 continue
-            assert build not in words, repr(wrapper.tag)
-            inverted_tag = f'-{baca.Tags.build(build)}+{wrapper.tag}'
-            wrapper._tag = inverted_tag
+            wrapper._tag = baca.Tags.forbid(build, wrapper.tag)
 
     ### PUBLIC PROPERTIES ###
 

@@ -280,15 +280,16 @@ class OverrideCommand(Command):
         if self.after is True:
             format_slot = 'after'
         literal = abjad.LilyPondLiteral(string, format_slot)
-        deactivate = None
-        if self._build_prefix is not None:
+        tag, deactivate = self.tag, None
+        if self.build_prefix is not None:
+            tag = baca.Tags.only(self.build_prefix, tag)
             deactivate = True
         abjad.attach(
             literal,
             leaves[0],
             deactivate=deactivate,
             site=self.site,
-            tag=self.tag,
+            tag=tag,
             )
         if once:
             return
@@ -303,7 +304,7 @@ class OverrideCommand(Command):
             leaves[-1],
             deactivate=deactivate,
             site=self.site,
-            tag=self.tag,
+            tag=tag,
             )
 
     ### PUBLIC PROPERTIES ###
@@ -367,13 +368,16 @@ class OverrideCommand(Command):
 
         Returns string or none.
         '''
-        parts = []
-        if self._build_prefix is not None:
-            parts.append(self._build_prefix)
+#        parts = []
+#        if self._build_prefix is not None:
+#            parts.append(self._build_prefix)
+#        if self._tag is not None:
+#            parts.append(self._tag)
+#        if parts:
+#            return '+'.join(parts)
         if self._tag is not None:
-            parts.append(self._tag)
-        if parts:
-            return '+'.join(parts)
+            assert isinstance(self._tag, str)
+        return self._tag
 
     @property
     def value(self):
