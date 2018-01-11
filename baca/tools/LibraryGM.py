@@ -1262,6 +1262,7 @@ class LibraryGM(abjad.AbjadObject):
                         tag='SEGMENT+LAYOUT',
                         ),
                     ),
+                build='SEGMENT',
                 )
 
         Returns layout measure map.

@@ -727,7 +727,10 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         if not self._fermata_start_offsets:
             return
-        self._attach_fermata_measure_adjustments(self._break_offsets)
+        self._attach_fermata_measure_adjustments(
+            self._break_offsets,
+            baca.Tags.SEGMENT,
+            )
         for build_name, build_metadata in self._builds_metadata.items():
             break_measure_numbers = build_metadata.get('break_measures')
             break_measure_timespans = self._get_measure_timespans(
@@ -815,13 +818,12 @@ class SegmentMaker(abjad.SegmentMaker):
             message = f'must be 1 <= x <= {self.stage_count}: {stage_number}.'
             raise Exception(message)
 
-    def _attach_fermata_measure_adjustments(self, break_offsets, build=None):
+    def _attach_fermata_measure_adjustments(self, break_offsets, build):
         prototype = baca.StaffLines
         staff_lines = baca.StaffLines(self.fermata_measure_staff_line_count)
         breaks_already_treated = []
-        if build is None:
-            deactivate = False
-        else:
+        deactivate = None
+        if build != baca.Tags.SEGMENT:
             deactivate = True
         for staff in abjad.iterate(self.score).components(abjad.Staff):
             for leaf in abjad.iterate(staff).leaves():
@@ -836,7 +838,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     after = abjad.inspect(next_leaf).get_effective(prototype)
                 if before != staff_lines:
                     strings = []
-                    if build is None:
+                    if build == baca.Tags.SEGMENT:
                         strings_ = staff_lines._get_lilypond_format(
                             context=staff,
                             )
@@ -880,7 +882,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             tag=tag,
                             )
                     breaks_already_treated.append(leaf_stop)
-                if (build is None and
+                if (build == baca.Tags.SEGMENT and
                     next_leaf is None and
                     before != staff_lines):
                     before_line_count = getattr(before, 'line_count', 5)
@@ -1856,7 +1858,10 @@ class SegmentMaker(abjad.SegmentMaker):
             literal,
             first_skip,
             site='SM2',
-            tag=baca.Tags.build(baca.Tags.EMPTY_START_BAR),
+            tag=baca.Tags.build(
+                baca.Tags.EMPTY_START_BAR,
+                baca.Tags.SEGMENT,
+                ),
             )
 
     def _make_lilypond_file(self):
@@ -8208,7 +8213,10 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
             >>> metronome_marks['112'] = abjad.MetronomeMark((1, 4), 112)
             >>> remove = [
-            ...     baca.Tags.build(baca.Tags.EMPTY_START_BAR),
+            ...     baca.Tags.build(
+            ...         baca.Tags.EMPTY_START_BAR,
+            ...         baca.Tags.SEGMENT,
+            ...         ),
             ...     baca.Tags.CLOCK_TIME_MARKUP,
             ...     baca.Tags.SPACING_MARKUP,
             ...     baca.Tags.STAGE_NUMBER_MARKUP,
