@@ -2929,12 +2929,29 @@ class LibraryNS(abjad.AbjadObject):
 
         Returns suite command.
         '''
-        clef = abjad.Clef(clef)
-        width = clef._to_width[clef.name]
-        extra_offset_x = -width
+        if isinstance(clef, (int, float)):
+            extra_offset_x = clef
+        else:
+            clef = abjad.Clef(clef)
+            width = clef._to_width[clef.name]
+            extra_offset_x = -width
         return baca.suite([
             baca.clef_x_extent_false(),
             baca.clef_extra_offset((extra_offset_x, 0)),
+            ])
+
+    @staticmethod
+    def shift_dynamic(dynamic, selector='baca.leaf(0)'):
+        r'''Shifts dynamic to left by width of dynamic.
+
+        Returns suite command.
+        '''
+        dynamic = abjad.Dynamic(dynamic)
+        width = dynamic._to_width[dynamic.name]
+        extra_offset_x = -width
+        return baca.suite([
+            baca.dynamic_text_extra_offset((extra_offset_x, 0)),
+            baca.dynamic_text_x_extent_zero(),
             ])
 
     @staticmethod
