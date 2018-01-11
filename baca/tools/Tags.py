@@ -177,6 +177,6 @@ class Tags(abjad.Enumeration):
             words = abjad.String(build).delimit_words()
             build = '_'.join(words)
             build = build.upper()
-            return f'{build}_{tag.name}'
+            return f'{build}+{tag.name}'
         else:
-            return f'SEGMENT_{tag.name}'
+            return f'SEGMENT+{tag.name}'

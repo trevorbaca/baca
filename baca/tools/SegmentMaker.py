@@ -2287,7 +2287,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=[
-            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.SPACING_MARKUP,
             ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
@@ -2323,14 +2323,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -2342,14 +2334,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -2400,7 +2384,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=[
-            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.SPACING_MARKUP,
             ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
@@ -2436,14 +2420,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -2455,14 +2431,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -2522,7 +2490,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.SPACING_MARKUP,
             ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
@@ -2560,14 +2528,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -2579,14 +2539,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -2644,7 +2596,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.SPACING_MARKUP,
             ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
@@ -2683,14 +2635,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -2702,14 +2646,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -2760,7 +2696,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=(
-            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.SPACING_MARKUP,
             ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ),
             ...     )
@@ -2797,14 +2733,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -2812,14 +2740,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! SEGMENT+LAYOUT:LMM2
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -2831,14 +2751,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -2906,7 +2818,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=(
-            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.SPACING_MARKUP,
             ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ),
             ...     )
@@ -2945,14 +2857,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -2964,14 +2868,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -3912,7 +3808,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=[
-            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.SPACING_MARKUP,
             ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
@@ -3943,14 +3839,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -3958,14 +3846,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -4016,7 +3896,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.SPACING_MARKUP,
             ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
@@ -4049,14 +3929,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -4064,14 +3936,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -4123,7 +3987,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.SPACING_MARKUP,
             ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
@@ -4156,14 +4020,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -4171,14 +4027,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -4221,7 +4069,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=[
-            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.SPACING_MARKUP,
             ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
@@ -4252,14 +4100,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -4267,14 +4107,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -4327,7 +4159,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.SPACING_MARKUP,
             ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
@@ -4360,14 +4192,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -4375,14 +4199,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -4423,7 +4239,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=[
-            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.SPACING_MARKUP,
             ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
@@ -4454,14 +4270,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -4469,14 +4277,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -4529,7 +4329,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.SPACING_MARKUP,
             ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
@@ -4562,14 +4362,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -4577,14 +4369,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -6206,7 +5990,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     )
             >>> remove = [
-            ...     abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...     abjad.Tags.SPACING_MARKUP,
             ...     abjad.Tags.STAGE_NUMBER_MARKUP,
             ...     ]
 
@@ -6272,14 +6056,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -6291,14 +6067,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -6422,14 +6190,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -6441,14 +6201,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -6583,14 +6335,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -6602,14 +6346,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -6739,14 +6475,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -6758,14 +6486,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -6893,14 +6613,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! SEGMENT+LAYOUT:LMM3
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -6908,14 +6620,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! SEGMENT+LAYOUT:LMM2
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -6927,14 +6631,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! SEGMENT+LAYOUT:LMM3
                             s1 * 1/2
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7115,14 +6811,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -7134,14 +6822,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7265,7 +6945,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         ),
             ...     )
             >>> remove = [
-            ...     abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...     abjad.Tags.SPACING_MARKUP,
             ...     abjad.Tags.STAGE_NUMBER_MARKUP,
             ...     ]
 
@@ -7329,14 +7009,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -7348,14 +7020,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7473,14 +7137,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -7492,14 +7148,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7628,14 +7276,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -7647,14 +7287,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7784,14 +7416,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -7803,14 +7427,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7938,14 +7554,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! SEGMENT+LAYOUT:LMM3
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -7953,14 +7561,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! SEGMENT+LAYOUT:LMM2
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -7972,14 +7572,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! SEGMENT+LAYOUT:LMM3
                             s1 * 1/2
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -8160,14 +7752,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -8179,14 +7763,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -8636,8 +8212,8 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> metronome_marks['112'] = abjad.MetronomeMark((1, 4), 112)
             >>> remove = [
             ...     abjad.Tags.build(abjad.Tags.EMPTY_START_BAR),
-            ...     abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
             ...     abjad.Tags.CLOCK_TIME_MARKUP,
+            ...     abjad.Tags.SPACING_MARKUP,
             ...     abjad.Tags.STAGE_NUMBER_MARKUP,
             ...     ]
 
@@ -8743,14 +8319,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/25)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -8759,14 +8327,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/25)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -8901,14 +8461,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -8917,14 +8469,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \revert TextSpanner.staff-padding                                            %! OC
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -9061,14 +8605,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -9077,14 +8613,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \revert TextSpanner.staff-padding                                            %! OC
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -9261,14 +8789,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -9280,14 +8800,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -9422,14 +8934,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! SEGMENT+LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -9438,14 +8942,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \revert TextSpanner.staff-padding                                            %! OC
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -9782,7 +9278,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=[
-            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.SPACING_MARKUP,
             ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
@@ -9813,14 +9309,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -9828,14 +9316,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -9888,7 +9368,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.SPACING_MARKUP,
             ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
@@ -9921,14 +9401,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -9936,14 +9408,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -9997,7 +9461,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.SPACING_MARKUP,
             ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
@@ -10030,14 +9494,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -10045,14 +9501,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -10097,7 +9545,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     remove=[
-            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.SPACING_MARKUP,
             ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
@@ -10128,14 +9576,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -10143,14 +9583,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -10207,7 +9639,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     environment='docs',
             ...     previous_metadata=metadata,
             ...     remove=[
-            ...         abjad.Tags.build(abjad.Tags.SPACING_MARKUP),
+            ...         abjad.Tags.SPACING_MARKUP,
             ...         abjad.Tags.STAGE_NUMBER_MARKUP,
             ...         ],
             ...     )
@@ -10240,14 +9672,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -10255,14 +9679,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {                                                                  %! SPACING_MARKUP:HSS2
-                                \with-color                                                              %! SPACING_MARKUP:HSS2
-                                    #(x11-color 'DarkCyan)                                               %! SPACING_MARKUP:HSS2
-                                    \bold                                                                %! SPACING_MARKUP:HSS2
-                                        \fontsize                                                        %! SPACING_MARKUP:HSS2
-                                            #3                                                           %! SPACING_MARKUP:HSS2
-                                            (1/24)                                                       %! SPACING_MARKUP:HSS2
-                                }                                                                        %! SPACING_MARKUP:HSS2
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
