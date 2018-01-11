@@ -34,6 +34,7 @@ Bases
       ~baca.tools.LibraryNS.LibraryNS.possibile_dynamic
       ~baca.tools.LibraryNS.LibraryNS.proportional_notation_duration
       ~baca.tools.LibraryNS.LibraryNS.register
+      ~baca.tools.LibraryNS.LibraryNS.rehearsal_mark_extra_offset
       ~baca.tools.LibraryNS.LibraryNS.reiterated_dynamic
       ~baca.tools.LibraryNS.LibraryNS.repeat_ties_down
       ~baca.tools.LibraryNS.LibraryNS.repeat_ties_up
@@ -121,6 +122,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNS.LibraryNS.proportional_notation_duration
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.register
+
+.. automethod:: baca.tools.LibraryNS.LibraryNS.rehearsal_mark_extra_offset
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.reiterated_dynamic
 

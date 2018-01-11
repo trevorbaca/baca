@@ -74,7 +74,11 @@ class SpacingOverrideCommand(Command):
             tag=tag,
             )
         markup = abjad.Markup(f'({self.duration!s})').fontsize(3).bold()
-        markup = markup.with_color(abjad.SchemeColor('BlueViolet'))
+        if self.build_prefix is None:
+            color = 'BlueViolet'
+        else:
+            color = 'DarkOrange'
+        markup = markup.with_color(abjad.SchemeColor(color))
         markup = abjad.new(markup, direction=abjad.Up)
         tag, deactivate = baca.Tags.SPACING_OVERRIDE_MARKUP, None
         if self.build_prefix:
@@ -87,22 +91,33 @@ class SpacingOverrideCommand(Command):
             site='SOC2',
             tag=tag,
             )
-        if self.build_prefix is not None:
-            self._mark_segment_wrappers_as_segment_only(leaf)
+        self._negate_nonbuild_wrappers(self.build_prefix, leaf)
 
     ### PRIVATE METHODS ###
 
-    def _mark_segment_wrappers_as_segment_only(self, leaf):
+    def _negate_nonbuild_wrappers(self, build, leaf):
+        if build is None:
+            return
         tag = baca.Tags.SPACING_OVERRIDE
         for wrapper in abjad.inspect(leaf).wrappers(baca.SpacingSection):
-            if wrapper.tag == tag:
-                tag = baca.Tags.build(baca.Tags.SEGMENT, tag)
-                wrapper._tag = tag
+            words = wrapper.tag.split('+')
+            if (not wrapper.tag or
+                tag not in words or
+                wrapper.tag == baca.Tags.build(build, tag)):
+                continue
+            assert build not in words, repr(wrapper.tag)
+            inverted_tag = f'-{baca.Tags.build(build)}+{wrapper.tag}'
+            wrapper._tag = inverted_tag
         tag = baca.Tags.SPACING_OVERRIDE_MARKUP
         for wrapper in abjad.inspect(leaf).wrappers(abjad.Markup):
-            if wrapper.tag == tag:
-                tag = baca.Tags.build(baca.Tags.SEGMENT, tag)
-                wrapper._tag = tag
+            words = wrapper.tag.split('+')
+            if (not wrapper.tag or
+                tag not in words or
+                wrapper.tag == baca.Tags.build(build, tag)):
+                continue
+            assert build not in words, repr(wrapper.tag)
+            inverted_tag = f'-{baca.Tags.build(build)}+{wrapper.tag}'
+            wrapper._tag = inverted_tag
 
     ### PUBLIC PROPERTIES ###
 
