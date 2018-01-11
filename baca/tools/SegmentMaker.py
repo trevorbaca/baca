@@ -2043,10 +2043,7 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(tags, (tuple, list)), repr(tags)
         tags_ = []
         for tag in tags:
-            if isinstance(tag, str):
-                tags_.append(tag)
-            else:
-                tags_.append(tag.name)
+            tags_.append(tag)
         tags = tags_
         for leaf in abjad.iterate(self.score).leaves():
             for wrapper in abjad.inspect(leaf).wrappers():
@@ -2198,7 +2195,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 color = SegmentMaker._status_to_color[status]
                 tag = f'{status.upper()}_{stem}_WITH_COLOR'
                 tag = getattr(baca.Tags, tag)
-                alternate = (color, 'SM15', tag.name)
+                alternate = (color, 'SM15', tag)
                 found_wrapper = False
                 for wrapper in abjad.inspect(leaf).wrappers():
                     if wrapper.indicator is indicator:

@@ -1,17 +1,23 @@
-import abjad
-import enum
+from abjad.tools.datastructuretools.Tags import Tags
 
 
-class Tags(abjad.Enumeration):
+class Tags(Tags):
     r'''Tags.
+
+    ..  container:: example
+
+        >>> baca.Tags
+        Tags()
 
     ..  container::
 
+        All attributes return strings:
+
         >>> baca.Tags.EXPLICIT_CLEF
-        Tags.EXPLICIT_CLEF
+        'EXPLICIT_CLEF'
 
         >>> baca.Tags.REDUNDANT_CLEF
-        Tags.REDUNDANT_CLEF
+        'REDUNDANT_CLEF'
 
     '''
 
@@ -22,161 +28,155 @@ class Tags(abjad.Enumeration):
     __slots__ = (
         )
 
-    ### CLEFS ###
+    _my_known_tags = (
 
-    DEFAULT_CLEF = enum.auto()
-    DEFAULT_CLEF_COLOR = enum.auto()
-    DEFAULT_CLEF_COLOR_CANCELLATION = enum.auto()
-    DEFAULT_CLEF_REDRAW_COLOR = enum.auto()
+        ### CLEFS ###
 
-    EXPLICIT_CLEF = enum.auto()
-    EXPLICIT_CLEF_COLOR = enum.auto()
-    EXPLICIT_CLEF_COLOR_CANCELLATION = enum.auto()
-    EXPLICIT_CLEF_REDRAW_COLOR = enum.auto()
+        'DEFAULT_CLEF',
+        'DEFAULT_CLEF_COLOR',
+        'DEFAULT_CLEF_COLOR_CANCELLATION',
+        'DEFAULT_CLEF_REDRAW_COLOR',
 
-    REAPPLIED_CLEF = enum.auto()
-    REAPPLIED_CLEF_COLOR = enum.auto() 
-    REAPPLIED_CLEF_COLOR_CANCELLATION = enum.auto()
-    REAPPLIED_CLEF_REDRAW_COLOR = enum.auto()
+        'EXPLICIT_CLEF',
+        'EXPLICIT_CLEF_COLOR',
+        'EXPLICIT_CLEF_COLOR_CANCELLATION',
+        'EXPLICIT_CLEF_REDRAW_COLOR',
 
-    REDUNDANT_CLEF = enum.auto()
-    REDUNDANT_CLEF_COLOR = enum.auto()
-    REDUNDANT_CLEF_COLOR_CANCELLATION = enum.auto()
-    REDUNDANT_CLEF_REDRAW_COLOR = enum.auto()
+        'REAPPLIED_CLEF',
+        'REAPPLIED_CLEF_COLOR',
+        'REAPPLIED_CLEF_COLOR_CANCELLATION',
+        'REAPPLIED_CLEF_REDRAW_COLOR',
 
-    ### DYNAMICS ###
+        'REDUNDANT_CLEF',
+        'REDUNDANT_CLEF_COLOR',
+        'REDUNDANT_CLEF_COLOR_CANCELLATION',
+        'REDUNDANT_CLEF_REDRAW_COLOR',
 
-    EXPLICIT_DYNAMIC = enum.auto()
-    EXPLICIT_DYNAMIC_COLOR = enum.auto()
-    EXPLICIT_DYNAMIC_COLOR_CANCELLATION = enum.auto()
-    EXPLICIT_DYNAMIC_REDRAW_COLOR = enum.auto()
+        ### DYNAMICS ###
 
-    REAPPLIED_DYNAMIC = enum.auto()
-    REAPPLIED_DYNAMIC_COLOR = enum.auto() 
-    REAPPLIED_DYNAMIC_COLOR_CANCELLATION = enum.auto()
-    REAPPLIED_DYNAMIC_REDRAW_COLOR = enum.auto()
+        'EXPLICIT_DYNAMIC',
+        'EXPLICIT_DYNAMIC_COLOR',
+        'EXPLICIT_DYNAMIC_COLOR_CANCELLATION',
+        'EXPLICIT_DYNAMIC_REDRAW_COLOR',
 
-    REDUNDANT_DYNAMIC = enum.auto()
-    REDUNDANT_DYNAMIC_COLOR = enum.auto()
-    REDUNDANT_DYNAMIC_COLOR_CANCELLATION = enum.auto()
-    REDUNDANT_DYNAMIC_REDRAW_COLOR = enum.auto()
+        'REAPPLIED_DYNAMIC',
+        'REAPPLIED_DYNAMIC_COLOR',
+        'REAPPLIED_DYNAMIC_COLOR_CANCELLATION',
+        'REAPPLIED_DYNAMIC_REDRAW_COLOR',
 
-    ### INSTRUMENTS ###
+        'REDUNDANT_DYNAMIC',
+        'REDUNDANT_DYNAMIC_COLOR',
+        'REDUNDANT_DYNAMIC_COLOR_CANCELLATION',
+        'REDUNDANT_DYNAMIC_REDRAW_COLOR',
 
-    DEFAULT_INSTRUMENT = enum.auto()
-    DEFAULT_INSTRUMENT_ALERT = enum.auto()
-    DEFAULT_INSTRUMENT_ALERT_WITH_COLOR = enum.auto()
-    DEFAULT_INSTRUMENT_COLOR = enum.auto()
-    REDRAWN_DEFAULT_INSTRUMENT = enum.auto()
-    REDRAWN_DEFAULT_INSTRUMENT_COLOR = enum.auto()
+        ### INSTRUMENTS ###
 
-    EXPLICIT_INSTRUMENT = enum.auto()
-    EXPLICIT_INSTRUMENT_ALERT = enum.auto()
-    EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR = enum.auto()
-    EXPLICIT_INSTRUMENT_COLOR = enum.auto()
-    REDRAWN_EXPLICIT_INSTRUMENT = enum.auto()
-    REDRAWN_EXPLICIT_INSTRUMENT_COLOR = enum.auto()
+        'DEFAULT_INSTRUMENT',
+        'DEFAULT_INSTRUMENT_ALERT',
+        'DEFAULT_INSTRUMENT_ALERT_WITH_COLOR',
+        'DEFAULT_INSTRUMENT_COLOR',
+        'REDRAWN_DEFAULT_INSTRUMENT',
+        'REDRAWN_DEFAULT_INSTRUMENT_COLOR',
 
-    REAPPLIED_INSTRUMENT = enum.auto()
-    REAPPLIED_INSTRUMENT_ALERT = enum.auto()
-    REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR = enum.auto()
-    REAPPLIED_INSTRUMENT_COLOR = enum.auto() 
-    REDRAWN_REAPPLIED_INSTRUMENT = enum.auto()
-    REDRAWN_REAPPLIED_INSTRUMENT_COLOR = enum.auto()
+        'EXPLICIT_INSTRUMENT',
+        'EXPLICIT_INSTRUMENT_ALERT',
+        'EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR',
+        'EXPLICIT_INSTRUMENT_COLOR',
+        'REDRAWN_EXPLICIT_INSTRUMENT',
+        'REDRAWN_EXPLICIT_INSTRUMENT_COLOR',
 
-    REDUNDANT_INSTRUMENT = enum.auto()
-    REDUNDANT_INSTRUMENT_ALERT = enum.auto()
-    REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR = enum.auto()
-    REDUNDANT_INSTRUMENT_COLOR = enum.auto()
-    REDRAWN_REDUNDANT_INSTRUMENT = enum.auto()
-    REDRAWN_REDUNDANT_INSTRUMENT_COLOR = enum.auto()
+        'REAPPLIED_INSTRUMENT',
+        'REAPPLIED_INSTRUMENT_ALERT',
+        'REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR',
+        'REAPPLIED_INSTRUMENT_COLOR',
+        'REDRAWN_REAPPLIED_INSTRUMENT',
+        'REDRAWN_REAPPLIED_INSTRUMENT_COLOR',
 
-    ### MARGIN MARKUP ###
+        'REDUNDANT_INSTRUMENT',
+        'REDUNDANT_INSTRUMENT_ALERT',
+        'REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR',
+        'REDUNDANT_INSTRUMENT_COLOR',
+        'REDRAWN_REDUNDANT_INSTRUMENT',
+        'REDRAWN_REDUNDANT_INSTRUMENT_COLOR',
 
-    DEFAULT_MARGIN_MARKUP = enum.auto()
-    DEFAULT_MARGIN_MARKUP_ALERT = enum.auto()
-    DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR = enum.auto()
-    DEFAULT_MARGIN_MARKUP_COLOR = enum.auto()
-    REDRAWN_DEFAULT_MARGIN_MARKUP = enum.auto()
-    REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR = enum.auto()
+        ### MARGIN MARKUP ###
 
-    EXPLICIT_MARGIN_MARKUP = enum.auto()
-    EXPLICIT_MARGIN_MARKUP_ALERT = enum.auto()
-    EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR = enum.auto()
-    EXPLICIT_MARGIN_MARKUP_COLOR = enum.auto()
-    REDRAWN_EXPLICIT_MARGIN_MARKUP = enum.auto()
-    REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR = enum.auto()
+        'DEFAULT_MARGIN_MARKUP',
+        'DEFAULT_MARGIN_MARKUP_ALERT',
+        'DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR',
+        'DEFAULT_MARGIN_MARKUP_COLOR',
+        'REDRAWN_DEFAULT_MARGIN_MARKUP',
+        'REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR',
 
-    REAPPLIED_MARGIN_MARKUP = enum.auto()
-    REAPPLIED_MARGIN_MARKUP_ALERT = enum.auto()
-    REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR = enum.auto()
-    REAPPLIED_MARGIN_MARKUP_COLOR = enum.auto() 
-    REDRAWN_REAPPLIED_MARGIN_MARKUP = enum.auto()
-    REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR = enum.auto()
+        'EXPLICIT_MARGIN_MARKUP',
+        'EXPLICIT_MARGIN_MARKUP_ALERT',
+        'EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR',
+        'EXPLICIT_MARGIN_MARKUP_COLOR',
+        'REDRAWN_EXPLICIT_MARGIN_MARKUP',
+        'REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR',
 
-    REDUNDANT_MARGIN_MARKUP = enum.auto()
-    REDUNDANT_MARGIN_MARKUP_ALERT = enum.auto()
-    REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR = enum.auto()
-    REDUNDANT_MARGIN_MARKUP_COLOR = enum.auto()
-    REDRAWN_REDUNDANT_MARGIN_MARKUP = enum.auto()
-    REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR = enum.auto()
+        'REAPPLIED_MARGIN_MARKUP',
+        'REAPPLIED_MARGIN_MARKUP_ALERT',
+        'REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR',
+        'REAPPLIED_MARGIN_MARKUP_COLOR',
+        'REDRAWN_REAPPLIED_MARGIN_MARKUP',
+        'REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR',
 
-    ### METRONOME MARKS ###
+        'REDUNDANT_MARGIN_MARKUP',
+        'REDUNDANT_MARGIN_MARKUP_ALERT',
+        'REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR',
+        'REDUNDANT_MARGIN_MARKUP_COLOR',
+        'REDRAWN_REDUNDANT_MARGIN_MARKUP',
+        'REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR',
 
-    EXPLICIT_METRONOME_MARK = enum.auto()
-    EXPLICIT_METRONOME_MARK_WITH_COLOR = enum.auto()
+        ### METRONOME MARKS ###
 
-    REAPPLIED_METRONOME_MARK = enum.auto()
-    REAPPLIED_METRONOME_MARK_WITH_COLOR = enum.auto() 
+        'EXPLICIT_METRONOME_MARK',
+        'EXPLICIT_METRONOME_MARK_WITH_COLOR',
 
-    REDUNDANT_METRONOME_MARK = enum.auto()
-    REDUNDANT_METRONOME_MARK_WITH_COLOR = enum.auto()
+        'REAPPLIED_METRONOME_MARK',
+        'REAPPLIED_METRONOME_MARK_WITH_COLOR',
 
-    ### SPACING SECTION ###
+        'REDUNDANT_METRONOME_MARK',
+        'REDUNDANT_METRONOME_MARK_WITH_COLOR',
 
-    EXPLICIT_SPACING_SECTION = enum.auto()
-    EXPLICIT_SPACING_SECTION_COLOR = enum.auto()
+        ### SPACING SECTION ###
 
-    REAPPLIED_SPACING_SECTION = enum.auto()
-    REAPPLIED_SPACING_SECTION_COLOR = enum.auto() 
+        'EXPLICIT_SPACING_SECTION',
+        'EXPLICIT_SPACING_SECTION_COLOR',
 
-    REDUNDANT_SPACING_SECTION = enum.auto()
-    REDUNDANT_SPACING_SECTION_COLOR = enum.auto()
+        'REAPPLIED_SPACING_SECTION',
+        'REAPPLIED_SPACING_SECTION_COLOR',
 
-    ### STAFF LINES ###
+        'REDUNDANT_SPACING_SECTION',
+        'REDUNDANT_SPACING_SECTION_COLOR',
 
-    EXPLICIT_STAFF_LINES = enum.auto()
-    EXPLICIT_STAFF_LINES_COLOR = enum.auto()
+        ### STAFF LINES ###
 
-    REAPPLIED_STAFF_LINES = enum.auto()
-    REAPPLIED_STAFF_LINES_COLOR = enum.auto() 
+        'EXPLICIT_STAFF_LINES',
+        'EXPLICIT_STAFF_LINES_COLOR',
 
-    REDUNDANT_STAFF_LINES = enum.auto()
-    REDUNDANT_STAFF_LINES_COLOR = enum.auto()
+        'REAPPLIED_STAFF_LINES',
+        'REAPPLIED_STAFF_LINES_COLOR',
 
-    ### TIME SIGNATURES ###
+        'REDUNDANT_STAFF_LINES',
+        'REDUNDANT_STAFF_LINES_COLOR',
 
-    EXPLICIT_TIME_SIGNATURE = enum.auto()
-    EXPLICIT_TIME_SIGNATURE_COLOR = enum.auto()
+        ### TIME SIGNATURES ###
 
-    REAPPLIED_TIME_SIGNATURE = enum.auto()
-    REAPPLIED_TIME_SIGNATURE_COLOR = enum.auto()
+        'EXPLICIT_TIME_SIGNATURE',
+        'EXPLICIT_TIME_SIGNATURE_COLOR',
 
-    REDUNDANT_TIME_SIGNATURE = enum.auto()
-    REDUNDANT_TIME_SIGNATURE_COLOR = enum.auto()
+        'REAPPLIED_TIME_SIGNATURE',
+        'REAPPLIED_TIME_SIGNATURE_COLOR',
 
-    ### PUBLIC METHODS ###
+        'REDUNDANT_TIME_SIGNATURE',
+        'REDUNDANT_TIME_SIGNATURE_COLOR',
 
-    @staticmethod
-    def build(tag, build=None):
-        r'''Tags `tag` with `build` name or ``'SEGMENT'``..
+        )
 
-        Returns string.
-        '''
-        if build is not None:
-            words = abjad.String(build).delimit_words()
-            build = '_'.join(words)
-            build = build.upper()
-            return f'{build}+{tag.name}'
-        else:
-            return f'SEGMENT+{tag.name}'
+    for tag in _my_known_tags:
+        if tag in Tags._known_tags:
+            raise Exception(f'tag already exists in abjad.Tags: {tag!r}.')
+
+    _known_tags = Tags._known_tags + _my_known_tags

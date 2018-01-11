@@ -42,34 +42,28 @@ class SpacingOverrideCommand(Command):
             argument = self.selector(argument)
         leaf = baca.select(argument).leaf(0)
         assert isinstance(leaf, abjad.Skip), repr(leaf)
-        tag = abjad.Tags.SPACING.name
-        assert isinstance(tag, str), repr(tag)
+        tag = abjad.Tags.SPACING
         for wrapper in abjad.inspect(leaf).wrappers(baca.SpacingSection):
             if wrapper.tag == tag:
                 abjad.detach(wrapper, leaf)
-        tag = abjad.Tags.SPACING_MARKUP.name
-        assert isinstance(tag, str), repr(tag)
+        tag = abjad.Tags.SPACING_MARKUP
         for wrapper in abjad.inspect(leaf).wrappers(abjad.Markup):
             if wrapper.tag == tag:
                 abjad.detach(wrapper, leaf)
-        tag = abjad.Tags.SPACING_OVERRIDE.name
-        assert isinstance(tag, str), repr(tag)
+        tag = abjad.Tags.SPACING_OVERRIDE
         if self.build_prefix:
             tag = abjad.Tags.build(tag, build=self.build_prefix)
-        assert isinstance(tag, str), repr(tag)
         for wrapper in abjad.inspect(leaf).wrappers(baca.SpacingSection):
             if wrapper.tag == tag:
                 raise Exception(f'already have {tag} spacing section.')
-        tag = abjad.Tags.SPACING_OVERRIDE_MARKUP.name
-        assert isinstance(tag, str), repr(tag)
+        tag = abjad.Tags.SPACING_OVERRIDE_MARKUP
         if self.build_prefix:
             tag = abjad.Tags.build(tag, build=self.build_prefix)
-        assert isinstance(tag, str), repr(tag)
         for wrapper in abjad.inspect(leaf).wrappers(abjad.Markup):
             if wrapper.tag == tag:
                 raise Exception(f'already have {tag} spacing override markup.')
         spacing_section = baca.SpacingSection(duration=self.duration)
-        tag, deactivate = abjad.Tags.SPACING_OVERRIDE.name, None
+        tag, deactivate = abjad.Tags.SPACING_OVERRIDE, None
         if self.build_prefix:
             tag = abjad.Tags.build(tag, build=self.build_prefix)
             deactivate = True
@@ -83,7 +77,7 @@ class SpacingOverrideCommand(Command):
         markup = abjad.Markup(f'({self.duration!s})').fontsize(3).bold()
         markup = markup.with_color(abjad.SchemeColor('BlueViolet'))
         markup = abjad.new(markup, direction=abjad.Up)
-        tag, deactivate = abjad.Tags.SPACING_OVERRIDE_MARKUP.name, None
+        tag, deactivate = abjad.Tags.SPACING_OVERRIDE_MARKUP, None
         if self.build_prefix:
             tag = abjad.Tags.build(tag, build=self.build_prefix)
             deactivate = True
@@ -100,14 +94,12 @@ class SpacingOverrideCommand(Command):
     ### PRIVATE METHODS ###
 
     def _mark_segment_wrappers_as_segment_only(self, leaf):
-        tag = abjad.Tags.SPACING_OVERRIDE.name
-        assert isinstance(tag, str), repr(tag)
+        tag = abjad.Tags.SPACING_OVERRIDE
         for wrapper in abjad.inspect(leaf).wrappers(baca.SpacingSection):
             if wrapper.tag == tag:
                 tag = abjad.Tags.build(tag, build='SEGMENT')
                 wrapper._tag = tag
-        tag = abjad.Tags.SPACING_OVERRIDE_MARKUP.name
-        assert isinstance(tag, str), repr(tag)
+        tag = abjad.Tags.SPACING_OVERRIDE_MARKUP
         for wrapper in abjad.inspect(leaf).wrappers(abjad.Markup):
             if wrapper.tag == tag:
                 tag = abjad.Tags.build(tag, build='SEGMENT')

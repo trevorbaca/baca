@@ -97,7 +97,7 @@ from .StageMeasureMap import StageMeasureMap
 from .StringTrioScoreTemplate import StringTrioScoreTemplate
 from .SuiteCommand import SuiteCommand
 from .TagCommand import TagCommand
-from .Tags import Tags
+from .Tags import Tags; Tags = Tags()
 from .TieCorrectionCommand import TieCorrectionCommand
 from .TimeSignatureGroups import TimeSignatureGroups
 from .TimeSignatureMaker import TimeSignatureMaker
