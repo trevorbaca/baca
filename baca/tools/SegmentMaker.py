@@ -873,7 +873,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     if strings:
                         literal = abjad.LilyPondLiteral(strings, 'after')
                         tag = baca.Tags.FERMATA_BAR_LINE
-                        tag = baca.Tags.build(tag, build)
+                        tag = baca.Tags.build(build, tag)
                         abjad.attach(
                             literal,
                             leaf,
@@ -1858,10 +1858,7 @@ class SegmentMaker(abjad.SegmentMaker):
             literal,
             first_skip,
             site='SM2',
-            tag=baca.Tags.build(
-                baca.Tags.EMPTY_START_BAR,
-                baca.Tags.SEGMENT,
-                ),
+            tag=baca.Tags.build(baca.Tags.SEGMENT, baca.Tags.EMPTY_START_BAR),
             )
 
     def _make_lilypond_file(self):
@@ -8214,8 +8211,8 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> metronome_marks['112'] = abjad.MetronomeMark((1, 4), 112)
             >>> remove = [
             ...     baca.Tags.build(
-            ...         baca.Tags.EMPTY_START_BAR,
             ...         baca.Tags.SEGMENT,
+            ...         baca.Tags.EMPTY_START_BAR,
             ...         ),
             ...     baca.Tags.CLOCK_TIME_MARKUP,
             ...     baca.Tags.SPACING_MARKUP,

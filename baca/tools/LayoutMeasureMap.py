@@ -440,7 +440,7 @@ class LayoutMeasureMap(abjad.AbjadObject):
     def __init__(self, commands=None, build=None):
         build = build or baca.Tags.SEGMENT
         self._build = build
-        tag = baca.Tags.build(baca.Tags.LAYOUT, build)
+        tag = baca.Tags.build(build, baca.Tags.LAYOUT)
         self._tag = tag
         if commands is not None:
             commands_ = []
