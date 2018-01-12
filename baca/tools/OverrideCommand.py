@@ -199,7 +199,7 @@ class OverrideCommand(Command):
     __slots__ = (
         '_after',
         '_attribute',
-        '_build_prefix',
+        '_build',
         '_context',
         '_grob',
         '_site',
@@ -227,7 +227,7 @@ class OverrideCommand(Command):
         if attribute is not None:
             assert isinstance(attribute, str), repr(attribute)
         self._attribute = attribute
-        self._build_prefix = None
+        self._build = None
         if context is not None:
             assert isinstance(context, str), repr(context)
         self._context = context
@@ -281,8 +281,8 @@ class OverrideCommand(Command):
             format_slot = 'after'
         literal = abjad.LilyPondLiteral(string, format_slot)
         tag, deactivate = self.tag, None
-        if self.build_prefix is not None:
-            tag = baca.tags.only(self.build_prefix, tag)
+        if self.build is not None:
+            tag = baca.tags.only(self.build, tag)
             deactivate = True
         abjad.attach(
             literal,
@@ -326,16 +326,16 @@ class OverrideCommand(Command):
         return self._attribute
 
     @property
-    def build_prefix(self):
+    def build(self):
         r'''Gets build prefix.
 
         Set to tag, string or none.
 
         Returns string or none
         '''
-        if self._build_prefix is not None:
-            assert isinstance(self._build_prefix, str)
-        return self._build_prefix
+        if self._build is not None:
+            assert isinstance(self._build, str)
+        return self._build
 
     @property
     def context(self):
@@ -357,7 +357,6 @@ class OverrideCommand(Command):
         '''
         return self._grob
 
-    # TODO: change this back to return tag without build prefix
     @property
     def tag(self):
         r'''Gets tag.
@@ -368,13 +367,6 @@ class OverrideCommand(Command):
 
         Returns string or none.
         '''
-#        parts = []
-#        if self._build_prefix is not None:
-#            parts.append(self._build_prefix)
-#        if self._tag is not None:
-#            parts.append(self._tag)
-#        if parts:
-#            return '+'.join(parts)
         if self._tag is not None:
             assert isinstance(self._tag, str)
         return self._tag

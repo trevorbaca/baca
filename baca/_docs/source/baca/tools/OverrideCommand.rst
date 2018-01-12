@@ -25,7 +25,7 @@ Bases
 
       ~baca.tools.OverrideCommand.OverrideCommand.after
       ~baca.tools.OverrideCommand.OverrideCommand.attribute
-      ~baca.tools.OverrideCommand.OverrideCommand.build_prefix
+      ~baca.tools.OverrideCommand.OverrideCommand.build
       ~baca.tools.OverrideCommand.OverrideCommand.context
       ~baca.tools.OverrideCommand.OverrideCommand.grob
       ~baca.tools.OverrideCommand.OverrideCommand.selector
@@ -45,7 +45,7 @@ Read-only properties
 
 .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.attribute
 
-.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.build_prefix
+.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.build
 
 .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.context
 

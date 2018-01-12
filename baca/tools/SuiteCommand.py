@@ -16,7 +16,7 @@ class SuiteCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_build_prefix',
+        '_build',
         '_commands',
         '_selector',
         )
@@ -25,7 +25,7 @@ class SuiteCommand(Command):
 
     def __init__(self, commands=None, selector=None):
         Command.__init__(self, selector=selector)
-        self._build_prefix = None
+        self._build = None
         if isinstance(commands, baca.Command):
             commands = (commands,)
         elif isinstance(commands, collections.Iterable):
@@ -51,16 +51,16 @@ class SuiteCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def build_prefix(self):
+    def build(self):
         r'''Gets build prefix.
 
         Set to tag, string or none.
 
         Returns string or none.
         '''
-        if self._build_prefix is not None:
-            assert isinstance(self._build_prefix, str)
-        return self._build_prefix
+        if self._build is not None:
+            assert isinstance(self._build, str)
+        return self._build
 
     @property
     def commands(self):

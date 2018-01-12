@@ -16,7 +16,7 @@ class SpacingOverrideCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_build_prefix',
+        '_build',
         '_duration',
         )
 
@@ -26,7 +26,7 @@ class SpacingOverrideCommand(Command):
         Command.__init__(self, selector=selector)
         if duration is not None:
             duration = abjad.NonreducedFraction(duration)
-        self._build_prefix = None
+        self._build = None
         self._duration = duration
 
     ### SPECIAL METHODS ###
@@ -50,13 +50,13 @@ class SpacingOverrideCommand(Command):
         for wrapper in abjad.inspect(leaf).wrappers(abjad.Markup):
             if wrapper.tag == tag:
                 abjad.detach(wrapper, leaf)
-        if self.build_prefix:
-            tag = baca.tags.only(self.build_prefix, baca.tags.SPACING_OVERRIDE)
+        if self.build:
+            tag = baca.tags.only(self.build, baca.tags.SPACING_OVERRIDE)
             for wrapper in abjad.inspect(leaf).wrappers(baca.SpacingSection):
                 if wrapper.tag == tag:
                     raise Exception(f'already have {tag} spacing override.')
             tag = baca.tags.only(
-                self.build_prefix,
+                self.build,
                 baca.tags.SPACING_OVERRIDE_MARKUP,
                 )
             for wrapper in abjad.inspect(leaf).wrappers(abjad.Markup):
@@ -65,8 +65,8 @@ class SpacingOverrideCommand(Command):
                     raise Exception(message)
         spacing_section = baca.SpacingSection(duration=self.duration)
         tag, deactivate = baca.tags.SPACING_OVERRIDE, None
-        if self.build_prefix:
-            tag = baca.tags.only(self.build_prefix, tag)
+        if self.build:
+            tag = baca.tags.only(self.build, tag)
             deactivate = True
         abjad.attach(
             spacing_section,
@@ -76,15 +76,15 @@ class SpacingOverrideCommand(Command):
             tag=tag,
             )
         markup = abjad.Markup(f'({self.duration!s})').fontsize(3).bold()
-        if self.build_prefix is None:
+        if self.build is None:
             color = 'BlueViolet'
         else:
             color = 'DarkOrange'
         markup = markup.with_color(abjad.SchemeColor(color))
         markup = abjad.new(markup, direction=abjad.Up)
         tag, deactivate = baca.tags.SPACING_OVERRIDE_MARKUP, None
-        if self.build_prefix:
-            tag = baca.tags.only(self.build_prefix, tag)
+        if self.build:
+            tag = baca.tags.only(self.build, tag)
             deactivate = True
         abjad.attach(
             markup,
@@ -93,7 +93,7 @@ class SpacingOverrideCommand(Command):
             site='SOC2',
             tag=tag,
             )
-        self._add_negation_to_other_wrappers(self.build_prefix, leaf)
+        self._add_negation_to_other_wrappers(self.build, leaf)
 
     ### PRIVATE METHODS ###
 
@@ -120,16 +120,16 @@ class SpacingOverrideCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def build_prefix(self):
+    def build(self):
         r'''Gets build prefix.
 
         Set to tag, string or none.
 
         Returns string or none.
         '''
-        if self._build_prefix is not None:
-            assert isinstance(self._build_prefix, str)
-        return self._build_prefix
+        if self._build is not None:
+            assert isinstance(self._build, str)
+        return self._build
 
     @property
     def duration(self):

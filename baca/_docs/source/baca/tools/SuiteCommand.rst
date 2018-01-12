@@ -23,7 +23,7 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.SuiteCommand.SuiteCommand.build_prefix
+      ~baca.tools.SuiteCommand.SuiteCommand.build
       ~baca.tools.SuiteCommand.SuiteCommand.commands
       ~baca.tools.SuiteCommand.SuiteCommand.selector
       ~baca.tools.SuiteCommand.SuiteCommand.site
@@ -37,7 +37,7 @@ Bases
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.SuiteCommand.SuiteCommand.build_prefix
+.. autoattribute:: baca.tools.SuiteCommand.SuiteCommand.build
 
 .. autoattribute:: baca.tools.SuiteCommand.SuiteCommand.commands
 

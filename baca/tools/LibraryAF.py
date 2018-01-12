@@ -1781,12 +1781,12 @@ class LibraryAF(abjad.AbjadObject):
         '''
         assert isinstance(tag, str), repr(tag)
         assert isinstance(command, baca.Command), repr(command)
-        assert command._build_prefix is None, repr(command)
-        command._build_prefix = tag
+        assert command._build is None, repr(command)
+        command._build = tag
         if isinstance(command, baca.SuiteCommand):
             for command_ in command.commands:
-                assert command_._build_prefix is None, repr(command_)
-                command_._build_prefix = tag
+                assert command_._build is None, repr(command_)
+                command_._build = tag
         return command
 
     @staticmethod
