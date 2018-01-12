@@ -3772,6 +3772,14 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
+    def dls_sp(n, selector='baca.leaves()'):
+        r'''Overrides dynamic line spanner staff padding.
+        
+        Returns override command.
+        '''
+        return baca.dynamic_line_spanner_staff_padding(n, selector=selector)
+
+    @staticmethod
     def double_tonguing(selector='baca.pheads()'):
         r'''Attaches double-staccati to pitched heads.
 
@@ -4218,14 +4226,6 @@ class LibraryAF(abjad.AbjadObject):
             indicators=[abjad.Articulation('downbow')],
             selector=selector,
             )
-
-    @staticmethod
-    def dls_sp(n, selector='baca.leaves()'):
-        r'''Overrides dynamic line spanner staff padding.
-        
-        Returns override command.
-        '''
-        return baca.dynamic_line_spanner_staff_padding(n, selector=selector)
 
     @staticmethod
     def dynamic(dynamic=None, selector='baca.phead(0)'):

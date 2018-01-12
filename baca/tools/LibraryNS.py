@@ -853,20 +853,6 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def rehearsal_mark_extra_offset(pair, selector='baca.leaf(0)'):
-        r'''Overrides rehearsal mark extra offset.
-
-        Returns override command.
-        '''
-        return baca.OverrideCommand(
-            attribute='extra_offset',
-            value=pair,
-            context='GlobalContext',
-            grob='rehearsal_mark',
-            selector=selector,
-            )
-
-    @staticmethod
     def register(start, stop=None, selector='baca.plts()'):
         r'''Octave-transposes PLTs.
 
@@ -1187,6 +1173,20 @@ class LibraryNS(abjad.AbjadObject):
             selector=selector,
             start_pitch=start,
             stop_pitch=stop,
+            )
+
+    @staticmethod
+    def rehearsal_mark_extra_offset(pair, selector='baca.leaf(0)'):
+        r'''Overrides rehearsal mark extra offset.
+
+        Returns override command.
+        '''
+        return baca.OverrideCommand(
+            attribute='extra_offset',
+            value=pair,
+            context='GlobalContext',
+            grob='rehearsal_mark',
+            selector=selector,
             )
 
     @staticmethod
