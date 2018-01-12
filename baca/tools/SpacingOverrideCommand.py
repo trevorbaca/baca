@@ -18,16 +18,22 @@ class SpacingOverrideCommand(Command):
     __slots__ = (
         '_build',
         '_duration',
+        '_eol',
         )
+
+    _magic_lilypond_eol_adjustment = abjad.Multiplier(17, 12)
 
     ### INITIALIZER ###
 
-    def __init__(self, duration=None, selector='baca.leaf(0)'):
+    def __init__(self, duration=None, eol=None, selector='baca.leaf(0)'):
         Command.__init__(self, selector=selector)
         if duration is not None:
             duration = abjad.NonreducedFraction(duration)
         self._build = None
         self._duration = duration
+        if eol is not None:
+            eol = bool(eol)
+        self._eol = eol
 
     ### SPECIAL METHODS ###
 
@@ -63,7 +69,10 @@ class SpacingOverrideCommand(Command):
                 if wrapper.tag == tag:
                     message = f'already have {tag} spacing override markup.'
                     raise Exception(message)
-        spacing_section = baca.SpacingSection(duration=self.duration)
+        duration = self.duration
+        if self.eol:
+            duration *= self._magic_lilypond_eol_adjustment
+        spacing_section = baca.SpacingSection(duration=duration)
         tag, deactivate = baca.tags.SPACING_OVERRIDE, None
         if self.build:
             tag = baca.tags.only(self.build, tag)
@@ -75,7 +84,7 @@ class SpacingOverrideCommand(Command):
             site='SOC1',
             tag=tag,
             )
-        markup = abjad.Markup(f'({self.duration!s})').fontsize(3).bold()
+        markup = abjad.Markup(f'({duration!s})').fontsize(3).bold()
         if self.build is None:
             color = 'BlueViolet'
         else:
@@ -142,3 +151,15 @@ class SpacingOverrideCommand(Command):
         Returns nonreduced fraction.
         '''
         return self._duration
+
+    @property
+    def eol(self):
+        r'''Is true when EOL multiplier should apply to duration.
+
+        Defaults to none.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        '''
+        return self._eol

@@ -40,6 +40,7 @@ Bases
       ~baca.tools.SegmentMaker.SegmentMaker.ignore_unpitched_notes
       ~baca.tools.SegmentMaker.SegmentMaker.ignore_unregistered_pitches
       ~baca.tools.SegmentMaker.SegmentMaker.instruments
+      ~baca.tools.SegmentMaker.SegmentMaker.known_builds
       ~baca.tools.SegmentMaker.SegmentMaker.last_segment
       ~baca.tools.SegmentMaker.SegmentMaker.layout_measure_map
       ~baca.tools.SegmentMaker.SegmentMaker.manifests
@@ -111,6 +112,8 @@ Read-only properties
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.ignore_unregistered_pitches
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.instruments
+
+.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.known_builds
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.last_segment
 

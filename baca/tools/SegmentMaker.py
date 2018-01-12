@@ -659,6 +659,9 @@ class SegmentMaker(abjad.SegmentMaker):
         for command in commands:
             if not isinstance(command, baca.Command):
                 raise Exception(f'commands only:\n\n{format(command)}')
+            if (getattr(command, 'build', None) and
+                command.build not in self.known_builds):
+                raise Exception(f'unknown build: {command.build!r}.')
         for scope in scopes:
             for command in commands:
                 manifest = getattr(command, '_manifest', None)
@@ -6887,6 +6890,16 @@ class SegmentMaker(abjad.SegmentMaker):
         Returns instrument dictionary or none.
         '''
         return self._instruments
+
+    @property
+    def known_builds(self):
+        r'''Gets known builds.
+
+        Returns list.
+        '''
+        result = ['SEGMENT']
+        result.extend(getattr(self.score_template, 'known_builds', []))
+        return result
 
     @property
     def last_segment(self):
