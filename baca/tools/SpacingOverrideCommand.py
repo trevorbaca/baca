@@ -21,7 +21,7 @@ class SpacingOverrideCommand(Command):
         '_eol',
         )
 
-    _magic_lilypond_eol_adjustment = abjad.Multiplier(17, 12)
+    _magic_lilypond_eol_adjustment = abjad.Multiplier(35, 24)
 
     ### INITIALIZER ###
 
