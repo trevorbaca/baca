@@ -52,22 +52,22 @@ class LayoutMeasureMap(abjad.AbjadObject):
                         ^ \markup {
                             \column
                                 {
-                                %F% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
-                                %F%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
-                                %F%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
-                                %F%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
-                                %F%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
-                                %F%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %F%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
-                                %F%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
-                                %F% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
-                                %F%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
-                                %F%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
-                                %F%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
-                                %F%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
-                                %F%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
-                                %F%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
-                                %F%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
                                 }
                             }
                         \break                                                                       %! +SEGMENT:LAYOUT:LMM3
@@ -79,13 +79,13 @@ class LayoutMeasureMap(abjad.AbjadObject):
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
-                    %F% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                    %F%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                    %F%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                    %F%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                    %F%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %F%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
-                    %F%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                    %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
+                    %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
+                    %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
+                    %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                         \break                                                                       %! +SEGMENT:LAYOUT:LMM3
             <BLANKLINE>
                         % GlobalSkips [measure 3]                                                    %! SM4
@@ -93,26 +93,26 @@ class LayoutMeasureMap(abjad.AbjadObject):
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
-                    %F% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                    %F%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                    %F%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                    %F%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                    %F%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %F%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
-                    %F%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                    %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
+                    %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
+                    %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
+                    %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
             <BLANKLINE>
                         % GlobalSkips [measure 4]                                                    %! SM4
                         \noBreak                                                                     %! +SEGMENT:LAYOUT:LMM2
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
-                    %F% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                    %F%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                    %F%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                    %F%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                    %F%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %F%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
-                    %F%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                    %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
+                    %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
+                    %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
+                    %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
             <BLANKLINE>
                         % GlobalSkips [measure 5]                                                    %! SM4
                         \noBreak                                                                     %! +SEGMENT:LAYOUT:LMM2
@@ -120,13 +120,13 @@ class LayoutMeasureMap(abjad.AbjadObject):
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
                         \stopTextSpan                                                                %! SM29
-                    %F% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                    %F%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                    %F%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                    %F%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                    %F%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %F%             m4                                                               %! MEASURE_INDEX_MARKUP:SM31
-                    %F%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                    %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
+                    %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
+                    %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
+                    %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             m4                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                         \override Score.BarLine.transparent = ##f                                    %! SM5
                         \bar "|"                                                                     %! SM5
             <BLANKLINE>
@@ -154,30 +154,30 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                     \clef "treble"                                                   %! DEFAULT_CLEF:SM8
                                     \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR:SM6
                                     \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:SM6
-                                %F% \override ViolinMusicStaff.Clef.color = ##f                      %! DEFAULT_CLEF_COLOR_CANCELLATION:SM7
+                                %@% \override ViolinMusicStaff.Clef.color = ##f                      %! DEFAULT_CLEF_COLOR_CANCELLATION:SM7
                                     e'8
                                     [
                                     ^ \markup {
                                         \column
                                             {
-                                            %F% \line                                                %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %F%     {                                                %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %F%         \vcenter                                     %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %F%             (Violin                                  %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %F%         \vcenter                                     %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %F%             \hcenter-in                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %F%                 #10                                  %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %F%                 Violin                               %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %F%         \concat                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %F%             {                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %F%                 \vcenter                             %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %F%                     \hcenter-in                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %F%                         #10                          %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %F%                         Vn.                          %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %F%                 \vcenter                             %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %F%                     )                                %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %F%             }                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %F%     }                                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %@% \line                                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %@%     {                                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %@%         \vcenter                                     %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %@%             (Violin                                  %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %@%         \vcenter                                     %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %@%             \hcenter-in                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %@%                 #10                                  %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %@%                 Violin                               %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %@%         \concat                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %@%             {                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %@%                 \vcenter                             %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %@%                     \hcenter-in                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %@%                         #10                          %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %@%                         Vn.                          %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %@%                 \vcenter                             %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %@%                     )                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %@%             }                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                            %@%     }                                                %! DEFAULT_INSTRUMENT_ALERT:SM10
                                                 \line                                                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                                     {                                                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                                         \with-color                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
@@ -292,29 +292,29 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                 \clef "alto"                                                         %! DEFAULT_CLEF:SM8
                                 \once \override ViolaMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR:SM6
                                 \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:SM6
-                            %F% \override ViolaMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:SM7
+                            %@% \override ViolaMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:SM7
                                 R1 * 1/2
                                 ^ \markup {
                                     \column
                                         {
-                                        %F% \line                                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%     {                                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%         \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%             (Viola                                       %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%         \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%             \hcenter-in                                  %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%                 #10                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%                 Viola                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%         \concat                                          %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%             {                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%                 \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%                     \hcenter-in                          %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%                         #10                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%                         Va.                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%                 \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%                     )                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%             }                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%     }                                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@% \line                                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%     {                                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%         \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%             (Viola                                       %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%         \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%             \hcenter-in                                  %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%                 #10                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%                 Viola                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%         \concat                                          %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%             {                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%                 \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%                     \hcenter-in                          %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%                         #10                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%                         Va.                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%                 \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%                     )                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%             }                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%     }                                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
                                             \line                                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                                 {                                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                                     \with-color                                      %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
@@ -385,29 +385,29 @@ class LayoutMeasureMap(abjad.AbjadObject):
                                 \clef "bass"                                                         %! DEFAULT_CLEF:SM8
                                 \once \override CelloMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR:SM6
                                 \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:SM6
-                            %F% \override CelloMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:SM7
+                            %@% \override CelloMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:SM7
                                 R1 * 1/2
                                 ^ \markup {
                                     \column
                                         {
-                                        %F% \line                                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%     {                                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%         \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%             (Cello                                       %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%         \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%             \hcenter-in                                  %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%                 #10                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%                 Cello                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%         \concat                                          %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%             {                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%                 \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%                     \hcenter-in                          %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%                         #10                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%                         Vc.                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%                 \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%                     )                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%             }                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %F%     }                                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@% \line                                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%     {                                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%         \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%             (Cello                                       %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%         \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%             \hcenter-in                                  %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%                 #10                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%                 Cello                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%         \concat                                          %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%             {                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%                 \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%                     \hcenter-in                          %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%                         #10                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%                         Vc.                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%                 \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%                     )                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%             }                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%     }                                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
                                             \line                                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                                 {                                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                                     \with-color                                      %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11

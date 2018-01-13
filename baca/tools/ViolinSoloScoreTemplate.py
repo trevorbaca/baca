@@ -40,22 +40,22 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                         ^ \markup {
                             \column
                                 {
-                                %F% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
-                                %F%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
-                                %F%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
-                                %F%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
-                                %F%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
-                                %F%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %F%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
-                                %F%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
-                                %F% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
-                                %F%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
-                                %F%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
-                                %F%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
-                                %F%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
-                                %F%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
-                                %F%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
-                                %F%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
                                 }
                             }
             <BLANKLINE>
@@ -63,38 +63,38 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
-                    %F% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                    %F%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                    %F%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                    %F%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                    %F%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %F%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
-                    %F%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                    %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
+                    %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
+                    %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
+                    %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
             <BLANKLINE>
                         % GlobalSkips [measure 3]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
-                    %F% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                    %F%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                    %F%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                    %F%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                    %F%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %F%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
-                    %F%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                    %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
+                    %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
+                    %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
+                    %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
             <BLANKLINE>
                         % GlobalSkips [measure 4]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
                         \stopTextSpan                                                                %! SM29
-                    %F% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                    %F%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                    %F%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                    %F%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                    %F%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %F%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
-                    %F%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                    %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
+                    %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
+                    %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
+                    %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                         \override Score.BarLine.transparent = ##f                                    %! SM5
                         \bar "|"                                                                     %! SM5
             <BLANKLINE>
@@ -120,29 +120,29 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                             \clef "treble"                                                           %! DEFAULT_CLEF:SM8
                             \once \override ViolinMusicStaff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_INSTRUMENT_COLOR:SM6
                             \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet)   %! DEFAULT_CLEF_COLOR:SM6
-                        %F% \override ViolinMusicStaff.Clef.color = ##f                              %! DEFAULT_CLEF_COLOR_CANCELLATION:SM7
+                        %@% \override ViolinMusicStaff.Clef.color = ##f                              %! DEFAULT_CLEF_COLOR_CANCELLATION:SM7
                             R1 * 1/2
                             ^ \markup {
                                 \column
                                     {
-                                    %F% \line                                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                    %F%     {                                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                    %F%         \vcenter                                             %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                    %F%             (Violin                                          %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                    %F%         \vcenter                                             %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                    %F%             \hcenter-in                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                    %F%                 #16                                          %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                    %F%                 Violin                                       %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                    %F%         \concat                                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                    %F%             {                                                %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                    %F%                 \vcenter                                     %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                    %F%                     \hcenter-in                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                    %F%                         #10                                  %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                    %F%                         Vn.                                  %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                    %F%                 \vcenter                                     %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                    %F%                     )                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                    %F%             }                                                %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                    %F%     }                                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %@% \line                                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %@%     {                                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %@%         \vcenter                                             %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %@%             (Violin                                          %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %@%         \vcenter                                             %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %@%             \hcenter-in                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %@%                 #16                                          %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %@%                 Violin                                       %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %@%         \concat                                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %@%             {                                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %@%                 \vcenter                                     %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %@%                     \hcenter-in                              %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %@%                         #10                                  %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %@%                         Vn.                                  %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %@%                 \vcenter                                     %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %@%                     )                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %@%             }                                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                    %@%     }                                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
                                         \line                                                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                             {                                                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                                 \with-color                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
