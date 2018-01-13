@@ -93,61 +93,11 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
                         \startTextSpan                                                               %! SM29
-                        ^ \markup {
-                            \column
-                                {
-                                %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
-                                %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
-                                %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
-                                %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
-                                %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
-                                %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
-                                %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
-                                %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
-                                %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
-                                %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
-                                %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
-                                %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
-                                %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
-                                %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
-                                %@% \line                                                            %! CLOCK_TIME_MARKUP:SM28
-                                %@%     {                                                            %! CLOCK_TIME_MARKUP:SM28
-                                %@%         \with-color                                              %! CLOCK_TIME_MARKUP:SM28
-                                %@%             #(x11-color 'DarkCyan)                               %! CLOCK_TIME_MARKUP:SM28
-                                %@%             \fontsize                                            %! CLOCK_TIME_MARKUP:SM28
-                                %@%                 #3                                               %! CLOCK_TIME_MARKUP:SM28
-                                %@%                 [0'00'']                                         %! CLOCK_TIME_MARKUP:SM28
-                                %@%     }                                                            %! CLOCK_TIME_MARKUP:SM28
-                                }
-                            }
             <BLANKLINE>
                         % GlobalSkips [measure 2]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
-                        ^ \markup {
-                            \column
-                                {
-                                %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
-                                %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
-                                %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
-                                %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
-                                %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
-                                %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
-                                %@% \line                                                            %! CLOCK_TIME_MARKUP:SM28
-                                %@%     {                                                            %! CLOCK_TIME_MARKUP:SM28
-                                %@%         \with-color                                              %! CLOCK_TIME_MARKUP:SM28
-                                %@%             #(x11-color 'DarkCyan)                               %! CLOCK_TIME_MARKUP:SM28
-                                %@%             \fontsize                                            %! CLOCK_TIME_MARKUP:SM28
-                                %@%                 #3                                               %! CLOCK_TIME_MARKUP:SM28
-                                %@%                 [0'01'']                                         %! CLOCK_TIME_MARKUP:SM28
-                                %@%     }                                                            %! CLOCK_TIME_MARKUP:SM28
-                                }
-                            }
             <BLANKLINE>
                         % GlobalSkips [measure 3]                                                    %! SM4
                     %@% \once \override TextSpanner.bound-details.left.text =                        %! EXPLICIT_METRONOME_MARK:SM27
@@ -208,62 +158,12 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                         s1 * 1/2
                         \stopTextSpan                                                                %! SM29
                         \startTextSpan                                                               %! SM29
-                        ^ \markup {
-                            \column
-                                {
-                                %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
-                                %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
-                                %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
-                                %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
-                                %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 [02]                                             %! MEASURE_INDEX_MARKUP:SM31
-                                %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
-                                %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
-                                %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
-                                %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
-                                %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
-                                %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
-                                %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
-                                %@%                 [2]                                              %! STAGE_NUMBER_MARKUP:SM3
-                                %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
-                                %@% \line                                                            %! CLOCK_TIME_MARKUP:SM28
-                                %@%     {                                                            %! CLOCK_TIME_MARKUP:SM28
-                                %@%         \with-color                                              %! CLOCK_TIME_MARKUP:SM28
-                                %@%             #(x11-color 'DarkCyan)                               %! CLOCK_TIME_MARKUP:SM28
-                                %@%             \fontsize                                            %! CLOCK_TIME_MARKUP:SM28
-                                %@%                 #3                                               %! CLOCK_TIME_MARKUP:SM28
-                                %@%                 [0'02'']                                         %! CLOCK_TIME_MARKUP:SM28
-                                %@%     }                                                            %! CLOCK_TIME_MARKUP:SM28
-                                }
-                            }
             <BLANKLINE>
                         % GlobalSkips [measure 4]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
                         \stopTextSpan                                                                %! SM29
-                        ^ \markup {
-                            \column
-                                {
-                                %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
-                                %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
-                                %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
-                                %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
-                                %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 [03]                                             %! MEASURE_INDEX_MARKUP:SM31
-                                %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
-                                %@% \line                                                            %! CLOCK_TIME_MARKUP:SM28
-                                %@%     {                                                            %! CLOCK_TIME_MARKUP:SM28
-                                %@%         \with-color                                              %! CLOCK_TIME_MARKUP:SM28
-                                %@%             #(x11-color 'DarkCyan)                               %! CLOCK_TIME_MARKUP:SM28
-                                %@%             \fontsize                                            %! CLOCK_TIME_MARKUP:SM28
-                                %@%                 #3                                               %! CLOCK_TIME_MARKUP:SM28
-                                %@%                 [0'04'']                                         %! CLOCK_TIME_MARKUP:SM28
-                                %@%     }                                                            %! CLOCK_TIME_MARKUP:SM28
-                                }
-                            }
                         \override Score.BarLine.transparent = ##f                                    %! SM5
                         \bar "|"                                                                     %! SM5
             <BLANKLINE>

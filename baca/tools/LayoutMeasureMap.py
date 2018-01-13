@@ -49,27 +49,6 @@ class LayoutMeasureMap(abjad.AbjadObject):
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
                         \startTextSpan                                                               %! SM29
-                        ^ \markup {
-                            \column
-                                {
-                                %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
-                                %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
-                                %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
-                                %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
-                                %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
-                                %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
-                                %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
-                                %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
-                                %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
-                                %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
-                                %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
-                                %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
-                                %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
-                                %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
-                                }
-                            }
                         \break                                                                       %! +SEGMENT:LAYOUT:LMM3
             <BLANKLINE>
                         % GlobalSkips [measure 2]                                                    %! SM4
@@ -79,13 +58,6 @@ class LayoutMeasureMap(abjad.AbjadObject):
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
-                    %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                    %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                    %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                    %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                    %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                         \break                                                                       %! +SEGMENT:LAYOUT:LMM3
             <BLANKLINE>
                         % GlobalSkips [measure 3]                                                    %! SM4
@@ -93,26 +65,12 @@ class LayoutMeasureMap(abjad.AbjadObject):
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
-                    %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                    %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                    %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                    %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                    %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
             <BLANKLINE>
                         % GlobalSkips [measure 4]                                                    %! SM4
                         \noBreak                                                                     %! +SEGMENT:LAYOUT:LMM2
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
-                    %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                    %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                    %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                    %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             [03]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                    %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
             <BLANKLINE>
                         % GlobalSkips [measure 5]                                                    %! SM4
                         \noBreak                                                                     %! +SEGMENT:LAYOUT:LMM2
@@ -120,13 +78,6 @@ class LayoutMeasureMap(abjad.AbjadObject):
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
                         \stopTextSpan                                                                %! SM29
-                    %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                    %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                    %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                    %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             [04]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                    %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                         \override Score.BarLine.transparent = ##f                                    %! SM5
                         \bar "|"                                                                     %! SM5
             <BLANKLINE>
