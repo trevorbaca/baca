@@ -45,29 +45,64 @@ class ColorFingeringCommand(Command):
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
                         \startTextSpan                                                               %! SM29
-                        ^ \markup {                                                                  %! STAGE_NUMBER_MARKUP:SM3
-                            \fontsize                                                                %! STAGE_NUMBER_MARKUP:SM3
-                                #3                                                                   %! STAGE_NUMBER_MARKUP:SM3
-                                \with-color                                                          %! STAGE_NUMBER_MARKUP:SM3
-                                    #(x11-color 'DarkCyan)                                           %! STAGE_NUMBER_MARKUP:SM3
-                                    [1]                                                              %! STAGE_NUMBER_MARKUP:SM3
-                            }                                                                        %! STAGE_NUMBER_MARKUP:SM3
+                        ^ \markup {
+                            \column
+                                {
+                                %F% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                %F%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                %F%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                %F%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                %F%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                %F%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                %F%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %F%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                %F% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                %F%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                %F%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                %F%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                %F%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                %F%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                %F%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                %F%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                }
+                            }
             <BLANKLINE>
                         % GlobalSkips [measure 2]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
+                    %F% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
+                    %F%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
+                    %F%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
+                    %F%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
+                    %F%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
+                    %F%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %F%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
             <BLANKLINE>
                         % GlobalSkips [measure 3]                                                    %! SM4
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
+                    %F% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
+                    %F%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
+                    %F%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
+                    %F%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
+                    %F%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
+                    %F%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %F%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
             <BLANKLINE>
                         % GlobalSkips [measure 4]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
                         \stopTextSpan                                                                %! SM29
+                    %F% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
+                    %F%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
+                    %F%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
+                    %F%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
+                    %F%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
+                    %F%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %F%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                         \override Score.BarLine.transparent = ##f                                    %! SM5
                         \bar "|"                                                                     %! SM5
             <BLANKLINE>

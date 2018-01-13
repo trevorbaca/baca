@@ -779,6 +779,13 @@ class LibraryAF(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
+                        %F% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
+                        %F%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
+                        %F%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
+                        %F%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
+                        %F%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
+                        %F%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %F%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -786,6 +793,13 @@ class LibraryAF(abjad.AbjadObject):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
+                        %F% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
+                        %F%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
+                        %F%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
+                        %F%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
+                        %F%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
+                        %F%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %F%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -793,6 +807,13 @@ class LibraryAF(abjad.AbjadObject):
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
+                        %F% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
+                        %F%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
+                        %F%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
+                        %F%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
+                        %F%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
+                        %F%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %F%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -801,6 +822,13 @@ class LibraryAF(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
+                        %F% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
+                        %F%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
+                        %F%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
+                        %F%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
+                        %F%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
+                        %F%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %F%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -2851,6 +2879,13 @@ class LibraryAF(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 5/8
                             \startTextSpan                                                               %! SM29
+                        %F% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
+                        %F%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
+                        %F%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
+                        %F%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
+                        %F%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
+                        %F%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %F%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -2859,6 +2894,13 @@ class LibraryAF(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/8
                             \stopTextSpan                                                                %! SM29
+                        %F% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
+                        %F%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
+                        %F%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
+                        %F%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
+                        %F%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
+                        %F%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %F%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -3239,6 +3281,13 @@ class LibraryAF(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 5/8
                             \startTextSpan                                                               %! SM29
+                        %F% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
+                        %F%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
+                        %F%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
+                        %F%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
+                        %F%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
+                        %F%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %F%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -3247,6 +3296,13 @@ class LibraryAF(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/8
                             \stopTextSpan                                                                %! SM29
+                        %F% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
+                        %F%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
+                        %F%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
+                        %F%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
+                        %F%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
+                        %F%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %F%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
