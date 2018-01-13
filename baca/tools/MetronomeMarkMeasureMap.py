@@ -102,7 +102,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                 %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -114,9 +114,11 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                                 %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
                                 %@% \line                                                            %! CLOCK_TIME_MARKUP:SM28
                                 %@%     {                                                            %! CLOCK_TIME_MARKUP:SM28
-                                %@%         \fontsize                                                %! CLOCK_TIME_MARKUP:SM28
-                                %@%             #3                                                   %! CLOCK_TIME_MARKUP:SM28
-                                %@%             0'00''                                               %! CLOCK_TIME_MARKUP:SM28
+                                %@%         \with-color                                              %! CLOCK_TIME_MARKUP:SM28
+                                %@%             #(x11-color 'DarkCyan)                               %! CLOCK_TIME_MARKUP:SM28
+                                %@%             \fontsize                                            %! CLOCK_TIME_MARKUP:SM28
+                                %@%                 #3                                               %! CLOCK_TIME_MARKUP:SM28
+                                %@%                 [0'00'']                                         %! CLOCK_TIME_MARKUP:SM28
                                 %@%     }                                                            %! CLOCK_TIME_MARKUP:SM28
                                 }
                             }
@@ -134,13 +136,15 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m1                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! CLOCK_TIME_MARKUP:SM28
                                 %@%     {                                                            %! CLOCK_TIME_MARKUP:SM28
-                                %@%         \fontsize                                                %! CLOCK_TIME_MARKUP:SM28
-                                %@%             #3                                                   %! CLOCK_TIME_MARKUP:SM28
-                                %@%             0'01''                                               %! CLOCK_TIME_MARKUP:SM28
+                                %@%         \with-color                                              %! CLOCK_TIME_MARKUP:SM28
+                                %@%             #(x11-color 'DarkCyan)                               %! CLOCK_TIME_MARKUP:SM28
+                                %@%             \fontsize                                            %! CLOCK_TIME_MARKUP:SM28
+                                %@%                 #3                                               %! CLOCK_TIME_MARKUP:SM28
+                                %@%                 [0'01'']                                         %! CLOCK_TIME_MARKUP:SM28
                                 %@%     }                                                            %! CLOCK_TIME_MARKUP:SM28
                                 }
                             }
@@ -213,7 +217,7 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m2                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [02]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                 %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -225,9 +229,11 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                                 %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
                                 %@% \line                                                            %! CLOCK_TIME_MARKUP:SM28
                                 %@%     {                                                            %! CLOCK_TIME_MARKUP:SM28
-                                %@%         \fontsize                                                %! CLOCK_TIME_MARKUP:SM28
-                                %@%             #3                                                   %! CLOCK_TIME_MARKUP:SM28
-                                %@%             0'02''                                               %! CLOCK_TIME_MARKUP:SM28
+                                %@%         \with-color                                              %! CLOCK_TIME_MARKUP:SM28
+                                %@%             #(x11-color 'DarkCyan)                               %! CLOCK_TIME_MARKUP:SM28
+                                %@%             \fontsize                                            %! CLOCK_TIME_MARKUP:SM28
+                                %@%                 #3                                               %! CLOCK_TIME_MARKUP:SM28
+                                %@%                 [0'02'']                                         %! CLOCK_TIME_MARKUP:SM28
                                 %@%     }                                                            %! CLOCK_TIME_MARKUP:SM28
                                 }
                             }
@@ -246,13 +252,15 @@ class MetronomeMarkMeasureMap(abjad.AbjadObject):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m3                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [03]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! CLOCK_TIME_MARKUP:SM28
                                 %@%     {                                                            %! CLOCK_TIME_MARKUP:SM28
-                                %@%         \fontsize                                                %! CLOCK_TIME_MARKUP:SM28
-                                %@%             #3                                                   %! CLOCK_TIME_MARKUP:SM28
-                                %@%             0'04''                                               %! CLOCK_TIME_MARKUP:SM28
+                                %@%         \with-color                                              %! CLOCK_TIME_MARKUP:SM28
+                                %@%             #(x11-color 'DarkCyan)                               %! CLOCK_TIME_MARKUP:SM28
+                                %@%             \fontsize                                            %! CLOCK_TIME_MARKUP:SM28
+                                %@%                 #3                                               %! CLOCK_TIME_MARKUP:SM28
+                                %@%                 [0'04'']                                         %! CLOCK_TIME_MARKUP:SM28
                                 %@%     }                                                            %! CLOCK_TIME_MARKUP:SM28
                                 }
                             }

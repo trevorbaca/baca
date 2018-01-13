@@ -54,7 +54,7 @@ class PitchCommand(Command):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                 %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -76,7 +76,7 @@ class PitchCommand(Command):
                     %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                     %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                     %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                     %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
             <BLANKLINE>
                         % GlobalSkips [measure 3]                                                    %! SM4
@@ -88,7 +88,7 @@ class PitchCommand(Command):
                     %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                     %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                     %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
                     %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
             <BLANKLINE>
                         % GlobalSkips [measure 4]                                                    %! SM4
@@ -101,7 +101,7 @@ class PitchCommand(Command):
                     %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                     %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                     %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             [03]                                                             %! MEASURE_INDEX_MARKUP:SM31
                     %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                         \override Score.BarLine.transparent = ##f                                    %! SM5
                         \bar "|"                                                                     %! SM5
@@ -212,7 +212,7 @@ class PitchCommand(Command):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                 %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -234,7 +234,7 @@ class PitchCommand(Command):
                     %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                     %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                     %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                     %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
             <BLANKLINE>
                         % GlobalSkips [measure 3]                                                    %! SM4
@@ -246,7 +246,7 @@ class PitchCommand(Command):
                     %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                     %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                     %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
                     %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
             <BLANKLINE>
                         % GlobalSkips [measure 4]                                                    %! SM4
@@ -259,7 +259,7 @@ class PitchCommand(Command):
                     %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                     %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                     %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             [03]                                                             %! MEASURE_INDEX_MARKUP:SM31
                     %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                         \override Score.BarLine.transparent = ##f                                    %! SM5
                         \bar "|"                                                                     %! SM5
@@ -370,7 +370,7 @@ class PitchCommand(Command):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                 %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -392,7 +392,7 @@ class PitchCommand(Command):
                     %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                     %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                     %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                     %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
             <BLANKLINE>
                         % GlobalSkips [measure 3]                                                    %! SM4
@@ -404,7 +404,7 @@ class PitchCommand(Command):
                     %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                     %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                     %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
                     %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
             <BLANKLINE>
                         % GlobalSkips [measure 4]                                                    %! SM4
@@ -417,7 +417,7 @@ class PitchCommand(Command):
                     %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                     %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                     %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             [03]                                                             %! MEASURE_INDEX_MARKUP:SM31
                     %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                         \override Score.BarLine.transparent = ##f                                    %! SM5
                         \bar "|"                                                                     %! SM5

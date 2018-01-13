@@ -56,7 +56,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                     %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                     %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                     %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
             <BLANKLINE>
                         % GlobalSkips [measure 2]                                                    %! SM4
@@ -68,7 +68,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                     %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                     %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                     %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
             <BLANKLINE>
                         % GlobalSkips [measure 3]                                                    %! SM4
@@ -80,7 +80,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                     %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                     %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
                     %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
             <BLANKLINE>
                         % GlobalSkips [measure 4]                                                    %! SM4
@@ -93,7 +93,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                     %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                     %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             [03]                                                             %! MEASURE_INDEX_MARKUP:SM31
                     %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                         \override Score.BarLine.transparent = ##f                                    %! SM5
                         \bar "|"                                                                     %! SM5
@@ -461,7 +461,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                     %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -483,7 +483,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
@@ -495,7 +495,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                                    %! SM4
@@ -508,7 +508,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [03]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -1886,12 +1886,6 @@ class SegmentMaker(abjad.SegmentMaker):
         skips = baca.select(self.score['GlobalSkips']).skips()
         if abjad.inspect(skips[0]).get_effective(abjad.MetronomeMark) is None:
             return
-        skips_ = []
-        for skip in skips:
-            start_offset = abjad.inspect(skip).get_timespan().start_offset
-            if start_offset in self._fermata_start_offsets:
-                continue
-            skips_.append(skip)
         start_clock_time = self._get_previous_stop_clock_time()
         start_clock_time = start_clock_time or "0'00''"
         self._start_clock_time = start_clock_time 
@@ -1905,9 +1899,11 @@ class SegmentMaker(abjad.SegmentMaker):
         seconds = 60 * minutes + seconds
         segment_start_offset = abjad.Duration(seconds)
         tag = baca.tags.CLOCK_TIME_MARKUP
-        label = abjad.label(skips_, deactivate=True, site='SM28', tag=tag)
+        label = abjad.label(skips, deactivate=True, site='SM28', tag=tag)
         segment_stop_duration = label.with_start_offsets(
+            brackets=True,
             clock_time=True,
+            color=abjad.SchemeColor('DarkCyan'),
             font_size=3,
             global_offset=segment_start_offset,
             )
@@ -1920,7 +1916,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _label_measure_indices(self):
         skips = baca.select(self.score['GlobalSkips']).skips()
         for i, skip in enumerate(skips):
-            markup = abjad.Markup(f'm{i}')
+            markup = abjad.Markup(f'[{str(i).zfill(2)}]')
             markup = markup.with_color(abjad.SchemeColor('DarkCyan'))
             markup = markup.fontsize(3)
             markup = abjad.new(markup, direction=abjad.Up)
@@ -2409,7 +2405,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -2427,7 +2423,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -2520,7 +2516,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -2538,7 +2534,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -2642,7 +2638,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -2660,7 +2656,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -2763,7 +2759,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -2781,7 +2777,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -2875,7 +2871,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -2889,7 +2885,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
@@ -2907,7 +2903,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -3020,7 +3016,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -3038,7 +3034,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -3143,7 +3139,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                     %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -3157,10 +3153,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%     {                                                            %! SPACING_MARKUP:HSS2
                                     %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                     %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                    %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                    %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                    %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                    %@%                     (1/31)                                       %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/31]                                           %! SPACING_MARKUP:HSS2
                                     %@%     }                                                            %! SPACING_MARKUP:HSS2
                                     }
                                 }
@@ -3180,16 +3175,15 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m1                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! SPACING_MARKUP:HSS2
                                     %@%     {                                                            %! SPACING_MARKUP:HSS2
                                     %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                     %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                    %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                    %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                    %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                    %@%                     (1/31)                                       %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/31]                                           %! SPACING_MARKUP:HSS2
                                     %@%     }                                                            %! SPACING_MARKUP:HSS2
                                     }
                                 }
@@ -3588,7 +3582,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                     %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -3602,10 +3596,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%     {                                                            %! SPACING_MARKUP:HSS2
                                     %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                     %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                    %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                    %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                    %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                    %@%                     (1/24)                                       %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
                                     %@%     }                                                            %! SPACING_MARKUP:HSS2
                                     }
                                 }
@@ -3625,16 +3618,15 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m1                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! SPACING_MARKUP:HSS2
                                     %@%     {                                                            %! SPACING_MARKUP:HSS2
                                     %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                     %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                    %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                    %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                    %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                    %@%                     (1/24)                                       %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
                                     %@%     }                                                            %! SPACING_MARKUP:HSS2
                                     }
                                 }
@@ -3654,16 +3646,15 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m2                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [02]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! SPACING_MARKUP:HSS2
                                     %@%     {                                                            %! SPACING_MARKUP:HSS2
                                     %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                     %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                    %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                    %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                    %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                    %@%                     (1/24)                                       %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
                                     %@%     }                                                            %! SPACING_MARKUP:HSS2
                                     }
                                 }
@@ -3684,16 +3675,15 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m3                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [03]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! SPACING_MARKUP:HSS2
                                     %@%     {                                                            %! SPACING_MARKUP:HSS2
                                     %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                     %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                    %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                    %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                    %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                    %@%                     (1/24)                                       %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
                                     %@%     }                                                            %! SPACING_MARKUP:HSS2
                                     }
                                 }
@@ -3858,7 +3848,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                     %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -3872,10 +3862,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%     {                                                            %! SPACING_MARKUP:HSS2
                                     %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                     %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                    %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                    %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                    %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                    %@%                     (1/24)                                       %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
                                     %@%     }                                                            %! SPACING_MARKUP:HSS2
                                     }
                                 }
@@ -3895,16 +3884,15 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m1                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! SPACING_MARKUP:HSS2
                                     %@%     {                                                            %! SPACING_MARKUP:HSS2
                                     %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                     %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                    %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                    %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                    %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                    %@%                     (1/24)                                       %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
                                     %@%     }                                                            %! SPACING_MARKUP:HSS2
                                     }
                                 }
@@ -3924,16 +3912,15 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m2                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [02]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! SPACING_MARKUP:HSS2
                                     %@%     {                                                            %! SPACING_MARKUP:HSS2
                                     %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                     %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                    %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                    %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                    %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                    %@%                     (1/24)                                       %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
                                     %@%     }                                                            %! SPACING_MARKUP:HSS2
                                     }
                                 }
@@ -3954,16 +3941,15 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m3                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [03]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! SPACING_MARKUP:HSS2
                                     %@%     {                                                            %! SPACING_MARKUP:HSS2
                                     %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                     %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                    %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                    %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                    %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                    %@%                     (1/24)                                       %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
                                     %@%     }                                                            %! SPACING_MARKUP:HSS2
                                     }
                                 }
@@ -4138,7 +4124,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -4152,7 +4138,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -4242,7 +4228,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -4256,7 +4242,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -4347,7 +4333,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -4361,7 +4347,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -4441,7 +4427,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -4455,7 +4441,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -4547,7 +4533,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -4561,7 +4547,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -4639,7 +4625,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -4653,7 +4639,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -4745,7 +4731,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -4759,7 +4745,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -4849,7 +4835,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                     %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -4871,7 +4857,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
@@ -4883,7 +4869,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                                    %! SM4
@@ -4896,7 +4882,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [03]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -5006,7 +4992,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                     %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -5028,7 +5014,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
@@ -5040,7 +5026,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                                    %! SM4
@@ -5053,7 +5039,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [03]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "||"                                                                    %! SM5
@@ -5165,7 +5151,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                     %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -5187,7 +5173,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
@@ -5199,7 +5185,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                                    %! SM4
@@ -5212,7 +5198,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [03]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|."                                                                    %! SM5
@@ -5326,7 +5312,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                     %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -5348,7 +5334,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
@@ -5360,7 +5346,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                                    %! SM4
@@ -5373,7 +5359,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [03]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "||"                                                                    %! SM5
@@ -5497,7 +5483,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                     %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -5519,7 +5505,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
@@ -5531,7 +5517,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                                    %! SM4
@@ -5544,7 +5530,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [03]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|."                                                                    %! SM5
@@ -5719,7 +5705,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                     %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -5741,7 +5727,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
@@ -5753,7 +5739,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                                    %! SM4
@@ -5766,7 +5752,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [03]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -5876,7 +5862,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                     %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -5898,7 +5884,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
@@ -5910,7 +5896,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                                    %! SM4
@@ -5923,7 +5909,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [03]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -6172,7 +6158,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                     %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -6186,10 +6172,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%     {                                                            %! SPACING_MARKUP:HSS2
                                     %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                     %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                    %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                    %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                    %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                    %@%                     (1/24)                                       %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
                                     %@%     }                                                            %! SPACING_MARKUP:HSS2
                                     }
                                 }
@@ -6208,16 +6193,15 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m1                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! SPACING_MARKUP:HSS2
                                     %@%     {                                                            %! SPACING_MARKUP:HSS2
                                     %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                     %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                    %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                    %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                    %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                    %@%                     (1/24)                                       %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
                                     %@%     }                                                            %! SPACING_MARKUP:HSS2
                                     }
                                 }
@@ -6236,16 +6220,15 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m2                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [02]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! SPACING_MARKUP:HSS2
                                     %@%     {                                                            %! SPACING_MARKUP:HSS2
                                     %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                     %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                    %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                    %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                    %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                    %@%                     (1/24)                                       %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
                                     %@%     }                                                            %! SPACING_MARKUP:HSS2
                                     }
                                 }
@@ -6265,16 +6248,15 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m3                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [03]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! SPACING_MARKUP:HSS2
                                     %@%     {                                                            %! SPACING_MARKUP:HSS2
                                     %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                     %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                    %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                    %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                    %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                    %@%                     (1/24)                                       %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
                                     %@%     }                                                            %! SPACING_MARKUP:HSS2
                                     }
                                 }
@@ -6436,7 +6418,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                     %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -6450,10 +6432,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%     {                                                            %! SPACING_MARKUP:HSS2
                                     %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                     %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                    %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                    %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                    %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                    %@%                     (1/24)                                       %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
                                     %@%     }                                                            %! SPACING_MARKUP:HSS2
                                     }
                                 }
@@ -6472,16 +6453,15 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m1                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! SPACING_MARKUP:HSS2
                                     %@%     {                                                            %! SPACING_MARKUP:HSS2
                                     %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                     %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                    %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                    %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                    %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                    %@%                     (1/24)                                       %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
                                     %@%     }                                                            %! SPACING_MARKUP:HSS2
                                     }
                                 }
@@ -6500,16 +6480,15 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m2                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [02]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! SPACING_MARKUP:HSS2
                                     %@%     {                                                            %! SPACING_MARKUP:HSS2
                                     %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                     %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                    %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                    %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                    %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                    %@%                     (1/24)                                       %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
                                     %@%     }                                                            %! SPACING_MARKUP:HSS2
                                     }
                                 }
@@ -6529,16 +6508,15 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m3                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [03]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! SPACING_MARKUP:HSS2
                                     %@%     {                                                            %! SPACING_MARKUP:HSS2
                                     %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                     %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                    %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                    %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                    %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                    %@%                     (1/24)                                       %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
                                     %@%     }                                                            %! SPACING_MARKUP:HSS2
                                     }
                                 }
@@ -6798,7 +6776,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -6816,7 +6794,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -6946,7 +6924,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -6964,7 +6942,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -7105,7 +7083,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -7123,7 +7101,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -7259,7 +7237,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -7277,7 +7255,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -7411,7 +7389,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -7425,7 +7403,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
@@ -7443,7 +7421,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -7630,7 +7608,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -7648,7 +7626,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -7852,7 +7830,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -7870,7 +7848,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -7994,7 +7972,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -8012,7 +7990,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -8147,7 +8125,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -8165,7 +8143,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -8301,7 +8279,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -8319,7 +8297,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -8453,7 +8431,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -8467,7 +8445,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
@@ -8485,7 +8463,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -8672,7 +8650,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -8690,7 +8668,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -8841,7 +8819,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                     %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -8863,7 +8841,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
@@ -8875,7 +8853,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                                    %! SM4
@@ -8888,7 +8866,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [03]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -9072,7 +9050,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                     %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -9094,7 +9072,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
@@ -9106,7 +9084,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                                    %! SM4
@@ -9119,7 +9097,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [03]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -9323,7 +9301,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -9338,7 +9316,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -9480,7 +9458,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -9495,7 +9473,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \revert TextSpanner.staff-padding                                            %! OC
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -9639,7 +9617,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -9654,7 +9632,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \revert TextSpanner.staff-padding                                            %! OC
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -9837,7 +9815,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -9855,7 +9833,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -9997,7 +9975,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -10012,7 +9990,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \revert TextSpanner.staff-padding                                            %! OC
                             \override Score.BarLine.transparent = ##f                                    %! SM5
@@ -10185,7 +10163,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                     %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -10207,7 +10185,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
@@ -10219,7 +10197,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                                    %! SM4
@@ -10232,7 +10210,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [03]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -10302,7 +10280,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                     %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -10324,7 +10302,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
@@ -10336,7 +10314,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                                    %! SM4
@@ -10349,7 +10327,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [03]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -10456,7 +10434,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -10470,7 +10448,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -10562,7 +10540,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -10576,7 +10554,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -10669,7 +10647,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -10683,7 +10661,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -10765,7 +10743,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -10779,7 +10757,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -10875,7 +10853,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m0                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
@@ -10889,7 +10867,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -10986,7 +10964,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                     %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -11008,7 +10986,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
@@ -11020,7 +10998,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                                    %! SM4
@@ -11033,7 +11011,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [03]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -11171,7 +11149,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                     %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -11193,7 +11171,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
@@ -11205,7 +11183,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                                    %! SM4
@@ -11218,7 +11196,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [03]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -11377,7 +11355,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                     %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                     %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                    %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                     %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                     %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                     %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -11399,7 +11377,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
@@ -11411,7 +11389,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                                    %! SM4
@@ -11424,7 +11402,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                         %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                         %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
+                        %@%             [03]                                                             %! MEASURE_INDEX_MARKUP:SM31
                         %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5

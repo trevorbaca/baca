@@ -56,7 +56,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                 %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -78,7 +78,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                     %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                     %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             m1                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
                     %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
             <BLANKLINE>
                         % GlobalSkips [measure 3]                                                    %! SM4
@@ -90,7 +90,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                     %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                     %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             m2                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
                     %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
             <BLANKLINE>
                         % GlobalSkips [measure 4]                                                    %! SM4
@@ -103,7 +103,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                     %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
                     %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
                     %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             m3                                                               %! MEASURE_INDEX_MARKUP:SM31
+                    %@%             [03]                                                             %! MEASURE_INDEX_MARKUP:SM31
                     %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
                         \override Score.BarLine.transparent = ##f                                    %! SM5
                         \bar "|"                                                                     %! SM5
@@ -217,7 +217,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                 %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -231,10 +231,9 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 %@%     {                                                            %! SPACING_MARKUP:HSS2
                                 %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                 %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                %@%                     (1/16)                                       %! SPACING_MARKUP:HSS2
+                                %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                %@%                 [1/16]                                           %! SPACING_MARKUP:HSS2
                                 %@%     }                                                            %! SPACING_MARKUP:HSS2
                                 }
                             }
@@ -254,16 +253,15 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m1                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! SPACING_MARKUP:HSS2
                                 %@%     {                                                            %! SPACING_MARKUP:HSS2
                                 %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                 %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                %@%                     (1/8)                                        %! SPACING_MARKUP:HSS2
+                                %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                %@%                 [1/8]                                            %! SPACING_MARKUP:HSS2
                                 %@%     }                                                            %! SPACING_MARKUP:HSS2
                                 }
                             }
@@ -283,16 +281,15 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m2                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [02]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! SPACING_MARKUP:HSS2
                                 %@%     {                                                            %! SPACING_MARKUP:HSS2
                                 %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                 %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                %@%                     (1/4)                                        %! SPACING_MARKUP:HSS2
+                                %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                %@%                 [1/4]                                            %! SPACING_MARKUP:HSS2
                                 %@%     }                                                            %! SPACING_MARKUP:HSS2
                                 }
                             }
@@ -313,16 +310,15 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m3                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [03]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! SPACING_MARKUP:HSS2
                                 %@%     {                                                            %! SPACING_MARKUP:HSS2
                                 %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                 %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                %@%                     (1/2)                                        %! SPACING_MARKUP:HSS2
+                                %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                %@%                 [1/2]                                            %! SPACING_MARKUP:HSS2
                                 %@%     }                                                            %! SPACING_MARKUP:HSS2
                                 }
                             }
@@ -440,7 +436,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                 %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -454,10 +450,9 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 %@%     {                                                            %! SPACING_MARKUP:HSS2
                                 %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                 %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                %@%                     (1/16)                                       %! SPACING_MARKUP:HSS2
+                                %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                %@%                 [1/16]                                           %! SPACING_MARKUP:HSS2
                                 %@%     }                                                            %! SPACING_MARKUP:HSS2
                                 }
                             }
@@ -477,16 +472,15 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m1                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! SPACING_MARKUP:HSS2
                                 %@%     {                                                            %! SPACING_MARKUP:HSS2
                                 %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                 %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                %@%                     (1/8)                                        %! SPACING_MARKUP:HSS2
+                                %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                %@%                 [1/8]                                            %! SPACING_MARKUP:HSS2
                                 %@%     }                                                            %! SPACING_MARKUP:HSS2
                                 }
                             }
@@ -506,16 +500,15 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m2                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [02]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! SPACING_MARKUP:HSS2
                                 %@%     {                                                            %! SPACING_MARKUP:HSS2
                                 %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                 %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                %@%                     (1/4)                                        %! SPACING_MARKUP:HSS2
+                                %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                %@%                 [1/4]                                            %! SPACING_MARKUP:HSS2
                                 %@%     }                                                            %! SPACING_MARKUP:HSS2
                                 }
                             }
@@ -536,16 +529,15 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m3                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [03]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! SPACING_MARKUP:HSS2
                                 %@%     {                                                            %! SPACING_MARKUP:HSS2
                                 %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                 %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                %@%                     (1/2)                                        %! SPACING_MARKUP:HSS2
+                                %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                %@%                 [1/2]                                            %! SPACING_MARKUP:HSS2
                                 %@%     }                                                            %! SPACING_MARKUP:HSS2
                                 }
                             }
@@ -664,7 +656,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                 %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -678,10 +670,9 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 %@%     {                                                            %! SPACING_MARKUP:HSS2
                                 %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                 %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                %@%                     (1/32)                                       %! SPACING_MARKUP:HSS2
+                                %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                %@%                 [1/32]                                           %! SPACING_MARKUP:HSS2
                                 %@%     }                                                            %! SPACING_MARKUP:HSS2
                                 }
                             }
@@ -701,16 +692,15 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m1                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! SPACING_MARKUP:HSS2
                                 %@%     {                                                            %! SPACING_MARKUP:HSS2
                                 %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                 %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                %@%                     (1/16)                                       %! SPACING_MARKUP:HSS2
+                                %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                %@%                 [1/16]                                           %! SPACING_MARKUP:HSS2
                                 %@%     }                                                            %! SPACING_MARKUP:HSS2
                                 }
                             }
@@ -730,16 +720,15 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m2                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [02]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! SPACING_MARKUP:HSS2
                                 %@%     {                                                            %! SPACING_MARKUP:HSS2
                                 %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                 %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                %@%                     (1/8)                                        %! SPACING_MARKUP:HSS2
+                                %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                %@%                 [1/8]                                            %! SPACING_MARKUP:HSS2
                                 %@%     }                                                            %! SPACING_MARKUP:HSS2
                                 }
                             }
@@ -760,16 +749,15 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m3                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [03]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! SPACING_MARKUP:HSS2
                                 %@%     {                                                            %! SPACING_MARKUP:HSS2
                                 %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                 %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                %@%                     (1/4)                                        %! SPACING_MARKUP:HSS2
+                                %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                %@%                 [1/4]                                            %! SPACING_MARKUP:HSS2
                                 %@%     }                                                            %! SPACING_MARKUP:HSS2
                                 }
                             }
@@ -889,7 +877,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                 %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -903,10 +891,9 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 %@%     {                                                            %! SPACING_MARKUP:HSS2
                                 %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                 %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                %@%                     (1/32)                                       %! SPACING_MARKUP:HSS2
+                                %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                %@%                 [1/32]                                           %! SPACING_MARKUP:HSS2
                                 %@%     }                                                            %! SPACING_MARKUP:HSS2
                                 }
                             }
@@ -926,16 +913,15 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m1                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! SPACING_MARKUP:HSS2
                                 %@%     {                                                            %! SPACING_MARKUP:HSS2
                                 %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                 %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                %@%                     (1/16)                                       %! SPACING_MARKUP:HSS2
+                                %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                %@%                 [1/16]                                           %! SPACING_MARKUP:HSS2
                                 %@%     }                                                            %! SPACING_MARKUP:HSS2
                                 }
                             }
@@ -955,16 +941,15 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m2                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [02]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! SPACING_MARKUP:HSS2
                                 %@%     {                                                            %! SPACING_MARKUP:HSS2
                                 %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                 %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                %@%                     (1/16)                                       %! SPACING_MARKUP:HSS2
+                                %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                %@%                 [1/16]                                           %! SPACING_MARKUP:HSS2
                                 %@%     }                                                            %! SPACING_MARKUP:HSS2
                                 }
                             }
@@ -985,16 +970,15 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m3                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [03]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! SPACING_MARKUP:HSS2
                                 %@%     {                                                            %! SPACING_MARKUP:HSS2
                                 %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                 %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                %@%                     (1/16)                                       %! SPACING_MARKUP:HSS2
+                                %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                %@%                 [1/16]                                           %! SPACING_MARKUP:HSS2
                                 %@%     }                                                            %! SPACING_MARKUP:HSS2
                                 }
                             }
@@ -1124,7 +1108,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m0                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
                                 %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
@@ -1138,10 +1122,9 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 %@%     {                                                            %! SPACING_MARKUP:HSS2
                                 %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                 %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                %@%                     (1/16)                                       %! SPACING_MARKUP:HSS2
+                                %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                %@%                 [1/16]                                           %! SPACING_MARKUP:HSS2
                                 %@%     }                                                            %! SPACING_MARKUP:HSS2
                                 }
                             }
@@ -1162,16 +1145,15 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                                 %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
                                 %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
                                 %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
-                                %@%                 m1                                               %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
                                 %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
                                 %@% \line                                                            %! SPACING_MARKUP:HSS2
                                 %@%     {                                                            %! SPACING_MARKUP:HSS2
                                 %@%         \with-color                                              %! SPACING_MARKUP:HSS2
                                 %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
-                                %@%             \bold                                                %! SPACING_MARKUP:HSS2
-                                %@%                 \fontsize                                        %! SPACING_MARKUP:HSS2
-                                %@%                     #3                                           %! SPACING_MARKUP:HSS2
-                                %@%                     (1/16)                                       %! SPACING_MARKUP:HSS2
+                                %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                %@%                 [1/16]                                           %! SPACING_MARKUP:HSS2
                                 %@%     }                                                            %! SPACING_MARKUP:HSS2
                                 }
                             }
@@ -1358,8 +1340,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             spacing_section = baca.SpacingSection(duration)
             tag = baca.tags.SPACING
             abjad.attach(spacing_section, skip, site='HSS1', tag=tag)
-            markup = abjad.Markup(f'({duration!s})')
-            markup = markup.fontsize(3).bold()
+            markup = abjad.Markup(f'[{duration!s}]')
+            markup = markup.fontsize(3)
             markup = markup.with_color(abjad.SchemeColor('DarkCyan'))
             markup = abjad.new(markup, direction=abjad.Up)
             tag = baca.tags.SPACING_MARKUP
