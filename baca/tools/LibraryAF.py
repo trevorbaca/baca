@@ -747,14 +747,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
             ...     )
 
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     remove=[
-            ...         baca.tags.FIGURE_NAME_MARKUP,
-            ...         baca.tags.SPACING_MARKUP,
-            ...         baca.tags.STAGE_NUMBER_MARKUP,
-            ...         ],
-            ...     )
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -779,13 +772,35 @@ class LibraryAF(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/12]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -793,13 +808,27 @@ class LibraryAF(abjad.AbjadObject):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/12]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -807,13 +836,27 @@ class LibraryAF(abjad.AbjadObject):
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [02]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/12]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -822,13 +865,27 @@ class LibraryAF(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [03]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [03]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/12]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -2846,14 +2903,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_signatures=accumulator.time_signatures,
             ...     )
             >>> accumulator.populate_segment_maker(maker)
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     remove=[
-            ...         baca.tags.FIGURE_NAME_MARKUP,
-            ...         baca.tags.SPACING_MARKUP,
-            ...         baca.tags.STAGE_NUMBER_MARKUP,
-            ...         ],
-            ...     )
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -2879,13 +2929,35 @@ class LibraryAF(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 5/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/12]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -2894,13 +2966,27 @@ class LibraryAF(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/12]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -2935,6 +3021,24 @@ class LibraryAF(abjad.AbjadObject):
                                             ^ \markup {
                                                 \column
                                                     {
+                                                        \line                                            %! FIGURE_NAME_MARKUP
+                                                            {                                            %! FIGURE_NAME_MARKUP
+                                                                \fontsize                                %! FIGURE_NAME_MARKUP
+                                                                    #2                                   %! FIGURE_NAME_MARKUP
+                                                                    \concat                              %! FIGURE_NAME_MARKUP
+                                                                        {                                %! FIGURE_NAME_MARKUP
+                                                                            [                            %! FIGURE_NAME_MARKUP
+                                                                            vn.1                         %! FIGURE_NAME_MARKUP
+                                                                            \hspace                      %! FIGURE_NAME_MARKUP
+                                                                                #1                       %! FIGURE_NAME_MARKUP
+                                                                            \raise                       %! FIGURE_NAME_MARKUP
+                                                                                #0.25                    %! FIGURE_NAME_MARKUP
+                                                                                \fontsize                %! FIGURE_NAME_MARKUP
+                                                                                    #-2                  %! FIGURE_NAME_MARKUP
+                                                                                    (None)               %! FIGURE_NAME_MARKUP
+                                                                            ]                            %! FIGURE_NAME_MARKUP
+                                                                        }                                %! FIGURE_NAME_MARKUP
+                                                            }                                            %! FIGURE_NAME_MARKUP
                                                     %@% \line                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
                                                     %@%     {                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
                                                     %@%         \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM10
@@ -3005,6 +3109,23 @@ class LibraryAF(abjad.AbjadObject):
                 <BLANKLINE>
                                             % ViolinMusicVoice [measure 2]                               %! SM4
                                             ef''8
+                                            ^ \markup {                                                  %! FIGURE_NAME_MARKUP
+                                                \fontsize                                                %! FIGURE_NAME_MARKUP
+                                                    #2                                                   %! FIGURE_NAME_MARKUP
+                                                    \concat                                              %! FIGURE_NAME_MARKUP
+                                                        {                                                %! FIGURE_NAME_MARKUP
+                                                            [                                            %! FIGURE_NAME_MARKUP
+                                                            vn.2                                         %! FIGURE_NAME_MARKUP
+                                                            \hspace                                      %! FIGURE_NAME_MARKUP
+                                                                #1                                       %! FIGURE_NAME_MARKUP
+                                                            \raise                                       %! FIGURE_NAME_MARKUP
+                                                                #0.25                                    %! FIGURE_NAME_MARKUP
+                                                                \fontsize                                %! FIGURE_NAME_MARKUP
+                                                                    #-2                                  %! FIGURE_NAME_MARKUP
+                                                                    (None)                               %! FIGURE_NAME_MARKUP
+                                                            ]                                            %! FIGURE_NAME_MARKUP
+                                                        }                                                %! FIGURE_NAME_MARKUP
+                                                }                                                        %! FIGURE_NAME_MARKUP
                 <BLANKLINE>
                                         }
                                     }
@@ -3038,6 +3159,24 @@ class LibraryAF(abjad.AbjadObject):
                                             ^ \markup {
                                                 \column
                                                     {
+                                                        \line                                            %! FIGURE_NAME_MARKUP
+                                                            {                                            %! FIGURE_NAME_MARKUP
+                                                                \fontsize                                %! FIGURE_NAME_MARKUP
+                                                                    #2                                   %! FIGURE_NAME_MARKUP
+                                                                    \concat                              %! FIGURE_NAME_MARKUP
+                                                                        {                                %! FIGURE_NAME_MARKUP
+                                                                            [                            %! FIGURE_NAME_MARKUP
+                                                                            va.1                         %! FIGURE_NAME_MARKUP
+                                                                            \hspace                      %! FIGURE_NAME_MARKUP
+                                                                                #1                       %! FIGURE_NAME_MARKUP
+                                                                            \raise                       %! FIGURE_NAME_MARKUP
+                                                                                #0.25                    %! FIGURE_NAME_MARKUP
+                                                                                \fontsize                %! FIGURE_NAME_MARKUP
+                                                                                    #-2                  %! FIGURE_NAME_MARKUP
+                                                                                    (None)               %! FIGURE_NAME_MARKUP
+                                                                            ]                            %! FIGURE_NAME_MARKUP
+                                                                        }                                %! FIGURE_NAME_MARKUP
+                                                            }                                            %! FIGURE_NAME_MARKUP
                                                     %@% \line                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
                                                     %@%     {                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
                                                     %@%         \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM10
@@ -3248,14 +3387,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     time_signatures=accumulator.time_signatures,
             ...     )
             >>> accumulator.populate_segment_maker(maker)
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     remove=[
-            ...         baca.tags.FIGURE_NAME_MARKUP,
-            ...         baca.tags.SPACING_MARKUP,
-            ...         baca.tags.STAGE_NUMBER_MARKUP,
-            ...         ],
-            ...     )
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -3281,13 +3413,35 @@ class LibraryAF(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 5/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/12]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -3296,13 +3450,27 @@ class LibraryAF(abjad.AbjadObject):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/12]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -3337,6 +3505,24 @@ class LibraryAF(abjad.AbjadObject):
                                             ^ \markup {
                                                 \column
                                                     {
+                                                        \line                                            %! FIGURE_NAME_MARKUP
+                                                            {                                            %! FIGURE_NAME_MARKUP
+                                                                \fontsize                                %! FIGURE_NAME_MARKUP
+                                                                    #2                                   %! FIGURE_NAME_MARKUP
+                                                                    \concat                              %! FIGURE_NAME_MARKUP
+                                                                        {                                %! FIGURE_NAME_MARKUP
+                                                                            [                            %! FIGURE_NAME_MARKUP
+                                                                            vn.1                         %! FIGURE_NAME_MARKUP
+                                                                            \hspace                      %! FIGURE_NAME_MARKUP
+                                                                                #1                       %! FIGURE_NAME_MARKUP
+                                                                            \raise                       %! FIGURE_NAME_MARKUP
+                                                                                #0.25                    %! FIGURE_NAME_MARKUP
+                                                                                \fontsize                %! FIGURE_NAME_MARKUP
+                                                                                    #-2                  %! FIGURE_NAME_MARKUP
+                                                                                    (None)               %! FIGURE_NAME_MARKUP
+                                                                            ]                            %! FIGURE_NAME_MARKUP
+                                                                        }                                %! FIGURE_NAME_MARKUP
+                                                            }                                            %! FIGURE_NAME_MARKUP
                                                     %@% \line                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
                                                     %@%     {                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
                                                     %@%         \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM10
@@ -3407,6 +3593,23 @@ class LibraryAF(abjad.AbjadObject):
                 <BLANKLINE>
                                             % ViolinMusicVoice [measure 2]                               %! SM4
                                             ef''8
+                                            ^ \markup {                                                  %! FIGURE_NAME_MARKUP
+                                                \fontsize                                                %! FIGURE_NAME_MARKUP
+                                                    #2                                                   %! FIGURE_NAME_MARKUP
+                                                    \concat                                              %! FIGURE_NAME_MARKUP
+                                                        {                                                %! FIGURE_NAME_MARKUP
+                                                            [                                            %! FIGURE_NAME_MARKUP
+                                                            vn.2                                         %! FIGURE_NAME_MARKUP
+                                                            \hspace                                      %! FIGURE_NAME_MARKUP
+                                                                #1                                       %! FIGURE_NAME_MARKUP
+                                                            \raise                                       %! FIGURE_NAME_MARKUP
+                                                                #0.25                                    %! FIGURE_NAME_MARKUP
+                                                                \fontsize                                %! FIGURE_NAME_MARKUP
+                                                                    #-2                                  %! FIGURE_NAME_MARKUP
+                                                                    (None)                               %! FIGURE_NAME_MARKUP
+                                                            ]                                            %! FIGURE_NAME_MARKUP
+                                                        }                                                %! FIGURE_NAME_MARKUP
+                                                }                                                        %! FIGURE_NAME_MARKUP
                 <BLANKLINE>
                                         }
                                     }
@@ -3439,6 +3642,24 @@ class LibraryAF(abjad.AbjadObject):
                                             ^ \markup {
                                                 \column
                                                     {
+                                                        \line                                            %! FIGURE_NAME_MARKUP
+                                                            {                                            %! FIGURE_NAME_MARKUP
+                                                                \fontsize                                %! FIGURE_NAME_MARKUP
+                                                                    #2                                   %! FIGURE_NAME_MARKUP
+                                                                    \concat                              %! FIGURE_NAME_MARKUP
+                                                                        {                                %! FIGURE_NAME_MARKUP
+                                                                            [                            %! FIGURE_NAME_MARKUP
+                                                                            va.1                         %! FIGURE_NAME_MARKUP
+                                                                            \hspace                      %! FIGURE_NAME_MARKUP
+                                                                                #1                       %! FIGURE_NAME_MARKUP
+                                                                            \raise                       %! FIGURE_NAME_MARKUP
+                                                                                #0.25                    %! FIGURE_NAME_MARKUP
+                                                                                \fontsize                %! FIGURE_NAME_MARKUP
+                                                                                    #-2                  %! FIGURE_NAME_MARKUP
+                                                                                    (None)               %! FIGURE_NAME_MARKUP
+                                                                            ]                            %! FIGURE_NAME_MARKUP
+                                                                        }                                %! FIGURE_NAME_MARKUP
+                                                            }                                            %! FIGURE_NAME_MARKUP
                                                     %@% \line                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
                                                     %@%     {                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
                                                     %@%         \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM10

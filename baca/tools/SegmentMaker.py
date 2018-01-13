@@ -25,10 +25,7 @@ class SegmentMaker(abjad.SegmentMaker):
         ...     baca.make_even_runs(),
         ...     )
 
-        >>> lilypond_file = maker.run(
-        ...     environment='docs',
-        ...     remove=[baca.tags.STAGE_NUMBER_MARKUP],
-        ...     )
+        >>> lilypond_file = maker.run(environment='docs')
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -51,13 +48,27 @@ class SegmentMaker(abjad.SegmentMaker):
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
                         \startTextSpan                                                               %! SM29
-                    %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                    %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                    %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                    %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                    %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                    %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                        ^ \markup {
+                            \column
+                                {
+                                %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                }
+                            }
             <BLANKLINE>
                         % GlobalSkips [measure 2]                                                    %! SM4
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
@@ -2361,13 +2372,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
 
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     remove=[
-            ...         baca.tags.SPACING_MARKUP,
-            ...         baca.tags.STAGE_NUMBER_MARKUP,
-            ...         ],
-            ...     )
+            >>> lilypond_file = maker.run(environment='docs')
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(0, block)
@@ -2400,13 +2405,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -2418,13 +2445,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -2472,13 +2513,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.clef('treble'),
             ...     )
 
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     remove=[
-            ...         baca.tags.SPACING_MARKUP,
-            ...         baca.tags.STAGE_NUMBER_MARKUP,
-            ...         ],
-            ...     )
+            >>> lilypond_file = maker.run(environment='docs')
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(0, block)
@@ -2511,13 +2546,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -2529,13 +2586,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -2594,10 +2665,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=[
-            ...         baca.tags.SPACING_MARKUP,
-            ...         baca.tags.STAGE_NUMBER_MARKUP,
-            ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -2633,13 +2700,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [A.1]                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -2651,13 +2740,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -2714,10 +2817,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=[
-            ...         baca.tags.SPACING_MARKUP,
-            ...         baca.tags.STAGE_NUMBER_MARKUP,
-            ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -2754,13 +2853,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [A.1]                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -2772,13 +2893,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -2826,13 +2961,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.clef('treble', baca.leaf(0)),
             ...     baca.clef('treble', baca.leaf(1)),
             ...     )
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     remove=(
-            ...         baca.tags.SPACING_MARKUP,
-            ...         baca.tags.STAGE_NUMBER_MARKUP,
-            ...         ),
-            ...     )
+            >>> lilypond_file = maker.run(environment='docs')
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(0, block)
@@ -2866,13 +2995,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -2880,13 +3031,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! +SEGMENT:LAYOUT:LMM2
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -2898,13 +3063,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [02]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -2971,10 +3150,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=(
-            ...         baca.tags.SPACING_MARKUP,
-            ...         baca.tags.STAGE_NUMBER_MARKUP,
-            ...         ),
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -3011,13 +3186,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [A.1]                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -3029,13 +3226,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -4085,13 +4296,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_notes(),
             ...     )
 
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     remove=[
-            ...         baca.tags.SPACING_MARKUP,
-            ...         baca.tags.STAGE_NUMBER_MARKUP,
-            ...         ],
-            ...     )
+            >>> lilypond_file = maker.run(environment='docs')
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(0, block)
@@ -4119,13 +4324,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -4133,13 +4360,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -4189,10 +4430,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=[
-            ...         baca.tags.SPACING_MARKUP,
-            ...         baca.tags.STAGE_NUMBER_MARKUP,
-            ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -4223,13 +4460,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [A.1]                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -4237,13 +4496,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -4294,10 +4567,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=[
-            ...         baca.tags.SPACING_MARKUP,
-            ...         baca.tags.STAGE_NUMBER_MARKUP,
-            ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -4328,13 +4597,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [A.1]                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -4342,13 +4633,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -4388,13 +4693,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.dynamic('f', baca.leaf(1)),
             ...     )
 
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     remove=[
-            ...         baca.tags.SPACING_MARKUP,
-            ...         baca.tags.STAGE_NUMBER_MARKUP,
-            ...         ],
-            ...     )
+            >>> lilypond_file = maker.run(environment='docs')
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(0, block)
@@ -4422,13 +4721,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -4436,13 +4757,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -4494,10 +4829,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=[
-            ...         baca.tags.SPACING_MARKUP,
-            ...         baca.tags.STAGE_NUMBER_MARKUP,
-            ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -4528,13 +4859,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [A.1]                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -4542,13 +4895,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -4586,13 +4953,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.dynamic('sfz', baca.leaf(1)),
             ...     )
 
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     remove=[
-            ...         baca.tags.SPACING_MARKUP,
-            ...         baca.tags.STAGE_NUMBER_MARKUP,
-            ...         ],
-            ...     )
+            >>> lilypond_file = maker.run(environment='docs')
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(0, block)
@@ -4620,13 +4981,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -4634,13 +5017,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -4692,10 +5089,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=[
-            ...         baca.tags.SPACING_MARKUP,
-            ...         baca.tags.STAGE_NUMBER_MARKUP,
-            ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -4726,13 +5119,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [A.1]                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -4740,13 +5155,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -6704,10 +7133,6 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         [9, 50, (7,)],
             ...         ),
             ...     )
-            >>> remove = [
-            ...     baca.tags.SPACING_MARKUP,
-            ...     baca.tags.STAGE_NUMBER_MARKUP,
-            ...     ]
 
         ..  container:: example
 
@@ -6735,10 +7160,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_notes(),
             ...     )
 
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     remove=remove,
-            ...     )
+            >>> lilypond_file = maker.run(environment='docs')
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(0, block)
@@ -6771,13 +7193,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -6789,13 +7233,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -6883,10 +7341,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_notes(),
             ...     )
 
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     remove=remove,
-            ...     )
+            >>> lilypond_file = maker.run(environment='docs')
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(0, block)
@@ -6919,13 +7374,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -6937,13 +7414,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7042,7 +7533,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=remove,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -7078,13 +7568,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [A.1]                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -7096,13 +7608,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7196,7 +7722,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=remove,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -7232,13 +7757,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [A.1]                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -7250,13 +7797,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7348,10 +7909,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_notes(),
             ...     )
 
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     remove=remove,
-            ...     )
+            >>> lilypond_file = maker.run(environment='docs')
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(0, block)
@@ -7384,13 +7942,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! +SEGMENT:LAYOUT:LMM3
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -7398,13 +7978,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! +SEGMENT:LAYOUT:LMM2
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -7416,13 +8010,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! +SEGMENT:LAYOUT:LMM3
                             s1 * 1/2
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [02]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7567,7 +8175,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=remove,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -7603,13 +8210,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [A.1]                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -7621,13 +8250,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7760,10 +8403,6 @@ class SegmentMaker(abjad.SegmentMaker):
             ...         [2, 20, (11,)],
             ...         ),
             ...     )
-            >>> remove = [
-            ...     baca.tags.SPACING_MARKUP,
-            ...     baca.tags.STAGE_NUMBER_MARKUP,
-            ...     ]
 
         ..  container:: example
 
@@ -7789,10 +8428,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_notes(),
             ...     )
 
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     remove=remove,
-            ...     )
+            >>> lilypond_file = maker.run(environment='docs')
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(0, block)
@@ -7825,13 +8461,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -7843,13 +8501,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7931,10 +8603,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_notes(),
             ...     )
 
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     remove=remove,
-            ...     )
+            >>> lilypond_file = maker.run(environment='docs')
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(0, block)
@@ -7967,13 +8636,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -7985,13 +8676,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -8084,7 +8789,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=remove,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -8120,13 +8824,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [A.1]                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -8138,13 +8864,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -8238,7 +8978,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=remove,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -8274,13 +9013,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [A.1]                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -8292,13 +9053,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -8390,10 +9165,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_notes(),
             ...     )
 
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     remove=remove,
-            ...     )
+            >>> lilypond_file = maker.run(environment='docs')
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(0, block)
@@ -8426,13 +9198,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! +SEGMENT:LAYOUT:LMM3
                             s1 * 1/2
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -8440,13 +9234,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \noBreak                                                                     %! +SEGMENT:LAYOUT:LMM2
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -8458,13 +9266,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! +SEGMENT:LAYOUT:LMM3
                             s1 * 1/2
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [02]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -8609,7 +9431,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=remove,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -8645,13 +9466,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [A.1]                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -8663,13 +9506,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \break                                                                       %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -8970,10 +9827,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_even_runs(),
             ...     )
 
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     remove=[baca.tags.CLOCK_TIME_MARKUP],
-            ...     )
+            >>> lilypond_file = maker.run(environment='docs')
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -9060,6 +9914,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                     %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
                                     %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
                                     %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     {                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%         \with-color                                              %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             #(x11-color 'DarkCyan)                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             \fontsize                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 #3                                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 [0'00'']                                         %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     }                                                            %! CLOCK_TIME_MARKUP:SM28
                                     }
                                 }
                 <BLANKLINE>
@@ -9067,38 +9929,80 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     {                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%         \with-color                                              %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             #(x11-color 'DarkCyan)                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             \fontsize                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 #3                                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 [0'01'']                                         %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     }                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [02]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [02]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     {                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%         \with-color                                              %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             #(x11-color 'DarkCyan)                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             \fontsize                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 #3                                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 [0'02'']                                         %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     }                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 4]                                                    %! SM4
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [03]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [03]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     {                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%         \with-color                                              %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             #(x11-color 'DarkCyan)                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             \fontsize                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 #3                                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 [0'03'']                                         %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     }                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -9187,12 +10091,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> metronome_marks = abjad.MetronomeMarkDictionary()
             >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
             >>> metronome_marks['112'] = abjad.MetronomeMark((1, 4), 112)
-            >>> remove = [
-            ...     baca.tags.CLOCK_TIME_MARKUP,
-            ...     baca.tags.EMPTY_START_BAR,
-            ...     baca.tags.SPACING_MARKUP,
-            ...     baca.tags.STAGE_NUMBER_MARKUP,
-            ...     ]
 
         ..  container:: example
 
@@ -9215,10 +10113,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_notes(),
             ...     )
 
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     remove=remove,
-            ...     )
+            >>> lilypond_file = maker.run(environment='docs')
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(0, block)
@@ -9296,13 +10191,43 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/25]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    %@% \line                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     {                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%         \with-color                                              %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             #(x11-color 'DarkCyan)                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             \fontsize                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 #3                                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 [0'00'']                                         %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     }                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -9311,13 +10236,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/25]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    %@% \line                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     {                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%         \with-color                                              %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             #(x11-color 'DarkCyan)                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             \fontsize                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 #3                                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 [0'00'']                                         %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     }                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -9371,7 +10318,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=remove,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -9453,13 +10399,43 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [A.1]                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    %@% \line                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     {                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%         \with-color                                              %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             #(x11-color 'DarkCyan)                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             \fontsize                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 #3                                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 [0'00'']                                         %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     }                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -9468,13 +10444,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    %@% \line                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     {                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%         \with-color                                              %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             #(x11-color 'DarkCyan)                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             \fontsize                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 #3                                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 [0'00'']                                         %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     }                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    }
+                                }
                             \revert TextSpanner.staff-padding                                            %! OC
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -9530,7 +10528,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=remove,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -9612,13 +10609,43 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [A.1]                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    %@% \line                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     {                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%         \with-color                                              %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             #(x11-color 'DarkCyan)                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             \fontsize                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 #3                                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 [0'00'']                                         %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     }                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -9627,13 +10654,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    %@% \line                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     {                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%         \with-color                                              %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             #(x11-color 'DarkCyan)                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             \fontsize                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 #3                                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 [0'01'']                                         %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     }                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    }
+                                }
                             \revert TextSpanner.staff-padding                                            %! OC
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -9677,10 +10726,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.make_notes(),
             ...     )
 
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     remove=remove,
-            ...     )
+            >>> lilypond_file = maker.run(environment='docs')
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(0, block)
@@ -9810,13 +10856,43 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    %@% \line                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     {                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%         \with-color                                              %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             #(x11-color 'DarkCyan)                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             \fontsize                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 #3                                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 [0'00'']                                         %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     }                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -9828,13 +10904,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    %@% \line                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     {                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%         \with-color                                              %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             #(x11-color 'DarkCyan)                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             \fontsize                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 #3                                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 [0'00'']                                         %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     }                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -9888,7 +10986,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=remove,
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -9970,13 +11067,43 @@ class SegmentMaker(abjad.SegmentMaker):
                             \pageBreak                                                                   %! +SEGMENT:LAYOUT:LMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [A.1]                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    %@% \line                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     {                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%         \with-color                                              %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             #(x11-color 'DarkCyan)                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             \fontsize                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 #3                                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 [0'00'']                                         %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     }                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -9985,13 +11112,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    %@% \line                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     {                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%         \with-color                                              %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             #(x11-color 'DarkCyan)                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%             \fontsize                                            %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 #3                                               %! CLOCK_TIME_MARKUP:SM28
+                                    %@%                 [0'00'']                                         %! CLOCK_TIME_MARKUP:SM28
+                                    %@%     }                                                            %! CLOCK_TIME_MARKUP:SM28
+                                    }
+                                }
                             \revert TextSpanner.staff-padding                                            %! OC
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -10395,13 +11544,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.staff_lines(5),
             ...     )
 
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     remove=[
-            ...         baca.tags.SPACING_MARKUP,
-            ...         baca.tags.STAGE_NUMBER_MARKUP,
-            ...         ],
-            ...     )
+            >>> lilypond_file = maker.run(environment='docs')
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(0, block)
@@ -10429,13 +11572,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -10443,13 +11608,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -10501,10 +11680,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=[
-            ...         baca.tags.SPACING_MARKUP,
-            ...         baca.tags.STAGE_NUMBER_MARKUP,
-            ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -10535,13 +11710,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [A.1]                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -10549,13 +11746,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -10608,10 +11819,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=[
-            ...         baca.tags.SPACING_MARKUP,
-            ...         baca.tags.STAGE_NUMBER_MARKUP,
-            ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -10642,13 +11849,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [A.1]                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -10656,13 +11885,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -10704,13 +11947,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     baca.staff_lines(5, baca.leaf(1)),
             ...     )
 
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     remove=[
-            ...         baca.tags.SPACING_MARKUP,
-            ...         baca.tags.STAGE_NUMBER_MARKUP,
-            ...         ],
-            ...     )
+            >>> lilypond_file = maker.run(environment='docs')
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
             >>> lilypond_file.items.insert(0, block)
@@ -10738,13 +11975,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [1]                                              %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -10752,13 +12011,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -10814,10 +12087,6 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> lilypond_file = maker.run(
             ...     environment='docs',
             ...     previous_metadata=metadata,
-            ...     remove=[
-            ...         baca.tags.SPACING_MARKUP,
-            ...         baca.tags.STAGE_NUMBER_MARKUP,
-            ...         ],
             ...     )
             >>> block = abjad.Block(name='layout')
             >>> block.indent = 0
@@ -10848,13 +12117,35 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [00]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [00]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     {                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%         \fontsize                                                %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             #3                                                   %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%             \with-color                                          %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 #(x11-color 'DarkCyan)                           %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%                 [A.1]                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@%     }                                                            %! STAGE_NUMBER_MARKUP:SM3
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
@@ -10862,13 +12153,27 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                        %@% ^ \markup {                                                                  %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     \fontsize                                                                %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         #3                                                                   %! MEASURE_INDEX_MARKUP:SM31
-                        %@%         \with-color                                                          %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             #(x11-color 'DarkCyan)                                           %! MEASURE_INDEX_MARKUP:SM31
-                        %@%             [01]                                                             %! MEASURE_INDEX_MARKUP:SM31
-                        %@%     }                                                                        %! MEASURE_INDEX_MARKUP:SM31
+                            ^ \markup {
+                                \column
+                                    {
+                                    %@% \line                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     {                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%         \fontsize                                                %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             #3                                                   %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%             \with-color                                          %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 #(x11-color 'DarkCyan)                           %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%                 [01]                                             %! MEASURE_INDEX_MARKUP:SM31
+                                    %@%     }                                                            %! MEASURE_INDEX_MARKUP:SM31
+                                    %@% \line                                                            %! SPACING_MARKUP:HSS2
+                                    %@%     {                                                            %! SPACING_MARKUP:HSS2
+                                    %@%         \with-color                                              %! SPACING_MARKUP:HSS2
+                                    %@%             #(x11-color 'DarkCyan)                               %! SPACING_MARKUP:HSS2
+                                    %@%             \fontsize                                            %! SPACING_MARKUP:HSS2
+                                    %@%                 #3                                               %! SPACING_MARKUP:HSS2
+                                    %@%                 [1/24]                                           %! SPACING_MARKUP:HSS2
+                                    %@%     }                                                            %! SPACING_MARKUP:HSS2
+                                    }
+                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
