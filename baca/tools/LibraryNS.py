@@ -4355,14 +4355,12 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def spacing(duration, eol:bool=False, selector='baca.leaf(0)'):
+    def spacing(duration, selector='baca.leaf(0)'):
         r'''Creates new spacing section and sets proportional notation
         duration to `duration`.
         '''
-        assert eol in (True, False)
         return baca.SpacingOverrideCommand(
             duration=duration,
-            eol=eol,
             selector=selector,
             )
 

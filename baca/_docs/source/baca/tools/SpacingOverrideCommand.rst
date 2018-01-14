@@ -25,7 +25,6 @@ Bases
 
       ~baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.build
       ~baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.duration
-      ~baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.eol
       ~baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.selector
       ~baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.site
       ~baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.tag
@@ -41,8 +40,6 @@ Read-only properties
 .. autoattribute:: baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.build
 
 .. autoattribute:: baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.duration
-
-.. autoattribute:: baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.eol
 
 .. only:: html
 

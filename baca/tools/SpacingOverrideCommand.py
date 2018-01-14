@@ -18,22 +18,18 @@ class SpacingOverrideCommand(Command):
     __slots__ = (
         '_build',
         '_duration',
-        '_eol',
         )
 
     _magic_lilypond_eol_adjustment = abjad.Multiplier(35, 24)
 
     ### INITIALIZER ###
 
-    def __init__(self, duration=None, eol=None, selector='baca.leaf(0)'):
+    def __init__(self, duration=None, selector='baca.leaf(0)'):
         Command.__init__(self, selector=selector)
         if duration is not None:
             duration = abjad.NonreducedFraction(duration)
         self._build = None
         self._duration = duration
-        if eol is not None:
-            eol = bool(eol)
-        self._eol = eol
 
     ### SPECIAL METHODS ###
 
@@ -48,12 +44,22 @@ class SpacingOverrideCommand(Command):
             argument = self.selector(argument)
         leaf = baca.select(argument).leaf(0)
         assert isinstance(leaf, abjad.Skip), repr(leaf)
+        self._attach_spacing_override(leaf, self.duration, build=self.build)
+
+    ### PRIVATE METHODS ###
+
+    @staticmethod
+    def _attach_spacing_override(leaf, duration, build=None, eol=None):
+        assert isinstance(leaf, abjad.Skip), repr(leaf)
         # overriding spacing for just one build:
-        if self.build:
-            include_build_tag = baca.tags.only(self.build)
+        if build:
+            include_build_tag = baca.tags.only(build)
             for wrapper in abjad.inspect(leaf).wrappers(baca.SpacingSection):
                 assert isinstance(wrapper.tag, str)
                 if include_build_tag in wrapper.tag.split(':'):
+                    if eol:
+                        # automatic eol defers to explicit user override
+                        return
                     message = 'already have {} spacing override.'
                     message = message.format(include_build_tag)
                     raise Exception(message)
@@ -64,6 +70,9 @@ class SpacingOverrideCommand(Command):
                 if baca.tags.SPACING_OVERRIDE_MARKUP not in words:
                     continue
                 if include_build_tag in words:
+                    if eol:
+                        # automatic eol defers to explicit user override
+                        return
                     message = 'already have {} spacing override markup.'
                     message = message.format(include_build_tag)
                     raise Exception(message)
@@ -78,13 +87,15 @@ class SpacingOverrideCommand(Command):
                     continue
                 if baca.tags.SPACING_MARKUP in wrapper.tag.split(':'):
                     abjad.detach(wrapper, leaf)
-        duration = self.duration
-        if self.eol:
-            duration *= self._magic_lilypond_eol_adjustment
+        if eol:
+            duration *= SpacingOverrideCommand._magic_lilypond_eol_adjustment
         spacing_section = baca.SpacingSection(duration=duration)
-        tag, deactivate = baca.tags.SPACING_OVERRIDE, None
-        if self.build:
-            tag = baca.tags.only(self.build, tag)
+        if build is None:
+            tag = baca.tags.SPACING
+            deactivate = None
+        else:
+            tag = baca.tags.SPACING_OVERRIDE
+            tag = baca.tags.only(build, tag)
             deactivate = True
         abjad.attach(
             spacing_section,
@@ -93,22 +104,22 @@ class SpacingOverrideCommand(Command):
             site='SOC1',
             tag=tag,
             )
-        if self.eol:
+        if eol:
             markup = abjad.Markup(f'[[{duration!s}]]')
         else:
             markup = abjad.Markup(f'[{duration!s}]')
         markup = markup.fontsize(3)
-        if self.build is None:
+        if build is None:
             color = 'BlueViolet'
-        elif self.eol:
+        elif eol:
             color = 'DarkOrange'
         else:
             color = 'DeepPink1'
         markup = markup.with_color(abjad.SchemeColor(color))
         markup = abjad.new(markup, direction=abjad.Up)
         tag, deactivate = baca.tags.SPACING_OVERRIDE_MARKUP, None
-        if self.build:
-            tag = baca.tags.only(self.build, tag)
+        if build:
+            tag = baca.tags.only(build, tag)
             deactivate = True
         abjad.attach(
             markup,
@@ -117,14 +128,14 @@ class SpacingOverrideCommand(Command):
             site='SOC2',
             tag=tag,
             )
-        # overriding spacing for just one build:
-        if self.build:
-            self._exclude_other_spacing_sections_from_build(self.build, leaf)
-            self._exclude_other_spacing_markup_from_build(self.build, leaf)
+        # if overriding spacing for just one build:
+        if build:
+            class_ = SpacingOverrideCommand
+            class_._exclude_other_spacing_sections_from_build(build, leaf)
+            class_._exclude_other_spacing_markup_from_build(build, leaf)
 
-    ### PRIVATE METHODS ###
-
-    def _exclude_other_spacing_sections_from_build(self, build, leaf):
+    @staticmethod
+    def _exclude_other_spacing_sections_from_build(build, leaf):
         my_build = baca.tags.only(build)
         for wrapper in abjad.inspect(leaf).wrappers(baca.SpacingSection):
             assert isinstance(wrapper.tag, str)
@@ -132,7 +143,8 @@ class SpacingOverrideCommand(Command):
                 continue
             wrapper._tag = baca.tags.forbid(build, wrapper.tag)
 
-    def _exclude_other_spacing_markup_from_build(self, build, leaf):
+    @staticmethod
+    def _exclude_other_spacing_markup_from_build(build, leaf):
         tags = (baca.tags.SPACING_MARKUP, baca.tags.SPACING_OVERRIDE_MARKUP)
         my_build = baca.tags.only(build)
         for wrapper in abjad.inspect(leaf).wrappers(abjad.Markup):
@@ -170,15 +182,3 @@ class SpacingOverrideCommand(Command):
         Returns nonreduced fraction.
         '''
         return self._duration
-
-    @property
-    def eol(self):
-        r'''Is true when EOL multiplier should apply to duration.
-
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
-        '''
-        return self._eol
