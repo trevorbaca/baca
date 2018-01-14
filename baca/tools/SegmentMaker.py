@@ -726,6 +726,8 @@ class SegmentMaker(abjad.SegmentMaker):
             )
         for build_name, build_metadata in self._builds_metadata.items():
             break_measure_numbers = build_metadata.get('break_measures')
+            if break_measure_numbers is None:
+                continue
             break_measure_timespans = self._get_measure_timespans(
                 break_measure_numbers)
             break_measure_stop_offsets = [
