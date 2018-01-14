@@ -1265,10 +1265,8 @@ class LibraryGM(abjad.AbjadObject):
                 alignment_distances = item[2]
                 selector = baca.skip(skip_index)
                 if i == 0:
-                    #break_ = abjad.PageBreak(format_slot='before')
                     break_ = abjad.LilyPondLiteral(r'\pageBreak')
                 else:
-                    #break_ = abjad.LineBreak(format_slot='before')
                     break_ = abjad.LilyPondLiteral(r'\break')
                 command = baca.IndicatorCommand(
                     indicators=[break_],
@@ -1285,6 +1283,7 @@ class LibraryGM(abjad.AbjadObject):
 
         Returns indicator command.
         '''
+        alignment_distances = baca.sequence(alignment_distances).flatten()
         lbsd = baca.LBSD(
             alignment_distances=alignment_distances,
             y_offset=y_offset,
