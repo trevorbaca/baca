@@ -24,6 +24,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.SegmentMaker.SegmentMaker.allow_empty_selections
+      ~baca.tools.SegmentMaker.SegmentMaker.builds_metadata
       ~baca.tools.SegmentMaker.SegmentMaker.clefs
       ~baca.tools.SegmentMaker.SegmentMaker.color_octaves
       ~baca.tools.SegmentMaker.SegmentMaker.color_out_of_range_pitches
@@ -52,7 +53,7 @@ Bases
       ~baca.tools.SegmentMaker.SegmentMaker.metronome_mark_stem_height
       ~baca.tools.SegmentMaker.SegmentMaker.metronome_marks
       ~baca.tools.SegmentMaker.SegmentMaker.midi
-      ~baca.tools.SegmentMaker.SegmentMaker.print_segment_duration
+      ~baca.tools.SegmentMaker.SegmentMaker.previous_metadata
       ~baca.tools.SegmentMaker.SegmentMaker.print_timings
       ~baca.tools.SegmentMaker.SegmentMaker.range_checker
       ~baca.tools.SegmentMaker.SegmentMaker.rehearsal_letter
@@ -82,6 +83,8 @@ Read-only properties
 --------------------
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.allow_empty_selections
+
+.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.builds_metadata
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.clefs
 
@@ -137,7 +140,7 @@ Read-only properties
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.midi
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.print_segment_duration
+.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.previous_metadata
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.print_timings
 

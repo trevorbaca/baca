@@ -135,6 +135,7 @@ class SegmentMaker(abjad.SegmentMaker):
     __slots__ = (
         '_allow_empty_selections',
         '_break_offsets',
+        '_build_to_break_offsets',
         '_builds_metadata',
         '_cache',
         '_cached_time_signatures',
@@ -146,6 +147,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_environment',
         '_fermata_measure_staff_line_count',
         '_fermata_start_offsets',
+        '_fermata_stop_offsets',
         '_final_bar_line',
         '_final_markup',
         '_final_markup_extra_offset',
@@ -153,6 +155,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_ignore_unpitched_notes',
         '_ignore_unregistered_pitches',
         '_instruments',
+        '_last_measure_is_fermata',
         '_last_segment',
         '_layout_measure_map',
         '_margin_markup',
@@ -161,7 +164,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_metronome_mark_stem_height',
         '_metronome_marks',
         '_midi',
-        '_print_segment_duration',
         '_print_timings',
         '_range_checker',
         '_rehearsal_letter',
@@ -278,7 +280,6 @@ class SegmentMaker(abjad.SegmentMaker):
         metronome_mark_measure_map=None,
         metronome_mark_stem_height=1.5,
         metronome_marks=None,
-        print_segment_duration=None,
         print_timings=None,
         range_checker=None,
         rehearsal_letter=None,
@@ -295,6 +296,7 @@ class SegmentMaker(abjad.SegmentMaker):
             allow_empty_selections = bool(allow_empty_selections)
         self._allow_empty_selections = allow_empty_selections
         self._break_offsets = []
+        self._build_to_break_offsets = None
         if color_octaves is not None:
             color_octaves = bool(color_octaves)
         self._color_octaves = color_octaves
@@ -314,6 +316,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._fermata_measure_staff_line_count = \
             fermata_measure_staff_line_count
         self._fermata_start_offsets = []
+        self._fermata_stop_offsets = []
         if final_bar_line not in (None, False, abjad.Exact):
             assert isinstance(final_bar_line, str), repr(final_bar_line)
         self._final_bar_line = final_bar_line
@@ -336,6 +339,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if instruments is not None:
             assert isinstance(instruments, abjad.TypedOrderedDict)
         self._instruments = instruments
+        self._last_measure_is_fermata = False
         if last_segment is not None:
             last_segment = bool(last_segment)
         self._last_segment = last_segment
@@ -352,7 +356,6 @@ class SegmentMaker(abjad.SegmentMaker):
             assert isinstance(metronome_marks, abjad.TypedOrderedDict)
         self._metronome_marks = metronome_marks
         self._midi = None
-        self._print_segment_duration = print_segment_duration
         self._print_timings = print_timings
         self._range_checker = range_checker
         self._rehearsal_letter = rehearsal_letter
@@ -717,10 +720,35 @@ class SegmentMaker(abjad.SegmentMaker):
                 status = 'redundant'
         return leaf, previous_indicator, status
 
+    def _apply_per_build_clef_shifts(self):
+        if not self._fermata_start_offsets:
+            return
+        fermata_stop_offsets = self._fermata_stop_offsets[:]
+        if self.previous_metadata.get('last_measure_is_fermata') is True:
+            fermata_stop_offsets.insert(0, abjad.Offset(0))
+        for staff in abjad.iterate(self.score).components(abjad.Staff):
+            for leaf in abjad.iterate(staff).leaves():
+                start_offset = abjad.inspect(leaf).get_timespan().start_offset
+                if start_offset not in fermata_stop_offsets:
+                    continue
+                wrapper = abjad.inspect(leaf).wrapper(abjad.Clef)
+                if wrapper is None or not wrapper.tag:
+                    continue
+                if baca.tags.EXPLICIT_CLEF not in wrapper.tag.split(':'):
+                    continue
+                items = self._build_to_break_offsets.items()
+                for build, break_offsets in items:
+                    if start_offset in break_offsets:
+                        continue
+                    clef = wrapper.indicator
+                    command = baca.shift_clef(clef, selector=baca.leaf(0))
+                    command = baca.build(build, command)
+                    command(leaf)
+
     def _apply_per_build_eol_spacing(self):
         if self.spacing_specifier is None:
             return
-        builds_metadata = self._builds_metadata
+        builds_metadata = self.builds_metadata
         assert 'SEGMENT' not in builds_metadata
         break_measures = self._segment_break_measure_numbers
         builds_metadata['SEGMENT'] = abjad.TypedOrderedDict()
@@ -765,7 +793,7 @@ class SegmentMaker(abjad.SegmentMaker):
             self._break_offsets,
             baca.tags.SEGMENT,
             )
-        for build_name, build_metadata in self._builds_metadata.items():
+        for build_name, build_metadata in self.builds_metadata.items():
             break_measure_numbers = build_metadata.get('break_measures')
             if break_measure_numbers is None:
                 continue
@@ -951,6 +979,7 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.BreathMark,
             abjad.Fermata,
             )
+        last_measure_index = len(rests) - 1
         for stage_number, directive in self.metronome_mark_measure_map:
             if not isinstance(directive, directive_prototype):
                 continue
@@ -959,6 +988,8 @@ class SegmentMaker(abjad.SegmentMaker):
             start_measure_index, stop_measure_index = result
             rest = context[start_measure_index]
             assert isinstance(rest, abjad.MultimeasureRest)
+            if start_measure_index == last_measure_index:
+                self._last_measure_is_fermata = True
             fermata_y_offset = None
             if isinstance(directive, abjad.Fermata):
                 if directive.command == 'shortfermata':
@@ -993,8 +1024,9 @@ class SegmentMaker(abjad.SegmentMaker):
             literal = abjad.LilyPondLiteral(strings)
             abjad.attach(literal, rest, site='SM19')
             abjad.attach('fermata measure', rest, site='')
-            start_offset = abjad.inspect(rest).get_timespan().start_offset
-            self._fermata_start_offsets.append(start_offset)
+            timespan = abjad.inspect(rest).get_timespan()
+            self._fermata_start_offsets.append(timespan.start_offset)
+            self._fermata_stop_offsets.append(timespan.stop_offset)
 
     @staticmethod
     def _attach_latent_indicator_alert(leaf, indicator, status, manifests):
@@ -1089,10 +1121,17 @@ class SegmentMaker(abjad.SegmentMaker):
                 'default',
                 )
 
-    def _cache_segment_break_information(self):
+    def _cache_per_build_break_information(self):
         prototype = abjad.LilyPondLiteral
         skips = baca.select(self.score['GlobalSkips']).skips()
         first_measure_number = self._get_first_measure_number()
+        segment_measure_numbers = self._get_segment_measure_numbers()
+        build_to_break_offsets = abjad.TypedOrderedDict()
+        self._build_to_break_offsets = build_to_break_offsets
+        build_to_break_offsets['SEGMENT'] = []
+        if self.builds_metadata:
+            for build in self.builds_metadata:
+                build_to_break_offsets[build] = []
         for i, skip in enumerate(skips):
             literals = abjad.inspect(skip).get_indicators(prototype)
             if not literals:
@@ -1105,10 +1144,23 @@ class SegmentMaker(abjad.SegmentMaker):
             self._break_offsets.append(offset)
             break_measure_number = first_measure_number + i
             self._segment_break_measure_numbers.append(break_measure_number)
+            build_to_break_offsets['SEGMENT'].append(offset)
         segment_stop_offset = abjad.inspect(skip).get_timespan().stop_offset
         self._break_offsets.append(segment_stop_offset)
         break_measure_number = first_measure_number + i + 1
         self._segment_break_measure_numbers.append(break_measure_number)
+        build_to_break_offsets['SEGMENT'].append(segment_stop_offset)
+        for build, build_metadata in self.builds_metadata.items():
+            break_measures = build_metadata.get('break_measures')
+            if not break_measures:
+                continue
+            for break_measure in break_measures:
+                if break_measure not in segment_measure_numbers:
+                    continue
+                index = break_measure - first_measure_number
+                skip = skips[index]
+                offset = abjad.inspect(skip).get_timespan().start_offset
+                build_to_break_offsets[build].append(offset)
 
     def _cache_leaves(self):
         stage_timespans = []
@@ -1330,6 +1382,8 @@ class SegmentMaker(abjad.SegmentMaker):
         result = {}
         result['duration'] = self._duration
         result['first_measure_number'] = self._get_first_measure_number()
+        if self._last_measure_is_fermata:
+            result['last_measure_is_fermata'] = True
         result['persistent_indicators'] = self._collect_persistent_indicators()
         result['segment_number'] = self._get_segment_number()
         result['start_clock_time'] = self._start_clock_time
@@ -1581,11 +1635,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._extend_beam(leaf)
 
     def _get_first_measure_number(self):
-        if not self._previous_metadata:
+        if not self.previous_metadata:
             return 1
         string = 'first_measure_number'
-        first_measure_number = self._previous_metadata.get(string)
-        time_signatures = self._previous_metadata.get('time_signatures')
+        first_measure_number = self.previous_metadata.get(string)
+        time_signatures = self.previous_metadata.get('time_signatures')
         if first_measure_number is None or time_signatures is None:
             return 1
         first_measure_number += len(time_signatures)
@@ -1597,6 +1651,9 @@ class SegmentMaker(abjad.SegmentMaker):
             for key, value_ in dictionary.items():
                 if value_ == value:
                     return key
+
+    def _get_last_measure_number(self):
+        return self._get_first_measure_number() + self.measure_count - 1
 
     def _get_measure_timespans(self, measure_numbers):
         timespans = []
@@ -1613,9 +1670,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _get_persistent_indicator(self, context, prototype):
         assert isinstance(context, abjad.Context), repr(context)
-        if not self._previous_metadata:
+        if not self.previous_metadata:
             return
-        dictionary = self._previous_metadata.get('persistent_indicators')
+        dictionary = self.previous_metadata.get('persistent_indicators')
         if not dictionary:
             return
         momentos = dictionary.get(context.name)
@@ -1628,8 +1685,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 return (indicator, momento.context)
 
     def _get_previous_stop_clock_time(self):
-        if self._previous_metadata:
-            return self._previous_metadata.get('stop_clock_time')
+        if self.previous_metadata:
+            return self.previous_metadata.get('stop_clock_time')
 
     def _get_rehearsal_letter(self):
         if self.rehearsal_letter:
@@ -1649,11 +1706,16 @@ class SegmentMaker(abjad.SegmentMaker):
         segment_number = self._get_segment_number()
         return segment_number
 
+    def _get_segment_measure_numbers(self):
+        first_measure_number = self._get_first_measure_number()
+        last_measure_number = self._get_last_measure_number()
+        return list(range(first_measure_number, last_measure_number + 1))
+
     def _get_segment_number(self):
-        if not self._previous_metadata:
+        if not self.previous_metadata:
             segment_number = 0
         else:
-            segment_number = self._previous_metadata.get('segment_number')
+            segment_number = self.previous_metadata.get('segment_number')
             if segment_number is None:
                 message = 'previous metadata missing segment number.'
                 raise Exception(message)
@@ -2031,55 +2093,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 for leaf in leaves_by_stage_number[stage_number]:
                     print(leaf)
 
-    def _print_segment_duration_(self):
-        if not self.print_segment_duration:
-            return
-        current_tempo = None
-        skips = baca.select(self.score['GlobalSkips']).skips()
-        measure_summaries = []
-        tempo_index = 0
-        is_trending = False
-        for i, skip in enumerate(skips):
-            duration = abjad.inspect(skip).get_duration()
-            tempi = abjad.inspect(skip).get_indicators(abjad.MetronomeMark)
-            if tempi:
-                current_tempo = tempi[0]
-                for measure_summary in measure_summaries[tempo_index:]:
-                    assert measure_summary[-1] is None
-                    measure_summary[-1] = current_tempo
-                tempo_index = i
-                is_trending = False
-            if abjad.inspect(skip).has_indicator(abjad.Accelerando):
-                is_trending = True
-            if abjad.inspect(skip).has_indicator(abjad.Ritardando):
-                is_trending = True
-            next_tempo = None
-            measure_summary = [
-                duration,
-                current_tempo,
-                is_trending,
-                next_tempo,
-                ]
-            measure_summaries.append(measure_summary)
-        total_duration = abjad.Duration(0)
-        for measure_summary in measure_summaries:
-            duration, current_tempo, is_trending, next_tempo = measure_summary
-            if is_trending and current_tempo is not None:
-                effective_tempo = current_tempo + next_tempo
-                effective_tempo /= 2
-            else:
-                effective_tempo = current_tempo
-            if effective_tempo is None:
-                message = 'no effective tempo found ...'
-                print(message)
-                return
-            duration_ = effective_tempo.duration_to_milliseconds(duration)
-            duration_ /= 1000
-            total_duration += duration_
-        total_duration = int(round(total_duration))
-        counter = abjad.String('second').pluralize(total_duration)
-        print(f'segment duration {total_duration} {counter} ...')
-
     @staticmethod
     def _prototype_string(class_):
         parts = class_.__module__.split('.')
@@ -2089,7 +2102,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.first_segment:
             return
         string = 'persistent_indicators'
-        dictionary = self._previous_metadata.get('persistent_indicators')
+        dictionary = self.previous_metadata.get('persistent_indicators')
         if not dictionary:
             return
         for context in abjad.iterate(self.score).components(abjad.Context):
@@ -2317,6 +2330,14 @@ class SegmentMaker(abjad.SegmentMaker):
         Returns true, false or none.
         '''
         return self._allow_empty_selections
+
+    @property
+    def builds_metadata(self):
+        r'''Gets builds metadata.
+
+        Returns ordered dictionary.
+        '''
+        return self._builds_metadata
 
     @property
     def clefs(self):
@@ -9600,16 +9621,12 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._midi
 
     @property
-    def print_segment_duration(self):
-        r'''Is true when segment prints duration in seconds.
+    def previous_metadata(self):
+        r'''Gets previous segment metadata.
 
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
+        Returns ordered dictionary.
         '''
-        return self._print_segment_duration
+        return self._previous_metadata
 
     @property
     def print_timings(self):
@@ -10883,13 +10900,13 @@ class SegmentMaker(abjad.SegmentMaker):
         self._whitespace_leaves()
         self._comment_measure_numbers()
         self._apply_layout_measure_map()
-        self._cache_segment_break_information()
+        self._cache_per_build_break_information()
         self._apply_fermata_measure_staff_line_count()
         self._apply_per_build_eol_spacing()
+        self._apply_per_build_clef_shifts()
         self._deactivate_tags(deactivate)
         self._remove_tags(remove)
         self._collect_metadata()
-        self._print_segment_duration_()
         return self._lilypond_file
 
     def validate_measure_count(self, measure_count):
