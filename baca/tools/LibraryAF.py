@@ -2118,7 +2118,7 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def clef(clef='treble', selector='baca.leaf(0)', shift=False):
+    def clef(clef='treble', selector='baca.leaf(0)'):
         r'''Attaches clef to leaf 0.
 
         ..  container:: example
@@ -2250,18 +2250,10 @@ class LibraryAF(abjad.AbjadObject):
 
         '''
         clef = abjad.Clef(clef)
-        if shift is False:
-            return baca.IndicatorCommand(
-                indicators=[clef],
-                selector=selector,
-                )
-        if shift is True:
-            shift = clef._to_width[clef.name]
-        return baca.SuiteCommand([
-            baca.clef(clef, selector=selector),
-            baca.clef_x_extent_false(),
-            baca.clef_extra_offset((-shift, 0)),
-            ])
+        return baca.IndicatorCommand(
+            indicators=[clef],
+            selector=selector,
+            )
 
     @staticmethod
     def clef_extra_offset(pair, selector='baca.leaf(0)'):
@@ -5117,7 +5109,7 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def effort_dynamic(dynamic:str, selector='baca.phead(0)', shift=False):
+    def effort_dynamic(dynamic:str, selector='baca.phead(0)'):
         r'''Attaches effort dynamic to pitched head 0.
 
         ..  container:: example
@@ -5272,17 +5264,10 @@ class LibraryAF(abjad.AbjadObject):
         '''
         assert isinstance(dynamic, str), repr(dynamic)
         dynamic = abjad.Dynamic(f'"{dynamic}"')
-        if shift is False:
-            return baca.IndicatorCommand(
-                indicators=[dynamic],
-                selector=selector,
-                )
-        width = dynamic._to_width[dynamic.name]
-        return baca.SuiteCommand([
-            baca.effort_dynamic(dynamic.name),
-            baca.dynamic_text_x_extent_zero(),
-            baca.dynamic_text_extra_offset((-width, 0)),
-            ])
+        return baca.IndicatorCommand(
+            indicators=[dynamic],
+            selector=selector,
+            )
 
     @staticmethod
     def fermata(selector='baca.leaf(0)'):
