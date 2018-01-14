@@ -48,27 +48,36 @@ class SpacingOverrideCommand(Command):
             argument = self.selector(argument)
         leaf = baca.select(argument).leaf(0)
         assert isinstance(leaf, abjad.Skip), repr(leaf)
-        tag = baca.tags.SPACING
-        for wrapper in abjad.inspect(leaf).wrappers(baca.SpacingSection):
-            if wrapper.tag == tag:
-                abjad.detach(wrapper, leaf)
-        tag = baca.tags.SPACING_MARKUP
-        for wrapper in abjad.inspect(leaf).wrappers(abjad.Markup):
-            if wrapper.tag == tag:
-                abjad.detach(wrapper, leaf)
+        # overriding spacing for just one build:
         if self.build:
-            tag = baca.tags.only(self.build, baca.tags.SPACING_OVERRIDE)
+            include_build_tag = baca.tags.only(self.build)
             for wrapper in abjad.inspect(leaf).wrappers(baca.SpacingSection):
-                if wrapper.tag == tag:
-                    raise Exception(f'already have {tag} spacing override.')
-            tag = baca.tags.only(
-                self.build,
-                baca.tags.SPACING_OVERRIDE_MARKUP,
-                )
-            for wrapper in abjad.inspect(leaf).wrappers(abjad.Markup):
-                if wrapper.tag == tag:
-                    message = f'already have {tag} spacing override markup.'
+                assert isinstance(wrapper.tag, str)
+                if include_build_tag in wrapper.tag.split(':'):
+                    message = 'already have {} spacing override.'
+                    message = message.format(include_build_tag)
                     raise Exception(message)
+            for wrapper in abjad.inspect(leaf).wrappers(abjad.Markup):
+                if not wrapper.tag:
+                    continue
+                words = wrapper.tag.split(':')
+                if baca.tags.SPACING_OVERRIDE_MARKUP not in words:
+                    continue
+                if include_build_tag in words:
+                    message = 'already have {} spacing override markup.'
+                    message = message.format(include_build_tag)
+                    raise Exception(message)
+        # overriding fallback spacing for all builds:
+        else:
+            for wrapper in abjad.inspect(leaf).wrappers(baca.SpacingSection):
+                assert isinstance(wrapper.tag, str)
+                if baca.tags.SPACING in wrapper.tag.split(':'):
+                    abjad.detach(wrapper, leaf)
+            for wrapper in abjad.inspect(leaf).wrappers(abjad.Markup):
+                if not wrapper.tag:
+                    continue
+                if baca.tags.SPACING_MARKUP in wrapper.tag.split(':'):
+                    abjad.detach(wrapper, leaf)
         duration = self.duration
         if self.eol:
             duration *= self._magic_lilypond_eol_adjustment
@@ -84,7 +93,11 @@ class SpacingOverrideCommand(Command):
             site='SOC1',
             tag=tag,
             )
-        markup = abjad.Markup(f'({duration!s})').fontsize(3).bold()
+        if self.eol:
+            markup = abjad.Markup(f'[[{duration!s}]]')
+        else:
+            markup = abjad.Markup(f'[{duration!s}]')
+        markup = markup.fontsize(3)
         if self.build is None:
             color = 'BlueViolet'
         else:
@@ -102,27 +115,31 @@ class SpacingOverrideCommand(Command):
             site='SOC2',
             tag=tag,
             )
-        self._add_negation_to_other_wrappers(self.build, leaf)
+        # overriding spacing for just one build:
+        if self.build:
+            self._exclude_other_spacing_sections_from_build(self.build, leaf)
+            self._exclude_other_spacing_markup_from_build(self.build, leaf)
 
     ### PRIVATE METHODS ###
 
-    def _add_negation_to_other_wrappers(self, build, leaf):
-        if build is None:
-            return
-        tag = baca.tags.SPACING_OVERRIDE
+    def _exclude_other_spacing_sections_from_build(self, build, leaf):
+        my_build = baca.tags.only(build)
         for wrapper in abjad.inspect(leaf).wrappers(baca.SpacingSection):
-            words = wrapper.tag.split(':')
-            if (not wrapper.tag or
-                tag not in words or
-                any(_.startswith('+') for _ in words)):
+            assert isinstance(wrapper.tag, str)
+            if my_build in wrapper.tag.split(':'):
                 continue
             wrapper._tag = baca.tags.forbid(build, wrapper.tag)
-        tag = baca.tags.SPACING_OVERRIDE_MARKUP
+
+    def _exclude_other_spacing_markup_from_build(self, build, leaf):
+        tags = (baca.tags.SPACING_MARKUP, baca.tags.SPACING_OVERRIDE_MARKUP)
+        my_build = baca.tags.only(build)
         for wrapper in abjad.inspect(leaf).wrappers(abjad.Markup):
+            if not wrapper.tag:
+                continue
             words = wrapper.tag.split(':')
-            if (not wrapper.tag or
-                tag not in words or
-                any(_.startswith('+') for _ in words)):
+            if not any(tag in words for tag in tags):
+                continue
+            if my_build in words:
                 continue
             wrapper._tag = baca.tags.forbid(build, wrapper.tag)
 

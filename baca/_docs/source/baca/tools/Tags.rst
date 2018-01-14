@@ -27,6 +27,7 @@ Bases
 
       ~baca.tools.Tags.Tags.build
       ~baca.tools.Tags.Tags.forbid
+      ~baca.tools.Tags.Tags.markup_tags
       ~baca.tools.Tags.Tags.only
       ~baca.tools.Tags.Tags.__copy__
       ~baca.tools.Tags.Tags.__eq__
@@ -34,6 +35,15 @@ Bases
       ~baca.tools.Tags.Tags.__getattr__
       ~baca.tools.Tags.Tags.__hash__
       ~baca.tools.Tags.Tags.__repr__
+
+Read-only properties
+--------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.Tags.Tags.markup_tags
 
 Class & static methods
 ----------------------
