@@ -1891,8 +1891,10 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _label_measure_indices(self):
         skips = baca.select(self.score['GlobalSkips']).skips()
+        first_measure_number = self._get_first_measure_number()
         for i, skip in enumerate(skips):
-            markup = abjad.Markup(f'[{str(i).zfill(2)}]')
+            measure_number = first_measure_number + i
+            markup = abjad.Markup(f'[{str(i).zfill(2)} ({measure_number})]')
             markup = markup.with_color(abjad.SchemeColor('DarkCyan'))
             markup = markup.fontsize(3)
             markup = abjad.new(markup, direction=abjad.Up)
