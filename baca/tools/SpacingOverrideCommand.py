@@ -100,8 +100,10 @@ class SpacingOverrideCommand(Command):
         markup = markup.fontsize(3)
         if self.build is None:
             color = 'BlueViolet'
-        else:
+        elif self.eol:
             color = 'DarkOrange'
+        else:
+            color = 'DeepPink1'
         markup = markup.with_color(abjad.SchemeColor(color))
         markup = abjad.new(markup, direction=abjad.Up)
         tag, deactivate = baca.tags.SPACING_OVERRIDE_MARKUP, None
