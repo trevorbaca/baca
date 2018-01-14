@@ -721,11 +721,11 @@ class SegmentMaker(abjad.SegmentMaker):
         return leaf, previous_indicator, status
 
     def _apply_per_build_clef_shifts(self):
-        if not self._fermata_start_offsets:
-            return
         fermata_stop_offsets = self._fermata_stop_offsets[:]
         if self.previous_metadata.get('last_measure_is_fermata') is True:
             fermata_stop_offsets.insert(0, abjad.Offset(0))
+        if not fermata_stop_offsets:
+            return
         for staff in abjad.iterate(self.score).components(abjad.Staff):
             for leaf in abjad.iterate(staff).leaves():
                 start_offset = abjad.inspect(leaf).get_timespan().start_offset
