@@ -5141,18 +5141,7 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC
                                 r8
                                 c'16
-                                _ #(make-dynamic-script
-                                    (markup
-                                        #:whiteout
-                                        #:line (
-                                            #:general-align Y -2 #:normal-text #:larger "“"
-                                            #:hspace -0.4
-                                            #:dynamic "f"
-                                            #:hspace -0.2
-                                            #:general-align Y -2 #:normal-text #:larger "”"
-                                            )
-                                        )
-                                    )                                                                    %! IC
+                                \effort_f                                                                %! IC
                                 [
                                 d'16
                                 ]
@@ -5228,18 +5217,7 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
-                                _ #(make-dynamic-script
-                                    (markup
-                                        #:whiteout
-                                        #:line (
-                                            #:general-align Y -2 #:normal-text #:larger "“"
-                                            #:hspace -0.4
-                                            #:dynamic "f"
-                                            #:hspace -0.2
-                                            #:general-align Y -2 #:normal-text #:larger "”"
-                                            )
-                                        )
-                                    )                                                                    %! IC
+                                \effort_f                                                                %! IC
                                 [
                                 e''16
                                 ]
@@ -5263,7 +5241,8 @@ class LibraryAF(abjad.AbjadObject):
 
         '''
         assert isinstance(dynamic, str), repr(dynamic)
-        dynamic = abjad.Dynamic(f'"{dynamic}"')
+        command = rf'\effort_{dynamic}'
+        dynamic = abjad.Dynamic(f'{dynamic}', command=command)
         return baca.IndicatorCommand(
             indicators=[dynamic],
             selector=selector,

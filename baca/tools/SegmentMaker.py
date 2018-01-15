@@ -1802,8 +1802,10 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @staticmethod
     def _indicator_to_key(indicator, manifests):
-        if isinstance(indicator, (abjad.Clef, abjad.Dynamic)):
+        if isinstance(indicator, abjad.Clef):
             return indicator.name
+        if isinstance(indicator, abjad.Dynamic):
+            return indicator.command or indicator.name
         if isinstance(indicator, abjad.Instrument):
             return SegmentMaker._get_key(
                 manifests['abjad.Instrument'],
@@ -2082,6 +2084,8 @@ class SegmentMaker(abjad.SegmentMaker):
         class_ = eval(momento.prototype)
         if hasattr(class_, 'from_string'):
             return class_.from_string(momento.value)
+        if class_ is abjad.Dynamic and momento.value.startswith('\\'):
+            return class_(name='', command=momento.value)
         return class_(momento.value)
 
     def _print_cache(self):
