@@ -29,6 +29,7 @@ Bases
       ~baca.tools.Tags.Tags.forbid
       ~baca.tools.Tags.Tags.markup_tags
       ~baca.tools.Tags.Tags.only
+      ~baca.tools.Tags.Tags.spacing_tags
       ~baca.tools.Tags.Tags.__copy__
       ~baca.tools.Tags.Tags.__eq__
       ~baca.tools.Tags.Tags.__format__
@@ -44,6 +45,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.Tags.Tags.markup_tags
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.Tags.Tags.spacing_tags
 
 Class & static methods
 ----------------------
