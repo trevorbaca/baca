@@ -1967,7 +1967,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 skip,
                 deactivate=True,
                 site='SM31',
-                tag=baca.tags.MEASURE_INDEX_MARKUP,
+                tag=baca.tags.MEASURE_NUMBER_MARKUP,
                 )
 
     def _label_stage_numbers(self):
@@ -2154,7 +2154,7 @@ class SegmentMaker(abjad.SegmentMaker):
             remove_documentation_tags = (
                 baca.tags.CLOCK_TIME_MARKUP,
                 baca.tags.FIGURE_NAME_MARKUP,
-                baca.tags.MEASURE_INDEX_MARKUP,
+                baca.tags.MEASURE_NUMBER_MARKUP,
                 baca.tags.SPACING_MARKUP,
                 baca.tags.STAGE_NUMBER_MARKUP,
                 )
