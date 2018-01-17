@@ -145,6 +145,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_design_checker',
         '_duration',
         '_environment',
+        '_fermata_measure_numbers',
         '_fermata_measure_staff_line_count',
         '_fermata_start_offsets',
         '_fermata_stop_offsets',
@@ -310,6 +311,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._cached_time_signatures = []
         self._design_checker = design_checker
         self._duration = None
+        self._fermata_measure_numbers = []
         if fermata_measure_staff_line_count is not None:
             assert isinstance(fermata_measure_staff_line_count, int)
             assert 0 <= fermata_measure_staff_line_count
@@ -980,12 +982,14 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.Fermata,
             )
         last_measure_index = len(rests) - 1
+        first_measure_number = self._get_first_measure_number()
         for stage_number, directive in self.metronome_mark_measure_map:
             if not isinstance(directive, directive_prototype):
                 continue
             assert 0 < stage_number <= self.stage_count
             result = self._stage_number_to_measure_indices(stage_number)
             start_measure_index, stop_measure_index = result
+            measure_number = first_measure_number + start_measure_index
             rest = context[start_measure_index]
             assert isinstance(rest, abjad.MultimeasureRest)
             if start_measure_index == last_measure_index:
@@ -1027,6 +1031,7 @@ class SegmentMaker(abjad.SegmentMaker):
             timespan = abjad.inspect(rest).get_timespan()
             self._fermata_start_offsets.append(timespan.start_offset)
             self._fermata_stop_offsets.append(timespan.stop_offset)
+            self._fermata_measure_numbers.append(measure_number)
 
     @staticmethod
     def _attach_latent_indicator_alert(leaf, indicator, status, manifests):
@@ -1381,6 +1386,8 @@ class SegmentMaker(abjad.SegmentMaker):
     def _collect_metadata(self):
         result = {}
         result['duration'] = self._duration
+        if self._fermata_measure_numbers:
+            result['fermata_measure_numbers'] = self._fermata_measure_numbers
         result['first_measure_number'] = self._get_first_measure_number()
         if self._last_measure_is_fermata:
             result['last_measure_is_fermata'] = True
