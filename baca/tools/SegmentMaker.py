@@ -656,9 +656,12 @@ class SegmentMaker(abjad.SegmentMaker):
         for command in commands:
             if not isinstance(command, baca.Command):
                 raise Exception(f'commands only:\n\n{format(command)}')
-            if (getattr(command, 'build', None) and
-                command.build not in self.known_builds):
-                raise Exception(f'unknown build: {command.build!r}.')
+            if getattr(command, 'build', None):
+                build = command.build
+                build = build.strip('+')
+                build = build.strip('-')
+                if build not in self.known_builds:
+                    raise Exception(f'unknown build: {command.build!r}.')
         for scope in scopes:
             for command in commands:
                 manifest = getattr(command, '_manifest', None)

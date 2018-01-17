@@ -23,6 +23,7 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.IndicatorCommand.IndicatorCommand.build
       ~baca.tools.IndicatorCommand.IndicatorCommand.context
       ~baca.tools.IndicatorCommand.IndicatorCommand.indicators
       ~baca.tools.IndicatorCommand.IndicatorCommand.selector
@@ -36,6 +37,8 @@ Bases
 
 Read-only properties
 --------------------
+
+.. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.build
 
 .. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.context
 
