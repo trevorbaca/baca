@@ -473,7 +473,6 @@ class LibraryNS(abjad.AbjadObject):
 
         '''
         return baca.IndicatorCommand(
-            #indicators=[abjad.PageBreak()],
             indicators=[abjad.LilyPondLiteral(r'\pageBreak', 'after')],
             selector=selector,
             )
@@ -2291,6 +2290,31 @@ class LibraryNS(abjad.AbjadObject):
                 scope = baca.Scope(*argument)
             scopes.append(scope)
         return scopes
+
+    @staticmethod
+    def scorewide_spacing(
+        score_package_name,
+        fallback_duration,
+        fermata_measure_duration=None,
+        ):
+        r'''Makes scorewide spacing.
+
+        Returns horizontal spacing specifier with overrides.
+        '''
+        path = abjad.Path(score_package_name)
+        dictionary = path.get_metadatum('time_signatures', {})
+        measure_count = 0
+        for segment, time_signatures in dictionary.items():
+            measure_count += len(time_signatures)
+        overrides = abjad.TypedOrderedDict()
+        for i in range(measure_count):
+            measure_number = i + 1
+            overrides[measure_number] = fallback_duration
+        return baca.HorizontalSpacingSpecifier(
+            fermata_measure_width=fermata_measure_duration,
+            fermata_score=score_package_name,
+            overrides=overrides,
+            )
 
     @staticmethod
     def script_color(color='red', selector='baca.leaves()'):

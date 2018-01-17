@@ -817,7 +817,10 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
     __documentation_section__ = '(3) Specifiers'
 
     __slots__ = (
+        '_fermata_measure_numbers',
         '_fermata_measure_width',
+        '_fermata_score',
+        '_fermata_start_offsets',
         '_minimum_width',
         '_multiplier',
         '_overrides',
@@ -828,13 +831,19 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
     def __init__(
         self,
         fermata_measure_width=None,
+        fermata_score=None,
         minimum_width=None,
         multiplier=None,
         overrides=None,
         ):
+        self._fermata_measure_numbers = []
         if fermata_measure_width is not None:
             fermata_measure_width = abjad.Duration(fermata_measure_width)
         self._fermata_measure_width = fermata_measure_width
+        if fermata_score is not None:
+            assert isinstance(fermata_score, str), repr(fermata_score)
+        self._fermata_score = fermata_score
+        self._fermata_start_offsets = []
         if minimum_width is not None:
             minimum_width = abjad.Duration(minimum_width)
         self._minimum_width = minimum_width
@@ -842,7 +851,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             multiplier = abjad.Multiplier(multiplier)
         self._multiplier = multiplier
         if overrides is not None:
-            overrides = tuple(overrides)
+            prototype = abjad.TypedOrderedDict
+            assert isinstance(overrides, prototype), repr(overrides)
         self._overrides = overrides
 
     ### SPECIAL METHODS ###
@@ -855,21 +865,24 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         score = segment_maker._score
         context = score['GlobalSkips']
         skips = baca.select(context).skips()
-        leaves = abjad.iterate(score).leaves(grace_notes=False)
-        minimum_durations_by_measure = self._get_minimum_durations_by_measure(
-            skips,
-            leaves,
-            )
-        fermata_start_offsets = getattr(
-            segment_maker,
-            '_fermata_start_offsets',
-            [],
-            )
+        self._interrogate_fermata_score()
+        programmatic = True
+        if self.overrides and len(self.overrides) == len(skips):
+            programmatic = False
+        if programmatic:
+            leaves = abjad.iterate(score).leaves(grace_notes=False)
+            method = self._get_minimum_durations_by_measure
+            minimum_durations_by_measure = method(skips, leaves)
+        string = '_fermata_start_offsets'
+        self._fermata_start_offsets = getattr(segment_maker, string, [])
         for measure_index, skip in enumerate(skips):
-            measure_timespan = abjad.inspect(skip).get_timespan()
+            measure_number = measure_index + 1
             if (self.fermata_measure_width is not None and
-                measure_timespan.start_offset in fermata_start_offsets):
+                self._is_fermata_measure(measure_number, skip)):
                 duration = self.fermata_measure_width
+            elif self.overrides and measure_number in self.overrides:
+                duration = self.overrides[measure_number]
+                duration = abjad.Duration(duration)
             else:
                 duration = minimum_durations_by_measure[measure_index]
                 if self.minimum_width is not None:
@@ -882,7 +895,12 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             abjad.attach(spacing_section, skip, site='HSS1', tag=tag)
             markup = abjad.Markup(f'[{duration!s}]')
             markup = markup.fontsize(3)
-            markup = markup.with_color(abjad.SchemeColor('DarkCyan'))
+            if programmatic:
+                color = 'DarkCyan'
+            else:
+                color = 'ForestGreen'
+            color = abjad.SchemeColor(color)
+            markup = markup.with_color(color)
             markup = abjad.new(markup, direction=abjad.Up)
             tag = baca.tags.SPACING_MARKUP
             abjad.attach(markup, skip, deactivate=True, site='HSS2', tag=tag)
@@ -929,7 +947,34 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         minimum_durations_by_measure = [min(_) for _ in durations_by_measure]
         return minimum_durations_by_measure
 
+    def _interrogate_fermata_score(self):
+        if not self.fermata_score:
+            return
+        path = abjad.Path(self.fermata_score)
+        dictionary = path.get_metadatum('fermata_measure_numbers', {})
+        for path, fermata_measure_numbers in dictionary.items():
+            self._fermata_measure_numbers.extend(fermata_measure_numbers)
+
+    def _is_fermata_measure(self, measure_number, skip):
+        if (self.fermata_measure_numbers and
+            measure_number in self.fermata_measure_numbers):
+            return True
+        measure_timespan = abjad.inspect(skip).get_timespan()
+        return measure_timespan.start_offset in self._fermata_start_offsets
+
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def fermata_measure_numbers(self):
+        r'''Gets fermata measure numbers.
+
+        Defaults to none.
+
+        Set to list or none.
+
+        Returns list or none.
+        '''
+        return self._fermata_measure_numbers
 
     @property
     def fermata_measure_width(self):
@@ -945,6 +990,18 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         Returns duration or none.
         '''
         return self._fermata_measure_width
+
+    @property
+    def fermata_score(self):
+        r'''Gets name score package with fermata measures.
+
+        Defaults to none.
+
+        Set to string or none.
+
+        Returns string or none.
+        '''
+        return self._fermata_score
 
     @property
     def minimum_width(self):

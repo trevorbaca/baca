@@ -161,6 +161,7 @@ baca.tools
 .. toctree::
    :hidden:
 
+   BreaksMeasureMap
    Coat
    CollectionList
    Constellation
@@ -173,7 +174,6 @@ baca.tools
    ExpressionGallery
    Interpolator
    LBSD
-   LayoutMeasureMap
    Loop
    MarginMarkup
    Matrix
@@ -217,6 +217,7 @@ baca.tools
 .. autosummary::
    :nosignatures:
 
+   BreaksMeasureMap
    Coat
    CollectionList
    Constellation
@@ -229,7 +230,6 @@ baca.tools
    ExpressionGallery
    Interpolator
    LBSD
-   LayoutMeasureMap
    Loop
    MarginMarkup
    Matrix

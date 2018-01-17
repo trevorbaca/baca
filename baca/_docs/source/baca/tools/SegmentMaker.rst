@@ -24,6 +24,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.SegmentMaker.SegmentMaker.allow_empty_selections
+      ~baca.tools.SegmentMaker.SegmentMaker.breaks_measure_map
       ~baca.tools.SegmentMaker.SegmentMaker.builds_metadata
       ~baca.tools.SegmentMaker.SegmentMaker.clefs
       ~baca.tools.SegmentMaker.SegmentMaker.color_octaves
@@ -43,7 +44,6 @@ Bases
       ~baca.tools.SegmentMaker.SegmentMaker.instruments
       ~baca.tools.SegmentMaker.SegmentMaker.known_builds
       ~baca.tools.SegmentMaker.SegmentMaker.last_segment
-      ~baca.tools.SegmentMaker.SegmentMaker.layout_measure_map
       ~baca.tools.SegmentMaker.SegmentMaker.manifests
       ~baca.tools.SegmentMaker.SegmentMaker.margin_markup
       ~baca.tools.SegmentMaker.SegmentMaker.measure_count
@@ -84,6 +84,8 @@ Read-only properties
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.allow_empty_selections
 
+.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.breaks_measure_map
+
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.builds_metadata
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.clefs
@@ -119,8 +121,6 @@ Read-only properties
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.known_builds
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.last_segment
-
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.layout_measure_map
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.manifests
 

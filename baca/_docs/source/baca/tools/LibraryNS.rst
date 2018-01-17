@@ -49,6 +49,7 @@ Bases
       ~baca.tools.LibraryNS.LibraryNS.rhythm
       ~baca.tools.LibraryNS.LibraryNS.scope
       ~baca.tools.LibraryNS.LibraryNS.scopes
+      ~baca.tools.LibraryNS.LibraryNS.scorewide_spacing
       ~baca.tools.LibraryNS.LibraryNS.script_color
       ~baca.tools.LibraryNS.LibraryNS.script_extra_offset
       ~baca.tools.LibraryNS.LibraryNS.script_staff_padding
@@ -152,6 +153,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNS.LibraryNS.scope
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.scopes
+
+.. automethod:: baca.tools.LibraryNS.LibraryNS.scorewide_spacing
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.script_color
 

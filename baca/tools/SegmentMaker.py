@@ -158,7 +158,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_instruments',
         '_last_measure_is_fermata',
         '_last_segment',
-        '_layout_measure_map',
+        '_breaks_measure_map',
         '_margin_markup',
         '_measures_per_stage',
         '_metronome_mark_measure_map',
@@ -275,7 +275,7 @@ class SegmentMaker(abjad.SegmentMaker):
         ignore_unregistered_pitches=None,
         instruments=None,
         last_segment=None,
-        layout_measure_map=None,
+        breaks_measure_map=None,
         margin_markup=None,
         measures_per_stage=None,
         metronome_mark_measure_map=None,
@@ -345,9 +345,9 @@ class SegmentMaker(abjad.SegmentMaker):
         if last_segment is not None:
             last_segment = bool(last_segment)
         self._last_segment = last_segment
-        if layout_measure_map is not None:
-            assert isinstance(layout_measure_map, baca.LayoutMeasureMap)
-        self._layout_measure_map = layout_measure_map
+        if breaks_measure_map is not None:
+            assert isinstance(breaks_measure_map, baca.BreaksMeasureMap)
+        self._breaks_measure_map = breaks_measure_map
         if margin_markup is not None:
             assert isinstance(margin_markup, abjad.TypedOrderedDict)
         self._margin_markup = margin_markup
@@ -850,10 +850,10 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.attach(tie, leaves, site='SM17')
                 abjad.detach('tie from me', current_leaf)
 
-    def _apply_layout_measure_map(self):
-        if self.layout_measure_map is None:
+    def _apply_breaks_measure_map(self):
+        if self.breaks_measure_map is None:
             return
-        self.layout_measure_map(self.score['GlobalSkips'])
+        self.breaks_measure_map(self.score['GlobalSkips'])
 
     def _apply_spacing_specifier(self):
         start_time = time.time()
@@ -2343,6 +2343,16 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._allow_empty_selections
 
     @property
+    def breaks_measure_map(self):
+        r'''Gets breaks measure map.
+
+        Set to breaks measure map or none.
+
+        Returns breaks measure map or none.
+        '''
+        return self._breaks_measure_map
+
+    @property
     def builds_metadata(self):
         r'''Gets builds metadata.
 
@@ -2358,7 +2368,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Default clefs color purple and redraw dull purple:
 
-            >>> layout_measure_map = baca.layout(
+            >>> breaks_measure_map = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (7,)],
             ...         [2, 20, (7,)],
@@ -2369,7 +2379,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> score_template.defaults.append(triple)
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     layout_measure_map=layout_measure_map,
+            ...     breaks_measure_map=breaks_measure_map,
             ...     score_template=score_template,
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -2494,7 +2504,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Explicit clefs color blue and redraw dull blue:
 
-            >>> layout_measure_map = baca.layout(
+            >>> breaks_measure_map = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (7,)],
             ...         [2, 20, (7,)],
@@ -2502,7 +2512,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     layout_measure_map=layout_measure_map,
+            ...     breaks_measure_map=breaks_measure_map,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -2629,7 +2639,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Even after a previous clef:
 
-            >>> layout_measure_map = baca.layout(
+            >>> breaks_measure_map = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (7,)],
             ...         [2, 20, (7,)],
@@ -2637,7 +2647,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     layout_measure_map=layout_measure_map,
+            ...     breaks_measure_map=breaks_measure_map,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -2781,7 +2791,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Reapplied clefs color green and redraw dull green:
 
-            >>> layout_measure_map = baca.layout(
+            >>> breaks_measure_map = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (7,)],
             ...         [2, 20, (7,)],
@@ -2789,7 +2799,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     layout_measure_map=layout_measure_map,
+            ...     breaks_measure_map=breaks_measure_map,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -2930,7 +2940,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Redundant clefs color pink and redraw dull pink:
 
-            >>> layout_measure_map = baca.layout(
+            >>> breaks_measure_map = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (7,)],
             ...         [3, 20, (7,)],
@@ -2938,7 +2948,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     layout_measure_map=layout_measure_map,
+            ...     breaks_measure_map=breaks_measure_map,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
@@ -3081,7 +3091,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Even at the beginning of a segment:
 
-            >>> layout_measure_map = baca.layout(
+            >>> breaks_measure_map = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (7,)],
             ...         [2, 20, (7,)],
@@ -3089,7 +3099,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     layout_measure_map=layout_measure_map,
+            ...     breaks_measure_map=breaks_measure_map,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -6022,7 +6032,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> instruments = abjad.InstrumentDictionary()
             >>> instruments['Flute'] = abjad.Flute()
             >>> instruments['Piccolo'] = abjad.Piccolo()
-            >>> layout_measure_map = baca.layout(
+            >>> breaks_measure_map = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
             ...         [5, 25, (11,)],
@@ -6034,7 +6044,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Default instruments color purple and redraw dull purple:
 
-            >>> layout_measure_map_ = baca.layout(
+            >>> breaks_measure_map_ = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
             ...         [2, 20, (11,)],
@@ -6046,7 +6056,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
-            ...     layout_measure_map=layout_measure_map_,
+            ...     breaks_measure_map=breaks_measure_map_,
             ...     score_template=score_template,
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -6213,7 +6223,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Explicit instruments color blue and redraw dull blue:
 
-            >>> layout_measure_map_ = baca.layout(
+            >>> breaks_measure_map_ = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
             ...         [2, 20, (11,)],
@@ -6222,7 +6232,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
-            ...     layout_measure_map=layout_measure_map_,
+            ...     breaks_measure_map=breaks_measure_map_,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -6388,7 +6398,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Even after a previous instrument:
 
-            >>> layout_measure_map_ = baca.layout(
+            >>> breaks_measure_map_ = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
             ...         [2, 25, (11,)],
@@ -6397,7 +6407,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
-            ...     layout_measure_map=layout_measure_map_,
+            ...     breaks_measure_map=breaks_measure_map_,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -6583,7 +6593,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
-            ...     layout_measure_map=layout_measure_map_,
+            ...     breaks_measure_map=breaks_measure_map_,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -6765,7 +6775,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Redundant instruments color pink and redraw dull pink:
 
-            >>> layout_measure_map = baca.layout(
+            >>> breaks_measure_map = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
             ...         [3, 20, (11,)],
@@ -6774,7 +6784,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
-            ...     layout_measure_map=layout_measure_map,
+            ...     breaks_measure_map=breaks_measure_map,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
@@ -6997,7 +7007,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Even at the beginning of a segment:
 
-            >>> layout_measure_map = baca.layout(
+            >>> breaks_measure_map = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
             ...         [2, 20, (11,)],
@@ -7006,7 +7016,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
-            ...     layout_measure_map=layout_measure_map,
+            ...     breaks_measure_map=breaks_measure_map,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -7212,16 +7222,6 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._last_segment
 
     @property
-    def layout_measure_map(self):
-        r'''Gets layout measure map.
-
-        Set to layout measure map or none.
-
-        Returns layout measure map or none.
-        '''
-        return self._layout_measure_map
-
-    @property
     def manifests(self):
         r'''Gets manifests.
 
@@ -7248,7 +7248,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     markup=abjad.Markup('III+IV'),
             ...     short_markup=abjad.Markup('III+IV'),
             ...     )
-            >>> layout_measure_map = baca.layout(
+            >>> breaks_measure_map = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
             ...         [2, 20, (11,)],
@@ -7269,7 +7269,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     margin_markup=margin_markup,
-            ...     layout_measure_map=layout_measure_map,
+            ...     breaks_measure_map=breaks_measure_map,
             ...     score_template=score_template,
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -7438,7 +7438,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     layout_measure_map=layout_measure_map,
+            ...     breaks_measure_map=breaks_measure_map,
             ...     margin_markup=margin_markup,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
@@ -7607,7 +7607,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     layout_measure_map=layout_measure_map,
+            ...     breaks_measure_map=breaks_measure_map,
             ...     margin_markup=margin_markup,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
@@ -7793,7 +7793,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     layout_measure_map=layout_measure_map,
+            ...     breaks_measure_map=breaks_measure_map,
             ...     margin_markup=margin_markup,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
@@ -7976,7 +7976,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Redundant margin markup color pink and redraw dull pink:
 
-            >>> layout_measure_map = baca.layout(
+            >>> breaks_measure_map = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
             ...         [3, 20, (11,)],
@@ -7984,7 +7984,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     layout_measure_map=layout_measure_map,
+            ...     breaks_measure_map=breaks_measure_map,
             ...     margin_markup=margin_markup,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
@@ -8208,7 +8208,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Even at the beginning of a segment:
 
-            >>> layout_measure_map = baca.layout(
+            >>> breaks_measure_map = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
             ...         [2, 20, (11,)],
@@ -8216,7 +8216,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     layout_measure_map=layout_measure_map,
+            ...     breaks_measure_map=breaks_measure_map,
             ...     margin_markup=margin_markup,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
@@ -8759,7 +8759,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            >>> layout = baca.layout(baca.page([1, 0, (8,)]))
+            >>> breaks = baca.breaks(baca.page([1, 0, (8,)]))
             >>> metronome_marks = abjad.MetronomeMarkDictionary()
             >>> metronome_marks['90'] = abjad.MetronomeMark((1, 4), 90)
             >>> metronome_marks['112'] = abjad.MetronomeMark((1, 4), 112)
@@ -8770,7 +8770,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     layout_measure_map=layout,
+            ...     breaks_measure_map=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 25)),
@@ -8918,7 +8918,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     layout_measure_map=layout,
+            ...     breaks_measure_map=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
@@ -9086,7 +9086,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     layout_measure_map=layout,
+            ...     breaks_measure_map=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
@@ -9253,7 +9253,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     layout_measure_map=layout,
+            ...     breaks_measure_map=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
@@ -9457,7 +9457,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     layout_measure_map=layout,
+            ...     breaks_measure_map=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
@@ -10910,7 +10910,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._remove_redundant_time_signatures()
         self._whitespace_leaves()
         self._comment_measure_numbers()
-        self._apply_layout_measure_map()
+        self._apply_breaks_measure_map()
         self._cache_per_build_break_information()
         self._apply_fermata_measure_staff_line_count()
         self._apply_per_build_eol_spacing()

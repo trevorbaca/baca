@@ -2,15 +2,15 @@ import abjad
 import baca
 
 
-class LayoutMeasureMap(abjad.AbjadObject):
-    r'''Layout measure map.
+class BreaksMeasureMap(abjad.AbjadObject):
+    r'''Breaks measure map.
 
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.StringTrioScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8)],
-        ...     layout_measure_map=baca.LayoutMeasureMap([
+        ...     breaks_measure_map=baca.BreaksMeasureMap([
         ...         baca.line_break(baca.skip(0)),
         ...         baca.lbsd(100, [30, 30], baca.skip(1)),
         ...         baca.line_break(baca.skip(1)),
@@ -477,12 +477,12 @@ class LayoutMeasureMap(abjad.AbjadObject):
 
         ..  container:: example
 
-            >>> layout = baca.LayoutMeasureMap([
+            >>> breaks = baca.BreaksMeasureMap([
             ...     baca.line_break(baca.skip(0)),
             ...     baca.page_break(baca.skip(1)),
             ...     ])
 
-            >>> for command in layout.commands:
+            >>> for command in breaks.commands:
             ...     abjad.f(command)
             ...
             baca.IndicatorCommand(
