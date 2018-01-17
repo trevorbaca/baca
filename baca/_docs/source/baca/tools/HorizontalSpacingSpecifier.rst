@@ -21,11 +21,14 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.breaks
+      ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.eol_measure_numbers
       ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.fermata_measure_numbers
       ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.fermata_measure_width
       ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.fermata_score
       ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.minimum_width
       ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.multiplier
+      ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.override
       ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.overrides
       ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.__call__
       ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.__eq__
@@ -35,6 +38,10 @@ Bases
 
 Read-only properties
 --------------------
+
+.. autoattribute:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.breaks
+
+.. autoattribute:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.eol_measure_numbers
 
 .. autoattribute:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.fermata_measure_numbers
 
@@ -47,6 +54,11 @@ Read-only properties
 .. autoattribute:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.multiplier
 
 .. autoattribute:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.overrides
+
+Methods
+-------
+
+.. automethod:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.override
 
 Special methods
 ---------------

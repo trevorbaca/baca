@@ -817,6 +817,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
     __documentation_section__ = '(3) Specifiers'
 
     __slots__ = (
+        '_breaks',
         '_fermata_measure_numbers',
         '_fermata_measure_width',
         '_fermata_score',
@@ -826,16 +827,23 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         '_overrides',
         )
 
+    _magic_lilypond_eol_adjustment = abjad.Multiplier(35, 24)
+
     ### INITIALIZER ###
 
     def __init__(
         self,
+        breaks=None,
         fermata_measure_width=None,
         fermata_score=None,
         minimum_width=None,
         multiplier=None,
         overrides=None,
         ):
+        if breaks is not None:
+            prototype = baca.BreaksMeasureMap
+            assert isinstance(breaks, prototype), repr(breaks)
+        self._breaks = breaks
         self._fermata_measure_numbers = []
         if fermata_measure_width is not None:
             fermata_measure_width = abjad.Duration(fermata_measure_width)
@@ -882,7 +890,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                 duration = self.fermata_measure_width
             elif self.overrides and measure_number in self.overrides:
                 duration = self.overrides[measure_number]
-                duration = abjad.Duration(duration)
+                duration = abjad.NonreducedFraction(duration)
             else:
                 duration = minimum_durations_by_measure[measure_index]
                 if self.minimum_width is not None:
@@ -890,10 +898,17 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
                         duration = self.minimum_width
                 if self.multiplier is not None:
                     duration = duration / self.multiplier
+            eol_adjusted = False
+            if measure_number in self.eol_measure_numbers:
+                duration *= self._magic_lilypond_eol_adjustment
+                eol_adjusted = True
             spacing_section = baca.SpacingSection(duration)
             tag = baca.tags.SPACING
             abjad.attach(spacing_section, skip, site='HSS1', tag=tag)
-            markup = abjad.Markup(f'[{duration!s}]')
+            if eol_adjusted:
+                markup = abjad.Markup(f'[[{duration!s}]]')
+            else:
+                markup = abjad.Markup(f'[{duration!s}]')
             markup = markup.fontsize(3)
             if programmatic:
                 color = 'DarkCyan'
@@ -963,6 +978,27 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         return measure_timespan.start_offset in self._fermata_start_offsets
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def breaks(self):
+        r'''Gets break measure map.
+
+        Returns break measure map or none.
+        '''
+        return self._breaks
+
+    @property
+    def eol_measure_numbers(self):
+        r'''Gets EOL measure numbers.
+
+        Returns list.
+        '''
+        eol_measure_numbers = []
+        if self.breaks and self.breaks._break_measure_numbers:
+            for measure_number in self.breaks._break_measure_numbers[1:]:
+                eol_measure_number = measure_number - 1
+                eol_measure_numbers.append(eol_measure_number)
+        return eol_measure_numbers
 
     @property
     def fermata_measure_numbers(self):
@@ -1038,3 +1074,23 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         Returns tuple or none.
         '''
         return self._overrides
+
+    ### PUBLIC METHODS ###
+
+    def override(self, measures, duration):
+        r'''Overrides `measures` with `duration`.
+
+        Returns none.
+        '''
+        duration = abjad.NonreducedFraction(duration)
+        if isinstance(measures, int):
+            self.overrides[measures] = duration
+        elif isinstance(measures, tuple):
+            start_measure, stop_measure = measures
+            for measure in range(start_measure, stop_measure + 1):
+                self.overrides[measure] = duration
+        elif isinstance(measures, list):
+            for measure in measures:
+                self.overrides[measure] = duration
+        else:
+            raise TypeError(measures)

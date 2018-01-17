@@ -2295,12 +2295,18 @@ class LibraryNS(abjad.AbjadObject):
     def scorewide_spacing(
         score_package_name,
         fallback_duration,
+        breaks=None,
         fermata_measure_duration=None,
         ):
         r'''Makes scorewide spacing.
 
         Returns horizontal spacing specifier with overrides.
         '''
+        fallback_duration = abjad.NonreducedFraction(fallback_duration)
+        if fermata_measure_duration is not None:
+            fermata_measure_duration = abjad.NonreducedFraction(
+                fermata_measure_duration
+                )
         path = abjad.Path(score_package_name)
         dictionary = path.get_metadatum('time_signatures', {})
         measure_count = 0
@@ -2311,6 +2317,7 @@ class LibraryNS(abjad.AbjadObject):
             measure_number = i + 1
             overrides[measure_number] = fallback_duration
         return baca.HorizontalSpacingSpecifier(
+            breaks=breaks,
             fermata_measure_width=fermata_measure_duration,
             fermata_score=score_package_name,
             overrides=overrides,

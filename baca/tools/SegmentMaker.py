@@ -968,15 +968,18 @@ class SegmentMaker(abjad.SegmentMaker):
             del(self.score['GlobalRests'])
             return
         has_fermata = False
-        for entry in self.metronome_mark_measure_map:
-            if isinstance(entry[1], abjad.Fermata):
-                has_fermata = True
+        if self.metronome_mark_measure_map:
+            for entry in self.metronome_mark_measure_map:
+                if isinstance(entry[1], abjad.Fermata):
+                    has_fermata = True
         if not has_fermata:
             del(self.score['GlobalRests'])
             return
         context = self.score['GlobalRests']
         rests = self._make_multimeasure_rests()
         context.extend(rests)
+        #if not self.metronome_mark_measure_map:
+        #    return
         directive_prototype = (
             abjad.BreathMark,
             abjad.Fermata,

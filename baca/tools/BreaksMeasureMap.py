@@ -421,6 +421,7 @@ class BreaksMeasureMap(abjad.AbjadObject):
     __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
+        '_break_measure_numbers',
         '_build',
         '_commands',
         '_tag',
@@ -431,6 +432,7 @@ class BreaksMeasureMap(abjad.AbjadObject):
     ### INITIALIZER ###
 
     def __init__(self, commands=None, build=None):
+        self._break_measure_numbers = []
         build = build or baca.tags.SEGMENT
         self._build = build
         tag = baca.tags.only(build, baca.tags.LAYOUT)
