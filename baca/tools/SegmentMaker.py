@@ -978,8 +978,6 @@ class SegmentMaker(abjad.SegmentMaker):
         context = self.score['GlobalRests']
         rests = self._make_multimeasure_rests()
         context.extend(rests)
-        #if not self.metronome_mark_measure_map:
-        #    return
         directive_prototype = (
             abjad.BreathMark,
             abjad.Fermata,
@@ -997,20 +995,20 @@ class SegmentMaker(abjad.SegmentMaker):
             assert isinstance(rest, abjad.MultimeasureRest)
             if start_measure_index == last_measure_index:
                 self._last_measure_is_fermata = True
-            fermata_y_offset = None
+            #fermata_y_offset = None
             if isinstance(directive, abjad.Fermata):
                 if directive.command == 'shortfermata':
                     string = 'scripts.ushortfermata'
-                    fermata_y_offset = -7
+                    #fermata_y_offset = -7
                 elif directive.command == 'fermata':
                     string = 'scripts.ufermata'
-                    fermata_y_offset = -7
+                    #fermata_y_offset = -7
                 elif directive.command == 'longfermata':
                     string = 'scripts.ulongfermata'
-                    fermata_y_offset = -7
+                    #fermata_y_offset = -7
                 elif directive.command == 'verylongfermata':
                     string = 'scripts.uverylongfermata'
-                    fermata_y_offset = -7
+                    #fermata_y_offset = -7
                 else:
                     raise Exception(f'unknown fermata: {directive.command!r}.')
                 directive = abjad.Markup.musicglyph(string)
@@ -1019,10 +1017,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 directive = abjad.new(directive)
             abjad.attach(directive, rest, site='SM18')
             strings = []
-            if fermata_y_offset is not None:
-                string = r'\once \override MultiMeasureRestText.extra-offset'
-                string += f" = #'(0 . {fermata_y_offset})"
-                strings.append(string)
+            #if fermata_y_offset is not None:
+            #    string = r'\once \override MultiMeasureRestText.extra-offset'
+            #    string += f" = #'(0 . {fermata_y_offset})"
+            #    strings.append(string)
             string = r'\once \override'
             string += ' Score.MultiMeasureRest.transparent = ##t'
             strings.append(string)
