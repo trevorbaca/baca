@@ -35,8 +35,8 @@ class BreaksMeasureMap(abjad.AbjadObject):
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
                         % GlobalSkips [measure 1]                                                    %! SM4
-                        \autoPageBreaksOff                                                           %! +SEGMENT:LAYOUT:LMM1
-                        \noBreak                                                                     %! +SEGMENT:LAYOUT:LMM2
+                        \autoPageBreaksOff                                                           %! +SEGMENT:BREAKS:LMM1
+                        \noBreak                                                                     %! +SEGMENT:BREAKS:LMM2
                         \once \override TextSpanner.Y-extent = ##f                                   %! SM29
                         \once \override TextSpanner.bound-details.left-broken.text = ##f             %! SM29
                         \once \override TextSpanner.bound-details.left.stencil-align-dir-y = #center %! SM29
@@ -49,31 +49,31 @@ class BreaksMeasureMap(abjad.AbjadObject):
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
                         \startTextSpan                                                               %! SM29
-                        \break                                                                       %! +SEGMENT:LAYOUT:LMM3
+                        \break                                                                       %! +SEGMENT:BREAKS:LMM3
             <BLANKLINE>
                         % GlobalSkips [measure 2]                                                    %! SM4
-                        \noBreak                                                                     %! +SEGMENT:LAYOUT:LMM2
-                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! +SEGMENT:LAYOUT:LMM3
-                        #'((Y-offset . 100) (alignment-distances . (30 30)))                         %! +SEGMENT:LAYOUT:LMM3
+                        \noBreak                                                                     %! +SEGMENT:BREAKS:LMM2
+                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! +SEGMENT:BREAKS:LMM3
+                        #'((Y-offset . 100) (alignment-distances . (30 30)))                         %! +SEGMENT:BREAKS:LMM3
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
-                        \break                                                                       %! +SEGMENT:LAYOUT:LMM3
+                        \break                                                                       %! +SEGMENT:BREAKS:LMM3
             <BLANKLINE>
                         % GlobalSkips [measure 3]                                                    %! SM4
-                        \noBreak                                                                     %! +SEGMENT:LAYOUT:LMM2
+                        \noBreak                                                                     %! +SEGMENT:BREAKS:LMM2
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
                         % GlobalSkips [measure 4]                                                    %! SM4
-                        \noBreak                                                                     %! +SEGMENT:LAYOUT:LMM2
+                        \noBreak                                                                     %! +SEGMENT:BREAKS:LMM2
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
                         % GlobalSkips [measure 5]                                                    %! SM4
-                        \noBreak                                                                     %! +SEGMENT:LAYOUT:LMM2
+                        \noBreak                                                                     %! +SEGMENT:BREAKS:LMM2
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
@@ -435,7 +435,7 @@ class BreaksMeasureMap(abjad.AbjadObject):
         self._break_measure_numbers = []
         build = build or baca.tags.SEGMENT
         self._build = build
-        tag = baca.tags.only(build, baca.tags.LAYOUT)
+        tag = baca.tags.only(build, baca.tags.BREAKS)
         self._tag = tag
         if commands is not None:
             commands_ = []
@@ -495,7 +495,7 @@ class BreaksMeasureMap(abjad.AbjadObject):
                     ),
                 selector=baca.skip(0),
                 site='LMM3',
-                tag='+SEGMENT:LAYOUT',
+                tag='+SEGMENT:BREAKS',
                 )
             baca.IndicatorCommand(
                 indicators=abjad.CyclicTuple(
@@ -505,7 +505,7 @@ class BreaksMeasureMap(abjad.AbjadObject):
                     ),
                 selector=baca.skip(1),
                 site='LMM3',
-                tag='+SEGMENT:LAYOUT',
+                tag='+SEGMENT:BREAKS',
                 )
 
         Returns commands.
