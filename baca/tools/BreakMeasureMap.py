@@ -35,36 +35,36 @@ class BreakMeasureMap(abjad.AbjadObject):
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
                         % GlobalSkips [measure 1]                                                    %! SM4
-                        \autoPageBreaksOff                                                           %! +SEGMENT:BREAKS:LMM1
-                        \noBreak                                                                     %! +SEGMENT:BREAKS:LMM2
+                        \autoPageBreaksOff                                                           %! +SEGMENT:BREAKS:BMM1
+                        \noBreak                                                                     %! +SEGMENT:BREAKS:BMM2
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
-                        \break                                                                       %! +SEGMENT:BREAKS:LMM3
+                        \break                                                                       %! +SEGMENT:BREAKS:BMM3
             <BLANKLINE>
                         % GlobalSkips [measure 2]                                                    %! SM4
-                        \noBreak                                                                     %! +SEGMENT:BREAKS:LMM2
-                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! +SEGMENT:BREAKS:LMM3
-                        #'((Y-offset . 100) (alignment-distances . (30 30)))                         %! +SEGMENT:BREAKS:LMM3
+                        \noBreak                                                                     %! +SEGMENT:BREAKS:BMM2
+                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! +SEGMENT:BREAKS:BMM3
+                        #'((Y-offset . 100) (alignment-distances . (30 30)))                         %! +SEGMENT:BREAKS:BMM3
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
-                        \break                                                                       %! +SEGMENT:BREAKS:LMM3
+                        \break                                                                       %! +SEGMENT:BREAKS:BMM3
             <BLANKLINE>
                         % GlobalSkips [measure 3]                                                    %! SM4
-                        \noBreak                                                                     %! +SEGMENT:BREAKS:LMM2
+                        \noBreak                                                                     %! +SEGMENT:BREAKS:BMM2
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
                         % GlobalSkips [measure 4]                                                    %! SM4
-                        \noBreak                                                                     %! +SEGMENT:BREAKS:LMM2
+                        \noBreak                                                                     %! +SEGMENT:BREAKS:BMM2
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
                         % GlobalSkips [measure 5]                                                    %! SM4
-                        \noBreak                                                                     %! +SEGMENT:BREAKS:LMM2
+                        \noBreak                                                                     %! +SEGMENT:BREAKS:BMM2
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
@@ -430,7 +430,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         if commands is not None:
             commands_ = []
             for command in commands:
-                command_ = abjad.new(command, site='LMM3', tag=self.tag)
+                command_ = abjad.new(command, site='BMM3', tag=self.tag)
                 commands_.append(command_)
             commands = commands_
             commands = tuple(commands)
@@ -447,11 +447,11 @@ class BreakMeasureMap(abjad.AbjadObject):
             return
         skips = baca.select(context).skips()
         literal = abjad.LilyPondLiteral(r'\autoPageBreaksOff', 'before')
-        abjad.attach(literal, skips[0], site='LMM1', tag=self.tag)
+        abjad.attach(literal, skips[0], site='BMM1', tag=self.tag)
         for skip in skips:
             if not abjad.inspect(skip).has_indicator(baca.LBSD):
                 literal = abjad.LilyPondLiteral(r'\noBreak', 'before')
-                abjad.attach(literal, skip, site='LMM2', tag=self.tag)
+                abjad.attach(literal, skip, site='BMM2', tag=self.tag)
         for command in self.commands:
             command(context)
 
@@ -478,7 +478,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                         ]
                     ),
                 selector=baca.skip(0),
-                site='LMM3',
+                site='BMM3',
                 tag='+SEGMENT:BREAKS',
                 )
             baca.IndicatorCommand(
@@ -488,7 +488,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                         ]
                     ),
                 selector=baca.skip(1),
-                site='LMM3',
+                site='BMM3',
                 tag='+SEGMENT:BREAKS',
                 )
 
