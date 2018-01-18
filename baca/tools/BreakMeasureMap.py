@@ -2,7 +2,7 @@ import abjad
 import baca
 
 
-class BreaksMeasureMap(abjad.AbjadObject):
+class BreakMeasureMap(abjad.AbjadObject):
     r'''Breaks measure map.
 
     ..  container:: example
@@ -10,7 +10,7 @@ class BreaksMeasureMap(abjad.AbjadObject):
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.StringTrioScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8)],
-        ...     breaks_measure_map=baca.BreaksMeasureMap([
+        ...     breaks_measure_map=baca.BreakMeasureMap([
         ...         baca.line_break(baca.skip(0)),
         ...         baca.lbsd(100, [30, 30], baca.skip(1)),
         ...         baca.line_break(baca.skip(1)),
@@ -473,7 +473,7 @@ class BreaksMeasureMap(abjad.AbjadObject):
 
         ..  container:: example
 
-            >>> breaks = baca.BreaksMeasureMap([
+            >>> breaks = baca.BreakMeasureMap([
             ...     baca.line_break(baca.skip(0)),
             ...     baca.page_break(baca.skip(1)),
             ...     ])

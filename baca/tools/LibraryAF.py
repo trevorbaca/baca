@@ -1783,7 +1783,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     )
 
             >>> abjad.f(breaks, strict=89)
-            baca.BreaksMeasureMap(
+            baca.BreakMeasureMap(
                 commands=(
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
@@ -1862,7 +1862,7 @@ class LibraryAF(abjad.AbjadObject):
         '''
         commands = []
         if not pages:
-            return baca.BreaksMeasureMap(commands=commands, document=document)
+            return baca.BreakMeasureMap(commands=commands, document=document)
         first_measure_number = pages[0].items[0][0]
         bol_measure_numbers = []
         for page in pages:
@@ -1884,7 +1884,7 @@ class LibraryAF(abjad.AbjadObject):
                 commands.append(command)
                 lbsd = baca.lbsd(y_offset, alignment_distances, selector)
                 commands.append(lbsd)
-        breaks = baca.BreaksMeasureMap(commands=commands, document=document)
+        breaks = baca.BreakMeasureMap(commands=commands, document=document)
         breaks._bol_measure_numbers.extend(bol_measure_numbers)
         return breaks
 

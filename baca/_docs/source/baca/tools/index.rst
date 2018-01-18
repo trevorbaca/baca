@@ -161,7 +161,7 @@ baca.tools
 .. toctree::
    :hidden:
 
-   BreaksMeasureMap
+   BreakMeasureMap
    Coat
    CollectionList
    Constellation
@@ -217,7 +217,7 @@ baca.tools
 .. autosummary::
    :nosignatures:
 
-   BreaksMeasureMap
+   BreakMeasureMap
    Coat
    CollectionList
    Constellation

@@ -31,7 +31,7 @@ from .Interpolator import Interpolator
 from .LBSD import LBSD
 from .LMRSpecifier import LMRSpecifier
 from .LabelCommand import LabelCommand
-from .BreaksMeasureMap import BreaksMeasureMap
+from .BreakMeasureMap import BreakMeasureMap
 from .LibraryAF import LibraryAF
 from .LibraryGM import LibraryGM
 from .LibraryNS import LibraryNS

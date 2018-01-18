@@ -346,7 +346,7 @@ class SegmentMaker(abjad.SegmentMaker):
             last_segment = bool(last_segment)
         self._last_segment = last_segment
         if breaks_measure_map is not None:
-            assert isinstance(breaks_measure_map, baca.BreaksMeasureMap)
+            assert isinstance(breaks_measure_map, baca.BreakMeasureMap)
         self._breaks_measure_map = breaks_measure_map
         if margin_markup is not None:
             assert isinstance(margin_markup, abjad.TypedOrderedDict)

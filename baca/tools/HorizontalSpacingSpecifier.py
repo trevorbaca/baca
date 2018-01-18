@@ -841,7 +841,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         overrides=None,
         ):
         if breaks is not None:
-            prototype = baca.BreaksMeasureMap
+            prototype = baca.BreakMeasureMap
             assert isinstance(breaks, prototype), repr(breaks)
         self._breaks = breaks
         self._fermata_measure_numbers = []
