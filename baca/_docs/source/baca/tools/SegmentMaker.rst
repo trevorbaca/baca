@@ -24,7 +24,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.SegmentMaker.SegmentMaker.allow_empty_selections
-      ~baca.tools.SegmentMaker.SegmentMaker.breaks_measure_map
+      ~baca.tools.SegmentMaker.SegmentMaker.breaks
       ~baca.tools.SegmentMaker.SegmentMaker.clefs
       ~baca.tools.SegmentMaker.SegmentMaker.color_octaves
       ~baca.tools.SegmentMaker.SegmentMaker.color_out_of_range_pitches
@@ -85,7 +85,7 @@ Read-only properties
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.allow_empty_selections
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.breaks_measure_map
+.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.breaks
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.clefs
 

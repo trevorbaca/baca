@@ -124,7 +124,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     __slots__ = (
         '_allow_empty_selections',
-        '_breaks_measure_map',
+        '_breaks',
         '_break_offsets',
         '_document_to_break_offsets',
         '_documents_metadata',
@@ -267,7 +267,7 @@ class SegmentMaker(abjad.SegmentMaker):
         ignore_unregistered_pitches=None,
         instruments=None,
         last_segment=None,
-        breaks_measure_map=None,
+        breaks=None,
         margin_markup=None,
         measures_per_stage=None,
         metronome_mark_measure_map=None,
@@ -341,9 +341,9 @@ class SegmentMaker(abjad.SegmentMaker):
         if last_segment is not None:
             last_segment = bool(last_segment)
         self._last_segment = last_segment
-        if breaks_measure_map is not None:
-            assert isinstance(breaks_measure_map, baca.BreakMeasureMap)
-        self._breaks_measure_map = breaks_measure_map
+        if breaks is not None:
+            assert isinstance(breaks, baca.BreakMeasureMap)
+        self._breaks = breaks
         if margin_markup is not None:
             assert isinstance(margin_markup, abjad.TypedOrderedDict)
         self._margin_markup = margin_markup
@@ -711,10 +711,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 status = 'redundant'
         return leaf, previous_indicator, status
 
-    def _apply_breaks_measure_map(self):
-        if self.breaks_measure_map is None:
+    def _apply_breaks(self):
+        if self.breaks is None:
             return
-        self.breaks_measure_map(self.score['GlobalSkips'])
+        self.breaks(self.score['GlobalSkips'])
 
     def _apply_fermata_measure_staff_line_count(self):
         if self.fermata_measure_staff_line_count is None:
@@ -2338,14 +2338,14 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._allow_empty_selections
 
     @property
-    def breaks_measure_map(self):
+    def breaks(self):
         r'''Gets breaks measure map.
 
         Set to breaks measure map or none.
 
         Returns breaks measure map or none.
         '''
-        return self._breaks_measure_map
+        return self._breaks
 
     @property
     def clefs(self):
@@ -2355,7 +2355,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Default clefs color purple and redraw dull purple:
 
-            >>> breaks_measure_map = baca.breaks(
+            >>> breaks = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (7,)],
             ...         [2, 20, (7,)],
@@ -2366,7 +2366,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> score_template.defaults.append(triple)
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     breaks_measure_map=breaks_measure_map,
+            ...     breaks=breaks,
             ...     score_template=score_template,
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -2388,15 +2388,15 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \autoPageBreaksOff                                                           %! BREAKS:BMM1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 0) (alignment-distances . (7)))                               %! BREAKS:BMM3
+                            \autoPageBreaksOff                                                           %! BREAK:BMM1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 0) (alignment-distances . (7)))                               %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \pageBreak                                                                   %! BREAKS:BMM3
+                            \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -2423,13 +2423,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 20) (alignment-distances . (7)))                              %! BREAKS:BMM3
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 20) (alignment-distances . (7)))                              %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \break                                                                       %! BREAKS:BMM3
+                            \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -2481,7 +2481,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Explicit clefs color blue and redraw dull blue:
 
-            >>> breaks_measure_map = baca.breaks(
+            >>> breaks = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (7,)],
             ...         [2, 20, (7,)],
@@ -2489,7 +2489,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     breaks_measure_map=breaks_measure_map,
+            ...     breaks=breaks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -2515,15 +2515,15 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \autoPageBreaksOff                                                           %! BREAKS:BMM1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 0) (alignment-distances . (7)))                               %! BREAKS:BMM3
+                            \autoPageBreaksOff                                                           %! BREAK:BMM1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 0) (alignment-distances . (7)))                               %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \pageBreak                                                                   %! BREAKS:BMM3
+                            \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -2550,13 +2550,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 20) (alignment-distances . (7)))                              %! BREAKS:BMM3
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 20) (alignment-distances . (7)))                              %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \break                                                                       %! BREAKS:BMM3
+                            \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -2606,7 +2606,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Even after a previous clef:
 
-            >>> breaks_measure_map = baca.breaks(
+            >>> breaks = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (7,)],
             ...         [2, 20, (7,)],
@@ -2614,7 +2614,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     breaks_measure_map=breaks_measure_map,
+            ...     breaks=breaks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -2653,17 +2653,17 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \autoPageBreaksOff                                                           %! BREAKS:BMM1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 0) (alignment-distances . (7)))                               %! BREAKS:BMM3
+                            \autoPageBreaksOff                                                           %! BREAK:BMM1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 0) (alignment-distances . (7)))                               %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \pageBreak                                                                   %! BREAKS:BMM3
+                            \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -2690,13 +2690,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 20) (alignment-distances . (7)))                              %! BREAKS:BMM3
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 20) (alignment-distances . (7)))                              %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \break                                                                       %! BREAKS:BMM3
+                            \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -2748,7 +2748,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Reapplied clefs color green and redraw dull green:
 
-            >>> breaks_measure_map = baca.breaks(
+            >>> breaks = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (7,)],
             ...         [2, 20, (7,)],
@@ -2756,7 +2756,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     breaks_measure_map=breaks_measure_map,
+            ...     breaks=breaks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -2792,17 +2792,17 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \autoPageBreaksOff                                                           %! BREAKS:BMM1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 0) (alignment-distances . (7)))                               %! BREAKS:BMM3
+                            \autoPageBreaksOff                                                           %! BREAK:BMM1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 0) (alignment-distances . (7)))                               %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \pageBreak                                                                   %! BREAKS:BMM3
+                            \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -2829,13 +2829,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 20) (alignment-distances . (7)))                              %! BREAKS:BMM3
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 20) (alignment-distances . (7)))                              %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \break                                                                       %! BREAKS:BMM3
+                            \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -2887,7 +2887,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Redundant clefs color pink and redraw dull pink:
 
-            >>> breaks_measure_map = baca.breaks(
+            >>> breaks = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (7,)],
             ...         [3, 20, (7,)],
@@ -2895,7 +2895,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     breaks_measure_map=breaks_measure_map,
+            ...     breaks=breaks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
@@ -2922,19 +2922,19 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
-                            \autoPageBreaksOff                                                           %! BREAKS:BMM1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 0) (alignment-distances . (7)))                               %! BREAKS:BMM3
+                            \autoPageBreaksOff                                                           %! BREAK:BMM1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 0) (alignment-distances . (7)))                               %! BREAK:BMM3
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \pageBreak                                                                   %! BREAKS:BMM3
+                            \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
+                            \noBreak                                                                     %! BREAK:BMM2
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
@@ -2964,13 +2964,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 20) (alignment-distances . (7)))                              %! BREAKS:BMM3
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 20) (alignment-distances . (7)))                              %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \break                                                                       %! BREAKS:BMM3
+                            \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -3028,7 +3028,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Even at the beginning of a segment:
 
-            >>> breaks_measure_map = baca.breaks(
+            >>> breaks = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (7,)],
             ...         [2, 20, (7,)],
@@ -3036,7 +3036,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     breaks_measure_map=breaks_measure_map,
+            ...     breaks=breaks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -3076,17 +3076,17 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \autoPageBreaksOff                                                           %! BREAKS:BMM1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 0) (alignment-distances . (7)))                               %! BREAKS:BMM3
+                            \autoPageBreaksOff                                                           %! BREAK:BMM1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 0) (alignment-distances . (7)))                               %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \pageBreak                                                                   %! BREAKS:BMM3
+                            \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -3113,13 +3113,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 20) (alignment-distances . (7)))                              %! BREAKS:BMM3
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 20) (alignment-distances . (7)))                              %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \break                                                                       %! BREAKS:BMM3
+                            \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -5785,7 +5785,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> instruments = abjad.InstrumentDictionary()
             >>> instruments['Flute'] = abjad.Flute()
             >>> instruments['Piccolo'] = abjad.Piccolo()
-            >>> breaks_measure_map = baca.breaks(
+            >>> breaks = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
             ...         [5, 25, (11,)],
@@ -5797,7 +5797,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Default instruments color purple and redraw dull purple:
 
-            >>> breaks_measure_map_ = baca.breaks(
+            >>> breaks_ = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
             ...         [2, 20, (11,)],
@@ -5809,7 +5809,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
-            ...     breaks_measure_map=breaks_measure_map_,
+            ...     breaks=breaks_,
             ...     score_template=score_template,
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -5835,15 +5835,15 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \autoPageBreaksOff                                                           %! BREAKS:BMM1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAKS:BMM3
+                            \autoPageBreaksOff                                                           %! BREAK:BMM1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \pageBreak                                                                   %! BREAKS:BMM3
+                            \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -5870,13 +5870,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAKS:BMM3
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \break                                                                       %! BREAKS:BMM3
+                            \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -5966,7 +5966,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Explicit instruments color blue and redraw dull blue:
 
-            >>> breaks_measure_map_ = baca.breaks(
+            >>> breaks_ = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
             ...         [2, 20, (11,)],
@@ -5975,7 +5975,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
-            ...     breaks_measure_map=breaks_measure_map_,
+            ...     breaks=breaks_,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -6002,15 +6002,15 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \autoPageBreaksOff                                                           %! BREAKS:BMM1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAKS:BMM3
+                            \autoPageBreaksOff                                                           %! BREAK:BMM1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \pageBreak                                                                   %! BREAKS:BMM3
+                            \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -6037,13 +6037,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAKS:BMM3
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \break                                                                       %! BREAKS:BMM3
+                            \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -6131,7 +6131,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Even after a previous instrument:
 
-            >>> breaks_measure_map_ = baca.breaks(
+            >>> breaks_ = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
             ...         [2, 25, (11,)],
@@ -6140,7 +6140,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
-            ...     breaks_measure_map=breaks_measure_map_,
+            ...     breaks=breaks_,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -6180,17 +6180,17 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \autoPageBreaksOff                                                           %! BREAKS:BMM1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAKS:BMM3
+                            \autoPageBreaksOff                                                           %! BREAK:BMM1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \pageBreak                                                                   %! BREAKS:BMM3
+                            \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -6217,13 +6217,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 25) (alignment-distances . (11)))                             %! BREAKS:BMM3
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 25) (alignment-distances . (11)))                             %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \break                                                                       %! BREAKS:BMM3
+                            \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -6316,7 +6316,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
-            ...     breaks_measure_map=breaks_measure_map_,
+            ...     breaks=breaks_,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -6355,17 +6355,17 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \autoPageBreaksOff                                                           %! BREAKS:BMM1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAKS:BMM3
+                            \autoPageBreaksOff                                                           %! BREAK:BMM1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \pageBreak                                                                   %! BREAKS:BMM3
+                            \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -6392,13 +6392,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 25) (alignment-distances . (11)))                             %! BREAKS:BMM3
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 25) (alignment-distances . (11)))                             %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \break                                                                       %! BREAKS:BMM3
+                            \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -6488,7 +6488,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Redundant instruments color pink and redraw dull pink:
 
-            >>> breaks_measure_map = baca.breaks(
+            >>> breaks = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
             ...         [3, 20, (11,)],
@@ -6497,7 +6497,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
-            ...     breaks_measure_map=breaks_measure_map,
+            ...     breaks=breaks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
@@ -6528,19 +6528,19 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
-                            \autoPageBreaksOff                                                           %! BREAKS:BMM1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAKS:BMM3
+                            \autoPageBreaksOff                                                           %! BREAK:BMM1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:BMM3
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \pageBreak                                                                   %! BREAKS:BMM3
+                            \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 1/2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
+                            \noBreak                                                                     %! BREAK:BMM2
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
@@ -6570,13 +6570,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAKS:BMM3
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \break                                                                       %! BREAKS:BMM3
+                            \break                                                                       %! BREAK:BMM3
                             s1 * 1/2
                             ^ \markup {
                                 \column
@@ -6710,7 +6710,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Even at the beginning of a segment:
 
-            >>> breaks_measure_map = baca.breaks(
+            >>> breaks = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
             ...         [2, 20, (11,)],
@@ -6719,7 +6719,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
-            ...     breaks_measure_map=breaks_measure_map,
+            ...     breaks=breaks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -6759,17 +6759,17 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \autoPageBreaksOff                                                           %! BREAKS:BMM1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAKS:BMM3
+                            \autoPageBreaksOff                                                           %! BREAK:BMM1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \pageBreak                                                                   %! BREAKS:BMM3
+                            \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -6796,13 +6796,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAKS:BMM3
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \break                                                                       %! BREAKS:BMM3
+                            \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -6941,7 +6941,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     markup=abjad.Markup('III+IV'),
             ...     short_markup=abjad.Markup('III+IV'),
             ...     )
-            >>> breaks_measure_map = baca.breaks(
+            >>> breaks = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
             ...         [2, 20, (11,)],
@@ -6962,7 +6962,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     margin_markup=margin_markup,
-            ...     breaks_measure_map=breaks_measure_map,
+            ...     breaks=breaks,
             ...     score_template=score_template,
             ...     spacing_specifier=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -6988,15 +6988,15 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \autoPageBreaksOff                                                           %! BREAKS:BMM1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAKS:BMM3
+                            \autoPageBreaksOff                                                           %! BREAK:BMM1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \pageBreak                                                                   %! BREAKS:BMM3
+                            \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -7023,13 +7023,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAKS:BMM3
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \break                                                                       %! BREAKS:BMM3
+                            \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -7121,7 +7121,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     breaks_measure_map=breaks_measure_map,
+            ...     breaks=breaks,
             ...     margin_markup=margin_markup,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
@@ -7149,15 +7149,15 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \autoPageBreaksOff                                                           %! BREAKS:BMM1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAKS:BMM3
+                            \autoPageBreaksOff                                                           %! BREAK:BMM1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \pageBreak                                                                   %! BREAKS:BMM3
+                            \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -7184,13 +7184,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAKS:BMM3
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \break                                                                       %! BREAKS:BMM3
+                            \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -7280,7 +7280,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     breaks_measure_map=breaks_measure_map,
+            ...     breaks=breaks,
             ...     margin_markup=margin_markup,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
@@ -7321,17 +7321,17 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \autoPageBreaksOff                                                           %! BREAKS:BMM1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAKS:BMM3
+                            \autoPageBreaksOff                                                           %! BREAK:BMM1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \pageBreak                                                                   %! BREAKS:BMM3
+                            \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -7358,13 +7358,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAKS:BMM3
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \break                                                                       %! BREAKS:BMM3
+                            \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -7456,7 +7456,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     breaks_measure_map=breaks_measure_map,
+            ...     breaks=breaks,
             ...     margin_markup=margin_markup,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
@@ -7496,17 +7496,17 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \autoPageBreaksOff                                                           %! BREAKS:BMM1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAKS:BMM3
+                            \autoPageBreaksOff                                                           %! BREAK:BMM1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \pageBreak                                                                   %! BREAKS:BMM3
+                            \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -7533,13 +7533,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAKS:BMM3
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \break                                                                       %! BREAKS:BMM3
+                            \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -7629,7 +7629,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Redundant margin markup color pink and redraw dull pink:
 
-            >>> breaks_measure_map = baca.breaks(
+            >>> breaks = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
             ...         [3, 20, (11,)],
@@ -7637,7 +7637,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     breaks_measure_map=breaks_measure_map,
+            ...     breaks=breaks,
             ...     margin_markup=margin_markup,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
@@ -7669,19 +7669,19 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
-                            \autoPageBreaksOff                                                           %! BREAKS:BMM1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAKS:BMM3
+                            \autoPageBreaksOff                                                           %! BREAK:BMM1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:BMM3
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \pageBreak                                                                   %! BREAKS:BMM3
+                            \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 1/2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
+                            \noBreak                                                                     %! BREAK:BMM2
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
@@ -7711,13 +7711,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 3]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAKS:BMM3
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \break                                                                       %! BREAKS:BMM3
+                            \break                                                                       %! BREAK:BMM3
                             s1 * 1/2
                             ^ \markup {
                                 \column
@@ -7851,7 +7851,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Even at the beginning of a segment:
 
-            >>> breaks_measure_map = baca.breaks(
+            >>> breaks = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
             ...         [2, 20, (11,)],
@@ -7859,7 +7859,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     breaks_measure_map=breaks_measure_map,
+            ...     breaks=breaks,
             ...     margin_markup=margin_markup,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
@@ -7900,17 +7900,17 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \autoPageBreaksOff                                                           %! BREAKS:BMM1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAKS:BMM3
+                            \autoPageBreaksOff                                                           %! BREAK:BMM1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \pageBreak                                                                   %! BREAKS:BMM3
+                            \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -7937,13 +7937,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAKS:BMM3
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:BMM3
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
-                            \break                                                                       %! BREAKS:BMM3
+                            \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
                             ^ \markup {
                                 \column
@@ -8394,7 +8394,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     breaks_measure_map=breaks,
+            ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 25)),
@@ -8425,10 +8425,10 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 25)             %! SPACING:HSS1
-                            \autoPageBreaksOff                                                           %! BREAKS:BMM1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! BREAKS:BMM3
+                            \autoPageBreaksOff                                                           %! BREAK:BMM1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! BREAK:BMM3
                         %@% \once \override TextSpanner.bound-details.left.text =                        %! EXPLICIT_METRONOME_MARK:SM27
                         %@% \markup {                                                                    %! EXPLICIT_METRONOME_MARK:SM27
                         %@%     \fontsize                                                                %! EXPLICIT_METRONOME_MARK:SM27
@@ -8484,14 +8484,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \pageBreak                                                                   %! BREAKS:BMM3
+                            \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 25)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
+                            \noBreak                                                                     %! BREAK:BMM2
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 600)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
@@ -8542,7 +8542,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     breaks_measure_map=breaks,
+            ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
@@ -8588,10 +8588,10 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \override TextSpanner.staff-padding = #4                                     %! OC
-                            \autoPageBreaksOff                                                           %! BREAKS:BMM1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! BREAKS:BMM3
+                            \autoPageBreaksOff                                                           %! BREAK:BMM1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! BREAK:BMM3
                         %@% \once \override TextSpanner.bound-details.left.text =                        %! EXPLICIT_METRONOME_MARK:SM27
                         %@% \markup {                                                                    %! EXPLICIT_METRONOME_MARK:SM27
                         %@%     \fontsize                                                                %! EXPLICIT_METRONOME_MARK:SM27
@@ -8649,14 +8649,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \pageBreak                                                                   %! BREAKS:BMM3
+                            \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
+                            \noBreak                                                                     %! BREAK:BMM2
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
@@ -8710,7 +8710,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     breaks_measure_map=breaks,
+            ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
@@ -8755,10 +8755,10 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \override TextSpanner.staff-padding = #4                                     %! OC
-                            \autoPageBreaksOff                                                           %! BREAKS:BMM1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! BREAKS:BMM3
+                            \autoPageBreaksOff                                                           %! BREAK:BMM1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! BREAK:BMM3
                         %@% \once \override TextSpanner.bound-details.left.text =                        %! REAPPLIED_METRONOME_MARK:SM27
                         %@% \markup {                                                                    %! REAPPLIED_METRONOME_MARK:SM27
                         %@%     \fontsize                                                                %! REAPPLIED_METRONOME_MARK:SM27
@@ -8816,14 +8816,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \pageBreak                                                                   %! BREAKS:BMM3
+                            \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
+                            \noBreak                                                                     %! BREAK:BMM2
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
@@ -8877,7 +8877,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     breaks_measure_map=breaks,
+            ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
@@ -8909,10 +8909,10 @@ class SegmentMaker(abjad.SegmentMaker):
                             % GlobalSkips [measure 1]                                                    %! SM4
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
-                            \autoPageBreaksOff                                                           %! BREAKS:BMM1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! BREAKS:BMM3
+                            \autoPageBreaksOff                                                           %! BREAK:BMM1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! BREAK:BMM3
                         %@% \once \override TextSpanner.bound-details.left.text =                        %! EXPLICIT_METRONOME_MARK:SM27
                         %@% \markup {                                                                    %! EXPLICIT_METRONOME_MARK:SM27
                         %@%     \fontsize                                                                %! EXPLICIT_METRONOME_MARK:SM27
@@ -9020,14 +9020,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \pageBreak                                                                   %! BREAKS:BMM3
+                            \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
+                            \noBreak                                                                     %! BREAK:BMM2
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override TextSpanner.bound-details.left-broken.text = \markup {
@@ -9081,7 +9081,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
-            ...     breaks_measure_map=breaks,
+            ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing_specifier=baca.minimum_width((1, 24)),
@@ -9127,10 +9127,10 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \override TextSpanner.staff-padding = #4                                     %! OC
-                            \autoPageBreaksOff                                                           %! BREAKS:BMM1
-                            \noBreak                                                                     %! BREAKS:BMM2
-                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! BREAKS:BMM3
+                            \autoPageBreaksOff                                                           %! BREAK:BMM1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                            #'((Y-offset . 0) (alignment-distances . (8)))                               %! BREAK:BMM3
                         %@% \once \override TextSpanner.bound-details.left.text =                        %! REDUNDANT_METRONOME_MARK:SM27
                         %@% \markup {                                                                    %! REDUNDANT_METRONOME_MARK:SM27
                         %@%     \fontsize                                                                %! REDUNDANT_METRONOME_MARK:SM27
@@ -9188,14 +9188,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            \pageBreak                                                                   %! BREAKS:BMM3
+                            \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
                             \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
                             \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
-                            \noBreak                                                                     %! BREAKS:BMM2
+                            \noBreak                                                                     %! BREAK:BMM2
                         %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                         %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
@@ -10434,7 +10434,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._remove_redundant_time_signatures()
         self._whitespace_leaves()
         self._comment_measure_numbers()
-        self._apply_breaks_measure_map()
+        self._apply_breaks()
         self._cache_per_document_break_information()
         self._apply_fermata_measure_staff_line_count()
         self._apply_per_document_eol_spacing()

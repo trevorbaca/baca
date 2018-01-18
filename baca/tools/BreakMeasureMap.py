@@ -10,7 +10,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.StringTrioScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8), (4, 8)],
-        ...     breaks_measure_map=baca.BreakMeasureMap([
+        ...     breaks=baca.BreakMeasureMap([
         ...         baca.line_break(baca.skip(0)),
         ...         baca.lbsd(100, [30, 30], baca.skip(1)),
         ...         baca.line_break(baca.skip(1)),
@@ -35,36 +35,36 @@ class BreakMeasureMap(abjad.AbjadObject):
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
                         % GlobalSkips [measure 1]                                                    %! SM4
-                        \autoPageBreaksOff                                                           %! BREAKS:BMM1
-                        \noBreak                                                                     %! BREAKS:BMM2
+                        \autoPageBreaksOff                                                           %! BREAK:BMM1
+                        \noBreak                                                                     %! BREAK:BMM2
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
-                        \break                                                                       %! BREAKS:BMM3
+                        \break                                                                       %! BREAK:BMM3
             <BLANKLINE>
                         % GlobalSkips [measure 2]                                                    %! SM4
-                        \noBreak                                                                     %! BREAKS:BMM2
-                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAKS:BMM3
-                        #'((Y-offset . 100) (alignment-distances . (30 30)))                         %! BREAKS:BMM3
+                        \noBreak                                                                     %! BREAK:BMM2
+                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
+                        #'((Y-offset . 100) (alignment-distances . (30 30)))                         %! BREAK:BMM3
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
-                        \break                                                                       %! BREAKS:BMM3
+                        \break                                                                       %! BREAK:BMM3
             <BLANKLINE>
                         % GlobalSkips [measure 3]                                                    %! SM4
-                        \noBreak                                                                     %! BREAKS:BMM2
+                        \noBreak                                                                     %! BREAK:BMM2
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
             <BLANKLINE>
                         % GlobalSkips [measure 4]                                                    %! SM4
-                        \noBreak                                                                     %! BREAKS:BMM2
+                        \noBreak                                                                     %! BREAK:BMM2
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
             <BLANKLINE>
                         % GlobalSkips [measure 5]                                                    %! SM4
-                        \noBreak                                                                     %! BREAKS:BMM2
+                        \noBreak                                                                     %! BREAK:BMM2
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
@@ -425,8 +425,8 @@ class BreakMeasureMap(abjad.AbjadObject):
         self._bol_measure_numbers = []
         document = document or baca.tags.SEGMENT
         self._document = document
-        #tag = f'+{document}:{baca.tags.BREAKS}'
-        tag = baca.tags.BREAKS
+        #tag = f'+{document}:{baca.tags.BREAK}'
+        tag = baca.tags.BREAK
         self._tag = tag
         if commands is not None:
             commands_ = []
@@ -480,7 +480,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                     ),
                 selector=baca.skip(0),
                 site='BMM3',
-                tag='BREAKS',
+                tag='BREAK',
                 )
             baca.IndicatorCommand(
                 indicators=abjad.CyclicTuple(
@@ -490,7 +490,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                     ),
                 selector=baca.skip(1),
                 site='BMM3',
-                tag='BREAKS',
+                tag='BREAK',
                 )
 
         Returns commands.
