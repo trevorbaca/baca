@@ -1397,6 +1397,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if self._fermata_measure_numbers:
             result['fermata_measure_numbers'] = self._fermata_measure_numbers
         result['first_measure_number'] = self._get_first_measure_number()
+        result['last_measure_number'] = self._get_last_measure_number()
         if self._last_measure_is_fermata:
             result['last_measure_is_fermata'] = True
         result['persistent_indicators'] = self._collect_persistent_indicators()
@@ -8533,6 +8534,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 [
                     ('duration', None),
                     ('first_measure_number', 1),
+                    ('last_measure_number', 4),
                     (
                         'persistent_indicators',
                         abjad.TypedOrderedDict(
