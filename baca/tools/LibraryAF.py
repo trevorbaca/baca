@@ -1864,11 +1864,11 @@ class LibraryAF(abjad.AbjadObject):
         if not pages:
             return baca.BreaksMeasureMap(commands=commands, document=document)
         first_measure_number = pages[0].items[0][0]
-        break_measure_numbers = []
+        bol_measure_numbers = []
         for page in pages:
             for i, item in enumerate(page.items):
                 measure_number = item[0]
-                break_measure_numbers.append(measure_number)
+                bol_measure_numbers.append(measure_number)
                 skip_index = measure_number - first_measure_number
                 y_offset = item[1]
                 alignment_distances = item[2]
@@ -1885,7 +1885,7 @@ class LibraryAF(abjad.AbjadObject):
                 lbsd = baca.lbsd(y_offset, alignment_distances, selector)
                 commands.append(lbsd)
         breaks = baca.BreaksMeasureMap(commands=commands, document=document)
-        breaks._break_measure_numbers.extend(break_measure_numbers)
+        breaks._bol_measure_numbers.extend(bol_measure_numbers)
         return breaks
 
     @staticmethod

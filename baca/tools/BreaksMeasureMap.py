@@ -421,7 +421,7 @@ class BreaksMeasureMap(abjad.AbjadObject):
     __documentation_section__ = '(5) Utilities'
 
     __slots__ = (
-        '_break_measure_numbers',
+        '_bol_measure_numbers',
         '_commands',
         '_document',
         '_tag',
@@ -432,7 +432,7 @@ class BreaksMeasureMap(abjad.AbjadObject):
     ### INITIALIZER ###
 
     def __init__(self, commands=None, document=None):
-        self._break_measure_numbers = []
+        self._bol_measure_numbers = []
         document = document or baca.tags.SEGMENT
         self._document = document
         tag = baca.tags.only(document, baca.tags.BREAKS)

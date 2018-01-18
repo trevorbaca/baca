@@ -994,8 +994,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         Returns list.
         '''
         eol_measure_numbers = []
-        if self.breaks and self.breaks._break_measure_numbers:
-            for measure_number in self.breaks._break_measure_numbers[1:]:
+        if self.breaks and self.breaks._bol_measure_numbers:
+            for measure_number in self.breaks._bol_measure_numbers[1:]:
                 eol_measure_number = measure_number - 1
                 eol_measure_numbers.append(eol_measure_number)
         return eol_measure_numbers

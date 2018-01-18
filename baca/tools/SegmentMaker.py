@@ -170,7 +170,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_rehearsal_letter',
         '_score',
         '_score_template',
-        '_segment_break_measure_numbers',
+        '_segment_bol_measure_numbers',
         '_segment_duration',
         '_skip_wellformedness_checks',
         '_skips_instead_of_rests',
@@ -365,7 +365,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if score_template is not None:
             assert isinstance(score_template, baca.ScoreTemplate)
         self._score_template = score_template
-        self._segment_break_measure_numbers = []
+        self._segment_bol_measure_numbers = []
         self._segment_duration = None
         if skip_wellformedness_checks is not None:
             skip_wellformedness_checks = bool(skip_wellformedness_checks)
@@ -755,16 +755,16 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         builds_metadata = self.builds_metadata
         assert 'SEGMENT' not in builds_metadata
-        break_measures = self._segment_break_measure_numbers
+        bol_measure_numbers = self._segment_bol_measure_numbers
         builds_metadata['SEGMENT'] = abjad.TypedOrderedDict()
-        builds_metadata['SEGMENT']['break_measures'] = break_measures
+        builds_metadata['SEGMENT']['bol_measure_numbers'] = bol_measure_numbers
         first_measure_number = self._get_first_measure_number()
         for document_name, document_metadata in builds_metadata.items():
             document_name = baca.tags.document(document_name)
-            break_measure_numbers = document_metadata.get('break_measures')
-            if break_measure_numbers is None:
+            bol_measure_numbers = document_metadata.get('bol_measure_numbers')
+            if bol_measure_numbers is None:
                 continue
-            eol_measure_numbers = [_ - 1 for _ in break_measure_numbers[1:]]
+            eol_measure_numbers = [_ - 1 for _ in bol_measure_numbers[1:]]
             if not eol_measure_numbers:
                 continue
             skips = baca.select(self.score['GlobalSkips']).skips()
@@ -799,17 +799,17 @@ class SegmentMaker(abjad.SegmentMaker):
             baca.tags.SEGMENT,
             )
         for document_name, document_metadata in self.builds_metadata.items():
-            break_measure_numbers = document_metadata.get('break_measures')
-            if break_measure_numbers is None:
+            bol_measure_numbers = document_metadata.get('bol_measure_numbers')
+            if bol_measure_numbers is None:
                 continue
-            break_measure_timespans = self._get_measure_timespans(
-                break_measure_numbers)
-            break_measure_stop_offsets = [
-                _.stop_offset for _ in break_measure_timespans
+            bol_measure_timespans = self._get_measure_timespans(
+                bol_measure_numbers)
+            bol_measure_stop_offsets = [
+                _.stop_offset for _ in bol_measure_timespans
                 ]
-            if break_measure_stop_offsets:
+            if bol_measure_stop_offsets:
                 self._attach_fermata_measure_adjustments(
-                    break_measure_stop_offsets,
+                    bol_measure_stop_offsets,
                     document_name,
                     )
 
@@ -1151,22 +1151,22 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             offset = abjad.inspect(skip).get_timespan().start_offset
             self._break_offsets.append(offset)
-            break_measure_number = first_measure_number + i
-            self._segment_break_measure_numbers.append(break_measure_number)
+            bol_measure_number = first_measure_number + i
+            self._segment_bol_measure_numbers.append(bol_measure_number)
             build_to_break_offsets['SEGMENT'].append(offset)
         segment_stop_offset = abjad.inspect(skip).get_timespan().stop_offset
         self._break_offsets.append(segment_stop_offset)
-        break_measure_number = first_measure_number + i + 1
-        self._segment_break_measure_numbers.append(break_measure_number)
+        bol_measure_number = first_measure_number + i + 1
+        self._segment_bol_measure_numbers.append(bol_measure_number)
         build_to_break_offsets['SEGMENT'].append(segment_stop_offset)
         for build, build_metadata in self.builds_metadata.items():
-            break_measures = build_metadata.get('break_measures')
-            if not break_measures:
+            bol_measure_numbers = build_metadata.get('bol_measure_numbers')
+            if not bol_measure_numbers:
                 continue
-            for break_measure in break_measures:
-                if break_measure not in segment_measure_numbers:
+            for bol_measure_number in bol_measure_numbers:
+                if bol_measure_number not in segment_measure_numbers:
                     continue
-                index = break_measure - first_measure_number
+                index = bol_measure_number - first_measure_number
                 skip = skips[index]
                 offset = abjad.inspect(skip).get_timespan().start_offset
                 build_to_break_offsets[build].append(offset)

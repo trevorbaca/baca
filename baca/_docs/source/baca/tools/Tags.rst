@@ -25,7 +25,7 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.Tags.Tags.build
+      ~baca.tools.Tags.Tags.document
       ~baca.tools.Tags.Tags.forbid
       ~baca.tools.Tags.Tags.markup_tags
       ~baca.tools.Tags.Tags.only
@@ -59,7 +59,7 @@ Class & static methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Tags.Tags.build
+      .. automethod:: baca.tools.Tags.Tags.document
 
 .. only:: html
 
