@@ -351,6 +351,14 @@ class IndicatorCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
+    def context(self):
+        r'''Gets context name.
+
+        Returns string or none.
+        '''
+        return self._context
+
+    @property
     def document(self):
         r'''Gets document.
 
@@ -359,14 +367,6 @@ class IndicatorCommand(Command):
         Returns string or none.
         '''
         return self._document
-
-    @property
-    def context(self):
-        r'''Gets context name.
-
-        Returns string or none.
-        '''
-        return self._context
 
     @property
     def indicators(self):

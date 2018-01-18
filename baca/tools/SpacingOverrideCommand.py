@@ -140,15 +140,6 @@ class SpacingOverrideCommand(Command):
             class_._exclude_other_spacing_markup_from_document(document, leaf)
 
     @staticmethod
-    def _exclude_other_spacing_sections_from_document(document, leaf):
-        my_document = baca.tags.only(document)
-        for wrapper in abjad.inspect(leaf).wrappers(baca.SpacingSection):
-            assert isinstance(wrapper.tag, str)
-            if my_document in wrapper.tag.split(':'):
-                continue
-            wrapper._tag = baca.tags.forbid(document, wrapper.tag)
-
-    @staticmethod
     def _exclude_other_spacing_markup_from_document(document, leaf):
         tags = (baca.tags.SPACING_MARKUP, baca.tags.SPACING_OVERRIDE_MARKUP)
         my_document = baca.tags.only(document)
@@ -159,6 +150,15 @@ class SpacingOverrideCommand(Command):
             if not any(tag in words for tag in tags):
                 continue
             if my_document in words:
+                continue
+            wrapper._tag = baca.tags.forbid(document, wrapper.tag)
+
+    @staticmethod
+    def _exclude_other_spacing_sections_from_document(document, leaf):
+        my_document = baca.tags.only(document)
+        for wrapper in abjad.inspect(leaf).wrappers(baca.SpacingSection):
+            assert isinstance(wrapper.tag, str)
+            if my_document in wrapper.tag.split(':'):
                 continue
             wrapper._tag = baca.tags.forbid(document, wrapper.tag)
 

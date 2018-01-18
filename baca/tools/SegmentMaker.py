@@ -135,8 +135,8 @@ class SegmentMaker(abjad.SegmentMaker):
     __slots__ = (
         '_allow_empty_selections',
         '_break_offsets',
-        '_build_to_break_offsets',
-        '_builds_metadata',
+        '_document_to_break_offsets',
+        '_documents_metadata',
         '_cache',
         '_cached_time_signatures',
         '_color_octaves',
@@ -297,7 +297,7 @@ class SegmentMaker(abjad.SegmentMaker):
             allow_empty_selections = bool(allow_empty_selections)
         self._allow_empty_selections = allow_empty_selections
         self._break_offsets = []
-        self._build_to_break_offsets = None
+        self._document_to_break_offsets = None
         if color_octaves is not None:
             color_octaves = bool(color_octaves)
         self._color_octaves = color_octaves
@@ -725,69 +725,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 status = 'redundant'
         return leaf, previous_indicator, status
 
-    def _apply_per_document_clef_shifts(self):
-        fermata_stop_offsets = self._fermata_stop_offsets[:]
-        if self.previous_metadata.get('last_measure_is_fermata') is True:
-            fermata_stop_offsets.insert(0, abjad.Offset(0))
-        if not fermata_stop_offsets:
+    def _apply_breaks_measure_map(self):
+        if self.breaks_measure_map is None:
             return
-        for staff in abjad.iterate(self.score).components(abjad.Staff):
-            for leaf in abjad.iterate(staff).leaves():
-                start_offset = abjad.inspect(leaf).get_timespan().start_offset
-                if start_offset not in fermata_stop_offsets:
-                    continue
-                wrapper = abjad.inspect(leaf).wrapper(abjad.Clef)
-                if wrapper is None or not wrapper.tag:
-                    continue
-                if baca.tags.EXPLICIT_CLEF not in wrapper.tag.split(':'):
-                    continue
-                items = self._build_to_break_offsets.items()
-                for build, break_offsets in items:
-                    if start_offset in break_offsets:
-                        continue
-                    clef = wrapper.indicator
-                    command = baca.shift_clef(clef, selector=baca.leaf(0))
-                    command = baca.document(build, command)
-                    command(leaf)
-
-    def _apply_per_document_eol_spacing(self):
-        if self.spacing_specifier is None:
-            return
-        builds_metadata = self.builds_metadata
-        assert 'SEGMENT' not in builds_metadata
-        bol_measure_numbers = self._segment_bol_measure_numbers
-        builds_metadata['SEGMENT'] = abjad.TypedOrderedDict()
-        builds_metadata['SEGMENT']['bol_measure_numbers'] = bol_measure_numbers
-        first_measure_number = self._get_first_measure_number()
-        for document_name, document_metadata in builds_metadata.items():
-            document_name = baca.tags.document(document_name)
-            bol_measure_numbers = document_metadata.get('bol_measure_numbers')
-            if bol_measure_numbers is None:
-                continue
-            eol_measure_numbers = [_ - 1 for _ in bol_measure_numbers[1:]]
-            if not eol_measure_numbers:
-                continue
-            skips = baca.select(self.score['GlobalSkips']).skips()
-            prototype = baca.SpacingSection
-            for i, skip in enumerate(skips):
-                measure_number = first_measure_number + i
-                if measure_number not in eol_measure_numbers:
-                    continue
-                fallback_spacing = None
-                for wrapper in abjad.inspect(skip).wrappers(prototype):
-                    if baca.tags.SPACING in wrapper.tag.split(':'):
-                        fallback_spacing = wrapper
-                if fallback_spacing is None:
-                    message = 'fallback spacing not yet attached'
-                    message += f' to skip {i} / measure {measure_number}.'
-                    raise Exception(message)
-                duration = fallback_spacing.indicator.duration
-                baca.SpacingOverrideCommand._attach_spacing_override(
-                    skip,
-                    duration,
-                    document=document_name,
-                    eol=True,
-                    )
+        self.breaks_measure_map(self.score['GlobalSkips'])
 
     def _apply_fermata_measure_staff_line_count(self):
         if self.fermata_measure_staff_line_count is None:
@@ -798,7 +739,7 @@ class SegmentMaker(abjad.SegmentMaker):
             self._break_offsets,
             baca.tags.SEGMENT,
             )
-        for document_name, document_metadata in self.builds_metadata.items():
+        for document_name, document_metadata in self.documents_metadata.items():
             bol_measure_numbers = document_metadata.get('bol_measure_numbers')
             if bol_measure_numbers is None:
                 continue
@@ -853,10 +794,69 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.attach(tie, leaves, site='SM17')
                 abjad.detach('tie from me', current_leaf)
 
-    def _apply_breaks_measure_map(self):
-        if self.breaks_measure_map is None:
+    def _apply_per_document_clef_shifts(self):
+        fermata_stop_offsets = self._fermata_stop_offsets[:]
+        if self.previous_metadata.get('last_measure_is_fermata') is True:
+            fermata_stop_offsets.insert(0, abjad.Offset(0))
+        if not fermata_stop_offsets:
             return
-        self.breaks_measure_map(self.score['GlobalSkips'])
+        for staff in abjad.iterate(self.score).components(abjad.Staff):
+            for leaf in abjad.iterate(staff).leaves():
+                start_offset = abjad.inspect(leaf).get_timespan().start_offset
+                if start_offset not in fermata_stop_offsets:
+                    continue
+                wrapper = abjad.inspect(leaf).wrapper(abjad.Clef)
+                if wrapper is None or not wrapper.tag:
+                    continue
+                if baca.tags.EXPLICIT_CLEF not in wrapper.tag.split(':'):
+                    continue
+                items = self._document_to_break_offsets.items()
+                for document, break_offsets in items:
+                    if start_offset in break_offsets:
+                        continue
+                    clef = wrapper.indicator
+                    command = baca.shift_clef(clef, selector=baca.leaf(0))
+                    command = baca.document(document, command)
+                    command(leaf)
+
+    def _apply_per_document_eol_spacing(self):
+        if self.spacing_specifier is None:
+            return
+        documents_metadata = self.documents_metadata
+        assert 'SEGMENT' not in documents_metadata
+        bol_measure_numbers = self._segment_bol_measure_numbers
+        documents_metadata['SEGMENT'] = abjad.TypedOrderedDict()
+        documents_metadata['SEGMENT']['bol_measure_numbers'] = bol_measure_numbers
+        first_measure_number = self._get_first_measure_number()
+        for document_name, document_metadata in documents_metadata.items():
+            document_name = baca.tags.document(document_name)
+            bol_measure_numbers = document_metadata.get('bol_measure_numbers')
+            if bol_measure_numbers is None:
+                continue
+            eol_measure_numbers = [_ - 1 for _ in bol_measure_numbers[1:]]
+            if not eol_measure_numbers:
+                continue
+            skips = baca.select(self.score['GlobalSkips']).skips()
+            prototype = baca.SpacingSection
+            for i, skip in enumerate(skips):
+                measure_number = first_measure_number + i
+                if measure_number not in eol_measure_numbers:
+                    continue
+                fallback_spacing = None
+                for wrapper in abjad.inspect(skip).wrappers(prototype):
+                    if baca.tags.SPACING in wrapper.tag.split(':'):
+                        fallback_spacing = wrapper
+                if fallback_spacing is None:
+                    message = 'fallback spacing not yet attached'
+                    message += f' to skip {i} / measure {measure_number}.'
+                    raise Exception(message)
+                duration = fallback_spacing.indicator.duration
+                baca.SpacingOverrideCommand._attach_spacing_override(
+                    skip,
+                    duration,
+                    document=document_name,
+                    eol=True,
+                    )
 
     def _apply_spacing_specifier(self):
         start_time = time.time()
@@ -887,12 +887,12 @@ class SegmentMaker(abjad.SegmentMaker):
             message = f'must be 1 <= x <= {self.stage_count}: {stage_number}.'
             raise Exception(message)
 
-    def _attach_fermata_measure_adjustments(self, break_offsets, build):
+    def _attach_fermata_measure_adjustments(self, break_offsets, document):
         prototype = baca.StaffLines
         staff_lines = baca.StaffLines(self.fermata_measure_staff_line_count)
         breaks_already_treated = []
         deactivate = None
-        if build != baca.tags.SEGMENT:
+        if document != baca.tags.SEGMENT:
             deactivate = True
         for staff in abjad.iterate(self.score).components(abjad.Staff):
             for leaf in abjad.iterate(staff).leaves():
@@ -907,7 +907,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     after = abjad.inspect(next_leaf).get_effective(prototype)
                 if before != staff_lines:
                     strings = []
-                    if build == baca.tags.SEGMENT:
+                    if document == baca.tags.SEGMENT:
                         strings_ = staff_lines._get_lilypond_format(
                             context=staff,
                             )
@@ -942,7 +942,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     if strings:
                         literal = abjad.LilyPondLiteral(strings, 'after')
                         tag = baca.tags.FERMATA_BAR_LINE
-                        tag = baca.tags.only(build, tag)
+                        tag = baca.tags.only(document, tag)
                         abjad.attach(
                             literal,
                             leaf,
@@ -951,7 +951,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             tag=tag,
                             )
                     breaks_already_treated.append(leaf_stop)
-                if (build == baca.tags.SEGMENT and
+                if (document == baca.tags.SEGMENT and
                     next_leaf is None and
                     before != staff_lines):
                     before_line_count = getattr(before, 'line_count', 5)
@@ -1130,47 +1130,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 'default',
                 )
 
-    def _cache_per_document_break_information(self):
-        prototype = abjad.LilyPondLiteral
-        skips = baca.select(self.score['GlobalSkips']).skips()
-        first_measure_number = self._get_first_measure_number()
-        segment_measure_numbers = self._get_segment_measure_numbers()
-        build_to_break_offsets = abjad.TypedOrderedDict()
-        self._build_to_break_offsets = build_to_break_offsets
-        build_to_break_offsets['SEGMENT'] = []
-        if self.builds_metadata:
-            for build in self.builds_metadata:
-                build_to_break_offsets[build] = []
-        for i, skip in enumerate(skips):
-            literals = abjad.inspect(skip).get_indicators(prototype)
-            if not literals:
-                continue
-            if not any(
-                _.argument in (r'\break', r'\pageBreak') for _ in literals
-                ):
-                continue
-            offset = abjad.inspect(skip).get_timespan().start_offset
-            self._break_offsets.append(offset)
-            bol_measure_number = first_measure_number + i
-            self._segment_bol_measure_numbers.append(bol_measure_number)
-            build_to_break_offsets['SEGMENT'].append(offset)
-        segment_stop_offset = abjad.inspect(skip).get_timespan().stop_offset
-        self._break_offsets.append(segment_stop_offset)
-        bol_measure_number = first_measure_number + i + 1
-        self._segment_bol_measure_numbers.append(bol_measure_number)
-        build_to_break_offsets['SEGMENT'].append(segment_stop_offset)
-        for build, build_metadata in self.builds_metadata.items():
-            bol_measure_numbers = build_metadata.get('bol_measure_numbers')
-            if not bol_measure_numbers:
-                continue
-            for bol_measure_number in bol_measure_numbers:
-                if bol_measure_number not in segment_measure_numbers:
-                    continue
-                index = bol_measure_number - first_measure_number
-                skip = skips[index]
-                offset = abjad.inspect(skip).get_timespan().start_offset
-                build_to_break_offsets[build].append(offset)
-
     def _cache_leaves(self):
         stage_timespans = []
         for stage_index in range(self.stage_count):
@@ -1193,6 +1152,47 @@ class SegmentMaker(abjad.SegmentMaker):
                     stage_number = stage_index + 1
                     if leaf_timespan.starts_during_timespan(stage_timespan):
                         leaves_by_stage_number[stage_number].append(leaf)
+
+    def _cache_per_document_break_information(self):
+        prototype = abjad.LilyPondLiteral
+        skips = baca.select(self.score['GlobalSkips']).skips()
+        first_measure_number = self._get_first_measure_number()
+        segment_measure_numbers = self._get_segment_measure_numbers()
+        document_to_break_offsets = abjad.TypedOrderedDict()
+        self._document_to_break_offsets = document_to_break_offsets
+        document_to_break_offsets['SEGMENT'] = []
+        if self.documents_metadata:
+            for document in self.documents_metadata:
+                document_to_break_offsets[document] = []
+        for i, skip in enumerate(skips):
+            literals = abjad.inspect(skip).get_indicators(prototype)
+            if not literals:
+                continue
+            if not any(
+                _.argument in (r'\break', r'\pageBreak') for _ in literals
+                ):
+                continue
+            offset = abjad.inspect(skip).get_timespan().start_offset
+            self._break_offsets.append(offset)
+            bol_measure_number = first_measure_number + i
+            self._segment_bol_measure_numbers.append(bol_measure_number)
+            document_to_break_offsets['SEGMENT'].append(offset)
+        segment_stop_offset = abjad.inspect(skip).get_timespan().stop_offset
+        self._break_offsets.append(segment_stop_offset)
+        bol_measure_number = first_measure_number + i + 1
+        self._segment_bol_measure_numbers.append(bol_measure_number)
+        document_to_break_offsets['SEGMENT'].append(segment_stop_offset)
+        for document_name, document_metadata in self.documents_metadata.items():
+            bol_measure_numbers = document_metadata.get('bol_measure_numbers')
+            if not bol_measure_numbers:
+                continue
+            for bol_measure_number in bol_measure_numbers:
+                if bol_measure_number not in segment_measure_numbers:
+                    continue
+                index = bol_measure_number - first_measure_number
+                skip = skips[index]
+                offset = abjad.inspect(skip).get_timespan().start_offset
+                document_to_break_offsets[document_name].append(offset)
 
     def _call_commands(self):
         start_time = time.time()
@@ -2355,14 +2355,6 @@ class SegmentMaker(abjad.SegmentMaker):
         Returns breaks measure map or none.
         '''
         return self._breaks_measure_map
-
-    @property
-    def builds_metadata(self):
-        r'''Gets builds metadata.
-
-        Returns ordered dictionary.
-        '''
-        return self._builds_metadata
 
     @property
     def clefs(self):
@@ -4013,6 +4005,14 @@ class SegmentMaker(abjad.SegmentMaker):
         Returns design-checker or none.
         '''
         return self._design_checker
+
+    @property
+    def documents_metadata(self):
+        r'''Gets documents metadata.
+
+        Returns ordered dictionary.
+        '''
+        return self._documents_metadata
 
     @property
     def dynamics(self):
@@ -7205,7 +7205,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @property
     def known_documents(self):
-        r'''Gets known builds.
+        r'''Gets known documents.
 
         Returns list.
         '''
@@ -10861,8 +10861,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def run(
         self,
-        builds_metadata=None,
         deactivate=None,
+        documents_metadata=None,
         environment=None,
         metadata=None,
         midi=None,
@@ -10882,7 +10882,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '''
         deactivate = deactivate or []
         assert all(isinstance(_, str) for _ in deactivate), repr(deactivate)
-        self._builds_metadata = abjad.TypedOrderedDict(builds_metadata)
+        self._documents_metadata = abjad.TypedOrderedDict(documents_metadata)
         self._environment = environment
         self._midi = midi
         self._previous_metadata = abjad.TypedOrderedDict(previous_metadata)
