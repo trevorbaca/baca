@@ -21,8 +21,8 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.BreaksMeasureMap.BreaksMeasureMap.build
       ~baca.tools.BreaksMeasureMap.BreaksMeasureMap.commands
+      ~baca.tools.BreaksMeasureMap.BreaksMeasureMap.document
       ~baca.tools.BreaksMeasureMap.BreaksMeasureMap.tag
       ~baca.tools.BreaksMeasureMap.BreaksMeasureMap.__call__
       ~baca.tools.BreaksMeasureMap.BreaksMeasureMap.__eq__
@@ -33,9 +33,9 @@ Bases
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.BreaksMeasureMap.BreaksMeasureMap.build
-
 .. autoattribute:: baca.tools.BreaksMeasureMap.BreaksMeasureMap.commands
+
+.. autoattribute:: baca.tools.BreaksMeasureMap.BreaksMeasureMap.document
 
 .. autoattribute:: baca.tools.BreaksMeasureMap.BreaksMeasureMap.tag
 

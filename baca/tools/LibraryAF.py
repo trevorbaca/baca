@@ -1767,7 +1767,7 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def breaks(*pages, build=None):
+    def breaks(*pages, document=None):
         r'''Makes breas.
 
         ..  container:: example
@@ -1855,14 +1855,14 @@ class LibraryAF(abjad.AbjadObject):
                         tag='+SEGMENT:BREAKS',
                         ),
                     ),
-                build='SEGMENT',
+                document='SEGMENT',
                 )
 
         Returns breaks measure map.
         '''
         commands = []
         if not pages:
-            return baca.BreaksMeasureMap(commands=commands, build=build)
+            return baca.BreaksMeasureMap(commands=commands, document=document)
         first_measure_number = pages[0].items[0][0]
         break_measure_numbers = []
         for page in pages:
@@ -1884,25 +1884,9 @@ class LibraryAF(abjad.AbjadObject):
                 commands.append(command)
                 lbsd = baca.lbsd(y_offset, alignment_distances, selector)
                 commands.append(lbsd)
-        breaks = baca.BreaksMeasureMap(commands=commands, build=build)
+        breaks = baca.BreaksMeasureMap(commands=commands, document=document)
         breaks._break_measure_numbers.extend(break_measure_numbers)
         return breaks
-
-    @staticmethod
-    def build(tag:str, command):
-        r'''Sets `command` build tag private property to `tag`.
-
-        Returns build tag closure.
-        '''
-        assert isinstance(tag, str), repr(tag)
-        assert isinstance(command, baca.Command), repr(command)
-        assert command._build is None, repr(command)
-        command._build = tag
-        if isinstance(command, baca.SuiteCommand):
-            for command_ in command.commands:
-                assert command_._build is None, repr(command_)
-                command_._build = tag
-        return command
 
     @staticmethod
     def center_to_octave(n, selector='baca.plts()'):
@@ -3871,6 +3855,22 @@ class LibraryAF(abjad.AbjadObject):
         Returns override command.
         '''
         return baca.dynamic_line_spanner_staff_padding(n, selector=selector)
+
+    @staticmethod
+    def document(tag:str, command):
+        r'''Sets `command` document tag private property to `tag`.
+
+        Returns command.
+        '''
+        assert isinstance(tag, str), repr(tag)
+        assert isinstance(command, baca.Command), repr(command)
+        assert command._document is None, repr(command)
+        command._document = tag
+        if isinstance(command, baca.SuiteCommand):
+            for command_ in command.commands:
+                assert command_._document is None, repr(command_)
+                command_._document = tag
+        return command
 
     @staticmethod
     def double_tonguing(selector='baca.pheads()'):

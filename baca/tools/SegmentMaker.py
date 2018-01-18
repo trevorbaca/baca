@@ -656,12 +656,12 @@ class SegmentMaker(abjad.SegmentMaker):
         for command in commands:
             if not isinstance(command, baca.Command):
                 raise Exception(f'commands only:\n\n{format(command)}')
-            if getattr(command, 'build', None):
-                build = command.build
-                build = build.strip('+')
-                build = build.strip('-')
-                if build not in self.known_builds:
-                    raise Exception(f'unknown build: {command.build!r}.')
+            if getattr(command, 'document', None):
+                document = command.document
+                document = document.strip('+')
+                document = document.strip('-')
+                if document not in self.known_documents:
+                    raise Exception(f'unknown document: {command.document!r}.')
         for scope in scopes:
             for command in commands:
                 manifest = getattr(command, '_manifest', None)
@@ -725,7 +725,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 status = 'redundant'
         return leaf, previous_indicator, status
 
-    def _apply_per_build_clef_shifts(self):
+    def _apply_per_document_clef_shifts(self):
         fermata_stop_offsets = self._fermata_stop_offsets[:]
         if self.previous_metadata.get('last_measure_is_fermata') is True:
             fermata_stop_offsets.insert(0, abjad.Offset(0))
@@ -747,10 +747,10 @@ class SegmentMaker(abjad.SegmentMaker):
                         continue
                     clef = wrapper.indicator
                     command = baca.shift_clef(clef, selector=baca.leaf(0))
-                    command = baca.build(build, command)
+                    command = baca.document(build, command)
                     command(leaf)
 
-    def _apply_per_build_eol_spacing(self):
+    def _apply_per_document_eol_spacing(self):
         if self.spacing_specifier is None:
             return
         builds_metadata = self.builds_metadata
@@ -759,9 +759,9 @@ class SegmentMaker(abjad.SegmentMaker):
         builds_metadata['SEGMENT'] = abjad.TypedOrderedDict()
         builds_metadata['SEGMENT']['break_measures'] = break_measures
         first_measure_number = self._get_first_measure_number()
-        for build_name, build_metadata in builds_metadata.items():
-            build_name = baca.tags.build(build_name)
-            break_measure_numbers = build_metadata.get('break_measures')
+        for document_name, document_metadata in builds_metadata.items():
+            document_name = baca.tags.build(document_name)
+            break_measure_numbers = document_metadata.get('break_measures')
             if break_measure_numbers is None:
                 continue
             eol_measure_numbers = [_ - 1 for _ in break_measure_numbers[1:]]
@@ -785,7 +785,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 baca.SpacingOverrideCommand._attach_spacing_override(
                     skip,
                     duration,
-                    build=build_name,
+                    document=document_name,
                     eol=True,
                     )
 
@@ -798,8 +798,8 @@ class SegmentMaker(abjad.SegmentMaker):
             self._break_offsets,
             baca.tags.SEGMENT,
             )
-        for build_name, build_metadata in self.builds_metadata.items():
-            break_measure_numbers = build_metadata.get('break_measures')
+        for document_name, document_metadata in self.builds_metadata.items():
+            break_measure_numbers = document_metadata.get('break_measures')
             if break_measure_numbers is None:
                 continue
             break_measure_timespans = self._get_measure_timespans(
@@ -810,7 +810,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if break_measure_stop_offsets:
                 self._attach_fermata_measure_adjustments(
                     break_measure_stop_offsets,
-                    build_name,
+                    document_name,
                     )
 
     def _apply_first_and_last_ties(self, voice):
@@ -1130,7 +1130,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 'default',
                 )
 
-    def _cache_per_build_break_information(self):
+    def _cache_per_document_break_information(self):
         prototype = abjad.LilyPondLiteral
         skips = baca.select(self.score['GlobalSkips']).skips()
         first_measure_number = self._get_first_measure_number()
@@ -7204,13 +7204,13 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._instruments
 
     @property
-    def known_builds(self):
+    def known_documents(self):
         r'''Gets known builds.
 
         Returns list.
         '''
         result = ['SEGMENT']
-        result.extend(getattr(self.score_template, 'known_builds', []))
+        result.extend(getattr(self.score_template, 'known_documents', []))
         return result
 
     @property
@@ -10915,10 +10915,10 @@ class SegmentMaker(abjad.SegmentMaker):
         self._whitespace_leaves()
         self._comment_measure_numbers()
         self._apply_breaks_measure_map()
-        self._cache_per_build_break_information()
+        self._cache_per_document_break_information()
         self._apply_fermata_measure_staff_line_count()
-        self._apply_per_build_eol_spacing()
-        self._apply_per_build_clef_shifts()
+        self._apply_per_document_eol_spacing()
+        self._apply_per_document_clef_shifts()
         self._deactivate_tags(deactivate)
         self._remove_tags(remove)
         self._collect_metadata()

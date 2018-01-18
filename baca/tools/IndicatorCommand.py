@@ -215,8 +215,8 @@ class IndicatorCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_build',
         '_context',
+        '_document',
         '_indicators',
         '_site',
         '_tag',
@@ -233,7 +233,7 @@ class IndicatorCommand(Command):
         tag=None,
         ):
         Command.__init__(self, selector=selector)
-        self._build = None
+        self._document = None
         if context is not None:
             assert isinstance(context, str), repr(context)
         self._context = context
@@ -267,11 +267,11 @@ class IndicatorCommand(Command):
             return
         tag = self.tag
         deactivate = None
-        if self.build is not None:
-            if self.build.startswith('-'):
-                tag = f'{self.build}:{tag}'
+        if self.document is not None:
+            if self.document.startswith('-'):
+                tag = f'{self.document}:{tag}'
             else:
-                tag = baca.tags.only(self.build, tag)
+                tag = baca.tags.only(self.document, tag)
                 assert tag.startswith('+')
                 deactivate = True
         for i, leaf in enumerate(baca.select(argument).leaves()):
@@ -351,14 +351,14 @@ class IndicatorCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def build(self):
-        r'''Gets build.
+    def document(self):
+        r'''Gets document.
 
         Set to string or none.
 
         Returns string or none.
         '''
-        return self._build
+        return self._document
 
     @property
     def context(self):

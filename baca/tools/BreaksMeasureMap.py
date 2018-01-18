@@ -422,8 +422,8 @@ class BreaksMeasureMap(abjad.AbjadObject):
 
     __slots__ = (
         '_break_measure_numbers',
-        '_build',
         '_commands',
+        '_document',
         '_tag',
         )
 
@@ -431,11 +431,11 @@ class BreaksMeasureMap(abjad.AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, commands=None, build=None):
+    def __init__(self, commands=None, document=None):
         self._break_measure_numbers = []
-        build = build or baca.tags.SEGMENT
-        self._build = build
-        tag = baca.tags.only(build, baca.tags.BREAKS)
+        document = document or baca.tags.SEGMENT
+        self._document = document
+        tag = baca.tags.only(document, baca.tags.BREAKS)
         self._tag = tag
         if commands is not None:
             commands_ = []
@@ -466,12 +466,6 @@ class BreaksMeasureMap(abjad.AbjadObject):
             command(context)
 
     ### PUBLIC PROPERTIES ###
-
-    @property
-    def build(self):
-        r'''Gets build.
-        '''
-        return self._build
 
     @property
     def commands(self):
@@ -511,6 +505,12 @@ class BreaksMeasureMap(abjad.AbjadObject):
         Returns commands.
         '''
         return self._commands
+
+    @property
+    def document(self):
+        r'''Gets document.
+        '''
+        return self._document
 
     @property
     def tag(self):

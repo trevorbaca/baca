@@ -16,8 +16,8 @@ class SuiteCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_build',
         '_commands',
+        '_document',
         '_selector',
         )
 
@@ -25,12 +25,12 @@ class SuiteCommand(Command):
 
     def __init__(self, commands=None, selector=None):
         Command.__init__(self, selector=selector)
-        self._build = None
         if isinstance(commands, baca.Command):
             commands = (commands,)
         elif isinstance(commands, collections.Iterable):
             commands = tuple(commands)
         self._commands = commands
+        self._document = None
 
     ### SPECIAL METHODS ###
 
@@ -51,21 +51,21 @@ class SuiteCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def build(self):
-        r'''Gets build prefix.
-
-        Set to tag, string or none.
-
-        Returns string or none.
-        '''
-        if self._build is not None:
-            assert isinstance(self._build, str)
-        return self._build
-
-    @property
     def commands(self):
         r'''Gets commands.
 
         Returns tuple or none.
         '''
         return self._commands
+
+    @property
+    def document(self):
+        r'''Gets document.
+
+        Set to tag, string or none.
+
+        Returns string or none.
+        '''
+        if self._document is not None:
+            assert isinstance(self._document, str)
+        return self._document

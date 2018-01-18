@@ -192,8 +192,8 @@ class OverrideCommand(Command):
     __slots__ = (
         '_after',
         '_attribute',
-        '_build',
         '_context',
+        '_document',
         '_grob',
         '_site',
         '_tag',
@@ -220,10 +220,10 @@ class OverrideCommand(Command):
         if attribute is not None:
             assert isinstance(attribute, str), repr(attribute)
         self._attribute = attribute
-        self._build = None
         if context is not None:
             assert isinstance(context, str), repr(context)
         self._context = context
+        self._document = None
         if grob is not None:
             assert isinstance(grob, str), repr(grob)
         self._grob = grob
@@ -274,8 +274,8 @@ class OverrideCommand(Command):
             format_slot = 'after'
         literal = abjad.LilyPondLiteral(string, format_slot)
         tag, deactivate = self.tag, None
-        if self.build is not None:
-            tag = baca.tags.only(self.build, tag)
+        if self.document is not None:
+            tag = baca.tags.only(self.document, tag)
             deactivate = True
         abjad.attach(
             literal,
@@ -319,18 +319,6 @@ class OverrideCommand(Command):
         return self._attribute
 
     @property
-    def build(self):
-        r'''Gets build prefix.
-
-        Set to tag, string or none.
-
-        Returns string or none
-        '''
-        if self._build is not None:
-            assert isinstance(self._build, str)
-        return self._build
-
-    @property
     def context(self):
         r'''Gets context name.
 
@@ -341,6 +329,18 @@ class OverrideCommand(Command):
         Returns string or none.
         '''
         return self._context
+
+    @property
+    def document(self):
+        r'''Gets document.
+
+        Set to tag, string or none.
+
+        Returns string or none
+        '''
+        if self._document is not None:
+            assert isinstance(self._document, str)
+        return self._document
 
     @property
     def grob(self):

@@ -23,7 +23,7 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.build
+      ~baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.document
       ~baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.duration
       ~baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.selector
       ~baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.site
@@ -37,7 +37,7 @@ Bases
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.build
+.. autoattribute:: baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.document
 
 .. autoattribute:: baca.tools.SpacingOverrideCommand.SpacingOverrideCommand.duration
 
