@@ -760,7 +760,7 @@ class SegmentMaker(abjad.SegmentMaker):
         builds_metadata['SEGMENT']['break_measures'] = break_measures
         first_measure_number = self._get_first_measure_number()
         for document_name, document_metadata in builds_metadata.items():
-            document_name = baca.tags.build(document_name)
+            document_name = baca.tags.document(document_name)
             break_measure_numbers = document_metadata.get('break_measures')
             if break_measure_numbers is None:
                 continue
