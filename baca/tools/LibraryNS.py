@@ -2293,7 +2293,7 @@ class LibraryNS(abjad.AbjadObject):
 
     @staticmethod
     def scorewide_spacing(
-        score_package_name,
+        path,
         fallback_duration,
         breaks=None,
         fermata_measure_duration=None,
@@ -2302,26 +2302,37 @@ class LibraryNS(abjad.AbjadObject):
 
         Returns horizontal spacing specifier with overrides.
         '''
+        path = abjad.Path(path)
+        if path.parent.is_segment():
+            string = 'first_measure_number'
+            first_measure_number = path.parent.get_metadatum(string)
+            time_signatures = path.parent.get_metadatum('time_signatures')
+            measure_count = len(time_signatures)
+        else:
+            first_measure_number = 1
+            dictionary = path.contents.get_metadatum('time_signatures', {})
+            measure_count = 0
+            for segment, time_signatures in dictionary.items():
+                measure_count += len(time_signatures)
         fallback_duration = abjad.NonreducedFraction(fallback_duration)
+        overrides = abjad.TypedOrderedDict()
+        last_measure_number = first_measure_number + measure_count - 1
+        for n in range(first_measure_number, last_measure_number + 1):
+            overrides[n] = fallback_duration
         if fermata_measure_duration is not None:
             fermata_measure_duration = abjad.NonreducedFraction(
                 fermata_measure_duration
                 )
-        path = abjad.Path(score_package_name)
-        dictionary = path.get_metadatum('time_signatures', {})
-        measure_count = 0
-        for segment, time_signatures in dictionary.items():
-            measure_count += len(time_signatures)
-        overrides = abjad.TypedOrderedDict()
-        for i in range(measure_count):
-            measure_number = i + 1
-            overrides[measure_number] = fallback_duration
-        return baca.HorizontalSpacingSpecifier(
+        specifier = baca.HorizontalSpacingSpecifier(
             breaks=breaks,
             fermata_measure_width=fermata_measure_duration,
-            fermata_score=score_package_name,
+            fermata_score=path.contents.name,
+            first_measure_number=first_measure_number,
+            measure_count=measure_count,
             overrides=overrides,
             )
+        specifier._forbid_segment_maker_adjustments = True
+        return specifier
 
     @staticmethod
     def script_color(color='red', selector='baca.leaves()'):

@@ -1783,7 +1783,7 @@ class LibraryAF(abjad.AbjadObject):
                             ),
                         selector=baca.skip(0),
                         site='BMM3',
-                        tag='+SEGMENT:BREAKS',
+                        tag='BREAKS',
                         ),
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
@@ -1796,7 +1796,7 @@ class LibraryAF(abjad.AbjadObject):
                             ),
                         selector=baca.skip(0),
                         site='BMM3',
-                        tag='+SEGMENT:BREAKS',
+                        tag='BREAKS',
                         ),
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
@@ -1806,7 +1806,7 @@ class LibraryAF(abjad.AbjadObject):
                             ),
                         selector=baca.skip(12),
                         site='BMM3',
-                        tag='+SEGMENT:BREAKS',
+                        tag='BREAKS',
                         ),
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
@@ -1819,7 +1819,7 @@ class LibraryAF(abjad.AbjadObject):
                             ),
                         selector=baca.skip(12),
                         site='BMM3',
-                        tag='+SEGMENT:BREAKS',
+                        tag='BREAKS',
                         ),
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
@@ -1829,7 +1829,7 @@ class LibraryAF(abjad.AbjadObject):
                             ),
                         selector=baca.skip(22),
                         site='BMM3',
-                        tag='+SEGMENT:BREAKS',
+                        tag='BREAKS',
                         ),
                     baca.IndicatorCommand(
                         indicators=abjad.CyclicTuple(
@@ -1842,7 +1842,7 @@ class LibraryAF(abjad.AbjadObject):
                             ),
                         selector=baca.skip(22),
                         site='BMM3',
-                        tag='+SEGMENT:BREAKS',
+                        tag='BREAKS',
                         ),
                     ),
                 document='SEGMENT',

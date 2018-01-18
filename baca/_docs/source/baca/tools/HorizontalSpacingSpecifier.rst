@@ -26,6 +26,9 @@ Bases
       ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.fermata_measure_numbers
       ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.fermata_measure_width
       ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.fermata_score
+      ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.first_measure_number
+      ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.last_measure_number
+      ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.measure_count
       ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.minimum_width
       ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.multiplier
       ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.override
@@ -48,6 +51,12 @@ Read-only properties
 .. autoattribute:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.fermata_measure_width
 
 .. autoattribute:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.fermata_score
+
+.. autoattribute:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.first_measure_number
+
+.. autoattribute:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.last_measure_number
+
+.. autoattribute:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.measure_count
 
 .. autoattribute:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.minimum_width
 

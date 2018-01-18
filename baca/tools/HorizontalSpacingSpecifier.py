@@ -762,6 +762,9 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         '_fermata_measure_width',
         '_fermata_score',
         '_fermata_start_offsets',
+        '_first_measure_number',
+        '_forbid_segment_maker_adjustments',
+        '_measure_count',
         '_minimum_width',
         '_multiplier',
         '_overrides',
@@ -776,6 +779,8 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         breaks=None,
         fermata_measure_width=None,
         fermata_score=None,
+        first_measure_number=None,
+        measure_count=None,
         minimum_width=None,
         multiplier=None,
         overrides=None,
@@ -792,6 +797,15 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             assert isinstance(fermata_score, str), repr(fermata_score)
         self._fermata_score = fermata_score
         self._fermata_start_offsets = []
+        if first_measure_number is not None:
+            assert isinstance(first_measure_number, int)
+            assert 1 <= first_measure_number
+        self._first_measure_number = first_measure_number
+        self._forbid_segment_maker_adjustments = None
+        if measure_count is not None:
+            assert isinstance(measure_count, int)
+            assert 0 <= measure_count
+        self._measure_count = measure_count
         if minimum_width is not None:
             minimum_width = abjad.Duration(minimum_width)
         self._minimum_width = minimum_width
@@ -823,8 +837,9 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             minimum_durations_by_measure = method(skips, leaves)
         string = '_fermata_start_offsets'
         self._fermata_start_offsets = getattr(segment_maker, string, [])
+        first_measure_number = self.first_measure_number or 1
         for measure_index, skip in enumerate(skips):
-            measure_number = measure_index + 1
+            measure_number = first_measure_number + measure_index
             if (self.fermata_measure_width is not None and
                 self._is_fermata_measure(measure_number, skip)):
                 duration = self.fermata_measure_width
@@ -938,6 +953,9 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             for measure_number in self.breaks._bol_measure_numbers[1:]:
                 eol_measure_number = measure_number - 1
                 eol_measure_numbers.append(eol_measure_number)
+        if (self.last_measure_number and
+            self.last_measure_number not in eol_measure_numbers):
+            eol_measure_numbers.append(self.last_measure_number)
         return eol_measure_numbers
 
     @property
@@ -978,6 +996,32 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
         Returns string or none.
         '''
         return self._fermata_score
+
+    @property
+    def first_measure_number(self):
+        r'''Gets first measure number.
+
+        Returns positive integer or none.
+        '''
+        return self._first_measure_number
+
+    @property
+    def last_measure_number(self):
+        r'''Gets last measure number.
+
+        First measure number and measure count must be defined.
+        '''
+        if (self.first_measure_number is not None and
+            self.measure_count is not None):
+            return self.first_measure_number + self.measure_count - 1
+
+    @property
+    def measure_count(self):
+        r'''Gets measure count.
+
+        Returns nonnegative integer or none.
+        '''
+        return self._measure_count
 
     @property
     def minimum_width(self):
