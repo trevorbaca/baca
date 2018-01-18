@@ -26,9 +26,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.Tags.Tags.document
-      ~baca.tools.Tags.Tags.forbid
       ~baca.tools.Tags.Tags.markup_tags
-      ~baca.tools.Tags.Tags.only
       ~baca.tools.Tags.Tags.spacing_tags
       ~baca.tools.Tags.Tags.__copy__
       ~baca.tools.Tags.Tags.__eq__
@@ -60,18 +58,6 @@ Class & static methods
    .. container:: inherited
 
       .. automethod:: baca.tools.Tags.Tags.document
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Tags.Tags.forbid
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Tags.Tags.only
 
 Special methods
 ---------------

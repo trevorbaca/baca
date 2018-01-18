@@ -275,7 +275,11 @@ class OverrideCommand(Command):
         literal = abjad.LilyPondLiteral(string, format_slot)
         tag, deactivate = self.tag, None
         if self.document is not None:
-            tag = baca.tags.only(self.document, tag)
+            assert self.document[0] in ('+', '-'), repr(self.document)
+            if self.tag:
+                tag = f'{self.document}:{self.tag}'
+            else:
+                tag = f'{self.document}'
             deactivate = True
         abjad.attach(
             literal,
@@ -338,9 +342,10 @@ class OverrideCommand(Command):
 
         Returns string or none
         '''
-        if self._document is not None:
-            assert isinstance(self._document, str)
-        return self._document
+        document = self._document
+        if document is not None:
+            self._is_signed_document_name(document), repr(document)
+        return document
 
     @property
     def grob(self):

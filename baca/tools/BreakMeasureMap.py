@@ -435,7 +435,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         self._bol_measure_numbers = []
         document = document or baca.tags.SEGMENT
         self._document = document
-        tag = baca.tags.only(document, baca.tags.BREAKS)
+        tag = f'+{document}:{baca.tags.BREAKS}'
         self._tag = tag
         if commands is not None:
             commands_ = []
@@ -510,7 +510,10 @@ class BreakMeasureMap(abjad.AbjadObject):
     def document(self):
         r'''Gets document.
         '''
-        return self._document
+        document = self._document
+        if document is not None:
+            self._is_signed_document_name(document), repr(document)
+        return document
 
     @property
     def tag(self):

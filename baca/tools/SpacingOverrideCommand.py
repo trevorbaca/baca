@@ -55,9 +55,11 @@ class SpacingOverrideCommand(Command):
     @staticmethod
     def _attach_spacing_override(leaf, duration, document=None, eol=None):
         assert isinstance(leaf, abjad.Skip), repr(leaf)
+        if document is not None:
+            assert document.startswith('+'), repr(document)
         # overriding spacing for just one document:
         if document:
-            include_document_tag = baca.tags.only(document)
+            include_document_tag = document
             for wrapper in abjad.inspect(leaf).wrappers(baca.SpacingSection):
                 assert isinstance(wrapper.tag, str)
                 if include_document_tag in wrapper.tag.split(':'):
@@ -98,8 +100,8 @@ class SpacingOverrideCommand(Command):
             tag = baca.tags.SPACING
             deactivate = None
         else:
-            tag = baca.tags.SPACING_OVERRIDE
-            tag = baca.tags.only(document, tag)
+            assert document.startswith('+')
+            tag = f'{document}:{baca.tags.SPACING_OVERRIDE}'
             deactivate = True
         abjad.attach(
             spacing_section,
@@ -123,7 +125,8 @@ class SpacingOverrideCommand(Command):
         markup = abjad.new(markup, direction=abjad.Up)
         tag, deactivate = baca.tags.SPACING_OVERRIDE_MARKUP, None
         if document:
-            tag = baca.tags.only(document, tag)
+            assert document.startswith('+'), repr(document)
+            tag = f'{document}:{baca.tags.SPACING_OVERRIDE_MARKUP}'
             deactivate = True
         abjad.attach(
             markup,
@@ -141,8 +144,10 @@ class SpacingOverrideCommand(Command):
 
     @staticmethod
     def _exclude_other_spacing_markup_from_document(document, leaf):
+        my_document = document
+        assert my_document.startswith('+'), repr(my_document)
+        negative_document = my_document.replace('+', '-')
         tags = (baca.tags.SPACING_MARKUP, baca.tags.SPACING_OVERRIDE_MARKUP)
-        my_document = baca.tags.only(document)
         for wrapper in abjad.inspect(leaf).wrappers(abjad.Markup):
             if not wrapper.tag:
                 continue
@@ -151,16 +156,18 @@ class SpacingOverrideCommand(Command):
                 continue
             if my_document in words:
                 continue
-            wrapper._tag = baca.tags.forbid(document, wrapper.tag)
+            wrapper._tag = f'{negative_document}:{wrapper.tag}'
 
     @staticmethod
     def _exclude_other_spacing_sections_from_document(document, leaf):
-        my_document = baca.tags.only(document)
+        my_document = document
+        assert my_document.startswith('+'), repr(my_document)
+        negative_document = my_document.replace('+', '-')
         for wrapper in abjad.inspect(leaf).wrappers(baca.SpacingSection):
             assert isinstance(wrapper.tag, str)
             if my_document in wrapper.tag.split(':'):
                 continue
-            wrapper._tag = baca.tags.forbid(document, wrapper.tag)
+            wrapper._tag = f'{negative_document}:{wrapper.tag}'
 
     ### PUBLIC PROPERTIES ###
 
@@ -172,9 +179,10 @@ class SpacingOverrideCommand(Command):
 
         Returns string or none.
         '''
-        if self._document is not None:
-            assert isinstance(self._document, str)
-        return self._document
+        document = self._document
+        if document is not None:
+            assert self._is_signed_document_name(document), repr(document)
+        return document
 
     @property
     def duration(self):

@@ -47,6 +47,16 @@ class Command(abjad.AbjadObject):
         '''
         pass
 
+    ### PRIVATE METHODS ###
+
+    @staticmethod
+    def _is_signed_document_name(string:str):
+        if not isinstance(string, str):
+            return False
+        if string[0] not in ('+', '-'):
+            return False
+        return abjad.String(string[1:]).is_shout_case()
+
     ### PUBLIC PROPERTIES ###
 
     @property

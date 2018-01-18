@@ -265,14 +265,21 @@ class IndicatorCommand(Command):
             argument = self.selector(argument)
         if not argument:
             return
-        tag = self.tag
         deactivate = None
+        tag = self.tag
         if self.document is not None:
-            if self.document.startswith('-'):
-                tag = f'{self.document}:{tag}'
+#            if self.document.startswith('-'):
+#                tag = f'{self.document}:{self.tag}'
+#            else:
+#                assert self.document.startswith('+')
+#                tag = f'{self.document}:{self.tag}'
+#                deactivate = True
+            assert self.document[0] in ('+', '-'), repr(self.document)
+            if self.tag:
+                tag = f'{self.document}:{self.tag}'
             else:
-                tag = baca.tags.only(self.document, tag)
-                assert tag.startswith('+')
+                tag = f'{self.document}'
+            if tag.startswith('+'):
                 deactivate = True
         for i, leaf in enumerate(baca.select(argument).leaves()):
             indicators = self.indicators[i]
@@ -366,7 +373,10 @@ class IndicatorCommand(Command):
 
         Returns string or none.
         '''
-        return self._document
+        document = self._document
+        if document is not None:
+            assert self._is_signed_document_name(document), repr(document)
+        return document
 
     @property
     def indicators(self):

@@ -66,6 +66,7 @@ class SuiteCommand(Command):
 
         Returns string or none.
         '''
-        if self._document is not None:
-            assert isinstance(self._document, str)
-        return self._document
+        document = self._document
+        if document is not None:
+            self._is_signed_document_name(document), repr(document)
+        return document

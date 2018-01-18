@@ -811,12 +811,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 if baca.tags.EXPLICIT_CLEF not in wrapper.tag.split(':'):
                     continue
                 items = self._document_to_break_offsets.items()
-                for document, break_offsets in items:
+                for document_name, break_offsets in items:
                     if start_offset in break_offsets:
                         continue
                     clef = wrapper.indicator
                     command = baca.shift_clef(clef, selector=baca.leaf(0))
-                    command = baca.document(document, command)
+                    command = baca.document(f'+{document_name}', command)
                     command(leaf)
 
     def _apply_per_document_eol_spacing(self):
@@ -829,7 +829,12 @@ class SegmentMaker(abjad.SegmentMaker):
         documents_metadata['SEGMENT']['bol_measure_numbers'] = bol_measure_numbers
         first_measure_number = self._get_first_measure_number()
         for document_name, document_metadata in documents_metadata.items():
-            document_name = baca.tags.document(document_name)
+
+            # TODO: remove after debug:
+            assert document_name != 'ARCH_A_PARTS', repr(document_name)
+
+            assert abjad.String(document_name).is_shout_case(), repr(
+                document_name)
             bol_measure_numbers = document_metadata.get('bol_measure_numbers')
             if bol_measure_numbers is None:
                 continue
@@ -854,7 +859,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 baca.SpacingOverrideCommand._attach_spacing_override(
                     skip,
                     duration,
-                    document=document_name,
+                    document=f'+{document_name}',
                     eol=True,
                     )
 
@@ -941,8 +946,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         strings.append(string)
                     if strings:
                         literal = abjad.LilyPondLiteral(strings, 'after')
-                        tag = baca.tags.FERMATA_BAR_LINE
-                        tag = baca.tags.only(document, tag)
+                        tag = f'+{document}:{baca.tags.FERMATA_BAR_LINE}'
                         abjad.attach(
                             literal,
                             leaf,
@@ -2024,7 +2028,7 @@ class SegmentMaker(abjad.SegmentMaker):
             literal,
             first_skip,
             site='SM2',
-            tag=baca.tags.only(baca.tags.SEGMENT, baca.tags.EMPTY_START_BAR),
+            tag=f'+{baca.tags.SEGMENT}:{baca.tags.EMPTY_START_BAR}',
             )
 
     def _make_lilypond_file(self):

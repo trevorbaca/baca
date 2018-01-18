@@ -3862,6 +3862,7 @@ class LibraryAF(abjad.AbjadObject):
 
         Returns command.
         '''
+        assert baca.Command._is_signed_document_name(tag), repr(tag)
         assert isinstance(tag, str), repr(tag)
         assert isinstance(command, baca.Command), repr(command)
         assert command._document is None, repr(command)
