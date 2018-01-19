@@ -51,6 +51,7 @@ from .NestingCommand import NestingCommand
 from .OctaveDisplacementCommand import OctaveDisplacementCommand
 from .OverrideCommand import OverrideCommand
 from .PageSpecifier import PageSpecifier
+from .PartCommand import PartCommand
 from .PartitionDivisionCallback import PartitionDivisionCallback
 from .PiecewiseCommand import PiecewiseCommand
 from .PitchArray import PitchArray
@@ -95,7 +96,6 @@ from .StaffPositionCommand import StaffPositionCommand
 from .StageMeasureMap import StageMeasureMap
 from .StringTrioScoreTemplate import StringTrioScoreTemplate
 from .SuiteCommand import SuiteCommand
-from .LilyPondTagCommand import LilyPondTagCommand
 from .Tags import Tags
 from .TieCorrectionCommand import TieCorrectionCommand
 from .TimeSignatureGroups import TimeSignatureGroups

@@ -3,13 +3,13 @@ import baca
 from .Command import Command
 
 
-class LilyPondTagCommand(Command):
-    r'''Tag command.
+class PartCommand(Command):
+    r'''Part command.
 
     ..  container:: example
 
-        >>> baca.LilyPondTagCommand()
-        LilyPondTagCommand(selector=baca.leaves())
+        >>> baca.PartCommand()
+        PartCommand(selector=baca.leaves())
 
     ..  container:: example
 
@@ -21,9 +21,9 @@ class LilyPondTagCommand(Command):
         >>> maker(
         ...     baca.scope('MusicVoice', 1),
         ...     baca.make_notes(repeat_ties=True),
+        ...     baca.part('ViolinI', baca.leaves()[:2]),
+        ...     baca.part('ViolinI.ViolinII', baca.leaves()[2:]),
         ...     baca.pitches('E4 F4'),
-        ...     baca.lilypond_tag('ViolinI', baca.leaves()[:2]),
-        ...     baca.lilypond_tag('ViolinI.ViolinII', baca.leaves()[2:]),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
@@ -89,16 +89,16 @@ class LilyPondTagCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_tag',
+        '_part',
         )
 
     ### INITIALIZER ###
 
-    def __init__(self, selector='baca.leaves()', tag=None):
+    def __init__(self, selector='baca.leaves()', part=None):
         Command.__init__(self, selector=selector)
-        if tag is not None:
-            assert isinstance(tag, str), repr(tag)
-        self._tag = tag
+        if part is not None:
+            assert isinstance(part, str), repr(part)
+        self._part = part
 
     ### SPECIAL METHODS ###
 
@@ -114,16 +114,16 @@ class LilyPondTagCommand(Command):
         leaves = baca.select(argument).leaves()
         container = abjad.Container()
         abjad.mutate(leaves).wrap(container)
-        string = rf'\tag {self.tag}'
+        string = rf'\tag {self.part}'
         literal = abjad.LilyPondLiteral(string, 'before')
         abjad.attach(literal, container)
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def tag(self):
-        r'''Gets tag.
+    def part(self):
+        r'''Gets part.
 
         Returns string.
         '''
-        return self._tag
+        return self._part

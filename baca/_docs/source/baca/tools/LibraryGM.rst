@@ -31,7 +31,6 @@ Bases
       ~baca.tools.LibraryGM.LibraryGM.label
       ~baca.tools.LibraryGM.LibraryGM.laissez_vibrer
       ~baca.tools.LibraryGM.LibraryGM.lbsd
-      ~baca.tools.LibraryGM.LibraryGM.lilypond_tag
       ~baca.tools.LibraryGM.LibraryGM.line_break
       ~baca.tools.LibraryGM.LibraryGM.literal
       ~baca.tools.LibraryGM.LibraryGM.long_fermata
@@ -78,8 +77,6 @@ Class & static methods
 .. automethod:: baca.tools.LibraryGM.LibraryGM.laissez_vibrer
 
 .. automethod:: baca.tools.LibraryGM.LibraryGM.lbsd
-
-.. automethod:: baca.tools.LibraryGM.LibraryGM.lilypond_tag
 
 .. automethod:: baca.tools.LibraryGM.LibraryGM.line_break
 

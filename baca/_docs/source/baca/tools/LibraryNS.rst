@@ -29,6 +29,7 @@ Bases
       ~baca.tools.LibraryNS.LibraryNS.ottava_bracket_staff_padding
       ~baca.tools.LibraryNS.LibraryNS.page
       ~baca.tools.LibraryNS.LibraryNS.page_break
+      ~baca.tools.LibraryNS.LibraryNS.part
       ~baca.tools.LibraryNS.LibraryNS.piecewise
       ~baca.tools.LibraryNS.LibraryNS.pitches
       ~baca.tools.LibraryNS.LibraryNS.possibile_dynamic
@@ -112,6 +113,8 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNS.LibraryNS.page
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.page_break
+
+.. automethod:: baca.tools.LibraryNS.LibraryNS.part
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.piecewise
 

@@ -96,13 +96,13 @@ baca.tools
    ImbricationCommand
    IndicatorCommand
    LabelCommand
-   LilyPondTagCommand
    MapCommand
    MetronomeMarkCommand
    MicrotoneDeviationCommand
    NestingCommand
    OctaveDisplacementCommand
    OverrideCommand
+   PartCommand
    PiecewiseCommand
    PitchCommand
    PitchFirstRhythmCommand
@@ -130,13 +130,13 @@ baca.tools
    ImbricationCommand
    IndicatorCommand
    LabelCommand
-   LilyPondTagCommand
    MapCommand
    MetronomeMarkCommand
    MicrotoneDeviationCommand
    NestingCommand
    OctaveDisplacementCommand
    OverrideCommand
+   PartCommand
    PiecewiseCommand
    PitchCommand
    PitchFirstRhythmCommand
