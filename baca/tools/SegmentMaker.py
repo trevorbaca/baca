@@ -1319,7 +1319,8 @@ class SegmentMaker(abjad.SegmentMaker):
         result['stop_clock_time'] = self._stop_clock_time
         result['time_signatures'] = self._cached_time_signatures
         items = sorted(result.items())
-        self._metadata = abjad.TypedOrderedDict(items)
+        metadata = abjad.TypedOrderedDict(items)
+        self._metadata.update(metadata)
 
     def _collect_persistent_indicators(self):
         result = abjad.TypedOrderedDict()
@@ -9438,6 +9439,7 @@ class SegmentMaker(abjad.SegmentMaker):
         assert all(isinstance(_, str) for _ in deactivate), repr(deactivate)
         self._documents_metadata = abjad.TypedOrderedDict(documents_metadata)
         self._environment = environment
+        self._metadata = abjad.TypedOrderedDict(metadata)
         self._midi = midi
         self._previous_metadata = abjad.TypedOrderedDict(previous_metadata)
         self._make_score()
