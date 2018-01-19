@@ -173,7 +173,7 @@ class OverrideCommand(Command):
     ..  container:: example
 
         >>> baca.OverrideCommand()
-        OverrideCommand(selector=baca.leaves(), site='OC')
+        OverrideCommand(selector=baca.leaves(), site='OC', tags=[])
 
     '''
 
@@ -186,7 +186,7 @@ class OverrideCommand(Command):
         '_document',
         '_grob',
         '_site',
-        '_tag',
+        '_tags',
         '_value',
         )
 
@@ -200,7 +200,7 @@ class OverrideCommand(Command):
         grob=None,
         selector='baca.leaves()',
         site='OC',
-        tag=None,
+        tags=None,
         value=None,
         ):
         Command.__init__(self, selector=selector)
@@ -220,9 +220,9 @@ class OverrideCommand(Command):
         if site is not None:
             assert isinstance(site, str), repr(site)
         self._site = site
-        if tag is not None:
-            assert isinstance(tag, str), repr(tag)
-        self._tag = tag
+        tags = tags or []
+        assert self._are_valid_tags(tags), repr(tags)
+        self._tags = tags
         self._value = value
 
     ### SPECIAL METHODS ###
@@ -347,17 +347,13 @@ class OverrideCommand(Command):
 
     @property
     def tag(self):
-        r'''Gets tag.
-
-        Defaults to none.
-
-        Set to string or none.
+        r'''Gets colon-delimited tag.
 
         Returns string or none.
+        Returns string or none.
         '''
-        if self._tag is not None:
-            assert isinstance(self._tag, str)
-        return self._tag
+        if self.tags:
+            return ':'.join(self.tags)
 
     @property
     def value(self):

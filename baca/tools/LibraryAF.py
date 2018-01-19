@@ -728,7 +728,7 @@ class LibraryAF(abjad.AbjadObject):
         return baca.IndicatorCommand(indicators=articulations)
 
     @staticmethod
-    def bar_extent(pair, selector='baca.leaf(0)', after=False, tag=None):
+    def bar_extent(pair, selector='baca.leaf(0)', after=False):
         r'''Overrides bar line bar extent.
 
         ..  container:: example
@@ -857,7 +857,6 @@ class LibraryAF(abjad.AbjadObject):
             context='Staff',
             grob='bar_line',
             selector=selector,
-            tag=tag,
             )
 
     @staticmethod
