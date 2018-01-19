@@ -4397,16 +4397,6 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def spacing(duration, selector='baca.leaf(0)'):
-        r'''Creates new spacing section and sets proportional notation
-        duration to `duration`.
-        '''
-        return baca.SpacingOverrideCommand(
-            duration=duration,
-            selector=selector,
-            )
-
-    @staticmethod
     def split_by_durations(durations):
         r'''Splits divisions by `durations`.
 

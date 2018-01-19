@@ -67,7 +67,6 @@ Bases
       ~baca.tools.LibraryNS.LibraryNS.slurs_down
       ~baca.tools.LibraryNS.LibraryNS.slurs_up
       ~baca.tools.LibraryNS.LibraryNS.soprano_to_octave
-      ~baca.tools.LibraryNS.LibraryNS.spacing
       ~baca.tools.LibraryNS.LibraryNS.split_by_durations
       ~baca.tools.LibraryNS.LibraryNS.staccati
       ~baca.tools.LibraryNS.LibraryNS.staccatissimi
@@ -185,8 +184,6 @@ Class & static methods
 .. automethod:: baca.tools.LibraryNS.LibraryNS.slurs_up
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.soprano_to_octave
-
-.. automethod:: baca.tools.LibraryNS.LibraryNS.spacing
 
 .. automethod:: baca.tools.LibraryNS.LibraryNS.split_by_durations
 

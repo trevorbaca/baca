@@ -805,48 +805,6 @@ class SegmentMaker(abjad.SegmentMaker):
                     command = baca.document(f'+{document_name}', command)
                     command(leaf)
 
-    def _apply_per_document_eol_spacing(self):
-        if self.spacing_specifier is None:
-            return
-        if self.spacing_specifier._forbid_segment_maker_adjustments is True:
-            return
-        documents_metadata = self.documents_metadata
-        assert 'SEGMENT' not in documents_metadata
-        bol_measure_numbers = self._segment_bol_measure_numbers
-        documents_metadata['SEGMENT'] = abjad.TypedOrderedDict()
-        documents_metadata['SEGMENT']['bol_measure_numbers'] = bol_measure_numbers
-        first_measure_number = self._get_first_measure_number()
-        for document_name, document_metadata in documents_metadata.items():
-            assert abjad.String(document_name).is_shout_case(), repr(
-                document_name)
-            bol_measure_numbers = document_metadata.get('bol_measure_numbers')
-            if bol_measure_numbers is None:
-                continue
-            eol_measure_numbers = [_ - 1 for _ in bol_measure_numbers[1:]]
-            if not eol_measure_numbers:
-                continue
-            skips = baca.select(self.score['GlobalSkips']).skips()
-            prototype = baca.SpacingSection
-            for i, skip in enumerate(skips):
-                measure_number = first_measure_number + i
-                if measure_number not in eol_measure_numbers:
-                    continue
-                fallback_spacing = None
-                for wrapper in abjad.inspect(skip).wrappers(prototype):
-                    if baca.tags.SPACING in wrapper.tag.split(':'):
-                        fallback_spacing = wrapper
-                if fallback_spacing is None:
-                    message = 'fallback spacing not yet attached'
-                    message += f' to skip {i} / measure {measure_number}.'
-                    raise Exception(message)
-                duration = fallback_spacing.indicator.duration
-                baca.SpacingOverrideCommand._attach_spacing_override(
-                    skip,
-                    duration,
-                    document=f'+{document_name}',
-                    eol=True,
-                    )
-
     def _apply_spacing_specifier(self):
         start_time = time.time()
         if self.spacing_specifier is None:
@@ -2397,72 +2355,26 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 0) (alignment-distances . (7)))                               %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 20) (alignment-distances . (7)))                              %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -2524,72 +2436,26 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 0) (alignment-distances . (7)))                               %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 20) (alignment-distances . (7)))                              %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -2662,74 +2528,28 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 0) (alignment-distances . (7)))                               %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 20) (alignment-distances . (7)))                              %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -2801,74 +2621,28 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 0) (alignment-distances . (7)))                               %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 20) (alignment-distances . (7)))                              %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -2943,67 +2717,21 @@ class SegmentMaker(abjad.SegmentMaker):
                             s1 * 3/8
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 20) (alignment-distances . (7)))                              %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -3085,74 +2813,28 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 0) (alignment-distances . (7)))                               %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 20) (alignment-distances . (7)))                              %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -5844,72 +5526,26 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -6011,72 +5647,26 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -6189,74 +5779,28 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 25) (alignment-distances . (11)))                             %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -6364,74 +5908,28 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 25) (alignment-distances . (11)))                             %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -6549,67 +6047,21 @@ class SegmentMaker(abjad.SegmentMaker):
                             s1 * 1/2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:BMM3
                             s1 * 1/2
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -6768,74 +6220,28 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -6997,72 +6403,26 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7158,72 +6518,26 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7330,74 +6644,28 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7505,74 +6773,28 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7690,67 +6912,21 @@ class SegmentMaker(abjad.SegmentMaker):
                             s1 * 1/2
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 3]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:BMM3
                             s1 * 1/2
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -7909,74 +7085,28 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context GlobalSkips = "GlobalSkips" {
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \autoPageBreaksOff                                                           %! BREAK:BMM1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                             \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
                             #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:BMM3
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:BMM3
                             s1 * 3/8
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -8500,35 +7630,12 @@ class SegmentMaker(abjad.SegmentMaker):
                             \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 25)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 25)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 600)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/25]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/600]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -8665,35 +7772,12 @@ class SegmentMaker(abjad.SegmentMaker):
                             \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                             \revert TextSpanner.staff-padding                                            %! OC
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -8832,35 +7916,12 @@ class SegmentMaker(abjad.SegmentMaker):
                             \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                             \revert TextSpanner.staff-padding                                            %! OC
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -9036,38 +8097,15 @@ class SegmentMaker(abjad.SegmentMaker):
                             \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override TextSpanner.bound-details.left-broken.text = \markup {
                                 \null
                                 }                                                                        %! SM29
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
                 <BLANKLINE>
@@ -9204,35 +8242,12 @@ class SegmentMaker(abjad.SegmentMaker):
                             \startTextSpan                                                               %! SM29
                 <BLANKLINE>
                             % GlobalSkips [measure 2]                                                    %! SM4
-                            \newSpacingSection                                                           %! -SEGMENT:SPACING:HSS1
-                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! -SEGMENT:SPACING:HSS1
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
-                        %@% \newSpacingSection                                                           %! +SEGMENT:SPACING_OVERRIDE:SOC1
-                        %@% \set Score.proportionalNotationDuration = #(ly:make-moment 35 576)           %! +SEGMENT:SPACING_OVERRIDE:SOC1
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
                             \stopTextSpan                                                                %! SM29
-                            ^ \markup {
-                                \column
-                                    {
-                                    %@% \line                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     {                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%         \with-color                                              %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             #(x11-color 'DarkCyan)                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%             \fontsize                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 #3                                               %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%                 [1/24]                                           %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@%     }                                                            %! -SEGMENT:SPACING_MARKUP:HSS2
-                                    %@% \line                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     {                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%         \with-color                                              %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             #(x11-color 'DarkOrange)                             %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%             \fontsize                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 #3                                               %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%                 [[35/576]]                                       %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    %@%     }                                                            %! +SEGMENT:SPACING_OVERRIDE_MARKUP:SOC2
-                                    }
-                                }
                             \revert TextSpanner.staff-padding                                            %! OC
                             \override Score.BarLine.transparent = ##f                                    %! SM5
                             \bar "|"                                                                     %! SM5
@@ -10448,7 +9463,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._apply_breaks()
         self._cache_per_document_break_information()
         self._apply_fermata_measure_staff_line_count()
-        self._apply_per_document_eol_spacing()
         self._apply_per_document_clef_shifts()
         self._deactivate_tags(deactivate)
         self._remove_tags(remove)

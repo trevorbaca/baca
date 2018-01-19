@@ -85,7 +85,6 @@ from .Sequence import Sequence
 from .SettingCommand import SettingCommand
 from .SingleStaffScoreTemplate import SingleStaffScoreTemplate
 from .SpacingIndication import SpacingIndication
-from .SpacingOverrideCommand import SpacingOverrideCommand
 from .SpacingSection import SpacingSection
 from .SpannerCommand import SpannerCommand
 from .SplitByDurationsDivisionCallback import SplitByDurationsDivisionCallback

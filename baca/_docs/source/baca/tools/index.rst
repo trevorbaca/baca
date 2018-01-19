@@ -110,7 +110,6 @@ baca.tools
    RegisterToOctaveCommand
    RhythmCommand
    SettingCommand
-   SpacingOverrideCommand
    SpannerCommand
    StaffPositionCommand
    SuiteCommand
@@ -145,7 +144,6 @@ baca.tools
    RegisterToOctaveCommand
    RhythmCommand
    SettingCommand
-   SpacingOverrideCommand
    SpannerCommand
    StaffPositionCommand
    SuiteCommand
