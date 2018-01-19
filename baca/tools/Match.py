@@ -234,11 +234,11 @@ class Match(abjad.AbjadObject):
             return False
         if self.forbid_all and all(_ in tags for _ in self.forbid_all):
             return False
-        if self.match_any and any(_ in tags for _ in self.match_any):
-            return True
-        if self.match_all and all(_ in tags for _ in self.match_all):
-            return True
-        return False
+        if self.match_all and not all(_ in tags for _ in self.match_all):
+            return False
+        if self.match_any and not any(_ in tags for _ in self.match_any):
+            return False
+        return True
 
     ### PUBLIC PROPERTIES ###
 
