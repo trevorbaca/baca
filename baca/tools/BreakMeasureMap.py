@@ -414,20 +414,23 @@ class BreakMeasureMap(abjad.AbjadObject):
         '_bol_measure_numbers',
         '_commands',
         '_document',
-        '_tag',
+        '_tags',
         )
 
     _publish_storage_format = True
 
     ### INITIALIZER ###
 
-    def __init__(self, commands=None, document=None):
+    def __init__(self, commands=None, tags=None):
+        tags = tags or []
+        assert isinstance(tags, list), repr(tags)
+        assert not any(':' in _ for _ in tags), repr(tags)
+        assert '' not in tags, repr(tags)
+        if baca.tags.BREAK not in tags:
+            tags.append(baca.tags.BREAK)
+        self._tags = tags
         self._bol_measure_numbers = []
-        document = document or baca.tags.SEGMENT
-        self._document = document
-        #tag = f'+{document}:{baca.tags.BREAK}'
-        tag = baca.tags.BREAK
-        self._tag = tag
+        self._document = None
         if commands is not None:
             commands_ = []
             for command in commands:
@@ -507,7 +510,21 @@ class BreakMeasureMap(abjad.AbjadObject):
         return document
 
     @property
-    def tag(self):
-        r'''Gets tag.
+    def tags(self):
+        r'''Gets tags.
+
+        Returns (copied) list of strings.
         '''
-        return self._tag
+        assert isinstance(self._tags, list), repr(self._tags)
+        assert not any(':' in _ for _ in self._tags), repr(self._tags)
+        assert '' not in self._tags, repr(self._tags)
+        return self._tags[:]
+
+    @property
+    def tag(self):
+        r'''Gets colon-delimited tag.
+
+        Returns string.
+        '''
+        if self.tags:
+            return ':'.join(self.tags)

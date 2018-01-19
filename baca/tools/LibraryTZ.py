@@ -21,6 +21,22 @@ class LibraryTZ(abjad.AbjadObject):
     ### PUBLIC METHODS ###
 
     @staticmethod
+    def tag(command, tag):
+        r'''Tags `command` with `tag`.
+
+        Returns none.
+        '''
+        if not hasattr(command, '_tags'):
+            raise Exception(f'does not implement tags (yet): {command!r}.')
+        assert isinstance(tag, str), repr(tag)
+        if tag == '':
+            raise Exception(f'empty tags are not allowed: {tag!r}.')
+        if ':' in tag:
+            raise Exception(f'colon not allowed in tag: {tag!r}.')
+        command._tags.append(tag)
+        command._tags.sort()
+
+    @staticmethod
     def tenuti(selector='baca.pheads()'):
         r'''Attaches tenuti to pitched heads.
 

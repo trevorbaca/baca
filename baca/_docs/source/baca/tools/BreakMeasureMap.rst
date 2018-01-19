@@ -24,6 +24,7 @@ Bases
       ~baca.tools.BreakMeasureMap.BreakMeasureMap.commands
       ~baca.tools.BreakMeasureMap.BreakMeasureMap.document
       ~baca.tools.BreakMeasureMap.BreakMeasureMap.tag
+      ~baca.tools.BreakMeasureMap.BreakMeasureMap.tags
       ~baca.tools.BreakMeasureMap.BreakMeasureMap.__call__
       ~baca.tools.BreakMeasureMap.BreakMeasureMap.__eq__
       ~baca.tools.BreakMeasureMap.BreakMeasureMap.__format__
@@ -38,6 +39,8 @@ Read-only properties
 .. autoattribute:: baca.tools.BreakMeasureMap.BreakMeasureMap.document
 
 .. autoattribute:: baca.tools.BreakMeasureMap.BreakMeasureMap.tag
+
+.. autoattribute:: baca.tools.BreakMeasureMap.BreakMeasureMap.tags
 
 Special methods
 ---------------

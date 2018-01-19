@@ -1757,8 +1757,8 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def breaks(*pages, document=None):
-        r'''Makes breas.
+    def breaks(*pages):
+        r'''Makes breaks.
 
         ..  container:: example
 
@@ -1772,87 +1772,11 @@ class LibraryAF(abjad.AbjadObject):
             ...         ),
             ...     )
 
-            >>> abjad.f(breaks, strict=89)
-            baca.BreakMeasureMap(
-                commands=(
-                    baca.IndicatorCommand(
-                        indicators=abjad.CyclicTuple(
-                            [
-                                abjad.LilyPondLiteral('\\pageBreak'),
-                                ]
-                            ),
-                        selector=baca.skip(0),
-                        site='BMM3',
-                        tag='BREAK',
-                        ),
-                    baca.IndicatorCommand(
-                        indicators=abjad.CyclicTuple(
-                            [
-                                baca.LBSD(
-                                    y_offset=20,
-                                    alignment_distances=(15, 20, 20),
-                                    ),
-                                ]
-                            ),
-                        selector=baca.skip(0),
-                        site='BMM3',
-                        tag='BREAK',
-                        ),
-                    baca.IndicatorCommand(
-                        indicators=abjad.CyclicTuple(
-                            [
-                                abjad.LilyPondLiteral('\\break'),
-                                ]
-                            ),
-                        selector=baca.skip(12),
-                        site='BMM3',
-                        tag='BREAK',
-                        ),
-                    baca.IndicatorCommand(
-                        indicators=abjad.CyclicTuple(
-                            [
-                                baca.LBSD(
-                                    y_offset=140,
-                                    alignment_distances=(15, 20, 20),
-                                    ),
-                                ]
-                            ),
-                        selector=baca.skip(12),
-                        site='BMM3',
-                        tag='BREAK',
-                        ),
-                    baca.IndicatorCommand(
-                        indicators=abjad.CyclicTuple(
-                            [
-                                abjad.LilyPondLiteral('\\pageBreak'),
-                                ]
-                            ),
-                        selector=baca.skip(22),
-                        site='BMM3',
-                        tag='BREAK',
-                        ),
-                    baca.IndicatorCommand(
-                        indicators=abjad.CyclicTuple(
-                            [
-                                baca.LBSD(
-                                    y_offset=20,
-                                    alignment_distances=(15, 20, 20),
-                                    ),
-                                ]
-                            ),
-                        selector=baca.skip(22),
-                        site='BMM3',
-                        tag='BREAK',
-                        ),
-                    ),
-                document='SEGMENT',
-                )
-
-        Returns breaks measure map.
+        Returns break measure map.
         '''
         commands = []
         if not pages:
-            return baca.BreakMeasureMap(commands=commands, document=document)
+            return baca.BreakMeasureMap(commands=commands)
         first_measure_number = pages[0].items[0][0]
         bol_measure_numbers = []
         for page in pages:
@@ -1874,7 +1798,7 @@ class LibraryAF(abjad.AbjadObject):
                 commands.append(command)
                 lbsd = baca.lbsd(y_offset, alignment_distances, selector)
                 commands.append(lbsd)
-        breaks = baca.BreakMeasureMap(commands=commands, document=document)
+        breaks = baca.BreakMeasureMap(commands=commands)
         breaks._bol_measure_numbers.extend(bol_measure_numbers)
         return breaks
 
