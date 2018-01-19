@@ -169,7 +169,7 @@ class SpannerCommand(Command):
     ..  container:: example
 
         >>> baca.SpannerCommand()
-        SpannerCommand(selector=baca.tleaves(), site='SC')
+        SpannerCommand(selector=baca.tleaves(), site='SC', tags=[])
 
     '''
 
@@ -180,7 +180,7 @@ class SpannerCommand(Command):
         '_annotation',
         '_site',
         '_spanner',
-        '_tag',
+        '_tags',
         )
 
     ### INITIALIZER ###
@@ -190,7 +190,7 @@ class SpannerCommand(Command):
         selector='baca.tleaves()',
         spanner=None,
         site='SC',
-        tag=None,
+        tags=None,
         ):
         Command.__init__(self, selector=selector)
         self._annotation = None
@@ -198,7 +198,9 @@ class SpannerCommand(Command):
             assert isinstance(spanner, abjad.Spanner)
         self._spanner = spanner
         self._site = site
-        self._tag = tag
+        tags = tags or []
+        assert self._are_valid_tags(tags), repr(tags)
+        self._tags = tags
 
     ### SPECIAL METHODS ###
 
@@ -367,8 +369,9 @@ class SpannerCommand(Command):
 
     @property
     def tag(self):
-        r'''Gets tag.
+        r'''Gets colon-delimited tag.
 
         Set to string or none.
         '''
-        return self._tag
+        if self.tags:
+            return ':'.join(self.tags)

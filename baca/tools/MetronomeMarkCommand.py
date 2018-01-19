@@ -9,7 +9,7 @@ class MetronomeMarkCommand(Command):
     ..  container:: example
 
         >>> baca.MetronomeMarkCommand()
-        MetronomeMarkCommand(selector=baca.leaf(0))
+        MetronomeMarkCommand(selector=baca.leaf(0), tags=[])
 
     '''
 
@@ -19,7 +19,7 @@ class MetronomeMarkCommand(Command):
         '_key',
         '_manifest',
         '_site',
-        '_tag',
+        '_tags',
         )
 
     ### INITIALIZER ###
@@ -29,7 +29,7 @@ class MetronomeMarkCommand(Command):
         key=None,
         selector='baca.leaf(0)', 
         site=None,
-        tag=None,
+        tags=None,
         ):
         Command.__init__(self, selector=selector)
         if key is not None:
@@ -40,9 +40,9 @@ class MetronomeMarkCommand(Command):
         if site is not None:
             assert isinstance(site, str), repr(site)
         self._site = site
-        if tag is not None:
-            assert isinstance(tag, str), repr(tag)
-        self._tag = tag
+        tags = tags or []
+        assert self._are_valid_tags(tags), repr(tags)
+        self._tags = tags
 
     ### SPECIAL METHODS ###
 
@@ -112,8 +112,9 @@ class MetronomeMarkCommand(Command):
 
     @property
     def tag(self):
-        r'''Gets tag.
+        r'''Gets colon-delimited tag.
 
         Returns string or none.
         '''
-        return self._tag
+        if self.tags:
+            return ':'.join(self.tags)

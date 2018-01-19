@@ -9,7 +9,7 @@ class HairpinCommand(Command):
     ..  container:: example
 
         >>> baca.HairpinCommand()
-        HairpinCommand(selector=baca.tleaves(), site='HC')
+        HairpinCommand(selector=baca.tleaves(), site='HC', tags=[])
 
     '''
 
@@ -19,7 +19,7 @@ class HairpinCommand(Command):
         '_site',
         '_start',
         '_stop',
-        '_tag',
+        '_tags',
         )
 
     ### INITIALIZER ###
@@ -30,7 +30,7 @@ class HairpinCommand(Command):
         site='HC',
         start=None,
         stop=None,
-        tag=None,
+        tags=None,
         ):
         Command.__init__(self, selector=selector)
         if site is not None:
@@ -42,9 +42,9 @@ class HairpinCommand(Command):
         if stop is not None:
             assert isinstance(stop, abjad.Dynamic), repr(stop)
         self._stop = stop
-        if tag is not None:
-            assert isinstance(tag, str), repr(tag)
-        self._tag = tag
+        tags = tags or []
+        assert self._are_valid_tags(tags), repr(tags)
+        self._tags = tags
 
     ### SPECIAL METHODS ###
 
@@ -135,8 +135,9 @@ class HairpinCommand(Command):
 
     @property
     def tag(self):
-        r'''Gets tag.
+        r'''Gets colon-delimited tag.
 
         Returns string or none.
         '''
-        return self._tag
+        if self.tags:
+            return ':'.join(self.tags)
