@@ -27,6 +27,7 @@ Bases
       ~baca.tools.NestingCommand.NestingCommand.selector
       ~baca.tools.NestingCommand.NestingCommand.site
       ~baca.tools.NestingCommand.NestingCommand.tag
+      ~baca.tools.NestingCommand.NestingCommand.tags
       ~baca.tools.NestingCommand.NestingCommand.time_treatments
       ~baca.tools.NestingCommand.NestingCommand.__call__
       ~baca.tools.NestingCommand.NestingCommand.__eq__
@@ -56,6 +57,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.NestingCommand.NestingCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.NestingCommand.NestingCommand.tags
 
 .. autoattribute:: baca.tools.NestingCommand.NestingCommand.time_treatments
 

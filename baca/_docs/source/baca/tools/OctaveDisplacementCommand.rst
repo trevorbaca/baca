@@ -27,6 +27,7 @@ Bases
       ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.selector
       ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.site
       ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.tag
+      ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.tags
       ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.__call__
       ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.__eq__
       ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.__format__
@@ -55,6 +56,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.tags
 
 Special methods
 ---------------

@@ -31,6 +31,7 @@ Bases
       ~baca.tools.OverrideCommand.OverrideCommand.selector
       ~baca.tools.OverrideCommand.OverrideCommand.site
       ~baca.tools.OverrideCommand.OverrideCommand.tag
+      ~baca.tools.OverrideCommand.OverrideCommand.tags
       ~baca.tools.OverrideCommand.OverrideCommand.value
       ~baca.tools.OverrideCommand.OverrideCommand.__call__
       ~baca.tools.OverrideCommand.OverrideCommand.__eq__
@@ -64,6 +65,12 @@ Read-only properties
       .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.site
 
 .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.tags
 
 .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.value
 

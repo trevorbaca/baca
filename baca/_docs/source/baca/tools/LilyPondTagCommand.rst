@@ -26,6 +26,7 @@ Bases
       ~baca.tools.LilyPondTagCommand.LilyPondTagCommand.selector
       ~baca.tools.LilyPondTagCommand.LilyPondTagCommand.site
       ~baca.tools.LilyPondTagCommand.LilyPondTagCommand.tag
+      ~baca.tools.LilyPondTagCommand.LilyPondTagCommand.tags
       ~baca.tools.LilyPondTagCommand.LilyPondTagCommand.__call__
       ~baca.tools.LilyPondTagCommand.LilyPondTagCommand.__eq__
       ~baca.tools.LilyPondTagCommand.LilyPondTagCommand.__format__
@@ -48,6 +49,12 @@ Read-only properties
       .. autoattribute:: baca.tools.LilyPondTagCommand.LilyPondTagCommand.site
 
 .. autoattribute:: baca.tools.LilyPondTagCommand.LilyPondTagCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.LilyPondTagCommand.LilyPondTagCommand.tags
 
 Special methods
 ---------------

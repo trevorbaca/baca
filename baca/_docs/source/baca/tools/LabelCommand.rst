@@ -27,6 +27,7 @@ Bases
       ~baca.tools.LabelCommand.LabelCommand.selector
       ~baca.tools.LabelCommand.LabelCommand.site
       ~baca.tools.LabelCommand.LabelCommand.tag
+      ~baca.tools.LabelCommand.LabelCommand.tags
       ~baca.tools.LabelCommand.LabelCommand.__call__
       ~baca.tools.LabelCommand.LabelCommand.__eq__
       ~baca.tools.LabelCommand.LabelCommand.__format__
@@ -55,6 +56,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.LabelCommand.LabelCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.LabelCommand.LabelCommand.tags
 
 Special methods
 ---------------

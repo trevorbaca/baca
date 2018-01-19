@@ -209,7 +209,7 @@ class IndicatorCommand(Command):
         '_document',
         '_indicators',
         '_site',
-        '_tag',
+        '_tags',
         )
 
     ### INITIALIZER ###
@@ -220,7 +220,7 @@ class IndicatorCommand(Command):
         indicators=None,
         selector='baca.pheads()',
         site='IC',
-        tag=None,
+        tags=None,
         ):
         Command.__init__(self, selector=selector)
         self._document = None
@@ -236,9 +236,9 @@ class IndicatorCommand(Command):
         if site is not None:
             assert isinstance(site, str), repr(site)
         self._site = site
-        if tag is not None:
-            assert isinstance(tag, str), repr(tag)
-        self._tag = tag
+        tags = tags or []
+        assert self._are_valid_tags(tags), repr(tags)
+        self._tags = tags
 
     ### SPECIAL METHODS ###
 
@@ -258,12 +258,6 @@ class IndicatorCommand(Command):
         deactivate = None
         tag = self.tag
         if self.document is not None:
-#            if self.document.startswith('-'):
-#                tag = f'{self.document}:{self.tag}'
-#            else:
-#                assert self.document.startswith('+')
-#                tag = f'{self.document}:{self.tag}'
-#                deactivate = True
             assert self.document[0] in ('+', '-'), repr(self.document)
             if self.tag:
                 tag = f'{self.document}:{self.tag}'
@@ -535,4 +529,5 @@ class IndicatorCommand(Command):
 
         Returns string or none.
         '''
-        return self._tag
+        if self.tags:
+            return ':'.join(self.tags)

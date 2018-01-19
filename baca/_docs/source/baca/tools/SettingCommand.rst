@@ -28,6 +28,7 @@ Bases
       ~baca.tools.SettingCommand.SettingCommand.setting
       ~baca.tools.SettingCommand.SettingCommand.site
       ~baca.tools.SettingCommand.SettingCommand.tag
+      ~baca.tools.SettingCommand.SettingCommand.tags
       ~baca.tools.SettingCommand.SettingCommand.value
       ~baca.tools.SettingCommand.SettingCommand.__call__
       ~baca.tools.SettingCommand.SettingCommand.__eq__
@@ -59,6 +60,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.SettingCommand.SettingCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.SettingCommand.SettingCommand.tags
 
 .. autoattribute:: baca.tools.SettingCommand.SettingCommand.value
 

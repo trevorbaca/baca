@@ -26,6 +26,7 @@ Bases
       ~baca.tools.ColorCommand.ColorCommand.selector
       ~baca.tools.ColorCommand.ColorCommand.site
       ~baca.tools.ColorCommand.ColorCommand.tag
+      ~baca.tools.ColorCommand.ColorCommand.tags
       ~baca.tools.ColorCommand.ColorCommand.__call__
       ~baca.tools.ColorCommand.ColorCommand.__eq__
       ~baca.tools.ColorCommand.ColorCommand.__format__
@@ -52,6 +53,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.ColorCommand.ColorCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ColorCommand.ColorCommand.tags
 
 Special methods
 ---------------

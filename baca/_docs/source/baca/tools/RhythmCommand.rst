@@ -37,6 +37,7 @@ Bases
       ~baca.tools.RhythmCommand.RhythmCommand.start_stage
       ~baca.tools.RhythmCommand.RhythmCommand.stop_stage
       ~baca.tools.RhythmCommand.RhythmCommand.tag
+      ~baca.tools.RhythmCommand.RhythmCommand.tags
       ~baca.tools.RhythmCommand.RhythmCommand.tie_first
       ~baca.tools.RhythmCommand.RhythmCommand.tie_last
       ~baca.tools.RhythmCommand.RhythmCommand.__call__
@@ -87,6 +88,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.tags
 
 .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.tie_first
 

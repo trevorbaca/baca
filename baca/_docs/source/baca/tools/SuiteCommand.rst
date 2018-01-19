@@ -28,6 +28,7 @@ Bases
       ~baca.tools.SuiteCommand.SuiteCommand.selector
       ~baca.tools.SuiteCommand.SuiteCommand.site
       ~baca.tools.SuiteCommand.SuiteCommand.tag
+      ~baca.tools.SuiteCommand.SuiteCommand.tags
       ~baca.tools.SuiteCommand.SuiteCommand.__call__
       ~baca.tools.SuiteCommand.SuiteCommand.__eq__
       ~baca.tools.SuiteCommand.SuiteCommand.__format__
@@ -58,6 +59,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.SuiteCommand.SuiteCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.SuiteCommand.SuiteCommand.tags
 
 Special methods
 ---------------

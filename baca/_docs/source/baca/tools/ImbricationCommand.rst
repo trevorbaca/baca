@@ -32,6 +32,7 @@ Bases
       ~baca.tools.ImbricationCommand.ImbricationCommand.site
       ~baca.tools.ImbricationCommand.ImbricationCommand.specifiers
       ~baca.tools.ImbricationCommand.ImbricationCommand.tag
+      ~baca.tools.ImbricationCommand.ImbricationCommand.tags
       ~baca.tools.ImbricationCommand.ImbricationCommand.truncate_ties
       ~baca.tools.ImbricationCommand.ImbricationCommand.voice_name
       ~baca.tools.ImbricationCommand.ImbricationCommand.__call__
@@ -68,6 +69,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.tags
 
 .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.truncate_ties
 

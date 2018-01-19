@@ -28,6 +28,7 @@ Bases
       ~baca.tools.HairpinCommand.HairpinCommand.start
       ~baca.tools.HairpinCommand.HairpinCommand.stop
       ~baca.tools.HairpinCommand.HairpinCommand.tag
+      ~baca.tools.HairpinCommand.HairpinCommand.tags
       ~baca.tools.HairpinCommand.HairpinCommand.__call__
       ~baca.tools.HairpinCommand.HairpinCommand.__eq__
       ~baca.tools.HairpinCommand.HairpinCommand.__format__
@@ -50,6 +51,12 @@ Read-only properties
 .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.stop
 
 .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.tags
 
 Special methods
 ---------------

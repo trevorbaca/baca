@@ -30,6 +30,7 @@ Bases
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.site
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.spanner
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.tag
+      ~baca.tools.PiecewiseCommand.PiecewiseCommand.tags
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.__call__
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.__eq__
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.__format__
@@ -60,6 +61,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.tags
 
 Special methods
 ---------------

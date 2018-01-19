@@ -27,6 +27,7 @@ Bases
       ~baca.tools.MapCommand.MapCommand.selector
       ~baca.tools.MapCommand.MapCommand.site
       ~baca.tools.MapCommand.MapCommand.tag
+      ~baca.tools.MapCommand.MapCommand.tags
       ~baca.tools.MapCommand.MapCommand.__call__
       ~baca.tools.MapCommand.MapCommand.__eq__
       ~baca.tools.MapCommand.MapCommand.__format__
@@ -55,6 +56,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.MapCommand.MapCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.MapCommand.MapCommand.tags
 
 Special methods
 ---------------

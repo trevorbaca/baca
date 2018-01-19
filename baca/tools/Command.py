@@ -50,6 +50,13 @@ class Command(abjad.AbjadObject):
     ### PRIVATE METHODS ###
 
     @staticmethod
+    def _are_valid_tags(tags):
+        assert isinstance(tags, list), repr(tags)
+        assert '' not in tags, repr(tags)
+        assert not any(':' in _ for _ in tags), repr(tags)
+        return True
+
+    @staticmethod
     def _is_signed_document_name(string:str):
         if not isinstance(string, str):
             return False
@@ -94,3 +101,12 @@ class Command(abjad.AbjadObject):
         Returns string or none.
         '''
         return self._tag
+
+    @property
+    def tags(self):
+        r'''Gets tags.
+
+        Returns list of strings.
+        '''
+        assert self._are_valid_tags(self._tags)
+        return self._tags

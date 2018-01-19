@@ -27,6 +27,7 @@ Bases
       ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.selector
       ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.site
       ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.tag
+      ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.tags
       ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.__call__
       ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.__eq__
       ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.__format__
@@ -55,6 +56,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.tags
 
 Special methods
 ---------------

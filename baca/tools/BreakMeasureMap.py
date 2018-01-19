@@ -423,9 +423,7 @@ class BreakMeasureMap(abjad.AbjadObject):
 
     def __init__(self, commands=None, tags=None):
         tags = tags or []
-        assert isinstance(tags, list), repr(tags)
-        assert not any(':' in _ for _ in tags), repr(tags)
-        assert '' not in tags, repr(tags)
+        assert baca.Command._are_valid_tags(tags), repr(tags)
         if baca.tags.BREAK not in tags:
             tags.append(baca.tags.BREAK)
         self._tags = tags
@@ -434,7 +432,7 @@ class BreakMeasureMap(abjad.AbjadObject):
         if commands is not None:
             commands_ = []
             for command in commands:
-                command_ = abjad.new(command, site='BMM3', tag=self.tag)
+                command_ = abjad.new(command, site='BMM3', tags=self.tags)
                 commands_.append(command_)
             commands = commands_
             commands = tuple(commands)
@@ -483,7 +481,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                     ),
                 selector=baca.skip(0),
                 site='BMM3',
-                tag='BREAK',
+                tags=['BREAK'],
                 )
             baca.IndicatorCommand(
                 indicators=abjad.CyclicTuple(
@@ -493,7 +491,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                     ),
                 selector=baca.skip(1),
                 site='BMM3',
-                tag='BREAK',
+                tags=['BREAK'],
                 )
 
         Returns commands.

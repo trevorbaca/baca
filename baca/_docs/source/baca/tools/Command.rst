@@ -24,6 +24,7 @@ Bases
       ~baca.tools.Command.Command.selector
       ~baca.tools.Command.Command.site
       ~baca.tools.Command.Command.tag
+      ~baca.tools.Command.Command.tags
       ~baca.tools.Command.Command.__call__
       ~baca.tools.Command.Command.__eq__
       ~baca.tools.Command.Command.__format__
@@ -38,6 +39,8 @@ Read-only properties
 .. autoattribute:: baca.tools.Command.Command.site
 
 .. autoattribute:: baca.tools.Command.Command.tag
+
+.. autoattribute:: baca.tools.Command.Command.tags
 
 Special methods
 ---------------

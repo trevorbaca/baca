@@ -28,6 +28,7 @@ Bases
       ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.selector
       ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.site
       ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.tag
+      ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.tags
       ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.__call__
       ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.__eq__
       ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.__format__
@@ -58,6 +59,12 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.tags
 
 Special methods
 ---------------
