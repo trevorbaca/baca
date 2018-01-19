@@ -23,6 +23,7 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.deactivate
       ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.selector
       ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.site
       ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.start_pitch
@@ -37,6 +38,12 @@ Bases
 
 Read-only properties
 --------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.deactivate
 
 .. autoattribute:: baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.selector
 

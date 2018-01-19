@@ -26,12 +26,13 @@ class MetronomeMarkCommand(Command):
 
     def __init__(
         self,
+        deactivate=None,
         key=None,
         selector='baca.leaf(0)', 
         site=None,
         tags=None,
         ):
-        Command.__init__(self, selector=selector)
+        Command.__init__(self, deactivate=deactivate, selector=selector)
         if key is not None:
             assert isinstance(key, str)
         self._key = key
@@ -70,7 +71,13 @@ class MetronomeMarkCommand(Command):
             leaf,
             metronome_mark,
             )
-        spanner.attach(metronome_mark, leaf, site=self.site, tag=self.tag)
+        spanner.attach(
+            metronome_mark,
+            leaf,
+            deactivate=self.deactivate,
+            site=self.site,
+            tag=self.tag,
+            )
         if metronome_mark == reapplied_mark:
             score = abjad.inspect(leaf).get_parentage().get_first(abjad.Score)
             baca.SegmentMaker._categorize_persistent_indicator(

@@ -23,6 +23,7 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.RhythmCommand.RhythmCommand.deactivate
       ~baca.tools.RhythmCommand.RhythmCommand.division_expression
       ~baca.tools.RhythmCommand.RhythmCommand.division_maker
       ~baca.tools.RhythmCommand.RhythmCommand.reference_meters
@@ -48,6 +49,12 @@ Bases
 
 Read-only properties
 --------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.deactivate
 
 .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.division_expression
 

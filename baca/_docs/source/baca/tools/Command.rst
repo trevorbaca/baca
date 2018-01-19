@@ -21,6 +21,7 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.Command.Command.deactivate
       ~baca.tools.Command.Command.selector
       ~baca.tools.Command.Command.site
       ~baca.tools.Command.Command.tag
@@ -33,6 +34,8 @@ Bases
 
 Read-only properties
 --------------------
+
+.. autoattribute:: baca.tools.Command.Command.deactivate
 
 .. autoattribute:: baca.tools.Command.Command.selector
 

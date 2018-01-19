@@ -23,6 +23,7 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.StaffPositionCommand.StaffPositionCommand.deactivate
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.numbers
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.repeats
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.selector
@@ -37,6 +38,12 @@ Bases
 
 Read-only properties
 --------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.StaffPositionCommand.StaffPositionCommand.deactivate
 
 .. autoattribute:: baca.tools.StaffPositionCommand.StaffPositionCommand.numbers
 

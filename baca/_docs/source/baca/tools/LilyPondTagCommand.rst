@@ -23,6 +23,7 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.LilyPondTagCommand.LilyPondTagCommand.deactivate
       ~baca.tools.LilyPondTagCommand.LilyPondTagCommand.selector
       ~baca.tools.LilyPondTagCommand.LilyPondTagCommand.site
       ~baca.tools.LilyPondTagCommand.LilyPondTagCommand.tag
@@ -35,6 +36,12 @@ Bases
 
 Read-only properties
 --------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.LilyPondTagCommand.LilyPondTagCommand.deactivate
 
 .. only:: html
 

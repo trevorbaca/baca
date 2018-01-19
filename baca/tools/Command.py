@@ -12,6 +12,7 @@ class Command(abjad.AbjadObject):
     __documentation_section__ = '(4) Commands'
 
     __slots__ = (
+        '_deactivate',
         '_manifests',
         '_selector',
         '_site',
@@ -22,7 +23,14 @@ class Command(abjad.AbjadObject):
 
     ### INITIALIZER ###
 
-    def __init__(self, selector=None, site:str=None, tag=None):
+    def __init__(
+        self,
+        deactivate=None,
+        selector=None,
+        site:str=None,
+        tag=None,
+        ):
+        self._deactivate = deactivate
         self._manifests = None
         if isinstance(selector, str):
             selector = eval(selector)
@@ -65,6 +73,14 @@ class Command(abjad.AbjadObject):
         return abjad.String(string[1:]).is_shout_case()
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def deactivate(self):
+        r'''Is true when tag should write deactivated.
+
+        Returns true, false or none.
+        '''
+        return self._deactivate
 
     @property
     def selector(self):

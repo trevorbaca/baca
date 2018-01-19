@@ -3750,23 +3750,6 @@ class LibraryAF(abjad.AbjadObject):
         return baca.dynamic_line_spanner_staff_padding(n, selector=selector)
 
     @staticmethod
-    def document(tag:str, command):
-        r'''Sets `command` document tag private property to `tag`.
-
-        Returns command.
-        '''
-        assert baca.Command._is_signed_document_name(tag), repr(tag)
-        assert isinstance(tag, str), repr(tag)
-        assert isinstance(command, baca.Command), repr(command)
-        assert command._document is None, repr(command)
-        command._document = tag
-        if isinstance(command, baca.SuiteCommand):
-            for command_ in command.commands:
-                assert command_._document is None, repr(command_)
-                command_._document = tag
-        return command
-
-    @staticmethod
     def double_tonguing(selector='baca.pheads()'):
         r'''Attaches double-staccati to pitched heads.
 

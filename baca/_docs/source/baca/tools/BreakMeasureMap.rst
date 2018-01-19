@@ -22,6 +22,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.BreakMeasureMap.BreakMeasureMap.commands
+      ~baca.tools.BreakMeasureMap.BreakMeasureMap.deactivate
       ~baca.tools.BreakMeasureMap.BreakMeasureMap.document
       ~baca.tools.BreakMeasureMap.BreakMeasureMap.tag
       ~baca.tools.BreakMeasureMap.BreakMeasureMap.tags
@@ -35,6 +36,8 @@ Read-only properties
 --------------------
 
 .. autoattribute:: baca.tools.BreakMeasureMap.BreakMeasureMap.commands
+
+.. autoattribute:: baca.tools.BreakMeasureMap.BreakMeasureMap.deactivate
 
 .. autoattribute:: baca.tools.BreakMeasureMap.BreakMeasureMap.document
 

@@ -25,6 +25,7 @@ Bases
 
       ~baca.tools.ImbricationCommand.ImbricationCommand.allow_unused_pitches
       ~baca.tools.ImbricationCommand.ImbricationCommand.by_pitch_class
+      ~baca.tools.ImbricationCommand.ImbricationCommand.deactivate
       ~baca.tools.ImbricationCommand.ImbricationCommand.extend_beam
       ~baca.tools.ImbricationCommand.ImbricationCommand.hocket
       ~baca.tools.ImbricationCommand.ImbricationCommand.segment
@@ -47,6 +48,12 @@ Read-only properties
 .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.allow_unused_pitches
 
 .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.by_pitch_class
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.deactivate
 
 .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.extend_beam
 

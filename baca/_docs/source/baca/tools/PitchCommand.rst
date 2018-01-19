@@ -25,6 +25,7 @@ Bases
 
       ~baca.tools.PitchCommand.PitchCommand.allow_repeat_pitches
       ~baca.tools.PitchCommand.PitchCommand.cyclic
+      ~baca.tools.PitchCommand.PitchCommand.deactivate
       ~baca.tools.PitchCommand.PitchCommand.pitches
       ~baca.tools.PitchCommand.PitchCommand.selector
       ~baca.tools.PitchCommand.PitchCommand.site
@@ -42,6 +43,12 @@ Read-only properties
 .. autoattribute:: baca.tools.PitchCommand.PitchCommand.allow_repeat_pitches
 
 .. autoattribute:: baca.tools.PitchCommand.PitchCommand.cyclic
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.PitchCommand.PitchCommand.deactivate
 
 .. autoattribute:: baca.tools.PitchCommand.PitchCommand.pitches
 

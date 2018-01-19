@@ -197,13 +197,14 @@ class OverrideCommand(Command):
         after=None,
         attribute=None,
         context=None,
+        deactivate=None,
         grob=None,
         selector='baca.leaves()',
         site='OC',
         tags=None,
         value=None,
         ):
-        Command.__init__(self, selector=selector)
+        Command.__init__(self, deactivate=deactivate, selector=selector)
         if after is not None:
             after = bool(after)
         self._after = after
@@ -263,18 +264,20 @@ class OverrideCommand(Command):
         if self.after is True:
             format_slot = 'after'
         literal = abjad.LilyPondLiteral(string, format_slot)
-        tag, deactivate = self.tag, None
+        #tag, deactivate = self.tag, None
+        tag = self.tag
         if self.document is not None:
             assert self.document[0] in ('+', '-'), repr(self.document)
             if self.tag:
                 tag = f'{self.document}:{self.tag}'
             else:
                 tag = f'{self.document}'
-            deactivate = True
+            #deactivate = True
         abjad.attach(
             literal,
             leaves[0],
-            deactivate=deactivate,
+            #deactivate=deactivate,
+            deactivate=self.deactivate,
             site=self.site,
             tag=tag,
             )
@@ -289,7 +292,8 @@ class OverrideCommand(Command):
         abjad.attach(
             literal,
             leaves[-1],
-            deactivate=deactivate,
+            #deactivate=deactivate,
+            deactivate=self.deactivate,
             site=self.site,
             tag=tag,
             )

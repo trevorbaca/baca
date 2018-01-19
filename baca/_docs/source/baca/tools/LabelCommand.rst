@@ -23,6 +23,7 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.LabelCommand.LabelCommand.deactivate
       ~baca.tools.LabelCommand.LabelCommand.expression
       ~baca.tools.LabelCommand.LabelCommand.selector
       ~baca.tools.LabelCommand.LabelCommand.site
@@ -36,6 +37,12 @@ Bases
 
 Read-only properties
 --------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.LabelCommand.LabelCommand.deactivate
 
 .. autoattribute:: baca.tools.LabelCommand.LabelCommand.expression
 

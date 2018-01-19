@@ -21,22 +21,27 @@ class LibraryTZ(abjad.AbjadObject):
     ### PUBLIC METHODS ###
 
     @staticmethod
-    def tag(command, tag):
-        r'''Tags `command` with `tag`.
+    def tag(tags, command, deactivate=None):
+        r'''Appends each tag in `tags` to `command`.
 
-        Returns none.
+        Sorts `comand` tags.
+
+        Returns `command` for in-place definition file application.
         '''
-        if isinstance(tag, str):
-            tag = [tag]
-        assert baca.Command._are_valid_tags(tag)
+        if isinstance(tags, str):
+            tags = [tags]
+        assert baca.Command._are_valid_tags(tags)
         if isinstance(command, baca.SuiteCommand):
             for command_ in command.commands:
-                baca.tag(command_, tag)
+                baca.tag(tags, command_, deactivate=deactivate)
         else:
-            if not hasattr(command, '_tags'):
-                raise Exception(f'does not implement tags: {command!r}.')
-            command._tags.extend(tag)
+            if (not hasattr(command, '_tags') or
+                not hasattr(command, '_deactivate')):
+                raise Exception(f'does not implement tag protocol: {command}.')
+            command._tags.extend(tags)
             command._tags.sort()
+            command._deactivate = deactivate
+        return command
 
     @staticmethod
     def tenuti(selector='baca.pheads()'):

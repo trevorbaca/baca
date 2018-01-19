@@ -23,6 +23,7 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.deactivate
       ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.selector
       ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.site
       ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.tag
@@ -36,6 +37,12 @@ Bases
 
 Read-only properties
 --------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.deactivate
 
 .. only:: html
 

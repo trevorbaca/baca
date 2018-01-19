@@ -23,6 +23,7 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.ColorCommand.ColorCommand.deactivate
       ~baca.tools.ColorCommand.ColorCommand.selector
       ~baca.tools.ColorCommand.ColorCommand.site
       ~baca.tools.ColorCommand.ColorCommand.tag
@@ -35,6 +36,12 @@ Bases
 
 Read-only properties
 --------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ColorCommand.ColorCommand.deactivate
 
 .. only:: html
 

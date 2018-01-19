@@ -52,7 +52,6 @@ Bases
       ~baca.tools.LibraryAF.LibraryAF.diatonic_clusters
       ~baca.tools.LibraryAF.LibraryAF.displacement
       ~baca.tools.LibraryAF.LibraryAF.dls_sp
-      ~baca.tools.LibraryAF.LibraryAF.document
       ~baca.tools.LibraryAF.LibraryAF.double_tonguing
       ~baca.tools.LibraryAF.LibraryAF.down_arpeggios
       ~baca.tools.LibraryAF.LibraryAF.down_bows
@@ -139,8 +138,6 @@ Class & static methods
 .. automethod:: baca.tools.LibraryAF.LibraryAF.displacement
 
 .. automethod:: baca.tools.LibraryAF.LibraryAF.dls_sp
-
-.. automethod:: baca.tools.LibraryAF.LibraryAF.document
 
 .. automethod:: baca.tools.LibraryAF.LibraryAF.double_tonguing
 

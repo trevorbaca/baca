@@ -23,6 +23,7 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.RegisterCommand.RegisterCommand.deactivate
       ~baca.tools.RegisterCommand.RegisterCommand.registration
       ~baca.tools.RegisterCommand.RegisterCommand.selector
       ~baca.tools.RegisterCommand.RegisterCommand.site
@@ -36,6 +37,12 @@ Bases
 
 Read-only properties
 --------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.RegisterCommand.RegisterCommand.deactivate
 
 .. autoattribute:: baca.tools.RegisterCommand.RegisterCommand.registration
 

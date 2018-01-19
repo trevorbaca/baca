@@ -24,6 +24,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.anchor
+      ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.deactivate
       ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.octave_number
       ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.selector
       ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.site
@@ -39,6 +40,12 @@ Read-only properties
 --------------------
 
 .. autoattribute:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.anchor
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.deactivate
 
 .. autoattribute:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.octave_number
 

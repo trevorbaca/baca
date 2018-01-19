@@ -187,12 +187,13 @@ class SpannerCommand(Command):
 
     def __init__(
         self,
+        deactivate=None,
         selector='baca.tleaves()',
         spanner=None,
         site='SC',
         tags=None,
         ):
-        Command.__init__(self, selector=selector)
+        Command.__init__(self, deactivate=deactivate, selector=selector)
         self._annotation = None
         if spanner is not None:
             assert isinstance(spanner, abjad.Spanner)
@@ -220,6 +221,7 @@ class SpannerCommand(Command):
         abjad.attach(
             spanner,
             leaves,
+            deactivate=self.deactivate,
             site=self.site,
             tag=self.tag,
             )

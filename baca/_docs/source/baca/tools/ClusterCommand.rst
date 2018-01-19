@@ -23,6 +23,7 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.ClusterCommand.ClusterCommand.deactivate
       ~baca.tools.ClusterCommand.ClusterCommand.hide_flat_markup
       ~baca.tools.ClusterCommand.ClusterCommand.selector
       ~baca.tools.ClusterCommand.ClusterCommand.site
@@ -38,6 +39,12 @@ Bases
 
 Read-only properties
 --------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.deactivate
 
 .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.hide_flat_markup
 

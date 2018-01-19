@@ -26,13 +26,14 @@ class HairpinCommand(Command):
 
     def __init__(
         self,
+        deactivate=None,
         selector='baca.tleaves()',
         site='HC',
         start=None,
         stop=None,
         tags=None,
         ):
-        Command.__init__(self, selector=selector)
+        Command.__init__(self, deactivate=deactivate, selector=selector)
         if site is not None:
             assert isinstance(site, str), repr(site)
         self._site = site
@@ -70,6 +71,7 @@ class HairpinCommand(Command):
             spanner.attach(
                 self.start,
                 spanner[0],
+                deactivate=self.deactivate,
                 site=self.site,
                 tag=self.tag,
                 )
@@ -92,6 +94,7 @@ class HairpinCommand(Command):
             spanner.attach(
                 self.stop,
                 spanner[-1],
+                deactivate=self.deactivate,
                 site=self.site,
                 tag=self.tag,
                 )

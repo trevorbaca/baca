@@ -24,6 +24,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.MapCommand.MapCommand.commands
+      ~baca.tools.MapCommand.MapCommand.deactivate
       ~baca.tools.MapCommand.MapCommand.selector
       ~baca.tools.MapCommand.MapCommand.site
       ~baca.tools.MapCommand.MapCommand.tag
@@ -38,6 +39,12 @@ Read-only properties
 --------------------
 
 .. autoattribute:: baca.tools.MapCommand.MapCommand.commands
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.MapCommand.MapCommand.deactivate
 
 .. only:: html
 

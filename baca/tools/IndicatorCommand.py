@@ -217,12 +217,13 @@ class IndicatorCommand(Command):
     def __init__(
         self,
         context=None,
+        deactivate=None,
         indicators=None,
         selector='baca.pheads()',
         site='IC',
         tags=None,
         ):
-        Command.__init__(self, selector=selector)
+        Command.__init__(self, deactivate=deactivate, selector=selector)
         self._document = None
         if context is not None:
             assert isinstance(context, str), repr(context)
@@ -255,7 +256,7 @@ class IndicatorCommand(Command):
             argument = self.selector(argument)
         if not argument:
             return
-        deactivate = None
+        #deactivate = None
         tag = self.tag
         if self.document is not None:
             assert self.document[0] in ('+', '-'), repr(self.document)
@@ -263,8 +264,8 @@ class IndicatorCommand(Command):
                 tag = f'{self.document}:{self.tag}'
             else:
                 tag = f'{self.document}'
-            if tag.startswith('+'):
-                deactivate = True
+            #if tag.startswith('+'):
+            #    deactivate = True
         for i, leaf in enumerate(baca.select(argument).leaves()):
             indicators = self.indicators[i]
             indicators = self._token_to_indicators(indicators)
@@ -277,7 +278,8 @@ class IndicatorCommand(Command):
                     indicator,
                     leaf,
                     context=self.context,
-                    deactivate=deactivate,
+                    #deactivate=deactivate,
+                    deactivate=self.deactivate,
                     site=self.site,
                     tag=tag,
                     )

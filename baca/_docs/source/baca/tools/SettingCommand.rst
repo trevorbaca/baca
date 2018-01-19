@@ -24,6 +24,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.SettingCommand.SettingCommand.context
+      ~baca.tools.SettingCommand.SettingCommand.deactivate
       ~baca.tools.SettingCommand.SettingCommand.selector
       ~baca.tools.SettingCommand.SettingCommand.setting
       ~baca.tools.SettingCommand.SettingCommand.site
@@ -40,6 +41,12 @@ Read-only properties
 --------------------
 
 .. autoattribute:: baca.tools.SettingCommand.SettingCommand.context
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.SettingCommand.SettingCommand.deactivate
 
 .. only:: html
 

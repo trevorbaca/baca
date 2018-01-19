@@ -24,6 +24,7 @@ Bases
    .. autosummary::
 
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.bookend
+      ~baca.tools.PiecewiseCommand.PiecewiseCommand.deactivate
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.indicators
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.preamble
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.selector
@@ -41,6 +42,12 @@ Read-only properties
 --------------------
 
 .. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.bookend
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.deactivate
 
 .. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.indicators
 

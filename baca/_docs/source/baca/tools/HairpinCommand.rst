@@ -23,6 +23,7 @@ Bases
 
    .. autosummary::
 
+      ~baca.tools.HairpinCommand.HairpinCommand.deactivate
       ~baca.tools.HairpinCommand.HairpinCommand.selector
       ~baca.tools.HairpinCommand.HairpinCommand.site
       ~baca.tools.HairpinCommand.HairpinCommand.start
@@ -37,6 +38,12 @@ Bases
 
 Read-only properties
 --------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.deactivate
 
 .. only:: html
 
