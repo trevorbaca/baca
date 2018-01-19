@@ -206,7 +206,6 @@ class IndicatorCommand(Command):
 
     __slots__ = (
         '_context',
-        '_document',
         '_indicators',
         '_site',
         '_tags',
@@ -224,7 +223,6 @@ class IndicatorCommand(Command):
         tags=None,
         ):
         Command.__init__(self, deactivate=deactivate, selector=selector)
-        self._document = None
         if context is not None:
             assert isinstance(context, str), repr(context)
         self._context = context
@@ -256,16 +254,6 @@ class IndicatorCommand(Command):
             argument = self.selector(argument)
         if not argument:
             return
-        #deactivate = None
-        tag = self.tag
-        if self.document is not None:
-            assert self.document[0] in ('+', '-'), repr(self.document)
-            if self.tag:
-                tag = f'{self.document}:{self.tag}'
-            else:
-                tag = f'{self.document}'
-            #if tag.startswith('+'):
-            #    deactivate = True
         for i, leaf in enumerate(baca.select(argument).leaves()):
             indicators = self.indicators[i]
             indicators = self._token_to_indicators(indicators)
@@ -278,10 +266,9 @@ class IndicatorCommand(Command):
                     indicator,
                     leaf,
                     context=self.context,
-                    #deactivate=deactivate,
                     deactivate=self.deactivate,
                     site=self.site,
-                    tag=tag,
+                    tag=self.tag,
                     )
                 if indicator == reapplied_indicator:
                     if (isinstance(indicator, abjad.Dynamic) and
@@ -350,19 +337,6 @@ class IndicatorCommand(Command):
         Returns string or none.
         '''
         return self._context
-
-    @property
-    def document(self):
-        r'''Gets document.
-
-        Set to string or none.
-
-        Returns string or none.
-        '''
-        document = self._document
-        if document is not None:
-            assert self._is_signed_document_name(document), repr(document)
-        return document
 
     @property
     def indicators(self):
@@ -524,12 +498,3 @@ class IndicatorCommand(Command):
         Returns string or none.
         '''
         return self._site
-
-    @property
-    def tag(self):
-        r'''Gets tag.
-
-        Returns string or none.
-        '''
-        if self.tags:
-            return ':'.join(self.tags)

@@ -116,12 +116,3 @@ class MetronomeMarkCommand(Command):
         Returns string or none.
         '''
         return self._site
-
-    @property
-    def tag(self):
-        r'''Gets colon-delimited tag.
-
-        Returns string or none.
-        '''
-        if self.tags:
-            return ':'.join(self.tags)

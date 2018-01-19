@@ -183,7 +183,6 @@ class OverrideCommand(Command):
         '_after',
         '_attribute',
         '_context',
-        '_document',
         '_grob',
         '_site',
         '_tags',
@@ -214,7 +213,6 @@ class OverrideCommand(Command):
         if context is not None:
             assert isinstance(context, str), repr(context)
         self._context = context
-        self._document = None
         if grob is not None:
             assert isinstance(grob, str), repr(grob)
         self._grob = grob
@@ -264,22 +262,12 @@ class OverrideCommand(Command):
         if self.after is True:
             format_slot = 'after'
         literal = abjad.LilyPondLiteral(string, format_slot)
-        #tag, deactivate = self.tag, None
-        tag = self.tag
-        if self.document is not None:
-            assert self.document[0] in ('+', '-'), repr(self.document)
-            if self.tag:
-                tag = f'{self.document}:{self.tag}'
-            else:
-                tag = f'{self.document}'
-            #deactivate = True
         abjad.attach(
             literal,
             leaves[0],
-            #deactivate=deactivate,
             deactivate=self.deactivate,
             site=self.site,
-            tag=tag,
+            tag=self.tag,
             )
         if once:
             return
@@ -292,10 +280,9 @@ class OverrideCommand(Command):
         abjad.attach(
             literal,
             leaves[-1],
-            #deactivate=deactivate,
             deactivate=self.deactivate,
             site=self.site,
-            tag=tag,
+            tag=self.tag,
             )
 
     ### PUBLIC PROPERTIES ###
@@ -329,35 +316,12 @@ class OverrideCommand(Command):
         return self._context
 
     @property
-    def document(self):
-        r'''Gets document.
-
-        Set to tag, string or none.
-
-        Returns string or none
-        '''
-        document = self._document
-        if document is not None:
-            self._is_signed_document_name(document), repr(document)
-        return document
-
-    @property
     def grob(self):
         r'''Gets grob name.
 
         Set to string or none.
         '''
         return self._grob
-
-    @property
-    def tag(self):
-        r'''Gets colon-delimited tag.
-
-        Returns string or none.
-        Returns string or none.
-        '''
-        if self.tags:
-            return ':'.join(self.tags)
 
     @property
     def value(self):

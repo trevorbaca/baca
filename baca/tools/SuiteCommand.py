@@ -17,7 +17,6 @@ class SuiteCommand(Command):
 
     __slots__ = (
         '_commands',
-        '_document',
         '_selector',
         )
 
@@ -30,7 +29,6 @@ class SuiteCommand(Command):
         elif isinstance(commands, collections.Iterable):
             commands = tuple(commands)
         self._commands = commands
-        self._document = None
 
     ### SPECIAL METHODS ###
 
@@ -57,16 +55,3 @@ class SuiteCommand(Command):
         Returns tuple or none.
         '''
         return self._commands
-
-    @property
-    def document(self):
-        r'''Gets document.
-
-        Set to tag, string or none.
-
-        Returns string or none.
-        '''
-        document = self._document
-        if document is not None:
-            self._is_signed_document_name(document), repr(document)
-        return document

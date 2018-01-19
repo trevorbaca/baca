@@ -57,7 +57,11 @@ Read-only properties
 
 .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.stop
 
-.. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.tag
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.tag
 
 .. only:: html
 

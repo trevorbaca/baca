@@ -50,7 +50,11 @@ Read-only properties
 
 .. autoattribute:: baca.tools.SpannerCommand.SpannerCommand.spanner
 
-.. autoattribute:: baca.tools.SpannerCommand.SpannerCommand.tag
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.SpannerCommand.SpannerCommand.tag
 
 .. only:: html
 

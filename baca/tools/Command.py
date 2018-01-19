@@ -64,14 +64,6 @@ class Command(abjad.AbjadObject):
         assert not any(':' in _ for _ in tags), repr(tags)
         return True
 
-    @staticmethod
-    def _is_signed_document_name(string:str):
-        if not isinstance(string, str):
-            return False
-        if string[0] not in ('+', '-'):
-            return False
-        return abjad.String(string[1:]).is_shout_case()
-
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -108,15 +100,12 @@ class Command(abjad.AbjadObject):
 
     @property
     def tag(self):
-        r'''Gets tag.
-
-        Defaults to none.
-
-        Set to string or none.
+        r'''Gets colon-delimited tag.
 
         Returns string or none.
         '''
-        return self._tag
+        if self.tags:
+            return ':'.join(self.tags)
 
     @property
     def tags(self):
@@ -125,4 +114,4 @@ class Command(abjad.AbjadObject):
         Returns list of strings.
         '''
         assert self._are_valid_tags(self._tags)
-        return self._tags
+        return self._tags[:]

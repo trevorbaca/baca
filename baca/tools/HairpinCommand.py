@@ -135,12 +135,3 @@ class HairpinCommand(Command):
         Returns dynamic or none.
         '''
         return self._stop
-
-    @property
-    def tag(self):
-        r'''Gets colon-delimited tag.
-
-        Returns string or none.
-        '''
-        if self.tags:
-            return ':'.join(self.tags)

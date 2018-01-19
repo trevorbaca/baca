@@ -25,7 +25,6 @@ Bases
 
       ~baca.tools.IndicatorCommand.IndicatorCommand.context
       ~baca.tools.IndicatorCommand.IndicatorCommand.deactivate
-      ~baca.tools.IndicatorCommand.IndicatorCommand.document
       ~baca.tools.IndicatorCommand.IndicatorCommand.indicators
       ~baca.tools.IndicatorCommand.IndicatorCommand.selector
       ~baca.tools.IndicatorCommand.IndicatorCommand.site
@@ -48,8 +47,6 @@ Read-only properties
 
       .. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.deactivate
 
-.. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.document
-
 .. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.indicators
 
 .. only:: html
@@ -60,7 +57,11 @@ Read-only properties
 
 .. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.site
 
-.. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.tag
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.tag
 
 .. only:: html
 

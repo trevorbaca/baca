@@ -25,7 +25,6 @@ Bases
 
       ~baca.tools.SuiteCommand.SuiteCommand.commands
       ~baca.tools.SuiteCommand.SuiteCommand.deactivate
-      ~baca.tools.SuiteCommand.SuiteCommand.document
       ~baca.tools.SuiteCommand.SuiteCommand.selector
       ~baca.tools.SuiteCommand.SuiteCommand.site
       ~baca.tools.SuiteCommand.SuiteCommand.tag
@@ -46,8 +45,6 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.SuiteCommand.SuiteCommand.deactivate
-
-.. autoattribute:: baca.tools.SuiteCommand.SuiteCommand.document
 
 .. only:: html
 

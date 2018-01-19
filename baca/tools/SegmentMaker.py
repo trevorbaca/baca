@@ -644,12 +644,6 @@ class SegmentMaker(abjad.SegmentMaker):
         for command in commands:
             if not isinstance(command, baca.Command):
                 raise Exception(f'commands only:\n\n{format(command)}')
-            if getattr(command, 'document', None):
-                document = command.document
-                document = document.strip('+')
-                document = document.strip('-')
-                if document not in self.known_documents:
-                    raise Exception(f'unknown document: {command.document!r}.')
         for scope in scopes:
             for command in commands:
                 manifest = getattr(command, '_manifest', None)

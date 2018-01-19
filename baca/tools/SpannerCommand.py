@@ -368,12 +368,3 @@ class SpannerCommand(Command):
         Returns spanner or none.
         '''
         return self._spanner
-
-    @property
-    def tag(self):
-        r'''Gets colon-delimited tag.
-
-        Set to string or none.
-        '''
-        if self.tags:
-            return ':'.join(self.tags)

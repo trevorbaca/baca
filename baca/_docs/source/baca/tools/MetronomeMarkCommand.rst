@@ -57,7 +57,11 @@ Read-only properties
 
 .. autoattribute:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.site
 
-.. autoattribute:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.tag
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.tag
 
 .. only:: html
 

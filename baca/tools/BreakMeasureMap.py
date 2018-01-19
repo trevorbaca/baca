@@ -414,7 +414,6 @@ class BreakMeasureMap(abjad.AbjadObject):
         '_bol_measure_numbers',
         '_commands',
         '_deactivate',
-        '_document',
         '_tags',
         )
 
@@ -430,7 +429,6 @@ class BreakMeasureMap(abjad.AbjadObject):
         self._tags = tags
         self._bol_measure_numbers = []
         self._deactivate = deactivate
-        self._document = None
         if commands is not None:
             commands_ = []
             for command in commands:
@@ -526,23 +524,12 @@ class BreakMeasureMap(abjad.AbjadObject):
         return self._deactivate
 
     @property
-    def document(self):
-        r'''Gets document.
-        '''
-        document = self._document
-        if document is not None:
-            self._is_signed_document_name(document), repr(document)
-        return document
-
-    @property
     def tags(self):
         r'''Gets tags.
 
         Returns (copied) list of strings.
         '''
-        assert isinstance(self._tags, list), repr(self._tags)
-        assert not any(':' in _ for _ in self._tags), repr(self._tags)
-        assert '' not in self._tags, repr(self._tags)
+        assert baca.Command._are_valid_tags(self._tags), repr(self._tags)
         return self._tags[:]
 
     @property
