@@ -2040,16 +2040,17 @@ class SegmentMaker(abjad.SegmentMaker):
         for item in lilypond_file.items[:]:
             if getattr(item, 'name', None) == 'header':
                 lilypond_file.items.remove(item)
-        assert len(lilypond_file.score_block.items) == 1
-        score = lilypond_file.score_block.items[0]
-        assert isinstance(score, abjad.Score)
-        items = [
-            abjad.LilyPondLiteral('<<'),
-            abjad.LilyPondLiteral(r'{ \include "layout.ly" }'),
-            score,
-            abjad.LilyPondLiteral('>>'),
-            ]
-        lilypond_file.score_block.items[:] = items
+        if self._environment != 'docs':
+            assert len(lilypond_file.score_block.items) == 1
+            score = lilypond_file.score_block.items[0]
+            assert isinstance(score, abjad.Score)
+            items = [
+                abjad.LilyPondLiteral('<<'),
+                abjad.LilyPondLiteral(r'{ \include "layout.ly" }'),
+                score,
+                abjad.LilyPondLiteral('>>'),
+                ]
+            lilypond_file.score_block.items[:] = items
         self._lilypond_file = lilypond_file
 
     def _make_measure_silences(self, start, stop, measure_start_offsets):
