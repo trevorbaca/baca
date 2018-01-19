@@ -96,6 +96,7 @@ baca.tools
    ImbricationCommand
    IndicatorCommand
    LabelCommand
+   LilyPondTagCommand
    MapCommand
    MetronomeMarkCommand
    MicrotoneDeviationCommand
@@ -113,7 +114,6 @@ baca.tools
    SpannerCommand
    StaffPositionCommand
    SuiteCommand
-   TagCommand
    TieCorrectionCommand
    VoltaCommand
 
@@ -130,6 +130,7 @@ baca.tools
    ImbricationCommand
    IndicatorCommand
    LabelCommand
+   LilyPondTagCommand
    MapCommand
    MetronomeMarkCommand
    MicrotoneDeviationCommand
@@ -147,7 +148,6 @@ baca.tools
    SpannerCommand
    StaffPositionCommand
    SuiteCommand
-   TagCommand
    TieCorrectionCommand
    VoltaCommand
 

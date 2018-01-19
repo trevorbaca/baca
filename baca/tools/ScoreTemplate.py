@@ -64,19 +64,16 @@ class ScoreTemplate(abjad.ScoreTemplate):
         abjad.attach(literal, context, site='ST4')
 
     def _make_global_context(self):
-        global_context_multimeasure_rests = abjad.Context(
+        global_rests = abjad.Context(
             context_name='GlobalRests',
             name='GlobalRests',
             )
-        global_context_skips = abjad.Context(
+        global_skips = abjad.Context(
             context_name='GlobalSkips',
             name='GlobalSkips',
             )
         global_context = abjad.Context(
-            [
-                global_context_multimeasure_rests,
-                global_context_skips,
-            ],
+            [global_rests, global_skips ],
             context_name='GlobalContext',
             is_simultaneous=True,
             name='GlobalContext',

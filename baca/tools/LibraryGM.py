@@ -1156,6 +1156,87 @@ class LibraryGM(abjad.AbjadObject):
             )
 
     @staticmethod
+    def lilypond_tag(tag, selector='baca.leaves()'):
+        r'''Attaches LilyPond tag command to leaves.
+
+        ..  container:: example
+
+            >>> maker = baca.SegmentMaker(
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_notes(repeat_ties=True),
+            ...     baca.pitches('E4 F4'),
+            ...     baca.lilypond_tag('ViolinI', baca.leaves()[:2]),
+            ...     baca.lilypond_tag('ViolinI.ViolinII', baca.leaves()[2:]),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \context Score = "Score" <<
+                \context GlobalContext = "GlobalContext" <<
+                    \context GlobalSkips = "GlobalSkips" {
+            <BLANKLINE>
+                        % GlobalSkips [measure 1]                                                    %! SM4
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                        s1 * 1/2
+            <BLANKLINE>
+                        % GlobalSkips [measure 2]                                                    %! SM4
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                        s1 * 3/8
+            <BLANKLINE>
+                        % GlobalSkips [measure 3]                                                    %! SM4
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                        s1 * 1/2
+            <BLANKLINE>
+                        % GlobalSkips [measure 4]                                                    %! SM4
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
+                        \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                        s1 * 3/8
+                        \override Score.BarLine.transparent = ##f                                    %! SM5
+                        \bar "|"                                                                     %! SM5
+            <BLANKLINE>
+                    }
+                >>
+                \context MusicContext = "MusicContext" <<
+                    \context Staff = "MusicStaff" {
+                        \context Voice = "MusicVoice" {
+                            \tag ViolinI
+                            {
+            <BLANKLINE>
+                                % MusicVoice [measure 1]                                             %! SM4
+                                e'2
+            <BLANKLINE>
+                                % MusicVoice [measure 2]                                             %! SM4
+                                f'4.
+                            }
+                            \tag ViolinI.ViolinII
+                            {
+            <BLANKLINE>
+                                % MusicVoice [measure 3]                                             %! SM4
+                                e'2
+            <BLANKLINE>
+                                % MusicVoice [measure 4]                                             %! SM4
+                                f'4.
+            <BLANKLINE>
+                            }
+                        }
+                    }
+                >>
+            >>
+
+        Returns tag command.
+        '''
+        return baca.LilyPondTagCommand(selector=selector, tag=tag)
+
+    @staticmethod
     def line_break(selector='baca.leaf(-1)'):
         r'''Attaches line break after last leaf.
 

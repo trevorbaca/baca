@@ -3,13 +3,13 @@ import baca
 from .Command import Command
 
 
-class TagCommand(Command):
+class LilyPondTagCommand(Command):
     r'''Tag command.
 
     ..  container:: example
 
-        >>> baca.TagCommand()
-        TagCommand(selector=baca.leaves())
+        >>> baca.LilyPondTagCommand()
+        LilyPondTagCommand(selector=baca.leaves())
 
     ..  container:: example
 
@@ -22,8 +22,8 @@ class TagCommand(Command):
         ...     baca.scope('MusicVoice', 1),
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.pitches('E4 F4'),
-        ...     baca.tag('ViolinI', baca.leaves()[:2]),
-        ...     baca.tag('ViolinI.ViolinII', baca.leaves()[2:]),
+        ...     baca.lilypond_tag('ViolinI', baca.leaves()[:2]),
+        ...     baca.lilypond_tag('ViolinI.ViolinII', baca.leaves()[2:]),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')

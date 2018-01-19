@@ -95,7 +95,7 @@ from .StaffPositionCommand import StaffPositionCommand
 from .StageMeasureMap import StageMeasureMap
 from .StringTrioScoreTemplate import StringTrioScoreTemplate
 from .SuiteCommand import SuiteCommand
-from .TagCommand import TagCommand
+from .LilyPondTagCommand import LilyPondTagCommand
 from .Tags import Tags
 from .TieCorrectionCommand import TieCorrectionCommand
 from .TimeSignatureGroups import TimeSignatureGroups

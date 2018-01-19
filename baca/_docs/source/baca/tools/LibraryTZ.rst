@@ -21,7 +21,6 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.LibraryTZ.LibraryTZ.tag
       ~baca.tools.LibraryTZ.LibraryTZ.tenuti
       ~baca.tools.LibraryTZ.LibraryTZ.text_script_color
       ~baca.tools.LibraryTZ.LibraryTZ.text_script_extra_offset
@@ -61,8 +60,6 @@ Bases
 
 Class & static methods
 ----------------------
-
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.tag
 
 .. automethod:: baca.tools.LibraryTZ.LibraryTZ.tenuti
 
