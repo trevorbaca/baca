@@ -714,25 +714,23 @@ class SegmentMaker(abjad.SegmentMaker):
         prototype = baca.StaffLines
         staff_lines = baca.StaffLines(self.fermata_measure_staff_line_count)
         breaks_already_treated = []
-        deactivate = None
         for staff in abjad.iterate(self.score).components(abjad.Staff):
             for leaf in abjad.iterate(staff).leaves():
                 start_offset = abjad.inspect(leaf).get_timespan().start_offset
                 if start_offset not in self._fermata_start_offsets:
                     continue
                 leaf_stop = abjad.inspect(leaf).get_timespan().stop_offset
-                ends_at_break = leaf_stop in break_offsets
+                eol = leaf_stop in break_offsets
                 before = abjad.inspect(leaf).get_effective(prototype)
                 next_leaf = abjad.inspect(leaf).get_leaf(1)
                 if next_leaf is not None:
                     after = abjad.inspect(next_leaf).get_effective(prototype)
                 if before != staff_lines:
-                    strings = []
-                    strings_ = staff_lines._get_lilypond_format(context=staff)
-                    strings.extend(strings_)
+                    strings = staff_lines._get_lilypond_format(context=staff)
                     if getattr(before, 'line_count', 5) == 5:
-                        string = rf'\once \override {staff.name}.BarLine'
-                        string += f".bar-extent = #'(-2 . 2)"
+                        context = staff.name
+                        string = f"{context}.BarLine.bar-extent = #'(-2 . 2)"
+                        string = r'\once \override ' + string
                         strings.append(string)
                     if strings:
                         literal = abjad.LilyPondLiteral(strings)
@@ -741,31 +739,27 @@ class SegmentMaker(abjad.SegmentMaker):
                     strings = after._get_lilypond_format(context=staff)
                     literal = abjad.LilyPondLiteral(strings)
                     abjad.attach(literal, next_leaf, site='SM21')
-                if ends_at_break and leaf_stop not in breaks_already_treated:
+                if eol and leaf_stop not in breaks_already_treated:
                     strings = []
-                    if staff_lines.line_count == 0:
-                        if next_leaf is None and self.last_segment:
-                            pass
-                        else:
-                            string = r'\override Score.BarLine.transparent = ##t'
-                            string = r'\once ' + string
-                            strings.append(string)
-                            string = r'\override Score.SpanBar.transparent = ##t'
-                            string = r'\once ' + string
-                            strings.append(string)
+                    if (staff_lines.line_count == 0 and
+                        not (next_leaf is None and self.last_segment)):
+                        string = r'Score.BarLine.transparent = ##t'
+                        string = r'\once \override ' + string
+                        strings.append(string)
+                        string = r'Score.SpanBar.transparent = ##t'
+                        string = r'\once \override ' + string
+                        strings.append(string)
                     elif staff_lines.line_count == 1:
                         string = "Score.BarLine.bar-extent = #'(-2 . 2)"
                         string = r'\once \override ' + string
                         strings.append(string)
                     if strings:
                         literal = abjad.LilyPondLiteral(strings, 'after')
-                        tag = baca.tags.FERMATA_BAR_LINE
                         abjad.attach(
                             literal,
                             leaf,
-                            deactivate=deactivate,
                             site='SM22',
-                            tag=tag,
+                            tag=baca.tags.BAR_LINE_AFTER_EOL_FERMATA,
                             )
                     breaks_already_treated.append(leaf_stop)
                 if next_leaf is None and before != staff_lines:
