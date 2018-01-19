@@ -17,7 +17,6 @@ class MetronomeMarkCommand(Command):
 
     __slots__ = (
         '_key',
-        '_manifest',
         '_tags',
         )
 
@@ -34,8 +33,6 @@ class MetronomeMarkCommand(Command):
         if key is not None:
             assert isinstance(key, str)
         self._key = key
-        # TODO: set to none instead?
-        self._manifest = 'metronome_marks'
         tags = tags or []
         assert self._are_valid_tags(tags), repr(tags)
         self._tags = tags
@@ -51,7 +48,8 @@ class MetronomeMarkCommand(Command):
             return
         if self.key is None:
             return
-        metronome_mark = self.manifest.get(self.key)
+        metronome_marks = self._manifests['abjad.MetronomeMark']
+        metronome_mark = metronome_marks.get(self.key)
         if metronome_mark is None:
             raise Exception(f'can not find metronome mark {key!r}.')
         if self.selector is not None:
@@ -70,7 +68,6 @@ class MetronomeMarkCommand(Command):
             metronome_mark,
             leaf,
             deactivate=self.deactivate,
-            #site=self.site, ?
             tag=self.tag,
             )
         if metronome_mark == reapplied_mark:
@@ -93,13 +90,3 @@ class MetronomeMarkCommand(Command):
         Returns string or none.
         '''
         return self._key
-
-    @property
-    def manifest(self):
-        r'''Gets metronome mark manifest.
-
-        Populated by segment-maker at command wrap-time.
-
-        Returns ordered dictionary.
-        '''
-        return self._manifest

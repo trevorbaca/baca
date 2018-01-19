@@ -25,7 +25,6 @@ Bases
 
       ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.deactivate
       ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.key
-      ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.manifest
       ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.selector
       ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.tag
       ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.tags
@@ -45,8 +44,6 @@ Read-only properties
       .. autoattribute:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.deactivate
 
 .. autoattribute:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.key
-
-.. autoattribute:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.manifest
 
 .. only:: html
 

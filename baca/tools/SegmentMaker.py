@@ -646,10 +646,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 raise Exception(f'commands only:\n\n{format(command)}')
         for scope in scopes:
             for command in commands:
-                manifest = getattr(command, '_manifest', None)
-                if manifest is not None:
-                    manifest = getattr(self, manifest)
-                    command._manifest = manifest
                 wrapper = baca.CommandWrapper(command=command, scope=scope)
                 self.wrappers.append(wrapper)
 
@@ -931,8 +927,6 @@ class SegmentMaker(abjad.SegmentMaker):
             else:
                 directive = abjad.new(directive)
             abjad.attach(directive, rest, site='SM18')
-
-            # TODO: test and remove this block:
             strings = []
             string = r'\once \override'
             string += ' Score.MultiMeasureRest.transparent = ##t'
@@ -941,7 +935,6 @@ class SegmentMaker(abjad.SegmentMaker):
             strings.append(string)
             literal = abjad.LilyPondLiteral(strings)
             abjad.attach(literal, rest, site='SM19')
-
             abjad.attach('fermata measure', rest, site='')
             timespan = abjad.inspect(rest).get_timespan()
             self._fermata_start_offsets.append(timespan.start_offset)
