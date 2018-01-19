@@ -26,15 +26,17 @@ class LibraryTZ(abjad.AbjadObject):
 
         Returns none.
         '''
-        if not hasattr(command, '_tags'):
-            raise Exception(f'does not implement tags (yet): {command!r}.')
-        assert isinstance(tag, str), repr(tag)
-        if tag == '':
-            raise Exception(f'empty tags are not allowed: {tag!r}.')
-        if ':' in tag:
-            raise Exception(f'colon not allowed in tag: {tag!r}.')
-        command._tags.append(tag)
-        command._tags.sort()
+        if isinstance(tag, str):
+            tag = [tag]
+        assert baca.Command._are_valid_tags(tag)
+        if isinstance(command, baca.SuiteCommand):
+            for command_ in command.commands:
+                baca.tag(command_, tag)
+        else:
+            if not hasattr(command, '_tags'):
+                raise Exception(f'does not implement tags: {command!r}.')
+            command._tags.extend(tag)
+            command._tags.sort()
 
     @staticmethod
     def tenuti(selector='baca.pheads()'):

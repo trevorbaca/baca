@@ -2187,7 +2187,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 tag = f'-BOL_MEASURE_{measure_number}'
                 clef = wrapper.indicator
                 command = baca.shift_clef(clef, selector=baca.leaf(0))
-                command = baca.document(tag, command)
+                baca.tag(command, tag)
                 command(leaf)
 
     def _shorten_long_repeat_ties(self):
