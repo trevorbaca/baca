@@ -1,6 +1,7 @@
 from .AcciaccaturaSpecifier import AcciaccaturaSpecifier
 from .AnchorSpecifier import AnchorSpecifier
 from .ArpeggiationSpacingSpecifier import ArpeggiationSpacingSpecifier
+from .BreakMeasureMap import BreakMeasureMap
 from .ChordalSpacingSpecifier import ChordalSpacingSpecifier
 from .ClusterCommand import ClusterCommand
 from .Coat import Coat
@@ -31,7 +32,6 @@ from .Interpolator import Interpolator
 from .LBSD import LBSD
 from .LMRSpecifier import LMRSpecifier
 from .LabelCommand import LabelCommand
-from .BreakMeasureMap import BreakMeasureMap
 from .LibraryAF import LibraryAF
 from .LibraryGM import LibraryGM
 from .LibraryNS import LibraryNS
@@ -40,6 +40,7 @@ from .Loop import Loop
 from .MapCommand import MapCommand
 from .MarginMarkup import MarginMarkup
 from .MarkupLibrary import MarkupLibrary
+from .Match import Match
 from .Matrix import Matrix
 from .MetronomeMarkCommand import MetronomeMarkCommand
 from .MetronomeMarkMeasureMap import MetronomeMarkMeasureMap
