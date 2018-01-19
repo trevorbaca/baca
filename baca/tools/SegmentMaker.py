@@ -156,6 +156,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_metronome_mark_stem_height',
         '_metronome_marks',
         '_midi',
+        '_offset_to_measure_number',
         '_print_timings',
         '_range_checker',
         '_rehearsal_letter',
@@ -354,6 +355,7 @@ class SegmentMaker(abjad.SegmentMaker):
             assert isinstance(metronome_marks, abjad.TypedOrderedDict)
         self._metronome_marks = metronome_marks
         self._midi = None
+        self._offset_to_measure_number = {}
         self._print_timings = print_timings
         self._range_checker = range_checker
         self._rehearsal_letter = rehearsal_letter
@@ -780,31 +782,6 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.attach(tie, leaves, site='SM17')
                 abjad.detach('tie from me', current_leaf)
 
-    def _apply_per_document_clef_shifts(self):
-        fermata_stop_offsets = self._fermata_stop_offsets[:]
-        if self.previous_metadata.get('last_measure_is_fermata') is True:
-            fermata_stop_offsets.insert(0, abjad.Offset(0))
-        if not fermata_stop_offsets:
-            return
-        for staff in abjad.iterate(self.score).components(abjad.Staff):
-            for leaf in abjad.iterate(staff).leaves():
-                start_offset = abjad.inspect(leaf).get_timespan().start_offset
-                if start_offset not in fermata_stop_offsets:
-                    continue
-                wrapper = abjad.inspect(leaf).wrapper(abjad.Clef)
-                if wrapper is None or not wrapper.tag:
-                    continue
-                if baca.tags.EXPLICIT_CLEF not in wrapper.tag.split(':'):
-                    continue
-                items = self._document_to_break_offsets.items()
-                for document_name, break_offsets in items:
-                    if start_offset in break_offsets:
-                        continue
-                    clef = wrapper.indicator
-                    command = baca.shift_clef(clef, selector=baca.leaf(0))
-                    command = baca.document(f'+{document_name}', command)
-                    command(leaf)
-
     def _apply_spacing_specifier(self):
         start_time = time.time()
         if self.spacing_specifier is None:
@@ -944,20 +921,15 @@ class SegmentMaker(abjad.SegmentMaker):
             assert isinstance(rest, abjad.MultimeasureRest)
             if start_measure_index == last_measure_index:
                 self._last_measure_is_fermata = True
-            #fermata_y_offset = None
             if isinstance(directive, abjad.Fermata):
                 if directive.command == 'shortfermata':
                     string = 'scripts.ushortfermata'
-                    #fermata_y_offset = -7
                 elif directive.command == 'fermata':
                     string = 'scripts.ufermata'
-                    #fermata_y_offset = -7
                 elif directive.command == 'longfermata':
                     string = 'scripts.ulongfermata'
-                    #fermata_y_offset = -7
                 elif directive.command == 'verylongfermata':
                     string = 'scripts.uverylongfermata'
-                    #fermata_y_offset = -7
                 else:
                     raise Exception(f'unknown fermata: {directive.command!r}.')
                 directive = abjad.Markup.musicglyph(string)
@@ -965,11 +937,9 @@ class SegmentMaker(abjad.SegmentMaker):
             else:
                 directive = abjad.new(directive)
             abjad.attach(directive, rest, site='SM18')
+
+            # TODO: test and remove this block:
             strings = []
-            #if fermata_y_offset is not None:
-            #    string = r'\once \override MultiMeasureRestText.extra-offset'
-            #    string += f" = #'(0 . {fermata_y_offset})"
-            #    strings.append(string)
             string = r'\once \override'
             string += ' Score.MultiMeasureRest.transparent = ##t'
             strings.append(string)
@@ -977,6 +947,7 @@ class SegmentMaker(abjad.SegmentMaker):
             strings.append(string)
             literal = abjad.LilyPondLiteral(strings)
             abjad.attach(literal, rest, site='SM19')
+
             abjad.attach('fermata measure', rest, site='')
             timespan = abjad.inspect(rest).get_timespan()
             self._fermata_start_offsets.append(timespan.start_offset)
@@ -1506,19 +1477,22 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.attach(literal, pleaf, site='SM25')
 
     def _comment_measure_numbers(self):
-        offset_to_measure_number = {}
-        measure_number = self._get_first_measure_number()
-        for skip in baca.select(self.score['GlobalSkips']).skips():
-            offset = abjad.inspect(skip).get_timespan().start_offset
-            offset_to_measure_number[offset] = measure_number
-            measure_number += 1
+#        offset_to_measure_number = {}
+#        measure_number = self._get_first_measure_number()
+#        for skip in baca.select(self.score['GlobalSkips']).skips():
+#            offset = abjad.inspect(skip).get_timespan().start_offset
+#            offset_to_measure_number[offset] = measure_number
+#            measure_number += 1
         contexts = []
         contexts.extend(self.score['GlobalContext'])
         contexts.extend(abjad.iterate(self.score).components(abjad.Voice))
         for context in contexts:
             for leaf in abjad.iterate(context).leaves():
                 offset = abjad.inspect(leaf).get_timespan().start_offset
-                measure_number = offset_to_measure_number.get(offset, None)
+                measure_number = self._offset_to_measure_number.get(
+                    offset,
+                    None,
+                    )
                 if measure_number is None:
                     continue
                 string = f'% {context.name} [measure {measure_number}]'
@@ -2059,6 +2033,13 @@ class SegmentMaker(abjad.SegmentMaker):
             return class_(name='', command=momento.value)
         return class_(momento.value)
 
+    def _populate_offset_to_measure_number(self):
+        measure_number = self._get_first_measure_number()
+        for skip in baca.select(self.score['GlobalSkips']).skips():
+            offset = abjad.inspect(skip).get_timespan().start_offset
+            self._offset_to_measure_number[offset] = measure_number
+            measure_number += 1
+
     def _print_cache(self):
         for context in self._cache:
             print(f'CONTEXT {context} ...')
@@ -2180,6 +2161,33 @@ class SegmentMaker(abjad.SegmentMaker):
                 leaves.extend(leaves_by_stage_number[stage_number])
             leaf_selections.append(abjad.select(leaves))
         return leaf_selections
+
+    def _shift_clefs_into_fermata_measures(self):
+        fermata_stop_offsets = self._fermata_stop_offsets[:]
+        if self.previous_metadata.get('last_measure_is_fermata') is True:
+            fermata_stop_offsets.insert(0, abjad.Offset(0))
+        if not fermata_stop_offsets:
+            return
+        for staff in abjad.iterate(self.score).components(abjad.Staff):
+            for leaf in abjad.iterate(staff).leaves():
+                start_offset = abjad.inspect(leaf).get_timespan().start_offset
+                if start_offset not in fermata_stop_offsets:
+                    continue
+                wrapper = abjad.inspect(leaf).wrapper(abjad.Clef)
+                if wrapper is None or not wrapper.tag:
+                    continue
+                if baca.tags.EXPLICIT_CLEF not in wrapper.tag.split(':'):
+                    continue
+                measure_number = self._offset_to_measure_number.get(
+                    start_offset,
+                    )
+                if measure_number is None:
+                    continue
+                tag = f'-BOL_MEASURE_{measure_number}'
+                clef = wrapper.indicator
+                command = baca.shift_clef(clef, selector=baca.leaf(0))
+                command = baca.document(tag, command)
+                command(leaf)
 
     def _shorten_long_repeat_ties(self):
         leaves = abjad.iterate(self.score).leaves()
@@ -9459,11 +9467,12 @@ class SegmentMaker(abjad.SegmentMaker):
         self._color_octaves_()
         self._remove_redundant_time_signatures()
         self._whitespace_leaves()
+        self._populate_offset_to_measure_number()
         self._comment_measure_numbers()
         self._apply_breaks()
         self._cache_per_document_break_information()
         self._apply_fermata_measure_staff_line_count()
-        self._apply_per_document_clef_shifts()
+        self._shift_clefs_into_fermata_measures()
         self._deactivate_tags(deactivate)
         self._remove_tags(remove)
         self._collect_metadata()
