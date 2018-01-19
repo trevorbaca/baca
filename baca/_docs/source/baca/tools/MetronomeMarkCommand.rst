@@ -24,9 +24,13 @@ Bases
    .. autosummary::
 
       ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.deactivate
+      ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.get_tag
       ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.key
+      ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.manifests
+      ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.offset_to_measure_number
       ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.selector
       ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.tag
+      ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.tag_measure_number
       ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.tags
       ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.__call__
       ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.__eq__
@@ -62,6 +66,36 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.tags
+
+Read/write properties
+---------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.manifests
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.tag_measure_number
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.get_tag
 
 Special methods
 ---------------

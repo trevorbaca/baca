@@ -1106,7 +1106,9 @@ class SegmentMaker(abjad.SegmentMaker):
             if isinstance(wrapper.command, baca.RhythmCommand):
                 continue
             selection = self._scope_to_leaf_selection(wrapper)
-            wrapper.command._manifests = self.manifests
+            wrapper.command.manifests = self.manifests
+            dictionary = self._offset_to_measure_number
+            wrapper.command.offset_to_measure_number = dictionary
             try:
                 wrapper.command(selection)
             except:
@@ -1465,12 +1467,6 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.attach(literal, pleaf, site='SM25')
 
     def _comment_measure_numbers(self):
-#        offset_to_measure_number = {}
-#        measure_number = self._get_first_measure_number()
-#        for skip in baca.select(self.score['GlobalSkips']).skips():
-#            offset = abjad.inspect(skip).get_timespan().start_offset
-#            offset_to_measure_number[offset] = measure_number
-#            measure_number += 1
         contexts = []
         contexts.extend(self.score['GlobalContext'])
         contexts.extend(abjad.iterate(self.score).components(abjad.Voice))
@@ -2172,9 +2168,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 if measure_number is None:
                     continue
                 clef = wrapper.indicator
+                dictionary = self._offset_to_measure_number
                 command = baca.shift_clef(clef, selector=baca.leaf(0))
-                tags = [baca.tags.SHIFTED_CLEF, f'MEASURE_{measure_number}']
-                baca.tag(tags, command)
+                command.offset_to_measure_number = dictionary
                 command(leaf)
 
     def _shorten_long_repeat_ties(self):
@@ -9435,6 +9431,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._label_measure_indices()
         self._label_stage_numbers()
         self._call_rhythm_commands()
+        self._populate_offset_to_measure_number()
         self._extend_beams()
         self._attach_score_template_defaults()
         self._reapply_persistent_indicators()
@@ -9456,7 +9453,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._color_octaves_()
         self._remove_redundant_time_signatures()
         self._whitespace_leaves()
-        self._populate_offset_to_measure_number()
         self._comment_measure_numbers()
         self._apply_breaks()
         self._cache_per_document_break_information()

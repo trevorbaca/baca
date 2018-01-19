@@ -24,10 +24,14 @@ Bases
    .. autosummary::
 
       ~baca.tools.HairpinCommand.HairpinCommand.deactivate
+      ~baca.tools.HairpinCommand.HairpinCommand.get_tag
+      ~baca.tools.HairpinCommand.HairpinCommand.manifests
+      ~baca.tools.HairpinCommand.HairpinCommand.offset_to_measure_number
       ~baca.tools.HairpinCommand.HairpinCommand.selector
       ~baca.tools.HairpinCommand.HairpinCommand.start
       ~baca.tools.HairpinCommand.HairpinCommand.stop
       ~baca.tools.HairpinCommand.HairpinCommand.tag
+      ~baca.tools.HairpinCommand.HairpinCommand.tag_measure_number
       ~baca.tools.HairpinCommand.HairpinCommand.tags
       ~baca.tools.HairpinCommand.HairpinCommand.__call__
       ~baca.tools.HairpinCommand.HairpinCommand.__eq__
@@ -65,6 +69,36 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.tags
+
+Read/write properties
+---------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.manifests
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.tag_measure_number
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.HairpinCommand.HairpinCommand.get_tag
 
 Special methods
 ---------------

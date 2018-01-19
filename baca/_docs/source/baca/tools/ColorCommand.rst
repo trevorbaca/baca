@@ -24,8 +24,12 @@ Bases
    .. autosummary::
 
       ~baca.tools.ColorCommand.ColorCommand.deactivate
+      ~baca.tools.ColorCommand.ColorCommand.get_tag
+      ~baca.tools.ColorCommand.ColorCommand.manifests
+      ~baca.tools.ColorCommand.ColorCommand.offset_to_measure_number
       ~baca.tools.ColorCommand.ColorCommand.selector
       ~baca.tools.ColorCommand.ColorCommand.tag
+      ~baca.tools.ColorCommand.ColorCommand.tag_measure_number
       ~baca.tools.ColorCommand.ColorCommand.tags
       ~baca.tools.ColorCommand.ColorCommand.__call__
       ~baca.tools.ColorCommand.ColorCommand.__eq__
@@ -59,6 +63,36 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.ColorCommand.ColorCommand.tags
+
+Read/write properties
+---------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ColorCommand.ColorCommand.manifests
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ColorCommand.ColorCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ColorCommand.ColorCommand.tag_measure_number
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.ColorCommand.ColorCommand.get_tag
 
 Special methods
 ---------------

@@ -25,9 +25,13 @@ Bases
 
       ~baca.tools.IndicatorCommand.IndicatorCommand.context
       ~baca.tools.IndicatorCommand.IndicatorCommand.deactivate
+      ~baca.tools.IndicatorCommand.IndicatorCommand.get_tag
       ~baca.tools.IndicatorCommand.IndicatorCommand.indicators
+      ~baca.tools.IndicatorCommand.IndicatorCommand.manifests
+      ~baca.tools.IndicatorCommand.IndicatorCommand.offset_to_measure_number
       ~baca.tools.IndicatorCommand.IndicatorCommand.selector
       ~baca.tools.IndicatorCommand.IndicatorCommand.tag
+      ~baca.tools.IndicatorCommand.IndicatorCommand.tag_measure_number
       ~baca.tools.IndicatorCommand.IndicatorCommand.tags
       ~baca.tools.IndicatorCommand.IndicatorCommand.__call__
       ~baca.tools.IndicatorCommand.IndicatorCommand.__eq__
@@ -65,6 +69,36 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.tags
+
+Read/write properties
+---------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.manifests
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.tag_measure_number
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.IndicatorCommand.IndicatorCommand.get_tag
 
 Special methods
 ---------------

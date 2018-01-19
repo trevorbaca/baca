@@ -24,10 +24,14 @@ Bases
    .. autosummary::
 
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.deactivate
+      ~baca.tools.StaffPositionCommand.StaffPositionCommand.get_tag
+      ~baca.tools.StaffPositionCommand.StaffPositionCommand.manifests
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.numbers
+      ~baca.tools.StaffPositionCommand.StaffPositionCommand.offset_to_measure_number
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.repeats
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.selector
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.tag
+      ~baca.tools.StaffPositionCommand.StaffPositionCommand.tag_measure_number
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.tags
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.__call__
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.__eq__
@@ -65,6 +69,36 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.StaffPositionCommand.StaffPositionCommand.tags
+
+Read/write properties
+---------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.StaffPositionCommand.StaffPositionCommand.manifests
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.StaffPositionCommand.StaffPositionCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.StaffPositionCommand.StaffPositionCommand.tag_measure_number
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.StaffPositionCommand.StaffPositionCommand.get_tag
 
 Special methods
 ---------------

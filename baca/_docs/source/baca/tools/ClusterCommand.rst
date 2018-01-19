@@ -24,10 +24,14 @@ Bases
    .. autosummary::
 
       ~baca.tools.ClusterCommand.ClusterCommand.deactivate
+      ~baca.tools.ClusterCommand.ClusterCommand.get_tag
       ~baca.tools.ClusterCommand.ClusterCommand.hide_flat_markup
+      ~baca.tools.ClusterCommand.ClusterCommand.manifests
+      ~baca.tools.ClusterCommand.ClusterCommand.offset_to_measure_number
       ~baca.tools.ClusterCommand.ClusterCommand.selector
       ~baca.tools.ClusterCommand.ClusterCommand.start_pitch
       ~baca.tools.ClusterCommand.ClusterCommand.tag
+      ~baca.tools.ClusterCommand.ClusterCommand.tag_measure_number
       ~baca.tools.ClusterCommand.ClusterCommand.tags
       ~baca.tools.ClusterCommand.ClusterCommand.widths
       ~baca.tools.ClusterCommand.ClusterCommand.__call__
@@ -64,6 +68,36 @@ Read-only properties
       .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.tags
 
 .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.widths
+
+Read/write properties
+---------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.manifests
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.tag_measure_number
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.ClusterCommand.ClusterCommand.get_tag
 
 Special methods
 ---------------

@@ -26,9 +26,13 @@ Bases
       ~baca.tools.PitchCommand.PitchCommand.allow_repeat_pitches
       ~baca.tools.PitchCommand.PitchCommand.cyclic
       ~baca.tools.PitchCommand.PitchCommand.deactivate
+      ~baca.tools.PitchCommand.PitchCommand.get_tag
+      ~baca.tools.PitchCommand.PitchCommand.manifests
+      ~baca.tools.PitchCommand.PitchCommand.offset_to_measure_number
       ~baca.tools.PitchCommand.PitchCommand.pitches
       ~baca.tools.PitchCommand.PitchCommand.selector
       ~baca.tools.PitchCommand.PitchCommand.tag
+      ~baca.tools.PitchCommand.PitchCommand.tag_measure_number
       ~baca.tools.PitchCommand.PitchCommand.tags
       ~baca.tools.PitchCommand.PitchCommand.__call__
       ~baca.tools.PitchCommand.PitchCommand.__eq__
@@ -68,6 +72,36 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.PitchCommand.PitchCommand.tags
+
+Read/write properties
+---------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.PitchCommand.PitchCommand.manifests
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.PitchCommand.PitchCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.PitchCommand.PitchCommand.tag_measure_number
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.PitchCommand.PitchCommand.get_tag
 
 Special methods
 ---------------

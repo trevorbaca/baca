@@ -27,9 +27,13 @@ Bases
       ~baca.tools.OverrideCommand.OverrideCommand.attribute
       ~baca.tools.OverrideCommand.OverrideCommand.context
       ~baca.tools.OverrideCommand.OverrideCommand.deactivate
+      ~baca.tools.OverrideCommand.OverrideCommand.get_tag
       ~baca.tools.OverrideCommand.OverrideCommand.grob
+      ~baca.tools.OverrideCommand.OverrideCommand.manifests
+      ~baca.tools.OverrideCommand.OverrideCommand.offset_to_measure_number
       ~baca.tools.OverrideCommand.OverrideCommand.selector
       ~baca.tools.OverrideCommand.OverrideCommand.tag
+      ~baca.tools.OverrideCommand.OverrideCommand.tag_measure_number
       ~baca.tools.OverrideCommand.OverrideCommand.tags
       ~baca.tools.OverrideCommand.OverrideCommand.value
       ~baca.tools.OverrideCommand.OverrideCommand.__call__
@@ -74,6 +78,36 @@ Read-only properties
       .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.tags
 
 .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.value
+
+Read/write properties
+---------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.manifests
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.tag_measure_number
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.OverrideCommand.OverrideCommand.get_tag
 
 Special methods
 ---------------

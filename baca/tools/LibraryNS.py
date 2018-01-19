@@ -3072,12 +3072,14 @@ class LibraryNS(abjad.AbjadObject):
             clef = abjad.Clef(clef)
             width = clef._to_width[clef.name]
             extra_offset_x = -width
-        return baca.suite(
+        command = baca.suite(
             [
                 baca.clef_x_extent_false(),
                 baca.clef_extra_offset((extra_offset_x, 0)),
                 ],
             )
+        baca.tag(baca.tags.SHIFTED_CLEF, command, tag_measure_number=True)
+        return command
 
     @staticmethod
     def shift_dynamic(dynamic, selector='baca.leaf(0)'):

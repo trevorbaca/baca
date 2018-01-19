@@ -24,9 +24,13 @@ Bases
    .. autosummary::
 
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.deactivate
+      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.get_tag
+      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.manifests
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.numbers
+      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.offset_to_measure_number
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.selector
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.tag
+      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.tag_measure_number
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.tags
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.__call__
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.__eq__
@@ -62,6 +66,36 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.tags
+
+Read/write properties
+---------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.manifests
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.tag_measure_number
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.get_tag
 
 Special methods
 ---------------

@@ -25,11 +25,15 @@ Bases
 
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.bookend
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.deactivate
+      ~baca.tools.PiecewiseCommand.PiecewiseCommand.get_tag
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.indicators
+      ~baca.tools.PiecewiseCommand.PiecewiseCommand.manifests
+      ~baca.tools.PiecewiseCommand.PiecewiseCommand.offset_to_measure_number
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.preamble
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.selector
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.spanner
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.tag
+      ~baca.tools.PiecewiseCommand.PiecewiseCommand.tag_measure_number
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.tags
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.__call__
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.__eq__
@@ -67,6 +71,36 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.tags
+
+Read/write properties
+---------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.manifests
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.tag_measure_number
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.PiecewiseCommand.PiecewiseCommand.get_tag
 
 Special methods
 ---------------

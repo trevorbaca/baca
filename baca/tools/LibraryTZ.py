@@ -21,7 +21,7 @@ class LibraryTZ(abjad.AbjadObject):
     ### PUBLIC METHODS ###
 
     @staticmethod
-    def tag(tags, command, deactivate=None):
+    def tag(tags, command, deactivate=None, tag_measure_number=None):
         r'''Appends each tag in `tags` to `command`.
 
         Sorts `comand` tags.
@@ -30,17 +30,24 @@ class LibraryTZ(abjad.AbjadObject):
         '''
         if isinstance(tags, str):
             tags = [tags]
-        assert baca.Command._are_valid_tags(tags)
+        assert baca.Command._are_valid_tags(tags), repr(tags)
         if isinstance(command, baca.SuiteCommand):
             for command_ in command.commands:
-                baca.tag(tags, command_, deactivate=deactivate)
+                baca.tag(
+                    tags,
+                    command_,
+                    deactivate=deactivate,
+                    tag_measure_number=tag_measure_number,
+                    )
         else:
-            if (not hasattr(command, '_tags') or
-                not hasattr(command, '_deactivate')):
+            if (not hasattr(command, '_deactivate') or
+                not hasattr(command, '_tag_measure_number') or
+                not hasattr(command, '_tags')):
                 raise Exception(f'does not implement tag protocol: {command}.')
             command._tags.extend(tags)
             command._tags.sort()
             command._deactivate = deactivate
+            command._tag_measure_number = tag_measure_number
         return command
 
     @staticmethod

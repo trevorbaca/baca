@@ -25,8 +25,12 @@ Bases
 
       ~baca.tools.LabelCommand.LabelCommand.deactivate
       ~baca.tools.LabelCommand.LabelCommand.expression
+      ~baca.tools.LabelCommand.LabelCommand.get_tag
+      ~baca.tools.LabelCommand.LabelCommand.manifests
+      ~baca.tools.LabelCommand.LabelCommand.offset_to_measure_number
       ~baca.tools.LabelCommand.LabelCommand.selector
       ~baca.tools.LabelCommand.LabelCommand.tag
+      ~baca.tools.LabelCommand.LabelCommand.tag_measure_number
       ~baca.tools.LabelCommand.LabelCommand.tags
       ~baca.tools.LabelCommand.LabelCommand.__call__
       ~baca.tools.LabelCommand.LabelCommand.__eq__
@@ -62,6 +66,36 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.LabelCommand.LabelCommand.tags
+
+Read/write properties
+---------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.LabelCommand.LabelCommand.manifests
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.LabelCommand.LabelCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.LabelCommand.LabelCommand.tag_measure_number
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.LabelCommand.LabelCommand.get_tag
 
 Special methods
 ---------------

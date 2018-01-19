@@ -26,6 +26,9 @@ Bases
       ~baca.tools.RhythmCommand.RhythmCommand.deactivate
       ~baca.tools.RhythmCommand.RhythmCommand.division_expression
       ~baca.tools.RhythmCommand.RhythmCommand.division_maker
+      ~baca.tools.RhythmCommand.RhythmCommand.get_tag
+      ~baca.tools.RhythmCommand.RhythmCommand.manifests
+      ~baca.tools.RhythmCommand.RhythmCommand.offset_to_measure_number
       ~baca.tools.RhythmCommand.RhythmCommand.reference_meters
       ~baca.tools.RhythmCommand.RhythmCommand.repeat_ties
       ~baca.tools.RhythmCommand.RhythmCommand.rewrite_meter
@@ -37,6 +40,7 @@ Bases
       ~baca.tools.RhythmCommand.RhythmCommand.start_stage
       ~baca.tools.RhythmCommand.RhythmCommand.stop_stage
       ~baca.tools.RhythmCommand.RhythmCommand.tag
+      ~baca.tools.RhythmCommand.RhythmCommand.tag_measure_number
       ~baca.tools.RhythmCommand.RhythmCommand.tags
       ~baca.tools.RhythmCommand.RhythmCommand.tie_first
       ~baca.tools.RhythmCommand.RhythmCommand.tie_last
@@ -98,6 +102,36 @@ Read-only properties
 .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.tie_first
 
 .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.tie_last
+
+Read/write properties
+---------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.manifests
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.tag_measure_number
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.RhythmCommand.RhythmCommand.get_tag
 
 Special methods
 ---------------

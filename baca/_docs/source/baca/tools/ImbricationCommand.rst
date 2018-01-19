@@ -27,11 +27,15 @@ Bases
       ~baca.tools.ImbricationCommand.ImbricationCommand.by_pitch_class
       ~baca.tools.ImbricationCommand.ImbricationCommand.deactivate
       ~baca.tools.ImbricationCommand.ImbricationCommand.extend_beam
+      ~baca.tools.ImbricationCommand.ImbricationCommand.get_tag
       ~baca.tools.ImbricationCommand.ImbricationCommand.hocket
+      ~baca.tools.ImbricationCommand.ImbricationCommand.manifests
+      ~baca.tools.ImbricationCommand.ImbricationCommand.offset_to_measure_number
       ~baca.tools.ImbricationCommand.ImbricationCommand.segment
       ~baca.tools.ImbricationCommand.ImbricationCommand.selector
       ~baca.tools.ImbricationCommand.ImbricationCommand.specifiers
       ~baca.tools.ImbricationCommand.ImbricationCommand.tag
+      ~baca.tools.ImbricationCommand.ImbricationCommand.tag_measure_number
       ~baca.tools.ImbricationCommand.ImbricationCommand.tags
       ~baca.tools.ImbricationCommand.ImbricationCommand.truncate_ties
       ~baca.tools.ImbricationCommand.ImbricationCommand.voice_name
@@ -79,6 +83,36 @@ Read-only properties
 .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.truncate_ties
 
 .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.voice_name
+
+Read/write properties
+---------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.manifests
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.tag_measure_number
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.ImbricationCommand.ImbricationCommand.get_tag
 
 Special methods
 ---------------

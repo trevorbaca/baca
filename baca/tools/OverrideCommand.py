@@ -262,7 +262,7 @@ class OverrideCommand(Command):
             leaves[0],
             deactivate=self.deactivate,
             site='OC',
-            tag=self.tag,
+            tag=self.get_tag(leaves[0]),
             )
         if once:
             return

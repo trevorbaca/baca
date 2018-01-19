@@ -24,8 +24,12 @@ Bases
    .. autosummary::
 
       ~baca.tools.VoltaCommand.VoltaCommand.deactivate
+      ~baca.tools.VoltaCommand.VoltaCommand.get_tag
+      ~baca.tools.VoltaCommand.VoltaCommand.manifests
+      ~baca.tools.VoltaCommand.VoltaCommand.offset_to_measure_number
       ~baca.tools.VoltaCommand.VoltaCommand.selector
       ~baca.tools.VoltaCommand.VoltaCommand.tag
+      ~baca.tools.VoltaCommand.VoltaCommand.tag_measure_number
       ~baca.tools.VoltaCommand.VoltaCommand.tags
       ~baca.tools.VoltaCommand.VoltaCommand.__call__
       ~baca.tools.VoltaCommand.VoltaCommand.__eq__
@@ -59,6 +63,36 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.VoltaCommand.VoltaCommand.tags
+
+Read/write properties
+---------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.VoltaCommand.VoltaCommand.manifests
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.VoltaCommand.VoltaCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.VoltaCommand.VoltaCommand.tag_measure_number
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.VoltaCommand.VoltaCommand.get_tag
 
 Special methods
 ---------------

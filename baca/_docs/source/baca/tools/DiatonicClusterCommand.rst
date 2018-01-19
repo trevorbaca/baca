@@ -24,8 +24,12 @@ Bases
    .. autosummary::
 
       ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.deactivate
+      ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.get_tag
+      ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.manifests
+      ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.offset_to_measure_number
       ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.selector
       ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.tag
+      ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.tag_measure_number
       ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.tags
       ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.widths
       ~baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.__call__
@@ -62,6 +66,36 @@ Read-only properties
       .. autoattribute:: baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.tags
 
 .. autoattribute:: baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.widths
+
+Read/write properties
+---------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.manifests
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.tag_measure_number
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.DiatonicClusterCommand.DiatonicClusterCommand.get_tag
 
 Special methods
 ---------------

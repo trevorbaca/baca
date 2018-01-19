@@ -24,9 +24,13 @@ Bases
    .. autosummary::
 
       ~baca.tools.PartCommand.PartCommand.deactivate
+      ~baca.tools.PartCommand.PartCommand.get_tag
+      ~baca.tools.PartCommand.PartCommand.manifests
+      ~baca.tools.PartCommand.PartCommand.offset_to_measure_number
       ~baca.tools.PartCommand.PartCommand.part
       ~baca.tools.PartCommand.PartCommand.selector
       ~baca.tools.PartCommand.PartCommand.tag
+      ~baca.tools.PartCommand.PartCommand.tag_measure_number
       ~baca.tools.PartCommand.PartCommand.tags
       ~baca.tools.PartCommand.PartCommand.__call__
       ~baca.tools.PartCommand.PartCommand.__eq__
@@ -62,6 +66,36 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.PartCommand.PartCommand.tags
+
+Read/write properties
+---------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.PartCommand.PartCommand.manifests
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.PartCommand.PartCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.PartCommand.PartCommand.tag_measure_number
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.PartCommand.PartCommand.get_tag
 
 Special methods
 ---------------

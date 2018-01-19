@@ -25,9 +25,13 @@ Bases
 
       ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.deactivate
       ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.direction
+      ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.get_tag
+      ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.manifests
+      ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.offset_to_measure_number
       ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.repeat
       ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.selector
       ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.tag
+      ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.tag_measure_number
       ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.tags
       ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.__call__
       ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.__eq__
@@ -65,6 +69,36 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.tags
+
+Read/write properties
+---------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.manifests
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.tag_measure_number
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.get_tag
 
 Special methods
 ---------------

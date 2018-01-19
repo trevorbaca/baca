@@ -24,9 +24,13 @@ Bases
    .. autosummary::
 
       ~baca.tools.NestingCommand.NestingCommand.deactivate
+      ~baca.tools.NestingCommand.NestingCommand.get_tag
       ~baca.tools.NestingCommand.NestingCommand.lmr_specifier
+      ~baca.tools.NestingCommand.NestingCommand.manifests
+      ~baca.tools.NestingCommand.NestingCommand.offset_to_measure_number
       ~baca.tools.NestingCommand.NestingCommand.selector
       ~baca.tools.NestingCommand.NestingCommand.tag
+      ~baca.tools.NestingCommand.NestingCommand.tag_measure_number
       ~baca.tools.NestingCommand.NestingCommand.tags
       ~baca.tools.NestingCommand.NestingCommand.time_treatments
       ~baca.tools.NestingCommand.NestingCommand.__call__
@@ -65,6 +69,36 @@ Read-only properties
       .. autoattribute:: baca.tools.NestingCommand.NestingCommand.tags
 
 .. autoattribute:: baca.tools.NestingCommand.NestingCommand.time_treatments
+
+Read/write properties
+---------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.NestingCommand.NestingCommand.manifests
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.NestingCommand.NestingCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.NestingCommand.NestingCommand.tag_measure_number
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.NestingCommand.NestingCommand.get_tag
 
 Special methods
 ---------------

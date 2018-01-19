@@ -24,9 +24,13 @@ Bases
    .. autosummary::
 
       ~baca.tools.RegisterCommand.RegisterCommand.deactivate
+      ~baca.tools.RegisterCommand.RegisterCommand.get_tag
+      ~baca.tools.RegisterCommand.RegisterCommand.manifests
+      ~baca.tools.RegisterCommand.RegisterCommand.offset_to_measure_number
       ~baca.tools.RegisterCommand.RegisterCommand.registration
       ~baca.tools.RegisterCommand.RegisterCommand.selector
       ~baca.tools.RegisterCommand.RegisterCommand.tag
+      ~baca.tools.RegisterCommand.RegisterCommand.tag_measure_number
       ~baca.tools.RegisterCommand.RegisterCommand.tags
       ~baca.tools.RegisterCommand.RegisterCommand.__call__
       ~baca.tools.RegisterCommand.RegisterCommand.__eq__
@@ -62,6 +66,36 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.RegisterCommand.RegisterCommand.tags
+
+Read/write properties
+---------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.RegisterCommand.RegisterCommand.manifests
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.RegisterCommand.RegisterCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.RegisterCommand.RegisterCommand.tag_measure_number
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.RegisterCommand.RegisterCommand.get_tag
 
 Special methods
 ---------------

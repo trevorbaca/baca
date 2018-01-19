@@ -25,8 +25,12 @@ Bases
 
       ~baca.tools.MapCommand.MapCommand.commands
       ~baca.tools.MapCommand.MapCommand.deactivate
+      ~baca.tools.MapCommand.MapCommand.get_tag
+      ~baca.tools.MapCommand.MapCommand.manifests
+      ~baca.tools.MapCommand.MapCommand.offset_to_measure_number
       ~baca.tools.MapCommand.MapCommand.selector
       ~baca.tools.MapCommand.MapCommand.tag
+      ~baca.tools.MapCommand.MapCommand.tag_measure_number
       ~baca.tools.MapCommand.MapCommand.tags
       ~baca.tools.MapCommand.MapCommand.__call__
       ~baca.tools.MapCommand.MapCommand.__eq__
@@ -62,6 +66,36 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.MapCommand.MapCommand.tags
+
+Read/write properties
+---------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.MapCommand.MapCommand.manifests
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.MapCommand.MapCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.MapCommand.MapCommand.tag_measure_number
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.MapCommand.MapCommand.get_tag
 
 Special methods
 ---------------

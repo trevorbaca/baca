@@ -25,9 +25,13 @@ Bases
 
       ~baca.tools.SettingCommand.SettingCommand.context
       ~baca.tools.SettingCommand.SettingCommand.deactivate
+      ~baca.tools.SettingCommand.SettingCommand.get_tag
+      ~baca.tools.SettingCommand.SettingCommand.manifests
+      ~baca.tools.SettingCommand.SettingCommand.offset_to_measure_number
       ~baca.tools.SettingCommand.SettingCommand.selector
       ~baca.tools.SettingCommand.SettingCommand.setting
       ~baca.tools.SettingCommand.SettingCommand.tag
+      ~baca.tools.SettingCommand.SettingCommand.tag_measure_number
       ~baca.tools.SettingCommand.SettingCommand.tags
       ~baca.tools.SettingCommand.SettingCommand.value
       ~baca.tools.SettingCommand.SettingCommand.__call__
@@ -68,6 +72,36 @@ Read-only properties
       .. autoattribute:: baca.tools.SettingCommand.SettingCommand.tags
 
 .. autoattribute:: baca.tools.SettingCommand.SettingCommand.value
+
+Read/write properties
+---------------------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.SettingCommand.SettingCommand.manifests
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.SettingCommand.SettingCommand.offset_to_measure_number
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: baca.tools.SettingCommand.SettingCommand.tag_measure_number
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: baca.tools.SettingCommand.SettingCommand.get_tag
 
 Special methods
 ---------------
