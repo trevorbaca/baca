@@ -18,7 +18,6 @@ class MetronomeMarkCommand(Command):
     __slots__ = (
         '_key',
         '_manifest',
-        '_site',
         '_tags',
         )
 
@@ -29,7 +28,6 @@ class MetronomeMarkCommand(Command):
         deactivate=None,
         key=None,
         selector='baca.leaf(0)', 
-        site=None,
         tags=None,
         ):
         Command.__init__(self, deactivate=deactivate, selector=selector)
@@ -38,9 +36,6 @@ class MetronomeMarkCommand(Command):
         self._key = key
         # TODO: set to none instead?
         self._manifest = 'metronome_marks'
-        if site is not None:
-            assert isinstance(site, str), repr(site)
-        self._site = site
         tags = tags or []
         assert self._are_valid_tags(tags), repr(tags)
         self._tags = tags
@@ -75,7 +70,7 @@ class MetronomeMarkCommand(Command):
             metronome_mark,
             leaf,
             deactivate=self.deactivate,
-            site=self.site,
+            #site=self.site, ?
             tag=self.tag,
             )
         if metronome_mark == reapplied_mark:
@@ -108,11 +103,3 @@ class MetronomeMarkCommand(Command):
         Returns ordered dictionary.
         '''
         return self._manifest
-
-    @property
-    def site(self):
-        r'''Gets site.
-
-        Returns string or none.
-        '''
-        return self._site

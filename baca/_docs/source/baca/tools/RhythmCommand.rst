@@ -32,7 +32,6 @@ Bases
       ~baca.tools.RhythmCommand.RhythmCommand.rhythm_maker
       ~baca.tools.RhythmCommand.RhythmCommand.rhythm_overwrites
       ~baca.tools.RhythmCommand.RhythmCommand.selector
-      ~baca.tools.RhythmCommand.RhythmCommand.site
       ~baca.tools.RhythmCommand.RhythmCommand.split_at_measure_boundaries
       ~baca.tools.RhythmCommand.RhythmCommand.stages
       ~baca.tools.RhythmCommand.RhythmCommand.start_stage
@@ -75,12 +74,6 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.selector
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.site
 
 .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.split_at_measure_boundaries
 

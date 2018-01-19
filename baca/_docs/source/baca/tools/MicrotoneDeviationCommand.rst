@@ -26,7 +26,6 @@ Bases
       ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.deactivate
       ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.deviations
       ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.selector
-      ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.site
       ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.tag
       ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.tags
       ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.__call__
@@ -51,12 +50,6 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.selector
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.site
 
 .. only:: html
 

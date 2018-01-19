@@ -27,7 +27,6 @@ Bases
       ~baca.tools.SettingCommand.SettingCommand.deactivate
       ~baca.tools.SettingCommand.SettingCommand.selector
       ~baca.tools.SettingCommand.SettingCommand.setting
-      ~baca.tools.SettingCommand.SettingCommand.site
       ~baca.tools.SettingCommand.SettingCommand.tag
       ~baca.tools.SettingCommand.SettingCommand.tags
       ~baca.tools.SettingCommand.SettingCommand.value
@@ -55,12 +54,6 @@ Read-only properties
       .. autoattribute:: baca.tools.SettingCommand.SettingCommand.selector
 
 .. autoattribute:: baca.tools.SettingCommand.SettingCommand.setting
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.SettingCommand.SettingCommand.site
 
 .. only:: html
 

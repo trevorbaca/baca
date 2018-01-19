@@ -169,7 +169,7 @@ class SpannerCommand(Command):
     ..  container:: example
 
         >>> baca.SpannerCommand()
-        SpannerCommand(selector=baca.tleaves(), site='SC', tags=[])
+        SpannerCommand(selector=baca.tleaves(), tags=[])
 
     '''
 
@@ -178,7 +178,6 @@ class SpannerCommand(Command):
     __slots__ = (
         # TODO: remove annotation?
         '_annotation',
-        '_site',
         '_spanner',
         '_tags',
         )
@@ -190,7 +189,6 @@ class SpannerCommand(Command):
         deactivate=None,
         selector='baca.tleaves()',
         spanner=None,
-        site='SC',
         tags=None,
         ):
         Command.__init__(self, deactivate=deactivate, selector=selector)
@@ -198,7 +196,6 @@ class SpannerCommand(Command):
         if spanner is not None:
             assert isinstance(spanner, abjad.Spanner)
         self._spanner = spanner
-        self._site = site
         tags = tags or []
         assert self._are_valid_tags(tags), repr(tags)
         self._tags = tags
@@ -222,7 +219,7 @@ class SpannerCommand(Command):
             spanner,
             leaves,
             deactivate=self.deactivate,
-            site=self.site,
+            site='SC',
             tag=self.tag,
             )
         return spanner
@@ -281,14 +278,6 @@ class SpannerCommand(Command):
         Returns selector or none.
         '''
         return self._selector
-
-    @property
-    def site(self):
-        r'''Gets site.
-
-        Set to string or none.
-        '''
-        return self._site
 
     @property
     def spanner(self):

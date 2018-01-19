@@ -27,7 +27,6 @@ Bases
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.numbers
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.repeats
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.selector
-      ~baca.tools.StaffPositionCommand.StaffPositionCommand.site
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.tag
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.tags
       ~baca.tools.StaffPositionCommand.StaffPositionCommand.__call__
@@ -54,12 +53,6 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.StaffPositionCommand.StaffPositionCommand.selector
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.StaffPositionCommand.StaffPositionCommand.site
 
 .. only:: html
 

@@ -15,7 +15,6 @@ class Command(abjad.AbjadObject):
         '_deactivate',
         '_manifests',
         '_selector',
-        '_site',
         '_tag',
         )
 
@@ -27,7 +26,6 @@ class Command(abjad.AbjadObject):
         self,
         deactivate=None,
         selector=None,
-        site:str=None,
         tag=None,
         ):
         self._deactivate = deactivate
@@ -38,9 +36,6 @@ class Command(abjad.AbjadObject):
             prototype = (abjad.Expression, baca.MapCommand)
             assert isinstance(selector, prototype), repr(selector)
         self._selector = selector
-        if site is not None:
-            assert isinstance(site, str)
-        self._site = site
         if tag is not None:
             assert isinstance(tag, str)
         self._tag = tag
@@ -85,18 +80,6 @@ class Command(abjad.AbjadObject):
         Returns selector or none.
         '''
         return self._selector
-
-    @property
-    def site(self):
-        r'''Gets site.
-
-        Defaults to none.
-
-        Set to string or none.
-
-        Returns string or none.
-        '''
-        return self._site
 
     @property
     def tag(self):

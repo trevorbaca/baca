@@ -26,7 +26,6 @@ Bases
       ~baca.tools.RegisterCommand.RegisterCommand.deactivate
       ~baca.tools.RegisterCommand.RegisterCommand.registration
       ~baca.tools.RegisterCommand.RegisterCommand.selector
-      ~baca.tools.RegisterCommand.RegisterCommand.site
       ~baca.tools.RegisterCommand.RegisterCommand.tag
       ~baca.tools.RegisterCommand.RegisterCommand.tags
       ~baca.tools.RegisterCommand.RegisterCommand.__call__
@@ -51,12 +50,6 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.RegisterCommand.RegisterCommand.selector
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.RegisterCommand.RegisterCommand.site
 
 .. only:: html
 

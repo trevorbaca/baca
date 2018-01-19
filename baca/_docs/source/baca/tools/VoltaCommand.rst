@@ -25,7 +25,6 @@ Bases
 
       ~baca.tools.VoltaCommand.VoltaCommand.deactivate
       ~baca.tools.VoltaCommand.VoltaCommand.selector
-      ~baca.tools.VoltaCommand.VoltaCommand.site
       ~baca.tools.VoltaCommand.VoltaCommand.tag
       ~baca.tools.VoltaCommand.VoltaCommand.tags
       ~baca.tools.VoltaCommand.VoltaCommand.__call__
@@ -48,12 +47,6 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.VoltaCommand.VoltaCommand.selector
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.VoltaCommand.VoltaCommand.site
 
 .. only:: html
 

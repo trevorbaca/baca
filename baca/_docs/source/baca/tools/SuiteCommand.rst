@@ -26,7 +26,6 @@ Bases
       ~baca.tools.SuiteCommand.SuiteCommand.commands
       ~baca.tools.SuiteCommand.SuiteCommand.deactivate
       ~baca.tools.SuiteCommand.SuiteCommand.selector
-      ~baca.tools.SuiteCommand.SuiteCommand.site
       ~baca.tools.SuiteCommand.SuiteCommand.tag
       ~baca.tools.SuiteCommand.SuiteCommand.tags
       ~baca.tools.SuiteCommand.SuiteCommand.__call__
@@ -51,12 +50,6 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.SuiteCommand.SuiteCommand.selector
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.SuiteCommand.SuiteCommand.site
 
 .. only:: html
 

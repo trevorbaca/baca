@@ -28,7 +28,6 @@ Bases
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.indicators
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.preamble
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.selector
-      ~baca.tools.PiecewiseCommand.PiecewiseCommand.site
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.spanner
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.tag
       ~baca.tools.PiecewiseCommand.PiecewiseCommand.tags
@@ -54,12 +53,6 @@ Read-only properties
 .. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.preamble
 
 .. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.selector
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.site
 
 .. autoattribute:: baca.tools.PiecewiseCommand.PiecewiseCommand.spanner
 

@@ -40,16 +40,16 @@ class BreakMeasureMap(abjad.AbjadObject):
                         \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 1/2
-                        \break                                                                       %! BREAK:BMM3
+                        \break                                                                       %! BREAK:IC
             <BLANKLINE>
                         % GlobalSkips [measure 2]                                                    %! SM4
                         \noBreak                                                                     %! BREAK:BMM2
-                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:BMM3
-                        #'((Y-offset . 100) (alignment-distances . (30 30)))                         %! BREAK:BMM3
+                        \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
+                        #'((Y-offset . 100) (alignment-distances . (30 30)))                         %! BREAK:IC
                         \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
                         \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                         s1 * 3/8
-                        \break                                                                       %! BREAK:BMM3
+                        \break                                                                       %! BREAK:IC
             <BLANKLINE>
                         % GlobalSkips [measure 3]                                                    %! SM4
                         \noBreak                                                                     %! BREAK:BMM2
@@ -435,7 +435,6 @@ class BreakMeasureMap(abjad.AbjadObject):
                 command_ = abjad.new(
                     command,
                     deactivate=self.deactivate,
-                    site='BMM3',
                     tags=self.tags,
                     )
                 commands_.append(command_)
@@ -497,7 +496,6 @@ class BreakMeasureMap(abjad.AbjadObject):
                         ]
                     ),
                 selector=baca.skip(0),
-                site='BMM3',
                 tags=['BREAK'],
                 )
             baca.IndicatorCommand(
@@ -507,7 +505,6 @@ class BreakMeasureMap(abjad.AbjadObject):
                         ]
                     ),
                 selector=baca.skip(1),
-                site='BMM3',
                 tags=['BREAK'],
                 )
 

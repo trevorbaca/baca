@@ -25,7 +25,6 @@ Bases
 
       ~baca.tools.ColorCommand.ColorCommand.deactivate
       ~baca.tools.ColorCommand.ColorCommand.selector
-      ~baca.tools.ColorCommand.ColorCommand.site
       ~baca.tools.ColorCommand.ColorCommand.tag
       ~baca.tools.ColorCommand.ColorCommand.tags
       ~baca.tools.ColorCommand.ColorCommand.__call__
@@ -48,12 +47,6 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.ColorCommand.ColorCommand.selector
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.ColorCommand.ColorCommand.site
 
 .. only:: html
 

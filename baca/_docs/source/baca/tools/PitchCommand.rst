@@ -28,7 +28,6 @@ Bases
       ~baca.tools.PitchCommand.PitchCommand.deactivate
       ~baca.tools.PitchCommand.PitchCommand.pitches
       ~baca.tools.PitchCommand.PitchCommand.selector
-      ~baca.tools.PitchCommand.PitchCommand.site
       ~baca.tools.PitchCommand.PitchCommand.tag
       ~baca.tools.PitchCommand.PitchCommand.tags
       ~baca.tools.PitchCommand.PitchCommand.__call__
@@ -57,12 +56,6 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.PitchCommand.PitchCommand.selector
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.PitchCommand.PitchCommand.site
 
 .. only:: html
 

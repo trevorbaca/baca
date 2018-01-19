@@ -9,14 +9,13 @@ class HairpinCommand(Command):
     ..  container:: example
 
         >>> baca.HairpinCommand()
-        HairpinCommand(selector=baca.tleaves(), site='HC', tags=[])
+        HairpinCommand(selector=baca.tleaves(), tags=[])
 
     '''
 
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_site',
         '_start',
         '_stop',
         '_tags',
@@ -28,15 +27,11 @@ class HairpinCommand(Command):
         self,
         deactivate=None,
         selector='baca.tleaves()',
-        site='HC',
         start=None,
         stop=None,
         tags=None,
         ):
         Command.__init__(self, deactivate=deactivate, selector=selector)
-        if site is not None:
-            assert isinstance(site, str), repr(site)
-        self._site = site
         if start is not None:
             assert isinstance(start, abjad.Dynamic), repr(start)
         self._start = start
@@ -72,7 +67,7 @@ class HairpinCommand(Command):
                 self.start,
                 spanner[0],
                 deactivate=self.deactivate,
-                site=self.site,
+                site='HC',
                 tag=self.tag,
                 )
             if self.start == reapplied:
@@ -95,7 +90,7 @@ class HairpinCommand(Command):
                 self.stop,
                 spanner[-1],
                 deactivate=self.deactivate,
-                site=self.site,
+                site='HC',
                 tag=self.tag,
                 )
             if self.stop == reapplied:
@@ -111,14 +106,6 @@ class HairpinCommand(Command):
                     )
 
     ### PUBLIC PROPERTIES ###
-
-    @property
-    def site(self):
-        r'''Gets site.
-
-        Returns string or none.
-        '''
-        return self._site
 
     @property
     def start(self):

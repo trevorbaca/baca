@@ -29,7 +29,6 @@ Bases
       ~baca.tools.OverrideCommand.OverrideCommand.deactivate
       ~baca.tools.OverrideCommand.OverrideCommand.grob
       ~baca.tools.OverrideCommand.OverrideCommand.selector
-      ~baca.tools.OverrideCommand.OverrideCommand.site
       ~baca.tools.OverrideCommand.OverrideCommand.tag
       ~baca.tools.OverrideCommand.OverrideCommand.tags
       ~baca.tools.OverrideCommand.OverrideCommand.value
@@ -61,12 +60,6 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.selector
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.site
 
 .. only:: html
 

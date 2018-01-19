@@ -173,7 +173,7 @@ class OverrideCommand(Command):
     ..  container:: example
 
         >>> baca.OverrideCommand()
-        OverrideCommand(selector=baca.leaves(), site='OC', tags=[])
+        OverrideCommand(selector=baca.leaves(), tags=[])
 
     '''
 
@@ -184,7 +184,6 @@ class OverrideCommand(Command):
         '_attribute',
         '_context',
         '_grob',
-        '_site',
         '_tags',
         '_value',
         )
@@ -199,7 +198,6 @@ class OverrideCommand(Command):
         deactivate=None,
         grob=None,
         selector='baca.leaves()',
-        site='OC',
         tags=None,
         value=None,
         ):
@@ -216,9 +214,6 @@ class OverrideCommand(Command):
         if grob is not None:
             assert isinstance(grob, str), repr(grob)
         self._grob = grob
-        if site is not None:
-            assert isinstance(site, str), repr(site)
-        self._site = site
         tags = tags or []
         assert self._are_valid_tags(tags), repr(tags)
         self._tags = tags
@@ -266,7 +261,7 @@ class OverrideCommand(Command):
             literal,
             leaves[0],
             deactivate=self.deactivate,
-            site=self.site,
+            site='OC',
             tag=self.tag,
             )
         if once:
@@ -281,7 +276,7 @@ class OverrideCommand(Command):
             literal,
             leaves[-1],
             deactivate=self.deactivate,
-            site=self.site,
+            site='OC',
             tag=self.tag,
             )
 

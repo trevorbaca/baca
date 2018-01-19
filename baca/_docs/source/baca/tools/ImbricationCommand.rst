@@ -30,7 +30,6 @@ Bases
       ~baca.tools.ImbricationCommand.ImbricationCommand.hocket
       ~baca.tools.ImbricationCommand.ImbricationCommand.segment
       ~baca.tools.ImbricationCommand.ImbricationCommand.selector
-      ~baca.tools.ImbricationCommand.ImbricationCommand.site
       ~baca.tools.ImbricationCommand.ImbricationCommand.specifiers
       ~baca.tools.ImbricationCommand.ImbricationCommand.tag
       ~baca.tools.ImbricationCommand.ImbricationCommand.tags
@@ -62,12 +61,6 @@ Read-only properties
 .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.segment
 
 .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.selector
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.site
 
 .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.specifiers
 

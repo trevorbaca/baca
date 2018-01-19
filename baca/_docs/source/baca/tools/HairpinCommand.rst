@@ -25,7 +25,6 @@ Bases
 
       ~baca.tools.HairpinCommand.HairpinCommand.deactivate
       ~baca.tools.HairpinCommand.HairpinCommand.selector
-      ~baca.tools.HairpinCommand.HairpinCommand.site
       ~baca.tools.HairpinCommand.HairpinCommand.start
       ~baca.tools.HairpinCommand.HairpinCommand.stop
       ~baca.tools.HairpinCommand.HairpinCommand.tag
@@ -50,8 +49,6 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.selector
-
-.. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.site
 
 .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.start
 

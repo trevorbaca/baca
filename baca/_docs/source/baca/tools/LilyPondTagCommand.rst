@@ -25,7 +25,6 @@ Bases
 
       ~baca.tools.LilyPondTagCommand.LilyPondTagCommand.deactivate
       ~baca.tools.LilyPondTagCommand.LilyPondTagCommand.selector
-      ~baca.tools.LilyPondTagCommand.LilyPondTagCommand.site
       ~baca.tools.LilyPondTagCommand.LilyPondTagCommand.tag
       ~baca.tools.LilyPondTagCommand.LilyPondTagCommand.tags
       ~baca.tools.LilyPondTagCommand.LilyPondTagCommand.__call__
@@ -48,12 +47,6 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.LilyPondTagCommand.LilyPondTagCommand.selector
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.LilyPondTagCommand.LilyPondTagCommand.site
 
 .. autoattribute:: baca.tools.LilyPondTagCommand.LilyPondTagCommand.tag
 

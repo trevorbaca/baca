@@ -25,7 +25,6 @@ Bases
 
       ~baca.tools.SpannerCommand.SpannerCommand.deactivate
       ~baca.tools.SpannerCommand.SpannerCommand.selector
-      ~baca.tools.SpannerCommand.SpannerCommand.site
       ~baca.tools.SpannerCommand.SpannerCommand.spanner
       ~baca.tools.SpannerCommand.SpannerCommand.tag
       ~baca.tools.SpannerCommand.SpannerCommand.tags
@@ -45,8 +44,6 @@ Read-only properties
       .. autoattribute:: baca.tools.SpannerCommand.SpannerCommand.deactivate
 
 .. autoattribute:: baca.tools.SpannerCommand.SpannerCommand.selector
-
-.. autoattribute:: baca.tools.SpannerCommand.SpannerCommand.site
 
 .. autoattribute:: baca.tools.SpannerCommand.SpannerCommand.spanner
 

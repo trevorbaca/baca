@@ -207,7 +207,6 @@ class IndicatorCommand(Command):
     __slots__ = (
         '_context',
         '_indicators',
-        '_site',
         '_tags',
         )
 
@@ -219,7 +218,6 @@ class IndicatorCommand(Command):
         deactivate=None,
         indicators=None,
         selector='baca.pheads()',
-        site='IC',
         tags=None,
         ):
         Command.__init__(self, deactivate=deactivate, selector=selector)
@@ -232,9 +230,6 @@ class IndicatorCommand(Command):
             else:
                 indicators = abjad.CyclicTuple([indicators])
         self._indicators = indicators
-        if site is not None:
-            assert isinstance(site, str), repr(site)
-        self._site = site
         tags = tags or []
         assert self._are_valid_tags(tags), repr(tags)
         self._tags = tags
@@ -267,7 +262,7 @@ class IndicatorCommand(Command):
                     leaf,
                     context=self.context,
                     deactivate=self.deactivate,
-                    site=self.site,
+                    site='IC',
                     tag=self.tag,
                     )
                 if indicator == reapplied_indicator:
@@ -490,11 +485,3 @@ class IndicatorCommand(Command):
         Returns indicators or none.
         '''
         return self._indicators
-
-    @property
-    def site(self):
-        r'''Gets site.
-
-        Returns string or none.
-        '''
-        return self._site

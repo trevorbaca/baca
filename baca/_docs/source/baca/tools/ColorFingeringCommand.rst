@@ -26,7 +26,6 @@ Bases
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.deactivate
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.numbers
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.selector
-      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.site
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.tag
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.tags
       ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.__call__
@@ -51,12 +50,6 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.selector
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.site
 
 .. only:: html
 

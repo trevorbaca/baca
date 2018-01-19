@@ -27,7 +27,6 @@ Bases
       ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.pattern
       ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.rhythm_maker
       ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.selector
-      ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.site
       ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.tag
       ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.tags
       ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.__call__
@@ -54,12 +53,6 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.selector
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.site
 
 .. only:: html
 

@@ -27,7 +27,6 @@ Bases
       ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.deactivate
       ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.octave_number
       ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.selector
-      ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.site
       ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.tag
       ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.tags
       ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.__call__
@@ -54,12 +53,6 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.selector
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.site
 
 .. only:: html
 
