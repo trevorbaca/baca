@@ -31,7 +31,6 @@ Bases
       ~baca.tools.SegmentMaker.SegmentMaker.color_repeat_pitch_classes
       ~baca.tools.SegmentMaker.SegmentMaker.copy_rhythm
       ~baca.tools.SegmentMaker.SegmentMaker.design_checker
-      ~baca.tools.SegmentMaker.SegmentMaker.documents_metadata
       ~baca.tools.SegmentMaker.SegmentMaker.dynamics
       ~baca.tools.SegmentMaker.SegmentMaker.fermata_measure_staff_line_count
       ~baca.tools.SegmentMaker.SegmentMaker.final_bar_line
@@ -43,7 +42,6 @@ Bases
       ~baca.tools.SegmentMaker.SegmentMaker.ignore_unpitched_notes
       ~baca.tools.SegmentMaker.SegmentMaker.ignore_unregistered_pitches
       ~baca.tools.SegmentMaker.SegmentMaker.instruments
-      ~baca.tools.SegmentMaker.SegmentMaker.known_documents
       ~baca.tools.SegmentMaker.SegmentMaker.last_segment
       ~baca.tools.SegmentMaker.SegmentMaker.manifests
       ~baca.tools.SegmentMaker.SegmentMaker.margin_markup
@@ -97,8 +95,6 @@ Read-only properties
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.design_checker
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.documents_metadata
-
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.dynamics
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.fermata_measure_staff_line_count
@@ -120,8 +116,6 @@ Read-only properties
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.ignore_unregistered_pitches
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.instruments
-
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.known_documents
 
 .. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.last_segment
 

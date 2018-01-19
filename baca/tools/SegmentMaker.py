@@ -126,8 +126,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '_allow_empty_selections',
         '_breaks',
         '_break_offsets',
-        '_document_to_break_offsets',
-        '_documents_metadata',
         '_cache',
         '_cached_time_signatures',
         '_color_octaves',
@@ -290,7 +288,6 @@ class SegmentMaker(abjad.SegmentMaker):
             allow_empty_selections = bool(allow_empty_selections)
         self._allow_empty_selections = allow_empty_selections
         self._break_offsets = []
-        self._document_to_break_offsets = None
         if color_octaves is not None:
             color_octaves = bool(color_octaves)
         self._color_octaves = color_octaves
@@ -713,24 +710,76 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         if not self._fermata_start_offsets:
             return
-        self._attach_fermata_measure_adjustments(
-            self._break_offsets,
-            baca.tags.SEGMENT,
-            )
-        for document_name, document_metadata in self.documents_metadata.items():
-            bol_measure_numbers = document_metadata.get('bol_measure_numbers')
-            if bol_measure_numbers is None:
-                continue
-            bol_measure_timespans = self._get_measure_timespans(
-                bol_measure_numbers)
-            bol_measure_stop_offsets = [
-                _.stop_offset for _ in bol_measure_timespans
-                ]
-            if bol_measure_stop_offsets:
-                self._attach_fermata_measure_adjustments(
-                    bol_measure_stop_offsets,
-                    document_name,
-                    )
+        break_offsets = self._break_offsets
+        prototype = baca.StaffLines
+        staff_lines = baca.StaffLines(self.fermata_measure_staff_line_count)
+        breaks_already_treated = []
+        deactivate = None
+        for staff in abjad.iterate(self.score).components(abjad.Staff):
+            for leaf in abjad.iterate(staff).leaves():
+                start_offset = abjad.inspect(leaf).get_timespan().start_offset
+                if start_offset not in self._fermata_start_offsets:
+                    continue
+                leaf_stop = abjad.inspect(leaf).get_timespan().stop_offset
+                ends_at_break = leaf_stop in break_offsets
+                before = abjad.inspect(leaf).get_effective(prototype)
+                next_leaf = abjad.inspect(leaf).get_leaf(1)
+                if next_leaf is not None:
+                    after = abjad.inspect(next_leaf).get_effective(prototype)
+                if before != staff_lines:
+                    strings = []
+                    strings_ = staff_lines._get_lilypond_format(context=staff)
+                    strings.extend(strings_)
+                    if getattr(before, 'line_count', 5) == 5:
+                        string = rf'\once \override {staff.name}.BarLine'
+                        string += f".bar-extent = #'(-2 . 2)"
+                        strings.append(string)
+                    if strings:
+                        literal = abjad.LilyPondLiteral(strings)
+                        abjad.attach(literal, leaf, site='SM20')
+                if next_leaf is not None and staff_lines != after:
+                    strings = after._get_lilypond_format(context=staff)
+                    literal = abjad.LilyPondLiteral(strings)
+                    abjad.attach(literal, next_leaf, site='SM21')
+                if ends_at_break and leaf_stop not in breaks_already_treated:
+                    strings = []
+                    if staff_lines.line_count == 0:
+                        if next_leaf is None and self.last_segment:
+                            pass
+                        else:
+                            string = r'\override Score.BarLine.transparent = ##t'
+                            string = r'\once ' + string
+                            strings.append(string)
+                            string = r'\override Score.SpanBar.transparent = ##t'
+                            string = r'\once ' + string
+                            strings.append(string)
+                    elif staff_lines.line_count == 1:
+                        string = "Score.BarLine.bar-extent = #'(-2 . 2)"
+                        string = r'\once \override ' + string
+                        strings.append(string)
+                    if strings:
+                        literal = abjad.LilyPondLiteral(strings, 'after')
+                        tag = baca.tags.FERMATA_BAR_LINE
+                        abjad.attach(
+                            literal,
+                            leaf,
+                            deactivate=deactivate,
+                            site='SM22',
+                            tag=tag,
+                            )
+                    breaks_already_treated.append(leaf_stop)
+                if next_leaf is None and before != staff_lines:
+                    before_line_count = getattr(before, 'line_count', 5)
+                    before_staff_lines = baca.StaffLines(
+                        line_count=before_line_count,
+                        hide=True,
+                        )
+                    abjad.attach(
+                        before_staff_lines,
+                        leaf,
+                        site='SM23',
+                        synthetic_offset=1_000_000,
+                        )
 
     def _apply_first_and_last_ties(self, voice):
         dummy_tie = abjad.Tie()
@@ -800,84 +849,6 @@ class SegmentMaker(abjad.SegmentMaker):
         if not 1 <= stage_number <= self.stage_count:
             message = f'must be 1 <= x <= {self.stage_count}: {stage_number}.'
             raise Exception(message)
-
-    def _attach_fermata_measure_adjustments(self, break_offsets, document):
-        prototype = baca.StaffLines
-        staff_lines = baca.StaffLines(self.fermata_measure_staff_line_count)
-        breaks_already_treated = []
-        deactivate = None
-        if document != baca.tags.SEGMENT:
-            deactivate = True
-        for staff in abjad.iterate(self.score).components(abjad.Staff):
-            for leaf in abjad.iterate(staff).leaves():
-                start_offset = abjad.inspect(leaf).get_timespan().start_offset
-                if start_offset not in self._fermata_start_offsets:
-                    continue
-                leaf_stop = abjad.inspect(leaf).get_timespan().stop_offset
-                ends_at_break = leaf_stop in break_offsets
-                before = abjad.inspect(leaf).get_effective(prototype)
-                next_leaf = abjad.inspect(leaf).get_leaf(1)
-                if next_leaf is not None:
-                    after = abjad.inspect(next_leaf).get_effective(prototype)
-                if before != staff_lines:
-                    strings = []
-                    if document == baca.tags.SEGMENT:
-                        strings_ = staff_lines._get_lilypond_format(
-                            context=staff,
-                            )
-                        strings.extend(strings_)
-                    if getattr(before, 'line_count', 5) == 5:
-                        string = rf'\once \override {staff.name}.BarLine'
-                        string += f".bar-extent = #'(-2 . 2)"
-                        strings.append(string)
-                    if strings:
-                        literal = abjad.LilyPondLiteral(strings)
-                        abjad.attach(literal, leaf, site='SM20')
-                if next_leaf is not None and staff_lines != after:
-                    strings = after._get_lilypond_format(context=staff)
-                    literal = abjad.LilyPondLiteral(strings)
-                    abjad.attach(literal, next_leaf, site='SM21')
-                if ends_at_break and leaf_stop not in breaks_already_treated:
-                    strings = []
-                    if staff_lines.line_count == 0:
-                        if next_leaf is None and self.last_segment:
-                            pass
-                        else:
-                            string = r'\override Score.BarLine.transparent = ##t'
-                            string = r'\once ' + string
-                            strings.append(string)
-                            string = r'\override Score.SpanBar.transparent = ##t'
-                            string = r'\once ' + string
-                            strings.append(string)
-                    elif staff_lines.line_count == 1:
-                        string = "Score.BarLine.bar-extent = #'(-2 . 2)"
-                        string = r'\once \override ' + string
-                        strings.append(string)
-                    if strings:
-                        literal = abjad.LilyPondLiteral(strings, 'after')
-                        tag = f'+{document}:{baca.tags.FERMATA_BAR_LINE}'
-                        abjad.attach(
-                            literal,
-                            leaf,
-                            deactivate=deactivate,
-                            site='SM22',
-                            tag=tag,
-                            )
-                    breaks_already_treated.append(leaf_stop)
-                if (document == baca.tags.SEGMENT and
-                    next_leaf is None and
-                    before != staff_lines):
-                    before_line_count = getattr(before, 'line_count', 5)
-                    before_staff_lines = baca.StaffLines(
-                        line_count=before_line_count,
-                        hide=True,
-                        )
-                    abjad.attach(
-                        before_staff_lines,
-                        leaf,
-                        site='SM23',
-                        synthetic_offset=1_000_000,
-                        )
 
     def _attach_fermatas(self):
         if not self.metronome_mark_measure_map:
@@ -1057,17 +1028,11 @@ class SegmentMaker(abjad.SegmentMaker):
                     if leaf_timespan.starts_during_timespan(stage_timespan):
                         leaves_by_stage_number[stage_number].append(leaf)
 
-    def _cache_per_document_break_information(self):
+    def _cache_break_offsets(self):
         prototype = abjad.LilyPondLiteral
         skips = baca.select(self.score['GlobalSkips']).skips()
         first_measure_number = self._get_first_measure_number()
         segment_measure_numbers = self._get_segment_measure_numbers()
-        document_to_break_offsets = abjad.TypedOrderedDict()
-        self._document_to_break_offsets = document_to_break_offsets
-        document_to_break_offsets['SEGMENT'] = []
-        if self.documents_metadata:
-            for document in self.documents_metadata:
-                document_to_break_offsets[document] = []
         for i, skip in enumerate(skips):
             literals = abjad.inspect(skip).get_indicators(prototype)
             if not literals:
@@ -1080,23 +1045,10 @@ class SegmentMaker(abjad.SegmentMaker):
             self._break_offsets.append(offset)
             bol_measure_number = first_measure_number + i
             self._segment_bol_measure_numbers.append(bol_measure_number)
-            document_to_break_offsets['SEGMENT'].append(offset)
         segment_stop_offset = abjad.inspect(skip).get_timespan().stop_offset
         self._break_offsets.append(segment_stop_offset)
         bol_measure_number = first_measure_number + i + 1
         self._segment_bol_measure_numbers.append(bol_measure_number)
-        document_to_break_offsets['SEGMENT'].append(segment_stop_offset)
-        for document_name, document_metadata in self.documents_metadata.items():
-            bol_measure_numbers = document_metadata.get('bol_measure_numbers')
-            if not bol_measure_numbers:
-                continue
-            for bol_measure_number in bol_measure_numbers:
-                if bol_measure_number not in segment_measure_numbers:
-                    continue
-                index = bol_measure_number - first_measure_number
-                skip = skips[index]
-                offset = abjad.inspect(skip).get_timespan().start_offset
-                document_to_break_offsets[document_name].append(offset)
 
     def _call_commands(self):
         start_time = time.time()
@@ -3591,14 +3543,6 @@ class SegmentMaker(abjad.SegmentMaker):
         Returns design-checker or none.
         '''
         return self._design_checker
-
-    @property
-    def documents_metadata(self):
-        r'''Gets documents metadata.
-
-        Returns ordered dictionary.
-        '''
-        return self._documents_metadata
 
     @property
     def dynamics(self):
@@ -6300,16 +6244,6 @@ class SegmentMaker(abjad.SegmentMaker):
         Returns instrument dictionary or none.
         '''
         return self._instruments
-
-    @property
-    def known_documents(self):
-        r'''Gets known documents.
-
-        Returns list.
-        '''
-        result = ['SEGMENT']
-        result.extend(getattr(self.score_template, 'known_documents', []))
-        return result
 
     @property
     def last_segment(self):
@@ -9400,7 +9334,6 @@ class SegmentMaker(abjad.SegmentMaker):
     def run(
         self,
         deactivate=None,
-        documents_metadata=None,
         environment=None,
         metadata=None,
         midi=None,
@@ -9420,7 +9353,6 @@ class SegmentMaker(abjad.SegmentMaker):
         '''
         deactivate = deactivate or []
         assert all(isinstance(_, str) for _ in deactivate), repr(deactivate)
-        self._documents_metadata = abjad.TypedOrderedDict(documents_metadata)
         self._environment = environment
         self._metadata = abjad.TypedOrderedDict(metadata)
         self._midi = midi
@@ -9455,7 +9387,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._whitespace_leaves()
         self._comment_measure_numbers()
         self._apply_breaks()
-        self._cache_per_document_break_information()
+        self._cache_break_offsets()
         self._apply_fermata_measure_staff_line_count()
         self._shift_clefs_into_fermata_measures()
         self._deactivate_tags(deactivate)
