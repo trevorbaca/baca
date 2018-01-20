@@ -1,4 +1,4 @@
-from abjad.tools.datastructuretools.Tags import Tags
+from abjad.tools.segmenttools.Tags import Tags
 
 
 class Tags(Tags):
