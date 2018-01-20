@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.CollectionList
 
 CollectionList
 ==============
@@ -8,11 +8,9 @@ CollectionList
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadValueObject`
+- :py:class:`abjad.tools.abctools.AbjadValueObject.AbjadValueObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,133 +21,133 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.CollectionList.CollectionList.accumulate
-      ~baca.tools.CollectionList.CollectionList.arpeggiate_down
-      ~baca.tools.CollectionList.CollectionList.arpeggiate_up
-      ~baca.tools.CollectionList.CollectionList.bass_to_octave
-      ~baca.tools.CollectionList.CollectionList.center_to_octave
-      ~baca.tools.CollectionList.CollectionList.chords
-      ~baca.tools.CollectionList.CollectionList.collections
-      ~baca.tools.CollectionList.CollectionList.cursor
-      ~baca.tools.CollectionList.CollectionList.flatten
-      ~baca.tools.CollectionList.CollectionList.has_duplicate_pitch_classes
-      ~baca.tools.CollectionList.CollectionList.has_duplicates
-      ~baca.tools.CollectionList.CollectionList.has_repeat_pitch_classes
-      ~baca.tools.CollectionList.CollectionList.has_repeats
-      ~baca.tools.CollectionList.CollectionList.helianthate
-      ~baca.tools.CollectionList.CollectionList.item_class
-      ~baca.tools.CollectionList.CollectionList.join
-      ~baca.tools.CollectionList.CollectionList.partition
-      ~baca.tools.CollectionList.CollectionList.read
-      ~baca.tools.CollectionList.CollectionList.remove
-      ~baca.tools.CollectionList.CollectionList.remove_duplicate_pitch_classes
-      ~baca.tools.CollectionList.CollectionList.remove_duplicates
-      ~baca.tools.CollectionList.CollectionList.remove_repeat_pitch_classes
-      ~baca.tools.CollectionList.CollectionList.remove_repeats
-      ~baca.tools.CollectionList.CollectionList.repeat
-      ~baca.tools.CollectionList.CollectionList.retain
-      ~baca.tools.CollectionList.CollectionList.soprano_to_octave
-      ~baca.tools.CollectionList.CollectionList.space_down
-      ~baca.tools.CollectionList.CollectionList.space_up
-      ~baca.tools.CollectionList.CollectionList.to_pitch_classes
-      ~baca.tools.CollectionList.CollectionList.to_pitches
-      ~baca.tools.CollectionList.CollectionList.transpose
-      ~baca.tools.CollectionList.CollectionList.__add__
-      ~baca.tools.CollectionList.CollectionList.__copy__
-      ~baca.tools.CollectionList.CollectionList.__eq__
-      ~baca.tools.CollectionList.CollectionList.__format__
-      ~baca.tools.CollectionList.CollectionList.__getitem__
-      ~baca.tools.CollectionList.CollectionList.__illustrate__
-      ~baca.tools.CollectionList.CollectionList.__len__
-      ~baca.tools.CollectionList.CollectionList.__repr__
+      ~CollectionList.accumulate
+      ~CollectionList.arpeggiate_down
+      ~CollectionList.arpeggiate_up
+      ~CollectionList.bass_to_octave
+      ~CollectionList.center_to_octave
+      ~CollectionList.chords
+      ~CollectionList.collections
+      ~CollectionList.cursor
+      ~CollectionList.flatten
+      ~CollectionList.has_duplicate_pitch_classes
+      ~CollectionList.has_duplicates
+      ~CollectionList.has_repeat_pitch_classes
+      ~CollectionList.has_repeats
+      ~CollectionList.helianthate
+      ~CollectionList.item_class
+      ~CollectionList.join
+      ~CollectionList.partition
+      ~CollectionList.read
+      ~CollectionList.remove
+      ~CollectionList.remove_duplicate_pitch_classes
+      ~CollectionList.remove_duplicates
+      ~CollectionList.remove_repeat_pitch_classes
+      ~CollectionList.remove_repeats
+      ~CollectionList.repeat
+      ~CollectionList.retain
+      ~CollectionList.soprano_to_octave
+      ~CollectionList.space_down
+      ~CollectionList.space_up
+      ~CollectionList.to_pitch_classes
+      ~CollectionList.to_pitches
+      ~CollectionList.transpose
+      ~CollectionList.__add__
+      ~CollectionList.__copy__
+      ~CollectionList.__eq__
+      ~CollectionList.__format__
+      ~CollectionList.__getitem__
+      ~CollectionList.__illustrate__
+      ~CollectionList.__len__
+      ~CollectionList.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.CollectionList.CollectionList.collections
+.. autoattribute:: CollectionList.collections
 
-.. autoattribute:: baca.tools.CollectionList.CollectionList.item_class
+.. autoattribute:: CollectionList.item_class
 
 Methods
 -------
 
-.. automethod:: baca.tools.CollectionList.CollectionList.accumulate
+.. automethod:: CollectionList.accumulate
 
-.. automethod:: baca.tools.CollectionList.CollectionList.arpeggiate_down
+.. automethod:: CollectionList.arpeggiate_down
 
-.. automethod:: baca.tools.CollectionList.CollectionList.arpeggiate_up
+.. automethod:: CollectionList.arpeggiate_up
 
-.. automethod:: baca.tools.CollectionList.CollectionList.bass_to_octave
+.. automethod:: CollectionList.bass_to_octave
 
-.. automethod:: baca.tools.CollectionList.CollectionList.center_to_octave
+.. automethod:: CollectionList.center_to_octave
 
-.. automethod:: baca.tools.CollectionList.CollectionList.chords
+.. automethod:: CollectionList.chords
 
-.. automethod:: baca.tools.CollectionList.CollectionList.cursor
+.. automethod:: CollectionList.cursor
 
-.. automethod:: baca.tools.CollectionList.CollectionList.flatten
+.. automethod:: CollectionList.flatten
 
-.. automethod:: baca.tools.CollectionList.CollectionList.has_duplicate_pitch_classes
+.. automethod:: CollectionList.has_duplicate_pitch_classes
 
-.. automethod:: baca.tools.CollectionList.CollectionList.has_duplicates
+.. automethod:: CollectionList.has_duplicates
 
-.. automethod:: baca.tools.CollectionList.CollectionList.has_repeat_pitch_classes
+.. automethod:: CollectionList.has_repeat_pitch_classes
 
-.. automethod:: baca.tools.CollectionList.CollectionList.has_repeats
+.. automethod:: CollectionList.has_repeats
 
-.. automethod:: baca.tools.CollectionList.CollectionList.helianthate
+.. automethod:: CollectionList.helianthate
 
-.. automethod:: baca.tools.CollectionList.CollectionList.join
+.. automethod:: CollectionList.join
 
-.. automethod:: baca.tools.CollectionList.CollectionList.partition
+.. automethod:: CollectionList.partition
 
-.. automethod:: baca.tools.CollectionList.CollectionList.read
+.. automethod:: CollectionList.read
 
-.. automethod:: baca.tools.CollectionList.CollectionList.remove
+.. automethod:: CollectionList.remove
 
-.. automethod:: baca.tools.CollectionList.CollectionList.remove_duplicate_pitch_classes
+.. automethod:: CollectionList.remove_duplicate_pitch_classes
 
-.. automethod:: baca.tools.CollectionList.CollectionList.remove_duplicates
+.. automethod:: CollectionList.remove_duplicates
 
-.. automethod:: baca.tools.CollectionList.CollectionList.remove_repeat_pitch_classes
+.. automethod:: CollectionList.remove_repeat_pitch_classes
 
-.. automethod:: baca.tools.CollectionList.CollectionList.remove_repeats
+.. automethod:: CollectionList.remove_repeats
 
-.. automethod:: baca.tools.CollectionList.CollectionList.repeat
+.. automethod:: CollectionList.repeat
 
-.. automethod:: baca.tools.CollectionList.CollectionList.retain
+.. automethod:: CollectionList.retain
 
-.. automethod:: baca.tools.CollectionList.CollectionList.soprano_to_octave
+.. automethod:: CollectionList.soprano_to_octave
 
-.. automethod:: baca.tools.CollectionList.CollectionList.space_down
+.. automethod:: CollectionList.space_down
 
-.. automethod:: baca.tools.CollectionList.CollectionList.space_up
+.. automethod:: CollectionList.space_up
 
-.. automethod:: baca.tools.CollectionList.CollectionList.to_pitch_classes
+.. automethod:: CollectionList.to_pitch_classes
 
-.. automethod:: baca.tools.CollectionList.CollectionList.to_pitches
+.. automethod:: CollectionList.to_pitches
 
-.. automethod:: baca.tools.CollectionList.CollectionList.transpose
+.. automethod:: CollectionList.transpose
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.CollectionList.CollectionList.__add__
+.. automethod:: CollectionList.__add__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.CollectionList.CollectionList.__copy__
+      .. automethod:: CollectionList.__copy__
 
-.. automethod:: baca.tools.CollectionList.CollectionList.__eq__
+.. automethod:: CollectionList.__eq__
 
-.. automethod:: baca.tools.CollectionList.CollectionList.__format__
+.. automethod:: CollectionList.__format__
 
-.. automethod:: baca.tools.CollectionList.CollectionList.__getitem__
+.. automethod:: CollectionList.__getitem__
 
-.. automethod:: baca.tools.CollectionList.CollectionList.__illustrate__
+.. automethod:: CollectionList.__illustrate__
 
-.. automethod:: baca.tools.CollectionList.CollectionList.__len__
+.. automethod:: CollectionList.__len__
 
-.. automethod:: baca.tools.CollectionList.CollectionList.__repr__
+.. automethod:: CollectionList.__repr__

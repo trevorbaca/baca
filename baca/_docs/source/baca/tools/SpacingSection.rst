@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.SpacingSection
 
 SpacingSection
 ==============
@@ -8,9 +8,7 @@ SpacingSection
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,41 +19,41 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.SpacingSection.SpacingSection.duration
-      ~baca.tools.SpacingSection.SpacingSection.from_string
-      ~baca.tools.SpacingSection.SpacingSection.__eq__
-      ~baca.tools.SpacingSection.SpacingSection.__format__
-      ~baca.tools.SpacingSection.SpacingSection.__hash__
-      ~baca.tools.SpacingSection.SpacingSection.__repr__
-      ~baca.tools.SpacingSection.SpacingSection.__str__
+      ~SpacingSection.duration
+      ~SpacingSection.from_string
+      ~SpacingSection.__eq__
+      ~SpacingSection.__format__
+      ~SpacingSection.__hash__
+      ~SpacingSection.__repr__
+      ~SpacingSection.__str__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.SpacingSection.SpacingSection.duration
+.. autoattribute:: SpacingSection.duration
 
 Class & static methods
 ----------------------
 
-.. automethod:: baca.tools.SpacingSection.SpacingSection.from_string
+.. automethod:: SpacingSection.from_string
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.SpacingSection.SpacingSection.__eq__
+.. automethod:: SpacingSection.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SpacingSection.SpacingSection.__format__
+      .. automethod:: SpacingSection.__format__
 
-.. automethod:: baca.tools.SpacingSection.SpacingSection.__hash__
+.. automethod:: SpacingSection.__hash__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SpacingSection.SpacingSection.__repr__
+      .. automethod:: SpacingSection.__repr__
 
-.. automethod:: baca.tools.SpacingSection.SpacingSection.__str__
+.. automethod:: SpacingSection.__str__

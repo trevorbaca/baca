@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.ZaggedPitchClassMaker
 
 ZaggedPitchClassMaker
 =====================
@@ -8,9 +8,7 @@ ZaggedPitchClassMaker
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,41 +19,41 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker.division_ratios
-      ~baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker.grouping_counts
-      ~baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker.pc_cells
-      ~baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker.__call__
-      ~baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker.__eq__
-      ~baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker.__format__
-      ~baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker.__hash__
-      ~baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker.__repr__
+      ~ZaggedPitchClassMaker.division_ratios
+      ~ZaggedPitchClassMaker.grouping_counts
+      ~ZaggedPitchClassMaker.pc_cells
+      ~ZaggedPitchClassMaker.__call__
+      ~ZaggedPitchClassMaker.__eq__
+      ~ZaggedPitchClassMaker.__format__
+      ~ZaggedPitchClassMaker.__hash__
+      ~ZaggedPitchClassMaker.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker.division_ratios
+.. autoattribute:: ZaggedPitchClassMaker.division_ratios
 
-.. autoattribute:: baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker.grouping_counts
+.. autoattribute:: ZaggedPitchClassMaker.grouping_counts
 
-.. autoattribute:: baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker.pc_cells
+.. autoattribute:: ZaggedPitchClassMaker.pc_cells
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker.__call__
+.. automethod:: ZaggedPitchClassMaker.__call__
 
-.. automethod:: baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker.__eq__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker.__format__
-
-.. automethod:: baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker.__hash__
+.. automethod:: ZaggedPitchClassMaker.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ZaggedPitchClassMaker.ZaggedPitchClassMaker.__repr__
+      .. automethod:: ZaggedPitchClassMaker.__format__
+
+.. automethod:: ZaggedPitchClassMaker.__hash__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: ZaggedPitchClassMaker.__repr__

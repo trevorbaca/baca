@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.PartitionDivisionCallback
 
 PartitionDivisionCallback
 =========================
@@ -8,11 +8,9 @@ PartitionDivisionCallback
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadValueObject`
+- :py:class:`abjad.tools.abctools.AbjadValueObject.AbjadValueObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,51 +21,51 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.append_remainder
-      ~baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.counts
-      ~baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.fuse_assignable_total_duration
-      ~baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.remainder_direction
-      ~baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.__call__
-      ~baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.__copy__
-      ~baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.__eq__
-      ~baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.__format__
-      ~baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.__hash__
-      ~baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.__repr__
+      ~PartitionDivisionCallback.append_remainder
+      ~PartitionDivisionCallback.counts
+      ~PartitionDivisionCallback.fuse_assignable_total_duration
+      ~PartitionDivisionCallback.remainder_direction
+      ~PartitionDivisionCallback.__call__
+      ~PartitionDivisionCallback.__copy__
+      ~PartitionDivisionCallback.__eq__
+      ~PartitionDivisionCallback.__format__
+      ~PartitionDivisionCallback.__hash__
+      ~PartitionDivisionCallback.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.append_remainder
+.. autoattribute:: PartitionDivisionCallback.append_remainder
 
-.. autoattribute:: baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.counts
+.. autoattribute:: PartitionDivisionCallback.counts
 
-.. autoattribute:: baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.fuse_assignable_total_duration
+.. autoattribute:: PartitionDivisionCallback.fuse_assignable_total_duration
 
-.. autoattribute:: baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.remainder_direction
+.. autoattribute:: PartitionDivisionCallback.remainder_direction
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.__call__
+.. automethod:: PartitionDivisionCallback.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.__copy__
+      .. automethod:: PartitionDivisionCallback.__copy__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.__eq__
+      .. automethod:: PartitionDivisionCallback.__eq__
 
-.. automethod:: baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.__format__
+.. automethod:: PartitionDivisionCallback.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.__hash__
+      .. automethod:: PartitionDivisionCallback.__hash__
 
-.. automethod:: baca.tools.PartitionDivisionCallback.PartitionDivisionCallback.__repr__
+.. automethod:: PartitionDivisionCallback.__repr__

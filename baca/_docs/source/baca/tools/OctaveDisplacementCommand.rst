@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.OctaveDisplacementCommand
 
 OctaveDisplacementCommand
 =========================
@@ -8,11 +8,9 @@ OctaveDisplacementCommand
 Bases
 -----
 
-- :py:class:`baca.tools.Command`
+- :py:class:`baca.tools.Command.Command`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,20 +21,18 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.deactivate
-      ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.displacements
-      ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.get_tag
-      ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.manifests
-      ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.offset_to_measure_number
-      ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.selector
-      ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.tag
-      ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.tag_measure_number
-      ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.tags
-      ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.__call__
-      ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.__eq__
-      ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.__format__
-      ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.__hash__
-      ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.__repr__
+      ~OctaveDisplacementCommand.deactivate
+      ~OctaveDisplacementCommand.displacements
+      ~OctaveDisplacementCommand.get_tag
+      ~OctaveDisplacementCommand.manifests
+      ~OctaveDisplacementCommand.offset_to_measure_number
+      ~OctaveDisplacementCommand.selector
+      ~OctaveDisplacementCommand.tag
+      ~OctaveDisplacementCommand.tag_measure_number
+      ~OctaveDisplacementCommand.tags
+      ~OctaveDisplacementCommand.__call__
+      ~OctaveDisplacementCommand.__format__
+      ~OctaveDisplacementCommand.__repr__
 
 Read-only properties
 --------------------
@@ -45,27 +41,27 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.deactivate
+      .. autoattribute:: OctaveDisplacementCommand.deactivate
 
-.. autoattribute:: baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.displacements
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.selector
+.. autoattribute:: OctaveDisplacementCommand.displacements
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.tag
+      .. autoattribute:: OctaveDisplacementCommand.selector
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.tags
+      .. autoattribute:: OctaveDisplacementCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: OctaveDisplacementCommand.tags
 
 Read/write properties
 ---------------------
@@ -74,19 +70,19 @@ Read/write properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.manifests
+      .. autoattribute:: OctaveDisplacementCommand.manifests
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.offset_to_measure_number
+      .. autoattribute:: OctaveDisplacementCommand.offset_to_measure_number
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.tag_measure_number
+      .. autoattribute:: OctaveDisplacementCommand.tag_measure_number
 
 Methods
 -------
@@ -95,33 +91,21 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.get_tag
+      .. automethod:: OctaveDisplacementCommand.get_tag
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.__call__
+.. automethod:: OctaveDisplacementCommand.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.__eq__
+      .. automethod:: OctaveDisplacementCommand.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand.__repr__
+      .. automethod:: OctaveDisplacementCommand.__repr__

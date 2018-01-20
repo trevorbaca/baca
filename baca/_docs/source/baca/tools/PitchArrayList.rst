@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.PitchArrayList
 
 PitchArrayList
 ==============
@@ -8,13 +8,25 @@ PitchArrayList
 Bases
 -----
 
-- :py:class:`abjad.tools.datastructuretools.TypedList`
+- :py:class:`abjad.tools.datastructuretools.TypedList.TypedList`
 
-- :py:class:`abjad.tools.datastructuretools.TypedCollection`
+- :py:class:`abjad.tools.datastructuretools.TypedCollection.TypedCollection`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`collections.abc.MutableSequence`
+
+- :py:class:`collections.abc.Sequence`
+
+- :py:class:`collections.abc.Reversible`
+
+- :py:class:`collections.abc.Collection`
+
+- :py:class:`collections.abc.Sized`
+
+- :py:class:`collections.abc.Iterable`
+
+- :py:class:`collections.abc.Container`
 
 - :py:class:`builtins.object`
 
@@ -25,31 +37,32 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.PitchArrayList.PitchArrayList.append
-      ~baca.tools.PitchArrayList.PitchArrayList.count
-      ~baca.tools.PitchArrayList.PitchArrayList.extend
-      ~baca.tools.PitchArrayList.PitchArrayList.index
-      ~baca.tools.PitchArrayList.PitchArrayList.insert
-      ~baca.tools.PitchArrayList.PitchArrayList.item_class
-      ~baca.tools.PitchArrayList.PitchArrayList.items
-      ~baca.tools.PitchArrayList.PitchArrayList.keep_sorted
-      ~baca.tools.PitchArrayList.PitchArrayList.pop
-      ~baca.tools.PitchArrayList.PitchArrayList.remove
-      ~baca.tools.PitchArrayList.PitchArrayList.reverse
-      ~baca.tools.PitchArrayList.PitchArrayList.sort
-      ~baca.tools.PitchArrayList.PitchArrayList.to_score
-      ~baca.tools.PitchArrayList.PitchArrayList.__contains__
-      ~baca.tools.PitchArrayList.PitchArrayList.__delitem__
-      ~baca.tools.PitchArrayList.PitchArrayList.__eq__
-      ~baca.tools.PitchArrayList.PitchArrayList.__format__
-      ~baca.tools.PitchArrayList.PitchArrayList.__getitem__
-      ~baca.tools.PitchArrayList.PitchArrayList.__hash__
-      ~baca.tools.PitchArrayList.PitchArrayList.__iadd__
-      ~baca.tools.PitchArrayList.PitchArrayList.__iter__
-      ~baca.tools.PitchArrayList.PitchArrayList.__len__
-      ~baca.tools.PitchArrayList.PitchArrayList.__repr__
-      ~baca.tools.PitchArrayList.PitchArrayList.__reversed__
-      ~baca.tools.PitchArrayList.PitchArrayList.__setitem__
+      ~PitchArrayList.append
+      ~PitchArrayList.clear
+      ~PitchArrayList.count
+      ~PitchArrayList.extend
+      ~PitchArrayList.index
+      ~PitchArrayList.insert
+      ~PitchArrayList.item_class
+      ~PitchArrayList.items
+      ~PitchArrayList.keep_sorted
+      ~PitchArrayList.pop
+      ~PitchArrayList.remove
+      ~PitchArrayList.reverse
+      ~PitchArrayList.sort
+      ~PitchArrayList.to_score
+      ~PitchArrayList.__contains__
+      ~PitchArrayList.__delitem__
+      ~PitchArrayList.__eq__
+      ~PitchArrayList.__format__
+      ~PitchArrayList.__getitem__
+      ~PitchArrayList.__hash__
+      ~PitchArrayList.__iadd__
+      ~PitchArrayList.__iter__
+      ~PitchArrayList.__len__
+      ~PitchArrayList.__repr__
+      ~PitchArrayList.__reversed__
+      ~PitchArrayList.__setitem__
 
 Read-only properties
 --------------------
@@ -58,13 +71,13 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchArrayList.PitchArrayList.item_class
+      .. autoattribute:: PitchArrayList.item_class
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchArrayList.PitchArrayList.items
+      .. autoattribute:: PitchArrayList.items
 
 Read/write properties
 ---------------------
@@ -73,7 +86,7 @@ Read/write properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchArrayList.PitchArrayList.keep_sorted
+      .. autoattribute:: PitchArrayList.keep_sorted
 
 Methods
 -------
@@ -82,57 +95,63 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArrayList.PitchArrayList.append
+      .. automethod:: PitchArrayList.append
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArrayList.PitchArrayList.count
+      .. automethod:: PitchArrayList.clear
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArrayList.PitchArrayList.extend
+      .. automethod:: PitchArrayList.count
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArrayList.PitchArrayList.index
+      .. automethod:: PitchArrayList.extend
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArrayList.PitchArrayList.insert
+      .. automethod:: PitchArrayList.index
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArrayList.PitchArrayList.pop
+      .. automethod:: PitchArrayList.insert
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArrayList.PitchArrayList.remove
+      .. automethod:: PitchArrayList.pop
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArrayList.PitchArrayList.reverse
+      .. automethod:: PitchArrayList.remove
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArrayList.PitchArrayList.sort
+      .. automethod:: PitchArrayList.reverse
 
-.. automethod:: baca.tools.PitchArrayList.PitchArrayList.to_score
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: PitchArrayList.sort
+
+.. automethod:: PitchArrayList.to_score
 
 Special methods
 ---------------
@@ -141,70 +160,70 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArrayList.PitchArrayList.__contains__
+      .. automethod:: PitchArrayList.__contains__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArrayList.PitchArrayList.__delitem__
+      .. automethod:: PitchArrayList.__delitem__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArrayList.PitchArrayList.__eq__
+      .. automethod:: PitchArrayList.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArrayList.PitchArrayList.__format__
+      .. automethod:: PitchArrayList.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArrayList.PitchArrayList.__getitem__
+      .. automethod:: PitchArrayList.__getitem__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArrayList.PitchArrayList.__hash__
+      .. automethod:: PitchArrayList.__hash__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArrayList.PitchArrayList.__iadd__
+      .. automethod:: PitchArrayList.__iadd__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArrayList.PitchArrayList.__iter__
+      .. automethod:: PitchArrayList.__iter__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArrayList.PitchArrayList.__len__
+      .. automethod:: PitchArrayList.__len__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArrayList.PitchArrayList.__repr__
+      .. automethod:: PitchArrayList.__repr__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArrayList.PitchArrayList.__reversed__
+      .. automethod:: PitchArrayList.__reversed__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArrayList.PitchArrayList.__setitem__
+      .. automethod:: PitchArrayList.__setitem__

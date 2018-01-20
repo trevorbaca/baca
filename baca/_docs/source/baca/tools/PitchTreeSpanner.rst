@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.PitchTreeSpanner
 
 PitchTreeSpanner
 ================
@@ -8,11 +8,21 @@ PitchTreeSpanner
 Bases
 -----
 
-- :py:class:`abjad.tools.spannertools.Spanner`
+- :py:class:`abjad.tools.spannertools.Spanner.Spanner`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`collections.abc.Sequence`
+
+- :py:class:`collections.abc.Reversible`
+
+- :py:class:`collections.abc.Collection`
+
+- :py:class:`collections.abc.Sized`
+
+- :py:class:`collections.abc.Iterable`
+
+- :py:class:`collections.abc.Container`
 
 - :py:class:`builtins.object`
 
@@ -23,18 +33,20 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.PitchTreeSpanner.PitchTreeSpanner.leaves
-      ~baca.tools.PitchTreeSpanner.PitchTreeSpanner.level
-      ~baca.tools.PitchTreeSpanner.PitchTreeSpanner.overrides
-      ~baca.tools.PitchTreeSpanner.PitchTreeSpanner.__contains__
-      ~baca.tools.PitchTreeSpanner.PitchTreeSpanner.__copy__
-      ~baca.tools.PitchTreeSpanner.PitchTreeSpanner.__eq__
-      ~baca.tools.PitchTreeSpanner.PitchTreeSpanner.__format__
-      ~baca.tools.PitchTreeSpanner.PitchTreeSpanner.__getitem__
-      ~baca.tools.PitchTreeSpanner.PitchTreeSpanner.__hash__
-      ~baca.tools.PitchTreeSpanner.PitchTreeSpanner.__len__
-      ~baca.tools.PitchTreeSpanner.PitchTreeSpanner.__lt__
-      ~baca.tools.PitchTreeSpanner.PitchTreeSpanner.__repr__
+      ~PitchTreeSpanner.count
+      ~PitchTreeSpanner.index
+      ~PitchTreeSpanner.leaves
+      ~PitchTreeSpanner.level
+      ~PitchTreeSpanner.overrides
+      ~PitchTreeSpanner.__contains__
+      ~PitchTreeSpanner.__copy__
+      ~PitchTreeSpanner.__format__
+      ~PitchTreeSpanner.__getitem__
+      ~PitchTreeSpanner.__iter__
+      ~PitchTreeSpanner.__len__
+      ~PitchTreeSpanner.__lt__
+      ~PitchTreeSpanner.__repr__
+      ~PitchTreeSpanner.__reversed__
 
 Read-only properties
 --------------------
@@ -43,15 +55,30 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchTreeSpanner.PitchTreeSpanner.leaves
+      .. autoattribute:: PitchTreeSpanner.leaves
 
-.. autoattribute:: baca.tools.PitchTreeSpanner.PitchTreeSpanner.level
+.. autoattribute:: PitchTreeSpanner.level
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchTreeSpanner.PitchTreeSpanner.overrides
+      .. autoattribute:: PitchTreeSpanner.overrides
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: PitchTreeSpanner.count
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: PitchTreeSpanner.index
 
 Special methods
 ---------------
@@ -60,52 +87,52 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchTreeSpanner.PitchTreeSpanner.__contains__
+      .. automethod:: PitchTreeSpanner.__contains__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchTreeSpanner.PitchTreeSpanner.__copy__
+      .. automethod:: PitchTreeSpanner.__copy__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchTreeSpanner.PitchTreeSpanner.__eq__
+      .. automethod:: PitchTreeSpanner.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchTreeSpanner.PitchTreeSpanner.__format__
+      .. automethod:: PitchTreeSpanner.__getitem__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchTreeSpanner.PitchTreeSpanner.__getitem__
+      .. automethod:: PitchTreeSpanner.__iter__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchTreeSpanner.PitchTreeSpanner.__hash__
+      .. automethod:: PitchTreeSpanner.__len__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchTreeSpanner.PitchTreeSpanner.__len__
+      .. automethod:: PitchTreeSpanner.__lt__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchTreeSpanner.PitchTreeSpanner.__lt__
+      .. automethod:: PitchTreeSpanner.__repr__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchTreeSpanner.PitchTreeSpanner.__repr__
+      .. automethod:: PitchTreeSpanner.__reversed__

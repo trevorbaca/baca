@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.RegisterCommand
 
 RegisterCommand
 ===============
@@ -8,11 +8,9 @@ RegisterCommand
 Bases
 -----
 
-- :py:class:`baca.tools.Command`
+- :py:class:`baca.tools.Command.Command`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,20 +21,18 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.RegisterCommand.RegisterCommand.deactivate
-      ~baca.tools.RegisterCommand.RegisterCommand.get_tag
-      ~baca.tools.RegisterCommand.RegisterCommand.manifests
-      ~baca.tools.RegisterCommand.RegisterCommand.offset_to_measure_number
-      ~baca.tools.RegisterCommand.RegisterCommand.registration
-      ~baca.tools.RegisterCommand.RegisterCommand.selector
-      ~baca.tools.RegisterCommand.RegisterCommand.tag
-      ~baca.tools.RegisterCommand.RegisterCommand.tag_measure_number
-      ~baca.tools.RegisterCommand.RegisterCommand.tags
-      ~baca.tools.RegisterCommand.RegisterCommand.__call__
-      ~baca.tools.RegisterCommand.RegisterCommand.__eq__
-      ~baca.tools.RegisterCommand.RegisterCommand.__format__
-      ~baca.tools.RegisterCommand.RegisterCommand.__hash__
-      ~baca.tools.RegisterCommand.RegisterCommand.__repr__
+      ~RegisterCommand.deactivate
+      ~RegisterCommand.get_tag
+      ~RegisterCommand.manifests
+      ~RegisterCommand.offset_to_measure_number
+      ~RegisterCommand.registration
+      ~RegisterCommand.selector
+      ~RegisterCommand.tag
+      ~RegisterCommand.tag_measure_number
+      ~RegisterCommand.tags
+      ~RegisterCommand.__call__
+      ~RegisterCommand.__format__
+      ~RegisterCommand.__repr__
 
 Read-only properties
 --------------------
@@ -45,27 +41,27 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RegisterCommand.RegisterCommand.deactivate
+      .. autoattribute:: RegisterCommand.deactivate
 
-.. autoattribute:: baca.tools.RegisterCommand.RegisterCommand.registration
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.RegisterCommand.RegisterCommand.selector
+.. autoattribute:: RegisterCommand.registration
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RegisterCommand.RegisterCommand.tag
+      .. autoattribute:: RegisterCommand.selector
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RegisterCommand.RegisterCommand.tags
+      .. autoattribute:: RegisterCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterCommand.tags
 
 Read/write properties
 ---------------------
@@ -74,19 +70,19 @@ Read/write properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RegisterCommand.RegisterCommand.manifests
+      .. autoattribute:: RegisterCommand.manifests
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RegisterCommand.RegisterCommand.offset_to_measure_number
+      .. autoattribute:: RegisterCommand.offset_to_measure_number
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RegisterCommand.RegisterCommand.tag_measure_number
+      .. autoattribute:: RegisterCommand.tag_measure_number
 
 Methods
 -------
@@ -95,33 +91,21 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegisterCommand.RegisterCommand.get_tag
+      .. automethod:: RegisterCommand.get_tag
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.RegisterCommand.RegisterCommand.__call__
+.. automethod:: RegisterCommand.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegisterCommand.RegisterCommand.__eq__
+      .. automethod:: RegisterCommand.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegisterCommand.RegisterCommand.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.RegisterCommand.RegisterCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.RegisterCommand.RegisterCommand.__repr__
+      .. automethod:: RegisterCommand.__repr__

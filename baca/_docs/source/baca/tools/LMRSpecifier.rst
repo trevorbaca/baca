@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.LMRSpecifier
 
 LMRSpecifier
 ============
@@ -8,9 +8,7 @@ LMRSpecifier
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,76 +19,62 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.LMRSpecifier.LMRSpecifier.left_counts
-      ~baca.tools.LMRSpecifier.LMRSpecifier.left_cyclic
-      ~baca.tools.LMRSpecifier.LMRSpecifier.left_length
-      ~baca.tools.LMRSpecifier.LMRSpecifier.left_reversed
-      ~baca.tools.LMRSpecifier.LMRSpecifier.middle_counts
-      ~baca.tools.LMRSpecifier.LMRSpecifier.middle_cyclic
-      ~baca.tools.LMRSpecifier.LMRSpecifier.middle_reversed
-      ~baca.tools.LMRSpecifier.LMRSpecifier.priority
-      ~baca.tools.LMRSpecifier.LMRSpecifier.right_counts
-      ~baca.tools.LMRSpecifier.LMRSpecifier.right_cyclic
-      ~baca.tools.LMRSpecifier.LMRSpecifier.right_length
-      ~baca.tools.LMRSpecifier.LMRSpecifier.right_reversed
-      ~baca.tools.LMRSpecifier.LMRSpecifier.__call__
-      ~baca.tools.LMRSpecifier.LMRSpecifier.__eq__
-      ~baca.tools.LMRSpecifier.LMRSpecifier.__format__
-      ~baca.tools.LMRSpecifier.LMRSpecifier.__hash__
-      ~baca.tools.LMRSpecifier.LMRSpecifier.__repr__
+      ~LMRSpecifier.left_counts
+      ~LMRSpecifier.left_cyclic
+      ~LMRSpecifier.left_length
+      ~LMRSpecifier.left_reversed
+      ~LMRSpecifier.middle_counts
+      ~LMRSpecifier.middle_cyclic
+      ~LMRSpecifier.middle_reversed
+      ~LMRSpecifier.priority
+      ~LMRSpecifier.right_counts
+      ~LMRSpecifier.right_cyclic
+      ~LMRSpecifier.right_length
+      ~LMRSpecifier.right_reversed
+      ~LMRSpecifier.__call__
+      ~LMRSpecifier.__format__
+      ~LMRSpecifier.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.LMRSpecifier.LMRSpecifier.left_counts
+.. autoattribute:: LMRSpecifier.left_counts
 
-.. autoattribute:: baca.tools.LMRSpecifier.LMRSpecifier.left_cyclic
+.. autoattribute:: LMRSpecifier.left_cyclic
 
-.. autoattribute:: baca.tools.LMRSpecifier.LMRSpecifier.left_length
+.. autoattribute:: LMRSpecifier.left_length
 
-.. autoattribute:: baca.tools.LMRSpecifier.LMRSpecifier.left_reversed
+.. autoattribute:: LMRSpecifier.left_reversed
 
-.. autoattribute:: baca.tools.LMRSpecifier.LMRSpecifier.middle_counts
+.. autoattribute:: LMRSpecifier.middle_counts
 
-.. autoattribute:: baca.tools.LMRSpecifier.LMRSpecifier.middle_cyclic
+.. autoattribute:: LMRSpecifier.middle_cyclic
 
-.. autoattribute:: baca.tools.LMRSpecifier.LMRSpecifier.middle_reversed
+.. autoattribute:: LMRSpecifier.middle_reversed
 
-.. autoattribute:: baca.tools.LMRSpecifier.LMRSpecifier.priority
+.. autoattribute:: LMRSpecifier.priority
 
-.. autoattribute:: baca.tools.LMRSpecifier.LMRSpecifier.right_counts
+.. autoattribute:: LMRSpecifier.right_counts
 
-.. autoattribute:: baca.tools.LMRSpecifier.LMRSpecifier.right_cyclic
+.. autoattribute:: LMRSpecifier.right_cyclic
 
-.. autoattribute:: baca.tools.LMRSpecifier.LMRSpecifier.right_length
+.. autoattribute:: LMRSpecifier.right_length
 
-.. autoattribute:: baca.tools.LMRSpecifier.LMRSpecifier.right_reversed
+.. autoattribute:: LMRSpecifier.right_reversed
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.LMRSpecifier.LMRSpecifier.__call__
+.. automethod:: LMRSpecifier.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.LMRSpecifier.LMRSpecifier.__eq__
+      .. automethod:: LMRSpecifier.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.LMRSpecifier.LMRSpecifier.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.LMRSpecifier.LMRSpecifier.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.LMRSpecifier.LMRSpecifier.__repr__
+      .. automethod:: LMRSpecifier.__repr__

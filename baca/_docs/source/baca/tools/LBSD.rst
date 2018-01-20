@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.LBSD
 
 LBSD
 ====
@@ -8,9 +8,7 @@ LBSD
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,19 +19,17 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.LBSD.LBSD.alignment_distances
-      ~baca.tools.LBSD.LBSD.y_offset
-      ~baca.tools.LBSD.LBSD.__eq__
-      ~baca.tools.LBSD.LBSD.__format__
-      ~baca.tools.LBSD.LBSD.__hash__
-      ~baca.tools.LBSD.LBSD.__repr__
+      ~LBSD.alignment_distances
+      ~LBSD.y_offset
+      ~LBSD.__format__
+      ~LBSD.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.LBSD.LBSD.alignment_distances
+.. autoattribute:: LBSD.alignment_distances
 
-.. autoattribute:: baca.tools.LBSD.LBSD.y_offset
+.. autoattribute:: LBSD.y_offset
 
 Special methods
 ---------------
@@ -42,22 +38,10 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.LBSD.LBSD.__eq__
+      .. automethod:: LBSD.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.LBSD.LBSD.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.LBSD.LBSD.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.LBSD.LBSD.__repr__
+      .. automethod:: LBSD.__repr__

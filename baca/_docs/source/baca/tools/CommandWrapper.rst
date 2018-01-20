@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.CommandWrapper
 
 CommandWrapper
 ==============
@@ -8,9 +8,7 @@ CommandWrapper
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,19 +19,17 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.CommandWrapper.CommandWrapper.command
-      ~baca.tools.CommandWrapper.CommandWrapper.scope
-      ~baca.tools.CommandWrapper.CommandWrapper.__eq__
-      ~baca.tools.CommandWrapper.CommandWrapper.__format__
-      ~baca.tools.CommandWrapper.CommandWrapper.__hash__
-      ~baca.tools.CommandWrapper.CommandWrapper.__repr__
+      ~CommandWrapper.command
+      ~CommandWrapper.scope
+      ~CommandWrapper.__format__
+      ~CommandWrapper.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.CommandWrapper.CommandWrapper.command
+.. autoattribute:: CommandWrapper.command
 
-.. autoattribute:: baca.tools.CommandWrapper.CommandWrapper.scope
+.. autoattribute:: CommandWrapper.scope
 
 Special methods
 ---------------
@@ -42,22 +38,10 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.CommandWrapper.CommandWrapper.__eq__
+      .. automethod:: CommandWrapper.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.CommandWrapper.CommandWrapper.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.CommandWrapper.CommandWrapper.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.CommandWrapper.CommandWrapper.__repr__
+      .. automethod:: CommandWrapper.__repr__

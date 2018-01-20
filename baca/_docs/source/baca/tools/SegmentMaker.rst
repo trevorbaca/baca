@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.SegmentMaker
 
 SegmentMaker
 ============
@@ -8,11 +8,9 @@ SegmentMaker
 Bases
 -----
 
-- :py:class:`abjad.tools.segmenttools.SegmentMaker`
+- :py:class:`abjad.tools.segmenttools.SegmentMaker.SegmentMaker`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,194 +21,194 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.SegmentMaker.SegmentMaker.allow_empty_selections
-      ~baca.tools.SegmentMaker.SegmentMaker.breaks
-      ~baca.tools.SegmentMaker.SegmentMaker.clefs
-      ~baca.tools.SegmentMaker.SegmentMaker.color_octaves
-      ~baca.tools.SegmentMaker.SegmentMaker.color_out_of_range_pitches
-      ~baca.tools.SegmentMaker.SegmentMaker.color_repeat_pitch_classes
-      ~baca.tools.SegmentMaker.SegmentMaker.copy_rhythm
-      ~baca.tools.SegmentMaker.SegmentMaker.design_checker
-      ~baca.tools.SegmentMaker.SegmentMaker.dynamics
-      ~baca.tools.SegmentMaker.SegmentMaker.fermata_measure_staff_line_count
-      ~baca.tools.SegmentMaker.SegmentMaker.final_bar_line
-      ~baca.tools.SegmentMaker.SegmentMaker.final_markup
-      ~baca.tools.SegmentMaker.SegmentMaker.final_markup_extra_offset
-      ~baca.tools.SegmentMaker.SegmentMaker.first_measure_number
-      ~baca.tools.SegmentMaker.SegmentMaker.first_segment
-      ~baca.tools.SegmentMaker.SegmentMaker.ignore_repeat_pitch_classes
-      ~baca.tools.SegmentMaker.SegmentMaker.ignore_unpitched_notes
-      ~baca.tools.SegmentMaker.SegmentMaker.ignore_unregistered_pitches
-      ~baca.tools.SegmentMaker.SegmentMaker.instruments
-      ~baca.tools.SegmentMaker.SegmentMaker.last_segment
-      ~baca.tools.SegmentMaker.SegmentMaker.manifests
-      ~baca.tools.SegmentMaker.SegmentMaker.margin_markup
-      ~baca.tools.SegmentMaker.SegmentMaker.measure_count
-      ~baca.tools.SegmentMaker.SegmentMaker.measures_per_stage
-      ~baca.tools.SegmentMaker.SegmentMaker.metadata
-      ~baca.tools.SegmentMaker.SegmentMaker.metronome_mark_measure_map
-      ~baca.tools.SegmentMaker.SegmentMaker.metronome_mark_stem_height
-      ~baca.tools.SegmentMaker.SegmentMaker.metronome_marks
-      ~baca.tools.SegmentMaker.SegmentMaker.midi
-      ~baca.tools.SegmentMaker.SegmentMaker.previous_metadata
-      ~baca.tools.SegmentMaker.SegmentMaker.print_timings
-      ~baca.tools.SegmentMaker.SegmentMaker.range_checker
-      ~baca.tools.SegmentMaker.SegmentMaker.rehearsal_letter
-      ~baca.tools.SegmentMaker.SegmentMaker.run
-      ~baca.tools.SegmentMaker.SegmentMaker.score
-      ~baca.tools.SegmentMaker.SegmentMaker.score_template
-      ~baca.tools.SegmentMaker.SegmentMaker.skip_wellformedness_checks
-      ~baca.tools.SegmentMaker.SegmentMaker.skips_instead_of_rests
-      ~baca.tools.SegmentMaker.SegmentMaker.spacing_specifier
-      ~baca.tools.SegmentMaker.SegmentMaker.staff_lines
-      ~baca.tools.SegmentMaker.SegmentMaker.stage_count
-      ~baca.tools.SegmentMaker.SegmentMaker.stage_label_base_string
-      ~baca.tools.SegmentMaker.SegmentMaker.time_signatures
-      ~baca.tools.SegmentMaker.SegmentMaker.transpose_score
-      ~baca.tools.SegmentMaker.SegmentMaker.validate_measure_count
-      ~baca.tools.SegmentMaker.SegmentMaker.validate_measures_per_stage
-      ~baca.tools.SegmentMaker.SegmentMaker.validate_stage_count
-      ~baca.tools.SegmentMaker.SegmentMaker.wrappers
-      ~baca.tools.SegmentMaker.SegmentMaker.__call__
-      ~baca.tools.SegmentMaker.SegmentMaker.__eq__
-      ~baca.tools.SegmentMaker.SegmentMaker.__format__
-      ~baca.tools.SegmentMaker.SegmentMaker.__hash__
-      ~baca.tools.SegmentMaker.SegmentMaker.__illustrate__
-      ~baca.tools.SegmentMaker.SegmentMaker.__repr__
+      ~SegmentMaker.allow_empty_selections
+      ~SegmentMaker.breaks
+      ~SegmentMaker.clefs
+      ~SegmentMaker.color_octaves
+      ~SegmentMaker.color_out_of_range_pitches
+      ~SegmentMaker.color_repeat_pitch_classes
+      ~SegmentMaker.copy_rhythm
+      ~SegmentMaker.design_checker
+      ~SegmentMaker.dynamics
+      ~SegmentMaker.fermata_measure_staff_line_count
+      ~SegmentMaker.final_bar_line
+      ~SegmentMaker.final_markup
+      ~SegmentMaker.final_markup_extra_offset
+      ~SegmentMaker.first_measure_number
+      ~SegmentMaker.first_segment
+      ~SegmentMaker.ignore_repeat_pitch_classes
+      ~SegmentMaker.ignore_unpitched_notes
+      ~SegmentMaker.ignore_unregistered_pitches
+      ~SegmentMaker.instruments
+      ~SegmentMaker.last_segment
+      ~SegmentMaker.manifests
+      ~SegmentMaker.margin_markup
+      ~SegmentMaker.measure_count
+      ~SegmentMaker.measures_per_stage
+      ~SegmentMaker.metadata
+      ~SegmentMaker.metronome_mark_measure_map
+      ~SegmentMaker.metronome_mark_stem_height
+      ~SegmentMaker.metronome_marks
+      ~SegmentMaker.midi
+      ~SegmentMaker.previous_metadata
+      ~SegmentMaker.print_timings
+      ~SegmentMaker.range_checker
+      ~SegmentMaker.rehearsal_letter
+      ~SegmentMaker.run
+      ~SegmentMaker.score
+      ~SegmentMaker.score_template
+      ~SegmentMaker.skip_wellformedness_checks
+      ~SegmentMaker.skips_instead_of_rests
+      ~SegmentMaker.spacing_specifier
+      ~SegmentMaker.staff_lines
+      ~SegmentMaker.stage_count
+      ~SegmentMaker.stage_label_base_string
+      ~SegmentMaker.time_signatures
+      ~SegmentMaker.transpose_score
+      ~SegmentMaker.validate_measure_count
+      ~SegmentMaker.validate_measures_per_stage
+      ~SegmentMaker.validate_stage_count
+      ~SegmentMaker.wrappers
+      ~SegmentMaker.__call__
+      ~SegmentMaker.__eq__
+      ~SegmentMaker.__format__
+      ~SegmentMaker.__hash__
+      ~SegmentMaker.__illustrate__
+      ~SegmentMaker.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.allow_empty_selections
+.. autoattribute:: SegmentMaker.allow_empty_selections
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.breaks
+.. autoattribute:: SegmentMaker.breaks
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.clefs
+.. autoattribute:: SegmentMaker.clefs
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.color_octaves
+.. autoattribute:: SegmentMaker.color_octaves
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.color_out_of_range_pitches
+.. autoattribute:: SegmentMaker.color_out_of_range_pitches
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.color_repeat_pitch_classes
+.. autoattribute:: SegmentMaker.color_repeat_pitch_classes
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.design_checker
+.. autoattribute:: SegmentMaker.design_checker
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.dynamics
+.. autoattribute:: SegmentMaker.dynamics
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.fermata_measure_staff_line_count
+.. autoattribute:: SegmentMaker.fermata_measure_staff_line_count
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.final_bar_line
+.. autoattribute:: SegmentMaker.final_bar_line
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.final_markup
+.. autoattribute:: SegmentMaker.final_markup
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.final_markup_extra_offset
+.. autoattribute:: SegmentMaker.final_markup_extra_offset
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.first_measure_number
+.. autoattribute:: SegmentMaker.first_measure_number
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.first_segment
+.. autoattribute:: SegmentMaker.first_segment
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.ignore_repeat_pitch_classes
+.. autoattribute:: SegmentMaker.ignore_repeat_pitch_classes
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.ignore_unpitched_notes
+.. autoattribute:: SegmentMaker.ignore_unpitched_notes
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.ignore_unregistered_pitches
+.. autoattribute:: SegmentMaker.ignore_unregistered_pitches
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.instruments
+.. autoattribute:: SegmentMaker.instruments
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.last_segment
+.. autoattribute:: SegmentMaker.last_segment
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.manifests
+.. autoattribute:: SegmentMaker.manifests
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.margin_markup
+.. autoattribute:: SegmentMaker.margin_markup
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.measure_count
+.. autoattribute:: SegmentMaker.measure_count
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.measures_per_stage
+.. autoattribute:: SegmentMaker.measures_per_stage
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.metadata
+.. autoattribute:: SegmentMaker.metadata
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.metronome_mark_measure_map
+.. autoattribute:: SegmentMaker.metronome_mark_measure_map
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.metronome_mark_stem_height
+.. autoattribute:: SegmentMaker.metronome_mark_stem_height
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.metronome_marks
+.. autoattribute:: SegmentMaker.metronome_marks
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.midi
+.. autoattribute:: SegmentMaker.midi
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.previous_metadata
+.. autoattribute:: SegmentMaker.previous_metadata
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.print_timings
+.. autoattribute:: SegmentMaker.print_timings
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.range_checker
+.. autoattribute:: SegmentMaker.range_checker
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.rehearsal_letter
+.. autoattribute:: SegmentMaker.rehearsal_letter
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.score
+.. autoattribute:: SegmentMaker.score
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.score_template
+.. autoattribute:: SegmentMaker.score_template
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.skip_wellformedness_checks
+.. autoattribute:: SegmentMaker.skip_wellformedness_checks
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.skips_instead_of_rests
+.. autoattribute:: SegmentMaker.skips_instead_of_rests
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.spacing_specifier
+.. autoattribute:: SegmentMaker.spacing_specifier
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.staff_lines
+.. autoattribute:: SegmentMaker.staff_lines
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.stage_count
+.. autoattribute:: SegmentMaker.stage_count
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.stage_label_base_string
+.. autoattribute:: SegmentMaker.stage_label_base_string
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.time_signatures
+.. autoattribute:: SegmentMaker.time_signatures
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.transpose_score
+.. autoattribute:: SegmentMaker.transpose_score
 
-.. autoattribute:: baca.tools.SegmentMaker.SegmentMaker.wrappers
+.. autoattribute:: SegmentMaker.wrappers
 
 Methods
 -------
 
-.. automethod:: baca.tools.SegmentMaker.SegmentMaker.copy_rhythm
+.. automethod:: SegmentMaker.copy_rhythm
 
-.. automethod:: baca.tools.SegmentMaker.SegmentMaker.run
+.. automethod:: SegmentMaker.run
 
-.. automethod:: baca.tools.SegmentMaker.SegmentMaker.validate_measure_count
+.. automethod:: SegmentMaker.validate_measure_count
 
-.. automethod:: baca.tools.SegmentMaker.SegmentMaker.validate_measures_per_stage
+.. automethod:: SegmentMaker.validate_measures_per_stage
 
-.. automethod:: baca.tools.SegmentMaker.SegmentMaker.validate_stage_count
+.. automethod:: SegmentMaker.validate_stage_count
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.SegmentMaker.SegmentMaker.__call__
+.. automethod:: SegmentMaker.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SegmentMaker.SegmentMaker.__eq__
+      .. automethod:: SegmentMaker.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SegmentMaker.SegmentMaker.__format__
+      .. automethod:: SegmentMaker.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SegmentMaker.SegmentMaker.__hash__
+      .. automethod:: SegmentMaker.__hash__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SegmentMaker.SegmentMaker.__illustrate__
+      .. automethod:: SegmentMaker.__illustrate__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SegmentMaker.SegmentMaker.__repr__
+      .. automethod:: SegmentMaker.__repr__

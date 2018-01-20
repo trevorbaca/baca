@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.RegisterToOctaveCommand
 
 RegisterToOctaveCommand
 =======================
@@ -8,11 +8,9 @@ RegisterToOctaveCommand
 Bases
 -----
 
-- :py:class:`baca.tools.Command`
+- :py:class:`baca.tools.Command.Command`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,52 +21,50 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.anchor
-      ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.deactivate
-      ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.get_tag
-      ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.manifests
-      ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.octave_number
-      ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.offset_to_measure_number
-      ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.selector
-      ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.tag
-      ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.tag_measure_number
-      ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.tags
-      ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.__call__
-      ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.__eq__
-      ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.__format__
-      ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.__hash__
-      ~baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.__repr__
+      ~RegisterToOctaveCommand.anchor
+      ~RegisterToOctaveCommand.deactivate
+      ~RegisterToOctaveCommand.get_tag
+      ~RegisterToOctaveCommand.manifests
+      ~RegisterToOctaveCommand.octave_number
+      ~RegisterToOctaveCommand.offset_to_measure_number
+      ~RegisterToOctaveCommand.selector
+      ~RegisterToOctaveCommand.tag
+      ~RegisterToOctaveCommand.tag_measure_number
+      ~RegisterToOctaveCommand.tags
+      ~RegisterToOctaveCommand.__call__
+      ~RegisterToOctaveCommand.__format__
+      ~RegisterToOctaveCommand.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.anchor
+.. autoattribute:: RegisterToOctaveCommand.anchor
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.deactivate
+      .. autoattribute:: RegisterToOctaveCommand.deactivate
 
-.. autoattribute:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.octave_number
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.selector
+.. autoattribute:: RegisterToOctaveCommand.octave_number
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.tag
+      .. autoattribute:: RegisterToOctaveCommand.selector
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.tags
+      .. autoattribute:: RegisterToOctaveCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterToOctaveCommand.tags
 
 Read/write properties
 ---------------------
@@ -77,19 +73,19 @@ Read/write properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.manifests
+      .. autoattribute:: RegisterToOctaveCommand.manifests
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.offset_to_measure_number
+      .. autoattribute:: RegisterToOctaveCommand.offset_to_measure_number
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.tag_measure_number
+      .. autoattribute:: RegisterToOctaveCommand.tag_measure_number
 
 Methods
 -------
@@ -98,33 +94,21 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.get_tag
+      .. automethod:: RegisterToOctaveCommand.get_tag
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.__call__
+.. automethod:: RegisterToOctaveCommand.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.__eq__
+      .. automethod:: RegisterToOctaveCommand.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.RegisterToOctaveCommand.RegisterToOctaveCommand.__repr__
+      .. automethod:: RegisterToOctaveCommand.__repr__

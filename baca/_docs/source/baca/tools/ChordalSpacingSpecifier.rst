@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.ChordalSpacingSpecifier
 
 ChordalSpacingSpecifier
 =======================
@@ -8,11 +8,9 @@ ChordalSpacingSpecifier
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadValueObject`
+- :py:class:`abjad.tools.abctools.AbjadValueObject.AbjadValueObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,62 +21,62 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.bass
-      ~baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.direction
-      ~baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.minimum_semitones
-      ~baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.pattern
-      ~baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.soprano
-      ~baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.__call__
-      ~baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.__copy__
-      ~baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.__eq__
-      ~baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.__format__
-      ~baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.__hash__
-      ~baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.__repr__
+      ~ChordalSpacingSpecifier.bass
+      ~ChordalSpacingSpecifier.direction
+      ~ChordalSpacingSpecifier.minimum_semitones
+      ~ChordalSpacingSpecifier.pattern
+      ~ChordalSpacingSpecifier.soprano
+      ~ChordalSpacingSpecifier.__call__
+      ~ChordalSpacingSpecifier.__copy__
+      ~ChordalSpacingSpecifier.__eq__
+      ~ChordalSpacingSpecifier.__format__
+      ~ChordalSpacingSpecifier.__hash__
+      ~ChordalSpacingSpecifier.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.bass
+.. autoattribute:: ChordalSpacingSpecifier.bass
 
-.. autoattribute:: baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.direction
+.. autoattribute:: ChordalSpacingSpecifier.direction
 
-.. autoattribute:: baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.minimum_semitones
+.. autoattribute:: ChordalSpacingSpecifier.minimum_semitones
 
-.. autoattribute:: baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.pattern
+.. autoattribute:: ChordalSpacingSpecifier.pattern
 
-.. autoattribute:: baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.soprano
+.. autoattribute:: ChordalSpacingSpecifier.soprano
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.__call__
+.. automethod:: ChordalSpacingSpecifier.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.__copy__
+      .. automethod:: ChordalSpacingSpecifier.__copy__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.__eq__
+      .. automethod:: ChordalSpacingSpecifier.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.__format__
+      .. automethod:: ChordalSpacingSpecifier.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.__hash__
+      .. automethod:: ChordalSpacingSpecifier.__hash__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ChordalSpacingSpecifier.ChordalSpacingSpecifier.__repr__
+      .. automethod:: ChordalSpacingSpecifier.__repr__

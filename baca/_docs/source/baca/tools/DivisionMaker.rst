@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.DivisionMaker
 
 DivisionMaker
 =============
@@ -8,11 +8,9 @@ DivisionMaker
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadValueObject`
+- :py:class:`abjad.tools.abctools.AbjadValueObject.AbjadValueObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,77 +21,77 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.DivisionMaker.DivisionMaker.append_callback
-      ~baca.tools.DivisionMaker.DivisionMaker.callbacks
-      ~baca.tools.DivisionMaker.DivisionMaker.flatten
-      ~baca.tools.DivisionMaker.DivisionMaker.fuse_by_counts
-      ~baca.tools.DivisionMaker.DivisionMaker.partition_by_counts
-      ~baca.tools.DivisionMaker.DivisionMaker.show
-      ~baca.tools.DivisionMaker.DivisionMaker.split_by_durations
-      ~baca.tools.DivisionMaker.DivisionMaker.split_by_rounded_ratios
-      ~baca.tools.DivisionMaker.DivisionMaker.__call__
-      ~baca.tools.DivisionMaker.DivisionMaker.__copy__
-      ~baca.tools.DivisionMaker.DivisionMaker.__eq__
-      ~baca.tools.DivisionMaker.DivisionMaker.__format__
-      ~baca.tools.DivisionMaker.DivisionMaker.__hash__
-      ~baca.tools.DivisionMaker.DivisionMaker.__repr__
+      ~DivisionMaker.append_callback
+      ~DivisionMaker.callbacks
+      ~DivisionMaker.flatten
+      ~DivisionMaker.fuse_by_counts
+      ~DivisionMaker.partition_by_counts
+      ~DivisionMaker.show
+      ~DivisionMaker.split_by_durations
+      ~DivisionMaker.split_by_rounded_ratios
+      ~DivisionMaker.__call__
+      ~DivisionMaker.__copy__
+      ~DivisionMaker.__eq__
+      ~DivisionMaker.__format__
+      ~DivisionMaker.__hash__
+      ~DivisionMaker.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.DivisionMaker.DivisionMaker.callbacks
+.. autoattribute:: DivisionMaker.callbacks
 
 Methods
 -------
 
-.. automethod:: baca.tools.DivisionMaker.DivisionMaker.append_callback
+.. automethod:: DivisionMaker.append_callback
 
-.. automethod:: baca.tools.DivisionMaker.DivisionMaker.flatten
+.. automethod:: DivisionMaker.flatten
 
-.. automethod:: baca.tools.DivisionMaker.DivisionMaker.fuse_by_counts
+.. automethod:: DivisionMaker.fuse_by_counts
 
-.. automethod:: baca.tools.DivisionMaker.DivisionMaker.partition_by_counts
+.. automethod:: DivisionMaker.partition_by_counts
 
-.. automethod:: baca.tools.DivisionMaker.DivisionMaker.split_by_durations
+.. automethod:: DivisionMaker.split_by_durations
 
-.. automethod:: baca.tools.DivisionMaker.DivisionMaker.split_by_rounded_ratios
+.. automethod:: DivisionMaker.split_by_rounded_ratios
 
 Class & static methods
 ----------------------
 
-.. automethod:: baca.tools.DivisionMaker.DivisionMaker.show
+.. automethod:: DivisionMaker.show
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.DivisionMaker.DivisionMaker.__call__
+.. automethod:: DivisionMaker.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionMaker.DivisionMaker.__copy__
+      .. automethod:: DivisionMaker.__copy__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionMaker.DivisionMaker.__eq__
+      .. automethod:: DivisionMaker.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionMaker.DivisionMaker.__format__
+      .. automethod:: DivisionMaker.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionMaker.DivisionMaker.__hash__
+      .. automethod:: DivisionMaker.__hash__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionMaker.DivisionMaker.__repr__
+      .. automethod:: DivisionMaker.__repr__

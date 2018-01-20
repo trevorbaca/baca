@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.ImbricationCommand
 
 ImbricationCommand
 ==================
@@ -8,11 +8,9 @@ ImbricationCommand
 Bases
 -----
 
-- :py:class:`baca.tools.Command`
+- :py:class:`baca.tools.Command.Command`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,66 +21,64 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.ImbricationCommand.ImbricationCommand.allow_unused_pitches
-      ~baca.tools.ImbricationCommand.ImbricationCommand.by_pitch_class
-      ~baca.tools.ImbricationCommand.ImbricationCommand.deactivate
-      ~baca.tools.ImbricationCommand.ImbricationCommand.extend_beam
-      ~baca.tools.ImbricationCommand.ImbricationCommand.get_tag
-      ~baca.tools.ImbricationCommand.ImbricationCommand.hocket
-      ~baca.tools.ImbricationCommand.ImbricationCommand.manifests
-      ~baca.tools.ImbricationCommand.ImbricationCommand.offset_to_measure_number
-      ~baca.tools.ImbricationCommand.ImbricationCommand.segment
-      ~baca.tools.ImbricationCommand.ImbricationCommand.selector
-      ~baca.tools.ImbricationCommand.ImbricationCommand.specifiers
-      ~baca.tools.ImbricationCommand.ImbricationCommand.tag
-      ~baca.tools.ImbricationCommand.ImbricationCommand.tag_measure_number
-      ~baca.tools.ImbricationCommand.ImbricationCommand.tags
-      ~baca.tools.ImbricationCommand.ImbricationCommand.truncate_ties
-      ~baca.tools.ImbricationCommand.ImbricationCommand.voice_name
-      ~baca.tools.ImbricationCommand.ImbricationCommand.__call__
-      ~baca.tools.ImbricationCommand.ImbricationCommand.__eq__
-      ~baca.tools.ImbricationCommand.ImbricationCommand.__format__
-      ~baca.tools.ImbricationCommand.ImbricationCommand.__hash__
-      ~baca.tools.ImbricationCommand.ImbricationCommand.__repr__
+      ~ImbricationCommand.allow_unused_pitches
+      ~ImbricationCommand.by_pitch_class
+      ~ImbricationCommand.deactivate
+      ~ImbricationCommand.extend_beam
+      ~ImbricationCommand.get_tag
+      ~ImbricationCommand.hocket
+      ~ImbricationCommand.manifests
+      ~ImbricationCommand.offset_to_measure_number
+      ~ImbricationCommand.segment
+      ~ImbricationCommand.selector
+      ~ImbricationCommand.specifiers
+      ~ImbricationCommand.tag
+      ~ImbricationCommand.tag_measure_number
+      ~ImbricationCommand.tags
+      ~ImbricationCommand.truncate_ties
+      ~ImbricationCommand.voice_name
+      ~ImbricationCommand.__call__
+      ~ImbricationCommand.__format__
+      ~ImbricationCommand.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.allow_unused_pitches
+.. autoattribute:: ImbricationCommand.allow_unused_pitches
 
-.. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.by_pitch_class
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.deactivate
-
-.. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.extend_beam
-
-.. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.hocket
-
-.. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.segment
-
-.. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.selector
-
-.. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.specifiers
+.. autoattribute:: ImbricationCommand.by_pitch_class
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.tag
+      .. autoattribute:: ImbricationCommand.deactivate
+
+.. autoattribute:: ImbricationCommand.extend_beam
+
+.. autoattribute:: ImbricationCommand.hocket
+
+.. autoattribute:: ImbricationCommand.segment
+
+.. autoattribute:: ImbricationCommand.selector
+
+.. autoattribute:: ImbricationCommand.specifiers
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.tags
+      .. autoattribute:: ImbricationCommand.tag
 
-.. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.truncate_ties
+.. only:: html
 
-.. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.voice_name
+   .. container:: inherited
+
+      .. autoattribute:: ImbricationCommand.tags
+
+.. autoattribute:: ImbricationCommand.truncate_ties
+
+.. autoattribute:: ImbricationCommand.voice_name
 
 Read/write properties
 ---------------------
@@ -91,19 +87,19 @@ Read/write properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.manifests
+      .. autoattribute:: ImbricationCommand.manifests
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.offset_to_measure_number
+      .. autoattribute:: ImbricationCommand.offset_to_measure_number
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ImbricationCommand.ImbricationCommand.tag_measure_number
+      .. autoattribute:: ImbricationCommand.tag_measure_number
 
 Methods
 -------
@@ -112,33 +108,21 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ImbricationCommand.ImbricationCommand.get_tag
+      .. automethod:: ImbricationCommand.get_tag
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.ImbricationCommand.ImbricationCommand.__call__
+.. automethod:: ImbricationCommand.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ImbricationCommand.ImbricationCommand.__eq__
+      .. automethod:: ImbricationCommand.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ImbricationCommand.ImbricationCommand.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.ImbricationCommand.ImbricationCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.ImbricationCommand.ImbricationCommand.__repr__
+      .. automethod:: ImbricationCommand.__repr__

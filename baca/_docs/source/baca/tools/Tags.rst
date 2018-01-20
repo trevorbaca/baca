@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.Tags
 
 Tags
 ====
@@ -8,13 +8,11 @@ Tags
 Bases
 -----
 
-- :py:class:`abjad.tools.datastructuretools.Tags`
+- :py:class:`abjad.tools.datastructuretools.Tags.Tags`
 
-- :py:class:`abjad.tools.abctools.AbjadValueObject`
+- :py:class:`abjad.tools.abctools.AbjadValueObject.AbjadValueObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -25,15 +23,15 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.Tags.Tags.document
-      ~baca.tools.Tags.Tags.markup_tags
-      ~baca.tools.Tags.Tags.spacing_tags
-      ~baca.tools.Tags.Tags.__copy__
-      ~baca.tools.Tags.Tags.__eq__
-      ~baca.tools.Tags.Tags.__format__
-      ~baca.tools.Tags.Tags.__getattr__
-      ~baca.tools.Tags.Tags.__hash__
-      ~baca.tools.Tags.Tags.__repr__
+      ~Tags.document
+      ~Tags.markup_tags
+      ~Tags.spacing_tags
+      ~Tags.__copy__
+      ~Tags.__eq__
+      ~Tags.__format__
+      ~Tags.__getattr__
+      ~Tags.__hash__
+      ~Tags.__repr__
 
 Read-only properties
 --------------------
@@ -42,13 +40,13 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Tags.Tags.markup_tags
+      .. autoattribute:: Tags.markup_tags
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Tags.Tags.spacing_tags
+      .. autoattribute:: Tags.spacing_tags
 
 Class & static methods
 ----------------------
@@ -57,7 +55,7 @@ Class & static methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Tags.Tags.document
+      .. automethod:: Tags.document
 
 Special methods
 ---------------
@@ -66,34 +64,34 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Tags.Tags.__copy__
+      .. automethod:: Tags.__copy__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Tags.Tags.__eq__
+      .. automethod:: Tags.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Tags.Tags.__format__
+      .. automethod:: Tags.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Tags.Tags.__getattr__
+      .. automethod:: Tags.__getattr__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Tags.Tags.__hash__
+      .. automethod:: Tags.__hash__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Tags.Tags.__repr__
+      .. automethod:: Tags.__repr__

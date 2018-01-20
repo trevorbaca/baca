@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.AcciaccaturaSpecifier
 
 AcciaccaturaSpecifier
 =====================
@@ -8,9 +8,7 @@ AcciaccaturaSpecifier
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,49 +19,35 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier.durations
-      ~baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier.lmr_specifier
-      ~baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier.pattern
-      ~baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier.__call__
-      ~baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier.__eq__
-      ~baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier.__format__
-      ~baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier.__hash__
-      ~baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier.__repr__
+      ~AcciaccaturaSpecifier.durations
+      ~AcciaccaturaSpecifier.lmr_specifier
+      ~AcciaccaturaSpecifier.pattern
+      ~AcciaccaturaSpecifier.__call__
+      ~AcciaccaturaSpecifier.__format__
+      ~AcciaccaturaSpecifier.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier.durations
+.. autoattribute:: AcciaccaturaSpecifier.durations
 
-.. autoattribute:: baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier.lmr_specifier
+.. autoattribute:: AcciaccaturaSpecifier.lmr_specifier
 
-.. autoattribute:: baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier.pattern
+.. autoattribute:: AcciaccaturaSpecifier.pattern
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier.__call__
+.. automethod:: AcciaccaturaSpecifier.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier.__eq__
+      .. automethod:: AcciaccaturaSpecifier.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.AcciaccaturaSpecifier.AcciaccaturaSpecifier.__repr__
+      .. automethod:: AcciaccaturaSpecifier.__repr__

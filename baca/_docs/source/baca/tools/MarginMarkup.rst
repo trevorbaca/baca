@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.MarginMarkup
 
 MarginMarkup
 ============
@@ -8,11 +8,9 @@ MarginMarkup
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadValueObject`
+- :py:class:`abjad.tools.abctools.AbjadValueObject.AbjadValueObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,35 +21,35 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.MarginMarkup.MarginMarkup.context
-      ~baca.tools.MarginMarkup.MarginMarkup.format_slot
-      ~baca.tools.MarginMarkup.MarginMarkup.latent
-      ~baca.tools.MarginMarkup.MarginMarkup.markup
-      ~baca.tools.MarginMarkup.MarginMarkup.persistent
-      ~baca.tools.MarginMarkup.MarginMarkup.redraw
-      ~baca.tools.MarginMarkup.MarginMarkup.short_markup
-      ~baca.tools.MarginMarkup.MarginMarkup.__copy__
-      ~baca.tools.MarginMarkup.MarginMarkup.__eq__
-      ~baca.tools.MarginMarkup.MarginMarkup.__format__
-      ~baca.tools.MarginMarkup.MarginMarkup.__hash__
-      ~baca.tools.MarginMarkup.MarginMarkup.__repr__
+      ~MarginMarkup.context
+      ~MarginMarkup.format_slot
+      ~MarginMarkup.latent
+      ~MarginMarkup.markup
+      ~MarginMarkup.persistent
+      ~MarginMarkup.redraw
+      ~MarginMarkup.short_markup
+      ~MarginMarkup.__copy__
+      ~MarginMarkup.__eq__
+      ~MarginMarkup.__format__
+      ~MarginMarkup.__hash__
+      ~MarginMarkup.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.MarginMarkup.MarginMarkup.context
+.. autoattribute:: MarginMarkup.context
 
-.. autoattribute:: baca.tools.MarginMarkup.MarginMarkup.format_slot
+.. autoattribute:: MarginMarkup.format_slot
 
-.. autoattribute:: baca.tools.MarginMarkup.MarginMarkup.latent
+.. autoattribute:: MarginMarkup.latent
 
-.. autoattribute:: baca.tools.MarginMarkup.MarginMarkup.markup
+.. autoattribute:: MarginMarkup.markup
 
-.. autoattribute:: baca.tools.MarginMarkup.MarginMarkup.persistent
+.. autoattribute:: MarginMarkup.persistent
 
-.. autoattribute:: baca.tools.MarginMarkup.MarginMarkup.redraw
+.. autoattribute:: MarginMarkup.redraw
 
-.. autoattribute:: baca.tools.MarginMarkup.MarginMarkup.short_markup
+.. autoattribute:: MarginMarkup.short_markup
 
 Special methods
 ---------------
@@ -60,20 +58,20 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.MarginMarkup.MarginMarkup.__copy__
+      .. automethod:: MarginMarkup.__copy__
 
-.. automethod:: baca.tools.MarginMarkup.MarginMarkup.__eq__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.MarginMarkup.MarginMarkup.__format__
-
-.. automethod:: baca.tools.MarginMarkup.MarginMarkup.__hash__
+.. automethod:: MarginMarkup.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.MarginMarkup.MarginMarkup.__repr__
+      .. automethod:: MarginMarkup.__format__
+
+.. automethod:: MarginMarkup.__hash__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: MarginMarkup.__repr__

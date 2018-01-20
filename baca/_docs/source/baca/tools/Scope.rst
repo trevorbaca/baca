@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.Scope
 
 Scope
 =====
@@ -8,9 +8,7 @@ Scope
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,19 +19,17 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.Scope.Scope.stages
-      ~baca.tools.Scope.Scope.voice_name
-      ~baca.tools.Scope.Scope.__eq__
-      ~baca.tools.Scope.Scope.__format__
-      ~baca.tools.Scope.Scope.__hash__
-      ~baca.tools.Scope.Scope.__repr__
+      ~Scope.stages
+      ~Scope.voice_name
+      ~Scope.__format__
+      ~Scope.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.Scope.Scope.stages
+.. autoattribute:: Scope.stages
 
-.. autoattribute:: baca.tools.Scope.Scope.voice_name
+.. autoattribute:: Scope.voice_name
 
 Special methods
 ---------------
@@ -42,22 +38,10 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Scope.Scope.__eq__
+      .. automethod:: Scope.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Scope.Scope.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Scope.Scope.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Scope.Scope.__repr__
+      .. automethod:: Scope.__repr__

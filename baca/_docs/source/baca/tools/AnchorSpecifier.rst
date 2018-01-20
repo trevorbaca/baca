@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.AnchorSpecifier
 
 AnchorSpecifier
 ===============
@@ -8,11 +8,9 @@ AnchorSpecifier
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadValueObject`
+- :py:class:`abjad.tools.abctools.AbjadValueObject.AbjadValueObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,29 +21,29 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.AnchorSpecifier.AnchorSpecifier.figure_name
-      ~baca.tools.AnchorSpecifier.AnchorSpecifier.local_selector
-      ~baca.tools.AnchorSpecifier.AnchorSpecifier.remote_selector
-      ~baca.tools.AnchorSpecifier.AnchorSpecifier.remote_voice_name
-      ~baca.tools.AnchorSpecifier.AnchorSpecifier.use_remote_stop_offset
-      ~baca.tools.AnchorSpecifier.AnchorSpecifier.__copy__
-      ~baca.tools.AnchorSpecifier.AnchorSpecifier.__eq__
-      ~baca.tools.AnchorSpecifier.AnchorSpecifier.__format__
-      ~baca.tools.AnchorSpecifier.AnchorSpecifier.__hash__
-      ~baca.tools.AnchorSpecifier.AnchorSpecifier.__repr__
+      ~AnchorSpecifier.figure_name
+      ~AnchorSpecifier.local_selector
+      ~AnchorSpecifier.remote_selector
+      ~AnchorSpecifier.remote_voice_name
+      ~AnchorSpecifier.use_remote_stop_offset
+      ~AnchorSpecifier.__copy__
+      ~AnchorSpecifier.__eq__
+      ~AnchorSpecifier.__format__
+      ~AnchorSpecifier.__hash__
+      ~AnchorSpecifier.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.AnchorSpecifier.AnchorSpecifier.figure_name
+.. autoattribute:: AnchorSpecifier.figure_name
 
-.. autoattribute:: baca.tools.AnchorSpecifier.AnchorSpecifier.local_selector
+.. autoattribute:: AnchorSpecifier.local_selector
 
-.. autoattribute:: baca.tools.AnchorSpecifier.AnchorSpecifier.remote_selector
+.. autoattribute:: AnchorSpecifier.remote_selector
 
-.. autoattribute:: baca.tools.AnchorSpecifier.AnchorSpecifier.remote_voice_name
+.. autoattribute:: AnchorSpecifier.remote_voice_name
 
-.. autoattribute:: baca.tools.AnchorSpecifier.AnchorSpecifier.use_remote_stop_offset
+.. autoattribute:: AnchorSpecifier.use_remote_stop_offset
 
 Special methods
 ---------------
@@ -54,28 +52,28 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.AnchorSpecifier.AnchorSpecifier.__copy__
+      .. automethod:: AnchorSpecifier.__copy__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.AnchorSpecifier.AnchorSpecifier.__eq__
+      .. automethod:: AnchorSpecifier.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.AnchorSpecifier.AnchorSpecifier.__format__
+      .. automethod:: AnchorSpecifier.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.AnchorSpecifier.AnchorSpecifier.__hash__
+      .. automethod:: AnchorSpecifier.__hash__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.AnchorSpecifier.AnchorSpecifier.__repr__
+      .. automethod:: AnchorSpecifier.__repr__

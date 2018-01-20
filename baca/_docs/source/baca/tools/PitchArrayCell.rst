@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.PitchArrayCell
 
 PitchArrayCell
 ==============
@@ -8,9 +8,7 @@ PitchArrayCell
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,74 +19,72 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.PitchArrayCell.PitchArrayCell.append_pitch
-      ~baca.tools.PitchArrayCell.PitchArrayCell.column_indices
-      ~baca.tools.PitchArrayCell.PitchArrayCell.column_start_index
-      ~baca.tools.PitchArrayCell.PitchArrayCell.column_stop_index
-      ~baca.tools.PitchArrayCell.PitchArrayCell.indices
-      ~baca.tools.PitchArrayCell.PitchArrayCell.is_first_in_row
-      ~baca.tools.PitchArrayCell.PitchArrayCell.is_last_in_row
-      ~baca.tools.PitchArrayCell.PitchArrayCell.item
-      ~baca.tools.PitchArrayCell.PitchArrayCell.matches_cell
-      ~baca.tools.PitchArrayCell.PitchArrayCell.next
-      ~baca.tools.PitchArrayCell.PitchArrayCell.parent_array
-      ~baca.tools.PitchArrayCell.PitchArrayCell.parent_column
-      ~baca.tools.PitchArrayCell.PitchArrayCell.parent_row
-      ~baca.tools.PitchArrayCell.PitchArrayCell.pitches
-      ~baca.tools.PitchArrayCell.PitchArrayCell.previous
-      ~baca.tools.PitchArrayCell.PitchArrayCell.row_index
-      ~baca.tools.PitchArrayCell.PitchArrayCell.weight
-      ~baca.tools.PitchArrayCell.PitchArrayCell.width
-      ~baca.tools.PitchArrayCell.PitchArrayCell.__eq__
-      ~baca.tools.PitchArrayCell.PitchArrayCell.__format__
-      ~baca.tools.PitchArrayCell.PitchArrayCell.__hash__
-      ~baca.tools.PitchArrayCell.PitchArrayCell.__repr__
-      ~baca.tools.PitchArrayCell.PitchArrayCell.__str__
+      ~PitchArrayCell.append_pitch
+      ~PitchArrayCell.column_indices
+      ~PitchArrayCell.column_start_index
+      ~PitchArrayCell.column_stop_index
+      ~PitchArrayCell.indices
+      ~PitchArrayCell.is_first_in_row
+      ~PitchArrayCell.is_last_in_row
+      ~PitchArrayCell.item
+      ~PitchArrayCell.matches_cell
+      ~PitchArrayCell.next
+      ~PitchArrayCell.parent_array
+      ~PitchArrayCell.parent_column
+      ~PitchArrayCell.parent_row
+      ~PitchArrayCell.pitches
+      ~PitchArrayCell.previous
+      ~PitchArrayCell.row_index
+      ~PitchArrayCell.weight
+      ~PitchArrayCell.width
+      ~PitchArrayCell.__format__
+      ~PitchArrayCell.__repr__
+      ~PitchArrayCell.__str__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.PitchArrayCell.PitchArrayCell.column_indices
+.. autoattribute:: PitchArrayCell.column_indices
 
-.. autoattribute:: baca.tools.PitchArrayCell.PitchArrayCell.column_start_index
+.. autoattribute:: PitchArrayCell.column_start_index
 
-.. autoattribute:: baca.tools.PitchArrayCell.PitchArrayCell.column_stop_index
+.. autoattribute:: PitchArrayCell.column_stop_index
 
-.. autoattribute:: baca.tools.PitchArrayCell.PitchArrayCell.indices
+.. autoattribute:: PitchArrayCell.indices
 
-.. autoattribute:: baca.tools.PitchArrayCell.PitchArrayCell.is_first_in_row
+.. autoattribute:: PitchArrayCell.is_first_in_row
 
-.. autoattribute:: baca.tools.PitchArrayCell.PitchArrayCell.is_last_in_row
+.. autoattribute:: PitchArrayCell.is_last_in_row
 
-.. autoattribute:: baca.tools.PitchArrayCell.PitchArrayCell.item
+.. autoattribute:: PitchArrayCell.item
 
-.. autoattribute:: baca.tools.PitchArrayCell.PitchArrayCell.next
+.. autoattribute:: PitchArrayCell.next
 
-.. autoattribute:: baca.tools.PitchArrayCell.PitchArrayCell.parent_array
+.. autoattribute:: PitchArrayCell.parent_array
 
-.. autoattribute:: baca.tools.PitchArrayCell.PitchArrayCell.parent_column
+.. autoattribute:: PitchArrayCell.parent_column
 
-.. autoattribute:: baca.tools.PitchArrayCell.PitchArrayCell.parent_row
+.. autoattribute:: PitchArrayCell.parent_row
 
-.. autoattribute:: baca.tools.PitchArrayCell.PitchArrayCell.previous
+.. autoattribute:: PitchArrayCell.previous
 
-.. autoattribute:: baca.tools.PitchArrayCell.PitchArrayCell.row_index
+.. autoattribute:: PitchArrayCell.row_index
 
-.. autoattribute:: baca.tools.PitchArrayCell.PitchArrayCell.weight
+.. autoattribute:: PitchArrayCell.weight
 
-.. autoattribute:: baca.tools.PitchArrayCell.PitchArrayCell.width
+.. autoattribute:: PitchArrayCell.width
 
 Read/write properties
 ---------------------
 
-.. autoattribute:: baca.tools.PitchArrayCell.PitchArrayCell.pitches
+.. autoattribute:: PitchArrayCell.pitches
 
 Methods
 -------
 
-.. automethod:: baca.tools.PitchArrayCell.PitchArrayCell.append_pitch
+.. automethod:: PitchArrayCell.append_pitch
 
-.. automethod:: baca.tools.PitchArrayCell.PitchArrayCell.matches_cell
+.. automethod:: PitchArrayCell.matches_cell
 
 Special methods
 ---------------
@@ -97,24 +93,12 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArrayCell.PitchArrayCell.__eq__
+      .. automethod:: PitchArrayCell.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArrayCell.PitchArrayCell.__format__
+      .. automethod:: PitchArrayCell.__repr__
 
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.PitchArrayCell.PitchArrayCell.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.PitchArrayCell.PitchArrayCell.__repr__
-
-.. automethod:: baca.tools.PitchArrayCell.PitchArrayCell.__str__
+.. automethod:: PitchArrayCell.__str__

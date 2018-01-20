@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.RegistrationComponent
 
 RegistrationComponent
 =====================
@@ -8,11 +8,9 @@ RegistrationComponent
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadValueObject`
+- :py:class:`abjad.tools.abctools.AbjadValueObject.AbjadValueObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,20 +21,20 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.RegistrationComponent.RegistrationComponent.source_pitch_range
-      ~baca.tools.RegistrationComponent.RegistrationComponent.target_octave_start_pitch
-      ~baca.tools.RegistrationComponent.RegistrationComponent.__copy__
-      ~baca.tools.RegistrationComponent.RegistrationComponent.__eq__
-      ~baca.tools.RegistrationComponent.RegistrationComponent.__format__
-      ~baca.tools.RegistrationComponent.RegistrationComponent.__hash__
-      ~baca.tools.RegistrationComponent.RegistrationComponent.__repr__
+      ~RegistrationComponent.source_pitch_range
+      ~RegistrationComponent.target_octave_start_pitch
+      ~RegistrationComponent.__copy__
+      ~RegistrationComponent.__eq__
+      ~RegistrationComponent.__format__
+      ~RegistrationComponent.__hash__
+      ~RegistrationComponent.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.RegistrationComponent.RegistrationComponent.source_pitch_range
+.. autoattribute:: RegistrationComponent.source_pitch_range
 
-.. autoattribute:: baca.tools.RegistrationComponent.RegistrationComponent.target_octave_start_pitch
+.. autoattribute:: RegistrationComponent.target_octave_start_pitch
 
 Special methods
 ---------------
@@ -45,16 +43,16 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationComponent.RegistrationComponent.__copy__
+      .. automethod:: RegistrationComponent.__copy__
 
-.. automethod:: baca.tools.RegistrationComponent.RegistrationComponent.__eq__
+.. automethod:: RegistrationComponent.__eq__
 
-.. automethod:: baca.tools.RegistrationComponent.RegistrationComponent.__format__
+.. automethod:: RegistrationComponent.__format__
 
-.. automethod:: baca.tools.RegistrationComponent.RegistrationComponent.__hash__
+.. automethod:: RegistrationComponent.__hash__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationComponent.RegistrationComponent.__repr__
+      .. automethod:: RegistrationComponent.__repr__

@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.RangeDictionary
 
 RangeDictionary
 ===============
@@ -8,13 +8,23 @@ RangeDictionary
 Bases
 -----
 
-- :py:class:`abjad.tools.datastructuretools.TypedOrderedDict`
+- :py:class:`abjad.tools.datastructuretools.TypedOrderedDict.TypedOrderedDict`
 
-- :py:class:`abjad.tools.datastructuretools.TypedCollection`
+- :py:class:`abjad.tools.datastructuretools.TypedCollection.TypedCollection`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`collections.abc.MutableMapping`
+
+- :py:class:`collections.abc.Mapping`
+
+- :py:class:`collections.abc.Collection`
+
+- :py:class:`collections.abc.Sized`
+
+- :py:class:`collections.abc.Iterable`
+
+- :py:class:`collections.abc.Container`
 
 - :py:class:`builtins.object`
 
@@ -25,35 +35,35 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.RangeDictionary.RangeDictionary.clear
-      ~baca.tools.RangeDictionary.RangeDictionary.copy
-      ~baca.tools.RangeDictionary.RangeDictionary.get
-      ~baca.tools.RangeDictionary.RangeDictionary.has_key
-      ~baca.tools.RangeDictionary.RangeDictionary.item_class
-      ~baca.tools.RangeDictionary.RangeDictionary.items
-      ~baca.tools.RangeDictionary.RangeDictionary.keys
-      ~baca.tools.RangeDictionary.RangeDictionary.pop
-      ~baca.tools.RangeDictionary.RangeDictionary.popitem
-      ~baca.tools.RangeDictionary.RangeDictionary.setdefault
-      ~baca.tools.RangeDictionary.RangeDictionary.update
-      ~baca.tools.RangeDictionary.RangeDictionary.values
-      ~baca.tools.RangeDictionary.RangeDictionary.__cmp__
-      ~baca.tools.RangeDictionary.RangeDictionary.__contains__
-      ~baca.tools.RangeDictionary.RangeDictionary.__delitem__
-      ~baca.tools.RangeDictionary.RangeDictionary.__eq__
-      ~baca.tools.RangeDictionary.RangeDictionary.__format__
-      ~baca.tools.RangeDictionary.RangeDictionary.__ge__
-      ~baca.tools.RangeDictionary.RangeDictionary.__getitem__
-      ~baca.tools.RangeDictionary.RangeDictionary.__gt__
-      ~baca.tools.RangeDictionary.RangeDictionary.__hash__
-      ~baca.tools.RangeDictionary.RangeDictionary.__illustrate__
-      ~baca.tools.RangeDictionary.RangeDictionary.__iter__
-      ~baca.tools.RangeDictionary.RangeDictionary.__le__
-      ~baca.tools.RangeDictionary.RangeDictionary.__len__
-      ~baca.tools.RangeDictionary.RangeDictionary.__lt__
-      ~baca.tools.RangeDictionary.RangeDictionary.__repr__
-      ~baca.tools.RangeDictionary.RangeDictionary.__reversed__
-      ~baca.tools.RangeDictionary.RangeDictionary.__setitem__
+      ~RangeDictionary.clear
+      ~RangeDictionary.copy
+      ~RangeDictionary.get
+      ~RangeDictionary.has_key
+      ~RangeDictionary.item_class
+      ~RangeDictionary.items
+      ~RangeDictionary.keys
+      ~RangeDictionary.pop
+      ~RangeDictionary.popitem
+      ~RangeDictionary.setdefault
+      ~RangeDictionary.update
+      ~RangeDictionary.values
+      ~RangeDictionary.__cmp__
+      ~RangeDictionary.__contains__
+      ~RangeDictionary.__delitem__
+      ~RangeDictionary.__eq__
+      ~RangeDictionary.__format__
+      ~RangeDictionary.__ge__
+      ~RangeDictionary.__getitem__
+      ~RangeDictionary.__gt__
+      ~RangeDictionary.__hash__
+      ~RangeDictionary.__illustrate__
+      ~RangeDictionary.__iter__
+      ~RangeDictionary.__le__
+      ~RangeDictionary.__len__
+      ~RangeDictionary.__lt__
+      ~RangeDictionary.__repr__
+      ~RangeDictionary.__reversed__
+      ~RangeDictionary.__setitem__
 
 Read-only properties
 --------------------
@@ -62,7 +72,7 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RangeDictionary.RangeDictionary.item_class
+      .. autoattribute:: RangeDictionary.item_class
 
 Methods
 -------
@@ -71,67 +81,67 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.clear
+      .. automethod:: RangeDictionary.clear
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.copy
+      .. automethod:: RangeDictionary.copy
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.get
+      .. automethod:: RangeDictionary.get
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.has_key
+      .. automethod:: RangeDictionary.has_key
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.items
+      .. automethod:: RangeDictionary.items
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.keys
+      .. automethod:: RangeDictionary.keys
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.pop
+      .. automethod:: RangeDictionary.pop
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.popitem
+      .. automethod:: RangeDictionary.popitem
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.setdefault
+      .. automethod:: RangeDictionary.setdefault
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.update
+      .. automethod:: RangeDictionary.update
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.values
+      .. automethod:: RangeDictionary.values
 
 Special methods
 ---------------
@@ -140,96 +150,96 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.__cmp__
+      .. automethod:: RangeDictionary.__cmp__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.__contains__
+      .. automethod:: RangeDictionary.__contains__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.__delitem__
+      .. automethod:: RangeDictionary.__delitem__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.__eq__
+      .. automethod:: RangeDictionary.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.__format__
+      .. automethod:: RangeDictionary.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.__ge__
+      .. automethod:: RangeDictionary.__ge__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.__getitem__
+      .. automethod:: RangeDictionary.__getitem__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.__gt__
+      .. automethod:: RangeDictionary.__gt__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.__hash__
+      .. automethod:: RangeDictionary.__hash__
 
-.. automethod:: baca.tools.RangeDictionary.RangeDictionary.__illustrate__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.__iter__
+.. automethod:: RangeDictionary.__illustrate__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.__le__
+      .. automethod:: RangeDictionary.__iter__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.__len__
+      .. automethod:: RangeDictionary.__le__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.__lt__
+      .. automethod:: RangeDictionary.__len__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.__repr__
+      .. automethod:: RangeDictionary.__lt__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.__reversed__
+      .. automethod:: RangeDictionary.__repr__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RangeDictionary.RangeDictionary.__setitem__
+      .. automethod:: RangeDictionary.__reversed__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: RangeDictionary.__setitem__

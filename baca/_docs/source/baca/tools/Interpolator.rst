@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.Interpolator
 
 Interpolator
 ============
@@ -8,9 +8,7 @@ Interpolator
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,16 +19,14 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.Interpolator.Interpolator.interpolate_linear
-      ~baca.tools.Interpolator.Interpolator.__eq__
-      ~baca.tools.Interpolator.Interpolator.__format__
-      ~baca.tools.Interpolator.Interpolator.__hash__
-      ~baca.tools.Interpolator.Interpolator.__repr__
+      ~Interpolator.interpolate_linear
+      ~Interpolator.__format__
+      ~Interpolator.__repr__
 
 Class & static methods
 ----------------------
 
-.. automethod:: baca.tools.Interpolator.Interpolator.interpolate_linear
+.. automethod:: Interpolator.interpolate_linear
 
 Special methods
 ---------------
@@ -39,22 +35,10 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Interpolator.Interpolator.__eq__
+      .. automethod:: Interpolator.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Interpolator.Interpolator.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Interpolator.Interpolator.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Interpolator.Interpolator.__repr__
+      .. automethod:: Interpolator.__repr__

@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.Coat
 
 Coat
 ====
@@ -8,9 +8,7 @@ Coat
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,16 +19,14 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.Coat.Coat.argument
-      ~baca.tools.Coat.Coat.__eq__
-      ~baca.tools.Coat.Coat.__format__
-      ~baca.tools.Coat.Coat.__hash__
-      ~baca.tools.Coat.Coat.__repr__
+      ~Coat.argument
+      ~Coat.__format__
+      ~Coat.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.Coat.Coat.argument
+.. autoattribute:: Coat.argument
 
 Special methods
 ---------------
@@ -39,22 +35,10 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Coat.Coat.__eq__
+      .. automethod:: Coat.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Coat.Coat.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Coat.Coat.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Coat.Coat.__repr__
+      .. automethod:: Coat.__repr__

@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.Expression
 
 Expression
 ==========
@@ -8,13 +8,11 @@ Expression
 Bases
 -----
 
-- :py:class:`abjad.tools.datastructuretools.Expression`
+- :py:class:`abjad.tools.datastructuretools.Expression.Expression`
 
-- :py:class:`abjad.tools.abctools.AbjadValueObject`
+- :py:class:`abjad.tools.abctools.AbjadValueObject.AbjadValueObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -25,56 +23,56 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.Expression.Expression.append_callback
-      ~baca.tools.Expression.Expression.argument_count
-      ~baca.tools.Expression.Expression.argument_values
-      ~baca.tools.Expression.Expression.callbacks
-      ~baca.tools.Expression.Expression.color
-      ~baca.tools.Expression.Expression.establish_equivalence
-      ~baca.tools.Expression.Expression.evaluation_template
-      ~baca.tools.Expression.Expression.force_return
-      ~baca.tools.Expression.Expression.get_markup
-      ~baca.tools.Expression.Expression.get_string
-      ~baca.tools.Expression.Expression.has_parentheses
-      ~baca.tools.Expression.Expression.is_composite
-      ~baca.tools.Expression.Expression.is_initializer
-      ~baca.tools.Expression.Expression.is_postfix
-      ~baca.tools.Expression.Expression.keywords
-      ~baca.tools.Expression.Expression.label
-      ~baca.tools.Expression.Expression.lone
-      ~baca.tools.Expression.Expression.make_callback
-      ~baca.tools.Expression.Expression.map_operand
-      ~baca.tools.Expression.Expression.markup_maker_callback
-      ~baca.tools.Expression.Expression.module_names
-      ~baca.tools.Expression.Expression.name
-      ~baca.tools.Expression.Expression.next_name
-      ~baca.tools.Expression.Expression.pitch_class_segment
-      ~baca.tools.Expression.Expression.pitch_class_segments
-      ~baca.tools.Expression.Expression.pitch_set
-      ~baca.tools.Expression.Expression.precedence
-      ~baca.tools.Expression.Expression.print
-      ~baca.tools.Expression.Expression.proxy_class
-      ~baca.tools.Expression.Expression.qualified_method_name
-      ~baca.tools.Expression.Expression.select
-      ~baca.tools.Expression.Expression.sequence
-      ~baca.tools.Expression.Expression.string_template
-      ~baca.tools.Expression.Expression.subclass_hook
-      ~baca.tools.Expression.Expression.subexpressions
-      ~baca.tools.Expression.Expression.template
-      ~baca.tools.Expression.Expression.wrap_in_list
-      ~baca.tools.Expression.Expression.__add__
-      ~baca.tools.Expression.Expression.__call__
-      ~baca.tools.Expression.Expression.__copy__
-      ~baca.tools.Expression.Expression.__eq__
-      ~baca.tools.Expression.Expression.__format__
-      ~baca.tools.Expression.Expression.__getattr__
-      ~baca.tools.Expression.Expression.__getitem__
-      ~baca.tools.Expression.Expression.__hash__
-      ~baca.tools.Expression.Expression.__iadd__
-      ~baca.tools.Expression.Expression.__radd__
-      ~baca.tools.Expression.Expression.__repr__
-      ~baca.tools.Expression.Expression.__setitem__
-      ~baca.tools.Expression.Expression.__str__
+      ~Expression.append_callback
+      ~Expression.argument_count
+      ~Expression.argument_values
+      ~Expression.callbacks
+      ~Expression.color
+      ~Expression.establish_equivalence
+      ~Expression.evaluation_template
+      ~Expression.force_return
+      ~Expression.get_markup
+      ~Expression.get_string
+      ~Expression.has_parentheses
+      ~Expression.is_composite
+      ~Expression.is_initializer
+      ~Expression.is_postfix
+      ~Expression.keywords
+      ~Expression.label
+      ~Expression.lone
+      ~Expression.make_callback
+      ~Expression.map_operand
+      ~Expression.markup_maker_callback
+      ~Expression.module_names
+      ~Expression.name
+      ~Expression.next_name
+      ~Expression.pitch_class_segment
+      ~Expression.pitch_class_segments
+      ~Expression.pitch_set
+      ~Expression.precedence
+      ~Expression.print
+      ~Expression.proxy_class
+      ~Expression.qualified_method_name
+      ~Expression.select
+      ~Expression.sequence
+      ~Expression.string_template
+      ~Expression.subclass_hook
+      ~Expression.subexpressions
+      ~Expression.template
+      ~Expression.wrap_in_list
+      ~Expression.__add__
+      ~Expression.__call__
+      ~Expression.__copy__
+      ~Expression.__eq__
+      ~Expression.__format__
+      ~Expression.__getattr__
+      ~Expression.__getitem__
+      ~Expression.__hash__
+      ~Expression.__iadd__
+      ~Expression.__radd__
+      ~Expression.__repr__
+      ~Expression.__setitem__
+      ~Expression.__str__
 
 Read-only properties
 --------------------
@@ -83,139 +81,139 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Expression.Expression.argument_count
+      .. autoattribute:: Expression.argument_count
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Expression.Expression.argument_values
+      .. autoattribute:: Expression.argument_values
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Expression.Expression.callbacks
+      .. autoattribute:: Expression.callbacks
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Expression.Expression.evaluation_template
+      .. autoattribute:: Expression.evaluation_template
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Expression.Expression.force_return
+      .. autoattribute:: Expression.force_return
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Expression.Expression.has_parentheses
+      .. autoattribute:: Expression.has_parentheses
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Expression.Expression.is_composite
+      .. autoattribute:: Expression.is_composite
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Expression.Expression.is_initializer
+      .. autoattribute:: Expression.is_initializer
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Expression.Expression.is_postfix
+      .. autoattribute:: Expression.is_postfix
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Expression.Expression.keywords
+      .. autoattribute:: Expression.keywords
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Expression.Expression.lone
+      .. autoattribute:: Expression.lone
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Expression.Expression.map_operand
+      .. autoattribute:: Expression.map_operand
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Expression.Expression.markup_maker_callback
+      .. autoattribute:: Expression.markup_maker_callback
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Expression.Expression.module_names
+      .. autoattribute:: Expression.module_names
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Expression.Expression.name
+      .. autoattribute:: Expression.name
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Expression.Expression.next_name
+      .. autoattribute:: Expression.next_name
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Expression.Expression.precedence
+      .. autoattribute:: Expression.precedence
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Expression.Expression.proxy_class
+      .. autoattribute:: Expression.proxy_class
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Expression.Expression.qualified_method_name
+      .. autoattribute:: Expression.qualified_method_name
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Expression.Expression.string_template
+      .. autoattribute:: Expression.string_template
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Expression.Expression.subclass_hook
+      .. autoattribute:: Expression.subclass_hook
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Expression.Expression.subexpressions
+      .. autoattribute:: Expression.subexpressions
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Expression.Expression.template
+      .. autoattribute:: Expression.template
 
 Methods
 -------
@@ -224,67 +222,67 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Expression.Expression.append_callback
+      .. automethod:: Expression.append_callback
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Expression.Expression.color
+      .. automethod:: Expression.color
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Expression.Expression.establish_equivalence
+      .. automethod:: Expression.establish_equivalence
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Expression.Expression.get_markup
+      .. automethod:: Expression.get_markup
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Expression.Expression.get_string
+      .. automethod:: Expression.get_string
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Expression.Expression.label
+      .. automethod:: Expression.label
 
-.. automethod:: baca.tools.Expression.Expression.pitch_class_segment
+.. automethod:: Expression.pitch_class_segment
 
-.. automethod:: baca.tools.Expression.Expression.pitch_class_segments
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Expression.Expression.pitch_set
+.. automethod:: Expression.pitch_class_segments
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Expression.Expression.print
-
-.. automethod:: baca.tools.Expression.Expression.select
+      .. automethod:: Expression.pitch_set
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Expression.Expression.sequence
+      .. automethod:: Expression.print
+
+.. automethod:: Expression.select
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Expression.Expression.wrap_in_list
+      .. automethod:: Expression.sequence
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: Expression.wrap_in_list
 
 Class & static methods
 ----------------------
@@ -293,7 +291,7 @@ Class & static methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Expression.Expression.make_callback
+      .. automethod:: Expression.make_callback
 
 Special methods
 ---------------
@@ -302,76 +300,76 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Expression.Expression.__add__
+      .. automethod:: Expression.__add__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Expression.Expression.__call__
+      .. automethod:: Expression.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Expression.Expression.__copy__
+      .. automethod:: Expression.__copy__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Expression.Expression.__eq__
+      .. automethod:: Expression.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Expression.Expression.__format__
+      .. automethod:: Expression.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Expression.Expression.__getattr__
+      .. automethod:: Expression.__getattr__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Expression.Expression.__getitem__
+      .. automethod:: Expression.__getitem__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Expression.Expression.__hash__
+      .. automethod:: Expression.__hash__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Expression.Expression.__iadd__
+      .. automethod:: Expression.__iadd__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Expression.Expression.__radd__
+      .. automethod:: Expression.__radd__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Expression.Expression.__repr__
+      .. automethod:: Expression.__repr__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Expression.Expression.__setitem__
+      .. automethod:: Expression.__setitem__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Expression.Expression.__str__
+      .. automethod:: Expression.__str__

@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.Matrix
 
 Matrix
 ======
@@ -8,9 +8,7 @@ Matrix
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,20 +19,18 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.Matrix.Matrix.columns
-      ~baca.tools.Matrix.Matrix.rows
-      ~baca.tools.Matrix.Matrix.__eq__
-      ~baca.tools.Matrix.Matrix.__format__
-      ~baca.tools.Matrix.Matrix.__getitem__
-      ~baca.tools.Matrix.Matrix.__hash__
-      ~baca.tools.Matrix.Matrix.__repr__
+      ~Matrix.columns
+      ~Matrix.rows
+      ~Matrix.__format__
+      ~Matrix.__getitem__
+      ~Matrix.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.Matrix.Matrix.columns
+.. autoattribute:: Matrix.columns
 
-.. autoattribute:: baca.tools.Matrix.Matrix.rows
+.. autoattribute:: Matrix.rows
 
 Special methods
 ---------------
@@ -43,20 +39,8 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Matrix.Matrix.__eq__
+      .. automethod:: Matrix.__format__
 
-.. only:: html
+.. automethod:: Matrix.__getitem__
 
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Matrix.Matrix.__format__
-
-.. automethod:: baca.tools.Matrix.Matrix.__getitem__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Matrix.Matrix.__hash__
-
-.. automethod:: baca.tools.Matrix.Matrix.__repr__
+.. automethod:: Matrix.__repr__

@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.StringTrioScoreTemplate
 
 StringTrioScoreTemplate
 =======================
@@ -8,15 +8,13 @@ StringTrioScoreTemplate
 Bases
 -----
 
-- :py:class:`baca.tools.ScoreTemplate`
+- :py:class:`baca.tools.ScoreTemplate.ScoreTemplate`
 
-- :py:class:`abjad.tools.segmenttools.ScoreTemplate`
+- :py:class:`abjad.tools.segmenttools.ScoreTemplate.ScoreTemplate`
 
-- :py:class:`abjad.tools.abctools.AbjadValueObject`
+- :py:class:`abjad.tools.abctools.AbjadValueObject.AbjadValueObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -27,21 +25,21 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.attach_defaults
-      ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.defaults
-      ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.group_families
-      ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.make_music_context
-      ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.make_piano_staff
-      ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.make_square_staff_group
-      ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.make_staff_group
-      ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.parts
-      ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__call__
-      ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__copy__
-      ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__eq__
-      ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__format__
-      ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__hash__
-      ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__illustrate__
-      ~baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__repr__
+      ~StringTrioScoreTemplate.attach_defaults
+      ~StringTrioScoreTemplate.defaults
+      ~StringTrioScoreTemplate.group_families
+      ~StringTrioScoreTemplate.make_music_context
+      ~StringTrioScoreTemplate.make_piano_staff
+      ~StringTrioScoreTemplate.make_square_staff_group
+      ~StringTrioScoreTemplate.make_staff_group
+      ~StringTrioScoreTemplate.parts
+      ~StringTrioScoreTemplate.__call__
+      ~StringTrioScoreTemplate.__copy__
+      ~StringTrioScoreTemplate.__eq__
+      ~StringTrioScoreTemplate.__format__
+      ~StringTrioScoreTemplate.__hash__
+      ~StringTrioScoreTemplate.__illustrate__
+      ~StringTrioScoreTemplate.__repr__
 
 Read-only properties
 --------------------
@@ -50,13 +48,13 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.defaults
+      .. autoattribute:: StringTrioScoreTemplate.defaults
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.parts
+      .. autoattribute:: StringTrioScoreTemplate.parts
 
 Methods
 -------
@@ -65,75 +63,75 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.attach_defaults
+      .. automethod:: StringTrioScoreTemplate.attach_defaults
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.group_families
+      .. automethod:: StringTrioScoreTemplate.group_families
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.make_music_context
+      .. automethod:: StringTrioScoreTemplate.make_music_context
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.make_piano_staff
+      .. automethod:: StringTrioScoreTemplate.make_piano_staff
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.make_square_staff_group
+      .. automethod:: StringTrioScoreTemplate.make_square_staff_group
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.make_staff_group
+      .. automethod:: StringTrioScoreTemplate.make_staff_group
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__call__
+.. automethod:: StringTrioScoreTemplate.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__copy__
+      .. automethod:: StringTrioScoreTemplate.__copy__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__eq__
+      .. automethod:: StringTrioScoreTemplate.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__format__
+      .. automethod:: StringTrioScoreTemplate.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__hash__
+      .. automethod:: StringTrioScoreTemplate.__hash__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__illustrate__
+      .. automethod:: StringTrioScoreTemplate.__illustrate__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.StringTrioScoreTemplate.StringTrioScoreTemplate.__repr__
+      .. automethod:: StringTrioScoreTemplate.__repr__

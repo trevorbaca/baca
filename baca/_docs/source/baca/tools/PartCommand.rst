@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.PartCommand
 
 PartCommand
 ===========
@@ -8,11 +8,9 @@ PartCommand
 Bases
 -----
 
-- :py:class:`baca.tools.Command`
+- :py:class:`baca.tools.Command.Command`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,20 +21,18 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.PartCommand.PartCommand.deactivate
-      ~baca.tools.PartCommand.PartCommand.get_tag
-      ~baca.tools.PartCommand.PartCommand.manifests
-      ~baca.tools.PartCommand.PartCommand.offset_to_measure_number
-      ~baca.tools.PartCommand.PartCommand.part
-      ~baca.tools.PartCommand.PartCommand.selector
-      ~baca.tools.PartCommand.PartCommand.tag
-      ~baca.tools.PartCommand.PartCommand.tag_measure_number
-      ~baca.tools.PartCommand.PartCommand.tags
-      ~baca.tools.PartCommand.PartCommand.__call__
-      ~baca.tools.PartCommand.PartCommand.__eq__
-      ~baca.tools.PartCommand.PartCommand.__format__
-      ~baca.tools.PartCommand.PartCommand.__hash__
-      ~baca.tools.PartCommand.PartCommand.__repr__
+      ~PartCommand.deactivate
+      ~PartCommand.get_tag
+      ~PartCommand.manifests
+      ~PartCommand.offset_to_measure_number
+      ~PartCommand.part
+      ~PartCommand.selector
+      ~PartCommand.tag
+      ~PartCommand.tag_measure_number
+      ~PartCommand.tags
+      ~PartCommand.__call__
+      ~PartCommand.__format__
+      ~PartCommand.__repr__
 
 Read-only properties
 --------------------
@@ -45,27 +41,27 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PartCommand.PartCommand.deactivate
+      .. autoattribute:: PartCommand.deactivate
 
-.. autoattribute:: baca.tools.PartCommand.PartCommand.part
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.PartCommand.PartCommand.selector
+.. autoattribute:: PartCommand.part
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PartCommand.PartCommand.tag
+      .. autoattribute:: PartCommand.selector
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PartCommand.PartCommand.tags
+      .. autoattribute:: PartCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: PartCommand.tags
 
 Read/write properties
 ---------------------
@@ -74,19 +70,19 @@ Read/write properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PartCommand.PartCommand.manifests
+      .. autoattribute:: PartCommand.manifests
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PartCommand.PartCommand.offset_to_measure_number
+      .. autoattribute:: PartCommand.offset_to_measure_number
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PartCommand.PartCommand.tag_measure_number
+      .. autoattribute:: PartCommand.tag_measure_number
 
 Methods
 -------
@@ -95,33 +91,21 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PartCommand.PartCommand.get_tag
+      .. automethod:: PartCommand.get_tag
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.PartCommand.PartCommand.__call__
+.. automethod:: PartCommand.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PartCommand.PartCommand.__eq__
+      .. automethod:: PartCommand.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PartCommand.PartCommand.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.PartCommand.PartCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.PartCommand.PartCommand.__repr__
+      .. automethod:: PartCommand.__repr__

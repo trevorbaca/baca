@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.Cursor
 
 Cursor
 ======
@@ -8,9 +8,7 @@ Cursor
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,71 +19,71 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.Cursor.Cursor.cyclic
-      ~baca.tools.Cursor.Cursor.from_pitch_class_segments
-      ~baca.tools.Cursor.Cursor.is_exhausted
-      ~baca.tools.Cursor.Cursor.next
-      ~baca.tools.Cursor.Cursor.position
-      ~baca.tools.Cursor.Cursor.reset
-      ~baca.tools.Cursor.Cursor.singletons
-      ~baca.tools.Cursor.Cursor.source
-      ~baca.tools.Cursor.Cursor.suppress_exception
-      ~baca.tools.Cursor.Cursor.__eq__
-      ~baca.tools.Cursor.Cursor.__format__
-      ~baca.tools.Cursor.Cursor.__getitem__
-      ~baca.tools.Cursor.Cursor.__hash__
-      ~baca.tools.Cursor.Cursor.__iter__
-      ~baca.tools.Cursor.Cursor.__len__
-      ~baca.tools.Cursor.Cursor.__repr__
+      ~Cursor.cyclic
+      ~Cursor.from_pitch_class_segments
+      ~Cursor.is_exhausted
+      ~Cursor.next
+      ~Cursor.position
+      ~Cursor.reset
+      ~Cursor.singletons
+      ~Cursor.source
+      ~Cursor.suppress_exception
+      ~Cursor.__eq__
+      ~Cursor.__format__
+      ~Cursor.__getitem__
+      ~Cursor.__hash__
+      ~Cursor.__iter__
+      ~Cursor.__len__
+      ~Cursor.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.Cursor.Cursor.cyclic
+.. autoattribute:: Cursor.cyclic
 
-.. autoattribute:: baca.tools.Cursor.Cursor.is_exhausted
+.. autoattribute:: Cursor.is_exhausted
 
-.. autoattribute:: baca.tools.Cursor.Cursor.position
+.. autoattribute:: Cursor.position
 
-.. autoattribute:: baca.tools.Cursor.Cursor.singletons
+.. autoattribute:: Cursor.singletons
 
-.. autoattribute:: baca.tools.Cursor.Cursor.source
+.. autoattribute:: Cursor.source
 
-.. autoattribute:: baca.tools.Cursor.Cursor.suppress_exception
+.. autoattribute:: Cursor.suppress_exception
 
 Methods
 -------
 
-.. automethod:: baca.tools.Cursor.Cursor.next
+.. automethod:: Cursor.next
 
-.. automethod:: baca.tools.Cursor.Cursor.reset
+.. automethod:: Cursor.reset
 
 Class & static methods
 ----------------------
 
-.. automethod:: baca.tools.Cursor.Cursor.from_pitch_class_segments
+.. automethod:: Cursor.from_pitch_class_segments
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.Cursor.Cursor.__eq__
+.. automethod:: Cursor.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Cursor.Cursor.__format__
+      .. automethod:: Cursor.__format__
 
-.. automethod:: baca.tools.Cursor.Cursor.__getitem__
+.. automethod:: Cursor.__getitem__
 
-.. automethod:: baca.tools.Cursor.Cursor.__hash__
+.. automethod:: Cursor.__hash__
 
-.. automethod:: baca.tools.Cursor.Cursor.__iter__
+.. automethod:: Cursor.__iter__
 
-.. automethod:: baca.tools.Cursor.Cursor.__len__
+.. automethod:: Cursor.__len__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Cursor.Cursor.__repr__
+      .. automethod:: Cursor.__repr__

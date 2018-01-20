@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.IndicatorCommand
 
 IndicatorCommand
 ================
@@ -8,11 +8,9 @@ IndicatorCommand
 Bases
 -----
 
-- :py:class:`baca.tools.Command`
+- :py:class:`baca.tools.Command.Command`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,52 +21,50 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.IndicatorCommand.IndicatorCommand.context
-      ~baca.tools.IndicatorCommand.IndicatorCommand.deactivate
-      ~baca.tools.IndicatorCommand.IndicatorCommand.get_tag
-      ~baca.tools.IndicatorCommand.IndicatorCommand.indicators
-      ~baca.tools.IndicatorCommand.IndicatorCommand.manifests
-      ~baca.tools.IndicatorCommand.IndicatorCommand.offset_to_measure_number
-      ~baca.tools.IndicatorCommand.IndicatorCommand.selector
-      ~baca.tools.IndicatorCommand.IndicatorCommand.tag
-      ~baca.tools.IndicatorCommand.IndicatorCommand.tag_measure_number
-      ~baca.tools.IndicatorCommand.IndicatorCommand.tags
-      ~baca.tools.IndicatorCommand.IndicatorCommand.__call__
-      ~baca.tools.IndicatorCommand.IndicatorCommand.__eq__
-      ~baca.tools.IndicatorCommand.IndicatorCommand.__format__
-      ~baca.tools.IndicatorCommand.IndicatorCommand.__hash__
-      ~baca.tools.IndicatorCommand.IndicatorCommand.__repr__
+      ~IndicatorCommand.context
+      ~IndicatorCommand.deactivate
+      ~IndicatorCommand.get_tag
+      ~IndicatorCommand.indicators
+      ~IndicatorCommand.manifests
+      ~IndicatorCommand.offset_to_measure_number
+      ~IndicatorCommand.selector
+      ~IndicatorCommand.tag
+      ~IndicatorCommand.tag_measure_number
+      ~IndicatorCommand.tags
+      ~IndicatorCommand.__call__
+      ~IndicatorCommand.__format__
+      ~IndicatorCommand.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.context
+.. autoattribute:: IndicatorCommand.context
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.deactivate
+      .. autoattribute:: IndicatorCommand.deactivate
 
-.. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.indicators
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.selector
+.. autoattribute:: IndicatorCommand.indicators
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.tag
+      .. autoattribute:: IndicatorCommand.selector
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.tags
+      .. autoattribute:: IndicatorCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: IndicatorCommand.tags
 
 Read/write properties
 ---------------------
@@ -77,19 +73,19 @@ Read/write properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.manifests
+      .. autoattribute:: IndicatorCommand.manifests
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.offset_to_measure_number
+      .. autoattribute:: IndicatorCommand.offset_to_measure_number
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.IndicatorCommand.IndicatorCommand.tag_measure_number
+      .. autoattribute:: IndicatorCommand.tag_measure_number
 
 Methods
 -------
@@ -98,33 +94,21 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.IndicatorCommand.IndicatorCommand.get_tag
+      .. automethod:: IndicatorCommand.get_tag
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.IndicatorCommand.IndicatorCommand.__call__
+.. automethod:: IndicatorCommand.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.IndicatorCommand.IndicatorCommand.__eq__
+      .. automethod:: IndicatorCommand.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.IndicatorCommand.IndicatorCommand.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.IndicatorCommand.IndicatorCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.IndicatorCommand.IndicatorCommand.__repr__
+      .. automethod:: IndicatorCommand.__repr__

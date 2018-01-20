@@ -26,7 +26,7 @@ extensions = [
     'sphinx.ext.graphviz',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
-    #'sphinx.ext.viewcode',
+    'sphinx_autodoc_typehints',
     'abjad.docs.ext.abjadbook',
     ]
 
@@ -61,7 +61,7 @@ master_doc = 'index'
 
 project = u'Bača API'
 
-copyright = u'1997-2017, Trevor Bača'
+copyright = u'1997-2018, Trevor Bača'
 
 #version = '0.1'
 

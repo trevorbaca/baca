@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.StageMeasureMap
 
 StageMeasureMap
 ===============
@@ -8,9 +8,7 @@ StageMeasureMap
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,20 +19,18 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.StageMeasureMap.StageMeasureMap.items
-      ~baca.tools.StageMeasureMap.StageMeasureMap.stage_count
-      ~baca.tools.StageMeasureMap.StageMeasureMap.__eq__
-      ~baca.tools.StageMeasureMap.StageMeasureMap.__format__
-      ~baca.tools.StageMeasureMap.StageMeasureMap.__getitem__
-      ~baca.tools.StageMeasureMap.StageMeasureMap.__hash__
-      ~baca.tools.StageMeasureMap.StageMeasureMap.__repr__
+      ~StageMeasureMap.items
+      ~StageMeasureMap.stage_count
+      ~StageMeasureMap.__format__
+      ~StageMeasureMap.__getitem__
+      ~StageMeasureMap.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.StageMeasureMap.StageMeasureMap.items
+.. autoattribute:: StageMeasureMap.items
 
-.. autoattribute:: baca.tools.StageMeasureMap.StageMeasureMap.stage_count
+.. autoattribute:: StageMeasureMap.stage_count
 
 Special methods
 ---------------
@@ -43,24 +39,12 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.StageMeasureMap.StageMeasureMap.__eq__
+      .. automethod:: StageMeasureMap.__format__
+
+.. automethod:: StageMeasureMap.__getitem__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.StageMeasureMap.StageMeasureMap.__format__
-
-.. automethod:: baca.tools.StageMeasureMap.StageMeasureMap.__getitem__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.StageMeasureMap.StageMeasureMap.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.StageMeasureMap.StageMeasureMap.__repr__
+      .. automethod:: StageMeasureMap.__repr__

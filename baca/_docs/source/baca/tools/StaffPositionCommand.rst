@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.StaffPositionCommand
 
 StaffPositionCommand
 ====================
@@ -8,11 +8,9 @@ StaffPositionCommand
 Bases
 -----
 
-- :py:class:`baca.tools.Command`
+- :py:class:`baca.tools.Command.Command`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,21 +21,19 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.StaffPositionCommand.StaffPositionCommand.deactivate
-      ~baca.tools.StaffPositionCommand.StaffPositionCommand.get_tag
-      ~baca.tools.StaffPositionCommand.StaffPositionCommand.manifests
-      ~baca.tools.StaffPositionCommand.StaffPositionCommand.numbers
-      ~baca.tools.StaffPositionCommand.StaffPositionCommand.offset_to_measure_number
-      ~baca.tools.StaffPositionCommand.StaffPositionCommand.repeats
-      ~baca.tools.StaffPositionCommand.StaffPositionCommand.selector
-      ~baca.tools.StaffPositionCommand.StaffPositionCommand.tag
-      ~baca.tools.StaffPositionCommand.StaffPositionCommand.tag_measure_number
-      ~baca.tools.StaffPositionCommand.StaffPositionCommand.tags
-      ~baca.tools.StaffPositionCommand.StaffPositionCommand.__call__
-      ~baca.tools.StaffPositionCommand.StaffPositionCommand.__eq__
-      ~baca.tools.StaffPositionCommand.StaffPositionCommand.__format__
-      ~baca.tools.StaffPositionCommand.StaffPositionCommand.__hash__
-      ~baca.tools.StaffPositionCommand.StaffPositionCommand.__repr__
+      ~StaffPositionCommand.deactivate
+      ~StaffPositionCommand.get_tag
+      ~StaffPositionCommand.manifests
+      ~StaffPositionCommand.numbers
+      ~StaffPositionCommand.offset_to_measure_number
+      ~StaffPositionCommand.repeats
+      ~StaffPositionCommand.selector
+      ~StaffPositionCommand.tag
+      ~StaffPositionCommand.tag_measure_number
+      ~StaffPositionCommand.tags
+      ~StaffPositionCommand.__call__
+      ~StaffPositionCommand.__format__
+      ~StaffPositionCommand.__repr__
 
 Read-only properties
 --------------------
@@ -46,29 +42,29 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.StaffPositionCommand.StaffPositionCommand.deactivate
+      .. autoattribute:: StaffPositionCommand.deactivate
 
-.. autoattribute:: baca.tools.StaffPositionCommand.StaffPositionCommand.numbers
+.. autoattribute:: StaffPositionCommand.numbers
 
-.. autoattribute:: baca.tools.StaffPositionCommand.StaffPositionCommand.repeats
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.StaffPositionCommand.StaffPositionCommand.selector
+.. autoattribute:: StaffPositionCommand.repeats
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.StaffPositionCommand.StaffPositionCommand.tag
+      .. autoattribute:: StaffPositionCommand.selector
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.StaffPositionCommand.StaffPositionCommand.tags
+      .. autoattribute:: StaffPositionCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: StaffPositionCommand.tags
 
 Read/write properties
 ---------------------
@@ -77,19 +73,19 @@ Read/write properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.StaffPositionCommand.StaffPositionCommand.manifests
+      .. autoattribute:: StaffPositionCommand.manifests
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.StaffPositionCommand.StaffPositionCommand.offset_to_measure_number
+      .. autoattribute:: StaffPositionCommand.offset_to_measure_number
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.StaffPositionCommand.StaffPositionCommand.tag_measure_number
+      .. autoattribute:: StaffPositionCommand.tag_measure_number
 
 Methods
 -------
@@ -98,33 +94,21 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.StaffPositionCommand.StaffPositionCommand.get_tag
+      .. automethod:: StaffPositionCommand.get_tag
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.StaffPositionCommand.StaffPositionCommand.__call__
+.. automethod:: StaffPositionCommand.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.StaffPositionCommand.StaffPositionCommand.__eq__
+      .. automethod:: StaffPositionCommand.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.StaffPositionCommand.StaffPositionCommand.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.StaffPositionCommand.StaffPositionCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.StaffPositionCommand.StaffPositionCommand.__repr__
+      .. automethod:: StaffPositionCommand.__repr__

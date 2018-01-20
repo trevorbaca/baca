@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.Tree
 
 Tree
 ====
@@ -8,9 +8,7 @@ Tree
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,48 +19,48 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.Tree.Tree.get_payload
-      ~baca.tools.Tree.Tree.item_class
-      ~baca.tools.Tree.Tree.items
-      ~baca.tools.Tree.Tree.iterate
-      ~baca.tools.Tree.Tree.__contains__
-      ~baca.tools.Tree.Tree.__eq__
-      ~baca.tools.Tree.Tree.__format__
-      ~baca.tools.Tree.Tree.__getitem__
-      ~baca.tools.Tree.Tree.__graph__
-      ~baca.tools.Tree.Tree.__hash__
-      ~baca.tools.Tree.Tree.__len__
-      ~baca.tools.Tree.Tree.__repr__
+      ~Tree.get_payload
+      ~Tree.item_class
+      ~Tree.items
+      ~Tree.iterate
+      ~Tree.__contains__
+      ~Tree.__eq__
+      ~Tree.__format__
+      ~Tree.__getitem__
+      ~Tree.__graph__
+      ~Tree.__hash__
+      ~Tree.__len__
+      ~Tree.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.Tree.Tree.item_class
+.. autoattribute:: Tree.item_class
 
-.. autoattribute:: baca.tools.Tree.Tree.items
+.. autoattribute:: Tree.items
 
 Methods
 -------
 
-.. automethod:: baca.tools.Tree.Tree.get_payload
+.. automethod:: Tree.get_payload
 
-.. automethod:: baca.tools.Tree.Tree.iterate
+.. automethod:: Tree.iterate
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.Tree.Tree.__contains__
+.. automethod:: Tree.__contains__
 
-.. automethod:: baca.tools.Tree.Tree.__eq__
+.. automethod:: Tree.__eq__
 
-.. automethod:: baca.tools.Tree.Tree.__format__
+.. automethod:: Tree.__format__
 
-.. automethod:: baca.tools.Tree.Tree.__getitem__
+.. automethod:: Tree.__getitem__
 
-.. automethod:: baca.tools.Tree.Tree.__graph__
+.. automethod:: Tree.__graph__
 
-.. automethod:: baca.tools.Tree.Tree.__hash__
+.. automethod:: Tree.__hash__
 
-.. automethod:: baca.tools.Tree.Tree.__len__
+.. automethod:: Tree.__len__
 
-.. automethod:: baca.tools.Tree.Tree.__repr__
+.. automethod:: Tree.__repr__

@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.MicrotoneDeviationCommand
 
 MicrotoneDeviationCommand
 =========================
@@ -8,11 +8,9 @@ MicrotoneDeviationCommand
 Bases
 -----
 
-- :py:class:`baca.tools.Command`
+- :py:class:`baca.tools.Command.Command`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,20 +21,18 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.deactivate
-      ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.deviations
-      ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.get_tag
-      ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.manifests
-      ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.offset_to_measure_number
-      ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.selector
-      ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.tag
-      ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.tag_measure_number
-      ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.tags
-      ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.__call__
-      ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.__eq__
-      ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.__format__
-      ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.__hash__
-      ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.__repr__
+      ~MicrotoneDeviationCommand.deactivate
+      ~MicrotoneDeviationCommand.deviations
+      ~MicrotoneDeviationCommand.get_tag
+      ~MicrotoneDeviationCommand.manifests
+      ~MicrotoneDeviationCommand.offset_to_measure_number
+      ~MicrotoneDeviationCommand.selector
+      ~MicrotoneDeviationCommand.tag
+      ~MicrotoneDeviationCommand.tag_measure_number
+      ~MicrotoneDeviationCommand.tags
+      ~MicrotoneDeviationCommand.__call__
+      ~MicrotoneDeviationCommand.__format__
+      ~MicrotoneDeviationCommand.__repr__
 
 Read-only properties
 --------------------
@@ -45,27 +41,27 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.deactivate
+      .. autoattribute:: MicrotoneDeviationCommand.deactivate
 
-.. autoattribute:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.deviations
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.selector
+.. autoattribute:: MicrotoneDeviationCommand.deviations
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.tag
+      .. autoattribute:: MicrotoneDeviationCommand.selector
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.tags
+      .. autoattribute:: MicrotoneDeviationCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: MicrotoneDeviationCommand.tags
 
 Read/write properties
 ---------------------
@@ -74,19 +70,19 @@ Read/write properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.manifests
+      .. autoattribute:: MicrotoneDeviationCommand.manifests
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.offset_to_measure_number
+      .. autoattribute:: MicrotoneDeviationCommand.offset_to_measure_number
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.tag_measure_number
+      .. autoattribute:: MicrotoneDeviationCommand.tag_measure_number
 
 Methods
 -------
@@ -95,33 +91,21 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.get_tag
+      .. automethod:: MicrotoneDeviationCommand.get_tag
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.__call__
+.. automethod:: MicrotoneDeviationCommand.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.__eq__
+      .. automethod:: MicrotoneDeviationCommand.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand.__repr__
+      .. automethod:: MicrotoneDeviationCommand.__repr__

@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.ScoreTemplate
 
 ScoreTemplate
 =============
@@ -8,13 +8,11 @@ ScoreTemplate
 Bases
 -----
 
-- :py:class:`abjad.tools.segmenttools.ScoreTemplate`
+- :py:class:`abjad.tools.segmenttools.ScoreTemplate.ScoreTemplate`
 
-- :py:class:`abjad.tools.abctools.AbjadValueObject`
+- :py:class:`abjad.tools.abctools.AbjadValueObject.AbjadValueObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -25,32 +23,32 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.ScoreTemplate.ScoreTemplate.attach_defaults
-      ~baca.tools.ScoreTemplate.ScoreTemplate.defaults
-      ~baca.tools.ScoreTemplate.ScoreTemplate.group_families
-      ~baca.tools.ScoreTemplate.ScoreTemplate.make_music_context
-      ~baca.tools.ScoreTemplate.ScoreTemplate.make_piano_staff
-      ~baca.tools.ScoreTemplate.ScoreTemplate.make_square_staff_group
-      ~baca.tools.ScoreTemplate.ScoreTemplate.make_staff_group
-      ~baca.tools.ScoreTemplate.ScoreTemplate.parts
-      ~baca.tools.ScoreTemplate.ScoreTemplate.__call__
-      ~baca.tools.ScoreTemplate.ScoreTemplate.__copy__
-      ~baca.tools.ScoreTemplate.ScoreTemplate.__eq__
-      ~baca.tools.ScoreTemplate.ScoreTemplate.__format__
-      ~baca.tools.ScoreTemplate.ScoreTemplate.__hash__
-      ~baca.tools.ScoreTemplate.ScoreTemplate.__illustrate__
-      ~baca.tools.ScoreTemplate.ScoreTemplate.__repr__
+      ~ScoreTemplate.attach_defaults
+      ~ScoreTemplate.defaults
+      ~ScoreTemplate.group_families
+      ~ScoreTemplate.make_music_context
+      ~ScoreTemplate.make_piano_staff
+      ~ScoreTemplate.make_square_staff_group
+      ~ScoreTemplate.make_staff_group
+      ~ScoreTemplate.parts
+      ~ScoreTemplate.__call__
+      ~ScoreTemplate.__copy__
+      ~ScoreTemplate.__eq__
+      ~ScoreTemplate.__format__
+      ~ScoreTemplate.__hash__
+      ~ScoreTemplate.__illustrate__
+      ~ScoreTemplate.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.ScoreTemplate.ScoreTemplate.defaults
+.. autoattribute:: ScoreTemplate.defaults
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ScoreTemplate.ScoreTemplate.parts
+      .. autoattribute:: ScoreTemplate.parts
 
 Methods
 -------
@@ -59,17 +57,17 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ScoreTemplate.ScoreTemplate.attach_defaults
+      .. automethod:: ScoreTemplate.attach_defaults
 
-.. automethod:: baca.tools.ScoreTemplate.ScoreTemplate.group_families
+.. automethod:: ScoreTemplate.group_families
 
-.. automethod:: baca.tools.ScoreTemplate.ScoreTemplate.make_music_context
+.. automethod:: ScoreTemplate.make_music_context
 
-.. automethod:: baca.tools.ScoreTemplate.ScoreTemplate.make_piano_staff
+.. automethod:: ScoreTemplate.make_piano_staff
 
-.. automethod:: baca.tools.ScoreTemplate.ScoreTemplate.make_square_staff_group
+.. automethod:: ScoreTemplate.make_square_staff_group
 
-.. automethod:: baca.tools.ScoreTemplate.ScoreTemplate.make_staff_group
+.. automethod:: ScoreTemplate.make_staff_group
 
 Special methods
 ---------------
@@ -78,40 +76,40 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ScoreTemplate.ScoreTemplate.__call__
+      .. automethod:: ScoreTemplate.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ScoreTemplate.ScoreTemplate.__copy__
+      .. automethod:: ScoreTemplate.__copy__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ScoreTemplate.ScoreTemplate.__eq__
+      .. automethod:: ScoreTemplate.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ScoreTemplate.ScoreTemplate.__format__
+      .. automethod:: ScoreTemplate.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ScoreTemplate.ScoreTemplate.__hash__
+      .. automethod:: ScoreTemplate.__hash__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ScoreTemplate.ScoreTemplate.__illustrate__
+      .. automethod:: ScoreTemplate.__illustrate__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ScoreTemplate.ScoreTemplate.__repr__
+      .. automethod:: ScoreTemplate.__repr__

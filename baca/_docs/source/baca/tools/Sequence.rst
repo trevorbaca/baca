@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.Sequence
 
 Sequence
 ========
@@ -8,13 +8,23 @@ Sequence
 Bases
 -----
 
-- :py:class:`abjad.tools.datastructuretools.Sequence`
+- :py:class:`abjad.tools.datastructuretools.Sequence.Sequence`
 
-- :py:class:`abjad.tools.abctools.AbjadValueObject`
+- :py:class:`abjad.tools.abctools.AbjadValueObject.AbjadValueObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`collections.abc.Sequence`
+
+- :py:class:`collections.abc.Reversible`
+
+- :py:class:`collections.abc.Collection`
+
+- :py:class:`collections.abc.Sized`
+
+- :py:class:`collections.abc.Iterable`
+
+- :py:class:`collections.abc.Container`
 
 - :py:class:`builtins.object`
 
@@ -25,57 +35,62 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.Sequence.Sequence.accumulate
-      ~baca.tools.Sequence.Sequence.boustrophedon
-      ~baca.tools.Sequence.Sequence.filter
-      ~baca.tools.Sequence.Sequence.flatten
-      ~baca.tools.Sequence.Sequence.get_degree_of_rotational_symmetry
-      ~baca.tools.Sequence.Sequence.get_period_of_rotation
-      ~baca.tools.Sequence.Sequence.group_by
-      ~baca.tools.Sequence.Sequence.group_by_sign
-      ~baca.tools.Sequence.Sequence.helianthate
-      ~baca.tools.Sequence.Sequence.is_decreasing
-      ~baca.tools.Sequence.Sequence.is_increasing
-      ~baca.tools.Sequence.Sequence.is_permutation
-      ~baca.tools.Sequence.Sequence.is_repetition_free
-      ~baca.tools.Sequence.Sequence.items
-      ~baca.tools.Sequence.Sequence.join
-      ~baca.tools.Sequence.Sequence.map
-      ~baca.tools.Sequence.Sequence.nwise
-      ~baca.tools.Sequence.Sequence.partition
-      ~baca.tools.Sequence.Sequence.partition_by_counts
-      ~baca.tools.Sequence.Sequence.partition_by_ratio_of_lengths
-      ~baca.tools.Sequence.Sequence.partition_by_ratio_of_weights
-      ~baca.tools.Sequence.Sequence.partition_by_weights
-      ~baca.tools.Sequence.Sequence.permute
-      ~baca.tools.Sequence.Sequence.remove
-      ~baca.tools.Sequence.Sequence.remove_repeats
-      ~baca.tools.Sequence.Sequence.repeat
-      ~baca.tools.Sequence.Sequence.repeat_by
-      ~baca.tools.Sequence.Sequence.repeat_to_length
-      ~baca.tools.Sequence.Sequence.repeat_to_weight
-      ~baca.tools.Sequence.Sequence.replace
-      ~baca.tools.Sequence.Sequence.retain
-      ~baca.tools.Sequence.Sequence.retain_pattern
-      ~baca.tools.Sequence.Sequence.reveal
-      ~baca.tools.Sequence.Sequence.reverse
-      ~baca.tools.Sequence.Sequence.rotate
-      ~baca.tools.Sequence.Sequence.select
-      ~baca.tools.Sequence.Sequence.sort
-      ~baca.tools.Sequence.Sequence.split
-      ~baca.tools.Sequence.Sequence.sum
-      ~baca.tools.Sequence.Sequence.sum_by_sign
-      ~baca.tools.Sequence.Sequence.truncate
-      ~baca.tools.Sequence.Sequence.zip
-      ~baca.tools.Sequence.Sequence.__add__
-      ~baca.tools.Sequence.Sequence.__copy__
-      ~baca.tools.Sequence.Sequence.__eq__
-      ~baca.tools.Sequence.Sequence.__format__
-      ~baca.tools.Sequence.Sequence.__getitem__
-      ~baca.tools.Sequence.Sequence.__hash__
-      ~baca.tools.Sequence.Sequence.__len__
-      ~baca.tools.Sequence.Sequence.__radd__
-      ~baca.tools.Sequence.Sequence.__repr__
+      ~Sequence.accumulate
+      ~Sequence.boustrophedon
+      ~Sequence.count
+      ~Sequence.filter
+      ~Sequence.flatten
+      ~Sequence.get_degree_of_rotational_symmetry
+      ~Sequence.get_period_of_rotation
+      ~Sequence.group_by
+      ~Sequence.group_by_sign
+      ~Sequence.helianthate
+      ~Sequence.index
+      ~Sequence.is_decreasing
+      ~Sequence.is_increasing
+      ~Sequence.is_permutation
+      ~Sequence.is_repetition_free
+      ~Sequence.items
+      ~Sequence.join
+      ~Sequence.map
+      ~Sequence.nwise
+      ~Sequence.partition
+      ~Sequence.partition_by_counts
+      ~Sequence.partition_by_ratio_of_lengths
+      ~Sequence.partition_by_ratio_of_weights
+      ~Sequence.partition_by_weights
+      ~Sequence.permute
+      ~Sequence.remove
+      ~Sequence.remove_repeats
+      ~Sequence.repeat
+      ~Sequence.repeat_by
+      ~Sequence.repeat_to_length
+      ~Sequence.repeat_to_weight
+      ~Sequence.replace
+      ~Sequence.retain
+      ~Sequence.retain_pattern
+      ~Sequence.reveal
+      ~Sequence.reverse
+      ~Sequence.rotate
+      ~Sequence.select
+      ~Sequence.sort
+      ~Sequence.split
+      ~Sequence.sum
+      ~Sequence.sum_by_sign
+      ~Sequence.truncate
+      ~Sequence.zip
+      ~Sequence.__add__
+      ~Sequence.__contains__
+      ~Sequence.__copy__
+      ~Sequence.__eq__
+      ~Sequence.__format__
+      ~Sequence.__getitem__
+      ~Sequence.__hash__
+      ~Sequence.__iter__
+      ~Sequence.__len__
+      ~Sequence.__radd__
+      ~Sequence.__repr__
+      ~Sequence.__reversed__
 
 Read-only properties
 --------------------
@@ -84,220 +99,232 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Sequence.Sequence.items
+      .. autoattribute:: Sequence.items
 
 Methods
 -------
 
-.. automethod:: baca.tools.Sequence.Sequence.accumulate
+.. automethod:: Sequence.accumulate
 
-.. automethod:: baca.tools.Sequence.Sequence.boustrophedon
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Sequence.Sequence.filter
+.. automethod:: Sequence.boustrophedon
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.flatten
-
-.. automethod:: baca.tools.Sequence.Sequence.get_degree_of_rotational_symmetry
-
-.. automethod:: baca.tools.Sequence.Sequence.get_period_of_rotation
+      .. automethod:: Sequence.count
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.group_by
-
-.. automethod:: baca.tools.Sequence.Sequence.group_by_sign
-
-.. automethod:: baca.tools.Sequence.Sequence.helianthate
+      .. automethod:: Sequence.filter
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.is_decreasing
+      .. automethod:: Sequence.flatten
+
+.. automethod:: Sequence.get_degree_of_rotational_symmetry
+
+.. automethod:: Sequence.get_period_of_rotation
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.is_increasing
+      .. automethod:: Sequence.group_by
+
+.. automethod:: Sequence.group_by_sign
+
+.. automethod:: Sequence.helianthate
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.is_permutation
+      .. automethod:: Sequence.index
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.is_repetition_free
+      .. automethod:: Sequence.is_decreasing
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.join
+      .. automethod:: Sequence.is_increasing
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.map
+      .. automethod:: Sequence.is_permutation
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.nwise
-
-.. automethod:: baca.tools.Sequence.Sequence.partition
+      .. automethod:: Sequence.is_repetition_free
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.partition_by_counts
+      .. automethod:: Sequence.join
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.partition_by_ratio_of_lengths
+      .. automethod:: Sequence.map
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.partition_by_ratio_of_weights
+      .. automethod:: Sequence.nwise
+
+.. automethod:: Sequence.partition
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.partition_by_weights
+      .. automethod:: Sequence.partition_by_counts
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.permute
+      .. automethod:: Sequence.partition_by_ratio_of_lengths
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.remove
+      .. automethod:: Sequence.partition_by_ratio_of_weights
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.remove_repeats
+      .. automethod:: Sequence.partition_by_weights
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.repeat
-
-.. automethod:: baca.tools.Sequence.Sequence.repeat_by
+      .. automethod:: Sequence.permute
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.repeat_to_length
+      .. automethod:: Sequence.remove
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.repeat_to_weight
+      .. automethod:: Sequence.remove_repeats
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.replace
+      .. automethod:: Sequence.repeat
+
+.. automethod:: Sequence.repeat_by
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.retain
+      .. automethod:: Sequence.repeat_to_length
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.retain_pattern
-
-.. automethod:: baca.tools.Sequence.Sequence.reveal
+      .. automethod:: Sequence.repeat_to_weight
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.reverse
+      .. automethod:: Sequence.replace
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.rotate
+      .. automethod:: Sequence.retain
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.select
+      .. automethod:: Sequence.retain_pattern
+
+.. automethod:: Sequence.reveal
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.sort
+      .. automethod:: Sequence.reverse
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.split
+      .. automethod:: Sequence.rotate
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.sum
+      .. automethod:: Sequence.select
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.sum_by_sign
+      .. automethod:: Sequence.sort
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.truncate
+      .. automethod:: Sequence.split
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.zip
+      .. automethod:: Sequence.sum
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: Sequence.sum_by_sign
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: Sequence.truncate
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: Sequence.zip
 
 Special methods
 ---------------
@@ -306,52 +333,70 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.__add__
+      .. automethod:: Sequence.__add__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.__copy__
+      .. automethod:: Sequence.__contains__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.__eq__
+      .. automethod:: Sequence.__copy__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.__format__
+      .. automethod:: Sequence.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.__getitem__
+      .. automethod:: Sequence.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.__hash__
+      .. automethod:: Sequence.__getitem__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.__len__
+      .. automethod:: Sequence.__hash__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.__radd__
+      .. automethod:: Sequence.__iter__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Sequence.Sequence.__repr__
+      .. automethod:: Sequence.__len__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: Sequence.__radd__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: Sequence.__repr__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: Sequence.__reversed__

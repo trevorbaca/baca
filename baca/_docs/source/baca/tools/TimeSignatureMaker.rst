@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.TimeSignatureMaker
 
 TimeSignatureMaker
 ==================
@@ -8,9 +8,7 @@ TimeSignatureMaker
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,55 +19,41 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.TimeSignatureMaker.TimeSignatureMaker.metronome_mark_measure_map
-      ~baca.tools.TimeSignatureMaker.TimeSignatureMaker.repeat_count
-      ~baca.tools.TimeSignatureMaker.TimeSignatureMaker.rotation
-      ~baca.tools.TimeSignatureMaker.TimeSignatureMaker.stage_measure_map
-      ~baca.tools.TimeSignatureMaker.TimeSignatureMaker.time_signatures
-      ~baca.tools.TimeSignatureMaker.TimeSignatureMaker.__call__
-      ~baca.tools.TimeSignatureMaker.TimeSignatureMaker.__eq__
-      ~baca.tools.TimeSignatureMaker.TimeSignatureMaker.__format__
-      ~baca.tools.TimeSignatureMaker.TimeSignatureMaker.__hash__
-      ~baca.tools.TimeSignatureMaker.TimeSignatureMaker.__repr__
+      ~TimeSignatureMaker.metronome_mark_measure_map
+      ~TimeSignatureMaker.repeat_count
+      ~TimeSignatureMaker.rotation
+      ~TimeSignatureMaker.stage_measure_map
+      ~TimeSignatureMaker.time_signatures
+      ~TimeSignatureMaker.__call__
+      ~TimeSignatureMaker.__format__
+      ~TimeSignatureMaker.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.TimeSignatureMaker.TimeSignatureMaker.metronome_mark_measure_map
+.. autoattribute:: TimeSignatureMaker.metronome_mark_measure_map
 
-.. autoattribute:: baca.tools.TimeSignatureMaker.TimeSignatureMaker.repeat_count
+.. autoattribute:: TimeSignatureMaker.repeat_count
 
-.. autoattribute:: baca.tools.TimeSignatureMaker.TimeSignatureMaker.rotation
+.. autoattribute:: TimeSignatureMaker.rotation
 
-.. autoattribute:: baca.tools.TimeSignatureMaker.TimeSignatureMaker.stage_measure_map
+.. autoattribute:: TimeSignatureMaker.stage_measure_map
 
-.. autoattribute:: baca.tools.TimeSignatureMaker.TimeSignatureMaker.time_signatures
+.. autoattribute:: TimeSignatureMaker.time_signatures
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.TimeSignatureMaker.TimeSignatureMaker.__call__
+.. automethod:: TimeSignatureMaker.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.TimeSignatureMaker.TimeSignatureMaker.__eq__
+      .. automethod:: TimeSignatureMaker.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.TimeSignatureMaker.TimeSignatureMaker.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.TimeSignatureMaker.TimeSignatureMaker.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.TimeSignatureMaker.TimeSignatureMaker.__repr__
+      .. automethod:: TimeSignatureMaker.__repr__

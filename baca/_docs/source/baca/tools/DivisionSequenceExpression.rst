@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.DivisionSequenceExpression
 
 DivisionSequenceExpression
 ==========================
@@ -8,13 +8,11 @@ DivisionSequenceExpression
 Bases
 -----
 
-- :py:class:`abjad.tools.datastructuretools.Expression`
+- :py:class:`abjad.tools.datastructuretools.Expression.Expression`
 
-- :py:class:`abjad.tools.abctools.AbjadValueObject`
+- :py:class:`abjad.tools.abctools.AbjadValueObject.AbjadValueObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -25,57 +23,57 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.append_callback
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.argument_count
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.argument_values
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.callbacks
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.color
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.division_sequence
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.establish_equivalence
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.evaluation_template
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.force_return
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.get_markup
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.get_string
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.has_parentheses
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.is_composite
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.is_initializer
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.is_postfix
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.keywords
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.label
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.lone
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.make_callback
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.map_operand
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.markup_maker_callback
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.module_names
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.name
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.next_name
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.pitch_class_segment
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.pitch_set
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.precedence
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.print
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.proxy_class
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.qualified_method_name
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.select
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.sequence
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.split_by_durations
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.string_template
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.subclass_hook
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.subexpressions
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.template
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.wrap_in_list
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__add__
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__call__
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__copy__
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__eq__
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__format__
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__getattr__
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__getitem__
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__hash__
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__iadd__
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__radd__
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__repr__
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__setitem__
-      ~baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__str__
+      ~DivisionSequenceExpression.append_callback
+      ~DivisionSequenceExpression.argument_count
+      ~DivisionSequenceExpression.argument_values
+      ~DivisionSequenceExpression.callbacks
+      ~DivisionSequenceExpression.color
+      ~DivisionSequenceExpression.division_sequence
+      ~DivisionSequenceExpression.establish_equivalence
+      ~DivisionSequenceExpression.evaluation_template
+      ~DivisionSequenceExpression.force_return
+      ~DivisionSequenceExpression.get_markup
+      ~DivisionSequenceExpression.get_string
+      ~DivisionSequenceExpression.has_parentheses
+      ~DivisionSequenceExpression.is_composite
+      ~DivisionSequenceExpression.is_initializer
+      ~DivisionSequenceExpression.is_postfix
+      ~DivisionSequenceExpression.keywords
+      ~DivisionSequenceExpression.label
+      ~DivisionSequenceExpression.lone
+      ~DivisionSequenceExpression.make_callback
+      ~DivisionSequenceExpression.map_operand
+      ~DivisionSequenceExpression.markup_maker_callback
+      ~DivisionSequenceExpression.module_names
+      ~DivisionSequenceExpression.name
+      ~DivisionSequenceExpression.next_name
+      ~DivisionSequenceExpression.pitch_class_segment
+      ~DivisionSequenceExpression.pitch_set
+      ~DivisionSequenceExpression.precedence
+      ~DivisionSequenceExpression.print
+      ~DivisionSequenceExpression.proxy_class
+      ~DivisionSequenceExpression.qualified_method_name
+      ~DivisionSequenceExpression.select
+      ~DivisionSequenceExpression.sequence
+      ~DivisionSequenceExpression.split_by_durations
+      ~DivisionSequenceExpression.string_template
+      ~DivisionSequenceExpression.subclass_hook
+      ~DivisionSequenceExpression.subexpressions
+      ~DivisionSequenceExpression.template
+      ~DivisionSequenceExpression.wrap_in_list
+      ~DivisionSequenceExpression.__add__
+      ~DivisionSequenceExpression.__call__
+      ~DivisionSequenceExpression.__copy__
+      ~DivisionSequenceExpression.__eq__
+      ~DivisionSequenceExpression.__format__
+      ~DivisionSequenceExpression.__getattr__
+      ~DivisionSequenceExpression.__getitem__
+      ~DivisionSequenceExpression.__hash__
+      ~DivisionSequenceExpression.__iadd__
+      ~DivisionSequenceExpression.__radd__
+      ~DivisionSequenceExpression.__repr__
+      ~DivisionSequenceExpression.__setitem__
+      ~DivisionSequenceExpression.__str__
 
 Read-only properties
 --------------------
@@ -84,139 +82,139 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.argument_count
+      .. autoattribute:: DivisionSequenceExpression.argument_count
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.argument_values
+      .. autoattribute:: DivisionSequenceExpression.argument_values
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.callbacks
+      .. autoattribute:: DivisionSequenceExpression.callbacks
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.evaluation_template
+      .. autoattribute:: DivisionSequenceExpression.evaluation_template
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.force_return
+      .. autoattribute:: DivisionSequenceExpression.force_return
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.has_parentheses
+      .. autoattribute:: DivisionSequenceExpression.has_parentheses
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.is_composite
+      .. autoattribute:: DivisionSequenceExpression.is_composite
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.is_initializer
+      .. autoattribute:: DivisionSequenceExpression.is_initializer
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.is_postfix
+      .. autoattribute:: DivisionSequenceExpression.is_postfix
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.keywords
+      .. autoattribute:: DivisionSequenceExpression.keywords
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.lone
+      .. autoattribute:: DivisionSequenceExpression.lone
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.map_operand
+      .. autoattribute:: DivisionSequenceExpression.map_operand
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.markup_maker_callback
+      .. autoattribute:: DivisionSequenceExpression.markup_maker_callback
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.module_names
+      .. autoattribute:: DivisionSequenceExpression.module_names
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.name
+      .. autoattribute:: DivisionSequenceExpression.name
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.next_name
+      .. autoattribute:: DivisionSequenceExpression.next_name
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.precedence
+      .. autoattribute:: DivisionSequenceExpression.precedence
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.proxy_class
+      .. autoattribute:: DivisionSequenceExpression.proxy_class
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.qualified_method_name
+      .. autoattribute:: DivisionSequenceExpression.qualified_method_name
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.string_template
+      .. autoattribute:: DivisionSequenceExpression.string_template
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.subclass_hook
+      .. autoattribute:: DivisionSequenceExpression.subclass_hook
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.subexpressions
+      .. autoattribute:: DivisionSequenceExpression.subexpressions
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.template
+      .. autoattribute:: DivisionSequenceExpression.template
 
 Methods
 -------
@@ -225,77 +223,77 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.append_callback
+      .. automethod:: DivisionSequenceExpression.append_callback
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.color
+      .. automethod:: DivisionSequenceExpression.color
 
-.. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.division_sequence
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.establish_equivalence
+.. automethod:: DivisionSequenceExpression.division_sequence
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.get_markup
+      .. automethod:: DivisionSequenceExpression.establish_equivalence
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.get_string
+      .. automethod:: DivisionSequenceExpression.get_markup
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.label
+      .. automethod:: DivisionSequenceExpression.get_string
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.pitch_class_segment
+      .. automethod:: DivisionSequenceExpression.label
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.pitch_set
+      .. automethod:: DivisionSequenceExpression.pitch_class_segment
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.print
+      .. automethod:: DivisionSequenceExpression.pitch_set
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.select
+      .. automethod:: DivisionSequenceExpression.print
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.sequence
-
-.. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.split_by_durations
+      .. automethod:: DivisionSequenceExpression.select
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.wrap_in_list
+      .. automethod:: DivisionSequenceExpression.sequence
+
+.. automethod:: DivisionSequenceExpression.split_by_durations
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.wrap_in_list
 
 Class & static methods
 ----------------------
@@ -304,73 +302,73 @@ Class & static methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.make_callback
+      .. automethod:: DivisionSequenceExpression.make_callback
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__add__
+.. automethod:: DivisionSequenceExpression.__add__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__call__
+      .. automethod:: DivisionSequenceExpression.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__copy__
+      .. automethod:: DivisionSequenceExpression.__copy__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__eq__
+      .. automethod:: DivisionSequenceExpression.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__format__
+      .. automethod:: DivisionSequenceExpression.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__getattr__
+      .. automethod:: DivisionSequenceExpression.__getattr__
 
-.. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__getitem__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__hash__
+.. automethod:: DivisionSequenceExpression.__getitem__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__iadd__
-
-.. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__radd__
+      .. automethod:: DivisionSequenceExpression.__hash__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__repr__
+      .. automethod:: DivisionSequenceExpression.__iadd__
+
+.. automethod:: DivisionSequenceExpression.__radd__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__setitem__
+      .. automethod:: DivisionSequenceExpression.__repr__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequenceExpression.DivisionSequenceExpression.__str__
+      .. automethod:: DivisionSequenceExpression.__setitem__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequenceExpression.__str__

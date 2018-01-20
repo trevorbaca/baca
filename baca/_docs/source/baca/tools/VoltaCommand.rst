@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.VoltaCommand
 
 VoltaCommand
 ============
@@ -8,11 +8,9 @@ VoltaCommand
 Bases
 -----
 
-- :py:class:`baca.tools.Command`
+- :py:class:`baca.tools.Command.Command`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,19 +21,17 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.VoltaCommand.VoltaCommand.deactivate
-      ~baca.tools.VoltaCommand.VoltaCommand.get_tag
-      ~baca.tools.VoltaCommand.VoltaCommand.manifests
-      ~baca.tools.VoltaCommand.VoltaCommand.offset_to_measure_number
-      ~baca.tools.VoltaCommand.VoltaCommand.selector
-      ~baca.tools.VoltaCommand.VoltaCommand.tag
-      ~baca.tools.VoltaCommand.VoltaCommand.tag_measure_number
-      ~baca.tools.VoltaCommand.VoltaCommand.tags
-      ~baca.tools.VoltaCommand.VoltaCommand.__call__
-      ~baca.tools.VoltaCommand.VoltaCommand.__eq__
-      ~baca.tools.VoltaCommand.VoltaCommand.__format__
-      ~baca.tools.VoltaCommand.VoltaCommand.__hash__
-      ~baca.tools.VoltaCommand.VoltaCommand.__repr__
+      ~VoltaCommand.deactivate
+      ~VoltaCommand.get_tag
+      ~VoltaCommand.manifests
+      ~VoltaCommand.offset_to_measure_number
+      ~VoltaCommand.selector
+      ~VoltaCommand.tag
+      ~VoltaCommand.tag_measure_number
+      ~VoltaCommand.tags
+      ~VoltaCommand.__call__
+      ~VoltaCommand.__format__
+      ~VoltaCommand.__repr__
 
 Read-only properties
 --------------------
@@ -44,25 +40,25 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.VoltaCommand.VoltaCommand.deactivate
+      .. autoattribute:: VoltaCommand.deactivate
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.VoltaCommand.VoltaCommand.selector
+      .. autoattribute:: VoltaCommand.selector
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.VoltaCommand.VoltaCommand.tag
+      .. autoattribute:: VoltaCommand.tag
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.VoltaCommand.VoltaCommand.tags
+      .. autoattribute:: VoltaCommand.tags
 
 Read/write properties
 ---------------------
@@ -71,19 +67,19 @@ Read/write properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.VoltaCommand.VoltaCommand.manifests
+      .. autoattribute:: VoltaCommand.manifests
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.VoltaCommand.VoltaCommand.offset_to_measure_number
+      .. autoattribute:: VoltaCommand.offset_to_measure_number
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.VoltaCommand.VoltaCommand.tag_measure_number
+      .. autoattribute:: VoltaCommand.tag_measure_number
 
 Methods
 -------
@@ -92,33 +88,21 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.VoltaCommand.VoltaCommand.get_tag
+      .. automethod:: VoltaCommand.get_tag
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.VoltaCommand.VoltaCommand.__call__
+.. automethod:: VoltaCommand.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.VoltaCommand.VoltaCommand.__eq__
+      .. automethod:: VoltaCommand.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.VoltaCommand.VoltaCommand.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.VoltaCommand.VoltaCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.VoltaCommand.VoltaCommand.__repr__
+      .. automethod:: VoltaCommand.__repr__

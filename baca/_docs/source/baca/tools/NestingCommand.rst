@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.NestingCommand
 
 NestingCommand
 ==============
@@ -8,11 +8,9 @@ NestingCommand
 Bases
 -----
 
-- :py:class:`baca.tools.Command`
+- :py:class:`baca.tools.Command.Command`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,21 +21,19 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.NestingCommand.NestingCommand.deactivate
-      ~baca.tools.NestingCommand.NestingCommand.get_tag
-      ~baca.tools.NestingCommand.NestingCommand.lmr_specifier
-      ~baca.tools.NestingCommand.NestingCommand.manifests
-      ~baca.tools.NestingCommand.NestingCommand.offset_to_measure_number
-      ~baca.tools.NestingCommand.NestingCommand.selector
-      ~baca.tools.NestingCommand.NestingCommand.tag
-      ~baca.tools.NestingCommand.NestingCommand.tag_measure_number
-      ~baca.tools.NestingCommand.NestingCommand.tags
-      ~baca.tools.NestingCommand.NestingCommand.time_treatments
-      ~baca.tools.NestingCommand.NestingCommand.__call__
-      ~baca.tools.NestingCommand.NestingCommand.__eq__
-      ~baca.tools.NestingCommand.NestingCommand.__format__
-      ~baca.tools.NestingCommand.NestingCommand.__hash__
-      ~baca.tools.NestingCommand.NestingCommand.__repr__
+      ~NestingCommand.deactivate
+      ~NestingCommand.get_tag
+      ~NestingCommand.lmr_specifier
+      ~NestingCommand.manifests
+      ~NestingCommand.offset_to_measure_number
+      ~NestingCommand.selector
+      ~NestingCommand.tag
+      ~NestingCommand.tag_measure_number
+      ~NestingCommand.tags
+      ~NestingCommand.time_treatments
+      ~NestingCommand.__call__
+      ~NestingCommand.__format__
+      ~NestingCommand.__repr__
 
 Read-only properties
 --------------------
@@ -46,29 +42,29 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.NestingCommand.NestingCommand.deactivate
+      .. autoattribute:: NestingCommand.deactivate
 
-.. autoattribute:: baca.tools.NestingCommand.NestingCommand.lmr_specifier
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.NestingCommand.NestingCommand.selector
+.. autoattribute:: NestingCommand.lmr_specifier
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.NestingCommand.NestingCommand.tag
+      .. autoattribute:: NestingCommand.selector
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.NestingCommand.NestingCommand.tags
+      .. autoattribute:: NestingCommand.tag
 
-.. autoattribute:: baca.tools.NestingCommand.NestingCommand.time_treatments
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: NestingCommand.tags
+
+.. autoattribute:: NestingCommand.time_treatments
 
 Read/write properties
 ---------------------
@@ -77,19 +73,19 @@ Read/write properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.NestingCommand.NestingCommand.manifests
+      .. autoattribute:: NestingCommand.manifests
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.NestingCommand.NestingCommand.offset_to_measure_number
+      .. autoattribute:: NestingCommand.offset_to_measure_number
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.NestingCommand.NestingCommand.tag_measure_number
+      .. autoattribute:: NestingCommand.tag_measure_number
 
 Methods
 -------
@@ -98,33 +94,21 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.NestingCommand.NestingCommand.get_tag
+      .. automethod:: NestingCommand.get_tag
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.NestingCommand.NestingCommand.__call__
+.. automethod:: NestingCommand.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.NestingCommand.NestingCommand.__eq__
+      .. automethod:: NestingCommand.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.NestingCommand.NestingCommand.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.NestingCommand.NestingCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.NestingCommand.NestingCommand.__repr__
+      .. automethod:: NestingCommand.__repr__

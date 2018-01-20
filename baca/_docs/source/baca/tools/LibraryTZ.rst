@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.LibraryTZ
 
 LibraryTZ
 =========
@@ -8,9 +8,7 @@ LibraryTZ
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,112 +19,110 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.LibraryTZ.LibraryTZ.tag
-      ~baca.tools.LibraryTZ.LibraryTZ.tenuti
-      ~baca.tools.LibraryTZ.LibraryTZ.text_script_color
-      ~baca.tools.LibraryTZ.LibraryTZ.text_script_extra_offset
-      ~baca.tools.LibraryTZ.LibraryTZ.text_script_padding
-      ~baca.tools.LibraryTZ.LibraryTZ.text_script_parent_center
-      ~baca.tools.LibraryTZ.LibraryTZ.text_script_staff_padding
-      ~baca.tools.LibraryTZ.LibraryTZ.text_scripts_down
-      ~baca.tools.LibraryTZ.LibraryTZ.text_scripts_up
-      ~baca.tools.LibraryTZ.LibraryTZ.text_spanner
-      ~baca.tools.LibraryTZ.LibraryTZ.text_spanner_staff_padding
-      ~baca.tools.LibraryTZ.LibraryTZ.tie
-      ~baca.tools.LibraryTZ.LibraryTZ.tie_from
-      ~baca.tools.LibraryTZ.LibraryTZ.tie_to
-      ~baca.tools.LibraryTZ.LibraryTZ.ties_down
-      ~baca.tools.LibraryTZ.LibraryTZ.ties_up
-      ~baca.tools.LibraryTZ.LibraryTZ.time_signature_extra_offset
-      ~baca.tools.LibraryTZ.LibraryTZ.timeline
-      ~baca.tools.LibraryTZ.LibraryTZ.transparent_bar_lines
-      ~baca.tools.LibraryTZ.LibraryTZ.transparent_rests
-      ~baca.tools.LibraryTZ.LibraryTZ.transparent_span_bars
-      ~baca.tools.LibraryTZ.LibraryTZ.transparent_time_signatures
-      ~baca.tools.LibraryTZ.LibraryTZ.tremolo_down
-      ~baca.tools.LibraryTZ.LibraryTZ.trill
-      ~baca.tools.LibraryTZ.LibraryTZ.tuplet_bracket_extra_offset
-      ~baca.tools.LibraryTZ.LibraryTZ.tuplet_bracket_staff_padding
-      ~baca.tools.LibraryTZ.LibraryTZ.tuplet_brackets_down
-      ~baca.tools.LibraryTZ.LibraryTZ.tuplet_brackets_up
-      ~baca.tools.LibraryTZ.LibraryTZ.tuplet_number_extra_offset
-      ~baca.tools.LibraryTZ.LibraryTZ.up_arpeggios
-      ~baca.tools.LibraryTZ.LibraryTZ.up_bows
-      ~baca.tools.LibraryTZ.LibraryTZ.very_long_fermata
-      ~baca.tools.LibraryTZ.LibraryTZ.volta
-      ~baca.tools.LibraryTZ.LibraryTZ.__eq__
-      ~baca.tools.LibraryTZ.LibraryTZ.__format__
-      ~baca.tools.LibraryTZ.LibraryTZ.__hash__
-      ~baca.tools.LibraryTZ.LibraryTZ.__repr__
+      ~LibraryTZ.tag
+      ~LibraryTZ.tenuti
+      ~LibraryTZ.text_script_color
+      ~LibraryTZ.text_script_extra_offset
+      ~LibraryTZ.text_script_padding
+      ~LibraryTZ.text_script_parent_center
+      ~LibraryTZ.text_script_staff_padding
+      ~LibraryTZ.text_scripts_down
+      ~LibraryTZ.text_scripts_up
+      ~LibraryTZ.text_spanner
+      ~LibraryTZ.text_spanner_staff_padding
+      ~LibraryTZ.tie
+      ~LibraryTZ.tie_from
+      ~LibraryTZ.tie_to
+      ~LibraryTZ.ties_down
+      ~LibraryTZ.ties_up
+      ~LibraryTZ.time_signature_extra_offset
+      ~LibraryTZ.timeline
+      ~LibraryTZ.transparent_bar_lines
+      ~LibraryTZ.transparent_rests
+      ~LibraryTZ.transparent_span_bars
+      ~LibraryTZ.transparent_time_signatures
+      ~LibraryTZ.tremolo_down
+      ~LibraryTZ.trill
+      ~LibraryTZ.tuplet_bracket_extra_offset
+      ~LibraryTZ.tuplet_bracket_staff_padding
+      ~LibraryTZ.tuplet_brackets_down
+      ~LibraryTZ.tuplet_brackets_up
+      ~LibraryTZ.tuplet_number_extra_offset
+      ~LibraryTZ.up_arpeggios
+      ~LibraryTZ.up_bows
+      ~LibraryTZ.very_long_fermata
+      ~LibraryTZ.volta
+      ~LibraryTZ.__format__
+      ~LibraryTZ.__repr__
 
 Class & static methods
 ----------------------
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.tag
+.. automethod:: LibraryTZ.tag
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.tenuti
+.. automethod:: LibraryTZ.tenuti
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.text_script_color
+.. automethod:: LibraryTZ.text_script_color
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.text_script_extra_offset
+.. automethod:: LibraryTZ.text_script_extra_offset
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.text_script_padding
+.. automethod:: LibraryTZ.text_script_padding
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.text_script_parent_center
+.. automethod:: LibraryTZ.text_script_parent_center
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.text_script_staff_padding
+.. automethod:: LibraryTZ.text_script_staff_padding
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.text_scripts_down
+.. automethod:: LibraryTZ.text_scripts_down
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.text_scripts_up
+.. automethod:: LibraryTZ.text_scripts_up
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.text_spanner
+.. automethod:: LibraryTZ.text_spanner
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.text_spanner_staff_padding
+.. automethod:: LibraryTZ.text_spanner_staff_padding
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.tie
+.. automethod:: LibraryTZ.tie
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.tie_from
+.. automethod:: LibraryTZ.tie_from
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.tie_to
+.. automethod:: LibraryTZ.tie_to
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.ties_down
+.. automethod:: LibraryTZ.ties_down
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.ties_up
+.. automethod:: LibraryTZ.ties_up
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.time_signature_extra_offset
+.. automethod:: LibraryTZ.time_signature_extra_offset
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.timeline
+.. automethod:: LibraryTZ.timeline
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.transparent_bar_lines
+.. automethod:: LibraryTZ.transparent_bar_lines
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.transparent_rests
+.. automethod:: LibraryTZ.transparent_rests
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.transparent_span_bars
+.. automethod:: LibraryTZ.transparent_span_bars
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.transparent_time_signatures
+.. automethod:: LibraryTZ.transparent_time_signatures
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.tremolo_down
+.. automethod:: LibraryTZ.tremolo_down
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.trill
+.. automethod:: LibraryTZ.trill
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.tuplet_bracket_extra_offset
+.. automethod:: LibraryTZ.tuplet_bracket_extra_offset
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.tuplet_bracket_staff_padding
+.. automethod:: LibraryTZ.tuplet_bracket_staff_padding
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.tuplet_brackets_down
+.. automethod:: LibraryTZ.tuplet_brackets_down
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.tuplet_brackets_up
+.. automethod:: LibraryTZ.tuplet_brackets_up
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.tuplet_number_extra_offset
+.. automethod:: LibraryTZ.tuplet_number_extra_offset
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.up_arpeggios
+.. automethod:: LibraryTZ.up_arpeggios
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.up_bows
+.. automethod:: LibraryTZ.up_bows
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.very_long_fermata
+.. automethod:: LibraryTZ.very_long_fermata
 
-.. automethod:: baca.tools.LibraryTZ.LibraryTZ.volta
+.. automethod:: LibraryTZ.volta
 
 Special methods
 ---------------
@@ -135,22 +131,10 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.LibraryTZ.LibraryTZ.__eq__
+      .. automethod:: LibraryTZ.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.LibraryTZ.LibraryTZ.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.LibraryTZ.LibraryTZ.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.LibraryTZ.LibraryTZ.__repr__
+      .. automethod:: LibraryTZ.__repr__

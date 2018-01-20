@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.Command
 
 Command
 =======
@@ -8,9 +8,7 @@ Command
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,70 +19,56 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.Command.Command.deactivate
-      ~baca.tools.Command.Command.get_tag
-      ~baca.tools.Command.Command.manifests
-      ~baca.tools.Command.Command.offset_to_measure_number
-      ~baca.tools.Command.Command.selector
-      ~baca.tools.Command.Command.tag
-      ~baca.tools.Command.Command.tag_measure_number
-      ~baca.tools.Command.Command.tags
-      ~baca.tools.Command.Command.__call__
-      ~baca.tools.Command.Command.__eq__
-      ~baca.tools.Command.Command.__format__
-      ~baca.tools.Command.Command.__hash__
-      ~baca.tools.Command.Command.__repr__
+      ~Command.deactivate
+      ~Command.get_tag
+      ~Command.manifests
+      ~Command.offset_to_measure_number
+      ~Command.selector
+      ~Command.tag
+      ~Command.tag_measure_number
+      ~Command.tags
+      ~Command.__call__
+      ~Command.__format__
+      ~Command.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.Command.Command.deactivate
+.. autoattribute:: Command.deactivate
 
-.. autoattribute:: baca.tools.Command.Command.selector
+.. autoattribute:: Command.selector
 
-.. autoattribute:: baca.tools.Command.Command.tag
+.. autoattribute:: Command.tag
 
-.. autoattribute:: baca.tools.Command.Command.tags
+.. autoattribute:: Command.tags
 
 Read/write properties
 ---------------------
 
-.. autoattribute:: baca.tools.Command.Command.manifests
+.. autoattribute:: Command.manifests
 
-.. autoattribute:: baca.tools.Command.Command.offset_to_measure_number
+.. autoattribute:: Command.offset_to_measure_number
 
-.. autoattribute:: baca.tools.Command.Command.tag_measure_number
+.. autoattribute:: Command.tag_measure_number
 
 Methods
 -------
 
-.. automethod:: baca.tools.Command.Command.get_tag
+.. automethod:: Command.get_tag
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.Command.Command.__call__
+.. automethod:: Command.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Command.Command.__eq__
+      .. automethod:: Command.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Command.Command.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Command.Command.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Command.Command.__repr__
+      .. automethod:: Command.__repr__

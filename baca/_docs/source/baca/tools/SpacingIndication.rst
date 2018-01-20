@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.SpacingIndication
 
 SpacingIndication
 =================
@@ -8,11 +8,9 @@ SpacingIndication
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadValueObject`
+- :py:class:`abjad.tools.abctools.AbjadValueObject.AbjadValueObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,23 +21,23 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.SpacingIndication.SpacingIndication.normalized_spacing_duration
-      ~baca.tools.SpacingIndication.SpacingIndication.proportional_notation_duration
-      ~baca.tools.SpacingIndication.SpacingIndication.tempo_indication
-      ~baca.tools.SpacingIndication.SpacingIndication.__copy__
-      ~baca.tools.SpacingIndication.SpacingIndication.__eq__
-      ~baca.tools.SpacingIndication.SpacingIndication.__format__
-      ~baca.tools.SpacingIndication.SpacingIndication.__hash__
-      ~baca.tools.SpacingIndication.SpacingIndication.__repr__
+      ~SpacingIndication.normalized_spacing_duration
+      ~SpacingIndication.proportional_notation_duration
+      ~SpacingIndication.tempo_indication
+      ~SpacingIndication.__copy__
+      ~SpacingIndication.__eq__
+      ~SpacingIndication.__format__
+      ~SpacingIndication.__hash__
+      ~SpacingIndication.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.SpacingIndication.SpacingIndication.normalized_spacing_duration
+.. autoattribute:: SpacingIndication.normalized_spacing_duration
 
-.. autoattribute:: baca.tools.SpacingIndication.SpacingIndication.proportional_notation_duration
+.. autoattribute:: SpacingIndication.proportional_notation_duration
 
-.. autoattribute:: baca.tools.SpacingIndication.SpacingIndication.tempo_indication
+.. autoattribute:: SpacingIndication.tempo_indication
 
 Special methods
 ---------------
@@ -48,20 +46,20 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SpacingIndication.SpacingIndication.__copy__
+      .. automethod:: SpacingIndication.__copy__
 
-.. automethod:: baca.tools.SpacingIndication.SpacingIndication.__eq__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.SpacingIndication.SpacingIndication.__format__
-
-.. automethod:: baca.tools.SpacingIndication.SpacingIndication.__hash__
+.. automethod:: SpacingIndication.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SpacingIndication.SpacingIndication.__repr__
+      .. automethod:: SpacingIndication.__format__
+
+.. automethod:: SpacingIndication.__hash__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: SpacingIndication.__repr__

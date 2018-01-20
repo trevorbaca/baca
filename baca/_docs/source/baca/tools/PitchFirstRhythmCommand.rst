@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.PitchFirstRhythmCommand
 
 PitchFirstRhythmCommand
 =======================
@@ -8,11 +8,9 @@ PitchFirstRhythmCommand
 Bases
 -----
 
-- :py:class:`baca.tools.Command`
+- :py:class:`baca.tools.Command.Command`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,21 +21,19 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.deactivate
-      ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.get_tag
-      ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.manifests
-      ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.offset_to_measure_number
-      ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.pattern
-      ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.rhythm_maker
-      ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.selector
-      ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.tag
-      ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.tag_measure_number
-      ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.tags
-      ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.__call__
-      ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.__eq__
-      ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.__format__
-      ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.__hash__
-      ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.__repr__
+      ~PitchFirstRhythmCommand.deactivate
+      ~PitchFirstRhythmCommand.get_tag
+      ~PitchFirstRhythmCommand.manifests
+      ~PitchFirstRhythmCommand.offset_to_measure_number
+      ~PitchFirstRhythmCommand.pattern
+      ~PitchFirstRhythmCommand.rhythm_maker
+      ~PitchFirstRhythmCommand.selector
+      ~PitchFirstRhythmCommand.tag
+      ~PitchFirstRhythmCommand.tag_measure_number
+      ~PitchFirstRhythmCommand.tags
+      ~PitchFirstRhythmCommand.__call__
+      ~PitchFirstRhythmCommand.__format__
+      ~PitchFirstRhythmCommand.__repr__
 
 Read-only properties
 --------------------
@@ -46,29 +42,29 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.deactivate
+      .. autoattribute:: PitchFirstRhythmCommand.deactivate
 
-.. autoattribute:: baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.pattern
+.. autoattribute:: PitchFirstRhythmCommand.pattern
 
-.. autoattribute:: baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.rhythm_maker
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.selector
+.. autoattribute:: PitchFirstRhythmCommand.rhythm_maker
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.tag
+      .. autoattribute:: PitchFirstRhythmCommand.selector
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.tags
+      .. autoattribute:: PitchFirstRhythmCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmCommand.tags
 
 Read/write properties
 ---------------------
@@ -77,19 +73,19 @@ Read/write properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.manifests
+      .. autoattribute:: PitchFirstRhythmCommand.manifests
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.offset_to_measure_number
+      .. autoattribute:: PitchFirstRhythmCommand.offset_to_measure_number
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.tag_measure_number
+      .. autoattribute:: PitchFirstRhythmCommand.tag_measure_number
 
 Methods
 -------
@@ -98,33 +94,21 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.get_tag
+      .. automethod:: PitchFirstRhythmCommand.get_tag
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.__call__
+.. automethod:: PitchFirstRhythmCommand.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.__eq__
+      .. automethod:: PitchFirstRhythmCommand.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand.__repr__
+      .. automethod:: PitchFirstRhythmCommand.__repr__

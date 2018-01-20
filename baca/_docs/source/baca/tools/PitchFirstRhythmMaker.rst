@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.PitchFirstRhythmMaker
 
 PitchFirstRhythmMaker
 =====================
@@ -8,13 +8,11 @@ PitchFirstRhythmMaker
 Bases
 -----
 
-- :py:class:`abjad.tools.rhythmmakertools.RhythmMaker`
+- :py:class:`abjad.tools.rhythmmakertools.RhythmMaker.RhythmMaker`
 
-- :py:class:`abjad.tools.abctools.AbjadValueObject`
+- :py:class:`abjad.tools.abctools.AbjadValueObject.AbjadValueObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -25,87 +23,87 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.acciaccatura_specifiers
-      ~baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.beam_specifier
-      ~baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.division_masks
-      ~baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.duration_specifier
-      ~baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.logical_tie_masks
-      ~baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.show
-      ~baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.talea
-      ~baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.tie_specifier
-      ~baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.time_treatments
-      ~baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.tuplet_specifier
-      ~baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.__call__
-      ~baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.__copy__
-      ~baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.__eq__
-      ~baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.__format__
-      ~baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.__hash__
-      ~baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.__illustrate__
-      ~baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.__repr__
+      ~PitchFirstRhythmMaker.acciaccatura_specifiers
+      ~PitchFirstRhythmMaker.beam_specifier
+      ~PitchFirstRhythmMaker.division_masks
+      ~PitchFirstRhythmMaker.duration_specifier
+      ~PitchFirstRhythmMaker.logical_tie_masks
+      ~PitchFirstRhythmMaker.show
+      ~PitchFirstRhythmMaker.talea
+      ~PitchFirstRhythmMaker.tie_specifier
+      ~PitchFirstRhythmMaker.time_treatments
+      ~PitchFirstRhythmMaker.tuplet_specifier
+      ~PitchFirstRhythmMaker.__call__
+      ~PitchFirstRhythmMaker.__copy__
+      ~PitchFirstRhythmMaker.__eq__
+      ~PitchFirstRhythmMaker.__format__
+      ~PitchFirstRhythmMaker.__hash__
+      ~PitchFirstRhythmMaker.__illustrate__
+      ~PitchFirstRhythmMaker.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.acciaccatura_specifiers
+.. autoattribute:: PitchFirstRhythmMaker.acciaccatura_specifiers
 
-.. autoattribute:: baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.beam_specifier
+.. autoattribute:: PitchFirstRhythmMaker.beam_specifier
 
-.. autoattribute:: baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.division_masks
+.. autoattribute:: PitchFirstRhythmMaker.division_masks
 
-.. autoattribute:: baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.duration_specifier
+.. autoattribute:: PitchFirstRhythmMaker.duration_specifier
 
-.. autoattribute:: baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.logical_tie_masks
+.. autoattribute:: PitchFirstRhythmMaker.logical_tie_masks
 
-.. autoattribute:: baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.talea
+.. autoattribute:: PitchFirstRhythmMaker.talea
 
-.. autoattribute:: baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.tie_specifier
+.. autoattribute:: PitchFirstRhythmMaker.tie_specifier
 
-.. autoattribute:: baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.time_treatments
+.. autoattribute:: PitchFirstRhythmMaker.time_treatments
 
-.. autoattribute:: baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.tuplet_specifier
+.. autoattribute:: PitchFirstRhythmMaker.tuplet_specifier
 
 Class & static methods
 ----------------------
 
-.. automethod:: baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.show
+.. automethod:: PitchFirstRhythmMaker.show
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.__call__
+.. automethod:: PitchFirstRhythmMaker.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.__copy__
+      .. automethod:: PitchFirstRhythmMaker.__copy__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.__eq__
+      .. automethod:: PitchFirstRhythmMaker.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.__format__
+      .. automethod:: PitchFirstRhythmMaker.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.__hash__
+      .. automethod:: PitchFirstRhythmMaker.__hash__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.__illustrate__
+      .. automethod:: PitchFirstRhythmMaker.__illustrate__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker.__repr__
+      .. automethod:: PitchFirstRhythmMaker.__repr__

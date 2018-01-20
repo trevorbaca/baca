@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.HairpinCommand
 
 HairpinCommand
 ==============
@@ -8,11 +8,9 @@ HairpinCommand
 Bases
 -----
 
-- :py:class:`baca.tools.Command`
+- :py:class:`baca.tools.Command.Command`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,21 +21,19 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.HairpinCommand.HairpinCommand.deactivate
-      ~baca.tools.HairpinCommand.HairpinCommand.get_tag
-      ~baca.tools.HairpinCommand.HairpinCommand.manifests
-      ~baca.tools.HairpinCommand.HairpinCommand.offset_to_measure_number
-      ~baca.tools.HairpinCommand.HairpinCommand.selector
-      ~baca.tools.HairpinCommand.HairpinCommand.start
-      ~baca.tools.HairpinCommand.HairpinCommand.stop
-      ~baca.tools.HairpinCommand.HairpinCommand.tag
-      ~baca.tools.HairpinCommand.HairpinCommand.tag_measure_number
-      ~baca.tools.HairpinCommand.HairpinCommand.tags
-      ~baca.tools.HairpinCommand.HairpinCommand.__call__
-      ~baca.tools.HairpinCommand.HairpinCommand.__eq__
-      ~baca.tools.HairpinCommand.HairpinCommand.__format__
-      ~baca.tools.HairpinCommand.HairpinCommand.__hash__
-      ~baca.tools.HairpinCommand.HairpinCommand.__repr__
+      ~HairpinCommand.deactivate
+      ~HairpinCommand.get_tag
+      ~HairpinCommand.manifests
+      ~HairpinCommand.offset_to_measure_number
+      ~HairpinCommand.selector
+      ~HairpinCommand.start
+      ~HairpinCommand.stop
+      ~HairpinCommand.tag
+      ~HairpinCommand.tag_measure_number
+      ~HairpinCommand.tags
+      ~HairpinCommand.__call__
+      ~HairpinCommand.__format__
+      ~HairpinCommand.__repr__
 
 Read-only properties
 --------------------
@@ -46,29 +42,29 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.deactivate
+      .. autoattribute:: HairpinCommand.deactivate
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.selector
+      .. autoattribute:: HairpinCommand.selector
 
-.. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.start
+.. autoattribute:: HairpinCommand.start
 
-.. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.stop
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.tag
+.. autoattribute:: HairpinCommand.stop
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.tags
+      .. autoattribute:: HairpinCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: HairpinCommand.tags
 
 Read/write properties
 ---------------------
@@ -77,19 +73,19 @@ Read/write properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.manifests
+      .. autoattribute:: HairpinCommand.manifests
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.offset_to_measure_number
+      .. autoattribute:: HairpinCommand.offset_to_measure_number
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.HairpinCommand.HairpinCommand.tag_measure_number
+      .. autoattribute:: HairpinCommand.tag_measure_number
 
 Methods
 -------
@@ -98,33 +94,21 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.HairpinCommand.HairpinCommand.get_tag
+      .. automethod:: HairpinCommand.get_tag
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.HairpinCommand.HairpinCommand.__call__
+.. automethod:: HairpinCommand.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.HairpinCommand.HairpinCommand.__eq__
+      .. automethod:: HairpinCommand.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.HairpinCommand.HairpinCommand.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.HairpinCommand.HairpinCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.HairpinCommand.HairpinCommand.__repr__
+      .. automethod:: HairpinCommand.__repr__

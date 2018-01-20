@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.DivisionSequence
 
 DivisionSequence
 ================
@@ -8,13 +8,23 @@ DivisionSequence
 Bases
 -----
 
-- :py:class:`abjad.tools.datastructuretools.Sequence`
+- :py:class:`abjad.tools.datastructuretools.Sequence.Sequence`
 
-- :py:class:`abjad.tools.abctools.AbjadValueObject`
+- :py:class:`abjad.tools.abctools.AbjadValueObject.AbjadValueObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`collections.abc.Sequence`
+
+- :py:class:`collections.abc.Reversible`
+
+- :py:class:`collections.abc.Collection`
+
+- :py:class:`collections.abc.Sized`
+
+- :py:class:`collections.abc.Iterable`
+
+- :py:class:`collections.abc.Container`
 
 - :py:class:`builtins.object`
 
@@ -25,49 +35,54 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.DivisionSequence.DivisionSequence.filter
-      ~baca.tools.DivisionSequence.DivisionSequence.flatten
-      ~baca.tools.DivisionSequence.DivisionSequence.group_by
-      ~baca.tools.DivisionSequence.DivisionSequence.is_decreasing
-      ~baca.tools.DivisionSequence.DivisionSequence.is_increasing
-      ~baca.tools.DivisionSequence.DivisionSequence.is_permutation
-      ~baca.tools.DivisionSequence.DivisionSequence.is_repetition_free
-      ~baca.tools.DivisionSequence.DivisionSequence.items
-      ~baca.tools.DivisionSequence.DivisionSequence.join
-      ~baca.tools.DivisionSequence.DivisionSequence.map
-      ~baca.tools.DivisionSequence.DivisionSequence.nwise
-      ~baca.tools.DivisionSequence.DivisionSequence.partition_by_counts
-      ~baca.tools.DivisionSequence.DivisionSequence.partition_by_ratio_of_lengths
-      ~baca.tools.DivisionSequence.DivisionSequence.partition_by_ratio_of_weights
-      ~baca.tools.DivisionSequence.DivisionSequence.partition_by_weights
-      ~baca.tools.DivisionSequence.DivisionSequence.permute
-      ~baca.tools.DivisionSequence.DivisionSequence.remove
-      ~baca.tools.DivisionSequence.DivisionSequence.remove_repeats
-      ~baca.tools.DivisionSequence.DivisionSequence.repeat
-      ~baca.tools.DivisionSequence.DivisionSequence.repeat_to_length
-      ~baca.tools.DivisionSequence.DivisionSequence.repeat_to_weight
-      ~baca.tools.DivisionSequence.DivisionSequence.replace
-      ~baca.tools.DivisionSequence.DivisionSequence.retain
-      ~baca.tools.DivisionSequence.DivisionSequence.retain_pattern
-      ~baca.tools.DivisionSequence.DivisionSequence.reverse
-      ~baca.tools.DivisionSequence.DivisionSequence.rotate
-      ~baca.tools.DivisionSequence.DivisionSequence.select
-      ~baca.tools.DivisionSequence.DivisionSequence.sort
-      ~baca.tools.DivisionSequence.DivisionSequence.split
-      ~baca.tools.DivisionSequence.DivisionSequence.split_by_durations
-      ~baca.tools.DivisionSequence.DivisionSequence.sum
-      ~baca.tools.DivisionSequence.DivisionSequence.sum_by_sign
-      ~baca.tools.DivisionSequence.DivisionSequence.truncate
-      ~baca.tools.DivisionSequence.DivisionSequence.zip
-      ~baca.tools.DivisionSequence.DivisionSequence.__add__
-      ~baca.tools.DivisionSequence.DivisionSequence.__copy__
-      ~baca.tools.DivisionSequence.DivisionSequence.__eq__
-      ~baca.tools.DivisionSequence.DivisionSequence.__format__
-      ~baca.tools.DivisionSequence.DivisionSequence.__getitem__
-      ~baca.tools.DivisionSequence.DivisionSequence.__hash__
-      ~baca.tools.DivisionSequence.DivisionSequence.__len__
-      ~baca.tools.DivisionSequence.DivisionSequence.__radd__
-      ~baca.tools.DivisionSequence.DivisionSequence.__repr__
+      ~DivisionSequence.count
+      ~DivisionSequence.filter
+      ~DivisionSequence.flatten
+      ~DivisionSequence.group_by
+      ~DivisionSequence.index
+      ~DivisionSequence.is_decreasing
+      ~DivisionSequence.is_increasing
+      ~DivisionSequence.is_permutation
+      ~DivisionSequence.is_repetition_free
+      ~DivisionSequence.items
+      ~DivisionSequence.join
+      ~DivisionSequence.map
+      ~DivisionSequence.nwise
+      ~DivisionSequence.partition_by_counts
+      ~DivisionSequence.partition_by_ratio_of_lengths
+      ~DivisionSequence.partition_by_ratio_of_weights
+      ~DivisionSequence.partition_by_weights
+      ~DivisionSequence.permute
+      ~DivisionSequence.remove
+      ~DivisionSequence.remove_repeats
+      ~DivisionSequence.repeat
+      ~DivisionSequence.repeat_to_length
+      ~DivisionSequence.repeat_to_weight
+      ~DivisionSequence.replace
+      ~DivisionSequence.retain
+      ~DivisionSequence.retain_pattern
+      ~DivisionSequence.reverse
+      ~DivisionSequence.rotate
+      ~DivisionSequence.select
+      ~DivisionSequence.sort
+      ~DivisionSequence.split
+      ~DivisionSequence.split_by_durations
+      ~DivisionSequence.sum
+      ~DivisionSequence.sum_by_sign
+      ~DivisionSequence.truncate
+      ~DivisionSequence.zip
+      ~DivisionSequence.__add__
+      ~DivisionSequence.__contains__
+      ~DivisionSequence.__copy__
+      ~DivisionSequence.__eq__
+      ~DivisionSequence.__format__
+      ~DivisionSequence.__getitem__
+      ~DivisionSequence.__hash__
+      ~DivisionSequence.__iter__
+      ~DivisionSequence.__len__
+      ~DivisionSequence.__radd__
+      ~DivisionSequence.__repr__
+      ~DivisionSequence.__reversed__
 
 Read-only properties
 --------------------
@@ -76,7 +91,7 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.DivisionSequence.DivisionSequence.items
+      .. autoattribute:: DivisionSequence.items
 
 Methods
 -------
@@ -85,195 +100,207 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.filter
+      .. automethod:: DivisionSequence.count
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.flatten
+      .. automethod:: DivisionSequence.filter
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.group_by
+      .. automethod:: DivisionSequence.flatten
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.is_decreasing
+      .. automethod:: DivisionSequence.group_by
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.is_increasing
+      .. automethod:: DivisionSequence.index
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.is_permutation
+      .. automethod:: DivisionSequence.is_decreasing
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.is_repetition_free
+      .. automethod:: DivisionSequence.is_increasing
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.join
+      .. automethod:: DivisionSequence.is_permutation
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.map
+      .. automethod:: DivisionSequence.is_repetition_free
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.nwise
+      .. automethod:: DivisionSequence.join
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.partition_by_counts
+      .. automethod:: DivisionSequence.map
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.partition_by_ratio_of_lengths
+      .. automethod:: DivisionSequence.nwise
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.partition_by_ratio_of_weights
+      .. automethod:: DivisionSequence.partition_by_counts
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.partition_by_weights
+      .. automethod:: DivisionSequence.partition_by_ratio_of_lengths
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.permute
+      .. automethod:: DivisionSequence.partition_by_ratio_of_weights
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.remove
+      .. automethod:: DivisionSequence.partition_by_weights
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.remove_repeats
+      .. automethod:: DivisionSequence.permute
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.repeat
+      .. automethod:: DivisionSequence.remove
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.repeat_to_length
+      .. automethod:: DivisionSequence.remove_repeats
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.repeat_to_weight
+      .. automethod:: DivisionSequence.repeat
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.replace
+      .. automethod:: DivisionSequence.repeat_to_length
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.retain
+      .. automethod:: DivisionSequence.repeat_to_weight
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.retain_pattern
+      .. automethod:: DivisionSequence.replace
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.reverse
+      .. automethod:: DivisionSequence.retain
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.rotate
+      .. automethod:: DivisionSequence.retain_pattern
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.select
+      .. automethod:: DivisionSequence.reverse
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.sort
+      .. automethod:: DivisionSequence.rotate
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.split
-
-.. automethod:: baca.tools.DivisionSequence.DivisionSequence.split_by_durations
+      .. automethod:: DivisionSequence.select
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.sum
+      .. automethod:: DivisionSequence.sort
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.sum_by_sign
+      .. automethod:: DivisionSequence.split
+
+.. automethod:: DivisionSequence.split_by_durations
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.truncate
+      .. automethod:: DivisionSequence.sum
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.zip
+      .. automethod:: DivisionSequence.sum_by_sign
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.truncate
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.zip
 
 Special methods
 ---------------
@@ -282,52 +309,70 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.__add__
+      .. automethod:: DivisionSequence.__add__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.__copy__
+      .. automethod:: DivisionSequence.__contains__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.__eq__
+      .. automethod:: DivisionSequence.__copy__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.__format__
+      .. automethod:: DivisionSequence.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.__getitem__
+      .. automethod:: DivisionSequence.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.__hash__
+      .. automethod:: DivisionSequence.__getitem__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.__len__
+      .. automethod:: DivisionSequence.__hash__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.__radd__
+      .. automethod:: DivisionSequence.__iter__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DivisionSequence.DivisionSequence.__repr__
+      .. automethod:: DivisionSequence.__len__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.__radd__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.__repr__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.__reversed__

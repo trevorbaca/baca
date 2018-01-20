@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.PitchTree
 
 PitchTree
 =========
@@ -8,11 +8,9 @@ PitchTree
 Bases
 -----
 
-- :py:class:`baca.tools.Tree`
+- :py:class:`baca.tools.Tree.Tree`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,24 +21,24 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.PitchTree.PitchTree.get_payload
-      ~baca.tools.PitchTree.PitchTree.has_repeats
-      ~baca.tools.PitchTree.PitchTree.invert
-      ~baca.tools.PitchTree.PitchTree.item_class
-      ~baca.tools.PitchTree.PitchTree.items
-      ~baca.tools.PitchTree.PitchTree.iterate
-      ~baca.tools.PitchTree.PitchTree.retrograde
-      ~baca.tools.PitchTree.PitchTree.rotate
-      ~baca.tools.PitchTree.PitchTree.transpose
-      ~baca.tools.PitchTree.PitchTree.__contains__
-      ~baca.tools.PitchTree.PitchTree.__eq__
-      ~baca.tools.PitchTree.PitchTree.__format__
-      ~baca.tools.PitchTree.PitchTree.__getitem__
-      ~baca.tools.PitchTree.PitchTree.__graph__
-      ~baca.tools.PitchTree.PitchTree.__hash__
-      ~baca.tools.PitchTree.PitchTree.__illustrate__
-      ~baca.tools.PitchTree.PitchTree.__len__
-      ~baca.tools.PitchTree.PitchTree.__repr__
+      ~PitchTree.get_payload
+      ~PitchTree.has_repeats
+      ~PitchTree.invert
+      ~PitchTree.item_class
+      ~PitchTree.items
+      ~PitchTree.iterate
+      ~PitchTree.retrograde
+      ~PitchTree.rotate
+      ~PitchTree.transpose
+      ~PitchTree.__contains__
+      ~PitchTree.__eq__
+      ~PitchTree.__format__
+      ~PitchTree.__getitem__
+      ~PitchTree.__graph__
+      ~PitchTree.__hash__
+      ~PitchTree.__illustrate__
+      ~PitchTree.__len__
+      ~PitchTree.__repr__
 
 Read-only properties
 --------------------
@@ -49,13 +47,13 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchTree.PitchTree.item_class
+      .. autoattribute:: PitchTree.item_class
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchTree.PitchTree.items
+      .. autoattribute:: PitchTree.items
 
 Methods
 -------
@@ -64,23 +62,23 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchTree.PitchTree.get_payload
+      .. automethod:: PitchTree.get_payload
 
-.. automethod:: baca.tools.PitchTree.PitchTree.has_repeats
+.. automethod:: PitchTree.has_repeats
 
-.. automethod:: baca.tools.PitchTree.PitchTree.invert
+.. automethod:: PitchTree.invert
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchTree.PitchTree.iterate
+      .. automethod:: PitchTree.iterate
 
-.. automethod:: baca.tools.PitchTree.PitchTree.retrograde
+.. automethod:: PitchTree.retrograde
 
-.. automethod:: baca.tools.PitchTree.PitchTree.rotate
+.. automethod:: PitchTree.rotate
 
-.. automethod:: baca.tools.PitchTree.PitchTree.transpose
+.. automethod:: PitchTree.transpose
 
 Special methods
 ---------------
@@ -89,44 +87,44 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchTree.PitchTree.__contains__
+      .. automethod:: PitchTree.__contains__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchTree.PitchTree.__eq__
+      .. automethod:: PitchTree.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchTree.PitchTree.__format__
+      .. automethod:: PitchTree.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchTree.PitchTree.__getitem__
+      .. automethod:: PitchTree.__getitem__
 
-.. automethod:: baca.tools.PitchTree.PitchTree.__graph__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.PitchTree.PitchTree.__hash__
-
-.. automethod:: baca.tools.PitchTree.PitchTree.__illustrate__
+.. automethod:: PitchTree.__graph__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchTree.PitchTree.__len__
+      .. automethod:: PitchTree.__hash__
+
+.. automethod:: PitchTree.__illustrate__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchTree.PitchTree.__repr__
+      .. automethod:: PitchTree.__len__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: PitchTree.__repr__

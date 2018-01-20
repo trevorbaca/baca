@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.RegistrationDictionary
 
 RegistrationDictionary
 ======================
@@ -8,13 +8,23 @@ RegistrationDictionary
 Bases
 -----
 
-- :py:class:`abjad.tools.datastructuretools.TypedOrderedDict`
+- :py:class:`abjad.tools.datastructuretools.TypedOrderedDict.TypedOrderedDict`
 
-- :py:class:`abjad.tools.datastructuretools.TypedCollection`
+- :py:class:`abjad.tools.datastructuretools.TypedCollection.TypedCollection`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`collections.abc.MutableMapping`
+
+- :py:class:`collections.abc.Mapping`
+
+- :py:class:`collections.abc.Collection`
+
+- :py:class:`collections.abc.Sized`
+
+- :py:class:`collections.abc.Iterable`
+
+- :py:class:`collections.abc.Container`
 
 - :py:class:`builtins.object`
 
@@ -25,34 +35,34 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.clear
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.copy
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.get
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.has_key
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.item_class
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.items
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.keys
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.pop
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.popitem
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.setdefault
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.update
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.values
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.__cmp__
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.__contains__
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.__delitem__
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.__eq__
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.__format__
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.__ge__
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.__getitem__
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.__gt__
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.__hash__
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.__iter__
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.__le__
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.__len__
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.__lt__
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.__repr__
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.__reversed__
-      ~baca.tools.RegistrationDictionary.RegistrationDictionary.__setitem__
+      ~RegistrationDictionary.clear
+      ~RegistrationDictionary.copy
+      ~RegistrationDictionary.get
+      ~RegistrationDictionary.has_key
+      ~RegistrationDictionary.item_class
+      ~RegistrationDictionary.items
+      ~RegistrationDictionary.keys
+      ~RegistrationDictionary.pop
+      ~RegistrationDictionary.popitem
+      ~RegistrationDictionary.setdefault
+      ~RegistrationDictionary.update
+      ~RegistrationDictionary.values
+      ~RegistrationDictionary.__cmp__
+      ~RegistrationDictionary.__contains__
+      ~RegistrationDictionary.__delitem__
+      ~RegistrationDictionary.__eq__
+      ~RegistrationDictionary.__format__
+      ~RegistrationDictionary.__ge__
+      ~RegistrationDictionary.__getitem__
+      ~RegistrationDictionary.__gt__
+      ~RegistrationDictionary.__hash__
+      ~RegistrationDictionary.__iter__
+      ~RegistrationDictionary.__le__
+      ~RegistrationDictionary.__len__
+      ~RegistrationDictionary.__lt__
+      ~RegistrationDictionary.__repr__
+      ~RegistrationDictionary.__reversed__
+      ~RegistrationDictionary.__setitem__
 
 Read-only properties
 --------------------
@@ -61,7 +71,7 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RegistrationDictionary.RegistrationDictionary.item_class
+      .. autoattribute:: RegistrationDictionary.item_class
 
 Methods
 -------
@@ -70,67 +80,67 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.clear
+      .. automethod:: RegistrationDictionary.clear
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.copy
+      .. automethod:: RegistrationDictionary.copy
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.get
+      .. automethod:: RegistrationDictionary.get
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.has_key
+      .. automethod:: RegistrationDictionary.has_key
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.items
+      .. automethod:: RegistrationDictionary.items
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.keys
+      .. automethod:: RegistrationDictionary.keys
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.pop
+      .. automethod:: RegistrationDictionary.pop
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.popitem
+      .. automethod:: RegistrationDictionary.popitem
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.setdefault
+      .. automethod:: RegistrationDictionary.setdefault
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.update
+      .. automethod:: RegistrationDictionary.update
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.values
+      .. automethod:: RegistrationDictionary.values
 
 Special methods
 ---------------
@@ -139,94 +149,94 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.__cmp__
+      .. automethod:: RegistrationDictionary.__cmp__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.__contains__
+      .. automethod:: RegistrationDictionary.__contains__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.__delitem__
+      .. automethod:: RegistrationDictionary.__delitem__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.__eq__
+      .. automethod:: RegistrationDictionary.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.__format__
+      .. automethod:: RegistrationDictionary.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.__ge__
+      .. automethod:: RegistrationDictionary.__ge__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.__getitem__
+      .. automethod:: RegistrationDictionary.__getitem__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.__gt__
+      .. automethod:: RegistrationDictionary.__gt__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.__hash__
+      .. automethod:: RegistrationDictionary.__hash__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.__iter__
+      .. automethod:: RegistrationDictionary.__iter__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.__le__
+      .. automethod:: RegistrationDictionary.__le__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.__len__
+      .. automethod:: RegistrationDictionary.__len__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.__lt__
+      .. automethod:: RegistrationDictionary.__lt__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.__repr__
+      .. automethod:: RegistrationDictionary.__repr__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.__reversed__
+      .. automethod:: RegistrationDictionary.__reversed__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegistrationDictionary.RegistrationDictionary.__setitem__
+      .. automethod:: RegistrationDictionary.__setitem__

@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.BreakMeasureMap
 
 BreakMeasureMap
 ===============
@@ -8,9 +8,7 @@ BreakMeasureMap
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,52 +19,38 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.BreakMeasureMap.BreakMeasureMap.commands
-      ~baca.tools.BreakMeasureMap.BreakMeasureMap.deactivate
-      ~baca.tools.BreakMeasureMap.BreakMeasureMap.tag
-      ~baca.tools.BreakMeasureMap.BreakMeasureMap.tags
-      ~baca.tools.BreakMeasureMap.BreakMeasureMap.__call__
-      ~baca.tools.BreakMeasureMap.BreakMeasureMap.__eq__
-      ~baca.tools.BreakMeasureMap.BreakMeasureMap.__format__
-      ~baca.tools.BreakMeasureMap.BreakMeasureMap.__hash__
-      ~baca.tools.BreakMeasureMap.BreakMeasureMap.__repr__
+      ~BreakMeasureMap.commands
+      ~BreakMeasureMap.deactivate
+      ~BreakMeasureMap.tag
+      ~BreakMeasureMap.tags
+      ~BreakMeasureMap.__call__
+      ~BreakMeasureMap.__format__
+      ~BreakMeasureMap.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.BreakMeasureMap.BreakMeasureMap.commands
+.. autoattribute:: BreakMeasureMap.commands
 
-.. autoattribute:: baca.tools.BreakMeasureMap.BreakMeasureMap.deactivate
+.. autoattribute:: BreakMeasureMap.deactivate
 
-.. autoattribute:: baca.tools.BreakMeasureMap.BreakMeasureMap.tag
+.. autoattribute:: BreakMeasureMap.tag
 
-.. autoattribute:: baca.tools.BreakMeasureMap.BreakMeasureMap.tags
+.. autoattribute:: BreakMeasureMap.tags
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.BreakMeasureMap.BreakMeasureMap.__call__
+.. automethod:: BreakMeasureMap.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.BreakMeasureMap.BreakMeasureMap.__eq__
+      .. automethod:: BreakMeasureMap.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.BreakMeasureMap.BreakMeasureMap.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.BreakMeasureMap.BreakMeasureMap.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.BreakMeasureMap.BreakMeasureMap.__repr__
+      .. automethod:: BreakMeasureMap.__repr__

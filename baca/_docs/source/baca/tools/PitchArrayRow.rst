@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.PitchArrayRow
 
 PitchArrayRow
 =============
@@ -8,9 +8,7 @@ PitchArrayRow
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,137 +19,137 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.PitchArrayRow.PitchArrayRow.append
-      ~baca.tools.PitchArrayRow.PitchArrayRow.apply_pitches
-      ~baca.tools.PitchArrayRow.PitchArrayRow.cell_tokens
-      ~baca.tools.PitchArrayRow.PitchArrayRow.cell_widths
-      ~baca.tools.PitchArrayRow.PitchArrayRow.cells
-      ~baca.tools.PitchArrayRow.PitchArrayRow.copy_subrow
-      ~baca.tools.PitchArrayRow.PitchArrayRow.depth
-      ~baca.tools.PitchArrayRow.PitchArrayRow.dimensions
-      ~baca.tools.PitchArrayRow.PitchArrayRow.empty_pitches
-      ~baca.tools.PitchArrayRow.PitchArrayRow.extend
-      ~baca.tools.PitchArrayRow.PitchArrayRow.has_spanning_cell_over_index
-      ~baca.tools.PitchArrayRow.PitchArrayRow.index
-      ~baca.tools.PitchArrayRow.PitchArrayRow.is_defective
-      ~baca.tools.PitchArrayRow.PitchArrayRow.is_in_range
-      ~baca.tools.PitchArrayRow.PitchArrayRow.merge
-      ~baca.tools.PitchArrayRow.PitchArrayRow.pad_to_width
-      ~baca.tools.PitchArrayRow.PitchArrayRow.parent_array
-      ~baca.tools.PitchArrayRow.PitchArrayRow.pitch_range
-      ~baca.tools.PitchArrayRow.PitchArrayRow.pitches
-      ~baca.tools.PitchArrayRow.PitchArrayRow.pop
-      ~baca.tools.PitchArrayRow.PitchArrayRow.remove
-      ~baca.tools.PitchArrayRow.PitchArrayRow.row_index
-      ~baca.tools.PitchArrayRow.PitchArrayRow.to_measure
-      ~baca.tools.PitchArrayRow.PitchArrayRow.weight
-      ~baca.tools.PitchArrayRow.PitchArrayRow.width
-      ~baca.tools.PitchArrayRow.PitchArrayRow.withdraw
-      ~baca.tools.PitchArrayRow.PitchArrayRow.__add__
-      ~baca.tools.PitchArrayRow.PitchArrayRow.__copy__
-      ~baca.tools.PitchArrayRow.PitchArrayRow.__eq__
-      ~baca.tools.PitchArrayRow.PitchArrayRow.__format__
-      ~baca.tools.PitchArrayRow.PitchArrayRow.__getitem__
-      ~baca.tools.PitchArrayRow.PitchArrayRow.__hash__
-      ~baca.tools.PitchArrayRow.PitchArrayRow.__iadd__
-      ~baca.tools.PitchArrayRow.PitchArrayRow.__iter__
-      ~baca.tools.PitchArrayRow.PitchArrayRow.__len__
-      ~baca.tools.PitchArrayRow.PitchArrayRow.__ne__
-      ~baca.tools.PitchArrayRow.PitchArrayRow.__repr__
-      ~baca.tools.PitchArrayRow.PitchArrayRow.__str__
+      ~PitchArrayRow.append
+      ~PitchArrayRow.apply_pitches
+      ~PitchArrayRow.cell_tokens
+      ~PitchArrayRow.cell_widths
+      ~PitchArrayRow.cells
+      ~PitchArrayRow.copy_subrow
+      ~PitchArrayRow.depth
+      ~PitchArrayRow.dimensions
+      ~PitchArrayRow.empty_pitches
+      ~PitchArrayRow.extend
+      ~PitchArrayRow.has_spanning_cell_over_index
+      ~PitchArrayRow.index
+      ~PitchArrayRow.is_defective
+      ~PitchArrayRow.is_in_range
+      ~PitchArrayRow.merge
+      ~PitchArrayRow.pad_to_width
+      ~PitchArrayRow.parent_array
+      ~PitchArrayRow.pitch_range
+      ~PitchArrayRow.pitches
+      ~PitchArrayRow.pop
+      ~PitchArrayRow.remove
+      ~PitchArrayRow.row_index
+      ~PitchArrayRow.to_measure
+      ~PitchArrayRow.weight
+      ~PitchArrayRow.width
+      ~PitchArrayRow.withdraw
+      ~PitchArrayRow.__add__
+      ~PitchArrayRow.__copy__
+      ~PitchArrayRow.__eq__
+      ~PitchArrayRow.__format__
+      ~PitchArrayRow.__getitem__
+      ~PitchArrayRow.__hash__
+      ~PitchArrayRow.__iadd__
+      ~PitchArrayRow.__iter__
+      ~PitchArrayRow.__len__
+      ~PitchArrayRow.__ne__
+      ~PitchArrayRow.__repr__
+      ~PitchArrayRow.__str__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.PitchArrayRow.PitchArrayRow.cell_tokens
+.. autoattribute:: PitchArrayRow.cell_tokens
 
-.. autoattribute:: baca.tools.PitchArrayRow.PitchArrayRow.cell_widths
+.. autoattribute:: PitchArrayRow.cell_widths
 
-.. autoattribute:: baca.tools.PitchArrayRow.PitchArrayRow.cells
+.. autoattribute:: PitchArrayRow.cells
 
-.. autoattribute:: baca.tools.PitchArrayRow.PitchArrayRow.depth
+.. autoattribute:: PitchArrayRow.depth
 
-.. autoattribute:: baca.tools.PitchArrayRow.PitchArrayRow.dimensions
+.. autoattribute:: PitchArrayRow.dimensions
 
-.. autoattribute:: baca.tools.PitchArrayRow.PitchArrayRow.is_defective
+.. autoattribute:: PitchArrayRow.is_defective
 
-.. autoattribute:: baca.tools.PitchArrayRow.PitchArrayRow.is_in_range
+.. autoattribute:: PitchArrayRow.is_in_range
 
-.. autoattribute:: baca.tools.PitchArrayRow.PitchArrayRow.parent_array
+.. autoattribute:: PitchArrayRow.parent_array
 
-.. autoattribute:: baca.tools.PitchArrayRow.PitchArrayRow.pitches
+.. autoattribute:: PitchArrayRow.pitches
 
-.. autoattribute:: baca.tools.PitchArrayRow.PitchArrayRow.row_index
+.. autoattribute:: PitchArrayRow.row_index
 
-.. autoattribute:: baca.tools.PitchArrayRow.PitchArrayRow.weight
+.. autoattribute:: PitchArrayRow.weight
 
-.. autoattribute:: baca.tools.PitchArrayRow.PitchArrayRow.width
+.. autoattribute:: PitchArrayRow.width
 
 Read/write properties
 ---------------------
 
-.. autoattribute:: baca.tools.PitchArrayRow.PitchArrayRow.pitch_range
+.. autoattribute:: PitchArrayRow.pitch_range
 
 Methods
 -------
 
-.. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.append
+.. automethod:: PitchArrayRow.append
 
-.. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.apply_pitches
+.. automethod:: PitchArrayRow.apply_pitches
 
-.. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.copy_subrow
+.. automethod:: PitchArrayRow.copy_subrow
 
-.. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.empty_pitches
+.. automethod:: PitchArrayRow.empty_pitches
 
-.. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.extend
+.. automethod:: PitchArrayRow.extend
 
-.. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.has_spanning_cell_over_index
+.. automethod:: PitchArrayRow.has_spanning_cell_over_index
 
-.. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.index
+.. automethod:: PitchArrayRow.index
 
-.. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.merge
+.. automethod:: PitchArrayRow.merge
 
-.. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.pad_to_width
+.. automethod:: PitchArrayRow.pad_to_width
 
-.. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.pop
+.. automethod:: PitchArrayRow.pop
 
-.. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.remove
+.. automethod:: PitchArrayRow.remove
 
-.. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.to_measure
+.. automethod:: PitchArrayRow.to_measure
 
-.. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.withdraw
+.. automethod:: PitchArrayRow.withdraw
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.__add__
+.. automethod:: PitchArrayRow.__add__
 
-.. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.__copy__
+.. automethod:: PitchArrayRow.__copy__
 
-.. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.__eq__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.__format__
-
-.. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.__getitem__
-
-.. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.__hash__
-
-.. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.__iadd__
-
-.. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.__iter__
-
-.. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.__len__
-
-.. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.__ne__
+.. automethod:: PitchArrayRow.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.__repr__
+      .. automethod:: PitchArrayRow.__format__
 
-.. automethod:: baca.tools.PitchArrayRow.PitchArrayRow.__str__
+.. automethod:: PitchArrayRow.__getitem__
+
+.. automethod:: PitchArrayRow.__hash__
+
+.. automethod:: PitchArrayRow.__iadd__
+
+.. automethod:: PitchArrayRow.__iter__
+
+.. automethod:: PitchArrayRow.__len__
+
+.. automethod:: PitchArrayRow.__ne__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: PitchArrayRow.__repr__
+
+.. automethod:: PitchArrayRow.__str__

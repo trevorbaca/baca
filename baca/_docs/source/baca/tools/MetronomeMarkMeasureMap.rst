@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.MetronomeMarkMeasureMap
 
 MetronomeMarkMeasureMap
 =======================
@@ -8,9 +8,7 @@ MetronomeMarkMeasureMap
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,17 +19,15 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap.items
-      ~baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap.__eq__
-      ~baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap.__format__
-      ~baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap.__getitem__
-      ~baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap.__hash__
-      ~baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap.__repr__
+      ~MetronomeMarkMeasureMap.items
+      ~MetronomeMarkMeasureMap.__format__
+      ~MetronomeMarkMeasureMap.__getitem__
+      ~MetronomeMarkMeasureMap.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap.items
+.. autoattribute:: MetronomeMarkMeasureMap.items
 
 Special methods
 ---------------
@@ -40,24 +36,12 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap.__eq__
+      .. automethod:: MetronomeMarkMeasureMap.__format__
+
+.. automethod:: MetronomeMarkMeasureMap.__getitem__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap.__format__
-
-.. automethod:: baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap.__getitem__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap.__repr__
+      .. automethod:: MetronomeMarkMeasureMap.__repr__

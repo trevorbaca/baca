@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.PitchSpecifier
 
 PitchSpecifier
 ==============
@@ -8,9 +8,7 @@ PitchSpecifier
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,48 +19,34 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.PitchSpecifier.PitchSpecifier.expressions
-      ~baca.tools.PitchSpecifier.PitchSpecifier.remove_duplicate_pitch_classes
-      ~baca.tools.PitchSpecifier.PitchSpecifier.remove_duplicates
-      ~baca.tools.PitchSpecifier.PitchSpecifier.to_pitch_classes
-      ~baca.tools.PitchSpecifier.PitchSpecifier.__call__
-      ~baca.tools.PitchSpecifier.PitchSpecifier.__eq__
-      ~baca.tools.PitchSpecifier.PitchSpecifier.__format__
-      ~baca.tools.PitchSpecifier.PitchSpecifier.__hash__
-      ~baca.tools.PitchSpecifier.PitchSpecifier.__repr__
+      ~PitchSpecifier.expressions
+      ~PitchSpecifier.remove_duplicate_pitch_classes
+      ~PitchSpecifier.remove_duplicates
+      ~PitchSpecifier.to_pitch_classes
+      ~PitchSpecifier.__call__
+      ~PitchSpecifier.__format__
+      ~PitchSpecifier.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.PitchSpecifier.PitchSpecifier.expressions
+.. autoattribute:: PitchSpecifier.expressions
 
-.. autoattribute:: baca.tools.PitchSpecifier.PitchSpecifier.remove_duplicate_pitch_classes
+.. autoattribute:: PitchSpecifier.remove_duplicate_pitch_classes
 
-.. autoattribute:: baca.tools.PitchSpecifier.PitchSpecifier.remove_duplicates
+.. autoattribute:: PitchSpecifier.remove_duplicates
 
-.. autoattribute:: baca.tools.PitchSpecifier.PitchSpecifier.to_pitch_classes
+.. autoattribute:: PitchSpecifier.to_pitch_classes
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.PitchSpecifier.PitchSpecifier.__call__
+.. automethod:: PitchSpecifier.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSpecifier.PitchSpecifier.__eq__
+      .. automethod:: PitchSpecifier.__format__
 
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.PitchSpecifier.PitchSpecifier.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.PitchSpecifier.PitchSpecifier.__hash__
-
-.. automethod:: baca.tools.PitchSpecifier.PitchSpecifier.__repr__
+.. automethod:: PitchSpecifier.__repr__

@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.ColorFingeringCommand
 
 ColorFingeringCommand
 =====================
@@ -8,11 +8,9 @@ ColorFingeringCommand
 Bases
 -----
 
-- :py:class:`baca.tools.Command`
+- :py:class:`baca.tools.Command.Command`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,20 +21,18 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.deactivate
-      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.get_tag
-      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.manifests
-      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.numbers
-      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.offset_to_measure_number
-      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.selector
-      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.tag
-      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.tag_measure_number
-      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.tags
-      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.__call__
-      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.__eq__
-      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.__format__
-      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.__hash__
-      ~baca.tools.ColorFingeringCommand.ColorFingeringCommand.__repr__
+      ~ColorFingeringCommand.deactivate
+      ~ColorFingeringCommand.get_tag
+      ~ColorFingeringCommand.manifests
+      ~ColorFingeringCommand.numbers
+      ~ColorFingeringCommand.offset_to_measure_number
+      ~ColorFingeringCommand.selector
+      ~ColorFingeringCommand.tag
+      ~ColorFingeringCommand.tag_measure_number
+      ~ColorFingeringCommand.tags
+      ~ColorFingeringCommand.__call__
+      ~ColorFingeringCommand.__format__
+      ~ColorFingeringCommand.__repr__
 
 Read-only properties
 --------------------
@@ -45,27 +41,27 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.deactivate
+      .. autoattribute:: ColorFingeringCommand.deactivate
 
-.. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.numbers
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.selector
+.. autoattribute:: ColorFingeringCommand.numbers
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.tag
+      .. autoattribute:: ColorFingeringCommand.selector
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.tags
+      .. autoattribute:: ColorFingeringCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: ColorFingeringCommand.tags
 
 Read/write properties
 ---------------------
@@ -74,19 +70,19 @@ Read/write properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.manifests
+      .. autoattribute:: ColorFingeringCommand.manifests
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.offset_to_measure_number
+      .. autoattribute:: ColorFingeringCommand.offset_to_measure_number
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.tag_measure_number
+      .. autoattribute:: ColorFingeringCommand.tag_measure_number
 
 Methods
 -------
@@ -95,33 +91,21 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.get_tag
+      .. automethod:: ColorFingeringCommand.get_tag
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.__call__
+.. automethod:: ColorFingeringCommand.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.__eq__
+      .. automethod:: ColorFingeringCommand.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.ColorFingeringCommand.ColorFingeringCommand.__repr__
+      .. automethod:: ColorFingeringCommand.__repr__

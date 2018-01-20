@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.ConstellationCircuit
 
 ConstellationCircuit
 ====================
@@ -8,9 +8,7 @@ ConstellationCircuit
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,51 +19,49 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.ConstellationCircuit.ConstellationCircuit.generator_chords
-      ~baca.tools.ConstellationCircuit.ConstellationCircuit.get
-      ~baca.tools.ConstellationCircuit.ConstellationCircuit.illustrate_colored_generator_chords
-      ~baca.tools.ConstellationCircuit.ConstellationCircuit.illustrate_colored_generator_chords_and_pivot_chords
-      ~baca.tools.ConstellationCircuit.ConstellationCircuit.illustrate_generator_chords
-      ~baca.tools.ConstellationCircuit.ConstellationCircuit.illustrate_generator_chords_and_pivot_chords
-      ~baca.tools.ConstellationCircuit.ConstellationCircuit.illustrate_pivot_chords
-      ~baca.tools.ConstellationCircuit.ConstellationCircuit.make_constellation_circuit_1
-      ~baca.tools.ConstellationCircuit.ConstellationCircuit.pitch_range
-      ~baca.tools.ConstellationCircuit.ConstellationCircuit.pivot_chords
-      ~baca.tools.ConstellationCircuit.ConstellationCircuit.__eq__
-      ~baca.tools.ConstellationCircuit.ConstellationCircuit.__format__
-      ~baca.tools.ConstellationCircuit.ConstellationCircuit.__getitem__
-      ~baca.tools.ConstellationCircuit.ConstellationCircuit.__hash__
-      ~baca.tools.ConstellationCircuit.ConstellationCircuit.__len__
-      ~baca.tools.ConstellationCircuit.ConstellationCircuit.__repr__
+      ~ConstellationCircuit.generator_chords
+      ~ConstellationCircuit.get
+      ~ConstellationCircuit.illustrate_colored_generator_chords
+      ~ConstellationCircuit.illustrate_colored_generator_chords_and_pivot_chords
+      ~ConstellationCircuit.illustrate_generator_chords
+      ~ConstellationCircuit.illustrate_generator_chords_and_pivot_chords
+      ~ConstellationCircuit.illustrate_pivot_chords
+      ~ConstellationCircuit.make_constellation_circuit_1
+      ~ConstellationCircuit.pitch_range
+      ~ConstellationCircuit.pivot_chords
+      ~ConstellationCircuit.__format__
+      ~ConstellationCircuit.__getitem__
+      ~ConstellationCircuit.__len__
+      ~ConstellationCircuit.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.ConstellationCircuit.ConstellationCircuit.generator_chords
+.. autoattribute:: ConstellationCircuit.generator_chords
 
-.. autoattribute:: baca.tools.ConstellationCircuit.ConstellationCircuit.pitch_range
+.. autoattribute:: ConstellationCircuit.pitch_range
 
-.. autoattribute:: baca.tools.ConstellationCircuit.ConstellationCircuit.pivot_chords
+.. autoattribute:: ConstellationCircuit.pivot_chords
 
 Methods
 -------
 
-.. automethod:: baca.tools.ConstellationCircuit.ConstellationCircuit.get
+.. automethod:: ConstellationCircuit.get
 
-.. automethod:: baca.tools.ConstellationCircuit.ConstellationCircuit.illustrate_colored_generator_chords
+.. automethod:: ConstellationCircuit.illustrate_colored_generator_chords
 
-.. automethod:: baca.tools.ConstellationCircuit.ConstellationCircuit.illustrate_colored_generator_chords_and_pivot_chords
+.. automethod:: ConstellationCircuit.illustrate_colored_generator_chords_and_pivot_chords
 
-.. automethod:: baca.tools.ConstellationCircuit.ConstellationCircuit.illustrate_generator_chords
+.. automethod:: ConstellationCircuit.illustrate_generator_chords
 
-.. automethod:: baca.tools.ConstellationCircuit.ConstellationCircuit.illustrate_generator_chords_and_pivot_chords
+.. automethod:: ConstellationCircuit.illustrate_generator_chords_and_pivot_chords
 
-.. automethod:: baca.tools.ConstellationCircuit.ConstellationCircuit.illustrate_pivot_chords
+.. automethod:: ConstellationCircuit.illustrate_pivot_chords
 
 Class & static methods
 ----------------------
 
-.. automethod:: baca.tools.ConstellationCircuit.ConstellationCircuit.make_constellation_circuit_1
+.. automethod:: ConstellationCircuit.make_constellation_circuit_1
 
 Special methods
 ---------------
@@ -74,22 +70,10 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ConstellationCircuit.ConstellationCircuit.__eq__
+      .. automethod:: ConstellationCircuit.__format__
 
-.. only:: html
+.. automethod:: ConstellationCircuit.__getitem__
 
-   .. container:: inherited
+.. automethod:: ConstellationCircuit.__len__
 
-      .. automethod:: baca.tools.ConstellationCircuit.ConstellationCircuit.__format__
-
-.. automethod:: baca.tools.ConstellationCircuit.ConstellationCircuit.__getitem__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.ConstellationCircuit.ConstellationCircuit.__hash__
-
-.. automethod:: baca.tools.ConstellationCircuit.ConstellationCircuit.__len__
-
-.. automethod:: baca.tools.ConstellationCircuit.ConstellationCircuit.__repr__
+.. automethod:: ConstellationCircuit.__repr__

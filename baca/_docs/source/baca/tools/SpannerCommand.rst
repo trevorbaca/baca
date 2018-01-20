@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.SpannerCommand
 
 SpannerCommand
 ==============
@@ -8,11 +8,9 @@ SpannerCommand
 Bases
 -----
 
-- :py:class:`baca.tools.Command`
+- :py:class:`baca.tools.Command.Command`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,20 +21,18 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.SpannerCommand.SpannerCommand.deactivate
-      ~baca.tools.SpannerCommand.SpannerCommand.get_tag
-      ~baca.tools.SpannerCommand.SpannerCommand.manifests
-      ~baca.tools.SpannerCommand.SpannerCommand.offset_to_measure_number
-      ~baca.tools.SpannerCommand.SpannerCommand.selector
-      ~baca.tools.SpannerCommand.SpannerCommand.spanner
-      ~baca.tools.SpannerCommand.SpannerCommand.tag
-      ~baca.tools.SpannerCommand.SpannerCommand.tag_measure_number
-      ~baca.tools.SpannerCommand.SpannerCommand.tags
-      ~baca.tools.SpannerCommand.SpannerCommand.__call__
-      ~baca.tools.SpannerCommand.SpannerCommand.__eq__
-      ~baca.tools.SpannerCommand.SpannerCommand.__format__
-      ~baca.tools.SpannerCommand.SpannerCommand.__hash__
-      ~baca.tools.SpannerCommand.SpannerCommand.__repr__
+      ~SpannerCommand.deactivate
+      ~SpannerCommand.get_tag
+      ~SpannerCommand.manifests
+      ~SpannerCommand.offset_to_measure_number
+      ~SpannerCommand.selector
+      ~SpannerCommand.spanner
+      ~SpannerCommand.tag
+      ~SpannerCommand.tag_measure_number
+      ~SpannerCommand.tags
+      ~SpannerCommand.__call__
+      ~SpannerCommand.__format__
+      ~SpannerCommand.__repr__
 
 Read-only properties
 --------------------
@@ -45,23 +41,23 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.SpannerCommand.SpannerCommand.deactivate
+      .. autoattribute:: SpannerCommand.deactivate
 
-.. autoattribute:: baca.tools.SpannerCommand.SpannerCommand.selector
+.. autoattribute:: SpannerCommand.selector
 
-.. autoattribute:: baca.tools.SpannerCommand.SpannerCommand.spanner
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.SpannerCommand.SpannerCommand.tag
+.. autoattribute:: SpannerCommand.spanner
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.SpannerCommand.SpannerCommand.tags
+      .. autoattribute:: SpannerCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: SpannerCommand.tags
 
 Read/write properties
 ---------------------
@@ -70,19 +66,19 @@ Read/write properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.SpannerCommand.SpannerCommand.manifests
+      .. autoattribute:: SpannerCommand.manifests
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.SpannerCommand.SpannerCommand.offset_to_measure_number
+      .. autoattribute:: SpannerCommand.offset_to_measure_number
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.SpannerCommand.SpannerCommand.tag_measure_number
+      .. autoattribute:: SpannerCommand.tag_measure_number
 
 Methods
 -------
@@ -91,33 +87,21 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SpannerCommand.SpannerCommand.get_tag
+      .. automethod:: SpannerCommand.get_tag
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.SpannerCommand.SpannerCommand.__call__
+.. automethod:: SpannerCommand.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SpannerCommand.SpannerCommand.__eq__
+      .. automethod:: SpannerCommand.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SpannerCommand.SpannerCommand.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.SpannerCommand.SpannerCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.SpannerCommand.SpannerCommand.__repr__
+      .. automethod:: SpannerCommand.__repr__

@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.SplitByRoundedRatiosDivisionCallback
 
 SplitByRoundedRatiosDivisionCallback
 ====================================
@@ -8,11 +8,9 @@ SplitByRoundedRatiosDivisionCallback
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadValueObject`
+- :py:class:`abjad.tools.abctools.AbjadValueObject.AbjadValueObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,50 +21,50 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback.ratios
-      ~baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback.__call__
-      ~baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback.__copy__
-      ~baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback.__eq__
-      ~baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback.__format__
-      ~baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback.__hash__
-      ~baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback.__repr__
+      ~SplitByRoundedRatiosDivisionCallback.ratios
+      ~SplitByRoundedRatiosDivisionCallback.__call__
+      ~SplitByRoundedRatiosDivisionCallback.__copy__
+      ~SplitByRoundedRatiosDivisionCallback.__eq__
+      ~SplitByRoundedRatiosDivisionCallback.__format__
+      ~SplitByRoundedRatiosDivisionCallback.__hash__
+      ~SplitByRoundedRatiosDivisionCallback.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback.ratios
+.. autoattribute:: SplitByRoundedRatiosDivisionCallback.ratios
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback.__call__
+.. automethod:: SplitByRoundedRatiosDivisionCallback.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback.__copy__
+      .. automethod:: SplitByRoundedRatiosDivisionCallback.__copy__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback.__eq__
+      .. automethod:: SplitByRoundedRatiosDivisionCallback.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback.__format__
+      .. automethod:: SplitByRoundedRatiosDivisionCallback.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback.__hash__
+      .. automethod:: SplitByRoundedRatiosDivisionCallback.__hash__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback.__repr__
+      .. automethod:: SplitByRoundedRatiosDivisionCallback.__repr__

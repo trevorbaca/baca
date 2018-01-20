@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.DesignMaker
 
 DesignMaker
 ===========
@@ -8,9 +8,7 @@ DesignMaker
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,46 +19,32 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.DesignMaker.DesignMaker.partition
-      ~baca.tools.DesignMaker.DesignMaker.partition_cyclic
-      ~baca.tools.DesignMaker.DesignMaker.__call__
-      ~baca.tools.DesignMaker.DesignMaker.__eq__
-      ~baca.tools.DesignMaker.DesignMaker.__format__
-      ~baca.tools.DesignMaker.DesignMaker.__hash__
-      ~baca.tools.DesignMaker.DesignMaker.__repr__
+      ~DesignMaker.partition
+      ~DesignMaker.partition_cyclic
+      ~DesignMaker.__call__
+      ~DesignMaker.__format__
+      ~DesignMaker.__repr__
 
 Methods
 -------
 
-.. automethod:: baca.tools.DesignMaker.DesignMaker.partition
+.. automethod:: DesignMaker.partition
 
-.. automethod:: baca.tools.DesignMaker.DesignMaker.partition_cyclic
+.. automethod:: DesignMaker.partition_cyclic
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.DesignMaker.DesignMaker.__call__
+.. automethod:: DesignMaker.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DesignMaker.DesignMaker.__eq__
+      .. automethod:: DesignMaker.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.DesignMaker.DesignMaker.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.DesignMaker.DesignMaker.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.DesignMaker.DesignMaker.__repr__
+      .. automethod:: DesignMaker.__repr__

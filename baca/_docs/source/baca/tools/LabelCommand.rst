@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.LabelCommand
 
 LabelCommand
 ============
@@ -8,11 +8,9 @@ LabelCommand
 Bases
 -----
 
-- :py:class:`baca.tools.Command`
+- :py:class:`baca.tools.Command.Command`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,20 +21,18 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.LabelCommand.LabelCommand.deactivate
-      ~baca.tools.LabelCommand.LabelCommand.expression
-      ~baca.tools.LabelCommand.LabelCommand.get_tag
-      ~baca.tools.LabelCommand.LabelCommand.manifests
-      ~baca.tools.LabelCommand.LabelCommand.offset_to_measure_number
-      ~baca.tools.LabelCommand.LabelCommand.selector
-      ~baca.tools.LabelCommand.LabelCommand.tag
-      ~baca.tools.LabelCommand.LabelCommand.tag_measure_number
-      ~baca.tools.LabelCommand.LabelCommand.tags
-      ~baca.tools.LabelCommand.LabelCommand.__call__
-      ~baca.tools.LabelCommand.LabelCommand.__eq__
-      ~baca.tools.LabelCommand.LabelCommand.__format__
-      ~baca.tools.LabelCommand.LabelCommand.__hash__
-      ~baca.tools.LabelCommand.LabelCommand.__repr__
+      ~LabelCommand.deactivate
+      ~LabelCommand.expression
+      ~LabelCommand.get_tag
+      ~LabelCommand.manifests
+      ~LabelCommand.offset_to_measure_number
+      ~LabelCommand.selector
+      ~LabelCommand.tag
+      ~LabelCommand.tag_measure_number
+      ~LabelCommand.tags
+      ~LabelCommand.__call__
+      ~LabelCommand.__format__
+      ~LabelCommand.__repr__
 
 Read-only properties
 --------------------
@@ -45,27 +41,27 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.LabelCommand.LabelCommand.deactivate
+      .. autoattribute:: LabelCommand.deactivate
 
-.. autoattribute:: baca.tools.LabelCommand.LabelCommand.expression
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.LabelCommand.LabelCommand.selector
+.. autoattribute:: LabelCommand.expression
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.LabelCommand.LabelCommand.tag
+      .. autoattribute:: LabelCommand.selector
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.LabelCommand.LabelCommand.tags
+      .. autoattribute:: LabelCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: LabelCommand.tags
 
 Read/write properties
 ---------------------
@@ -74,19 +70,19 @@ Read/write properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.LabelCommand.LabelCommand.manifests
+      .. autoattribute:: LabelCommand.manifests
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.LabelCommand.LabelCommand.offset_to_measure_number
+      .. autoattribute:: LabelCommand.offset_to_measure_number
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.LabelCommand.LabelCommand.tag_measure_number
+      .. autoattribute:: LabelCommand.tag_measure_number
 
 Methods
 -------
@@ -95,33 +91,21 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.LabelCommand.LabelCommand.get_tag
+      .. automethod:: LabelCommand.get_tag
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.LabelCommand.LabelCommand.__call__
+.. automethod:: LabelCommand.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.LabelCommand.LabelCommand.__eq__
+      .. automethod:: LabelCommand.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.LabelCommand.LabelCommand.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.LabelCommand.LabelCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.LabelCommand.LabelCommand.__repr__
+      .. automethod:: LabelCommand.__repr__

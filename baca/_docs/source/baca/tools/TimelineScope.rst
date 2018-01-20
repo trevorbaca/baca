@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.TimelineScope
 
 TimelineScope
 =============
@@ -8,9 +8,7 @@ TimelineScope
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,16 +19,14 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.TimelineScope.TimelineScope.scopes
-      ~baca.tools.TimelineScope.TimelineScope.__eq__
-      ~baca.tools.TimelineScope.TimelineScope.__format__
-      ~baca.tools.TimelineScope.TimelineScope.__hash__
-      ~baca.tools.TimelineScope.TimelineScope.__repr__
+      ~TimelineScope.scopes
+      ~TimelineScope.__format__
+      ~TimelineScope.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.TimelineScope.TimelineScope.scopes
+.. autoattribute:: TimelineScope.scopes
 
 Special methods
 ---------------
@@ -39,22 +35,10 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.TimelineScope.TimelineScope.__eq__
+      .. automethod:: TimelineScope.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.TimelineScope.TimelineScope.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.TimelineScope.TimelineScope.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.TimelineScope.TimelineScope.__repr__
+      .. automethod:: TimelineScope.__repr__

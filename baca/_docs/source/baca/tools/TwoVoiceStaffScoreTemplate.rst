@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.TwoVoiceStaffScoreTemplate
 
 TwoVoiceStaffScoreTemplate
 ==========================
@@ -8,15 +8,13 @@ TwoVoiceStaffScoreTemplate
 Bases
 -----
 
-- :py:class:`baca.tools.ScoreTemplate`
+- :py:class:`baca.tools.ScoreTemplate.ScoreTemplate`
 
-- :py:class:`abjad.tools.segmenttools.ScoreTemplate`
+- :py:class:`abjad.tools.segmenttools.ScoreTemplate.ScoreTemplate`
 
-- :py:class:`abjad.tools.abctools.AbjadValueObject`
+- :py:class:`abjad.tools.abctools.AbjadValueObject.AbjadValueObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -27,21 +25,21 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.attach_defaults
-      ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.defaults
-      ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.group_families
-      ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.make_music_context
-      ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.make_piano_staff
-      ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.make_square_staff_group
-      ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.make_staff_group
-      ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.parts
-      ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__call__
-      ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__copy__
-      ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__eq__
-      ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__format__
-      ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__hash__
-      ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__illustrate__
-      ~baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__repr__
+      ~TwoVoiceStaffScoreTemplate.attach_defaults
+      ~TwoVoiceStaffScoreTemplate.defaults
+      ~TwoVoiceStaffScoreTemplate.group_families
+      ~TwoVoiceStaffScoreTemplate.make_music_context
+      ~TwoVoiceStaffScoreTemplate.make_piano_staff
+      ~TwoVoiceStaffScoreTemplate.make_square_staff_group
+      ~TwoVoiceStaffScoreTemplate.make_staff_group
+      ~TwoVoiceStaffScoreTemplate.parts
+      ~TwoVoiceStaffScoreTemplate.__call__
+      ~TwoVoiceStaffScoreTemplate.__copy__
+      ~TwoVoiceStaffScoreTemplate.__eq__
+      ~TwoVoiceStaffScoreTemplate.__format__
+      ~TwoVoiceStaffScoreTemplate.__hash__
+      ~TwoVoiceStaffScoreTemplate.__illustrate__
+      ~TwoVoiceStaffScoreTemplate.__repr__
 
 Read-only properties
 --------------------
@@ -50,13 +48,13 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.defaults
+      .. autoattribute:: TwoVoiceStaffScoreTemplate.defaults
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.parts
+      .. autoattribute:: TwoVoiceStaffScoreTemplate.parts
 
 Methods
 -------
@@ -65,75 +63,75 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.attach_defaults
+      .. automethod:: TwoVoiceStaffScoreTemplate.attach_defaults
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.group_families
+      .. automethod:: TwoVoiceStaffScoreTemplate.group_families
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.make_music_context
+      .. automethod:: TwoVoiceStaffScoreTemplate.make_music_context
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.make_piano_staff
+      .. automethod:: TwoVoiceStaffScoreTemplate.make_piano_staff
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.make_square_staff_group
+      .. automethod:: TwoVoiceStaffScoreTemplate.make_square_staff_group
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.make_staff_group
+      .. automethod:: TwoVoiceStaffScoreTemplate.make_staff_group
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__call__
+.. automethod:: TwoVoiceStaffScoreTemplate.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__copy__
+      .. automethod:: TwoVoiceStaffScoreTemplate.__copy__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__eq__
+      .. automethod:: TwoVoiceStaffScoreTemplate.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__format__
+      .. automethod:: TwoVoiceStaffScoreTemplate.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__hash__
+      .. automethod:: TwoVoiceStaffScoreTemplate.__hash__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__illustrate__
+      .. automethod:: TwoVoiceStaffScoreTemplate.__illustrate__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.TwoVoiceStaffScoreTemplate.TwoVoiceStaffScoreTemplate.__repr__
+      .. automethod:: TwoVoiceStaffScoreTemplate.__repr__

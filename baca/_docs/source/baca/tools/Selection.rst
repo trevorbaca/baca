@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.Selection
 
 Selection
 =========
@@ -8,13 +8,23 @@ Selection
 Bases
 -----
 
-- :py:class:`abjad.tools.scoretools.Selection`
+- :py:class:`abjad.tools.scoretools.Selection.Selection`
 
-- :py:class:`abjad.tools.abctools.AbjadValueObject`
+- :py:class:`abjad.tools.abctools.AbjadValueObject.AbjadValueObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`collections.abc.Sequence`
+
+- :py:class:`collections.abc.Reversible`
+
+- :py:class:`collections.abc.Collection`
+
+- :py:class:`collections.abc.Sized`
+
+- :py:class:`collections.abc.Iterable`
+
+- :py:class:`collections.abc.Container`
 
 - :py:class:`builtins.object`
 
@@ -25,89 +35,93 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.Selection.Selection.are_contiguous_logical_voice
-      ~baca.tools.Selection.Selection.are_contiguous_same_parent
-      ~baca.tools.Selection.Selection.are_leaves
-      ~baca.tools.Selection.Selection.are_logical_voice
-      ~baca.tools.Selection.Selection.chead
-      ~baca.tools.Selection.Selection.cheads
-      ~baca.tools.Selection.Selection.chord
-      ~baca.tools.Selection.Selection.chords
-      ~baca.tools.Selection.Selection.components
-      ~baca.tools.Selection.Selection.enchain
-      ~baca.tools.Selection.Selection.filter
-      ~baca.tools.Selection.Selection.filter_duration
-      ~baca.tools.Selection.Selection.filter_length
-      ~baca.tools.Selection.Selection.filter_pitches
-      ~baca.tools.Selection.Selection.filter_preprolated
-      ~baca.tools.Selection.Selection.flatten
-      ~baca.tools.Selection.Selection.group
-      ~baca.tools.Selection.Selection.group_by
-      ~baca.tools.Selection.Selection.group_by_contiguity
-      ~baca.tools.Selection.Selection.group_by_duration
-      ~baca.tools.Selection.Selection.group_by_length
-      ~baca.tools.Selection.Selection.group_by_measure
-      ~baca.tools.Selection.Selection.group_by_pitch
-      ~baca.tools.Selection.Selection.items
-      ~baca.tools.Selection.Selection.leaf
-      ~baca.tools.Selection.Selection.leaves
-      ~baca.tools.Selection.Selection.lleak
-      ~baca.tools.Selection.Selection.lleaves
-      ~baca.tools.Selection.Selection.logical_ties
-      ~baca.tools.Selection.Selection.lt
-      ~baca.tools.Selection.Selection.ltqrun
-      ~baca.tools.Selection.Selection.ltqruns
-      ~baca.tools.Selection.Selection.ltrun
-      ~baca.tools.Selection.Selection.ltruns
-      ~baca.tools.Selection.Selection.lts
-      ~baca.tools.Selection.Selection.map
-      ~baca.tools.Selection.Selection.nontrivial
-      ~baca.tools.Selection.Selection.note
-      ~baca.tools.Selection.Selection.notes
-      ~baca.tools.Selection.Selection.ntruns
-      ~baca.tools.Selection.Selection.partition_by_counts
-      ~baca.tools.Selection.Selection.partition_by_durations
-      ~baca.tools.Selection.Selection.partition_by_ratio
-      ~baca.tools.Selection.Selection.phead
-      ~baca.tools.Selection.Selection.pheads
-      ~baca.tools.Selection.Selection.pleaf
-      ~baca.tools.Selection.Selection.pleaves
-      ~baca.tools.Selection.Selection.plt
-      ~baca.tools.Selection.Selection.plts
-      ~baca.tools.Selection.Selection.ptail
-      ~baca.tools.Selection.Selection.ptails
-      ~baca.tools.Selection.Selection.ptlt
-      ~baca.tools.Selection.Selection.ptlts
-      ~baca.tools.Selection.Selection.qrun
-      ~baca.tools.Selection.Selection.qruns
-      ~baca.tools.Selection.Selection.rest
-      ~baca.tools.Selection.Selection.rests
-      ~baca.tools.Selection.Selection.rleak
-      ~baca.tools.Selection.Selection.rleaves
-      ~baca.tools.Selection.Selection.rrun
-      ~baca.tools.Selection.Selection.rruns
-      ~baca.tools.Selection.Selection.run
-      ~baca.tools.Selection.Selection.runs
-      ~baca.tools.Selection.Selection.skip
-      ~baca.tools.Selection.Selection.skips
-      ~baca.tools.Selection.Selection.tleaves
-      ~baca.tools.Selection.Selection.top
-      ~baca.tools.Selection.Selection.tuplet
-      ~baca.tools.Selection.Selection.tuplets
-      ~baca.tools.Selection.Selection.with_next_leaf
-      ~baca.tools.Selection.Selection.with_previous_leaf
-      ~baca.tools.Selection.Selection.wleaves
-      ~baca.tools.Selection.Selection.__add__
-      ~baca.tools.Selection.Selection.__contains__
-      ~baca.tools.Selection.Selection.__copy__
-      ~baca.tools.Selection.Selection.__eq__
-      ~baca.tools.Selection.Selection.__format__
-      ~baca.tools.Selection.Selection.__getitem__
-      ~baca.tools.Selection.Selection.__hash__
-      ~baca.tools.Selection.Selection.__illustrate__
-      ~baca.tools.Selection.Selection.__len__
-      ~baca.tools.Selection.Selection.__radd__
-      ~baca.tools.Selection.Selection.__repr__
+      ~Selection.are_contiguous_logical_voice
+      ~Selection.are_contiguous_same_parent
+      ~Selection.are_leaves
+      ~Selection.are_logical_voice
+      ~Selection.chead
+      ~Selection.cheads
+      ~Selection.chord
+      ~Selection.chords
+      ~Selection.components
+      ~Selection.count
+      ~Selection.enchain
+      ~Selection.filter
+      ~Selection.filter_duration
+      ~Selection.filter_length
+      ~Selection.filter_pitches
+      ~Selection.filter_preprolated
+      ~Selection.flatten
+      ~Selection.group
+      ~Selection.group_by
+      ~Selection.group_by_contiguity
+      ~Selection.group_by_duration
+      ~Selection.group_by_length
+      ~Selection.group_by_measure
+      ~Selection.group_by_pitch
+      ~Selection.index
+      ~Selection.items
+      ~Selection.leaf
+      ~Selection.leaves
+      ~Selection.lleak
+      ~Selection.lleaves
+      ~Selection.logical_ties
+      ~Selection.lt
+      ~Selection.ltqrun
+      ~Selection.ltqruns
+      ~Selection.ltrun
+      ~Selection.ltruns
+      ~Selection.lts
+      ~Selection.map
+      ~Selection.nontrivial
+      ~Selection.note
+      ~Selection.notes
+      ~Selection.ntruns
+      ~Selection.partition_by_counts
+      ~Selection.partition_by_durations
+      ~Selection.partition_by_ratio
+      ~Selection.phead
+      ~Selection.pheads
+      ~Selection.pleaf
+      ~Selection.pleaves
+      ~Selection.plt
+      ~Selection.plts
+      ~Selection.ptail
+      ~Selection.ptails
+      ~Selection.ptlt
+      ~Selection.ptlts
+      ~Selection.qrun
+      ~Selection.qruns
+      ~Selection.rest
+      ~Selection.rests
+      ~Selection.rleak
+      ~Selection.rleaves
+      ~Selection.rrun
+      ~Selection.rruns
+      ~Selection.run
+      ~Selection.runs
+      ~Selection.skip
+      ~Selection.skips
+      ~Selection.tleaves
+      ~Selection.top
+      ~Selection.tuplet
+      ~Selection.tuplets
+      ~Selection.with_next_leaf
+      ~Selection.with_previous_leaf
+      ~Selection.wleaves
+      ~Selection.__add__
+      ~Selection.__contains__
+      ~Selection.__copy__
+      ~Selection.__eq__
+      ~Selection.__format__
+      ~Selection.__getitem__
+      ~Selection.__hash__
+      ~Selection.__illustrate__
+      ~Selection.__iter__
+      ~Selection.__len__
+      ~Selection.__radd__
+      ~Selection.__repr__
+      ~Selection.__reversed__
 
 Read-only properties
 --------------------
@@ -116,7 +130,7 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.Selection.Selection.items
+      .. autoattribute:: Selection.items
 
 Methods
 -------
@@ -125,295 +139,307 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.are_contiguous_logical_voice
+      .. automethod:: Selection.are_contiguous_logical_voice
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.are_contiguous_same_parent
+      .. automethod:: Selection.are_contiguous_same_parent
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.are_leaves
+      .. automethod:: Selection.are_leaves
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.are_logical_voice
+      .. automethod:: Selection.are_logical_voice
 
-.. automethod:: baca.tools.Selection.Selection.chead
+.. automethod:: Selection.chead
 
-.. automethod:: baca.tools.Selection.Selection.cheads
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Selection.Selection.chord
+.. automethod:: Selection.cheads
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.chords
+      .. automethod:: Selection.chord
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.components
-
-.. automethod:: baca.tools.Selection.Selection.enchain
+      .. automethod:: Selection.chords
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.filter
+      .. automethod:: Selection.components
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.filter_duration
+      .. automethod:: Selection.count
+
+.. automethod:: Selection.enchain
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.filter_length
+      .. automethod:: Selection.filter
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.filter_pitches
+      .. automethod:: Selection.filter_duration
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.filter_preprolated
+      .. automethod:: Selection.filter_length
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.flatten
-
-.. automethod:: baca.tools.Selection.Selection.group
+      .. automethod:: Selection.filter_pitches
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.group_by
+      .. automethod:: Selection.filter_preprolated
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.group_by_contiguity
+      .. automethod:: Selection.flatten
+
+.. automethod:: Selection.group
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.group_by_duration
+      .. automethod:: Selection.group_by
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.group_by_length
+      .. automethod:: Selection.group_by_contiguity
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.group_by_measure
+      .. automethod:: Selection.group_by_duration
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.group_by_pitch
+      .. automethod:: Selection.group_by_length
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.leaf
+      .. automethod:: Selection.group_by_measure
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.leaves
-
-.. automethod:: baca.tools.Selection.Selection.lleak
-
-.. automethod:: baca.tools.Selection.Selection.lleaves
+      .. automethod:: Selection.group_by_pitch
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.logical_ties
-
-.. automethod:: baca.tools.Selection.Selection.lt
-
-.. automethod:: baca.tools.Selection.Selection.ltqrun
-
-.. automethod:: baca.tools.Selection.Selection.ltqruns
-
-.. automethod:: baca.tools.Selection.Selection.ltrun
-
-.. automethod:: baca.tools.Selection.Selection.ltruns
-
-.. automethod:: baca.tools.Selection.Selection.lts
+      .. automethod:: Selection.index
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.map
+      .. automethod:: Selection.leaf
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.nontrivial
+      .. automethod:: Selection.leaves
+
+.. automethod:: Selection.lleak
+
+.. automethod:: Selection.lleaves
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.note
+      .. automethod:: Selection.logical_ties
+
+.. automethod:: Selection.lt
+
+.. automethod:: Selection.ltqrun
+
+.. automethod:: Selection.ltqruns
+
+.. automethod:: Selection.ltrun
+
+.. automethod:: Selection.ltruns
+
+.. automethod:: Selection.lts
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.notes
-
-.. automethod:: baca.tools.Selection.Selection.ntruns
+      .. automethod:: Selection.map
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.partition_by_counts
+      .. automethod:: Selection.nontrivial
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.partition_by_durations
+      .. automethod:: Selection.note
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.partition_by_ratio
+      .. automethod:: Selection.notes
 
-.. automethod:: baca.tools.Selection.Selection.phead
-
-.. automethod:: baca.tools.Selection.Selection.pheads
-
-.. automethod:: baca.tools.Selection.Selection.pleaf
-
-.. automethod:: baca.tools.Selection.Selection.pleaves
-
-.. automethod:: baca.tools.Selection.Selection.plt
-
-.. automethod:: baca.tools.Selection.Selection.plts
-
-.. automethod:: baca.tools.Selection.Selection.ptail
-
-.. automethod:: baca.tools.Selection.Selection.ptails
-
-.. automethod:: baca.tools.Selection.Selection.ptlt
-
-.. automethod:: baca.tools.Selection.Selection.ptlts
-
-.. automethod:: baca.tools.Selection.Selection.qrun
-
-.. automethod:: baca.tools.Selection.Selection.qruns
+.. automethod:: Selection.ntruns
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.rest
+      .. automethod:: Selection.partition_by_counts
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.rests
-
-.. automethod:: baca.tools.Selection.Selection.rleak
-
-.. automethod:: baca.tools.Selection.Selection.rleaves
-
-.. automethod:: baca.tools.Selection.Selection.rrun
-
-.. automethod:: baca.tools.Selection.Selection.rruns
+      .. automethod:: Selection.partition_by_durations
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.run
+      .. automethod:: Selection.partition_by_ratio
+
+.. automethod:: Selection.phead
+
+.. automethod:: Selection.pheads
+
+.. automethod:: Selection.pleaf
+
+.. automethod:: Selection.pleaves
+
+.. automethod:: Selection.plt
+
+.. automethod:: Selection.plts
+
+.. automethod:: Selection.ptail
+
+.. automethod:: Selection.ptails
+
+.. automethod:: Selection.ptlt
+
+.. automethod:: Selection.ptlts
+
+.. automethod:: Selection.qrun
+
+.. automethod:: Selection.qruns
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.runs
-
-.. automethod:: baca.tools.Selection.Selection.skip
-
-.. automethod:: baca.tools.Selection.Selection.skips
-
-.. automethod:: baca.tools.Selection.Selection.tleaves
+      .. automethod:: Selection.rest
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.top
+      .. automethod:: Selection.rests
+
+.. automethod:: Selection.rleak
+
+.. automethod:: Selection.rleaves
+
+.. automethod:: Selection.rrun
+
+.. automethod:: Selection.rruns
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.tuplet
+      .. automethod:: Selection.run
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.tuplets
+      .. automethod:: Selection.runs
+
+.. automethod:: Selection.skip
+
+.. automethod:: Selection.skips
+
+.. automethod:: Selection.tleaves
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.with_next_leaf
+      .. automethod:: Selection.top
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.with_previous_leaf
+      .. automethod:: Selection.tuplet
 
-.. automethod:: baca.tools.Selection.Selection.wleaves
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: Selection.tuplets
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: Selection.with_next_leaf
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: Selection.with_previous_leaf
+
+.. automethod:: Selection.wleaves
 
 Special methods
 ---------------
@@ -422,64 +448,76 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.__add__
+      .. automethod:: Selection.__add__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.__contains__
+      .. automethod:: Selection.__contains__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.__copy__
+      .. automethod:: Selection.__copy__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.__eq__
+      .. automethod:: Selection.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.__format__
+      .. automethod:: Selection.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.__getitem__
+      .. automethod:: Selection.__getitem__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.__hash__
+      .. automethod:: Selection.__hash__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.__illustrate__
+      .. automethod:: Selection.__illustrate__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.__len__
+      .. automethod:: Selection.__iter__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.__radd__
+      .. automethod:: Selection.__len__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Selection.Selection.__repr__
+      .. automethod:: Selection.__radd__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: Selection.__repr__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: Selection.__reversed__

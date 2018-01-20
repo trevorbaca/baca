@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.SplitByDurationsDivisionCallback
 
 SplitByDurationsDivisionCallback
 ================================
@@ -8,11 +8,9 @@ SplitByDurationsDivisionCallback
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadValueObject`
+- :py:class:`abjad.tools.abctools.AbjadValueObject.AbjadValueObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,71 +21,71 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.compound_meter_multiplier
-      ~baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.cyclic
-      ~baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.durations
-      ~baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.pattern_rotation_index
-      ~baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.remainder
-      ~baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.remainder_fuse_threshold
-      ~baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.show
-      ~baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.__call__
-      ~baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.__copy__
-      ~baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.__eq__
-      ~baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.__format__
-      ~baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.__hash__
-      ~baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.__repr__
+      ~SplitByDurationsDivisionCallback.compound_meter_multiplier
+      ~SplitByDurationsDivisionCallback.cyclic
+      ~SplitByDurationsDivisionCallback.durations
+      ~SplitByDurationsDivisionCallback.pattern_rotation_index
+      ~SplitByDurationsDivisionCallback.remainder
+      ~SplitByDurationsDivisionCallback.remainder_fuse_threshold
+      ~SplitByDurationsDivisionCallback.show
+      ~SplitByDurationsDivisionCallback.__call__
+      ~SplitByDurationsDivisionCallback.__copy__
+      ~SplitByDurationsDivisionCallback.__eq__
+      ~SplitByDurationsDivisionCallback.__format__
+      ~SplitByDurationsDivisionCallback.__hash__
+      ~SplitByDurationsDivisionCallback.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.compound_meter_multiplier
+.. autoattribute:: SplitByDurationsDivisionCallback.compound_meter_multiplier
 
-.. autoattribute:: baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.cyclic
+.. autoattribute:: SplitByDurationsDivisionCallback.cyclic
 
-.. autoattribute:: baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.durations
+.. autoattribute:: SplitByDurationsDivisionCallback.durations
 
-.. autoattribute:: baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.pattern_rotation_index
+.. autoattribute:: SplitByDurationsDivisionCallback.pattern_rotation_index
 
-.. autoattribute:: baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.remainder
+.. autoattribute:: SplitByDurationsDivisionCallback.remainder
 
-.. autoattribute:: baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.remainder_fuse_threshold
+.. autoattribute:: SplitByDurationsDivisionCallback.remainder_fuse_threshold
 
 Class & static methods
 ----------------------
 
-.. automethod:: baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.show
+.. automethod:: SplitByDurationsDivisionCallback.show
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.__call__
+.. automethod:: SplitByDurationsDivisionCallback.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.__copy__
+      .. automethod:: SplitByDurationsDivisionCallback.__copy__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.__eq__
+      .. automethod:: SplitByDurationsDivisionCallback.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.__format__
+      .. automethod:: SplitByDurationsDivisionCallback.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.__hash__
+      .. automethod:: SplitByDurationsDivisionCallback.__hash__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback.__repr__
+      .. automethod:: SplitByDurationsDivisionCallback.__repr__

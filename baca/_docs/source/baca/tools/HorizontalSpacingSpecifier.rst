@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.HorizontalSpacingSpecifier
 
 HorizontalSpacingSpecifier
 ==========================
@@ -8,9 +8,7 @@ HorizontalSpacingSpecifier
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,79 +19,65 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.breaks
-      ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.eol_measure_numbers
-      ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.fermata_measure_numbers
-      ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.fermata_measure_width
-      ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.fermata_score
-      ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.first_measure_number
-      ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.last_measure_number
-      ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.measure_count
-      ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.minimum_width
-      ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.multiplier
-      ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.override
-      ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.overrides
-      ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.__call__
-      ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.__eq__
-      ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.__format__
-      ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.__hash__
-      ~baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.__repr__
+      ~HorizontalSpacingSpecifier.breaks
+      ~HorizontalSpacingSpecifier.eol_measure_numbers
+      ~HorizontalSpacingSpecifier.fermata_measure_numbers
+      ~HorizontalSpacingSpecifier.fermata_measure_width
+      ~HorizontalSpacingSpecifier.fermata_score
+      ~HorizontalSpacingSpecifier.first_measure_number
+      ~HorizontalSpacingSpecifier.last_measure_number
+      ~HorizontalSpacingSpecifier.measure_count
+      ~HorizontalSpacingSpecifier.minimum_width
+      ~HorizontalSpacingSpecifier.multiplier
+      ~HorizontalSpacingSpecifier.override
+      ~HorizontalSpacingSpecifier.overrides
+      ~HorizontalSpacingSpecifier.__call__
+      ~HorizontalSpacingSpecifier.__format__
+      ~HorizontalSpacingSpecifier.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.breaks
+.. autoattribute:: HorizontalSpacingSpecifier.breaks
 
-.. autoattribute:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.eol_measure_numbers
+.. autoattribute:: HorizontalSpacingSpecifier.eol_measure_numbers
 
-.. autoattribute:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.fermata_measure_numbers
+.. autoattribute:: HorizontalSpacingSpecifier.fermata_measure_numbers
 
-.. autoattribute:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.fermata_measure_width
+.. autoattribute:: HorizontalSpacingSpecifier.fermata_measure_width
 
-.. autoattribute:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.fermata_score
+.. autoattribute:: HorizontalSpacingSpecifier.fermata_score
 
-.. autoattribute:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.first_measure_number
+.. autoattribute:: HorizontalSpacingSpecifier.first_measure_number
 
-.. autoattribute:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.last_measure_number
+.. autoattribute:: HorizontalSpacingSpecifier.last_measure_number
 
-.. autoattribute:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.measure_count
+.. autoattribute:: HorizontalSpacingSpecifier.measure_count
 
-.. autoattribute:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.minimum_width
+.. autoattribute:: HorizontalSpacingSpecifier.minimum_width
 
-.. autoattribute:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.multiplier
+.. autoattribute:: HorizontalSpacingSpecifier.multiplier
 
-.. autoattribute:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.overrides
+.. autoattribute:: HorizontalSpacingSpecifier.overrides
 
 Methods
 -------
 
-.. automethod:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.override
+.. automethod:: HorizontalSpacingSpecifier.override
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.__call__
+.. automethod:: HorizontalSpacingSpecifier.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.__eq__
+      .. automethod:: HorizontalSpacingSpecifier.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.HorizontalSpacingSpecifier.HorizontalSpacingSpecifier.__repr__
+      .. automethod:: HorizontalSpacingSpecifier.__repr__

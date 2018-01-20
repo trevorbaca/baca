@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.Loop
 
 Loop
 ====
@@ -8,11 +8,21 @@ Loop
 Bases
 -----
 
-- :py:class:`abjad.tools.datastructuretools.CyclicTuple`
+- :py:class:`abjad.tools.datastructuretools.CyclicTuple.CyclicTuple`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
+- :py:class:`collections.abc.Sequence`
 
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`collections.abc.Reversible`
+
+- :py:class:`collections.abc.Collection`
+
+- :py:class:`collections.abc.Sized`
+
+- :py:class:`collections.abc.Iterable`
+
+- :py:class:`collections.abc.Container`
+
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,24 +33,42 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.Loop.Loop.intervals
-      ~baca.tools.Loop.Loop.items
-      ~baca.tools.Loop.Loop.__contains__
-      ~baca.tools.Loop.Loop.__eq__
-      ~baca.tools.Loop.Loop.__format__
-      ~baca.tools.Loop.Loop.__getitem__
-      ~baca.tools.Loop.Loop.__hash__
-      ~baca.tools.Loop.Loop.__iter__
-      ~baca.tools.Loop.Loop.__len__
-      ~baca.tools.Loop.Loop.__repr__
-      ~baca.tools.Loop.Loop.__str__
+      ~Loop.count
+      ~Loop.index
+      ~Loop.intervals
+      ~Loop.items
+      ~Loop.__contains__
+      ~Loop.__eq__
+      ~Loop.__format__
+      ~Loop.__getitem__
+      ~Loop.__hash__
+      ~Loop.__iter__
+      ~Loop.__len__
+      ~Loop.__repr__
+      ~Loop.__reversed__
+      ~Loop.__str__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.Loop.Loop.intervals
+.. autoattribute:: Loop.intervals
 
-.. autoattribute:: baca.tools.Loop.Loop.items
+.. autoattribute:: Loop.items
+
+Methods
+-------
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: Loop.count
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: Loop.index
 
 Special methods
 ---------------
@@ -49,48 +77,54 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Loop.Loop.__contains__
+      .. automethod:: Loop.__contains__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Loop.Loop.__eq__
+      .. automethod:: Loop.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Loop.Loop.__format__
+      .. automethod:: Loop.__format__
 
-.. automethod:: baca.tools.Loop.Loop.__getitem__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.Loop.Loop.__hash__
+.. automethod:: Loop.__getitem__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Loop.Loop.__iter__
+      .. automethod:: Loop.__hash__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Loop.Loop.__len__
+      .. automethod:: Loop.__iter__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Loop.Loop.__repr__
+      .. automethod:: Loop.__len__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.Loop.Loop.__str__
+      .. automethod:: Loop.__repr__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: Loop.__reversed__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: Loop.__str__

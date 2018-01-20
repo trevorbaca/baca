@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.PitchClassSegment
 
 PitchClassSegment
 =================
@@ -8,17 +8,27 @@ PitchClassSegment
 Bases
 -----
 
-- :py:class:`abjad.tools.pitchtools.PitchClassSegment`
+- :py:class:`abjad.tools.pitchtools.PitchClassSegment.PitchClassSegment`
 
-- :py:class:`abjad.tools.pitchtools.Segment`
+- :py:class:`abjad.tools.pitchtools.Segment.Segment`
 
-- :py:class:`abjad.tools.datastructuretools.TypedTuple`
+- :py:class:`abjad.tools.datastructuretools.TypedTuple.TypedTuple`
 
-- :py:class:`abjad.tools.datastructuretools.TypedCollection`
+- :py:class:`abjad.tools.datastructuretools.TypedCollection.TypedCollection`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`collections.abc.Sequence`
+
+- :py:class:`collections.abc.Reversible`
+
+- :py:class:`collections.abc.Collection`
+
+- :py:class:`collections.abc.Sized`
+
+- :py:class:`collections.abc.Iterable`
+
+- :py:class:`collections.abc.Container`
 
 - :py:class:`builtins.object`
 
@@ -29,46 +39,47 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.PitchClassSegment.PitchClassSegment.alpha
-      ~baca.tools.PitchClassSegment.PitchClassSegment.arpeggiate_down
-      ~baca.tools.PitchClassSegment.PitchClassSegment.arpeggiate_up
-      ~baca.tools.PitchClassSegment.PitchClassSegment.chord
-      ~baca.tools.PitchClassSegment.PitchClassSegment.count
-      ~baca.tools.PitchClassSegment.PitchClassSegment.from_selection
-      ~baca.tools.PitchClassSegment.PitchClassSegment.get_matching_transforms
-      ~baca.tools.PitchClassSegment.PitchClassSegment.get_transforms
-      ~baca.tools.PitchClassSegment.PitchClassSegment.has_duplicates
-      ~baca.tools.PitchClassSegment.PitchClassSegment.has_repeats
-      ~baca.tools.PitchClassSegment.PitchClassSegment.index
-      ~baca.tools.PitchClassSegment.PitchClassSegment.invert
-      ~baca.tools.PitchClassSegment.PitchClassSegment.item_class
-      ~baca.tools.PitchClassSegment.PitchClassSegment.items
-      ~baca.tools.PitchClassSegment.PitchClassSegment.make_notes
-      ~baca.tools.PitchClassSegment.PitchClassSegment.multiply
-      ~baca.tools.PitchClassSegment.PitchClassSegment.permute
-      ~baca.tools.PitchClassSegment.PitchClassSegment.retrograde
-      ~baca.tools.PitchClassSegment.PitchClassSegment.rotate
-      ~baca.tools.PitchClassSegment.PitchClassSegment.sequence
-      ~baca.tools.PitchClassSegment.PitchClassSegment.space_down
-      ~baca.tools.PitchClassSegment.PitchClassSegment.space_up
-      ~baca.tools.PitchClassSegment.PitchClassSegment.to_pitch_classes
-      ~baca.tools.PitchClassSegment.PitchClassSegment.to_pitches
-      ~baca.tools.PitchClassSegment.PitchClassSegment.transpose
-      ~baca.tools.PitchClassSegment.PitchClassSegment.voice_horizontally
-      ~baca.tools.PitchClassSegment.PitchClassSegment.voice_vertically
-      ~baca.tools.PitchClassSegment.PitchClassSegment.__add__
-      ~baca.tools.PitchClassSegment.PitchClassSegment.__contains__
-      ~baca.tools.PitchClassSegment.PitchClassSegment.__eq__
-      ~baca.tools.PitchClassSegment.PitchClassSegment.__format__
-      ~baca.tools.PitchClassSegment.PitchClassSegment.__getitem__
-      ~baca.tools.PitchClassSegment.PitchClassSegment.__illustrate__
-      ~baca.tools.PitchClassSegment.PitchClassSegment.__iter__
-      ~baca.tools.PitchClassSegment.PitchClassSegment.__len__
-      ~baca.tools.PitchClassSegment.PitchClassSegment.__mul__
-      ~baca.tools.PitchClassSegment.PitchClassSegment.__radd__
-      ~baca.tools.PitchClassSegment.PitchClassSegment.__repr__
-      ~baca.tools.PitchClassSegment.PitchClassSegment.__rmul__
-      ~baca.tools.PitchClassSegment.PitchClassSegment.__str__
+      ~PitchClassSegment.alpha
+      ~PitchClassSegment.arpeggiate_down
+      ~PitchClassSegment.arpeggiate_up
+      ~PitchClassSegment.chord
+      ~PitchClassSegment.count
+      ~PitchClassSegment.from_selection
+      ~PitchClassSegment.get_matching_transforms
+      ~PitchClassSegment.get_transforms
+      ~PitchClassSegment.has_duplicates
+      ~PitchClassSegment.has_repeats
+      ~PitchClassSegment.index
+      ~PitchClassSegment.invert
+      ~PitchClassSegment.item_class
+      ~PitchClassSegment.items
+      ~PitchClassSegment.make_notes
+      ~PitchClassSegment.multiply
+      ~PitchClassSegment.permute
+      ~PitchClassSegment.retrograde
+      ~PitchClassSegment.rotate
+      ~PitchClassSegment.sequence
+      ~PitchClassSegment.space_down
+      ~PitchClassSegment.space_up
+      ~PitchClassSegment.to_pitch_classes
+      ~PitchClassSegment.to_pitches
+      ~PitchClassSegment.transpose
+      ~PitchClassSegment.voice_horizontally
+      ~PitchClassSegment.voice_vertically
+      ~PitchClassSegment.__add__
+      ~PitchClassSegment.__contains__
+      ~PitchClassSegment.__eq__
+      ~PitchClassSegment.__format__
+      ~PitchClassSegment.__getitem__
+      ~PitchClassSegment.__illustrate__
+      ~PitchClassSegment.__iter__
+      ~PitchClassSegment.__len__
+      ~PitchClassSegment.__mul__
+      ~PitchClassSegment.__radd__
+      ~PitchClassSegment.__repr__
+      ~PitchClassSegment.__reversed__
+      ~PitchClassSegment.__rmul__
+      ~PitchClassSegment.__str__
 
 Read-only properties
 --------------------
@@ -77,116 +88,116 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchClassSegment.PitchClassSegment.item_class
+      .. autoattribute:: PitchClassSegment.item_class
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchClassSegment.PitchClassSegment.items
+      .. autoattribute:: PitchClassSegment.items
 
 Methods
 -------
 
-.. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.alpha
+.. automethod:: PitchClassSegment.alpha
 
-.. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.arpeggiate_down
+.. automethod:: PitchClassSegment.arpeggiate_down
 
-.. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.arpeggiate_up
+.. automethod:: PitchClassSegment.arpeggiate_up
 
-.. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.chord
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.count
-
-.. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.get_matching_transforms
-
-.. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.get_transforms
-
-.. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.has_duplicates
-
-.. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.has_repeats
+.. automethod:: PitchClassSegment.chord
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.index
+      .. automethod:: PitchClassSegment.count
+
+.. automethod:: PitchClassSegment.get_matching_transforms
+
+.. automethod:: PitchClassSegment.get_transforms
+
+.. automethod:: PitchClassSegment.has_duplicates
+
+.. automethod:: PitchClassSegment.has_repeats
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.invert
+      .. automethod:: PitchClassSegment.index
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.make_notes
+      .. automethod:: PitchClassSegment.invert
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.multiply
+      .. automethod:: PitchClassSegment.make_notes
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.permute
+      .. automethod:: PitchClassSegment.multiply
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.retrograde
+      .. automethod:: PitchClassSegment.permute
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.rotate
-
-.. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.sequence
-
-.. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.space_down
-
-.. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.space_up
+      .. automethod:: PitchClassSegment.retrograde
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.to_pitch_classes
+      .. automethod:: PitchClassSegment.rotate
+
+.. automethod:: PitchClassSegment.sequence
+
+.. automethod:: PitchClassSegment.space_down
+
+.. automethod:: PitchClassSegment.space_up
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.to_pitches
+      .. automethod:: PitchClassSegment.to_pitch_classes
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.transpose
+      .. automethod:: PitchClassSegment.to_pitches
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.voice_horizontally
+      .. automethod:: PitchClassSegment.transpose
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.voice_vertically
+      .. automethod:: PitchClassSegment.voice_horizontally
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSegment.voice_vertically
 
 Class & static methods
 ----------------------
@@ -195,7 +206,7 @@ Class & static methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.from_selection
+      .. automethod:: PitchClassSegment.from_selection
 
 Special methods
 ---------------
@@ -204,72 +215,78 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.__add__
+      .. automethod:: PitchClassSegment.__add__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.__contains__
+      .. automethod:: PitchClassSegment.__contains__
 
-.. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.__eq__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.__format__
+.. automethod:: PitchClassSegment.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.__getitem__
+      .. automethod:: PitchClassSegment.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.__illustrate__
+      .. automethod:: PitchClassSegment.__getitem__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.__iter__
+      .. automethod:: PitchClassSegment.__illustrate__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.__len__
+      .. automethod:: PitchClassSegment.__iter__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.__mul__
+      .. automethod:: PitchClassSegment.__len__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.__radd__
+      .. automethod:: PitchClassSegment.__mul__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.__repr__
+      .. automethod:: PitchClassSegment.__radd__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.__rmul__
+      .. automethod:: PitchClassSegment.__repr__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchClassSegment.PitchClassSegment.__str__
+      .. automethod:: PitchClassSegment.__reversed__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSegment.__rmul__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSegment.__str__

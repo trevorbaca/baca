@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.PitchArray
 
 PitchArray
 ==========
@@ -8,9 +8,7 @@ PitchArray
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,146 +19,146 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.PitchArray.PitchArray.append_column
-      ~baca.tools.PitchArray.PitchArray.append_row
-      ~baca.tools.PitchArray.PitchArray.apply_pitches_by_row
-      ~baca.tools.PitchArray.PitchArray.cell_tokens_by_row
-      ~baca.tools.PitchArray.PitchArray.cell_widths_by_row
-      ~baca.tools.PitchArray.PitchArray.cells
-      ~baca.tools.PitchArray.PitchArray.columns
-      ~baca.tools.PitchArray.PitchArray.copy_subarray
-      ~baca.tools.PitchArray.PitchArray.depth
-      ~baca.tools.PitchArray.PitchArray.dimensions
-      ~baca.tools.PitchArray.PitchArray.from_counts
-      ~baca.tools.PitchArray.PitchArray.from_score
-      ~baca.tools.PitchArray.PitchArray.has_spanning_cell_over_index
-      ~baca.tools.PitchArray.PitchArray.has_voice_crossing
-      ~baca.tools.PitchArray.PitchArray.is_rectangular
-      ~baca.tools.PitchArray.PitchArray.list_nonspanning_subarrays
-      ~baca.tools.PitchArray.PitchArray.pad_to_depth
-      ~baca.tools.PitchArray.PitchArray.pad_to_width
-      ~baca.tools.PitchArray.PitchArray.pitches
-      ~baca.tools.PitchArray.PitchArray.pitches_by_row
-      ~baca.tools.PitchArray.PitchArray.pop_column
-      ~baca.tools.PitchArray.PitchArray.pop_row
-      ~baca.tools.PitchArray.PitchArray.remove_row
-      ~baca.tools.PitchArray.PitchArray.rows
-      ~baca.tools.PitchArray.PitchArray.size
-      ~baca.tools.PitchArray.PitchArray.to_measures
-      ~baca.tools.PitchArray.PitchArray.voice_crossing_count
-      ~baca.tools.PitchArray.PitchArray.weight
-      ~baca.tools.PitchArray.PitchArray.width
-      ~baca.tools.PitchArray.PitchArray.__add__
-      ~baca.tools.PitchArray.PitchArray.__contains__
-      ~baca.tools.PitchArray.PitchArray.__copy__
-      ~baca.tools.PitchArray.PitchArray.__eq__
-      ~baca.tools.PitchArray.PitchArray.__format__
-      ~baca.tools.PitchArray.PitchArray.__getitem__
-      ~baca.tools.PitchArray.PitchArray.__hash__
-      ~baca.tools.PitchArray.PitchArray.__iadd__
-      ~baca.tools.PitchArray.PitchArray.__ne__
-      ~baca.tools.PitchArray.PitchArray.__repr__
-      ~baca.tools.PitchArray.PitchArray.__setitem__
-      ~baca.tools.PitchArray.PitchArray.__str__
+      ~PitchArray.append_column
+      ~PitchArray.append_row
+      ~PitchArray.apply_pitches_by_row
+      ~PitchArray.cell_tokens_by_row
+      ~PitchArray.cell_widths_by_row
+      ~PitchArray.cells
+      ~PitchArray.columns
+      ~PitchArray.copy_subarray
+      ~PitchArray.depth
+      ~PitchArray.dimensions
+      ~PitchArray.from_counts
+      ~PitchArray.from_score
+      ~PitchArray.has_spanning_cell_over_index
+      ~PitchArray.has_voice_crossing
+      ~PitchArray.is_rectangular
+      ~PitchArray.list_nonspanning_subarrays
+      ~PitchArray.pad_to_depth
+      ~PitchArray.pad_to_width
+      ~PitchArray.pitches
+      ~PitchArray.pitches_by_row
+      ~PitchArray.pop_column
+      ~PitchArray.pop_row
+      ~PitchArray.remove_row
+      ~PitchArray.rows
+      ~PitchArray.size
+      ~PitchArray.to_measures
+      ~PitchArray.voice_crossing_count
+      ~PitchArray.weight
+      ~PitchArray.width
+      ~PitchArray.__add__
+      ~PitchArray.__contains__
+      ~PitchArray.__copy__
+      ~PitchArray.__eq__
+      ~PitchArray.__format__
+      ~PitchArray.__getitem__
+      ~PitchArray.__hash__
+      ~PitchArray.__iadd__
+      ~PitchArray.__ne__
+      ~PitchArray.__repr__
+      ~PitchArray.__setitem__
+      ~PitchArray.__str__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.PitchArray.PitchArray.cell_tokens_by_row
+.. autoattribute:: PitchArray.cell_tokens_by_row
 
-.. autoattribute:: baca.tools.PitchArray.PitchArray.cell_widths_by_row
+.. autoattribute:: PitchArray.cell_widths_by_row
 
-.. autoattribute:: baca.tools.PitchArray.PitchArray.cells
+.. autoattribute:: PitchArray.cells
 
-.. autoattribute:: baca.tools.PitchArray.PitchArray.columns
+.. autoattribute:: PitchArray.columns
 
-.. autoattribute:: baca.tools.PitchArray.PitchArray.depth
+.. autoattribute:: PitchArray.depth
 
-.. autoattribute:: baca.tools.PitchArray.PitchArray.dimensions
+.. autoattribute:: PitchArray.dimensions
 
-.. autoattribute:: baca.tools.PitchArray.PitchArray.has_voice_crossing
+.. autoattribute:: PitchArray.has_voice_crossing
 
-.. autoattribute:: baca.tools.PitchArray.PitchArray.is_rectangular
+.. autoattribute:: PitchArray.is_rectangular
 
-.. autoattribute:: baca.tools.PitchArray.PitchArray.pitches
+.. autoattribute:: PitchArray.pitches
 
-.. autoattribute:: baca.tools.PitchArray.PitchArray.pitches_by_row
+.. autoattribute:: PitchArray.pitches_by_row
 
-.. autoattribute:: baca.tools.PitchArray.PitchArray.rows
+.. autoattribute:: PitchArray.rows
 
-.. autoattribute:: baca.tools.PitchArray.PitchArray.size
+.. autoattribute:: PitchArray.size
 
-.. autoattribute:: baca.tools.PitchArray.PitchArray.voice_crossing_count
+.. autoattribute:: PitchArray.voice_crossing_count
 
-.. autoattribute:: baca.tools.PitchArray.PitchArray.weight
+.. autoattribute:: PitchArray.weight
 
-.. autoattribute:: baca.tools.PitchArray.PitchArray.width
+.. autoattribute:: PitchArray.width
 
 Methods
 -------
 
-.. automethod:: baca.tools.PitchArray.PitchArray.append_column
+.. automethod:: PitchArray.append_column
 
-.. automethod:: baca.tools.PitchArray.PitchArray.append_row
+.. automethod:: PitchArray.append_row
 
-.. automethod:: baca.tools.PitchArray.PitchArray.apply_pitches_by_row
+.. automethod:: PitchArray.apply_pitches_by_row
 
-.. automethod:: baca.tools.PitchArray.PitchArray.copy_subarray
+.. automethod:: PitchArray.copy_subarray
 
-.. automethod:: baca.tools.PitchArray.PitchArray.has_spanning_cell_over_index
+.. automethod:: PitchArray.has_spanning_cell_over_index
 
-.. automethod:: baca.tools.PitchArray.PitchArray.list_nonspanning_subarrays
+.. automethod:: PitchArray.list_nonspanning_subarrays
 
-.. automethod:: baca.tools.PitchArray.PitchArray.pad_to_depth
+.. automethod:: PitchArray.pad_to_depth
 
-.. automethod:: baca.tools.PitchArray.PitchArray.pad_to_width
+.. automethod:: PitchArray.pad_to_width
 
-.. automethod:: baca.tools.PitchArray.PitchArray.pop_column
+.. automethod:: PitchArray.pop_column
 
-.. automethod:: baca.tools.PitchArray.PitchArray.pop_row
+.. automethod:: PitchArray.pop_row
 
-.. automethod:: baca.tools.PitchArray.PitchArray.remove_row
+.. automethod:: PitchArray.remove_row
 
-.. automethod:: baca.tools.PitchArray.PitchArray.to_measures
+.. automethod:: PitchArray.to_measures
 
 Class & static methods
 ----------------------
 
-.. automethod:: baca.tools.PitchArray.PitchArray.from_counts
+.. automethod:: PitchArray.from_counts
 
-.. automethod:: baca.tools.PitchArray.PitchArray.from_score
+.. automethod:: PitchArray.from_score
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.PitchArray.PitchArray.__add__
+.. automethod:: PitchArray.__add__
 
-.. automethod:: baca.tools.PitchArray.PitchArray.__contains__
+.. automethod:: PitchArray.__contains__
 
-.. automethod:: baca.tools.PitchArray.PitchArray.__copy__
+.. automethod:: PitchArray.__copy__
 
-.. automethod:: baca.tools.PitchArray.PitchArray.__eq__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.PitchArray.PitchArray.__format__
-
-.. automethod:: baca.tools.PitchArray.PitchArray.__getitem__
-
-.. automethod:: baca.tools.PitchArray.PitchArray.__hash__
-
-.. automethod:: baca.tools.PitchArray.PitchArray.__iadd__
-
-.. automethod:: baca.tools.PitchArray.PitchArray.__ne__
+.. automethod:: PitchArray.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchArray.PitchArray.__repr__
+      .. automethod:: PitchArray.__format__
 
-.. automethod:: baca.tools.PitchArray.PitchArray.__setitem__
+.. automethod:: PitchArray.__getitem__
 
-.. automethod:: baca.tools.PitchArray.PitchArray.__str__
+.. automethod:: PitchArray.__hash__
+
+.. automethod:: PitchArray.__iadd__
+
+.. automethod:: PitchArray.__ne__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: PitchArray.__repr__
+
+.. automethod:: PitchArray.__setitem__
+
+.. automethod:: PitchArray.__str__

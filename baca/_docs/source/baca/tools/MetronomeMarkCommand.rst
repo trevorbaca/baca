@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.MetronomeMarkCommand
 
 MetronomeMarkCommand
 ====================
@@ -8,11 +8,9 @@ MetronomeMarkCommand
 Bases
 -----
 
-- :py:class:`baca.tools.Command`
+- :py:class:`baca.tools.Command.Command`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,20 +21,18 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.deactivate
-      ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.get_tag
-      ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.key
-      ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.manifests
-      ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.offset_to_measure_number
-      ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.selector
-      ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.tag
-      ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.tag_measure_number
-      ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.tags
-      ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.__call__
-      ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.__eq__
-      ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.__format__
-      ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.__hash__
-      ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.__repr__
+      ~MetronomeMarkCommand.deactivate
+      ~MetronomeMarkCommand.get_tag
+      ~MetronomeMarkCommand.key
+      ~MetronomeMarkCommand.manifests
+      ~MetronomeMarkCommand.offset_to_measure_number
+      ~MetronomeMarkCommand.selector
+      ~MetronomeMarkCommand.tag
+      ~MetronomeMarkCommand.tag_measure_number
+      ~MetronomeMarkCommand.tags
+      ~MetronomeMarkCommand.__call__
+      ~MetronomeMarkCommand.__format__
+      ~MetronomeMarkCommand.__repr__
 
 Read-only properties
 --------------------
@@ -45,27 +41,27 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.deactivate
+      .. autoattribute:: MetronomeMarkCommand.deactivate
 
-.. autoattribute:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.key
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.selector
+.. autoattribute:: MetronomeMarkCommand.key
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.tag
+      .. autoattribute:: MetronomeMarkCommand.selector
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.tags
+      .. autoattribute:: MetronomeMarkCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: MetronomeMarkCommand.tags
 
 Read/write properties
 ---------------------
@@ -74,19 +70,19 @@ Read/write properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.manifests
+      .. autoattribute:: MetronomeMarkCommand.manifests
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.offset_to_measure_number
+      .. autoattribute:: MetronomeMarkCommand.offset_to_measure_number
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.tag_measure_number
+      .. autoattribute:: MetronomeMarkCommand.tag_measure_number
 
 Methods
 -------
@@ -95,33 +91,21 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.get_tag
+      .. automethod:: MetronomeMarkCommand.get_tag
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.__call__
+.. automethod:: MetronomeMarkCommand.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.__eq__
+      .. automethod:: MetronomeMarkCommand.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.MetronomeMarkCommand.MetronomeMarkCommand.__repr__
+      .. automethod:: MetronomeMarkCommand.__repr__

@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.ClusterCommand
 
 ClusterCommand
 ==============
@@ -8,11 +8,9 @@ ClusterCommand
 Bases
 -----
 
-- :py:class:`baca.tools.Command`
+- :py:class:`baca.tools.Command.Command`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,22 +21,20 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.ClusterCommand.ClusterCommand.deactivate
-      ~baca.tools.ClusterCommand.ClusterCommand.get_tag
-      ~baca.tools.ClusterCommand.ClusterCommand.hide_flat_markup
-      ~baca.tools.ClusterCommand.ClusterCommand.manifests
-      ~baca.tools.ClusterCommand.ClusterCommand.offset_to_measure_number
-      ~baca.tools.ClusterCommand.ClusterCommand.selector
-      ~baca.tools.ClusterCommand.ClusterCommand.start_pitch
-      ~baca.tools.ClusterCommand.ClusterCommand.tag
-      ~baca.tools.ClusterCommand.ClusterCommand.tag_measure_number
-      ~baca.tools.ClusterCommand.ClusterCommand.tags
-      ~baca.tools.ClusterCommand.ClusterCommand.widths
-      ~baca.tools.ClusterCommand.ClusterCommand.__call__
-      ~baca.tools.ClusterCommand.ClusterCommand.__eq__
-      ~baca.tools.ClusterCommand.ClusterCommand.__format__
-      ~baca.tools.ClusterCommand.ClusterCommand.__hash__
-      ~baca.tools.ClusterCommand.ClusterCommand.__repr__
+      ~ClusterCommand.deactivate
+      ~ClusterCommand.get_tag
+      ~ClusterCommand.hide_flat_markup
+      ~ClusterCommand.manifests
+      ~ClusterCommand.offset_to_measure_number
+      ~ClusterCommand.selector
+      ~ClusterCommand.start_pitch
+      ~ClusterCommand.tag
+      ~ClusterCommand.tag_measure_number
+      ~ClusterCommand.tags
+      ~ClusterCommand.widths
+      ~ClusterCommand.__call__
+      ~ClusterCommand.__format__
+      ~ClusterCommand.__repr__
 
 Read-only properties
 --------------------
@@ -47,27 +43,27 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.deactivate
+      .. autoattribute:: ClusterCommand.deactivate
 
-.. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.hide_flat_markup
+.. autoattribute:: ClusterCommand.hide_flat_markup
 
-.. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.selector
+.. autoattribute:: ClusterCommand.selector
 
-.. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.start_pitch
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.tag
+.. autoattribute:: ClusterCommand.start_pitch
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.tags
+      .. autoattribute:: ClusterCommand.tag
 
-.. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.widths
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: ClusterCommand.tags
+
+.. autoattribute:: ClusterCommand.widths
 
 Read/write properties
 ---------------------
@@ -76,19 +72,19 @@ Read/write properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.manifests
+      .. autoattribute:: ClusterCommand.manifests
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.offset_to_measure_number
+      .. autoattribute:: ClusterCommand.offset_to_measure_number
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ClusterCommand.ClusterCommand.tag_measure_number
+      .. autoattribute:: ClusterCommand.tag_measure_number
 
 Methods
 -------
@@ -97,33 +93,21 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ClusterCommand.ClusterCommand.get_tag
+      .. automethod:: ClusterCommand.get_tag
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.ClusterCommand.ClusterCommand.__call__
+.. automethod:: ClusterCommand.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ClusterCommand.ClusterCommand.__eq__
+      .. automethod:: ClusterCommand.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ClusterCommand.ClusterCommand.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.ClusterCommand.ClusterCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.ClusterCommand.ClusterCommand.__repr__
+      .. automethod:: ClusterCommand.__repr__

@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.LibraryGM
 
 LibraryGM
 =========
@@ -8,9 +8,7 @@ LibraryGM
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,100 +19,98 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.LibraryGM.LibraryGM.glissando
-      ~baca.tools.LibraryGM.LibraryGM.hairpin
-      ~baca.tools.LibraryGM.LibraryGM.hairpin_shorten_pair
-      ~baca.tools.LibraryGM.LibraryGM.helianthate
-      ~baca.tools.LibraryGM.LibraryGM.imbricate
-      ~baca.tools.LibraryGM.LibraryGM.instrument
-      ~baca.tools.LibraryGM.LibraryGM.invisible_line_segment
-      ~baca.tools.LibraryGM.LibraryGM.label
-      ~baca.tools.LibraryGM.LibraryGM.laissez_vibrer
-      ~baca.tools.LibraryGM.LibraryGM.lbsd
-      ~baca.tools.LibraryGM.LibraryGM.line_break
-      ~baca.tools.LibraryGM.LibraryGM.literal
-      ~baca.tools.LibraryGM.LibraryGM.long_fermata
-      ~baca.tools.LibraryGM.LibraryGM.loop
-      ~baca.tools.LibraryGM.LibraryGM.make_even_runs
-      ~baca.tools.LibraryGM.LibraryGM.make_fused_tuplet_monads
-      ~baca.tools.LibraryGM.LibraryGM.make_multimeasure_rests
-      ~baca.tools.LibraryGM.LibraryGM.make_notes
-      ~baca.tools.LibraryGM.LibraryGM.make_repeated_durations
-      ~baca.tools.LibraryGM.LibraryGM.make_rests
-      ~baca.tools.LibraryGM.LibraryGM.make_rhythm
-      ~baca.tools.LibraryGM.LibraryGM.make_scopes
-      ~baca.tools.LibraryGM.LibraryGM.make_single_attack
-      ~baca.tools.LibraryGM.LibraryGM.make_tied_notes
-      ~baca.tools.LibraryGM.LibraryGM.make_tied_repeated_durations
-      ~baca.tools.LibraryGM.LibraryGM.marcati
-      ~baca.tools.LibraryGM.LibraryGM.margin_markup
-      ~baca.tools.LibraryGM.LibraryGM.metronome_mark
-      ~baca.tools.LibraryGM.LibraryGM.minimum_width
-      ~baca.tools.LibraryGM.LibraryGM.__eq__
-      ~baca.tools.LibraryGM.LibraryGM.__format__
-      ~baca.tools.LibraryGM.LibraryGM.__hash__
-      ~baca.tools.LibraryGM.LibraryGM.__repr__
+      ~LibraryGM.glissando
+      ~LibraryGM.hairpin
+      ~LibraryGM.hairpin_shorten_pair
+      ~LibraryGM.helianthate
+      ~LibraryGM.imbricate
+      ~LibraryGM.instrument
+      ~LibraryGM.invisible_line_segment
+      ~LibraryGM.label
+      ~LibraryGM.laissez_vibrer
+      ~LibraryGM.lbsd
+      ~LibraryGM.line_break
+      ~LibraryGM.literal
+      ~LibraryGM.long_fermata
+      ~LibraryGM.loop
+      ~LibraryGM.make_even_runs
+      ~LibraryGM.make_fused_tuplet_monads
+      ~LibraryGM.make_multimeasure_rests
+      ~LibraryGM.make_notes
+      ~LibraryGM.make_repeated_durations
+      ~LibraryGM.make_rests
+      ~LibraryGM.make_rhythm
+      ~LibraryGM.make_scopes
+      ~LibraryGM.make_single_attack
+      ~LibraryGM.make_tied_notes
+      ~LibraryGM.make_tied_repeated_durations
+      ~LibraryGM.marcati
+      ~LibraryGM.margin_markup
+      ~LibraryGM.metronome_mark
+      ~LibraryGM.minimum_width
+      ~LibraryGM.__format__
+      ~LibraryGM.__repr__
 
 Class & static methods
 ----------------------
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.glissando
+.. automethod:: LibraryGM.glissando
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.hairpin
+.. automethod:: LibraryGM.hairpin
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.hairpin_shorten_pair
+.. automethod:: LibraryGM.hairpin_shorten_pair
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.helianthate
+.. automethod:: LibraryGM.helianthate
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.imbricate
+.. automethod:: LibraryGM.imbricate
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.instrument
+.. automethod:: LibraryGM.instrument
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.invisible_line_segment
+.. automethod:: LibraryGM.invisible_line_segment
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.label
+.. automethod:: LibraryGM.label
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.laissez_vibrer
+.. automethod:: LibraryGM.laissez_vibrer
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.lbsd
+.. automethod:: LibraryGM.lbsd
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.line_break
+.. automethod:: LibraryGM.line_break
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.literal
+.. automethod:: LibraryGM.literal
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.long_fermata
+.. automethod:: LibraryGM.long_fermata
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.loop
+.. automethod:: LibraryGM.loop
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.make_even_runs
+.. automethod:: LibraryGM.make_even_runs
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.make_fused_tuplet_monads
+.. automethod:: LibraryGM.make_fused_tuplet_monads
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.make_multimeasure_rests
+.. automethod:: LibraryGM.make_multimeasure_rests
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.make_notes
+.. automethod:: LibraryGM.make_notes
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.make_repeated_durations
+.. automethod:: LibraryGM.make_repeated_durations
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.make_rests
+.. automethod:: LibraryGM.make_rests
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.make_rhythm
+.. automethod:: LibraryGM.make_rhythm
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.make_scopes
+.. automethod:: LibraryGM.make_scopes
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.make_single_attack
+.. automethod:: LibraryGM.make_single_attack
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.make_tied_notes
+.. automethod:: LibraryGM.make_tied_notes
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.make_tied_repeated_durations
+.. automethod:: LibraryGM.make_tied_repeated_durations
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.marcati
+.. automethod:: LibraryGM.marcati
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.margin_markup
+.. automethod:: LibraryGM.margin_markup
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.metronome_mark
+.. automethod:: LibraryGM.metronome_mark
 
-.. automethod:: baca.tools.LibraryGM.LibraryGM.minimum_width
+.. automethod:: LibraryGM.minimum_width
 
 Special methods
 ---------------
@@ -123,22 +119,10 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.LibraryGM.LibraryGM.__eq__
+      .. automethod:: LibraryGM.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.LibraryGM.LibraryGM.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.LibraryGM.LibraryGM.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.LibraryGM.LibraryGM.__repr__
+      .. automethod:: LibraryGM.__repr__

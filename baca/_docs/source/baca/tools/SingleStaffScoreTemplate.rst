@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.SingleStaffScoreTemplate
 
 SingleStaffScoreTemplate
 ========================
@@ -8,15 +8,13 @@ SingleStaffScoreTemplate
 Bases
 -----
 
-- :py:class:`baca.tools.ScoreTemplate`
+- :py:class:`baca.tools.ScoreTemplate.ScoreTemplate`
 
-- :py:class:`abjad.tools.segmenttools.ScoreTemplate`
+- :py:class:`abjad.tools.segmenttools.ScoreTemplate.ScoreTemplate`
 
-- :py:class:`abjad.tools.abctools.AbjadValueObject`
+- :py:class:`abjad.tools.abctools.AbjadValueObject.AbjadValueObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -27,21 +25,21 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.attach_defaults
-      ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.defaults
-      ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.group_families
-      ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.make_music_context
-      ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.make_piano_staff
-      ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.make_square_staff_group
-      ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.make_staff_group
-      ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.parts
-      ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.__call__
-      ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.__copy__
-      ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.__eq__
-      ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.__format__
-      ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.__hash__
-      ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.__illustrate__
-      ~baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.__repr__
+      ~SingleStaffScoreTemplate.attach_defaults
+      ~SingleStaffScoreTemplate.defaults
+      ~SingleStaffScoreTemplate.group_families
+      ~SingleStaffScoreTemplate.make_music_context
+      ~SingleStaffScoreTemplate.make_piano_staff
+      ~SingleStaffScoreTemplate.make_square_staff_group
+      ~SingleStaffScoreTemplate.make_staff_group
+      ~SingleStaffScoreTemplate.parts
+      ~SingleStaffScoreTemplate.__call__
+      ~SingleStaffScoreTemplate.__copy__
+      ~SingleStaffScoreTemplate.__eq__
+      ~SingleStaffScoreTemplate.__format__
+      ~SingleStaffScoreTemplate.__hash__
+      ~SingleStaffScoreTemplate.__illustrate__
+      ~SingleStaffScoreTemplate.__repr__
 
 Read-only properties
 --------------------
@@ -50,13 +48,13 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.defaults
+      .. autoattribute:: SingleStaffScoreTemplate.defaults
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.parts
+      .. autoattribute:: SingleStaffScoreTemplate.parts
 
 Methods
 -------
@@ -65,75 +63,75 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.attach_defaults
+      .. automethod:: SingleStaffScoreTemplate.attach_defaults
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.group_families
+      .. automethod:: SingleStaffScoreTemplate.group_families
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.make_music_context
+      .. automethod:: SingleStaffScoreTemplate.make_music_context
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.make_piano_staff
+      .. automethod:: SingleStaffScoreTemplate.make_piano_staff
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.make_square_staff_group
+      .. automethod:: SingleStaffScoreTemplate.make_square_staff_group
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.make_staff_group
+      .. automethod:: SingleStaffScoreTemplate.make_staff_group
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.__call__
+.. automethod:: SingleStaffScoreTemplate.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.__copy__
+      .. automethod:: SingleStaffScoreTemplate.__copy__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.__eq__
+      .. automethod:: SingleStaffScoreTemplate.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.__format__
+      .. automethod:: SingleStaffScoreTemplate.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.__hash__
+      .. automethod:: SingleStaffScoreTemplate.__hash__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.__illustrate__
+      .. automethod:: SingleStaffScoreTemplate.__illustrate__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.SingleStaffScoreTemplate.SingleStaffScoreTemplate.__repr__
+      .. automethod:: SingleStaffScoreTemplate.__repr__

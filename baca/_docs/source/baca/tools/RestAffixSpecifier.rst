@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.RestAffixSpecifier
 
 RestAffixSpecifier
 ==================
@@ -8,11 +8,9 @@ RestAffixSpecifier
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadValueObject`
+- :py:class:`abjad.tools.abctools.AbjadValueObject.AbjadValueObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,59 +21,59 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.RestAffixSpecifier.RestAffixSpecifier.pattern
-      ~baca.tools.RestAffixSpecifier.RestAffixSpecifier.prefix
-      ~baca.tools.RestAffixSpecifier.RestAffixSpecifier.skips_instead_of_rests
-      ~baca.tools.RestAffixSpecifier.RestAffixSpecifier.suffix
-      ~baca.tools.RestAffixSpecifier.RestAffixSpecifier.__call__
-      ~baca.tools.RestAffixSpecifier.RestAffixSpecifier.__copy__
-      ~baca.tools.RestAffixSpecifier.RestAffixSpecifier.__eq__
-      ~baca.tools.RestAffixSpecifier.RestAffixSpecifier.__format__
-      ~baca.tools.RestAffixSpecifier.RestAffixSpecifier.__hash__
-      ~baca.tools.RestAffixSpecifier.RestAffixSpecifier.__repr__
+      ~RestAffixSpecifier.pattern
+      ~RestAffixSpecifier.prefix
+      ~RestAffixSpecifier.skips_instead_of_rests
+      ~RestAffixSpecifier.suffix
+      ~RestAffixSpecifier.__call__
+      ~RestAffixSpecifier.__copy__
+      ~RestAffixSpecifier.__eq__
+      ~RestAffixSpecifier.__format__
+      ~RestAffixSpecifier.__hash__
+      ~RestAffixSpecifier.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.RestAffixSpecifier.RestAffixSpecifier.pattern
+.. autoattribute:: RestAffixSpecifier.pattern
 
-.. autoattribute:: baca.tools.RestAffixSpecifier.RestAffixSpecifier.prefix
+.. autoattribute:: RestAffixSpecifier.prefix
 
-.. autoattribute:: baca.tools.RestAffixSpecifier.RestAffixSpecifier.skips_instead_of_rests
+.. autoattribute:: RestAffixSpecifier.skips_instead_of_rests
 
-.. autoattribute:: baca.tools.RestAffixSpecifier.RestAffixSpecifier.suffix
+.. autoattribute:: RestAffixSpecifier.suffix
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.RestAffixSpecifier.RestAffixSpecifier.__call__
+.. automethod:: RestAffixSpecifier.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RestAffixSpecifier.RestAffixSpecifier.__copy__
+      .. automethod:: RestAffixSpecifier.__copy__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RestAffixSpecifier.RestAffixSpecifier.__eq__
+      .. automethod:: RestAffixSpecifier.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RestAffixSpecifier.RestAffixSpecifier.__format__
+      .. automethod:: RestAffixSpecifier.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RestAffixSpecifier.RestAffixSpecifier.__hash__
+      .. automethod:: RestAffixSpecifier.__hash__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RestAffixSpecifier.RestAffixSpecifier.__repr__
+      .. automethod:: RestAffixSpecifier.__repr__

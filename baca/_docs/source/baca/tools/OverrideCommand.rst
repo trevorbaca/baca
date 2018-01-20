@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.OverrideCommand
 
 OverrideCommand
 ===============
@@ -8,11 +8,9 @@ OverrideCommand
 Bases
 -----
 
-- :py:class:`baca.tools.Command`
+- :py:class:`baca.tools.Command.Command`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,61 +21,59 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.OverrideCommand.OverrideCommand.after
-      ~baca.tools.OverrideCommand.OverrideCommand.attribute
-      ~baca.tools.OverrideCommand.OverrideCommand.context
-      ~baca.tools.OverrideCommand.OverrideCommand.deactivate
-      ~baca.tools.OverrideCommand.OverrideCommand.get_tag
-      ~baca.tools.OverrideCommand.OverrideCommand.grob
-      ~baca.tools.OverrideCommand.OverrideCommand.manifests
-      ~baca.tools.OverrideCommand.OverrideCommand.offset_to_measure_number
-      ~baca.tools.OverrideCommand.OverrideCommand.selector
-      ~baca.tools.OverrideCommand.OverrideCommand.tag
-      ~baca.tools.OverrideCommand.OverrideCommand.tag_measure_number
-      ~baca.tools.OverrideCommand.OverrideCommand.tags
-      ~baca.tools.OverrideCommand.OverrideCommand.value
-      ~baca.tools.OverrideCommand.OverrideCommand.__call__
-      ~baca.tools.OverrideCommand.OverrideCommand.__eq__
-      ~baca.tools.OverrideCommand.OverrideCommand.__format__
-      ~baca.tools.OverrideCommand.OverrideCommand.__hash__
-      ~baca.tools.OverrideCommand.OverrideCommand.__repr__
+      ~OverrideCommand.after
+      ~OverrideCommand.attribute
+      ~OverrideCommand.context
+      ~OverrideCommand.deactivate
+      ~OverrideCommand.get_tag
+      ~OverrideCommand.grob
+      ~OverrideCommand.manifests
+      ~OverrideCommand.offset_to_measure_number
+      ~OverrideCommand.selector
+      ~OverrideCommand.tag
+      ~OverrideCommand.tag_measure_number
+      ~OverrideCommand.tags
+      ~OverrideCommand.value
+      ~OverrideCommand.__call__
+      ~OverrideCommand.__format__
+      ~OverrideCommand.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.after
+.. autoattribute:: OverrideCommand.after
 
-.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.attribute
+.. autoattribute:: OverrideCommand.attribute
 
-.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.context
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.deactivate
-
-.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.grob
+.. autoattribute:: OverrideCommand.context
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.selector
+      .. autoattribute:: OverrideCommand.deactivate
+
+.. autoattribute:: OverrideCommand.grob
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.tag
+      .. autoattribute:: OverrideCommand.selector
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.tags
+      .. autoattribute:: OverrideCommand.tag
 
-.. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.value
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: OverrideCommand.tags
+
+.. autoattribute:: OverrideCommand.value
 
 Read/write properties
 ---------------------
@@ -86,19 +82,19 @@ Read/write properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.manifests
+      .. autoattribute:: OverrideCommand.manifests
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.offset_to_measure_number
+      .. autoattribute:: OverrideCommand.offset_to_measure_number
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.OverrideCommand.OverrideCommand.tag_measure_number
+      .. autoattribute:: OverrideCommand.tag_measure_number
 
 Methods
 -------
@@ -107,33 +103,21 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.OverrideCommand.OverrideCommand.get_tag
+      .. automethod:: OverrideCommand.get_tag
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.OverrideCommand.OverrideCommand.__call__
+.. automethod:: OverrideCommand.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.OverrideCommand.OverrideCommand.__eq__
+      .. automethod:: OverrideCommand.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.OverrideCommand.OverrideCommand.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.OverrideCommand.OverrideCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.OverrideCommand.OverrideCommand.__repr__
+      .. automethod:: OverrideCommand.__repr__

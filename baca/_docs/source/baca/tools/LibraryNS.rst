@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.LibraryNS
 
 LibraryNS
 =========
@@ -8,9 +8,7 @@ LibraryNS
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,202 +19,200 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.LibraryNS.LibraryNS.natural_clusters
-      ~baca.tools.LibraryNS.LibraryNS.natural_harmonics
-      ~baca.tools.LibraryNS.LibraryNS.nest
-      ~baca.tools.LibraryNS.LibraryNS.ottava
-      ~baca.tools.LibraryNS.LibraryNS.ottava_bassa
-      ~baca.tools.LibraryNS.LibraryNS.ottava_bracket_staff_padding
-      ~baca.tools.LibraryNS.LibraryNS.page
-      ~baca.tools.LibraryNS.LibraryNS.page_break
-      ~baca.tools.LibraryNS.LibraryNS.part
-      ~baca.tools.LibraryNS.LibraryNS.piecewise
-      ~baca.tools.LibraryNS.LibraryNS.pitches
-      ~baca.tools.LibraryNS.LibraryNS.possibile_dynamic
-      ~baca.tools.LibraryNS.LibraryNS.proportional_notation_duration
-      ~baca.tools.LibraryNS.LibraryNS.register
-      ~baca.tools.LibraryNS.LibraryNS.rehearsal_mark_extra_offset
-      ~baca.tools.LibraryNS.LibraryNS.reiterated_dynamic
-      ~baca.tools.LibraryNS.LibraryNS.repeat_ties_down
-      ~baca.tools.LibraryNS.LibraryNS.repeat_ties_up
-      ~baca.tools.LibraryNS.LibraryNS.rest_position
-      ~baca.tools.LibraryNS.LibraryNS.rests_after
-      ~baca.tools.LibraryNS.LibraryNS.rests_around
-      ~baca.tools.LibraryNS.LibraryNS.rests_before
-      ~baca.tools.LibraryNS.LibraryNS.rests_down
-      ~baca.tools.LibraryNS.LibraryNS.rests_up
-      ~baca.tools.LibraryNS.LibraryNS.resume
-      ~baca.tools.LibraryNS.LibraryNS.resume_after
-      ~baca.tools.LibraryNS.LibraryNS.rhythm
-      ~baca.tools.LibraryNS.LibraryNS.scope
-      ~baca.tools.LibraryNS.LibraryNS.scopes
-      ~baca.tools.LibraryNS.LibraryNS.scorewide_spacing
-      ~baca.tools.LibraryNS.LibraryNS.script_color
-      ~baca.tools.LibraryNS.LibraryNS.script_extra_offset
-      ~baca.tools.LibraryNS.LibraryNS.script_staff_padding
-      ~baca.tools.LibraryNS.LibraryNS.scripts_down
-      ~baca.tools.LibraryNS.LibraryNS.scripts_up
-      ~baca.tools.LibraryNS.LibraryNS.shift_clef
-      ~baca.tools.LibraryNS.LibraryNS.shift_dynamic
-      ~baca.tools.LibraryNS.LibraryNS.shift_hairpin_start
-      ~baca.tools.LibraryNS.LibraryNS.short_fermata
-      ~baca.tools.LibraryNS.LibraryNS.single_segment_transition
-      ~baca.tools.LibraryNS.LibraryNS.skips_after
-      ~baca.tools.LibraryNS.LibraryNS.skips_around
-      ~baca.tools.LibraryNS.LibraryNS.skips_before
-      ~baca.tools.LibraryNS.LibraryNS.slur
-      ~baca.tools.LibraryNS.LibraryNS.slurs_down
-      ~baca.tools.LibraryNS.LibraryNS.slurs_up
-      ~baca.tools.LibraryNS.LibraryNS.soprano_to_octave
-      ~baca.tools.LibraryNS.LibraryNS.split_by_durations
-      ~baca.tools.LibraryNS.LibraryNS.staccati
-      ~baca.tools.LibraryNS.LibraryNS.staccatissimi
-      ~baca.tools.LibraryNS.LibraryNS.staff_lines
-      ~baca.tools.LibraryNS.LibraryNS.staff_positions
-      ~baca.tools.LibraryNS.LibraryNS.staff_symbol_extra_offset
-      ~baca.tools.LibraryNS.LibraryNS.stem_color
-      ~baca.tools.LibraryNS.LibraryNS.stem_tremolo
-      ~baca.tools.LibraryNS.LibraryNS.stems_down
-      ~baca.tools.LibraryNS.LibraryNS.stems_up
-      ~baca.tools.LibraryNS.LibraryNS.strict_note_spacing_off
-      ~baca.tools.LibraryNS.LibraryNS.strict_quarter_divisions
-      ~baca.tools.LibraryNS.LibraryNS.suite
-      ~baca.tools.LibraryNS.LibraryNS.sustain_pedal
-      ~baca.tools.LibraryNS.LibraryNS.sustain_pedal_staff_padding
-      ~baca.tools.LibraryNS.LibraryNS.__eq__
-      ~baca.tools.LibraryNS.LibraryNS.__format__
-      ~baca.tools.LibraryNS.LibraryNS.__hash__
-      ~baca.tools.LibraryNS.LibraryNS.__repr__
+      ~LibraryNS.natural_clusters
+      ~LibraryNS.natural_harmonics
+      ~LibraryNS.nest
+      ~LibraryNS.ottava
+      ~LibraryNS.ottava_bassa
+      ~LibraryNS.ottava_bracket_staff_padding
+      ~LibraryNS.page
+      ~LibraryNS.page_break
+      ~LibraryNS.part
+      ~LibraryNS.piecewise
+      ~LibraryNS.pitches
+      ~LibraryNS.possibile_dynamic
+      ~LibraryNS.proportional_notation_duration
+      ~LibraryNS.register
+      ~LibraryNS.rehearsal_mark_extra_offset
+      ~LibraryNS.reiterated_dynamic
+      ~LibraryNS.repeat_ties_down
+      ~LibraryNS.repeat_ties_up
+      ~LibraryNS.rest_position
+      ~LibraryNS.rests_after
+      ~LibraryNS.rests_around
+      ~LibraryNS.rests_before
+      ~LibraryNS.rests_down
+      ~LibraryNS.rests_up
+      ~LibraryNS.resume
+      ~LibraryNS.resume_after
+      ~LibraryNS.rhythm
+      ~LibraryNS.scope
+      ~LibraryNS.scopes
+      ~LibraryNS.scorewide_spacing
+      ~LibraryNS.script_color
+      ~LibraryNS.script_extra_offset
+      ~LibraryNS.script_staff_padding
+      ~LibraryNS.scripts_down
+      ~LibraryNS.scripts_up
+      ~LibraryNS.shift_clef
+      ~LibraryNS.shift_dynamic
+      ~LibraryNS.shift_hairpin_start
+      ~LibraryNS.short_fermata
+      ~LibraryNS.single_segment_transition
+      ~LibraryNS.skips_after
+      ~LibraryNS.skips_around
+      ~LibraryNS.skips_before
+      ~LibraryNS.slur
+      ~LibraryNS.slurs_down
+      ~LibraryNS.slurs_up
+      ~LibraryNS.soprano_to_octave
+      ~LibraryNS.split_by_durations
+      ~LibraryNS.staccati
+      ~LibraryNS.staccatissimi
+      ~LibraryNS.staff_lines
+      ~LibraryNS.staff_positions
+      ~LibraryNS.staff_symbol_extra_offset
+      ~LibraryNS.stem_color
+      ~LibraryNS.stem_tremolo
+      ~LibraryNS.stems_down
+      ~LibraryNS.stems_up
+      ~LibraryNS.strict_note_spacing_off
+      ~LibraryNS.strict_quarter_divisions
+      ~LibraryNS.suite
+      ~LibraryNS.sustain_pedal
+      ~LibraryNS.sustain_pedal_staff_padding
+      ~LibraryNS.__format__
+      ~LibraryNS.__repr__
 
 Methods
 -------
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.script_staff_padding
+.. automethod:: LibraryNS.script_staff_padding
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.single_segment_transition
+.. automethod:: LibraryNS.single_segment_transition
 
 Class & static methods
 ----------------------
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.natural_clusters
+.. automethod:: LibraryNS.natural_clusters
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.natural_harmonics
+.. automethod:: LibraryNS.natural_harmonics
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.nest
+.. automethod:: LibraryNS.nest
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.ottava
+.. automethod:: LibraryNS.ottava
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.ottava_bassa
+.. automethod:: LibraryNS.ottava_bassa
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.ottava_bracket_staff_padding
+.. automethod:: LibraryNS.ottava_bracket_staff_padding
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.page
+.. automethod:: LibraryNS.page
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.page_break
+.. automethod:: LibraryNS.page_break
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.part
+.. automethod:: LibraryNS.part
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.piecewise
+.. automethod:: LibraryNS.piecewise
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.pitches
+.. automethod:: LibraryNS.pitches
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.possibile_dynamic
+.. automethod:: LibraryNS.possibile_dynamic
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.proportional_notation_duration
+.. automethod:: LibraryNS.proportional_notation_duration
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.register
+.. automethod:: LibraryNS.register
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.rehearsal_mark_extra_offset
+.. automethod:: LibraryNS.rehearsal_mark_extra_offset
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.reiterated_dynamic
+.. automethod:: LibraryNS.reiterated_dynamic
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.repeat_ties_down
+.. automethod:: LibraryNS.repeat_ties_down
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.repeat_ties_up
+.. automethod:: LibraryNS.repeat_ties_up
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.rest_position
+.. automethod:: LibraryNS.rest_position
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.rests_after
+.. automethod:: LibraryNS.rests_after
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.rests_around
+.. automethod:: LibraryNS.rests_around
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.rests_before
+.. automethod:: LibraryNS.rests_before
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.rests_down
+.. automethod:: LibraryNS.rests_down
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.rests_up
+.. automethod:: LibraryNS.rests_up
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.resume
+.. automethod:: LibraryNS.resume
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.resume_after
+.. automethod:: LibraryNS.resume_after
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.rhythm
+.. automethod:: LibraryNS.rhythm
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.scope
+.. automethod:: LibraryNS.scope
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.scopes
+.. automethod:: LibraryNS.scopes
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.scorewide_spacing
+.. automethod:: LibraryNS.scorewide_spacing
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.script_color
+.. automethod:: LibraryNS.script_color
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.script_extra_offset
+.. automethod:: LibraryNS.script_extra_offset
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.scripts_down
+.. automethod:: LibraryNS.scripts_down
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.scripts_up
+.. automethod:: LibraryNS.scripts_up
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.shift_clef
+.. automethod:: LibraryNS.shift_clef
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.shift_dynamic
+.. automethod:: LibraryNS.shift_dynamic
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.shift_hairpin_start
+.. automethod:: LibraryNS.shift_hairpin_start
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.short_fermata
+.. automethod:: LibraryNS.short_fermata
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.skips_after
+.. automethod:: LibraryNS.skips_after
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.skips_around
+.. automethod:: LibraryNS.skips_around
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.skips_before
+.. automethod:: LibraryNS.skips_before
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.slur
+.. automethod:: LibraryNS.slur
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.slurs_down
+.. automethod:: LibraryNS.slurs_down
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.slurs_up
+.. automethod:: LibraryNS.slurs_up
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.soprano_to_octave
+.. automethod:: LibraryNS.soprano_to_octave
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.split_by_durations
+.. automethod:: LibraryNS.split_by_durations
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.staccati
+.. automethod:: LibraryNS.staccati
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.staccatissimi
+.. automethod:: LibraryNS.staccatissimi
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.staff_lines
+.. automethod:: LibraryNS.staff_lines
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.staff_positions
+.. automethod:: LibraryNS.staff_positions
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.staff_symbol_extra_offset
+.. automethod:: LibraryNS.staff_symbol_extra_offset
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.stem_color
+.. automethod:: LibraryNS.stem_color
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.stem_tremolo
+.. automethod:: LibraryNS.stem_tremolo
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.stems_down
+.. automethod:: LibraryNS.stems_down
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.stems_up
+.. automethod:: LibraryNS.stems_up
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.strict_note_spacing_off
+.. automethod:: LibraryNS.strict_note_spacing_off
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.strict_quarter_divisions
+.. automethod:: LibraryNS.strict_quarter_divisions
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.suite
+.. automethod:: LibraryNS.suite
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.sustain_pedal
+.. automethod:: LibraryNS.sustain_pedal
 
-.. automethod:: baca.tools.LibraryNS.LibraryNS.sustain_pedal_staff_padding
+.. automethod:: LibraryNS.sustain_pedal_staff_padding
 
 Special methods
 ---------------
@@ -225,22 +221,10 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.LibraryNS.LibraryNS.__eq__
+      .. automethod:: LibraryNS.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.LibraryNS.LibraryNS.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.LibraryNS.LibraryNS.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.LibraryNS.LibraryNS.__repr__
+      .. automethod:: LibraryNS.__repr__

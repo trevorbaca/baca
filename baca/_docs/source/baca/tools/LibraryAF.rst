@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.LibraryAF
 
 LibraryAF
 =========
@@ -8,9 +8,7 @@ LibraryAF
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,157 +19,155 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.LibraryAF.LibraryAF.accents
-      ~baca.tools.LibraryAF.LibraryAF.alternate_bow_strokes
-      ~baca.tools.LibraryAF.LibraryAF.anchor
-      ~baca.tools.LibraryAF.LibraryAF.anchor_after
-      ~baca.tools.LibraryAF.LibraryAF.anchor_to_figure
-      ~baca.tools.LibraryAF.LibraryAF.ancora_dynamic
-      ~baca.tools.LibraryAF.LibraryAF.arpeggios
-      ~baca.tools.LibraryAF.LibraryAF.articulations
-      ~baca.tools.LibraryAF.LibraryAF.bar_extent
-      ~baca.tools.LibraryAF.LibraryAF.bass_to_octave
-      ~baca.tools.LibraryAF.LibraryAF.beam_divisions
-      ~baca.tools.LibraryAF.LibraryAF.beam_everything
-      ~baca.tools.LibraryAF.LibraryAF.beam_positions
-      ~baca.tools.LibraryAF.LibraryAF.beam_runs
-      ~baca.tools.LibraryAF.LibraryAF.breaks
-      ~baca.tools.LibraryAF.LibraryAF.center_to_octave
-      ~baca.tools.LibraryAF.LibraryAF.clef
-      ~baca.tools.LibraryAF.LibraryAF.clef_extra_offset
-      ~baca.tools.LibraryAF.LibraryAF.clef_x_extent_false
-      ~baca.tools.LibraryAF.LibraryAF.clusters
-      ~baca.tools.LibraryAF.LibraryAF.coat
-      ~baca.tools.LibraryAF.LibraryAF.color
-      ~baca.tools.LibraryAF.LibraryAF.color_fingerings
-      ~baca.tools.LibraryAF.LibraryAF.compound_quarter_divisions
-      ~baca.tools.LibraryAF.LibraryAF.cross_note_heads
-      ~baca.tools.LibraryAF.LibraryAF.cross_staff
-      ~baca.tools.LibraryAF.LibraryAF.dashed_arrow
-      ~baca.tools.LibraryAF.LibraryAF.deviation
-      ~baca.tools.LibraryAF.LibraryAF.diatonic_clusters
-      ~baca.tools.LibraryAF.LibraryAF.displacement
-      ~baca.tools.LibraryAF.LibraryAF.dls_sp
-      ~baca.tools.LibraryAF.LibraryAF.double_tonguing
-      ~baca.tools.LibraryAF.LibraryAF.down_arpeggios
-      ~baca.tools.LibraryAF.LibraryAF.down_bows
-      ~baca.tools.LibraryAF.LibraryAF.dynamic
-      ~baca.tools.LibraryAF.LibraryAF.dynamic_line_spanner_staff_padding
-      ~baca.tools.LibraryAF.LibraryAF.dynamic_line_spanner_up
-      ~baca.tools.LibraryAF.LibraryAF.dynamic_text_extra_offset
-      ~baca.tools.LibraryAF.LibraryAF.dynamic_text_x_extent_zero
-      ~baca.tools.LibraryAF.LibraryAF.dynamic_text_x_offset
-      ~baca.tools.LibraryAF.LibraryAF.dynamics
-      ~baca.tools.LibraryAF.LibraryAF.dynamics_down
-      ~baca.tools.LibraryAF.LibraryAF.dynamics_up
-      ~baca.tools.LibraryAF.LibraryAF.effort_dynamic
-      ~baca.tools.LibraryAF.LibraryAF.fermata
-      ~baca.tools.LibraryAF.LibraryAF.flageolets
-      ~baca.tools.LibraryAF.LibraryAF.flags
-      ~baca.tools.LibraryAF.LibraryAF.fuse_compound_quarter_divisions
-      ~baca.tools.LibraryAF.LibraryAF.__eq__
-      ~baca.tools.LibraryAF.LibraryAF.__format__
-      ~baca.tools.LibraryAF.LibraryAF.__hash__
-      ~baca.tools.LibraryAF.LibraryAF.__repr__
+      ~LibraryAF.accents
+      ~LibraryAF.alternate_bow_strokes
+      ~LibraryAF.anchor
+      ~LibraryAF.anchor_after
+      ~LibraryAF.anchor_to_figure
+      ~LibraryAF.ancora_dynamic
+      ~LibraryAF.arpeggios
+      ~LibraryAF.articulations
+      ~LibraryAF.bar_extent
+      ~LibraryAF.bass_to_octave
+      ~LibraryAF.beam_divisions
+      ~LibraryAF.beam_everything
+      ~LibraryAF.beam_positions
+      ~LibraryAF.beam_runs
+      ~LibraryAF.breaks
+      ~LibraryAF.center_to_octave
+      ~LibraryAF.clef
+      ~LibraryAF.clef_extra_offset
+      ~LibraryAF.clef_x_extent_false
+      ~LibraryAF.clusters
+      ~LibraryAF.coat
+      ~LibraryAF.color
+      ~LibraryAF.color_fingerings
+      ~LibraryAF.compound_quarter_divisions
+      ~LibraryAF.cross_note_heads
+      ~LibraryAF.cross_staff
+      ~LibraryAF.dashed_arrow
+      ~LibraryAF.deviation
+      ~LibraryAF.diatonic_clusters
+      ~LibraryAF.displacement
+      ~LibraryAF.dls_sp
+      ~LibraryAF.double_tonguing
+      ~LibraryAF.down_arpeggios
+      ~LibraryAF.down_bows
+      ~LibraryAF.dynamic
+      ~LibraryAF.dynamic_line_spanner_staff_padding
+      ~LibraryAF.dynamic_line_spanner_up
+      ~LibraryAF.dynamic_text_extra_offset
+      ~LibraryAF.dynamic_text_x_extent_zero
+      ~LibraryAF.dynamic_text_x_offset
+      ~LibraryAF.dynamics
+      ~LibraryAF.dynamics_down
+      ~LibraryAF.dynamics_up
+      ~LibraryAF.effort_dynamic
+      ~LibraryAF.fermata
+      ~LibraryAF.flageolets
+      ~LibraryAF.flags
+      ~LibraryAF.fuse_compound_quarter_divisions
+      ~LibraryAF.__format__
+      ~LibraryAF.__repr__
 
 Class & static methods
 ----------------------
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.accents
+.. automethod:: LibraryAF.accents
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.alternate_bow_strokes
+.. automethod:: LibraryAF.alternate_bow_strokes
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.anchor
+.. automethod:: LibraryAF.anchor
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.anchor_after
+.. automethod:: LibraryAF.anchor_after
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.anchor_to_figure
+.. automethod:: LibraryAF.anchor_to_figure
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.ancora_dynamic
+.. automethod:: LibraryAF.ancora_dynamic
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.arpeggios
+.. automethod:: LibraryAF.arpeggios
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.articulations
+.. automethod:: LibraryAF.articulations
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.bar_extent
+.. automethod:: LibraryAF.bar_extent
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.bass_to_octave
+.. automethod:: LibraryAF.bass_to_octave
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.beam_divisions
+.. automethod:: LibraryAF.beam_divisions
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.beam_everything
+.. automethod:: LibraryAF.beam_everything
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.beam_positions
+.. automethod:: LibraryAF.beam_positions
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.beam_runs
+.. automethod:: LibraryAF.beam_runs
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.breaks
+.. automethod:: LibraryAF.breaks
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.center_to_octave
+.. automethod:: LibraryAF.center_to_octave
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.clef
+.. automethod:: LibraryAF.clef
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.clef_extra_offset
+.. automethod:: LibraryAF.clef_extra_offset
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.clef_x_extent_false
+.. automethod:: LibraryAF.clef_x_extent_false
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.clusters
+.. automethod:: LibraryAF.clusters
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.coat
+.. automethod:: LibraryAF.coat
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.color
+.. automethod:: LibraryAF.color
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.color_fingerings
+.. automethod:: LibraryAF.color_fingerings
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.compound_quarter_divisions
+.. automethod:: LibraryAF.compound_quarter_divisions
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.cross_note_heads
+.. automethod:: LibraryAF.cross_note_heads
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.cross_staff
+.. automethod:: LibraryAF.cross_staff
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.dashed_arrow
+.. automethod:: LibraryAF.dashed_arrow
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.deviation
+.. automethod:: LibraryAF.deviation
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.diatonic_clusters
+.. automethod:: LibraryAF.diatonic_clusters
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.displacement
+.. automethod:: LibraryAF.displacement
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.dls_sp
+.. automethod:: LibraryAF.dls_sp
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.double_tonguing
+.. automethod:: LibraryAF.double_tonguing
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.down_arpeggios
+.. automethod:: LibraryAF.down_arpeggios
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.down_bows
+.. automethod:: LibraryAF.down_bows
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.dynamic
+.. automethod:: LibraryAF.dynamic
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.dynamic_line_spanner_staff_padding
+.. automethod:: LibraryAF.dynamic_line_spanner_staff_padding
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.dynamic_line_spanner_up
+.. automethod:: LibraryAF.dynamic_line_spanner_up
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.dynamic_text_extra_offset
+.. automethod:: LibraryAF.dynamic_text_extra_offset
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.dynamic_text_x_extent_zero
+.. automethod:: LibraryAF.dynamic_text_x_extent_zero
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.dynamic_text_x_offset
+.. automethod:: LibraryAF.dynamic_text_x_offset
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.dynamics
+.. automethod:: LibraryAF.dynamics
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.dynamics_down
+.. automethod:: LibraryAF.dynamics_down
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.dynamics_up
+.. automethod:: LibraryAF.dynamics_up
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.effort_dynamic
+.. automethod:: LibraryAF.effort_dynamic
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.fermata
+.. automethod:: LibraryAF.fermata
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.flageolets
+.. automethod:: LibraryAF.flageolets
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.flags
+.. automethod:: LibraryAF.flags
 
-.. automethod:: baca.tools.LibraryAF.LibraryAF.fuse_compound_quarter_divisions
+.. automethod:: LibraryAF.fuse_compound_quarter_divisions
 
 Special methods
 ---------------
@@ -180,22 +176,10 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.LibraryAF.LibraryAF.__eq__
+      .. automethod:: LibraryAF.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.LibraryAF.LibraryAF.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.LibraryAF.LibraryAF.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.LibraryAF.LibraryAF.__repr__
+      .. automethod:: LibraryAF.__repr__

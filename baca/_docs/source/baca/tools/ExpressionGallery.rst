@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.ExpressionGallery
 
 ExpressionGallery
 =================
@@ -8,9 +8,7 @@ ExpressionGallery
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,10 +19,8 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.ExpressionGallery.ExpressionGallery.__eq__
-      ~baca.tools.ExpressionGallery.ExpressionGallery.__format__
-      ~baca.tools.ExpressionGallery.ExpressionGallery.__hash__
-      ~baca.tools.ExpressionGallery.ExpressionGallery.__repr__
+      ~ExpressionGallery.__format__
+      ~ExpressionGallery.__repr__
 
 Special methods
 ---------------
@@ -33,22 +29,10 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ExpressionGallery.ExpressionGallery.__eq__
+      .. automethod:: ExpressionGallery.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ExpressionGallery.ExpressionGallery.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.ExpressionGallery.ExpressionGallery.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.ExpressionGallery.ExpressionGallery.__repr__
+      .. automethod:: ExpressionGallery.__repr__

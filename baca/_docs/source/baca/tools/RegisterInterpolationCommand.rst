@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.RegisterInterpolationCommand
 
 RegisterInterpolationCommand
 ============================
@@ -8,11 +8,9 @@ RegisterInterpolationCommand
 Bases
 -----
 
-- :py:class:`baca.tools.Command`
+- :py:class:`baca.tools.Command.Command`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,21 +21,19 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.deactivate
-      ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.get_tag
-      ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.manifests
-      ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.offset_to_measure_number
-      ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.selector
-      ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.start_pitch
-      ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.stop_pitch
-      ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.tag
-      ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.tag_measure_number
-      ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.tags
-      ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.__call__
-      ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.__eq__
-      ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.__format__
-      ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.__hash__
-      ~baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.__repr__
+      ~RegisterInterpolationCommand.deactivate
+      ~RegisterInterpolationCommand.get_tag
+      ~RegisterInterpolationCommand.manifests
+      ~RegisterInterpolationCommand.offset_to_measure_number
+      ~RegisterInterpolationCommand.selector
+      ~RegisterInterpolationCommand.start_pitch
+      ~RegisterInterpolationCommand.stop_pitch
+      ~RegisterInterpolationCommand.tag
+      ~RegisterInterpolationCommand.tag_measure_number
+      ~RegisterInterpolationCommand.tags
+      ~RegisterInterpolationCommand.__call__
+      ~RegisterInterpolationCommand.__format__
+      ~RegisterInterpolationCommand.__repr__
 
 Read-only properties
 --------------------
@@ -46,25 +42,25 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.deactivate
+      .. autoattribute:: RegisterInterpolationCommand.deactivate
 
-.. autoattribute:: baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.selector
+.. autoattribute:: RegisterInterpolationCommand.selector
 
-.. autoattribute:: baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.start_pitch
+.. autoattribute:: RegisterInterpolationCommand.start_pitch
 
-.. autoattribute:: baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.stop_pitch
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.tag
+.. autoattribute:: RegisterInterpolationCommand.stop_pitch
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.tags
+      .. autoattribute:: RegisterInterpolationCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: RegisterInterpolationCommand.tags
 
 Read/write properties
 ---------------------
@@ -73,19 +69,19 @@ Read/write properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.manifests
+      .. autoattribute:: RegisterInterpolationCommand.manifests
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.offset_to_measure_number
+      .. autoattribute:: RegisterInterpolationCommand.offset_to_measure_number
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.tag_measure_number
+      .. autoattribute:: RegisterInterpolationCommand.tag_measure_number
 
 Methods
 -------
@@ -94,33 +90,21 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.get_tag
+      .. automethod:: RegisterInterpolationCommand.get_tag
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.__call__
+.. automethod:: RegisterInterpolationCommand.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.__eq__
+      .. automethod:: RegisterInterpolationCommand.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.RegisterInterpolationCommand.RegisterInterpolationCommand.__repr__
+      .. automethod:: RegisterInterpolationCommand.__repr__

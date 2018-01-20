@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.PitchSet
 
 PitchSet
 ========
@@ -8,17 +8,25 @@ PitchSet
 Bases
 -----
 
-- :py:class:`abjad.tools.pitchtools.PitchSet`
+- :py:class:`abjad.tools.pitchtools.PitchSet.PitchSet`
 
-- :py:class:`abjad.tools.pitchtools.Set`
+- :py:class:`abjad.tools.pitchtools.Set.Set`
 
-- :py:class:`abjad.tools.datastructuretools.TypedFrozenset`
+- :py:class:`abjad.tools.datastructuretools.TypedFrozenset.TypedFrozenset`
 
-- :py:class:`abjad.tools.datastructuretools.TypedCollection`
+- :py:class:`abjad.tools.datastructuretools.TypedCollection.TypedCollection`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`collections.abc.Set`
+
+- :py:class:`collections.abc.Collection`
+
+- :py:class:`collections.abc.Sized`
+
+- :py:class:`collections.abc.Iterable`
+
+- :py:class:`collections.abc.Container`
 
 - :py:class:`builtins.object`
 
@@ -29,43 +37,47 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.PitchSet.PitchSet.cardinality
-      ~baca.tools.PitchSet.PitchSet.copy
-      ~baca.tools.PitchSet.PitchSet.difference
-      ~baca.tools.PitchSet.PitchSet.duplicate_pitch_classes
-      ~baca.tools.PitchSet.PitchSet.from_selection
-      ~baca.tools.PitchSet.PitchSet.hertz
-      ~baca.tools.PitchSet.PitchSet.intersection
-      ~baca.tools.PitchSet.PitchSet.invert
-      ~baca.tools.PitchSet.PitchSet.is_pitch_class_unique
-      ~baca.tools.PitchSet.PitchSet.isdisjoint
-      ~baca.tools.PitchSet.PitchSet.issubset
-      ~baca.tools.PitchSet.PitchSet.issuperset
-      ~baca.tools.PitchSet.PitchSet.item_class
-      ~baca.tools.PitchSet.PitchSet.items
-      ~baca.tools.PitchSet.PitchSet.register
-      ~baca.tools.PitchSet.PitchSet.space_down
-      ~baca.tools.PitchSet.PitchSet.space_up
-      ~baca.tools.PitchSet.PitchSet.symmetric_difference
-      ~baca.tools.PitchSet.PitchSet.to_pitch_classes
-      ~baca.tools.PitchSet.PitchSet.transpose
-      ~baca.tools.PitchSet.PitchSet.union
-      ~baca.tools.PitchSet.PitchSet.__and__
-      ~baca.tools.PitchSet.PitchSet.__contains__
-      ~baca.tools.PitchSet.PitchSet.__eq__
-      ~baca.tools.PitchSet.PitchSet.__format__
-      ~baca.tools.PitchSet.PitchSet.__ge__
-      ~baca.tools.PitchSet.PitchSet.__gt__
-      ~baca.tools.PitchSet.PitchSet.__illustrate__
-      ~baca.tools.PitchSet.PitchSet.__iter__
-      ~baca.tools.PitchSet.PitchSet.__le__
-      ~baca.tools.PitchSet.PitchSet.__len__
-      ~baca.tools.PitchSet.PitchSet.__lt__
-      ~baca.tools.PitchSet.PitchSet.__or__
-      ~baca.tools.PitchSet.PitchSet.__repr__
-      ~baca.tools.PitchSet.PitchSet.__str__
-      ~baca.tools.PitchSet.PitchSet.__sub__
-      ~baca.tools.PitchSet.PitchSet.__xor__
+      ~PitchSet.cardinality
+      ~PitchSet.copy
+      ~PitchSet.difference
+      ~PitchSet.duplicate_pitch_classes
+      ~PitchSet.from_selection
+      ~PitchSet.hertz
+      ~PitchSet.intersection
+      ~PitchSet.invert
+      ~PitchSet.is_pitch_class_unique
+      ~PitchSet.isdisjoint
+      ~PitchSet.issubset
+      ~PitchSet.issuperset
+      ~PitchSet.item_class
+      ~PitchSet.items
+      ~PitchSet.register
+      ~PitchSet.space_down
+      ~PitchSet.space_up
+      ~PitchSet.symmetric_difference
+      ~PitchSet.to_pitch_classes
+      ~PitchSet.transpose
+      ~PitchSet.union
+      ~PitchSet.__and__
+      ~PitchSet.__contains__
+      ~PitchSet.__eq__
+      ~PitchSet.__format__
+      ~PitchSet.__ge__
+      ~PitchSet.__gt__
+      ~PitchSet.__illustrate__
+      ~PitchSet.__iter__
+      ~PitchSet.__le__
+      ~PitchSet.__len__
+      ~PitchSet.__lt__
+      ~PitchSet.__or__
+      ~PitchSet.__rand__
+      ~PitchSet.__repr__
+      ~PitchSet.__ror__
+      ~PitchSet.__rsub__
+      ~PitchSet.__rxor__
+      ~PitchSet.__str__
+      ~PitchSet.__sub__
+      ~PitchSet.__xor__
 
 Read-only properties
 --------------------
@@ -74,37 +86,37 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchSet.PitchSet.cardinality
+      .. autoattribute:: PitchSet.cardinality
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchSet.PitchSet.duplicate_pitch_classes
+      .. autoattribute:: PitchSet.duplicate_pitch_classes
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchSet.PitchSet.hertz
+      .. autoattribute:: PitchSet.hertz
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchSet.PitchSet.is_pitch_class_unique
+      .. autoattribute:: PitchSet.is_pitch_class_unique
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchSet.PitchSet.item_class
+      .. autoattribute:: PitchSet.item_class
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchSet.PitchSet.items
+      .. autoattribute:: PitchSet.items
 
 Methods
 -------
@@ -113,73 +125,73 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.copy
+      .. automethod:: PitchSet.copy
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.difference
+      .. automethod:: PitchSet.difference
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.intersection
+      .. automethod:: PitchSet.intersection
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.invert
+      .. automethod:: PitchSet.invert
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.isdisjoint
+      .. automethod:: PitchSet.isdisjoint
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.issubset
+      .. automethod:: PitchSet.issubset
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.issuperset
+      .. automethod:: PitchSet.issuperset
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.register
+      .. automethod:: PitchSet.register
 
-.. automethod:: baca.tools.PitchSet.PitchSet.space_down
+.. automethod:: PitchSet.space_down
 
-.. automethod:: baca.tools.PitchSet.PitchSet.space_up
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.PitchSet.PitchSet.symmetric_difference
-
-.. automethod:: baca.tools.PitchSet.PitchSet.to_pitch_classes
+.. automethod:: PitchSet.space_up
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.transpose
+      .. automethod:: PitchSet.symmetric_difference
+
+.. automethod:: PitchSet.to_pitch_classes
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.union
+      .. automethod:: PitchSet.transpose
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: PitchSet.union
 
 Class & static methods
 ----------------------
@@ -188,7 +200,7 @@ Class & static methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.from_selection
+      .. automethod:: PitchSet.from_selection
 
 Special methods
 ---------------
@@ -197,90 +209,114 @@ Special methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.__and__
+      .. automethod:: PitchSet.__and__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.__contains__
+      .. automethod:: PitchSet.__contains__
 
-.. automethod:: baca.tools.PitchSet.PitchSet.__eq__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.PitchSet.PitchSet.__format__
+.. automethod:: PitchSet.__eq__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.__ge__
+      .. automethod:: PitchSet.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.__gt__
+      .. automethod:: PitchSet.__ge__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.__illustrate__
+      .. automethod:: PitchSet.__gt__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.__iter__
+      .. automethod:: PitchSet.__illustrate__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.__le__
+      .. automethod:: PitchSet.__iter__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.__len__
+      .. automethod:: PitchSet.__le__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.__lt__
+      .. automethod:: PitchSet.__len__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.__or__
+      .. automethod:: PitchSet.__lt__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.__repr__
+      .. automethod:: PitchSet.__or__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.__str__
+      .. automethod:: PitchSet.__rand__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.__sub__
+      .. automethod:: PitchSet.__repr__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchSet.PitchSet.__xor__
+      .. automethod:: PitchSet.__ror__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: PitchSet.__rsub__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: PitchSet.__rxor__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: PitchSet.__str__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: PitchSet.__sub__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: PitchSet.__xor__

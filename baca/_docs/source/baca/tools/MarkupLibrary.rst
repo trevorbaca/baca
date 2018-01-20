@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.MarkupLibrary
 
 MarkupLibrary
 =============
@@ -8,9 +8,7 @@ MarkupLibrary
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,475 +19,461 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.MarkupLibrary.MarkupLibrary.FB
-      ~baca.tools.MarkupLibrary.MarkupLibrary.FB_flaut
-      ~baca.tools.MarkupLibrary.MarkupLibrary.MP_XFB_flaut
-      ~baca.tools.MarkupLibrary.MarkupLibrary.OB
-      ~baca.tools.MarkupLibrary.MarkupLibrary.OB_full_bow_strokes
-      ~baca.tools.MarkupLibrary.MarkupLibrary.OB_no_pitch
-      ~baca.tools.MarkupLibrary.MarkupLibrary.OB_terminate_abruptly
-      ~baca.tools.MarkupLibrary.MarkupLibrary.OB_terminate_each_note_abruptly
-      ~baca.tools.MarkupLibrary.MarkupLibrary.PO
-      ~baca.tools.MarkupLibrary.MarkupLibrary.PO_FB_flaut
-      ~baca.tools.MarkupLibrary.MarkupLibrary.PO_NBS
-      ~baca.tools.MarkupLibrary.MarkupLibrary.PO_XFB_flaut
-      ~baca.tools.MarkupLibrary.MarkupLibrary.PO_plus_non_vib
-      ~baca.tools.MarkupLibrary.MarkupLibrary.PO_plus_poco_vib
-      ~baca.tools.MarkupLibrary.MarkupLibrary.PO_scratch
-      ~baca.tools.MarkupLibrary.MarkupLibrary.PO_slow_bow
-      ~baca.tools.MarkupLibrary.MarkupLibrary.P_XFB_flaut
-      ~baca.tools.MarkupLibrary.MarkupLibrary.XFB
-      ~baca.tools.MarkupLibrary.MarkupLibrary.XFB_flaut
-      ~baca.tools.MarkupLibrary.MarkupLibrary.XFB_plus_pochiss_pont
-      ~baca.tools.MarkupLibrary.MarkupLibrary.XFB_plus_tasto
-      ~baca.tools.MarkupLibrary.MarkupLibrary.XFB_sempre
-      ~baca.tools.MarkupLibrary.MarkupLibrary.XP
-      ~baca.tools.MarkupLibrary.MarkupLibrary.XP_FB
-      ~baca.tools.MarkupLibrary.MarkupLibrary.XP_FB_flaut
-      ~baca.tools.MarkupLibrary.MarkupLibrary.XP_XFB
-      ~baca.tools.MarkupLibrary.MarkupLibrary.XP_XFB_flaut
-      ~baca.tools.MarkupLibrary.MarkupLibrary.XP_full_bow_strokes
-      ~baca.tools.MarkupLibrary.MarkupLibrary.XT
-      ~baca.tools.MarkupLibrary.MarkupLibrary.accent_changes_of_direction
-      ~baca.tools.MarkupLibrary.MarkupLibrary.airtone
-      ~baca.tools.MarkupLibrary.MarkupLibrary.allow_bowing_to_convey_accelerando
-      ~baca.tools.MarkupLibrary.MarkupLibrary.arco
-      ~baca.tools.MarkupLibrary.MarkupLibrary.arco_ordinario
-      ~baca.tools.MarkupLibrary.MarkupLibrary.attackless
-      ~baca.tools.MarkupLibrary.MarkupLibrary.bow_on_tailpiece
-      ~baca.tools.MarkupLibrary.MarkupLibrary.bow_on_wooden_mute
-      ~baca.tools.MarkupLibrary.MarkupLibrary.boxed
-      ~baca.tools.MarkupLibrary.MarkupLibrary.boxed_lines
-      ~baca.tools.MarkupLibrary.MarkupLibrary.boxed_repeat_count
-      ~baca.tools.MarkupLibrary.MarkupLibrary.clicks_per_second
-      ~baca.tools.MarkupLibrary.MarkupLibrary.col_legno_battuto
-      ~baca.tools.MarkupLibrary.MarkupLibrary.delicatiss
-      ~baca.tools.MarkupLibrary.MarkupLibrary.delicatissimo
-      ~baca.tools.MarkupLibrary.MarkupLibrary.directly_on_bridge_bow_diagonally
-      ~baca.tools.MarkupLibrary.MarkupLibrary.directly_on_bridge_very_slow_bow
-      ~baca.tools.MarkupLibrary.MarkupLibrary.estr_sul_pont
-      ~baca.tools.MarkupLibrary.MarkupLibrary.final_markup
-      ~baca.tools.MarkupLibrary.MarkupLibrary.fluttertongue
-      ~baca.tools.MarkupLibrary.MarkupLibrary.fractional_OB
-      ~baca.tools.MarkupLibrary.MarkupLibrary.fractional_scratch
-      ~baca.tools.MarkupLibrary.MarkupLibrary.full_bow_strokes
-      ~baca.tools.MarkupLibrary.MarkupLibrary.glissando_lentissimo
-      ~baca.tools.MarkupLibrary.MarkupLibrary.gridato_possibile
-      ~baca.tools.MarkupLibrary.MarkupLibrary.instrument
-      ~baca.tools.MarkupLibrary.MarkupLibrary.kn_rasg
-      ~baca.tools.MarkupLibrary.MarkupLibrary.knuckle_rasg
-      ~baca.tools.MarkupLibrary.MarkupLibrary.leggieriss
-      ~baca.tools.MarkupLibrary.MarkupLibrary.leggierissimo
-      ~baca.tools.MarkupLibrary.MarkupLibrary.leggierissimo_off_string_bowing_on_staccati
-      ~baca.tools.MarkupLibrary.MarkupLibrary.lines
-      ~baca.tools.MarkupLibrary.MarkupLibrary.lv_possibile
-      ~baca.tools.MarkupLibrary.MarkupLibrary.molto_flautando
-      ~baca.tools.MarkupLibrary.MarkupLibrary.molto_flautando_e_pont
-      ~baca.tools.MarkupLibrary.MarkupLibrary.molto_gridato
-      ~baca.tools.MarkupLibrary.MarkupLibrary.molto_pont_plus_vib_molto
-      ~baca.tools.MarkupLibrary.MarkupLibrary.nail_rasg
-      ~baca.tools.MarkupLibrary.MarkupLibrary.nail_rasgueado
-      ~baca.tools.MarkupLibrary.MarkupLibrary.non_flautando
-      ~baca.tools.MarkupLibrary.MarkupLibrary.non_flutt
-      ~baca.tools.MarkupLibrary.MarkupLibrary.non_spazz
-      ~baca.tools.MarkupLibrary.MarkupLibrary.nut
-      ~baca.tools.MarkupLibrary.MarkupLibrary.off_string_bowing_on_staccati
-      ~baca.tools.MarkupLibrary.MarkupLibrary.one_click_every
-      ~baca.tools.MarkupLibrary.MarkupLibrary.ord
-      ~baca.tools.MarkupLibrary.MarkupLibrary.ord_poco_scratch
-      ~baca.tools.MarkupLibrary.MarkupLibrary.ord_senza_scratch
-      ~baca.tools.MarkupLibrary.MarkupLibrary.ordinario
-      ~baca.tools.MarkupLibrary.MarkupLibrary.overblow
-      ~baca.tools.MarkupLibrary.MarkupLibrary.pP_XFB_flaut
-      ~baca.tools.MarkupLibrary.MarkupLibrary.pT_XFB_flaut
-      ~baca.tools.MarkupLibrary.MarkupLibrary.pizz
-      ~baca.tools.MarkupLibrary.MarkupLibrary.po_meno_scratch
-      ~baca.tools.MarkupLibrary.MarkupLibrary.pochiss_pont
-      ~baca.tools.MarkupLibrary.MarkupLibrary.pochiss_scratch
-      ~baca.tools.MarkupLibrary.MarkupLibrary.pochiss_vib
-      ~baca.tools.MarkupLibrary.MarkupLibrary.poco_pont_plus_non_vib
-      ~baca.tools.MarkupLibrary.MarkupLibrary.poco_pont_plus_sub_non_vib
-      ~baca.tools.MarkupLibrary.MarkupLibrary.poco_pont_plus_sub_vib_mod
-      ~baca.tools.MarkupLibrary.MarkupLibrary.poco_pont_plus_vib_mod
-      ~baca.tools.MarkupLibrary.MarkupLibrary.poco_scratch
-      ~baca.tools.MarkupLibrary.MarkupLibrary.pont
-      ~baca.tools.MarkupLibrary.MarkupLibrary.pont_XFB
-      ~baca.tools.MarkupLibrary.MarkupLibrary.pont_XFB_flaut
-      ~baca.tools.MarkupLibrary.MarkupLibrary.ponticello
-      ~baca.tools.MarkupLibrary.MarkupLibrary.pos_ord
-      ~baca.tools.MarkupLibrary.MarkupLibrary.pos_ord_XFB
-      ~baca.tools.MarkupLibrary.MarkupLibrary.pos_ord_XFB_flaut
-      ~baca.tools.MarkupLibrary.MarkupLibrary.pos_ord_poco_scratch
-      ~baca.tools.MarkupLibrary.MarkupLibrary.pos_ord_senza_vib
-      ~baca.tools.MarkupLibrary.MarkupLibrary.pos_ord_vib_poco
-      ~baca.tools.MarkupLibrary.MarkupLibrary.put_reed_back_in
-      ~baca.tools.MarkupLibrary.MarkupLibrary.remove_reed
-      ~baca.tools.MarkupLibrary.MarkupLibrary.remove_staple
-      ~baca.tools.MarkupLibrary.MarkupLibrary.scratch_moltiss
-      ~baca.tools.MarkupLibrary.MarkupLibrary.senza_pedale
-      ~baca.tools.MarkupLibrary.MarkupLibrary.senza_scratch
-      ~baca.tools.MarkupLibrary.MarkupLibrary.senza_vib
-      ~baca.tools.MarkupLibrary.MarkupLibrary.shakers
-      ~baca.tools.MarkupLibrary.MarkupLibrary.short_instrument
-      ~baca.tools.MarkupLibrary.MarkupLibrary.sparse_clicks
-      ~baca.tools.MarkupLibrary.MarkupLibrary.spazz
-      ~baca.tools.MarkupLibrary.MarkupLibrary.spazzolato
-      ~baca.tools.MarkupLibrary.MarkupLibrary.spazzolato_1_2_clt
-      ~baca.tools.MarkupLibrary.MarkupLibrary.still
-      ~baca.tools.MarkupLibrary.MarkupLibrary.string_number
-      ~baca.tools.MarkupLibrary.MarkupLibrary.string_numbers
-      ~baca.tools.MarkupLibrary.MarkupLibrary.subito_non_armonichi_e_non_gridato
-      ~baca.tools.MarkupLibrary.MarkupLibrary.subito_ordinario
-      ~baca.tools.MarkupLibrary.MarkupLibrary.tamb_tr
-      ~baca.tools.MarkupLibrary.MarkupLibrary.tasto
-      ~baca.tools.MarkupLibrary.MarkupLibrary.tasto_FB
-      ~baca.tools.MarkupLibrary.MarkupLibrary.tasto_FB_flaut
-      ~baca.tools.MarkupLibrary.MarkupLibrary.tasto_NBS
-      ~baca.tools.MarkupLibrary.MarkupLibrary.tasto_XFB
-      ~baca.tools.MarkupLibrary.MarkupLibrary.tasto_XFB_flaut
-      ~baca.tools.MarkupLibrary.MarkupLibrary.tasto_fractional_scratch
-      ~baca.tools.MarkupLibrary.MarkupLibrary.tasto_half_scratch
-      ~baca.tools.MarkupLibrary.MarkupLibrary.tasto_moltiss
-      ~baca.tools.MarkupLibrary.MarkupLibrary.tasto_plus_non_vib
-      ~baca.tools.MarkupLibrary.MarkupLibrary.tasto_plus_pochiss_scratch
-      ~baca.tools.MarkupLibrary.MarkupLibrary.tasto_plus_poco_scratch
-      ~baca.tools.MarkupLibrary.MarkupLibrary.tasto_plus_poco_vib
-      ~baca.tools.MarkupLibrary.MarkupLibrary.tasto_plus_scratch_moltiss
-      ~baca.tools.MarkupLibrary.MarkupLibrary.tasto_poss
-      ~baca.tools.MarkupLibrary.MarkupLibrary.tasto_senza_vib
-      ~baca.tools.MarkupLibrary.MarkupLibrary.tasto_slow_bow
-      ~baca.tools.MarkupLibrary.MarkupLibrary.terminate_abruptly
-      ~baca.tools.MarkupLibrary.MarkupLibrary.terminate_each_note_abruptly
-      ~baca.tools.MarkupLibrary.MarkupLibrary.trans
-      ~baca.tools.MarkupLibrary.MarkupLibrary.trem_flaut_tast
-      ~baca.tools.MarkupLibrary.MarkupLibrary.two_part_transition
-      ~baca.tools.MarkupLibrary.MarkupLibrary.vib_moltiss
-      ~baca.tools.MarkupLibrary.MarkupLibrary.vib_pochiss
-      ~baca.tools.MarkupLibrary.MarkupLibrary.vib_poco
-      ~baca.tools.MarkupLibrary.MarkupLibrary.__call__
-      ~baca.tools.MarkupLibrary.MarkupLibrary.__eq__
-      ~baca.tools.MarkupLibrary.MarkupLibrary.__format__
-      ~baca.tools.MarkupLibrary.MarkupLibrary.__hash__
-      ~baca.tools.MarkupLibrary.MarkupLibrary.__repr__
+      ~MarkupLibrary.FB
+      ~MarkupLibrary.FB_flaut
+      ~MarkupLibrary.MP_XFB_flaut
+      ~MarkupLibrary.OB
+      ~MarkupLibrary.OB_full_bow_strokes
+      ~MarkupLibrary.OB_no_pitch
+      ~MarkupLibrary.OB_terminate_abruptly
+      ~MarkupLibrary.OB_terminate_each_note_abruptly
+      ~MarkupLibrary.PO
+      ~MarkupLibrary.PO_FB_flaut
+      ~MarkupLibrary.PO_NBS
+      ~MarkupLibrary.PO_XFB_flaut
+      ~MarkupLibrary.PO_plus_non_vib
+      ~MarkupLibrary.PO_plus_poco_vib
+      ~MarkupLibrary.PO_scratch
+      ~MarkupLibrary.PO_slow_bow
+      ~MarkupLibrary.P_XFB_flaut
+      ~MarkupLibrary.XFB
+      ~MarkupLibrary.XFB_flaut
+      ~MarkupLibrary.XFB_plus_pochiss_pont
+      ~MarkupLibrary.XFB_plus_tasto
+      ~MarkupLibrary.XFB_sempre
+      ~MarkupLibrary.XP
+      ~MarkupLibrary.XP_FB
+      ~MarkupLibrary.XP_FB_flaut
+      ~MarkupLibrary.XP_XFB
+      ~MarkupLibrary.XP_XFB_flaut
+      ~MarkupLibrary.XP_full_bow_strokes
+      ~MarkupLibrary.XT
+      ~MarkupLibrary.accent_changes_of_direction
+      ~MarkupLibrary.airtone
+      ~MarkupLibrary.allow_bowing_to_convey_accelerando
+      ~MarkupLibrary.arco
+      ~MarkupLibrary.arco_ordinario
+      ~MarkupLibrary.attackless
+      ~MarkupLibrary.bow_on_tailpiece
+      ~MarkupLibrary.bow_on_wooden_mute
+      ~MarkupLibrary.boxed
+      ~MarkupLibrary.boxed_lines
+      ~MarkupLibrary.boxed_repeat_count
+      ~MarkupLibrary.clicks_per_second
+      ~MarkupLibrary.col_legno_battuto
+      ~MarkupLibrary.delicatiss
+      ~MarkupLibrary.delicatissimo
+      ~MarkupLibrary.directly_on_bridge_bow_diagonally
+      ~MarkupLibrary.directly_on_bridge_very_slow_bow
+      ~MarkupLibrary.estr_sul_pont
+      ~MarkupLibrary.final_markup
+      ~MarkupLibrary.fluttertongue
+      ~MarkupLibrary.fractional_OB
+      ~MarkupLibrary.fractional_scratch
+      ~MarkupLibrary.full_bow_strokes
+      ~MarkupLibrary.glissando_lentissimo
+      ~MarkupLibrary.gridato_possibile
+      ~MarkupLibrary.instrument
+      ~MarkupLibrary.kn_rasg
+      ~MarkupLibrary.knuckle_rasg
+      ~MarkupLibrary.leggieriss
+      ~MarkupLibrary.leggierissimo
+      ~MarkupLibrary.leggierissimo_off_string_bowing_on_staccati
+      ~MarkupLibrary.lines
+      ~MarkupLibrary.lv_possibile
+      ~MarkupLibrary.molto_flautando
+      ~MarkupLibrary.molto_flautando_e_pont
+      ~MarkupLibrary.molto_gridato
+      ~MarkupLibrary.molto_pont_plus_vib_molto
+      ~MarkupLibrary.nail_rasg
+      ~MarkupLibrary.nail_rasgueado
+      ~MarkupLibrary.non_flautando
+      ~MarkupLibrary.non_flutt
+      ~MarkupLibrary.non_spazz
+      ~MarkupLibrary.nut
+      ~MarkupLibrary.off_string_bowing_on_staccati
+      ~MarkupLibrary.one_click_every
+      ~MarkupLibrary.ord
+      ~MarkupLibrary.ord_poco_scratch
+      ~MarkupLibrary.ord_senza_scratch
+      ~MarkupLibrary.ordinario
+      ~MarkupLibrary.overblow
+      ~MarkupLibrary.pP_XFB_flaut
+      ~MarkupLibrary.pT_XFB_flaut
+      ~MarkupLibrary.pizz
+      ~MarkupLibrary.po_meno_scratch
+      ~MarkupLibrary.pochiss_pont
+      ~MarkupLibrary.pochiss_scratch
+      ~MarkupLibrary.pochiss_vib
+      ~MarkupLibrary.poco_pont_plus_non_vib
+      ~MarkupLibrary.poco_pont_plus_sub_non_vib
+      ~MarkupLibrary.poco_pont_plus_sub_vib_mod
+      ~MarkupLibrary.poco_pont_plus_vib_mod
+      ~MarkupLibrary.poco_scratch
+      ~MarkupLibrary.pont
+      ~MarkupLibrary.pont_XFB
+      ~MarkupLibrary.pont_XFB_flaut
+      ~MarkupLibrary.ponticello
+      ~MarkupLibrary.pos_ord
+      ~MarkupLibrary.pos_ord_XFB
+      ~MarkupLibrary.pos_ord_XFB_flaut
+      ~MarkupLibrary.pos_ord_poco_scratch
+      ~MarkupLibrary.pos_ord_senza_vib
+      ~MarkupLibrary.pos_ord_vib_poco
+      ~MarkupLibrary.put_reed_back_in
+      ~MarkupLibrary.remove_reed
+      ~MarkupLibrary.remove_staple
+      ~MarkupLibrary.scratch_moltiss
+      ~MarkupLibrary.senza_pedale
+      ~MarkupLibrary.senza_scratch
+      ~MarkupLibrary.senza_vib
+      ~MarkupLibrary.shakers
+      ~MarkupLibrary.short_instrument
+      ~MarkupLibrary.sparse_clicks
+      ~MarkupLibrary.spazz
+      ~MarkupLibrary.spazzolato
+      ~MarkupLibrary.spazzolato_1_2_clt
+      ~MarkupLibrary.still
+      ~MarkupLibrary.string_number
+      ~MarkupLibrary.string_numbers
+      ~MarkupLibrary.subito_non_armonichi_e_non_gridato
+      ~MarkupLibrary.subito_ordinario
+      ~MarkupLibrary.tamb_tr
+      ~MarkupLibrary.tasto
+      ~MarkupLibrary.tasto_FB
+      ~MarkupLibrary.tasto_FB_flaut
+      ~MarkupLibrary.tasto_NBS
+      ~MarkupLibrary.tasto_XFB
+      ~MarkupLibrary.tasto_XFB_flaut
+      ~MarkupLibrary.tasto_fractional_scratch
+      ~MarkupLibrary.tasto_half_scratch
+      ~MarkupLibrary.tasto_moltiss
+      ~MarkupLibrary.tasto_plus_non_vib
+      ~MarkupLibrary.tasto_plus_pochiss_scratch
+      ~MarkupLibrary.tasto_plus_poco_scratch
+      ~MarkupLibrary.tasto_plus_poco_vib
+      ~MarkupLibrary.tasto_plus_scratch_moltiss
+      ~MarkupLibrary.tasto_poss
+      ~MarkupLibrary.tasto_senza_vib
+      ~MarkupLibrary.tasto_slow_bow
+      ~MarkupLibrary.terminate_abruptly
+      ~MarkupLibrary.terminate_each_note_abruptly
+      ~MarkupLibrary.trans
+      ~MarkupLibrary.trem_flaut_tast
+      ~MarkupLibrary.two_part_transition
+      ~MarkupLibrary.vib_moltiss
+      ~MarkupLibrary.vib_pochiss
+      ~MarkupLibrary.vib_poco
+      ~MarkupLibrary.__call__
+      ~MarkupLibrary.__format__
+      ~MarkupLibrary.__repr__
 
 Class & static methods
 ----------------------
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.FB
+.. automethod:: MarkupLibrary.FB
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.FB_flaut
+.. automethod:: MarkupLibrary.FB_flaut
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.MP_XFB_flaut
+.. automethod:: MarkupLibrary.MP_XFB_flaut
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.OB
+.. automethod:: MarkupLibrary.OB
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.OB_full_bow_strokes
+.. automethod:: MarkupLibrary.OB_full_bow_strokes
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.OB_no_pitch
+.. automethod:: MarkupLibrary.OB_no_pitch
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.OB_terminate_abruptly
+.. automethod:: MarkupLibrary.OB_terminate_abruptly
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.OB_terminate_each_note_abruptly
+.. automethod:: MarkupLibrary.OB_terminate_each_note_abruptly
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.PO
+.. automethod:: MarkupLibrary.PO
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.PO_FB_flaut
+.. automethod:: MarkupLibrary.PO_FB_flaut
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.PO_NBS
+.. automethod:: MarkupLibrary.PO_NBS
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.PO_XFB_flaut
+.. automethod:: MarkupLibrary.PO_XFB_flaut
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.PO_plus_non_vib
+.. automethod:: MarkupLibrary.PO_plus_non_vib
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.PO_plus_poco_vib
+.. automethod:: MarkupLibrary.PO_plus_poco_vib
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.PO_scratch
+.. automethod:: MarkupLibrary.PO_scratch
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.PO_slow_bow
+.. automethod:: MarkupLibrary.PO_slow_bow
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.P_XFB_flaut
+.. automethod:: MarkupLibrary.P_XFB_flaut
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.XFB
+.. automethod:: MarkupLibrary.XFB
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.XFB_flaut
+.. automethod:: MarkupLibrary.XFB_flaut
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.XFB_plus_pochiss_pont
+.. automethod:: MarkupLibrary.XFB_plus_pochiss_pont
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.XFB_plus_tasto
+.. automethod:: MarkupLibrary.XFB_plus_tasto
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.XFB_sempre
+.. automethod:: MarkupLibrary.XFB_sempre
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.XP
+.. automethod:: MarkupLibrary.XP
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.XP_FB
+.. automethod:: MarkupLibrary.XP_FB
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.XP_FB_flaut
+.. automethod:: MarkupLibrary.XP_FB_flaut
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.XP_XFB
+.. automethod:: MarkupLibrary.XP_XFB
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.XP_XFB_flaut
+.. automethod:: MarkupLibrary.XP_XFB_flaut
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.XP_full_bow_strokes
+.. automethod:: MarkupLibrary.XP_full_bow_strokes
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.XT
+.. automethod:: MarkupLibrary.XT
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.accent_changes_of_direction
+.. automethod:: MarkupLibrary.accent_changes_of_direction
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.airtone
+.. automethod:: MarkupLibrary.airtone
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.allow_bowing_to_convey_accelerando
+.. automethod:: MarkupLibrary.allow_bowing_to_convey_accelerando
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.arco
+.. automethod:: MarkupLibrary.arco
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.arco_ordinario
+.. automethod:: MarkupLibrary.arco_ordinario
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.attackless
+.. automethod:: MarkupLibrary.attackless
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.bow_on_tailpiece
+.. automethod:: MarkupLibrary.bow_on_tailpiece
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.bow_on_wooden_mute
+.. automethod:: MarkupLibrary.bow_on_wooden_mute
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.boxed
+.. automethod:: MarkupLibrary.boxed
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.boxed_lines
+.. automethod:: MarkupLibrary.boxed_lines
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.boxed_repeat_count
+.. automethod:: MarkupLibrary.boxed_repeat_count
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.clicks_per_second
+.. automethod:: MarkupLibrary.clicks_per_second
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.col_legno_battuto
+.. automethod:: MarkupLibrary.col_legno_battuto
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.delicatiss
+.. automethod:: MarkupLibrary.delicatiss
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.delicatissimo
+.. automethod:: MarkupLibrary.delicatissimo
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.directly_on_bridge_bow_diagonally
+.. automethod:: MarkupLibrary.directly_on_bridge_bow_diagonally
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.directly_on_bridge_very_slow_bow
+.. automethod:: MarkupLibrary.directly_on_bridge_very_slow_bow
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.estr_sul_pont
+.. automethod:: MarkupLibrary.estr_sul_pont
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.final_markup
+.. automethod:: MarkupLibrary.final_markup
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.fluttertongue
+.. automethod:: MarkupLibrary.fluttertongue
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.fractional_OB
+.. automethod:: MarkupLibrary.fractional_OB
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.fractional_scratch
+.. automethod:: MarkupLibrary.fractional_scratch
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.full_bow_strokes
+.. automethod:: MarkupLibrary.full_bow_strokes
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.glissando_lentissimo
+.. automethod:: MarkupLibrary.glissando_lentissimo
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.gridato_possibile
+.. automethod:: MarkupLibrary.gridato_possibile
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.instrument
+.. automethod:: MarkupLibrary.instrument
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.kn_rasg
+.. automethod:: MarkupLibrary.kn_rasg
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.knuckle_rasg
+.. automethod:: MarkupLibrary.knuckle_rasg
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.leggieriss
+.. automethod:: MarkupLibrary.leggieriss
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.leggierissimo
+.. automethod:: MarkupLibrary.leggierissimo
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.leggierissimo_off_string_bowing_on_staccati
+.. automethod:: MarkupLibrary.leggierissimo_off_string_bowing_on_staccati
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.lines
+.. automethod:: MarkupLibrary.lines
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.lv_possibile
+.. automethod:: MarkupLibrary.lv_possibile
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.molto_flautando
+.. automethod:: MarkupLibrary.molto_flautando
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.molto_flautando_e_pont
+.. automethod:: MarkupLibrary.molto_flautando_e_pont
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.molto_gridato
+.. automethod:: MarkupLibrary.molto_gridato
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.molto_pont_plus_vib_molto
+.. automethod:: MarkupLibrary.molto_pont_plus_vib_molto
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.nail_rasg
+.. automethod:: MarkupLibrary.nail_rasg
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.nail_rasgueado
+.. automethod:: MarkupLibrary.nail_rasgueado
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.non_flautando
+.. automethod:: MarkupLibrary.non_flautando
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.non_flutt
+.. automethod:: MarkupLibrary.non_flutt
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.non_spazz
+.. automethod:: MarkupLibrary.non_spazz
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.nut
+.. automethod:: MarkupLibrary.nut
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.off_string_bowing_on_staccati
+.. automethod:: MarkupLibrary.off_string_bowing_on_staccati
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.one_click_every
+.. automethod:: MarkupLibrary.one_click_every
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.ord
+.. automethod:: MarkupLibrary.ord
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.ord_poco_scratch
+.. automethod:: MarkupLibrary.ord_poco_scratch
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.ord_senza_scratch
+.. automethod:: MarkupLibrary.ord_senza_scratch
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.ordinario
+.. automethod:: MarkupLibrary.ordinario
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.overblow
+.. automethod:: MarkupLibrary.overblow
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.pP_XFB_flaut
+.. automethod:: MarkupLibrary.pP_XFB_flaut
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.pT_XFB_flaut
+.. automethod:: MarkupLibrary.pT_XFB_flaut
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.pizz
+.. automethod:: MarkupLibrary.pizz
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.po_meno_scratch
+.. automethod:: MarkupLibrary.po_meno_scratch
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.pochiss_pont
+.. automethod:: MarkupLibrary.pochiss_pont
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.pochiss_scratch
+.. automethod:: MarkupLibrary.pochiss_scratch
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.pochiss_vib
+.. automethod:: MarkupLibrary.pochiss_vib
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.poco_pont_plus_non_vib
+.. automethod:: MarkupLibrary.poco_pont_plus_non_vib
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.poco_pont_plus_sub_non_vib
+.. automethod:: MarkupLibrary.poco_pont_plus_sub_non_vib
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.poco_pont_plus_sub_vib_mod
+.. automethod:: MarkupLibrary.poco_pont_plus_sub_vib_mod
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.poco_pont_plus_vib_mod
+.. automethod:: MarkupLibrary.poco_pont_plus_vib_mod
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.poco_scratch
+.. automethod:: MarkupLibrary.poco_scratch
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.pont
+.. automethod:: MarkupLibrary.pont
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.pont_XFB
+.. automethod:: MarkupLibrary.pont_XFB
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.pont_XFB_flaut
+.. automethod:: MarkupLibrary.pont_XFB_flaut
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.ponticello
+.. automethod:: MarkupLibrary.ponticello
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.pos_ord
+.. automethod:: MarkupLibrary.pos_ord
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.pos_ord_XFB
+.. automethod:: MarkupLibrary.pos_ord_XFB
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.pos_ord_XFB_flaut
+.. automethod:: MarkupLibrary.pos_ord_XFB_flaut
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.pos_ord_poco_scratch
+.. automethod:: MarkupLibrary.pos_ord_poco_scratch
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.pos_ord_senza_vib
+.. automethod:: MarkupLibrary.pos_ord_senza_vib
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.pos_ord_vib_poco
+.. automethod:: MarkupLibrary.pos_ord_vib_poco
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.put_reed_back_in
+.. automethod:: MarkupLibrary.put_reed_back_in
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.remove_reed
+.. automethod:: MarkupLibrary.remove_reed
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.remove_staple
+.. automethod:: MarkupLibrary.remove_staple
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.scratch_moltiss
+.. automethod:: MarkupLibrary.scratch_moltiss
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.senza_pedale
+.. automethod:: MarkupLibrary.senza_pedale
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.senza_scratch
+.. automethod:: MarkupLibrary.senza_scratch
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.senza_vib
+.. automethod:: MarkupLibrary.senza_vib
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.shakers
+.. automethod:: MarkupLibrary.shakers
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.short_instrument
+.. automethod:: MarkupLibrary.short_instrument
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.sparse_clicks
+.. automethod:: MarkupLibrary.sparse_clicks
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.spazz
+.. automethod:: MarkupLibrary.spazz
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.spazzolato
+.. automethod:: MarkupLibrary.spazzolato
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.spazzolato_1_2_clt
+.. automethod:: MarkupLibrary.spazzolato_1_2_clt
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.still
+.. automethod:: MarkupLibrary.still
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.string_number
+.. automethod:: MarkupLibrary.string_number
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.string_numbers
+.. automethod:: MarkupLibrary.string_numbers
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.subito_non_armonichi_e_non_gridato
+.. automethod:: MarkupLibrary.subito_non_armonichi_e_non_gridato
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.subito_ordinario
+.. automethod:: MarkupLibrary.subito_ordinario
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.tamb_tr
+.. automethod:: MarkupLibrary.tamb_tr
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.tasto
+.. automethod:: MarkupLibrary.tasto
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.tasto_FB
+.. automethod:: MarkupLibrary.tasto_FB
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.tasto_FB_flaut
+.. automethod:: MarkupLibrary.tasto_FB_flaut
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.tasto_NBS
+.. automethod:: MarkupLibrary.tasto_NBS
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.tasto_XFB
+.. automethod:: MarkupLibrary.tasto_XFB
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.tasto_XFB_flaut
+.. automethod:: MarkupLibrary.tasto_XFB_flaut
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.tasto_fractional_scratch
+.. automethod:: MarkupLibrary.tasto_fractional_scratch
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.tasto_half_scratch
+.. automethod:: MarkupLibrary.tasto_half_scratch
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.tasto_moltiss
+.. automethod:: MarkupLibrary.tasto_moltiss
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.tasto_plus_non_vib
+.. automethod:: MarkupLibrary.tasto_plus_non_vib
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.tasto_plus_pochiss_scratch
+.. automethod:: MarkupLibrary.tasto_plus_pochiss_scratch
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.tasto_plus_poco_scratch
+.. automethod:: MarkupLibrary.tasto_plus_poco_scratch
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.tasto_plus_poco_vib
+.. automethod:: MarkupLibrary.tasto_plus_poco_vib
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.tasto_plus_scratch_moltiss
+.. automethod:: MarkupLibrary.tasto_plus_scratch_moltiss
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.tasto_poss
+.. automethod:: MarkupLibrary.tasto_poss
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.tasto_senza_vib
+.. automethod:: MarkupLibrary.tasto_senza_vib
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.tasto_slow_bow
+.. automethod:: MarkupLibrary.tasto_slow_bow
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.terminate_abruptly
+.. automethod:: MarkupLibrary.terminate_abruptly
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.terminate_each_note_abruptly
+.. automethod:: MarkupLibrary.terminate_each_note_abruptly
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.trans
+.. automethod:: MarkupLibrary.trans
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.trem_flaut_tast
+.. automethod:: MarkupLibrary.trem_flaut_tast
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.two_part_transition
+.. automethod:: MarkupLibrary.two_part_transition
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.vib_moltiss
+.. automethod:: MarkupLibrary.vib_moltiss
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.vib_pochiss
+.. automethod:: MarkupLibrary.vib_pochiss
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.vib_poco
+.. automethod:: MarkupLibrary.vib_poco
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.__call__
+.. automethod:: MarkupLibrary.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.__eq__
+      .. automethod:: MarkupLibrary.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.MarkupLibrary.MarkupLibrary.__repr__
+      .. automethod:: MarkupLibrary.__repr__

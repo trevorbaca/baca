@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.WellformednessManager
 
 WellformednessManager
 =====================
@@ -8,9 +8,7 @@ WellformednessManager
 Bases
 -----
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -21,52 +19,38 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.WellformednessManager.WellformednessManager.check_repeat_pitch_classes
-      ~baca.tools.WellformednessManager.WellformednessManager.is_well_formed
-      ~baca.tools.WellformednessManager.WellformednessManager.tabulate_wellformedness
-      ~baca.tools.WellformednessManager.WellformednessManager.__call__
-      ~baca.tools.WellformednessManager.WellformednessManager.__eq__
-      ~baca.tools.WellformednessManager.WellformednessManager.__format__
-      ~baca.tools.WellformednessManager.WellformednessManager.__hash__
-      ~baca.tools.WellformednessManager.WellformednessManager.__repr__
+      ~WellformednessManager.check_repeat_pitch_classes
+      ~WellformednessManager.is_well_formed
+      ~WellformednessManager.tabulate_wellformedness
+      ~WellformednessManager.__call__
+      ~WellformednessManager.__format__
+      ~WellformednessManager.__repr__
 
 Methods
 -------
 
-.. automethod:: baca.tools.WellformednessManager.WellformednessManager.is_well_formed
+.. automethod:: WellformednessManager.is_well_formed
 
-.. automethod:: baca.tools.WellformednessManager.WellformednessManager.tabulate_wellformedness
+.. automethod:: WellformednessManager.tabulate_wellformedness
 
 Class & static methods
 ----------------------
 
-.. automethod:: baca.tools.WellformednessManager.WellformednessManager.check_repeat_pitch_classes
+.. automethod:: WellformednessManager.check_repeat_pitch_classes
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.WellformednessManager.WellformednessManager.__call__
+.. automethod:: WellformednessManager.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.WellformednessManager.WellformednessManager.__eq__
+      .. automethod:: WellformednessManager.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.WellformednessManager.WellformednessManager.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.WellformednessManager.WellformednessManager.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.WellformednessManager.WellformednessManager.__repr__
+      .. automethod:: WellformednessManager.__repr__

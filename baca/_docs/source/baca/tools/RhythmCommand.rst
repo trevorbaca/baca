@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.RhythmCommand
 
 RhythmCommand
 =============
@@ -8,11 +8,9 @@ RhythmCommand
 Bases
 -----
 
-- :py:class:`baca.tools.Command`
+- :py:class:`baca.tools.Command.Command`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,32 +21,30 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.RhythmCommand.RhythmCommand.deactivate
-      ~baca.tools.RhythmCommand.RhythmCommand.division_expression
-      ~baca.tools.RhythmCommand.RhythmCommand.division_maker
-      ~baca.tools.RhythmCommand.RhythmCommand.get_tag
-      ~baca.tools.RhythmCommand.RhythmCommand.manifests
-      ~baca.tools.RhythmCommand.RhythmCommand.offset_to_measure_number
-      ~baca.tools.RhythmCommand.RhythmCommand.reference_meters
-      ~baca.tools.RhythmCommand.RhythmCommand.repeat_ties
-      ~baca.tools.RhythmCommand.RhythmCommand.rewrite_meter
-      ~baca.tools.RhythmCommand.RhythmCommand.rhythm_maker
-      ~baca.tools.RhythmCommand.RhythmCommand.rhythm_overwrites
-      ~baca.tools.RhythmCommand.RhythmCommand.selector
-      ~baca.tools.RhythmCommand.RhythmCommand.split_at_measure_boundaries
-      ~baca.tools.RhythmCommand.RhythmCommand.stages
-      ~baca.tools.RhythmCommand.RhythmCommand.start_stage
-      ~baca.tools.RhythmCommand.RhythmCommand.stop_stage
-      ~baca.tools.RhythmCommand.RhythmCommand.tag
-      ~baca.tools.RhythmCommand.RhythmCommand.tag_measure_number
-      ~baca.tools.RhythmCommand.RhythmCommand.tags
-      ~baca.tools.RhythmCommand.RhythmCommand.tie_first
-      ~baca.tools.RhythmCommand.RhythmCommand.tie_last
-      ~baca.tools.RhythmCommand.RhythmCommand.__call__
-      ~baca.tools.RhythmCommand.RhythmCommand.__eq__
-      ~baca.tools.RhythmCommand.RhythmCommand.__format__
-      ~baca.tools.RhythmCommand.RhythmCommand.__hash__
-      ~baca.tools.RhythmCommand.RhythmCommand.__repr__
+      ~RhythmCommand.deactivate
+      ~RhythmCommand.division_expression
+      ~RhythmCommand.division_maker
+      ~RhythmCommand.get_tag
+      ~RhythmCommand.manifests
+      ~RhythmCommand.offset_to_measure_number
+      ~RhythmCommand.reference_meters
+      ~RhythmCommand.repeat_ties
+      ~RhythmCommand.rewrite_meter
+      ~RhythmCommand.rhythm_maker
+      ~RhythmCommand.rhythm_overwrites
+      ~RhythmCommand.selector
+      ~RhythmCommand.split_at_measure_boundaries
+      ~RhythmCommand.stages
+      ~RhythmCommand.start_stage
+      ~RhythmCommand.stop_stage
+      ~RhythmCommand.tag
+      ~RhythmCommand.tag_measure_number
+      ~RhythmCommand.tags
+      ~RhythmCommand.tie_first
+      ~RhythmCommand.tie_last
+      ~RhythmCommand.__call__
+      ~RhythmCommand.__format__
+      ~RhythmCommand.__repr__
 
 Read-only properties
 --------------------
@@ -57,51 +53,51 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.deactivate
+      .. autoattribute:: RhythmCommand.deactivate
 
-.. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.division_expression
+.. autoattribute:: RhythmCommand.division_expression
 
-.. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.division_maker
+.. autoattribute:: RhythmCommand.division_maker
 
-.. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.reference_meters
+.. autoattribute:: RhythmCommand.reference_meters
 
-.. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.repeat_ties
+.. autoattribute:: RhythmCommand.repeat_ties
 
-.. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.rewrite_meter
+.. autoattribute:: RhythmCommand.rewrite_meter
 
-.. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.rhythm_maker
+.. autoattribute:: RhythmCommand.rhythm_maker
 
-.. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.rhythm_overwrites
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.selector
-
-.. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.split_at_measure_boundaries
-
-.. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.stages
-
-.. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.start_stage
-
-.. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.stop_stage
+.. autoattribute:: RhythmCommand.rhythm_overwrites
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.tag
+      .. autoattribute:: RhythmCommand.selector
+
+.. autoattribute:: RhythmCommand.split_at_measure_boundaries
+
+.. autoattribute:: RhythmCommand.stages
+
+.. autoattribute:: RhythmCommand.start_stage
+
+.. autoattribute:: RhythmCommand.stop_stage
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.tags
+      .. autoattribute:: RhythmCommand.tag
 
-.. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.tie_first
+.. only:: html
 
-.. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.tie_last
+   .. container:: inherited
+
+      .. autoattribute:: RhythmCommand.tags
+
+.. autoattribute:: RhythmCommand.tie_first
+
+.. autoattribute:: RhythmCommand.tie_last
 
 Read/write properties
 ---------------------
@@ -110,19 +106,19 @@ Read/write properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.manifests
+      .. autoattribute:: RhythmCommand.manifests
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.offset_to_measure_number
+      .. autoattribute:: RhythmCommand.offset_to_measure_number
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.RhythmCommand.RhythmCommand.tag_measure_number
+      .. autoattribute:: RhythmCommand.tag_measure_number
 
 Methods
 -------
@@ -131,33 +127,21 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RhythmCommand.RhythmCommand.get_tag
+      .. automethod:: RhythmCommand.get_tag
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.RhythmCommand.RhythmCommand.__call__
+.. automethod:: RhythmCommand.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RhythmCommand.RhythmCommand.__eq__
+      .. automethod:: RhythmCommand.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.RhythmCommand.RhythmCommand.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.RhythmCommand.RhythmCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.RhythmCommand.RhythmCommand.__repr__
+      .. automethod:: RhythmCommand.__repr__

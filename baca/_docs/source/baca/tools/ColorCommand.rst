@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.ColorCommand
 
 ColorCommand
 ============
@@ -8,11 +8,9 @@ ColorCommand
 Bases
 -----
 
-- :py:class:`baca.tools.Command`
+- :py:class:`baca.tools.Command.Command`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,19 +21,17 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.ColorCommand.ColorCommand.deactivate
-      ~baca.tools.ColorCommand.ColorCommand.get_tag
-      ~baca.tools.ColorCommand.ColorCommand.manifests
-      ~baca.tools.ColorCommand.ColorCommand.offset_to_measure_number
-      ~baca.tools.ColorCommand.ColorCommand.selector
-      ~baca.tools.ColorCommand.ColorCommand.tag
-      ~baca.tools.ColorCommand.ColorCommand.tag_measure_number
-      ~baca.tools.ColorCommand.ColorCommand.tags
-      ~baca.tools.ColorCommand.ColorCommand.__call__
-      ~baca.tools.ColorCommand.ColorCommand.__eq__
-      ~baca.tools.ColorCommand.ColorCommand.__format__
-      ~baca.tools.ColorCommand.ColorCommand.__hash__
-      ~baca.tools.ColorCommand.ColorCommand.__repr__
+      ~ColorCommand.deactivate
+      ~ColorCommand.get_tag
+      ~ColorCommand.manifests
+      ~ColorCommand.offset_to_measure_number
+      ~ColorCommand.selector
+      ~ColorCommand.tag
+      ~ColorCommand.tag_measure_number
+      ~ColorCommand.tags
+      ~ColorCommand.__call__
+      ~ColorCommand.__format__
+      ~ColorCommand.__repr__
 
 Read-only properties
 --------------------
@@ -44,25 +40,25 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ColorCommand.ColorCommand.deactivate
+      .. autoattribute:: ColorCommand.deactivate
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ColorCommand.ColorCommand.selector
+      .. autoattribute:: ColorCommand.selector
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ColorCommand.ColorCommand.tag
+      .. autoattribute:: ColorCommand.tag
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ColorCommand.ColorCommand.tags
+      .. autoattribute:: ColorCommand.tags
 
 Read/write properties
 ---------------------
@@ -71,19 +67,19 @@ Read/write properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ColorCommand.ColorCommand.manifests
+      .. autoattribute:: ColorCommand.manifests
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ColorCommand.ColorCommand.offset_to_measure_number
+      .. autoattribute:: ColorCommand.offset_to_measure_number
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.ColorCommand.ColorCommand.tag_measure_number
+      .. autoattribute:: ColorCommand.tag_measure_number
 
 Methods
 -------
@@ -92,33 +88,21 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ColorCommand.ColorCommand.get_tag
+      .. automethod:: ColorCommand.get_tag
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.ColorCommand.ColorCommand.__call__
+.. automethod:: ColorCommand.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ColorCommand.ColorCommand.__eq__
+      .. automethod:: ColorCommand.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.ColorCommand.ColorCommand.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.ColorCommand.ColorCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.ColorCommand.ColorCommand.__repr__
+      .. automethod:: ColorCommand.__repr__

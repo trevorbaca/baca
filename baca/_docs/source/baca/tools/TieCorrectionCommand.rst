@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.TieCorrectionCommand
 
 TieCorrectionCommand
 ====================
@@ -8,11 +8,9 @@ TieCorrectionCommand
 Bases
 -----
 
-- :py:class:`baca.tools.Command`
+- :py:class:`baca.tools.Command.Command`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,21 +21,19 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.deactivate
-      ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.direction
-      ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.get_tag
-      ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.manifests
-      ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.offset_to_measure_number
-      ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.repeat
-      ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.selector
-      ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.tag
-      ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.tag_measure_number
-      ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.tags
-      ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.__call__
-      ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.__eq__
-      ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.__format__
-      ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.__hash__
-      ~baca.tools.TieCorrectionCommand.TieCorrectionCommand.__repr__
+      ~TieCorrectionCommand.deactivate
+      ~TieCorrectionCommand.direction
+      ~TieCorrectionCommand.get_tag
+      ~TieCorrectionCommand.manifests
+      ~TieCorrectionCommand.offset_to_measure_number
+      ~TieCorrectionCommand.repeat
+      ~TieCorrectionCommand.selector
+      ~TieCorrectionCommand.tag
+      ~TieCorrectionCommand.tag_measure_number
+      ~TieCorrectionCommand.tags
+      ~TieCorrectionCommand.__call__
+      ~TieCorrectionCommand.__format__
+      ~TieCorrectionCommand.__repr__
 
 Read-only properties
 --------------------
@@ -46,29 +42,29 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.deactivate
+      .. autoattribute:: TieCorrectionCommand.deactivate
 
-.. autoattribute:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.direction
+.. autoattribute:: TieCorrectionCommand.direction
 
-.. autoattribute:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.repeat
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.selector
+.. autoattribute:: TieCorrectionCommand.repeat
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.tag
+      .. autoattribute:: TieCorrectionCommand.selector
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.tags
+      .. autoattribute:: TieCorrectionCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: TieCorrectionCommand.tags
 
 Read/write properties
 ---------------------
@@ -77,19 +73,19 @@ Read/write properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.manifests
+      .. autoattribute:: TieCorrectionCommand.manifests
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.offset_to_measure_number
+      .. autoattribute:: TieCorrectionCommand.offset_to_measure_number
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.tag_measure_number
+      .. autoattribute:: TieCorrectionCommand.tag_measure_number
 
 Methods
 -------
@@ -98,33 +94,21 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.get_tag
+      .. automethod:: TieCorrectionCommand.get_tag
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.__call__
+.. automethod:: TieCorrectionCommand.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.__eq__
+      .. automethod:: TieCorrectionCommand.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.TieCorrectionCommand.TieCorrectionCommand.__repr__
+      .. automethod:: TieCorrectionCommand.__repr__

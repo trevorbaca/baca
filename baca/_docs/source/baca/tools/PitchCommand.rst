@@ -1,4 +1,4 @@
-.. currentmodule:: baca.tools
+.. currentmodule:: baca.tools.PitchCommand
 
 PitchCommand
 ============
@@ -8,11 +8,9 @@ PitchCommand
 Bases
 -----
 
-- :py:class:`baca.tools.Command`
+- :py:class:`baca.tools.Command.Command`
 
-- :py:class:`abjad.tools.abctools.AbjadObject`
-
-- :py:class:`abjad.tools.abctools.AbjadObject.AbstractBase`
+- :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
 - :py:class:`builtins.object`
 
@@ -23,55 +21,53 @@ Bases
 
    .. autosummary::
 
-      ~baca.tools.PitchCommand.PitchCommand.allow_repeat_pitches
-      ~baca.tools.PitchCommand.PitchCommand.cyclic
-      ~baca.tools.PitchCommand.PitchCommand.deactivate
-      ~baca.tools.PitchCommand.PitchCommand.get_tag
-      ~baca.tools.PitchCommand.PitchCommand.manifests
-      ~baca.tools.PitchCommand.PitchCommand.offset_to_measure_number
-      ~baca.tools.PitchCommand.PitchCommand.pitches
-      ~baca.tools.PitchCommand.PitchCommand.selector
-      ~baca.tools.PitchCommand.PitchCommand.tag
-      ~baca.tools.PitchCommand.PitchCommand.tag_measure_number
-      ~baca.tools.PitchCommand.PitchCommand.tags
-      ~baca.tools.PitchCommand.PitchCommand.__call__
-      ~baca.tools.PitchCommand.PitchCommand.__eq__
-      ~baca.tools.PitchCommand.PitchCommand.__format__
-      ~baca.tools.PitchCommand.PitchCommand.__hash__
-      ~baca.tools.PitchCommand.PitchCommand.__repr__
+      ~PitchCommand.allow_repeat_pitches
+      ~PitchCommand.cyclic
+      ~PitchCommand.deactivate
+      ~PitchCommand.get_tag
+      ~PitchCommand.manifests
+      ~PitchCommand.offset_to_measure_number
+      ~PitchCommand.pitches
+      ~PitchCommand.selector
+      ~PitchCommand.tag
+      ~PitchCommand.tag_measure_number
+      ~PitchCommand.tags
+      ~PitchCommand.__call__
+      ~PitchCommand.__format__
+      ~PitchCommand.__repr__
 
 Read-only properties
 --------------------
 
-.. autoattribute:: baca.tools.PitchCommand.PitchCommand.allow_repeat_pitches
+.. autoattribute:: PitchCommand.allow_repeat_pitches
 
-.. autoattribute:: baca.tools.PitchCommand.PitchCommand.cyclic
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: baca.tools.PitchCommand.PitchCommand.deactivate
-
-.. autoattribute:: baca.tools.PitchCommand.PitchCommand.pitches
+.. autoattribute:: PitchCommand.cyclic
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchCommand.PitchCommand.selector
+      .. autoattribute:: PitchCommand.deactivate
+
+.. autoattribute:: PitchCommand.pitches
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchCommand.PitchCommand.tag
+      .. autoattribute:: PitchCommand.selector
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchCommand.PitchCommand.tags
+      .. autoattribute:: PitchCommand.tag
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchCommand.tags
 
 Read/write properties
 ---------------------
@@ -80,19 +76,19 @@ Read/write properties
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchCommand.PitchCommand.manifests
+      .. autoattribute:: PitchCommand.manifests
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchCommand.PitchCommand.offset_to_measure_number
+      .. autoattribute:: PitchCommand.offset_to_measure_number
 
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: baca.tools.PitchCommand.PitchCommand.tag_measure_number
+      .. autoattribute:: PitchCommand.tag_measure_number
 
 Methods
 -------
@@ -101,33 +97,21 @@ Methods
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchCommand.PitchCommand.get_tag
+      .. automethod:: PitchCommand.get_tag
 
 Special methods
 ---------------
 
-.. automethod:: baca.tools.PitchCommand.PitchCommand.__call__
+.. automethod:: PitchCommand.__call__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchCommand.PitchCommand.__eq__
+      .. automethod:: PitchCommand.__format__
 
 .. only:: html
 
    .. container:: inherited
 
-      .. automethod:: baca.tools.PitchCommand.PitchCommand.__format__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.PitchCommand.PitchCommand.__hash__
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. automethod:: baca.tools.PitchCommand.PitchCommand.__repr__
+      .. automethod:: PitchCommand.__repr__
