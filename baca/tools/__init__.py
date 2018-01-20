@@ -40,7 +40,6 @@ from .Loop import Loop
 from .MapCommand import MapCommand
 from .MarginMarkup import MarginMarkup
 from .MarkupLibrary import MarkupLibrary
-from .Match import Match
 from .Matrix import Matrix
 from .MetronomeMarkCommand import MetronomeMarkCommand
 from .MetronomeMarkMeasureMap import MetronomeMarkMeasureMap

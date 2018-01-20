@@ -296,18 +296,3 @@ baca.tools
    ~baca.tools.PartitionDivisionCallback.PartitionDivisionCallback
    ~baca.tools.SplitByDurationsDivisionCallback.SplitByDurationsDivisionCallback
    ~baca.tools.SplitByRoundedRatiosDivisionCallback.SplitByRoundedRatiosDivisionCallback
-
---------
-
-Classes
--------
-
-.. toctree::
-   :hidden:
-
-   Match
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.tools.Match.Match

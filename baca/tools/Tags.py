@@ -52,10 +52,6 @@ class Tags(Tags):
         'REDUNDANT_CLEF_COLOR_CANCELLATION',
         'REDUNDANT_CLEF_REDRAW_COLOR',
 
-        ### DOCUMENT-SPECIFIC TAGS ###
-
-        'SHIFTED_CLEF',
-
         ### DYNAMICS ###
 
         'EXPLICIT_DYNAMIC',
