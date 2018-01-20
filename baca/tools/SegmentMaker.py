@@ -1818,13 +1818,15 @@ class SegmentMaker(abjad.SegmentMaker):
             assert len(lilypond_file.score_block.items) == 1
             score = lilypond_file.score_block.items[0]
             assert isinstance(score, abjad.Score)
-            items = [
-                abjad.LilyPondLiteral('<<'),
-                abjad.LilyPondLiteral(r'{ \include "layout.ly" }'),
-                score,
-                abjad.LilyPondLiteral('>>'),
-                ]
-            lilypond_file.score_block.items[:] = items
+            include = abjad.Container()
+            string = r'\include "layout.ly"'
+            literal = abjad.LilyPondLiteral(string, 'opening')
+            abjad.attach(literal, include)
+            container = abjad.Container(
+                [include, score],
+                is_simultaneous=True,
+                )
+            lilypond_file.score_block.items[:] = [container]
         self._lilypond_file = lilypond_file
 
     def _make_measure_silences(self, start, stop, measure_start_offsets):
