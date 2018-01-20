@@ -125,7 +125,6 @@ class SegmentMaker(abjad.SegmentMaker):
     __slots__ = (
         '_allow_empty_selections',
         '_breaks',
-        '_break_offsets',
         '_cache',
         '_cached_time_signatures',
         '_color_octaves',
@@ -287,7 +286,6 @@ class SegmentMaker(abjad.SegmentMaker):
         if allow_empty_selections is not None:
             allow_empty_selections = bool(allow_empty_selections)
         self._allow_empty_selections = allow_empty_selections
-        self._break_offsets = []
         if color_octaves is not None:
             color_octaves = bool(color_octaves)
         self._color_octaves = color_octaves
@@ -705,76 +703,6 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         self.breaks(self.score['GlobalSkips'])
 
-    def _apply_fermata_measure_staff_line_count(self):
-        if self.fermata_measure_staff_line_count is None:
-            return
-        if not self._fermata_start_offsets:
-            return
-        break_offsets = self._break_offsets
-        prototype = baca.StaffLines
-        staff_lines = baca.StaffLines(self.fermata_measure_staff_line_count)
-        breaks_already_treated = []
-        for staff in abjad.iterate(self.score).components(abjad.Staff):
-            for leaf in abjad.iterate(staff).leaves():
-                start_offset = abjad.inspect(leaf).get_timespan().start_offset
-                if start_offset not in self._fermata_start_offsets:
-                    continue
-                leaf_stop = abjad.inspect(leaf).get_timespan().stop_offset
-                eol = leaf_stop in break_offsets
-                before = abjad.inspect(leaf).get_effective(prototype)
-                next_leaf = abjad.inspect(leaf).get_leaf(1)
-                if next_leaf is not None:
-                    after = abjad.inspect(next_leaf).get_effective(prototype)
-                if before != staff_lines:
-                    strings = staff_lines._get_lilypond_format(context=staff)
-                    if getattr(before, 'line_count', 5) == 5:
-                        context = staff.name
-                        string = f"{context}.BarLine.bar-extent = #'(-2 . 2)"
-                        string = r'\once \override ' + string
-                        strings.append(string)
-                    if strings:
-                        literal = abjad.LilyPondLiteral(strings)
-                        abjad.attach(literal, leaf, site='SM20')
-                if next_leaf is not None and staff_lines != after:
-                    strings = after._get_lilypond_format(context=staff)
-                    literal = abjad.LilyPondLiteral(strings)
-                    abjad.attach(literal, next_leaf, site='SM21')
-                if eol and leaf_stop not in breaks_already_treated:
-                    strings = []
-                    if (staff_lines.line_count == 0 and
-                        not (next_leaf is None and self.last_segment)):
-                        string = r'Score.BarLine.transparent = ##t'
-                        string = r'\once \override ' + string
-                        strings.append(string)
-                        string = r'Score.SpanBar.transparent = ##t'
-                        string = r'\once \override ' + string
-                        strings.append(string)
-                    elif staff_lines.line_count == 1:
-                        string = "Score.BarLine.bar-extent = #'(-2 . 2)"
-                        string = r'\once \override ' + string
-                        strings.append(string)
-                    if strings:
-                        literal = abjad.LilyPondLiteral(strings, 'after')
-                        abjad.attach(
-                            literal,
-                            leaf,
-                            site='SM22',
-                            tag=baca.tags.BAR_LINE_AFTER_EOL_FERMATA,
-                            )
-                    breaks_already_treated.append(leaf_stop)
-                if next_leaf is None and before != staff_lines:
-                    before_line_count = getattr(before, 'line_count', 5)
-                    before_staff_lines = baca.StaffLines(
-                        line_count=before_line_count,
-                        hide=True,
-                        )
-                    abjad.attach(
-                        before_staff_lines,
-                        leaf,
-                        site='SM23',
-                        synthetic_offset=1_000_000,
-                        )
-
     def _apply_first_and_last_ties(self, voice):
         dummy_tie = abjad.Tie()
         for current_leaf in abjad.iterate(voice).leaves():
@@ -1021,28 +949,6 @@ class SegmentMaker(abjad.SegmentMaker):
                     stage_number = stage_index + 1
                     if leaf_timespan.starts_during_timespan(stage_timespan):
                         leaves_by_stage_number[stage_number].append(leaf)
-
-    def _cache_break_offsets(self):
-        prototype = abjad.LilyPondLiteral
-        skips = baca.select(self.score['GlobalSkips']).skips()
-        first_measure_number = self._get_first_measure_number()
-        segment_measure_numbers = self._get_segment_measure_numbers()
-        for i, skip in enumerate(skips):
-            literals = abjad.inspect(skip).get_indicators(prototype)
-            if not literals:
-                continue
-            if not any(
-                _.argument in (r'\break', r'\pageBreak') for _ in literals
-                ):
-                continue
-            offset = abjad.inspect(skip).get_timespan().start_offset
-            self._break_offsets.append(offset)
-            bol_measure_number = first_measure_number + i
-            self._segment_bol_measure_numbers.append(bol_measure_number)
-        segment_stop_offset = abjad.inspect(skip).get_timespan().stop_offset
-        self._break_offsets.append(segment_stop_offset)
-        bol_measure_number = first_measure_number + i + 1
-        self._segment_bol_measure_numbers.append(bol_measure_number)
 
     def _call_commands(self):
         start_time = time.time()
@@ -1518,6 +1424,12 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _get_last_measure_number(self):
         return self._get_first_measure_number() + self.measure_count - 1
+
+    def _get_measure_number_tag(self, leaf):
+        start_offset = abjad.inspect(leaf).get_timespan().start_offset
+        measure_number = self._offset_to_measure_number.get(start_offset)
+        if measure_number is not None:
+            return f'MEASURE_{measure_number}'
 
     def _get_measure_timespans(self, measure_numbers):
         timespans = []
@@ -2153,6 +2065,78 @@ class SegmentMaker(abjad.SegmentMaker):
         start_measure_index = measure_indices[stop]
         stop_measure_index = measure_indices[stage_number] - 1
         return start_measure_index, stop_measure_index
+
+    def _style_fermata_measures(self):
+        if self.fermata_measure_staff_line_count is None:
+            return
+        if not self._fermata_start_offsets:
+            return
+        prototype = baca.StaffLines
+        staff_lines = baca.StaffLines(self.fermata_measure_staff_line_count)
+        bar_lines_already_styled = []
+        for staff in abjad.iterate(self.score).components(abjad.Staff):
+            for leaf in abjad.iterate(staff).leaves():
+                start_offset = abjad.inspect(leaf).get_timespan().start_offset
+                if start_offset not in self._fermata_start_offsets:
+                    continue
+                before = abjad.inspect(leaf).get_effective(prototype)
+                next_leaf = abjad.inspect(leaf).get_leaf(1)
+                if next_leaf is not None:
+                    after = abjad.inspect(next_leaf).get_effective(prototype)
+                if before != staff_lines:
+                    strings = staff_lines._get_lilypond_format(context=staff)
+                    if getattr(before, 'line_count', 5) == 5:
+                        context = staff.name
+                        string = f"{context}.BarLine.bar-extent = #'(-2 . 2)"
+                        string = r'\once \override ' + string
+                        strings.append(string)
+                    if strings:
+                        literal = abjad.LilyPondLiteral(strings)
+                        abjad.attach(literal, leaf, site='SM20')
+                if next_leaf is not None and staff_lines != after:
+                    strings = after._get_lilypond_format(context=staff)
+                    literal = abjad.LilyPondLiteral(strings)
+                    abjad.attach(literal, next_leaf, site='SM21')
+                if next_leaf is None and before != staff_lines:
+                    before_line_count = getattr(before, 'line_count', 5)
+                    before_staff_lines = baca.StaffLines(
+                        line_count=before_line_count,
+                        hide=True,
+                        )
+                    abjad.attach(
+                        before_staff_lines,
+                        leaf,
+                        site='SM23',
+                        synthetic_offset=1_000_000,
+                        )
+                if start_offset in bar_lines_already_styled:
+                    continue
+                strings = []
+                if (staff_lines.line_count == 0 and
+                    not (next_leaf is None and self.last_segment)):
+                    string = r'Score.BarLine.transparent = ##t'
+                    string = r'\once \override ' + string
+                    strings.append(string)
+                    string = r'Score.SpanBar.transparent = ##t'
+                    string = r'\once \override ' + string
+                    strings.append(string)
+                elif staff_lines.line_count == 1:
+                    string = "Score.BarLine.bar-extent = #'(-2 . 2)"
+                    string = r'\once \override ' + string
+                    strings.append(string)
+                if strings:
+                    literal = abjad.LilyPondLiteral(strings, 'after')
+                    tag = baca.tags.BAR_LINE_AFTER_EOL_FERMATA
+                    measure_number_tag = self._get_measure_number_tag(leaf)
+                    if measure_number_tag is not None:
+                        tag = f'{tag}:{measure_number_tag}'
+                    abjad.attach(
+                        literal,
+                        leaf,
+                        site='SM22',
+                        tag=tag,
+                        )
+                bar_lines_already_styled.append(start_offset)
 
     @staticmethod
     def _tag_persistent_indicator(
@@ -9381,8 +9365,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._whitespace_leaves()
         self._comment_measure_numbers()
         self._apply_breaks()
-        self._cache_break_offsets()
-        self._apply_fermata_measure_staff_line_count()
+        self._style_fermata_measures()
         self._shift_clefs_into_fermata_measures()
         self._deactivate_tags(deactivate)
         self._remove_tags(remove)
