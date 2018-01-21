@@ -349,12 +349,12 @@ class StringTrioScoreTemplate(ScoreTemplate):
         # VIOLIN
         violin_music_voice = abjad.Voice(
             [],
-            context_name='ViolinMusicVoice',
+            lilypond_type='ViolinMusicVoice',
             name='ViolinMusicVoice',
             )
         violin_music_staff = abjad.Staff(
             [violin_music_voice],
-            context_name='ViolinMusicStaff',
+            lilypond_type='ViolinMusicStaff',
             name='ViolinMusicStaff',
             )
         violin = abjad.Violin(
@@ -379,12 +379,12 @@ class StringTrioScoreTemplate(ScoreTemplate):
         # VIOLA
         viola_music_voice = abjad.Voice(
             [],
-            context_name='ViolaMusicVoice',
+            lilypond_type='ViolaMusicVoice',
             name='ViolaMusicVoice',
             )
         viola_music_staff = abjad.Staff(
             [viola_music_voice],
-            context_name='ViolaMusicStaff',
+            lilypond_type='ViolaMusicStaff',
             name='ViolaMusicStaff',
             )
         abjad.annotate(
@@ -408,12 +408,12 @@ class StringTrioScoreTemplate(ScoreTemplate):
         # CELLO
         cello_music_voice = abjad.Voice(
             [],
-            context_name='CelloMusicVoice',
+            lilypond_type='CelloMusicVoice',
             name='CelloMusicVoice',
             )
         cello_music_staff = abjad.Staff(
             [cello_music_voice],
-            context_name='CelloMusicStaff',
+            lilypond_type='CelloMusicStaff',
             name='CelloMusicStaff',
             )
         abjad.annotate(
@@ -441,14 +441,14 @@ class StringTrioScoreTemplate(ScoreTemplate):
                 viola_music_staff,
                 cello_music_staff,
                 ],
-            context_name='StringSectionStaffGroup',
+            lilypond_type='StringSectionStaffGroup',
             name='String Section Staff Group',
             )
         music_context = abjad.Context(
             [
                 string_section_staff_group,
                 ],
-            context_name='MusicContext',
+            lilypond_type='MusicContext',
             is_simultaneous=True,
             name='MusicContext',
             )

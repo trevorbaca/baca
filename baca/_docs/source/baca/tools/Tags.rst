@@ -8,7 +8,7 @@ Tags
 Bases
 -----
 
-- :py:class:`abjad.tools.datastructuretools.Tags.Tags`
+- :py:class:`abjad.tools.segmenttools.Tags.Tags`
 
 - :py:class:`abjad.tools.abctools.AbjadValueObject.AbjadValueObject`
 

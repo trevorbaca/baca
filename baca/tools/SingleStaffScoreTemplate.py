@@ -101,7 +101,7 @@ class SingleStaffScoreTemplate(ScoreTemplate):
         # MUSIC CONTEXT
         music_context = abjad.Context(
             [music_staff],
-            context_name='MusicContext',
+            lilypond_type='MusicContext',
             is_simultaneous=True,
             name='MusicContext',
             )

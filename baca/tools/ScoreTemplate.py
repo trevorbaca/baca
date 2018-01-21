@@ -34,10 +34,10 @@ class ScoreTemplate(abjad.ScoreTemplate):
     @staticmethod
     def _assert_matching_custom_context_names(score):
         for context in abjad.iterate(score).components(abjad.Context):
-            if context.context_name in abjad.Context.lilypond_context_names:
+            if context.lilypond_type in abjad.Context.lilypond_types:
                 continue
-            if context.name != context.context_name:
-                message = f'context {context.context_name}'
+            if context.name != context.lilypond_type:
+                message = f'context {context.lilypond_type}'
                 message += f' has name {context.name!r}.'
                 raise Exception(message)
 
@@ -50,8 +50,8 @@ class ScoreTemplate(abjad.ScoreTemplate):
 
     def _attach_calltime_defaults(self, score):
         assert isinstance(score, abjad.Score)
-        for context_name, annotation, indicator in self.defaults:
-            context = score[context_name]
+        for lilypond_type, annotation, indicator in self.defaults:
+            context = score[lilypond_type]
             abjad.annotate(context, annotation, indicator)
         
     def _attach_tag(self, tag, context):
@@ -65,16 +65,16 @@ class ScoreTemplate(abjad.ScoreTemplate):
 
     def _make_global_context(self):
         global_rests = abjad.Context(
-            context_name='GlobalRests',
+            lilypond_type='GlobalRests',
             name='GlobalRests',
             )
         global_skips = abjad.Context(
-            context_name='GlobalSkips',
+            lilypond_type='GlobalSkips',
             name='GlobalSkips',
             )
         global_context = abjad.Context(
             [global_rests, global_skips ],
-            context_name='GlobalContext',
+            lilypond_type='GlobalContext',
             is_simultaneous=True,
             name='GlobalContext',
             )
@@ -140,7 +140,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
         contexts = [_ for _ in contexts if _ is not None]
         return abjad.Context(
             contexts,
-            context_name='MusicContext',
+            lilypond_type='MusicContext',
             is_simultaneous=True,
             name='MusicContext',
             )

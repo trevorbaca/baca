@@ -166,12 +166,12 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
         # VIOLIN
         violin_music_voice = abjad.Voice(
             [],
-            context_name='ViolinMusicVoice',
+            lilypond_type='ViolinMusicVoice',
             name='ViolinMusicVoice',
             )
         violin_music_staff = abjad.Staff(
             [violin_music_voice],
-            context_name='ViolinMusicStaff',
+            lilypond_type='ViolinMusicStaff',
             name='ViolinMusicStaff',
             )
         violin = abjad.Violin(
@@ -193,7 +193,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
         # MUSIC ONTEXT
         music_context = abjad.Context(
             [violin_music_staff],
-            context_name='MusicContext',
+            lilypond_type='MusicContext',
             is_simultaneous=True,
             name='MusicContext',
             )

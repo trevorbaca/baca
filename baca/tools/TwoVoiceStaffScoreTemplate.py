@@ -100,16 +100,16 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
 
         # MUSIC STAFF
         music_voice_1 = abjad.Voice(
-            context_name='MusicVoiceOne',
+            lilypond_type='MusicVoiceOne',
             name='MusicVoiceOne',
             )
         music_voice_2 = abjad.Voice(
-            context_name='MusicVoiceTwo',
+            lilypond_type='MusicVoiceTwo',
             name='MusicVoiceTwo',
             )
         music_staff = abjad.Staff(
             [music_voice_1, music_voice_2],
-            context_name='MusicStaff',
+            lilypond_type='MusicStaff',
             is_simultaneous=True,
             name='MusicStaff',
             )
@@ -117,7 +117,7 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
         # MUSIC CONTEXT
         music_context = abjad.Context(
             [music_staff],
-            context_name='MusicContext',
+            lilypond_type='MusicContext',
             is_simultaneous=True,
             name='MusicContext',
             )
