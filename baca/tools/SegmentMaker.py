@@ -1148,7 +1148,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _collect_metadata(self):
         result = {}
         result['duration'] = self._duration
-        if self._fermata_measure_numbers:
+        if bool(self._fermata_measure_numbers):
             result['fermata_measure_numbers'] = self._fermata_measure_numbers
         result['first_measure_number'] = self._get_first_measure_number()
         result['last_measure_number'] = self._get_last_measure_number()
