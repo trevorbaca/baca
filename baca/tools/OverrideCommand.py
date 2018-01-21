@@ -240,7 +240,7 @@ class OverrideCommand(Command):
             assert issubclass(context, abjad.Context), repr(context)
             parentage = abjad.inspect(leaves[0]).get_parentage()
             context = parentage.get_first(context) or context()
-            context = context.headword
+            context = context.lilypond_type
             assert isinstance(context, str), repr(context)
         grob = self.grob
         attribute = self.attribute

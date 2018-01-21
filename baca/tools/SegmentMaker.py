@@ -1043,7 +1043,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 uncolor=True,
                 )
         if isinstance(indicator, abjad.Clef):
-            string = rf'\set {context.headword}.forceClef = ##t'
+            string = rf'\set {context.lilypond_type}.forceClef = ##t'
             literal = abjad.LilyPondLiteral(string)
             SegmentMaker._tag_persistent_indicator(
                 context,
@@ -1233,7 +1233,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         grob = SegmentMaker._indicator_to_grob(indicator)
         if context is not None:
-            string = rf'\override {context.headword}.{grob}.color ='
+            string = rf'\override {context.lilypond_type}.{grob}.color ='
         else:
             string = rf'\override {grob}.color ='
         if uncolor is True:
@@ -2180,11 +2180,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 if not found_wrapper:
                     raise Exception('can not find wrapper.')
         else:
-            headword = getattr(context, 'headword', None)
             abjad.attach(
                 indicator,
                 leaf,
-                context=headword,
+                context=context.lilypond_type,
                 site='SM8',
                 tag=tag,
                 )

@@ -148,7 +148,7 @@ class MarginMarkup(abjad.AbjadValueObject):
         if context is None:
             context = self.context
         elif isinstance(context, abjad.Context):
-            context = context.headword
+            context = context.lilypond_type
         assert isinstance(context, str), repr(context)
         markup = format(self.markup)
         lines.append(rf'\set {context}.instrumentName = {markup}')
