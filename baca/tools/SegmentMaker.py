@@ -2128,7 +2128,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     strings.append(string)
                 if strings:
                     literal = abjad.LilyPondLiteral(strings, 'after')
-                    tag = baca.tags.BAR_LINE_ADJUSTMENT_AFTER_EOL_FERMATA
+                    tag = baca.tags.EOL_FERMATA
                     measure_number_tag = self._get_measure_number_tag(leaf)
                     if measure_number_tag is not None:
                         tag = f'{tag}:{measure_number_tag}'
