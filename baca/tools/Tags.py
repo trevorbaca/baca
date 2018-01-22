@@ -1,3 +1,4 @@
+import baca
 from abjad.tools.segmenttools.Tags import Tags
 
 
@@ -180,3 +181,36 @@ class Tags(Tags):
             raise Exception(f'tag already exists in abjad.Tags: {tag!r}.')
 
     _known_tags = Tags._known_tags + _my_known_tags
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def clef_color_tags(self):
+        r'''Gets clef color tags.
+
+        ..  container:: example
+
+            >>> for tag in baca.tags.clef_color_tags:
+            ...     tag
+            ...
+            'DEFAULT_CLEF_COLOR'
+            'DEFAULT_CLEF_REDRAW_COLOR'
+            'EXPLICIT_CLEF_COLOR'
+            'EXPLICIT_CLEF_REDRAW_COLOR'
+            'REAPPLIED_CLEF_COLOR'
+            'REAPPLIED_CLEF_REDRAW_COLOR'
+            'REDUNDANT_CLEF_COLOR'
+            'REDUNDANT_CLEF_REDRAW_COLOR'
+
+        Returns copied list.
+        '''
+        return [
+            baca.tags.DEFAULT_CLEF_COLOR,
+            baca.tags.DEFAULT_CLEF_REDRAW_COLOR,
+            baca.tags.EXPLICIT_CLEF_COLOR,
+            baca.tags.EXPLICIT_CLEF_REDRAW_COLOR,
+            baca.tags.REAPPLIED_CLEF_COLOR,
+            baca.tags.REAPPLIED_CLEF_REDRAW_COLOR,
+            baca.tags.REDUNDANT_CLEF_COLOR,
+            baca.tags.REDUNDANT_CLEF_REDRAW_COLOR,
+            ][:]

@@ -23,8 +23,9 @@ Bases
 
    .. autosummary::
 
+      ~Tags.clef_color_tags
       ~Tags.document
-      ~Tags.markup_tags
+      ~Tags.score_annotation_tags
       ~Tags.spacing_tags
       ~Tags.__copy__
       ~Tags.__eq__
@@ -36,11 +37,13 @@ Bases
 Read-only properties
 --------------------
 
+.. autoattribute:: Tags.clef_color_tags
+
 .. only:: html
 
    .. container:: inherited
 
-      .. autoattribute:: Tags.markup_tags
+      .. autoattribute:: Tags.score_annotation_tags
 
 .. only:: html
 
