@@ -184,13 +184,21 @@ class Tags(Tags):
 
     ### PUBLIC PROPERTIES ###
 
-    @property
-    def clef_color_tags(self):
+    @staticmethod
+    def clef_color_match(tags):
+        r'''Matches clef color tags.
+
+        Returns true or false.
+        '''
+        return set(tags) & set(Tags.clef_color_tags())
+
+    @staticmethod
+    def clef_color_tags():
         r'''Gets clef color tags.
 
         ..  container:: example
 
-            >>> for tag in baca.tags.clef_color_tags:
+            >>> for tag in baca.tags.clef_color_tags():
             ...     tag
             ...
             'DEFAULT_CLEF_COLOR'
@@ -202,7 +210,7 @@ class Tags(Tags):
             'REDUNDANT_CLEF_COLOR'
             'REDUNDANT_CLEF_REDRAW_COLOR'
 
-        Returns copied list.
+        Returns list.
         '''
         return [
             baca.tags.DEFAULT_CLEF_COLOR,
@@ -213,4 +221,219 @@ class Tags(Tags):
             baca.tags.REAPPLIED_CLEF_REDRAW_COLOR,
             baca.tags.REDUNDANT_CLEF_COLOR,
             baca.tags.REDUNDANT_CLEF_REDRAW_COLOR,
-            ][:]
+            ]
+
+    @staticmethod
+    def dynamic_color_match(tags):
+        r'''Matches dynamic color tags.
+
+        Returns true or false.
+        '''
+        return set(tags) & set(Tags.dynamic_color_tags())
+
+    @staticmethod
+    def dynamic_color_tags():
+        r'''Gets dynamic color tags.
+
+        ..  container:: example
+
+            >>> for tag in baca.tags.dynamic_color_tags():
+            ...     tag
+            ...
+            'EXPLICIT_DYNAMIC_COLOR'
+            'EXPLICIT_DYNAMIC_REDRAW_COLOR'
+            'REAPPLIED_DYNAMIC'
+            'REAPPLIED_DYNAMIC_COLOR'
+            'REAPPLIED_DYNAMIC_REDRAW_COLOR'
+            'REDUNDANT_DYNAMIC_COLOR'
+            'REDUNDANT_DYNAMIC_REDRAW_COLOR'
+
+        Returns list.
+        '''
+        return [
+            baca.tags.EXPLICIT_DYNAMIC_COLOR,
+            baca.tags.EXPLICIT_DYNAMIC_REDRAW_COLOR,
+            baca.tags.REAPPLIED_DYNAMIC,
+            baca.tags.REAPPLIED_DYNAMIC_COLOR,
+            baca.tags.REAPPLIED_DYNAMIC_REDRAW_COLOR,
+            baca.tags.REDUNDANT_DYNAMIC_COLOR,
+            baca.tags.REDUNDANT_DYNAMIC_REDRAW_COLOR,
+            ]
+
+    @staticmethod
+    def margin_markup_color_expression_match(tags):
+        r'''Matches margin markup color expression tags.
+
+        Returns true or false.
+        '''
+        tags_ = Tags.margin_markup_color_tags()['activate']
+        return bool(set(tags) & set(tags_))
+
+    @staticmethod
+    def margin_markup_color_suppression_match(tags):
+        r'''Matches margin markup color suppression tags.
+
+        Returns true or false.
+        '''
+        tags_ = Tags.margin_markup_color_tags()['deactivate']
+        return bool(set(tags) & set(tags_))
+
+    @staticmethod
+    def margin_markup_color_tags():
+        r'''Gets margin markup color tags.
+
+        ..  container:: example
+
+            >>> dictionary = baca.tags.margin_markup_color_tags()
+            >>> for tag in dictionary['activate']:
+            ...     tag
+            ...
+            'DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR'
+            'DEFAULT_MARGIN_MARKUP_COLOR'
+            'REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR'
+            'EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR'
+            'EXPLICIT_MARGIN_MARKUP_COLOR'
+            'REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR'
+            'REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR'
+            'REAPPLIED_MARGIN_MARKUP_COLOR'
+            'REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR'
+            'REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR'
+            'REDUNDANT_MARGIN_MARKUP_COLOR'
+            'REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR'
+
+            >>> for tag in dictionary['deactivate']:
+            ...     tag
+            ...
+
+        Returns two-part dictionary.
+        '''
+        return {
+            'activate': [
+                baca.tags.DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR,
+                baca.tags.DEFAULT_MARGIN_MARKUP_COLOR,
+                baca.tags.REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR,
+                baca.tags.EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR,
+                baca.tags.EXPLICIT_MARGIN_MARKUP_COLOR,
+                baca.tags.REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR,
+                baca.tags.REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR,
+                baca.tags.REAPPLIED_MARGIN_MARKUP_COLOR,
+                baca.tags.REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR,
+                baca.tags.REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR,
+                baca.tags.REDUNDANT_MARGIN_MARKUP_COLOR,
+                baca.tags.REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR,
+                ],
+            'deactivate': [
+                ],
+            }
+
+    @staticmethod
+    def metronome_mark_color_expression_match(tags):
+        r'''Matches tags that should activate for colored metronome marks.
+
+        Returns true or false.
+        '''
+        tags_ = Tags.metronome_mark_color_tags()['activate']
+        return bool(set(tags) & set(tags_))
+
+    @staticmethod
+    def metronome_mark_color_suppression_match(tags):
+        r'''Matches tags that should deactivate for colored metronome marks.
+
+        Returns true or false.
+        '''
+        tags_ = Tags.metronome_mark_color_tags()['deactivate']
+        return bool(set(tags) & set(tags_))
+
+    @staticmethod
+    def metronome_mark_color_tags():
+        r'''Gets metronome mark color tags.
+
+        ..  container:: example
+
+            >>> dictionary = baca.tags.metronome_mark_color_tags()
+            >>> for tag in dictionary['activate']:
+            ...     tag
+            ...
+            'EXPLICIT_METRONOME_MARK_WITH_COLOR'
+            'REAPPLIED_METRONOME_MARK_WITH_COLOR'
+            'REDUNDANT_METRONOME_MARK_WITH_COLOR'
+
+            >>> for tag in dictionary['deactivate']:
+            ...     tag
+            ...
+            'EXPLICIT_METRONOME_MARK'
+            'REAPPLIED_METRONOME_MARK'
+            'REDUNDANT_METRONOME_MARK'
+
+        Returns two-part dictionary.
+        '''
+        return {
+            'activate': [
+                baca.tags.EXPLICIT_METRONOME_MARK_WITH_COLOR,
+                baca.tags.REAPPLIED_METRONOME_MARK_WITH_COLOR,
+                baca.tags.REDUNDANT_METRONOME_MARK_WITH_COLOR,
+                ],
+            'deactivate': [
+                baca.tags.EXPLICIT_METRONOME_MARK,
+                baca.tags.REAPPLIED_METRONOME_MARK,
+                baca.tags.REDUNDANT_METRONOME_MARK,
+                ],
+            }
+
+    @staticmethod
+    def staff_lines_color_match(tags):
+        r'''Matches staff lines color tags.
+
+        Returns true or false.
+        '''
+        return set(tags) & set(Tags.staff_lines_color_tags())
+
+    @staticmethod
+    def staff_lines_color_tags():
+        r'''Gets staff lines color tags.
+
+        ..  container:: example
+
+            >>> for tag in baca.tags.staff_lines_color_tags():
+            ...     tag
+            ...
+            'EXPLICIT_STAFF_LINES_COLOR'
+            'REAPPLIED_STAFF_LINES_COLOR'
+            'REDUNDANT_STAFF_LINES_COLOR'
+
+        Returns list of strings.
+        '''
+        return [
+            baca.tags.EXPLICIT_STAFF_LINES_COLOR,
+            baca.tags.REAPPLIED_STAFF_LINES_COLOR,
+            baca.tags.REDUNDANT_STAFF_LINES_COLOR,
+            ]
+
+    @staticmethod
+    def time_signature_color_match(tags):
+        r'''Matches time signature color tags.
+
+        Returns true or false.
+        '''
+        return set(tags) & set(Tags.time_signature_color_tags())
+
+    @staticmethod
+    def time_signature_color_tags():
+        r'''Gets time signature color tags.
+
+        ..  container:: example
+
+            >>> for tag in baca.tags.time_signature_color_tags():
+            ...     tag
+            ...
+            'EXPLICIT_TIME_SIGNATURE_COLOR'
+            'REAPPLIED_TIME_SIGNATURE_COLOR'
+            'REDUNDANT_TIME_SIGNATURE_COLOR'
+
+        Returns list.
+        '''
+        return [
+            baca.tags.EXPLICIT_TIME_SIGNATURE_COLOR,
+            baca.tags.REAPPLIED_TIME_SIGNATURE_COLOR,
+            baca.tags.REDUNDANT_TIME_SIGNATURE_COLOR,
+            ]
