@@ -261,6 +261,45 @@ class Tags(Tags):
             ]
 
     @staticmethod
+    def instrument_color_tags():
+        r'''Gets instrument color tags.
+
+        ..  container:: example
+
+            >>> for tag in baca.tags.instrument_color_tags():
+            ...     tag
+            ...
+            'DEFAULT_INSTRUMENT_ALERT_WITH_COLOR'
+            'DEFAULT_INSTRUMENT_COLOR'
+            'REDRAWN_DEFAULT_INSTRUMENT_COLOR'
+            'EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR'
+            'EXPLICIT_INSTRUMENT_COLOR'
+            'REDRAWN_EXPLICIT_INSTRUMENT_COLOR'
+            'REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR'
+            'REAPPLIED_INSTRUMENT_COLOR'
+            'REDRAWN_REAPPLIED_INSTRUMENT_COLOR'
+            'REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR'
+            'REDUNDANT_INSTRUMENT_COLOR'
+            'REDRAWN_REDUNDANT_INSTRUMENT_COLOR'
+
+        Returns list of strings.
+        '''
+        return [
+            baca.tags.DEFAULT_INSTRUMENT_ALERT_WITH_COLOR,
+            baca.tags.DEFAULT_INSTRUMENT_COLOR,
+            baca.tags.REDRAWN_DEFAULT_INSTRUMENT_COLOR,
+            baca.tags.EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR,
+            baca.tags.EXPLICIT_INSTRUMENT_COLOR,
+            baca.tags.REDRAWN_EXPLICIT_INSTRUMENT_COLOR,
+            baca.tags.REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR,
+            baca.tags.REAPPLIED_INSTRUMENT_COLOR,
+            baca.tags.REDRAWN_REAPPLIED_INSTRUMENT_COLOR,
+            baca.tags.REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR,
+            baca.tags.REDUNDANT_INSTRUMENT_COLOR,
+            baca.tags.REDRAWN_REDUNDANT_INSTRUMENT_COLOR,
+            ]
+
+    @staticmethod
     def margin_markup_color_expression_match(tags):
         r'''Matches margin markup color expression tags.
 
