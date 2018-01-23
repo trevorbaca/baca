@@ -185,6 +185,157 @@ class Tags(Tags):
     ### PUBLIC PROPERTIES ###
 
     @staticmethod
+    def all_persistent_indicator_color_tags(path=None):
+        r'''Gets all persistent indicator color tags.
+
+        ..  container:: example
+
+            >>> dictionary = baca.tags.all_persistent_indicator_color_tags()
+            >>> for tag in dictionary['activate']:
+            ...     tag
+            ...
+            'DEFAULT_CLEF_COLOR'
+            'DEFAULT_CLEF_REDRAW_COLOR'
+            'EXPLICIT_CLEF_COLOR'
+            'EXPLICIT_CLEF_REDRAW_COLOR'
+            'REAPPLIED_CLEF_COLOR'
+            'REAPPLIED_CLEF_REDRAW_COLOR'
+            'REDUNDANT_CLEF_COLOR'
+            'REDUNDANT_CLEF_REDRAW_COLOR'
+            'EXPLICIT_DYNAMIC_COLOR'
+            'EXPLICIT_DYNAMIC_REDRAW_COLOR'
+            'REAPPLIED_DYNAMIC'
+            'REAPPLIED_DYNAMIC_COLOR'
+            'REAPPLIED_DYNAMIC_REDRAW_COLOR'
+            'REDUNDANT_DYNAMIC_COLOR'
+            'REDUNDANT_DYNAMIC_REDRAW_COLOR'
+            'DEFAULT_INSTRUMENT_ALERT_WITH_COLOR'
+            'DEFAULT_INSTRUMENT_COLOR'
+            'REDRAWN_DEFAULT_INSTRUMENT_COLOR'
+            'EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR'
+            'EXPLICIT_INSTRUMENT_COLOR'
+            'REDRAWN_EXPLICIT_INSTRUMENT_COLOR'
+            'REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR'
+            'REAPPLIED_INSTRUMENT_COLOR'
+            'REDRAWN_REAPPLIED_INSTRUMENT_COLOR'
+            'REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR'
+            'REDUNDANT_INSTRUMENT_COLOR'
+            'REDRAWN_REDUNDANT_INSTRUMENT_COLOR'
+            'DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR'
+            'DEFAULT_MARGIN_MARKUP_COLOR'
+            'REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR'
+            'EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR'
+            'EXPLICIT_MARGIN_MARKUP_COLOR'
+            'REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR'
+            'REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR'
+            'REAPPLIED_MARGIN_MARKUP_COLOR'
+            'REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR'
+            'REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR'
+            'REDUNDANT_MARGIN_MARKUP_COLOR'
+            'REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR'
+            'EXPLICIT_METRONOME_MARK_WITH_COLOR'
+            'REAPPLIED_METRONOME_MARK_WITH_COLOR'
+            'REDUNDANT_METRONOME_MARK_WITH_COLOR'
+            'EXPLICIT_STAFF_LINES_COLOR'
+            'REAPPLIED_STAFF_LINES_COLOR'
+            'REDUNDANT_STAFF_LINES_COLOR'
+            'EXPLICIT_TIME_SIGNATURE_COLOR'
+            'REAPPLIED_TIME_SIGNATURE_COLOR'
+            'REDUNDANT_TIME_SIGNATURE_COLOR'
+
+            >>> for tag in dictionary['deactivate']:
+            ...     tag
+            ...
+            'EXPLICIT_METRONOME_MARK'
+            'REDUNDANT_METRONOME_MARK'
+
+        ..  container:: example
+
+            Additional REAPPLIED_CLEF tag when path is not none and is in a
+            build:
+
+            >>> path = abjad.Path('etude', 'builds', 'letter-score')
+            >>> dictionary = baca.tags.all_persistent_indicator_color_tags(path)
+            >>> for tag in dictionary['activate']:
+            ...     tag
+            ...
+            'DEFAULT_CLEF_COLOR'
+            'DEFAULT_CLEF_REDRAW_COLOR'
+            'EXPLICIT_CLEF_COLOR'
+            'EXPLICIT_CLEF_REDRAW_COLOR'
+            'REAPPLIED_CLEF_COLOR'
+            'REAPPLIED_CLEF_REDRAW_COLOR'
+            'REDUNDANT_CLEF_COLOR'
+            'REDUNDANT_CLEF_REDRAW_COLOR'
+            'REAPPLIED_CLEF'
+            'EXPLICIT_DYNAMIC_COLOR'
+            'EXPLICIT_DYNAMIC_REDRAW_COLOR'
+            'REAPPLIED_DYNAMIC'
+            'REAPPLIED_DYNAMIC_COLOR'
+            'REAPPLIED_DYNAMIC_REDRAW_COLOR'
+            'REDUNDANT_DYNAMIC_COLOR'
+            'REDUNDANT_DYNAMIC_REDRAW_COLOR'
+            'DEFAULT_INSTRUMENT_ALERT_WITH_COLOR'
+            'DEFAULT_INSTRUMENT_COLOR'
+            'REDRAWN_DEFAULT_INSTRUMENT_COLOR'
+            'EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR'
+            'EXPLICIT_INSTRUMENT_COLOR'
+            'REDRAWN_EXPLICIT_INSTRUMENT_COLOR'
+            'REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR'
+            'REAPPLIED_INSTRUMENT_COLOR'
+            'REDRAWN_REAPPLIED_INSTRUMENT_COLOR'
+            'REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR'
+            'REDUNDANT_INSTRUMENT_COLOR'
+            'REDRAWN_REDUNDANT_INSTRUMENT_COLOR'
+            'DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR'
+            'DEFAULT_MARGIN_MARKUP_COLOR'
+            'REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR'
+            'EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR'
+            'EXPLICIT_MARGIN_MARKUP_COLOR'
+            'REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR'
+            'REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR'
+            'REAPPLIED_MARGIN_MARKUP_COLOR'
+            'REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR'
+            'REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR'
+            'REDUNDANT_MARGIN_MARKUP_COLOR'
+            'REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR'
+            'EXPLICIT_METRONOME_MARK_WITH_COLOR'
+            'REAPPLIED_METRONOME_MARK_WITH_COLOR'
+            'REDUNDANT_METRONOME_MARK_WITH_COLOR'
+            'EXPLICIT_STAFF_LINES_COLOR'
+            'REAPPLIED_STAFF_LINES_COLOR'
+            'REDUNDANT_STAFF_LINES_COLOR'
+            'EXPLICIT_TIME_SIGNATURE_COLOR'
+            'REAPPLIED_TIME_SIGNATURE_COLOR'
+            'REDUNDANT_TIME_SIGNATURE_COLOR'
+
+            >>> for tag in dictionary['deactivate']:
+            ...     tag
+            ...
+            'REAPPLIED_INSTRUMENT'
+            'EXPLICIT_METRONOME_MARK'
+            'REDUNDANT_METRONOME_MARK'
+
+        Returns two-part dictionary.
+        '''
+        activate = []
+        activate.extend(baca.tags.clef_color_tags(path))
+        activate.extend(baca.tags.dynamic_color_tags())
+        activate.extend(baca.tags.instrument_color_tags())
+        activate.extend(baca.tags.margin_markup_color_tags())
+        activate.extend(baca.tags.metronome_mark_color_tags()['activate'])
+        activate.extend(baca.tags.staff_lines_color_tags())
+        activate.extend(baca.tags.time_signature_color_tags())
+        deactivate = []
+        if path is not None and path.build is not None:
+            deactivate.append(baca.tags.REAPPLIED_INSTRUMENT)
+        deactivate.extend(baca.tags.metronome_mark_color_tags()['deactivate'])
+        return {
+            'activate': activate,
+            'deactivate': deactivate,
+            }
+
+    @staticmethod
     def clef_color_match(tags):
         r'''Matches clef color tags.
 
@@ -193,7 +344,7 @@ class Tags(Tags):
         return set(tags) & set(Tags.clef_color_tags())
 
     @staticmethod
-    def clef_color_tags():
+    def clef_color_tags(path=None):
         r'''Gets clef color tags.
 
         ..  container:: example
@@ -210,9 +361,28 @@ class Tags(Tags):
             'REDUNDANT_CLEF_COLOR'
             'REDUNDANT_CLEF_REDRAW_COLOR'
 
+        ..  container:: example
+
+            If `path` is not none and is in a build directory, output includes
+            the extra REAPPLIED_CLEF tag:
+
+            >>> path = abjad.Path('etude', 'builds', 'letter-score')
+            >>> for tag in baca.tags.clef_color_tags(path=path):
+            ...     tag
+            ...
+            'DEFAULT_CLEF_COLOR'
+            'DEFAULT_CLEF_REDRAW_COLOR'
+            'EXPLICIT_CLEF_COLOR'
+            'EXPLICIT_CLEF_REDRAW_COLOR'
+            'REAPPLIED_CLEF_COLOR'
+            'REAPPLIED_CLEF_REDRAW_COLOR'
+            'REDUNDANT_CLEF_COLOR'
+            'REDUNDANT_CLEF_REDRAW_COLOR'
+            'REAPPLIED_CLEF'
+
         Returns list.
         '''
-        return [
+        tags = [
             baca.tags.DEFAULT_CLEF_COLOR,
             baca.tags.DEFAULT_CLEF_REDRAW_COLOR,
             baca.tags.EXPLICIT_CLEF_COLOR,
@@ -222,6 +392,9 @@ class Tags(Tags):
             baca.tags.REDUNDANT_CLEF_COLOR,
             baca.tags.REDUNDANT_CLEF_REDRAW_COLOR,
             ]
+        if path is not None and path.build is not None:
+            tags.append(baca.tags.REAPPLIED_CLEF)
+        return tags
 
     @staticmethod
     def dynamic_color_match(tags):
@@ -305,7 +478,7 @@ class Tags(Tags):
 
         Returns true or false.
         '''
-        tags_ = Tags.margin_markup_color_tags()['activate']
+        tags_ = Tags.margin_markup_color_tags()
         return bool(set(tags) & set(tags_))
 
     @staticmethod
@@ -314,7 +487,7 @@ class Tags(Tags):
 
         Returns true or false.
         '''
-        tags_ = Tags.margin_markup_color_tags()['deactivate']
+        tags_ = Tags.margin_markup_color_tags()
         return bool(set(tags) & set(tags_))
 
     @staticmethod
@@ -323,8 +496,7 @@ class Tags(Tags):
 
         ..  container:: example
 
-            >>> dictionary = baca.tags.margin_markup_color_tags()
-            >>> for tag in dictionary['activate']:
+            >>> for tag in baca.tags.margin_markup_color_tags():
             ...     tag
             ...
             'DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR'
@@ -340,30 +512,22 @@ class Tags(Tags):
             'REDUNDANT_MARGIN_MARKUP_COLOR'
             'REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR'
 
-            >>> for tag in dictionary['deactivate']:
-            ...     tag
-            ...
-
-        Returns two-part dictionary.
+        Returns list.
         '''
-        return {
-            'activate': [
-                baca.tags.DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR,
-                baca.tags.DEFAULT_MARGIN_MARKUP_COLOR,
-                baca.tags.REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR,
-                baca.tags.EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR,
-                baca.tags.EXPLICIT_MARGIN_MARKUP_COLOR,
-                baca.tags.REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR,
-                baca.tags.REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR,
-                baca.tags.REAPPLIED_MARGIN_MARKUP_COLOR,
-                baca.tags.REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR,
-                baca.tags.REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR,
-                baca.tags.REDUNDANT_MARGIN_MARKUP_COLOR,
-                baca.tags.REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR,
-                ],
-            'deactivate': [
-                ],
-            }
+        return [
+            baca.tags.DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR,
+            baca.tags.DEFAULT_MARGIN_MARKUP_COLOR,
+            baca.tags.REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR,
+            baca.tags.EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR,
+            baca.tags.EXPLICIT_MARGIN_MARKUP_COLOR,
+            baca.tags.REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR,
+            baca.tags.REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR,
+            baca.tags.REAPPLIED_MARGIN_MARKUP_COLOR,
+            baca.tags.REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR,
+            baca.tags.REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR,
+            baca.tags.REDUNDANT_MARGIN_MARKUP_COLOR,
+            baca.tags.REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR,
+            ]
 
     @staticmethod
     def metronome_mark_color_expression_match(tags):
