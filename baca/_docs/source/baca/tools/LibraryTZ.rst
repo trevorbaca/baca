@@ -32,6 +32,7 @@ Bases
       ~LibraryTZ.text_spanner_staff_padding
       ~LibraryTZ.tie
       ~LibraryTZ.tie_from
+      ~LibraryTZ.tie_repeat_pitches
       ~LibraryTZ.tie_to
       ~LibraryTZ.ties_down
       ~LibraryTZ.ties_up
@@ -44,6 +45,7 @@ Bases
       ~LibraryTZ.tremolo_down
       ~LibraryTZ.trill
       ~LibraryTZ.tuplet_bracket_extra_offset
+      ~LibraryTZ.tuplet_bracket_padding
       ~LibraryTZ.tuplet_bracket_staff_padding
       ~LibraryTZ.tuplet_brackets_down
       ~LibraryTZ.tuplet_brackets_up
@@ -84,6 +86,8 @@ Class & static methods
 
 .. automethod:: LibraryTZ.tie_from
 
+.. automethod:: LibraryTZ.tie_repeat_pitches
+
 .. automethod:: LibraryTZ.tie_to
 
 .. automethod:: LibraryTZ.ties_down
@@ -107,6 +111,8 @@ Class & static methods
 .. automethod:: LibraryTZ.trill
 
 .. automethod:: LibraryTZ.tuplet_bracket_extra_offset
+
+.. automethod:: LibraryTZ.tuplet_bracket_padding
 
 .. automethod:: LibraryTZ.tuplet_bracket_staff_padding
 

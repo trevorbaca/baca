@@ -76,7 +76,7 @@ class MusicMaker(abjad.AbjadObject):
 
     _recollection_tag = 'recollection'
 
-    _repeat_pitch_allowed_string = 'repeat pitch allowed'
+    _repeat_pitch_allowed_string = abjad.tags.ALLOW_REPEAT_PITCH
 
     _state_variables = (
         '_next_figure',

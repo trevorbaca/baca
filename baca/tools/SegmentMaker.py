@@ -1089,8 +1089,13 @@ class SegmentMaker(abjad.SegmentMaker):
                     continue
                 if wrapper.tag is not None:
                     continue
+                if isinstance(wrapper.indicator, abjad.Instrument):
+                    prototype = abjad.Instrument
+                else:
+                    prototype = type(wrapper.indicator)
                 previous_indicator = abjad.inspect(leaf).get_effective(
-                    type(wrapper.indicator),
+                    #type(wrapper.indicator),
+                    prototype,
                     n=-1,
                     )
                 if previous_indicator != wrapper.indicator:

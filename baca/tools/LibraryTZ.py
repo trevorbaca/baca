@@ -1575,11 +1575,22 @@ class LibraryTZ(abjad.AbjadObject):
                     >>
                 >>
 
-
+        Returns tie correction command.
         '''
         return baca.TieCorrectionCommand(
             repeat=repeat,
             selector=selector,
+            )
+
+    @staticmethod
+    def tie_repeat_pitches(repeat=None):
+        r'''Ties repeat pitches.
+
+        Returns mapped tie correction command.
+        '''
+        return baca.map(
+            baca.tie(repeat=repeat),
+            baca.ltqruns().nontrivial(),
             )
 
     @staticmethod
@@ -3186,6 +3197,19 @@ class LibraryTZ(abjad.AbjadObject):
         return baca.OverrideCommand(
             attribute='extra_offset',
             value=pair,
+            grob='tuplet_bracket',
+            selector=selector,
+            )
+
+    @staticmethod
+    def tuplet_bracket_padding(n, selector='baca.leaves()'):
+        r'''Overrides tuplet bracket padding.
+
+        Returns override command.
+        '''
+        return baca.OverrideCommand(
+            attribute='padding',
+            value=n,
             grob='tuplet_bracket',
             selector=selector,
             )

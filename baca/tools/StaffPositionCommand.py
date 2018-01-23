@@ -87,7 +87,7 @@ class StaffPositionCommand(Command):
             baca.PitchCommand._set_lt_pitch(plt, pitch)
             if self.repeats:
                 for pleaf in plt:
-                    abjad.attach('repeat pitch allowed', pleaf)
+                    abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, pleaf)
                     abjad.attach(baca.tags.DO_NOT_TRANSPOSE, pleaf)
 
     ### PUBLIC PROPERTIES ###

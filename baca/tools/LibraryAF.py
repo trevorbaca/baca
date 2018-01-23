@@ -4319,6 +4319,19 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
+    def dynamic_line_spanner_padding(n, selector='baca.leaves()'):
+        r'''Overrides dynamic line spanner padding on leaves.
+
+        Returns override command.
+        '''
+        return baca.OverrideCommand(
+            attribute='padding',
+            value=str(n),
+            grob='dynamic_line_spanner',
+            selector=selector,
+            )
+
+    @staticmethod
     def dynamic_line_spanner_staff_padding(n, selector='baca.leaves()'):
         r'''Overrides dynamic line spanner staff padding on leaves.
 

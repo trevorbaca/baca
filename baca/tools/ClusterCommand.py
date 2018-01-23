@@ -560,7 +560,7 @@ class ClusterCommand(Command):
             chord = abjad.Chord(pitches, pleaf.written_duration)
             abjad.mutate(pleaf).replace(chord)
             abjad.attach(indicator, chord)
-            abjad.attach('repeat pitch allowed', chord)
+            abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, chord)
 
     def _make_pitches(self, start_pitch, width):
         pitches = [start_pitch]

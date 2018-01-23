@@ -54,6 +54,7 @@ Bases
       ~LibraryAF.down_arpeggios
       ~LibraryAF.down_bows
       ~LibraryAF.dynamic
+      ~LibraryAF.dynamic_line_spanner_padding
       ~LibraryAF.dynamic_line_spanner_staff_padding
       ~LibraryAF.dynamic_line_spanner_up
       ~LibraryAF.dynamic_text_extra_offset
@@ -142,6 +143,8 @@ Class & static methods
 .. automethod:: LibraryAF.down_bows
 
 .. automethod:: LibraryAF.dynamic
+
+.. automethod:: LibraryAF.dynamic_line_spanner_padding
 
 .. automethod:: LibraryAF.dynamic_line_spanner_staff_padding
 

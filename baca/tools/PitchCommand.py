@@ -413,7 +413,7 @@ class PitchCommand(Command):
                 plt = new_plt
             if self.allow_repeat_pitches:
                 for pleaf in plt:
-                    abjad.attach('repeat pitch allowed', pleaf)
+                    abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, pleaf)
 
     ### PRIVATE METHODS ###
 
