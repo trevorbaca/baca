@@ -362,8 +362,9 @@ class Tags(Tags):
             ...     tag
             ...
             'EXPLICIT_METRONOME_MARK'
-            'REAPPLIED_METRONOME_MARK'
             'REDUNDANT_METRONOME_MARK'
+
+        Note that baca.tags.REAPPLIED_METRONOME_MARK is completely ignored.
 
         Returns two-part dictionary.
         '''
@@ -375,7 +376,6 @@ class Tags(Tags):
                 ],
             'deactivate': [
                 baca.tags.EXPLICIT_METRONOME_MARK,
-                baca.tags.REAPPLIED_METRONOME_MARK,
                 baca.tags.REDUNDANT_METRONOME_MARK,
                 ],
             }
