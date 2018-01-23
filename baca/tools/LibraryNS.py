@@ -586,11 +586,7 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def possibile_dynamic(
-        dynamic,
-        selector='baca.phead(0)',
-        direction=abjad.Down,
-        ):
+    def possibile_dynamic(dynamic:str, selector='baca.phead(0)'):
         r'''Attaches possibile dynamic to pitched head 0.
 
         ..  container:: example
@@ -622,13 +618,8 @@ class LibraryNS(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC
                                 r8
                                 c'16
+                                \ff_poss                                                                 %! IC
                                 [
-                                _ \markup {                                                              %! IC
-                                    \dynamic                                                             %! IC
-                                        ff                                                               %! IC
-                                    \upright                                                             %! IC
-                                        possibile                                                        %! IC
-                                    }                                                                    %! IC
                                 d'16
                                 ]
                                 bf'4
@@ -703,13 +694,8 @@ class LibraryNS(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
+                                \ff_poss                                                                 %! IC
                                 [
-                                _ \markup {                                                              %! IC
-                                    \dynamic                                                             %! IC
-                                        ff                                                               %! IC
-                                    \upright                                                             %! IC
-                                        possibile                                                        %! IC
-                                    }                                                                    %! IC
                                 e''16
                                 ]
                                 ef''4
@@ -731,11 +717,11 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        markup = abjad.Markup(dynamic).dynamic()
-        markup += abjad.Markup('possibile').upright()
-        markup = abjad.new(markup, direction=direction)
+        assert isinstance(dynamic, str), repr(str)
+        command = rf'\{dynamic}_poss'
+        dynamic = abjad.Dynamic(dynamic, command=command)
         return baca.IndicatorCommand(
-            indicators=[markup],
+            indicators=[dynamic],
             selector=selector,
             )
 
@@ -5525,6 +5511,20 @@ class LibraryNS(abjad.AbjadObject):
         expression = expression.sequence()
         expression = expression.flatten(depth=-1)
         return expression
+
+    @staticmethod
+    def subito_dynamic(dynamic:str, selector='baca.phead(0)'):
+        r'''Attaches subito dynamic.
+
+        Returns indicator command.
+        '''
+        assert isinstance(dynamic, str), repr(str)
+        command = rf'\{dynamic}_sub'
+        dynamic = abjad.Dynamic(dynamic, command=command)
+        return baca.IndicatorCommand(
+            indicators=[dynamic],
+            selector=selector,
+            )
 
     @staticmethod
     def suite(commands, selector=None):

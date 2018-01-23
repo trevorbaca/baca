@@ -78,6 +78,7 @@ Bases
       ~LibraryNS.stems_up
       ~LibraryNS.strict_note_spacing_off
       ~LibraryNS.strict_quarter_divisions
+      ~LibraryNS.subito_dynamic
       ~LibraryNS.suite
       ~LibraryNS.sustain_pedal
       ~LibraryNS.sustain_pedal_staff_padding
@@ -207,6 +208,8 @@ Class & static methods
 .. automethod:: LibraryNS.strict_note_spacing_off
 
 .. automethod:: LibraryNS.strict_quarter_divisions
+
+.. automethod:: LibraryNS.subito_dynamic
 
 .. automethod:: LibraryNS.suite
 

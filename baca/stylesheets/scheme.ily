@@ -49,7 +49,167 @@ tongue =
                   (ly:music-property script 'tweaks)))
      script))
 
-%%% DYNAMICS %%%
+%%% DYNAMICS (ANCORA) %%%
+
+ppp_poss = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:dynamic "ppp"
+            #:hspace 0.25
+            #:normal-text "ancora"
+            )
+        )
+    )
+
+pp_ancora = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:dynamic "pp"
+            #:hspace 0.25
+            #:normal-text "ancora."
+            )
+        )
+    )
+
+p_ancora = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:dynamic "p"
+            #:hspace 0.25
+            #:normal-text "ancora"
+            )
+        )
+    )
+
+mp_ancora = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:dynamic "mp"
+            #:hspace 0.25
+            #:normal-text "ancora"
+            )
+        )
+    )
+
+mf_ancora = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:dynamic "mf"
+            #:hspace 0.25
+            #:normal-text "ancora"
+            )
+        )
+    )
+
+f_ancora = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:dynamic "f"
+            #:hspace 0.25
+            #:normal-text "ancora"
+            )
+        )
+    )
+
+ff_ancora = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:dynamic "ff"
+            #:hspace 0.25
+            #:normal-text "ancora"
+            )
+        )
+    )
+
+fff_ancora = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:dynamic "fff"
+            #:hspace 0.25
+            #:normal-text "ancora"
+            )
+        )
+    )
+
+%%% DYNAMICS (EFFORT) %%%
+
+effort_ppp = #(
+    make-dynamic-script
+    (markup
+        #:whiteout
+        #:line (
+            #:general-align Y -2 #:normal-text #:larger "“"
+            #:hspace -0.1
+            #:dynamic "ppp"
+            #:hspace -0.25
+            #:general-align Y -2 #:normal-text #:larger "”"
+            )
+        )
+    )
+
+effort_pp = #(
+    make-dynamic-script
+    (markup
+        #:whiteout
+        #:line (
+            #:general-align Y -2 #:normal-text #:larger "“"
+            #:hspace -0.1
+            #:dynamic "pp"
+            #:hspace -0.25
+            #:general-align Y -2 #:normal-text #:larger "”"
+            )
+        )
+    )
+
+effort_p = #(
+    make-dynamic-script
+    (markup
+        #:whiteout
+        #:line (
+            #:general-align Y -2 #:normal-text #:larger "“"
+            #:hspace -0.1
+            #:dynamic "p"
+            #:hspace -0.25
+            #:general-align Y -2 #:normal-text #:larger "”"
+            )
+        )
+    )
+
+effort_mp = #(
+    make-dynamic-script
+    (markup
+        #:whiteout
+        #:line (
+            #:general-align Y -2 #:normal-text #:larger "“"
+            #:hspace -0.1
+            #:dynamic "mp"
+            #:hspace -0.25
+            #:general-align Y -2 #:normal-text #:larger "”"
+            )
+        )
+    )
+
+effort_mf = #(
+    make-dynamic-script
+    (markup
+        #:whiteout
+        #:line (
+            #:general-align Y -2 #:normal-text #:larger "“"
+            #:hspace -0.1
+            #:dynamic "mf"
+            #:hspace -0.2
+            #:general-align Y -2 #:normal-text #:larger "”"
+            )
+        )
+    )
 
 effort_f = #(
     make-dynamic-script
@@ -93,76 +253,6 @@ effort_fff = #(
         )
     )
 
-effort_mf = #(
-    make-dynamic-script
-    (markup
-        #:whiteout
-        #:line (
-            #:general-align Y -2 #:normal-text #:larger "“"
-            #:hspace -0.1
-            #:dynamic "mf"
-            #:hspace -0.2
-            #:general-align Y -2 #:normal-text #:larger "”"
-            )
-        )
-    )
-
-effort_mp = #(
-    make-dynamic-script
-    (markup
-        #:whiteout
-        #:line (
-            #:general-align Y -2 #:normal-text #:larger "“"
-            #:hspace -0.1
-            #:dynamic "mp"
-            #:hspace -0.25
-            #:general-align Y -2 #:normal-text #:larger "”"
-            )
-        )
-    )
-
-effort_p = #(
-    make-dynamic-script
-    (markup
-        #:whiteout
-        #:line (
-            #:general-align Y -2 #:normal-text #:larger "“"
-            #:hspace -0.1
-            #:dynamic "p"
-            #:hspace -0.25
-            #:general-align Y -2 #:normal-text #:larger "”"
-            )
-        )
-    )
-
-effort_pp = #(
-    make-dynamic-script
-    (markup
-        #:whiteout
-        #:line (
-            #:general-align Y -2 #:normal-text #:larger "“"
-            #:hspace -0.1
-            #:dynamic "pp"
-            #:hspace -0.25
-            #:general-align Y -2 #:normal-text #:larger "”"
-            )
-        )
-    )
-
-effort_ppp = #(
-    make-dynamic-script
-    (markup
-        #:whiteout
-        #:line (
-            #:general-align Y -2 #:normal-text #:larger "“"
-            #:hspace -0.1
-            #:dynamic "ppp"
-            #:hspace -0.25
-            #:general-align Y -2 #:normal-text #:larger "”"
-            )
-        )
-    )
-
 effort_sfz = #(
     make-dynamic-script
     (markup
@@ -191,19 +281,80 @@ effort_sffz = #(
         )
     )
 
+%%% DYNAMICS (FP) %%%
+
 ffp = #(make-dynamic-script "ffp")
 fffp = #(make-dynamic-script "fffp")
 
-mf_sub = #(
+%%% DYNAMICS (POSSIBILE) %%%
+
+ppp_poss = #(
     make-dynamic-script
     (markup
         #:line (
-            #:dynamic "mf"
-            #:hspace -0.25
-            #:normal-text #:italic "sub."
+            #:dynamic "ppp"
+            #:hspace 0.25
+            #:normal-text "poss."
             )
         )
     )
+
+pp_poss = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:dynamic "pp"
+            #:hspace 0.25
+            #:normal-text "poss."
+            )
+        )
+    )
+
+p_poss = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:dynamic "p"
+            #:hspace 0.25
+            #:normal-text "poss."
+            )
+        )
+    )
+
+f_poss = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:dynamic "f"
+            #:hspace 0.25
+            #:normal-text "poss."
+            )
+        )
+    )
+
+ff_poss = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:dynamic "ff"
+            #:hspace 0.25
+            #:normal-text "poss."
+            )
+        )
+    )
+
+fff_poss = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:dynamic "fff"
+            #:hspace 0.25 
+            #:normal-text "poss."
+            )
+        )
+    )
+
+%%% DYNAMICS (SFORZANDO) %%%
 
 sff = #(make-dynamic-script "sff")
 sffp = #(make-dynamic-script "sffp")
@@ -211,6 +362,96 @@ sffpp = #(make-dynamic-script "sffpp")
 sfpp = #(make-dynamic-script "sfpp")
 sffz = #(make-dynamic-script "sffz")
 sfffz = #(make-dynamic-script "sfffz")
+
+%%% DYNAMICS (SUBITO) %%%
+
+ppp_sub = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:dynamic "ppp"
+            #:hspace 0.25
+            #:normal-text "sub."
+            )
+        )
+    )
+
+pp_sub = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:dynamic "pp"
+            #:hspace 0.25
+            #:normal-text "sub."
+            )
+        )
+    )
+
+p_sub = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:dynamic "p"
+            #:hspace 0.25
+            #:normal-text "sub."
+            )
+        )
+    )
+
+mp_sub = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:dynamic "mp"
+            #:hspace 0.25
+            #:normal-text "sub."
+            )
+        )
+    )
+
+mf_sub = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:dynamic "mf"
+            #:hspace 0.25
+            #:normal-text "sub."
+            )
+        )
+    )
+
+f_sub = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:dynamic "f"
+            #:hspace 0.25
+            #:normal-text "sub."
+            )
+        )
+    )
+
+ff_sub = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:dynamic "ff"
+            #:hspace 0.25
+            #:normal-text "sub."
+            )
+        )
+    )
+
+fff_sub = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:dynamic "fff"
+            #:hspace 0.25
+            #:normal-text "sub."
+            )
+        )
+    )
 
 %%% SHAPE NOTE HEADS %%%
 

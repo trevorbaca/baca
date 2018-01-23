@@ -23,10 +23,25 @@ Bases
 
    .. autosummary::
 
+      ~Tags.all_persistent_indicator_color_tags
+      ~Tags.all_score_annotation_tags
+      ~Tags.clef_color_match
       ~Tags.clef_color_tags
       ~Tags.document
-      ~Tags.score_annotation_tags
+      ~Tags.dynamic_color_match
+      ~Tags.dynamic_color_tags
+      ~Tags.instrument_color_tags
+      ~Tags.margin_markup_color_expression_match
+      ~Tags.margin_markup_color_suppression_match
+      ~Tags.margin_markup_color_tags
+      ~Tags.metronome_mark_color_expression_match
+      ~Tags.metronome_mark_color_suppression_match
+      ~Tags.metronome_mark_color_tags
       ~Tags.spacing_tags
+      ~Tags.staff_lines_color_match
+      ~Tags.staff_lines_color_tags
+      ~Tags.time_signature_color_match
+      ~Tags.time_signature_color_tags
       ~Tags.__copy__
       ~Tags.__eq__
       ~Tags.__format__
@@ -34,31 +49,58 @@ Bases
       ~Tags.__hash__
       ~Tags.__repr__
 
-Read-only properties
---------------------
-
-.. autoattribute:: Tags.clef_color_tags
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: Tags.score_annotation_tags
-
-.. only:: html
-
-   .. container:: inherited
-
-      .. autoattribute:: Tags.spacing_tags
-
 Class & static methods
 ----------------------
+
+.. automethod:: Tags.all_persistent_indicator_color_tags
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: Tags.all_score_annotation_tags
+
+.. automethod:: Tags.clef_color_match
+
+.. automethod:: Tags.clef_color_tags
 
 .. only:: html
 
    .. container:: inherited
 
       .. automethod:: Tags.document
+
+.. automethod:: Tags.dynamic_color_match
+
+.. automethod:: Tags.dynamic_color_tags
+
+.. automethod:: Tags.instrument_color_tags
+
+.. automethod:: Tags.margin_markup_color_expression_match
+
+.. automethod:: Tags.margin_markup_color_suppression_match
+
+.. automethod:: Tags.margin_markup_color_tags
+
+.. automethod:: Tags.metronome_mark_color_expression_match
+
+.. automethod:: Tags.metronome_mark_color_suppression_match
+
+.. automethod:: Tags.metronome_mark_color_tags
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: Tags.spacing_tags
+
+.. automethod:: Tags.staff_lines_color_match
+
+.. automethod:: Tags.staff_lines_color_tags
+
+.. automethod:: Tags.time_signature_color_match
+
+.. automethod:: Tags.time_signature_color_tags
 
 Special methods
 ---------------

@@ -421,11 +421,7 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def ancora_dynamic(
-        dynamic,
-        selector='baca.phead(0)',
-        direction=abjad.Down,
-        ):
+    def ancora_dynamic(dynamic:str, selector='baca.phead(0)'):
         r'''Attaches ancora dynamic pitched head 0.
 
         ..  container:: example
@@ -457,13 +453,8 @@ class LibraryAF(abjad.AbjadObject):
                                 \override TupletBracket.staff-padding = #5                               %! OC
                                 r8
                                 c'16
+                                \ff_ancora                                                               %! IC
                                 [
-                                _ \markup {                                                              %! IC
-                                    \dynamic                                                             %! IC
-                                        ff                                                               %! IC
-                                    \upright                                                             %! IC
-                                        ancora                                                           %! IC
-                                    }                                                                    %! IC
                                 d'16
                                 ]
                                 bf'4
@@ -538,13 +529,8 @@ class LibraryAF(abjad.AbjadObject):
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
                                 fs''16
+                                \ff_ancora                                                               %! IC
                                 [
-                                _ \markup {                                                              %! IC
-                                    \dynamic                                                             %! IC
-                                        ff                                                               %! IC
-                                    \upright                                                             %! IC
-                                        ancora                                                           %! IC
-                                    }                                                                    %! IC
                                 e''16
                                 ]
                                 ef''4
@@ -566,11 +552,11 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        markup = abjad.Markup(dynamic).dynamic()
-        markup += abjad.Markup('ancora').upright()
-        markup = abjad.new(markup, direction=direction)
+        assert isinstance(dynamic, str), repr(str)
+        command = rf'\{dynamic}_ancora'
+        dynamic = abjad.Dynamic(dynamic, command=command)
         return baca.IndicatorCommand(
-            indicators=[markup],
+            indicators=[dynamic],
             selector=selector,
             )
 
