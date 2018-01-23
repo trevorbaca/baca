@@ -38,10 +38,9 @@ Bases
       ~Sequence.accumulate
       ~Sequence.boustrophedon
       ~Sequence.count
+      ~Sequence.degree_of_rotational_symmetry
       ~Sequence.filter
       ~Sequence.flatten
-      ~Sequence.get_degree_of_rotational_symmetry
-      ~Sequence.get_period_of_rotation
       ~Sequence.group_by
       ~Sequence.group_by_sign
       ~Sequence.helianthate
@@ -59,6 +58,7 @@ Bases
       ~Sequence.partition_by_ratio_of_lengths
       ~Sequence.partition_by_ratio_of_weights
       ~Sequence.partition_by_weights
+      ~Sequence.period_of_rotation
       ~Sequence.permute
       ~Sequence.remove
       ~Sequence.remove_repeats
@@ -114,6 +114,8 @@ Methods
 
       .. automethod:: Sequence.count
 
+.. automethod:: Sequence.degree_of_rotational_symmetry
+
 .. only:: html
 
    .. container:: inherited
@@ -125,10 +127,6 @@ Methods
    .. container:: inherited
 
       .. automethod:: Sequence.flatten
-
-.. automethod:: Sequence.get_degree_of_rotational_symmetry
-
-.. automethod:: Sequence.get_period_of_rotation
 
 .. only:: html
 
@@ -213,6 +211,8 @@ Methods
    .. container:: inherited
 
       .. automethod:: Sequence.partition_by_weights
+
+.. automethod:: Sequence.period_of_rotation
 
 .. only:: html
 

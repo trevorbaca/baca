@@ -521,15 +521,6 @@ class BreakMeasureMap(abjad.AbjadObject):
         return self._deactivate
 
     @property
-    def tags(self):
-        r'''Gets tags.
-
-        Returns (copied) list of strings.
-        '''
-        assert baca.Command._are_valid_tags(self._tags), repr(self._tags)
-        return self._tags[:]
-
-    @property
     def tag(self):
         r'''Gets colon-delimited tag.
 
@@ -537,3 +528,12 @@ class BreakMeasureMap(abjad.AbjadObject):
         '''
         if self.tags:
             return ':'.join(self.tags)
+
+    @property
+    def tags(self):
+        r'''Gets tags.
+
+        Returns (copied) list of strings.
+        '''
+        assert baca.Command._are_valid_tags(self._tags), repr(self._tags)
+        return self._tags[:]

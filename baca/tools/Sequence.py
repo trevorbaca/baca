@@ -930,24 +930,24 @@ class Sequence(abjad.Sequence):
                         result.append(item)
         return type(self)(items=result)
 
-    def get_degree_of_rotational_symmetry(self):
+    def degree_of_rotational_symmetry(self):
         '''Gets degree of rotational symmetry.
 
         ..  container:: example
 
-            >>> baca.Sequence([1, 1, 1, 1, 1, 1]).get_degree_of_rotational_symmetry()
+            >>> baca.Sequence([1, 1, 1, 1, 1, 1]).degree_of_rotational_symmetry()
             6
 
-            >>> baca.Sequence([1, 2, 1, 2, 1, 2]).get_degree_of_rotational_symmetry()
+            >>> baca.Sequence([1, 2, 1, 2, 1, 2]).degree_of_rotational_symmetry()
             3
 
-            >>> baca.Sequence([1, 2, 3, 1, 2, 3]).get_degree_of_rotational_symmetry()
+            >>> baca.Sequence([1, 2, 3, 1, 2, 3]).degree_of_rotational_symmetry()
             2
 
-            >>> baca.Sequence([1, 2, 3, 4, 5, 6]).get_degree_of_rotational_symmetry()
+            >>> baca.Sequence([1, 2, 3, 4, 5, 6]).degree_of_rotational_symmetry()
             1
 
-            >>> baca.Sequence().get_degree_of_rotational_symmetry()
+            >>> baca.Sequence().degree_of_rotational_symmetry()
             1
 
         Returns positive integer.
@@ -959,33 +959,6 @@ class Sequence(abjad.Sequence):
                 degree_of_rotational_symmetry += 1
         degree_of_rotational_symmetry = degree_of_rotational_symmetry or 1
         return degree_of_rotational_symmetry
-
-    def get_period_of_rotation(self):
-        '''Gets period of rotation.
-
-        ..  container:: example
-
-            >>> baca.Sequence([1, 2, 3, 4, 5, 6]).get_period_of_rotation()
-            6
-
-            >>> baca.Sequence([1, 2, 3, 1, 2, 3]).get_period_of_rotation()
-            3
-
-            >>> baca.Sequence([1, 2, 1, 2, 1, 2]).get_period_of_rotation()
-            2
-
-            >>> baca.Sequence([1, 1, 1, 1, 1, 1]).get_period_of_rotation()
-            1
-
-            >>> baca.Sequence().get_period_of_rotation()
-            0
-
-        Defined equal to length of sequence divided by degree of rotational
-        symmetry of sequence.
-
-        Returns positive integer.
-        '''
-        return len(self) // self.get_degree_of_rotational_symmetry()
 
     def group_by_sign(self, sign=(-1, 0, 1)):
         r'''Groups sequence by sign of items.
@@ -1369,6 +1342,33 @@ class Sequence(abjad.Sequence):
             cyclic=True,
             overhang=True,
             )
+
+    def period_of_rotation(self):
+        '''Gets period of rotation.
+
+        ..  container:: example
+
+            >>> baca.Sequence([1, 2, 3, 4, 5, 6]).period_of_rotation()
+            6
+
+            >>> baca.Sequence([1, 2, 3, 1, 2, 3]).period_of_rotation()
+            3
+
+            >>> baca.Sequence([1, 2, 1, 2, 1, 2]).period_of_rotation()
+            2
+
+            >>> baca.Sequence([1, 1, 1, 1, 1, 1]).period_of_rotation()
+            1
+
+            >>> baca.Sequence().period_of_rotation()
+            0
+
+        Defined equal to length of sequence divided by degree of rotational
+        symmetry of sequence.
+
+        Returns positive integer.
+        '''
+        return len(self) // self.degree_of_rotational_symmetry()
 
     @abjad.Signature()
     def repeat_by(self, counts=None, cyclic=None):
