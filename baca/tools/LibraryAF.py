@@ -2,6 +2,8 @@ import abjad
 import baca
 from typing import Union
 from abjad import rhythmmakertools as rhythmos
+from .IndicatorCommand import IndicatorCommand
+from .OverrideCommand import OverrideCommand
 
 
 class LibraryAF(abjad.AbjadObject):
@@ -18,7 +20,7 @@ class LibraryAF(abjad.AbjadObject):
     ### PUBLIC METHODS ###
 
     @staticmethod
-    def accents(selector='baca.pheads()'):
+    def accents(selector='baca.pheads()') -> IndicatorCommand:
         r'''Attaches accents to pitched heads.
 
         ..  container:: example
@@ -422,7 +424,10 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def ancora_dynamic(dynamic:str, selector='baca.phead(0)'):
+    def ancora_dynamic(
+        dynamic: str,
+        selector='baca.phead(0)',
+        ) -> OverrideCommand:
         r'''Attaches ancora dynamic pitched head 0.
 
         ..  container:: example
@@ -553,11 +558,10 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        assert isinstance(dynamic, str), repr(str)
         command = rf'\{dynamic}_ancora'
-        dynamic = abjad.Dynamic(dynamic, command=command)
+        indicator = abjad.Dynamic(dynamic, command=command)
         return baca.tools.IndicatorCommand(
-            indicators=[dynamic],
+            indicators=[indicator],
             selector=selector,
             )
 
@@ -4185,7 +4189,7 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def dynamic(dynamic:str, selector='baca.phead(0)'):
+    def dynamic(dynamic: str, selector='baca.phead(0)'):
         r'''Attaches dynamic to pitched head 0.
 
         ..  container:: example
@@ -4313,25 +4317,24 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        assert isinstance(dynamic, str), repr(dynamic)
-        if dynamic in baca.scheme.dynamics:
-            steady_state = baca.scheme.dynamic_to_steady_state(dynamic)
+        if dynamic in baca.tools.scheme.dynamics:
+            steady_state = baca.tools.scheme.dynamic_to_steady_state(dynamic)
             command = '\\' + dynamic
             first = dynamic.split('_')[0]
             if first in ('sfz', 'sffz', 'sfffz'):
                 sforzando = True
             else:
                 sforzando = False
-            dynamic = abjad.Dynamic(
+            indicator = abjad.Dynamic(
                 steady_state,
                 command=command,
                 sforzando=sforzando,
                 )
         else:
-            dynamic = abjad.Dynamic(dynamic)
+            indicator = abjad.Dynamic(dynamic)
         return baca.tools.IndicatorCommand(
             context='Voice',
-            indicators=[dynamic],
+            indicators=[indicator],
             selector=selector,
             )
 
@@ -5124,7 +5127,7 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def effort_dynamic(dynamic:str, selector='baca.phead(0)'):
+    def effort_dynamic(dynamic: str, selector='baca.phead(0)'):
         r'''Attaches effort dynamic to pitched head 0.
 
         ..  container:: example
@@ -5255,11 +5258,10 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        assert isinstance(dynamic, str), repr(dynamic)
         command = rf'\effort_{dynamic}'
-        dynamic = abjad.Dynamic(f'{dynamic}', command=command)
+        indicator = abjad.Dynamic(f'{dynamic}', command=command)
         return baca.tools.IndicatorCommand(
-            indicators=[dynamic],
+            indicators=[indicator],
             selector=selector,
             )
 

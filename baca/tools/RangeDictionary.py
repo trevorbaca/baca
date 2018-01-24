@@ -1,9 +1,9 @@
 import abjad
 import copy
-from abjad.tools.datastructuretools.TypedOrderedDict import TypedOrderedDict
+from abjad.tools.datastructuretools.OrderedDict import OrderedDict
 
 
-class RangeDictionary(TypedOrderedDict):
+class RangeDictionary(OrderedDict):
     r"""Range dictionary.
 
     ..  container:: example

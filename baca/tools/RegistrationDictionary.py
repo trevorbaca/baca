@@ -1,7 +1,7 @@
 import abjad
 
 
-class RegistrationDictionary(abjad.TypedOrderedDict):
+class RegistrationDictionary(abjad.OrderedDict):
     '''Registration dictionary.
 
     ..  container:: example

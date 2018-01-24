@@ -8,7 +8,7 @@ RegistrationDictionary
 Bases
 -----
 
-- :py:class:`abjad.tools.datastructuretools.TypedOrderedDict.TypedOrderedDict`
+- :py:class:`abjad.tools.datastructuretools.OrderedDict.OrderedDict`
 
 - :py:class:`abjad.tools.datastructuretools.TypedCollection.TypedCollection`
 

@@ -586,7 +586,7 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def possibile_dynamic(dynamic:str, selector='baca.phead(0)'):
+    def possibile_dynamic(dynamic: str, selector='baca.phead(0)'):
         r'''Attaches possibile dynamic to pitched head 0.
 
         ..  container:: example
@@ -717,15 +717,10 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        assert isinstance(dynamic, str), repr(str)
         command = rf'\{dynamic}_poss'
-        # mypy complains about the following rebinding:
-        # baca/tools/LibraryNS.py:726: error:
-        # Incompatible types in assignment
-        # (expression has type "Dynamic", variable has type "str"):
-        dynamic = abjad.Dynamic(dynamic, command=command)
+        indicator:abjad.Dynamic = abjad.Dynamic(dynamic, command=command)
         return baca.tools.IndicatorCommand(
-            indicators=[dynamic],
+            indicators=[indicator],
             selector=selector,
             )
 
@@ -2386,7 +2381,7 @@ class LibraryNS(abjad.AbjadObject):
             for segment, time_signatures in dictionary.items():
                 measure_count += len(time_signatures)
         fallback_duration = abjad.NonreducedFraction(fallback_duration)
-        overrides = abjad.TypedOrderedDict()
+        overrides = abjad.OrderedDict()
         last_measure_number = first_measure_number + measure_count - 1
         for n in range(first_measure_number, last_measure_number + 1):
             overrides[n] = fallback_duration
@@ -5518,16 +5513,15 @@ class LibraryNS(abjad.AbjadObject):
         return expression
 
     @staticmethod
-    def subito_dynamic(dynamic:str, selector='baca.phead(0)'):
+    def subito_dynamic(dynamic: str, selector='baca.phead(0)'):
         r'''Attaches subito dynamic.
 
         Returns indicator command.
         '''
-        assert isinstance(dynamic, str), repr(str)
         command = rf'\{dynamic}_sub'
-        dynamic = abjad.Dynamic(dynamic, command=command)
+        indicator:abjad.Dynamic = abjad.Dynamic(dynamic, command=command)
         return baca.tools.IndicatorCommand(
-            indicators=[dynamic],
+            indicators=[indicator],
             selector=selector,
             )
 

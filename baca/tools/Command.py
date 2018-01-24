@@ -79,7 +79,7 @@ class Command(abjad.AbjadObject):
 
     @manifests.setter
     def manifests(self, dictionary):
-        prototype = (abjad.TypedOrderedDict, type(None))
+        prototype = (abjad.OrderedDict, type(None))
         assert isinstance(dictionary, prototype), repr(dictionary)
         self._manifests = dictionary
         for command in getattr(self, 'commands', []):

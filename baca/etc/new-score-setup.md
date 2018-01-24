@@ -185,7 +185,7 @@ Make new score package
 
     Add catalog number and forces tagline metadata by hand.
     
-        metadata = abjad.TypedOrderedDict(
+        metadata = abjad.OrderedDict(
             [
                 ('catalog_number', 'AWN-018'),
                 ('composer', 'Bača'),

@@ -39,10 +39,6 @@ from .Interpolator import Interpolator
 from .LBSD import LBSD
 from .LMRSpecifier import LMRSpecifier
 from .LabelCommand import LabelCommand
-from .LibraryAF import LibraryAF
-from .LibraryGM import LibraryGM
-from .LibraryNS import LibraryNS
-from .LibraryTZ import LibraryTZ
 from .Loop import Loop
 from .MapCommand import MapCommand
 from .MarginMarkup import MarginMarkup
@@ -113,3 +109,9 @@ from .ViolinSoloScoreTemplate import ViolinSoloScoreTemplate
 from .VoltaCommand import VoltaCommand
 from .WellformednessManager import WellformednessManager
 from .ZaggedPitchClassMaker import ZaggedPitchClassMaker
+
+# library:
+from .LibraryAF import LibraryAF
+from .LibraryGM import LibraryGM
+from .LibraryNS import LibraryNS
+from .LibraryTZ import LibraryTZ

@@ -813,7 +813,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
             multiplier = abjad.Multiplier(multiplier)
         self._multiplier = multiplier
         if overrides is not None:
-            prototype = abjad.TypedOrderedDict
+            prototype = abjad.OrderedDict
             assert isinstance(overrides, prototype), repr(overrides)
         self._overrides = overrides
 

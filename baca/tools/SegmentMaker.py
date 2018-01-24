@@ -331,7 +331,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ignore_unregistered_pitches = bool(ignore_unregistered_pitches)
         self._ignore_unregistered_pitches = ignore_unregistered_pitches
         if instruments is not None:
-            assert isinstance(instruments, abjad.TypedOrderedDict)
+            assert isinstance(instruments, abjad.OrderedDict)
         self._instruments = instruments
         self._last_measure_is_fermata = False
         if last_segment is not None:
@@ -341,13 +341,13 @@ class SegmentMaker(abjad.SegmentMaker):
             assert isinstance(breaks, baca.BreakMeasureMap)
         self._breaks = breaks
         if margin_markup is not None:
-            assert isinstance(margin_markup, abjad.TypedOrderedDict)
+            assert isinstance(margin_markup, abjad.OrderedDict)
         self._margin_markup = margin_markup
         self._measures_per_stage = measures_per_stage
         self._metronome_mark_measure_map = metronome_mark_measure_map
         self._metronome_mark_stem_height = metronome_mark_stem_height
         if metronome_marks is not None:
-            assert isinstance(metronome_marks, abjad.TypedOrderedDict)
+            assert isinstance(metronome_marks, abjad.OrderedDict)
         self._metronome_marks = metronome_marks
         self._midi = None
         self._offset_to_measure_number = {}
@@ -934,11 +934,11 @@ class SegmentMaker(abjad.SegmentMaker):
             stage_offsets = self._get_stage_offsets(stage_number, stage_number)
             stage_timespan = abjad.Timespan(*stage_offsets)
             stage_timespans.append(stage_timespan)
-        self._cache = abjad.TypedOrderedDict()
+        self._cache = abjad.OrderedDict()
         contexts = [self.score['GlobalSkips']]
         contexts.extend(abjad.select(self.score).components(abjad.Voice))
         for context in contexts:
-            leaves_by_stage_number = abjad.TypedOrderedDict()
+            leaves_by_stage_number = abjad.OrderedDict()
             self._cache[context.name] = leaves_by_stage_number
             for stage_index in range(self.stage_count):
                 stage_number = stage_index + 1
@@ -1165,11 +1165,11 @@ class SegmentMaker(abjad.SegmentMaker):
         result['stop_clock_time'] = self._stop_clock_time
         result['time_signatures'] = self._cached_time_signatures
         items = sorted(result.items())
-        metadata = abjad.TypedOrderedDict(items)
+        metadata = abjad.OrderedDict(items)
         self._metadata.update(metadata)
 
     def _collect_persistent_indicators(self):
-        result = abjad.TypedOrderedDict()
+        result = abjad.OrderedDict()
         contexts = abjad.iterate(self.score).components(abjad.Context)
         contexts = list(contexts)
         contexts.sort(key=lambda _: _.name)
@@ -6247,7 +6247,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         Returns ordered dictionary of ordered dictionaries.
         '''
-        manifests = abjad.TypedOrderedDict()
+        manifests = abjad.OrderedDict()
         manifests['abjad.Instrument'] = self.instruments
         manifests['abjad.MetronomeMark'] = self.metronome_marks
         manifests['baca.MarginMarkup'] = self.margin_markup
@@ -6259,7 +6259,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            >>> margin_markup = abjad.TypedOrderedDict()
+            >>> margin_markup = abjad.OrderedDict()
             >>> margin_markup['I+II'] = baca.MarginMarkup(
             ...     markup=abjad.Markup('I+II'),
             ...     short_markup=abjad.Markup('I+II'),
@@ -7195,14 +7195,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>
 
             >>> abjad.f(maker.metadata, strict=89)
-            abjad.TypedOrderedDict(
+            abjad.OrderedDict(
                 [
                     ('duration', None),
                     ('first_measure_number', 1),
                     ('last_measure_number', 4),
                     (
                         'persistent_indicators',
-                        abjad.TypedOrderedDict(
+                        abjad.OrderedDict(
                             [
                                 (
                                     'MusicStaff',
@@ -9338,9 +9338,9 @@ class SegmentMaker(abjad.SegmentMaker):
         deactivate = deactivate or []
         assert all(isinstance(_, str) for _ in deactivate), repr(deactivate)
         self._environment = environment
-        self._metadata = abjad.TypedOrderedDict(metadata)
+        self._metadata = abjad.OrderedDict(metadata)
         self._midi = midi
-        self._previous_metadata = abjad.TypedOrderedDict(previous_metadata)
+        self._previous_metadata = abjad.OrderedDict(previous_metadata)
         self._make_score()
         self._make_lilypond_file()
         self._make_global_skips()
