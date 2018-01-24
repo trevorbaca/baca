@@ -28,7 +28,7 @@ class RegisterInterpolationCommand(Command):
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
-                        {
+                        \scaleDurations #'(1 . 1) {
                             fs'16
                             [
                             e'16
@@ -44,7 +44,7 @@ class RegisterInterpolationCommand(Command):
                             d''16
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             fs''16
                             [
                             e''16
@@ -89,22 +89,22 @@ class RegisterInterpolationCommand(Command):
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
-                        {
+                        \scaleDurations #'(1 . 1) {
                             <e' fs'>16
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             <f' ef''>16
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             <a' bf'>16
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             <c'' b''>16
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             <g'' af''>16
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             <cs''' d'''>16
                         }
                     }
@@ -1090,7 +1090,7 @@ class RegisterInterpolationCommand(Command):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
@@ -1166,7 +1166,7 @@ class RegisterInterpolationCommand(Command):
                                 d'''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs'16
                                 [
                                 e'16
@@ -1209,7 +1209,7 @@ class RegisterInterpolationCommand(Command):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs'16
                                 [
                                 e'16
@@ -1225,7 +1225,7 @@ class RegisterInterpolationCommand(Command):
                                 d'16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
@@ -1328,7 +1328,7 @@ class RegisterInterpolationCommand(Command):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
@@ -1404,7 +1404,7 @@ class RegisterInterpolationCommand(Command):
                                 d'''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue

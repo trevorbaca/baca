@@ -27,14 +27,14 @@ class MusicMaker(abjad.AbjadObject):
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
-                        {
+                        \scaleDurations #'(1 . 1) {
                             c'16
                             [
                             d'16
                             bf'16
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             fs''16
                             [
                             e''16
@@ -43,7 +43,7 @@ class MusicMaker(abjad.AbjadObject):
                             g''16
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             a'16
                         }
                     }
@@ -159,14 +159,14 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
                                 d'16
                                 bf'16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs''16
                                 [
                                 e''16
@@ -175,7 +175,7 @@ class MusicMaker(abjad.AbjadObject):
                                 g''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'16
                             }
                         }
@@ -204,14 +204,14 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
                                 d'8
                                 bf'16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs''16
                                 [
                                 e''8
@@ -220,7 +220,7 @@ class MusicMaker(abjad.AbjadObject):
                                 g''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'16
                             }
                         }
@@ -249,14 +249,14 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'32
                                 [
                                 d'32
                                 bf'32
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs''32
                                 [
                                 e''32
@@ -265,7 +265,7 @@ class MusicMaker(abjad.AbjadObject):
                                 g''32
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'32
                             }
                         }
@@ -312,7 +312,7 @@ class MusicMaker(abjad.AbjadObject):
                                 g''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'16
                             }
                         }
@@ -343,7 +343,8 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 7/6 {
-                                {
+                                \tweak text #tuplet-number::calc-fraction-text
+                                \times 1/1 {
                                     r4.
                                     r4.
                                 }
@@ -373,7 +374,7 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs''8
                                 r16
                                 e''8
@@ -404,7 +405,7 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs''8
                                 r16
                                 r16
@@ -440,7 +441,7 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 r16
                                 fs''8
                                 r16
@@ -471,7 +472,7 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 r16
                                 r16
                                 fs''8
@@ -507,7 +508,7 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 r16
                                 r16
                                 fs''8
@@ -563,10 +564,10 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 <c' d' bf'>16
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs''16
                                 [
                                 e''16
@@ -575,7 +576,7 @@ class MusicMaker(abjad.AbjadObject):
                                 g''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'16
                             }
                         }
@@ -1090,7 +1091,7 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
                                 d'16
@@ -1098,7 +1099,7 @@ class MusicMaker(abjad.AbjadObject):
                                 fs''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 e''16
                                 [
                                 ef''16
@@ -1106,7 +1107,7 @@ class MusicMaker(abjad.AbjadObject):
                                 f''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 g''16
                                 [
                                 cs''16
@@ -1145,7 +1146,7 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
                                 d'16
@@ -1153,7 +1154,7 @@ class MusicMaker(abjad.AbjadObject):
                                 fs''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 e''16
                                 [
                                 ef''16
@@ -1161,7 +1162,7 @@ class MusicMaker(abjad.AbjadObject):
                                 f''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 g''16
                                 [
                                 cs''16
@@ -1202,7 +1203,7 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
                                 d'16
@@ -1210,7 +1211,7 @@ class MusicMaker(abjad.AbjadObject):
                                 fs''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 e''16
                                 [
                                 ef''16
@@ -1218,7 +1219,7 @@ class MusicMaker(abjad.AbjadObject):
                                 f''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 g''16
                                 [
                                 cs''16
@@ -1262,7 +1263,7 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
                                 d'16
@@ -1270,7 +1271,7 @@ class MusicMaker(abjad.AbjadObject):
                                 fs''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 e''16
                                 [
                                 ef''16
@@ -1278,7 +1279,7 @@ class MusicMaker(abjad.AbjadObject):
                                 f''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 g''16
                                 [
                                 cs''16
@@ -1320,14 +1321,14 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
                                 d'16
                                 bf16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs16
                                 [
                                 e'16
@@ -1336,7 +1337,7 @@ class MusicMaker(abjad.AbjadObject):
                                 g16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a16
                             }
                         }
@@ -1361,14 +1362,14 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
                                 d'16
                                 bf'16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs'16
                                 [
                                 e''16
@@ -1377,7 +1378,7 @@ class MusicMaker(abjad.AbjadObject):
                                 g''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a''16
                             }
                         }
@@ -1412,7 +1413,7 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 \<
                                 \p
@@ -1422,14 +1423,14 @@ class MusicMaker(abjad.AbjadObject):
                                 fs''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 e''16
                                 [
                                 ef''16
                                 b''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 g''16
                                 [
                                 cs''16
@@ -1473,7 +1474,7 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 \<
                                 \p
@@ -1484,7 +1485,7 @@ class MusicMaker(abjad.AbjadObject):
                                 \f
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 r16
                                 ef''16
                                 \<
@@ -1493,7 +1494,7 @@ class MusicMaker(abjad.AbjadObject):
                                 b''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 g''16
                                 [
                                 cs''16
@@ -1531,7 +1532,7 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 \<
                                 \p
@@ -1542,14 +1543,14 @@ class MusicMaker(abjad.AbjadObject):
                                 \f
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 e''16
                                 [
                                 ef''16
                                 b''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 g''16
                                 \>
                                 \f
@@ -1589,7 +1590,7 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 \<
                                 \p
@@ -1599,7 +1600,7 @@ class MusicMaker(abjad.AbjadObject):
                                 fs''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 e''16
                                 [
                                 ef''16
@@ -1607,7 +1608,7 @@ class MusicMaker(abjad.AbjadObject):
                                 \f
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 g''16
                                 \>
                                 \f
@@ -1650,7 +1651,7 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
                                 (                                                                        %! SC
@@ -1659,14 +1660,14 @@ class MusicMaker(abjad.AbjadObject):
                                 fs''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 e''16
                                 [
                                 ef''16
                                 b''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 g''16
                                 [
                                 cs''16
@@ -1707,7 +1708,7 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
                                 (                                                                        %! SC
@@ -1717,7 +1718,7 @@ class MusicMaker(abjad.AbjadObject):
                                 ]
                                 )                                                                        %! SC
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 e''16
                                 [
                                 (                                                                        %! SC
@@ -1726,7 +1727,7 @@ class MusicMaker(abjad.AbjadObject):
                                 ]
                                 )                                                                        %! SC
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 g''16
                                 [
                                 (                                                                        %! SC
@@ -1770,7 +1771,7 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
                                 (                                                                        %! SC
@@ -1780,7 +1781,7 @@ class MusicMaker(abjad.AbjadObject):
                                 fs''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 e''16
                                 [
                                 (                                                                        %! SC
@@ -1789,7 +1790,7 @@ class MusicMaker(abjad.AbjadObject):
                                 b''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 g''16
                                 [
                                 (                                                                        %! SC
@@ -1833,7 +1834,7 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
                                 d'16
@@ -1843,7 +1844,7 @@ class MusicMaker(abjad.AbjadObject):
                                 ]
                                 )                                                                        %! SC
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 e''16
                                 [
                                 ef''16
@@ -1852,7 +1853,7 @@ class MusicMaker(abjad.AbjadObject):
                                 ]
                                 )                                                                        %! SC
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 g''16
                                 [
                                 cs''16
@@ -1896,7 +1897,7 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \set stemLeftBeamCount = 0
                                 \set stemRightBeamCount = 2
                                 c'16
@@ -1911,7 +1912,7 @@ class MusicMaker(abjad.AbjadObject):
                                 \set stemRightBeamCount = 1
                                 fs''16
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 2
                                 e''16
@@ -1922,7 +1923,7 @@ class MusicMaker(abjad.AbjadObject):
                                 \set stemRightBeamCount = 1
                                 b''16
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 2
                                 g''16
@@ -1967,18 +1968,18 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 d'16
                                 bf'16
                                 fs''16
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 e''16
                                 ef''16
                                 b''16
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 g''16
                                 cs''16
                                 a'16
@@ -2023,7 +2024,7 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 12/11 {
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
@@ -2038,7 +2039,7 @@ class MusicMaker(abjad.AbjadObject):
                                     \set stemRightBeamCount = 1
                                     fs''16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     e''16
@@ -2049,7 +2050,7 @@ class MusicMaker(abjad.AbjadObject):
                                     \set stemRightBeamCount = 1
                                     b''16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     g''16
@@ -2107,7 +2108,7 @@ class MusicMaker(abjad.AbjadObject):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 8/7 {
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
@@ -2122,7 +2123,7 @@ class MusicMaker(abjad.AbjadObject):
                                     \set stemRightBeamCount = 1
                                     fs''16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     e''16
@@ -2134,7 +2135,7 @@ class MusicMaker(abjad.AbjadObject):
                                     b''16
                                 }
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 2
                                 g''16
@@ -2189,14 +2190,14 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
                                 d'16
                                 bf'16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs''8
                                 [
                                 e''8
@@ -2205,7 +2206,7 @@ class MusicMaker(abjad.AbjadObject):
                                 g''8
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'8
                             }
                         }
@@ -2248,14 +2249,14 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
                                 d'16
                                 bf'16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs''8.
                                 [
                                 e''8.
@@ -2264,7 +2265,7 @@ class MusicMaker(abjad.AbjadObject):
                                 g''8.
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'16
                             }
                         }
@@ -2308,7 +2309,7 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
                                 d'16
@@ -2325,7 +2326,7 @@ class MusicMaker(abjad.AbjadObject):
                                 g''8.
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'16
                             }
                         }
@@ -2377,7 +2378,7 @@ class MusicMaker(abjad.AbjadObject):
                                 bf'16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs''8.
                                 [
                                 e''8.
@@ -2386,7 +2387,7 @@ class MusicMaker(abjad.AbjadObject):
                                 g''8.
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'16
                             }
                         }
@@ -2437,7 +2438,7 @@ class MusicMaker(abjad.AbjadObject):
                                 bf'16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs''8.
                                 [
                                 e''8.
@@ -2446,7 +2447,7 @@ class MusicMaker(abjad.AbjadObject):
                                 g''8.
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'16
                             }
                         }
@@ -2487,14 +2488,14 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
                                 d'8
                                 bf'8.
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs''16
                                 [
                                 e''8
@@ -2503,7 +2504,7 @@ class MusicMaker(abjad.AbjadObject):
                                 g''8
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'16
                             }
                         }
@@ -2529,14 +2530,14 @@ class MusicMaker(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
                                 d'8
                                 bf'8.
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs''16
                                 [
                                 e''8
@@ -2545,7 +2546,7 @@ class MusicMaker(abjad.AbjadObject):
                                 g''8
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'8.
                             }
                         }

@@ -24,7 +24,7 @@ class ClusterCommand(Command):
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -76,7 +76,7 @@ class ClusterCommand(Command):
                                         }
                                 }
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -160,7 +160,7 @@ class ClusterCommand(Command):
                                         }
                                 }
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -205,14 +205,14 @@ class ClusterCommand(Command):
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
-                        {
+                        \scaleDurations #'(1 . 1) {
                             c'16
                             [
                             d'16
                             bf'16
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -296,7 +296,7 @@ class ClusterCommand(Command):
                                         }
                                 }
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             a'16
                         }
                     }
@@ -323,14 +323,14 @@ class ClusterCommand(Command):
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
-                        {
+                        \scaleDurations #'(1 . 1) {
                             c'16
                             [
                             d'16
                             bf'16
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             fs''16
                             [
                             e''16
@@ -339,7 +339,7 @@ class ClusterCommand(Command):
                             g''16
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2

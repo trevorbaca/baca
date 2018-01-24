@@ -2865,7 +2865,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context ViolinMusicStaff = "ViolinMusicStaff" {
                                 \context ViolinMusicVoice = "ViolinMusicVoice" {
                                     {
-                                        {
+                                        \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                             % ViolinMusicVoice [measure 1]                               %! SM4
                                             \set ViolinMusicStaff.instrumentName = \markup {             %! DEFAULT_INSTRUMENT:SM8
@@ -3054,7 +3054,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context CelloMusicStaff = "CelloMusicStaff" {
                                 \context CelloMusicVoice = "CelloMusicVoice" {
                                     {
-                                        {
+                                        \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                             % CelloMusicVoice [measure 1]                                %! SM4
                                             \set CelloMusicStaff.instrumentName = \markup {              %! DEFAULT_INSTRUMENT:SM8
@@ -3261,14 +3261,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
-                                    {
+                                    \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % MusicVoice [measure 1]                                         %! SM4
                                         e'16
                                     }
                                 }
                                 {
-                                    {
+                                    \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % MusicVoice [measure 2]                                         %! SM4
                                         \once \override Accidental.color = #red
@@ -3294,14 +3294,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                     }
                                 }
                                 {
-                                    {
+                                    \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % MusicVoice [measure 3]                                         %! SM4
                                         b'16
                                     }
                                 }
                                 {
-                                    {
+                                    \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % MusicVoice [measure 4]                                         %! SM4
                                         bf'16
@@ -3425,14 +3425,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
-                                    {
+                                    \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % MusicVoice [measure 1]                                         %! SM4
                                         e'16
                                     }
                                 }
                                 {
-                                    {
+                                    \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % MusicVoice [measure 2]                                         %! SM4
                                         fs'16
@@ -3465,14 +3465,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                     }
                                 }
                                 {
-                                    {
+                                    \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % MusicVoice [measure 3]                                         %! SM4
                                         b'16
                                     }
                                 }
                                 {
-                                    {
+                                    \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % MusicVoice [measure 4]                                         %! SM4
                                         bf'16
@@ -5072,14 +5072,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
-                                    {
+                                    \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % MusicVoice [measure 1]                                         %! SM4
                                         e'8.
                                     }
                                 }
                                 {
-                                    {
+                                    \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % MusicVoice [measure 2]                                         %! SM4
                                         \acciaccatura {
@@ -5101,14 +5101,14 @@ class SegmentMaker(abjad.SegmentMaker):
                                     }
                                 }
                                 {
-                                    {
+                                    \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % MusicVoice [measure 3]                                         %! SM4
                                         b'8.
                                     }
                                 }
                                 {
-                                    {
+                                    \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % MusicVoice [measure 4]                                         %! SM4
                                         \acciaccatura {
@@ -5230,7 +5230,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         \context Staff = "MusicStaff" {
                             \context Voice = "MusicVoice" {
                                 {
-                                    {
+                                    \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % MusicVoice [measure 1]                                         %! SM4
                                         \once \override Accidental.color = #magenta                      %! SM25
@@ -5243,7 +5243,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     }
                                 }
                                 {
-                                    {
+                                    \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % MusicVoice [measure 2]                                         %! SM4
                                         \acciaccatura {
@@ -5307,7 +5307,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     }
                                 }
                                 {
-                                    {
+                                    \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % MusicVoice [measure 3]                                         %! SM4
                                         \once \override Accidental.color = #magenta                      %! SM25
@@ -5320,7 +5320,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     }
                                 }
                                 {
-                                    {
+                                    \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % MusicVoice [measure 4]                                         %! SM4
                                         \acciaccatura {

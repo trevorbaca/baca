@@ -39,7 +39,7 @@ class NestingCommand(Command):
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 12/11 {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \set stemLeftBeamCount = 0
                                 \set stemRightBeamCount = 2
                                 c'16
@@ -54,7 +54,7 @@ class NestingCommand(Command):
                                 \set stemRightBeamCount = 1
                                 fs''16
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 2
                                 e''16
@@ -65,7 +65,7 @@ class NestingCommand(Command):
                                 \set stemRightBeamCount = 1
                                 b''16
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 2
                                 g''16
@@ -164,7 +164,7 @@ class NestingCommand(Command):
                             {
                                 \tweak text #tuplet-number::calc-fraction-text
                                 \times 8/7 {
-                                    {
+                                    \scaleDurations #'(1 . 1) {
             <BLANKLINE>
                                         % MusicVoice [measure 1]                                     %! SM4
                                         \set stemLeftBeamCount = 0
@@ -184,7 +184,7 @@ class NestingCommand(Command):
                                         \set stemRightBeamCount = 1
                                         fs''16
                                     }
-                                    {
+                                    \scaleDurations #'(1 . 1) {
             <BLANKLINE>
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
@@ -201,7 +201,7 @@ class NestingCommand(Command):
                                 }
                             }
                             {
-                                {
+                                \scaleDurations #'(1 . 1) {
             <BLANKLINE>
                                     % MusicVoice [measure 2]                                         %! SM4
                                     \set stemLeftBeamCount = 1
@@ -293,7 +293,7 @@ class NestingCommand(Command):
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 17/16 {
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     r8
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
@@ -309,7 +309,7 @@ class NestingCommand(Command):
                                     \set stemRightBeamCount = 1
                                     fs''16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     e''16
@@ -320,7 +320,7 @@ class NestingCommand(Command):
                                     \set stemRightBeamCount = 1
                                     b''16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     g''16

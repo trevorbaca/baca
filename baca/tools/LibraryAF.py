@@ -605,7 +605,7 @@ class LibraryAF(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 <c' d' bf'>8
                                 -\arpeggio                                                               %! IC
                                 ~
@@ -614,7 +614,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 f''8
                                 ~
                                 [
@@ -622,7 +622,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 <ef'' e'' fs'''>8
                                 -\arpeggio                                                               %! IC
                                 ~
@@ -631,7 +631,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 <g' af''>8
                                 -\arpeggio                                                               %! IC
                                 ~
@@ -640,7 +640,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'8
                                 ~
                                 [
@@ -674,7 +674,7 @@ class LibraryAF(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 <c' d' bf'>8
                                 ~
                                 [
@@ -682,7 +682,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 f''8
                                 ~
                                 [
@@ -690,7 +690,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 <ef'' e'' fs'''>8
                                 -\arpeggio                                                               %! IC
                                 ~
@@ -699,7 +699,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 <g' af''>8
                                 -\arpeggio                                                               %! IC
                                 ~
@@ -708,7 +708,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'8
                                 ~
                                 [
@@ -902,7 +902,7 @@ class LibraryAF(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
@@ -920,7 +920,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
@@ -938,7 +938,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
@@ -956,7 +956,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
@@ -974,7 +974,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
@@ -1020,7 +1020,7 @@ class LibraryAF(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
@@ -1038,7 +1038,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
@@ -1056,7 +1056,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
@@ -1074,7 +1074,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
@@ -1092,7 +1092,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
@@ -1138,7 +1138,7 @@ class LibraryAF(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 <c' d' bf'>8
                                 ~
                                 [
@@ -1146,7 +1146,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 f''8
                                 ~
                                 [
@@ -1154,7 +1154,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 <ef'' e'' fs'''>8
                                 ~
                                 [
@@ -1162,7 +1162,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
@@ -1180,7 +1180,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
@@ -1236,7 +1236,7 @@ class LibraryAF(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 r8
                                 c'16
                                 [
@@ -1244,7 +1244,7 @@ class LibraryAF(abjad.AbjadObject):
                                 bf'16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs''16
                                 [
                                 e''16
@@ -1253,7 +1253,7 @@ class LibraryAF(abjad.AbjadObject):
                                 g''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'16
                                 r8
                             }
@@ -1282,7 +1282,7 @@ class LibraryAF(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \override Staff.Stem.stemlet-length = 2
                                 r8
                                 [
@@ -1292,7 +1292,7 @@ class LibraryAF(abjad.AbjadObject):
                                 bf'16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \override Staff.Stem.stemlet-length = 2
                                 fs''16
                                 [
@@ -1303,7 +1303,7 @@ class LibraryAF(abjad.AbjadObject):
                                 g''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \override Staff.Stem.stemlet-length = 2
                                 a'16
                                 [
@@ -1350,7 +1350,7 @@ class LibraryAF(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 r8
                                 [
                                 \set stemLeftBeamCount = 2
@@ -1363,7 +1363,7 @@ class LibraryAF(abjad.AbjadObject):
                                 \set stemRightBeamCount = 1
                                 bf'16
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 2
                                 fs''16
@@ -1380,7 +1380,7 @@ class LibraryAF(abjad.AbjadObject):
                                 \set stemRightBeamCount = 1
                                 g''16
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 2
                                 a'16
@@ -1412,7 +1412,7 @@ class LibraryAF(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \override Staff.Stem.stemlet-length = 2
                                 r8
                                 [
@@ -1426,7 +1426,7 @@ class LibraryAF(abjad.AbjadObject):
                                 \set stemRightBeamCount = 1
                                 bf'16
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 2
                                 fs''16
@@ -1443,7 +1443,7 @@ class LibraryAF(abjad.AbjadObject):
                                 \set stemRightBeamCount = 1
                                 g''16
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 2
                                 a'16
@@ -1476,21 +1476,21 @@ class LibraryAF(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 r8
                                 [
                                 c'16
                                 d'16
                                 bf'16
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs''16
                                 e''16
                                 ef''16
                                 af''16
                                 g''16
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'16
                                 r8
                                 ]
@@ -1854,7 +1854,7 @@ class LibraryAF(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
@@ -1872,7 +1872,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
@@ -1890,7 +1890,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
@@ -1908,7 +1908,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
@@ -1926,7 +1926,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
@@ -1972,7 +1972,7 @@ class LibraryAF(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
@@ -1990,7 +1990,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
@@ -2008,7 +2008,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
@@ -2026,7 +2026,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
@@ -2044,7 +2044,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
@@ -2090,7 +2090,7 @@ class LibraryAF(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 <c' d' bf'>8
                                 ~
                                 [
@@ -2098,7 +2098,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 f''8
                                 ~
                                 [
@@ -2106,7 +2106,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 <ef'' e'' fs'''>8
                                 ~
                                 [
@@ -2114,7 +2114,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
@@ -2132,7 +2132,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
@@ -2892,7 +2892,7 @@ class LibraryAF(abjad.AbjadObject):
                             \context ViolinMusicStaff = "ViolinMusicStaff" {
                                 \context ViolinMusicVoice = "ViolinMusicVoice" {
                                     {
-                                        {
+                                        \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                             % ViolinMusicVoice [measure 1]                               %! SM4
                                             \override Stem.direction = #up                               %! OC
@@ -2981,7 +2981,7 @@ class LibraryAF(abjad.AbjadObject):
                                         }
                                     }
                                     {
-                                        {
+                                        \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                             % ViolinMusicVoice [measure 2]                               %! SM4
                                             ef''8
@@ -2994,7 +2994,7 @@ class LibraryAF(abjad.AbjadObject):
                             \context ViolaMusicStaff = "ViolaMusicStaff" {
                                 \context ViolaMusicVoice = "ViolaMusicVoice" {
                                     {
-                                        {
+                                        \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                             % ViolaMusicVoice [measure 1]                                %! SM4
                                             \override Stem.direction = #up                               %! OC
@@ -3263,7 +3263,7 @@ class LibraryAF(abjad.AbjadObject):
                             \context ViolinMusicStaff = "ViolinMusicStaff" {
                                 \context ViolinMusicVoice = "ViolinMusicVoice" {
                                     {
-                                        {
+                                        \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                             % ViolinMusicVoice [measure 1]                               %! SM4
                                             \override Stem.direction = #up                               %! OC
@@ -3352,7 +3352,7 @@ class LibraryAF(abjad.AbjadObject):
                                         }
                                     }
                                     {
-                                        {
+                                        \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                             % ViolinMusicVoice [measure 2]                               %! SM4
                                             ef''8
@@ -3365,7 +3365,7 @@ class LibraryAF(abjad.AbjadObject):
                             \context ViolaMusicStaff = "ViolaMusicStaff" {
                                 \context ViolaMusicVoice = "ViolaMusicVoice" {
                                     {
-                                        {
+                                        \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                             % ViolaMusicVoice [measure 1]                                %! SM4
                                             \override Stem.direction = #up                               %! OC
@@ -3681,23 +3681,23 @@ class LibraryAF(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 r8
                                 <c' d' ef'>4
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 <c' d' ef'>4
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 <c d ef>4
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 <c d ef>4
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 <c'' d'' ef''>4
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 <c'' d'' ef''>4
                                 r4
                             }
@@ -3958,7 +3958,7 @@ class LibraryAF(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \arpeggioArrowDown                                                       %! IC
                                 <c' d' bf'>8
                                 \arpeggio                                                                %! IC
@@ -3968,7 +3968,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 f''8
                                 ~
                                 [
@@ -3976,7 +3976,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \arpeggioArrowDown                                                       %! IC
                                 <ef'' e'' fs'''>8
                                 \arpeggio                                                                %! IC
@@ -3986,7 +3986,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \arpeggioArrowDown                                                       %! IC
                                 <g' af''>8
                                 \arpeggio                                                                %! IC
@@ -3996,7 +3996,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'8
                                 ~
                                 [
@@ -4030,7 +4030,7 @@ class LibraryAF(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 <c' d' bf'>8
                                 ~
                                 [
@@ -4038,7 +4038,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 f''8
                                 ~
                                 [
@@ -4046,7 +4046,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \arpeggioArrowDown                                                       %! IC
                                 <ef'' e'' fs'''>8
                                 \arpeggio                                                                %! IC
@@ -4056,7 +4056,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \arpeggioArrowDown                                                       %! IC
                                 <g' af''>8
                                 \arpeggio                                                                %! IC
@@ -4066,7 +4066,7 @@ class LibraryAF(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'8
                                 ~
                                 [

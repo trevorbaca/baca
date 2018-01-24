@@ -216,7 +216,7 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
                                 g''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'16
                                 r16
                             }
@@ -487,7 +487,7 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 r8.
                                 c'16
                                 [
@@ -495,7 +495,7 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
                                 bf'16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs''16
                                 [
                                 e''16
@@ -504,7 +504,7 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
                                 g''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'16
                             }
                         }
@@ -555,14 +555,14 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
                                 d'16
                                 bf'16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs''16
                                 [
                                 e''16
@@ -571,7 +571,7 @@ class RestAffixSpecifier(abjad.AbjadValueObject):
                                 g''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'16
                                 r8.
                             }

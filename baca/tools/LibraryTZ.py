@@ -3792,7 +3792,7 @@ class LibraryTZ(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \arpeggioArrowUp                                                         %! IC
                                 <c' d' bf'>8
                                 \arpeggio                                                                %! IC
@@ -3802,7 +3802,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 f''8
                                 ~
                                 [
@@ -3810,7 +3810,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \arpeggioArrowUp                                                         %! IC
                                 <ef'' e'' fs'''>8
                                 \arpeggio                                                                %! IC
@@ -3820,7 +3820,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \arpeggioArrowUp                                                         %! IC
                                 <g' af''>8
                                 \arpeggio                                                                %! IC
@@ -3830,7 +3830,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'8
                                 ~
                                 [
@@ -3864,7 +3864,7 @@ class LibraryTZ(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 <c' d' bf'>8
                                 ~
                                 [
@@ -3872,7 +3872,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 f''8
                                 ~
                                 [
@@ -3880,7 +3880,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \arpeggioArrowUp                                                         %! IC
                                 <ef'' e'' fs'''>8
                                 \arpeggio                                                                %! IC
@@ -3890,7 +3890,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \arpeggioArrowUp                                                         %! IC
                                 <g' af''>8
                                 \arpeggio                                                                %! IC
@@ -3900,7 +3900,7 @@ class LibraryTZ(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'8
                                 ~
                                 [

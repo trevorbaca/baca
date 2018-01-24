@@ -2015,7 +2015,7 @@ class LibraryNS(abjad.AbjadObject):
                                 g''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'16
                                 \revert TupletBracket.staff-padding                                      %! OC
                             }
@@ -3656,7 +3656,7 @@ class LibraryNS(abjad.AbjadObject):
                                 g''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'16
                                 \revert TupletBracket.staff-padding                                      %! OC
                             }
@@ -4160,7 +4160,7 @@ class LibraryNS(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
@@ -4178,7 +4178,7 @@ class LibraryNS(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
@@ -4196,7 +4196,7 @@ class LibraryNS(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
@@ -4214,7 +4214,7 @@ class LibraryNS(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
@@ -4232,7 +4232,7 @@ class LibraryNS(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #green
                                 \once \override Beam.color = #green
                                 \once \override Dots.color = #green
@@ -4278,7 +4278,7 @@ class LibraryNS(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
@@ -4296,7 +4296,7 @@ class LibraryNS(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
@@ -4314,7 +4314,7 @@ class LibraryNS(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
@@ -4332,7 +4332,7 @@ class LibraryNS(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue
@@ -4350,7 +4350,7 @@ class LibraryNS(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
@@ -4396,7 +4396,7 @@ class LibraryNS(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 <c' d' bf'>8
                                 ~
                                 [
@@ -4404,7 +4404,7 @@ class LibraryNS(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 f''8
                                 ~
                                 [
@@ -4412,7 +4412,7 @@ class LibraryNS(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 <ef'' e'' fs'''>8
                                 ~
                                 [
@@ -4420,7 +4420,7 @@ class LibraryNS(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #red
                                 \once \override Beam.color = #red
                                 \once \override Dots.color = #red
@@ -4438,7 +4438,7 @@ class LibraryNS(abjad.AbjadObject):
                                 ]
                                 r16.
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \once \override Accidental.color = #blue
                                 \once \override Beam.color = #blue
                                 \once \override Dots.color = #blue

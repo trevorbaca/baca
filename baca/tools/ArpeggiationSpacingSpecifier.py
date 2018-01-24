@@ -129,14 +129,14 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c,16
                                 [
                                 d,16
                                 bf,16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs,16
                                 [
                                 e16
@@ -145,7 +145,7 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
                                 g''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a,16
                             }
                         }
@@ -175,14 +175,14 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
                                 d16
                                 bf,16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs16
                                 [
                                 e16
@@ -191,7 +191,7 @@ class ArpeggiationSpacingSpecifier(abjad.AbjadValueObject):
                                 g,16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a,16
                             }
                         }

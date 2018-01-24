@@ -29,7 +29,7 @@ class OverrideCommand(Command):
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \override Beam.positions = #'(6 . 6)                                     %! OC
                             \override Stem.direction = #up                                           %! OC
                             c'16
@@ -38,7 +38,7 @@ class OverrideCommand(Command):
                             bf'16
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             fs''16
                             [
                             e''16
@@ -47,7 +47,7 @@ class OverrideCommand(Command):
                             g''16
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             a'16
                             \revert Beam.positions                                                   %! OC
                             \revert Stem.direction                                                   %! OC

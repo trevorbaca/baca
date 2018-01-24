@@ -37,7 +37,7 @@ class IndicatorCommand(Command):
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
-                        {
+                        \scaleDurations #'(1 . 1) {
                             c'8
                             \fermata                                                                 %! IC
                             ~
@@ -49,7 +49,7 @@ class IndicatorCommand(Command):
                             \fermata                                                                 %! IC
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             fs''8
                             \fermata                                                                 %! IC
                             ~
@@ -67,7 +67,7 @@ class IndicatorCommand(Command):
                             \fermata                                                                 %! IC
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             a'8
                             \fermata                                                                 %! IC
                             ~
@@ -365,7 +365,7 @@ class IndicatorCommand(Command):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'8
                                 \fermata                                                                 %! IC
                                 ~
@@ -377,7 +377,7 @@ class IndicatorCommand(Command):
                                 \fermata                                                                 %! IC
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs''8
                                 \fermata                                                                 %! IC
                                 ~
@@ -395,7 +395,7 @@ class IndicatorCommand(Command):
                                 \fermata                                                                 %! IC
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'8
                                 \fermata                                                                 %! IC
                                 ~
@@ -441,7 +441,7 @@ class IndicatorCommand(Command):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'8
                                 \fermata                                                                 %! IC
                                 ~
@@ -451,7 +451,7 @@ class IndicatorCommand(Command):
                                 bf'8
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs''8
                                 \fermata                                                                 %! IC
                                 ~
@@ -466,7 +466,7 @@ class IndicatorCommand(Command):
                                 g''8
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'8
                                 \fermata                                                                 %! IC
                                 ~

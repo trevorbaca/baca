@@ -42,23 +42,23 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
             \new Staff {
                 { % measure
                     \time 3/4
-                    {
+                    \scaleDurations #'(1 . 1) {
                         c'8
                     }
-                    {
+                    \scaleDurations #'(1 . 1) {
                         \acciaccatura {
                             d'16
                         }
                         bf'8
                     }
-                    {
+                    \scaleDurations #'(1 . 1) {
                         \acciaccatura {
                             fs''16 [                                                                 %! ACC1
                             e''16 ]                                                                  %! ACC1
                         }
                         ef''8
                     }
-                    {
+                    \scaleDurations #'(1 . 1) {
                         \acciaccatura {
                             af''16 [                                                                 %! ACC1
                             g''16
@@ -66,7 +66,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         c'8
                     }
-                    {
+                    \scaleDurations #'(1 . 1) {
                         \acciaccatura {
                             d'16 [                                                                   %! ACC1
                             bf'16
@@ -75,7 +75,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                         }
                         ef''8
                     }
-                    {
+                    \scaleDurations #'(1 . 1) {
                         \acciaccatura {
                             af''16 [                                                                 %! ACC1
                             g''16
@@ -207,23 +207,23 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 \new Staff {
                     { % measure
                         \time 3/4
-                        {
+                        \scaleDurations #'(1 . 1) {
                             c'8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
                             }
                             bf'8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16 [                                                                 %! ACC1
                                 e''16 ]                                                                  %! ACC1
                             }
                             ef''8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16 [                                                                 %! ACC1
                                 g''16
@@ -231,7 +231,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             }
                             c'8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16 [                                                                   %! ACC1
                                 bf'16
@@ -240,7 +240,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             }
                             ef''8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16 [                                                                 %! ACC1
                                 g''16
@@ -290,23 +290,23 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 \new Staff {
                     { % measure
                         \time 3/4
-                        {
+                        \scaleDurations #'(1 . 1) {
                             c'8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'8
                             }
                             bf'8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''8 [                                                                  %! ACC1
                                 e''8 ]                                                                   %! ACC1
                             }
                             ef''8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''8 [                                                                  %! ACC1
                                 g''8
@@ -314,7 +314,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             }
                             c'8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'8 [                                                                    %! ACC1
                                 bf'8
@@ -323,7 +323,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             }
                             ef''8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''8 [                                                                  %! ACC1
                                 g''8
@@ -383,23 +383,23 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 \new Staff {
                     { % measure
                         \time 3/4
-                        {
+                        \scaleDurations #'(1 . 1) {
                             c'8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
                             }
                             bf'8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16 [                                                                 %! ACC1
                                 e''16 ]                                                                  %! ACC1
                             }
                             ef''8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16 [                                                                 %! ACC1
                                 g''16
@@ -407,7 +407,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             }
                             c'8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16 [                                                                   %! ACC1
                                 bf'16
@@ -416,7 +416,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             }
                             ef''8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16 [                                                                 %! ACC1
                                 g''16
@@ -471,23 +471,23 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 \new Staff {
                     { % measure
                         \time 3/2
-                        {
+                        \scaleDurations #'(1 . 1) {
                             c'8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
                             }
                             bf'8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16 [                                                                 %! ACC1
                                 e''16 ]                                                                  %! ACC1
                             }
                             ef''8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16 [                                                                 %! ACC1
                                 g''16 ]                                                                  %! ACC1
@@ -497,7 +497,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             c'8
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16 [                                                                   %! ACC1
                                 bf'16 ]                                                                  %! ACC1
@@ -508,7 +508,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             ef''8
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16 [                                                                 %! ACC1
                                 g''16 ]                                                                  %! ACC1
@@ -564,23 +564,23 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 \new Staff {
                     { % measure
                         \time 3/2
-                        {
+                        \scaleDurations #'(1 . 1) {
                             c'8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
                             }
                             bf'8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16 [                                                                 %! ACC1
                                 e''16 ]                                                                  %! ACC1
                             }
                             ef''8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             af''8
                             [
                             \acciaccatura {
@@ -590,7 +590,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             c'8
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             d'8
                             [
                             bf'8
@@ -601,7 +601,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             ef''8
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             af''8
                             [
                             g''8
@@ -659,23 +659,23 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 \new Staff {
                     { % measure
                         \time 9/8
-                        {
+                        \scaleDurations #'(1 . 1) {
                             c'8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
                             }
                             bf'8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16 [                                                                 %! ACC1
                                 e''16 ]                                                                  %! ACC1
                             }
                             ef''8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16 [                                                                 %! ACC1
                                 g''16 ]                                                                  %! ACC1
@@ -685,7 +685,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             c'8
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16 [                                                                   %! ACC1
                                 bf'16 ]                                                                  %! ACC1
@@ -698,7 +698,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             ef''8
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16 [                                                                 %! ACC1
                                 g''16 ]                                                                  %! ACC1
@@ -754,16 +754,16 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 \new Staff {
                     { % measure
                         \time 11/8
-                        {
+                        \scaleDurations #'(1 . 1) {
                             c'8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             d'8
                             [
                             bf'8
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             fs''8
                             [
                             \acciaccatura {
@@ -772,7 +772,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             ef''8
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             af''8
                             [
                             \acciaccatura {
@@ -782,7 +782,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             c'8
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             d'8
                             [
                             \acciaccatura {
@@ -793,7 +793,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             ef''8
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             af''8
                             [
                             \acciaccatura {
@@ -855,23 +855,23 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 \new Staff {
                     { % measure
                         \time 3/4
-                        {
+                        \scaleDurations #'(1 . 1) {
                             c'8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
                             }
                             bf'8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16 [                                                                 %! ACC1
                                 e''16 ]                                                                  %! ACC1
                             }
                             ef''8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16 [                                                                 %! ACC1
                                 g''16
@@ -879,7 +879,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             }
                             c'8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16 [                                                                   %! ACC1
                                 bf'16
@@ -888,7 +888,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             }
                             ef''8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16 [                                                                 %! ACC1
                                 g''16
@@ -938,23 +938,23 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 \new Staff {
                     { % measure
                         \time 2/1
-                        {
+                        \scaleDurations #'(1 . 1) {
                             c'8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             d'8
                             [
                             bf'8
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             fs''8
                             [
                             e''8
                             ef''8
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             af''8
                             [
                             g''8
@@ -962,7 +962,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             c'8
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             d'8
                             [
                             bf'8
@@ -971,7 +971,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             ef''8
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16 [                                                                 %! ACC1
                                 g''16
@@ -1021,23 +1021,23 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                 \new Staff {
                     { % measure
                         \time 3/2
-                        {
+                        \scaleDurations #'(1 . 1) {
                             c'8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
                             }
                             bf'8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             fs''8
                             [
                             e''8
                             ef''8
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16 [                                                                 %! ACC1
                                 g''16
@@ -1045,7 +1045,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             }
                             c'8
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             d'8
                             [
                             bf'8
@@ -1054,7 +1054,7 @@ class AcciaccaturaSpecifier(abjad.AbjadObject):
                             ef''8
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16 [                                                                 %! ACC1
                                 g''16

@@ -38,7 +38,7 @@ class ColorCommand(Command):
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \once \override Accidental.color = #red
                             \once \override Beam.color = #red
                             \once \override Dots.color = #red
@@ -67,7 +67,7 @@ class ColorCommand(Command):
                             bf'8
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \once \override Accidental.color = #red
                             \once \override Beam.color = #red
                             \once \override Dots.color = #red
@@ -115,7 +115,7 @@ class ColorCommand(Command):
                             g''8
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             \once \override Accidental.color = #blue
                             \once \override Beam.color = #blue
                             \once \override Dots.color = #blue

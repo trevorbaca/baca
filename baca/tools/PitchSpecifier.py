@@ -32,14 +32,14 @@ class PitchSpecifier(abjad.AbjadObject):
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
-                        {
+                        \scaleDurations #'(1 . 1) {
                             c'16
                             [
                             d'16
                             bf'16
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             fs'16
                             [
                             e'16
@@ -48,17 +48,17 @@ class PitchSpecifier(abjad.AbjadObject):
                             g'16
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             a'16
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             ef'16
                             [
                             f'16
                             cs'16
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             a'16
                             [
                             g'16
@@ -67,17 +67,17 @@ class PitchSpecifier(abjad.AbjadObject):
                             bf'16
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             c'16
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             fs'16
                             [
                             af'16
                             e'16
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             c'16
                             [
                             bf'16
@@ -86,17 +86,17 @@ class PitchSpecifier(abjad.AbjadObject):
                             cs'16
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             ef'16
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             a'16
                             [
                             b'16
                             g'16
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             ef'16
                             [
                             cs'16
@@ -105,7 +105,7 @@ class PitchSpecifier(abjad.AbjadObject):
                             e'16
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             fs'16
                         }
                     }
@@ -247,14 +247,14 @@ class PitchSpecifier(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 ef'16
                                 [
                                 f'16
                                 cs'16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'16
                                 [
                                 g'16
@@ -263,7 +263,7 @@ class PitchSpecifier(abjad.AbjadObject):
                                 bf'16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                             }
                         }
@@ -352,14 +352,14 @@ class PitchSpecifier(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
                                 d'16
                                 bf'16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs''16
                                 [
                                 e''16
@@ -368,7 +368,7 @@ class PitchSpecifier(abjad.AbjadObject):
                                 g''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'16
                             }
                         }
@@ -397,14 +397,14 @@ class PitchSpecifier(abjad.AbjadObject):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
                                 d'16
                                 bf'16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs'16
                                 [
                                 e'16
@@ -413,7 +413,7 @@ class PitchSpecifier(abjad.AbjadObject):
                                 g'16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'16
                             }
                         }

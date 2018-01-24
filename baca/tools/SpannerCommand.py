@@ -29,14 +29,14 @@ class SpannerCommand(Command):
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
-                        {
+                        \scaleDurations #'(1 . 1) {
                             c'16
                             [
                             d'16
                             bf'16
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             fs''16
                             [
                             (                                                                        %! SC
@@ -47,7 +47,7 @@ class SpannerCommand(Command):
                             ]
                             )                                                                        %! SC
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             a'16
                         }
                     }
@@ -248,7 +248,7 @@ class SpannerCommand(Command):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 c'16
                                 [
                                 (                                                                        %! SC
@@ -256,7 +256,7 @@ class SpannerCommand(Command):
                                 bf'16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 fs''16
                                 [
                                 e''16
@@ -265,7 +265,7 @@ class SpannerCommand(Command):
                                 g''16
                                 ]
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 a'16
                                 )                                                                        %! SC
                             }
@@ -304,7 +304,7 @@ class SpannerCommand(Command):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 d''4
                                 ~
                                 d''16
@@ -335,7 +335,7 @@ class SpannerCommand(Command):
                     \context Voice = "Voice 1" {
                         \voiceOne
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 d''4
                                 ~                                                                        %! SC
                                 d''16

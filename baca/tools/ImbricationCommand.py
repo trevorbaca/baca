@@ -52,14 +52,14 @@ class ImbricationCommand(Command):
                         {
                             \override TupletBracket.stencil = ##f
                             \override TupletNumber.stencil = ##f
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 s16
                                 d'16
                                 s16
                                 s16
                                 s16
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 s16
                                 s16
                                 g''16
@@ -68,7 +68,7 @@ class ImbricationCommand(Command):
                                 ]
                                 s16
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 s16
                                 s16
                                 fs''16
@@ -84,7 +84,7 @@ class ImbricationCommand(Command):
                     \context Voice = "Voice 2" {
                         \voiceTwo
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \set stemLeftBeamCount = 0
                                 \set stemRightBeamCount = 2
                                 c'16
@@ -102,7 +102,7 @@ class ImbricationCommand(Command):
                                 \set stemRightBeamCount = 1
                                 e''16
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 2
                                 ef''16
@@ -119,7 +119,7 @@ class ImbricationCommand(Command):
                                 \set stemRightBeamCount = 1
                                 c'16
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 2
                                 d'16
@@ -192,7 +192,7 @@ class ImbricationCommand(Command):
                         {
                             \override TupletBracket.stencil = ##f
                             \override TupletNumber.stencil = ##f
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 s16
                                 [
                                 \set stemLeftBeamCount = 2
@@ -203,7 +203,7 @@ class ImbricationCommand(Command):
                                 s16
                                 s16
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 s16
                                 s16
                                 \set stemLeftBeamCount = 2
@@ -216,7 +216,7 @@ class ImbricationCommand(Command):
                                 -\staccato                                                           %! IC
                                 s16
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 s16
                                 s16
                                 s16
@@ -231,7 +231,7 @@ class ImbricationCommand(Command):
                     \context Voice = "Voice 2" {
                         \voiceTwo
                         {
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \set stemLeftBeamCount = 0
                                 \set stemRightBeamCount = 2
                                 c'16
@@ -249,7 +249,7 @@ class ImbricationCommand(Command):
                                 \set stemRightBeamCount = 1
                                 e''16
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 2
                                 ef''16
@@ -266,7 +266,7 @@ class ImbricationCommand(Command):
                                 \set stemRightBeamCount = 1
                                 c'16
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 2
                                 d'16
@@ -291,7 +291,7 @@ class ImbricationCommand(Command):
                         {
                             \override TupletBracket.stencil = ##f
                             \override TupletNumber.stencil = ##f
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 s16
                                 [
                                 s16
@@ -302,14 +302,14 @@ class ImbricationCommand(Command):
                                 e''16
                                 -\accent                                                             %! IC
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 s16
                                 s16
                                 s16
                                 s16
                                 s16
                             }
-                            {
+                            \scaleDurations #'(1 . 1) {
                                 s16
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
@@ -622,7 +622,7 @@ class ImbricationCommand(Command):
                             {
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s8.
                                     [
                                     s8.
@@ -631,7 +631,7 @@ class ImbricationCommand(Command):
                                     bf'8.
                                     -\accent                                                             %! IC
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
                                     fs''8.
@@ -647,7 +647,7 @@ class ImbricationCommand(Command):
                                     s8.
                                     s8.
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s8.
                                     ]
                                 }
@@ -658,14 +658,14 @@ class ImbricationCommand(Command):
                         \context Voice = "Voice 2" {
                             \voiceTwo
                             {
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     c'8.
                                     [
                                     d'8.
                                     bf'8.
                                     ]
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     fs''8.
                                     [
                                     e''8.
@@ -674,7 +674,7 @@ class ImbricationCommand(Command):
                                     g''8.
                                     ]
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     a'8.
                                 }
                             }
@@ -727,7 +727,7 @@ class ImbricationCommand(Command):
                             {
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
@@ -738,13 +738,13 @@ class ImbricationCommand(Command):
                                     s16
                                     s16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     s16
                                     s16
                                     s16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     s16
                                     \set stemLeftBeamCount = 2
@@ -757,7 +757,7 @@ class ImbricationCommand(Command):
                                     -\accent                                                             %! IC
                                     s16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     s16
                                     s16
@@ -771,7 +771,7 @@ class ImbricationCommand(Command):
                         \context Voice = "Voice 2" {
                             \voiceTwo
                             {
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     c'16
                                     [
                                     d'16
@@ -780,7 +780,7 @@ class ImbricationCommand(Command):
                                     e''16
                                     ]
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     ef''16
                                     [
                                     af''16
@@ -788,7 +788,7 @@ class ImbricationCommand(Command):
                                     a'16
                                     ]
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     c'16
                                     [
                                     d'16
@@ -797,7 +797,7 @@ class ImbricationCommand(Command):
                                     e''16
                                     ]
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     ef''16
                                     [
                                     af''16
@@ -922,7 +922,7 @@ class ImbricationCommand(Command):
                                 {
                                     \override TupletBracket.stencil = ##f
                                     \override TupletNumber.stencil = ##f
-                                    {
+                                    \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % MusicVoiceOne [measure 1]                                      %! SM4
                                         s16
@@ -940,7 +940,7 @@ class ImbricationCommand(Command):
                 <BLANKLINE>
                                         s16
                                     }
-                                    {
+                                    \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         s16
                 <BLANKLINE>
@@ -954,7 +954,7 @@ class ImbricationCommand(Command):
                                 {
                                     \override TupletBracket.stencil = ##f
                                     \override TupletNumber.stencil = ##f
-                                    {
+                                    \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % MusicVoiceOne [measure 2]                                      %! SM4
                                         s16
@@ -979,7 +979,7 @@ class ImbricationCommand(Command):
                             }
                             \context MusicVoiceTwo = "MusicVoiceTwo" {
                                 {
-                                    {
+                                    \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % MusicVoiceTwo [measure 1]                                      %! SM4
                                         \set stemLeftBeamCount = 0
@@ -999,7 +999,7 @@ class ImbricationCommand(Command):
                                         \set stemRightBeamCount = 1
                                         fs''16
                                     }
-                                    {
+                                    \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
@@ -1016,7 +1016,7 @@ class ImbricationCommand(Command):
                                     }
                                 }
                                 {
-                                    {
+                                    \scaleDurations #'(1 . 1) {
                 <BLANKLINE>
                                         % MusicVoiceTwo [measure 2]                                      %! SM4
                                         \set stemLeftBeamCount = 0
@@ -1086,10 +1086,10 @@ class ImbricationCommand(Command):
                             {
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     d'16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     s16
                                     g''16
@@ -1098,7 +1098,7 @@ class ImbricationCommand(Command):
                                     ]
                                     s16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     s16
                                     fs''16
@@ -1114,13 +1114,13 @@ class ImbricationCommand(Command):
                         \context Voice = "Voice 2" {
                             \voiceTwo
                             {
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     <c' d' bf' e'' fs''>16
                                     [
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''16
@@ -1137,7 +1137,7 @@ class ImbricationCommand(Command):
                                     \set stemRightBeamCount = 1
                                     c'16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     d'16
@@ -1203,7 +1203,7 @@ class ImbricationCommand(Command):
                             {
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s8
                                     s16
                                     d'16
@@ -1211,7 +1211,7 @@ class ImbricationCommand(Command):
                                     s16
                                     s16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     s16
                                     g''16
@@ -1220,7 +1220,7 @@ class ImbricationCommand(Command):
                                     ]
                                     s16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     s16
                                     fs''16
@@ -1237,7 +1237,7 @@ class ImbricationCommand(Command):
                         \context Voice = "Voice 2" {
                             \voiceTwo
                             {
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     r8
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
@@ -1256,7 +1256,7 @@ class ImbricationCommand(Command):
                                     \set stemRightBeamCount = 1
                                     e''16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''16
@@ -1273,7 +1273,7 @@ class ImbricationCommand(Command):
                                     \set stemRightBeamCount = 1
                                     c'16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     d'16
@@ -1491,7 +1491,7 @@ class ImbricationCommand(Command):
                             {
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     [
                                     \set stemLeftBeamCount = 2
@@ -1502,7 +1502,7 @@ class ImbricationCommand(Command):
                                     s16
                                     s16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     s16
                                     \set stemLeftBeamCount = 2
@@ -1523,7 +1523,7 @@ class ImbricationCommand(Command):
                         \context Voice = "Voice 2" {
                             \voiceTwo
                             {
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
@@ -1546,7 +1546,7 @@ class ImbricationCommand(Command):
                                     e''16
                                     -\staccato                                                           %! IC
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''16
@@ -1693,7 +1693,7 @@ class ImbricationCommand(Command):
                             {
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     [
                                     \set stemLeftBeamCount = 2
@@ -1704,7 +1704,7 @@ class ImbricationCommand(Command):
                                     s16
                                     s16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     s16
                                     \set stemLeftBeamCount = 2
@@ -1717,7 +1717,7 @@ class ImbricationCommand(Command):
                                     -\accent                                                             %! IC
                                     s16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     s16
                                     \set stemLeftBeamCount = 2
@@ -1738,7 +1738,7 @@ class ImbricationCommand(Command):
                         \context Voice = "Voice 2" {
                             \voiceTwo
                             {
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
@@ -1758,7 +1758,7 @@ class ImbricationCommand(Command):
                                     e''16
                                     -\staccato                                                           %! IC
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''16
@@ -1774,7 +1774,7 @@ class ImbricationCommand(Command):
                                     c'16
                                     -\staccato                                                           %! IC
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     d'16
@@ -1868,7 +1868,7 @@ class ImbricationCommand(Command):
                             {
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     [
                                     s16
@@ -1876,13 +1876,13 @@ class ImbricationCommand(Command):
                                     s16
                                     s16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     s16
                                     s16
                                     s16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
@@ -1898,7 +1898,7 @@ class ImbricationCommand(Command):
                                     e''16
                                     -\accent                                                             %! IC
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''16
@@ -1915,7 +1915,7 @@ class ImbricationCommand(Command):
                         \context Voice = "Voice 2" {
                             \voiceTwo
                             {
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
@@ -1938,7 +1938,7 @@ class ImbricationCommand(Command):
                                     e''16
                                     -\staccato                                                           %! IC
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''16
@@ -1956,7 +1956,7 @@ class ImbricationCommand(Command):
                                     a'16
                                     -\staccato                                                           %! IC
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     c'16
@@ -1978,7 +1978,7 @@ class ImbricationCommand(Command):
                                     e''16
                                     -\staccato                                                           %! IC
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''16
@@ -2065,21 +2065,21 @@ class ImbricationCommand(Command):
                             {
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     d'16
                                     s16
                                     s16
                                     s16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     s16
                                     g''16
                                     a'16
                                     s16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     s16
                                     fs''16
@@ -2093,7 +2093,7 @@ class ImbricationCommand(Command):
                         \context Voice = "Voice 2" {
                             \voiceTwo
                             {
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
@@ -2111,7 +2111,7 @@ class ImbricationCommand(Command):
                                     \set stemRightBeamCount = 1
                                     e''16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''16
@@ -2128,7 +2128,7 @@ class ImbricationCommand(Command):
                                     \set stemRightBeamCount = 1
                                     c'16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     d'16
@@ -2196,7 +2196,7 @@ class ImbricationCommand(Command):
                             {
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
@@ -2207,7 +2207,7 @@ class ImbricationCommand(Command):
                                     s16
                                     s16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     s16
                                     \set stemLeftBeamCount = 2
@@ -2220,7 +2220,7 @@ class ImbricationCommand(Command):
                                     ]
                                     s16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     s16
                                     \set stemLeftBeamCount = 2
@@ -2240,7 +2240,7 @@ class ImbricationCommand(Command):
                         \context Voice = "Voice 2" {
                             \voiceTwo
                             {
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
@@ -2258,7 +2258,7 @@ class ImbricationCommand(Command):
                                     \set stemRightBeamCount = 1
                                     e''16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''16
@@ -2275,7 +2275,7 @@ class ImbricationCommand(Command):
                                     \set stemRightBeamCount = 1
                                     c'16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     d'16
@@ -2341,7 +2341,7 @@ class ImbricationCommand(Command):
                             {
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     [
                                     \set stemLeftBeamCount = 2
@@ -2351,7 +2351,7 @@ class ImbricationCommand(Command):
                                     s16
                                     s16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     s16
                                     \set stemLeftBeamCount = 2
@@ -2362,7 +2362,7 @@ class ImbricationCommand(Command):
                                     a'16
                                     s16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     s16
                                     \set stemLeftBeamCount = 2
@@ -2381,7 +2381,7 @@ class ImbricationCommand(Command):
                         \context Voice = "Voice 2" {
                             \voiceTwo
                             {
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
@@ -2399,7 +2399,7 @@ class ImbricationCommand(Command):
                                     \set stemRightBeamCount = 1
                                     e''16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''16
@@ -2416,7 +2416,7 @@ class ImbricationCommand(Command):
                                     \set stemRightBeamCount = 1
                                     c'16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     d'16
@@ -2484,7 +2484,7 @@ class ImbricationCommand(Command):
                             {
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     [
                                     d'16
@@ -2493,7 +2493,7 @@ class ImbricationCommand(Command):
                                     s16
                                     ]
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     [
                                     s16
@@ -2502,7 +2502,7 @@ class ImbricationCommand(Command):
                                     s16
                                     ]
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s16
                                     [
                                     s16
@@ -2518,7 +2518,7 @@ class ImbricationCommand(Command):
                         \context Voice = "Voice 2" {
                             \voiceTwo
                             {
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
@@ -2536,7 +2536,7 @@ class ImbricationCommand(Command):
                                     \set stemRightBeamCount = 1
                                     e''16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''16
@@ -2553,7 +2553,7 @@ class ImbricationCommand(Command):
                                     \set stemRightBeamCount = 1
                                     c'16
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     d'16
@@ -2629,7 +2629,7 @@ class ImbricationCommand(Command):
                             {
                                 \override TupletBracket.stencil = ##f
                                 \override TupletNumber.stencil = ##f
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     s8
                                     [
                                     s32
@@ -2642,7 +2642,7 @@ class ImbricationCommand(Command):
                                     bf'8
                                     s32
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
                                     fs''8
@@ -2658,7 +2658,7 @@ class ImbricationCommand(Command):
                                     g''8
                                     s32
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
                                     a'8
@@ -2672,7 +2672,7 @@ class ImbricationCommand(Command):
                         \context Voice = "Voice 2" {
                             \voiceTwo
                             {
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     c'8
                                     ~
                                     [
@@ -2685,7 +2685,7 @@ class ImbricationCommand(Command):
                                     bf'32
                                     ]
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     fs''8
                                     ~
                                     [
@@ -2704,7 +2704,7 @@ class ImbricationCommand(Command):
                                     g''32
                                     ]
                                 }
-                                {
+                                \scaleDurations #'(1 . 1) {
                                     a'8
                                     ~
                                     [

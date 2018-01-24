@@ -194,7 +194,7 @@ class LabelCommand(Command):
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
-                        {
+                        \scaleDurations #'(1 . 1) {
                             c'16
                             [
                             ^ \markup {
@@ -213,7 +213,7 @@ class LabelCommand(Command):
                                     Bb4
                                 }
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             fs''16
                             [
                             e''16
@@ -222,7 +222,7 @@ class LabelCommand(Command):
                             g''16
                             ]
                         }
-                        {
+                        \scaleDurations #'(1 . 1) {
                             a'16
                         }
                     }

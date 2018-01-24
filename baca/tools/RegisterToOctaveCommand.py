@@ -30,7 +30,7 @@ class RegisterToOctaveCommand(Command):
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
-                        {
+                        \scaleDurations #'(1 . 1) {
                             <c' d'' e'''>16
                         }
                     }
@@ -55,7 +55,7 @@ class RegisterToOctaveCommand(Command):
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
-                        {
+                        \scaleDurations #'(1 . 1) {
                             <c d' e''>16
                         }
                     }
@@ -80,7 +80,7 @@ class RegisterToOctaveCommand(Command):
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
-                        {
+                        \scaleDurations #'(1 . 1) {
                             <c, d e'>16
                         }
                     }
@@ -111,7 +111,7 @@ class RegisterToOctaveCommand(Command):
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
-                        {
+                        \scaleDurations #'(1 . 1) {
                             c'16
                             [
                             d''16
@@ -140,7 +140,7 @@ class RegisterToOctaveCommand(Command):
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
-                        {
+                        \scaleDurations #'(1 . 1) {
                             c16
                             [
                             d'16
@@ -169,7 +169,7 @@ class RegisterToOctaveCommand(Command):
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
-                        {
+                        \scaleDurations #'(1 . 1) {
                             c,16
                             [
                             d16
@@ -204,7 +204,7 @@ class RegisterToOctaveCommand(Command):
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
-                        {
+                        \scaleDurations #'(1 . 1) {
                             bf'16
                             [
                             c''16
@@ -233,7 +233,7 @@ class RegisterToOctaveCommand(Command):
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
-                        {
+                        \scaleDurations #'(1 . 1) {
                             bf16
                             [
                             c'16
@@ -262,7 +262,7 @@ class RegisterToOctaveCommand(Command):
                 \context Voice = "Voice 1" {
                     \voiceOne
                     {
-                        {
+                        \scaleDurations #'(1 . 1) {
                             bf16
                             [
                             c'16
