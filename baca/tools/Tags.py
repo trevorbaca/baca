@@ -1,8 +1,7 @@
-import baca
-from abjad.tools.segmenttools.Tags import Tags
+import abjad
 
 
-class Tags(Tags):
+class Tags(abjad.Tags):
     r'''Tags.
 
     ..  container:: example
@@ -29,7 +28,7 @@ class Tags(Tags):
     __slots__ = (
         )
 
-    _my_known_tags = (
+    _my_known_tags:tuple = (
 
         ### CLEFS ###
 
@@ -177,10 +176,10 @@ class Tags(Tags):
         )
 
     for tag in _my_known_tags:
-        if tag in Tags._known_tags:
+        if tag in abjad.Tags._known_tags:
             raise Exception(f'tag already exists in abjad.Tags: {tag!r}.')
 
-    _known_tags = Tags._known_tags + _my_known_tags
+    _known_tags:tuple = abjad.Tags._known_tags + _my_known_tags
 
     ### PUBLIC PROPERTIES ###
 
@@ -318,6 +317,7 @@ class Tags(Tags):
 
         Returns two-part dictionary.
         '''
+        import baca
         activate = []
         activate.extend(baca.tags.clef_color_tags(path))
         activate.extend(baca.tags.dynamic_color_tags())
@@ -382,6 +382,7 @@ class Tags(Tags):
 
         Returns list.
         '''
+        import baca
         tags = [
             baca.tags.DEFAULT_CLEF_COLOR,
             baca.tags.DEFAULT_CLEF_REDRAW_COLOR,
@@ -423,6 +424,7 @@ class Tags(Tags):
 
         Returns list.
         '''
+        import baca
         return [
             baca.tags.EXPLICIT_DYNAMIC_COLOR,
             baca.tags.EXPLICIT_DYNAMIC_REDRAW_COLOR,
@@ -457,6 +459,7 @@ class Tags(Tags):
 
         Returns list of strings.
         '''
+        import baca
         return [
             baca.tags.DEFAULT_INSTRUMENT_ALERT_WITH_COLOR,
             baca.tags.DEFAULT_INSTRUMENT_COLOR,
@@ -514,6 +517,7 @@ class Tags(Tags):
 
         Returns list.
         '''
+        import baca
         return [
             baca.tags.DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR,
             baca.tags.DEFAULT_MARGIN_MARKUP_COLOR,
@@ -571,6 +575,7 @@ class Tags(Tags):
 
         Returns two-part dictionary.
         '''
+        import baca
         return {
             'activate': [
                 baca.tags.EXPLICIT_METRONOME_MARK_WITH_COLOR,
@@ -606,6 +611,7 @@ class Tags(Tags):
 
         Returns list of strings.
         '''
+        import baca
         return [
             baca.tags.EXPLICIT_STAFF_LINES_COLOR,
             baca.tags.REAPPLIED_STAFF_LINES_COLOR,
@@ -635,6 +641,7 @@ class Tags(Tags):
 
         Returns list.
         '''
+        import baca
         return [
             baca.tags.EXPLICIT_TIME_SIGNATURE_COLOR,
             baca.tags.REAPPLIED_TIME_SIGNATURE_COLOR,

@@ -54,3 +54,6 @@ target/
 
 # MacOS
 .DS_Store
+
+# mypy
+.mypy_cache

@@ -88,8 +88,6 @@ Bases
 Methods
 -------
 
-.. automethod:: LibraryNS.script_staff_padding
-
 .. automethod:: LibraryNS.single_segment_transition
 
 Class & static methods
@@ -158,6 +156,8 @@ Class & static methods
 .. automethod:: LibraryNS.script_color
 
 .. automethod:: LibraryNS.script_extra_offset
+
+.. automethod:: LibraryNS.script_staff_padding
 
 .. automethod:: LibraryNS.scripts_down
 

@@ -1,8 +1,8 @@
 import abjad
 import baca
 import collections
-from abjad import rhythmmakertools as rhythmos
 from typing import Union
+from abjad import rhythmmakertools as rhythmos
 
 
 class LibraryNS(abjad.AbjadObject):
@@ -160,7 +160,7 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='style',
             value='harmonic',
             grob='note_head',
@@ -391,7 +391,7 @@ class LibraryNS(abjad.AbjadObject):
     def ottava_bracket_staff_padding(n, selector='baca.leaves()'):
         r'''Overrides ottava bracket staff padding.
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='staff_padding',
             context='Staff',
             value=n,
@@ -472,7 +472,7 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[abjad.LilyPondLiteral(r'\pageBreak', 'after')],
             selector=selector,
             )
@@ -719,8 +719,12 @@ class LibraryNS(abjad.AbjadObject):
         '''
         assert isinstance(dynamic, str), repr(str)
         command = rf'\{dynamic}_poss'
+        # mypy complains about the following rebinding:
+        # baca/tools/LibraryNS.py:726: error:
+        # Incompatible types in assignment
+        # (expression has type "Dynamic", variable has type "str"):
         dynamic = abjad.Dynamic(dynamic, command=command)
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[dynamic],
             selector=selector,
             )
@@ -1247,7 +1251,7 @@ class LibraryNS(abjad.AbjadObject):
 
         Returns override command.
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='extra_offset',
             value=pair,
             context='GlobalContext',
@@ -1399,7 +1403,7 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[abjad.Dynamic(dynamic)],
             selector=selector,
             )
@@ -1541,7 +1545,7 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='direction',
             value=abjad.Down,
             grob='repeat_tie',
@@ -1685,7 +1689,7 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='direction',
             value=abjad.Up,
             grob='repeat_tie',
@@ -1822,7 +1826,7 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='staff_position',
             value=n,
             grob='rest',
@@ -2159,7 +2163,7 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='direction',
             value=abjad.Down,
             grob='rest',
@@ -2296,7 +2300,7 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='direction',
             value=abjad.Up,
             grob='rest',
@@ -2552,7 +2556,7 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='color',
             value=color,
             grob='script',
@@ -2711,19 +2715,20 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='extra_offset',
             value=pair,
             grob='script',
             selector=selector,
             )
 
+    @staticmethod
     def script_staff_padding(n:Union[int, float], selector='baca.leaf(0)'):
         r'''Overrides script staff padding.
 
         Returns override command.
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='staff_padding',
             value=n,
             grob='script',
@@ -2881,7 +2886,7 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='direction',
             value=abjad.Down,
             grob='script',
@@ -3039,7 +3044,7 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='direction',
             value=abjad.Up,
             grob='script',
@@ -3228,7 +3233,7 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[abjad.Articulation('shortfermata')],
             selector=selector,
             )
@@ -3959,7 +3964,7 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='direction',
             value=abjad.Down,
             grob='slur',
@@ -4125,7 +4130,7 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='direction',
             value=abjad.Up,
             grob='slur',
@@ -4648,7 +4653,7 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[abjad.Articulation('staccato')],
             selector=selector,
             )
@@ -4794,7 +4799,7 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[abjad.Articulation('staccatissimo')],
             selector=selector,
             )
@@ -4805,7 +4810,7 @@ class LibraryNS(abjad.AbjadObject):
 
         Returns indicator command.
         '''
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[baca.StaffLines(line_count=n)],
             selector=selector,
             )
@@ -4831,7 +4836,7 @@ class LibraryNS(abjad.AbjadObject):
         ):
         r'''Overrides staff symbol extra offset.
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             after=after,
             attribute='extra_offset',
             value=pair,
@@ -4972,7 +4977,7 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='color',
             value=color,
             context=context,
@@ -5124,7 +5129,7 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[abjad.StemTremolo(tremolo_flags=tremolo_flags)],
             selector=selector,
             )
@@ -5263,7 +5268,7 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='direction',
             value=abjad.Down,
             grob='stem',
@@ -5404,7 +5409,7 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='direction',
             value=abjad.Up,
             grob='stem',
@@ -5479,7 +5484,7 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='strict_note_spacing',
             value=False,
             context='Score',
@@ -5521,7 +5526,7 @@ class LibraryNS(abjad.AbjadObject):
         assert isinstance(dynamic, str), repr(str)
         command = rf'\{dynamic}_sub'
         dynamic = abjad.Dynamic(dynamic, command=command)
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[dynamic],
             selector=selector,
             )
@@ -6277,7 +6282,7 @@ class LibraryNS(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='staff_padding',
             value=n,
             context=context,

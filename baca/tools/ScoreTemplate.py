@@ -1,5 +1,5 @@
 import abjad
-import roman
+import roman # type:ignore
 
 
 class ScoreTemplate(abjad.ScoreTemplate):
@@ -14,7 +14,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
         '_defaults',
         )
 
-    voice_colors = {
+    voice_colors:dict = {
         }
 
     ### INITIALIZER ###

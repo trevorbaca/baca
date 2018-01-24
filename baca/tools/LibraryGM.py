@@ -1,5 +1,6 @@
 import abjad
 import baca
+from typing import Union
 from abjad import rhythmmakertools as rhythmos
 
 
@@ -537,7 +538,7 @@ class LibraryGM(abjad.AbjadObject):
 
         Returns override command.
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='shorten_pair',
             value=pair,
             grob='hairpin',
@@ -769,7 +770,7 @@ class LibraryGM(abjad.AbjadObject):
         r'''Attaches instrument.
         '''
         assert isinstance(instrument, abjad.Instrument)
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[instrument],
             selector=selector,
             )
@@ -1134,7 +1135,7 @@ class LibraryGM(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[abjad.Articulation('laissezVibrer')],
             selector=selector,
             )
@@ -1150,7 +1151,7 @@ class LibraryGM(abjad.AbjadObject):
             alignment_distances=alignment_distances,
             y_offset=y_offset,
             )
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[lbsd],
             selector=selector,
             )
@@ -1284,7 +1285,7 @@ class LibraryGM(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             #indicators=[abjad.LineBreak()],
             indicators=[abjad.LilyPondLiteral(r'\break', 'after')],
             selector=selector,
@@ -1295,7 +1296,7 @@ class LibraryGM(abjad.AbjadObject):
         r'''Makes LilyPond literal.
         '''
         literal = abjad.LilyPondLiteral(string)
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[literal],
             selector=selector,
             )
@@ -1429,7 +1430,7 @@ class LibraryGM(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[abjad.Articulation('longfermata')],
             selector=selector,
             )
@@ -1745,7 +1746,7 @@ class LibraryGM(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[abjad.Articulation('marcato')],
             selector=selector,
             )
@@ -1897,7 +1898,7 @@ class LibraryGM(abjad.AbjadObject):
                 )
         else:
             raise TypeError(argument)
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[margin_markup],
             selector=selector,
             )

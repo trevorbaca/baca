@@ -1,3 +1,10 @@
+# singletons
+from .SchemeManifest import SchemeManifest
+from .Tags import Tags
+scheme = SchemeManifest()
+tags = Tags()
+
+# everything else
 from .AcciaccaturaSpecifier import AcciaccaturaSpecifier
 from .AnchorSpecifier import AnchorSpecifier
 from .ArpeggiationSpacingSpecifier import ArpeggiationSpacingSpecifier
@@ -78,7 +85,6 @@ from .RegistrationComponent import RegistrationComponent
 from .RegistrationDictionary import RegistrationDictionary
 from .RestAffixSpecifier import RestAffixSpecifier
 from .RhythmCommand import RhythmCommand
-from .SchemeManifest import SchemeManifest
 from .Scope import Scope
 from .ScoreTemplate import ScoreTemplate
 from .SegmentMaker import SegmentMaker
@@ -97,7 +103,6 @@ from .StaffPositionCommand import StaffPositionCommand
 from .StageMeasureMap import StageMeasureMap
 from .StringTrioScoreTemplate import StringTrioScoreTemplate
 from .SuiteCommand import SuiteCommand
-from .Tags import Tags
 from .TieCorrectionCommand import TieCorrectionCommand
 from .TimeSignatureGroups import TimeSignatureGroups
 from .TimeSignatureMaker import TimeSignatureMaker
@@ -108,7 +113,3 @@ from .ViolinSoloScoreTemplate import ViolinSoloScoreTemplate
 from .VoltaCommand import VoltaCommand
 from .WellformednessManager import WellformednessManager
 from .ZaggedPitchClassMaker import ZaggedPitchClassMaker
-
-# singletons
-scheme = SchemeManifest()
-tags = Tags()

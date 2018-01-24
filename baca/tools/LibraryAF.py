@@ -1,5 +1,6 @@
 import abjad
 import baca
+from typing import Union
 from abjad import rhythmmakertools as rhythmos
 
 
@@ -157,7 +158,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[abjad.Articulation('>')],
             selector=selector,
             )
@@ -382,7 +383,7 @@ class LibraryAF(abjad.AbjadObject):
         else:
             articulations = ['upbow', 'downbow']
         articulations = [abjad.Articulation(_) for _ in articulations]
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=articulations,
             selector=selector,
             )
@@ -555,7 +556,7 @@ class LibraryAF(abjad.AbjadObject):
         assert isinstance(dynamic, str), repr(str)
         command = rf'\{dynamic}_ancora'
         dynamic = abjad.Dynamic(dynamic, command=command)
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[dynamic],
             selector=selector,
             )
@@ -702,7 +703,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         """
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[abjad.Articulation('arpeggio')],
             selector=selector,
             )
@@ -711,7 +712,7 @@ class LibraryAF(abjad.AbjadObject):
     def articulations(articulations, selector='baca.pheads()'):
         r'''Attaches articulations.
         '''
-        return baca.IndicatorCommand(indicators=articulations)
+        return baca.tools.IndicatorCommand(indicators=articulations)
 
     @staticmethod
     def bar_extent(pair, selector='baca.leaf(0)', after=False):
@@ -836,7 +837,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             after=after,
             attribute='bar_extent',
             value=pair,
@@ -1578,7 +1579,7 @@ class LibraryAF(abjad.AbjadObject):
 
         '''
         assert isinstance(n, (int, float)), repr(n)
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='positions',
             value=(n, n),
             grob='beam',
@@ -1776,7 +1777,7 @@ class LibraryAF(abjad.AbjadObject):
                     break_ = abjad.LilyPondLiteral(r'\pageBreak')
                 else:
                     break_ = abjad.LilyPondLiteral(r'\break')
-                command = baca.IndicatorCommand(
+                command = baca.tools.IndicatorCommand(
                     indicators=[break_],
                     selector=selector,
                     )
@@ -2255,7 +2256,7 @@ class LibraryAF(abjad.AbjadObject):
 
         '''
         clef = abjad.Clef(clef)
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[clef],
             selector=selector,
             )
@@ -2264,7 +2265,7 @@ class LibraryAF(abjad.AbjadObject):
     def clef_extra_offset(pair, selector='baca.leaf(0)'):
         r'''Overrides clef extra offset.
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='extra_offset',
             context='Staff',
             grob='clef',
@@ -2276,7 +2277,7 @@ class LibraryAF(abjad.AbjadObject):
     def clef_x_extent_false(selector='baca.leaf(0)'):
         r'''Overrides clef x-extent.
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='X_extent',
             context='Staff',
             grob='clef',
@@ -2750,7 +2751,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='style',
             value='cross',
             grob='note_head',
@@ -3501,7 +3502,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[abjad.LilyPondLiteral(r'\crossStaff')],
             selector=selector,
             )
@@ -3878,7 +3879,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[abjad.Articulation('tongue #2')],
             selector=selector,
             )
@@ -4030,7 +4031,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         """
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[abjad.Arpeggio(direction=abjad.Down)],
             selector=selector,
             )
@@ -4178,7 +4179,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[abjad.Articulation('downbow')],
             selector=selector,
             )
@@ -4328,7 +4329,7 @@ class LibraryAF(abjad.AbjadObject):
                 )
         else:
             dynamic = abjad.Dynamic(dynamic)
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             context='Voice',
             indicators=[dynamic],
             selector=selector,
@@ -4340,7 +4341,7 @@ class LibraryAF(abjad.AbjadObject):
 
         Returns override command.
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='padding',
             value=str(n),
             grob='dynamic_line_spanner',
@@ -4494,7 +4495,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='staff_padding',
             value=str(n),
             grob='dynamic_line_spanner',
@@ -4648,7 +4649,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='direction',
             value=abjad.Up,
             grob='dynamic_line_spanner',
@@ -4796,7 +4797,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='extra_offset',
             value=pair,
             grob='dynamic_text',
@@ -4807,7 +4808,7 @@ class LibraryAF(abjad.AbjadObject):
     def dynamic_text_x_extent_zero(selector='baca.pleaf(0)'):
         r'''Overrides dynamic text X-extent.
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='X_extent',
             value=(0, 0),
             grob='dynamic_text',
@@ -4815,10 +4816,10 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def dynamic_text_x_offset(n, selector='baca.pleaf(0)'):
+    def dynamic_text_x_offset(n:Union[int, float], selector='baca.pleaf(0)'):
         r'''Overrides dynamic text X-extent.
         '''
-        return baca.OverrideCommand(
+        return baca.tools.OverrideCommand(
             attribute='X_offset',
             value=n,
             grob='dynamic_text',
@@ -4975,7 +4976,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[abjad.LilyPondLiteral(r'\dynamicDown')],
             selector=selector,
             )
@@ -5117,7 +5118,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[abjad.LilyPondLiteral(r'\dynamicUp')],
             selector=selector,
             )
@@ -5257,7 +5258,7 @@ class LibraryAF(abjad.AbjadObject):
         assert isinstance(dynamic, str), repr(dynamic)
         command = rf'\effort_{dynamic}'
         dynamic = abjad.Dynamic(f'{dynamic}', command=command)
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[dynamic],
             selector=selector,
             )
@@ -5391,7 +5392,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[abjad.Articulation('fermata')],
             selector=selector,
             )
@@ -5537,7 +5538,7 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.IndicatorCommand(
+        return baca.tools.IndicatorCommand(
             indicators=[abjad.Articulation('flageolet')],
             selector=selector,
             )
