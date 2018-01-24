@@ -824,7 +824,7 @@ class Division(abjad.NonreducedFraction):
                 pairs = tuple(pairs)
                 return pairs
             prolation = duration / written_duration
-            if prolation.is_proper_tuplet_multiplier:
+            if prolation.normalized():
                 pair = (prolation, written_duration)
                 pairs.append(pair)
 

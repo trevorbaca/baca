@@ -671,8 +671,8 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             contents_duration = abjad.inspect(leaf_selection).get_duration()
             multiplier = tuplet_duration / contents_duration
             tuplet = abjad.Tuplet(multiplier, leaf_selection)
-            if not tuplet.multiplier.is_proper_tuplet_multiplier:
-                tuplet._fix()
+            if not tuplet.multiplier.normalized():
+                tuplet.normalize_multiplier()
         else:
             raise Exception(f'bad time treatment: {time_treatment!r}.')
         assert isinstance(tuplet, abjad.Tuplet)
@@ -718,7 +718,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             new_contents_count,
             contents_count,
             )
-        if not tuplet_multiplier.is_proper_tuplet_multiplier:
+        if not tuplet_multiplier.normalized():
             message = f'{leaf_selection!r} gives {tuplet_multiplier}'
             message += ' with {contents_count} and {new_contents_count}.'
             raise Exception(message)
@@ -3272,7 +3272,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
 
         ..  container:: example
 
-            Simplifies redundant tuplets:
+            Trivializes tuplets:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     talea=rhythmos.Talea(
@@ -3281,7 +3281,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...         ),
             ...     time_treatments=[-2],
             ...     tuplet_specifier=rhythmos.TupletSpecifier(
-            ...         simplify_redundant_tuplets=True,
+            ...         trivialize=True,
             ...         ),
             ...     )
 
