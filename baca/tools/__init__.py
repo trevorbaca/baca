@@ -78,6 +78,7 @@ from .RegistrationComponent import RegistrationComponent
 from .RegistrationDictionary import RegistrationDictionary
 from .RestAffixSpecifier import RestAffixSpecifier
 from .RhythmCommand import RhythmCommand
+from .SchemeManifest import SchemeManifest
 from .Scope import Scope
 from .ScoreTemplate import ScoreTemplate
 from .SegmentMaker import SegmentMaker
@@ -109,4 +110,5 @@ from .WellformednessManager import WellformednessManager
 from .ZaggedPitchClassMaker import ZaggedPitchClassMaker
 
 # singletons
+scheme = SchemeManifest()
 tags = Tags()

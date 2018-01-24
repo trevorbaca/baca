@@ -363,6 +363,32 @@ sfpp = #(make-dynamic-script "sfpp")
 sffz = #(make-dynamic-script "sffz")
 sfffz = #(make-dynamic-script "sfffz")
 
+sfz_f = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:dynamic "sfz"
+            #:hspace -0.25
+            #:normal-text "/"
+            #:hspace -0.5
+            #:dynamic "f"
+            )
+        )
+    )
+
+sfz_p = #(
+    make-dynamic-script
+    (markup
+        #:line (
+            #:dynamic "sfz"
+            #:hspace 0
+            #:normal-text "/"
+            #:hspace 0 
+            #:dynamic "p"
+            )
+        )
+    )
+
 %%% DYNAMICS (SUBITO) %%%
 
 ppp_sub = #(

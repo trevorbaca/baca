@@ -4184,7 +4184,7 @@ class LibraryAF(abjad.AbjadObject):
             )
 
     @staticmethod
-    def dynamic(dynamic=None, selector='baca.phead(0)'):
+    def dynamic(dynamic:str, selector='baca.phead(0)'):
         r'''Attaches dynamic to pitched head 0.
 
         ..  container:: example
@@ -4312,9 +4312,25 @@ class LibraryAF(abjad.AbjadObject):
                 >>
 
         '''
+        assert isinstance(dynamic, str), repr(dynamic)
+        if dynamic in baca.scheme.dynamics:
+            steady_state = baca.scheme.dynamic_to_steady_state(dynamic)
+            command = '\\' + dynamic
+            first = dynamic.split('_')[0]
+            if first in ('sfz', 'sffz', 'sfffz'):
+                sforzando = True
+            else:
+                sforzando = False
+            dynamic = abjad.Dynamic(
+                steady_state,
+                command=command,
+                sforzando=sforzando,
+                )
+        else:
+            dynamic = abjad.Dynamic(dynamic)
         return baca.IndicatorCommand(
             context='Voice',
-            indicators=[abjad.Dynamic(dynamic)],
+            indicators=[dynamic],
             selector=selector,
             )
 

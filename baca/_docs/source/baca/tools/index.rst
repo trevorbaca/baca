@@ -16,6 +16,7 @@ baca.tools
    LibraryNS
    LibraryTZ
    MarkupLibrary
+   SchemeManifest
 
 .. autosummary::
    :nosignatures:
@@ -25,6 +26,7 @@ baca.tools
    ~baca.tools.LibraryNS.LibraryNS
    ~baca.tools.LibraryTZ.LibraryTZ
    ~baca.tools.MarkupLibrary.MarkupLibrary
+   ~baca.tools.SchemeManifest.SchemeManifest
 
 --------
 
