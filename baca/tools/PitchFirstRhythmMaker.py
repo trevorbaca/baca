@@ -685,7 +685,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                     logical_tie.head,
                     site='PFRM1',
                     )
-        if tuplet.is_trivial:
+        if tuplet.trivial():
             tuplet.hide = True
         selection = abjad.select([tuplet])
         return selection
