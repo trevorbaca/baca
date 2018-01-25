@@ -28,7 +28,7 @@ Bases
       ~SegmentMaker.color_out_of_range_pitches
       ~SegmentMaker.color_repeat_pitch_classes
       ~SegmentMaker.copy_rhythm
-      ~SegmentMaker.design_checker
+      ~SegmentMaker.do_not_check_persistence
       ~SegmentMaker.dynamics
       ~SegmentMaker.fermata_measure_staff_line_count
       ~SegmentMaker.final_bar_line
@@ -91,7 +91,7 @@ Read-only properties
 
 .. autoattribute:: SegmentMaker.color_repeat_pitch_classes
 
-.. autoattribute:: SegmentMaker.design_checker
+.. autoattribute:: SegmentMaker.do_not_check_persistence
 
 .. autoattribute:: SegmentMaker.dynamics
 

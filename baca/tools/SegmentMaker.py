@@ -5,6 +5,22 @@ import pathlib
 import time
 import traceback
 from abjad import rhythmmakertools as rhythmos
+from .BreakMeasureMap import BreakMeasureMap
+from .CommandWrapper import CommandWrapper
+from .HorizontalSpacingSpecifier import HorizontalSpacingSpecifier
+from .MetronomeMarkMeasureMap import MetronomeMarkMeasureMap
+from .ScoreTemplate import ScoreTemplate
+from .Typing import Dict
+from .Typing import List
+from .Typing import Number
+from .Typing import NumberPair
+from .Typing import OptionalBool
+from .Typing import OptionalInt
+from .Typing import OptionalNumber
+from .Typing import OptionalStr
+from .Typing import NumberPair
+from .Typing import Tuple
+from .Typing import Union as U
 
 
 class SegmentMaker(abjad.SegmentMaker):
@@ -130,7 +146,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_color_octaves',
         '_color_out_of_range_pitches',
         '_color_repeat_pitch_classes',
-        '_design_checker',
+        '_do_not_check_persistence',
         '_duration',
         '_environment',
         '_fermata_measure_numbers',
@@ -250,135 +266,94 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def __init__(
         self,
-        allow_empty_selections=None,
-        color_octaves=None,
-        color_out_of_range_pitches=None,
-        color_repeat_pitch_classes=None,
-        design_checker=None,
-        fermata_measure_staff_line_count=None,
-        final_bar_line=None,
-        final_markup=None,
-        final_markup_extra_offset=None,
-        first_measure_number=None,
-        ignore_repeat_pitch_classes=None,
-        ignore_unpitched_notes=None,
-        ignore_unregistered_pitches=None,
-        instruments=None,
-        last_segment=None,
-        breaks=None,
-        margin_markup=None,
-        measures_per_stage=None,
-        metronome_mark_measure_map=None,
-        metronome_mark_stem_height=1.5,
-        metronome_marks=None,
-        print_timings=None,
-        range_checker=None,
-        rehearsal_letter=None,
-        score_template=None,
-        skip_wellformedness_checks=None,
-        skips_instead_of_rests=None,
-        spacing_specifier=None,
-        stage_label_base_string=None,
-        time_signatures=None,
-        transpose_score=None,
-        ):
+        allow_empty_selections: OptionalBool = None,
+        color_octaves: OptionalBool = None,
+        color_out_of_range_pitches: OptionalBool = None,
+        color_repeat_pitch_classes: OptionalBool = None,
+        do_not_check_persistence: OptionalBool = None,
+        fermata_measure_staff_line_count: OptionalInt = None,
+        final_bar_line: U[bool, str, None] = None,
+        final_markup: U[tuple, None] = None,
+        final_markup_extra_offset: U[NumberPair, None] = None,
+        first_measure_number: U[int, None] = None,
+        ignore_repeat_pitch_classes: OptionalBool = None,
+        ignore_unpitched_notes: OptionalBool = None,
+        ignore_unregistered_pitches: OptionalBool = None,
+        instruments: U[abjad.OrderedDict, None] = None,
+        last_segment: OptionalBool = None,
+        breaks: U[BreakMeasureMap, None] = None,
+        margin_markup: U[abjad.OrderedDict, None] = None,
+        measures_per_stage: U[List[int], None] = None,
+        metronome_mark_measure_map: U[MetronomeMarkMeasureMap, None] = None,
+        metronome_mark_stem_height: OptionalNumber = 1.5,
+        metronome_marks: U[abjad.OrderedDict, None] = None,
+        print_timings: OptionalBool = None,
+        range_checker: U[abjad.PitchRange, None] = None,
+        rehearsal_letter: OptionalStr = None,
+        score_template: U[ScoreTemplate, None] = None,
+        skip_wellformedness_checks: OptionalBool = None,
+        skips_instead_of_rests: OptionalBool = None,
+        spacing_specifier: U[HorizontalSpacingSpecifier, None] = None,
+        stage_label_base_string: OptionalStr = None,
+        time_signatures: U[List[tuple], None] = None,
+        transpose_score: OptionalBool = None,
+        ) -> None:
         super(SegmentMaker, self).__init__()
-        if allow_empty_selections is not None:
-            allow_empty_selections = bool(allow_empty_selections)
-        self._allow_empty_selections = allow_empty_selections
-        if color_octaves is not None:
-            color_octaves = bool(color_octaves)
-        self._color_octaves = color_octaves
-        if color_out_of_range_pitches is not None:
-            color_out_of_range_pitches = bool(color_out_of_range_pitches)
-        self._color_out_of_range_pitches = color_out_of_range_pitches
-        if color_repeat_pitch_classes is not None:
-            color_repeat_pitch_classes = bool(color_repeat_pitch_classes)
-        self._color_repeat_pitch_classes = color_repeat_pitch_classes
+        self._allow_empty_selections: OptionalBool = allow_empty_selections
+        self._color_octaves: OptionalBool = color_octaves
+        self._color_out_of_range_pitches: OptionalBool = \
+            color_out_of_range_pitches
+        self._color_repeat_pitch_classes: OptionalBool = \
+            color_repeat_pitch_classes
         self._cache = None
-        self._cached_time_signatures = []
-        self._design_checker = design_checker
+        self._cached_time_signatures: List[abjad.TimeSignature] = []
+        self._do_not_check_persistence = do_not_check_persistence
         self._duration = None
-        self._fermata_measure_numbers = []
-        if fermata_measure_staff_line_count is not None:
-            assert isinstance(fermata_measure_staff_line_count, int)
-            assert 0 <= fermata_measure_staff_line_count
-        self._fermata_measure_staff_line_count = \
+        self._fermata_measure_numbers: list = []
+        self._fermata_measure_staff_line_count: OptionalInt = \
             fermata_measure_staff_line_count
-        self._fermata_start_offsets = []
-        self._fermata_stop_offsets = []
-        if final_bar_line not in (None, False, abjad.Exact):
-            assert isinstance(final_bar_line, str), repr(final_bar_line)
-        self._final_bar_line = final_bar_line
-        if final_markup is not None:
-            assert isinstance(final_markup, (tuple, list))
-        self._final_markup = final_markup
-        if final_markup_extra_offset is not None:
-            assert isinstance(final_markup_extra_offset, tuple)
-        self._final_markup_extra_offset = final_markup_extra_offset
-        if first_measure_number is not None:
-            assert isinstance(first_measure_number, int)
-            assert 1 <= first_measure_number
-        self._first_measure_number = first_measure_number
-        if ignore_repeat_pitch_classes is not None:
-            ignore_repeat_pitch_classes = bool(
-                ignore_repeat_pitch_classes)
-        self._ignore_repeat_pitch_classes = ignore_repeat_pitch_classes
-        if ignore_unpitched_notes is not None:
-            ignore_unpitched_notes = bool(ignore_unpitched_notes)
-        self._ignore_unpitched_notes = ignore_unpitched_notes
-        if ignore_unregistered_pitches is not None:
-            ignore_unregistered_pitches = bool(ignore_unregistered_pitches)
-        self._ignore_unregistered_pitches = ignore_unregistered_pitches
-        if instruments is not None:
-            assert isinstance(instruments, abjad.OrderedDict)
-        self._instruments = instruments
+        self._fermata_start_offsets: List[abjad.Offset] = []
+        self._fermata_stop_offsets: List[abjad.Offset] = []
+        self._final_bar_line: U[bool, str, None] = final_bar_line
+        self._final_markup: U[tuple, None] = final_markup
+        self._final_markup_extra_offset: NumberPair = \
+            final_markup_extra_offset
+        self._first_measure_number: int = first_measure_number
+        self._ignore_repeat_pitch_classes: OptionalBool = \
+            ignore_repeat_pitch_classes
+        self._ignore_unpitched_notes: OptionalBool = ignore_unpitched_notes
+        self._ignore_unregistered_pitches: OptionalBool = \
+            ignore_unregistered_pitches
+        self._instruments: U[abjad.OrderedDict, None] = instruments
         self._last_measure_is_fermata = False
-        if last_segment is not None:
-            last_segment = bool(last_segment)
-        self._last_segment = last_segment
-        if breaks is not None:
-            assert isinstance(breaks, baca.BreakMeasureMap)
-        self._breaks = breaks
-        if margin_markup is not None:
-            assert isinstance(margin_markup, abjad.OrderedDict)
-        self._margin_markup = margin_markup
-        self._measures_per_stage = measures_per_stage
-        self._metronome_mark_measure_map = metronome_mark_measure_map
-        self._metronome_mark_stem_height = metronome_mark_stem_height
-        if metronome_marks is not None:
-            assert isinstance(metronome_marks, abjad.OrderedDict)
-        self._metronome_marks = metronome_marks
-        self._midi = None
-        self._offset_to_measure_number = {}
-        self._print_timings = print_timings
-        self._range_checker = range_checker
-        self._rehearsal_letter = rehearsal_letter
+        self._last_segment: OptionalBool = last_segment
+        self._breaks: U[BreakMeasureMap, None] = breaks
+        self._margin_markup: U[abjad.OrderedDict, None] = margin_markup
+        self._measures_per_stage: U[List[int], None] = measures_per_stage
+        self._metronome_mark_measure_map: U[
+            MetronomeMarkMeasureMap, None] = metronome_mark_measure_map
+        self._metronome_mark_stem_height: OptionalNumber = \
+            metronome_mark_stem_height
+        self._metronome_marks: U[abjad.OrderedDict, None] = metronome_marks
+        self._midi: OptionalBool = None
+        self._offset_to_measure_number: Dict[abjad.Offset, int] = {}
+        self._print_timings: OptionalBool = print_timings
+        self._range_checker: U[abjad.PitchRange, None] = range_checker
+        self._rehearsal_letter: OptionalStr = rehearsal_letter
+        self._score_template: U[ScoreTemplate, None] = score_template
+        self._segment_bol_measure_numbers: List[int] = []
+        self._segment_duration: U[abjad.Duration, None] = None
+        self._skip_wellformedness_checks: OptionalBool = \
+            skip_wellformedness_checks
+        self._skips_instead_of_rests: OptionalBool = skips_instead_of_rests
+        self._spacing_specifier: U[
+            HorizontalSpacingSpecifier, None] = spacing_specifier
+        self._stage_label_base_string: OptionalStr = stage_label_base_string
+        self._start_clock_time: OptionalStr = None
+        self._stop_clock_time: OptionalStr = None
+        self._transpose_score: OptionalBool = transpose_score
+        self._wrappers: List[CommandWrapper] = []
         self._initialize_time_signatures(time_signatures)
-        if score_template is not None:
-            assert isinstance(score_template, baca.ScoreTemplate)
-        self._score_template = score_template
-        self._segment_bol_measure_numbers = []
-        self._segment_duration = None
-        if skip_wellformedness_checks is not None:
-            skip_wellformedness_checks = bool(skip_wellformedness_checks)
-        self._skip_wellformedness_checks = skip_wellformedness_checks
-        if skips_instead_of_rests is not None:
-            skips_instead_of_rests = bool(skips_instead_of_rests)
-        self._skips_instead_of_rests = skips_instead_of_rests
-        if spacing_specifier is not None:
-            prototype = baca.HorizontalSpacingSpecifier
-            assert isinstance(spacing_specifier, prototype)
-        self._spacing_specifier = spacing_specifier
-        if stage_label_base_string is not None:
-            assert isinstance(stage_label_base_string, str)
-        self._stage_label_base_string = stage_label_base_string
-        self._start_clock_time = None
-        self._stop_clock_time = None
-        if transpose_score is not None:
-            transpose_score = bool(transpose_score)
-        self._transpose_score = transpose_score
-        self._wrappers = []
 
     ### SPECIAL METHODS ###
 
@@ -1115,10 +1090,10 @@ class SegmentMaker(abjad.SegmentMaker):
                     spanner=wrapper.spanner,
                     )
 
-    def _check_design(self):
-        if self.design_checker is None:
+    def _check_persistent_indicators(self):
+        if self.do_not_check_persistence:
             return
-        return self.design_checker(self.score)
+        # TODO: check
 
     def _check_range(self):
         if not self.range_checker:
@@ -3529,16 +3504,10 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._color_repeat_pitch_classes
 
     @property
-    def design_checker(self):
-        r'''Gets design-checker.
-
-        Defaults to none.
-
-        Set to design-checker or none.
-
-        Returns design-checker or none.
+    def do_not_check_persistence(self) -> U[bool, None]:
+        r'''Is true when segment-maker does not check persistent indicators.
         '''
-        return self._design_checker
+        return self._do_not_check_persistence
 
     @property
     def dynamics(self):
@@ -9375,8 +9344,8 @@ class SegmentMaker(abjad.SegmentMaker):
         self._color_unregistered_pitches()
         self._color_unpitched_notes()
         self._check_wellformedness()
-        self._check_design()
         self._check_range()
+        self._check_persistent_indicators()
         self._color_repeat_pitch_classes_()
         self._color_octaves_()
         self._remove_redundant_time_signatures()

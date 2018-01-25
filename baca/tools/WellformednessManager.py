@@ -1,5 +1,8 @@
 import abjad
 import baca
+from typing import List
+from typing import Tuple
+from typing import Union
 
 
 class WellformednessManager(abjad.AbjadObject):
@@ -18,25 +21,38 @@ class WellformednessManager(abjad.AbjadObject):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None):
+    def __call__(
+        self,
+        argument: Union[abjad.Score, None] = None,
+        ) -> List[Tuple[list, int, str]]:
         r'''Calls wellformedness checks on `argument`.
+
+        :param argument: input score.
 
         ..  container:: example
 
             >>> voice = abjad.Voice("c'4 c' d' d'")
-            >>> baca.WellformednessManager()(voice)
-            [([LogicalTie([Note("c'4")]), LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")]), LogicalTie([Note("d'4")])], 4, 'check_repeat_pitch_classes')]
+            >>> manager = baca.WellformednessManager()
+            >>> result = manager(voice)
+            >>> for violators, total, check in result:
+            ...     print(check)
+            ...     print(total)
+            ...     print(violators)
+            ...     print()
+            check_repeat_pitch_classes
+            4
+            [LogicalTie([Note("c'4")]), LogicalTie([Note("c'4")]), LogicalTie([Note("d'4")]), LogicalTie([Note("d'4")])]
 
-        Returns list of violators / total / check triples.
+        Returns (violators, total, check) triples.
         '''
+        triples: list = []
         if argument is None:
-            return
-        check_names = [_ for _ in dir(self) if _.startswith('check_')]
-        triples = []
-        for check_name in sorted(check_names):
-            check = getattr(self, check_name)
+            return triples
+        names = [_ for _ in dir(self) if _.startswith('check_')]
+        for name in sorted(names):
+            check = getattr(self, name)
             violators, total = check(argument=argument)
-            triples.append((violators, total, check_name))
+            triples.append((violators, total, name))
         return triples
 
     ### PRIVATE METHODS ###
