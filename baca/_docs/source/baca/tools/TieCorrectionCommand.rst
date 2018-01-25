@@ -31,6 +31,7 @@ Bases
       ~TieCorrectionCommand.tag
       ~TieCorrectionCommand.tag_measure_number
       ~TieCorrectionCommand.tags
+      ~TieCorrectionCommand.untie
       ~TieCorrectionCommand.__call__
       ~TieCorrectionCommand.__format__
       ~TieCorrectionCommand.__repr__
@@ -65,6 +66,8 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: TieCorrectionCommand.tags
+
+.. autoattribute:: TieCorrectionCommand.untie
 
 Read/write properties
 ---------------------

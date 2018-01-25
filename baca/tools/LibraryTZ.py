@@ -1,6 +1,7 @@
 import abjad
 import baca
 import collections
+from typing import Union
 from abjad import rhythmmakertools as rhythmos
 
 
@@ -3762,6 +3763,88 @@ class LibraryTZ(abjad.AbjadObject):
             value=pair,
             grob='tuplet_number',
             selector=selector,
+            )
+
+    @staticmethod
+    def untie_to(selector='baca.pleaf(0)'):
+        r'''Unties to leaf.
+
+        ..  container:: example
+
+            >>> maker = baca.SegmentMaker(
+            ...     ignore_unpitched_notes=True,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+            ...     )
+
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.make_tied_notes(),
+            ...     baca.untie_to(selector=baca.leaf(2)),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            % GlobalSkips [measure 1]                                                    %! SM4
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            s1 * 1/2
+                <BLANKLINE>
+                            % GlobalSkips [measure 2]                                                    %! SM4
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            s1 * 3/8
+                <BLANKLINE>
+                            % GlobalSkips [measure 3]                                                    %! SM4
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            s1 * 1/2
+                <BLANKLINE>
+                            % GlobalSkips [measure 4]                                                    %! SM4
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                % MusicVoice [measure 1]                                                 %! SM4
+                                c'2
+                                ~
+                <BLANKLINE>
+                                % MusicVoice [measure 2]                                                 %! SM4
+                                c'4.
+                <BLANKLINE>
+                                % MusicVoice [measure 3]                                                 %! SM4
+                                c'2
+                                ~
+                <BLANKLINE>
+                                % MusicVoice [measure 4]                                                 %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+        '''
+        return baca.TieCorrectionCommand(
+            direction=abjad.Left,
+            selector=selector,
+            untie=True,
             )
 
     @staticmethod

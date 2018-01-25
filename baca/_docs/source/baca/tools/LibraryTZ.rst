@@ -50,6 +50,7 @@ Bases
       ~LibraryTZ.tuplet_brackets_down
       ~LibraryTZ.tuplet_brackets_up
       ~LibraryTZ.tuplet_number_extra_offset
+      ~LibraryTZ.untie_to
       ~LibraryTZ.up_arpeggios
       ~LibraryTZ.up_bows
       ~LibraryTZ.very_long_fermata
@@ -121,6 +122,8 @@ Class & static methods
 .. automethod:: LibraryTZ.tuplet_brackets_up
 
 .. automethod:: LibraryTZ.tuplet_number_extra_offset
+
+.. automethod:: LibraryTZ.untie_to
 
 .. automethod:: LibraryTZ.up_arpeggios
 

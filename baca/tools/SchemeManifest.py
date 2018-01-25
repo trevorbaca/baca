@@ -10,6 +10,9 @@ class SchemeManifest(abjad.AbjadObject):
     __documentation_section__ = '(1) Library'
 
     _dynamics = (
+        ('f_but_accents_sffz', 'f'),
+        ('f_sub_accents_continue_sffz', 'f'),
+        ('p_sub_accents_continue_sffz', 'p'),
         ('sfz_f', 'f'),
         ('sfz_p', 'p'),
         )
@@ -25,6 +28,9 @@ class SchemeManifest(abjad.AbjadObject):
             >>> for dynamic in baca.scheme.dynamics:
             ...     dynamic
             ...
+            'f_but_accents_sffz'
+            'f_sub_accents_continue_sffz'
+            'p_sub_accents_continue_sffz'
             'sfz_f'
             'sfz_p'
 

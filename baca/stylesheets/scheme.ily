@@ -139,6 +139,59 @@ fff_ancora = #(
         )
     )
 
+%%% DYNAMICS (PHRASAL) %%%
+
+p_sub_accents_continue_sffz = 
+    \tweak DynamicText.self-alignment-X #LEFT
+    \tweak DynamicText.X-extent ##f
+    #(make-dynamic-script
+    (markup
+        #:whiteout
+        #:line (
+            #:general-align Y -0.75 #:dynamic "p"
+            #:normal-text "sub. (accents continue"
+            #:dynamic "sffz"
+            #:hspace -0.5
+            #:normal-text ")"
+            )
+        )
+    )
+
+f_but_accents_sffz =
+    \tweak DynamicText.self-alignment-X #LEFT
+    \tweak DynamicText.X-extent ##f
+    #(make-dynamic-script
+    (markup
+        #:whiteout
+        #:line (
+            #:general-align Y -0.75 #:dynamic "f"
+            #:hspace 0.25
+            #:normal-text "(but accents"
+            #:hspace 0.25
+            #:dynamic "sffz"
+            #:hspace -0.5
+            #:normal-text ")"
+            )
+        )
+    )
+
+f_sub_accents_continue_sffz =
+    \tweak DynamicText.self-alignment-X #LEFT
+    \tweak DynamicText.X-extent ##f
+    #(make-dynamic-script
+    (markup
+        #:whiteout
+        #:line (
+            #:general-align Y -0.75 #:dynamic "f"
+            #:hspace 0.25
+            #:normal-text "sub. (accents continue"
+            #:dynamic "sffz"
+            #:hspace -0.5
+            #:normal-text ")"
+            )
+        )
+    )
+
 %%% DYNAMICS (EFFORT) %%%
 
 effort_ppp = #(

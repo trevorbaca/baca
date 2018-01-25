@@ -1,5 +1,6 @@
 import abjad
 import baca
+from typing import Union
 from .Command import Command
 
 
@@ -18,6 +19,7 @@ class TieCorrectionCommand(Command):
     __slots__ = (
         '_direction',
         '_repeat',
+        '_untie',
         )
 
     ### INITIALIZER ###
@@ -27,6 +29,7 @@ class TieCorrectionCommand(Command):
         direction=None,
         repeat=None,
         selector='baca.pleaf(-1)',
+        untie=None,
         ):
         Command.__init__(self, selector=selector)
         if direction is not None:
@@ -35,6 +38,9 @@ class TieCorrectionCommand(Command):
         if repeat is not None:
             repeat = bool(repeat)
         self._repeat = repeat
+        if untie is not None:
+            untie = bool(untie)
+        self._untie = untie
 
     ### SPECIAL METHODS ###
 
@@ -49,7 +55,10 @@ class TieCorrectionCommand(Command):
             argument = self.selector(argument)
         leaves = baca.select(argument).leaves()
         for leaf in leaves:
-            self._add_tie(leaf)
+            if self.untie is True:
+                self._sever_tie(leaf)
+            else:
+                self._add_tie(leaf)
 
     ### PRIVATE METHODS ###
 
@@ -104,6 +113,16 @@ class TieCorrectionCommand(Command):
         for leaf in new_leaves:
             abjad.detach(abjad.Tie, leaf)
         abjad.attach(new_tie, new_leaves, site='TCC')
+
+    def _sever_tie(self, current_leaf):
+        current_tie = abjad.inspect(current_leaf).get_spanner(abjad.Tie)
+        if current_tie is None:
+            return
+        direction = self.direction
+        if direction is None:
+            direction = abjad.Right
+        leaf_index = current_tie.index(current_leaf)
+        current_tie._fracture(leaf_index, direction=direction)
             
     ### PUBLIC PROPERTIES ###
 
@@ -128,3 +147,11 @@ class TieCorrectionCommand(Command):
         Set to true, false or none.
         '''
         return self._repeat
+
+    @property
+    def untie(self) -> Union[bool, None]:
+        r'''Is true when command severs tie instead of creating tie.
+
+        Defaults to none.
+        '''
+        return self._untie
