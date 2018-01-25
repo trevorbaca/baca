@@ -22,7 +22,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         ...     )
 
         >>> collections = [[0, 2, 10, 8]]
-        >>> selections, state_manifest = rhythm_maker(collections)
+        >>> selections, state = rhythm_maker(collections)
         >>> lilypond_file = rhythm_maker.show(selections)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -44,7 +44,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             }
 
         >>> collections = [[18, 16, 15, 20, 19]]
-        >>> selections, state_manifest = rhythm_maker(collections)
+        >>> selections, state = rhythm_maker(collections)
         >>> lilypond_file = rhythm_maker.show(selections)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -67,7 +67,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             }
 
         >>> collections = [[9]]
-        >>> selections, state_manifest = rhythm_maker(collections)
+        >>> selections, state = rhythm_maker(collections)
         >>> lilypond_file = rhythm_maker.show(selections)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -84,7 +84,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             }
 
         >>> collections = [[0, 2, 10, 8], [18, 16, 15, 20, 19], [9]]
-        >>> selections, state_manifest = rhythm_maker(collections)
+        >>> selections, state = rhythm_maker(collections)
         >>> lilypond_file = rhythm_maker.show(selections)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -127,7 +127,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         '_acciaccatura_specifiers',
         '_next_attack',
         '_next_segment',
-        '_state_manifest',
+        '_state',
         '_talea',
         '_time_treatments',
         )
@@ -167,7 +167,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         self._acciaccatura_specifiers = acciaccatura_specifiers
         self._next_attack = 0
         self._next_segment = 0
-        self._state_manifest = collections.OrderedDict()
+        self._state = collections.OrderedDict()
         talea = talea or rhythmos.Talea()
         if not isinstance(talea, rhythmos.Talea):
             raise TypeError(f'must be talea: {talea!r}.')
@@ -185,7 +185,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         collections,
         rest_affix_specifier=None,
         collection_index=None,
-        state_manifest=None,
+        state=None,
         total_collections=None,
         ):
         r'''Calls rhythm-maker on `collections`.
@@ -202,7 +202,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -234,7 +234,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                     } % measure
                 }
 
-            >>> rhythm_maker._print_state_manifest()
+            >>> rhythm_maker._print_state()
             _next_attack: 9
             _next_segment: 3
 
@@ -250,10 +250,10 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> state_manifest = {'_next_attack': 2}
-            >>> selections, state_manifest = rhythm_maker(
+            >>> state = {'_next_attack': 2}
+            >>> selections, state = rhythm_maker(
             ...     collections,
-            ...     state_manifest=state_manifest,
+            ...     state=state,
             ...     )
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -286,13 +286,14 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
                     } % measure
                 }
 
-            >>> rhythm_maker._print_state_manifest()
+            >>> rhythm_maker._print_state()
             _next_attack: 11
             _next_segment: 3
 
         Returns selections together with state manifest.
         '''
-        self._apply_state_manifest(state_manifest)
+        self._state = state or abjad.OrderedDict()
+        self._apply_state(state)
         selections = self._make_music(
             collections,
             rest_affix_specifier=rest_affix_specifier,
@@ -301,8 +302,8 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             )
         selections = self._apply_specifiers(selections)
         self._check_wellformedness(selections)
-        state_manifest = self._make_state_manifest()
-        return selections, state_manifest
+        state = self._make_state()
+        return selections, state
 
     ### PRIVATE METHODS ###
 
@@ -333,13 +334,13 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             leaves.extend(leaves_)
         return leaves
 
-    def _apply_state_manifest(self, state_manifest=None):
+    def _apply_state(self, state=None):
         for name in self._state_variables:
             value = setattr(self, name, 0)
-        state_manifest = state_manifest or {}
-        assert isinstance(state_manifest, dict), repr(state_manifest)
-        for key in state_manifest:
-            value = state_manifest[key]
+        state = state or {}
+        assert isinstance(state, dict), repr(state)
+        for key in state:
+            value = state[key]
             setattr(self, key, value)
 
     @staticmethod
@@ -690,12 +691,12 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
         selection = abjad.select([tuplet])
         return selection
 
-    def _make_state_manifest(self):
-        state_manifest = {}
+    def _make_state(self):
+        state = {}
         for name in self._state_variables:
             value = getattr(self, name)
-            state_manifest[name] = value
-        return state_manifest
+            state[name] = value
+        return state
 
     @staticmethod
     def _make_tuplet_with_extra_count(
@@ -733,10 +734,10 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             multiplier /= 2
         return multiplier
 
-    def _print_state_manifest(self):
-        state_manifest = self._make_state_manifest()
-        for key in sorted(state_manifest):
-            value = state_manifest[key]
+    def _print_state(self):
+        state = self._make_state()
+        for key in sorted(state):
+            value = state[key]
             message = f'{key}: {value}'
             print(message)
 
@@ -768,7 +769,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -852,7 +853,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     [2, 10, 18, 16, 15, None],
             ...     [20, 19, 9, 0, 2, 10, None],
             ...     ]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -953,7 +954,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
@@ -1008,7 +1009,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
@@ -1079,7 +1080,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -1123,7 +1124,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     )
 
             >>> collections = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
@@ -1178,7 +1179,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     )
 
             >>> collections = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
@@ -1234,7 +1235,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     )
 
             >>> collections = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
@@ -1309,7 +1310,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -1356,7 +1357,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -1395,7 +1396,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -1450,7 +1451,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -1506,7 +1507,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -1579,7 +1580,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -1629,7 +1630,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -1695,7 +1696,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -1751,7 +1752,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2]]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -1805,7 +1806,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2, 10], [10, 16, 15, 20, 19], [9]]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -1853,7 +1854,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2, 10], [10, 16, 16, 19, 19], [19]]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -1920,7 +1921,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -1968,7 +1969,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -2022,7 +2023,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
 
             ..  docs::
 
@@ -2074,7 +2075,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
 
             ..  docs::
 
@@ -2124,7 +2125,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     [10, 18, 16, 15, 20],
             ...     [19, 9, 0, 2, 10, 18],
             ...     ]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
 
             ..  docs::
 
@@ -2176,7 +2177,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     [10, 18, 16, 15, 20],
             ...     [19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
 
             ..  docs::
 
@@ -2228,7 +2229,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).beam.positions = (-6, -6)
@@ -2317,7 +2318,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).beam.positions = (-6, -6)
@@ -2403,7 +2404,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     [10, 18, 16, 15, 20],
             ...     [19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).beam.positions = (-6, -6)
@@ -2512,7 +2513,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2], [10, 18, 16], [15, 20], [19, 9, None]]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
@@ -2573,7 +2574,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2], [10, 18, 16], [15, 20], [19, 9, None]]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections, state = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Staff]
             >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
