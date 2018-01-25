@@ -140,7 +140,7 @@ class PitchFirstRhythmCommand(Command):
                 specifier = rhythmos.TupletSpecifier()
             specifier = abjad.new(
                 specifier,
-                preferred_denominator=tuplet_denominator,
+                denominator=tuplet_denominator,
                 )
             rhythm_maker = abjad.new(
                 rhythm_maker,

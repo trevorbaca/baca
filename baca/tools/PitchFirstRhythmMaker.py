@@ -2305,7 +2305,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...         denominator=8,
             ...         ),
             ...     tuplet_specifier=rhythmos.TupletSpecifier(
-            ...         preferred_denominator=abjad.Duration(1, 16),
+            ...         denominator=abjad.Duration(1, 16),
             ...         ),
             ...     )
 
@@ -2391,7 +2391,7 @@ class PitchFirstRhythmMaker(rhythmos.RhythmMaker):
             ...         denominator=8,
             ...         ),
             ...     tuplet_specifier=rhythmos.TupletSpecifier(
-            ...         preferred_denominator=abjad.Duration(1, 16),
+            ...         denominator=abjad.Duration(1, 16),
             ...         ),
             ...     )
 
