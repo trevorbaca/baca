@@ -1737,9 +1737,9 @@ class SegmentMaker(abjad.SegmentMaker):
     def _label_measure_indices(self):
         skips = baca.select(self.score['GlobalSkips']).skips()
         first_measure_number = self._get_first_measure_number()
-        for i, skip in enumerate(skips):
-            measure_number = first_measure_number + i
-            markup = abjad.Markup(f'[{str(i).zfill(2)} ({measure_number})]')
+        for measure_index, skip in enumerate(skips):
+            measure_number = first_measure_number + measure_index
+            markup = abjad.Markup(f'({measure_number})')
             markup = markup.with_color(abjad.SchemeColor('DarkCyan'))
             markup = markup.fontsize(3)
             markup = abjad.new(markup, direction=abjad.Up)
@@ -1749,6 +1749,17 @@ class SegmentMaker(abjad.SegmentMaker):
                 deactivate=True,
                 site='SM31',
                 tag=baca.tags.MEASURE_NUMBER_MARKUP,
+                )
+            markup = abjad.Markup(f'<{measure_index}>')
+            markup = markup.with_color(abjad.SchemeColor('DarkCyan'))
+            markup = markup.fontsize(3)
+            markup = abjad.new(markup, direction=abjad.Up)
+            abjad.attach(
+                markup,
+                skip,
+                deactivate=True,
+                site='SM32',
+                tag=baca.tags.MEASURE_INDEX_MARKUP,
                 )
 
     def _label_stage_numbers(self):
@@ -1955,6 +1966,7 @@ class SegmentMaker(abjad.SegmentMaker):
             remove_documentation_tags = (
                 baca.tags.CLOCK_TIME_MARKUP,
                 baca.tags.FIGURE_NAME_MARKUP,
+                baca.tags.MEASURE_INDEX_MARKUP,
                 baca.tags.MEASURE_NUMBER_MARKUP,
                 baca.tags.SPACING_MARKUP,
                 baca.tags.STAGE_NUMBER_MARKUP,
