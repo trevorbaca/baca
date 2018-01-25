@@ -141,7 +141,7 @@ fff_ancora = #(
 
 %%% DYNAMICS (PHRASAL) %%%
 
-p_sub_accents_continue_sffz = 
+p_sub_but_accents_continue_sffz = 
     \tweak DynamicText.self-alignment-X #LEFT
     \tweak DynamicText.X-extent ##f
     #(make-dynamic-script
@@ -149,7 +149,7 @@ p_sub_accents_continue_sffz =
         #:whiteout
         #:line (
             #:general-align Y -0.75 #:dynamic "p"
-            #:normal-text "sub. (accents continue"
+            #:normal-text "sub. (but accents continue"
             #:dynamic "sffz"
             #:hspace -0.5
             #:normal-text ")"
@@ -175,7 +175,7 @@ f_but_accents_sffz =
         )
     )
 
-f_sub_accents_continue_sffz =
+f_sub_but_accents_continue_sffz =
     \tweak DynamicText.self-alignment-X #LEFT
     \tweak DynamicText.X-extent ##f
     #(make-dynamic-script
@@ -184,7 +184,7 @@ f_sub_accents_continue_sffz =
         #:line (
             #:general-align Y -0.75 #:dynamic "f"
             #:hspace 0.25
-            #:normal-text "sub. (accents continue"
+            #:normal-text "sub. (but accents continue"
             #:dynamic "sffz"
             #:hspace -0.5
             #:normal-text ")"

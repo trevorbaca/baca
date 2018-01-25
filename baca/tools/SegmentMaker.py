@@ -179,6 +179,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_segment_duration',
         '_skip_wellformedness_checks',
         '_skips_instead_of_rests',
+        '_sounds_during_segment',
         '_spacing_specifier',
         '_stage_label_base_string',
         '_start_clock_time',
@@ -348,6 +349,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._skips_instead_of_rests: OptionalBool = skips_instead_of_rests
         self._spacing_specifier: U[
             HorizontalSpacingSpecifier, None] = spacing_specifier
+        self._sounds_during_segment: abjad.OrderedDict = abjad.OrderedDict()
         self._stage_label_base_string: OptionalStr = stage_label_base_string
         self._start_clock_time: OptionalStr = None
         self._stop_clock_time: OptionalStr = None
@@ -644,6 +646,13 @@ class SegmentMaker(abjad.SegmentMaker):
             command.indicators[0],
             extra_offset=self.final_markup_extra_offset,
             )
+
+    def _annotate_sounds_during(self):
+        for voice in abjad.iterate(self.score).components(abjad.Voice):
+            pleaves = baca.select(voice).pleaves()
+            value = bool(pleaves)
+            abjad.annotate(voice, abjad.tags.SOUNDS_DURING_SEGMENT, value)
+            self._sounds_during_segment[voice.name] = value
 
     def _analyze_momento(self, context, momento):
         previous_indicator = self._momento_to_indicator(momento)
@@ -1093,7 +1102,39 @@ class SegmentMaker(abjad.SegmentMaker):
     def _check_persistent_indicators(self):
         if self.do_not_check_persistence:
             return
-        # TODO: check
+        if self._environment == 'docs':
+            return
+        tag = abjad.tags.SOUNDS_DURING_SEGMENT
+        for voice in abjad.iterate(self.score).components(abjad.Voice):
+            if not abjad.inspect(voice).get_annotation(tag):
+                continue
+            for i, leaf in enumerate(abjad.iterate(voice).leaves()):
+                self._check_persistent_indicators_for_leaf(voice.name, leaf, i)
+
+    @staticmethod
+    def _check_persistent_indicators_for_leaf(voice, leaf, i):
+        mark = abjad.inspect(leaf).get_effective(abjad.MetronomeMark)
+        if mark is None:
+            message = f'{voice} leaf {i} ({leaf!s}) missing metronome mark.'
+            raise Exception(message)
+        instrument = abjad.inspect(leaf).get_effective(abjad.Instrument)
+        if instrument is None:
+            message = f'{voice} leaf {i} ({leaf!s}) missing instrument.'
+            raise Exception(message)
+        if instrument.hide:
+            markup = abjad.inspect(leaf).get_effective(baca.MarginMarkup)
+            if markup is None:
+                message = f'{voice} leaf {i} ({leaf!s}) missing margin markup.'
+                raise Exception(message)
+        clef = abjad.inspect(leaf).get_effective(abjad.Clef)
+        if clef is None:
+            message = f'{voice} leaf {i} ({leaf!s}) missing clef.'
+            raise Exception(message)
+#        if isinstance(leaf, (abjad.Chord, abjad.Note)):
+#            dynamic = abjad.inspect(leaf).get_effective(abjad.Dynamic)
+#            if dynamic is None:
+#                message = f'{voice} leaf {i} ({leaf!s}) missing dynamic.'
+#                raise Exception(message)
 
     def _check_range(self):
         if not self.range_checker:
@@ -1136,6 +1177,7 @@ class SegmentMaker(abjad.SegmentMaker):
             result['last_measure_is_fermata'] = True
         result['persistent_indicators'] = self._collect_persistent_indicators()
         result['segment_number'] = self._get_segment_number()
+        result['sounds_during_segment'] = self._sounds_during_segment
         result['start_clock_time'] = self._start_clock_time
         result['stop_clock_time'] = self._stop_clock_time
         result['time_signatures'] = self._cached_time_signatures
@@ -7209,6 +7251,14 @@ class SegmentMaker(abjad.SegmentMaker):
                             ),
                         ),
                     ('segment_number', 2),
+                    (
+                        'sounds_during_segment',
+                        abjad.OrderedDict(
+                            [
+                                ('MusicVoice', False),
+                                ]
+                            ),
+                        ),
                     ('start_clock_time', None),
                     ('stop_clock_time', None),
                     (
@@ -9298,23 +9348,19 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def run(
         self,
-        deactivate=None,
-        environment=None,
-        metadata=None,
-        midi=None,
-        previous_metadata=None,
-        remove=None,
-        ):
+        deactivate: U[List[str], None] = None,
+        environment: OptionalStr = None,
+        metadata: U[abjad.OrderedDict, None] = None,
+        midi: OptionalBool = None,
+        previous_metadata: U[abjad.OrderedDict, None] = None,
+        remove: U[List[str], None] = None,
+        ) -> abjad.LilyPondFile:
         r'''Runs segment-maker.
 
-        Leave `environment` set to none to render segments in real score.
+        :param environment: leave set to none to render segments in real score.
+            Set to `'docs'` for API examples.
+            Set to `'external'` to debug API examples in an external file.
 
-        Set `environment` to `'docs'` for API examples.
-        
-        Set `environment` to `'external'` to debug API examples in an external
-        file.
-
-        Returns LilyPond file.
         '''
         deactivate = deactivate or []
         assert all(isinstance(_, str) for _ in deactivate), repr(deactivate)
@@ -9330,6 +9376,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._call_rhythm_commands()
         self._populate_offset_to_measure_number()
         self._extend_beams()
+        self._annotate_sounds_during()
         self._attach_score_template_defaults()
         self._reapply_persistent_indicators()
         self._apply_spacing_specifier()

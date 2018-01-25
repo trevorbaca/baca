@@ -11,8 +11,8 @@ class SchemeManifest(abjad.AbjadObject):
 
     _dynamics = (
         ('f_but_accents_sffz', 'f'),
-        ('f_sub_accents_continue_sffz', 'f'),
-        ('p_sub_accents_continue_sffz', 'p'),
+        ('f_sub_but_accents_continue_sffz', 'f'),
+        ('p_sub_but_accents_continue_sffz', 'p'),
         ('sfz_f', 'f'),
         ('sfz_p', 'p'),
         )
@@ -29,8 +29,8 @@ class SchemeManifest(abjad.AbjadObject):
             ...     dynamic
             ...
             'f_but_accents_sffz'
-            'f_sub_accents_continue_sffz'
-            'p_sub_accents_continue_sffz'
+            'f_sub_but_accents_continue_sffz'
+            'p_sub_but_accents_continue_sffz'
             'sfz_f'
             'sfz_p'
 
