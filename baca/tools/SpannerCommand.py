@@ -216,10 +216,17 @@ class SpannerCommand(Command):
             argument = self.selector(argument)
         leaves = abjad.select(argument).leaves()
         spanner = abjad.new(self.spanner)
+        left_open, right_open = None, None
+        if self.open in (abjad.Left, abjad.Both):
+            left_open = True
+        if self.open in (abjad.Right, abjad.Both):
+            right_open = True
         abjad.attach(
             spanner,
             leaves,
             deactivate=self.deactivate,
+            left_open=left_open,
+            right_open=right_open,
             site='SC',
             tag=self.tag,
             )
