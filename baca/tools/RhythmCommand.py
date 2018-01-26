@@ -32,6 +32,7 @@ class RhythmCommand(Command):
     __slots__ = (
         '_division_maker',
         '_division_expression',
+        '_previous_voice_metadata',
         '_reference_meters',
         '_rewrite_meter',
         '_rhythm_maker',
@@ -54,71 +55,59 @@ class RhythmCommand(Command):
         division_maker=None,
         division_expression=None,
         reference_meters=None,
-        rewrite_meter=None,
+        rewrite_meter: bool = None,
         rhythm_maker=None,
         rhythm_overwrites=None,
-        split_at_measure_boundaries=None,
+        split_at_measure_boundaries: bool = None,
         stages=None,
-        tie_first=None,
-        tie_last=None,
-        voice_metadata_pairs: U[List[tuple], None] = None,
+        tie_first: bool = None,
+        tie_last: bool = None,
+        voice_metadata_pairs: Optional[List[tuple]] = None,
         ) -> None:
         if division_expression is not None and division_maker is not None:
             message = 'can not set both division expression and division-maker'
             message += f':\n{division_expression} {division_maker}.'
             raise Exception(message)
         self._division_maker = division_maker
-        if division_expression is not None:
-            prototype = abjad.Expression
-            assert isinstance(division_expression, prototype), repr(
-                division_expression)
-        self._division_expression = division_expression
+        self._division_expression: abjad.Expression = division_expression
+        self._previous_voice_metadata: abjad.OrderedDict = None
         self._reference_meters = reference_meters
-        if rewrite_meter is not None:
-            rewrite_meter = bool(rewrite_meter)
-        self._rewrite_meter = rewrite_meter
+        self._rewrite_meter: bool = rewrite_meter
         self._rhythm_maker = rhythm_maker
         self._rhythm_overwrites = rhythm_overwrites
-        self._split_at_measure_boundaries = split_at_measure_boundaries
-        if isinstance(stages, int):
-            stages = (stages, stages)
+        self._split_at_measure_boundaries: bool = split_at_measure_boundaries
         self._stages = stages
         self._state: Optional[abjad.OrderedDict] = None
-        if tie_first is not None:
-            tie_first = bool(tie_first)
-        self._tie_first = tie_first
-        if tie_last is not None:
-            tie_last = bool(tie_last)
-        self._tie_last = tie_last
+        self._tie_first: bool = tie_first
+        self._tie_last: bool = tie_last
         self._voice_metadata: Optional[abjad.OrderedDict] = None
-        self._voice_metadata_pairs: U[
-            List[tuple], None] = voice_metadata_pairs
+        self._voice_metadata_pairs: Optional[
+            List[tuple]] = voice_metadata_pairs
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, start_offset=None, time_signatures=None):
+    def __call__(
+        self,
+        start_offset: abjad.Offset = None,
+        time_signatures: List[abjad.TimeSignature] = None,
+        ):
         r'''Calls command on `start_offset` and `time_signatures`.
 
         Returns contribution with music payload.
         '''
-        for time_signature in time_signatures:
-            prototype = abjad.TimeSignature
-            assert isinstance(time_signature, prototype), repr(time_signature)
-        if start_offset is not None:
-            assert isinstance(start_offset, abjad.Offset)
         music, start_offset = self._make_rhythm(start_offset, time_signatures)
         assert isinstance(music, (tuple, list, abjad.Voice))
         first_leaf = abjad.inspect(music).get_leaf(0)
         last_leaf = abjad.inspect(music).get_leaf(-1)
         pitched_prototype = (abjad.Note, abjad.Chord)
         if self.tie_first and isinstance(first_leaf, pitched_prototype):
-            abjad.attach('tie to me', first_leaf)
+            abjad.attach(abjad.tags.TIE_TO, first_leaf)
             if self.repeat_ties:
-                abjad.attach('use messiaen style ties', first_leaf)
+                abjad.attach(abjad.tags.REPEAT_TIE, first_leaf)
         if self.tie_last and isinstance(last_leaf, pitched_prototype):
-            abjad.attach('tie from me', last_leaf)
+            abjad.attach(abjad.tags.TIE_FROM, last_leaf)
             if self.repeat_ties:
-                abjad.attach('use messiaen style ties', last_leaf)
+                abjad.attach(abjad.tags.REPEAT_TIE, last_leaf)
         return abjad.AnnotatedTimespan(
             start_offset=start_offset,
             stop_offset=None,

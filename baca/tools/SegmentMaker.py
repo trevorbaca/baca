@@ -689,7 +689,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for current_leaf in abjad.iterate(voice).leaves():
             if not dummy_tie._attachment_test(current_leaf):
                 continue
-            if abjad.inspect(current_leaf).has_indicator('tie to me'):
+            if abjad.inspect(current_leaf).has_indicator(abjad.tags.TIE_TO):
                 previous_leaf = abjad.inspect(current_leaf).get_leaf(-1)
                 if dummy_tie._attachment_test(previous_leaf):
                     previous_logical_tie = abjad.inspect(
@@ -701,12 +701,12 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.detach(abjad.Tie, previous_leaf)
                         abjad.detach(abjad.Tie, current_leaf)
                         inspector = abjad.inspect(current_leaf)
-                        string = 'use messiaen style ties'
+                        string = abjad.tags.REPEAT_TIE 
                         repeat_ties = inspector.has_indicator(string)
                         tie = abjad.Tie(repeat=repeat_ties)
                         abjad.attach(tie, leaves, site='SM16')
-                abjad.detach('tie to me', current_leaf)
-            if abjad.inspect(current_leaf).has_indicator('tie from me'):
+                abjad.detach(abjad.tags.TIE_TO, current_leaf)
+            if abjad.inspect(current_leaf).has_indicator(abjad.tags.TIE_FROM):
                 next_leaf = abjad.inspect(current_leaf).get_leaf(1)
                 if dummy_tie._attachment_test(next_leaf):
                     current_logical_tie = abjad.inspect(
@@ -718,11 +718,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.detach(abjad.Tie, current_leaf)
                         abjad.detach(abjad.Tie, next_leaf)
                         inspector = abjad.inspect(current_leaf)
-                        string = 'use messiaen style ties'
+                        string = abjad.tags.REPEAT_TIE
                         repeat_ties = inspector.has_indicator(string)
                         tie = abjad.Tie(repeat=repeat_ties)
                         abjad.attach(tie, leaves, site='SM17')
-                abjad.detach('tie from me', current_leaf)
+                abjad.detach(abjad.tags.TIE_FROM, current_leaf)
 
     def _apply_spacing_specifier(self):
         start_time = time.time()
@@ -959,6 +959,8 @@ class SegmentMaker(abjad.SegmentMaker):
         self._attach_fermatas()
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             assert not len(voice), repr(voice)
+            voice_metadata = self._voice_metadata.get(voice.name)
+            voice_metadata = voice_metadata or abjad.OrderedDict()
             wrappers = self._voice_to_rhythm_wrappers(voice)
             if not wrappers:
                 if self.skips_instead_of_rests:
@@ -976,6 +978,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     raise Exception(format(wrapper))
                 result = self._get_stage_time_signatures(*wrapper.scope.stages)
                 start_offset, time_signatures = result
+                wrapper.command._previous_voice_metadata = voice_metadata
                 try:
                     rhythm = wrapper.command(start_offset, time_signatures)
                 except:
@@ -983,12 +986,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 rhythms.append(rhythm)
                 command_voice_metadata = wrapper.command.voice_metadata
                 if bool(command_voice_metadata):
-                    voice_metadata = self._voice_metadata.get(voice.name)
-                    if voice_metadata is None:
-                        voice_metadata = abjad.OrderedDict()
-                        self._voice_metadata[voice.name] = voice_metadata
                     for key, value in command_voice_metadata.items():
                         voice_metadata[key] = value
+            if bool(voice_metadata):
+                self._voice_metadata[voice.name] = voice_metadata
             rhythms.sort()
             self._assert_nonoverlapping_rhythms(rhythms, voice.name)
             rhythms = self._intercalate_silences(rhythms)
