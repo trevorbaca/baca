@@ -186,6 +186,7 @@ class RhythmCommand(Command):
         elif not isinstance(rhythm_maker, rhythmos.RhythmMaker):
             raise TypeError(f'rhythm-maker or selection: {rhythm_maker!r}.')
         else:
+            state = self._previous_voice_metadata or abjad.OrderedDict()
             division_maker = self.division_maker
             if division_maker is None:
                 division_maker = self._default_division_maker
@@ -197,7 +198,7 @@ class RhythmCommand(Command):
             divisions = baca.sequence(divisions).flatten(depth=-1)
             divisions = self._transform_divisions(divisions)
             start_offset = divisions[0].start_offset
-            selections = rhythm_maker(divisions)
+            selections = rhythm_maker(divisions, state=state)
             self._annotate_unpitched_notes(selections)
         if hasattr(rhythm_maker, 'state'):
             self._make_voice_metadata(rhythm_maker.state)
@@ -261,7 +262,7 @@ class RhythmCommand(Command):
                 key_value_pairs.append(key_value_pair)
         self._voice_metadata: Optional[abjad.OrderedDict] = voice_metadata
 
-    def _transform_divisions(self, divisions):
+    def _transform_divisions(self, divisions) -> Optional[abjad.Sequence]:
         if self.division_expression is not None:
             divisions = self.division_expression(divisions)
             assert isinstance(divisions, abjad.Sequence), repr(divisions)

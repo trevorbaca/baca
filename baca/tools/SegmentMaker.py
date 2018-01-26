@@ -976,15 +976,20 @@ class SegmentMaker(abjad.SegmentMaker):
                 assert isinstance(wrapper, baca.CommandWrapper)
                 if wrapper.scope.stages is None:
                     raise Exception(format(wrapper))
+                command = wrapper.command
+                previous_voice_metadata = self._get_previous_voice_metadata(
+                    voice,
+                    command.voice_metadata_pairs,
+                    )
                 result = self._get_stage_time_signatures(*wrapper.scope.stages)
                 start_offset, time_signatures = result
-                wrapper.command._previous_voice_metadata = voice_metadata
+                command._previous_voice_metadata = previous_voice_metadata
                 try:
-                    rhythm = wrapper.command(start_offset, time_signatures)
+                    rhythm = command(start_offset, time_signatures)
                 except:
-                    raise Exception(format(wrapper))
+                    raise Exception(f'\n\n{format(wrapper)}')
                 rhythms.append(rhythm)
-                command_voice_metadata = wrapper.command.voice_metadata
+                command_voice_metadata = command.voice_metadata
                 if bool(command_voice_metadata):
                     for key, value in command_voice_metadata.items():
                         voice_metadata[key] = value
@@ -1491,6 +1496,23 @@ class SegmentMaker(abjad.SegmentMaker):
             if momento.prototype == prototype_string:
                 indicator = self._key_to_indicator(momento.value, prototype)
                 return (indicator, momento.context)
+
+    def _get_previous_voice_metadata(self, voice, voice_metadata_pairs):
+        if not bool(self.previous_metadata) or not bool(voice_metadata_pairs):
+            return
+        voice_metadata = self.previous_metadata.get('voice_metadata')
+        if not bool(voice_metadata):
+            return
+        this_voice_metadata = voice_metadata.get(voice.name)
+        if not bool(this_voice_metadata):
+            return
+        result = abjad.OrderedDict()
+        for name, keys in voice_metadata_pairs:
+            key_value_pairs = this_voice_metadata.get(name)
+            assert isinstance(key_value_pairs, list)
+            for key, value in key_value_pairs:
+                result[key] = value
+        return result
 
     def _get_previous_stop_clock_time(self):
         if self.previous_metadata:
