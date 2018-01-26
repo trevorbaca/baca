@@ -3,7 +3,7 @@ import baca
 from abjad import rhythmmakertools as rhythmos
 from .Command import Command
 from .Typing import List
-from .Typing import OptionalOrderedDict
+from .Typing import Optional
 from .Typing import Union as U
 
 
@@ -62,7 +62,7 @@ class RhythmCommand(Command):
         tie_first=None,
         tie_last=None,
         voice_metadata_pairs: U[List[tuple], None] = None,
-        ):
+        ) -> None:
         if division_expression is not None and division_maker is not None:
             message = 'can not set both division expression and division-maker'
             message += f':\n{division_expression} {division_maker}.'
@@ -83,14 +83,14 @@ class RhythmCommand(Command):
         if isinstance(stages, int):
             stages = (stages, stages)
         self._stages = stages
-        self._state: U[abjad.OrderedDict, None] = None
+        self._state: Optional[abjad.OrderedDict] = None
         if tie_first is not None:
             tie_first = bool(tie_first)
         self._tie_first = tie_first
         if tie_last is not None:
             tie_last = bool(tie_last)
         self._tie_last = tie_last
-        self._voice_metadata = OptionalOrderedDict = None
+        self._voice_metadata: Optional[abjad.OrderedDict] = None
         self._voice_metadata_pairs: U[
             List[tuple], None] = voice_metadata_pairs
 
@@ -272,7 +272,7 @@ class RhythmCommand(Command):
                 value = state.get(key)
                 key_value_pair = (key, value)
                 key_value_pairs.append(key_value_pair)
-        self._voice_metadata = voice_metadata
+        self._voice_metadata: Optional[abjad.OrderedDict] = voice_metadata
 
     def _transform_divisions(self, divisions):
         if self.division_expression is not None:
@@ -417,7 +417,7 @@ class RhythmCommand(Command):
         return self._tie_last
 
     @property
-    def voice_metadata(self) -> OptionalOrderedDict:
+    def voice_metadata(self) -> Optional[abjad.OrderedDict]:
         r'''Gets voice metadata.
         '''
         return self._voice_metadata

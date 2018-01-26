@@ -12,12 +12,8 @@ from .MetronomeMarkMeasureMap import MetronomeMarkMeasureMap
 from .ScoreTemplate import ScoreTemplate
 from .Typing import Dict
 from .Typing import List
+from .Typing import Optional
 from .Typing import Number
-from .Typing import NumberPair
-from .Typing import OptionalBool
-from .Typing import OptionalInt
-from .Typing import OptionalNumber
-from .Typing import OptionalStr
 from .Typing import NumberPair
 from .Typing import Tuple
 from .Typing import Union as U
@@ -268,51 +264,51 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def __init__(
         self,
-        allow_empty_selections: OptionalBool = None,
-        color_octaves: OptionalBool = None,
-        color_out_of_range_pitches: OptionalBool = None,
-        color_repeat_pitch_classes: OptionalBool = None,
-        do_not_check_persistence: OptionalBool = None,
-        fermata_measure_staff_line_count: OptionalInt = None,
+        allow_empty_selections: bool = None,
+        color_octaves: bool = None,
+        color_out_of_range_pitches: bool = None,
+        color_repeat_pitch_classes: bool = None,
+        do_not_check_persistence: bool = None,
+        fermata_measure_staff_line_count: int = None,
         final_bar_line: U[bool, str, None] = None,
         final_markup: U[tuple, None] = None,
         final_markup_extra_offset: U[NumberPair, None] = None,
         first_measure_number: U[int, None] = None,
-        ignore_repeat_pitch_classes: OptionalBool = None,
-        ignore_unpitched_notes: OptionalBool = None,
-        ignore_unregistered_pitches: OptionalBool = None,
+        ignore_repeat_pitch_classes: bool = None,
+        ignore_unpitched_notes: bool = None,
+        ignore_unregistered_pitches: bool = None,
         instruments: U[abjad.OrderedDict, None] = None,
-        last_segment: OptionalBool = None,
+        last_segment: bool = None,
         breaks: U[BreakMeasureMap, None] = None,
         margin_markup: U[abjad.OrderedDict, None] = None,
         measures_per_stage: U[List[int], None] = None,
         metronome_mark_measure_map: U[MetronomeMarkMeasureMap, None] = None,
-        metronome_mark_stem_height: OptionalNumber = 1.5,
+        metronome_mark_stem_height: Optional[Number] = 1.5,
         metronome_marks: U[abjad.OrderedDict, None] = None,
-        print_timings: OptionalBool = None,
+        print_timings: bool = None,
         range_checker: U[abjad.PitchRange, None] = None,
-        rehearsal_letter: OptionalStr = None,
+        rehearsal_letter: str = None,
         score_template: U[ScoreTemplate, None] = None,
-        skip_wellformedness_checks: OptionalBool = None,
-        skips_instead_of_rests: OptionalBool = None,
+        skip_wellformedness_checks: bool = None,
+        skips_instead_of_rests: bool = None,
         spacing_specifier: U[HorizontalSpacingSpecifier, None] = None,
-        stage_label_base_string: OptionalStr = None,
+        stage_label_base_string: str = None,
         time_signatures: U[List[tuple], None] = None,
-        transpose_score: OptionalBool = None,
+        transpose_score: bool = None,
         ) -> None:
         super(SegmentMaker, self).__init__()
-        self._allow_empty_selections: OptionalBool = allow_empty_selections
-        self._color_octaves: OptionalBool = color_octaves
-        self._color_out_of_range_pitches: OptionalBool = \
+        self._allow_empty_selections: bool = allow_empty_selections
+        self._color_octaves: bool = color_octaves
+        self._color_out_of_range_pitches: bool = \
             color_out_of_range_pitches
-        self._color_repeat_pitch_classes: OptionalBool = \
+        self._color_repeat_pitch_classes: bool = \
             color_repeat_pitch_classes
         self._cache = None
         self._cached_time_signatures: List[abjad.TimeSignature] = []
         self._do_not_check_persistence = do_not_check_persistence
         self._duration = None
         self._fermata_measure_numbers: list = []
-        self._fermata_measure_staff_line_count: OptionalInt = \
+        self._fermata_measure_staff_line_count: int = \
             fermata_measure_staff_line_count
         self._fermata_start_offsets: List[abjad.Offset] = []
         self._fermata_stop_offsets: List[abjad.Offset] = []
@@ -321,40 +317,39 @@ class SegmentMaker(abjad.SegmentMaker):
         self._final_markup_extra_offset: NumberPair = \
             final_markup_extra_offset
         self._first_measure_number: int = first_measure_number
-        self._ignore_repeat_pitch_classes: OptionalBool = \
+        self._ignore_repeat_pitch_classes: bool = \
             ignore_repeat_pitch_classes
-        self._ignore_unpitched_notes: OptionalBool = ignore_unpitched_notes
-        self._ignore_unregistered_pitches: OptionalBool = \
+        self._ignore_unpitched_notes: bool = ignore_unpitched_notes
+        self._ignore_unregistered_pitches: bool = \
             ignore_unregistered_pitches
         self._instruments: U[abjad.OrderedDict, None] = instruments
         self._last_measure_is_fermata = False
-        self._last_segment: OptionalBool = last_segment
+        self._last_segment: bool = last_segment
         self._breaks: U[BreakMeasureMap, None] = breaks
         self._margin_markup: U[abjad.OrderedDict, None] = margin_markup
         self._measures_per_stage: U[List[int], None] = measures_per_stage
         self._metronome_mark_measure_map: U[
             MetronomeMarkMeasureMap, None] = metronome_mark_measure_map
-        self._metronome_mark_stem_height: OptionalNumber = \
+        self._metronome_mark_stem_height: Optional[Number] = \
             metronome_mark_stem_height
         self._metronome_marks: U[abjad.OrderedDict, None] = metronome_marks
-        self._midi: OptionalBool = None
+        self._midi: bool = None
         self._offset_to_measure_number: Dict[abjad.Offset, int] = {}
-        self._print_timings: OptionalBool = print_timings
+        self._print_timings: bool = print_timings
         self._range_checker: U[abjad.PitchRange, None] = range_checker
-        self._rehearsal_letter: OptionalStr = rehearsal_letter
+        self._rehearsal_letter: str = rehearsal_letter
         self._score_template: U[ScoreTemplate, None] = score_template
         self._segment_bol_measure_numbers: List[int] = []
         self._segment_duration: U[abjad.Duration, None] = None
-        self._skip_wellformedness_checks: OptionalBool = \
-            skip_wellformedness_checks
-        self._skips_instead_of_rests: OptionalBool = skips_instead_of_rests
+        self._skip_wellformedness_checks: bool = skip_wellformedness_checks
+        self._skips_instead_of_rests: bool = skips_instead_of_rests
         self._spacing_specifier: U[
             HorizontalSpacingSpecifier, None] = spacing_specifier
         self._sounds_during_segment: abjad.OrderedDict = abjad.OrderedDict()
-        self._stage_label_base_string: OptionalStr = stage_label_base_string
-        self._start_clock_time: OptionalStr = None
-        self._stop_clock_time: OptionalStr = None
-        self._transpose_score: OptionalBool = transpose_score
+        self._stage_label_base_string: str = stage_label_base_string
+        self._start_clock_time: str = None
+        self._stop_clock_time: str = None
+        self._transpose_score: bool = transpose_score
         self._voice_metadata: abjad.OrderedDict = abjad.OrderedDict()
         self._wrappers: List[CommandWrapper] = []
         self._initialize_time_signatures(time_signatures)
@@ -9361,9 +9356,9 @@ class SegmentMaker(abjad.SegmentMaker):
     def run(
         self,
         deactivate: U[List[str], None] = None,
-        environment: OptionalStr = None,
+        environment: str = None,
         metadata: U[abjad.OrderedDict, None] = None,
-        midi: OptionalBool = None,
+        midi: bool = None,
         previous_metadata: U[abjad.OrderedDict, None] = None,
         remove: U[List[str], None] = None,
         ) -> abjad.LilyPondFile:
