@@ -1099,8 +1099,6 @@ class LibraryTZ(abjad.AbjadObject):
         selector: Selector = 'baca.leaves()',
         ) -> SpannerCommand:
         r'''Makes text spanner.
-
-        Returns spanner command.
         '''
         return SpannerCommand(
             selector=selector,
@@ -1618,7 +1616,6 @@ class LibraryTZ(abjad.AbjadObject):
                     >>
                 >>
 
-        Returns tie correction command.
         '''
         return TieCorrectionCommand(
             repeat=repeat,
@@ -1628,8 +1625,6 @@ class LibraryTZ(abjad.AbjadObject):
     @staticmethod
     def tie_repeat_pitches(repeat=None):
         r'''Ties repeat pitches.
-
-        Returns mapped tie correction command.
         '''
         return baca.map(
             LibraryTZ.tie(repeat=repeat),
@@ -2649,7 +2644,7 @@ class LibraryTZ(abjad.AbjadObject):
     def trill(
         string: str = None,
         harmonic: bool = None,
-        open: abjad.OrdinalConstant = None,
+        broken: abjad.OrdinalConstant = None,
         selector: Selector = 'baca.tleaves().with_next_leaf()',
         ) -> SpannerCommand:
         r'''Attaches trill to trimmed leaves (leaked to the right).
@@ -3120,7 +3115,7 @@ class LibraryTZ(abjad.AbjadObject):
                 interval = abjad.NamedInterval(string)
                 pitch = None
         return SpannerCommand(
-            open=open,
+            broken=broken,
             spanner=abjad.TrillSpanner(
                 interval=interval,
                 is_harmonic=harmonic,
@@ -3277,8 +3272,6 @@ class LibraryTZ(abjad.AbjadObject):
         selector: Selector = 'baca.leaves()',
         ) -> OverrideCommand:
         r'''Overrides tuplet bracket padding.
-
-        Returns override command.
         '''
         return OverrideCommand(
             attribute='padding',

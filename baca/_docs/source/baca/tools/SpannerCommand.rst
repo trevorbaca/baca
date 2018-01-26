@@ -21,11 +21,11 @@ Bases
 
    .. autosummary::
 
+      ~SpannerCommand.broken
       ~SpannerCommand.deactivate
       ~SpannerCommand.get_tag
       ~SpannerCommand.manifests
       ~SpannerCommand.offset_to_measure_number
-      ~SpannerCommand.open
       ~SpannerCommand.selector
       ~SpannerCommand.spanner
       ~SpannerCommand.tag
@@ -38,13 +38,13 @@ Bases
 Read-only properties
 --------------------
 
+.. autoattribute:: SpannerCommand.broken
+
 .. only:: html
 
    .. container:: inherited
 
       .. autoattribute:: SpannerCommand.deactivate
-
-.. autoattribute:: SpannerCommand.open
 
 .. autoattribute:: SpannerCommand.selector
 

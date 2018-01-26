@@ -179,7 +179,7 @@ class SpannerCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_open',
+        '_broken',
         '_spanner',
         '_tags',
         )
@@ -189,13 +189,13 @@ class SpannerCommand(Command):
     def __init__(
         self,
         deactivate: bool = None,
-        open: abjad.OrdinalConstant = None,
+        broken: abjad.OrdinalConstant = None,
         selector: Selector = 'baca.tleaves()',
         spanner: abjad.Spanner = None,
         tags=None,
         ) -> None:
         Command.__init__(self, deactivate=deactivate, selector=selector)
-        self._open = open
+        self._broken = broken
         self._spanner = spanner
         tags = tags or []
         assert self._are_valid_tags(tags), repr(tags)
@@ -216,17 +216,17 @@ class SpannerCommand(Command):
             argument = self.selector(argument)
         leaves = abjad.select(argument).leaves()
         spanner = abjad.new(self.spanner)
-        left_open, right_open = None, None
-        if self.open in (abjad.Left, abjad.Both):
-            left_open = True
-        if self.open in (abjad.Right, abjad.Both):
-            right_open = True
+        left_broken, right_broken = None, None
+        if self.broken in (abjad.Left, abjad.Both):
+            left_broken = True
+        if self.broken in (abjad.Right, abjad.Both):
+            right_broken = True
         abjad.attach(
             spanner,
             leaves,
             deactivate=self.deactivate,
-            left_open=left_open,
-            right_open=right_open,
+            left_broken=left_broken,
+            right_broken=right_broken,
             site='SC',
             tag=self.tag,
             )
@@ -235,10 +235,10 @@ class SpannerCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def open(self) -> Optional[abjad.OrdinalConstant]:
-        r'''Gets the direction-to-which spanner is open, if any.
+    def broken(self) -> Optional[abjad.OrdinalConstant]:
+        r'''Gets the direction-to-which spanner is broken, if any.
         '''
-        return self._open
+        return self._broken
 
     @property
     def selector(self) -> Optional[Selector]:
