@@ -3,6 +3,16 @@ import baca
 import collections
 from typing import Union
 from abjad import rhythmmakertools as rhythmos
+from .IndicatorCommand import IndicatorCommand
+from .MapCommand import MapCommand
+from .OverrideCommand import OverrideCommand
+from .Selection import Selection
+from .SpannerCommand import SpannerCommand
+from .TieCorrectionCommand import TieCorrectionCommand
+from .TimelineScope import TimelineScope
+from .VoltaCommand import VoltaCommand
+from .Typing import Number
+from .Typing import NumberPair
 
 
 class LibraryTZ(abjad.AbjadObject):
@@ -52,7 +62,7 @@ class LibraryTZ(abjad.AbjadObject):
         return command
 
     @staticmethod
-    def tenuti(selector='baca.pheads()'):
+    def tenuti(selector='baca.pheads()') -> IndicatorCommand:
         r'''Attaches tenuti to pitched heads.
 
         ..  container:: example
@@ -192,13 +202,16 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.IndicatorCommand(
+        return IndicatorCommand(
             indicators=[abjad.Articulation('tenuto')],
             selector=selector,
             )
 
     @staticmethod
-    def text_script_color(color='red', selector='baca.leaves()'):
+    def text_script_color(
+        color: str = 'red',
+        selector='baca.leaves()',
+        ) -> OverrideCommand:
         r'''Overrides text script color.
 
         ..  container:: example
@@ -358,7 +371,7 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return OverrideCommand(
             attribute='color',
             value=color,
             grob='text_script',
@@ -366,10 +379,13 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def text_script_extra_offset(pair, selector='baca.leaves()'):
+    def text_script_extra_offset(
+        pair: NumberPair,
+        selector='baca.leaves()',
+        ) -> OverrideCommand:
         r'''Overrides text script extra offset.
         '''
-        return baca.OverrideCommand(
+        return OverrideCommand(
             attribute='extra_offset',
             value=pair,
             grob='text_script',
@@ -377,7 +393,10 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def text_script_padding(n, selector='baca.leaves()'):
+    def text_script_padding(
+        n: Number,
+        selector='baca.leaves()',
+        ) -> OverrideCommand:
         r'''Overrides text script padding.
 
         ..  container:: example
@@ -538,7 +557,7 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return OverrideCommand(
             attribute='padding',
             value=n,
             grob='text_script',
@@ -546,10 +565,12 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def text_script_parent_center(selector='baca.leaves()'):
+    def text_script_parent_center(
+        selector='baca.leaves()',
+        ) -> OverrideCommand:
         r'''Overrides text script parent alignment X to center.
         '''
-        return baca.OverrideCommand(
+        return OverrideCommand(
             attribute='parent_alignment_X',
             value=0,
             grob='text_script',
@@ -557,7 +578,10 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def text_script_staff_padding(n, selector='baca.leaves()'):
+    def text_script_staff_padding(
+        n: Number,
+        selector='baca.leaves()',
+        ) -> OverrideCommand:
         r'''Overrides text script staff padding.
 
         ..  container:: example
@@ -720,7 +744,7 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return OverrideCommand(
             attribute='staff_padding',
             value=n,
             grob='text_script',
@@ -728,7 +752,9 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def text_scripts_down(selector='baca.leaves()'):
+    def text_scripts_down(
+        selector='baca.leaves()',
+        ) -> OverrideCommand:
         r'''Down-overrides text script.
 
         ..  container:: example
@@ -888,7 +914,7 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return OverrideCommand(
             attribute='direction',
             value=abjad.Down,
             grob='text_script',
@@ -896,7 +922,9 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def text_scripts_up(selector='baca.leaves()'):
+    def text_scripts_up(
+        selector='baca.leaves()',
+        ) -> OverrideCommand:
         r'''Up-overrides text script direction.
 
         ..  container:: example
@@ -1056,7 +1084,7 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return OverrideCommand(
             attribute='direction',
             value=abjad.Up,
             grob='text_script',
@@ -1064,18 +1092,23 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def text_spanner(selector='baca.leaves()'):
+    def text_spanner(
+        selector='baca.leaves()',
+        ) -> SpannerCommand:
         r'''Makes text spanner.
 
         Returns spanner command.
         '''
-        return baca.SpannerCommand(
+        return SpannerCommand(
             selector=selector,
             spanner=abjad.TextSpanner(),
             )
 
     @staticmethod
-    def text_spanner_staff_padding(n, selector='baca.leaves()'):
+    def text_spanner_staff_padding(
+        n: Number,
+        selector='baca.leaves()',
+        ) -> OverrideCommand:
         r'''Overrides text spanner staff padding.
 
         ..  container:: example
@@ -1292,7 +1325,7 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return OverrideCommand(
             attribute='staff_padding',
             value=n,
             grob='text_spanner',
@@ -1300,7 +1333,10 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def tie(repeat=False, selector='baca.qrun(0)'):
+    def tie(
+        repeat: bool = False,
+        selector='baca.qrun(0)',
+        ) -> SpannerCommand:
         r'''Attaches tie to equipitch run 0.
 
         ..  container:: example
@@ -1493,13 +1529,16 @@ class LibraryTZ(abjad.AbjadObject):
 
         '''
         assert isinstance(repeat, bool), repr(repeat)
-        return baca.SpannerCommand(
+        return SpannerCommand(
             selector=selector,
             spanner=abjad.Tie(repeat=repeat),
             )
 
     @staticmethod
-    def tie_from(selector='baca.pleaf(-1)', repeat=None):
+    def tie_from(
+        selector='baca.pleaf(-1)',
+        repeat: bool = None,
+        ) -> TieCorrectionCommand:
         r'''Ties from leaf.
 
         ..  container:: example
@@ -1578,7 +1617,7 @@ class LibraryTZ(abjad.AbjadObject):
 
         Returns tie correction command.
         '''
-        return baca.TieCorrectionCommand(
+        return TieCorrectionCommand(
             repeat=repeat,
             selector=selector,
             )
@@ -1590,12 +1629,15 @@ class LibraryTZ(abjad.AbjadObject):
         Returns mapped tie correction command.
         '''
         return baca.map(
-            baca.tie(repeat=repeat),
+            LibraryTZ.tie(repeat=repeat),
             baca.ltqruns().nontrivial(),
             )
 
     @staticmethod
-    def tie_to(selector='baca.pleaf(0)', repeat=None):
+    def tie_to(
+        selector='baca.pleaf(0)',
+        repeat: bool = None,
+        ) -> TieCorrectionCommand:
         r'''Ties to leaf.
 
         ..  container:: example
@@ -1674,14 +1716,16 @@ class LibraryTZ(abjad.AbjadObject):
 
 
         '''
-        return baca.TieCorrectionCommand(
+        return TieCorrectionCommand(
             direction=abjad.Left,
             repeat=repeat,
             selector=selector,
             )
 
     @staticmethod
-    def ties_down(selector='baca.tleaves()'):
+    def ties_down(
+        selector='baca.tleaves()',
+        ) -> OverrideCommand:
         r'''Overrides tie direction.
 
         ..  container:: example
@@ -1817,7 +1861,7 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return OverrideCommand(
             attribute='direction',
             value=abjad.Down,
             grob='tie',
@@ -1825,7 +1869,9 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def ties_up(selector='baca.tleaves()'):
+    def ties_up(
+        selector='baca.tleaves()',
+        ) -> OverrideCommand:
         r'''Overrides tie direction.
 
         ..  container:: example
@@ -1961,7 +2007,7 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return OverrideCommand(
             attribute='direction',
             value=abjad.Up,
             grob='tie',
@@ -1969,7 +2015,10 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def time_signature_extra_offset(pair, selector='baca.leaf(0)'):
+    def time_signature_extra_offset(
+        pair: NumberPair,
+        selector='baca.leaf(0)',
+        ) -> OverrideCommand:
         r'''Overrides time signature extra offset.
 
         ..  container:: example
@@ -2036,7 +2085,7 @@ class LibraryTZ(abjad.AbjadObject):
 
         '''
         assert isinstance(pair, tuple), repr(pair)
-        return baca.OverrideCommand(
+        return OverrideCommand(
             attribute='extra_offset',
             value=pair,
             context='Score',
@@ -2051,10 +2100,12 @@ class LibraryTZ(abjad.AbjadObject):
         Returns timeline scope.
         '''
         scopes = [baca.scope(*_) for _ in scopes]
-        return baca.TimelineScope(scopes)
+        return TimelineScope(scopes)
 
     @staticmethod
-    def transparent_bar_lines(selector='baca.leaves()'):
+    def transparent_bar_lines(
+        selector='baca.leaves()',
+        ) -> OverrideCommand:
         r'''Makes bar lines transparent.
 
         ..  container:: example
@@ -2274,7 +2325,7 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return OverrideCommand(
             attribute='transparent',
             value=True,
             context='Score',
@@ -2283,7 +2334,9 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def transparent_rests(selector='baca.rests()'):
+    def transparent_rests(
+        selector='baca.rests()',
+        ) -> OverrideCommand:
         r'''Makes rests transparent.
 
         ..  container:: example
@@ -2412,7 +2465,7 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return OverrideCommand(
             attribute='transparent',
             value=True,
             grob='rest',
@@ -2420,7 +2473,9 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def transparent_span_bars(selector='baca.leaf(0)'):
+    def transparent_span_bars(
+        selector='baca.leaf(0)',
+        ) -> OverrideCommand:
         r'''Makes span bars transparent.
 
         ..  container:: example
@@ -2486,7 +2541,7 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return OverrideCommand(
             attribute='transparent',
             value=True,
             context='Score',
@@ -2495,7 +2550,9 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def transparent_time_signatures(selector='baca.leaves()'):
+    def transparent_time_signatures(
+        selector='baca.leaves()',
+        ) -> OverrideCommand:
         r'''Makes time signatures transparent.
 
         ..  container:: example
@@ -2562,7 +2619,7 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return OverrideCommand(
             attribute='transparent',
             value=True,
             context='GlobalContext',
@@ -2571,11 +2628,14 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def tremolo_down(n, selector='baca.tleaves()'):
+    def tremolo_down(
+        n: Number,
+        selector='baca.tleaves()',
+        ) -> OverrideCommand:
         r'''Overrides stem tremolo extra offset on trimmed leaves.
         '''
         pair = (0, -n)
-        return baca.OverrideCommand(
+        return OverrideCommand(
             attribute='extra_offset',
             value=str(pair),
             grob='stem_tremolo',
@@ -2584,10 +2644,10 @@ class LibraryTZ(abjad.AbjadObject):
 
     @staticmethod
     def trill(
-        pitch=None,
-        harmonic=None,
+        string: str = None,
+        harmonic: bool = None,
         selector='baca.tleaves().with_next_leaf()',
-        ):
+        ) -> SpannerCommand:
         r'''Attaches trill to trimmed leaves (leaked to the right).
 
         ..  container:: example
@@ -3045,16 +3105,17 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         '''
-        if pitch is None:
+        if string is None:
             interval = None
+            pitch = None
         else:
             try:
                 interval = None
-                pitch = abjad.NamedPitch(pitch)
+                pitch = abjad.NamedPitch(string)
             except ValueError:
-                interval = abjad.NamedInterval(pitch)
+                interval = abjad.NamedInterval(string)
                 pitch = None
-        return baca.SpannerCommand(
+        return SpannerCommand(
             spanner=abjad.TrillSpanner(
                 interval=interval,
                 is_harmonic=harmonic,
@@ -3064,7 +3125,10 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def tuplet_bracket_extra_offset(pair, selector='baca.leaf(0)'):
+    def tuplet_bracket_extra_offset(
+        pair: NumberPair,
+        selector='baca.leaf(0)',
+        ) -> OverrideCommand:
         r'''Overrides tuplet bracket extra offset.
 
         ..  container:: example
@@ -3195,7 +3259,7 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return OverrideCommand(
             attribute='extra_offset',
             value=pair,
             grob='tuplet_bracket',
@@ -3203,12 +3267,15 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def tuplet_bracket_padding(n, selector='baca.leaves()'):
+    def tuplet_bracket_padding(
+        n: Number,
+        selector='baca.leaves()',
+        ) -> OverrideCommand:
         r'''Overrides tuplet bracket padding.
 
         Returns override command.
         '''
-        return baca.OverrideCommand(
+        return OverrideCommand(
             attribute='padding',
             value=n,
             grob='tuplet_bracket',
@@ -3216,7 +3283,10 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def tuplet_bracket_staff_padding(n, selector='baca.leaves()'):
+    def tuplet_bracket_staff_padding(
+        n: Number,
+        selector='baca.leaves()',
+        ) -> OverrideCommand:
         r'''Overrides tuplet bracket staff padding.
 
         ..  container:: example
@@ -3343,7 +3413,7 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return OverrideCommand(
             attribute='staff_padding',
             value=n,
             grob='tuplet_bracket',
@@ -3351,7 +3421,9 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def tuplet_brackets_down(selector='baca.leaves()'):
+    def tuplet_brackets_down(
+        selector='baca.leaves()',
+        ) -> OverrideCommand:
         r'''Overrides tuplet bracket direction.
 
         ..  container:: example
@@ -3481,7 +3553,7 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return OverrideCommand(
             attribute='direction',
             value=abjad.Down,
             grob='tuplet_bracket',
@@ -3489,7 +3561,9 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def tuplet_brackets_up(selector='baca.leaves()'):
+    def tuplet_brackets_up(
+        selector='baca.leaves()',
+        ) -> OverrideCommand:
         r'''Overrides tuplet bracket direction.
 
         ..  container:: example
@@ -3619,7 +3693,7 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return OverrideCommand(
             attribute='direction',
             value=abjad.Up,
             grob='tuplet_bracket',
@@ -3627,7 +3701,10 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def tuplet_number_extra_offset(pair, selector='baca.leaf(0)'):
+    def tuplet_number_extra_offset(
+        pair: NumberPair,
+        selector='baca.leaf(0)',
+        ) -> OverrideCommand:
         r'''Overrides tuplet number extra offset.
 
         ..  container:: example
@@ -3758,7 +3835,7 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.OverrideCommand(
+        return OverrideCommand(
             attribute='extra_offset',
             value=pair,
             grob='tuplet_number',
@@ -3766,7 +3843,9 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
-    def untie_to(selector='baca.pleaf(0)'):
+    def untie_to(
+        selector='baca.pleaf(0)',
+        ) -> TieCorrectionCommand:
         r'''Unties to leaf.
 
         ..  container:: example
@@ -3841,14 +3920,16 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.TieCorrectionCommand(
+        return TieCorrectionCommand(
             direction=abjad.Left,
             selector=selector,
             untie=True,
             )
 
     @staticmethod
-    def up_arpeggios(selector='baca.cheads()'):
+    def up_arpeggios(
+        selector='baca.cheads()',
+        ) -> IndicatorCommand:
         r"""Attaches up-arpeggios to chord heads.
 
         ..  container:: example
@@ -3996,13 +4077,15 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         """
-        return baca.IndicatorCommand(
+        return IndicatorCommand(
             indicators=[abjad.Arpeggio(direction=abjad.Up)],
             selector=selector,
             )
 
     @staticmethod
-    def up_bows(selector='baca.pheads()'):
+    def up_bows(
+        selector='baca.pheads()',
+        ) -> IndicatorCommand:
         r'''Attaches up-bows to pitched heads.
 
         ..  container:: example
@@ -4144,13 +4227,15 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.IndicatorCommand(
+        return IndicatorCommand(
             indicators=[abjad.Articulation('upbow')],
             selector=selector,
             )
 
     @staticmethod
-    def very_long_fermata(selector='baca.leaf(0)'):
+    def very_long_fermata(
+        selector='baca.leaf(0)',
+        ) -> IndicatorCommand:
         r'''Attaches very long fermata to leaf.
 
         ..  container:: example
@@ -4280,13 +4365,15 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.IndicatorCommand(
+        return IndicatorCommand(
             indicators=[abjad.Articulation('verylongfermata')],
             selector=selector,
             )
 
     @staticmethod
-    def volta(selector='baca.leaves()'):
+    def volta(
+        selector='baca.leaves()',
+        ) -> VoltaCommand:
         r'''Wraps leaves in volta container.
 
         ..  container:: example
@@ -4517,4 +4604,4 @@ class LibraryTZ(abjad.AbjadObject):
                 >>
 
         '''
-        return baca.VoltaCommand(selector=selector)
+        return VoltaCommand(selector=selector)
