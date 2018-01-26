@@ -36,12 +36,15 @@ Bases
       ~RhythmCommand.split_at_measure_boundaries
       ~RhythmCommand.stages
       ~RhythmCommand.start_stage
+      ~RhythmCommand.state
       ~RhythmCommand.stop_stage
       ~RhythmCommand.tag
       ~RhythmCommand.tag_measure_number
       ~RhythmCommand.tags
       ~RhythmCommand.tie_first
       ~RhythmCommand.tie_last
+      ~RhythmCommand.voice_metadata
+      ~RhythmCommand.voice_metadata_pairs
       ~RhythmCommand.__call__
       ~RhythmCommand.__format__
       ~RhythmCommand.__repr__
@@ -81,6 +84,8 @@ Read-only properties
 
 .. autoattribute:: RhythmCommand.start_stage
 
+.. autoattribute:: RhythmCommand.state
+
 .. autoattribute:: RhythmCommand.stop_stage
 
 .. only:: html
@@ -98,6 +103,10 @@ Read-only properties
 .. autoattribute:: RhythmCommand.tie_first
 
 .. autoattribute:: RhythmCommand.tie_last
+
+.. autoattribute:: RhythmCommand.voice_metadata
+
+.. autoattribute:: RhythmCommand.voice_metadata_pairs
 
 Read/write properties
 ---------------------

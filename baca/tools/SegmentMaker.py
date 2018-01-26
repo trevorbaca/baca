@@ -186,6 +186,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_stop_clock_time',
         '_time_signatures',
         '_transpose_score',
+        '_voice_metadata',
         '_wrappers',
         )
 
@@ -354,6 +355,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._start_clock_time: OptionalStr = None
         self._stop_clock_time: OptionalStr = None
         self._transpose_score: OptionalBool = transpose_score
+        self._voice_metadata: abjad.OrderedDict = abjad.OrderedDict()
         self._wrappers: List[CommandWrapper] = []
         self._initialize_time_signatures(time_signatures)
 
@@ -984,6 +986,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 except:
                     raise Exception(format(wrapper))
                 rhythms.append(rhythm)
+                command_voice_metadata = wrapper.command.voice_metadata
+                if bool(command_voice_metadata):
+                    voice_metadata = self._voice_metadata.get(voice.name)
+                    if voice_metadata is None:
+                        voice_metadata = abjad.OrderedDict()
+                        self._voice_metadata[voice.name] = voice_metadata
+                    for key, value in command_voice_metadata.items():
+                        voice_metadata[key] = value
             rhythms.sort()
             self._assert_nonoverlapping_rhythms(rhythms, voice.name)
             rhythms = self._intercalate_silences(rhythms)
@@ -1181,6 +1191,8 @@ class SegmentMaker(abjad.SegmentMaker):
         result['start_clock_time'] = self._start_clock_time
         result['stop_clock_time'] = self._stop_clock_time
         result['time_signatures'] = self._cached_time_signatures
+        if bool(self._voice_metadata):
+            result['voice_metadata'] = self._voice_metadata
         items = sorted(result.items())
         metadata = abjad.OrderedDict(items)
         self._metadata.update(metadata)

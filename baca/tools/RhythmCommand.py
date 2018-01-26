@@ -2,6 +2,9 @@ import abjad
 import baca
 from abjad import rhythmmakertools as rhythmos
 from .Command import Command
+from .Typing import List
+from .Typing import OptionalOrderedDict
+from .Typing import Union as U
 
 
 class RhythmCommand(Command):
@@ -35,8 +38,11 @@ class RhythmCommand(Command):
         '_rhythm_overwrites',
         '_split_at_measure_boundaries',
         '_stages',
+        '_state',
         '_tie_first',
         '_tie_last',
+        '_voice_metadata',
+        '_voice_metadata_pairs',
         )
 
     _publish_storage_format = True
@@ -55,6 +61,7 @@ class RhythmCommand(Command):
         stages=None,
         tie_first=None,
         tie_last=None,
+        voice_metadata_pairs: U[List[tuple], None] = None,
         ):
         if division_expression is not None and division_maker is not None:
             message = 'can not set both division expression and division-maker'
@@ -76,12 +83,16 @@ class RhythmCommand(Command):
         if isinstance(stages, int):
             stages = (stages, stages)
         self._stages = stages
+        self._state: U[abjad.OrderedDict, None] = None
         if tie_first is not None:
             tie_first = bool(tie_first)
         self._tie_first = tie_first
         if tie_last is not None:
             tie_last = bool(tie_last)
         self._tie_last = tie_last
+        self._voice_metadata = OptionalOrderedDict = None
+        self._voice_metadata_pairs: U[
+            List[tuple], None] = voice_metadata_pairs
 
     ### SPECIAL METHODS ###
 
@@ -201,6 +212,8 @@ class RhythmCommand(Command):
             start_offset = divisions[0].start_offset
             selections = rhythm_maker(divisions)
             self._annotate_unpitched_notes(selections)
+        if hasattr(rhythm_maker, 'state'):
+            self._make_voice_metadata(rhythm_maker.state)
         assert self._all_are_selections(selections), repr(selections)
         if self.split_at_measure_boundaries:
             specifier = rhythmos.DurationSpecifier
@@ -233,34 +246,33 @@ class RhythmCommand(Command):
         dummy_staff.is_simultaneous = True
         assert len(self.rhythm_overwrites) == 1, repr(self.rhythm_overwrites)
         selector, division_maker, rhythm_maker = self.rhythm_overwrites[0]
-        #print('SELECTOR', selector)
-        #print('DIVISION-MAKER', division_maker)
-        #print('RHYTHM-MAKER', rhythm_maker)
         old_selection = selector(dummy_music_voice)
-        #print('OLD SELECTION', old_selection)
         old_selection = abjad.select(old_selection)
         result = old_selection._get_parent_and_start_stop_indices()
         parent, start_index, stop_index = result
         old_duration = abjad.inspect(old_selection).get_duration()
-        #print('OLD DURATION', old_duration)
         division_lists = division_maker([old_duration])
-        #print('DIVISION LISTS', division_lists)
         assert len(division_lists) == 1
         division_list = division_lists[0]
         new_selection = rhythm_maker(division_list)
-        #print('NEW SELECTION', new_selection)
-        #print('DUMMY MUSIC VOICE BEFORE:')
-        #for item in dummy_music_voice:
-        #    print(repr(item))
         stop_index += 1
         dummy_music_voice[start_index:stop_index] = new_selection
-        #print('DUMMY MUSIC VOICE AFTER:')
-        #for item in dummy_music_voice:
-        #    print(repr(item))
-        #print()
         music = dummy_music_voice[:]
         selections = [abjad.select(_) for _ in music]
         return selections, start_offset
+
+    def _make_voice_metadata(self, state: abjad.OrderedDict):
+        if not self.voice_metadata_pairs:
+            return
+        voice_metadata = abjad.OrderedDict()
+        for name, keys in self.voice_metadata_pairs:
+            voice_metadata[name] = []
+            key_value_pairs = voice_metadata[name]
+            for key in keys:
+                value = state.get(key)
+                key_value_pair = (key, value)
+                key_value_pairs.append(key_value_pair)
+        self._voice_metadata = voice_metadata
 
     def _transform_divisions(self, divisions):
         if self.division_expression is not None:
@@ -367,6 +379,14 @@ class RhythmCommand(Command):
         return self.stages[0]
 
     @property
+    def state(self) -> abjad.OrderedDict:
+        r'''Gets postcall state of rhythm command.
+
+        Populated by segment-maker.
+        '''
+        return self._state
+
+    @property
     def stop_stage(self):
         r'''Gets stop stage.
 
@@ -395,3 +415,15 @@ class RhythmCommand(Command):
         Returns true, false or none.
         '''
         return self._tie_last
+
+    @property
+    def voice_metadata(self) -> OptionalOrderedDict:
+        r'''Gets voice metadata.
+        '''
+        return self._voice_metadata
+
+    @property
+    def voice_metadata_pairs(self) -> U[List[tuple], None]:
+        r'''Gets voice metadata templates.
+        '''
+        return self._voice_metadata_pairs
