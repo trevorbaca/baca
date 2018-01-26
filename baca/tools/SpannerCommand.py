@@ -1,6 +1,9 @@
 import abjad
 import baca
 from .Command import Command
+from .Typing import Optional
+from .Typing import Selector
+from .Typing import U
 
 
 class SpannerCommand(Command):
@@ -176,8 +179,7 @@ class SpannerCommand(Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        # TODO: remove annotation?
-        '_annotation',
+        '_open',
         '_spanner',
         '_tags',
         )
@@ -186,15 +188,14 @@ class SpannerCommand(Command):
 
     def __init__(
         self,
-        deactivate=None,
-        selector='baca.tleaves()',
-        spanner=None,
+        deactivate: bool = None,
+        open: abjad.OrdinalConstant = None,
+        selector: Selector = 'baca.tleaves()',
+        spanner: abjad.Spanner = None,
         tags=None,
-        ):
+        ) -> None:
         Command.__init__(self, deactivate=deactivate, selector=selector)
-        self._annotation = None
-        if spanner is not None:
-            assert isinstance(spanner, abjad.Spanner)
+        self._open = open
         self._spanner = spanner
         tags = tags or []
         assert self._are_valid_tags(tags), repr(tags)
@@ -227,7 +228,13 @@ class SpannerCommand(Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def selector(self):
+    def open(self) -> Optional[abjad.OrdinalConstant]:
+        r'''Gets the direction-to-which spanner is open, if any.
+        '''
+        return self._open
+
+    @property
+    def selector(self) -> Optional[Selector]:
         r'''Gets selector.
 
         ..  container:: example
@@ -280,7 +287,7 @@ class SpannerCommand(Command):
         return self._selector
 
     @property
-    def spanner(self):
+    def spanner(self) -> Optional[abjad.Spanner]:
         r'''Gets spanner.
 
         ..  container:: example

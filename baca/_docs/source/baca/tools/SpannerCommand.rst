@@ -25,6 +25,7 @@ Bases
       ~SpannerCommand.get_tag
       ~SpannerCommand.manifests
       ~SpannerCommand.offset_to_measure_number
+      ~SpannerCommand.open
       ~SpannerCommand.selector
       ~SpannerCommand.spanner
       ~SpannerCommand.tag
@@ -42,6 +43,8 @@ Read-only properties
    .. container:: inherited
 
       .. autoattribute:: SpannerCommand.deactivate
+
+.. autoattribute:: SpannerCommand.open
 
 .. autoattribute:: SpannerCommand.selector
 
