@@ -1047,7 +1047,7 @@ class RegisterInterpolationCommand(Command):
                     pleaf.written_pitches = written_pitches
                 else:
                     raise TypeError(pleaf)
-                abjad.detach('not yet registered', pleaf)
+                abjad.detach(abjad.tags.NOT_YET_REGISTERED, pleaf)
 
     ### PRIVATE METHODS ###
 

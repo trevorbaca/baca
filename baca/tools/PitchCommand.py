@@ -478,9 +478,8 @@ class PitchCommand(Command):
     @staticmethod
     def _set_lt_pitch(lt, pitch):
         new_lt = None
-        string = 'not yet pitched'
         for leaf in lt:
-            abjad.detach(string, leaf)
+            abjad.detach(abjad.tags.NOT_YET_PITCHED, leaf)
         if pitch is None:
             if not lt.is_pitched:
                 pass

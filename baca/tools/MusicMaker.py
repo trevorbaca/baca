@@ -892,7 +892,7 @@ class MusicMaker(abjad.AbjadObject):
         if not color_unregistered_pitches:
             return
         for pleaf in abjad.iterate(argument).leaves(pitched=True):
-            abjad.attach('not yet registered', pleaf, site='')
+            abjad.attach(abjad.tags.NOT_YET_REGISTERED, pleaf, site='')
 
     @staticmethod
     def _exactly_double(selections):

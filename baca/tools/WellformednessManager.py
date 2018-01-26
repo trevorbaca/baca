@@ -71,7 +71,7 @@ class WellformednessManager(abjad.AbjadObject):
                     written_pitches = []
                 pcs = [_.pitch_class for _ in written_pitches]
                 inspection = abjad.inspect(lt.head)
-                if (inspection.has_indicator('not yet pitched') or
+                if (inspection.has_indicator(abjad.tags.NOT_YET_PITCHED) or
                     inspection.has_indicator(abjad.tags.ALLOW_REPEAT_PITCH)):
                     pass
                 elif set(pcs) & set(previous_pcs):

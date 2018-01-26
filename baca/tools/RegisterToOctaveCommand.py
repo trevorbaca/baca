@@ -362,7 +362,7 @@ class RegisterToOctaveCommand(Command):
         elif isinstance(leaf, abjad.Chord):
             pitches = [transposition(_) for _ in leaf.written_pitches]
             leaf.written_pitches = pitches
-        abjad.detach('not yet registered', leaf)
+        abjad.detach(abjad.tags.NOT_YET_REGISTERED, leaf)
 
     ### PUBLIC PROPERTIES ###
 

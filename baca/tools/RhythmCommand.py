@@ -90,10 +90,8 @@ class RhythmCommand(Command):
         self,
         start_offset: abjad.Offset = None,
         time_signatures: List[abjad.TimeSignature] = None,
-        ):
+        ) -> abjad.AnnotatedTimespan:
         r'''Calls command on `start_offset` and `time_signatures`.
-
-        Returns contribution with music payload.
         '''
         music, start_offset = self._make_rhythm(start_offset, time_signatures)
         assert isinstance(music, (tuple, list, abjad.Voice))
@@ -146,7 +144,7 @@ class RhythmCommand(Command):
                 message = f'rhythm-makers make only notes and rests: {leaf!r}.'
                 raise Exception(message)
             elif isinstance(leaf, abjad.Note):
-                abjad.attach('not yet pitched', leaf, site='')
+                abjad.attach(abjad.tags.NOT_YET_PITCHED, leaf, site='')
             elif isinstance(leaf, rest_prototype):
                 pass
             else:

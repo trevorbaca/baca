@@ -1316,8 +1316,9 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.ignore_unpitched_notes:
             return
         color = 'blue'
+        tag = abjad.tags.NOT_YET_PITCHED
         for pleaf in abjad.iterate(self.score).leaves(pitched=True):
-            if not abjad.inspect(pleaf).has_indicator('not yet pitched'):
+            if not abjad.inspect(pleaf).has_indicator(tag):
                 continue
             strings = [
                 rf'\once \override Accidental.color = #{color}',
@@ -1334,8 +1335,9 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.ignore_unregistered_pitches:
             return
         color = 'magenta'
+        tag = abjad.tags.NOT_YET_REGISTERED
         for pleaf in abjad.iterate(self.score).leaves(pitched=True):
-            if not abjad.inspect(pleaf).has_indicator('not yet registered'):
+            if not abjad.inspect(pleaf).has_indicator(tag):
                 continue
             strings = [
                 rf'\once \override Accidental.color = #{color}',
