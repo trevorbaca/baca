@@ -176,7 +176,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_skip_wellformedness_checks',
         '_skips_instead_of_rests',
         '_sounds_during_segment',
-        '_spacing_specifier',
+        '_spacing',
         '_stage_label_base_string',
         '_start_clock_time',
         '_stop_clock_time',
@@ -291,7 +291,7 @@ class SegmentMaker(abjad.SegmentMaker):
         score_template: ScoreTemplate = None,
         skip_wellformedness_checks: bool = None,
         skips_instead_of_rests: bool = None,
-        spacing_specifier: HorizontalSpacingSpecifier = None,
+        spacing: HorizontalSpacingSpecifier = None,
         stage_label_base_string: str = None,
         time_signatures: List[tuple] = None,
         transpose_score: bool = None,
@@ -345,8 +345,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._segment_duration: abjad.Duration = None
         self._skip_wellformedness_checks: bool = skip_wellformedness_checks
         self._skips_instead_of_rests: bool = skips_instead_of_rests
-        self._spacing_specifier: HorizontalSpacingSpecifier = \
-            spacing_specifier
+        self._spacing: HorizontalSpacingSpecifier = spacing
         self._sounds_during_segment: abjad.OrderedDict = abjad.OrderedDict()
         self._stage_label_base_string: str = stage_label_base_string
         self._start_clock_time: str = None
@@ -726,19 +725,19 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.attach(tie, leaves, site='SM17')
                 abjad.detach(abjad.tags.TIE_FROM, current_leaf)
 
-    def _apply_spacing_specifier(self):
+    def _apply_spacing(self):
         start_time = time.time()
-        if self.spacing_specifier is None:
+        if self.spacing is None:
             return
-        self.spacing_specifier(self)
+        self.spacing(self)
         stop_time = time.time()
         total_time = int(stop_time - start_time)
         if self.print_timings:
-            print(f'spacing specifier time {total_time} seconds ...')
+            print(f'spacing time {total_time} seconds ...')
         if os.getenv('TRAVIS'):
             return
         if 3 < total_time:
-            raise Exception(f'spacing specifier time {total_time} seconds!')
+            raise Exception(f'spacing time {total_time} seconds!')
 
     def _assert_nonoverlapping_rhythms(self, rhythms, voice):
         previous_stop_offset = 0
@@ -2328,7 +2327,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     ignore_unpitched_notes=True,
             ...     breaks=breaks,
             ...     score_template=score_template,
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
 
@@ -2405,7 +2404,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     ignore_unpitched_notes=True,
             ...     breaks=breaks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -2484,7 +2483,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     ignore_unpitched_notes=True,
             ...     breaks=breaks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -2580,7 +2579,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     ignore_unpitched_notes=True,
             ...     breaks=breaks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
 
@@ -2673,7 +2672,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     ignore_unpitched_notes=True,
             ...     breaks=breaks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -2768,7 +2767,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     ignore_unpitched_notes=True,
             ...     breaks=breaks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -2866,7 +2865,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     color_octaves=True,
             ...     score_template=baca.StringTrioScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 31)),
+            ...     spacing=baca.minimum_width((1, 31)),
             ...     time_signatures=[(6, 16), (6, 16)],
             ...     )
 
@@ -3267,7 +3266,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     color_out_of_range_pitches=True,
             ...     range_checker=pitch_range,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
@@ -3429,7 +3428,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     color_repeat_pitch_classes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
+            ...     spacing=baca.HorizontalSpacingSpecifier(
             ...         minimum_width=abjad.Duration(1, 24),
             ...         ),
             ...     time_signatures=time_signatures,
@@ -3596,7 +3595,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -3657,7 +3656,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -3735,7 +3734,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -3812,7 +3811,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -3876,7 +3875,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -3952,7 +3951,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -4016,7 +4015,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -5072,7 +5071,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unregistered_pitches=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
@@ -5230,7 +5229,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
@@ -5481,7 +5480,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     instruments=instruments,
             ...     breaks=breaks_,
             ...     score_template=score_template,
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -5601,7 +5600,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     instruments=instruments,
             ...     breaks=breaks_,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -5720,7 +5719,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     instruments=instruments,
             ...     breaks=breaks_,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -5850,7 +5849,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     instruments=instruments,
             ...     breaks=breaks_,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -5985,7 +5984,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     instruments=instruments,
             ...     breaks=breaks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
             ...     )
             >>> maker(
@@ -6161,7 +6160,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     instruments=instruments,
             ...     breaks=breaks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -6348,7 +6347,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     margin_markup=margin_markup,
             ...     breaks=breaks,
             ...     score_template=score_template,
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -6462,7 +6461,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     breaks=breaks,
             ...     margin_markup=margin_markup,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -6575,7 +6574,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     breaks=breaks,
             ...     margin_markup=margin_markup,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -6705,7 +6704,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     breaks=breaks,
             ...     margin_markup=margin_markup,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -6840,7 +6839,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     breaks=breaks,
             ...     margin_markup=margin_markup,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
             ...     )
             >>> maker(
@@ -7016,7 +7015,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     breaks=breaks,
             ...     margin_markup=margin_markup,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -7513,7 +7512,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 25)),
+            ...     spacing=baca.minimum_width((1, 25)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -7638,7 +7637,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -7783,7 +7782,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -7927,7 +7926,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -8108,7 +8107,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     breaks=breaks,
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -8487,7 +8486,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._skips_instead_of_rests
 
     @property
-    def spacing_specifier(self):
+    def spacing(self):
         r'''Gets spacing specifier.
 
         Defaults to none.
@@ -8496,7 +8495,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         Returns spacing specifier or none.
         '''
-        return self._spacing_specifier
+        return self._spacing
 
     @property
     def staff_lines(self):
@@ -8509,7 +8508,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -8572,7 +8571,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -8652,7 +8651,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -8731,7 +8730,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -8799,7 +8798,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker = baca.SegmentMaker(
             ...     ignore_unpitched_notes=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 24)),
+            ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
             ...     )
             >>> maker(
@@ -9413,7 +9412,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._annotate_sounds_during()
         self._attach_score_template_defaults()
         self._reapply_persistent_indicators()
-        self._apply_spacing_specifier()
+        self._apply_spacing()
         self._call_commands()
         self._shorten_long_repeat_ties()
         self._categorize_uncategorized_persistent_indicators()

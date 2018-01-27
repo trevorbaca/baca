@@ -119,7 +119,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing_specifier=baca.HorizontalSpacingSpecifier(),
+        ...     spacing=baca.HorizontalSpacingSpecifier(),
         ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
         ...     )
 
@@ -234,7 +234,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
+        ...     spacing=baca.HorizontalSpacingSpecifier(
         ...         multiplier=abjad.Multiplier(1),
         ...         ),
         ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
@@ -352,7 +352,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
+        ...     spacing=baca.HorizontalSpacingSpecifier(
         ...         multiplier=abjad.Multiplier(2),
         ...         ),
         ...     time_signatures=[(8, 16), (4, 8), (2, 4), (1, 2)],
@@ -470,7 +470,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
+        ...     spacing=baca.HorizontalSpacingSpecifier(
         ...         multiplier=abjad.Multiplier(2),
         ...         minimum_width=abjad.Duration(1, 8),
         ...         ),
@@ -588,7 +588,7 @@ class HorizontalSpacingSpecifier(abjad.AbjadObject):
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
+        ...     spacing=baca.HorizontalSpacingSpecifier(
         ...         minimum_width=abjad.Duration(1, 8),
         ...         ),
         ...     time_signatures=[(4, 8), (3, 8)],

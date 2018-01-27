@@ -114,7 +114,7 @@ class NestingCommand(Command):
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing_specifier=baca.HorizontalSpacingSpecifier(
+        ...     spacing=baca.HorizontalSpacingSpecifier(
         ...         minimum_width=abjad.Duration(1, 24),
         ...         ),
         ...     time_signatures=time_signatures,

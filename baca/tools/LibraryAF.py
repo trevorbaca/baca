@@ -747,7 +747,7 @@ class LibraryAF(abjad.AbjadObject):
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing_specifier=baca.minimum_width((1, 12)),
+            ...     spacing=baca.minimum_width((1, 12)),
             ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
             ...     )
 
@@ -2853,7 +2853,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     ignore_repeat_pitch_classes=True,
             ...     ignore_unregistered_pitches=True,
             ...     score_template=accumulator.score_template,
-            ...     spacing_specifier=baca.minimum_width((1, 12)),
+            ...     spacing=baca.minimum_width((1, 12)),
             ...     time_signatures=accumulator.time_signatures,
             ...     )
             >>> accumulator.populate_segment_maker(maker)
@@ -3224,7 +3224,7 @@ class LibraryAF(abjad.AbjadObject):
             ...     ignore_repeat_pitch_classes=True,
             ...     ignore_unregistered_pitches=True,
             ...     score_template=accumulator.score_template,
-            ...     spacing_specifier=baca.minimum_width((1, 12)),
+            ...     spacing=baca.minimum_width((1, 12)),
             ...     time_signatures=accumulator.time_signatures,
             ...     )
             >>> accumulator.populate_segment_maker(maker)

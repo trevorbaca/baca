@@ -59,7 +59,7 @@ Bases
       ~SegmentMaker.score_template
       ~SegmentMaker.skip_wellformedness_checks
       ~SegmentMaker.skips_instead_of_rests
-      ~SegmentMaker.spacing_specifier
+      ~SegmentMaker.spacing
       ~SegmentMaker.staff_lines
       ~SegmentMaker.stage_count
       ~SegmentMaker.stage_label_base_string
@@ -151,7 +151,7 @@ Read-only properties
 
 .. autoattribute:: SegmentMaker.skips_instead_of_rests
 
-.. autoattribute:: SegmentMaker.spacing_specifier
+.. autoattribute:: SegmentMaker.spacing
 
 .. autoattribute:: SegmentMaker.staff_lines
 
