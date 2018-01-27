@@ -163,6 +163,8 @@ Read-only properties
 
 .. autoattribute:: SegmentMaker.transpose_score
 
+.. autoattribute:: SegmentMaker.validate_measure_count
+
 .. autoattribute:: SegmentMaker.wrappers
 
 Methods
@@ -171,8 +173,6 @@ Methods
 .. automethod:: SegmentMaker.copy_rhythm
 
 .. automethod:: SegmentMaker.run
-
-.. automethod:: SegmentMaker.validate_measure_count
 
 .. automethod:: SegmentMaker.validate_measures_per_stage
 

@@ -182,6 +182,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_stop_clock_time',
         '_time_signatures',
         '_transpose_score',
+        '_validate_measure_count',
         '_voice_metadata',
         '_wrappers',
         )
@@ -295,6 +296,7 @@ class SegmentMaker(abjad.SegmentMaker):
         stage_label_base_string: str = None,
         time_signatures: List[tuple] = None,
         transpose_score: bool = None,
+        validate_measure_count: int = None,
         ) -> None:
         super(SegmentMaker, self).__init__()
         self._allow_empty_selections: bool = allow_empty_selections
@@ -351,9 +353,11 @@ class SegmentMaker(abjad.SegmentMaker):
         self._start_clock_time: str = None
         self._stop_clock_time: str = None
         self._transpose_score: bool = transpose_score
+        self._validate_measure_count: int = validate_measure_count
         self._voice_metadata: abjad.OrderedDict = abjad.OrderedDict()
         self._wrappers: List[CommandWrapper] = []
         self._initialize_time_signatures(time_signatures)
+        self._validate_measure_count_()
 
     ### SPECIAL METHODS ###
 
@@ -2263,6 +2267,13 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             abjad.Instrument.transpose_from_sounding_pitch(pleaf)
 
+    def _validate_measure_count_(self):
+        if not self.validate_measure_count:
+            return
+        found = len(self.time_signatures)
+        if found != self.validate_measure_count:
+            raise Exception(f'{found} != {self.validate_measure_count}')
+
     def _voice_to_rhythm_wrappers(self, voice):
         wrappers = []
         for wrapper in self.wrappers:
@@ -2283,31 +2294,21 @@ class SegmentMaker(abjad.SegmentMaker):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def allow_empty_selections(self):
+    def allow_empty_selections(self) -> Optional[bool]:
         r'''Is true when segment allows empty selectors.
 
         Otherwise segment raises exception on empty selectors.
-
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
         '''
         return self._allow_empty_selections
 
     @property
-    def breaks(self):
-        r'''Gets breaks measure map.
-
-        Set to breaks measure map or none.
-
-        Returns breaks measure map or none.
+    def breaks(self) -> Optional[BreakMeasureMap]:
+        r'''Gets breaks.
         '''
         return self._breaks
 
     @property
-    def clefs(self):
+    def clefs(self) -> None:
         r'''Gets clefs.
 
         ..  container:: example
@@ -2855,7 +2856,7 @@ class SegmentMaker(abjad.SegmentMaker):
         pass
 
     @property
-    def color_octaves(self):
+    def color_octaves(self) -> Optional[bool]:
         r'''Is true when segment-maker colors octaves.
 
         ..  container:: example
@@ -3230,7 +3231,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._color_octaves
 
     @property
-    def color_out_of_range_pitches(self):
+    def color_out_of_range_pitches(self) -> Optional[bool]:
         r'''Is true when segment-maker colors out-of-range pitches.
 
         ..  container:: example
@@ -3394,7 +3395,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._color_out_of_range_pitches
 
     @property
-    def color_repeat_pitch_classes(self):
+    def color_repeat_pitch_classes(self) -> Optional[bool]:
         r'''Is true when segment-maker colors repeat pitch-classes.
 
         ..  container:: example
@@ -3579,13 +3580,13 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._color_repeat_pitch_classes
 
     @property
-    def do_not_check_persistence(self) -> U[bool, None]:
+    def do_not_check_persistence(self) -> Optional[bool]:
         r'''Is true when segment-maker does not check persistent indicators.
         '''
         return self._do_not_check_persistence
 
     @property
-    def dynamics(self):
+    def dynamics(self) -> None:
         r'''Gets dynamics.
 
         ..  container:: example
@@ -4090,19 +4091,13 @@ class SegmentMaker(abjad.SegmentMaker):
         pass
 
     @property
-    def fermata_measure_staff_line_count(self):
+    def fermata_measure_staff_line_count(self) -> Optional[int]:
         r'''Gets fermata measure staff lines.
-
-        Defaults to none.
-
-        Set to nonnegative integer or none.
-
-        Returns nonnegative integer or none.
         '''
         return self._fermata_measure_staff_line_count
 
     @property
-    def final_bar_line(self):
+    def final_bar_line(self) -> U[bool, str, None]:
         r'''Gets final bar line.
 
         ..  container:: example
@@ -4532,14 +4527,11 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        Set to bar line string or none.
-
-        Returns bar line string or none.
         '''
         return self._final_bar_line
 
     @property
-    def final_markup(self):
+    def final_markup(self) -> Optional[tuple]:
         r'''Gets final markup.
 
         ..  container:: example
@@ -4669,58 +4661,35 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        Defaults to none.
-
-        Set to markup or none.
-
-        Returns markup or none.
         '''
         return self._final_markup
 
     @property
-    def final_markup_extra_offset(self):
+    def final_markup_extra_offset(self) -> Optional[NumberPair]:
         r'''Gets final markup extra offset.
-
-        See example for final markup, above.
-
-        Defaults to none.
-
-        Set to pair or none.
-
-        Returns pair or none.
         '''
         return self._final_markup_extra_offset
 
     @property
-    def first_measure_number(self):
+    def first_measure_number(self) -> Optional[int]:
         r'''Gets user-defined first measure number.
-
-        Returns nonnegative integer or none.
         '''
         return self._first_measure_number
 
     @property
-    def first_segment(self):
+    def first_segment(self) -> bool:
         r'''Is true when segment is first in score.
-
-        Returns true or false.
         '''
         return self._get_segment_number() == 1
 
     @property
-    def ignore_repeat_pitch_classes(self):
+    def ignore_repeat_pitch_classes(self) -> Optional[bool]:
         r'''Is true when segment ignores repeat pitch-classes.
-
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
         '''
         return self._ignore_repeat_pitch_classes
 
     @property
-    def ignore_unpitched_notes(self):
+    def ignore_unpitched_notes(self) -> Optional[bool]:
         r'''Is true when segment ignores unpitched notes.
 
         ..  container:: example
@@ -5018,16 +4987,11 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
         '''
         return self._ignore_unpitched_notes
 
     @property
-    def ignore_unregistered_pitches(self):
+    def ignore_unregistered_pitches(self) -> Optional[bool]:
         r'''Is true when segment ignores unregistered pitches.
 
         ..  container:: example
@@ -5437,16 +5401,11 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
         '''
         return self._ignore_unregistered_pitches
 
     @property
-    def instruments(self):
+    def instruments(self) -> Optional[abjad.OrderedDict]:
         r'''Gets instruments.
 
         ..  container:: example
@@ -6281,27 +6240,18 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        Returns instrument dictionary or none.
         '''
         return self._instruments
 
     @property
-    def last_segment(self):
+    def last_segment(self) -> Optional[bool]:
         r'''Is true when composer declares segment to be last in score.
-
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
         '''
         return self._last_segment
 
     @property
-    def manifests(self):
+    def manifests(self) -> abjad.OrderedDict:
         r'''Gets manifests.
-
-        Returns ordered dictionary of ordered dictionaries.
         '''
         manifests = abjad.OrderedDict()
         manifests['abjad.Instrument'] = self.instruments
@@ -6310,7 +6260,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return manifests
 
     @property
-    def margin_markup(self):
+    def margin_markup(self) -> Optional[abjad.OrderedDict]:
         r'''Gets margin markup.
 
         ..  container:: example
@@ -7136,35 +7086,25 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        Returns ordered dictionary or none.
         '''
         return self._margin_markup
 
     @property
-    def measure_count(self):
+    def measure_count(self) -> int:
         r'''Gets measure count.
-
-        Returns nonnegative integer.
         '''
         return len(self.time_signatures)
 
     @property
-    def measures_per_stage(self):
+    def measures_per_stage(self) -> List[int]:
         r'''Gets measures per stage.
-
-        Groups all measures into a single stage when `measures_per_stage` is
-        none.
-
-        Set to list of positive integers or none.
-
-        Returns list of positive integers or none.
         '''
         if self._measures_per_stage is None:
             return [len(self.time_signatures)]
         return self._measures_per_stage
 
     @property
-    def metadata(self):
+    def metadata(self) -> abjad.OrderedDict:
         r'''Gets segment metadata.
 
         ..  container:: example
@@ -7301,12 +7241,11 @@ class SegmentMaker(abjad.SegmentMaker):
                     ]
                 )
 
-        Returns ordered dictionary.
         '''
         return self._metadata
 
     @property
-    def metronome_mark_measure_map(self):
+    def metronome_mark_measure_map(self) -> Optional[MetronomeMarkMeasureMap]:
         r'''Gets metronome mark measure map.
 
         ..  container:: example
@@ -7476,24 +7415,17 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        Defaults to none.
-
-        Set to metronome mark measure map or none.
-
-        Returns metronome mark measure map or none.
         '''
         return self._metronome_mark_measure_map
 
     @property
-    def metronome_mark_stem_height(self):
+    def metronome_mark_stem_height(self) -> Optional[Number]:
         r'''Gets metronome mark stem height.
-
-        Set to number or none.
         '''
         return self._metronome_mark_stem_height
 
     @property
-    def metronome_marks(self):
+    def metronome_marks(self) -> abjad.OrderedDict:
         r'''Gets metronome marks.
 
         ..  container:: example
@@ -8243,78 +8175,53 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        Returns ordered dictionary or none.
         '''
         return self._metronome_marks
 
     @property
-    def midi(self):
+    def midi(self) -> Optional[bool]:
         r'''Is true when segment-maker outputs MIDI.
-
-        Returns true, false or none.
         '''
         return self._midi
 
     @property
-    def previous_metadata(self):
+    def previous_metadata(self) -> abjad.OrderedDict:
         r'''Gets previous segment metadata.
-
-        Returns ordered dictionary.
         '''
         return self._previous_metadata
 
     @property
-    def print_timings(self):
+    def print_timings(self) -> Optional[bool]:
         r'''Is true when segment prints interpreter timings.
-
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
         '''
         return self._print_timings
 
     @property
-    def range_checker(self):
+    def range_checker(self) -> Optional[abjad.PitchRange]:
         r'''Gets range checker.
-
-        Defaults to none.
-
-        Set to pitch range, true, false or none.
-
-        Returns pitch range, true, false or none.
         '''
         return self._range_checker
 
     @property
-    def rehearsal_letter(self):
+    def rehearsal_letter(self) -> Optional[str]:
         r'''Gets rehearsal letter.
-
-        Defaults to none.
-
-        Set to string or none.
 
         Calculates rehearsal letter automatically when none.
 
         Suppresses rehearsal letter when set to empty string.
 
         Sets rehearsal letter explicitly when set to nonempty string.
-
-        Returns string or none.
         '''
         return self._rehearsal_letter
 
     @property
-    def score(self):
+    def score(self) -> Optional[abjad.Score]:
         r'''Gets score.
-
-        Returns score or none.
         '''
         return self._score
 
     @property
-    def score_template(self):
+    def score_template(self) -> Optional[abjad.ScoreTemplate]:
         r'''Gets score template.
 
         ..  container:: example
@@ -8328,24 +8235,17 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker.score_template
             SingleStaffScoreTemplate()
 
-        Defaults to none.
-
-        Set to score template or none.
-
-        Returns score template or none.
         '''
         return self._score_template
 
     @property
-    def skip_wellformedness_checks(self):
+    def skip_wellformedness_checks(self) -> Optional[bool]:
         r'''Is true when segment skips wellformedness checks.
-
-        Returns true, false or none.
         '''
         return self._skip_wellformedness_checks
 
     @property
-    def skips_instead_of_rests(self):
+    def skips_instead_of_rests(self) -> Optional[bool]:
         r'''Is true when segment fills empty measures with skips.
 
         ..  container:: example
@@ -8477,28 +8377,17 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
         '''
         return self._skips_instead_of_rests
 
     @property
-    def spacing(self):
-        r'''Gets spacing specifier.
-
-        Defaults to none.
-
-        Set to spacing specifier or none.
-
-        Returns spacing specifier or none.
+    def spacing(self) -> Optional[HorizontalSpacingSpecifier]:
+        r'''Gets spacing.
         '''
         return self._spacing
 
     @property
-    def staff_lines(self):
+    def staff_lines(self) -> None:
         r'''Gets staff lines.
 
         ..  container:: example
@@ -8875,19 +8764,17 @@ class SegmentMaker(abjad.SegmentMaker):
         pass
 
     @property
-    def stage_count(self):
+    def stage_count(self) -> int:
         r'''Gets stage count.
 
         Defined equal to 1 when `self.measures_per_stage` is none.
-
-        Returns nonnegative integer.
         '''
         if self.measures_per_stage is None:
             return 1
         return len(self.measures_per_stage)
 
     @property
-    def stage_label_base_string(self):
+    def stage_label_base_string(self) -> Optional[str]:
         r'''Gets stage label base string.
 
         ..  container:: example
@@ -9001,26 +8888,17 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        Defaults to none.
-
-        Set to string or none.
-
-        Returns string or none.
         '''
         return self._stage_label_base_string
 
     @property
-    def time_signatures(self):
+    def time_signatures(self) -> List[abjad.TimeSignature]:
         r'''Gets time signatures.
-
-        Set to time signatures.
-
-        Returns tuple of time signatures.
         '''
         return self._time_signatures
 
     @property
-    def transpose_score(self):
+    def transpose_score(self) -> Optional[bool]:
         r'''Is true when segment transposes score.
 
         ..  container:: example
@@ -9331,19 +9209,18 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
         '''
         return self._transpose_score
 
     @property
-    def wrappers(self):
-        r'''Gets wrappers.
+    def validate_measure_count(self) -> Optional[int]:
+        r'''Gets validate measure count.
+        '''
+        return self._validate_measure_count
 
-        Returns list of wrappers.
+    @property
+    def wrappers(self) -> List[CommandWrapper]:
+        r'''Gets wrappers.
         '''
         return self._wrappers
 
@@ -9438,18 +9315,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._remove_tags(remove)
         self._collect_metadata()
         return self._lilypond_file
-
-    def validate_measure_count(self, measure_count):
-        r'''Validates measure count.
-
-        Raises exception when `measure_count` is incorrect.
-
-        Returns none.
-        '''
-        if not measure_count == self.measure_count:
-            message = f'segment measure count is not {measure_count}'
-            message += f' but {self.measure_count}.'
-            raise Exception(message)
 
     def validate_measures_per_stage(self):
         r'''Validates measures per stage.
