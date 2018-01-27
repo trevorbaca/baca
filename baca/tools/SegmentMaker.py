@@ -645,13 +645,6 @@ class SegmentMaker(abjad.SegmentMaker):
             extra_offset=self.final_markup_extra_offset,
             )
 
-    def _annotate_sounds_during(self):
-        for voice in abjad.iterate(self.score).components(abjad.Voice):
-            pleaves = baca.select(voice).pleaves()
-            value = bool(pleaves)
-            abjad.annotate(voice, abjad.tags.SOUNDS_DURING_SEGMENT, value)
-            self._sounds_during_segment[voice.name] = value
-
     def _analyze_momento(self, context, momento):
         previous_indicator = self._momento_to_indicator(momento)
         if previous_indicator is None:
@@ -679,6 +672,13 @@ class SegmentMaker(abjad.SegmentMaker):
             else:
                 status = 'redundant'
         return leaf, previous_indicator, status
+
+    def _annotate_sounds_during(self):
+        for voice in abjad.iterate(self.score).components(abjad.Voice):
+            pleaves = baca.select(voice).pleaves()
+            value = bool(pleaves)
+            abjad.annotate(voice, abjad.tags.SOUNDS_DURING_SEGMENT, value)
+            self._sounds_during_segment[voice.name] = value
 
     def _apply_breaks(self):
         if self.breaks is None:
@@ -1498,6 +1498,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 indicator = self._key_to_indicator(momento.value, prototype)
                 return (indicator, momento.context)
 
+    def _get_previous_stop_clock_time(self):
+        if self.previous_metadata:
+            return self.previous_metadata.get('stop_clock_time')
+
     def _get_previous_voice_metadata(self, voice, voice_metadata_pairs):
         if not bool(self.previous_metadata) or not bool(voice_metadata_pairs):
             return
@@ -1514,10 +1518,6 @@ class SegmentMaker(abjad.SegmentMaker):
             for key, value in key_value_pairs:
                 result[key] = value
         return result
-
-    def _get_previous_stop_clock_time(self):
-        if self.previous_metadata:
-            return self.previous_metadata.get('stop_clock_time')
 
     def _get_rehearsal_letter(self):
         if self.rehearsal_letter:

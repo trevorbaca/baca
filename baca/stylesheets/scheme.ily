@@ -444,8 +444,10 @@ sfz_p = #(
 
 %%% DYNAMICS (SUBITO) %%%
 
-ppp_sub = #(
-    make-dynamic-script
+ppp_sub = 
+    \tweak DynamicText.self-alignment-X #LEFT
+    \tweak DynamicText.X-extent ##f
+    #(make-dynamic-script
     (markup
         #:line (
             #:dynamic "ppp"
@@ -455,8 +457,10 @@ ppp_sub = #(
         )
     )
 
-pp_sub = #(
-    make-dynamic-script
+pp_sub = 
+    \tweak DynamicText.self-alignment-X #LEFT
+    \tweak DynamicText.X-extent ##f
+    #(make-dynamic-script
     (markup
         #:line (
             #:dynamic "pp"
@@ -466,8 +470,10 @@ pp_sub = #(
         )
     )
 
-p_sub = #(
-    make-dynamic-script
+p_sub = 
+    \tweak DynamicText.self-alignment-X #LEFT
+    \tweak DynamicText.X-extent ##f
+    #(make-dynamic-script
     (markup
         #:line (
             #:dynamic "p"
@@ -477,8 +483,10 @@ p_sub = #(
         )
     )
 
-mp_sub = #(
-    make-dynamic-script
+mp_sub = 
+    \tweak DynamicText.self-alignment-X #LEFT
+    \tweak DynamicText.X-extent ##f
+    #(make-dynamic-script
     (markup
         #:line (
             #:dynamic "mp"
@@ -488,8 +496,10 @@ mp_sub = #(
         )
     )
 
-mf_sub = #(
-    make-dynamic-script
+mf_sub =
+    \tweak DynamicText.self-alignment-X #LEFT
+    \tweak DynamicText.X-extent ##f
+    #(make-dynamic-script
     (markup
         #:line (
             #:dynamic "mf"
@@ -499,8 +509,10 @@ mf_sub = #(
         )
     )
 
-f_sub = #(
-    make-dynamic-script
+f_sub =
+    \tweak DynamicText.self-alignment-X #LEFT
+    \tweak DynamicText.X-extent ##f
+    #(make-dynamic-script
     (markup
         #:line (
             #:dynamic "f"
@@ -510,8 +522,8 @@ f_sub = #(
         )
     )
 
-ff_sub = #(
-    make-dynamic-script
+ff_sub =
+    #(make-dynamic-script
     (markup
         #:line (
             #:dynamic "ff"
@@ -521,8 +533,8 @@ ff_sub = #(
         )
     )
 
-fff_sub = #(
-    make-dynamic-script
+fff_sub =
+    #(make-dynamic-script
     (markup
         #:line (
             #:dynamic "fff"

@@ -3,6 +3,7 @@ import baca
 import collections
 from typing import Union
 from abjad import rhythmmakertools as rhythmos
+from .IndicatorCommand import IndicatorCommand
 
 
 class LibraryNS(abjad.AbjadObject):
@@ -569,6 +570,16 @@ class LibraryNS(abjad.AbjadObject):
             preamble=preamble,
             selector=selector,
             spanner=spanner,
+            )
+
+    @staticmethod
+    def pitch(pitch):
+        r'''Sets pitch.
+        '''
+        return baca.PitchCommand(
+            allow_repeat_pitches=True,
+            cyclic=True,
+            pitches=[pitch],
             )
 
     @staticmethod
@@ -1238,6 +1249,19 @@ class LibraryNS(abjad.AbjadObject):
             selector=selector,
             start_pitch=start,
             stop_pitch=stop,
+            )
+
+    @staticmethod
+    def rehearsal_mark(
+        number: int,
+        selector='baca.leaf(0)',
+        ) -> IndicatorCommand:
+        r'''Attaches rehearsal mark with `number`.
+        '''
+        indicator = abjad.RehearsalMark(number=number)
+        return IndicatorCommand(
+            indicators=[indicator],
+            selector=selector,
             )
 
     @staticmethod
