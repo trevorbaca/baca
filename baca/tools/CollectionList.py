@@ -3,7 +3,7 @@ import baca
 import collections as collections_module
 
 
-class CollectionList(abjad.AbjadValueObject):
+class CollectionList(abjad.AbjadValueObject, collections_module.Sequence):
     r'''Collection list.
 
     ..  container:: example
@@ -2041,6 +2041,3 @@ class CollectionList(abjad.AbjadValueObject):
             collection_ = collection.transpose(n)
             collections_.append(collection_)
         return abjad.new(self, collections=collections_)
-
-
-collections_module.Sequence.register(CollectionList)

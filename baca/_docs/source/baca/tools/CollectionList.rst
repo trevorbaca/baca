@@ -12,6 +12,18 @@ Bases
 
 - :py:class:`abjad.tools.abctools.AbjadObject.AbjadObject`
 
+- :py:class:`collections.abc.Sequence`
+
+- :py:class:`collections.abc.Reversible`
+
+- :py:class:`collections.abc.Collection`
+
+- :py:class:`collections.abc.Sized`
+
+- :py:class:`collections.abc.Iterable`
+
+- :py:class:`collections.abc.Container`
+
 - :py:class:`builtins.object`
 
 .. only:: html
@@ -28,6 +40,7 @@ Bases
       ~CollectionList.center_to_octave
       ~CollectionList.chords
       ~CollectionList.collections
+      ~CollectionList.count
       ~CollectionList.cursor
       ~CollectionList.flatten
       ~CollectionList.has_duplicate_pitch_classes
@@ -35,6 +48,7 @@ Bases
       ~CollectionList.has_repeat_pitch_classes
       ~CollectionList.has_repeats
       ~CollectionList.helianthate
+      ~CollectionList.index
       ~CollectionList.item_class
       ~CollectionList.join
       ~CollectionList.partition
@@ -53,13 +67,16 @@ Bases
       ~CollectionList.to_pitches
       ~CollectionList.transpose
       ~CollectionList.__add__
+      ~CollectionList.__contains__
       ~CollectionList.__copy__
       ~CollectionList.__eq__
       ~CollectionList.__format__
       ~CollectionList.__getitem__
       ~CollectionList.__illustrate__
+      ~CollectionList.__iter__
       ~CollectionList.__len__
       ~CollectionList.__repr__
+      ~CollectionList.__reversed__
 
 Read-only properties
 --------------------
@@ -83,6 +100,12 @@ Methods
 
 .. automethod:: CollectionList.chords
 
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: CollectionList.count
+
 .. automethod:: CollectionList.cursor
 
 .. automethod:: CollectionList.flatten
@@ -96,6 +119,12 @@ Methods
 .. automethod:: CollectionList.has_repeats
 
 .. automethod:: CollectionList.helianthate
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: CollectionList.index
 
 .. automethod:: CollectionList.join
 
@@ -138,6 +167,12 @@ Special methods
 
    .. container:: inherited
 
+      .. automethod:: CollectionList.__contains__
+
+.. only:: html
+
+   .. container:: inherited
+
       .. automethod:: CollectionList.__copy__
 
 .. automethod:: CollectionList.__eq__
@@ -148,6 +183,18 @@ Special methods
 
 .. automethod:: CollectionList.__illustrate__
 
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: CollectionList.__iter__
+
 .. automethod:: CollectionList.__len__
 
 .. automethod:: CollectionList.__repr__
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: CollectionList.__reversed__
