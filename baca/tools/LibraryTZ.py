@@ -3125,6 +3125,20 @@ class LibraryTZ(abjad.AbjadObject):
             )
 
     @staticmethod
+    def trill_spanner_staff_padding(
+        n: Number,
+        selector: Selector = 'baca.tleaves().with_next_leaf()',
+        ) -> OverrideCommand:
+        r'''Overrides trill spanner staff padding.
+        '''
+        return OverrideCommand(
+            attribute='staff_padding',
+            value=n,
+            grob='trill_spanner',
+            selector=selector,
+            )
+
+    @staticmethod
     def tuplet_bracket_extra_offset(
         pair: NumberPair,
         selector: Selector = 'baca.leaf(0)',

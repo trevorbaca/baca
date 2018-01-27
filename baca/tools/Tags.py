@@ -184,6 +184,38 @@ class Tags(abjad.Tags):
     ### PUBLIC PROPERTIES ###
 
     @staticmethod
+    def all_broken_spanner_tags():
+        r'''Gets all broken spanner tags.
+
+        ..  container:: example
+
+            >>> dictionary = baca.tags.all_broken_spanner_tags()
+            >>> for tag in dictionary['activate']:
+            ...     tag
+            ...
+            'LEFT_BROKEN_REPEAT_TIE'
+            'RIGHT_BROKEN_TIE'
+
+            >>> for tag in dictionary['deactivate']:
+            ...     tag
+            ...
+            'LEFT_BROKEN_TRILL'
+            'RIGHT_BROKEN_TRILL'
+
+        '''
+        import baca
+        return {
+            'activate': [
+                baca.tags.LEFT_BROKEN_REPEAT_TIE,
+                baca.tags.RIGHT_BROKEN_TIE,
+                ],
+            'deactivate': [
+                baca.tags.LEFT_BROKEN_TRILL,
+                baca.tags.RIGHT_BROKEN_TRILL,
+                ],
+            }
+
+    @staticmethod
     def all_persistent_indicator_color_tags(path=None):
         r'''Gets all persistent indicator color tags.
 
