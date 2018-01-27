@@ -327,6 +327,8 @@ class SegmentMaker(abjad.SegmentMaker):
         self._last_segment: bool = last_segment
         self._breaks: BreakMeasureMap = breaks
         self._margin_markup: abjad.OrderedDict = margin_markup
+        if measures_per_stage is True:
+            measures_per_stage = len(time_signatures) * [1]
         self._measures_per_stage: List[int] = measures_per_stage
         self._metronome_mark_measure_map: MetronomeMarkMeasureMap = \
             metronome_mark_measure_map
