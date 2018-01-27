@@ -46,6 +46,7 @@ Bases
       ~LibraryGM.make_tied_repeated_durations
       ~LibraryGM.marcati
       ~LibraryGM.margin_markup
+      ~LibraryGM.metadata
       ~LibraryGM.metronome_mark
       ~LibraryGM.minimum_width
       ~LibraryGM.__format__
@@ -107,6 +108,8 @@ Class & static methods
 .. automethod:: LibraryGM.marcati
 
 .. automethod:: LibraryGM.margin_markup
+
+.. automethod:: LibraryGM.metadata
 
 .. automethod:: LibraryGM.metronome_mark
 
