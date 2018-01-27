@@ -23,6 +23,7 @@ Bases
 
    .. autosummary::
 
+      ~Tags.all_broken_spanner_tags
       ~Tags.all_persistent_indicator_color_tags
       ~Tags.all_score_annotation_tags
       ~Tags.clef_color_match
@@ -51,6 +52,8 @@ Bases
 
 Class & static methods
 ----------------------
+
+.. automethod:: Tags.all_broken_spanner_tags
 
 .. automethod:: Tags.all_persistent_indicator_color_tags
 
