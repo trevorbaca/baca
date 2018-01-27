@@ -1,7 +1,8 @@
 import abjad
+from abjad.tools.mathtools.NonreducedFraction import NonreducedFraction
 
 
-class Division(abjad.NonreducedFraction):
+class Division(NonreducedFraction):
     r'''Division.
 
     >>> from abjad import rhythmmakertools as rhythmos

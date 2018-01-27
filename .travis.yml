@@ -25,6 +25,7 @@ install:
 
 script:
     - coverage run -a `which ajv` doctest --external-modules=baca ./baca
+    - mypy baca
     # package contains only doctests!
     #- coverage run -a `which py.test` -rf ./baca
 
