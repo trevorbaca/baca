@@ -1,5 +1,6 @@
 import abjad
 import baca
+import ide
 from typing import Union
 from abjad import rhythmmakertools as rhythmos
 
@@ -1902,6 +1903,17 @@ class LibraryGM(abjad.AbjadObject):
             indicators=[margin_markup],
             selector=selector,
             )
+
+    @staticmethod
+    def metadata(path: str) -> abjad.OrderedDict:
+        r'''Gets metadata for previous segment before segment `path`.
+        '''
+        segment = ide.Path(path).parent
+        if not segment.is_segment():
+            raise Exception(f'must be segment: {segment.trim()}')
+        previous_segment = segment.get_previous_package(cyclic=False)
+        metadata = previous_segment.get_metadata()
+        return metadata
 
     @staticmethod
     def metronome_mark(key, selector='baca.leaf(0)'):
