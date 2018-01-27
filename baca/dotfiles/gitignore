@@ -58,3 +58,6 @@ __make_ly__.py
 __make_midi__.py
 __make_pdf__.py
 illustration.pdf
+
+# mypy
+.mypy_cache

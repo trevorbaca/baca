@@ -277,23 +277,23 @@ class SegmentMaker(abjad.SegmentMaker):
         ignore_repeat_pitch_classes: bool = None,
         ignore_unpitched_notes: bool = None,
         ignore_unregistered_pitches: bool = None,
-        instruments: U[abjad.OrderedDict, None] = None,
+        instruments: abjad.OrderedDict = None,
         last_segment: bool = None,
-        breaks: U[BreakMeasureMap, None] = None,
-        margin_markup: U[abjad.OrderedDict, None] = None,
-        measures_per_stage: U[List[int], None] = None,
-        metronome_mark_measure_map: U[MetronomeMarkMeasureMap, None] = None,
+        breaks: BreakMeasureMap = None,
+        margin_markup: abjad.OrderedDict = None,
+        measures_per_stage: List[int] = None,
+        metronome_mark_measure_map: MetronomeMarkMeasureMap = None,
         metronome_mark_stem_height: Optional[Number] = 1.5,
-        metronome_marks: U[abjad.OrderedDict, None] = None,
+        metronome_marks: abjad.OrderedDict = None,
         print_timings: bool = None,
-        range_checker: U[abjad.PitchRange, None] = None,
+        range_checker: abjad.PitchRange = None,
         rehearsal_letter: str = None,
-        score_template: U[ScoreTemplate, None] = None,
+        score_template: ScoreTemplate = None,
         skip_wellformedness_checks: bool = None,
         skips_instead_of_rests: bool = None,
-        spacing_specifier: U[HorizontalSpacingSpecifier, None] = None,
+        spacing_specifier: HorizontalSpacingSpecifier = None,
         stage_label_base_string: str = None,
-        time_signatures: U[List[tuple], None] = None,
+        time_signatures: List[tuple] = None,
         transpose_score: bool = None,
         ) -> None:
         super(SegmentMaker, self).__init__()
@@ -313,7 +313,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._fermata_start_offsets: List[abjad.Offset] = []
         self._fermata_stop_offsets: List[abjad.Offset] = []
         self._final_bar_line: U[bool, str, None] = final_bar_line
-        self._final_markup: U[tuple, None] = final_markup
+        self._final_markup: tuple = final_markup
         self._final_markup_extra_offset: NumberPair = \
             final_markup_extra_offset
         self._first_measure_number: int = first_measure_number
@@ -322,29 +322,29 @@ class SegmentMaker(abjad.SegmentMaker):
         self._ignore_unpitched_notes: bool = ignore_unpitched_notes
         self._ignore_unregistered_pitches: bool = \
             ignore_unregistered_pitches
-        self._instruments: U[abjad.OrderedDict, None] = instruments
+        self._instruments: abjad.OrderedDict = instruments
         self._last_measure_is_fermata = False
         self._last_segment: bool = last_segment
-        self._breaks: U[BreakMeasureMap, None] = breaks
-        self._margin_markup: U[abjad.OrderedDict, None] = margin_markup
-        self._measures_per_stage: U[List[int], None] = measures_per_stage
-        self._metronome_mark_measure_map: U[
-            MetronomeMarkMeasureMap, None] = metronome_mark_measure_map
+        self._breaks: BreakMeasureMap = breaks
+        self._margin_markup: abjad.OrderedDict = margin_markup
+        self._measures_per_stage: List[int] = measures_per_stage
+        self._metronome_mark_measure_map: MetronomeMarkMeasureMap = \
+            metronome_mark_measure_map
         self._metronome_mark_stem_height: Optional[Number] = \
             metronome_mark_stem_height
-        self._metronome_marks: U[abjad.OrderedDict, None] = metronome_marks
+        self._metronome_marks: abjad.OrderedDict = metronome_marks
         self._midi: bool = None
         self._offset_to_measure_number: Dict[abjad.Offset, int] = {}
         self._print_timings: bool = print_timings
-        self._range_checker: U[abjad.PitchRange, None] = range_checker
+        self._range_checker: abjad.PitchRange = range_checker
         self._rehearsal_letter: str = rehearsal_letter
-        self._score_template: U[ScoreTemplate, None] = score_template
+        self._score_template: ScoreTemplate = score_template
         self._segment_bol_measure_numbers: List[int] = []
-        self._segment_duration: U[abjad.Duration, None] = None
+        self._segment_duration: abjad.Duration = None
         self._skip_wellformedness_checks: bool = skip_wellformedness_checks
         self._skips_instead_of_rests: bool = skips_instead_of_rests
-        self._spacing_specifier: U[
-            HorizontalSpacingSpecifier, None] = spacing_specifier
+        self._spacing_specifier: HorizontalSpacingSpecifier = \
+            spacing_specifier
         self._sounds_during_segment: abjad.OrderedDict = abjad.OrderedDict()
         self._stage_label_base_string: str = stage_label_base_string
         self._start_clock_time: str = None

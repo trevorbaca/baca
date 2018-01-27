@@ -115,3 +115,48 @@ from .LibraryAF import LibraryAF
 from .LibraryGM import LibraryGM
 from .LibraryNS import LibraryNS
 from .LibraryTZ import LibraryTZ
+
+
+# MYPY:
+#
+# UNCOMMENT WHEN RUNNING MYPY AGAINST SCORES
+#
+# LEAVE COMMENTED-OUT WHEN BUILDING API
+#
+#### SELECTORS ###
+#
+#def phead(n):
+#    return baca.select().phead(n)
+#
+#def pheads():
+#    return baca.select().pheads()
+#
+#def pleaf(n):
+#    return baca.select().pleaf(n)
+#
+#### LIBRARY A-F ###
+#
+#accents = LibraryAF.accents
+#breaks = LibraryAF.breaks
+#clef = LibraryAF.clef
+#dynamic = LibraryAF.dynamic
+#
+#### LIBRARY G-M ###
+#
+#make_scopes = LibraryGM.make_scopes
+#margin_markup = LibraryGM.margin_markup
+#metronome_mark = LibraryGM.metronome_mark
+#
+#### LIBRARY N-S ###
+#
+#page = LibraryNS.page
+#pitches = LibraryNS.pitches
+#scope = LibraryNS.scope
+#scorewide_spacing = LibraryNS.scorewide_spacing
+#strict_quarter_divisions = LibraryNS.strict_quarter_divisions
+#
+#### LIBRARY T-Z ###
+#
+#trill_spanner_staff_padding = LibraryTZ.trill_spanner_staff_padding
+#trill = LibraryTZ.trill
+#untie_to = LibraryTZ.trill
