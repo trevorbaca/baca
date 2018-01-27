@@ -29,10 +29,12 @@ Bases
       ~LibraryNS.page_break
       ~LibraryNS.part
       ~LibraryNS.piecewise
+      ~LibraryNS.pitch
       ~LibraryNS.pitches
       ~LibraryNS.possibile_dynamic
       ~LibraryNS.proportional_notation_duration
       ~LibraryNS.register
+      ~LibraryNS.rehearsal_mark
       ~LibraryNS.rehearsal_mark_extra_offset
       ~LibraryNS.reiterated_dynamic
       ~LibraryNS.repeat_ties_down
@@ -113,6 +115,8 @@ Class & static methods
 
 .. automethod:: LibraryNS.piecewise
 
+.. automethod:: LibraryNS.pitch
+
 .. automethod:: LibraryNS.pitches
 
 .. automethod:: LibraryNS.possibile_dynamic
@@ -120,6 +124,8 @@ Class & static methods
 .. automethod:: LibraryNS.proportional_notation_duration
 
 .. automethod:: LibraryNS.register
+
+.. automethod:: LibraryNS.rehearsal_mark
 
 .. automethod:: LibraryNS.rehearsal_mark_extra_offset
 
