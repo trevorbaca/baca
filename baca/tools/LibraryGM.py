@@ -1,6 +1,5 @@
 import abjad
 import baca
-import ide
 from typing import Union
 from abjad import rhythmmakertools as rhythmos
 
@@ -1908,7 +1907,7 @@ class LibraryGM(abjad.AbjadObject):
     def metadata(path: str) -> abjad.OrderedDict:
         r'''Gets metadata for previous segment before segment `path`.
         '''
-        segment = ide.Path(path).parent
+        segment = abjad.Path(path).parent
         if not segment.is_segment():
             raise Exception(f'must be segment: {segment.trim()}')
         previous_segment = segment.get_previous_package(cyclic=False)
