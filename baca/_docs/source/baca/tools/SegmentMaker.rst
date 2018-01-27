@@ -66,7 +66,6 @@ Bases
       ~SegmentMaker.time_signatures
       ~SegmentMaker.transpose_score
       ~SegmentMaker.validate_measure_count
-      ~SegmentMaker.validate_measures_per_stage
       ~SegmentMaker.validate_stage_count
       ~SegmentMaker.wrappers
       ~SegmentMaker.__call__
@@ -165,6 +164,8 @@ Read-only properties
 
 .. autoattribute:: SegmentMaker.validate_measure_count
 
+.. autoattribute:: SegmentMaker.validate_stage_count
+
 .. autoattribute:: SegmentMaker.wrappers
 
 Methods
@@ -173,10 +174,6 @@ Methods
 .. automethod:: SegmentMaker.copy_rhythm
 
 .. automethod:: SegmentMaker.run
-
-.. automethod:: SegmentMaker.validate_measures_per_stage
-
-.. automethod:: SegmentMaker.validate_stage_count
 
 Special methods
 ---------------

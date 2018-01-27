@@ -183,6 +183,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_time_signatures',
         '_transpose_score',
         '_validate_measure_count',
+        '_validate_stage_count',
         '_voice_metadata',
         '_wrappers',
         )
@@ -297,6 +298,7 @@ class SegmentMaker(abjad.SegmentMaker):
         time_signatures: List[tuple] = None,
         transpose_score: bool = None,
         validate_measure_count: int = None,
+        validate_stage_count: int = None,
         ) -> None:
         super(SegmentMaker, self).__init__()
         self._allow_empty_selections: bool = allow_empty_selections
@@ -354,10 +356,12 @@ class SegmentMaker(abjad.SegmentMaker):
         self._stop_clock_time: str = None
         self._transpose_score: bool = transpose_score
         self._validate_measure_count: int = validate_measure_count
+        self._validate_stage_count: int = validate_stage_count
         self._voice_metadata: abjad.OrderedDict = abjad.OrderedDict()
         self._wrappers: List[CommandWrapper] = []
         self._initialize_time_signatures(time_signatures)
         self._validate_measure_count_()
+        self._validate_measures_per_stage()
 
     ### SPECIAL METHODS ###
 
@@ -2273,6 +2277,21 @@ class SegmentMaker(abjad.SegmentMaker):
         found = len(self.time_signatures)
         if found != self.validate_measure_count:
             raise Exception(f'{found} != {self.validate_measure_count}')
+
+    def _validate_measures_per_stage(self):
+        if self.measures_per_stage is None:
+            return
+        if not sum(self.measures_per_stage) == self.measure_count:
+            message = f'measures per stage {self.measures_per_stage}'
+            message += f' do not match measure count {self.measure_count}.'
+            raise Exception(message)
+
+    def _validate_stage_count_(self):
+        if not self.validate_stage_count:
+            return
+        if self.stage_count != self.validate_stage_count:
+            message = f'{self.stage_count} != {self.validate_stage_count}'
+            raise Exception(message)
 
     def _voice_to_rhythm_wrappers(self, voice):
         wrappers = []
@@ -7093,14 +7112,17 @@ class SegmentMaker(abjad.SegmentMaker):
     def measure_count(self) -> int:
         r'''Gets measure count.
         '''
-        return len(self.time_signatures)
+        if self.time_signatures:
+            return len(self.time_signatures)
+        return 0
 
     @property
     def measures_per_stage(self) -> List[int]:
         r'''Gets measures per stage.
         '''
         if self._measures_per_stage is None:
-            return [len(self.time_signatures)]
+            time_signatures = self.time_signatures or []
+            return [len(time_signatures)]
         return self._measures_per_stage
 
     @property
@@ -9217,6 +9239,12 @@ class SegmentMaker(abjad.SegmentMaker):
         r'''Gets validate measure count.
         '''
         return self._validate_measure_count
+    
+    @property
+    def validate_stage_count(self) -> Optional[int]:
+        r'''Gets validate stage count.
+        '''
+        return self._validate_stage_count
 
     @property
     def wrappers(self) -> List[CommandWrapper]:
@@ -9315,29 +9343,3 @@ class SegmentMaker(abjad.SegmentMaker):
         self._remove_tags(remove)
         self._collect_metadata()
         return self._lilypond_file
-
-    def validate_measures_per_stage(self):
-        r'''Validates measures per stage.
-
-        Raises exception when measures per stage do not match measure count.
-
-        Returns none.
-        '''
-        if self.measures_per_stage is None:
-            return
-        if not sum(self.measures_per_stage) == self.measure_count:
-            message = f'measures per stage {self.measures_per_stage}'
-            message += f' do not match measure count {self.measure_count}.'
-            raise Exception(message)
-
-    def validate_stage_count(self, stage_count):
-        r'''Validates stage count.
-
-        Raises exception when `stage_count` is incorrect.
-
-        Returns none.
-        '''
-        if not stage_count == self.stage_count:
-            message = f'stage count is not {stage_count}'
-            message += f' but {self.stage_count}.'
-            raise Exception(message)
