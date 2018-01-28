@@ -2,6 +2,7 @@ import abjad
 import baca
 from typing import Union
 from abjad import rhythmmakertools as rhythmos
+from .RhythmCommand import RhythmCommand
 
 
 class LibraryGM(abjad.AbjadObject):
@@ -1578,6 +1579,14 @@ class LibraryGM(abjad.AbjadObject):
             )
         return baca.RhythmCommand(
             rhythm_maker=rhythm_maker,
+            )
+
+    @staticmethod
+    def make_skips() -> RhythmCommand:
+        r'''Makes skips.
+        '''
+        return RhythmCommand(
+            rhythm_maker=rhythmos.SkipRhythmMaker()
             )
 
     @staticmethod
