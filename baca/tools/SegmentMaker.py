@@ -2522,7 +2522,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
                             #'((Y-offset . 0) (alignment-distances . (7)))                               %! BREAK:IC
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:IC
@@ -2615,7 +2614,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
                             #'((Y-offset . 0) (alignment-distances . (7)))                               %! BREAK:IC
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:IC
@@ -2807,7 +2805,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
                             #'((Y-offset . 0) (alignment-distances . (7)))                               %! BREAK:IC
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:IC
@@ -3692,7 +3689,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -3769,7 +3765,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -3911,7 +3906,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -4051,7 +4045,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -5717,7 +5710,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:IC
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:IC
@@ -5846,7 +5838,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:IC
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:IC
@@ -6158,7 +6149,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:IC
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:IC
@@ -6563,7 +6553,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:IC
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:IC
@@ -6692,7 +6681,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:IC
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:IC
@@ -7004,7 +6992,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
                             #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:IC
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:IC
@@ -7139,7 +7126,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             % GlobalSkips [measure 1]                                                    %! SM4
                             \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 1/2
@@ -7669,7 +7655,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:IC
@@ -7813,7 +7798,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:IC
@@ -8139,7 +8123,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \once \override TextSpanner.bound-details.right.stencil-align-dir-y = #center %! SM29
                             \once \override TextSpanner.dash-period = 0                                  %! SM29
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             \pageBreak                                                                   %! BREAK:IC
@@ -8492,7 +8475,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -8571,7 +8553,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8
@@ -8719,7 +8700,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \newSpacingSection                                                           %! SPACING:HSS1
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \mark #1                                                                     %! SM9
                             \bar ""                                                                      %! +SEGMENT:EMPTY_START_BAR:SM2
                             \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
                             s1 * 3/8

@@ -53,7 +53,7 @@ Bases
       ~SegmentMaker.previous_metadata
       ~SegmentMaker.print_timings
       ~SegmentMaker.range_checker
-      ~SegmentMaker.rehearsal_letter
+      ~SegmentMaker.rehearsal_mark
       ~SegmentMaker.run
       ~SegmentMaker.score
       ~SegmentMaker.score_template
@@ -140,7 +140,7 @@ Read-only properties
 
 .. autoattribute:: SegmentMaker.range_checker
 
-.. autoattribute:: SegmentMaker.rehearsal_letter
+.. autoattribute:: SegmentMaker.rehearsal_mark
 
 .. autoattribute:: SegmentMaker.score
 
