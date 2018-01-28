@@ -669,6 +669,14 @@ class MarkupLibrary(abjad.AbjadObject):
             )
 
     @staticmethod
+    def non_div(is_new=True, selector='baca.leaf(0)'):
+        return baca.markup(
+            'non div.',
+            is_new=is_new,
+            selector=selector,
+            )
+
+    @staticmethod
     def non_flautando(selector='baca.pleaf(0)'):
         return baca.markup(
             'non flautando',

@@ -1,8 +1,11 @@
 import abjad
 import baca
-from typing import Union
 from abjad import rhythmmakertools as rhythmos
+from .IndicatorCommand import IndicatorCommand
 from .RhythmCommand import RhythmCommand
+from .SuiteCommand import SuiteCommand
+from .Typing import Selector
+from .Typing import Union
 
 
 class LibraryGM(abjad.AbjadObject):
@@ -1762,11 +1765,12 @@ class LibraryGM(abjad.AbjadObject):
 
     @staticmethod
     def margin_markup(
-        argument,
-        context='Staff',
-        selector='baca.leaf(0)',
-        ):
-        r'''Sets margin markup on leaf.
+        argument: str,
+        alert: IndicatorCommand = None,
+        context: str = 'Staff',
+        selector: Selector = 'baca.leaf(0)',
+        ) -> Union[IndicatorCommand, SuiteCommand]:
+        r'''Sets margin markup on each leaf in `selector` output.
 
         ..  container:: example
 
@@ -1880,25 +1884,24 @@ class LibraryGM(abjad.AbjadObject):
                     >>
                 >>
 
-        Returns indicator command.
         '''
         if isinstance(argument, tuple):
             assert len(argument) == 2, repr(argument)
-            markup, short_markup = argument
-            if isinstance(markup, str):
-                markup = abjad.Markup(markup)
-            if isinstance(short_markup, str):
-                short_markup = abjad.Markup(short_markup)
+            assert all(isinstance(_, str) for _ in argument)
+            markup = abjad.Markup(argument[0])
+            short_markup = abjad.Markup(argument[1])
             margin_markup = abjad.MarginMarkup(
                 context=context,
                 markup=markup,
                 short_markup=short_markup,
                 )
         elif isinstance(argument, (str, abjad.Markup)):
+            markup = abjad.Markup(argument)
+            short_markup = abjad.Markup(argument)
             margin_markup = abjad.MarginMarkup(
                 context=context,
-                markup=argument,
-                short_markup=argument,
+                markup=markup,
+                short_markup=short_markup,
                 )
         elif isinstance(argument, abjad.MarginMarkup):
             margin_markup = abjad.new(
@@ -1907,10 +1910,15 @@ class LibraryGM(abjad.AbjadObject):
                 )
         else:
             raise TypeError(argument)
-        return baca.tools.IndicatorCommand(
+        command = IndicatorCommand(
             indicators=[margin_markup],
             selector=selector,
             )
+        if bool(alert):
+            assert isinstance(alert, IndicatorCommand), repr(alert)
+            return SuiteCommand([command, alert])
+        else:
+            return command
 
     @staticmethod
     def metadata(path: str) -> abjad.OrderedDict:

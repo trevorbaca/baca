@@ -87,6 +87,7 @@ Bases
       ~MarkupLibrary.molto_pont_plus_vib_molto
       ~MarkupLibrary.nail_rasg
       ~MarkupLibrary.nail_rasgueado
+      ~MarkupLibrary.non_div
       ~MarkupLibrary.non_flautando
       ~MarkupLibrary.non_flutt
       ~MarkupLibrary.non_spazz
@@ -306,6 +307,8 @@ Class & static methods
 .. automethod:: MarkupLibrary.nail_rasg
 
 .. automethod:: MarkupLibrary.nail_rasgueado
+
+.. automethod:: MarkupLibrary.non_div
 
 .. automethod:: MarkupLibrary.non_flautando
 
