@@ -168,7 +168,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_offset_to_measure_number',
         '_print_timings',
         '_range_checker',
-        '_rehearsal_letter',
+        '_rehearsal_mark',
         '_score',
         '_score_template',
         '_segment_bol_measure_numbers',
@@ -289,7 +289,7 @@ class SegmentMaker(abjad.SegmentMaker):
         metronome_marks: abjad.OrderedDict = None,
         print_timings: bool = None,
         range_checker: abjad.PitchRange = None,
-        rehearsal_letter: str = None,
+        rehearsal_mark: str = None,
         score_template: ScoreTemplate = None,
         skip_wellformedness_checks: bool = None,
         skips_instead_of_rests: bool = None,
@@ -343,7 +343,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._offset_to_measure_number: Dict[abjad.Offset, int] = {}
         self._print_timings: bool = print_timings
         self._range_checker: abjad.PitchRange = range_checker
-        self._rehearsal_letter: str = rehearsal_letter
+        self._rehearsal_mark: str = rehearsal_mark
         self._score_template: ScoreTemplate = score_template
         self._segment_bol_measure_numbers: List[int] = []
         self._segment_duration: abjad.Duration = None
@@ -882,21 +882,9 @@ class SegmentMaker(abjad.SegmentMaker):
             spanner.attach(directive, skip, site='SM30')
 
     def _attach_rehearsal_mark(self):
-        if self.rehearsal_letter == '':
+        if not self.rehearsal_mark:
             return
-        letter_number = None
-        if self.rehearsal_letter is None:
-            segment_number = self._get_segment_number()
-            letter_number = segment_number - 1
-        elif isinstance(self.rehearsal_letter, str):
-            assert len(self.rehearsal_letter) == 1
-            rehearsal_letter = self.rehearsal_letter.upper()
-            letter_number = ord(rehearsal_letter) - ord('A') + 1
-        if letter_number == 0:
-            return
-        rehearsal_mark = abjad.RehearsalMark(
-            number=letter_number
-            )
+        rehearsal_mark = abjad.RehearsalMark.from_string(self.rehearsal_mark)
         skip = baca.select(self.score['GlobalSkips']).skip(0)
         abjad.attach(rehearsal_mark, skip, site='SM9')
 
@@ -1527,17 +1515,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 result[key] = value
         return result
 
-    def _get_rehearsal_letter(self):
-        if self.rehearsal_letter:
-            return self.rehearsal_letter
-        segment_number = self._get_segment_number()
-        if segment_number == 1:
-            return ''
-        segment_index = segment_number - 1
-        rehearsal_ordinal = ord('A') - 1 + segment_index
-        rehearsal_letter = chr(rehearsal_ordinal)
-        return rehearsal_letter
-
     def _get_segment_identifier(self):
         segment_name = self._metadata.get('segment_name')
         if segment_name is not None:
@@ -1827,7 +1804,7 @@ class SegmentMaker(abjad.SegmentMaker):
             result = self._stage_number_to_measure_indices(stage_number)
             start_measure_index, stop_measure_index = result
             base = self.stage_label_base_string
-            base = base or self._get_rehearsal_letter()
+            base = base or self.rehearsal_mark
             if base not in ('', None):
                 string = f'[{base}.{stage_number}]'
             else:
@@ -8225,16 +8202,10 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._range_checker
 
     @property
-    def rehearsal_letter(self) -> Optional[str]:
-        r'''Gets rehearsal letter.
-
-        Calculates rehearsal letter automatically when none.
-
-        Suppresses rehearsal letter when set to empty string.
-
-        Sets rehearsal letter explicitly when set to nonempty string.
+    def rehearsal_mark(self) -> Optional[str]:
+        r'''Gets rehearsal mark.
         '''
-        return self._rehearsal_letter
+        return self._rehearsal_mark
 
     @property
     def score(self) -> Optional[abjad.Score]:
