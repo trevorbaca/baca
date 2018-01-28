@@ -30,7 +30,8 @@ Bases
       ~ScoreTemplate.make_piano_staff
       ~ScoreTemplate.make_square_staff_group
       ~ScoreTemplate.make_staff_group
-      ~ScoreTemplate.parts
+      ~ScoreTemplate.part_manifest
+      ~ScoreTemplate.part_names
       ~ScoreTemplate.__call__
       ~ScoreTemplate.__copy__
       ~ScoreTemplate.__eq__
@@ -48,7 +49,7 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: ScoreTemplate.parts
+      .. autoattribute:: ScoreTemplate.part_manifest
 
 Methods
 -------
@@ -68,6 +69,12 @@ Methods
 .. automethod:: ScoreTemplate.make_square_staff_group
 
 .. automethod:: ScoreTemplate.make_staff_group
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: ScoreTemplate.part_names
 
 Special methods
 ---------------

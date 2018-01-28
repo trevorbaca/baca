@@ -32,7 +32,8 @@ Bases
       ~TwoVoiceStaffScoreTemplate.make_piano_staff
       ~TwoVoiceStaffScoreTemplate.make_square_staff_group
       ~TwoVoiceStaffScoreTemplate.make_staff_group
-      ~TwoVoiceStaffScoreTemplate.parts
+      ~TwoVoiceStaffScoreTemplate.part_manifest
+      ~TwoVoiceStaffScoreTemplate.part_names
       ~TwoVoiceStaffScoreTemplate.__call__
       ~TwoVoiceStaffScoreTemplate.__copy__
       ~TwoVoiceStaffScoreTemplate.__eq__
@@ -54,7 +55,7 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: TwoVoiceStaffScoreTemplate.parts
+      .. autoattribute:: TwoVoiceStaffScoreTemplate.part_manifest
 
 Methods
 -------
@@ -94,6 +95,12 @@ Methods
    .. container:: inherited
 
       .. automethod:: TwoVoiceStaffScoreTemplate.make_staff_group
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: TwoVoiceStaffScoreTemplate.part_names
 
 Special methods
 ---------------

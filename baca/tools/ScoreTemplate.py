@@ -14,7 +14,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
         '_defaults',
         )
 
-    voice_colors:dict = {
+    voice_colors: dict = {
         }
 
     ### INITIALIZER ###
@@ -58,7 +58,8 @@ class ScoreTemplate(abjad.ScoreTemplate):
         for tag_ in tag.split('.'):
             if not abjad.String(tag_).is_lilypond_identifier():
                 raise Exception(f'invalid LilyPond identifier: {tag_!r}.')
-            if self.parts and tag_ not in self.parts:
+            part_names = self.part_names()
+            if part_names and tag_ not in part_names:
                 raise Exception(f'not listed in parts manifest: {tag_!r}.')
         literal = abjad.LilyPondLiteral(fr'\tag {tag}', 'before')
         abjad.attach(literal, context, site='ST4')
@@ -171,15 +172,6 @@ class ScoreTemplate(abjad.ScoreTemplate):
         if not isinstance(stem, str):
             raise Exception(f'stem must be string: {stem!r}.')
         contexts = [_ for _ in contexts if _ is not None]
-#        # flatten redundant staff group
-#        if len(contexts) == 1 and isinstance(contexts[0], abjad.StaffGroup):
-#            contexts_ = abjad.mutate(contexts[0]).eject_contents()
-#            staff_group = abjad.StaffGroup(
-#                contexts_,
-#                name=f'{stem}StaffGroup',
-#                )
-#            return staff_group
-#        elif 1 < len(contexts):
         if contexts:
             staff_group = abjad.StaffGroup(contexts, name=f'{stem}StaffGroup')
             return staff_group

@@ -32,7 +32,8 @@ Bases
       ~SingleStaffScoreTemplate.make_piano_staff
       ~SingleStaffScoreTemplate.make_square_staff_group
       ~SingleStaffScoreTemplate.make_staff_group
-      ~SingleStaffScoreTemplate.parts
+      ~SingleStaffScoreTemplate.part_manifest
+      ~SingleStaffScoreTemplate.part_names
       ~SingleStaffScoreTemplate.__call__
       ~SingleStaffScoreTemplate.__copy__
       ~SingleStaffScoreTemplate.__eq__
@@ -54,7 +55,7 @@ Read-only properties
 
    .. container:: inherited
 
-      .. autoattribute:: SingleStaffScoreTemplate.parts
+      .. autoattribute:: SingleStaffScoreTemplate.part_manifest
 
 Methods
 -------
@@ -94,6 +95,12 @@ Methods
    .. container:: inherited
 
       .. automethod:: SingleStaffScoreTemplate.make_staff_group
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: SingleStaffScoreTemplate.part_names
 
 Special methods
 ---------------
