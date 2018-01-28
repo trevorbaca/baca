@@ -1916,12 +1916,23 @@ class LibraryGM(abjad.AbjadObject):
     def metadata(path: str) -> abjad.OrderedDict:
         r'''Gets metadata for previous segment before segment `path`.
         '''
-        segment = abjad.Path(path).parent
-        if not segment.is_segment():
-            raise Exception(f'must be segment: {segment.trim()}')
-        previous_segment = segment.get_previous_package(cyclic=False)
-        metadata = previous_segment.get_metadata()
-        return metadata
+        # reproduces abjad.Path.get_previous_path()
+        # because Travis isn't configured for scores-directory calculations
+        definition_py = abjad.Path(path)
+        segment = abjad.Path(definition_py).parent
+        assert segment.is_segment(), repr(segment)
+        segments = segment.parent
+        assert segments.is_segments(), repr(segments)
+        paths = segments.list_paths()
+        paths = [_ for _ in paths if not _.name.startswith('.')]
+        assert all(_.is_dir() for _ in paths), repr(paths)
+        index = paths.index(segment)
+        if index == 0:
+            return
+        previous_index = index - 1
+        previous_segment = paths[previous_index]
+        previous_metadata = previous_segment.get_metadata()
+        return previous_metadata
 
     @staticmethod
     def metronome_mark(key, selector='baca.leaf(0)'):
