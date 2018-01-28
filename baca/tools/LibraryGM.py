@@ -1928,7 +1928,7 @@ class LibraryGM(abjad.AbjadObject):
         assert all(_.is_dir() for _ in paths), repr(paths)
         index = paths.index(segment)
         if index == 0:
-            return
+            return None
         previous_index = index - 1
         previous_segment = paths[previous_index]
         previous_metadata = previous_segment.get_metadata()

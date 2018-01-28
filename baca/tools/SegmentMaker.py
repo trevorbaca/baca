@@ -172,12 +172,12 @@ class SegmentMaker(abjad.SegmentMaker):
         '_score',
         '_score_template',
         '_segment_bol_measure_numbers',
+        '_segment_directory',
         '_segment_duration',
         '_skip_wellformedness_checks',
         '_skips_instead_of_rests',
         '_sounds_during_segment',
         '_spacing',
-        '_stage_label_base_string',
         '_start_clock_time',
         '_stop_clock_time',
         '_time_signatures',
@@ -294,7 +294,6 @@ class SegmentMaker(abjad.SegmentMaker):
         skip_wellformedness_checks: bool = None,
         skips_instead_of_rests: bool = None,
         spacing: HorizontalSpacingSpecifier = None,
-        stage_label_base_string: str = None,
         time_signatures: List[tuple] = None,
         transpose_score: bool = None,
         validate_measure_count: int = None,
@@ -351,7 +350,6 @@ class SegmentMaker(abjad.SegmentMaker):
         self._skips_instead_of_rests: bool = skips_instead_of_rests
         self._spacing: HorizontalSpacingSpecifier = spacing
         self._sounds_during_segment: abjad.OrderedDict = abjad.OrderedDict()
-        self._stage_label_base_string: str = stage_label_base_string
         self._start_clock_time: str = None
         self._stop_clock_time: str = None
         self._transpose_score: bool = transpose_score
@@ -1184,6 +1182,8 @@ class SegmentMaker(abjad.SegmentMaker):
         if self._last_measure_is_fermata:
             result['last_measure_is_fermata'] = True
         result['persistent_indicators'] = self._collect_persistent_indicators()
+        if bool(self.segment_name):
+            result['segment_name'] = self.segment_name
         result['segment_number'] = self._get_segment_number()
         result['sounds_during_segment'] = self._sounds_during_segment
         result['start_clock_time'] = self._start_clock_time
@@ -1803,10 +1803,9 @@ class SegmentMaker(abjad.SegmentMaker):
             stage_number = stage_index + 1
             result = self._stage_number_to_measure_indices(stage_number)
             start_measure_index, stop_measure_index = result
-            base = self.stage_label_base_string
-            base = base or self.rehearsal_mark
-            if base not in ('', None):
-                string = f'[{base}.{stage_number}]'
+            name = self.segment_name or self.rehearsal_mark
+            if bool(name):
+                string = f'[{name}.{stage_number}]'
             else:
                 string = f'[{stage_number}]'
             markup = abjad.Markup(string)
@@ -8215,6 +8214,20 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._score_template
 
     @property
+    def segment_directory(self) -> Optional[abjad.Path]:
+        r'''Gets segment directory.
+        '''
+        return self._segment_directory
+
+    @property
+    def segment_name(self) -> Optional[str]:
+        r'''Gets segment name.
+        '''
+        if bool(self.segment_directory):
+            return self.segment_directory.name
+        return None
+
+    @property
     def skip_wellformedness_checks(self) -> Optional[bool]:
         r'''Is true when segment skips wellformedness checks.
         '''
@@ -8747,124 +8760,6 @@ class SegmentMaker(abjad.SegmentMaker):
         return len(self.measures_per_stage)
 
     @property
-    def stage_label_base_string(self) -> Optional[str]:
-        r'''Gets stage label base string.
-
-        ..  container:: example
-
-            Sets stage label base string explicitly:
-
-            >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     stage_label_base_string='intermezzo',
-            ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-            ...     )
-
-            >>> maker(
-            ...     baca.scope('MusicVoice', 1),
-            ...     baca.make_even_runs(),
-            ...     )
-
-            >>> metadata = {'name': 'K'}
-            >>> lilypond_file = maker.run(
-            ...     environment='docs',
-            ...     metadata=metadata,
-            ...     )
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \context Score = "Score" <<
-                    \context GlobalContext = "GlobalContext" <<
-                        \context GlobalSkips = "GlobalSkips" {
-                <BLANKLINE>
-                            % GlobalSkips [measure 1]                                                    %! SM4
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            s1 * 1/2
-                <BLANKLINE>
-                            % GlobalSkips [measure 2]                                                    %! SM4
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            s1 * 3/8
-                <BLANKLINE>
-                            % GlobalSkips [measure 3]                                                    %! SM4
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            s1 * 1/2
-                <BLANKLINE>
-                            % GlobalSkips [measure 4]                                                    %! SM4
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
-                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
-                            s1 * 3/8
-                            \override Score.BarLine.transparent = ##f                                    %! SM5
-                            \bar "|"                                                                     %! SM5
-                <BLANKLINE>
-                        }
-                    >>
-                    \context MusicContext = "MusicContext" <<
-                        \context Staff = "MusicStaff" {
-                            \context Voice = "MusicVoice" {
-                                {
-                <BLANKLINE>
-                                    % MusicVoice [measure 1]                                             %! SM4
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    % MusicVoice [measure 2]                                             %! SM4
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    % MusicVoice [measure 3]                                             %! SM4
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                                }
-                                {
-                <BLANKLINE>
-                                    % MusicVoice [measure 4]                                             %! SM4
-                                    c'8
-                                    [
-                <BLANKLINE>
-                                    c'8
-                <BLANKLINE>
-                                    c'8
-                                    ]
-                <BLANKLINE>
-                                }
-                            }
-                        }
-                    >>
-                >>
-
-        '''
-        return self._stage_label_base_string
-
-    @property
     def time_signatures(self) -> List[abjad.TimeSignature]:
         r'''Gets time signatures.
         '''
@@ -9237,12 +9132,13 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def run(
         self,
-        deactivate: U[List[str], None] = None,
+        deactivate: List[str] = None,
         environment: str = None,
-        metadata: U[abjad.OrderedDict, None] = None,
+        metadata: abjad.OrderedDict = None,
         midi: bool = None,
-        previous_metadata: U[abjad.OrderedDict, None] = None,
-        remove: U[List[str], None] = None,
+        previous_metadata: abjad.OrderedDict = None,
+        remove: List[str] = None,
+        segment_directory: abjad.Path = None,
         ) -> abjad.LilyPondFile:
         r'''Runs segment-maker.
 
@@ -9251,12 +9147,12 @@ class SegmentMaker(abjad.SegmentMaker):
             Set to `'external'` to debug API examples in an external file.
 
         '''
-        deactivate = deactivate or []
-        assert all(isinstance(_, str) for _ in deactivate), repr(deactivate)
-        self._environment = environment
-        self._metadata = abjad.OrderedDict(metadata)
-        self._midi = midi
-        self._previous_metadata = abjad.OrderedDict(previous_metadata)
+        self._environment: Optional[str] = environment
+        self._metadata: abjad.OrderedDict = abjad.OrderedDict(metadata)
+        self._midi: Optional[bool] = midi
+        self._previous_metadata: Optional[
+            abjad.OrderedDict] = abjad.OrderedDict(previous_metadata)
+        self._segment_directory: Optional[abjad.Path] = segment_directory
         self._make_score()
         self._make_lilypond_file()
         self._make_global_skips()
@@ -9290,7 +9186,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._apply_breaks()
         self._style_fermata_measures()
         self._shift_clefs_into_fermata_measures()
-        self._deactivate_tags(deactivate)
+        self._deactivate_tags(deactivate or [])
         self._remove_tags(remove)
         self._collect_metadata()
         return self._lilypond_file

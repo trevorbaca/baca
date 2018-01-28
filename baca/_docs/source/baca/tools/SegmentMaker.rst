@@ -57,12 +57,13 @@ Bases
       ~SegmentMaker.run
       ~SegmentMaker.score
       ~SegmentMaker.score_template
+      ~SegmentMaker.segment_directory
+      ~SegmentMaker.segment_name
       ~SegmentMaker.skip_wellformedness_checks
       ~SegmentMaker.skips_instead_of_rests
       ~SegmentMaker.spacing
       ~SegmentMaker.staff_lines
       ~SegmentMaker.stage_count
-      ~SegmentMaker.stage_label_base_string
       ~SegmentMaker.time_signatures
       ~SegmentMaker.transpose_score
       ~SegmentMaker.validate_measure_count
@@ -146,6 +147,10 @@ Read-only properties
 
 .. autoattribute:: SegmentMaker.score_template
 
+.. autoattribute:: SegmentMaker.segment_directory
+
+.. autoattribute:: SegmentMaker.segment_name
+
 .. autoattribute:: SegmentMaker.skip_wellformedness_checks
 
 .. autoattribute:: SegmentMaker.skips_instead_of_rests
@@ -155,8 +160,6 @@ Read-only properties
 .. autoattribute:: SegmentMaker.staff_lines
 
 .. autoattribute:: SegmentMaker.stage_count
-
-.. autoattribute:: SegmentMaker.stage_label_base_string
 
 .. autoattribute:: SegmentMaker.time_signatures
 
