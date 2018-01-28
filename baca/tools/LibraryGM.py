@@ -1889,18 +1889,18 @@ class LibraryGM(abjad.AbjadObject):
                 markup = abjad.Markup(markup)
             if isinstance(short_markup, str):
                 short_markup = abjad.Markup(short_markup)
-            margin_markup = baca.MarginMarkup(
+            margin_markup = abjad.MarginMarkup(
                 context=context,
                 markup=markup,
                 short_markup=short_markup,
                 )
         elif isinstance(argument, (str, abjad.Markup)):
-            margin_markup = baca.MarginMarkup(
+            margin_markup = abjad.MarginMarkup(
                 context=context,
                 markup=argument,
                 short_markup=argument,
                 )
-        elif isinstance(argument, baca.MarginMarkup):
+        elif isinstance(argument, abjad.MarginMarkup):
             margin_markup = abjad.new(
                 argument,
                 context=context,

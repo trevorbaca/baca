@@ -213,7 +213,7 @@ class SegmentMaker(abjad.SegmentMaker):
     _prototype_to_manifest_name = {
         'abjad.Instrument': 'instruments',
         'abjad.MetronomeMark': 'metronome_marks',
-        'baca.MarginMarkup': 'margin_markup',
+        'abjad.MarginMarkup': 'margin_markup',
         }
 
     _extend_beam_tag = 'extend beam'
@@ -834,7 +834,7 @@ class SegmentMaker(abjad.SegmentMaker):
             key = type(indicator).__name__
         if isinstance(indicator, abjad.Instrument):
             left, right = '(', ')'
-        elif isinstance(indicator, baca.MarginMarkup):
+        elif isinstance(indicator, abjad.MarginMarkup):
             left, right = '[', ']'
         else:
             raise TypeError(indicator)
@@ -1059,7 +1059,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 status,
                 redraw=True,
                 )
-            if isinstance(indicator, (abjad.Instrument, baca.MarginMarkup)):
+            if isinstance(indicator, (abjad.Instrument, abjad.MarginMarkup)):
                 strings = indicator._get_lilypond_format(context=context)
                 literal = abjad.LilyPondLiteral(strings, 'after')
                 stem = SegmentMaker._indicator_to_stem(indicator)
@@ -1128,7 +1128,7 @@ class SegmentMaker(abjad.SegmentMaker):
             message = f'{voice} leaf {i} ({leaf!s}) missing instrument.'
             raise Exception(message)
         if instrument.hide:
-            markup = abjad.inspect(leaf).get_effective(baca.MarginMarkup)
+            markup = abjad.inspect(leaf).get_effective(abjad.MarginMarkup)
             if markup is None:
                 message = f'{voice} leaf {i} ({leaf!s}) missing margin markup.'
                 raise Exception(message)
@@ -1610,7 +1610,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return 'InstrumentName'
         elif isinstance(indicator, abjad.MetronomeMark):
             return 'TextScript'
-        elif isinstance(indicator, baca.MarginMarkup):
+        elif isinstance(indicator, abjad.MarginMarkup):
             return 'InstrumentName'
         elif isinstance(indicator, baca.StaffLines):
             return 'StaffSymbol'
@@ -1632,9 +1632,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 manifests['abjad.MetronomeMark'],
                 indicator,
                 )
-        elif isinstance(indicator, baca.MarginMarkup):
+        elif isinstance(indicator, abjad.MarginMarkup):
             return SegmentMaker._get_key(
-                manifests['baca.MarginMarkup'],
+                manifests['abjad.MarginMarkup'],
                 indicator,
                 )
         elif isinstance(indicator, baca.StaffLines):
@@ -1730,7 +1730,7 @@ class SegmentMaker(abjad.SegmentMaker):
             indicator = self.metronome_marks.get(key)
         elif prototype is abjad.TimeSignature:
             indicator = abjad.TimeSignature.from_string(key)
-        elif prototype is baca.MarginMarkup:
+        elif prototype is abjad.MarginMarkup:
             indicator = self.margin_markup.get(key)
         elif prototype is baca.StaffLines:
             indicator = baca.StaffLines(line_count=key)
@@ -6241,7 +6241,7 @@ class SegmentMaker(abjad.SegmentMaker):
         manifests = abjad.OrderedDict()
         manifests['abjad.Instrument'] = self.instruments
         manifests['abjad.MetronomeMark'] = self.metronome_marks
-        manifests['baca.MarginMarkup'] = self.margin_markup
+        manifests['abjad.MarginMarkup'] = self.margin_markup
         return manifests
 
     @property
@@ -6251,11 +6251,11 @@ class SegmentMaker(abjad.SegmentMaker):
         ..  container:: example
 
             >>> margin_markup = abjad.OrderedDict()
-            >>> margin_markup['I+II'] = baca.MarginMarkup(
+            >>> margin_markup['I+II'] = abjad.MarginMarkup(
             ...     markup=abjad.Markup('I+II'),
             ...     short_markup=abjad.Markup('I+II'),
             ...     )
-            >>> margin_markup['III+IV'] = baca.MarginMarkup(
+            >>> margin_markup['III+IV'] = abjad.MarginMarkup(
             ...     markup=abjad.Markup('III+IV'),
             ...     short_markup=abjad.Markup('III+IV'),
             ...     )
@@ -6523,7 +6523,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> metadata['persistent_indicators']['MusicStaff'] = [
             ...     abjad.Momento(
             ...         context='MusicVoice',
-            ...         prototype='baca.MarginMarkup',
+            ...         prototype='abjad.MarginMarkup',
             ...         value='I+II',
             ...         )
             ...     ]
@@ -6651,7 +6651,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> metadata['persistent_indicators']['MusicStaff'] = [
             ...     abjad.Momento(
             ...         context='MusicVoice',
-            ...         prototype='baca.MarginMarkup',
+            ...         prototype='abjad.MarginMarkup',
             ...         value='I+II',
             ...         )
             ...     ]
@@ -6962,7 +6962,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> metadata['persistent_indicators']['MusicStaff'] = [
             ...     abjad.Momento(
             ...         context='MusicVoice',
-            ...         prototype='baca.MarginMarkup',
+            ...         prototype='abjad.MarginMarkup',
             ...         value='I+II',
             ...         )
             ...     ]

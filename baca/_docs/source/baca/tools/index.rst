@@ -175,7 +175,6 @@ baca.tools
    Interpolator
    LBSD
    Loop
-   MarginMarkup
    Matrix
    MetronomeMarkMeasureMap
    PageSpecifier
@@ -231,7 +230,6 @@ baca.tools
    ~baca.tools.Interpolator.Interpolator
    ~baca.tools.LBSD.LBSD
    ~baca.tools.Loop.Loop
-   ~baca.tools.MarginMarkup.MarginMarkup
    ~baca.tools.Matrix.Matrix
    ~baca.tools.MetronomeMarkMeasureMap.MetronomeMarkMeasureMap
    ~baca.tools.PageSpecifier.PageSpecifier
