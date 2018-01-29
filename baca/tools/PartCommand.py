@@ -111,9 +111,9 @@ class PartCommand(Command):
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        leaves = baca.select(argument).leaves()
         container = abjad.Container()
-        abjad.mutate(leaves).wrap(container)
+        components = baca.select(argument).leaves().top()
+        abjad.mutate(components).wrap(container)
         string = rf'\tag {self.part}'
         literal = abjad.LilyPondLiteral(string, 'before')
         abjad.attach(literal, container)

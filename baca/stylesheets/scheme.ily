@@ -141,9 +141,19 @@ fff_ancora = #(
 
 %%% DYNAMICS (PHRASAL) %%%
 
+%%% NOTE: Use ...
+%%%
+%%%       DynamicText.X-extent = #'(0 . 0)
+%%%
+%%% ... instead of ...
+%%%
+%%%       DynamicText.X-extent = ##f
+%%%
+%%% ... to avoid warnings in LilyPond log.
+
 p_sub_but_accents_continue_sffz = 
     \tweak DynamicText.self-alignment-X #LEFT
-    \tweak DynamicText.X-extent ##f
+    \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
     (markup
         #:whiteout
@@ -159,7 +169,7 @@ p_sub_but_accents_continue_sffz =
 
 f_but_accents_sffz =
     \tweak DynamicText.self-alignment-X #LEFT
-    \tweak DynamicText.X-extent ##f
+    \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
     (markup
         #:whiteout
@@ -177,7 +187,7 @@ f_but_accents_sffz =
 
 f_sub_but_accents_continue_sffz =
     \tweak DynamicText.self-alignment-X #LEFT
-    \tweak DynamicText.X-extent ##f
+    \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
     (markup
         #:whiteout
@@ -446,7 +456,7 @@ sfz_p = #(
 
 ppp_sub = 
     \tweak DynamicText.self-alignment-X #LEFT
-    \tweak DynamicText.X-extent ##f
+    \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
     (markup
         #:line (
@@ -459,7 +469,7 @@ ppp_sub =
 
 pp_sub = 
     \tweak DynamicText.self-alignment-X #LEFT
-    \tweak DynamicText.X-extent ##f
+    \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
     (markup
         #:line (
@@ -472,7 +482,7 @@ pp_sub =
 
 p_sub = 
     \tweak DynamicText.self-alignment-X #LEFT
-    \tweak DynamicText.X-extent ##f
+    \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
     (markup
         #:line (
@@ -485,7 +495,7 @@ p_sub =
 
 mp_sub = 
     \tweak DynamicText.self-alignment-X #LEFT
-    \tweak DynamicText.X-extent ##f
+    \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
     (markup
         #:line (
@@ -498,7 +508,7 @@ mp_sub =
 
 mf_sub =
     \tweak DynamicText.self-alignment-X #LEFT
-    \tweak DynamicText.X-extent ##f
+    \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
     (markup
         #:line (
@@ -511,7 +521,7 @@ mf_sub =
 
 f_sub =
     \tweak DynamicText.self-alignment-X #LEFT
-    \tweak DynamicText.X-extent ##f
+    \tweak DynamicText.X-extent #'(0 . 0)
     #(make-dynamic-script
     (markup
         #:line (
