@@ -1726,12 +1726,12 @@ class SegmentMaker(abjad.SegmentMaker):
             indicator = prototype(key)
         elif prototype is abjad.Instrument:
             indicator = self.instruments.get(key)
+        elif prototype is abjad.MarginMarkup:
+            indicator = self.margin_markup.get(key)
         elif prototype is abjad.MetronomeMark:
             indicator = self.metronome_marks.get(key)
         elif prototype is abjad.TimeSignature:
             indicator = abjad.TimeSignature.from_string(key)
-        elif prototype is abjad.MarginMarkup:
-            indicator = self.margin_markup.get(key)
         elif prototype is baca.StaffLines:
             indicator = baca.StaffLines(line_count=key)
         else:
@@ -6240,8 +6240,8 @@ class SegmentMaker(abjad.SegmentMaker):
         '''
         manifests = abjad.OrderedDict()
         manifests['abjad.Instrument'] = self.instruments
-        manifests['abjad.MetronomeMark'] = self.metronome_marks
         manifests['abjad.MarginMarkup'] = self.margin_markup
+        manifests['abjad.MetronomeMark'] = self.metronome_marks
         return manifests
 
     @property
