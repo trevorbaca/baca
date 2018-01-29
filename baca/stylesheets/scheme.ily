@@ -51,7 +51,7 @@ tongue =
 
 %%% DYNAMICS (ANCORA) %%%
 
-ppp_poss = #(
+ppp_ancora = #(
     make-dynamic-script
     (markup
         #:line (
