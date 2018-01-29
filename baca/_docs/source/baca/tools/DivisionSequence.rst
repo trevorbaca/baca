@@ -70,6 +70,7 @@ Bases
       ~DivisionSequence.sum
       ~DivisionSequence.sum_by_sign
       ~DivisionSequence.truncate
+      ~DivisionSequence.weight
       ~DivisionSequence.zip
       ~DivisionSequence.__add__
       ~DivisionSequence.__contains__
@@ -295,6 +296,12 @@ Methods
    .. container:: inherited
 
       .. automethod:: DivisionSequence.truncate
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: DivisionSequence.weight
 
 .. only:: html
 

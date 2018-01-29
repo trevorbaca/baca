@@ -4,7 +4,7 @@ import collections
 from typing import Union
 from abjad import rhythmmakertools as rhythmos
 from .IndicatorCommand import IndicatorCommand
-from .PartCommand import PartCommand
+from .LilyPondTagCommand import LilyPondTagCommand
 from .Typing import Selector
 
 
@@ -481,12 +481,11 @@ class LibraryNS(abjad.AbjadObject):
             )
 
     @staticmethod
-    def part(
-        part: str,
+    def lilypond_tag(
+        tag: str,
         selector: Selector = 'baca.leaves()',
-        ) -> PartCommand:
-        r'''Attaches LilyPond tag command to container-grouped output of
-        `selector`.
+        ) -> LilyPondTagCommand:
+        r'''Attaches LilyPond tag to container-grouped output of `selector`.
 
         ..  container:: example
 
@@ -497,9 +496,9 @@ class LibraryNS(abjad.AbjadObject):
 
             >>> maker(
             ...     baca.scope('MusicVoice', 1),
+            ...     baca.lilypond_tag('ViolinI', baca.leaves()[:2]),
+            ...     baca.lilypond_tag('ViolinI.ViolinII', baca.leaves()[2:]),
             ...     baca.make_notes(repeat_ties=True),
-            ...     baca.part('ViolinI', baca.leaves()[:2]),
-            ...     baca.part('ViolinI.ViolinII', baca.leaves()[2:]),
             ...     baca.pitches('E4 F4'),
             ...     )
 
@@ -562,7 +561,7 @@ class LibraryNS(abjad.AbjadObject):
             >>
 
         '''
-        return PartCommand(selector=selector, part=part)
+        return LilyPondTagCommand(selector=selector, tag=tag)
 
     @staticmethod
     def piecewise(spanner, indicators, selector, bookend=False, preamble=None):

@@ -19,6 +19,7 @@ Bases
 
    .. autosummary::
 
+      ~LibraryNS.lilypond_tag
       ~LibraryNS.natural_clusters
       ~LibraryNS.natural_harmonics
       ~LibraryNS.nest
@@ -27,7 +28,6 @@ Bases
       ~LibraryNS.ottava_bracket_staff_padding
       ~LibraryNS.page
       ~LibraryNS.page_break
-      ~LibraryNS.part
       ~LibraryNS.piecewise
       ~LibraryNS.pitch
       ~LibraryNS.pitches
@@ -95,6 +95,8 @@ Methods
 Class & static methods
 ----------------------
 
+.. automethod:: LibraryNS.lilypond_tag
+
 .. automethod:: LibraryNS.natural_clusters
 
 .. automethod:: LibraryNS.natural_harmonics
@@ -110,8 +112,6 @@ Class & static methods
 .. automethod:: LibraryNS.page
 
 .. automethod:: LibraryNS.page_break
-
-.. automethod:: LibraryNS.part
 
 .. automethod:: LibraryNS.piecewise
 

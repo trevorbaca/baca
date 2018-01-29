@@ -78,6 +78,7 @@ Bases
       ~Sequence.sum
       ~Sequence.sum_by_sign
       ~Sequence.truncate
+      ~Sequence.weight
       ~Sequence.zip
       ~Sequence.__add__
       ~Sequence.__contains__
@@ -319,6 +320,12 @@ Methods
    .. container:: inherited
 
       .. automethod:: Sequence.truncate
+
+.. only:: html
+
+   .. container:: inherited
+
+      .. automethod:: Sequence.weight
 
 .. only:: html
 

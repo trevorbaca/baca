@@ -98,13 +98,13 @@ baca.tools
    ImbricationCommand
    IndicatorCommand
    LabelCommand
+   LilyPondTagCommand
    MapCommand
    MetronomeMarkCommand
    MicrotoneDeviationCommand
    NestingCommand
    OctaveDisplacementCommand
    OverrideCommand
-   PartCommand
    PiecewiseCommand
    PitchCommand
    PitchFirstRhythmCommand
@@ -132,13 +132,13 @@ baca.tools
    ~baca.tools.ImbricationCommand.ImbricationCommand
    ~baca.tools.IndicatorCommand.IndicatorCommand
    ~baca.tools.LabelCommand.LabelCommand
+   ~baca.tools.LilyPondTagCommand.LilyPondTagCommand
    ~baca.tools.MapCommand.MapCommand
    ~baca.tools.MetronomeMarkCommand.MetronomeMarkCommand
    ~baca.tools.MicrotoneDeviationCommand.MicrotoneDeviationCommand
    ~baca.tools.NestingCommand.NestingCommand
    ~baca.tools.OctaveDisplacementCommand.OctaveDisplacementCommand
    ~baca.tools.OverrideCommand.OverrideCommand
-   ~baca.tools.PartCommand.PartCommand
    ~baca.tools.PiecewiseCommand.PiecewiseCommand
    ~baca.tools.PitchCommand.PitchCommand
    ~baca.tools.PitchFirstRhythmCommand.PitchFirstRhythmCommand

@@ -39,6 +39,7 @@ from .Interpolator import Interpolator
 from .LBSD import LBSD
 from .LMRSpecifier import LMRSpecifier
 from .LabelCommand import LabelCommand
+from .LilyPondTagCommand import LilyPondTagCommand
 from .Loop import Loop
 from .MapCommand import MapCommand
 from .MarkupLibrary import MarkupLibrary
@@ -53,7 +54,6 @@ from .NestingCommand import NestingCommand
 from .OctaveDisplacementCommand import OctaveDisplacementCommand
 from .OverrideCommand import OverrideCommand
 from .PageSpecifier import PageSpecifier
-from .PartCommand import PartCommand
 from .PartitionDivisionCallback import PartitionDivisionCallback
 from .PiecewiseCommand import PiecewiseCommand
 from .PitchArray import PitchArray
