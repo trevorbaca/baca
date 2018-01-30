@@ -364,7 +364,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
             'default_clef',
             abjad.Clef('treble'),
             )
-        self._attach_tag('Violin', violin_music_staff)
+        self._attach_lilypond_tag('Violin', violin_music_staff)
 
         # VIOLA
         viola_music_voice = abjad.Voice(
@@ -392,7 +392,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
             'default_clef',
             abjad.Clef('alto'),
             )
-        self._attach_tag('Viola', viola_music_staff)
+        self._attach_lilypond_tag('Viola', viola_music_staff)
 
         # CELLO
         cello_music_voice = abjad.Voice(
@@ -420,7 +420,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
             'default_clef',
             abjad.Clef('bass'),
             )
-        self._attach_tag('Cello', cello_music_staff)
+        self._attach_lilypond_tag('Cello', cello_music_staff)
 
         # SCORE
         string_section_staff_group = abjad.StaffGroup(

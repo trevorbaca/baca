@@ -55,7 +55,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
             context = score[lilypond_type]
             abjad.annotate(context, annotation, indicator)
         
-    def _attach_tag(self, tag, context):
+    def _attach_lilypond_tag(self, tag, context):
         for tag_ in tag.split('.'):
             if not abjad.String(tag_).is_lilypond_identifier():
                 raise Exception(f'invalid LilyPond identifier: {tag_!r}.')

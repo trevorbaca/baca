@@ -179,7 +179,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             'default_clef',
             abjad.Clef('treble'),
             )
-        self._attach_tag('Violin', violin_music_staff)
+        self._attach_lilypond_tag('Violin', violin_music_staff)
 
         # MUSIC ONTEXT
         music_context = abjad.Context(
