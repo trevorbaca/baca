@@ -891,6 +891,8 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         pairs = self.score_template.attach_defaults(self.score)
         for leaf, indicator in pairs:
+            if getattr(indicator, 'hide', False) is True:
+                continue
             wrapper = abjad.inspect(leaf).wrapper(indicator)
             assert wrapper is not None
             assert getattr(wrapper.indicator, 'persistent', False)
@@ -1084,7 +1086,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 else:
                     prototype = type(wrapper.indicator)
                 previous_indicator = abjad.inspect(leaf).get_effective(
-                    #type(wrapper.indicator),
                     prototype,
                     n=-1,
                     )
@@ -1258,6 +1259,8 @@ class SegmentMaker(abjad.SegmentMaker):
         redraw=False,
         uncolor=False,
         ):
+        if getattr(indicator, 'hide', False) is True:
+            return
         if context is not None:
             assert isinstance(context, abjad.Context), repr(context)
         stem = SegmentMaker._indicator_to_stem(indicator)

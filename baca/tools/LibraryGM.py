@@ -1910,6 +1910,7 @@ class LibraryGM(abjad.AbjadObject):
                 )
         else:
             raise TypeError(argument)
+        assert isinstance(margin_markup, abjad.MarginMarkup)
         command = IndicatorCommand(
             indicators=[margin_markup],
             selector=selector,

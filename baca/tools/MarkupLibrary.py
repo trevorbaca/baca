@@ -263,7 +263,12 @@ class MarkupLibrary(abjad.AbjadObject):
 
     @staticmethod
     def _make_instrument_name_markup(string, space, column=True):
-        parts = string.split()
+        if isinstance(string, str):
+            parts = string.split()
+        elif isinstance(string, list):
+            parts = string
+        else:
+            raise TypeError(string)
         if len(parts) == 1:
             markup = abjad.Markup(parts[0]).hcenter_in(space)
         elif column:
