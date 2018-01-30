@@ -208,6 +208,77 @@ class Tags(abjad.Tags):
             }
 
     @staticmethod
+    def all_persistence_labels():
+        r'''Gets all persistence labels.
+
+        ..  container:: example
+
+            >>> for string in baca.tags.all_persistence_labels():
+            ...     string
+            ...
+            'DEFAULT_CLEF'
+            'EXPLICIT_CLEF'
+            'REAPPLIED_CLEF'
+            'REDUNDANT_CLEF'
+            'EXPLICIT_DYNAMIC'
+            'REAPPLIED_DYNAMIC'
+            'REDUNDANT_DYNAMIC'
+            'DEFAULT_INSTRUMENT'
+            'EXPLICIT_INSTRUMENT'
+            'REAPPLIED_INSTRUMENT'
+            'REDUNDANT_INSTRUMENT'
+            'DEFAULT_MARGIN_MARKUP'
+            'EXPLICIT_MARGIN_MARKUP'
+            'REAPPLIED_MARGIN_MARKUP'
+            'REDUNDANT_MARGIN_MARKUP'
+            'EXPLICIT_METRONOME_MARK'
+            'REAPPLIED_METRONOME_MARK'
+            'REDUNDANT_METRONOME_MARK'
+            'EXPLICIT_STAFF_LINES'
+            'REAPPLIED_STAFF_LINES'
+            'REDUNDANT_STAFF_LINES'
+            'EXPLICIT_TIME_SIGNATURE'
+            'REAPPLIED_TIME_SIGNATURE'
+            'REDUNDANT_TIME_SIGNATURE'
+
+        Returns list.
+        '''
+        import baca
+        return [
+            baca.tags.DEFAULT_CLEF,
+            baca.tags.EXPLICIT_CLEF,
+            baca.tags.REAPPLIED_CLEF,
+            baca.tags.REDUNDANT_CLEF,
+            #
+            baca.tags.EXPLICIT_DYNAMIC,
+            baca.tags.REAPPLIED_DYNAMIC,
+            baca.tags.REDUNDANT_DYNAMIC,
+            #
+            baca.tags.DEFAULT_INSTRUMENT,
+            baca.tags.EXPLICIT_INSTRUMENT,
+            baca.tags.REAPPLIED_INSTRUMENT,
+            baca.tags.REDUNDANT_INSTRUMENT,
+            #
+            baca.tags.DEFAULT_MARGIN_MARKUP,
+            baca.tags.EXPLICIT_MARGIN_MARKUP,
+            baca.tags.REAPPLIED_MARGIN_MARKUP,
+            baca.tags.REDUNDANT_MARGIN_MARKUP,
+            #
+            baca.tags.EXPLICIT_METRONOME_MARK,
+            baca.tags.REAPPLIED_METRONOME_MARK,
+            baca.tags.REDUNDANT_METRONOME_MARK,
+            #
+            baca.tags.EXPLICIT_STAFF_LINES,
+            baca.tags.REAPPLIED_STAFF_LINES,
+            baca.tags.REDUNDANT_STAFF_LINES,
+            #
+            baca.tags.EXPLICIT_TIME_SIGNATURE,
+            baca.tags.REAPPLIED_TIME_SIGNATURE,
+            baca.tags.REDUNDANT_TIME_SIGNATURE,
+            #
+            ]
+
+    @staticmethod
     def all_persistent_indicator_color_tags(path=None):
         r'''Gets all persistent indicator color tags.
 
