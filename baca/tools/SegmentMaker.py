@@ -852,13 +852,14 @@ class SegmentMaker(abjad.SegmentMaker):
             markup = abjad.Markup(items)
         markup = abjad.new(markup, direction=abjad.Up)
         stem = SegmentMaker._indicator_to_stem(indicator)
-        tag = f'{status.upper()}_{stem}_ALERT'
-        tag = getattr(baca.tags, tag)
-        abjad.attach(markup, leaf, deactivate=True, site='SM10', tag=tag)
+#        tag = f'{status.upper()}_{stem}_ALERT'
+#        tag = getattr(baca.tags, tag)
+#        abjad.attach(markup, leaf, deactivate=True, site='SM10', tag=tag)
         color = SegmentMaker._status_to_color[status]
         color = abjad.SchemeColor(color)
         markup = markup.with_color(color)
-        tag = f'{status.upper()}_{stem}_ALERT_WITH_COLOR'
+#        tag = f'{status.upper()}_{stem}_ALERT_WITH_COLOR'
+        tag = f'{status.upper()}_{stem}_ALERT'
         tag = getattr(baca.tags, tag)
         abjad.attach(markup, leaf, site='SM11', tag=tag)
 
@@ -2944,51 +2945,27 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:SM6
                                         %@% \override ViolinMusicStaff.Clef.color = ##f                  %! DEFAULT_CLEF_COLOR_CANCELLATION:SM7
                                             d'16
-                                            ^ \markup {
-                                                \column
-                                                    {
-                                                    %@% \line                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%     {                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%         \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%             (Violin                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%         \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%             \hcenter-in                          %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%                 #10                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%                 Violin                           %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%         \concat                                  %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%             {                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%                 \vcenter                         %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%                     \hcenter-in                  %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%                         #10                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%                         Vn.                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%                 \vcenter                         %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%                     )                            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%             }                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%     }                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        \line                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            {                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                \with-color                              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    #(x11-color 'DarkViolet)             %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    {                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \vcenter                         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            (Violin                      %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \vcenter                         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            \hcenter-in                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                #10                      %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                Violin                   %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \concat                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            {                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                \vcenter                 %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                    \hcenter-in          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                        #10              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                        Vn.              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                \vcenter                 %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                    )                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            }                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    }                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            }                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    }
-                                                }
+                                            ^ \markup {                                                  %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                \with-color                                              %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                    #(x11-color 'DarkViolet)                             %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                    {                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                        \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                            (Violin                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                        \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                            \hcenter-in                                  %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                                #10                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                                Violin                                   %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                        \concat                                          %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                            {                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                                \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                                    \hcenter-in                          %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                                        #10                              %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                                        Vn.                              %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                                \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                                    )                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                            }                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                    }                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                }                                                        %! DEFAULT_INSTRUMENT_ALERT:SM11
                                             \set ViolinMusicStaff.instrumentName = \markup {             %! REDRAWN_DEFAULT_INSTRUMENT:SM8
                                                 \hcenter-in                                              %! REDRAWN_DEFAULT_INSTRUMENT:SM8
                                                     #10                                                  %! REDRAWN_DEFAULT_INSTRUMENT:SM8
@@ -3047,51 +3024,27 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:SM6
                                 %@% \override ViolaMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:SM7
                                     R1 * 3/8
-                                    ^ \markup {
-                                        \column
-                                            {
-                                            %@% \line                                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %@%     {                                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %@%         \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %@%             (Viola                                       %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %@%         \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %@%             \hcenter-in                                  %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %@%                 #10                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %@%                 Viola                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %@%         \concat                                          %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %@%             {                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %@%                 \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %@%                     \hcenter-in                          %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %@%                         #10                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %@%                         Va.                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %@%                 \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %@%                     )                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %@%             }                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            %@%     }                                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                \line                                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    {                                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        \with-color                                      %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            #(x11-color 'DarkViolet)                     %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            {                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    (Viola                               %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    \hcenter-in                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        #10                              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        Viola                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                \concat                                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    {                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \vcenter                         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            \hcenter-in                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                #10                      %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                Va.                      %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \vcenter                         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            )                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    }                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            }                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    }                                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                            }
-                                        }
+                                    ^ \markup {                                                          %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                        \with-color                                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                            #(x11-color 'DarkViolet)                                     %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                            {                                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                \vcenter                                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                    (Viola                                               %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                \vcenter                                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                    \hcenter-in                                          %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                        #10                                              %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                        Viola                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                \concat                                                  %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                    {                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                        \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                            \hcenter-in                                  %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                                #10                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                                Va.                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                        \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                            )                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                    }                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                            }                                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                        }                                                                %! DEFAULT_INSTRUMENT_ALERT:SM11
                                     \set ViolaMusicStaff.instrumentName = \markup {                      %! REDRAWN_DEFAULT_INSTRUMENT:SM8
                                         \hcenter-in                                                      %! REDRAWN_DEFAULT_INSTRUMENT:SM8
                                             #10                                                          %! REDRAWN_DEFAULT_INSTRUMENT:SM8
@@ -3133,51 +3086,27 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:SM6
                                         %@% \override CelloMusicStaff.Clef.color = ##f                   %! DEFAULT_CLEF_COLOR_CANCELLATION:SM7
                                             a16
-                                            ^ \markup {
-                                                \column
-                                                    {
-                                                    %@% \line                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%     {                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%         \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%             (Cello                               %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%         \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%             \hcenter-in                          %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%                 #10                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%                 Cello                            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%         \concat                                  %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%             {                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%                 \vcenter                         %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%                     \hcenter-in                  %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%                         #10                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%                         Vc.                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%                 \vcenter                         %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%                     )                            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%             }                                    %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                    %@%     }                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                                        \line                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            {                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                \with-color                              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    #(x11-color 'DarkViolet)             %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    {                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \vcenter                         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            (Cello                       %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \vcenter                         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            \hcenter-in                  %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                #10                      %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                Cello                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \concat                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            {                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                \vcenter                 %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                    \hcenter-in          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                        #10              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                        Vc.              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                \vcenter                 %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                                    )                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            }                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    }                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            }                                            %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    }
-                                                }
+                                            ^ \markup {                                                  %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                \with-color                                              %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                    #(x11-color 'DarkViolet)                             %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                    {                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                        \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                            (Cello                                       %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                        \vcenter                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                            \hcenter-in                                  %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                                #10                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                                Cello                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                        \concat                                          %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                            {                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                                \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                                    \hcenter-in                          %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                                        #10                              %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                                        Vc.                              %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                                \vcenter                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                                    )                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                            }                                            %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                    }                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                }                                                        %! DEFAULT_INSTRUMENT_ALERT:SM11
                                             \set CelloMusicStaff.instrumentName = \markup {              %! REDRAWN_DEFAULT_INSTRUMENT:SM8
                                                 \hcenter-in                                              %! REDRAWN_DEFAULT_INSTRUMENT:SM8
                                                     #10                                                  %! REDRAWN_DEFAULT_INSTRUMENT:SM8
@@ -4772,21 +4701,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                                 %! SM4
                                 c'4.
-                                ^ \markup {
-                                    \column
-                                        {
-                                        %@% \line                                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%     {                                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%         (“Flute”)                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%     }                                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            \line                                                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                {                                                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    \with-color                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        #(x11-color 'DarkViolet)                         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        (“Flute”)                                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                }                                                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                        }
-                                    }
+                                ^ \markup {                                                              %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                    \with-color                                                          %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'DarkViolet)                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)                                                        %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                    }                                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 c'4.
@@ -4860,21 +4779,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                                 %! SM4
                                 c'4.
-                                ^ \markup {
-                                    \column
-                                        {
-                                        %@% \line                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%     {                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%         (“Flute”)                                            %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%     }                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            \line                                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                {                                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    \with-color                                          %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        #(x11-color 'blue)                               %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        (“Flute”)                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                }                                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                        }
-                                    }
+                                ^ \markup {                                                              %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    \with-color                                                          %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'blue)                                               %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    }                                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 c'4.
@@ -4960,21 +4869,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                                 %! SM4
                                 c'4.
-                                ^ \markup {
-                                    \column
-                                        {
-                                        %@% \line                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%     {                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%         (“Flute”)                                            %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%     }                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            \line                                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                {                                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    \with-color                                          %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        #(x11-color 'blue)                               %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        (“Flute”)                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                }                                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                        }
-                                    }
+                                ^ \markup {                                                              %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    \with-color                                                          %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'blue)                                               %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    }                                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 c'4.
@@ -5060,21 +4959,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                                 %! SM4
                                 c'4.
-                                ^ \markup {
-                                    \column
-                                        {
-                                        %@% \line                                                        %! REAPPLIED_INSTRUMENT_ALERT:SM10
-                                        %@%     {                                                        %! REAPPLIED_INSTRUMENT_ALERT:SM10
-                                        %@%         (“Flute”)                                            %! REAPPLIED_INSTRUMENT_ALERT:SM10
-                                        %@%     }                                                        %! REAPPLIED_INSTRUMENT_ALERT:SM10
-                                            \line                                                        %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                {                                                        %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    \with-color                                          %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        #(x11-color 'green4)                             %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        (“Flute”)                                        %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                }                                                        %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                        }
-                                    }
+                                ^ \markup {                                                              %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                    \with-color                                                          %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'green4)                                             %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)                                                        %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                    }                                                                    %! REAPPLIED_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 c'4.
@@ -5165,39 +5054,19 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                                 %! SM4
                                 c'2
-                                ^ \markup {
-                                    \column
-                                        {
-                                        %@% \line                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%     {                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%         (“Flute”)                                            %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%     }                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            \line                                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                {                                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    \with-color                                          %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        #(x11-color 'blue)                               %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        (“Flute”)                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                }                                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                        }
-                                    }
+                                ^ \markup {                                                              %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    \with-color                                                          %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'blue)                                               %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    }                                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 c'2
-                                ^ \markup {
-                                    \column
-                                        {
-                                        %@% \line                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%     {                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%         (“Flute”)                                            %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%     }                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                            \line                                                        %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                {                                                        %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    \with-color                                          %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        #(x11-color 'DeepPink1)                          %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        (“Flute”)                                        %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                }                                                        %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                        }
-                                    }
+                                ^ \markup {                                                              %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                    \with-color                                                          %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'DeepPink1)                                          %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                    }                                                                    %! REDUNDANT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
                                 % MusicVoice [measure 3]                                                 %! SM4
                                 c'2
@@ -5288,21 +5157,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                                 %! SM4
                                 c'4.
-                                ^ \markup {
-                                    \column
-                                        {
-                                        %@% \line                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%     {                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%         (“Flute”)                                            %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%     }                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                            \line                                                        %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                {                                                        %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    \with-color                                          %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        #(x11-color 'DeepPink1)                          %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        (“Flute”)                                        %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                }                                                        %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                        }
-                                    }
+                                ^ \markup {                                                              %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                    \with-color                                                          %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'DeepPink1)                                          %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                    }                                                                    %! REDUNDANT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 c'4.
@@ -6123,43 +5982,23 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! DEFAULT_INSTRUMENT:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! DEFAULT_INSTRUMENT_COLOR:SM6
                                 c'4.
-                                ^ \markup {
-                                    \column
-                                        {
-                                        %@% \line                                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%     {                                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%         \vcenter                                             %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%             (“Flute”                                         %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%         \vcenter                                             %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%             Flute                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%         \concat                                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%             {                                                %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%                 \vcenter                                     %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%                     Fl.                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%                 \vcenter                                     %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%                     )                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%             }                                                %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%     }                                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                            \line                                                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                {                                                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    \with-color                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        #(x11-color 'DarkViolet)                         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        {                                                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                (“Flute”                                 %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                Flute                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            \concat                                      %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                {                                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        Fl.                              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        )                                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                }                                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        }                                                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                }                                                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                        }
-                                    }
+                                ^ \markup {                                                              %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                    \with-color                                                          %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'DarkViolet)                                         %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                        {                                                                %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                            \vcenter                                                     %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                (“Flute”                                                 %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                            \vcenter                                                     %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                Flute                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                            \concat                                                      %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                {                                                        %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                    \vcenter                                             %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                        Fl.                                              %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                    \vcenter                                             %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                        )                                                %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                                }                                                        %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                        }                                                                %! DEFAULT_INSTRUMENT_ALERT:SM11
+                                    }                                                                    %! DEFAULT_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_DEFAULT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_DEFAULT_INSTRUMENT:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'violet)              %! REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
@@ -6238,43 +6077,23 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! EXPLICIT_INSTRUMENT:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_INSTRUMENT_COLOR:SM6
                                 c'4.
-                                ^ \markup {
-                                    \column
-                                        {
-                                        %@% \line                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%     {                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%         \vcenter                                             %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%             (“Flute”                                         %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%         \vcenter                                             %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%             Flute                                            %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%         \concat                                              %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%             {                                                %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%                 \vcenter                                     %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%                     Fl.                                      %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%                 \vcenter                                     %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%                     )                                        %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%             }                                                %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%     }                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            \line                                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                {                                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    \with-color                                          %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        #(x11-color 'blue)                               %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        {                                                %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                (“Flute”                                 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                Flute                                    %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            \concat                                      %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                {                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        Fl.                              %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        )                                %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                }                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        }                                                %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                }                                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                        }
-                                    }
+                                ^ \markup {                                                              %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    \with-color                                                          %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'blue)                                               %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        {                                                                %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                            \vcenter                                                     %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                (“Flute”                                                 %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                            \vcenter                                                     %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                Flute                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                            \concat                                                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                {                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                    \vcenter                                             %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                        Fl.                                              %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                    \vcenter                                             %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                        )                                                %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                }                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        }                                                                %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    }                                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
@@ -6365,43 +6184,23 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! EXPLICIT_INSTRUMENT:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_INSTRUMENT_COLOR:SM6
                                 c'4.
-                                ^ \markup {
-                                    \column
-                                        {
-                                        %@% \line                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%     {                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%         \vcenter                                             %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%             (“Flute”                                         %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%         \vcenter                                             %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%             Flute                                            %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%         \concat                                              %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%             {                                                %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%                 \vcenter                                     %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%                     Fl.                                      %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%                 \vcenter                                     %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%                     )                                        %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%             }                                                %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%     }                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            \line                                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                {                                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    \with-color                                          %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        #(x11-color 'blue)                               %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        {                                                %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                (“Flute”                                 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                Flute                                    %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            \concat                                      %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                {                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        Fl.                              %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        )                                %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                }                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        }                                                %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                }                                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                        }
-                                    }
+                                ^ \markup {                                                              %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    \with-color                                                          %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'blue)                                               %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        {                                                                %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                            \vcenter                                                     %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                (“Flute”                                                 %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                            \vcenter                                                     %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                Flute                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                            \concat                                                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                {                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                    \vcenter                                             %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                        Fl.                                              %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                    \vcenter                                             %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                        )                                                %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                }                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        }                                                                %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    }                                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
@@ -6493,43 +6292,23 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REAPPLIED_INSTRUMENT:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'green4)        %! REAPPLIED_INSTRUMENT_COLOR:SM6
                                 c'4.
-                                ^ \markup {
-                                    \column
-                                        {
-                                        %@% \line                                                        %! REAPPLIED_INSTRUMENT_ALERT:SM10
-                                        %@%     {                                                        %! REAPPLIED_INSTRUMENT_ALERT:SM10
-                                        %@%         \vcenter                                             %! REAPPLIED_INSTRUMENT_ALERT:SM10
-                                        %@%             (“Flute”                                         %! REAPPLIED_INSTRUMENT_ALERT:SM10
-                                        %@%         \vcenter                                             %! REAPPLIED_INSTRUMENT_ALERT:SM10
-                                        %@%             Flute                                            %! REAPPLIED_INSTRUMENT_ALERT:SM10
-                                        %@%         \concat                                              %! REAPPLIED_INSTRUMENT_ALERT:SM10
-                                        %@%             {                                                %! REAPPLIED_INSTRUMENT_ALERT:SM10
-                                        %@%                 \vcenter                                     %! REAPPLIED_INSTRUMENT_ALERT:SM10
-                                        %@%                     Fl.                                      %! REAPPLIED_INSTRUMENT_ALERT:SM10
-                                        %@%                 \vcenter                                     %! REAPPLIED_INSTRUMENT_ALERT:SM10
-                                        %@%                     )                                        %! REAPPLIED_INSTRUMENT_ALERT:SM10
-                                        %@%             }                                                %! REAPPLIED_INSTRUMENT_ALERT:SM10
-                                        %@%     }                                                        %! REAPPLIED_INSTRUMENT_ALERT:SM10
-                                            \line                                                        %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                {                                                        %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    \with-color                                          %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        #(x11-color 'green4)                             %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        {                                                %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                (“Flute”                                 %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                Flute                                    %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            \concat                                      %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                {                                        %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        Fl.                              %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        )                                %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                }                                        %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        }                                                %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                }                                                        %! REAPPLIED_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                        }
-                                    }
+                                ^ \markup {                                                              %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                    \with-color                                                          %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'green4)                                             %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                        {                                                                %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                            \vcenter                                                     %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                                (“Flute”                                                 %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                            \vcenter                                                     %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                                Flute                                                    %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                            \concat                                                      %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                                {                                                        %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                                    \vcenter                                             %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                                        Fl.                                              %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                                    \vcenter                                             %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                                        )                                                %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                                }                                                        %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                        }                                                                %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                    }                                                                    %! REAPPLIED_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_REAPPLIED_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_REAPPLIED_INSTRUMENT:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)           %! REDRAWN_REAPPLIED_INSTRUMENT_COLOR:SM6
@@ -6625,43 +6404,23 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! EXPLICIT_INSTRUMENT:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_INSTRUMENT_COLOR:SM6
                                 c'2
-                                ^ \markup {
-                                    \column
-                                        {
-                                        %@% \line                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%     {                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%         \vcenter                                             %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%             (“Flute”                                         %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%         \vcenter                                             %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%             Flute                                            %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%         \concat                                              %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%             {                                                %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%                 \vcenter                                     %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%                     Fl.                                      %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%                 \vcenter                                     %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%                     )                                        %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%             }                                                %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                        %@%     }                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            \line                                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                {                                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    \with-color                                          %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        #(x11-color 'blue)                               %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        {                                                %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                (“Flute”                                 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                Flute                                    %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            \concat                                      %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                {                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        Fl.                              %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        )                                %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                }                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        }                                                %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                }                                                        %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                        }
-                                    }
+                                ^ \markup {                                                              %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    \with-color                                                          %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'blue)                                               %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        {                                                                %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                            \vcenter                                                     %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                (“Flute”                                                 %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                            \vcenter                                                     %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                Flute                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                            \concat                                                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                {                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                    \vcenter                                             %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                        Fl.                                              %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                    \vcenter                                             %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                        )                                                %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                }                                                        %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        }                                                                %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    }                                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
@@ -6671,43 +6430,23 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDUNDANT_INSTRUMENT:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_INSTRUMENT_COLOR:SM6
                                 c'2
-                                ^ \markup {
-                                    \column
-                                        {
-                                        %@% \line                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%     {                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%         \vcenter                                             %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%             (“Flute”                                         %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%         \vcenter                                             %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%             Flute                                            %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%         \concat                                              %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%             {                                                %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%                 \vcenter                                     %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%                     Fl.                                      %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%                 \vcenter                                     %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%                     )                                        %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%             }                                                %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%     }                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                            \line                                                        %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                {                                                        %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    \with-color                                          %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        #(x11-color 'DeepPink1)                          %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        {                                                %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                (“Flute”                                 %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                Flute                                    %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            \concat                                      %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                {                                        %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        Fl.                              %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        )                                %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                }                                        %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        }                                                %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                }                                                        %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                        }
-                                    }
+                                ^ \markup {                                                              %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                    \with-color                                                          %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'DeepPink1)                                          %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        {                                                                %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                            \vcenter                                                     %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                                (“Flute”                                                 %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                            \vcenter                                                     %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                                Flute                                                    %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                            \concat                                                      %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                                {                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                                    \vcenter                                             %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                                        Fl.                                              %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                                    \vcenter                                             %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                                        )                                                %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                                }                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        }                                                                %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                    }                                                                    %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_INSTRUMENT_COLOR:SM6
@@ -6804,43 +6543,23 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDUNDANT_INSTRUMENT:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_INSTRUMENT_COLOR:SM6
                                 c'4.
-                                ^ \markup {
-                                    \column
-                                        {
-                                        %@% \line                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%     {                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%         \vcenter                                             %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%             (“Flute”                                         %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%         \vcenter                                             %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%             Flute                                            %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%         \concat                                              %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%             {                                                %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%                 \vcenter                                     %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%                     Fl.                                      %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%                 \vcenter                                     %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%                     )                                        %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%             }                                                %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                        %@%     }                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM10
-                                            \line                                                        %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                {                                                        %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    \with-color                                          %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        #(x11-color 'DeepPink1)                          %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        {                                                %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                (“Flute”                                 %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                Flute                                    %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            \concat                                      %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                {                                        %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        Fl.                              %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        )                                %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                }                                        %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        }                                                %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                }                                                        %! REDUNDANT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                        }
-                                    }
+                                ^ \markup {                                                              %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                    \with-color                                                          %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'DeepPink1)                                          %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        {                                                                %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                            \vcenter                                                     %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                                (“Flute”                                                 %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                            \vcenter                                                     %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                                Flute                                                    %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                            \concat                                                      %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                                {                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                                    \vcenter                                             %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                                        Fl.                                              %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                                    \vcenter                                             %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                                        )                                                %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                                }                                                        %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        }                                                                %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                    }                                                                    %! REDUNDANT_INSTRUMENT_ALERT:SM11
                                 \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
                                 \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_REDUNDANT_INSTRUMENT:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_INSTRUMENT_COLOR:SM6
@@ -6966,43 +6685,23 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! DEFAULT_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! DEFAULT_MARGIN_MARKUP_COLOR:SM6
                                 c'4.
-                                ^ \markup {
-                                    \column
-                                        {
-                                        %@% \line                                                        %! DEFAULT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%     {                                                        %! DEFAULT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%         \vcenter                                             %! DEFAULT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             [“I+II”                                          %! DEFAULT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%         \vcenter                                             %! DEFAULT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             I+II                                             %! DEFAULT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%         \concat                                              %! DEFAULT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             {                                                %! DEFAULT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                 \vcenter                                     %! DEFAULT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                     I+II                                     %! DEFAULT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                 \vcenter                                     %! DEFAULT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                     ]                                        %! DEFAULT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             }                                                %! DEFAULT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%     }                                                        %! DEFAULT_MARGIN_MARKUP_ALERT:SM10
-                                            \line                                                        %! DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                {                                                        %! DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                    \with-color                                          %! DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                        #(x11-color 'DarkViolet)                         %! DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                        {                                                %! DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                [“I+II”                                  %! DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                I+II                                     %! DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                            \concat                                      %! DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                {                                        %! DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                        I+II                             %! DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                        ]                                %! DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                }                                        %! DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                        }                                                %! DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                }                                                        %! DEFAULT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                        }
-                                    }
+                                ^ \markup {                                                              %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                    \with-color                                                          %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                        #(x11-color 'DarkViolet)                                         %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                        {                                                                %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter                                                     %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                [“I+II”                                                  %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter                                                     %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                I+II                                                     %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                            \concat                                                      %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                {                                                        %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter                                             %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                        I+II                                             %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter                                             %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                        ]                                                %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                }                                                        %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                        }                                                                %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                    }                                                                    %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { I+II }                             %! REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'violet)              %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:SM6
@@ -7081,43 +6780,23 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! EXPLICIT_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                                 c'4.
-                                ^ \markup {
-                                    \column
-                                        {
-                                        %@% \line                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%     {                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%         \vcenter                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             [“I+II”                                          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%         \vcenter                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             I+II                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%         \concat                                              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             {                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                 \vcenter                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                     I+II                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                 \vcenter                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                     ]                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             }                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%     }                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            \line                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                {                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                    \with-color                                          %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                        #(x11-color 'blue)                               %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                        {                                                %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                [“I+II”                                  %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                I+II                                     %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                            \concat                                      %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                {                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                        I+II                             %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                        ]                                %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                }                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                        }                                                %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                }                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                        }
-                                    }
+                                ^ \markup {                                                              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                    \with-color                                                          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        #(x11-color 'blue)                                               %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        {                                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter                                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                [“I+II”                                                  %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter                                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                I+II                                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                            \concat                                                      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                {                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                        I+II                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                        ]                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                }                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        }                                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                    }                                                                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { I+II }                             %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
@@ -7208,43 +6887,23 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { III+IV }                      %! EXPLICIT_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                                 c'4.
-                                ^ \markup {
-                                    \column
-                                        {
-                                        %@% \line                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%     {                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%         \vcenter                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             [“III+IV”                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%         \vcenter                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             III+IV                                           %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%         \concat                                              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             {                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                 \vcenter                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                     III+IV                                   %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                 \vcenter                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                     ]                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             }                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%     }                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            \line                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                {                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                    \with-color                                          %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                        #(x11-color 'blue)                               %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                        {                                                %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                [“III+IV”                                %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                III+IV                                   %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                            \concat                                      %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                {                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                        III+IV                           %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                        ]                                %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                }                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                        }                                                %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                }                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                        }
-                                    }
+                                ^ \markup {                                                              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                    \with-color                                                          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        #(x11-color 'blue)                                               %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        {                                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter                                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                [“III+IV”                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter                                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                III+IV                                                   %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                            \concat                                                      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                {                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                        III+IV                                           %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                        ]                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                }                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        }                                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                    }                                                                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { III+IV }                           %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { III+IV }                      %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
@@ -7336,43 +6995,23 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! REAPPLIED_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'green4)        %! REAPPLIED_MARGIN_MARKUP_COLOR:SM6
                                 c'4.
-                                ^ \markup {
-                                    \column
-                                        {
-                                        %@% \line                                                        %! REAPPLIED_MARGIN_MARKUP_ALERT:SM10
-                                        %@%     {                                                        %! REAPPLIED_MARGIN_MARKUP_ALERT:SM10
-                                        %@%         \vcenter                                             %! REAPPLIED_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             [“I+II”                                          %! REAPPLIED_MARGIN_MARKUP_ALERT:SM10
-                                        %@%         \vcenter                                             %! REAPPLIED_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             I+II                                             %! REAPPLIED_MARGIN_MARKUP_ALERT:SM10
-                                        %@%         \concat                                              %! REAPPLIED_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             {                                                %! REAPPLIED_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                 \vcenter                                     %! REAPPLIED_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                     I+II                                     %! REAPPLIED_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                 \vcenter                                     %! REAPPLIED_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                     ]                                        %! REAPPLIED_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             }                                                %! REAPPLIED_MARGIN_MARKUP_ALERT:SM10
-                                        %@%     }                                                        %! REAPPLIED_MARGIN_MARKUP_ALERT:SM10
-                                            \line                                                        %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                {                                                        %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                    \with-color                                          %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                        #(x11-color 'green4)                             %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                        {                                                %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                [“I+II”                                  %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                I+II                                     %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                            \concat                                      %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                {                                        %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                        I+II                             %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                        ]                                %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                }                                        %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                        }                                                %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                }                                                        %! REAPPLIED_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                        }
-                                    }
+                                ^ \markup {                                                              %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                    \with-color                                                          %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                        #(x11-color 'green4)                                             %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                        {                                                                %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter                                                     %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                                [“I+II”                                                  %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter                                                     %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                                I+II                                                     %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                            \concat                                                      %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                                {                                                        %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter                                             %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                                        I+II                                             %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter                                             %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                                        ]                                                %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                                }                                                        %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                        }                                                                %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                    }                                                                    %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { I+II }                             %! REDRAWN_REAPPLIED_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_REAPPLIED_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)           %! REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM6
@@ -7468,43 +7107,23 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! EXPLICIT_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
                                 c'2
-                                ^ \markup {
-                                    \column
-                                        {
-                                        %@% \line                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%     {                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%         \vcenter                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             [“I+II”                                          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%         \vcenter                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             I+II                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%         \concat                                              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             {                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                 \vcenter                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                     I+II                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                 \vcenter                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                     ]                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             }                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%     }                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM10
-                                            \line                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                {                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                    \with-color                                          %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                        #(x11-color 'blue)                               %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                        {                                                %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                [“I+II”                                  %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                I+II                                     %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                            \concat                                      %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                {                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                        I+II                             %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                        ]                                %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                }                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                        }                                                %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                }                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                        }
-                                    }
+                                ^ \markup {                                                              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                    \with-color                                                          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        #(x11-color 'blue)                                               %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        {                                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter                                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                [“I+II”                                                  %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter                                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                I+II                                                     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                            \concat                                                      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                {                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                        I+II                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter                                             %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                        ]                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                }                                                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        }                                                                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                    }                                                                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { I+II }                             %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
@@ -7514,43 +7133,23 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! REDUNDANT_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_MARGIN_MARKUP_COLOR:SM6
                                 c'2
-                                ^ \markup {
-                                    \column
-                                        {
-                                        %@% \line                                                        %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%     {                                                        %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%         \vcenter                                             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             [“I+II”                                          %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%         \vcenter                                             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             I+II                                             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%         \concat                                              %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             {                                                %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                 \vcenter                                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                     I+II                                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                 \vcenter                                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                     ]                                        %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             }                                                %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%     }                                                        %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                            \line                                                        %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                {                                                        %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                    \with-color                                          %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                        #(x11-color 'DeepPink1)                          %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                        {                                                %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                [“I+II”                                  %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                I+II                                     %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                            \concat                                      %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                {                                        %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                        I+II                             %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                        ]                                %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                }                                        %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                        }                                                %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                }                                                        %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                        }
-                                    }
+                                ^ \markup {                                                              %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                    \with-color                                                          %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                        #(x11-color 'DeepPink1)                                          %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                        {                                                                %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter                                                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                [“I+II”                                                  %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter                                                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                I+II                                                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                            \concat                                                      %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                {                                                        %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter                                             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                        I+II                                             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter                                             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                        ]                                                %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                }                                                        %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                        }                                                                %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                    }                                                                    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { I+II }                             %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
@@ -7647,43 +7246,23 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! REDUNDANT_MARGIN_MARKUP:SM8
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_MARGIN_MARKUP_COLOR:SM6
                                 c'4.
-                                ^ \markup {
-                                    \column
-                                        {
-                                        %@% \line                                                        %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%     {                                                        %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%         \vcenter                                             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             [“I+II”                                          %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%         \vcenter                                             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             I+II                                             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%         \concat                                              %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             {                                                %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                 \vcenter                                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                     I+II                                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                 \vcenter                                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%                     ]                                        %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%             }                                                %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                        %@%     }                                                        %! REDUNDANT_MARGIN_MARKUP_ALERT:SM10
-                                            \line                                                        %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                {                                                        %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                    \with-color                                          %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                        #(x11-color 'DeepPink1)                          %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                        {                                                %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                [“I+II”                                  %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                I+II                                     %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                            \concat                                      %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                {                                        %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                        I+II                             %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                        ]                                %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                                }                                        %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                        }                                                %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                                }                                                        %! REDUNDANT_MARGIN_MARKUP_ALERT_WITH_COLOR:SM11
-                                        }
-                                    }
+                                ^ \markup {                                                              %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                    \with-color                                                          %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                        #(x11-color 'DeepPink1)                                          %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                        {                                                                %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter                                                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                [“I+II”                                                  %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter                                                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                I+II                                                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                            \concat                                                      %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                {                                                        %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter                                             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                        I+II                                             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter                                             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                        ]                                                %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                }                                                        %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                        }                                                                %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                    }                                                                    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
                                 \set Staff.instrumentName = \markup { I+II }                             %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
                                 \set Staff.shortInstrumentName = \markup { I+II }                        %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
@@ -9462,43 +9041,23 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Staff.InstrumentName.color = #(x11-color 'blue)      %! EXPLICIT_INSTRUMENT_COLOR:SM6
                                     fs'8
                                     [
-                                    ^ \markup {
-                                        \column
-                                            {
-                                            %@% \line                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%     {                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%         \vcenter                                         %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%             (“clarinet”                                  %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%         \vcenter                                         %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%             "Clarinet in B-flat"                         %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%         \concat                                          %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%             {                                            %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%                 \vcenter                                 %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%                     "Cl. in B-flat"                      %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%                 \vcenter                                 %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%                     )                                    %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%             }                                            %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%     }                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                                \line                                                    %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    {                                                    %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        \with-color                                      %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            #(x11-color 'blue)                           %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            {                                            %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                \vcenter                                 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    (“clarinet”                          %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                \vcenter                                 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    "Clarinet in B-flat"                 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                \concat                                  %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    {                                    %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \vcenter                         %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            "Cl. in B-flat"              %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \vcenter                         %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            )                            %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    }                                    %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            }                                            %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    }                                                    %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                            }
-                                        }
+                                    ^ \markup {                                                          %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        \with-color                                                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                            #(x11-color 'blue)                                           %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                            {                                                            %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                \vcenter                                                 %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                    (“clarinet”                                          %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                \vcenter                                                 %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                    "Clarinet in B-flat"                                 %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                \concat                                                  %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                    {                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                        \vcenter                                         %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                            "Cl. in B-flat"                              %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                        \vcenter                                         %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                            )                                            %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                    }                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                            }                                                            %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        }                                                                %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                     \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                     \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                     \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)    %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
@@ -9616,43 +9175,23 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Staff.InstrumentName.color = #(x11-color 'blue)      %! EXPLICIT_INSTRUMENT_COLOR:SM6
                                     e'8
                                     [
-                                    ^ \markup {
-                                        \column
-                                            {
-                                            %@% \line                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%     {                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%         \vcenter                                         %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%             (“clarinet”                                  %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%         \vcenter                                         %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%             "Clarinet in B-flat"                         %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%         \concat                                          %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%             {                                            %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%                 \vcenter                                 %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%                     "Cl. in B-flat"                      %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%                 \vcenter                                 %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%                     )                                    %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%             }                                            %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                            %@%     }                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM10
-                                                \line                                                    %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    {                                                    %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        \with-color                                      %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            #(x11-color 'blue)                           %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            {                                            %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                \vcenter                                 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    (“clarinet”                          %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                \vcenter                                 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    "Clarinet in B-flat"                 %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                \concat                                  %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    {                                    %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \vcenter                         %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            "Cl. in B-flat"              %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        \vcenter                         %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                            )                            %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    }                                    %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            }                                            %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                    }                                                    %! EXPLICIT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                            }
-                                        }
+                                    ^ \markup {                                                          %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        \with-color                                                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                            #(x11-color 'blue)                                           %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                            {                                                            %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                \vcenter                                                 %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                    (“clarinet”                                          %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                \vcenter                                                 %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                    "Clarinet in B-flat"                                 %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                \concat                                                  %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                    {                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                        \vcenter                                         %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                            "Cl. in B-flat"                              %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                        \vcenter                                         %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                            )                                            %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                                    }                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                            }                                                            %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        }                                                                %! EXPLICIT_INSTRUMENT_ALERT:SM11
                                     \set Staff.instrumentName = \markup { "Clarinet in B-flat" }         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                     \set Staff.shortInstrumentName = \markup { "Cl. in B-flat" }         %! REDRAWN_EXPLICIT_INSTRUMENT:SM8
                                     \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)    %! REDRAWN_EXPLICIT_INSTRUMENT_COLOR:SM6
