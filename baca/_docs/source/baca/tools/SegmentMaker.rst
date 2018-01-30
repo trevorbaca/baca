@@ -23,21 +23,18 @@ Bases
 
       ~SegmentMaker.allow_empty_selections
       ~SegmentMaker.breaks
-      ~SegmentMaker.clefs
       ~SegmentMaker.color_octaves
       ~SegmentMaker.color_out_of_range_pitches
       ~SegmentMaker.color_repeat_pitch_classes
       ~SegmentMaker.copy_rhythm
       ~SegmentMaker.do_not_check_persistence
       ~SegmentMaker.do_not_include_layout_ly
-      ~SegmentMaker.dynamics
       ~SegmentMaker.fermata_measure_staff_line_count
       ~SegmentMaker.final_bar_line
       ~SegmentMaker.final_markup
       ~SegmentMaker.final_markup_extra_offset
       ~SegmentMaker.first_measure_number
       ~SegmentMaker.first_segment
-      ~SegmentMaker.hidden_instruments
       ~SegmentMaker.ignore_repeat_pitch_classes
       ~SegmentMaker.ignore_unpitched_notes
       ~SegmentMaker.ignore_unregistered_pitches
@@ -64,7 +61,6 @@ Bases
       ~SegmentMaker.skip_wellformedness_checks
       ~SegmentMaker.skips_instead_of_rests
       ~SegmentMaker.spacing
-      ~SegmentMaker.staff_lines
       ~SegmentMaker.stage_count
       ~SegmentMaker.time_signatures
       ~SegmentMaker.transpose_score
@@ -85,8 +81,6 @@ Read-only properties
 
 .. autoattribute:: SegmentMaker.breaks
 
-.. autoattribute:: SegmentMaker.clefs
-
 .. autoattribute:: SegmentMaker.color_octaves
 
 .. autoattribute:: SegmentMaker.color_out_of_range_pitches
@@ -96,8 +90,6 @@ Read-only properties
 .. autoattribute:: SegmentMaker.do_not_check_persistence
 
 .. autoattribute:: SegmentMaker.do_not_include_layout_ly
-
-.. autoattribute:: SegmentMaker.dynamics
 
 .. autoattribute:: SegmentMaker.fermata_measure_staff_line_count
 
@@ -110,8 +102,6 @@ Read-only properties
 .. autoattribute:: SegmentMaker.first_measure_number
 
 .. autoattribute:: SegmentMaker.first_segment
-
-.. autoattribute:: SegmentMaker.hidden_instruments
 
 .. autoattribute:: SegmentMaker.ignore_repeat_pitch_classes
 
@@ -162,8 +152,6 @@ Read-only properties
 .. autoattribute:: SegmentMaker.skips_instead_of_rests
 
 .. autoattribute:: SegmentMaker.spacing
-
-.. autoattribute:: SegmentMaker.staff_lines
 
 .. autoattribute:: SegmentMaker.stage_count
 

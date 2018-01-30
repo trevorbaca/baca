@@ -55,6 +55,7 @@ from .OctaveDisplacementCommand import OctaveDisplacementCommand
 from .OverrideCommand import OverrideCommand
 from .PageSpecifier import PageSpecifier
 from .PartitionDivisionCallback import PartitionDivisionCallback
+from .PersistentIndicatorTests import PersistentIndicatorTests
 from .PiecewiseCommand import PiecewiseCommand
 from .PitchArray import PitchArray
 from .PitchArrayCell import PitchArrayCell

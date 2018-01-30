@@ -39,6 +39,7 @@ baca.tools
    MusicAccumulator
    MusicContribution
    MusicMaker
+   PersistentIndicatorTests
    PitchFirstRhythmMaker
    SegmentMaker
 
@@ -48,6 +49,7 @@ baca.tools
    ~baca.tools.MusicAccumulator.MusicAccumulator
    ~baca.tools.MusicContribution.MusicContribution
    ~baca.tools.MusicMaker.MusicMaker
+   ~baca.tools.PersistentIndicatorTests.PersistentIndicatorTests
    ~baca.tools.PitchFirstRhythmMaker.PitchFirstRhythmMaker
    ~baca.tools.SegmentMaker.SegmentMaker
 
