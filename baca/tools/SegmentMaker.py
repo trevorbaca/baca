@@ -8394,6 +8394,8 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
+            Margin markup for examples:
+
             >>> margin_markup = abjad.OrderedDict()
             >>> margin_markup['I+II'] = abjad.MarginMarkup(
             ...     markup=abjad.Markup('I+II'),
@@ -8406,7 +8408,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> breaks = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
-            ...         [2, 20, (11,)],
+            ...         [2, 15, (11,)],
             ...         ),
             ...     )
 
@@ -8422,9 +8424,9 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> score_template.defaults.append(triple)
             >>> maker = baca.SegmentMaker(
+            ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
             ...     margin_markup=margin_markup,
-            ...     breaks=breaks,
             ...     score_template=score_template,
             ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -8464,7 +8466,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
-                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! BREAK:IC
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:IC
                             s1 * 3/8
@@ -8511,13 +8513,172 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
+            >>> score = lilypond_file[abjad.Score]
+            >>> text = format(score, 'lilypond:strict')
+            >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
+            >>> tags_ = baca.tags.margin_markup_color_tags()
+            >>> match = lambda tags: bool(set(tags) & set(tags_))
+            >>> text, count = abjad.deactivate(text, match)
+            >>> lines = [_.strip('\n') for _ in text.split('\n')]
+            >>> lilypond_file.score_block.items[:] = lines
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> print(text)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            % GlobalSkips [measure 1] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \autoPageBreaksOff %! BREAK:BMM1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! BREAK:IC
+                            \time 3/8 %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \pageBreak %! BREAK:IC
+                            s1 * 3/8
+                <BLANKLINE>
+                            % GlobalSkips [measure 2] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! BREAK:IC
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \break %! BREAK:IC
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f %! SM5
+                            \bar "|"                                  %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                % MusicVoice [measure 1] %! SM4
+                                \set Staff.instrumentName = \markup { I+II }      %! DEFAULT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! DEFAULT_MARGIN_MARKUP:SM8
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_MARGIN_MARKUP_COLOR:SM6
+                                c'4.
+                            %%% ^ \markup {                      %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%     \with-color                  %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         #(x11-color 'DarkViolet) %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         {                        %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%             \vcenter             %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 [“I+II”          %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%             \vcenter             %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 I+II             %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%             \concat              %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 {                %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                     \vcenter     %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                         I+II     %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                     \vcenter     %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                         ]        %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 }                %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         }                        %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                            %%%     }                            %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'violet) %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:SM6
+                <BLANKLINE>
+                                % MusicVoice [measure 2] %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            >>> tags_ = baca.tags.margin_markup_color_tags()
+            >>> match = lambda tags: bool(set(tags) & set(tags_))
+            >>> text, count = abjad.activate(text, match)
+            >>> lines = [_.strip('\n') for _ in text.split('\n')]
+            >>> lilypond_file.score_block.items[:] = lines
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> print(text)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            % GlobalSkips [measure 1] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \autoPageBreaksOff %! BREAK:BMM1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! BREAK:IC
+                            \time 3/8 %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \pageBreak %! BREAK:IC
+                            s1 * 3/8
+                <BLANKLINE>
+                            % GlobalSkips [measure 2] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! BREAK:IC
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \break %! BREAK:IC
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f %! SM5
+                            \bar "|"                                  %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                % MusicVoice [measure 1] %! SM4
+                                \set Staff.instrumentName = \markup { I+II }      %! DEFAULT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! DEFAULT_MARGIN_MARKUP:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet) %! DEFAULT_MARGIN_MARKUP_COLOR:SM6
+                                c'4.
+                                ^ \markup {                      %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                    \with-color                  %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                        #(x11-color 'DarkViolet) %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                        {                        %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter             %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                [“I+II”          %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter             %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                I+II             %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                            \concat              %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                {                %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter     %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                        I+II     %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter     %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                        ]        %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                                }                %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                        }                        %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                    }                            %! DEFAULT_MARGIN_MARKUP_ALERT:SM11
+                                \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_DEFAULT_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'violet) %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:SM6
+                <BLANKLINE>
+                                % MusicVoice [measure 2] %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
         ..  container:: example
 
             Explicit margin markup color blue and redraw dull blue:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
             ...     breaks=breaks,
+            ...     ignore_unpitched_notes=True,
             ...     margin_markup=margin_markup,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_width((1, 24)),
@@ -8559,7 +8720,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
-                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! BREAK:IC
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:IC
                             s1 * 3/8
@@ -8606,11 +8767,170 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
+            >>> score = lilypond_file[abjad.Score]
+            >>> text = format(score, 'lilypond:strict')
+            >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
+            >>> tags_ = baca.tags.margin_markup_color_tags()
+            >>> match = lambda tags: bool(set(tags) & set(tags_))
+            >>> text, count = abjad.deactivate(text, match)
+            >>> lines = [_.strip('\n') for _ in text.split('\n')]
+            >>> lilypond_file.score_block.items[:] = lines
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> print(text)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            % GlobalSkips [measure 1] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \autoPageBreaksOff %! BREAK:BMM1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! BREAK:IC
+                            \time 3/8 %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \pageBreak %! BREAK:IC
+                            s1 * 3/8
+                <BLANKLINE>
+                            % GlobalSkips [measure 2] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! BREAK:IC
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \break %! BREAK:IC
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f %! SM5
+                            \bar "|"                                  %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                % MusicVoice [measure 1] %! SM4
+                                \set Staff.instrumentName = \markup { I+II }      %! EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! EXPLICIT_MARGIN_MARKUP:SM8
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                                c'4.
+                            %%% ^ \markup {                  %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%     \with-color              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         #(x11-color 'blue)   %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         {                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%             \vcenter         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 [“I+II”      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%             \vcenter         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 I+II         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%             \concat          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 {            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                     \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                         I+II %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                     \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                         ]    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 }            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         }                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%     }                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                <BLANKLINE>
+                                % MusicVoice [measure 2] %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            >>> tags_ = baca.tags.margin_markup_color_tags()
+            >>> match = lambda tags: bool(set(tags) & set(tags_))
+            >>> text, count = abjad.activate(text, match)
+            >>> lines = [_.strip('\n') for _ in text.split('\n')]
+            >>> lilypond_file.score_block.items[:] = lines
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> print(text)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            % GlobalSkips [measure 1] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \autoPageBreaksOff %! BREAK:BMM1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! BREAK:IC
+                            \time 3/8 %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \pageBreak %! BREAK:IC
+                            s1 * 3/8
+                <BLANKLINE>
+                            % GlobalSkips [measure 2] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! BREAK:IC
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \break %! BREAK:IC
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f %! SM5
+                            \bar "|"                                  %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                % MusicVoice [measure 1] %! SM4
+                                \set Staff.instrumentName = \markup { I+II }      %! EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! EXPLICIT_MARGIN_MARKUP:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                                c'4.
+                                ^ \markup {                  %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                    \with-color              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        #(x11-color 'blue)   %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        {                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                [“I+II”      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                I+II         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                            \concat          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                {            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                        I+II %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                        ]    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                }            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        }                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                    }                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                <BLANKLINE>
+                                % MusicVoice [measure 2] %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
             Even after previous margin markup:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
             ...     breaks=breaks,
+            ...     ignore_unpitched_notes=True,
             ...     margin_markup=margin_markup,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_width((1, 24)),
@@ -8666,7 +8986,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
-                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! BREAK:IC
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:IC
                             s1 * 3/8
@@ -8713,13 +9033,174 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
+            >>> score = lilypond_file[abjad.Score]
+            >>> text = format(score, 'lilypond:strict')
+            >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
+            >>> tags_ = baca.tags.margin_markup_color_tags()
+            >>> match = lambda tags: bool(set(tags) & set(tags_))
+            >>> text, count = abjad.deactivate(text, match)
+            >>> lines = [_.strip('\n') for _ in text.split('\n')]
+            >>> lilypond_file.score_block.items[:] = lines
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> print(text)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            % GlobalSkips [measure 1] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \autoPageBreaksOff %! BREAK:BMM1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! BREAK:IC
+                            \time 3/8 %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \pageBreak %! BREAK:IC
+                            s1 * 3/8
+                <BLANKLINE>
+                            % GlobalSkips [measure 2] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! BREAK:IC
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \break %! BREAK:IC
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f %! SM5
+                            \bar "|"                                  %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                % MusicVoice [measure 1] %! SM4
+                                \set Staff.instrumentName = \markup { III+IV }      %! EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { III+IV } %! EXPLICIT_MARGIN_MARKUP:SM8
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                                c'4.
+                            %%% ^ \markup {                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%     \with-color                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         #(x11-color 'blue)     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         {                      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%             \vcenter           %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 [“III+IV”      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%             \vcenter           %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 III+IV         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%             \concat            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 {              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                     \vcenter   %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                         III+IV %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                     \vcenter   %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                         ]      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 }              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         }                      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%     }                          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                \set Staff.instrumentName = \markup { III+IV }      %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { III+IV } %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                <BLANKLINE>
+                                % MusicVoice [measure 2] %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            >>> tags_ = baca.tags.margin_markup_color_tags()
+            >>> match = lambda tags: bool(set(tags) & set(tags_))
+            >>> text, count = abjad.activate(text, match)
+            >>> lines = [_.strip('\n') for _ in text.split('\n')]
+            >>> lilypond_file.score_block.items[:] = lines
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> print(text)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            % GlobalSkips [measure 1] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \autoPageBreaksOff %! BREAK:BMM1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! BREAK:IC
+                            \time 3/8 %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \pageBreak %! BREAK:IC
+                            s1 * 3/8
+                <BLANKLINE>
+                            % GlobalSkips [measure 2] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! BREAK:IC
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \break %! BREAK:IC
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f %! SM5
+                            \bar "|"                                  %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                % MusicVoice [measure 1] %! SM4
+                                \set Staff.instrumentName = \markup { III+IV }      %! EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { III+IV } %! EXPLICIT_MARGIN_MARKUP:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                                c'4.
+                                ^ \markup {                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                    \with-color                %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        #(x11-color 'blue)     %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        {                      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter           %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                [“III+IV”      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter           %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                III+IV         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                            \concat            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                {              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter   %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                        III+IV %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter   %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                        ]      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                }              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        }                      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                    }                          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                \set Staff.instrumentName = \markup { III+IV }      %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { III+IV } %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                <BLANKLINE>
+                                % MusicVoice [measure 2] %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
         ..  container:: example
 
             Reapplied margin markup color green and redraw dull green:
 
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
             ...     breaks=breaks,
+            ...     ignore_unpitched_notes=True,
             ...     margin_markup=margin_markup,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_width((1, 24)),
@@ -8774,7 +9255,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
-                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! BREAK:IC
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:IC
                             s1 * 3/8
@@ -8821,6 +9302,167 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
+            >>> score = lilypond_file[abjad.Score]
+            >>> text = format(score, 'lilypond:strict')
+            >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
+            >>> tags_ = baca.tags.margin_markup_color_tags()
+            >>> match = lambda tags: bool(set(tags) & set(tags_))
+            >>> text, count = abjad.deactivate(text, match)
+            >>> lines = [_.strip('\n') for _ in text.split('\n')]
+            >>> lilypond_file.score_block.items[:] = lines
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> print(text)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            % GlobalSkips [measure 1] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \autoPageBreaksOff %! BREAK:BMM1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! BREAK:IC
+                            \time 3/8 %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \pageBreak %! BREAK:IC
+                            s1 * 3/8
+                <BLANKLINE>
+                            % GlobalSkips [measure 2] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! BREAK:IC
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \break %! BREAK:IC
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f %! SM5
+                            \bar "|"                                  %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                % MusicVoice [measure 1] %! SM4
+                                \set Staff.instrumentName = \markup { I+II }      %! REAPPLIED_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! REAPPLIED_MARGIN_MARKUP:SM8
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! REAPPLIED_MARGIN_MARKUP_COLOR:SM6
+                                c'4.
+                            %%% ^ \markup {                  %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                            %%%     \with-color              %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                            %%%         #(x11-color 'green4) %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                            %%%         {                    %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                            %%%             \vcenter         %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 [“I+II”      %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                            %%%             \vcenter         %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 I+II         %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                            %%%             \concat          %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 {            %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                            %%%                     \vcenter %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                            %%%                         I+II %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                            %%%                     \vcenter %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                            %%%                         ]    %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 }            %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                            %%%         }                    %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                            %%%     }                        %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_REAPPLIED_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_REAPPLIED_MARGIN_MARKUP:SM8
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM6
+                <BLANKLINE>
+                                % MusicVoice [measure 2] %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            >>> tags_ = baca.tags.margin_markup_color_tags()
+            >>> match = lambda tags: bool(set(tags) & set(tags_))
+            >>> text, count = abjad.activate(text, match)
+            >>> lines = [_.strip('\n') for _ in text.split('\n')]
+            >>> lilypond_file.score_block.items[:] = lines
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> print(text)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            % GlobalSkips [measure 1] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \autoPageBreaksOff %! BREAK:BMM1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! BREAK:IC
+                            \time 3/8 %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \pageBreak %! BREAK:IC
+                            s1 * 3/8
+                <BLANKLINE>
+                            % GlobalSkips [measure 2] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! BREAK:IC
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \break %! BREAK:IC
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f %! SM5
+                            \bar "|"                                  %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                % MusicVoice [measure 1] %! SM4
+                                \set Staff.instrumentName = \markup { I+II }      %! REAPPLIED_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! REAPPLIED_MARGIN_MARKUP:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'green4) %! REAPPLIED_MARGIN_MARKUP_COLOR:SM6
+                                c'4.
+                                ^ \markup {                  %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                    \with-color              %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                        #(x11-color 'green4) %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                        {                    %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter         %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                                [“I+II”      %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter         %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                                I+II         %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                            \concat          %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                                {            %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                                        I+II %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                                        ]    %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                                }            %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                        }                    %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                    }                        %! REAPPLIED_MARGIN_MARKUP_ALERT:SM11
+                                \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_REAPPLIED_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_REAPPLIED_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'OliveDrab) %! REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:SM6
+                <BLANKLINE>
+                                % MusicVoice [measure 2] %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
         ..  container:: example
 
             Redundant margin markup color pink and redraw dull pink:
@@ -8828,12 +9470,12 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> breaks = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
-            ...         [3, 20, (11,)],
+            ...         [3, 15, (11,)],
             ...         ),
             ...     )
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
             ...     breaks=breaks,
+            ...     ignore_unpitched_notes=True,
             ...     margin_markup=margin_markup,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_width((1, 24)),
@@ -8886,7 +9528,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
-                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! BREAK:IC
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:IC
                             s1 * 1/2
@@ -8959,17 +9601,242 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
+            >>> score = lilypond_file[abjad.Score]
+            >>> text = format(score, 'lilypond:strict')
+            >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
+            >>> tags_ = baca.tags.margin_markup_color_tags()
+            >>> match = lambda tags: bool(set(tags) & set(tags_))
+            >>> text, count = abjad.deactivate(text, match)
+            >>> lines = [_.strip('\n') for _ in text.split('\n')]
+            >>> lilypond_file.score_block.items[:] = lines
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> print(text)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            % GlobalSkips [measure 1] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \autoPageBreaksOff %! BREAK:BMM1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! BREAK:IC
+                            \time 4/8 %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \pageBreak %! BREAK:IC
+                            s1 * 1/2
+                <BLANKLINE>
+                            % GlobalSkips [measure 2] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            s1 * 1/2
+                <BLANKLINE>
+                            % GlobalSkips [measure 3] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! BREAK:IC
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \break %! BREAK:IC
+                            s1 * 1/2
+                            \override Score.BarLine.transparent = ##f %! SM5
+                            \bar "|"                                  %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                % MusicVoice [measure 1] %! SM4
+                                \set Staff.instrumentName = \markup { I+II }      %! EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! EXPLICIT_MARGIN_MARKUP:SM8
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                                c'2
+                            %%% ^ \markup {                  %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%     \with-color              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         #(x11-color 'blue)   %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         {                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%             \vcenter         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 [“I+II”      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%             \vcenter         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 I+II         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%             \concat          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 {            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                     \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                         I+II %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                     \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                         ]    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 }            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         }                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                            %%%     }                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                <BLANKLINE>
+                                % MusicVoice [measure 2] %! SM4
+                                \set Staff.instrumentName = \markup { I+II }      %! REDUNDANT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! REDUNDANT_MARGIN_MARKUP:SM8
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_COLOR:SM6
+                                c'2
+                            %%% ^ \markup {                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%     \with-color                 %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         {                       %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%             \vcenter            %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 [“I+II”         %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%             \vcenter            %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 I+II            %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%             \concat             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 {               %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                     \vcenter    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                         I+II    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                     \vcenter    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                         ]       %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 }               %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         }                       %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%     }                           %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
+                <BLANKLINE>
+                                % MusicVoice [measure 3] %! SM4
+                                c'2
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            >>> tags_ = baca.tags.margin_markup_color_tags()
+            >>> match = lambda tags: bool(set(tags) & set(tags_))
+            >>> text, count = abjad.activate(text, match)
+            >>> lines = [_.strip('\n') for _ in text.split('\n')]
+            >>> lilypond_file.score_block.items[:] = lines
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> print(text)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            % GlobalSkips [measure 1] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \autoPageBreaksOff %! BREAK:BMM1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! BREAK:IC
+                            \time 4/8 %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \pageBreak %! BREAK:IC
+                            s1 * 1/2
+                <BLANKLINE>
+                            % GlobalSkips [measure 2] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            s1 * 1/2
+                <BLANKLINE>
+                            % GlobalSkips [measure 3] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! BREAK:IC
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \break %! BREAK:IC
+                            s1 * 1/2
+                            \override Score.BarLine.transparent = ##f %! SM5
+                            \bar "|"                                  %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                % MusicVoice [measure 1] %! SM4
+                                \set Staff.instrumentName = \markup { I+II }      %! EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! EXPLICIT_MARGIN_MARKUP:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue) %! EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                                c'2
+                                ^ \markup {                  %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                    \with-color              %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        #(x11-color 'blue)   %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        {                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                [“I+II”      %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                I+II         %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                            \concat          %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                {            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                        I+II %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                        ]    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                }            %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        }                    %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                    }                        %! EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2) %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                <BLANKLINE>
+                                % MusicVoice [measure 2] %! SM4
+                                \set Staff.instrumentName = \markup { I+II }      %! REDUNDANT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! REDUNDANT_MARGIN_MARKUP:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_COLOR:SM6
+                                c'2
+                                ^ \markup {                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                    \with-color                 %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                        #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                        {                       %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter            %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                [“I+II”         %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter            %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                I+II            %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                            \concat             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                {               %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                        I+II    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                        ]       %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                }               %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                        }                       %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                    }                           %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
+                <BLANKLINE>
+                                % MusicVoice [measure 3] %! SM4
+                                c'2
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
             Even at the beginning of a segment:
 
             >>> breaks = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
-            ...         [2, 20, (11,)],
+            ...         [2, 15, (11,)],
             ...         ),
             ...     )
             >>> maker = baca.SegmentMaker(
-            ...     ignore_unpitched_notes=True,
             ...     breaks=breaks,
+            ...     ignore_unpitched_notes=True,
             ...     margin_markup=margin_markup,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_width((1, 24)),
@@ -9025,7 +9892,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
-                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! BREAK:IC
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:IC
                             s1 * 3/8
@@ -9065,6 +9932,167 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            >>> score = lilypond_file[abjad.Score]
+            >>> text = format(score, 'lilypond:strict')
+            >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
+            >>> tags_ = baca.tags.margin_markup_color_tags()
+            >>> match = lambda tags: bool(set(tags) & set(tags_))
+            >>> text, count = abjad.deactivate(text, match)
+            >>> lines = [_.strip('\n') for _ in text.split('\n')]
+            >>> lilypond_file.score_block.items[:] = lines
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> print(text)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            % GlobalSkips [measure 1] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \autoPageBreaksOff %! BREAK:BMM1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! BREAK:IC
+                            \time 3/8 %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \pageBreak %! BREAK:IC
+                            s1 * 3/8
+                <BLANKLINE>
+                            % GlobalSkips [measure 2] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! BREAK:IC
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \break %! BREAK:IC
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f %! SM5
+                            \bar "|"                                  %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                % MusicVoice [measure 1] %! SM4
+                                \set Staff.instrumentName = \markup { I+II }      %! REDUNDANT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! REDUNDANT_MARGIN_MARKUP:SM8
+                            %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_COLOR:SM6
+                                c'4.
+                            %%% ^ \markup {                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%     \with-color                 %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         {                       %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%             \vcenter            %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 [“I+II”         %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%             \vcenter            %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 I+II            %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%             \concat             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 {               %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                     \vcenter    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                         I+II    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                     \vcenter    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                         ]       %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%                 }               %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%         }                       %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                            %%%     }                           %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
+                            %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
+                <BLANKLINE>
+                                % MusicVoice [measure 2] %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            >>> tags_ = baca.tags.margin_markup_color_tags()
+            >>> match = lambda tags: bool(set(tags) & set(tags_))
+            >>> text, count = abjad.activate(text, match)
+            >>> lines = [_.strip('\n') for _ in text.split('\n')]
+            >>> lilypond_file.score_block.items[:] = lines
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> print(text)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            % GlobalSkips [measure 1] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \autoPageBreaksOff %! BREAK:BMM1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! BREAK:IC
+                            \time 3/8 %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \pageBreak %! BREAK:IC
+                            s1 * 3/8
+                <BLANKLINE>
+                            % GlobalSkips [measure 2] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! BREAK:IC
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \break %! BREAK:IC
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f %! SM5
+                            \bar "|"                                  %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                % MusicVoice [measure 1] %! SM4
+                                \set Staff.instrumentName = \markup { I+II }      %! REDUNDANT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! REDUNDANT_MARGIN_MARKUP:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_COLOR:SM6
+                                c'4.
+                                ^ \markup {                     %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                    \with-color                 %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                        #(x11-color 'DeepPink1) %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                        {                       %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter            %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                [“I+II”         %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                            \vcenter            %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                I+II            %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                            \concat             %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                {               %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                        I+II    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                    \vcenter    %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                        ]       %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                                }               %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                        }                       %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                    }                           %! REDUNDANT_MARGIN_MARKUP_ALERT:SM11
+                                \set Staff.instrumentName = \markup { I+II }      %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II } %! REDRAWN_REDUNDANT_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepPink4) %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:SM6
+                <BLANKLINE>
+                                % MusicVoice [measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
