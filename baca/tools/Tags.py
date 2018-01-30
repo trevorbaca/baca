@@ -537,6 +537,35 @@ class Tags(abjad.Tags):
             ]
 
     @staticmethod
+    def has_persistence_label(string):
+        r'''Is true when ``string`` has persistence label.
+
+        ..  container:: example
+
+            >>> baca.tags.has_persistence_label('')
+            False
+
+            >>> baca.tags.has_persistence_label('FOO')
+            False
+
+            >>> baca.tags.has_persistence_label('FOO:DEFAULT_CLEF')
+            True
+
+            >>> baca.tags.has_persistence_label('DEFAULT_CLEF')
+            True
+
+        Returns true or false.
+        '''
+        if not isinstance(string, str):
+            return False
+        all_persistence_labels = Tags.all_persistence_labels()
+        words = string.split(':')
+        for word in words:
+            if word in all_persistence_labels:
+                return True
+        return False
+
+    @staticmethod
     def instrument_color_tags():
         r'''Gets instrument color tags.
 
