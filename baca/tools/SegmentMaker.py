@@ -143,6 +143,7 @@ class SegmentMaker(abjad.SegmentMaker):
         '_color_out_of_range_pitches',
         '_color_repeat_pitch_classes',
         '_do_not_check_persistence',
+        '_do_not_include_layout_ly',
         '_duration',
         '_environment',
         '_fermata_measure_numbers',
@@ -271,6 +272,7 @@ class SegmentMaker(abjad.SegmentMaker):
         color_out_of_range_pitches: bool = None,
         color_repeat_pitch_classes: bool = None,
         do_not_check_persistence: bool = None,
+        do_not_include_layout_ly: bool = None,
         fermata_measure_staff_line_count: int = None,
         final_bar_line: U[bool, str, None] = None,
         final_markup: U[tuple, None] = None,
@@ -308,8 +310,9 @@ class SegmentMaker(abjad.SegmentMaker):
             color_repeat_pitch_classes
         self._cache = None
         self._cached_time_signatures: List[abjad.TimeSignature] = []
-        self._do_not_check_persistence = do_not_check_persistence
-        self._duration = None
+        self._do_not_check_persistence: bool = do_not_check_persistence
+        self._do_not_include_layout_ly: bool = do_not_include_layout_ly
+        self._duration: abjad.Duration = None
         self._fermata_measure_numbers: list = []
         self._fermata_measure_staff_line_count: int = \
             fermata_measure_staff_line_count
@@ -1867,7 +1870,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for item in lilypond_file.items[:]:
             if getattr(item, 'name', None) == 'header':
                 lilypond_file.items.remove(item)
-        if self._environment != 'docs':
+        if self._environment != 'docs' and not self.do_not_include_layout_ly:
             assert len(lilypond_file.score_block.items) == 1
             score = lilypond_file.score_block.items[0]
             assert isinstance(score, abjad.Score)
@@ -3578,6 +3581,12 @@ class SegmentMaker(abjad.SegmentMaker):
         r'''Is true when segment-maker does not check persistent indicators.
         '''
         return self._do_not_check_persistence
+
+    @property
+    def do_not_include_layout_ly(self) -> Optional[bool]:
+        r'''Is true when segment-maker does not include layout.ly.
+        '''
+        return self._do_not_include_layout_ly
 
     @property
     def dynamics(self) -> None:
