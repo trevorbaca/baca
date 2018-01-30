@@ -4915,6 +4915,128 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
+            >>> score = lilypond_file[abjad.Score]
+            >>> text = format(score, 'lilypond:strict')
+            >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
+            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> match = lambda tags: bool(set(tags) & set(tags_))
+            >>> text, count = abjad.deactivate(text, match)
+            >>> lines = [_.strip('\n') for _ in text.split('\n')]
+            >>> lilypond_file.score_block.items[:] = lines
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> print(text)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            % GlobalSkips [measure 1] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \autoPageBreaksOff %! BREAK:BMM1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! BREAK:IC
+                            \time 3/8 %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \pageBreak %! BREAK:IC
+                            s1 * 3/8
+                <BLANKLINE>
+                            % GlobalSkips [measure 2] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! BREAK:IC
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \break %! BREAK:IC
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f %! SM5
+                            \bar "|"                                  %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                % MusicVoice [measure 1] %! SM4
+                                c'4.
+                            %%% ^ \markup {                %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%%     \with-color            %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%%         #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%%         (“Flute”)          %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%%     }                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                <BLANKLINE>
+                                % MusicVoice [measure 2] %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> match = lambda tags: bool(set(tags) & set(tags_))
+            >>> text, count = abjad.activate(text, match)
+            >>> lines = [_.strip('\n') for _ in text.split('\n')]
+            >>> lilypond_file.score_block.items[:] = lines
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> print(text)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            % GlobalSkips [measure 1] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \autoPageBreaksOff %! BREAK:BMM1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! BREAK:IC
+                            \time 3/8 %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \pageBreak %! BREAK:IC
+                            s1 * 3/8
+                <BLANKLINE>
+                            % GlobalSkips [measure 2] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! BREAK:IC
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \break %! BREAK:IC
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f %! SM5
+                            \bar "|"                                  %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                % MusicVoice [measure 1] %! SM4
+                                c'4.
+                                ^ \markup {                %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    \with-color            %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)          %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    }                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                <BLANKLINE>
+                                % MusicVoice [measure 2] %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
 
             Even after a previous instrument:
 
@@ -4998,6 +5120,131 @@ class SegmentMaker(abjad.SegmentMaker):
                                     }                                                                    %! EXPLICIT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            >>> score = lilypond_file[abjad.Score]
+            >>> text = format(score, 'lilypond:strict')
+            >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
+            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> match = lambda tags: bool(set(tags) & set(tags_))
+            >>> text, count = abjad.deactivate(text, match)
+            >>> lines = [_.strip('\n') for _ in text.split('\n')]
+            >>> lilypond_file.score_block.items[:] = lines
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> print(text)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            % GlobalSkips [measure 1] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \autoPageBreaksOff %! BREAK:BMM1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! BREAK:IC
+                            \time 3/8 %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \pageBreak %! BREAK:IC
+                            s1 * 3/8
+                <BLANKLINE>
+                            % GlobalSkips [measure 2] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! BREAK:IC
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \break %! BREAK:IC
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f %! SM5
+                            \bar "|"                                  %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                % MusicVoice [measure 1] %! SM4
+                                c'4.
+                            %%% ^ \markup {                %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%%     \with-color            %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%%         #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%%         (“Flute”)          %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%%     }                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                <BLANKLINE>
+                                % MusicVoice [measure 2] %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> match = lambda tags: bool(set(tags) & set(tags_))
+            >>> text, count = abjad.activate(text, match)
+            >>> lines = [_.strip('\n') for _ in text.split('\n')]
+            >>> lilypond_file.score_block.items[:] = lines
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> print(text)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            % GlobalSkips [measure 1] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \autoPageBreaksOff %! BREAK:BMM1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! BREAK:IC
+                            \time 3/8 %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \pageBreak %! BREAK:IC
+                            s1 * 3/8
+                <BLANKLINE>
+                            % GlobalSkips [measure 2] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! BREAK:IC
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \break %! BREAK:IC
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f %! SM5
+                            \bar "|"                                  %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                % MusicVoice [measure 1] %! SM4
+                                c'4.
+                                ^ \markup {                %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    \with-color            %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)          %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    }                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                <BLANKLINE>
+                                % MusicVoice [measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -5095,6 +5342,130 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
+            >>> score = lilypond_file[abjad.Score]
+            >>> text = format(score, 'lilypond:strict')
+            >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
+            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> match = lambda tags: bool(set(tags) & set(tags_))
+            >>> text, count = abjad.deactivate(text, match)
+            >>> lines = [_.strip('\n') for _ in text.split('\n')]
+            >>> lilypond_file.score_block.items[:] = lines
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> print(text)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            % GlobalSkips [measure 1] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \autoPageBreaksOff %! BREAK:BMM1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! BREAK:IC
+                            \time 3/8 %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \pageBreak %! BREAK:IC
+                            s1 * 3/8
+                <BLANKLINE>
+                            % GlobalSkips [measure 2] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! BREAK:IC
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \break %! BREAK:IC
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f %! SM5
+                            \bar "|"                                  %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                % MusicVoice [measure 1] %! SM4
+                                c'4.
+                            %%% ^ \markup {                  %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                            %%%     \with-color              %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                            %%%         #(x11-color 'green4) %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                            %%%         (“Flute”)            %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                            %%%     }                        %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                <BLANKLINE>
+                                % MusicVoice [measure 2] %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> match = lambda tags: bool(set(tags) & set(tags_))
+            >>> text, count = abjad.activate(text, match)
+            >>> lines = [_.strip('\n') for _ in text.split('\n')]
+            >>> lilypond_file.score_block.items[:] = lines
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> print(text)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            % GlobalSkips [measure 1] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \autoPageBreaksOff %! BREAK:BMM1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! BREAK:IC
+                            \time 3/8 %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \pageBreak %! BREAK:IC
+                            s1 * 3/8
+                <BLANKLINE>
+                            % GlobalSkips [measure 2] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! BREAK:IC
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \break %! BREAK:IC
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f %! SM5
+                            \bar "|"                                  %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                % MusicVoice [measure 1] %! SM4
+                                c'4.
+                                ^ \markup {                  %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                    \with-color              %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'green4) %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)            %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                                    }                        %! REAPPLIED_INSTRUMENT_ALERT:SM11
+                <BLANKLINE>
+                                % MusicVoice [measure 2] %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
 
         ..  container:: example
 
@@ -5198,6 +5569,159 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
+            >>> score = lilypond_file[abjad.Score]
+            >>> text = format(score, 'lilypond:strict')
+            >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
+            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> match = lambda tags: bool(set(tags) & set(tags_))
+            >>> text, count = abjad.deactivate(text, match)
+            >>> lines = [_.strip('\n') for _ in text.split('\n')]
+            >>> lilypond_file.score_block.items[:] = lines
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> print(text)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            % GlobalSkips [measure 1] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \autoPageBreaksOff %! BREAK:BMM1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! BREAK:IC
+                            \time 4/8 %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \pageBreak %! BREAK:IC
+                            s1 * 1/2
+                <BLANKLINE>
+                            % GlobalSkips [measure 2] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            s1 * 1/2
+                <BLANKLINE>
+                            % GlobalSkips [measure 3] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! BREAK:IC
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \break %! BREAK:IC
+                            s1 * 1/2
+                            \override Score.BarLine.transparent = ##f %! SM5
+                            \bar "|"                                  %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                % MusicVoice [measure 1] %! SM4
+                                c'2
+                            %%% ^ \markup {                %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%%     \with-color            %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%%         #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%%         (“Flute”)          %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                            %%%     }                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                <BLANKLINE>
+                                % MusicVoice [measure 2] %! SM4
+                                c'2
+                            %%% ^ \markup {                     %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                            %%%     \with-color                 %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                            %%%         #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                            %%%         (“Flute”)               %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                            %%%     }                           %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                <BLANKLINE>
+                                % MusicVoice [measure 3] %! SM4
+                                c'2
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> match = lambda tags: bool(set(tags) & set(tags_))
+            >>> text, count = abjad.activate(text, match)
+            >>> lines = [_.strip('\n') for _ in text.split('\n')]
+            >>> lilypond_file.score_block.items[:] = lines
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> print(text)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            % GlobalSkips [measure 1] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \autoPageBreaksOff %! BREAK:BMM1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! BREAK:IC
+                            \time 4/8 %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \pageBreak %! BREAK:IC
+                            s1 * 1/2
+                <BLANKLINE>
+                            % GlobalSkips [measure 2] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            s1 * 1/2
+                <BLANKLINE>
+                            % GlobalSkips [measure 3] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! BREAK:IC
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \break %! BREAK:IC
+                            s1 * 1/2
+                            \override Score.BarLine.transparent = ##f %! SM5
+                            \bar "|"                                  %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                % MusicVoice [measure 1] %! SM4
+                                c'2
+                                ^ \markup {                %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    \with-color            %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'blue) %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)          %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                                    }                      %! EXPLICIT_INSTRUMENT_ALERT:SM11
+                <BLANKLINE>
+                                % MusicVoice [measure 2] %! SM4
+                                c'2
+                                ^ \markup {                     %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                    \with-color                 %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)               %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                    }                           %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                <BLANKLINE>
+                                % MusicVoice [measure 3] %! SM4
+                                c'2
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
             Even at the beginning of a segment:
 
             >>> breaks = baca.breaks(
@@ -5286,6 +5810,131 @@ class SegmentMaker(abjad.SegmentMaker):
                                     }                                                                    %! REDUNDANT_INSTRUMENT_ALERT:SM11
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            >>> score = lilypond_file[abjad.Score]
+            >>> text = format(score, 'lilypond:strict')
+            >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
+            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> match = lambda tags: bool(set(tags) & set(tags_))
+            >>> text, count = abjad.deactivate(text, match)
+            >>> lines = [_.strip('\n') for _ in text.split('\n')]
+            >>> lilypond_file.score_block.items[:] = lines
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> print(text)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            % GlobalSkips [measure 1] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \autoPageBreaksOff %! BREAK:BMM1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! BREAK:IC
+                            \time 3/8 %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \pageBreak %! BREAK:IC
+                            s1 * 3/8
+                <BLANKLINE>
+                            % GlobalSkips [measure 2] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! BREAK:IC
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \break %! BREAK:IC
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f %! SM5
+                            \bar "|"                                  %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                % MusicVoice [measure 1] %! SM4
+                                c'4.
+                            %%% ^ \markup {                     %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                            %%%     \with-color                 %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                            %%%         #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                            %%%         (“Flute”)               %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                            %%%     }                           %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                <BLANKLINE>
+                                % MusicVoice [measure 2] %! SM4
+                                c'4.
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
+            >>> tags_ = baca.tags.instrument_color_tags()
+            >>> match = lambda tags: bool(set(tags) & set(tags_))
+            >>> text, count = abjad.activate(text, match)
+            >>> lines = [_.strip('\n') for _ in text.split('\n')]
+            >>> lilypond_file.score_block.items[:] = lines
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> print(text)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            % GlobalSkips [measure 1] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \autoPageBreaksOff %! BREAK:BMM1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 0) (alignment-distances . (11)))                         %! BREAK:IC
+                            \time 3/8 %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \bar "" %! +SEGMENT:EMPTY_START_BAR:SM2
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue) %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \pageBreak %! BREAK:IC
+                            s1 * 3/8
+                <BLANKLINE>
+                            % GlobalSkips [measure 2] %! SM4
+                            \newSpacingSection                                               %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24) %! SPACING:HSS1
+                            \noBreak %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                        %! BREAK:IC
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1) %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \break %! BREAK:IC
+                            s1 * 3/8
+                            \override Score.BarLine.transparent = ##f %! SM5
+                            \bar "|"                                  %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                % MusicVoice [measure 1] %! SM4
+                                c'4.
+                                ^ \markup {                     %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                    \with-color                 %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        #(x11-color 'DeepPink1) %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                        (“Flute”)               %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                                    }                           %! REDUNDANT_INSTRUMENT_ALERT:SM11
+                <BLANKLINE>
+                                % MusicVoice [measure 2] %! SM4
                                 c'4.
                 <BLANKLINE>
                             }
@@ -6814,7 +7463,6 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-
         ..  container:: example
 
             Reapplied instruments color green and redraw dull green:
@@ -7083,7 +7731,6 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                 >>
-
 
         ..  container:: example
 
@@ -7447,7 +8094,6 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                 >>
-
 
             Even at the beginning of a segment:
 
