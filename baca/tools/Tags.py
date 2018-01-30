@@ -351,9 +351,11 @@ class Tags(abjad.Tags):
         activate.extend(baca.tags.metronome_mark_color_tags()['activate'])
         activate.extend(baca.tags.staff_lines_color_tags())
         activate.extend(baca.tags.time_signature_color_tags())
+        # TODO: if path is not None and not path.is_segment()
         if path is not None and path.build is not None:
             activate.append(baca.tags.REAPPLIED_TIME_SIGNATURE)
         deactivate = []
+        ## TODO: if path is not None and not path.is_segment()
         if path is not None and path.build is not None:
             deactivate.append(baca.tags.REAPPLIED_INSTRUMENT)
         deactivate.extend(baca.tags.metronome_mark_color_tags()['deactivate'])
@@ -420,6 +422,7 @@ class Tags(abjad.Tags):
             baca.tags.REDUNDANT_CLEF_COLOR,
             baca.tags.REDUNDANT_CLEF_REDRAW_COLOR,
             ]
+        ## TODO: if path is not None and not path.is_segment()
         if path is not None and path.build is not None:
             tags.append(baca.tags.REAPPLIED_CLEF)
         return tags
