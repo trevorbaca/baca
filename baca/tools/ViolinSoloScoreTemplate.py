@@ -20,7 +20,6 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             \context Score = "Score" <<
-                \tag violin                                                                          %! ST4
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
@@ -49,7 +48,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                     }
                 >>
                 \context MusicContext = "MusicContext" <<
-                    \tag violin                                                                      %! ST4
+                    \tag Violin                                                                      %! ST4
                     \context ViolinMusicStaff = "ViolinMusicStaff" {
                         \context ViolinMusicVoice = "ViolinMusicVoice" {
             <BLANKLINE>
@@ -150,22 +149,14 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self):
+    def __call__(self) -> abjad.Score:
         r'''Calls violin solo score template.
-
-        Returns score.
         '''
         # GLOBAL CONTEXT
         global_context = self._make_global_context()
-        instrument_tags = (
-            'violin',
-            )
-        tag_string = '.'.join(instrument_tags)
-        self._attach_tag(tag_string, global_context)
 
         # VIOLIN
         violin_music_voice = abjad.Voice(
-            [],
             lilypond_type='ViolinMusicVoice',
             name='ViolinMusicVoice',
             )
@@ -188,7 +179,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             'default_clef',
             abjad.Clef('treble'),
             )
-        self._attach_tag('violin', violin_music_staff)
+        self._attach_tag('Violin', violin_music_staff)
 
         # MUSIC ONTEXT
         music_context = abjad.Context(

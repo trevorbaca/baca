@@ -36,6 +36,7 @@ Bases
       ~SegmentMaker.final_markup_extra_offset
       ~SegmentMaker.first_measure_number
       ~SegmentMaker.first_segment
+      ~SegmentMaker.hidden_instruments
       ~SegmentMaker.ignore_repeat_pitch_classes
       ~SegmentMaker.ignore_unpitched_notes
       ~SegmentMaker.ignore_unregistered_pitches
@@ -106,6 +107,8 @@ Read-only properties
 .. autoattribute:: SegmentMaker.first_measure_number
 
 .. autoattribute:: SegmentMaker.first_segment
+
+.. autoattribute:: SegmentMaker.hidden_instruments
 
 .. autoattribute:: SegmentMaker.ignore_repeat_pitch_classes
 

@@ -30,7 +30,6 @@ class BreakMeasureMap(abjad.AbjadObject):
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             \context Score = "Score" <<
-                \tag violin.viola.cello                                                              %! ST4
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
@@ -75,7 +74,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                 >>
                 \context MusicContext = "MusicContext" <<
                     \context StringSectionStaffGroup = "String Section Staff Group" <<
-                        \tag violin                                                                  %! ST4
+                        \tag Violin                                                                  %! ST4
                         \context ViolinMusicStaff = "ViolinMusicStaff" {
                             \context ViolinMusicVoice = "ViolinMusicVoice" {
                                 {
@@ -214,7 +213,7 @@ class BreakMeasureMap(abjad.AbjadObject):
                                 }
                             }
                         }
-                        \tag viola                                                                   %! ST4
+                        \tag Viola                                                                   %! ST4
                         \context ViolaMusicStaff = "ViolaMusicStaff" {
                             \context ViolaMusicVoice = "ViolaMusicVoice" {
             <BLANKLINE>
@@ -307,7 +306,7 @@ class BreakMeasureMap(abjad.AbjadObject):
             <BLANKLINE>
                             }
                         }
-                        \tag cello                                                                   %! ST4
+                        \tag Cello                                                                   %! ST4
                         \context CelloMusicStaff = "CelloMusicStaff" {
                             \context CelloMusicVoice = "CelloMusicVoice" {
             <BLANKLINE>

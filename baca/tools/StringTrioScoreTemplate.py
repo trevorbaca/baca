@@ -20,7 +20,6 @@ class StringTrioScoreTemplate(ScoreTemplate):
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             \context Score = "Score" <<
-                \tag violin.viola.cello                                                              %! ST4
                 \context GlobalContext = "GlobalContext" <<
                     \context GlobalSkips = "GlobalSkips" {
             <BLANKLINE>
@@ -50,7 +49,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
                 >>
                 \context MusicContext = "MusicContext" <<
                     \context StringSectionStaffGroup = "String Section Staff Group" <<
-                        \tag violin                                                                  %! ST4
+                        \tag Violin                                                                  %! ST4
                         \context ViolinMusicStaff = "ViolinMusicStaff" {
                             \context ViolinMusicVoice = "ViolinMusicVoice" {
             <BLANKLINE>
@@ -140,7 +139,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
             <BLANKLINE>
                             }
                         }
-                        \tag viola                                                                   %! ST4
+                        \tag Viola                                                                   %! ST4
                         \context ViolaMusicStaff = "ViolaMusicStaff" {
                             \context ViolaMusicVoice = "ViolaMusicVoice" {
             <BLANKLINE>
@@ -230,7 +229,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
             <BLANKLINE>
                             }
                         }
-                        \tag cello                                                                   %! ST4
+                        \tag Cello                                                                   %! ST4
                         \context CelloMusicStaff = "CelloMusicStaff" {
                             \context CelloMusicVoice = "CelloMusicVoice" {
             <BLANKLINE>
@@ -332,23 +331,14 @@ class StringTrioScoreTemplate(ScoreTemplate):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self):
+    def __call__(self) -> abjad.Score:
         r'''Calls string trio score template.
-
-        Returns score.
         '''
+        # GLOBAL CONTEXT
         global_context = self._make_global_context()
-        instrument_tags = (
-            'violin',
-            'viola',
-            'cello',
-            )
-        tag_string = '.'.join(instrument_tags)
-        self._attach_tag(tag_string, global_context)
 
         # VIOLIN
         violin_music_voice = abjad.Voice(
-            [],
             lilypond_type='ViolinMusicVoice',
             name='ViolinMusicVoice',
             )
@@ -374,11 +364,10 @@ class StringTrioScoreTemplate(ScoreTemplate):
             'default_clef',
             abjad.Clef('treble'),
             )
-        self._attach_tag('violin', violin_music_staff)
+        self._attach_tag('Violin', violin_music_staff)
 
         # VIOLA
         viola_music_voice = abjad.Voice(
-            [],
             lilypond_type='ViolaMusicVoice',
             name='ViolaMusicVoice',
             )
@@ -403,11 +392,10 @@ class StringTrioScoreTemplate(ScoreTemplate):
             'default_clef',
             abjad.Clef('alto'),
             )
-        self._attach_tag('viola', viola_music_staff)
+        self._attach_tag('Viola', viola_music_staff)
 
         # CELLO
         cello_music_voice = abjad.Voice(
-            [],
             lilypond_type='CelloMusicVoice',
             name='CelloMusicVoice',
             )
@@ -432,7 +420,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
             'default_clef',
             abjad.Clef('bass'),
             )
-        self._attach_tag('cello', cello_music_staff)
+        self._attach_tag('Cello', cello_music_staff)
 
         # SCORE
         string_section_staff_group = abjad.StaffGroup(
@@ -445,18 +433,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
             name='String Section Staff Group',
             )
         music_context = abjad.Context(
-            [
-                string_section_staff_group,
-                ],
+            [string_section_staff_group],
             lilypond_type='MusicContext',
             is_simultaneous=True,
             name='MusicContext',
             )
         score = abjad.Score(
-            [
-                global_context,
-                music_context,
-                ],
+            [global_context, music_context],
             name='Score',
             )
         return score

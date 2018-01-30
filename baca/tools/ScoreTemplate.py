@@ -1,5 +1,6 @@
 import abjad
-import roman # type:ignore
+import roman # type: ignore
+from typing import List
 
 
 class ScoreTemplate(abjad.ScoreTemplate):
@@ -19,8 +20,8 @@ class ScoreTemplate(abjad.ScoreTemplate):
 
     ### INITIALIZER ###
 
-    def __init__(self):
-        self._defaults = []
+    def __init__(self) -> None:
+        self._defaults: list = []
 
     ### PRIVATE METHODS ###
 
@@ -100,16 +101,14 @@ class ScoreTemplate(abjad.ScoreTemplate):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def defaults(self):
+    def defaults(self) -> list:
         r'''Gets defaults.
-
-        Returns list.
         '''
         return self._defaults
 
     ### PUBLIC METHODS ###
 
-    def group_families(self, *families):
+    def group_families(self, *families) -> List[abjad.Context]:
         r'''Groups `families` only when more than one family is passed in.
 
         Returns list of zero or more contexts.
@@ -119,7 +118,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
             if family is not None:
                 if any(_ for _ in family[1:] if _ is not None):
                     families_.append(family)
-        families = families_
+        families = tuple(families_)
         contexts = []
         if len(families) == 0:
             pass
@@ -137,8 +136,10 @@ class ScoreTemplate(abjad.ScoreTemplate):
                 contexts.append(square_staff_group)
         return contexts
 
-    def make_music_context(self, *contexts):
-        contexts = [_ for _ in contexts if _ is not None]
+    def make_music_context(self, *contexts) -> abjad.Context:
+        r'''Makes music context.
+        '''
+        contexts = tuple(_ for _ in contexts if _ is not None)
         return abjad.Context(
             contexts,
             lilypond_type='MusicContext',
@@ -146,32 +147,52 @@ class ScoreTemplate(abjad.ScoreTemplate):
             name='MusicContext',
             )
 
-    def make_piano_staff(self, stem, *contexts):
+    def make_piano_staff(
+        self,
+        stem: str,
+        *contexts,
+        ) -> abjad.StaffGroup:
+        r'''Makes piano staff.
+        '''
         if not isinstance(stem, str):
             raise Exception(f'stem must be string: {stem!r}.')
-        contexts = [_ for _ in contexts if _ is not None]
+        contexts = tuple(_ for _ in contexts if _ is not None)
         if contexts:
-            piano_staff = abjad.StaffGroup(contexts, name=f'{stem}PianoStaff')
-            return piano_staff
+            return abjad.StaffGroup(contexts, name=f'{stem}PianoStaff')
+        else:
+            return None
 
-    def make_square_staff_group(self, stem, *contexts):
+    def make_square_staff_group(
+        self,
+        stem: str,
+        *contexts,
+        ) -> abjad.StaffGroup:
+        r'''Makes square staff group.
+        '''
         if not isinstance(stem, str):
             raise Exception(f'stem must be string: {stem!r}.')
-        contexts = [_ for _ in contexts if _ is not None]
+        contexts = tuple(_ for _ in contexts if _ is not None)
         if len(contexts) == 1:
             return contexts[0]
         elif 1 < len(contexts):
-            staff_group = abjad.StaffGroup(
-                contexts,
-                name=f'{stem}SquareStaffGroup',
-                )
+            name = f'{stem}SquareStaffGroup'
+            staff_group = abjad.StaffGroup(contexts, name=name)
             self._set_square_delimiter(staff_group)
             return staff_group
+        else:
+            return None
 
-    def make_staff_group(self, stem, *contexts):
+    def make_staff_group(
+        self,
+        stem: str,
+        *contexts,
+        ) -> abjad.StaffGroup:
+        r'''Makes staff group.
+        '''
         if not isinstance(stem, str):
             raise Exception(f'stem must be string: {stem!r}.')
-        contexts = [_ for _ in contexts if _ is not None]
+        contexts = tuple(_ for _ in contexts if _ is not None)
         if contexts:
-            staff_group = abjad.StaffGroup(contexts, name=f'{stem}StaffGroup')
-            return staff_group
+            return abjad.StaffGroup(contexts, name=f'{stem}StaffGroup')
+        else:
+            return None

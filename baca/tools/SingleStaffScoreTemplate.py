@@ -76,12 +76,11 @@ class SingleStaffScoreTemplate(ScoreTemplate):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self):
+    def __call__(self) -> abjad.Score:
         r'''Calls score template.
 
         Returns score.
         '''
-
         # GLOBAL CONTEXT
         global_context = self._make_global_context()
 
@@ -91,12 +90,6 @@ class SingleStaffScoreTemplate(ScoreTemplate):
             [music_voice],
             name='MusicStaff',
             )
-
-#        abjad.annotate(
-#            music_staff,
-#            'default_clef',
-#            abjad.Clef('treble'),
-#            )
 
         # MUSIC CONTEXT
         music_context = abjad.Context(
@@ -111,7 +104,5 @@ class SingleStaffScoreTemplate(ScoreTemplate):
             [global_context, music_context],
             name='Score',
             )
-
         self._attach_calltime_defaults(score)
-
         return score
