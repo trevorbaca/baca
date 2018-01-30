@@ -19,7 +19,6 @@ Bases
 
    .. autosummary::
 
-      ~LibraryNS.lilypond_tag
       ~LibraryNS.natural_clusters
       ~LibraryNS.natural_harmonics
       ~LibraryNS.nest
@@ -94,8 +93,6 @@ Methods
 
 Class & static methods
 ----------------------
-
-.. automethod:: LibraryNS.lilypond_tag
 
 .. automethod:: LibraryNS.natural_clusters
 

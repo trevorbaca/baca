@@ -894,8 +894,8 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         pairs = self.score_template.attach_defaults(self.score)
         for leaf, indicator in pairs:
-            if getattr(indicator, 'hide', False) is True:
-                continue
+            #if getattr(indicator, 'hide', False) is True:
+            #    continue
             wrapper = abjad.inspect(leaf).wrapper(indicator)
             assert wrapper is not None
             assert getattr(wrapper.indicator, 'persistent', False)
@@ -4687,11 +4687,13 @@ class SegmentMaker(abjad.SegmentMaker):
 
         Hidden instruments provide an alert.
         
-        The alert is formatted between round parentheses.
+        Alerts are realized as markup formatted between round parentheses.
         
-        The alert is realized as markup.
+        Alerts do not redraw.
 
         ..  container:: example
+
+            Example instruments:
 
             >>> instruments = abjad.InstrumentDictionary()
             >>> instruments['Flute'] = abjad.Flute(hide=True)
@@ -4699,31 +4701,23 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> breaks = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
-            ...         [5, 25, (11,)],
-            ...         [9, 50, (7,)],
+            ...         [2, 15, (11,)],
             ...         ),
             ...     )
 
         ..  container:: example
 
-            With ``hide`` set to true, default instruments provide a purple
-            alert that redraws dull purple:
+            With ``hide`` set to true, default instrument alerts color purple:
 
-            >>> breaks_ = baca.breaks(
-            ...     baca.page(
-            ...         [1, 0, (11,)],
-            ...         [2, 20, (11,)],
-            ...         ),
-            ...     )
             >>> score_template = baca.SingleStaffScoreTemplate()
             >>> triple = (
-            ...     'MusicStaff', 'default_instrument', abjad.Flute(),
+            ...     'MusicStaff', 'default_instrument', instruments['Flute'],
             ...     )
             >>> score_template.defaults.append(triple)
             >>> maker = baca.SegmentMaker(
+            ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
-            ...     breaks=breaks_,
             ...     score_template=score_template,
             ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -4763,7 +4757,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
-                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! BREAK:IC
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:IC
                             s1 * 3/8
@@ -4777,50 +4771,22 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "MusicVoice" {
                 <BLANKLINE>
                                 % MusicVoice [measure 1]                                                 %! SM4
-                                \set Staff.instrumentName = \markup { Flute }                            %! DEFAULT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! DEFAULT_INSTRUMENT:SM8
-                                \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! DEFAULT_INSTRUMENT_COLOR:SM6
                                 c'4.
                                 ^ \markup {
                                     \column
                                         {
                                         %@% \line                                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
                                         %@%     {                                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%         \vcenter                                             %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%             (Flute                                           %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%         \vcenter                                             %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%             Flute                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%         \concat                                              %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%             {                                                %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%                 \vcenter                                     %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%                     Fl.                                      %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%                 \vcenter                                     %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%                     )                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
-                                        %@%             }                                                %! DEFAULT_INSTRUMENT_ALERT:SM10
+                                        %@%         (“Flute”)                                            %! DEFAULT_INSTRUMENT_ALERT:SM10
                                         %@%     }                                                        %! DEFAULT_INSTRUMENT_ALERT:SM10
                                             \line                                                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                                 {                                                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                                     \with-color                                          %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                                         #(x11-color 'DarkViolet)                         %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        {                                                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                (Flute                                   %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            \vcenter                                     %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                Flute                                    %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                            \concat                                      %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                {                                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        Fl.                              %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                    \vcenter                             %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                        )                                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                                }                                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
-                                                        }                                                %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
+                                                        (“Flute”)                                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                                 }                                                        %! DEFAULT_INSTRUMENT_ALERT_WITH_COLOR:SM11
                                         }
                                     }
-                                \set Staff.instrumentName = \markup { Flute }                            %! REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                \set Staff.shortInstrumentName = \markup { Fl. }                         %! REDRAWN_DEFAULT_INSTRUMENT:SM8
-                                \override Staff.InstrumentName.color = #(x11-color 'violet)              %! REDRAWN_DEFAULT_INSTRUMENT_COLOR:SM6
                 <BLANKLINE>
                                 % MusicVoice [measure 2]                                                 %! SM4
                                 c'4.
@@ -4833,19 +4799,12 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            With `hide` set to true, explicit instruments provide a blue alert
-            that redraws dull blue:
+            With ``hide`` set to true, explicit instrument alerts color blue:
 
-            >>> breaks_ = baca.breaks(
-            ...     baca.page(
-            ...         [1, 0, (11,)],
-            ...         [2, 20, (11,)],
-            ...         ),
-            ...     )
             >>> maker = baca.SegmentMaker(
+            ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
-            ...     breaks=breaks_,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -4886,7 +4845,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
-                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! BREAK:IC
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:IC
                             s1 * 3/8
@@ -4928,16 +4887,10 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Even after a previous instrument:
 
-            >>> breaks_ = baca.breaks(
-            ...     baca.page(
-            ...         [1, 0, (11,)],
-            ...         [2, 25, (11,)],
-            ...         ),
-            ...     )
             >>> maker = baca.SegmentMaker(
+            ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
-            ...     breaks=breaks_,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -4992,7 +4945,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
-                            #'((Y-offset . 25) (alignment-distances . (11)))                             %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! BREAK:IC
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:IC
                             s1 * 3/8
@@ -5031,16 +4984,14 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
-
         ..  container:: example
 
-            With `hide` set to true, reapplied instruments provide a green
-            alert that redraws dull green:
+            With ``hide`` set to true, reapplied instrument alerts color green:
 
             >>> maker = baca.SegmentMaker(
+            ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
-            ...     breaks=breaks_,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -5094,7 +5045,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
-                            #'((Y-offset . 25) (alignment-distances . (11)))                             %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! BREAK:IC
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:IC
                             s1 * 3/8
@@ -5136,19 +5087,18 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
-            With `hide` set to true, redundant instruments provide a pink alert
-            that redraws dull pink:
+            With ``hide`` set to true, redundant instrument alerts color pink:
 
             >>> breaks = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
-            ...         [3, 20, (11,)],
+            ...         [3, 15, (11,)],
             ...         ),
             ...     )
             >>> maker = baca.SegmentMaker(
+            ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
-            ...     breaks=breaks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
@@ -5200,7 +5150,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
-                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! BREAK:IC
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:IC
                             s1 * 1/2
@@ -5262,13 +5212,13 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> breaks = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
-            ...         [2, 20, (11,)],
+            ...         [2, 15, (11,)],
             ...         ),
             ...     )
             >>> maker = baca.SegmentMaker(
+            ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
-            ...     breaks=breaks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -5323,7 +5273,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
-                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! BREAK:IC
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:IC
                             s1 * 3/8
@@ -5361,7 +5311,6 @@ class SegmentMaker(abjad.SegmentMaker):
                         }
                     >>
                 >>
-
 
         '''
         return None
