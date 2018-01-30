@@ -24,6 +24,7 @@ Bases
    .. autosummary::
 
       ~Tags.all_broken_spanner_tags
+      ~Tags.all_persistence_labels
       ~Tags.all_persistent_indicator_color_tags
       ~Tags.all_score_annotation_tags
       ~Tags.clef_color_match
@@ -31,6 +32,7 @@ Bases
       ~Tags.document
       ~Tags.dynamic_color_match
       ~Tags.dynamic_color_tags
+      ~Tags.has_persistence_label
       ~Tags.instrument_color_tags
       ~Tags.margin_markup_color_expression_match
       ~Tags.margin_markup_color_suppression_match
@@ -55,6 +57,8 @@ Class & static methods
 
 .. automethod:: Tags.all_broken_spanner_tags
 
+.. automethod:: Tags.all_persistence_labels
+
 .. automethod:: Tags.all_persistent_indicator_color_tags
 
 .. only:: html
@@ -76,6 +80,8 @@ Class & static methods
 .. automethod:: Tags.dynamic_color_match
 
 .. automethod:: Tags.dynamic_color_tags
+
+.. automethod:: Tags.has_persistence_label
 
 .. automethod:: Tags.instrument_color_tags
 
