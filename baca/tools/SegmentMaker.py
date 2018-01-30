@@ -6043,14 +6043,15 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
+            Example instruments:
+
             >>> instruments = abjad.InstrumentDictionary()
             >>> instruments['Flute'] = abjad.Flute()
             >>> instruments['Piccolo'] = abjad.Piccolo()
             >>> breaks = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
-            ...         [5, 25, (11,)],
-            ...         [9, 50, (7,)],
+            ...         [2, 15, (11,)],
             ...         ),
             ...     )
 
@@ -6058,19 +6059,13 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Default instruments color purple and redraw dull purple:
 
-            >>> breaks_ = baca.breaks(
-            ...     baca.page(
-            ...         [1, 0, (11,)],
-            ...         [2, 20, (11,)],
-            ...         ),
-            ...     )
             >>> score_template = baca.SingleStaffScoreTemplate()
             >>> triple = ('MusicStaff', 'default_instrument', abjad.Flute())
             >>> score_template.defaults.append(triple)
             >>> maker = baca.SegmentMaker(
+            ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
-            ...     breaks=breaks_,
             ...     score_template=score_template,
             ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -6110,7 +6105,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
-                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! BREAK:IC
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:IC
                             s1 * 3/8
@@ -6181,16 +6176,10 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Explicit instruments color blue and redraw dull blue:
 
-            >>> breaks_ = baca.breaks(
-            ...     baca.page(
-            ...         [1, 0, (11,)],
-            ...         [2, 20, (11,)],
-            ...         ),
-            ...     )
             >>> maker = baca.SegmentMaker(
+            ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
-            ...     breaks=breaks_,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -6231,7 +6220,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
-                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! BREAK:IC
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:IC
                             s1 * 3/8
@@ -6300,16 +6289,10 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Even after a previous instrument:
 
-            >>> breaks_ = baca.breaks(
-            ...     baca.page(
-            ...         [1, 0, (11,)],
-            ...         [2, 25, (11,)],
-            ...         ),
-            ...     )
             >>> maker = baca.SegmentMaker(
+            ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
-            ...     breaks=breaks_,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -6364,7 +6347,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
-                            #'((Y-offset . 25) (alignment-distances . (11)))                             %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! BREAK:IC
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:IC
                             s1 * 3/8
@@ -6436,9 +6419,9 @@ class SegmentMaker(abjad.SegmentMaker):
             Reapplied instruments color green and redraw dull green:
 
             >>> maker = baca.SegmentMaker(
+            ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
-            ...     breaks=breaks_,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -6492,7 +6475,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
-                            #'((Y-offset . 25) (alignment-distances . (11)))                             %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! BREAK:IC
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:IC
                             s1 * 3/8
@@ -6566,13 +6549,13 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> breaks = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
-            ...         [3, 20, (11,)],
+            ...         [3, 15, (11,)],
             ...         ),
             ...     )
             >>> maker = baca.SegmentMaker(
+            ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
-            ...     breaks=breaks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
@@ -6624,7 +6607,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
-                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! BREAK:IC
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:IC
                             s1 * 1/2
@@ -6742,13 +6725,13 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> breaks = baca.breaks(
             ...     baca.page(
             ...         [1, 0, (11,)],
-            ...         [2, 20, (11,)],
+            ...         [2, 15, (11,)],
             ...         ),
             ...     )
             >>> maker = baca.SegmentMaker(
+            ...     breaks=breaks,
             ...     ignore_unpitched_notes=True,
             ...     instruments=instruments,
-            ...     breaks=breaks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_width((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -6803,7 +6786,7 @@ class SegmentMaker(abjad.SegmentMaker):
                             \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
                             \noBreak                                                                     %! BREAK:BMM2
                             \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
-                            #'((Y-offset . 20) (alignment-distances . (11)))                             %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! BREAK:IC
                             \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
                             \break                                                                       %! BREAK:IC
                             s1 * 3/8
