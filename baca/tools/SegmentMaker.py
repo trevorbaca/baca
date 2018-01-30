@@ -10152,6 +10152,155 @@ class SegmentMaker(abjad.SegmentMaker):
                     >>
                 >>
 
+        ..  container:: example
+
+            Multiple margin markup are allowed so long as only one is active:
+
+            >>> breaks = baca.breaks(
+            ...     baca.page(
+            ...         [1, 0, (11,)],
+            ...         [2, 15, (11,)],
+            ...         ),
+            ...     )
+            >>> maker = baca.SegmentMaker(
+            ...     breaks=breaks,
+            ...     ignore_unpitched_notes=True,
+            ...     margin_markup=margin_markup,
+            ...     score_template=baca.SingleStaffScoreTemplate(),
+            ...     spacing=baca.minimum_width((1, 24)),
+            ...     time_signatures=[(4, 8), (4, 8), (4, 8)],
+            ...     )
+            >>> maker(
+            ...     baca.scope('MusicVoice', 1),
+            ...     baca.tag(
+            ...         '+SEGMENT',
+            ...         baca.margin_markup(margin_markup['I+II']),
+            ...         ),
+            ...     baca.tag(
+            ...         '+PARTS_VIOLIN',
+            ...         baca.margin_markup(margin_markup['III+IV']),
+            ...         deactivate=True,
+            ...         ),
+            ...     baca.make_notes(),
+            ...     )
+
+            >>> lilypond_file = maker.run(environment='docs')
+            >>> block = abjad.Block(name='layout')
+            >>> block.indent = 0
+            >>> lilypond_file.items.insert(0, block)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \context Score = "Score" <<
+                    \context GlobalContext = "GlobalContext" <<
+                        \context GlobalSkips = "GlobalSkips" {
+                <BLANKLINE>
+                            % GlobalSkips [measure 1]                                                    %! SM4
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
+                            \autoPageBreaksOff                                                           %! BREAK:BMM1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
+                            #'((Y-offset . 0) (alignment-distances . (11)))                              %! BREAK:IC
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:SM8
+                            \once \override Score.TimeSignature.color = #(x11-color 'blue)               %! EXPLICIT_TIME_SIGNATURE_COLOR:SM6
+                            \pageBreak                                                                   %! BREAK:IC
+                            s1 * 1/2
+                <BLANKLINE>
+                            % GlobalSkips [measure 2]                                                    %! SM4
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \overrideProperty Score.NonMusicalPaperColumn.line-break-system-details      %! BREAK:IC
+                            #'((Y-offset . 15) (alignment-distances . (11)))                             %! BREAK:IC
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            \break                                                                       %! BREAK:IC
+                            s1 * 1/2
+                <BLANKLINE>
+                            % GlobalSkips [measure 3]                                                    %! SM4
+                            \newSpacingSection                                                           %! SPACING:HSS1
+                            \set Score.proportionalNotationDuration = #(ly:make-moment 1 24)             %! SPACING:HSS1
+                            \noBreak                                                                     %! BREAK:BMM2
+                            \once \override Score.TimeSignature.color = #(x11-color 'DeepPink1)          %! REDUNDANT_TIME_SIGNATURE_COLOR:SM6
+                            s1 * 1/2
+                            \override Score.BarLine.transparent = ##f                                    %! SM5
+                            \bar "|"                                                                     %! SM5
+                <BLANKLINE>
+                        }
+                    >>
+                    \context MusicContext = "MusicContext" <<
+                        \context Staff = "MusicStaff" {
+                            \context Voice = "MusicVoice" {
+                <BLANKLINE>
+                                % MusicVoice [measure 1]                                                 %! SM4
+                                \set Staff.instrumentName = \markup { I+II }                             %! +SEGMENT:EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! +SEGMENT:EXPLICIT_MARGIN_MARKUP:SM8
+                            %@% \set Staff.instrumentName = \markup { III+IV }                           %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP:SM8
+                            %@% \set Staff.shortInstrumentName = \markup { III+IV }                      %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP:SM8
+                                \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                            %@% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                                c'2
+                                ^ \markup {
+                                    \column
+                                        {
+                                            \line                                                        %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                {                                                        %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                    \with-color                                          %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                        #(x11-color 'blue)                               %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                        {                                                %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                            \vcenter                                     %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                                [“I+II”                                  %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                            \vcenter                                     %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                                I+II                                     %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                            \concat                                      %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                                {                                        %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                                    \vcenter                             %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                                        I+II                             %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                                    \vcenter                             %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                                        ]                                %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                                }                                        %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                        }                                                %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                                }                                                        %! +SEGMENT:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@% \line                                                        %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%     {                                                        %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%         \with-color                                          %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%             #(x11-color 'blue)                               %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%             {                                                %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%                 \vcenter                                     %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%                     [“III+IV”                                %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%                 \vcenter                                     %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%                     III+IV                                   %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%                 \concat                                      %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%                     {                                        %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%                         \vcenter                             %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%                             III+IV                           %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%                         \vcenter                             %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%                             ]                                %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%                     }                                        %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%             }                                                %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        %@%     }                                                        %! +PARTS_VIOLIN:EXPLICIT_MARGIN_MARKUP_ALERT:SM11
+                                        }
+                                    }
+                                \set Staff.instrumentName = \markup { I+II }                             %! +SEGMENT:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                \set Staff.shortInstrumentName = \markup { I+II }                        %! +SEGMENT:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                            %@% \set Staff.instrumentName = \markup { III+IV }                           %! +PARTS_VIOLIN:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                            %@% \set Staff.shortInstrumentName = \markup { III+IV }                      %! +PARTS_VIOLIN:REDRAWN_EXPLICIT_MARGIN_MARKUP:SM8
+                                \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! +SEGMENT:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                            %@% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! +PARTS_VIOLIN:REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:SM6
+                <BLANKLINE>
+                                % MusicVoice [measure 2]                                                 %! SM4
+                                c'2
+                <BLANKLINE>
+                                % MusicVoice [measure 3]                                                 %! SM4
+                                c'2
+                <BLANKLINE>
+                            }
+                        }
+                    >>
+                >>
+
         '''
         return self._margin_markup
 
