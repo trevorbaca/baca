@@ -826,7 +826,14 @@ class SegmentMaker(abjad.SegmentMaker):
             self._fermata_measure_numbers.append(measure_number)
 
     @staticmethod
-    def _attach_latent_indicator_alert(leaf, indicator, status, manifests):
+    def _attach_latent_indicator_alert(
+        leaf,
+        indicator,
+        status,
+        manifests,
+        existing_deactivate=None,
+        existing_tag=None,
+        ):
         assert indicator.latent, repr(indicator)
         if isinstance(indicator, abjad.Clef):
             return
@@ -852,16 +859,20 @@ class SegmentMaker(abjad.SegmentMaker):
             markup = abjad.Markup(items)
         markup = abjad.new(markup, direction=abjad.Up)
         stem = SegmentMaker._indicator_to_stem(indicator)
-#        tag = f'{status.upper()}_{stem}_ALERT'
-#        tag = getattr(baca.tags, tag)
-#        abjad.attach(markup, leaf, deactivate=True, site='SM10', tag=tag)
         color = SegmentMaker._status_to_color[status]
         color = abjad.SchemeColor(color)
         markup = markup.with_color(color)
-#        tag = f'{status.upper()}_{stem}_ALERT_WITH_COLOR'
         tag = f'{status.upper()}_{stem}_ALERT'
         tag = getattr(baca.tags, tag)
-        abjad.attach(markup, leaf, site='SM11', tag=tag)
+        if existing_tag:
+            tag = existing_tag + ':' + tag
+        abjad.attach(
+            markup,
+            leaf,
+            deactivate=existing_deactivate,
+            site='SM11',
+            tag=tag,
+            )
 
     def _attach_metronome_marks(self):
         skips = baca.select(self.score['GlobalSkips']).skips()
@@ -1009,6 +1020,8 @@ class SegmentMaker(abjad.SegmentMaker):
         leaf,
         indicator,
         status,
+        existing_deactivate=None,
+        existing_tag=None,
         spanner=None,
         ):
         assert isinstance(context, abjad.Context), repr(context)
@@ -1021,6 +1034,8 @@ class SegmentMaker(abjad.SegmentMaker):
             leaf,
             indicator,
             status,
+            existing_deactivate=existing_deactivate,
+            existing_tag=existing_tag,
             )
         if getattr(indicator, 'latent', False):
             SegmentMaker._attach_latent_indicator_alert(
@@ -1028,6 +1043,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 indicator,
                 status,
                 manifests,
+                existing_deactivate=existing_deactivate,
+                existing_tag=existing_tag,
                 )
         elif (getattr(indicator, 'redraw', False)
             and not getattr(indicator, 'hide', False)):
@@ -1036,6 +1053,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 leaf,
                 indicator,
                 status,
+                existing_deactivate=existing_deactivate,
+                existing_tag=existing_tag,
                 uncolor=True,
                 )
         if isinstance(indicator, abjad.Clef):
@@ -1046,6 +1065,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 leaf,
                 literal,
                 status,
+                existing_deactivate=existing_deactivate,
+                existing_tag=existing_tag,
                 stem='CLEF',
                 )
         abjad.detach(indicator, leaf)
@@ -1054,6 +1075,8 @@ class SegmentMaker(abjad.SegmentMaker):
             leaf,
             indicator,
             status,
+            existing_deactivate=existing_deactivate,
+            existing_tag=existing_tag,
             spanner=spanner,
             )
         if (getattr(indicator, 'redraw', False)
@@ -1063,6 +1086,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 leaf,
                 indicator,
                 status,
+                existing_deactivate=existing_deactivate,
+                existing_tag=existing_tag,
                 redraw=True,
                 )
             if isinstance(indicator, (abjad.Instrument, abjad.MarginMarkup)):
@@ -1074,6 +1099,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     leaf,
                     literal,
                     status,
+                    existing_deactivate=existing_deactivate,
+                    existing_tag=existing_tag,
                     redraw=True,
                     stem=stem,
                     )
@@ -1083,7 +1110,7 @@ class SegmentMaker(abjad.SegmentMaker):
             for wrapper in  abjad.inspect(leaf).wrappers():
                 if not getattr(wrapper.indicator, 'persistent', False):
                     continue
-                if wrapper.tag is not None:
+                if baca.tags.has_persistence_label(wrapper.tag):
                     continue
                 if isinstance(wrapper.indicator, abjad.Instrument):
                     prototype = abjad.Instrument
@@ -1107,6 +1134,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     leaf,
                     wrapper.indicator,
                     status,
+                    existing_deactivate=wrapper.deactivate,
+                    existing_tag=wrapper.tag,
                     spanner=wrapper.spanner,
                     )
 
@@ -1260,6 +1289,8 @@ class SegmentMaker(abjad.SegmentMaker):
         leaf,
         indicator,
         status,
+        existing_deactivate=None,
+        existing_tag=None,
         redraw=False,
         uncolor=False,
         ):
@@ -1306,10 +1337,24 @@ class SegmentMaker(abjad.SegmentMaker):
             else:
                 suffix = 'color'
         tag = SegmentMaker._get_tag(status, stem, prefix=prefix, suffix=suffix)
+        if existing_tag:
+            tag = existing_tag + ':' + tag
         if uncolor is True:
-            abjad.attach(literal, leaf, deactivate=True, site='SM7', tag=tag)
+            abjad.attach(
+                literal,
+                leaf,
+                deactivate=True,
+                site='SM7',
+                tag=tag,
+                )
         else:
-            abjad.attach(literal, leaf, site='SM6', tag=tag)
+            abjad.attach(
+                literal,
+                leaf,
+                deactivate=existing_deactivate,
+                site='SM6',
+                tag=tag,
+                )
 
     def _color_repeat_pitch_classes_(self):
         manager = baca.WellformednessManager
@@ -2204,6 +2249,8 @@ class SegmentMaker(abjad.SegmentMaker):
         leaf,
         indicator,
         status,
+        existing_deactivate=None,
+        existing_tag=None,
         redraw=None,
         spanner=None,
         stem=None,
@@ -2215,6 +2262,8 @@ class SegmentMaker(abjad.SegmentMaker):
         if redraw is True:
             prefix = 'redrawn'
         tag = SegmentMaker._get_tag(status, stem, prefix=prefix)
+        if existing_tag:
+            tag = existing_tag + ':' + tag
         if spanner is not None:
             spanner.attach(
                 indicator,
@@ -2227,6 +2276,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 color = SegmentMaker._status_to_color[status]
                 tag = f'{status.upper()}_{stem}_WITH_COLOR'
                 tag = getattr(baca.tags, tag)
+                if existing_tag:
+                    tag = existing_tag + ':' + tag
                 alternate = (color, 'SM15', tag)
                 found_wrapper = False
                 for wrapper in abjad.inspect(leaf).wrappers():
@@ -2242,6 +2293,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 indicator,
                 leaf,
                 context=context.lilypond_type,
+                deactivate=existing_deactivate,
                 site='SM8',
                 tag=tag,
                 )
