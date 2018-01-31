@@ -764,8 +764,8 @@ class Tags(abjad.Tags):
         '''
         import baca
         tags_ = (
-            baca.tags.REAPPLIED_MARGIN_MARKUP,
-            baca.tags.REDRAWN_REAPPLIED_MARGIN_MARKUP,
+            baca.tools.Tags.REAPPLIED_MARGIN_MARKUP,
+            baca.tools.Tags.REDRAWN_REAPPLIED_MARGIN_MARKUP,
             )
         return bool(set(tags) & set(tags_))
 
