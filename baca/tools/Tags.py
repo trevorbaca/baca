@@ -733,9 +733,9 @@ class Tags(abjad.Tags):
         tags_ = Tags.all_broken_spanner_tags()['deactivate']
         return bool(set(tags) & set(tags_))
 
-    @abjad.Match('document-specific (+)')
+    @abjad.Match('document-specific')
     def match_document_specific_tags(self, tags) -> bool:
-        r'''Matches document-specific tags (any tag beginning in +).
+        r'''Matches document-specific tags.
 
         Returns true or false.
         '''
